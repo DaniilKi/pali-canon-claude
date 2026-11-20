@@ -1,0 +1,89 @@
+{
+  "status": "A_B_SEVEN_ORIGINAL_FIRST_CORE_EXACT_MATCH",
+  "reviewed_utc": "2026-11-20T12:38:12.768555+00:00",
+  "A_precompare_sha256": "cdc7cc481acd7176a8e31332af8e5c5a65fb2f042f877417a9545a993abbec5e",
+  "B_precompare_sha256": "1bb25a04c642e4bdb49edf644eca6844e423def619c46ea6b5130c91e051d811",
+  "B_normalization_sha256": "3286d45f3beca57d48d2859863cef1fd6c290d3852d2bfb2ac026894340d809f",
+  "A_own_core_sealed_before_B_read": true,
+  "poems": [
+    {
+      "id": "tha-ap294",
+      "poem": 292,
+      "all5source_body_notes_paratext_root_pins_match": true,
+      "allparagraph_hashes_lines_and_codepoint_UTF16_lengths_match": true,
+      "allownednotes_and_title_note_presence_match": true,
+      "all31aggregate_entry_quote_pins_and_layouts_match": true,
+      "exact_UTF16rawXML_and_canonicaltuples_separate_hash_domains_match": true
+    },
+    {
+      "id": "tha-ap295",
+      "poem": 293,
+      "all5source_body_notes_paratext_root_pins_match": true,
+      "allparagraph_hashes_lines_and_codepoint_UTF16_lengths_match": true,
+      "allownednotes_and_title_note_presence_match": true,
+      "all31aggregate_entry_quote_pins_and_layouts_match": true,
+      "exact_UTF16rawXML_and_canonicaltuples_separate_hash_domains_match": true
+    },
+    {
+      "id": "tha-ap296",
+      "poem": 294,
+      "all5source_body_notes_paratext_root_pins_match": true,
+      "allparagraph_hashes_lines_and_codepoint_UTF16_lengths_match": true,
+      "allownednotes_and_title_note_presence_match": true,
+      "all31aggregate_entry_quote_pins_and_layouts_match": true,
+      "exact_UTF16rawXML_and_canonicaltuples_separate_hash_domains_match": true
+    },
+    {
+      "id": "tha-ap297",
+      "poem": 295,
+      "all5source_body_notes_paratext_root_pins_match": true,
+      "allparagraph_hashes_lines_and_codepoint_UTF16_lengths_match": true,
+      "allownednotes_and_title_note_presence_match": true,
+      "all31aggregate_entry_quote_pins_and_layouts_match": true,
+      "exact_UTF16rawXML_and_canonicaltuples_separate_hash_domains_match": true
+    },
+    {
+      "id": "tha-ap298",
+      "poem": 296,
+      "all5source_body_notes_paratext_root_pins_match": true,
+      "allparagraph_hashes_lines_and_codepoint_UTF16_lengths_match": true,
+      "allownednotes_and_title_note_presence_match": true,
+      "all31aggregate_entry_quote_pins_and_layouts_match": true,
+      "exact_UTF16rawXML_and_canonicaltuples_separate_hash_domains_match": true
+    },
+    {
+      "id": "tha-ap300",
+      "poem": 298,
+      "all5source_body_notes_paratext_root_pins_match": true,
+      "allparagraph_hashes_lines_and_codepoint_UTF16_lengths_match": true,
+      "allownednotes_and_title_note_presence_match": true,
+      "all31aggregate_entry_quote_pins_and_layouts_match": true,
+      "exact_UTF16rawXML_and_canonicaltuples_separate_hash_domains_match": true
+    },
+    {
+      "id": "tha-ap301",
+      "poem": 299,
+      "all5source_body_notes_paratext_root_pins_match": true,
+      "allparagraph_hashes_lines_and_codepoint_UTF16_lengths_match": true,
+      "allownednotes_and_title_note_presence_match": true,
+      "all31aggregate_entry_quote_pins_and_layouts_match": true,
+      "exact_UTF16rawXML_and_canonicaltuples_separate_hash_domains_match": true
+    }
+  ],
+  "totals": {
+    "poems": 7,
+    "body_paragraphs": 52,
+    "physical_entries": 31,
+    "printed_labels": 32,
+    "poem_notes": 22,
+    "paratext": 0,
+    "summaries": 0
+  },
+  "important_ownership": "299title unannotated; both notes stanza1.293note2 adjacency retained.294inlinecolon remains reference.",
+  "immutable_A_source_approval": {
+    "sha256": "370b9ab0fdfdaf07a66735125be93cdb9c91deada0b144212ab023a175237d8c",
+    "source_and_normalization_only": true
+  },
+  "B_review_of_A_maps_required_separately": true,
+  "runtime_release_push_approval": false
+}

@@ -1,0 +1,47 @@
+{
+  "status": "B_APPROVES_EXACT_V2_TWO_NOTICE_ADDITIONS_RESOLVES_PRIOR_MAP_HOLD",
+  "A_v2_source_sha256": "3bfff0ce8cbeb541cc3b30b4aa949b13bda33da7a2a20afed42b25aebce08570",
+  "A_v2_seals_sha256": "d1110673b784a77e55dc2eae149ead622aa701da94618a818dc09770454cd753",
+  "A_notice_additions_sha256": "5ffaa3202cc81f80388bfd4db26c3b5796b91efc8f29b80cd9c5e162b1d979e3",
+  "B_precompare_sha256": "1bb25a04c642e4bdb49edf644eca6844e423def619c46ea6b5130c91e051d811",
+  "B_normalization_sha256": "3286d45f3beca57d48d2859863cef1fd6c290d3852d2bfb2ac026894340d809f",
+  "core_files": [
+    {
+      "file": "GOLDENS.json",
+      "v1_sha256": "5f363d501c003829d2456f0fcc2a296238a0711758e504f6b0d23c695dcfea37",
+      "v2_sha256": "1363c5c612a34d36495b8a39fbeafc7ff3de6bb7703018fdd83937b6f40212ee",
+      "only_exact_two_notice_insertions": true,
+      "placement": "Immediately before unchanged final attainment-formula caveat; all old notice order retained.",
+      "inverse_restores_v1_bytes": true
+    },
+    {
+      "file": "EXPECTED_PROFILES.json",
+      "v1_sha256": "cdacb149f331b24035d381a6877233cdd16347bca15d908b3289732dc2b6f30a",
+      "v2_sha256": "8942f873599882e63ff182e80fd82ccb89be8a25b04e502dfd1a6f3b0083b340",
+      "only_exact_two_notice_insertions": true,
+      "placement": "Immediately before unchanged final attainment-formula caveat; all old notice order retained.",
+      "inverse_restores_v1_bytes": true
+    },
+    {
+      "file": "EXPECTED_LINKS.json",
+      "v1_sha256": "9b02da946032e373d0481e87dc2ab11f11c381e2d1b2e48a1e776d2506fbbda9",
+      "v2_sha256": "01889f99c347ba4be1ca32c97f53997f13d8cbbea1a8f31c92271be71da6a736",
+      "only_exact_two_notice_insertions": true,
+      "placement": "Immediately before unchanged final attainment-formula caveat; all old notice order retained.",
+      "inverse_restores_v1_bytes": true
+    }
+  ],
+  "source_words_rechecked_as_exact_original_tokens": [
+    "Mahārahā",
+    "tuvaralā",
+    "frankincense"
+  ],
+  "VRI_tagara_wording_rechecked_in_original_B_root": true,
+  "all_old_fields_and_notices_unchanged": true,
+  "both_required_mapping_notices_present_exactly_once": true,
+  "body_notes_paragraphs_quotes_root_source_rights_unchanged": true,
+  "prior_core_comparison_retained_unmodified": true,
+  "comparison_authoring_correction": "Initial unsaved comparison assumed appended notices. Actual finite insertions are immediately before unchanged final formula notice; exact positions and full byte inverses now asserted. No source/core expected values changed.",
+  "scope": "Seven source/finite-normalization scopes and exact v2 metadata notices only; no activation/runtime/release approval.",
+  "runtime_release_approval": false
+}

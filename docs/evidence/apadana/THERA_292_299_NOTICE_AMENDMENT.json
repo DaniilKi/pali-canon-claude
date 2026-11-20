@@ -1,0 +1,32 @@
+{
+  "status": "NOTICE_ONLY_V2_REPLACES_MAP_NOTICE_AUTHORITY_NOT_RAW_NORMALIZATION",
+  "review_version": 2,
+  "v1_immutable": {
+    "source_approval_sha256": "370b9ab0fdfdaf07a66735125be93cdb9c91deada0b144212ab023a175237d8c",
+    "seals_sha256": "12093668750b5b3b8cb42b919a2963c620cc6997520db0334da4364a021b41bc",
+    "precompare_sha256": "cdc7cc481acd7176a8e31332af8e5c5a65fb2f042f877417a9545a993abbec5e",
+    "portable_sha256": "48d8e9761b5b6f9577a3737ecb0f407425a2661e817b229f204cc17202c15b36",
+    "core": {
+      "GOLDENS.json": "5f363d501c003829d2456f0fcc2a296238a0711758e504f6b0d23c695dcfea37",
+      "EXPECTED_PROFILES.json": "cdacb149f331b24035d381a6877233cdd16347bca15d908b3289732dc2b6f30a",
+      "EXPECTED_LINKS.json": "9b02da946032e373d0481e87dc2ab11f11c381e2d1b2e48a1e776d2506fbbda9"
+    }
+  },
+  "v2_core": {
+    "GOLDENS.json": "1363c5c612a34d36495b8a39fbeafc7ff3de6bb7703018fdd83937b6f40212ee",
+    "EXPECTED_PROFILES.json": "8942f873599882e63ff182e80fd82ccb89be8a25b04e502dfd1a6f3b0083b340",
+    "EXPECTED_LINKS.json": "01889f99c347ba4be1ca32c97f53997f13d8cbbea1a8f31c92271be71da6a736",
+    "REPLAY_RECEIPT.json": "3366949c3de32473a2ceab55e3c25bc83ce1b1254e2e583e78ed9002d523837f"
+  },
+  "additions": {
+    "293": "Preserve the publisher ruler name Mahārahā exactly, including its final ā; do not normalize the original spelling or the seven-ruler and twenty-fifth-aeon wording.",
+    "296": "Source note4 identifies Sinh. tuvaralā/frankincense as the translator’s interpretation beside actual VRI tagarañcāpi (tagara). Preserve both; infer no unrecorded variant or botanical correction."
+  },
+  "proof_sha256": "2ad18e7e29bb78037f10e619424618e6820efc3d7745e14cc8c6448ea2ba4bb1",
+  "rights_byte_identical_v1_sha256": "9a2d26dd1bd26594fec32eb4423588343598718acffd2c93b5331107c25d58cd",
+  "B_independent_normalization_unchanged_sha256": "3286d45f3beca57d48d2859863cef1fd6c290d3852d2bfb2ac026894340d809f",
+  "all_source_wording_and_pins_unchanged": true,
+  "candidate_count": 7,
+  "activations": 0,
+  "runtime_release_push_approval": false
+}

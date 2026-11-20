@@ -1,0 +1,17 @@
+{
+  "status": "A_SEVEN_ORIGINAL_FIRST_CORE_SEALED_BEFORE_B_OR_PRODUCTION_COMPARISON",
+  "files": {
+    "core/GOLDENS.json": "5f363d501c003829d2456f0fcc2a296238a0711758e504f6b0d23c695dcfea37",
+    "core/EXPECTED_PROFILES.json": "cdacb149f331b24035d381a6877233cdd16347bca15d908b3289732dc2b6f30a",
+    "core/EXPECTED_LINKS.json": "9b02da946032e373d0481e87dc2ab11f11c381e2d1b2e48a1e776d2506fbbda9",
+    "core/REPLAY_RECEIPT.json": "ae21ffbb1ab4a0e783dd7b0418d796f1248fa94cc240bd0f88c19ce40dcab017",
+    "derive_original_facts.py": "62a927520264edd69e42f641067b875a1eca51059904b35265a552a3579e2d8e",
+    "finalize_sources.py": "bc5b0a6dc26028e1e67b45504044e7eb721d8347b1f10049041b41c0bd6439a3",
+    "portable/review_thera292_299.py": "48d8e9761b5b6f9577a3737ecb0f407425a2661e817b229f204cc17202c15b36",
+    "ORIGINAL_FIRST_SEALS.json": "6d8356a897edd01447eb4f1485af52b8b37d6d02b9de2904576b1a99f0472629",
+    "original-first/ORIGINAL_FACTS.json": "33ac7c0101b0fd0497e16449e41d55de25d94eed0ffa82d1446fea18651e34ca"
+  },
+  "full_wording_files": 0,
+  "production_normalizer_used": false,
+  "runtime_release_approval": false
+}

@@ -27,10 +27,11 @@ function shown(host,value,pali,id){
 function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}
 
 test('all five capabilities retain exact308 identity and every original303 profile without mistaking API choices for private pins',()=>{
- assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,310);
+ assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,317);
  assert.equal(e.approval.expected_profile_ids.length,308);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,308),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,308),e.approval.expected_profile_ids);
- assert.deepEqual(CURRENT_APADANA_IDS.slice(308),['tha-ap289','tha-ap290']);for(const id of e.approval.baseline_ids)assert.deepEqual(APADANA_PROFILES[id],e.baseline.profile_objects[id]);
+ assert.deepEqual(CURRENT_APADANA_IDS.slice(308,310),['tha-ap289','tha-ap290']);
+ assert.deepEqual(CURRENT_APADANA_IDS.slice(310),['tha-ap294','tha-ap295','tha-ap296','tha-ap297','tha-ap298','tha-ap300','tha-ap301']);for(const id of e.approval.baseline_ids)assert.deepEqual(APADANA_PROFILES[id],e.baseline.profile_objects[id]);
  for(const id of e.ids){const p=APADANA_PROFILES[id],choice=english.available(canon.resolve(id).unit).find(row=>row.translation_id===tid(p));assert.ok(choice);validateApadanaChoice(choice,id);assert.deepEqual(p,e.profiles[id]);for(const key of ['raw_sha256','body_sha256','notes_sha256','paratext_sha256','root_sha256'])assert.equal(p[key],e.independent(id)[key]);assert.equal(choice.translation_revision,APADANA_COMMIT);assert.equal(choice.translation_id,tid(p));}
  for(const id of ['tha-ap262','tha-ap268','tha-ap282']){assert.equal(APADANA_PROFILES[id],undefined);assert.throws(()=>validateApadanaChoice({...e.profiles['tha-ap283'],translation_id:'ap:chapter-3/poem-280'},id));}
 });

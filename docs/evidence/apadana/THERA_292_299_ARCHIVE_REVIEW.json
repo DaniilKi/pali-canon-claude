@@ -1,0 +1,127 @@
+{
+  "status": "APPROVE_EXACT_LOCAL317_ARCHIVE_PACKAGE_BYTES_ONLY",
+  "reviewed_utc": "2026-11-20T12:59:26.354657+00:00",
+  "archive": {
+    "path": "/tmp/pali-292-299-installed/pali-canon-mcp-2.1.0.tgz",
+    "bytes": 40701375,
+    "sha256": "7db6a28dff4bede8e0bad49ca1c83fb235c3a52466ac967af5950f8a42ff6e6e"
+  },
+  "installation": "/tmp/pali-292-299-installed/genuine/node_modules/pali-canon-mcp",
+  "root_receipt": {
+    "path": "/tmp/pali-292-299-installed/PACKAGE_INSTALL_RECEIPT.json",
+    "bytes": 11630,
+    "sha256": "2419d90dd99c8fc2ff25c3aac8cf17890ed49bcbb1e2e70d96733b93746cb8c1"
+  },
+  "runtime_review": {
+    "path": "/tmp/pali-292-299-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+    "bytes": 12645,
+    "sha256": "3d2a7460cf2a94f1acaa8fbdc49fc359139f574da04510fa6e460e8c1dab3765"
+  },
+  "member_inventory": {
+    "path": "/tmp/pali-292-299-package-review/FINAL_ARCHIVE_MEMBER_INVENTORY.json",
+    "bytes": 6605,
+    "sha256": "09f294df809dff47ad0d0fb9aa2716feecf7cf57b10a23fe6b0b754124836922"
+  },
+  "members": 39,
+  "runtime_members": 34,
+  "all39_archive_checkout_fresh_offline_install_byte_identical": true,
+  "all34_runtime_exact_frozen3d2_approval": true,
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "canonical_units": 8544,
+  "canonical_books": 61,
+  "source_note_sidecar_sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+  "source_closure_recheck": {
+    "prior_inputs_checked": 103,
+    "only_frozen_aggregator_two_clients_changed": true,
+    "current_client_hashes_and_reverse_projections_exact": true,
+    "new7_literal_exact_both_independent_V2_maps": true,
+    "old310_link_objects_exact": true,
+    "source_parser_DOM_SHA_build_auditor_unchanged": true
+  },
+  "V1_history_V2_notices": {
+    "all_preserved_initial_artifacts_unchanged": true,
+    "V2_only_exact_two_mapping_notices": true,
+    "three_core_byte_inverses_restore_V1_hashes": true,
+    "changed_notice_ids": [
+      "tha-ap295",
+      "tha-ap298"
+    ]
+  },
+  "English_media_bundle_review": {
+    "actual_body_translator_note_media_payload_fields_in_new_metadata": 0,
+    "exact_plaintext_original_probes": 18,
+    "matches_in39_members": 0,
+    "probe_scope": "Exact unformatted original spans only, not a claim every source token is absent. Independently sealed metadata-only literals/data and unchanged other29 runtime files establish the bounded new-data scope.",
+    "raw_sources": [
+      {
+        "id": "tha-ap294",
+        "path": "src/_poems/chapter-3/poem-292.md",
+        "raw_sha256": "80e90251728fd39d9dec778b05b526d3400d68919ea1f31384769238512121d5"
+      },
+      {
+        "id": "tha-ap295",
+        "path": "src/_poems/chapter-3/poem-293.md",
+        "raw_sha256": "66c0f894c402a9aaf855edd89db267461d6a76e5ff41fbb6302335e089512425"
+      },
+      {
+        "id": "tha-ap296",
+        "path": "src/_poems/chapter-3/poem-294.md",
+        "raw_sha256": "5899fe758a443ce8011c7f94065f748a24036b79af996920fdca0a77c2753ad3"
+      },
+      {
+        "id": "tha-ap297",
+        "path": "src/_poems/chapter-3/poem-295.md",
+        "raw_sha256": "c872cfd7b599a2e3f5e4205efc1f415f1d6226d17a7de5608951e9e206c1d3e2"
+      },
+      {
+        "id": "tha-ap298",
+        "path": "src/_poems/chapter-3/poem-296.md",
+        "raw_sha256": "0ffc75664a8b8998a2805fb3b8928d9c28c478572b50c854b23d1d17ec718220"
+      },
+      {
+        "id": "tha-ap300",
+        "path": "src/_poems/chapter-3/poem-298.md",
+        "raw_sha256": "bd70819d798221f8386de13f6502146c78f2e706ae950d2e0121d61e07f276e9"
+      },
+      {
+        "id": "tha-ap301",
+        "path": "src/_poems/chapter-3/poem-299.md",
+        "raw_sha256": "980936fe1d48e97a06431fc9cc80f399466bd43c40b68f5e2c2db777826e14ea"
+      }
+    ],
+    "full_wording_exported_by_reviewer": false,
+    "new_media_files_or_rights": false
+  },
+  "prior_authorities_preserved_unchanged": [
+    {
+      "path": "/tmp/pali-287-288-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 10075,
+      "sha256": "57c3b1c4efdc5b75b9718f77259c5ef4ee25a85e15b257f6f64b8235f3a71daf"
+    },
+    {
+      "path": "/tmp/pali-287-288-package-review/FINAL_ARCHIVE_APPROVAL.json",
+      "bytes": 4157,
+      "sha256": "b9c41a69cf880e0eb517207d98dc3f4cf37293dc54b54b21f113e41372b580fb"
+    },
+    {
+      "path": "/tmp/pali-281-285-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 10141,
+      "sha256": "809efc477aec7bd16c6d5077114ba5932663ecf110076899f9dc5ef85917519f"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 9979,
+      "sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+    }
+  ],
+  "client_authorship_limit": "Reviewer authored only two finite client guard/version edits. Package byte/source-authority review does not replace separate independent final implementation acceptance.",
+  "reviewer_project_server_tests_build_Git_network_execution": false,
+  "archive_package_byte_approval": true,
+  "behavioral_harness_approval": false,
+  "native_acceptance": false,
+  "full_check_approval": false,
+  "implementation_acceptance": false,
+  "remote_ci_approval": false,
+  "publication_release_or_push_approval": false,
+  "remaining_scope": "Behavioral/native/full-check/final implementation/CI/publication acceptance remain separate from this archive-byte approval."
+}

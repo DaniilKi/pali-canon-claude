@@ -1,0 +1,16 @@
+{
+  "status": "B_ORIGINAL_FIRST_SEVEN_PRECOMPARE_CORE_IMMUTABLE",
+  "files": {
+    "derive_metadata_B.py": "83b1128ae8174adf34e80e26a3c7d2a7172846b48e8e5b1bca777230aba27a60",
+    "INDEPENDENT_NORMALIZATION.json": "3286d45f3beca57d48d2859863cef1fd6c290d3852d2bfb2ac026894340d809f",
+    "ORIGINAL_XML_AND_CONTEXT.json": "b3fe1bbf69fe7f07f85f82cd96eac5321e2067debed66db0a0cdafad9b0f0dc1",
+    "RIGHTS_REVIEW.json": "9498ba0004a53e17504b1563e3555d2e5c48668f2e87cf331c61817867dff8fd",
+    "COPY_POLICY.json": "4fe973ca5a04c4b61121607e993d8ded5937a4e8dd5a2e1d2056d5777a8eaa70",
+    "README.md": "efdcb322f2c141c4dfe461372d1f8a7b4996bbae81f14083f5b83482be6978eb"
+  },
+  "A_new_core_or_recipe_read": false,
+  "production_parser_schema_import_or_execution": false,
+  "wording_payload_files_created": false,
+  "media_network_requests": 0,
+  "runtime_activation_release_push_approval": false
+}

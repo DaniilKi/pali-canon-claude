@@ -1,0 +1,9 @@
+{
+  "status": "A_SEVEN_ORIGINAL_FACTS_SEALED_BEFORE_B_OR_NEW_RUNTIME",
+  "files": {
+    "derive_original_facts.py": "62a927520264edd69e42f641067b875a1eca51059904b35265a552a3579e2d8e",
+    "original-first/ORIGINAL_FACTS.json": "33ac7c0101b0fd0497e16449e41d55de25d94eed0ffa82d1446fea18651e34ca",
+    "original-first/REPLAY_RECEIPT.json": "404aa5cfc699528f1faa616c2a805434398444d1c0a70b4e8120566ca9b4b20a"
+  },
+  "full_payload_files": 0
+}

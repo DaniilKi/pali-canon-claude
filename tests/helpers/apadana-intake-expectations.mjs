@@ -7,6 +7,7 @@ import {held234Evidence} from './thera-held234-evidence.mjs';
 import {thera261280Evidence} from './thera261-280-evidence.mjs';
 import {thera281285Evidence} from './thera281-285-evidence.mjs';
 import {thera287288Evidence} from './thera287-288-evidence.mjs';
+import {thera292299Evidence} from './thera292-299-evidence.mjs';
 
 const historical=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
 const previousBytes=readFileSync(new URL('../../docs/evidence/apadana/THERA_241_250_APPROVAL.json',import.meta.url));
@@ -82,20 +83,20 @@ for(const id of historical308.held_ids)assert.ok(!historical308.expected_profile
 const records308=[...historical308.baseline_records,...historical308.approved_records];
 assert.deepEqual(records308.map(row=>row.id),historical308.expected_profile_ids);
 
-const two=thera287288Evidence(),current=two.approval;
+const two=thera287288Evidence(),historical310=two.approval;
 assert.deepEqual(two.previous,historical308,'The sealed308 intake remains the exact historical anchor');
-assert.deepEqual(current.baseline_ids,historical308.expected_profile_ids);
-assert.deepEqual(current.baseline_records,records308);
+assert.deepEqual(historical310.baseline_ids,historical308.expected_profile_ids);
+assert.deepEqual(historical310.baseline_records,records308);
 const twoRecords=[{id:'tha-ap289',publisher_chapter:'chapter-3',poem:287},{id:'tha-ap290',publisher_chapter:'chapter-3',poem:288}];
-assert.deepEqual(current.approved_records,twoRecords);
-assert.deepEqual(current.approved_ids,twoRecords.map(row=>row.id));
-assert.deepEqual(Object.keys(two.profiles),current.approved_ids);
-assert.deepEqual(Object.keys(two.links),current.approved_ids);
-assert.ok(current.approved_ids.every(id=>!current.baseline_ids.includes(id)));
-assert.deepEqual(current.expected_profile_ids,[...historical308.expected_profile_ids,...current.approved_ids]);
-assert.equal(current.baseline_ids.length,308);assert.equal(current.expected_profile_ids.length,310);
-assert.equal(new Set(current.expected_profile_ids).size,310);
-assert.deepEqual(current.held_ids,historical308.held_ids);
+assert.deepEqual(historical310.approved_records,twoRecords);
+assert.deepEqual(historical310.approved_ids,twoRecords.map(row=>row.id));
+assert.deepEqual(Object.keys(two.profiles),historical310.approved_ids);
+assert.deepEqual(Object.keys(two.links),historical310.approved_ids);
+assert.ok(historical310.approved_ids.every(id=>!historical310.baseline_ids.includes(id)));
+assert.deepEqual(historical310.expected_profile_ids,[...historical308.expected_profile_ids,...historical310.approved_ids]);
+assert.equal(historical310.baseline_ids.length,308);assert.equal(historical310.expected_profile_ids.length,310);
+assert.equal(new Set(historical310.expected_profile_ids).size,310);
+assert.deepEqual(historical310.held_ids,historical308.held_ids);
 assert.deepEqual(Object.keys(two.baseline.profile_objects),historical308.expected_profile_ids);
 assert.deepEqual(Object.keys(two.baseline.translation_objects),historical308.expected_profile_ids);
 for(const id of historical308.baseline_ids){
@@ -106,7 +107,36 @@ for(const id of historical308.approved_ids){
   assert.deepEqual(two.baseline.profile_objects[id],five.profiles[id]);
   assert.deepEqual(two.baseline.translation_objects[id],five.links[id]);
 }
+for(const id of historical310.held_ids)assert.ok(!historical310.expected_profile_ids.includes(id));
+const records310=[...historical310.baseline_records,...historical310.approved_records];
+assert.deepEqual(records310.map(row=>row.id),historical310.expected_profile_ids);
+
+const seven=thera292299Evidence(),current=seven.approval;
+assert.deepEqual(seven.previous,historical310,'The sealed310 intake remains the exact historical anchor');
+assert.deepEqual(current.baseline_ids,historical310.expected_profile_ids);
+assert.deepEqual(current.baseline_records,records310);
+const sevenRecords=[{id:'tha-ap294',publisher_chapter:'chapter-3',poem:292},{id:'tha-ap295',publisher_chapter:'chapter-3',poem:293},{id:'tha-ap296',publisher_chapter:'chapter-3',poem:294},{id:'tha-ap297',publisher_chapter:'chapter-3',poem:295},{id:'tha-ap298',publisher_chapter:'chapter-3',poem:296},{id:'tha-ap300',publisher_chapter:'chapter-3',poem:298},{id:'tha-ap301',publisher_chapter:'chapter-3',poem:299}];
+assert.deepEqual(current.approved_records,sevenRecords);
+assert.deepEqual(current.approved_ids,sevenRecords.map(row=>row.id));
+assert.deepEqual(Object.keys(seven.profiles),current.approved_ids);
+assert.deepEqual(Object.keys(seven.links),current.approved_ids);
+assert.ok(current.approved_ids.every(id=>!current.baseline_ids.includes(id)));
+assert.deepEqual(current.expected_profile_ids,[...historical310.expected_profile_ids,...current.approved_ids]);
+assert.equal(current.baseline_ids.length,310);assert.equal(current.expected_profile_ids.length,317);
+assert.equal(new Set(current.expected_profile_ids).size,317);
+assert.deepEqual(current.held_ids,historical310.held_ids);
+assert.deepEqual(Object.keys(seven.baseline.profile_objects),historical310.expected_profile_ids);
+assert.deepEqual(Object.keys(seven.baseline.translation_objects),historical310.expected_profile_ids);
+for(const id of historical310.baseline_ids){
+  assert.deepEqual(seven.baseline.profile_objects[id],two.baseline.profile_objects[id]);
+  assert.deepEqual(seven.baseline.translation_objects[id],two.baseline.translation_objects[id]);
+}
+for(const id of historical310.approved_ids){
+  assert.deepEqual(seven.baseline.profile_objects[id],two.profiles[id]);
+  assert.deepEqual(seven.baseline.translation_objects[id],two.links[id]);
+}
 for(const id of current.held_ids)assert.ok(!current.expected_profile_ids.includes(id));
+assert.ok(!current.expected_profile_ids.includes('tha-ap299'),'Publisher297 remains outside the approved seven');
 const records=[...current.baseline_records,...current.approved_records];
 assert.deepEqual(records.map(row=>row.id),current.expected_profile_ids);
 assert.ok(records.every(row=>/^(?:thi|tha)-ap\d+$/.test(row.id)&&Number.isInteger(row.poem)&&row.poem>0&&['chapter-3','chapter-4'].includes(row.publisher_chapter)));

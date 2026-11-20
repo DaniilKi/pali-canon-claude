@@ -1,0 +1,13 @@
+{
+  "status": "READ_ONLY_METADATA310_RECONSTRUCTION_AND_COMPACT_COMMITMENTS_MATCH",
+  "method": "Own stdlib JSON/hash metadata reads only. No project helper/parser/runtime imported or executed. Reconstruct sealed308plus2 through immutable246 and later approved maps; deep compare full310 objects/order then all310 per-ID digests and complete source policy.",
+  "baseline": "3da5b3831af6396447dcc5d23f24cd03c34fdd9c",
+  "prior310_approval_sha256": "e159aefc7ad0f2a36a10dffa95fd5cf97650b95969820344f70aee0dd2c7e95e",
+  "external_full_sha256": "e4206842298629d98dc4f9611751f47f8e57041354c86973670f2366ccb9e32c",
+  "compact_sha256": "88c87437c64f70da86d107053d956f8a30a83a0f8f0d3e3e2cd0653014da0f50",
+  "full_objects_equal": true,
+  "exact_ordered_ids": 310,
+  "per_id_profile_and_link_digests_matching": 310,
+  "source_manifest_equal_and_digest_matching": true,
+  "new_seven_source_normalization_runtime_approval": false
+}

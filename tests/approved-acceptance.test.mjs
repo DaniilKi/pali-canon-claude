@@ -7,5 +7,5 @@ test('independent intake and runtime acceptance reject omissions, substitutions 
   const root=fileURLToPath(new URL('../',import.meta.url));
   const result=spawnSync('python3',['tests/approved_acceptance.py'],{cwd:root,encoding:'utf8',timeout:30000});
   assert.equal(result.status,0,result.stdout+'\n'+result.stderr);
-  assert.match(result.stderr,/Ran 25 tests/);
+  assert.match(result.stderr,/Ran 29 tests/);
 });

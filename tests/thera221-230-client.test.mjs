@@ -90,7 +90,7 @@ test('new client capabilities preserve the independently frozen256 source contra
     const profile = baseline.profile_objects[id];
     assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');
   }
-  assert.equal(WIDGET_VERSION, 'v36');
+  assert.equal(WIDGET_VERSION, 'v37');
   for (const id of approved) {
     const profile = APADANA_PROFILES[id], record = golden(id);
     assert.deepEqual(profile.mapping_notes, record.mapping_notes);

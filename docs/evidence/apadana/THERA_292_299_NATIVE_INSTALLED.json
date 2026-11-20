@@ -1,0 +1,628 @@
+{
+  "schema": "genuine-installed-seven-native-reader-v1",
+  "status": "passed",
+  "launch_receipt": "/tmp/pali-seven-native-sd0ckmdu/launch.json",
+  "checks": [
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap294",
+      "native_english_pages": 1,
+      "body_sha256": "3cdb95cb8e8343aee4fd489ff816443c35ddae391a5fc67c03a6faaaac32f50e",
+      "notes_sha256": "b0a2065b4cef41097c366bcb5a762921087e1d70ae34ad65de370bb10bbe9b3f",
+      "citations_sha256": "70cd76e2ed6e4498368c2474daa3e9f5b3d61972c1ec437cdc31e5500ef0eef8",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap295",
+      "native_english_pages": 1,
+      "body_sha256": "c61214ca90a4cfaf14bdc84eb89b1be7c2e54c27ab19361f61d8cab6038da6b0",
+      "notes_sha256": "3c21c2be65d79a74c18e08a88e0d48bc3d57a9839371e13c6be02e667ec8cf43",
+      "citations_sha256": "9f952ac5c0538d29fee76bce45c66bb2dd9c6be08bb1d6621c5181d2d06ad861",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap296",
+      "native_english_pages": 1,
+      "body_sha256": "7c494d18171b0f9f63e196dc7c500a2a310e2ad482ce9ae78c27f745b8cc21d4",
+      "notes_sha256": "f6e9f36047611d6c8d3160022bab8e3d55f271724af13527f7b57b26bbec47bc",
+      "citations_sha256": "f686924bff02e47731ba0d159fdd030e424719b4705126c3e810c8c5f95dc491",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap297",
+      "native_english_pages": 1,
+      "body_sha256": "647e68a6f9c67411a86ea900a2b91dccdc63b84546aebaf6c230f9dd50913754",
+      "notes_sha256": "f0fcc684b91cbb0c0f432bdeb057f9efa5e7a084e94bc55158392cdcc154adf5",
+      "citations_sha256": "c1b8ec0918f510698e01c3e7985a4f702f1d87e596872d4ca8f102303b651d82",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap298",
+      "native_english_pages": 1,
+      "body_sha256": "086e1bfac5dddd9da5214764d7d2e954cc264e75faf3ac9345616443dd226be9",
+      "notes_sha256": "e5de5ccc57cbd9e4be0c1c67eb2d7f8f1401b4eaeb273edb897d573995d40754",
+      "citations_sha256": "c77ee1d690be57eb91a3f85d4c73a9c499433e5c8dab511314b3afaf8b7a1630",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap300",
+      "native_english_pages": 1,
+      "body_sha256": "45ad212510e6706d849536393d3857f4d4911036c5ede36134a7b911fd083313",
+      "notes_sha256": "0e50e4107ff9ffdbe04d0d5e6ff2c4dd862d92b1d27ef13163526f7b42b9da5b",
+      "citations_sha256": "95b9cb85786022afc7764a46df0d4914aa7b02ef2f3518773218d106d77008c5",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap301",
+      "native_english_pages": 1,
+      "body_sha256": "541b4693b0c6c8d402e56bb54a5a5ec75f8a9eb1d444d6ef7e93bab10b43013a",
+      "notes_sha256": "00e6c1801be26d9f364a8d95a46bf5fd403782ab395fd5621d9e43781ea1b748",
+      "citations_sha256": "564b91ee50bde85dddd441f4b8f4614d5844eb619d23710de315e6ca21e4a173",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "light",
+      "synthetic_saved_note": true,
+      "unsaved_draft_recovered": true,
+      "private_bytes_sent": 0,
+      "original_source_note": true
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap294",
+      "native_english_pages": 1,
+      "body_sha256": "3cdb95cb8e8343aee4fd489ff816443c35ddae391a5fc67c03a6faaaac32f50e",
+      "notes_sha256": "b0a2065b4cef41097c366bcb5a762921087e1d70ae34ad65de370bb10bbe9b3f",
+      "citations_sha256": "70cd76e2ed6e4498368c2474daa3e9f5b3d61972c1ec437cdc31e5500ef0eef8",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap295",
+      "native_english_pages": 1,
+      "body_sha256": "c61214ca90a4cfaf14bdc84eb89b1be7c2e54c27ab19361f61d8cab6038da6b0",
+      "notes_sha256": "3c21c2be65d79a74c18e08a88e0d48bc3d57a9839371e13c6be02e667ec8cf43",
+      "citations_sha256": "9f952ac5c0538d29fee76bce45c66bb2dd9c6be08bb1d6621c5181d2d06ad861",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap296",
+      "native_english_pages": 1,
+      "body_sha256": "7c494d18171b0f9f63e196dc7c500a2a310e2ad482ce9ae78c27f745b8cc21d4",
+      "notes_sha256": "f6e9f36047611d6c8d3160022bab8e3d55f271724af13527f7b57b26bbec47bc",
+      "citations_sha256": "f686924bff02e47731ba0d159fdd030e424719b4705126c3e810c8c5f95dc491",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap297",
+      "native_english_pages": 1,
+      "body_sha256": "647e68a6f9c67411a86ea900a2b91dccdc63b84546aebaf6c230f9dd50913754",
+      "notes_sha256": "f0fcc684b91cbb0c0f432bdeb057f9efa5e7a084e94bc55158392cdcc154adf5",
+      "citations_sha256": "c1b8ec0918f510698e01c3e7985a4f702f1d87e596872d4ca8f102303b651d82",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap298",
+      "native_english_pages": 1,
+      "body_sha256": "086e1bfac5dddd9da5214764d7d2e954cc264e75faf3ac9345616443dd226be9",
+      "notes_sha256": "e5de5ccc57cbd9e4be0c1c67eb2d7f8f1401b4eaeb273edb897d573995d40754",
+      "citations_sha256": "c77ee1d690be57eb91a3f85d4c73a9c499433e5c8dab511314b3afaf8b7a1630",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap300",
+      "native_english_pages": 1,
+      "body_sha256": "45ad212510e6706d849536393d3857f4d4911036c5ede36134a7b911fd083313",
+      "notes_sha256": "0e50e4107ff9ffdbe04d0d5e6ff2c4dd862d92b1d27ef13163526f7b42b9da5b",
+      "citations_sha256": "95b9cb85786022afc7764a46df0d4914aa7b02ef2f3518773218d106d77008c5",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap301",
+      "native_english_pages": 1,
+      "body_sha256": "541b4693b0c6c8d402e56bb54a5a5ec75f8a9eb1d444d6ef7e93bab10b43013a",
+      "notes_sha256": "00e6c1801be26d9f364a8d95a46bf5fd403782ab395fd5621d9e43781ea1b748",
+      "citations_sha256": "564b91ee50bde85dddd441f4b8f4614d5844eb619d23710de315e6ca21e4a173",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 1280,
+      "theme": "dark",
+      "synthetic_saved_note": true,
+      "unsaved_draft_recovered": true,
+      "private_bytes_sent": 0,
+      "original_source_note": true
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap294",
+      "native_english_pages": 1,
+      "body_sha256": "3cdb95cb8e8343aee4fd489ff816443c35ddae391a5fc67c03a6faaaac32f50e",
+      "notes_sha256": "b0a2065b4cef41097c366bcb5a762921087e1d70ae34ad65de370bb10bbe9b3f",
+      "citations_sha256": "70cd76e2ed6e4498368c2474daa3e9f5b3d61972c1ec437cdc31e5500ef0eef8",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap295",
+      "native_english_pages": 1,
+      "body_sha256": "c61214ca90a4cfaf14bdc84eb89b1be7c2e54c27ab19361f61d8cab6038da6b0",
+      "notes_sha256": "3c21c2be65d79a74c18e08a88e0d48bc3d57a9839371e13c6be02e667ec8cf43",
+      "citations_sha256": "9f952ac5c0538d29fee76bce45c66bb2dd9c6be08bb1d6621c5181d2d06ad861",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap296",
+      "native_english_pages": 1,
+      "body_sha256": "7c494d18171b0f9f63e196dc7c500a2a310e2ad482ce9ae78c27f745b8cc21d4",
+      "notes_sha256": "f6e9f36047611d6c8d3160022bab8e3d55f271724af13527f7b57b26bbec47bc",
+      "citations_sha256": "f686924bff02e47731ba0d159fdd030e424719b4705126c3e810c8c5f95dc491",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap297",
+      "native_english_pages": 1,
+      "body_sha256": "647e68a6f9c67411a86ea900a2b91dccdc63b84546aebaf6c230f9dd50913754",
+      "notes_sha256": "f0fcc684b91cbb0c0f432bdeb057f9efa5e7a084e94bc55158392cdcc154adf5",
+      "citations_sha256": "c1b8ec0918f510698e01c3e7985a4f702f1d87e596872d4ca8f102303b651d82",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap298",
+      "native_english_pages": 1,
+      "body_sha256": "086e1bfac5dddd9da5214764d7d2e954cc264e75faf3ac9345616443dd226be9",
+      "notes_sha256": "e5de5ccc57cbd9e4be0c1c67eb2d7f8f1401b4eaeb273edb897d573995d40754",
+      "citations_sha256": "c77ee1d690be57eb91a3f85d4c73a9c499433e5c8dab511314b3afaf8b7a1630",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap300",
+      "native_english_pages": 1,
+      "body_sha256": "45ad212510e6706d849536393d3857f4d4911036c5ede36134a7b911fd083313",
+      "notes_sha256": "0e50e4107ff9ffdbe04d0d5e6ff2c4dd862d92b1d27ef13163526f7b42b9da5b",
+      "citations_sha256": "95b9cb85786022afc7764a46df0d4914aa7b02ef2f3518773218d106d77008c5",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap301",
+      "native_english_pages": 1,
+      "body_sha256": "541b4693b0c6c8d402e56bb54a5a5ec75f8a9eb1d444d6ef7e93bab10b43013a",
+      "notes_sha256": "00e6c1801be26d9f364a8d95a46bf5fd403782ab395fd5621d9e43781ea1b748",
+      "citations_sha256": "564b91ee50bde85dddd441f4b8f4614d5844eb619d23710de315e6ca21e4a173",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "light",
+      "synthetic_saved_note": true,
+      "unsaved_draft_recovered": true,
+      "private_bytes_sent": 0,
+      "original_source_note": true
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap294",
+      "native_english_pages": 1,
+      "body_sha256": "3cdb95cb8e8343aee4fd489ff816443c35ddae391a5fc67c03a6faaaac32f50e",
+      "notes_sha256": "b0a2065b4cef41097c366bcb5a762921087e1d70ae34ad65de370bb10bbe9b3f",
+      "citations_sha256": "70cd76e2ed6e4498368c2474daa3e9f5b3d61972c1ec437cdc31e5500ef0eef8",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap295",
+      "native_english_pages": 1,
+      "body_sha256": "c61214ca90a4cfaf14bdc84eb89b1be7c2e54c27ab19361f61d8cab6038da6b0",
+      "notes_sha256": "3c21c2be65d79a74c18e08a88e0d48bc3d57a9839371e13c6be02e667ec8cf43",
+      "citations_sha256": "9f952ac5c0538d29fee76bce45c66bb2dd9c6be08bb1d6621c5181d2d06ad861",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap296",
+      "native_english_pages": 1,
+      "body_sha256": "7c494d18171b0f9f63e196dc7c500a2a310e2ad482ce9ae78c27f745b8cc21d4",
+      "notes_sha256": "f6e9f36047611d6c8d3160022bab8e3d55f271724af13527f7b57b26bbec47bc",
+      "citations_sha256": "f686924bff02e47731ba0d159fdd030e424719b4705126c3e810c8c5f95dc491",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap297",
+      "native_english_pages": 1,
+      "body_sha256": "647e68a6f9c67411a86ea900a2b91dccdc63b84546aebaf6c230f9dd50913754",
+      "notes_sha256": "f0fcc684b91cbb0c0f432bdeb057f9efa5e7a084e94bc55158392cdcc154adf5",
+      "citations_sha256": "c1b8ec0918f510698e01c3e7985a4f702f1d87e596872d4ca8f102303b651d82",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap298",
+      "native_english_pages": 1,
+      "body_sha256": "086e1bfac5dddd9da5214764d7d2e954cc264e75faf3ac9345616443dd226be9",
+      "notes_sha256": "e5de5ccc57cbd9e4be0c1c67eb2d7f8f1401b4eaeb273edb897d573995d40754",
+      "citations_sha256": "c77ee1d690be57eb91a3f85d4c73a9c499433e5c8dab511314b3afaf8b7a1630",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap300",
+      "native_english_pages": 1,
+      "body_sha256": "45ad212510e6706d849536393d3857f4d4911036c5ede36134a7b911fd083313",
+      "notes_sha256": "0e50e4107ff9ffdbe04d0d5e6ff2c4dd862d92b1d27ef13163526f7b42b9da5b",
+      "citations_sha256": "95b9cb85786022afc7764a46df0d4914aa7b02ef2f3518773218d106d77008c5",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap301",
+      "native_english_pages": 1,
+      "body_sha256": "541b4693b0c6c8d402e56bb54a5a5ec75f8a9eb1d444d6ef7e93bab10b43013a",
+      "notes_sha256": "00e6c1801be26d9f364a8d95a46bf5fd403782ab395fd5621d9e43781ea1b748",
+      "citations_sha256": "564b91ee50bde85dddd441f4b8f4614d5844eb619d23710de315e6ca21e4a173",
+      "paging_scope": "Actual6000characterUIpages only;500charactercontinuation separately proveninstalledstdio."
+    },
+    {
+      "mode": "fixture",
+      "width": 390,
+      "theme": "dark",
+      "synthetic_saved_note": true,
+      "unsaved_draft_recovered": true,
+      "private_bytes_sent": 0,
+      "original_source_note": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap294",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap295",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap296",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap297",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap298",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap300",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "light",
+      "id": "tha-ap301",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "light",
+      "synthetic_saved_note": true,
+      "unsaved_draft_recovered": true,
+      "private_bytes_sent": 0,
+      "original_source_note": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap294",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap295",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap296",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap297",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap298",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap300",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "dark",
+      "id": "tha-ap301",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 1280,
+      "theme": "dark",
+      "synthetic_saved_note": true,
+      "unsaved_draft_recovered": true,
+      "private_bytes_sent": 0,
+      "original_source_note": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap294",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap295",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap296",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap297",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap298",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap300",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "light",
+      "id": "tha-ap301",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "light",
+      "synthetic_saved_note": true,
+      "unsaved_draft_recovered": true,
+      "private_bytes_sent": 0,
+      "original_source_note": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap294",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap295",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap296",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap297",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap298",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap300",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "dark",
+      "id": "tha-ap301",
+      "english_refused": true,
+      "pali_retained": true
+    },
+    {
+      "mode": "deny-all",
+      "width": 390,
+      "theme": "dark",
+      "synthetic_saved_note": true,
+      "unsaved_draft_recovered": true,
+      "private_bytes_sent": 0,
+      "original_source_note": true
+    }
+  ],
+  "limits": "Actual installed HTTP/native reader; Chromium viewport emulation and synthetic local notes, not physical devices/human AT/signed-in hosts/live upstream. No raw response/note/private text in report.",
+  "widget_audit": {
+    "exit_code": 0,
+    "stdout_sha256": "8758c4af15a0dab9340fff63b735cac9f4ea831ea4123dcd13c9a3ceec2a2752",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "report_sha256": "3dcbc45133987309abdd9b7558f08705521e0b7fd1f3e2f01cd0e31725464a7f"
+  },
+  "stdio": {
+    "exit_code": 0,
+    "stdout_sha256": "859025ef56065a98e89d37e2ed0d7235ae571df75f7e0b3507e9dab1cd9cd2f7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "report_sha256": "859025ef56065a98e89d37e2ed0d7235ae571df75f7e0b3507e9dab1cd9cd2f7"
+  },
+  "native_observations": 64,
+  "external_network_forwarded": 0,
+  "browser_run": true,
+  "phone_mode": "390pixelviewport emulation only"
+}

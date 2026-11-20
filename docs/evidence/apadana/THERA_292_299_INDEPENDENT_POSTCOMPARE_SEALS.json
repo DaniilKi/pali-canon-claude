@@ -1,0 +1,14 @@
+{
+  "status": "B_POSTCOMPARISON_SOURCE_FINITE_NORMALIZATION_ONLY",
+  "files": {
+    "A_CORE_COMPARISON.json": "ba269309a9b0f26439b46a3f251a7b7e2d6fea26b6fe22d56ef9f130bbe3fa8e",
+    "V2_NOTICE_COMPARISON.json": "87511b4819cba7930d13852f7f4773361575a3c1296098268e13eecc37b8c9c2",
+    "SOURCE_APPROVAL.json": "e6443b9944f23fd6cf8c2ace5709ba0c32c534312fd245a55f6a22a6a016c130",
+    "compare_A_core.py": "69e7aecca6b7f6bc3d0ec0739a4ad36e86d2d848cdb8b077a88b6f7a773ff92c",
+    "approve_A_maps.py": "90e5765cdd1bf03570b5502cb336f50ad7e94068cacebe59ad08024da2412a9a",
+    "review_v2_notices.py": "11a5344dce605cfbfc3437efd71c491e7fabb5d75f204e41118131abe01f2a25",
+    "FORMAL_A_METADATA_BINDING.json": "4d2ede712e0a7ccc3a8c5e7b14a71a10cc2113db1cc0b05807b12e40ba84fb9e"
+  },
+  "precompare_seals_sha256": "1bb25a04c642e4bdb49edf644eca6844e423def619c46ea6b5130c91e051d811",
+  "runtime_release_approval": false
+}

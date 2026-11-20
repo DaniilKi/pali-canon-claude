@@ -10,6 +10,7 @@ import {parseTheraApadana} from '../src/apadana-thera.mjs';
 import {fetchPublic} from '../src/http.mjs';
 import {readPassage} from '../src/chatgpt-widget.mjs';
 import {thera287288Evidence,digest,blob} from './helpers/thera287-288-evidence.mjs';
+import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 const e=thera287288Evidence(),originalFetch=globalThis.fetch,clone=value=>JSON.parse(JSON.stringify(value));
 const tid=p=>canon.translationId(p),profile=id=>APADANA_PROFILES[id],parsed=id=>parseApadana(e.artifact(id),profile(id));
 afterEach(()=>{globalThis.fetch=originalFetch;});
@@ -17,9 +18,18 @@ function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e
 
 test('exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities',()=>{
  const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));
- assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),e.approval.expected_profile_ids);assert.equal(Object.keys(APADANA_PROFILES).length,310);assert.deepEqual(Object.keys(manifest.links),e.approval.expected_profile_ids);
+ assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,317);
+ assert.equal(e.approval.expected_profile_ids.length,310);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,310),e.approval.expected_profile_ids);
+ assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,310),e.approval.expected_profile_ids);
+ assert.deepEqual(CURRENT_APADANA_IDS.slice(310),['tha-ap294','tha-ap295','tha-ap296','tha-ap297','tha-ap298','tha-ap300','tha-ap301']);assert.deepEqual(Object.keys(manifest.links),CURRENT_APADANA_IDS);
+ assert.deepEqual(Object.keys(manifest.links).slice(0,310),e.approval.expected_profile_ids);
  for(const id of e.approval.baseline_ids){assert.deepEqual(profile(id),e.baseline.profile_objects[id]);assert.deepEqual(manifest.links[id],e.baseline.translation_objects[id]);assert.equal(digest(JSON.stringify(profile(id))),e.compact.profile_object_sha256[id]);assert.equal(digest(JSON.stringify(manifest.links[id])),e.compact.translation_object_sha256[id]);}
- const priorSource=clone(manifest.source);for(const[current,previous]of [['310 finite complete publisher-edition poems','308 finite complete publisher-edition poems'],['270 explicitly mapped Therā','268 explicitly mapped Therā']]){assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved current counter '+current);priorSource.policy=priorSource.policy.replace(current,previous);}
+ const priorSource=clone(manifest.source);
+ for(const[current,previous]of [['317 finite complete publisher-edition poems','310 finite complete publisher-edition poems'],['277 explicitly mapped Therā','270 explicitly mapped Therā']]){
+  assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved latest policy counter '+current);
+  priorSource.policy=priorSource.policy.replace(current,previous);
+ }
+for(const[current,previous]of [['310 finite complete publisher-edition poems','308 finite complete publisher-edition poems'],['270 explicitly mapped Therā','268 explicitly mapped Therā']]){assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved current counter '+current);priorSource.policy=priorSource.policy.replace(current,previous);}
  assert.equal(digest(JSON.stringify(priorSource)),e.compact.manifest_source_sha256,'All source fields/rights/notices except exact two counters remain unchanged');let preserved=0;for(const[path,sha]of Object.entries(e.compact.data_file_sha256))if(path!=='server/data/apadana.json'){assert.equal(digest(readFileSync(path)),sha,'Unchanged prior data artifact '+path);preserved++;}assert.equal(preserved,26);
  assert.equal(digest(JSON.stringify(data.canon)),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
  for(const id of e.ids){const p=profile(id),b=e.independent(id),u=data.byId.get(id);assert.deepEqual(p,e.profiles[id]);assert.deepEqual(manifest.links[id],e.links[id]);assert.equal(rootDigest(u,data.canon.books[u.book]),b.root_sha256);assert.deepEqual({start:u.start,end:u.end,book:u.book},{start:b.canonical.start,end:b.canonical.end,book:b.canonical.book});assert.ok(Object.isFrozen(p));}

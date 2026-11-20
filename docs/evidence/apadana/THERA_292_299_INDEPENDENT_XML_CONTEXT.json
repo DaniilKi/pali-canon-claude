@@ -1,0 +1,58 @@
+{
+  "original_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "VRI_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "physical_elements": 14646,
+  "canonical_tuples": 14645,
+  "all14645_tuples_exact": true,
+  "omitted_note_only_elements": [
+    {
+      "physical_element_zero_based": 1130,
+      "raw_utf16le_byte_interval": [
+        196320,
+        196466
+      ],
+      "raw_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723"
+    }
+  ],
+  "canonical_repair": false,
+  "normalization_transform_metadata": [
+    {
+      "poem": 294,
+      "owner": "note3",
+      "kind": "complementary_pandoc",
+      "state_on": "c",
+      "state_off": "ch",
+      "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+    }
+  ],
+  "upstream_src_tree_sha256": "d049c106325b6b4644b8f779d025753af1d0a51d360961b79fa9d5659755488f",
+  "upstream_src_tree_object": "be2d0cf3fe0cb19938243c2f218a6150484025c0",
+  "all_seven_source_blob_memberships_verified": true,
+  "boundary_only_source_artifacts": [
+    {
+      "publisher_poem": 291,
+      "source_path": "src/_poems/chapter-3/poem-291.md",
+      "raw_sha256": "eed14647d63ee1949e6e36222f55160ae6ab16d403318f6455212e568c2e3a6c",
+      "git_blob_sha1": "3a924b2a7b4d397da501c69ecd53e89c68726a5a",
+      "source_scope_approved": false,
+      "normalization_approved": false
+    },
+    {
+      "publisher_poem": 297,
+      "source_path": "src/_poems/chapter-3/poem-297.md",
+      "raw_sha256": "b450a543dca3df223d6cb025a96a27c86b062f8fe3937d5716ef19ffb8a2b584",
+      "git_blob_sha1": "c226ab50cd682bb2e78341094669c0f79a4ee274",
+      "source_scope_approved": false,
+      "normalization_approved": false
+    },
+    {
+      "publisher_poem": 300,
+      "source_path": "src/_poems/chapter-3/poem-300.md",
+      "raw_sha256": "adbaebf31e860c965079b5f2c9dd9ef4df7a4105c1c6e4d11810e61772bd55ed",
+      "git_blob_sha1": "b5907a64d21bfb5e31518265cab7e6d1dcd50998",
+      "source_scope_approved": false,
+      "normalization_approved": false
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schema": "local-unpublished-seven-source-validation-v1",
+  "status": "LOCAL_VALIDATION_PASSED_FINAL_INDEPENDENT_REVIEW_SEPARATE",
+  "observed_utc": "2026-11-20T13:09:29.459348+00:00",
+  "base_commit": "3da5b3831af6396447dcc5d23f24cd03c34fdd9c",
+  "publishers": [
+    292,
+    293,
+    294,
+    295,
+    296,
+    298,
+    299
+  ],
+  "canonical_ids": [
+    "tha-ap294",
+    "tha-ap295",
+    "tha-ap296",
+    "tha-ap297",
+    "tha-ap298",
+    "tha-ap300",
+    "tha-ap301"
+  ],
+  "choices": 317,
+  "added_first_English_choices": 7,
+  "source_scope": {
+    "body_paragraphs": 52,
+    "physical_entries": 31,
+    "labels": 32,
+    "notes": 22,
+    "eight_line_combined_entries": 1,
+    "paratexts": 0,
+    "summaries": 0,
+    "media_approval": false,
+    "whole_publisher_edition_not_line_complete_VRI_or_chapter": true
+  },
+  "V2_notice_amendment": "Only two metadata notices were inserted; all V1 normalized source/body/note/root/quote hashes and original sealed history remain unchanged. Final A/B approve exact V2 maps.",
+  "focused": {
+    "tests": 12,
+    "pass": 12,
+    "fail": 0,
+    "skip": 0,
+    "first_project_run": true,
+    "log_sha256": "d6165cfa38ebef44ae72a60c4c3e63fa6818741587705ee4e1e6b742e3251eca"
+  },
+  "integrity": {
+    "tests": 29,
+    "pass": 29,
+    "log_sha256": "f61ce8dbedf0b494afd92bcc6f85bbf0ddd8321e9756e5e0bb7981db3b951707"
+  },
+  "full_check": {
+    "exit": 0,
+    "tests": 1792,
+    "passed": 1580,
+    "optional_source_skips": 212,
+    "fail": 0,
+    "cancel": 0,
+    "duration_ms": 310506.653737,
+    "log_sha256": "42539091872e8cbb8e3023481e820f08407bb558b47e42b628384553fc2ae6d1",
+    "audit_texts": 8544,
+    "audit_problems": 0
+  },
+  "smoke": {
+    "exit": 0,
+    "tools": 34,
+    "checks": 64,
+    "log_sha256": "8262dd13f13f0c45ba6d7152bb6f931f5a2aedcc728d7498a2547e961de2aa97"
+  },
+  "evals": {
+    "exit": 0,
+    "questions": 201,
+    "pass": 195,
+    "live_skips": 6,
+    "score_non_skipped": 1,
+    "log_sha256": "c12336d756c1baa68acfba6a887cd0d9d34ede0fbdbe9a99c12c5b12d586d87f"
+  },
+  "archive": {
+    "sha256": "7db6a28dff4bede8e0bad49ca1c83fb235c3a52466ac967af5950f8a42ff6e6e",
+    "members": 39,
+    "runtime_files": 34,
+    "byte_review_sha256": "f2ca515814d1c15026b6192f3ab24aff2d04f92047bea5ad4380ec1af870f9ba"
+  },
+  "installed": {
+    "native_observations": 64,
+    "fixture_poem_observations": 28,
+    "deny_all_English_refusals": 28,
+    "saved_note_draft_cells": 8,
+    "widths": [
+      1280,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "Pali_citations_and_source_note_links_retained": true,
+    "notes_verified": 22,
+    "stdio500pages": 16,
+    "quotation_checks": 7,
+    "held_source_refusals_per_stdio_mode": 6,
+    "Pali_reads_per_stdio_mode": 13,
+    "all_native_bodies_one6000page_no_Nextpage_claim": true,
+    "strict_widget_complete_resources": 2,
+    "widget_version": 37,
+    "selected_alignment_sample": 3,
+    "external_network_forwarded": 0,
+    "guard_expected_blocked_calls": [
+      40,
+      47
+    ],
+    "owned_groups_absent_and_leaders_reaped": true,
+    "first_execution_passed": true,
+    "native_receipt_sha256": "2a3a6df28ca9108821221d4c08b0d4884fb411d18e26fff6de78974a0d288ef2",
+    "launch_sha256": "67e2ad0b7169fec93a4d35c22c9160025ca1f99d5cc5b30c7c596b8e2d6f1aa4",
+    "harness_freeze_sha256": "2c52350d731b2f648afd366c163b9ac51cd8f6f9abdf15cce5a77cb4e4415c8a"
+  },
+  "preservation": {
+    "file": "/tmp/pali-292-299-preflight/FINAL_PRESERVATION.json",
+    "sha256": "81f05d27d1a3a09ed99dc80c7ece3c4606e3c250221651871a08f7687f837409"
+  },
+  "preserved_lines": {
+    "file": "/tmp/pali-292-299-preflight/PRESERVED_INDEPENDENT_LINES.json",
+    "sha256": "4646e39b1f4e50a14116c2bc9dc691d3adc7f204b08fc05f94bca9a675760910"
+  },
+  "no_push_run_rerun_cancel_merge_deploy_outreach": true,
+  "limits": [
+    "Independent final snapshot acceptance separate",
+    "No new remote exact-commit CI",
+    "Physical device/humanAT/signedinhost/live upstream/specialist acceptance unverified",
+    "English remains live-only; finite pinned fixture success differs from pure-outage refusal",
+    "Remaining26ofthis40-candidatequeue and separate prior holds inactive"
+  ]
+}

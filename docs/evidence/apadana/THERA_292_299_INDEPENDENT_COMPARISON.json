@@ -1,0 +1,116 @@
+{
+  "status": "B_INDEPENDENT_POSTSEAL_A_CORE_COMPARISON_APPROVES_SEVEN_SOURCE_AND_FINITE_NORMALIZATION_SCOPES_ONLY",
+  "A_core_sha256": "33ac7c0101b0fd0497e16449e41d55de25d94eed0ffa82d1446fea18651e34ca",
+  "B_core_sha256": "3286d45f3beca57d48d2859863cef1fd6c290d3852d2bfb2ac026894340d809f",
+  "B_precompare_seals_sha256": "1bb25a04c642e4bdb49edf644eca6844e423def619c46ea6b5130c91e051d811",
+  "approved_ids": [
+    "tha-ap294",
+    "tha-ap295",
+    "tha-ap296",
+    "tha-ap297",
+    "tha-ap298",
+    "tha-ap300",
+    "tha-ap301"
+  ],
+  "results": [
+    {
+      "id": "tha-ap294",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap295",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap296",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap297",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap298",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap300",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap301",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    }
+  ],
+  "rights_six_artifacts_equal": true,
+  "counts": {
+    "poems": 7,
+    "body_paragraphs": 52,
+    "physical_stanza_entries": 31,
+    "local_verse_labels": 32,
+    "poem_notes": 22,
+    "chapter_headings": 0,
+    "chapter_summaries": 0
+  },
+  "scope_clarifications": [
+    "One296eight-line entry remains intact; all correspondences are scope-only, not English/Pāli word or line equivalence.",
+    "Original294inline footnote-colon,293direct note-label adjacency,295mixed quotation punctuation,296xxx/incense/rayless differences,298same-title identity,299non-title notes/Romasa uncertainty remain exact.",
+    "Only partial chapter30 subset seven; held291/297/300 and their heading/summary apparatus remain excluded."
+  ],
+  "holds_or_material_disagreements": [],
+  "exact_profile_and_link_approval": "PENDING_TWO_REQUIRED_MAPPING_NOTICE_ADDITIONS",
+  "notice_gaps_in_initial_A_maps": [
+    {
+      "publisher": 293,
+      "canonical": "tha-ap295",
+      "requirement": "Explicitly retain original Mahārahā including final ā, without source name harmonization."
+    },
+    {
+      "publisher": 296,
+      "canonical": "tha-ap298",
+      "requirement": "Explicitly retain note4 tuvaralā/frankincense interpretation alongside VRI tagara, without claiming botanical equivalence or authorizing a correction."
+    }
+  ],
+  "source_scope_approval_count": 7,
+  "finite_normalization_scope_approval_count": 7,
+  "runtime_approval": false,
+  "release_approval": false,
+  "activation_approval": false,
+  "project_execution_or_changes": false,
+  "full_wording_files_created": false
+}

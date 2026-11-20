@@ -1,0 +1,61 @@
+{
+  "status": "SEVEN_SOURCE_METADATA_ONLY_COPY_POLICY",
+  "safe_to_copy": [
+    "core/GOLDENS.json",
+    "core/EXPECTED_PROFILES.json",
+    "core/EXPECTED_LINKS.json",
+    "core/REPLAY_RECEIPT.json",
+    "SOURCE_APPROVAL.json",
+    "RIGHTS_REVIEW.json",
+    "COPY_POLICY.json",
+    "README.md",
+    "SEALS.json",
+    "NOTICE_ADDITIONS.json",
+    "NOTICE_ONLY_INVERSE_PROOF.json",
+    "NOTICE_ONLY_CORE.patch",
+    "AMENDMENT.json",
+    "portable/review_thera292_299.py"
+  ],
+  "never_copy": [
+    "raw publisherMarkdown/originalXML",
+    "complete English or Pali normalized buffers or poem notes payloads",
+    "media/audio",
+    "private drafts/saved user data"
+  ],
+  "full_payload_files_created": 0,
+  "full_buffers": "In-memory normalization and hashing only; no full payload writer/stdout mode",
+  "presentation_only": [
+    "remove exact reviewed Markdown heading/emphasis/abbreviation presentation",
+    "decode literal punctuation escapes",
+    "choose exact one original c/ch state-on pair in294note3",
+    "replace footnote refs with explicit [Note N] labels",
+    "remove hard-break trailing padding while preserving lines and paragraph boundaries"
+  ],
+  "preserve_exactly": [
+    "293 note2 adjacent printed label with no inserted space",
+    "294 inline reference followed by colon",
+    "295 mixed quotes,missing punctuation,ŋ and original sangha",
+    "296 eight-line1–2pair,xxx/rayless/vītaraṃsa edition caveats",
+    "298 repeated-title source identity by narrative/colophons/neighbors",
+    "299 absent title note and both notes owned by stanza1;Romasa uncertainty"
+  ],
+  "not_approved": [
+    "whole chapter30",
+    "line-completeVRI",
+    "publisher291/297/300",
+    "other prior holds",
+    "wording correction or reconstruction",
+    "audio/media",
+    "runtime/package/release/push"
+  ],
+  "review_version": 2,
+  "amendment_scope": "Only two required reader-visible mapping notices; no source wording or normalization change",
+  "v1_immutable_copy_policy_sha256": "c5f68ce9dec8d6c070d0513172ad0b0cd62febbf93d5d104167c1459d5a918bf",
+  "immutable_v1_normalization_metadata_references": {
+    "original-first/ORIGINAL_FACTS.json": "33ac7c0101b0fd0497e16449e41d55de25d94eed0ffa82d1446fea18651e34ca",
+    "ORIGINAL_FIRST_SEALS.json": "6d8356a897edd01447eb4f1485af52b8b37d6d02b9de2904576b1a99f0472629",
+    "PRECOMPARE_SEALS.json": "cdc7cc481acd7176a8e31332af8e5c5a65fb2f042f877417a9545a993abbec5e",
+    "A_B_COMPARISON.json": "2db68c0c311fcd7c025cf781260d8f493365387be83ddafe3558dd4c388d4eb0",
+    "SEALS.json": "12093668750b5b3b8cb42b919a2963c620cc6997520db0334da4364a021b41bc"
+  }
+}

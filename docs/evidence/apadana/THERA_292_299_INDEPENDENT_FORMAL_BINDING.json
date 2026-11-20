@@ -1,0 +1,9 @@
+{
+  "status": "B_VERIFIED_EXACT_V2_FORMAL_A_EMBEDDED_MAP_RIGHTS_COPY_BINDINGS",
+  "A_source_approval_sha256": "3bfff0ce8cbeb541cc3b30b4aa949b13bda33da7a2a20afed42b25aebce08570",
+  "A_embedded_profiles_links_match_exact_v2_pure_maps": true,
+  "A_source_and_normalization_count": 7,
+  "all_seven_runtime_implementation_package_CI_activation_release_push_flags_false": true,
+  "A_rights_copy_hashes_match_formal_binding": true,
+  "source_rights_scope_not_runtime_or_release_approval": true
+}

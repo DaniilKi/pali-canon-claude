@@ -1,0 +1,25 @@
+{
+  "status": "SEALED_V2_NOTICE_ONLY_SEVEN_SOURCE_APPROVAL",
+  "files": {
+    "SOURCE_APPROVAL.json": "3bfff0ce8cbeb541cc3b30b4aa949b13bda33da7a2a20afed42b25aebce08570",
+    "RIGHTS_REVIEW.json": "9a2d26dd1bd26594fec32eb4423588343598718acffd2c93b5331107c25d58cd",
+    "COPY_POLICY.json": "63ad3444c19b078c06306f1cb319e7dcb905ba685e5c2df0d82613da042e05d2",
+    "README.md": "03169643672f7ea3b5b2d40f6adf2d6e3994e1ddb972604a05d0207fbb551d8b",
+    "NOTICE_ADDITIONS.json": "5ffaa3202cc81f80388bfd4db26c3b5796b91efc8f29b80cd9c5e162b1d979e3",
+    "NOTICE_ONLY_INVERSE_PROOF.json": "2ad18e7e29bb78037f10e619424618e6820efc3d7745e14cc8c6448ea2ba4bb1",
+    "NOTICE_ONLY_CORE.patch": "a2c527b19582dd4a6bf03b696ad11a332518a9c4f8db31db22d2b92c5997d5fc",
+    "AMENDMENT.json": "80e4914d3a3c874fa8e1aea207df335f2227727394ff4c045854b95aed5852db",
+    "portable/review_thera292_299.py": "14ece6ab67eb6354e2a3c23e040e7bd8a1f54a65ffdb554494d12253afaf0a28",
+    "core/GOLDENS.json": "1363c5c612a34d36495b8a39fbeafc7ff3de6bb7703018fdd83937b6f40212ee",
+    "core/EXPECTED_PROFILES.json": "8942f873599882e63ff182e80fd82ccb89be8a25b04e502dfd1a6f3b0083b340",
+    "core/EXPECTED_LINKS.json": "01889f99c347ba4be1ca32c97f53997f13d8cbbea1a8f31c92271be71da6a736",
+    "core/REPLAY_RECEIPT.json": "3366949c3de32473a2ceab55e3c25bc83ce1b1254e2e583e78ed9002d523837f"
+  },
+  "immutable_v1_SEALS_sha256": "12093668750b5b3b8cb42b919a2963c620cc6997520db0334da4364a021b41bc",
+  "immutable_v1_source_approval_sha256": "370b9ab0fdfdaf07a66735125be93cdb9c91deada0b144212ab023a175237d8c",
+  "original_facts_sha256": "33ac7c0101b0fd0497e16449e41d55de25d94eed0ffa82d1446fea18651e34ca",
+  "rights_unchanged": true,
+  "source_wording_and_normalization_unchanged": true,
+  "full_wording_files": 0,
+  "runtime_release_push_approval": false
+}

@@ -1,0 +1,327 @@
+{
+  "schema": "reviewed-current317-runtime-approval-v1",
+  "status": "APPROVE_EXACT_CURRENT34_RUNTIME_INVENTORY_LOCAL_UNPUBLISHED_ONLY",
+  "reviewed_utc": "2026-11-20T12:54:36.188741+00:00",
+  "baseline": "3da5b3831af6396447dcc5d23f24cd03c34fdd9c",
+  "prospective_inventory": {
+    "path": "/tmp/pali-292-299-installed/PROSPECTIVE_RUNTIME.json",
+    "bytes": 5256,
+    "sha256": "a059dc5710ee95898d12f7ee237eab5123a67e354f69a59bf0ee2fd017d9cb7d"
+  },
+  "files": {
+    "THIRD_PARTY_LICENSES.txt": {
+      "bytes": 12861,
+      "sha256": "378d7454a776c1ef18accaa55f817cfb429ef713a8ec75e68ad83affb70ba015"
+    },
+    "data/anandajoti.json": {
+      "bytes": 47765,
+      "sha256": "7ff6df1b2d91418aef2ceacca43dc652cbf1d8363b70fccfb4106e23fd0af669"
+    },
+    "data/apadana.json": {
+      "bytes": 1283030,
+      "sha256": "d74704f944bab75f03378c7f04db9120ec5241076cd31dd6fcde3e91428a2138"
+    },
+    "data/bmc.json": {
+      "bytes": 40743,
+      "sha256": "01f68a8a0c4aa1a9c21f7743c5172beccd3cce9133037830f8ee7836c4810a63"
+    },
+    "data/canon.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "526ba969d0fc3ce62fde7d11764313de43b91a2f71375d602cd647a43b601632"
+    },
+    "data/canon.json.gz.part-0002": {
+      "bytes": 1367632,
+      "sha256": "24169740dd71b5ee86767ef72daea44759201987ffb72975afaca5d31b4c0832"
+    },
+    "data/canon.json.gz.parts.json": {
+      "bytes": 455,
+      "sha256": "639a938e11a230acbf0a87a18c180c820013d95795b7f951439a8cae674b91a7"
+    },
+    "data/commentary.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "581fb24ed95f5ba4a30f7ca02be4dced03f81315f34d3aa6e8a8601a97f2d946"
+    },
+    "data/commentary.json.gz.part-0002": {
+      "bytes": 4194304,
+      "sha256": "40d18b97cd9859a80eced012436e84cecad1654a78a33a98b7e3ed8f9700bf98"
+    },
+    "data/commentary.json.gz.part-0003": {
+      "bytes": 2443283,
+      "sha256": "905cc7de1186d860c0fd4902c11610cf38d2c3d05fe47ce987b3f22b7d68f06b"
+    },
+    "data/commentary.json.gz.parts.json": {
+      "bytes": 631,
+      "sha256": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156"
+    },
+    "data/dhamma_lists.json": {
+      "bytes": 37147,
+      "sha256": "6e14b77fd25d8b524da9ce9a3405220c3fbc9286c82d2096d8f0ca7cdd56b33c"
+    },
+    "data/dpd.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "7f6790cfaca70ad2d5d9dc829420b491288a23d666b3a5ba2f9e0046cc165081"
+    },
+    "data/dpd.json.gz.part-0002": {
+      "bytes": 1294765,
+      "sha256": "25e831647c47c1f97b6d325cf285f2ec761ba1b2ee64f516d3c036c5b2b5af12"
+    },
+    "data/dpd.json.gz.parts.json": {
+      "bytes": 451,
+      "sha256": "5c530a5afef657ceac06a484bfea0e6ecc725c18a38a0f7e3bc687b6028b5854"
+    },
+    "data/dppn.json": {
+      "bytes": 1207,
+      "sha256": "e3d1bb4af928e8cda64bfd92fe2254569043ee97d9d124583b48eca0201cf959"
+    },
+    "data/glossary.json.gz": {
+      "bytes": 1523979,
+      "sha256": "a47a735d7a376882609cd6cb56804403adbf10c21e136c36a4c277e09d746d64"
+    },
+    "data/parallels.json.gz": {
+      "bytes": 487205,
+      "sha256": "a5c99363bdec68bdaea8ea111eaea74a1c1bc0755235e1c2e49493d86414b385"
+    },
+    "data/postcanonical.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "3b21aeb1467103dda9b7bdff1a8a06b134df11454003a623ae617d6c452efbd9"
+    },
+    "data/postcanonical.json.gz.part-0002": {
+      "bytes": 4194304,
+      "sha256": "7943baafd6927bdedd408058f75f5a28c7934dddef660932355692976c297147"
+    },
+    "data/postcanonical.json.gz.part-0003": {
+      "bytes": 4194304,
+      "sha256": "a67a0f4c851845de4d519f86f4f5aaae8a86ade22a4a0e7559160b8056073d2e"
+    },
+    "data/postcanonical.json.gz.part-0004": {
+      "bytes": 1927665,
+      "sha256": "13b966525a2d9b312c79c368ba43cfa9cda545124f5692097966aaf0c0d6c82b"
+    },
+    "data/postcanonical.json.gz.parts.json": {
+      "bytes": 808,
+      "sha256": "310a3db600ad23af025d6f62cfe6f37d56a7fb48f0cda7eaa55a7035bf2e0080"
+    },
+    "data/reviewed-ati-sections.json": {
+      "bytes": 102044,
+      "sha256": "91fde828f07be060a616127e0920b41935a25e180757418036b145a9cfc5214a"
+    },
+    "data/reviewed-partial-pages.json": {
+      "bytes": 40136,
+      "sha256": "55495a36fb429de09b3c7c07bae68da87cd76115df7342647babeeba31afbd76"
+    },
+    "data/source-notes.json": {
+      "bytes": 4218,
+      "sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e"
+    },
+    "data/topics.json": {
+      "bytes": 339961,
+      "sha256": "b1d022643419d6b122138999eb6813db615654cb625a827ea64c256e74facbfb"
+    },
+    "data/translations.json": {
+      "bytes": 748991,
+      "sha256": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6"
+    },
+    "http-worker.cjs": {
+      "bytes": 2750922,
+      "sha256": "daa2aea31a8036f2dfce36046e5bb1a5641985cfbc745f0dba4435608841f834"
+    },
+    "http.cjs": {
+      "bytes": 2818667,
+      "sha256": "e31a75e820a145654c5442f1fbf84b50a90859d2433acc6fa912c5c2c777e6c5"
+    },
+    "index.cjs": {
+      "bytes": 2628142,
+      "sha256": "6f80196dfcb02feed5d6df807ef4f93f754d0782ec16485fa91a40a3a848cc5c"
+    },
+    "web/index.html": {
+      "bytes": 4289,
+      "sha256": "084bdf021db7d6229b5f8948b5ce5758cb112f0faf5fbffe2e9dadf8fa9ed0f9"
+    },
+    "web/reader.css": {
+      "bytes": 19037,
+      "sha256": "b124a83028222fa258d91c6fb53636c438e523a6934da995252568b0b69e7f1d"
+    },
+    "web/reader.js": {
+      "bytes": 1696592,
+      "sha256": "6b37b8d17ca9d603b76d8933e154e204865efbab5f74f0ce854b589b18e832c5"
+    }
+  },
+  "runtime_files": 34,
+  "allowed_changed_paths_from_prior310": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_runtime_paths": 29,
+  "prior_immutable_authorities": [
+    {
+      "path": "/tmp/pali-287-288-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 10075,
+      "sha256": "57c3b1c4efdc5b75b9718f77259c5ef4ee25a85e15b257f6f64b8235f3a71daf"
+    },
+    {
+      "path": "/tmp/pali-287-288-package-review/FINAL_ARCHIVE_APPROVAL.json",
+      "bytes": 4157,
+      "sha256": "b9c41a69cf880e0eb517207d98dc3f4cf37293dc54b54b21f113e41372b580fb"
+    },
+    {
+      "path": "/tmp/pali-281-285-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 10141,
+      "sha256": "809efc477aec7bd16c6d5077114ba5932663ecf110076899f9dc5ef85917519f"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 9979,
+      "sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+    }
+  ],
+  "source_authorities": {
+    "source_approval": {
+      "file": "THERA_292_299_SOURCE_APPROVAL.json",
+      "sha256": "3bfff0ce8cbeb541cc3b30b4aa949b13bda33da7a2a20afed42b25aebce08570"
+    },
+    "independent_source_approval": {
+      "file": "THERA_292_299_INDEPENDENT_SOURCE_APPROVAL.json",
+      "sha256": "e6443b9944f23fd6cf8c2ace5709ba0c32c534312fd245a55f6a22a6a016c130"
+    },
+    "expected_profiles": {
+      "file": "THERA_292_299_EXPECTED_PROFILES.json",
+      "sha256": "8942f873599882e63ff182e80fd82ccb89be8a25b04e502dfd1a6f3b0083b340"
+    },
+    "expected_links": {
+      "file": "THERA_292_299_EXPECTED_LINKS.json",
+      "sha256": "01889f99c347ba4be1ca32c97f53997f13d8cbbea1a8f31c92271be71da6a736"
+    }
+  },
+  "curation": {
+    "path": "/tmp/pali-thera292-299-local/docs/evidence/apadana/THERA_292_299_APPROVAL.json",
+    "bytes": 46167,
+    "sha256": "a39e811b09749e399b7faea74a4559c159de9a6180867aaa94977c3daba0ba3e"
+  },
+  "baseline_full": {
+    "path": "/tmp/pali-292-299-preflight/BASELINE_310_FREEZE.json",
+    "bytes": 2648782,
+    "sha256": "e4206842298629d98dc4f9611751f47f8e57041354c86973670f2366ccb9e32c"
+  },
+  "baseline_compact": {
+    "file": "THERA_292_299_BASELINE_COMPACT.json",
+    "sha256": "88c87437c64f70da86d107053d956f8a30a83a0f8f0d3e3e2cd0653014da0f50"
+  },
+  "source_build_closure": {
+    "checked_prior_inputs": 103,
+    "changed_prior_source_paths": [
+      "src/apadana-thera-profiles.mjs",
+      "src/chatgpt-widget.mjs",
+      "web/translation-policy.mjs"
+    ],
+    "new_source_paths": [
+      "src/apadana-thera292-299-profiles.mjs"
+    ],
+    "all_other_checked_source_web_build_inputs_unchanged": true,
+    "aggregator_and_clients_reverse_project_to_exact_base": true,
+    "parser_DOM_SHA_helpers_build_literals_auditor_unchanged": true,
+    "new_module_literal_exact_both_independent_V2_maps": true
+  },
+  "V1_history_V2_notice_only_review": {
+    "initial_approval": {
+      "path": "/tmp/pali-thera292-299-local/docs/evidence/apadana/THERA_292_299_INITIAL_SOURCE_APPROVAL.json",
+      "bytes": 64369,
+      "sha256": "370b9ab0fdfdaf07a66735125be93cdb9c91deada0b144212ab023a175237d8c"
+    },
+    "preserved_initial_history": {
+      "THERA_292_299_INITIAL_NORMALIZATION_SEALS.json": {
+        "path": "/tmp/pali-thera292-299-local/docs/evidence/apadana/THERA_292_299_INITIAL_NORMALIZATION_SEALS.json",
+        "bytes": 1635,
+        "sha256": "12093668750b5b3b8cb42b919a2963c620cc6997520db0334da4364a021b41bc"
+      },
+      "THERA_292_299_INITIAL_PRECOMPARE_SEALS.json": {
+        "path": "/tmp/pali-thera292-299-local/docs/evidence/apadana/THERA_292_299_INITIAL_PRECOMPARE_SEALS.json",
+        "bytes": 1116,
+        "sha256": "cdc7cc481acd7176a8e31332af8e5c5a65fb2f042f877417a9545a993abbec5e"
+      },
+      "THERA_292_299_ORIGINAL_FACTS.json": {
+        "path": "/tmp/pali-thera292-299-local/docs/evidence/apadana/THERA_292_299_ORIGINAL_FACTS.json",
+        "bytes": 74415,
+        "sha256": "33ac7c0101b0fd0497e16449e41d55de25d94eed0ffa82d1446fea18651e34ca"
+      }
+    },
+    "inverse_proof": {
+      "path": "/tmp/pali-thera292-299-local/docs/evidence/apadana/THERA_292_299_NOTICE_INVERSE_PROOF.json",
+      "bytes": 3961,
+      "sha256": "2ad18e7e29bb78037f10e619424618e6820efc3d7745e14cc8c6448ea2ba4bb1"
+    },
+    "independent_core_byte_inverse": [
+      {
+        "file": "THERA_292_299_GOLDENS.json",
+        "v1_restored_sha256": "5f363d501c003829d2456f0fcc2a296238a0711758e504f6b0d23c695dcfea37",
+        "v2_current_sha256": "1363c5c612a34d36495b8a39fbeafc7ff3de6bb7703018fdd83937b6f40212ee"
+      },
+      {
+        "file": "THERA_292_299_EXPECTED_PROFILES.json",
+        "v1_restored_sha256": "cdacb149f331b24035d381a6877233cdd16347bca15d908b3289732dc2b6f30a",
+        "v2_current_sha256": "8942f873599882e63ff182e80fd82ccb89be8a25b04e502dfd1a6f3b0083b340"
+      },
+      {
+        "file": "THERA_292_299_EXPECTED_LINKS.json",
+        "v1_restored_sha256": "9b02da946032e373d0481e87dc2ab11f11c381e2d1b2e48a1e776d2506fbbda9",
+        "v2_current_sha256": "01889f99c347ba4be1ca32c97f53997f13d8cbbea1a8f31c92271be71da6a736"
+      }
+    ],
+    "changed_notice_ids": [
+      "tha-ap295",
+      "tha-ap298"
+    ],
+    "only_two_original_notices_appended": true,
+    "all_raw_body_notes_paragraph_stanza_quote_root_fields_unchanged_from_V1": true
+  },
+  "preservation": {
+    "all_old310_profiles_exact": true,
+    "all_old310_links_exact": true,
+    "new7_profiles_links_exact_A_B_V2": true,
+    "canonical_source_note_commentary_dictionaries_and_other29runtime_paths_unchanged": true,
+    "private_focus_citation_source_note_DOM_caption_SHA_build_auditor_bytes_unchanged": true
+  },
+  "scope": {
+    "new_canonical_ids": [
+      "tha-ap294",
+      "tha-ap295",
+      "tha-ap296",
+      "tha-ap297",
+      "tha-ap298",
+      "tha-ap300",
+      "tha-ap301"
+    ],
+    "new_publisher_poems": [
+      292,
+      293,
+      294,
+      295,
+      296,
+      298,
+      299
+    ],
+    "poem_notes": 22,
+    "widget_version": "v37",
+    "old_paratext_content_guard_ids": 221,
+    "current_paratext_content_guard_ids": 228,
+    "note_content_guards_still_apply_all_registered_profiles": true,
+    "no_actual_English_body_translator_note_media_export_in_new_metadata": true
+  },
+  "client_authorship_limit": "Reviewer authored only the two finite client guard/version edits; this independent byte/source-authority review is not independent final review of all production implementation. Root/source A final acceptance remains separate.",
+  "reviewer_project_execution_build_tests_Git_network_servers": false,
+  "inventory_only": true,
+  "runtime_inventory_approval": true,
+  "behavioral_harness_approval": false,
+  "full_check_approval": false,
+  "final_archive_package_approval": false,
+  "implementation_acceptance": false,
+  "remote_ci_approval": false,
+  "release_or_push_approval": false,
+  "remaining_gates": [
+    "Actual tar/fresh offline install byte comparison after packaged docs freeze",
+    "Installed behavioral/source/outage/widget/native evidence",
+    "Root fullcheck and separate independent final implementation/CI/publication gates"
+  ]
+}

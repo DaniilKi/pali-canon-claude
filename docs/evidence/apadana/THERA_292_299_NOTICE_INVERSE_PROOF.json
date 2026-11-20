@@ -1,0 +1,83 @@
+{
+  "status": "V2_EXACT_TWO_NOTICE_ADDITIONS_INVERSE_PROVED",
+  "v1_source_approval_sha256": "370b9ab0fdfdaf07a66735125be93cdb9c91deada0b144212ab023a175237d8c",
+  "v1_SEALS_sha256": "12093668750b5b3b8cb42b919a2963c620cc6997520db0334da4364a021b41bc",
+  "v1_PRECOMPARE_sha256": "cdc7cc481acd7176a8e31332af8e5c5a65fb2f042f877417a9545a993abbec5e",
+  "original_facts_sha256": "33ac7c0101b0fd0497e16449e41d55de25d94eed0ffa82d1446fea18651e34ca",
+  "core_files": [
+    {
+      "file": "GOLDENS.json",
+      "v1_sha256": "5f363d501c003829d2456f0fcc2a296238a0711758e504f6b0d23c695dcfea37",
+      "v2_sha256": "1363c5c612a34d36495b8a39fbeafc7ff3de6bb7703018fdd83937b6f40212ee",
+      "only_mapping_notes_changed": true,
+      "inverse_removes_exact_one_notice_each_for293_296_and_restores_v1_bytes": true,
+      "affected": [
+        {
+          "publisher": 293,
+          "id": "tha-ap295",
+          "exact_added_notice": "Preserve the publisher ruler name Mahārahā exactly, including its final ā; do not normalize the original spelling or the seven-ruler and twenty-fifth-aeon wording."
+        },
+        {
+          "publisher": 296,
+          "id": "tha-ap298",
+          "exact_added_notice": "Source note4 identifies Sinh. tuvaralā/frankincense as the translator’s interpretation beside actual VRI tagarañcāpi (tagara). Preserve both; infer no unrecorded variant or botanical correction."
+        }
+      ]
+    },
+    {
+      "file": "EXPECTED_PROFILES.json",
+      "v1_sha256": "cdacb149f331b24035d381a6877233cdd16347bca15d908b3289732dc2b6f30a",
+      "v2_sha256": "8942f873599882e63ff182e80fd82ccb89be8a25b04e502dfd1a6f3b0083b340",
+      "only_mapping_notes_changed": true,
+      "inverse_removes_exact_one_notice_each_for293_296_and_restores_v1_bytes": true,
+      "affected": [
+        {
+          "publisher": 293,
+          "id": "tha-ap295",
+          "exact_added_notice": "Preserve the publisher ruler name Mahārahā exactly, including its final ā; do not normalize the original spelling or the seven-ruler and twenty-fifth-aeon wording."
+        },
+        {
+          "publisher": 296,
+          "id": "tha-ap298",
+          "exact_added_notice": "Source note4 identifies Sinh. tuvaralā/frankincense as the translator’s interpretation beside actual VRI tagarañcāpi (tagara). Preserve both; infer no unrecorded variant or botanical correction."
+        }
+      ]
+    },
+    {
+      "file": "EXPECTED_LINKS.json",
+      "v1_sha256": "9b02da946032e373d0481e87dc2ab11f11c381e2d1b2e48a1e776d2506fbbda9",
+      "v2_sha256": "01889f99c347ba4be1ca32c97f53997f13d8cbbea1a8f31c92271be71da6a736",
+      "only_mapping_notes_changed": true,
+      "inverse_removes_exact_one_notice_each_for293_296_and_restores_v1_bytes": true,
+      "affected": [
+        {
+          "publisher": 293,
+          "id": "tha-ap295",
+          "exact_added_notice": "Preserve the publisher ruler name Mahārahā exactly, including its final ā; do not normalize the original spelling or the seven-ruler and twenty-fifth-aeon wording."
+        },
+        {
+          "publisher": 296,
+          "id": "tha-ap298",
+          "exact_added_notice": "Source note4 identifies Sinh. tuvaralā/frankincense as the translator’s interpretation beside actual VRI tagarañcāpi (tagara). Preserve both; infer no unrecorded variant or botanical correction."
+        }
+      ]
+    }
+  ],
+  "raw_body_notes_root_paragraph_stanza_quote_hashes_all_unchanged": true,
+  "all_old_mapping_notices_retained_in_original_order": true,
+  "original_derivation_functions_AST_unchanged": [
+    "sha",
+    "compact",
+    "meta",
+    "norm",
+    "inner",
+    "xmltuple",
+    "derive",
+    "write_new"
+  ],
+  "formatter_projection_only_removes_single_fixed_notice_extension": true,
+  "patch_sha256": "a2c527b19582dd4a6bf03b696ad11a332518a9c4f8db31db22d2b92c5997d5fc",
+  "candidate_count_rights_source_activation_changes": false,
+  "full_wording_files": 0,
+  "runtime_release_push_approval": false
+}
