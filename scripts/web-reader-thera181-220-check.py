@@ -9,6 +9,7 @@ from datetime import datetime,timezone
 from pathlib import Path
 from playwright.sync_api import expect,sync_playwright
 from web_reader_test_helpers import read_tool
+from web_reader_approved_acceptance import approved_catalogue, assert_catalogue, assert_profiles
 ROOT=Path(__file__).resolve().parents[1]
 BASE='94c607310845b84dc3cd51ba3a19ce6fecd28683'
 spec=importlib.util.spec_from_file_location('d251',ROOT/'scripts/web-reader-thera-pair-intake-check.py')
@@ -174,14 +175,19 @@ def main():
     launch_harness = digest(Path(__file__).read_bytes())
     mode = ('installed-' if args.server_dir else '') + ('mcp-only' if args.mcp_only else 'a11y' if args.a11y else 'normal')
     if args.server_dir:assert server_dir != ROOT/'server', 'Installed mode must launch outside the repository server tree'
-    launch_helpers = {name:digest((ROOT/'scripts'/name).read_bytes()) for name in ('web-reader-thera-pair-intake-check.py','web-reader-apadana-thera-scaled-check.py','web-reader-apadana-thera-expansion-check.py','web_reader_test_helpers.py')}
+    launch_helpers = {name:digest((ROOT/'scripts'/name).read_bytes()) for name in ('web-reader-thera-pair-intake-check.py','web-reader-apadana-thera-scaled-check.py','web-reader-apadana-thera-expansion-check.py','web_reader_test_helpers.py','web_reader_approved_acceptance.py','web_reader_apadana_intake.py')}
     manifest = json.loads((server_dir/'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT/'server/data/apadana.json').read_text())
     old, canon = baseline()
-    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 206 and set(manifest['links']) == set(old['links'])|all_approved
+    approved = approved_catalogue(ROOT)
+    historical_ids = set(approval['expected_profile_ids'])
+    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 206
+    assert set(old['links'])|all_approved == historical_ids == set(approved['ids'][:246]) and len(historical_ids) == 246
+    assert_catalogue(manifest, approved)
+    assert_profiles(ROOT, approved)
     rows = manifest['links']
     assert {k:v for k,v in manifest['source'].items() if k != 'policy'} == {k:v for k,v in old['source'].items() if k != 'policy'}, 'Existing source/rights provenance changed'
-    assert manifest['source']['policy'] == old['source']['policy'].replace('206 finite',str(206+len(all_approved))+' finite').replace('166 explicitly mapped Therā',str(166+len(all_approved))+' explicitly mapped Therā')
+    assert manifest['source']['policy'] == approved['source']['policy']
     commentary_parts=git_bytes('server/data/commentary.json.gz.parts.json')
     assert (server_dir/'data/commentary.json.gz.parts.json').read_bytes() == commentary_parts
     for part in json.loads(commentary_parts)['parts']:
@@ -258,7 +264,7 @@ def main():
             'harness_argv':[sys.executable,*sys.argv],'harness_cwd':str(Path.cwd()),'server_argv':server_argv,
             'server_cwd':str(stage),'server_directory':str(server_dir),'outside_source_tree':bool(args.server_dir),
             'server_file_sha256':launch_hashes,'harness_sha256':launch_harness,'helper_sha256':launch_helpers,
-            'approval_sha256':digest(args.approval.read_bytes()),
+            'approval_sha256':digest(args.approval.read_bytes()),'registry_profiles':len(approved['ids']),
             'package_archive':str(args.package_archive.resolve()) if args.package_archive else None,
             'package_sha256':digest(args.package_archive.read_bytes()) if args.package_archive else None}
         def write_launch():

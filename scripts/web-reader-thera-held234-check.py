@@ -8,6 +8,7 @@ import argparse,gzip,hashlib,importlib.util,json,os,re,signal,socket,subprocess,
 from datetime import datetime,timezone
 from pathlib import Path
 from web_reader_apadana_intake import reviewed_intake
+from web_reader_approved_acceptance import assert_runtime
 ROOT=Path(__file__).resolve().parents[1]
 BASE='7d5ac90845402b322dabf2c5120d1485b15c0bda'
 UID='tha-ap236';NEIGHBOR='tha-ap237'
@@ -108,10 +109,9 @@ def main():
     for uid in (UID,NEIGHBOR):
         row=rows[uid];path=(checkout/row['raw_url'].split(PIN+'/',1)[1]).resolve();assert path.is_relative_to(checkout) and digest(path.read_bytes())==row['raw_sha256']
         files[row['raw_url']]=str(path)
-    launch_hashes={str(p.relative_to(server_dir)):digest(p.read_bytes()) for p in sorted(server_dir.rglob('*')) if p.is_file()}
-    assert len(launch_hashes)==33
+    launch_hashes=assert_runtime(ROOT,server_dir)
     launch_harness=digest(Path(__file__).read_bytes())
-    launch_helpers={name:digest((ROOT/'scripts'/name).read_bytes()) for name in ('web-reader-apadana-thera-scaled-check.py','web-reader-apadana-thera-expansion-check.py','web_reader_test_helpers.py','web_reader_apadana_intake.py')}
+    launch_helpers={name:digest((ROOT/'scripts'/name).read_bytes()) for name in ('web-reader-apadana-thera-scaled-check.py','web-reader-apadana-thera-expansion-check.py','web_reader_test_helpers.py','web_reader_apadana_intake.py','web_reader_approved_acceptance.py')}
     mode=('installed-' if args.server_dir else '')+('mcp-only' if args.mcp_only else 'a11y' if args.a11y else 'normal')
     work_root=Path('/tmp/pali-held234-browser');work_root.mkdir(exist_ok=True)
     mode_root=work_root/mode;mode_root.mkdir(exist_ok=True)
