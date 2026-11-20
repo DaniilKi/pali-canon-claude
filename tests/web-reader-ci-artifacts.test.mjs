@@ -68,6 +68,7 @@ function beforeHeld234Workflow(source){
 }
 
 // Source-note-only projection: retain every original historical assertion below unchanged.
+import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';
 function beforeSourceNotesWorkflow(source){
  if(!source.includes("matrix.group == 'vrieditionnote'"))return source;
  const additions=conditionalSteps(source,'vrieditionnote');assert.equal(additions.length,5,'only one source-note baseline fetch and four mandatory gates are projected out');
@@ -77,7 +78,7 @@ function beforeSourceNotesWorkflow(source){
  for(const report of ['standalone-source-notes.report.json','standalone-source-notes-launch.report.json','standalone-source-notes-a11y.report.json','standalone-source-notes-a11y-launch.report.json','standalone-source-notes-independent.report.json','installed-source-notes.report.json','installed-source-notes-launch.report.json'])projected=projected.replace('            '+report+'\n','');
  return projected;
 }
-function sourceNotesHistoricalWorkflow(){return beforeSourceNotesWorkflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));}
+function sourceNotesHistoricalWorkflow(){return beforeSourceNotesWorkflow(projectCheckStageWorkflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8')));}
 // End source-note-only projection.
 
 test('every browser-group JSON report is retained as a CI artifact',()=>{

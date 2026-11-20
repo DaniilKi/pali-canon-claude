@@ -1656,6 +1656,7 @@ jobs:
   check:
     name: Node ${{ matrix.node }} / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
@@ -1677,7 +1678,18 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - run: npm run check
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Run complete test inventory
+        timeout-minutes: 30
+        run: npm test
+      - name: Audit the complete bundled corpus
+        timeout-minutes: 5
+        run: npm run audit
       - run: npm run smoke
       - run: npm run pack:desktop
       # Exhaust every shipped text once; npx.yml checks all lazy datasets on each OS.
