@@ -1,0 +1,50 @@
+{
+  "status": "SEALED_ORIGINAL_FIRST_FACTS_AND_PURE_MAPS_BEFORE_B_COMPARISON",
+  "files": {
+    "derive_original_facts.py": "b87c91f94448f659f674739ba852bde2a187da47bab9ac3dd4ff36630630c2a6",
+    "ORIGINAL_FIRST_SEALS.json": "e8e4c08719b46571d465ef277bde85e78a05860623f78b848f8381a6895965b7",
+    "finalize_sources.py": "a987228634a6102f67f15808a8409ed99c90d33855ee0445321d2b0d051512c7",
+    "original-first/ORIGINAL_FACTS.json": "f7a8355557cecb81877a59d88812b91964807435790a07b4ca84dd448368b089",
+    "core/GOLDENS.json": "4968146cb3742e020f4f038591bfeaa04bd57636da4e35c48c39475024b8c0f4",
+    "core/EXPECTED_PROFILES.json": "a2c31fb46405fae44341fb553a3f0b83d7725bea79547c471ff81b40bf66dc00",
+    "core/EXPECTED_LINKS.json": "086d7141ee6e64db4552fdc06519d72c718b31774c4436d20426a7de2f4d642d",
+    "core/REPLAY_RECEIPT.json": "1be01109455fa2e31ff820089ea58c19e70737246c774804edcdcf1052b7ba36"
+  },
+  "selected_publishers": [
+    301,
+    302,
+    303,
+    304,
+    305,
+    308,
+    309,
+    310
+  ],
+  "selected_ids": [
+    "tha-ap303",
+    "tha-ap304",
+    "tha-ap305",
+    "tha-ap306",
+    "tha-ap307",
+    "tha-ap310",
+    "tha-ap311",
+    "tha-ap312"
+  ],
+  "totals": {
+    "poems": 8,
+    "body_paragraphs": 58,
+    "stanza_entries": 34,
+    "printed_local_labels": 36,
+    "poem_notes": 31,
+    "chapter_heading_paratexts": 0,
+    "paratext_notes": 0,
+    "summaries": 1,
+    "summary_notes": 1,
+    "original_note_definitions": 32,
+    "paired_display_occurrences": 7
+  },
+  "source_and_finite_normalization_only": true,
+  "runtime_approval": false,
+  "activation": false,
+  "release_approval": false
+}

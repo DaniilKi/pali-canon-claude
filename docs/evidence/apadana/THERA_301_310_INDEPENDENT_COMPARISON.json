@@ -1,0 +1,103 @@
+{
+  "status": "B_POSTSEAL_EIGHT_SOURCE_FINITE_NORMALIZATION_COMPARISON_PASSES_MAP_GO_PENDING_ONE_ORDER_NOTICE",
+  "A_precompare_sha256": "2bd3a9d4cbe733c6983f82a17a5803afdc347a8e19d3b1db561ec34cee89915a",
+  "B_precompare_sha256": "9b8869021c486ea67f572721a9f82919761e1ab10ed447f60345136f69e521ea",
+  "B_normalization_sha256": "e676ddea79a40ef1d6b6c9ed035159ce6f7bff8df317c058c4f77804b0a1f4c3",
+  "approved_source_scope_ids": [
+    "tha-ap303",
+    "tha-ap304",
+    "tha-ap305",
+    "tha-ap306",
+    "tha-ap307",
+    "tha-ap310",
+    "tha-ap311",
+    "tha-ap312"
+  ],
+  "results": [
+    {
+      "id": "tha-ap303",
+      "raw_body_notes_paratext_root_pins_equal": true,
+      "all_paragraph_lines_note_hashes_and_title_ownership_equal": true,
+      "all_quotation_entries_equal": true,
+      "original_XML_scope_and_neighbors_equal": true,
+      "poem_summary_boundaries_equal": true
+    },
+    {
+      "id": "tha-ap304",
+      "raw_body_notes_paratext_root_pins_equal": true,
+      "all_paragraph_lines_note_hashes_and_title_ownership_equal": true,
+      "all_quotation_entries_equal": true,
+      "original_XML_scope_and_neighbors_equal": true,
+      "poem_summary_boundaries_equal": true
+    },
+    {
+      "id": "tha-ap305",
+      "raw_body_notes_paratext_root_pins_equal": true,
+      "all_paragraph_lines_note_hashes_and_title_ownership_equal": true,
+      "all_quotation_entries_equal": true,
+      "original_XML_scope_and_neighbors_equal": true,
+      "poem_summary_boundaries_equal": true
+    },
+    {
+      "id": "tha-ap306",
+      "raw_body_notes_paratext_root_pins_equal": true,
+      "all_paragraph_lines_note_hashes_and_title_ownership_equal": true,
+      "all_quotation_entries_equal": true,
+      "original_XML_scope_and_neighbors_equal": true,
+      "poem_summary_boundaries_equal": true
+    },
+    {
+      "id": "tha-ap307",
+      "raw_body_notes_paratext_root_pins_equal": true,
+      "all_paragraph_lines_note_hashes_and_title_ownership_equal": true,
+      "all_quotation_entries_equal": true,
+      "original_XML_scope_and_neighbors_equal": true,
+      "poem_summary_boundaries_equal": true
+    },
+    {
+      "id": "tha-ap310",
+      "raw_body_notes_paratext_root_pins_equal": true,
+      "all_paragraph_lines_note_hashes_and_title_ownership_equal": true,
+      "all_quotation_entries_equal": true,
+      "original_XML_scope_and_neighbors_equal": true,
+      "poem_summary_boundaries_equal": true
+    },
+    {
+      "id": "tha-ap311",
+      "raw_body_notes_paratext_root_pins_equal": true,
+      "all_paragraph_lines_note_hashes_and_title_ownership_equal": true,
+      "all_quotation_entries_equal": true,
+      "original_XML_scope_and_neighbors_equal": true,
+      "poem_summary_boundaries_equal": true
+    },
+    {
+      "id": "tha-ap312",
+      "raw_body_notes_paratext_root_pins_equal": true,
+      "all_paragraph_lines_note_hashes_and_title_ownership_equal": true,
+      "all_quotation_entries_equal": true,
+      "original_XML_scope_and_neighbors_equal": true,
+      "poem_summary_boundaries_equal": true
+    }
+  ],
+  "totals": {
+    "poems": 8,
+    "body_paragraphs": 58,
+    "physical_stanza_entries": 34,
+    "local_verse_labels": 36,
+    "poem_notes": 31,
+    "chapter_headings": 0,
+    "chapter_summaries": 1,
+    "summary_notes": 1
+  },
+  "summary_full_content_note8_and_scope_match": true,
+  "six_rights_artifacts_equal": true,
+  "source_scope_approval_count": 8,
+  "finite_normalization_scope_approval_count": 8,
+  "exact_profile_and_link_approval": "PENDING_EXPLICIT_310_DISPLAY_ORDER_NOTICE",
+  "notice_gap": "Display explicitly that publisher summary is marker/verse/chapterheading, while VRI source scope is chaptercolophon/marker/verse; keep both orders and no paragraph alignment. Existing v1 golden records this, v1 mapping notices only say retain order.",
+  "B_segment_proof_limitation": "Type labels in own coarse segment-boundary proof are not an assertion of exact runtime segment type labels. Original canonical rend tuples/bytes/refs remain unchanged; validated summary9–11 boundaries are the approval evidence.",
+  "source_or_normalized_wording_changed": false,
+  "runtime_activation_release_push_approval": false,
+  "production_parser_test_build_Git_CI_network_execution": false,
+  "full_wording_files_created": false
+}

@@ -1,0 +1,151 @@
+{
+  "schema": "local-unpublished-eight-source-validation-v1",
+  "status": "LOCAL_VALIDATION_PASSED_FINAL_INDEPENDENT_SNAPSHOT_REVIEW_SEPARATE",
+  "observed_utc": "2026-11-20T14:15:49.550277+00:00",
+  "base_commit": "4c69f023c9fe1093ad8aadf0ac7f3caf766d92f0",
+  "publishers": [
+    301,
+    302,
+    303,
+    304,
+    305,
+    308,
+    309,
+    310
+  ],
+  "canonical_ids": [
+    "tha-ap303",
+    "tha-ap304",
+    "tha-ap305",
+    "tha-ap306",
+    "tha-ap307",
+    "tha-ap310",
+    "tha-ap311",
+    "tha-ap312"
+  ],
+  "choices": 325,
+  "Theri": 40,
+  "Thera": 285,
+  "added_first_English_choices": 8,
+  "source_scope": {
+    "body_paragraphs": 58,
+    "physical_entries": 34,
+    "printed_labels": 36,
+    "poem_notes": 31,
+    "summary_notes": 1,
+    "chapter_summaries": 1,
+    "summary_paragraphs": 3,
+    "whole_publisher_edition_not_line_complete_VRI_or_chapter": true
+  },
+  "V2_amendment": "One explicit summary-order metadata notice only; source/body/note/root/quote hashes unchanged; V1 evidence and exact inverse retained.",
+  "focused": {
+    "tests": 14,
+    "pass": 14,
+    "fail": 0,
+    "skip": 0,
+    "first_project_run": true,
+    "log_sha256": "ae7cb43228d3e85c3f656200f3f66f9e074b97cfdc779aebe0d2d7cfbbd209e5"
+  },
+  "integrity": {
+    "tests": 33,
+    "pass": 33,
+    "first_project_run": true,
+    "log_sha256": "9ee714208e868b545113cb4aaf3b3832db9760a344e1d50bf58b5788bc1eb1d8"
+  },
+  "full_check": {
+    "tests": 1806,
+    "suites": 0,
+    "pass": 1583,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 223,
+    "todo": 0,
+    "duration_ms": 303071.824914,
+    "exit_code": 0,
+    "audit_texts": 8544,
+    "audit_problems": 0,
+    "full_log_sha256": "a8814e0f5692e74649741586573ee1690b6dd311e641bc0aa955bc1133a881a7",
+    "observed_utc": "2026-11-20T14:13:36.968852+00:00"
+  },
+  "smoke": {
+    "exit": 0,
+    "tools": 34,
+    "checks": 64,
+    "log_sha256": "8262dd13f13f0c45ba6d7152bb6f931f5a2aedcc728d7498a2547e961de2aa97"
+  },
+  "evals": {
+    "exit": 0,
+    "pass": 195,
+    "live_skips": 6,
+    "questions": 201,
+    "log_sha256": "c12336d756c1baa68acfba6a887cd0d9d34ede0fbdbe9a99c12c5b12d586d87f"
+  },
+  "archive": {
+    "sha256": "cf4b958ce15a79ac58357cb1d18eff65142bd1e9699ce98e233a9ac115ba656d",
+    "members": 39,
+    "runtime_files": 34,
+    "independent_review_sha256": "4a93ee27111f81e77e533318931bc6fad8f371a1ad0a0259fb9c585e3ed1944d"
+  },
+  "installed": {
+    "native_observations": 72,
+    "fixture_poem_observations": 32,
+    "deny_all_English_refusals": 32,
+    "saved_note_draft_cells": 8,
+    "widths": [
+      1280,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "poem_notes": 31,
+    "separate_summary_notes": 1,
+    "stdio500pages": 17,
+    "whole_poem_quotation_checks": 8,
+    "independently_pinned_physical_quote_entries": 34,
+    "summary_query_verdict": "not_found_in_scope",
+    "held_source_refusals_per_stdio_mode": 8,
+    "Pali_reads_per_stdio_mode": 16,
+    "all_native_bodies_one6000page_no_Nextpage_claim": true,
+    "strict_widget_complete_resources": 2,
+    "widget_version": 38,
+    "widget_alignment_sample": 3,
+    "external_network_forwarded": 0,
+    "guard_expected_blocked_calls": [
+      42,
+      50
+    ],
+    "owned_groups_absent_and_leaders_reaped": true,
+    "first_execution_passed": true,
+    "native_receipt_sha256": "b52aac47e23191a77427c5eba63ef590be820bde7389f91490a0e6f79552a658",
+    "launch_sha256": "3fae653867001177fdf30eb30133c4c536f4ad6026b2f6ecbea7c270ceb09d44",
+    "harness_freeze_sha256": "516e1915ce036c6595d903cd4230eb3acb58f1c4ff7b6575955418ec386d8166"
+  },
+  "preservation": {
+    "file": "/tmp/pali-301-310-preflight/FINAL_PRESERVATION.json",
+    "sha256": "9b3632984107602fdc6ed00f6ebc70a594c1ea5e6b02a8717017a93955e14ee2"
+  },
+  "preserved_lines": {
+    "file": "/tmp/pali-301-310-preflight/PRESERVED_INDEPENDENT_LINES.json",
+    "sha256": "aba3d630e8d1c793b9a2e1f2bb9407c8ac2980a1b907a0943c890512688cfa0f"
+  },
+  "remote_job": {
+    "job": 136167153764,
+    "conclusion": "cancelled",
+    "start": "2026-11-20T08:10:20Z",
+    "end": "2026-11-20T14:10:39Z",
+    "elapsed_seconds": 21619,
+    "cause": "Not established by available logs",
+    "receipt": "/tmp/pali-301-310-preflight/ci/TERMINAL_RECEIPT.json",
+    "logs_sha256": "ba0418c375f5a36ae404bf4a6447e5d201ac429694adf12605f13ef9921972f7"
+  },
+  "no_push_newrun_rerun_cancel_merge_deploy_outreach": true,
+  "limits": [
+    "No new remote exact-commit CI",
+    "Physical-device/humanAT/signed-inhost/liveupstream/specialist acceptance unverified",
+    "LinuxChromium viewport and simulatedwidgetbridges only; no newFF/WebKit/physical Safari certification",
+    "English remainslive-only; fixture success is notliveupstream availability orPWA",
+    "18oforiginal40candidatequeue remainunapproved alongside separatepriorholds"
+  ]
+}

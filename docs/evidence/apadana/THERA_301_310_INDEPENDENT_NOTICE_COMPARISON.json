@@ -1,0 +1,34 @@
+{
+  "status": "B_APPROVES_V2_EXACT_ONE_DISPLAY_ORDER_NOTICE_RESOLVES_PRIOR_MAP_HOLD",
+  "A_v2_source_approval_sha256": "276fcc2b31713b8e1553f7a6b05ff6a0d5089d9d71f3f23d2efb6bd00bf598a3",
+  "A_v2_seals_sha256": "9df6ff1773b2ec398df50182a63c6ff09504541e15571ac87738ec852be725a5",
+  "B_precompare_sha256": "9b8869021c486ea67f572721a9f82919761e1ab10ed447f60345136f69e521ea",
+  "B_normalization_sha256": "e676ddea79a40ef1d6b6c9ed035159ce6f7bff8df317c058c4f77804b0a1f4c3",
+  "added_notice": "Publisher summary order is the summary marker, six-line summary verse, then chapter closing; actual VRI places the chapter closing before the summary marker and verse. Preserve both edition orders without moving the summary or its note8 into the poem.",
+  "core_inverse": [
+    {
+      "file": "EXPECTED_PROFILES.json",
+      "v1_sha256": "a2c31fb46405fae44341fb553a3f0b83d7725bea79547c471ff81b40bf66dc00",
+      "v2_sha256": "e2c5c83e4a9062bd68bb56728e0e536c8a549810fff1071aaa087b7d32bcbaf7",
+      "only_exact_one_appended_order_notice": true,
+      "inverse_restores_v1_bytes": true
+    },
+    {
+      "file": "EXPECTED_LINKS.json",
+      "v1_sha256": "086d7141ee6e64db4552fdc06519d72c718b31774c4436d20426a7de2f4d642d",
+      "v2_sha256": "422f6790a7b3866704091d2c70814b600458e61918035966a4746c5ac345f034",
+      "only_exact_one_appended_order_notice": true,
+      "inverse_restores_v1_bytes": true
+    },
+    {
+      "file": "GOLDENS.json",
+      "v1_sha256": "4968146cb3742e020f4f038591bfeaa04bd57636da4e35c48c39475024b8c0f4",
+      "v2_sha256": "7b72f06b87db9e5c2d192cc0194f6602782d3ec29f29ecb5333ad665ebdd799f",
+      "only_exact_one_appended_order_notice": true,
+      "inverse_restores_v1_bytes": true
+    }
+  ],
+  "all_other_fields_and_old_notices_byte_exact": true,
+  "source_body_notes_root_layout_quotes_rights_unchanged": true,
+  "runtime_activation_release_push_approval": false
+}

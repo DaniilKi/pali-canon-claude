@@ -1,0 +1,294 @@
+{
+  "schema": "independent-baseline317-compact-review-v1",
+  "status": "APPROVE_EXACT_BASELINE317_COMPACT_ONLY",
+  "observed_utc": "2026-11-20T13:50:14.310814+00:00",
+  "baseline": "4c69f023c9fe1093ad8aadf0ac7f3caf766d92f0",
+  "compact": {
+    "sha256": "411a72c6ebc991bc2e2cb9038e415666749954bdad9dc2b14f4b41f5f8f11d43",
+    "bytes": 63089
+  },
+  "full_freeze": {
+    "sha256": "a1da899a978257b82433f9965e5edb89fcbb6db27a1d6ba28bc35e0da4accd0e",
+    "bytes": 2563109
+  },
+  "independent_reconstruction": {
+    "method": "Standalone standard-library metadata reconstruction from immutable246 full profile/link objects; corroborated206+independent40; append sealed pure-profile/link groups through317. No project/helper import, no candidate325 output.",
+    "steps": [
+      {
+        "added": 10,
+        "total": 256,
+        "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      {
+        "added": 10,
+        "total": 266,
+        "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      {
+        "added": 18,
+        "total": 284,
+        "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      {
+        "added": 1,
+        "total": 285,
+        "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      {
+        "added": 18,
+        "total": 303,
+        "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      {
+        "added": 5,
+        "total": 308,
+        "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      {
+        "added": 2,
+        "total": 310,
+        "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      {
+        "added": 7,
+        "total": 317,
+        "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      }
+    ],
+    "profiles": 317,
+    "Theri": 40,
+    "Thera": 277,
+    "ordered_link_objects_exact": 317,
+    "profile_object_compact_json_hashes_exact": 317,
+    "translation_object_compact_json_hashes_exact": 317,
+    "Thera_full_objects_exact": 277,
+    "manifest_source_policy": "Exact246\u2192317 and206\u2192277 numeric substitutions only; allother source/rights fields and policy wording retained.",
+    "source_object_sha256": "417e7186c990e0dbecef9d20db34a87613563063250c1747192afaac6c761fa0",
+    "data_files_hash_exact": 27,
+    "prior317_runtime_files_exact": 34,
+    "canon_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+    "canon_units": 8544,
+    "canon_books": 61,
+    "older206_freeze_format_note": "Earlier181\u2013220 baseline206 stored english/match UI fields. Only these two fields excluded for the optional206\u2192246 pure-profile corroboration; remaining206 values/order and independently approved40 exact. The authoritative sealed246 pure profiles and links are otherwise used verbatim for full317 reconstruction, including all40Theri."
+  },
+  "inputs": {
+    "/tmp/pali-301-310-helper-plan/BASELINE_317_COMPACT_DRAFT.json": {
+      "sha256": "411a72c6ebc991bc2e2cb9038e415666749954bdad9dc2b14f4b41f5f8f11d43",
+      "bytes": 63089
+    },
+    "/tmp/pali-301-310-preflight/TRACKED_BASELINE_317.json": {
+      "sha256": "a1da899a978257b82433f9965e5edb89fcbb6db27a1d6ba28bc35e0da4accd0e",
+      "bytes": 2563109
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_292_299_APPROVAL.json": {
+      "sha256": "a39e811b09749e399b7faea74a4559c159de9a6180867aaa94977c3daba0ba3e",
+      "bytes": 46167
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_287_288_APPROVAL.json": {
+      "sha256": "e159aefc7ad0f2a36a10dffa95fd5cf97650b95969820344f70aee0dd2c7e95e",
+      "bytes": 44122
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_281_285_APPROVAL.json": {
+      "sha256": "52c1813c72685a7a78f4f29ed860035c06e61f1b209f601ed0b2e9a36de3206f",
+      "bytes": 44132
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_261_280_APPROVAL.json": {
+      "sha256": "e25da6522df6f88bfcbf5fade43c6a8972d050425f5a6af1e6043d60440f896b",
+      "bytes": 43330
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_HELD234_APPROVAL.json": {
+      "sha256": "14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7",
+      "bytes": 40285
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_REMAINING_APPROVAL.json": {
+      "sha256": "20d72ee82ce1a0e07c9b5f5b87c68266637462a91ab1a0d4ba38152ee7396d40",
+      "bytes": 47362
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_221_230_APPROVAL.json": {
+      "sha256": "4ae2cd3fea1c64e323dfa41c15403c33215e90f8834c7ee0a4db708f77f68bed",
+      "bytes": 39319
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_241_250_APPROVAL.json": {
+      "sha256": "4d11c069b21e87ba7b58ea9a55c6b39d0a1beef0c9cd9f824e7c3f6146736df2",
+      "bytes": 36895
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_181_220_APPROVAL.json": {
+      "sha256": "25bf82a592840d1ed95ee07fa1fc7b80f57a1e5a5b7f701b7caf9c308d7931ad",
+      "bytes": 37405
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_241_250_BASELINE_FREEZE.json": {
+      "sha256": "24e63f5fb14ec74946d20349d78ae2b405e1636ca561f757660113226d6537dc",
+      "bytes": 2230360
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_181_220_BASELINE_FREEZE.json": {
+      "sha256": "2735510c7377c1a4c1e7ef5ec8a08a2db5827bdf6563e44d053272471e6e3d49",
+      "bytes": 1220499
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_181_220_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "6935c20ad8ae27d74e83a3ccd5857384ffc6b24c9c4cd7b45f844f170f95b8bc",
+      "bytes": 1079719
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_241_250_EXPECTED_PROFILES.json": {
+      "sha256": "356bb1b3aa144389d69d6f7446eaa84065af2bcaad3ca40522dcfbb39cd150c0",
+      "bytes": 28226
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_241_250_EXPECTED_LINKS.json": {
+      "sha256": "4c1e466abe86985073358436160ee71189d942c792efc306f81b104f40df57a1",
+      "bytes": 29043
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_TWENTY_FIFTH_SOURCE_APPROVAL.json": {
+      "sha256": "0b6a8dcb0118a7a3151899d545f48f64efa8af10f4f97d28a3833055b4d69f36",
+      "bytes": 27982
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_241_250_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "c055a6cfd0de8e90cf2c0a139626ea8d1b7177d73bf0fad9547b9dc529389b48",
+      "bytes": 73988
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_221_230_EXPECTED_PROFILES.json": {
+      "sha256": "637d8d8f523a3e5d33c1c33e36133d2535a8e7f4007e3bb5d1e51b20f07820ea",
+      "bytes": 29971
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_221_230_EXPECTED_LINKS.json": {
+      "sha256": "b87cb20b9840e95af3154250293985c3bb70c76109d4dd2887a02456297e1d0f",
+      "bytes": 30790
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_221_230_SOURCE_APPROVAL.json": {
+      "sha256": "1bdfc072457986e81b5edeaa3e235a0bd9dfa37b2b1085e367315eecfe19f9e2",
+      "bytes": 27806
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_221_230_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "8957644d3c28c367d6e46b014c2679a00b59ec78c1e2d8f5c0133a20d11b9ac0",
+      "bytes": 78590
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_231_240_EXPECTED_PROFILES.json": {
+      "sha256": "a070166743beb7ba7842fe65848a152b29db3c34817c341c82ddad5908ab6b66",
+      "bytes": 25640
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_231_240_EXPECTED_LINKS.json": {
+      "sha256": "89f92dfe67413162bbf7296a5e6abe174d08cd9510f7cf384968ea21568033d6",
+      "bytes": 26382
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_231_240_SOURCE_APPROVAL.json": {
+      "sha256": "c8c2a000d84725f8231a20e044498a30f12bc827418bb3638efba790f89820ca",
+      "bytes": 27974
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_231_240_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "6049ff90fc2b45fe0be400ee6c05aff1e498854aebee3fa06337ec60680f23e6",
+      "bytes": 69542
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_251_259_EXPECTED_PROFILES.json": {
+      "sha256": "dcb7eb11ee17006331bcbc6333e689feb8f01f44666cbb858896ad0cd3ba7332",
+      "bytes": 25568
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_251_259_EXPECTED_LINKS.json": {
+      "sha256": "e81b97b665cdec6157eb91a31d7c3857e4f03d38d53523f70ab33d927856a227",
+      "bytes": 26312
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_251_259_SOURCE_APPROVAL.json": {
+      "sha256": "97996843f7b422dbaf844f9558152a3a92e0749ca18ab5b8fa82106ac78b22f7",
+      "bytes": 21420
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_251_259_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "3626c99eeb7cdd9ee12f76417159d4d0c974bf97fffdd5b29bb60218df38697d",
+      "bytes": 5109
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_HELD234_EXPECTED_PROFILES.json": {
+      "sha256": "af6d434558dc690935a4cc12672999de9114afaeed259c4039492f8e6bd32efc",
+      "bytes": 4172
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_HELD234_EXPECTED_LINKS.json": {
+      "sha256": "279a6106888c4978da6abe40207cba84f4f994e5aad5014bf3023da27f095d77",
+      "bytes": 4255
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_HELD234_SOURCE_APPROVAL.json": {
+      "sha256": "79077c74bca9da96b34d29fb496db0eca44c4ce83572f482c72ea01e3b78ad6c",
+      "bytes": 9512
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_HELD234_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "9b7b6cf1d4efe45ee06330551651e1baaf76f20226a35c47a07224592d1cfb8d",
+      "bytes": 22370
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_261_280_EXPECTED_PROFILES.json": {
+      "sha256": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046",
+      "bytes": 51258
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_261_280_EXPECTED_LINKS.json": {
+      "sha256": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371",
+      "bytes": 52754
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_261_280_SOURCE_APPROVAL.json": {
+      "sha256": "dee7e7fa8e55cb539fbb7f4c9d09413eef931ad323f674ec8fd8ac8d31fd6ae5",
+      "bytes": 135106
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_261_280_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "8ce46b4cca025f55c61e10b8cd8c81fd154dbe7b811f433e7f33e2b29d95dae6",
+      "bytes": 113391
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_281_285_EXPECTED_PROFILES.json": {
+      "sha256": "50390be204501c1a82efb1f4b67c1a685ad702c2d60c39a6f88120b4c480ed30",
+      "bytes": 14929
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_281_285_EXPECTED_LINKS.json": {
+      "sha256": "c4db039b0fb86065b4d9cae28c708d3cd0292a1477b1e41edcbce9310308859b",
+      "bytes": 15337
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_281_285_SOURCE_APPROVAL.json": {
+      "sha256": "17f3c9b149c35c728c5668399dc0a599085b8e747d2ba650f9405dc00ae24e6d",
+      "bytes": 45628
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_281_285_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "bd0be2b38de251ad499d2237715790a1b14595493e233f1af9e144a266ed4640",
+      "bytes": 35001
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_287_288_EXPECTED_PROFILES.json": {
+      "sha256": "469448bac323d2e64f12ed16b5ce8e72439ee2a5471ee58106d3a4e47416df7a",
+      "bytes": 6183
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_287_288_EXPECTED_LINKS.json": {
+      "sha256": "f56c00dc91c62cad541a57181ca035524939bdcfbff4b89b5263128a3a522848",
+      "bytes": 6346
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_287_288_SOURCE_APPROVAL.json": {
+      "sha256": "8789f82ac660ecdb838f38d6cd5d7e7b44c9042a0fbe248119ba086f2cc41be9",
+      "bytes": 20978
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_287_288_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "4563f12df0490ae0b35b16c90c835ecce4fa8ee979857a3a9fadeb84f0a23fce",
+      "bytes": 16055
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_292_299_EXPECTED_PROFILES.json": {
+      "sha256": "8942f873599882e63ff182e80fd82ccb89be8a25b04e502dfd1a6f3b0083b340",
+      "bytes": 23390
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_292_299_EXPECTED_LINKS.json": {
+      "sha256": "01889f99c347ba4be1ca32c97f53997f13d8cbbea1a8f31c92271be71da6a736",
+      "bytes": 23964
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_292_299_SOURCE_APPROVAL.json": {
+      "sha256": "3bfff0ce8cbeb541cc3b30b4aa949b13bda33da7a2a20afed42b25aebce08570",
+      "bytes": 66703
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_292_299_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "e6443b9944f23fd6cf8c2ace5709ba0c32c534312fd245a55f6a22a6a016c130",
+      "bytes": 53247
+    },
+    "/tmp/pali-292-299-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json": {
+      "sha256": "3d2a7460cf2a94f1acaa8fbdc49fc359139f574da04510fa6e460e8c1dab3765",
+      "bytes": 12645
+    }
+  },
+  "scope": {
+    "baseline_compact_approval": true,
+    "new_source_approval": false,
+    "candidate325_runtime_approval": false,
+    "archive_approval": false,
+    "behavioral_approval": false,
+    "CI_release_push_approval": false
+  },
+  "execution_scope": "Only own standalone Python metadata reading/hash/comparison; no project/helper import or code, tests/build/browser/server/Git/network execution.",
+  "client_authorship_disclosure": "Reviewer authored only two pending D263 finite client changes. This baseline reconstruction does not provide independent all-implementation approval; source A/B final approval and later runtime/archive review remain separate.",
+  "review_script": {
+    "path": "/tmp/pali-301-310-package-review/review_baseline317.py",
+    "sha256": "21ea3d8c765bfc14b4ed591ce7f478c0414314773c0bbb32e5a32f9c699da8a3"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "allowed": "Metadata-only JSON,README and independent stdlib replay; full body/note/paratext/summary/Pali buffers remain memory only.",
+  "forbidden": "Never copy raw originals,normalized English/Pali/notes/summary buffers or private data into repository/package; no media or recording payloads.",
+  "scope": "Only publisher301302303304305308309310, complete publisher-edition poems and310chapter-summary/note8 scope; no wholechapter or held306307 approval.",
+  "source_normalization_runtime_release_gates_separate": true
+}

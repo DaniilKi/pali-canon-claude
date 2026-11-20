@@ -1,0 +1,12 @@
+{
+  "schema": "finite-one-notice-amendment-v1",
+  "status": "DISPLAY_NOTICE_ONLY",
+  "owner": "tha-ap312",
+  "old_approval_sha256": "5f1acb6ca7bc97c68593d39a7079f6485b82d60aa28854a69b7c6e1c461980c4",
+  "new_approval_sha256": "276fcc2b31713b8e1553f7a6b05ff6a0d5089d9d71f3f23d2efb6bd00bf598a3",
+  "inverse_sha256": "c905aae2887c6e6e76320afd4be01241da9231550208b62885df71c60178afa8",
+  "notice_additions_sha256": "b562dec4084945a18136763e40cb2f7ee78d27c4c738cf83c4f2f1cbd39f58ac",
+  "source_body_notes_root_quotes_changed": false,
+  "other_profile_fields_changed": false,
+  "runtime_or_release_approval": false
+}

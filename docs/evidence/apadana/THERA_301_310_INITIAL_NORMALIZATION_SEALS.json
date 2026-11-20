@@ -1,0 +1,71 @@
+{
+  "status": "SEALED_EIGHT_SOURCE_AND_FINITE_NORMALIZATION_REVIEW_A_ONLY",
+  "files": {
+    "derive_original_facts.py": {
+      "bytes": 20381,
+      "sha256": "b87c91f94448f659f674739ba852bde2a187da47bab9ac3dd4ff36630630c2a6"
+    },
+    "finalize_sources.py": {
+      "bytes": 16960,
+      "sha256": "a987228634a6102f67f15808a8409ed99c90d33855ee0445321d2b0d051512c7"
+    },
+    "original-first/ORIGINAL_FACTS.json": {
+      "bytes": 98267,
+      "sha256": "f7a8355557cecb81877a59d88812b91964807435790a07b4ca84dd448368b089"
+    },
+    "original-first/REPLAY_RECEIPT.json": {
+      "bytes": 365,
+      "sha256": "55abb7813de5a9cae31b0418ba5c074376f88fc5419848e21eb827255fe16450"
+    },
+    "ORIGINAL_FIRST_SEALS.json": {
+      "bytes": 734,
+      "sha256": "e8e4c08719b46571d465ef277bde85e78a05860623f78b848f8381a6895965b7"
+    },
+    "PRECOMPARE_SEALS.json": {
+      "bytes": 1611,
+      "sha256": "2bd3a9d4cbe733c6983f82a17a5803afdc347a8e19d3b1db561ec34cee89915a"
+    },
+    "core/GOLDENS.json": {
+      "bytes": 194745,
+      "sha256": "4968146cb3742e020f4f038591bfeaa04bd57636da4e35c48c39475024b8c0f4"
+    },
+    "core/EXPECTED_PROFILES.json": {
+      "bytes": 27697,
+      "sha256": "a2c31fb46405fae44341fb553a3f0b83d7725bea79547c471ff81b40bf66dc00"
+    },
+    "core/EXPECTED_LINKS.json": {
+      "bytes": 28356,
+      "sha256": "086d7141ee6e64db4552fdc06519d72c718b31774c4436d20426a7de2f4d642d"
+    },
+    "core/REPLAY_RECEIPT.json": {
+      "bytes": 670,
+      "sha256": "1be01109455fa2e31ff820089ea58c19e70737246c774804edcdcf1052b7ba36"
+    },
+    "RIGHTS_REVIEW.json": {
+      "bytes": 4945,
+      "sha256": "9a0f91c6e107c4d1e5ee60094185f2b174004f17f56c2295d10f9dabd9716a47"
+    },
+    "COPY_POLICY.json": {
+      "bytes": 1629,
+      "sha256": "175a362ba9aa738d24c73a7224925b1fcea1a9edf657332dbc3febd953d4e9f0"
+    },
+    "SOURCE_APPROVAL.json": {
+      "bytes": 81583,
+      "sha256": "5f1acb6ca7bc97c68593d39a7079f6485b82d60aa28854a69b7c6e1c461980c4"
+    },
+    "README.md": {
+      "bytes": 2520,
+      "sha256": "22484f629a5f46a23b92e40ded1b49413c4f40b4660a3e93c46a817b83d7472a"
+    },
+    "portable/review_thera301_310.py": {
+      "bytes": 35933,
+      "sha256": "0ae5135b5cc5bfe3f0211fd2bb8a3e35fd3e8425a038800635716511978ca6a2"
+    },
+    "portable/STATIC_PARAMETERIZATION_REVIEW.json": {
+      "bytes": 653,
+      "sha256": "3789dad344ac2602d6b439fc6045e7d4f2c57a86f16ed1492ad3593a2e7c67b5"
+    }
+  },
+  "runtime_approval": false,
+  "release_approval": false
+}

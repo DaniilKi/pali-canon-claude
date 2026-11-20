@@ -1,0 +1,52 @@
+{
+  "status": "SEALED_V2_EIGHT_SOURCE_AND_FINITE_NORMALIZATION_REVIEW_A_ONLY",
+  "v1_seals_sha256": "a68d6c47ed5dabf54dbd56ac21f30d00318eaf9739be61591ef62ca9d334d45a",
+  "files": {
+    "core/GOLDENS.json": {
+      "bytes": 195008,
+      "sha256": "7b72f06b87db9e5c2d192cc0194f6602782d3ec29f29ecb5333ad665ebdd799f"
+    },
+    "core/EXPECTED_PROFILES.json": {
+      "bytes": 27958,
+      "sha256": "e2c5c83e4a9062bd68bb56728e0e536c8a549810fff1071aaa087b7d32bcbaf7"
+    },
+    "core/EXPECTED_LINKS.json": {
+      "bytes": 28617,
+      "sha256": "422f6790a7b3866704091d2c70814b600458e61918035966a4746c5ac345f034"
+    },
+    "finalize_sources.py": {
+      "bytes": 17251,
+      "sha256": "fb521d1a3b36ca7b497b1642086dbc6681717d00a6013675a55fd84ff763635d"
+    },
+    "portable/review_thera301_310.py": {
+      "bytes": 36224,
+      "sha256": "e97e60d574fb91004ebde74e04731b3509e537cfe20edb20310cb393d30f1c00"
+    },
+    "RIGHTS_REVIEW.json": {
+      "bytes": 4945,
+      "sha256": "9a0f91c6e107c4d1e5ee60094185f2b174004f17f56c2295d10f9dabd9716a47"
+    },
+    "COPY_POLICY.json": {
+      "bytes": 1871,
+      "sha256": "d5cee3bdc61e461256b0ab5e31b6d2773129db35545ebf162386269276e267fc"
+    },
+    "SOURCE_APPROVAL.json": {
+      "bytes": 82765,
+      "sha256": "276fcc2b31713b8e1553f7a6b05ff6a0d5089d9d71f3f23d2efb6bd00bf598a3"
+    },
+    "NOTICE_ONLY_INVERSE_REVIEW.json": {
+      "bytes": 1745,
+      "sha256": "c905aae2887c6e6e76320afd4be01241da9231550208b62885df71c60178afa8"
+    },
+    "NOTICE_ONLY.diff": {
+      "bytes": 2158,
+      "sha256": "d1035c1b21f7788aa2e5732c517afd5b57478283d5b8c9a61c28bf59be9924f6"
+    },
+    "README.md": {
+      "bytes": 2875,
+      "sha256": "96afff2be19784d65fced5ac6d41d663dd3f062c02433d7a2d15a40031d73d13"
+    }
+  },
+  "runtime_approval": false,
+  "release_approval": false
+}

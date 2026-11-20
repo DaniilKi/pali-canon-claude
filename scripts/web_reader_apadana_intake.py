@@ -540,8 +540,162 @@ def read_292_299(root):
     return current
 
 
+def read_301_310(root):
+    previous=read_292_299(root)
+    current=_sealed(root,{'file':'THERA_301_310_APPROVAL.json',
+                         'sha256':'5b6ee312e81f422e464922a53354800f492c571ec98f837fa119ba01de6c7042'})
+    assert current['schema']=='reviewed-apadana-intake-v1' and current['status']=='approved'
+    assert current['base_commit']=='4c69f023c9fe1093ad8aadf0ac7f3caf766d92f0'
+    assert current['previous_intake']=={'file':'THERA_292_299_APPROVAL.json',
+                                        'sha256':'a39e811b09749e399b7faea74a4559c159de9a6180867aaa94977c3daba0ba3e'}
+    assert _sealed(root,current['previous_intake'])==previous
+    assert current['publisher_revision']==previous['publisher_revision'] and current['vri_revision']==previous['vri_revision']
+    assert current['baseline_ids']==previous['expected_profile_ids'] and len(current['baseline_ids'])==317
+    assert current['baseline_records']==previous['baseline_records']+previous['approved_records']
+    ids=['tha-ap303','tha-ap304','tha-ap305','tha-ap306','tha-ap307','tha-ap310','tha-ap311','tha-ap312']
+    publishers=[301,302,303,304,305,308,309,310]
+    records=[{'id':uid,'publisher_chapter':'chapter-3','poem':poem} for uid,poem in zip(ids,publishers,strict=True)]
+    assert current['approved_ids']==ids and current['approved_records']==records
+    assert not set(ids)&set(current['baseline_ids'])
+    assert current['expected_profile_ids']==current['baseline_ids']+ids
+    assert len(current['expected_profile_ids'])==len(set(current['expected_profile_ids']))==325
+    assert current['held_ids']==previous['held_ids']+['tha-ap308','tha-ap309']
+    assert not set(current['held_ids'])&set(current['expected_profile_ids'])
+    assert current['explicitly_not_activated_publishers']==[poem for poem in previous['explicitly_not_activated_publishers'] if poem not in publishers]
+    assert current['before_canon_sha256']==current['after_canon_sha256']==previous['after_canon_sha256']
+    assert current['source_and_normalization_only'] is True and current['media_approval'] is False
+    assert current['runtime_approval'] is False and current['release_approval'] is False and current['external_activations']==0
+    profiles=_sealed(root,current['expected_profiles']);links=_sealed(root,current['expected_links'])
+    golden=_sealed(root,current['goldens']);author=_sealed(root,current['source_approval'])
+    peer=_sealed(root,current['independent_source_approval']);normalized=_sealed(root,current['independent_normalization'])
+    assert list(profiles)==list(links)==ids
+    assert author['status']=='SOURCE_AND_FINITE_NORMALIZATION_APPROVED_EIGHT_REVIEW_A_V2_DISPLAY_NOTICE_ONLY'
+    assert author['baseline']==current['base_commit']
+    assert peer['status']=='APPROVE_EIGHT_EXACT_PUBLISHER301_310_V2_SOURCE_FINITE_NORMALIZATION_AND_MAPS_ONLY'
+    for packet in (author,peer):
+        assert packet['publisher_revision']==current['publisher_revision'] and packet['vri_revision']==current['vri_revision']
+        assert packet['canonical_logical_sha256']==current['after_canon_sha256']
+        assert packet['approved_ids']==ids and packet['source_approval_count']==packet['normalization_approval_count']==8
+        assert packet['approved_profile_objects']==profiles and packet['approved_link_objects']==links
+        assert packet['runtime_approval'] is False and packet['release_approval'] is False and packet['push_approval'] is False
+    assert author['source_approval'] is True and author['normalization_approval'] is True and author['activation'] is False
+    assert peer['activation_approval'] is False and peer['review_version']==2 and peer['notice_only_amendment'] is True
+    assert author['approved_publisher_poems']==publishers and peer['approved_records']==records
+    assert peer['A_v2_source_approval_sha256']==current['source_approval']['sha256']
+    assert peer['B_independent_normalization_sha256']==current['independent_normalization']['sha256']
+    assert normalized['status']=='B_ORIGINAL_FIRST_EIGHT_NORMALIZED_METADATA_SEALED_BEFORE_A_COMPARISON'
+    assert normalized['publisher_revision']==current['publisher_revision'] and normalized['vri_revision']==current['vri_revision']
+    assert normalized['production_parser_or_A_outputs_used'] is False and normalized['runtime_or_release_approval'] is False
+    assert [row['canonical_owner'] for row in normalized['poems']]==ids
+    assert [row['publisher_poem'] for row in normalized['poems']]==publishers
+    assert golden['baseline']==current['base_commit'] and golden['canonical_logical_sha256']==current['after_canon_sha256']
+    assert golden['publisher_revision']==current['publisher_revision'] and golden['vri_revision']==current['vri_revision']
+    assert [row['id'] for row in golden['poems']]==ids
+    for row,proof in zip(golden['poems'],normalized['poems'],strict=True):
+        uid=row['id']
+        assert row['poem']==proof['publisher_poem'] and row['path']==proof['source_path']
+        for field in ('raw_sha256','body_sha256','notes_sha256','paratext_sha256'):
+            assert profiles[uid][field]==row[field]==proof[field]
+        assert profiles[uid]['root_sha256']==row['root']['root_sha256']==proof['root_sha256']
+        assert profiles[uid]['stanza_layout']==row['stanza_layout']==proof['stanza_layout']
+        assert [part['sha256'] for part in row['body_paragraphs']]==proof['body_paragraph_sha256s']
+        assert row['note_numbers']==proof['poem_note_numbers']==profiles[uid]['note_numbers']
+        assert links[uid]==dict(profiles[uid],english=profiles[uid]['title'],match='individually-reviewed-whole-poem')
+        if uid!='tha-ap312':
+            assert 'chapter_summary' not in profiles[uid] and not row.get('chapter_summary') and proof['chapter_summary'] is None
+    row=golden['poems'][-1];proof=normalized['poems'][-1]
+    summary=profiles['tha-ap312']['chapter_summary'];a_summary=row['chapter_summary'];b_summary=proof['chapter_summary']
+    assert summary['kind']=='canonical_chapter_summary' and summary['parent_id']=='tha-ap312'
+    assert summary['first_ref']=='tha-ap312/9' and summary['last_ref']=='tha-ap312/11'
+    for field in summary:assert summary[field]==a_summary[field]
+    for field in ('root_start','root_end','root_sha256','body_sha256','notes_sha256','note_numbers'):
+        assert summary[field]==b_summary[field]
+    assert summary['root_start']==9221 and summary['root_end']==9226 and summary['note_numbers']==[8]
+    assert row['note_numbers']==proof['poem_note_numbers']==list(range(1,8))
+    assert row['note_count']==7 and row['original_note_count']==8 and proof['poem_root_end']==9221
+    assert row['poem_only_root_sha256']==proof['poem_root_sha256']
+    assert [part['sha256'] for part in a_summary['paragraphs']]==b_summary['paragraph_sha256s']
+    assert [part['lines'] for part in a_summary['paragraphs']]==b_summary['paragraph_lines']==[1,6,1]
+    assert a_summary['note_text_sha256s']==[{'number':part['number'],'sha256':part['sha256']} for part in b_summary['note_text_sha256s']]
+    assert a_summary['publisher_stated_total']==b_summary['publisher_stated_verse_count']==49
+    assert a_summary['vri_stated_total']==b_summary['VRI_stated_verse_count']==b_summary['VRI_numbered_stanzas_in_chapter']==51
+    assert a_summary['held_publisher_poems']==b_summary['contains_held_publisher_poems']==[306,307]
+    assert b_summary['whole_chapter_english_approval'] is False
+    assert b_summary['publisher_order']==['marker','verse','chapter_heading']
+    assert b_summary['VRI_order']==['chapter_colophon','marker','verse']
+    assert peer['summary_scope']['poem_notes']==author['summary_scope']['poem_notes']==list(range(1,8))
+    assert peer['summary_scope']['summary_notes']==author['summary_scope']['summary_notes']==[8]
+    assert peer['summary_scope']['publisher_stated_total']==author['summary_scope']['publisher_stated_total']==49
+    assert peer['summary_scope']['VRI_stated_and_actual_total']==author['summary_scope']['actual_publisher_global_and_VRI_total']==51
+    assert peer['summary_scope']['whole_chapter_English_approval'] is False and author['summary_scope']['fullchapter_approval'] is False
+    assert peer['summary_scope']['held_publishers']==author['summary_scope']['held_publishers']==[306,307]
+    seals=_sealed(root,current['normalization_seals']);replay=_sealed(root,current['normalization_replay'])
+    assert seals['status']=='SEALED_V2_EIGHT_SOURCE_AND_FINITE_NORMALIZATION_REVIEW_A_ONLY'
+    assert seals['runtime_approval'] is False and seals['release_approval'] is False
+    for original,field,author_field in (('GOLDENS.json','goldens','goldens_sha256'),('EXPECTED_PROFILES.json','expected_profiles','profiles_sha256'),('EXPECTED_LINKS.json','expected_links','links_sha256')):
+        sha=current[field]['sha256']
+        assert author[author_field]==peer['A_reviewed_core_artifacts'][original]==sha
+        assert seals['files']['core/'+original]['sha256']==replay['files'][original]==sha
+    assert replay['status']=='PASS_EIGHT_ORIGINAL_SOURCE_AND_FINITE_NORMALIZATION_METADATA_ONLY' and replay['all_xml_tuple_count']==14645
+    assert replay['full_english_payload_files_written']==replay['full_pali_payload_files_written']==0
+    assert replay['runtime_approval'] is False and replay['release_approval'] is False
+    compact=_sealed(root,current['baseline_freeze']);review=_sealed(root,current['baseline_reconstruction_review'])
+    assert compact['schema']=='reviewed-apadana-baseline-compact-v1' and compact['profiles']==317
+    assert compact['baseline']==current['base_commit'] and compact['ordered_ids']==current['baseline_ids']
+    assert compact['prior317_authority']==current['previous_intake']
+    assert list(compact['profile_object_sha256'])==list(compact['translation_object_sha256'])==current['baseline_ids']
+    assert compact['canon_logical_sha256']==current['before_canon_sha256'] and compact['canon_units']==8544 and compact['canon_books']==61
+    assert review['status']=='APPROVE_EXACT_BASELINE317_COMPACT_ONLY' and review['baseline']==current['base_commit']
+    assert review['compact']['sha256']==current['baseline_freeze']['sha256']
+    reconstruction=review['independent_reconstruction']
+    for field in ('profiles','ordered_link_objects_exact','profile_object_compact_json_hashes_exact','translation_object_compact_json_hashes_exact'):assert reconstruction[field]==317
+    assert reconstruction['Theri']==40 and reconstruction['Thera']==reconstruction['Thera_full_objects_exact']==277
+    assert reconstruction['data_files_hash_exact']==27 and reconstruction['prior317_runtime_files_exact']==34
+    assert reconstruction['source_object_sha256']==compact['manifest_source_sha256']
+    initial=_sealed(root,current['initial_source_approval']);initial_seals=_sealed(root,current['initial_normalization_seals'])
+    precompare=_sealed(root,current['initial_precompare_seals']);amendment=_sealed(root,current['notice_amendment'])
+    inverse=_sealed(root,current['notice_inverse_proof']);additions=_sealed(root,current['notice_additions'])
+    notice_peer=_sealed(root,current['peer_notice_review'])
+    assert amendment['status']=='DISPLAY_NOTICE_ONLY' and amendment['owner']=='tha-ap312'
+    assert amendment['old_approval_sha256']==author['v1_formal_approval_sha256']==current['initial_source_approval']['sha256']
+    assert amendment['new_approval_sha256']==current['source_approval']['sha256']
+    assert amendment['inverse_sha256']==author['notice_only_inverse_review_sha256']==current['notice_inverse_proof']['sha256']
+    assert amendment['notice_additions_sha256']==current['notice_additions']['sha256']
+    assert amendment['source_body_notes_root_quotes_changed'] is False and amendment['other_profile_fields_changed'] is False
+    assert inverse['status']=='PASS_EXACT_ONE_DISPLAY_NOTICE_ONLY' and inverse['owner']=='tha-ap312'
+    assert inverse['v1_core_seal_sha256']==author['precompare_seal_sha256']==current['initial_precompare_seals']['sha256']
+    assert inverse['v1_formal_seal_sha256']==author['v1_seals_sha256']==seals['v1_seals_sha256']==current['initial_normalization_seals']['sha256']
+    assert set(additions)=={'tha-ap312'} and additions['tha-ap312']==[inverse['notice']]
+    assert notice_peer['status']=='B_APPROVES_V2_EXACT_ONE_DISPLAY_ORDER_NOTICE_RESOLVES_PRIOR_MAP_HOLD'
+    assert notice_peer['added_notice']==inverse['notice'] and notice_peer['all_other_fields_and_old_notices_byte_exact'] is True
+    assert notice_peer['source_body_notes_root_layout_quotes_rights_unchanged'] is True
+    assert peer['v2_notice_comparison_sha256']==current['peer_notice_review']['sha256']
+    assert inverse['formatter_inverse_recovers_v1_bytes'] is True and inverse['portable_inverse_recovers_v1_bytes'] is True
+    assert inverse['source_body_note_summary_wording_root_quote_changes'] is False and inverse['other_profile_fields_changed'] is False
+    for objects,old_objects,original,descriptor in ((profiles,initial['approved_profile_objects'],'EXPECTED_PROFILES.json',current['expected_profiles']),(links,initial['approved_link_objects'],'EXPECTED_LINKS.json',current['expected_links']),(golden,None,'GOLDENS.json',current['goldens'])):
+        restored=json.loads(json.dumps(objects))
+        owner=restored['poems'][-1] if original=='GOLDENS.json' else restored['tha-ap312']
+        notices=owner['mapping_notes'];notice=inverse['notice']
+        assert notices.count(notice)==1 and notices[-1]==notice
+        notices.pop()
+        if old_objects is not None:assert restored==old_objects, 'Only one summary-order display notice may differ from sealed V1'
+        item=inverse['files'][original]
+        assert item['inverse_recovers_v1_bytes'] is True and item['v2_sha256']==descriptor['sha256']
+        assert item['v1_sha256']==initial_seals['files']['core/'+original]['sha256']==precompare['files']['core/'+original]
+        assert hashlib.sha256((json.dumps(restored,ensure_ascii=False,indent=2)+'\n').encode('utf-8')).hexdigest()==item['v1_sha256']
+    assert initial_seals['files']['SOURCE_APPROVAL.json']['sha256']==current['initial_source_approval']['sha256']
+    assert author['rights_review_sha256']==current['rights']['sha256'] and author['copy_policy_sha256']==current['copy_policy']['sha256']
+    rights=_sealed(root,current['rights']);_sealed(root,current['copy_policy'])
+    assert rights['applicable_license']=='CC BY-NC-SA 4.0' and rights['full_original_artifacts_read'] is True
+    assert rights['runtime_or_redistribution_acceptance'] is False
+    assert list(rights['per_poem_scope'])==ids and all(row['media_approved'] is False for row in rights['per_poem_scope'].values())
+    assert current['source_reviews']
+    for descriptor in current['source_reviews']:_sealed(root,descriptor)
+    return current
+
+
 def reviewed_intake(root):
-    return read_292_299(root)
+    return read_301_310(root)
 
 
 def curated_303_additions(root,anchor_filename):
@@ -610,8 +764,8 @@ def curated_310_additions(root,anchor_filename):
     return {'curation':current,'anchor':anchor,'ids':ids,'profiles':profiles,'links':links}
 
 
-def curated_additions(root,anchor_filename):
-    current=reviewed_intake(root)
+def curated_317_additions(root,anchor_filename):
+    current=read_292_299(root)
     if anchor_filename=='THERA_287_288_APPROVAL.json':
         anchor=read_287_288(root)
         ids=[];profiles={};links={}
@@ -620,6 +774,25 @@ def curated_additions(root,anchor_filename):
         anchor=historical['anchor']
         ids=list(historical['ids']);profiles=dict(historical['profiles']);links=dict(historical['links'])
         assert historical['curation']==read_287_288(root)
+    extra_profiles=_sealed(root,current['expected_profiles']);extra_links=_sealed(root,current['expected_links'])
+    assert list(extra_profiles)==list(extra_links)==current['approved_ids']
+    assert not set(extra_profiles)&(set(anchor['expected_profile_ids'])|set(ids))
+    ids.extend(current['approved_ids']);profiles.update(extra_profiles);links.update(extra_links)
+    assert current['expected_profile_ids']==anchor['expected_profile_ids']+ids
+    assert list(profiles)==list(links)==ids
+    return {'curation':current,'anchor':anchor,'ids':ids,'profiles':profiles,'links':links}
+
+
+def curated_additions(root,anchor_filename):
+    current=read_301_310(root)
+    if anchor_filename=='THERA_292_299_APPROVAL.json':
+        anchor=read_292_299(root)
+        ids=[];profiles={};links={}
+    else:
+        historical=curated_317_additions(root,anchor_filename)
+        anchor=historical['anchor']
+        ids=list(historical['ids']);profiles=dict(historical['profiles']);links=dict(historical['links'])
+        assert historical['curation']==read_292_299(root)
     extra_profiles=_sealed(root,current['expected_profiles']);extra_links=_sealed(root,current['expected_links'])
     assert list(extra_profiles)==list(extra_links)==current['approved_ids']
     assert not set(extra_profiles)&(set(anchor['expected_profile_ids'])|set(ids))

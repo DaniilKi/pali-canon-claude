@@ -28,7 +28,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_current_full_objects_and_profiles(self):
         assert_catalogue(self.manifest, self.approved)
         assert_profiles(ROOT, self.approved)
-        self.assertEqual(len(self.approved['links']), 317)
+        self.assertEqual(len(self.approved['links']), 325)
         for uid in ('tha-ap262', 'tha-ap268', 'tha-ap282'):
             self.assertNotIn(uid, self.approved['links'])
 
@@ -134,7 +134,8 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json',
-                'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json')
+                'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
@@ -170,7 +171,8 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json',
-                'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json')
+                'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
@@ -205,11 +207,49 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json',
-                'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json')
+                'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
             target=root/'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json'
+            data=json.loads(target.read_text(encoding='utf-8'));data['files']['index.cjs']['sha256']='0'*64
+            target.write_text(json.dumps(data),encoding='utf-8')
+            with self.assertRaises(AssertionError): approved_runtime(root)
+
+
+    def test_missing_eight_source_identity(self):
+        self.rejects_catalogue(lambda m: m['links'].pop('tha-ap303'))
+
+    def test_eight_summary_note_pin_changed(self):
+        self.rejects_catalogue(lambda m: m['links']['tha-ap312']['chapter_summary'].__setitem__('notes_sha256','0'*64))
+
+    def test_eight_curation_seal_tampering_after_positive(self):
+        import shutil
+        from web_reader_apadana_intake import read_301_310
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);dest=root/'docs/evidence/apadana'
+            shutil.copytree(ROOT/'docs/evidence/apadana',dest)
+            self.assertEqual(len(read_301_310(root)['expected_profile_ids']),325)
+            path=dest/'THERA_301_310_APPROVAL.json'
+            data=json.loads(path.read_text(encoding='utf-8'));data['approved_ids'][0]='tha-ap308'
+            path.write_text(json.dumps(data),encoding='utf-8')
+            with self.assertRaises(AssertionError): read_301_310(root)
+
+    def test_eight_runtime_inventory_seal_tampering_after_positive(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            names=('tests/fixtures/reviewed-runtime-2449.json',
+                'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json',
+                'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json')
+            for name in names:
+                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
+            self.assertEqual(len(approved_runtime(root)),34)
+            target=root/'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json'
             data=json.loads(target.read_text(encoding='utf-8'));data['files']['index.cjs']['sha256']='0'*64
             target.write_text(json.dumps(data),encoding='utf-8')
             with self.assertRaises(AssertionError): approved_runtime(root)

@@ -1,0 +1,22 @@
+{
+  "status": "SEALED_ORIGINAL_FIRST_FACTS_BEFORE_PROFILE_FORMATTING_OR_B_COMPARISON",
+  "files": {
+    "derive_original_facts.py": "b87c91f94448f659f674739ba852bde2a187da47bab9ac3dd4ff36630630c2a6",
+    "original-first/ORIGINAL_FACTS.json": "f7a8355557cecb81877a59d88812b91964807435790a07b4ca84dd448368b089",
+    "original-first/REPLAY_RECEIPT.json": "55abb7813de5a9cae31b0418ba5c074376f88fc5419848e21eb827255fe16450"
+  },
+  "counts": {
+    "poems": 8,
+    "body_paragraphs": 58,
+    "entries": 34,
+    "labels": 36,
+    "notes": 31,
+    "summary_notes": 1,
+    "original_note_definitions": 32,
+    "paratext_headings": 0,
+    "summaries": 1
+  },
+  "full_payload_files": 0,
+  "runtime_approval": false,
+  "release_approval": false
+}

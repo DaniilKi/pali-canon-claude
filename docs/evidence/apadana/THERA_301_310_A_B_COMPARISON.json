@@ -1,0 +1,358 @@
+{
+  "status": "PASS_EIGHT_INDEPENDENT_A_B_CORE_AND_APPARATUS_AGREEMENT",
+  "A_precompare_sha256": "2bd3a9d4cbe733c6983f82a17a5803afdc347a8e19d3b1db561ec34cee89915a",
+  "A_originalfacts_sha256": "f7a8355557cecb81877a59d88812b91964807435790a07b4ca84dd448368b089",
+  "A_v2_seals_sha256": "9df6ff1773b2ec398df50182a63c6ff09504541e15571ac87738ec852be725a5",
+  "B_normalization_sha256": "e676ddea79a40ef1d6b6c9ed035159ce6f7bff8df317c058c4f77804b0a1f4c3",
+  "B_precompare_sha256": "9b8869021c486ea67f572721a9f82919761e1ab10ed447f60345136f69e521ea",
+  "results": [
+    {
+      "id": "tha-ap303",
+      "poem": 301,
+      "status": "EXACT_MATCH_INDEPENDENT_SOURCE_NORMALIZATION_PINS",
+      "compared": [
+        "raw/size/blob",
+        "title",
+        "full canonicalunit/root",
+        "poem-onlyroot",
+        "body/notes/emptyparatext",
+        "everybodyparagraphhash/lines/characters",
+        "stanza/printedlabels",
+        "everynotehash/number/source reference owner",
+        "everyquoteentryhash/characters",
+        "no summary"
+      ],
+      "independently_verified_reference_owners": [
+        {
+          "number": 1,
+          "kind": "poem_title",
+          "body_paragraph_index": 0,
+          "physical_stanza_entry": null
+        },
+        {
+          "number": 2,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 1,
+          "physical_stanza_entry": 1
+        },
+        {
+          "number": 3,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 1,
+          "physical_stanza_entry": 1
+        },
+        {
+          "number": 4,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 1,
+          "physical_stanza_entry": 1
+        },
+        {
+          "number": 5,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 1,
+          "physical_stanza_entry": 1
+        },
+        {
+          "number": 6,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 1,
+          "physical_stanza_entry": 1
+        }
+      ]
+    },
+    {
+      "id": "tha-ap304",
+      "poem": 302,
+      "status": "EXACT_MATCH_INDEPENDENT_SOURCE_NORMALIZATION_PINS",
+      "compared": [
+        "raw/size/blob",
+        "title",
+        "full canonicalunit/root",
+        "poem-onlyroot",
+        "body/notes/emptyparatext",
+        "everybodyparagraphhash/lines/characters",
+        "stanza/printedlabels",
+        "everynotehash/number/source reference owner",
+        "everyquoteentryhash/characters",
+        "no summary"
+      ],
+      "independently_verified_reference_owners": [
+        {
+          "number": 1,
+          "kind": "poem_title",
+          "body_paragraph_index": 0,
+          "physical_stanza_entry": null
+        },
+        {
+          "number": 2,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 3,
+          "physical_stanza_entry": 3
+        },
+        {
+          "number": 3,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 3,
+          "physical_stanza_entry": 3
+        }
+      ]
+    },
+    {
+      "id": "tha-ap305",
+      "poem": 303,
+      "status": "EXACT_MATCH_INDEPENDENT_SOURCE_NORMALIZATION_PINS",
+      "compared": [
+        "raw/size/blob",
+        "title",
+        "full canonicalunit/root",
+        "poem-onlyroot",
+        "body/notes/emptyparatext",
+        "everybodyparagraphhash/lines/characters",
+        "stanza/printedlabels",
+        "everynotehash/number/source reference owner",
+        "everyquoteentryhash/characters",
+        "no summary"
+      ],
+      "independently_verified_reference_owners": [
+        {
+          "number": 1,
+          "kind": "poem_title",
+          "body_paragraph_index": 0,
+          "physical_stanza_entry": null
+        },
+        {
+          "number": 2,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 1,
+          "physical_stanza_entry": 1
+        },
+        {
+          "number": 3,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 2,
+          "physical_stanza_entry": 2
+        }
+      ]
+    },
+    {
+      "id": "tha-ap306",
+      "poem": 304,
+      "status": "EXACT_MATCH_INDEPENDENT_SOURCE_NORMALIZATION_PINS",
+      "compared": [
+        "raw/size/blob",
+        "title",
+        "full canonicalunit/root",
+        "poem-onlyroot",
+        "body/notes/emptyparatext",
+        "everybodyparagraphhash/lines/characters",
+        "stanza/printedlabels",
+        "everynotehash/number/source reference owner",
+        "everyquoteentryhash/characters",
+        "no summary"
+      ],
+      "independently_verified_reference_owners": [
+        {
+          "number": 1,
+          "kind": "poem_title",
+          "body_paragraph_index": 0,
+          "physical_stanza_entry": null
+        },
+        {
+          "number": 2,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 1,
+          "physical_stanza_entry": 1
+        },
+        {
+          "number": 3,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 2,
+          "physical_stanza_entry": 2
+        },
+        {
+          "number": 4,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 3,
+          "physical_stanza_entry": 3
+        },
+        {
+          "number": 5,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 3,
+          "physical_stanza_entry": 3
+        },
+        {
+          "number": 6,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 5,
+          "physical_stanza_entry": 5
+        },
+        {
+          "number": 7,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 6,
+          "physical_stanza_entry": 6
+        }
+      ]
+    },
+    {
+      "id": "tha-ap307",
+      "poem": 305,
+      "status": "EXACT_MATCH_INDEPENDENT_SOURCE_NORMALIZATION_PINS",
+      "compared": [
+        "raw/size/blob",
+        "title",
+        "full canonicalunit/root",
+        "poem-onlyroot",
+        "body/notes/emptyparatext",
+        "everybodyparagraphhash/lines/characters",
+        "stanza/printedlabels",
+        "everynotehash/number/source reference owner",
+        "everyquoteentryhash/characters",
+        "no summary"
+      ],
+      "independently_verified_reference_owners": [
+        {
+          "number": 1,
+          "kind": "poem_title",
+          "body_paragraph_index": 0,
+          "physical_stanza_entry": null
+        },
+        {
+          "number": 2,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 1,
+          "physical_stanza_entry": 1
+        },
+        {
+          "number": 3,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 2,
+          "physical_stanza_entry": 2
+        }
+      ]
+    },
+    {
+      "id": "tha-ap310",
+      "poem": 308,
+      "status": "EXACT_MATCH_INDEPENDENT_SOURCE_NORMALIZATION_PINS",
+      "compared": [
+        "raw/size/blob",
+        "title",
+        "full canonicalunit/root",
+        "poem-onlyroot",
+        "body/notes/emptyparatext",
+        "everybodyparagraphhash/lines/characters",
+        "stanza/printedlabels",
+        "everynotehash/number/source reference owner",
+        "everyquoteentryhash/characters",
+        "no summary"
+      ],
+      "independently_verified_reference_owners": [
+        {
+          "number": 1,
+          "kind": "poem_title",
+          "body_paragraph_index": 0,
+          "physical_stanza_entry": null
+        }
+      ]
+    },
+    {
+      "id": "tha-ap311",
+      "poem": 309,
+      "status": "EXACT_MATCH_INDEPENDENT_SOURCE_NORMALIZATION_PINS",
+      "compared": [
+        "raw/size/blob",
+        "title",
+        "full canonicalunit/root",
+        "poem-onlyroot",
+        "body/notes/emptyparatext",
+        "everybodyparagraphhash/lines/characters",
+        "stanza/printedlabels",
+        "everynotehash/number/source reference owner",
+        "everyquoteentryhash/characters",
+        "no summary"
+      ],
+      "independently_verified_reference_owners": [
+        {
+          "number": 1,
+          "kind": "poem_title",
+          "body_paragraph_index": 0,
+          "physical_stanza_entry": null
+        }
+      ]
+    },
+    {
+      "id": "tha-ap312",
+      "poem": 310,
+      "status": "EXACT_MATCH_INDEPENDENT_SOURCE_NORMALIZATION_PINS",
+      "compared": [
+        "raw/size/blob",
+        "title",
+        "full canonicalunit/root",
+        "poem-onlyroot",
+        "body/notes/emptyparatext",
+        "everybodyparagraphhash/lines/characters",
+        "stanza/printedlabels",
+        "everynotehash/number/source reference owner",
+        "everyquoteentryhash/characters",
+        "separatesummarybody/notes8/paragraphs/root/XML/counts"
+      ],
+      "independently_verified_reference_owners": [
+        {
+          "number": 1,
+          "kind": "poem_title",
+          "body_paragraph_index": 0,
+          "physical_stanza_entry": null
+        },
+        {
+          "number": 2,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 2,
+          "physical_stanza_entry": 2
+        },
+        {
+          "number": 3,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 2,
+          "physical_stanza_entry": 2
+        },
+        {
+          "number": 4,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 2,
+          "physical_stanza_entry": 2
+        },
+        {
+          "number": 5,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 2,
+          "physical_stanza_entry": 2
+        },
+        {
+          "number": 6,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 3,
+          "physical_stanza_entry": 3
+        },
+        {
+          "number": 7,
+          "kind": "poem_stanza",
+          "body_paragraph_index": 3,
+          "physical_stanza_entry": 3
+        },
+        {
+          "number": 8,
+          "kind": "chapter_summary",
+          "summary_paragraph_index": 1,
+          "physical_stanza_entry": null
+        }
+      ]
+    }
+  ],
+  "comparison_is_not_source_or_runtime_oracle": true,
+  "full_payload_files_written": 0,
+  "runtime_approval": false,
+  "release_approval": false
+}

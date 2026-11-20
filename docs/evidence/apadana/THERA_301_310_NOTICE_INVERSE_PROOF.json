@@ -1,0 +1,31 @@
+{
+  "status": "PASS_EXACT_ONE_DISPLAY_NOTICE_ONLY",
+  "owner": "tha-ap312",
+  "notice": "Publisher summary order is the summary marker, six-line summary verse, then chapter closing; actual VRI places the chapter closing before the summary marker and verse. Preserve both edition orders without moving the summary or its note8 into the poem.",
+  "v1_core_seal_sha256": "2bd3a9d4cbe733c6983f82a17a5803afdc347a8e19d3b1db561ec34cee89915a",
+  "v1_formal_seal_sha256": "a68d6c47ed5dabf54dbd56ac21f30d00318eaf9739be61591ef62ca9d334d45a",
+  "inverse_algorithm": "Remove exactly one final mapping_notes entry equal to the explicit notice on ownertha-ap312 in each pure map and GOLDENS row, then original indent2/UTF8 serialization.",
+  "files": {
+    "GOLDENS.json": {
+      "v1_sha256": "4968146cb3742e020f4f038591bfeaa04bd57636da4e35c48c39475024b8c0f4",
+      "v2_sha256": "7b72f06b87db9e5c2d192cc0194f6602782d3ec29f29ecb5333ad665ebdd799f",
+      "inverse_recovers_v1_bytes": true
+    },
+    "EXPECTED_PROFILES.json": {
+      "v1_sha256": "a2c31fb46405fae44341fb553a3f0b83d7725bea79547c471ff81b40bf66dc00",
+      "v2_sha256": "e2c5c83e4a9062bd68bb56728e0e536c8a549810fff1071aaa087b7d32bcbaf7",
+      "inverse_recovers_v1_bytes": true
+    },
+    "EXPECTED_LINKS.json": {
+      "v1_sha256": "086d7141ee6e64db4552fdc06519d72c718b31774c4436d20426a7de2f4d642d",
+      "v2_sha256": "422f6790a7b3866704091d2c70814b600458e61918035966a4746c5ac345f034",
+      "inverse_recovers_v1_bytes": true
+    }
+  },
+  "formatter_inverse_recovers_v1_bytes": true,
+  "portable_inverse_recovers_v1_bytes": true,
+  "source_body_note_summary_wording_root_quote_changes": false,
+  "other_profile_fields_changed": false,
+  "runtime_approval": false,
+  "release_approval": false
+}
