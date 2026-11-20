@@ -1,0 +1,309 @@
+{
+  "baseline": "cdbefd514164a559bc5aaab631c267f3084e31a6",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "goldens_sha256": "6f217a19e96a6d171a4c3a171778f50bc1e973c8c74948b7751a2b9ab5cc6a2a",
+  "expected_profiles_sha256": "dcb7eb11ee17006331bcbc6333e689feb8f01f44666cbb858896ad0cd3ba7332",
+  "expected_links_sha256": "e81b97b665cdec6157eb91a31d7c3857e4f03d38d53523f70ab33d927856a227",
+  "raw_source_v2_manifest_sha256": "782a5ce56f65036342cbf165683d3e1041fd55f3473ecfcd3a3bd0e806552ec8",
+  "normalization_approval_count": 9,
+  "external_activations": 0,
+  "runtime_release_approval": false,
+  "status": "NINE_GROUP_B_SOURCE_DERIVED_NORMALIZATION_SCOPES_QUALIFY; SEPARATE_PEER_AND_RUNTIME_GATES_PENDING",
+  "reviewer": "GroupB independent standard-library source author; AI-assisted, not human specialist acceptance",
+  "approved_ids": [
+    "tha-ap253",
+    "tha-ap254",
+    "tha-ap255",
+    "tha-ap256",
+    "tha-ap257",
+    "tha-ap258",
+    "tha-ap259",
+    "tha-ap260",
+    "tha-ap261"
+  ],
+  "approved_records": [
+    {
+      "id": "tha-ap253",
+      "publisher_poem": 251,
+      "raw_sha256": "1f6d3e6f19d2e9b70d20725dcdb3ed524a647598d0cf899035bc51b6b79dabd4",
+      "body_sha256": "df48e15240a028114976db56f0551378b682be52710c3646fa1eb2135b12fff3",
+      "notes_sha256": "28458c9f65d26786be778d06f81c5e4f16366c7f8398d9e7a3850fc922d91f30",
+      "paratext_sha256": "1da3cce800e8a1bc1166da3b89f8262dba2dfc3c5627641466cc46f5d429782d",
+      "root_sha256": "af5d3c92f0c293da01a9c37650a80e8fce03cb1c1d290457e58877ad51165640",
+      "note_count": 6,
+      "physical_stanza_count": 4,
+      "body_paragraph_count": 7,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 251 to canonical tha-ap253. Shared numbers alone do not establish any other mapping.",
+        "Publisher Thomadāyaka versus VRI Thomaka is retained; complete narrative and both colophons establish mapping. Preserve the six notes and original wording/typography even where a note has an awkward lexical gloss."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 0
+    },
+    {
+      "id": "tha-ap254",
+      "publisher_poem": 252,
+      "raw_sha256": "096d489003a7c526ae1fe22237348c2a3ed9f8fae80fca8414706d67785071e6",
+      "body_sha256": "5fe4c9713f0e61dd27f7e54b9ee6297c60598f78a5b0f9a41ee57fbb185ed1e2",
+      "notes_sha256": "e6aba50dd955924adc21e65edb96978b248085b611388e7846b5731122d35488",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "5d040f79f3796ef9168a6851dbdf49cd20bf2fcebbbfb697f94f1d6b03af8197",
+      "note_count": 6,
+      "physical_stanza_count": 4,
+      "body_paragraph_count": 7,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 252 to canonical tha-ap254. Shared numbers alone do not establish any other mapping.",
+        "Publisher and VRI retain the One-Seat-Donor title despite the actual alms-food narrative. Do not retitle the poem or convert the title into a seat donation; note6 concerns piṇḍapāta. All six notes are poem-owned."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 0
+    },
+    {
+      "id": "tha-ap255",
+      "publisher_poem": 253,
+      "raw_sha256": "347be76ad4cdbb5db36bc51011b8f84599ef8fd0f8f95819b59de33f1a55132b",
+      "body_sha256": "ed162b01217b56e8d23a853a931274993088e5c1ba21c32ae096abd29064cb1c",
+      "notes_sha256": "08a1a49f9d68204bd2c43011e636e16113853415912ae95d5f340d9ccda61831",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d498ac60387b5f2155b3145432b4ea7fc5d9de3bb710ab7240322224843a23a8",
+      "note_count": 4,
+      "physical_stanza_count": 4,
+      "body_paragraph_count": 7,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 253 to canonical tha-ap255. Shared numbers alone do not establish any other mapping.",
+        "Publisher Citapūjaka versus VRI Citakapūjaka follows the stated note1 distinction; do not silently amend name or lexical discussion.",
+        "Exactly eight paired Pandoc display alternatives retain original diacritics-on C/c forms: heading and both colophons, three in note1 and two in note3. Only these owner/token/count combinations qualify; no general HTML syntax is approved. Notes1–4 remain poem-owned."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 8
+    },
+    {
+      "id": "tha-ap256",
+      "publisher_poem": 254,
+      "raw_sha256": "734661e9b374f3563d72ae99961a2eb310595f9d6a5ffe8498252a411c88e773",
+      "body_sha256": "a3b2f011880f7c67d633ca012cb9118d58c3f3e84d4e8f67ecf4922d44a3633a",
+      "notes_sha256": "fa0a9dd9fa7136b1438b7b94af55edd49e4bd2dc721cec8799c11afe286a64c7",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "3e954e0366f2d163d08cac64608256fd6780769f67be1d9e35c8c9de85fcc6bc",
+      "note_count": 3,
+      "physical_stanza_count": 4,
+      "body_paragraph_count": 7,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 254 to canonical tha-ap256. Shared numbers alone do not establish any other mapping.",
+        "Publisher Vikaṭa versus VRI vikato (vikano variant) and tense/interpretive note3 are retained. The proper narrative is the three-flower offering, not adjacent seven-flower text.",
+        "Exactly five paired Pandoc display alternatives retain original diacritics-on C/c forms in the heading, both colophons and twice in note1. Preserve botanical names, source spellings and uncertainty; no general HTML syntax is approved. Notes1–3 remain poem-owned."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 5
+    },
+    {
+      "id": "tha-ap257",
+      "publisher_poem": 255,
+      "raw_sha256": "bd59dfd55c8e3e517bb29541476f03ab78ac121357473c8584b9ab4459214162",
+      "body_sha256": "15cae0fcf9abb72d04e1c2e1108b7b6b3ce82f4396eaabadd5b5fafa1d3dd5ba",
+      "notes_sha256": "802f4f0f12a19bbe6ceddf8c69a2bdcd4c0e9333ff0f0edd97dc1631c03416c6",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "87752d76f0bdd4de2682459ceab8c01a8f7321f60a6aeb76522ca36b0da348c8",
+      "note_count": 3,
+      "physical_stanza_count": 3,
+      "body_paragraph_count": 6,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 255 to canonical tha-ap257. Shared numbers alone do not establish any other mapping.",
+        "The seven mountain blossoms/94 narrative distinguishes it from publisher248 head-carried flowers/Vessabhu/31. Botanical notes retain the source title, spellings, cross-references and uncertainty."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 0
+    },
+    {
+      "id": "tha-ap258",
+      "publisher_poem": 256,
+      "raw_sha256": "36bc450070c0eae8d5770f6a84834c00cf11febd11b8f56cfdd4e7ebb477bb4e",
+      "body_sha256": "ab895858f2ed96b6ad0ed89ff7a3e3731b5a9d3bfb351ed456b0aa413c8b407b",
+      "notes_sha256": "ac59f53b73f38a9a048a4a47ff15a134edc2f0e4a9226d64ef1b0e23e3ad48a7",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "8fccc930cda1816989813597db92b30849a9e4f64025e57e169d0bf4d2ae2477",
+      "note_count": 2,
+      "physical_stanza_count": 3,
+      "body_paragraph_count": 6,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 256 to canonical tha-ap258. Shared numbers alone do not establish any other mapping.",
+        "Publisher elided title ‘Pāhanadāyaka versus VRI Upāhanadāyaka remains explicit; note1 explains supplied u, but the source title is not rewritten.",
+        "Publisher local1 renders the Awakening clause temporally; VRI20 has bodhiṃ sampajja me tuvaṃ. Preserve wording as publisher interpretation without asserting a word-for-word match or inferred recension cause.",
+        "The sole uppercase C/Ch paired display in publisher local1 retains original diacritics-on C. Its original temporal Awakening interpretation and elided title stay unchanged. Notes1–2 remain poem-owned; no other paired owner or token is approved."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 1
+    },
+    {
+      "id": "tha-ap259",
+      "publisher_poem": 257,
+      "raw_sha256": "5b2e888b14b1ddfcb47d5ff09b561d374bfe830341011d75d17feedab3f57804",
+      "body_sha256": "a382257c52761bc614272f44681bdc92bf12c12f714589c41d256f6ac121eb29",
+      "notes_sha256": "0482c0316adc29d0633d8fb54ceb7b0450aad72616793f262d816854fe4e81a6",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "ef2db333dd7d8232ae5b8c3051b2d9da87d4851d8bf7dd63bb57ad9216673635",
+      "note_count": 4,
+      "physical_stanza_count": 5,
+      "body_paragraph_count": 8,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 257 to canonical tha-ap259. Shared numbers alone do not establish any other mapping.",
+        "Retain note2 interpretation of fashioned bunch/bouquet and note3 literal entering. Jotiya and royal count agree substantively with VRI26; four original notes remain intact.",
+        "Publisher local3/global2523 describes the fruit as Buddha-pūjā (Buddha worship); VRI main stanza25, block8336, reads pupphapūjāyidaṃ (flower worship). The original XML records no variant note for this line. Retain this wording distinction without calling it an error or inferring a recension cause or ownership problem."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 0
+    },
+    {
+      "id": "tha-ap260",
+      "publisher_poem": 258,
+      "raw_sha256": "822fc3ab08181d957d749064bee08e4e60a2142d6ccb3abface7b0f142d15421",
+      "body_sha256": "8610e1e3a719b3fe15ba31db384c04cbfab631d843c50ea8d1166a9bb3bf0d32",
+      "notes_sha256": "270f58b0acbf2b09630e6afd201cd94bdef177e8e473b3bdec4fdc4feb8c9f6b",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "94aafd9ed100a9bf4dac082eeb759adce3b1a0bcd58592ad62fcf5863ffdc252",
+      "note_count": 3,
+      "physical_stanza_count": 5,
+      "body_paragraph_count": 8,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 258 to canonical tha-ap260. Shared numbers alone do not establish any other mapping.",
+        "Publisher Yadatthiya royal name versus VRI31 main Sadatthiya is supported by the yadatthiyo variant. Preserve the question mark in source note3 rather than resolve its meaning."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 0
+    },
+    {
+      "id": "tha-ap261",
+      "publisher_poem": 259,
+      "raw_sha256": "4160cf3b109002832b53d70596ec9db4a4f051ac5aa861ff280b1f65fef3e990",
+      "body_sha256": "e4bb270b58064af460c1c3d169a79f69b34349ef08cb2e3c8ef823f336bdea89",
+      "notes_sha256": "3bff9bbe6100892b7c3197be0d8d8b09fb2cda61f8abfbd65d5c277d16c3457e",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "45f373166bed8cc5929b582bb22f6c81c6e66b571b73a5de4a26442c800f28a8",
+      "note_count": 3,
+      "physical_stanza_count": 4,
+      "body_paragraph_count": 7,
+      "source_approval": true,
+      "normalization_approval": true,
+      "external_activation": false,
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 259 to canonical tha-ap261. Shared numbers alone do not establish any other mapping.",
+        "Publisher local3 says thirty-eighth aeon; VRI35 main says twenty-eighth, with aṭṭhatiṃse variant. This is an observed edition difference only.",
+        "Note2 explicitly leaves singular locative/plural object interpretation open; note3 preserves the unusual name and iti interpretation. Do not disambiguate or normalize the source wording."
+      ],
+      "separately_owned_apparatus": "Only251 note-free preface; no summary/recitation/note ownership invented",
+      "paired_occurrences": 0
+    }
+  ],
+  "method": "All nine original Markdown files, all notes and complete corresponding Pali narratives/variants/neighboring bounds read before deriving normalized output. No production parsers/imports/output or GroupA author output consulted. Reuse only prior external portable XML/hash/presentation workflow; actual241–260v2 raw schema and amendment257 remain independently bound.",
+  "approved_scope": "Publisher251–259 only, canonical253–261 individually established from full narrative/title/bothcolophons/VRIvariants and sealed rawv2 bounds, not a constant offset. Complete publisher-edition poems, not line-complete VRI. 260/234 and isolated Sariputta evidence excluded.",
+  "paired_scope": {
+    "253": {
+      "occurrences": 8,
+      "owners": "heading/speech/legend3; note1three; note3two"
+    },
+    "254": {
+      "occurrences": 5,
+      "owners": "heading/speech/legend3; note1two"
+    },
+    "256": {
+      "occurrences": 1,
+      "owners": "local1 only"
+    }
+  },
+  "historical_pending_gate_prose": "Original raw v2 observed_limits retained verbatim in prior_full_source_review. New mapping_notes253/254/256 rephrase only past pending-normalization phase prose into the exact author-derived owner/token/count scope; no runtime or general HTML approval is implied.",
+  "out_of_scope": [
+    {
+      "publisher_poem": 260,
+      "canonical_id": "tha-ap262",
+      "reason": "Malformed summary/note5 remains separate held evidence; no poem or summary activation here"
+    },
+    {
+      "publisher_poem": 234,
+      "canonical_id": "tha-ap236",
+      "reason": "Separate identity hold; outside GroupB"
+    },
+    {
+      "canonical_id": "tha-ap3",
+      "reason": "Separate note-only XML omission evidence; no repair authorized"
+    }
+  ],
+  "remaining_gates": [
+    "Separate independently derived GroupB comparison/approval",
+    "Any canonical/library data change prohibited",
+    "Runtime/source-policy/widget implementation and actual-source refusal validation",
+    "Package/no-English bundling/strict widget equality/browser acceptance",
+    "Exact-commit CI reconciliation before authorized dev-only release"
+  ],
+  "external_only_payload": {
+    "file": "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json",
+    "sha256": "f2a106f36f541b019d09a64b9c0c37c2391bb5da2bcc0358dc721dc0da08d0f6",
+    "must_not_copy_into_repository_or_package": true
+  },
+  "changes_notice": "Presentation extraction only: remove reviewed Markdown heading/emphasis markers and abbreviation tags; unescape literal bracket and cross-reference punctuation; render only the fourteen exact publisher253/254/256 owner-bound Pandoc display alternatives using their original diacritics-on C/c text; replace original note references with explicit note labels; remove Markdown hard-break padding while preserving every line and paragraph. Preserve wording, typography, diacritics, brackets, uncertainty, both numbering systems, both colophons and all original notes. Keep publisher251 chapter preface separate and note-free. No source wording is generated, repaired or harmonized to VRI; no Pali peyyala is expanded. Complete publisher-edition poems are not line-complete VRI translations.",
+  "source_v2_amendment257": {
+    "json_pointer": "/poems/16/observed_limits",
+    "publisher_poem": 257,
+    "operation": "append one caveat; existing entries unchanged",
+    "before": [
+      "Retain note2 interpretation of fashioned bunch/bouquet and note3 literal entering. Jotiya and royal count agree substantively with VRI26; four original notes remain intact."
+    ],
+    "after": [
+      "Retain note2 interpretation of fashioned bunch/bouquet and note3 literal entering. Jotiya and royal count agree substantively with VRI26; four original notes remain intact.",
+      "Publisher local3/global2523 describes the fruit as Buddha-pūjā (Buddha worship); VRI main stanza25, block8336, reads pupphapūjāyidaṃ (flower worship). The original XML records no variant note for this line. Retain this wording distinction without calling it an error or inferring a recension cause or ownership problem."
+    ],
+    "source_evidence": {
+      "publisher_raw_path": "src/_poems/chapter-3/poem-257.md",
+      "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "publisher_raw_sha256": "5b2e888b14b1ddfcb47d5ff09b561d374bfe830341011d75d17feedab3f57804",
+      "body_paragraph_0based": 3,
+      "original_stanza_raw_sha256": "02ccb509fada5abfb41949fb958497e0d5265098b59847a4c7a2237b59052f34",
+      "publisher_local_label": "3",
+      "publisher_global_label": "2523",
+      "vri_xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+      "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "canonical_id": "tha-ap259",
+      "canonical_block_0based": 8336,
+      "vri_paragraph": 25,
+      "pali_main_fruit_term": "pupphapūjāyidaṃ",
+      "recorded_variant_note_count": 0,
+      "canonical_block_sha256": "3525b5ed9c1d35cc9f28e215d7469954b9512be2f37dbedb627981123cb27384",
+      "original_xml_directly_reread": true,
+      "all_original_poem_notes_reread": true
+    },
+    "causal_or_error_inference": false
+  }
+}

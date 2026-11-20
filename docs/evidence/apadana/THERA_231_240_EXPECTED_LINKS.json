@@ -1,0 +1,613 @@
+{
+  "tha-ap233": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-231.md",
+    "id": "tha-ap233",
+    "publisher_chapter": "chapter-3",
+    "poem": 231,
+    "verses": [
+      2424,
+      2427
+    ],
+    "root_verses": [
+      1,
+      4
+    ],
+    "note_count": 2,
+    "note_numbers": [
+      1,
+      2
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-231/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-231/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-231.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Udakāsanadāyaka",
+    "reference": "Therā Apadāna publisher poem 231; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "c443e7406bee15b98247b161b41d2d2d28ba65fa4758245921d9169e0076e9b8",
+    "body_sha256": "0176b53fb1b090a51528cb0ca2a3bf2ce7ce312ff5d3f9cd9d9b00ef7e6f9111",
+    "notes_sha256": "b4a4cec934154ae3529e9ae75fdfca1eef0a591ce2611b2e2df45332f1dca176",
+    "paratext_sha256": "cf66c97f8b6a5cacbbbaa167906edb61db718b146a3c9f76681b9ec131626318",
+    "root_sha256": "d3c2771c1dce0336ae4f0b06ae13f47bc8a70dd36c1dac2398e70bc33c1a3259",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2424",
+        "suffix": "(1) [2424]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2425",
+        "suffix": "(2) [2425]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2426",
+        "suffix": "(3) [2426]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2427",
+        "suffix": "(4) [2427]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 231 to canonical tha-ap233. Shared numbers alone do not establish any other mapping.",
+      "Publisher chapter heading Udakāsanadāyi differs from root Udakāsanavagga; chapter heading is not poem text or quotation evidence.",
+      "The ultimate-goal line and alternative name meanings remain the supplied edition interpretation."
+    ],
+    "english": "Udakāsanadāyaka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap234": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-232.md",
+    "id": "tha-ap234",
+    "publisher_chapter": "chapter-3",
+    "poem": 232,
+    "verses": [
+      2428,
+      2431
+    ],
+    "root_verses": [
+      5,
+      8
+    ],
+    "note_count": 4,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-232/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-232/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-232.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Bhājanadāyaka",
+    "reference": "Therā Apadāna publisher poem 232; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "6456505f3bea460cca63f412e200a42b9df6369abf8ae17d3f826a19720a96eb",
+    "body_sha256": "992ca3e3b7bd2245a2cd1000871485605b95d4f35c6a793a4b59fc49fedf1ba7",
+    "notes_sha256": "2a3e3daadcf467ba7a216be33dfaa5a1ac61c350ead86f6fafc9fed87f28a8ac",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "94f82bca95a31a58154fddb762be33d30be65a8e00b091e612ad32c57ce978fb",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2428",
+        "suffix": "(1) [2428]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2429",
+        "suffix": "(2) [2429]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2430",
+        "suffix": "(3) [2430]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2431",
+        "suffix": "(4) [2431]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 232 to canonical tha-ap234. Shared numbers alone do not establish any other mapping.",
+      "Publisher Bhājanadāyaka differs from VRI Bhājanapālaka; the original speech note supports a dāyaka variant but does not rewrite the main root.",
+      "Keep the publisher duration interpretation against VRI tāvade and note2 explicitly declining speculative made/provided wording.",
+      "Retain both proposed Anantajāli etymologies as apparatus."
+    ],
+    "english": "Bhājanadāyaka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap235": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-233.md",
+    "id": "tha-ap235",
+    "publisher_chapter": "chapter-3",
+    "poem": 233,
+    "verses": [
+      2432,
+      2436
+    ],
+    "root_verses": [
+      9,
+      13
+    ],
+    "note_count": 6,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-233/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-233/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-233.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sālapupphiya",
+    "reference": "Therā Apadāna publisher poem 233; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "df3b7ead796df9c71820fff88c3a9073ecf399fe15747e9e95e8059f5eea085e",
+    "body_sha256": "e9d9dcab6ac65357a98a79212385361403f249463dfac41e92c7f69f6f69ee3d",
+    "notes_sha256": "f2a49f9a3f4f49d810ba0dc2f0c2e01cf9df620ebc843b01f3691b6860d61c7e",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "0e5073a0d6fa271a1e291777bf91f04c6faa3bb8419249d49fe064b6c227334a",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2432",
+        "suffix": "(1) [2432]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2433",
+        "suffix": "(2) [2433]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2434",
+        "suffix": "(3) [2434]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2435",
+        "suffix": "(4) [2435]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2436",
+        "suffix": "(5) [2436]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 233 to canonical tha-ap235. Shared numbers alone do not establish any other mapping.",
+      "Source sweets/khajja corresponds to recorded khajja variants against root-main puppha. Do not replace the sal-flower gift or treat the apparent tension as a repair.",
+      "Note5 explains this very tension and belongs to the poem. Preserve botanical and etymological notes as supplied, not new specialist conclusions."
+    ],
+    "english": "Sālapupphiya",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap237": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-235.md",
+    "id": "tha-ap237",
+    "publisher_chapter": "chapter-3",
+    "poem": 235,
+    "verses": [
+      2442,
+      2445
+    ],
+    "root_verses": [
+      19,
+      22
+    ],
+    "note_count": 2,
+    "note_numbers": [
+      1,
+      2
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-235/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-235/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-235.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Vediyadāyaka",
+    "reference": "Therā Apadāna publisher poem 235; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "39760489bd14dd018c44b4f40626f3619da2abed79e8a5d58fca4b4da7b868ed",
+    "body_sha256": "ef16a0e18b9822aa551b11295d443377b9a1d392b43d50f15c8405deaf6b12e7",
+    "notes_sha256": "3bf34927bc67aba0f1bd60f328589a77f7702f904d7130806010724a5e9b8415",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "c319d6d979c7b92d6231c3b9225190f170c038a570bae36291f36f2c1381ad97",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2442",
+        "suffix": "(1) [2442]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2443",
+        "suffix": "(2) [2443]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2444",
+        "suffix": "(3) [2444]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2445",
+        "suffix": "(4) [2445]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 235 to canonical tha-ap237. Shared numbers alone do not establish any other mapping.",
+      "Publisher Vediyadāyaka differs from VRI Vedikāraka.",
+      "Source Buddha-pūjā fruit differs from root-main railing/vedikā fruit; preserve both as observed wording."
+    ],
+    "english": "Vediyadāyaka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap238": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-236.md",
+    "id": "tha-ap238",
+    "publisher_chapter": "chapter-3",
+    "poem": 236,
+    "verses": [
+      2446,
+      2449
+    ],
+    "root_verses": [
+      23,
+      26
+    ],
+    "note_count": 3,
+    "note_numbers": [
+      1,
+      2,
+      3
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-236/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-236/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-236.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Vaṇṇakāraka",
+    "reference": "Therā Apadāna publisher poem 236; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "cf14da1a4e2d6f3353871e5d5a602350f8f0b1d5053eef31c008a7bbe75726f8",
+    "body_sha256": "bf7297bef45d3d8b6a57113b402846c8928b1e041d09aac472f9c8a2017add98",
+    "notes_sha256": "a2b2813d8c45fd8455143dd7882c77ba012f40b06ab03795917a20787114a74c",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "e414c237d3d2dd20cdfa4a41d278a2a3cbef7133070f2578041c2c428e20bc18",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2446",
+        "suffix": "(1) [2446]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2447",
+        "suffix": "(2) [2447]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2448",
+        "suffix": "(3) [2448]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2449",
+        "suffix": "(4) [2449]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 236 to canonical tha-ap238. Shared numbers alone do not establish any other mapping.",
+      "The source Vaṇṇakāraka title differs from VRI Vaṇṇakāra.",
+      "Three paired displays occur: one C/Ch in stanza3 and c/ch plus C/Ch in note2. Keep alternatives and their grammatical context through any later finite rendering.",
+      "Publisher Candupama corresponds to VRI candupama variant beside root-main vaṇṇasama and alternate candasama.",
+      "Note2 gives multiple possible shrine and cloth interpretations. Do not promote speculation to verified root identity."
+    ],
+    "english": "Vaṇṇakāraka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap239": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-237.md",
+    "id": "tha-ap239",
+    "publisher_chapter": "chapter-3",
+    "poem": 237,
+    "verses": [
+      2450,
+      2452
+    ],
+    "root_verses": [
+      27,
+      29
+    ],
+    "note_count": 3,
+    "note_numbers": [
+      1,
+      2,
+      3
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-237/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-237/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-237.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Piyālapupphiya",
+    "reference": "Therā Apadāna publisher poem 237; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "c476c5045e3f442c1a52498d74d53f4268bd83055f27a817cb4eba196c986a83",
+    "body_sha256": "28ceeb0922c0a10c12c04d3c1fc77c11b151294bd3059b1ccaa4bcce957dcaf0",
+    "notes_sha256": "93b72a90c00938684e3ff3f97f44fb8465c7a840d7706082bdfb55b0e2d378d8",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "f256dc87f768b0671f23187025fafc92f668a4567ea7fd9bede68905dc99b6fb",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2450",
+        "suffix": "(1) [2450]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2451",
+        "suffix": "(2) [2451]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2452",
+        "suffix": "(3) [2452]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 237 to canonical tha-ap239. Shared numbers alone do not establish any other mapping.",
+      "Publisher says31 aeons; VRI stanza28 says91. Preserve observed edition wording without inferring an error or recension cause.",
+      "Note3 speculates about a Buddha-traveled road and possible recipient. Neither recipient identification is independently proven by this root; keep the entire explanation outside scripture."
+    ],
+    "english": "Piyālapupphiya",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap240": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-238.md",
+    "id": "tha-ap240",
+    "publisher_chapter": "chapter-3",
+    "poem": 238,
+    "verses": [
+      2453,
+      2455
+    ],
+    "root_verses": [
+      30,
+      32
+    ],
+    "note_count": 3,
+    "note_numbers": [
+      1,
+      2,
+      3
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-238/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-238/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-238.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Ambayāgadāyaka",
+    "reference": "Therā Apadāna publisher poem 238; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "be57241461bbe594b7cabfac409b3cde4925da989848843ce86ce9cf71a6019b",
+    "body_sha256": "f57896da387bb26031d3612913cf05d787de9c0295bd8fce8a3464af6ee6f606",
+    "notes_sha256": "6ed9ad84f4e1116f1893f2ae33f90fc5b135eaddbae35e405fd8f3c39d78fe38",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "977c8a996ff99bd257ab3efda2c5f7723494b1ab39370d5723aeb08122c4fa78",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2453",
+        "suffix": "(1) [2453]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2454",
+        "suffix": "(2) [2454]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2455",
+        "suffix": "(3) [2455]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 238 to canonical tha-ap240. Shared numbers alone do not establish any other mapping.",
+      "Craft expertise in note2 is the translator’s commentary-based interpretation; no commentary text or alignment is approved by this mapping.",
+      "Publisher calm Buddha wording differs from VRI yantaṃ; retain source wording without resolving cause.",
+      "Keep original longer second line of stanza2 and yāga quantity speculation in note3."
+    ],
+    "english": "Ambayāgadāyaka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap241": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-239.md",
+    "id": "tha-ap241",
+    "publisher_chapter": "chapter-3",
+    "poem": 239,
+    "verses": [
+      2456,
+      2458
+    ],
+    "root_verses": [
+      33,
+      35
+    ],
+    "note_count": 1,
+    "note_numbers": [
+      1
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-239/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-239/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-239.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Jagatikāraka",
+    "reference": "Therā Apadāna publisher poem 239; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "a22aa9a32f20cfe49d74be6e18e0eb0e609e74a6668ee47f052690c3a3e8584b",
+    "body_sha256": "ba2ec163cc2f5fadb546865f09815992458af6c3adc834f02a31878d3138140e",
+    "notes_sha256": "d4aaf06c0344421229c073898b1d5d669d1558dcd10d38ff22486b559803d27d",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "5f30a05353c6943efcd0ef72262ba982bbf95b7d6d6152e81ecbf1a71d4ad02c",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2456",
+        "suffix": "(1) [2456]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2457",
+        "suffix": "(2) [2457]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2458",
+        "suffix": "(3) [2458]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 239 to canonical tha-ap241. Shared numbers alone do not establish any other mapping.",
+      "Landscaping is the source interpretation of jagatī. Preserve the lexical explanation and original opening curly quote in note1, without changing typography."
+    ],
+    "english": "Jagatikāraka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap242": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-240.md",
+    "id": "tha-ap242",
+    "publisher_chapter": "chapter-3",
+    "poem": 240,
+    "verses": [
+      2459,
+      2461
+    ],
+    "root_verses": [
+      36,
+      38
+    ],
+    "note_count": 2,
+    "note_numbers": [
+      1,
+      2
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-240/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-240/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-240.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Vāsidāyaka",
+    "reference": "Therā Apadāna publisher poem 240; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "43fcab6b97cc72307e892fe93fc720b1112aa802ace9c9d18c8d64f77c503d54",
+    "body_sha256": "13ffdf493587574c319f23dfc727c81d75b08ff86e04fbfa933b6534d377ee4c",
+    "notes_sha256": "3f0555e20b571f7e9ee57e3b00ea227cdd0d9c8ef4673570a96e014446907d9e",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "62138f8b58375d542e6c141536b509b52dd1b86a2cd3751c0a1edbe1c7040be2",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2459",
+        "suffix": "(1) [2459]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2460",
+        "suffix": "(2) [2460]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2461",
+        "suffix": "(3) [2461]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 240 to canonical tha-ap242. Shared numbers alone do not establish any other mapping.",
+      "Razor and Lonely One are publisher interpretations of vāsi and sayambhu; retain the root alternative note separately.",
+      "One c/ch paired display occurs in poem note2’s historical place-name citation. The citation is poem apparatus only.",
+      "The separately owned chapter summary states38, matching both observed source labels and VRI stanza count. It remains apparatus, not an extra poem stanza or expanded coverage.",
+      "The original chapter summary’s stated38 covers all ten publisher poems, including held publisher234/canonicaltha-ap236. This intake approves only nine poems with33printed entries; the summary does not activate the held poem or establish complete chapter English coverage."
+    ],
+    "chapter_summary": {
+      "kind": "canonical_chapter_summary",
+      "label": "Twenty-Fourth Therā Apadāna chapter summary",
+      "parent_id": "tha-ap242",
+      "first_ref": "tha-ap242/7",
+      "last_ref": "tha-ap242/9",
+      "root_start": 8104,
+      "root_end": 8109,
+      "root_sha256": "d9fe1ae69ad2d4ad8a5133a92a745ed74be83f9fb5845986d85234a64297344e",
+      "body_sha256": "4be275a929f2334d16e1433fa6f8fbff05a14a3f1715aeb7501c42f2a1391a0e",
+      "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "note_numbers": []
+    },
+    "english": "Vāsidāyaka",
+    "match": "individually-reviewed-whole-poem"
+  }
+}

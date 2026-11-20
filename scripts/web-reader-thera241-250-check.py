@@ -9,7 +9,7 @@ from datetime import datetime,timezone
 from pathlib import Path
 from playwright.sync_api import expect,sync_playwright
 from web_reader_test_helpers import read_tool
-from web_reader_apadana_intake import reviewed_intake
+from web_reader_apadana_intake import curated_additions
 ROOT=Path(__file__).resolve().parents[1]
 BASE='a9755d267c309ad930df0ef154e6c8a03f1f371e'
 spec=importlib.util.spec_from_file_location('d251',ROOT/'scripts/web-reader-thera-pair-intake-check.py')
@@ -158,13 +158,13 @@ def main():
     independent = {}
     for field in ('expected_profiles','expected_links','previous_intake'):
         seal=approval[field];independent[field]=read_sealed(evidence_dir/seal['file'],seal['sha256'])
-    current_curation=reviewed_intake(ROOT)
+    current_additions=curated_additions(ROOT,'THERA_241_250_APPROVAL.json')
+    current_curation=current_additions['curation']
     current_ids=current_curation['expected_profile_ids']
-    assert current_curation['baseline_ids']==approval['expected_profile_ids']
-    current_expected={}
+    assert current_additions['anchor']==approval
+    current_expected={'expected_profiles':current_additions['profiles'],'expected_links':current_additions['links']}
     for field in ('expected_profiles','expected_links'):
-        seal=current_curation[field];current_expected[field]=read_sealed(evidence_dir/seal['file'],seal['sha256'])
-        assert set(current_expected[field])==set(current_curation['approved_ids'])
+        assert set(current_expected[field])==set(current_additions['ids'])
     normalization = next(read_sealed(evidence_dir/seal['file'],seal['sha256']) for seal in approval['source_reviews'] if seal['file']=='THERA_TWENTY_FIFTH_NORMALIZATION_REVIEW.json')
     assert normalization['normalization_approval_count']==10 and normalization['source_wording_changed'] is False
     assert normalization['unicode_normalization_performed'] is False and normalization['broad_html_stripping_performed'] is False

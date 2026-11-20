@@ -1,0 +1,30 @@
+{
+  "status": "PASS; INDEPENDENT_NORMALIZATION_ONLY",
+  "baseline": "cdbefd514164a559bc5aaab631c267f3084e31a6",
+  "goldens_sha256": "6f217a19e96a6d171a4c3a171778f50bc1e973c8c74948b7751a2b9ab5cc6a2a",
+  "profiles_sha256": "dcb7eb11ee17006331bcbc6333e689feb8f01f44666cbb858896ad0cd3ba7332",
+  "links_sha256": "e81b97b665cdec6157eb91a31d7c3857e4f03d38d53523f70ab33d927856a227",
+  "external_payloads_checked": true,
+  "totals": {
+    "poems": 9,
+    "physical_publisher_stanzas": 36,
+    "printed_local_label_occurrences": 36,
+    "vri_numbered_stanzas": 36,
+    "body_paragraphs": 63,
+    "original_raw_body_paragraphs": 63,
+    "poem_notes": 34,
+    "original_notes": 34,
+    "preface_notes": 0,
+    "summary_notes": 0,
+    "collection_summary_notes": 0,
+    "source_blobs": 9,
+    "rights_blobs": 6,
+    "routing_blobs": 1,
+    "audio_fetches": 0,
+    "normalization_approvals": 9,
+    "external_activations": 0
+  },
+  "full_original_xml_blocks_exact": 14645,
+  "production_parser_imports": 0,
+  "runtime_release_approval": false
+}

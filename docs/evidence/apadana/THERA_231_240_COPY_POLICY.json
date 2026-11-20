@@ -1,0 +1,31 @@
+{
+  "metadata_only": [
+    "GOLDENS.json",
+    "EXPECTED_PROFILES.json",
+    "EXPECTED_LINKS.json",
+    "SOURCE_APPROVAL.json",
+    "RIGHTS_REVIEW.json",
+    "NORMALIZATION_COMPARISON.json",
+    "REPLAY_VALIDATION.json",
+    "FILE_SHA256S.json",
+    "COPY_POLICY.json"
+  ],
+  "stdlib_script": "replay.py",
+  "must_never_copy_into_repository_or_package": [
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json"
+  ],
+  "source_activation_count": 0,
+  "runtime_release_approval": false,
+  "approved_candidate_ids": [
+    "tha-ap233",
+    "tha-ap234",
+    "tha-ap235",
+    "tha-ap237",
+    "tha-ap238",
+    "tha-ap239",
+    "tha-ap240",
+    "tha-ap241",
+    "tha-ap242"
+  ],
+  "copy_requires_independent_source_normalization_approval_and_root_GO": true
+}

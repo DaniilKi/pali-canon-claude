@@ -1,0 +1,2141 @@
+{
+  "baseline": "cdbefd514164a559bc5aaab631c267f3084e31a6",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "goldens_sha256": "6f217a19e96a6d171a4c3a171778f50bc1e973c8c74948b7751a2b9ab5cc6a2a",
+  "expected_profiles_sha256": "dcb7eb11ee17006331bcbc6333e689feb8f01f44666cbb858896ad0cd3ba7332",
+  "expected_links_sha256": "e81b97b665cdec6157eb91a31d7c3857e4f03d38d53523f70ab33d927856a227",
+  "raw_source_v2_manifest_sha256": "782a5ce56f65036342cbf165683d3e1041fd55f3473ecfcd3a3bd0e806552ec8",
+  "normalization_approval_count": 9,
+  "external_activations": 0,
+  "runtime_release_approval": false,
+  "status": "ALL_NINE_GROUP_B_ORIGINAL_TO_DISPLAY_SCOPES_DERIVED; SEPARATE_PEER_REVIEW_PENDING",
+  "all_body_paragraphs_compared": 63,
+  "all_physical_stanza_entries_compared": 36,
+  "all_original_notes_compared": 34,
+  "all_speech_and_legend_colophons_compared": 18,
+  "first_and_last_stanzas_checked_in_each_poem": true,
+  "preface251_compared": true,
+  "preface_notes": 0,
+  "summary_scopes_approved": 0,
+  "source_wording_changed": false,
+  "unicode_normalization_performed": false,
+  "broad_html_stripping_performed": false,
+  "paired_display_occurrences": 14,
+  "paired_display_allowance": "Exact source poem/owner/token/count dictionary only; unknown HTML/paired tokens/owners refuse",
+  "negative_source_normalization_controls": [
+    {
+      "poem": 253,
+      "control": "foreign-owner",
+      "refused": true
+    },
+    {
+      "poem": 253,
+      "control": "foreign-poem",
+      "refused": true
+    },
+    {
+      "poem": 253,
+      "control": "reversed-state",
+      "refused": true
+    },
+    {
+      "poem": 253,
+      "control": "unknown-token",
+      "refused": true
+    },
+    {
+      "poem": 253,
+      "control": "unknown-html",
+      "refused": true
+    },
+    {
+      "poem": 254,
+      "control": "foreign-owner",
+      "refused": true
+    },
+    {
+      "poem": 254,
+      "control": "foreign-poem",
+      "refused": true
+    },
+    {
+      "poem": 254,
+      "control": "reversed-state",
+      "refused": true
+    },
+    {
+      "poem": 254,
+      "control": "unknown-token",
+      "refused": true
+    },
+    {
+      "poem": 254,
+      "control": "unknown-html",
+      "refused": true
+    },
+    {
+      "poem": 256,
+      "control": "foreign-owner",
+      "refused": true
+    },
+    {
+      "poem": 256,
+      "control": "foreign-poem",
+      "refused": true
+    },
+    {
+      "poem": 256,
+      "control": "reversed-state",
+      "refused": true
+    },
+    {
+      "poem": 256,
+      "control": "unknown-token",
+      "refused": true
+    },
+    {
+      "poem": 256,
+      "control": "unknown-html",
+      "refused": true
+    }
+  ],
+  "per_poem": [
+    {
+      "id": "tha-ap253",
+      "poem": 251,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "poem_notes": 6,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "03c5c4b84ebc67138ad3f8b832f940a7029a158bb79382864c93084d475fc204",
+          "lines": 1,
+          "characters": 26
+        },
+        {
+          "paragraph": 1,
+          "sha256": "1a8754ea4a582f15994c94729d930084c5f51379c50e38ca3f6668ace2d4c7ad",
+          "lines": 4,
+          "characters": 175
+        },
+        {
+          "paragraph": 2,
+          "sha256": "77a6663709dc09cd87db9adb40054beffb61c102dcd735a428d8179427a20a68",
+          "lines": 4,
+          "characters": 155
+        },
+        {
+          "paragraph": 3,
+          "sha256": "48c92527ae557a1bc3bded74e3cda02a53b280bd129fd0f09f51364d0daf5acb",
+          "lines": 4,
+          "characters": 150
+        },
+        {
+          "paragraph": 4,
+          "sha256": "ba6aff6fae5990e817b509297910a67ffbf5dd03eac8d6b138e47b6f67756437",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 5,
+          "sha256": "c888e10d4461ae75d75b4b643c7fe2c129ea9a6e193402d0a6a52cfe0349e577",
+          "lines": 1,
+          "characters": 59
+        },
+        {
+          "paragraph": 6,
+          "sha256": "bff2edc9c0fd794bd545c9e538e24953a0e2c3a23e4538b5c225020d23e273b8",
+          "lines": 1,
+          "characters": 44
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "e0df617e129a907e42174246f2f5fb5888ce6fbd687e71bdd9926086bf43e30c",
+          "body_sha256": "e0df617e129a907e42174246f2f5fb5888ce6fbd687e71bdd9926086bf43e30c",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "e0df617e129a907e42174246f2f5fb5888ce6fbd687e71bdd9926086bf43e30c",
+              "lines": 1,
+              "characters": 14
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            9
+          ],
+          "complete_raw_definition_sha256": "81e95a46b8b8a848ddcfe2f6a84f20f1ec68bfd052ceea5129eba9e80b61f993"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "fe006db227d1a50477653e6f0808b286aeba39a3f333eb9297f82b32fbde4ed6",
+          "body_sha256": "f5c7ade30c41746e55c23bd17de3afdf456ce5f7258ebba8c23e15a638c7c2f8",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "f5c7ade30c41746e55c23bd17de3afdf456ce5f7258ebba8c23e15a638c7c2f8",
+              "lines": 1,
+              "characters": 65
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            11
+          ],
+          "complete_raw_definition_sha256": "2a0e5e0e4af6bbc5176622d2b8d249a177d052edd23e750d63b690b06a5cf7e7"
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "raw_sha256": "816ecf5fc47993f4c65dcb737a2e0750303586153b0d25ec48555658fd55fa14",
+          "body_sha256": "a18dfc4fea7dbabaa56904d4a1368df45ec0a941d9c6e8ed4e0fa0507e8f6cba",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "a18dfc4fea7dbabaa56904d4a1368df45ec0a941d9c6e8ed4e0fa0507e8f6cba",
+              "lines": 1,
+              "characters": 7
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            12
+          ],
+          "complete_raw_definition_sha256": "b2eda882e531966e44c3bd9173f2995ddb1ed69684fcd610361d600effaca0a2"
+        },
+        {
+          "number": 4,
+          "owner": "poem",
+          "raw_sha256": "bc94b078f7ce12b938a5b562da1e363d676c8eb59b303baa821fc1b6e8c0cb29",
+          "body_sha256": "01e1c252ddff3765364f56c5fbd20891a39fdb029bb0660cced3a0168769cb80",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "01e1c252ddff3765364f56c5fbd20891a39fdb029bb0660cced3a0168769cb80",
+              "lines": 1,
+              "characters": 17
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            14
+          ],
+          "complete_raw_definition_sha256": "6a839900702780957a9adf9f1ad0fc056fe82baa38564219314f535f85893546"
+        },
+        {
+          "number": 5,
+          "owner": "poem",
+          "raw_sha256": "027ae40e478c899c375ba90b63664af1211a0ab3cadfc34525508cacfbab67b9",
+          "body_sha256": "027ae40e478c899c375ba90b63664af1211a0ab3cadfc34525508cacfbab67b9",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "027ae40e478c899c375ba90b63664af1211a0ab3cadfc34525508cacfbab67b9",
+              "lines": 1,
+              "characters": 31
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            14
+          ],
+          "complete_raw_definition_sha256": "abf5e55f997a711700ce12eb89a0207a559ee6b8e7cae2ae6876f16435bb281f"
+        },
+        {
+          "number": 6,
+          "owner": "poem",
+          "raw_sha256": "bf00cafc0a8274ea593a1fa0c42cea82c4668bff808d364598f19a77e3190438",
+          "body_sha256": "3449237781087ed311bc2ddea97d87e385f91038bafd51fac6c83e5f2beaa768",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "3449237781087ed311bc2ddea97d87e385f91038bafd51fac6c83e5f2beaa768",
+              "lines": 1,
+              "characters": 136
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            16
+          ],
+          "complete_raw_definition_sha256": "3b54c2af13e2b471a23e6e2526a0d353a1eff6b3f751761bc8b6dc218a5fed27"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 5,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 6,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 3,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 6,
+          "literal_escapes": 18,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 12
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap254",
+      "poem": 252,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "poem_notes": 6,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "8d6898ff5f6d573145b5f498b48b3160ab956b57864dbef7f91e4138f85af59f",
+          "lines": 1,
+          "characters": 28
+        },
+        {
+          "paragraph": 1,
+          "sha256": "b65ff12b0cc33eee4aff0729cd6834e2941d34af1a3a8cfaa24a6b4c3dafa2b6",
+          "lines": 4,
+          "characters": 157
+        },
+        {
+          "paragraph": 2,
+          "sha256": "c9069a289ab847087e5783825e2cc4511198f750f79144821a2f929877e17687",
+          "lines": 4,
+          "characters": 133
+        },
+        {
+          "paragraph": 3,
+          "sha256": "a36560f1399b576212833e0f8b8064971ee296351ef3389527b11b0a9eb61805",
+          "lines": 4,
+          "characters": 158
+        },
+        {
+          "paragraph": 4,
+          "sha256": "47f1c23e51f9d44dee5dd0024735106eae5b18c606ef4aca145e51a242670e75",
+          "lines": 4,
+          "characters": 137
+        },
+        {
+          "paragraph": 5,
+          "sha256": "3e242597eaeb1168d34c4208f62a3be04b56c74adac5046c5921420143343bb2",
+          "lines": 1,
+          "characters": 61
+        },
+        {
+          "paragraph": 6,
+          "sha256": "a860f1bb6dcec9b8fe16c440df865e6d57a5d39339dcff3f2f6724dc950f0bab",
+          "lines": 1,
+          "characters": 46
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "463c5ab5bd25d94942637bfd8ad77f63c3bd7a0b14210a07d2a80c9dd4f0a110",
+          "body_sha256": "463c5ab5bd25d94942637bfd8ad77f63c3bd7a0b14210a07d2a80c9dd4f0a110",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "463c5ab5bd25d94942637bfd8ad77f63c3bd7a0b14210a07d2a80c9dd4f0a110",
+              "lines": 1,
+              "characters": 16
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            7
+          ],
+          "complete_raw_definition_sha256": "edcdf43bb24391b675655c4acb2af7f0f1c6010ee327aaa17edd954f61bdd831"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "3e6fb108e662d8436b079b2f83be0c5d723eeb0bf8a8e6bad572b22216415e13",
+          "body_sha256": "3e6fb108e662d8436b079b2f83be0c5d723eeb0bf8a8e6bad572b22216415e13",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "3e6fb108e662d8436b079b2f83be0c5d723eeb0bf8a8e6bad572b22216415e13",
+              "lines": 1,
+              "characters": 28
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            9
+          ],
+          "complete_raw_definition_sha256": "8c32b47fb32fc7f36312cd588e5d43741dc24d9bbc6ffac13f1da81bc54e8173"
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "raw_sha256": "a47f88934dbd4c829bd42493b81a2742125272b504198223e5ea26676562d910",
+          "body_sha256": "52bb4ee47023a971fb1ed5b4281a0398593016725e8190fb7bb41709be89a223",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "52bb4ee47023a971fb1ed5b4281a0398593016725e8190fb7bb41709be89a223",
+              "lines": 1,
+              "characters": 29
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            9
+          ],
+          "complete_raw_definition_sha256": "989f87e6887a0de094be3c9467e4eefd290e62288bcfe8b50d2a8dfd05be07aa"
+        },
+        {
+          "number": 4,
+          "owner": "poem",
+          "raw_sha256": "3f4ada20cc20aa73009204ad6baef3abc42f12bb6c496128babbc4fa3201dc02",
+          "body_sha256": "3ed94122a163e0f8490945840cb2bf25eb966bd3e6a1afe928f0d4f1ce0d3f2d",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "3ed94122a163e0f8490945840cb2bf25eb966bd3e6a1afe928f0d4f1ce0d3f2d",
+              "lines": 1,
+              "characters": 22
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            12
+          ],
+          "complete_raw_definition_sha256": "363123facbd3370db83d22460fe74340de6ceb302af76423cc57e4c2a91eed8d"
+        },
+        {
+          "number": 5,
+          "owner": "poem",
+          "raw_sha256": "8f50d0863783133a6dc4627781f1fa229b87784cb2cebd74077d28141518c8da",
+          "body_sha256": "0fafd5cc77002a3aa85e3b80aa13011c38e51860fc873d207fb8cd532ee14d14",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "0fafd5cc77002a3aa85e3b80aa13011c38e51860fc873d207fb8cd532ee14d14",
+              "lines": 1,
+              "characters": 27
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            15
+          ],
+          "complete_raw_definition_sha256": "5ce714b8065db24a141d3ed3813403fcaa3d152ee63f83313caf7c031a090cbc"
+        },
+        {
+          "number": 6,
+          "owner": "poem",
+          "raw_sha256": "6678587c96b7ecb9ddf6c1ed3e6658daf172804b789761d50f9d5081069fb37e",
+          "body_sha256": "e263b846bad4ac671af694f6e4bbcba4ad982cae8c9b05ae6c142780a4384b25",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "e263b846bad4ac671af694f6e4bbcba4ad982cae8c9b05ae6c142780a4384b25",
+              "lines": 1,
+              "characters": 9
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            22
+          ],
+          "complete_raw_definition_sha256": "804e1ffddab76254ccead17a456bd2546d43885a8769c0b455de0255024988e5"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 5,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 3,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 6,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 6,
+          "literal_escapes": 14,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 12
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap255",
+      "poem": 253,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "poem_notes": 4,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "27ca9a6b900d49460b577c8d2f65b2e8993a0d73881311f041149577806bfbae",
+          "lines": 1,
+          "characters": 25
+        },
+        {
+          "paragraph": 1,
+          "sha256": "55293f561abca7270ad0cf924245d9298269f00029ee792fdae0f2d5f6d90da1",
+          "lines": 4,
+          "characters": 147
+        },
+        {
+          "paragraph": 2,
+          "sha256": "50342bcd9264415ac7e9e6412f9b152ab203f6899e696202dd0fd929784d78ca",
+          "lines": 4,
+          "characters": 153
+        },
+        {
+          "paragraph": 3,
+          "sha256": "2f85001d81592d9ad6a9aac4f75eef5145bd1857653b5c59c6d254aa01cb6dc2",
+          "lines": 4,
+          "characters": 142
+        },
+        {
+          "paragraph": 4,
+          "sha256": "a9c574062acacc0e667aacfd7f8acb72aaba8d88e9e91aa0ce9f95da7282f28e",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 5,
+          "sha256": "c597337919f4b64ba8696000491717361e618208f41c19b85a46e3f89fe04157",
+          "lines": 1,
+          "characters": 58
+        },
+        {
+          "paragraph": 6,
+          "sha256": "b898d2b39019ed04084b661985e9b08d8dda8e320d71ff301db4b1e65da7583f",
+          "lines": 1,
+          "characters": 43
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "d49bb58d7917aca1444e1ecf3de525693f8bc3195df658b41399c6eec003c214",
+          "body_sha256": "74b638791b81029069c5c639e2a6fee29fb1781c9b1073dedb37f8236f33f964",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "74b638791b81029069c5c639e2a6fee29fb1781c9b1073dedb37f8236f33f964",
+              "lines": 1,
+              "characters": 141
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            7
+          ],
+          "complete_raw_definition_sha256": "8d8203a58ff3c0261c2048539387ea71e09a053d33e5db7347a52988936c58bd"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "2a5f25ca590d43e9095ed59d794f72f4649d559d1b034c0373c412f3c353a2f2",
+          "body_sha256": "2a5f25ca590d43e9095ed59d794f72f4649d559d1b034c0373c412f3c353a2f2",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "2a5f25ca590d43e9095ed59d794f72f4649d559d1b034c0373c412f3c353a2f2",
+              "lines": 1,
+              "characters": 17
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            11
+          ],
+          "complete_raw_definition_sha256": "b48ff3c23168b282177903e418994305bf7575cf8688a6a7694cc1f47fb6c183"
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "raw_sha256": "3f15bbab6cf2b748c1f8943c7dd771a04bf65c85fd1e6d38f29be2bde7af8703",
+          "body_sha256": "d0e305f76383923c1e34a6cb78842046ee75bc941ed8b704876a17ba77891ad1",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "d0e305f76383923c1e34a6cb78842046ee75bc941ed8b704876a17ba77891ad1",
+              "lines": 1,
+              "characters": 23
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            15
+          ],
+          "complete_raw_definition_sha256": "01dfb9e42a76aa8256e9a6a454892ca2261f2de6664d6b5d1bfddafd6d767747"
+        },
+        {
+          "number": 4,
+          "owner": "poem",
+          "raw_sha256": "2fba1166d7450c9598c1d985295733fb82a7367d8cb78ffe62b19de27f0d3586",
+          "body_sha256": "58ed48f16c73dd2c50618e8539308561c2eb63b65b82f6767ff9eb47b78a1643",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "58ed48f16c73dd2c50618e8539308561c2eb63b65b82f6767ff9eb47b78a1643",
+              "lines": 1,
+              "characters": 179
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            17
+          ],
+          "complete_raw_definition_sha256": "21cc539cb63370a9759e31f10001b3bf850ffa11243fb6cb63774476615ffe77"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [
+        {
+          "owner": "note1",
+          "diacritic": "C",
+          "alternate": "Ch",
+          "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+          "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+          "occurrences": 1
+        },
+        {
+          "owner": "note1",
+          "diacritic": "c",
+          "alternate": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "rendered_sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+          "occurrences": 2
+        },
+        {
+          "owner": "note3",
+          "diacritic": "c",
+          "alternate": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "rendered_sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+          "occurrences": 2
+        },
+        {
+          "owner": "poem",
+          "diacritic": "C",
+          "alternate": "Ch",
+          "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+          "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+          "occurrences": 3
+        }
+      ],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [
+            {
+              "owner": "note1",
+              "diacritic": "C",
+              "alternate": "Ch",
+              "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+              "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+              "occurrences": 1
+            },
+            {
+              "owner": "note1",
+              "diacritic": "c",
+              "alternate": "ch",
+              "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+              "rendered_sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+              "occurrences": 2
+            }
+          ],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 2,
+          "note_references": 0,
+          "literal_escapes": 2,
+          "heading_markers": 0,
+          "emphasis_pairs": 3,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [
+            {
+              "owner": "note3",
+              "diacritic": "c",
+              "alternate": "ch",
+              "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+              "rendered_sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+              "occurrences": 2
+            }
+          ],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 2,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [
+            {
+              "owner": "poem",
+              "diacritic": "C",
+              "alternate": "Ch",
+              "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+              "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+              "occurrences": 3
+            }
+          ],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 4,
+          "literal_escapes": 22,
+          "heading_markers": 1,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 12
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap256",
+      "poem": 254,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "poem_notes": 3,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "1d3e3c2359e718f54fd9c972be99d015ccf148a52b5bb5e99477d16298aa54a1",
+          "lines": 1,
+          "characters": 32
+        },
+        {
+          "paragraph": 1,
+          "sha256": "058555bf9134f9f3f9ca84e9f318c0bfb8c292bffbad3787f8757b953ecac7f1",
+          "lines": 4,
+          "characters": 159
+        },
+        {
+          "paragraph": 2,
+          "sha256": "39373b05a286057681e8dd673852963d0cc90e910903da022a7c475ca23f8a30",
+          "lines": 4,
+          "characters": 150
+        },
+        {
+          "paragraph": 3,
+          "sha256": "ad05bf7c63b5cf48c8c0f8a8f538bfb578e0e6f5b4ed75ad63dca169e67eb2ef",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 4,
+          "sha256": "2a748541548f76f52157db23f0f75396fd98f8f59c1f319ac0410d1eb9c2a127",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 5,
+          "sha256": "234ca551db1c4e927f187453e10cbbbbed5412eb04ee6cc4a0a650bb659179ed",
+          "lines": 1,
+          "characters": 65
+        },
+        {
+          "paragraph": 6,
+          "sha256": "2f3c3e66be4ef7dbad5375d1dc50507d2f5be8deef3c9a2c5414a538a61ab2ea",
+          "lines": 1,
+          "characters": 50
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "c9ff45bbbe812ab5bb2a939b8acf79f0fb222ed1ce986df84e81948698adff40",
+          "body_sha256": "69b0d24f0418549904034e33fb1bdbec6cba32dde2e4c783c830eb423795e2fa",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "69b0d24f0418549904034e33fb1bdbec6cba32dde2e4c783c830eb423795e2fa",
+              "lines": 1,
+              "characters": 379
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            7
+          ],
+          "complete_raw_definition_sha256": "d2d55d9bae1de1443436a378fab9705142df8902d9d67a029f19b7b07baa3f0a"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "41b2978686827480523afddde8e29a59b8d9d5b765864325fa07dc7ff03eefb5",
+          "body_sha256": "31472d2777fc29f4345221f628027d979104145dbff79580a32ef9a73325aadb",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "31472d2777fc29f4345221f628027d979104145dbff79580a32ef9a73325aadb",
+              "lines": 1,
+              "characters": 160
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            10
+          ],
+          "complete_raw_definition_sha256": "e0941917e2d887dda41992905d8f749b0369f0c608f6a404b2f941889a691692"
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "raw_sha256": "4d3acd930580ce5e5091edffc5d56527920f47ccb867171f7d9c065d43811626",
+          "body_sha256": "4d3acd930580ce5e5091edffc5d56527920f47ccb867171f7d9c065d43811626",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "4d3acd930580ce5e5091edffc5d56527920f47ccb867171f7d9c065d43811626",
+              "lines": 1,
+              "characters": 10
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            11
+          ],
+          "complete_raw_definition_sha256": "b1f7bd03c479a3bcba44c8f42616a9723b25513e9dbc36b49c61b8e817c0e5f6"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [
+        {
+          "owner": "note1",
+          "diacritic": "C",
+          "alternate": "Ch",
+          "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+          "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+          "occurrences": 1
+        },
+        {
+          "owner": "note1",
+          "diacritic": "c",
+          "alternate": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "rendered_sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+          "occurrences": 1
+        },
+        {
+          "owner": "poem",
+          "diacritic": "c",
+          "alternate": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "rendered_sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+          "occurrences": 3
+        }
+      ],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [
+            {
+              "owner": "note1",
+              "diacritic": "C",
+              "alternate": "Ch",
+              "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+              "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+              "occurrences": 1
+            },
+            {
+              "owner": "note1",
+              "diacritic": "c",
+              "alternate": "ch",
+              "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+              "rendered_sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+              "occurrences": 1
+            }
+          ],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 6,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [
+            {
+              "owner": "poem",
+              "diacritic": "c",
+              "alternate": "ch",
+              "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+              "rendered_sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+              "occurrences": 3
+            }
+          ],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 3,
+          "literal_escapes": 26,
+          "heading_markers": 1,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 12
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap257",
+      "poem": 255,
+      "body_paragraph_count": 6,
+      "physical_stanza_count": 3,
+      "poem_notes": 3,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "562323d165842226795ecd8b9905546ba525b5dff5030f38692a504f922e310d",
+          "lines": 1,
+          "characters": 28
+        },
+        {
+          "paragraph": 1,
+          "sha256": "644eee1d4f59dc187b760f5af49678088c134e7129c2538226a90e8f9fcb8ace",
+          "lines": 4,
+          "characters": 154
+        },
+        {
+          "paragraph": 2,
+          "sha256": "fdbead06eb3e00ca01ea79e1de2c4802ce8c75b3ab895c88b5f0cb943098d741",
+          "lines": 4,
+          "characters": 139
+        },
+        {
+          "paragraph": 3,
+          "sha256": "e51912470edc5e7edd83f6a2ea963feee757479bc1999e83f48610c73e79cef1",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 4,
+          "sha256": "c84d6487558494a09d3e8dd1e509e22e8352c2576a9a0e6b13dd447206734db1",
+          "lines": 1,
+          "characters": 61
+        },
+        {
+          "paragraph": 5,
+          "sha256": "67b233685d34359dad7aadb82de6ca90091d563e13a6021ee497859565677d28",
+          "lines": 1,
+          "characters": 46
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "6c47afe82d38dbe9a69c4d705cd6bf001224d7207549a40ae333493f1ed84598",
+          "body_sha256": "6c47afe82d38dbe9a69c4d705cd6bf001224d7207549a40ae333493f1ed84598",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "6c47afe82d38dbe9a69c4d705cd6bf001224d7207549a40ae333493f1ed84598",
+              "lines": 1,
+              "characters": 25
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            7
+          ],
+          "complete_raw_definition_sha256": "35a66b7b26965f8577d24a147093bc50fc50144c4882e161ae8b8fdf69f22610"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "16f25308fc27dcd70375d83d9c96f1a6ae034c9d8469bb2d2f4da27c43065796",
+          "body_sha256": "5f752f21db21d541ae2f6efa2ec4a112e271fbe327611863aa4b2c36dc77080a",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "5f752f21db21d541ae2f6efa2ec4a112e271fbe327611863aa4b2c36dc77080a",
+              "lines": 1,
+              "characters": 169
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            9
+          ],
+          "complete_raw_definition_sha256": "849aa91f84cd953fac346db2638923fb96b576dec1b243aa7a9a9c9ffdf1011e"
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "raw_sha256": "f4dfa7da1a4ae42c1be99eaf3916f8831cba0a3e33da4b3a1ab93d310c890048",
+          "body_sha256": "82b0978106c54b62518634c150f1968092b357f37ee8f10cf35846e488853d4a",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "82b0978106c54b62518634c150f1968092b357f37ee8f10cf35846e488853d4a",
+              "lines": 1,
+              "characters": 241
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            11
+          ],
+          "complete_raw_definition_sha256": "608fcf0da0310233df81276894bb0b83b7e58b1a0719fe968fccc1ccc7f99703"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 5,
+          "heading_markers": 0,
+          "emphasis_pairs": 3,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 3,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 3,
+          "literal_escapes": 14,
+          "heading_markers": 1,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 9
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap258",
+      "poem": 256,
+      "body_paragraph_count": 6,
+      "physical_stanza_count": 3,
+      "poem_notes": 2,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "a2198c0130381084c4f58b3d01f30d7e8187e75130752bfa25b7b6c2ef2525a1",
+          "lines": 1,
+          "characters": 28
+        },
+        {
+          "paragraph": 1,
+          "sha256": "dea7003c9b8de9860e1b5f55f3dbe102e7d7f70eff18ddb779d3e52d999bc91b",
+          "lines": 4,
+          "characters": 140
+        },
+        {
+          "paragraph": 2,
+          "sha256": "c01775cdeb7015eea3bc3a78599cef03f2f92769f4358355bca8a0809eed8bd8",
+          "lines": 4,
+          "characters": 140
+        },
+        {
+          "paragraph": 3,
+          "sha256": "de5e025fd38897c8746b2dc81800ded712c7d10e8e76734b654e82ab5e798a03",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 4,
+          "sha256": "1b757928129a3009cd7e41a8be85be68d937140333a394fda2a1236ec8842dfa",
+          "lines": 1,
+          "characters": 61
+        },
+        {
+          "paragraph": 5,
+          "sha256": "97ce37a52fd3c4260c23a3f71c64a83065461a5f48c822996df792d9c3cb3737",
+          "lines": 1,
+          "characters": 46
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "8e4158f708c552f960f25952b2d313969c231a4b6e4798a4d46c9096502e3229",
+          "body_sha256": "8e4158f708c552f960f25952b2d313969c231a4b6e4798a4d46c9096502e3229",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "8e4158f708c552f960f25952b2d313969c231a4b6e4798a4d46c9096502e3229",
+              "lines": 1,
+              "characters": 88
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            7
+          ],
+          "complete_raw_definition_sha256": "777a2d6fd887d42e71b742f38c74262faf78cd58ac95574bab2231858e09fa8b"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "4794518f18e02309daa994515b0b44b03be8e040123408a372511007cc144ba6",
+          "body_sha256": "4794518f18e02309daa994515b0b44b03be8e040123408a372511007cc144ba6",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "4794518f18e02309daa994515b0b44b03be8e040123408a372511007cc144ba6",
+              "lines": 1,
+              "characters": 12
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            10
+          ],
+          "complete_raw_definition_sha256": "2c0055d3d4fc6fd0376f1f61aa2dea5e8015e803eadc3ef5ba891b75fbef9ebf"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [
+        {
+          "owner": "poem",
+          "diacritic": "C",
+          "alternate": "Ch",
+          "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+          "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+          "occurrences": 1
+        }
+      ],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [
+            {
+              "owner": "poem",
+              "diacritic": "C",
+              "alternate": "Ch",
+              "raw_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+              "rendered_sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+              "occurrences": 1
+            }
+          ],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 2,
+          "literal_escapes": 12,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 9
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap259",
+      "poem": 257,
+      "body_paragraph_count": 8,
+      "physical_stanza_count": 5,
+      "poem_notes": 4,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "cc7300f3966fc2fb3e14df918dad516eccf180db62b72e34efc00447027b5011",
+          "lines": 1,
+          "characters": 28
+        },
+        {
+          "paragraph": 1,
+          "sha256": "c1fa9943da390782d325451217ab84853118a3b9623b82aec64e5559ab2287a2",
+          "lines": 4,
+          "characters": 154
+        },
+        {
+          "paragraph": 2,
+          "sha256": "9924205942354945d26da28cdc02ce9aa7aaf9420dd5561e3a7083c35b8faf1e",
+          "lines": 4,
+          "characters": 151
+        },
+        {
+          "paragraph": 3,
+          "sha256": "ae0e17a4106ea4b0ce1a8ea027f7adcb75cac491b5e7a62c770457726ebb3331",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 4,
+          "sha256": "878278fe20ba68d98bbe3ee79598ace43bc39e3ec16c1c81de41d850ccc4a028",
+          "lines": 4,
+          "characters": 149
+        },
+        {
+          "paragraph": 5,
+          "sha256": "255dd01779272bb5b3ae683146b7839d66f7ed8bc66795cbbb83d2568bf5c016",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 6,
+          "sha256": "c8816c3c799e6483beeee8941c882fee292a7f3cf5ce9c8fd330b0969f255dc8",
+          "lines": 1,
+          "characters": 61
+        },
+        {
+          "paragraph": 7,
+          "sha256": "e8f54c8f8aaa7892e59a42848394b31f3342f4b294386a5b2442d918335db006",
+          "lines": 1,
+          "characters": 46
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "52c624dbeb6ba2460010e3bd959abaf4fedb2344aafcd6c07fbf78e1acb3d1bb",
+          "body_sha256": "52c624dbeb6ba2460010e3bd959abaf4fedb2344aafcd6c07fbf78e1acb3d1bb",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "52c624dbeb6ba2460010e3bd959abaf4fedb2344aafcd6c07fbf78e1acb3d1bb",
+              "lines": 1,
+              "characters": 20
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            7
+          ],
+          "complete_raw_definition_sha256": "99043dac82c6c0f2a4b394cd62053a94b05d8f37936ce30c5b10be334e22fca4"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "e5ad01763107e42783849a8eae9b4f77236f1e46f4dabe6f03b09554371c2af3",
+          "body_sha256": "a61430395e8951fd7dc726062f1d3bb20414ed97f68dc106711ead0f1291fbd4",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "a61430395e8951fd7dc726062f1d3bb20414ed97f68dc106711ead0f1291fbd4",
+              "lines": 1,
+              "characters": 211
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            9
+          ],
+          "complete_raw_definition_sha256": "bccc3537082a7bac885379c515dc8b17521da54a60ca5e2a6e4780273a9351fe"
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "raw_sha256": "9bd6eefcb078fb4590378945c82d652e2a45234d7480c1d858f4fe3b20dff975",
+          "body_sha256": "9bd6eefcb078fb4590378945c82d652e2a45234d7480c1d858f4fe3b20dff975",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "9bd6eefcb078fb4590378945c82d652e2a45234d7480c1d858f4fe3b20dff975",
+              "lines": 1,
+              "characters": 20
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            10
+          ],
+          "complete_raw_definition_sha256": "e8ed9e97d76a4c869c8cd607ea846c76e3fb54b2c1ebb671e6de6277481bd02e"
+        },
+        {
+          "number": 4,
+          "owner": "poem",
+          "raw_sha256": "088ae069f0982f4158474cfd6f62fe80e37c27c9f1e81735240c6bb9f7c7d266",
+          "body_sha256": "1007dc72184d0a4159dbab9c8640bfb35bff04f9916148a803282e9b4f7546f7",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "1007dc72184d0a4159dbab9c8640bfb35bff04f9916148a803282e9b4f7546f7",
+              "lines": 1,
+              "characters": 53
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            26
+          ],
+          "complete_raw_definition_sha256": "56644ef36f3d83c1b836c51ef8abd301b5ca59d436008901167227868badaa24"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 4,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 4,
+          "literal_escapes": 26,
+          "heading_markers": 1,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 15
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap260",
+      "poem": 258,
+      "body_paragraph_count": 8,
+      "physical_stanza_count": 5,
+      "poem_notes": 3,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "fa23f5db86409377a99361eae7ae4f2e2d595144590350afe9b838c70e95d894",
+          "lines": 1,
+          "characters": 26
+        },
+        {
+          "paragraph": 1,
+          "sha256": "7d9909500910d567b8dbcbdf24fa061a696226324bad2daf977256ea4d226ef0",
+          "lines": 4,
+          "characters": 144
+        },
+        {
+          "paragraph": 2,
+          "sha256": "acf0f674c017cc43b7d319e75f851e617c304e2bd69b2d5c09be9d1b789327bd",
+          "lines": 4,
+          "characters": 160
+        },
+        {
+          "paragraph": 3,
+          "sha256": "7e4a0a61d30623666d2af4a506daac653a451db8d0048b8fdd93ee95fbbeed83",
+          "lines": 4,
+          "characters": 151
+        },
+        {
+          "paragraph": 4,
+          "sha256": "3052a6cb81859cb92b67ff399b11baef8308177d43ea5badc875e8fe32daa954",
+          "lines": 4,
+          "characters": 146
+        },
+        {
+          "paragraph": 5,
+          "sha256": "b804d8fb70d31a8883f21fbf65fd783320d98a10680aad60c7f721814810f9f2",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 6,
+          "sha256": "2a6a8ec1f074eaf8bcaa4f29ef3c3d598ae3059688a1793a6e245ea78137271c",
+          "lines": 1,
+          "characters": 59
+        },
+        {
+          "paragraph": 7,
+          "sha256": "f514a993ea6321bf0bbd79f6944e152b6b2f2a6f4da419048375d9cc099ed054",
+          "lines": 1,
+          "characters": 44
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "9c94c2d74c395e6b47bec4880649bc55e3a39bfeb602301ee7b108e0b9234658",
+          "body_sha256": "9c94c2d74c395e6b47bec4880649bc55e3a39bfeb602301ee7b108e0b9234658",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "9c94c2d74c395e6b47bec4880649bc55e3a39bfeb602301ee7b108e0b9234658",
+              "lines": 1,
+              "characters": 12
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            7
+          ],
+          "complete_raw_definition_sha256": "c3a9b7279b5bc3a58a67300013ebb627430c30388f104e0aad439e4a04bdfe5b"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "685fa28ac809515d08d4269e8fc6848bc010eddc33e631aa03672a76c7216d0f",
+          "body_sha256": "5a1fbd10e67905e71a4a0eefd6983bd9554ac34620d0451648f9e3e424794bb6",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "5a1fbd10e67905e71a4a0eefd6983bd9554ac34620d0451648f9e3e424794bb6",
+              "lines": 1,
+              "characters": 68
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            12
+          ],
+          "complete_raw_definition_sha256": "9a8d719df0fd6021be00078cd449d77cb31c3a2aa9120b05c3440c6f1c4d539c"
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "raw_sha256": "a34a350c1922be4e905b0deaa4cb8edb8384052a6902e744f27377386d489944",
+          "body_sha256": "5e24426abc63b00b4018ca3ce42d8445a35467949c91a9e87c5657240b2f05da",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "5e24426abc63b00b4018ca3ce42d8445a35467949c91a9e87c5657240b2f05da",
+              "lines": 1,
+              "characters": 39
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            25
+          ],
+          "complete_raw_definition_sha256": "fb3071f095fdcd74e4ffc40a0e33bb172c8de5228b4448efddf98033c39be46a"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 1,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 3,
+          "literal_escapes": 28,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 15
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    },
+    {
+      "id": "tha-ap261",
+      "poem": 259,
+      "body_paragraph_count": 7,
+      "physical_stanza_count": 4,
+      "poem_notes": 3,
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "320f99a0284b40cd99e038899f49d1bf34a89e53d129e7e22fdd9b46c5ed3474",
+          "lines": 1,
+          "characters": 25
+        },
+        {
+          "paragraph": 1,
+          "sha256": "66cc089a9c2184fce01af559db7ad6c9d5b356ec866c7f9a193ddb7eb6eaca14",
+          "lines": 4,
+          "characters": 152
+        },
+        {
+          "paragraph": 2,
+          "sha256": "82c7ee307d803246c2a4685a58252ad21e9e568c36ce64d7ff2f6be3c5bcf8c5",
+          "lines": 4,
+          "characters": 145
+        },
+        {
+          "paragraph": 3,
+          "sha256": "50489d12439080a088ac76c7d1e0bab58baed3e99fea7a35c685a9f532dde84e",
+          "lines": 4,
+          "characters": 159
+        },
+        {
+          "paragraph": 4,
+          "sha256": "a1f32f8ff362ae36ec2b673a3cc1af71cc866f2b80f291064048378748d6a8c7",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 5,
+          "sha256": "82e21d1afe18efd4d7df26bc5c3ed0560175c2fef3e92c4c804ed84c7cbcfcce",
+          "lines": 1,
+          "characters": 58
+        },
+        {
+          "paragraph": 6,
+          "sha256": "6cf2d94190a0cf3075e26ba877b0c53ab20ef08647eef5e11c651fd5d62fd5e7",
+          "lines": 1,
+          "characters": 43
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "raw_sha256": "730e551666851c738e77bf3ef8e8d4dd6976feadf4f69a0ca7e1166b37f113e7",
+          "body_sha256": "730e551666851c738e77bf3ef8e8d4dd6976feadf4f69a0ca7e1166b37f113e7",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "730e551666851c738e77bf3ef8e8d4dd6976feadf4f69a0ca7e1166b37f113e7",
+              "lines": 1,
+              "characters": 11
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            7
+          ],
+          "complete_raw_definition_sha256": "1dc8ab88fadbf844182a302c9b715a12ff8098f5cd32dafb83ee924819b8bc7b"
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "raw_sha256": "9011bf091d8b52439a7d3117fe02cfa6a65bfcdee50cf8ef27f5354a5cd9102e",
+          "body_sha256": "cf15247f2fd2544491e0446b72f7e3415efaad70a01e6b198b22c381bcb5ac10",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "cf15247f2fd2544491e0446b72f7e3415efaad70a01e6b198b22c381bcb5ac10",
+              "lines": 1,
+              "characters": 321
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            12
+          ],
+          "complete_raw_definition_sha256": "e802c023a77683b4a2c9fea8aa81817ecfebfb8feecbe954edb88564a351f87b"
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "raw_sha256": "92d138f7e562cf0afa130e8ae668608cfaad0f4f23534de8500da6ffa4575275",
+          "body_sha256": "f9d76aa6336d93bd29538f0bd4223cf2ab97602da6078783be024e50953347da",
+          "paragraph_count": 1,
+          "paragraphs": [
+            {
+              "paragraph": 0,
+              "sha256": "f9d76aa6336d93bd29538f0bd4223cf2ab97602da6078783be024e50953347da",
+              "lines": 1,
+              "characters": 208
+            }
+          ],
+          "lines": 1,
+          "anchor_lines": [
+            22
+          ],
+          "complete_raw_definition_sha256": "7c655da25381967c2f6fbfc6e0bb055f22ec303c54de424badb3c2ef3913b938"
+        }
+      ],
+      "all_stanzas_notes_and_colophons_compared": true,
+      "paired_display_inventory": [],
+      "presentation_operations": [
+        {
+          "owner": "note",
+          "number": 1,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 2,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 2,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "note",
+          "number": 3,
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 2,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "poem",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 3,
+          "literal_escapes": 18,
+          "heading_markers": 1,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 12
+        },
+        {
+          "owner": "preface",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        },
+        {
+          "owner": "summary",
+          "paired_display_sequences": [],
+          "PTS_abbr": 0,
+          "BJTS_abbr": 0,
+          "note_references": 0,
+          "literal_escapes": 0,
+          "heading_markers": 0,
+          "emphasis_pairs": 0,
+          "hard_break_padding_runs": 0
+        }
+      ]
+    }
+  ],
+  "source257_amendment_retained": "Publisher local3/global2523 describes the fruit as Buddha-pūjā (Buddha worship); VRI main stanza25, block8336, reads pupphapūjāyidaṃ (flower worship). The original XML records no variant note for this line. Retain this wording distinction without calling it an error or inferring a recension cause or ownership problem."
+}

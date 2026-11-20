@@ -4,8 +4,10 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 
+const REMAINING_GROUPS=['apadanathera231','apadanathera251'];
+const beforeRemainingGroups=groups=>groups.filter(name=>!REMAINING_GROUPS.includes(name));
 const INTAKE_221_230_GROUPS=['apadanathera221'];
-const before221230Groups=groups=>groups.filter(name=>!INTAKE_221_230_GROUPS.includes(name));
+const before221230Groups=groups=>beforeRemainingGroups(groups).filter(name=>!INTAKE_221_230_GROUPS.includes(name));
 const INTAKE_241_250_GROUPS=['apadanathera241'];
 const before241250Groups=groups=>before221230Groups(groups).filter(name=>!INTAKE_241_250_GROUPS.includes(name));
 const INTAKE_181_220_GROUPS=['apadanathera181','apadanathera201'];
@@ -21,6 +23,8 @@ const intake241250FixtureFiles=Array.from({length:10},(_,i)=>'src/_poems/chapter
 // Publisher221 is an unchanged prior neighbor;231 is only the new boundary fixture.
 const intake221230FixtureFiles=Array.from({length:10},(_,i)=>'src/_poems/chapter-3/poem-'+String(i+222)+'.md');
 const intake221230Reports=['standalone-apadanathera221.report.json','standalone-apadanathera221-launch.report.json','standalone-apadanathera221-a11y.report.json','standalone-apadanathera221-a11y-launch.report.json','standalone-apadanathera221-independent.report.json','installed-apadanathera221.report.json','installed-apadanathera221-launch.report.json'];
+const remainingFixtureFiles=[232,233,235,236,237,238,239,240,251,252,253,254,255,256,257,258,259].map(n=>'src/_poems/chapter-3/poem-'+n+'.md');
+const remainingReports=REMAINING_GROUPS.flatMap(name=>[['standalone',''],['standalone','-launch'],['standalone','-a11y'],['standalone','-a11y-launch'],['standalone','-independent'],['installed',''],['installed','-launch']].map(([prefix,suffix])=>prefix+'-'+name+suffix+'.report.json'));
 
 const stepsOf=source=>source.match(/^      - [^]*?(?=^      - |^  [a-z][\w-]*:|(?![^]))/gm)||[];
 const namedStep=(source,name)=>{
@@ -32,7 +36,17 @@ function conditionGroups(step){
  return condition.split(' || ').map(term=>{const name=term.match(/^matrix\.group == '([a-z0-9]+)'$/)?.[1];assert.ok(name,'only explicit finite groups may select a public source checkout');return name;});
 }
 const conditionalSteps=(source,name)=>stepsOf(source).filter(step=>step.includes("\n        if: matrix.group == '"+name+"'\n"));
+function beforeRemainingWorkflow(source){
+ if(!source.includes("matrix.group == 'apadanathera231'")&&!source.includes("matrix.group == 'apadanathera251'"))return source;
+ const added=[namedStep(source,'Fetch exact remaining-intake baseline for independent preservation checks'),...REMAINING_GROUPS.flatMap(name=>conditionalSteps(source,name))];assert.equal(added.length,9,'only shared baseline fetch and two four-step source/browser groups are projected out');
+ let projected=source;for(const step of added)projected=projected.replace(step,'');
+ for(const name of REMAINING_GROUPS)projected=projected.replace(', '+name,'').replaceAll(" || matrix.group == '"+name+"'",'');
+ for(const file of remainingFixtureFiles)projected=projected.replace('            '+file+'\n','');
+ for(const report of remainingReports)projected=projected.replace('            '+report+'\n','');
+ return projected;
+}
 function before221230Workflow(source){
+ source=beforeRemainingWorkflow(source);
  const additions=conditionalSteps(source,'apadanathera221');assert.equal(additions.length,5,'finite221 projection removes only one baseline fetch and four required steps');
  let projected=source;for(const step of additions)projected=projected.replace(step,'');
  projected=projected.replace(', apadanathera221','').replaceAll(" || matrix.group == 'apadanathera221'",'');
@@ -51,7 +65,7 @@ test('every browser-group JSON report is retained as a CI artifact',()=>{
  assert.ok(selected?.includes('conflicts'),'local note-conflict acceptance is selected');
  assert.ok(selected?.includes('booksearch'),'complete source-book search acceptance is selected');
  assert.ok(selected?.includes('chapters'),'chapter and compact-context acceptance is selected');
- for(const name of ['anten','textspacing','apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanaedition','thagsixteen',...PAIR_GROUPS,...INTAKE_141_180_GROUPS,...INTAKE_181_220_GROUPS,...INTAKE_241_250_GROUPS,...INTAKE_221_230_GROUPS]){
+ for(const name of ['anten','textspacing','apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanaedition','thagsixteen',...PAIR_GROUPS,...INTAKE_141_180_GROUPS,...INTAKE_181_220_GROUPS,...INTAKE_241_250_GROUPS,...INTAKE_221_230_GROUPS,...REMAINING_GROUPS]){
   assert.ok(selected?.includes(name),name+' acceptance is selected');
   const steps=[...group.matchAll(new RegExp("if: matrix\\.group == '"+name+"'([^]*?)(?=\\n      -|$)",'g'))].map(match=>match[1]).join('\n');
   assert.match(steps,/--a11y/,name+' accessibility mode runs');
@@ -107,7 +121,7 @@ test('Apadāna browser CI uses a pinned public fixture without persisted credent
  assert.match(fixture,/persist-credentials: false/);
  assert.match(fixture,/sparse-checkout-cone-mode: false/);
  const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]);
- assert.deepEqual(files.filter(path=>!pairFixtureFiles.includes(path)&&!intake141180FixtureFiles.includes(path)&&!intake181220FixtureFiles.includes(path)&&!intake241250FixtureFiles.includes(path)&&!intake221230FixtureFiles.includes(path)),['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...Array.from({length:40},(_,i)=>i+1).map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md'),...Array.from({length:90},(_,i)=>i+11).map(n=>'src/_poems/chapter-3/poem-'+String(n).padStart(3,'0')+'.md'),'src/_poems/chapter-3/chapter-3.json']);
+ assert.deepEqual(files.filter(path=>!pairFixtureFiles.includes(path)&&!intake141180FixtureFiles.includes(path)&&!intake181220FixtureFiles.includes(path)&&!intake241250FixtureFiles.includes(path)&&!intake221230FixtureFiles.includes(path)&&!remainingFixtureFiles.includes(path)),['LICENSE.md','src/_pages/about.md','src/_includes/site/footer.njk','src/_includes/layouts/epub-metadata.xml','src/_data/site.json','src/_poems/_poems.json',...Array.from({length:40},(_,i)=>i+1).map(n=>'src/_poems/chapter-4/poem-'+String(n).padStart(3,'0')+'.md'),...Array.from({length:90},(_,i)=>i+11).map(n=>'src/_poems/chapter-3/poem-'+String(n).padStart(3,'0')+'.md'),'src/_poems/chapter-3/chapter-3.json']);
  const steps=[...source.matchAll(/if: matrix\.group == 'apadana'([^]*?)(?=\n      -|$)/g)].map(match=>match[1]).join('\n');
  assert.match(steps,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);
  assert.equal((steps.match(/python scripts\/web-reader-apadana-check\.py --source-root \.fixtures\/apadana-pinned/g)||[]).length,3);
@@ -574,7 +588,7 @@ test('Therā 181–220 adds two receipt-bound groups while preserving all 59 job
  assert.deepEqual(conditionGroups(fixture).filter(name=>INTAKE_181_220_GROUPS.includes(name)),INTAKE_181_220_GROUPS);
  assert.match(fixture,/repository: apadana-translation\/apadana-site/);assert.match(fixture,/ref: fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/);
  assert.match(fixture,/persist-credentials: false/);assert.match(fixture,/sparse-checkout-cone-mode: false/);
- const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]).filter(path=>!intake241250FixtureFiles.includes(path)&&!intake221230FixtureFiles.includes(path));
+ const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]).filter(path=>!intake241250FixtureFiles.includes(path)&&!intake221230FixtureFiles.includes(path)&&!remainingFixtureFiles.includes(path));
  assert.equal(files.length,258);assert.equal(new Set(files).size,258);
  assert.deepEqual(files.filter(path=>intake181220FixtureFiles.includes(path)),intake181220FixtureFiles);
  assert.equal(files.filter(path=>!intake181220FixtureFiles.includes(path)).length,218);
@@ -772,7 +786,7 @@ test('Therā 241–250 CI binds the reviewed ten-poem normalization, separate pu
 });
 
 test('Therā 221–230 adds one twenty-minute group while restoring the exact 9ceed785 workflow under historical projection',()=>{
- const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ const source=beforeRemainingWorkflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8'));
  const group=source.split('  reader-browser-group:')[1].split('  reader-browser:')[0];
  const selected=group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
  assert.equal(selected.length,45);assert.equal(new Set(selected).size,45);assert.equal(before221230Groups(selected).length,44);
@@ -890,4 +904,84 @@ test('Therā 221–230 CI consumes the independent ten-poem seals with note-only
  assert.equal(peerSummary.body_sha256,summary.body_sha256);assert.equal(peerSummary.paragraphs,2);assert.deepEqual(peerSummary.line_counts,[7,1]);assert.deepEqual(peerSummary.paragraph_sha256s,summary.paragraphs.map(row=>row.sha256));
  assert.equal(profiles['tha-ap232'].chapter_summary.body_sha256,summary.body_sha256);
  assert.equal(approval.finite_integration_authority.canonical_changes_authorized,false);assert.equal(approval.finite_integration_authority.new_namespace_authorized,false);
+});
+
+test('remaining Therā CI adds two twenty-minute lanes while restoring every byte of the cdbefd266 workflow',()=>{
+ const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ const group=source.split('  reader-browser-group:')[1].split('  reader-browser:')[0];
+ const selected=group.match(/group:\s*\[([^\]]+)\]/)[1].split(',').map(name=>name.trim());
+ assert.equal(selected.length,47);assert.equal(new Set(selected).size,47);assert.equal(beforeRemainingGroups(selected).length,45);
+ assert.deepEqual(selected.filter(name=>REMAINING_GROUPS.includes(name)),REMAINING_GROUPS);
+ assert.equal(selected[selected.indexOf('apadanathera221')+1],'apadanathera231');assert.equal(selected[selected.indexOf('apadanathera241')+1],'apadanathera251');
+ const baseline=namedStep(group,'Fetch exact remaining-intake baseline for independent preservation checks');
+ assert.deepEqual(conditionGroups(baseline),REMAINING_GROUPS);
+ assert.match(baseline,/git fetch --no-tags --depth=1 origin cdbefd514164a559bc5aaab631c267f3084e31a6/);assert.match(baseline,/git cat-file -e cdbefd514164a559bc5aaab631c267f3084e31a6\^\{commit\}/);
+ assert.doesNotMatch(baseline,/--unshallow|fetch-depth: 0|git reset|git checkout/);
+ const historicalSourceGroups=['apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanatherapair101','apadanatherapair121','apadanathera141','apadanathera161','apadanaedition','thagsixteen',...INTAKE_181_220_GROUPS,...INTAKE_241_250_GROUPS,...INTAKE_221_230_GROUPS];
+ const historical=historicalSourceGroups.flatMap(name=>conditionalSteps(group,name).filter(step=>/^        run:/m.test(step)&&!step.startsWith('      - name: Fetch exact ')));
+ assert.equal(historical.length,84);assert.equal(historical.length+REMAINING_GROUPS.flatMap(name=>conditionalSteps(group,name)).length,92);
+ const matrix=(text,key)=>text.match(new RegExp('^        '+key+': \\[([^\\]]+)\\]','m'))[1].split(',').map(value=>value.trim());
+ const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0],install=readFileSync(new URL('../.github/workflows/npx.yml',import.meta.url),'utf8');
+ const otherJobs=1+1+matrix(compat,'engine').length+matrix(node,'os').length*matrix(node,'node').length+matrix(install,'os').length*matrix(install,'node').length+1+1;
+ assert.equal(beforeRemainingGroups(selected).length+otherJobs,63);assert.equal(selected.length+otherJobs,65);assert.doesNotMatch(node,/timeout-minutes:/);
+ const expression=group.match(/^    timeout-minutes: \$\{\{ (.+) \}\}$/m)[1];
+ for(const name of REMAINING_GROUPS){assert.equal(runInNewContext(expression,{matrix:{group:name}},{timeout:1000}),20);assert.equal(conditionalSteps(group,name).length,4);assert.ok(group.indexOf(baseline)<group.indexOf(conditionalSteps(group,name)[0]));}
+ const fixture=namedStep(group,'Check out exact public Apadāna source fixtures without credentials');assert.deepEqual(conditionGroups(fixture).filter(name=>REMAINING_GROUPS.includes(name)),REMAINING_GROUPS);
+ const files=[...fixture.matchAll(/^            (.+)$/gm)].map(match=>match[1]);assert.equal(files.length,295);assert.equal(new Set(files).size,295);
+ assert.deepEqual(files.filter(path=>remainingFixtureFiles.includes(path)),remainingFixtureFiles);assert.equal(files.filter(path=>!remainingFixtureFiles.includes(path)).length,278);
+ assert.equal(files.filter(path=>path==='src/_poems/chapter-3/poem-231.md').length,1,'old231 fixture is reused');for(const n of [234,260])assert.ok(!files.includes('src/_poems/chapter-3/poem-'+n+'.md'),'held source is not added');
+ const xml=namedStep(group,'Check out exact public Apadāna original XML without credentials');assert.deepEqual(conditionGroups(xml).filter(name=>REMAINING_GROUPS.includes(name)),REMAINING_GROUPS);
+ assert.deepEqual([...xml.matchAll(/^            (.+)$/gm)].map(match=>match[1]),['romn/s0510m1.mul.xml','romn/s0510a.att.xml']);
+ const retained=group.split('          path: |')[1].split('          if-no-files-found:')[0].trim().split(/\s+/);for(const report of remainingReports)assert.equal(retained.filter(path=>path===report).length,1);
+ const projected=beforeRemainingWorkflow(source);assert.equal(createHash('sha256').update(projected).digest('hex'),'18bc1c70573e13b066ee0f6b69487b64007660ec8e8bd0246979920c43b84eec','only17 fixture paths, two groups/nine steps and their reports/conditions are projected out');
+ const oldExpression=projected.match(/^    timeout-minutes: (\$\{\{[^\n]+)$/m)[1].slice(3,-2).trim();for(const name of beforeRemainingGroups(selected))assert.equal(runInNewContext(expression,{matrix:{group:name}},{timeout:1000}),runInNewContext(oldExpression,{matrix:{group:name}},{timeout:1000}),name+' keeps its exact budget');
+});
+
+test('remaining Therā CI runs each separate nine-source replay and wrapper pair before its selected browser triplet',()=>{
+ const source=readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8');
+ for(const [name,batch,family]of [['apadanathera231','A','231-240'],['apadanathera251','B','251-259']]){
+  const steps=conditionalSteps(source,name);assert.equal(steps.length,4);const validation=steps[0],commands=steps.join('\n'),stem=family.replace('-','_');
+  assert.match(validation,/node scripts\/apadana\/build\.mjs --source \.fixtures\/apadana-pinned --check/);assert.ok(validation.includes('node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/'+name+'-inputs"'));
+  const replay=validation.split('\n').filter(line=>line.trim().startsWith('python scripts/apadana/review_thera'+stem+'.py '));assert.equal(replay.length,1);
+  for(const flag of ['--source-root .fixtures/apadana-pinned','--canon "$RUNNER_TEMP/'+name+'-inputs/canon.json.gz"','--xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml','--goldens docs/evidence/apadana/THERA_'+stem+'_GOLDENS.json','--profiles docs/evidence/apadana/THERA_'+stem+'_EXPECTED_PROFILES.json','--links docs/evidence/apadana/THERA_'+stem+'_EXPECTED_LINKS.json'])assert.ok(replay[0].includes(flag));
+  assert.ok(replay[0].endsWith('--verify-only > standalone-'+name+'-independent.report.json'));assert.doesNotMatch(replay[0],/--raw-packet|--payloads|--output|\/tmp\//);
+  const tests=validation.split('\n').filter(line=>line.includes('node --test '));assert.equal(tests.length,1);assert.ok(tests[0].endsWith('node --test tests/apadana-thera'+family+'.test.mjs tests/thera'+family+'-client.test.mjs'),'only this independent nine-source wrapper pair runs');
+  assert.match(tests[0],/APADANA_SOURCE_CHECKOUT=\.fixtures\/apadana-pinned APADANA_OFFICIAL_CHECKOUT=\.fixtures\/apadana-pinned VRI_SOURCE_CHECKOUT=\.fixtures\/apadana-vri-pinned/);
+  const browser=commands.split('\n').filter(line=>line.includes('python scripts/web-reader-thera-remaining-check.py '));assert.equal(browser.length,3);for(const line of browser)assert.ok(line.includes('--batch '+batch+' --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned'));
+  assert.ok(browser.some(line=>line.endsWith('--launch-receipt standalone-'+name+'-launch.report.json --report standalone-'+name+'.report.json')&&!line.includes('--a11y')&&!line.includes('--server-dir')));
+  assert.ok(browser.some(line=>line.endsWith('--a11y --launch-receipt standalone-'+name+'-a11y-launch.report.json --report standalone-'+name+'-a11y.report.json')));
+  assert.ok(browser.some(line=>line.includes('--server-dir "$RUNNER_TEMP/'+name+'-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-'+name+'-launch.report.json --report installed-'+name+'.report.json')));
+  assert.ok(steps[3].includes('npm pack --pack-destination "$RUNNER_TEMP/'+name+'-package"'));assert.ok(steps[3].includes('set -- "$RUNNER_TEMP/'+name+'-package/"*.tgz\n          test "$#" -eq 1\n          test -f "$1"'));
+  assert.ok(steps[3].includes('npm install --prefix "$RUNNER_TEMP/'+name+'-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"'));assert.doesNotMatch(steps[3],/tar -x|cp -R|package\/server/);
+  assert.doesNotMatch(commands,/--batch all|--pilot|--mcp-only|--live|curl |wget |continue-on-error|\|\| true/,'each lane executes full selected9 acceptance without duplicating all18');
+ }
+ const harness=readFileSync(new URL('../scripts/web-reader-thera-remaining-check.py',import.meta.url),'utf8');
+ const write=harness.indexOf('write_launch()  # Contemporaneous record exists BEFORE the server subprocess.'),popen=harness.indexOf('server = subprocess.Popen('),launch=harness.indexOf("launch={'status':'launching'");assert.ok(launch>=0&&write>launch&&popen>write);
+ const receipt=harness.slice(launch,write);for(const field of ['server_file_sha256','harness_sha256','helper_sha256','package_sha256','approval_sha256','started_utc','server_argv','server_cwd','package_archive','selected_groups','selected_source_count','source_group_seals'])assert.ok(receipt.includes(field),'before-Popen receipt binds '+field);
+ assert.match(harness,/server_dir\.parent\.parent\.name == 'node_modules'/);assert.match(harness,/runtime_origin[^\n]+isolated-npm-install/);assert.match(harness,/full_batch_acceptance[^\n]+not args\.pilot and not args\.mcp_only/);
+ assert.match(harness,/all18_source_browser_acceptance[^\n]+args\.batch=='all' and not args\.pilot and not args\.mcp_only/,'A/B reports cannot claim all18 browser acceptance');
+});
+
+test('remaining curation binds two independently approved nine-poem packets without inventing a combined source derivation',()=>{
+ const base=new URL('../docs/evidence/apadana/',import.meta.url),approval=JSON.parse(readFileSync(new URL('THERA_REMAINING_APPROVAL.json',base),'utf8'));
+ assert.equal(approval.schema,'reviewed-apadana-intake-v1');assert.equal(approval.status,'approved');assert.equal(approval.base_commit,'cdbefd514164a559bc5aaab631c267f3084e31a6');assert.equal(approval.publisher_revision,'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4');
+ assert.equal(approval.baseline_ids.length,266);assert.equal(new Set(approval.baseline_ids).size,266);assert.equal(approval.source_groups.length,2);assert.deepEqual(approval.source_groups.map(group=>group.batch),['A','B']);
+ assert.equal(Object.hasOwn(approval,'goldens'),false);assert.equal(Object.hasOwn(approval,'independent_normalization'),false,'no fabricated global18 derivation descriptor');
+ const expectedA=[233,234,235,237,238,239,240,241,242].map(n=>'tha-ap'+n),expectedB=Array.from({length:9},(_,i)=>'tha-ap'+(i+253));
+ assert.deepEqual(approval.source_groups.map(group=>group.approved_ids),[expectedA,expectedB]);assert.deepEqual(approval.approved_ids,expectedA.concat(expectedB));assert.deepEqual(approval.expected_profile_ids,approval.baseline_ids.concat(approval.approved_ids));assert.equal(approval.expected_profile_ids.length,284);assert.equal(new Set(approval.expected_profile_ids).size,284);
+ const sealed=descriptor=>{const raw=readFileSync(new URL(descriptor.file,base));assert.equal(createHash('sha256').update(raw).digest('hex'),descriptor.sha256,descriptor.file+' matches its independent seal');return JSON.parse(raw);};
+ sealed(approval.baseline_freeze);sealed(approval.previous_intake);assert.equal(approval.previous_intake.file,'THERA_221_230_APPROVAL.json');assert.equal(approval.previous_intake.sha256,'4ae2cd3fea1c64e323dfa41c15403c33215e90f8834c7ee0a4db708f77f68bed');
+ for(const [index,group]of approval.source_groups.entries()){
+  assert.equal(group.approved_ids.length,9);assert.deepEqual(group.approved_records.map(row=>row.id),group.approved_ids);
+  const golden=sealed(group.goldens),profiles=sealed(group.expected_profiles),links=sealed(group.expected_links),peer=sealed(group.independent_normalization);
+  for(const descriptor of [group.source_approval,group.independent_source_approval,...group.source_reviews,...group.rights,group.normalization_replay,group.normalization_seals,group.copy_policy])sealed(descriptor);
+  const stem=index===0?'231_240':'251_259';assert.equal(group.goldens.file,'THERA_'+stem+'_GOLDENS.json');assert.equal(group.independent_normalization.file,'THERA_'+stem+'_INDEPENDENT_NORMALIZATION.json');
+  assert.equal(group.independent_source_approval.sha256,index===0?'6049ff90fc2b45fe0be400ee6c05aff1e498854aebee3fa06337ec60680f23e6':'3626c99eeb7cdd9ee12f76417159d4d0c974bf97fffdd5b29bb60218df38697d');
+  assert.deepEqual(golden.poems.map(row=>row.id),group.approved_ids);assert.deepEqual(Object.keys(profiles),group.approved_ids);assert.deepEqual(Object.keys(links),group.approved_ids);
+  assert.deepEqual(peer.poems.map(row=>index===0?row.canonical_owner:row.id),group.approved_ids);assert.equal(peer.runtime_approval,false);assert.equal(peer.release_approval,false);
+  for(const row of golden.poems){const id=row.id,proof=peer.poems.find(item=>(index===0?item.canonical_owner:item.id)===id);for(const field of ['raw_sha256','body_sha256','notes_sha256','paratext_sha256'])assert.equal(proof[field],row[field]);assert.equal(proof.root_sha256,row.root.root_sha256);assert.deepEqual(proof.body_paragraph_sha256s,row.body_paragraphs.map(part=>part.sha256));assert.equal(profiles[id].english,undefined);assert.equal(profiles[id].match,undefined);assert.deepEqual(links[id],{...profiles[id],english:profiles[id].title,match:'individually-reviewed-whole-poem'});}
+  assert.equal(golden.totals.poems,9);assert.equal(golden.totals.body_paragraphs,index===0?60:63);assert.equal(golden.totals.poem_notes,index===0?26:34);
+ }
+ assert.equal(approval.before_canon_sha256,'1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32');assert.equal(approval.after_canon_sha256,approval.before_canon_sha256);assert.equal(approval.independent_source_group_count,2);assert.equal(approval.runtime_approval,false);assert.equal(approval.release_approval,false);assert.equal(approval.external_activation_count,0);
+ for(const id of ['tha-ap236','tha-ap262']){assert.ok(approval.held_ids.includes(id));assert.ok(!approval.approved_ids.includes(id));}assert.equal(approval.finite_integration_authority.canonical_changes_authorized,false);assert.equal(approval.finite_integration_authority.new_namespace_authorized,false);
 });

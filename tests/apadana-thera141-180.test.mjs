@@ -114,7 +114,8 @@ test('141–180 intake is exactly independently approved38 and preserves all168 
     assert.ok(Object.isFrozen(p) && Object.isFrozen(p.stanza_layout));
   }
   assert.equal(approval.expected_profile_ids.includes('tha-ap223'), false, 'Publisher221 remains outside this frozen historical source cohort');
-  for (const uid of ['tha-ap72', 'tha-ap142', 'tha-ap160', 'tha-ap161', 'tha-ap12', 'tha-ap233']) assert.equal(APADANA_PROFILES[uid], undefined);
+  assert.equal(approval.expected_profile_ids.includes('tha-ap233'), false, 'Publisher231 remains outside this frozen historical cohort');
+  for (const uid of ['tha-ap72', 'tha-ap142', 'tha-ap160', 'tha-ap161', 'tha-ap12', 'tha-ap236']) assert.equal(APADANA_PROFILES[uid], undefined);
   for (const row of rights) { assert.equal(row.license, 'CC BY-NC-SA 4.0'); assert.equal(row.live_only, true); assert.equal(row.media_fetches, 0); }
 });
 
@@ -175,7 +176,7 @@ test('source-enabled unreviewed wording, profile fields, layout shapes and held 
     for (const patch of [{ id: 'tha-ap160' }, { poem: 158 }, { stanza_layout: [] }, { note_numbers: [999] }, { raw_sha256: digest(raw + '\n') }, { chapter_summary: {} }, { publisher_divisions: [] }, { editorial_gap: {} }]) assert.throws(() => parseTheraApadana(raw, { ...p, ...patch }), /differs/);
   }
   let calls = 0; globalThis.fetch = async () => { calls++; throw Error('Held source transport'); };
-  for (const poem of ['010', '070', '140', '158', '159', '231', '570']) {
+  for (const poem of ['010', '070', '140', '158', '159', '234', '570']) {
     const url = `https://raw.githubusercontent.com/apadana-translation/apadana-site/${APADANA_COMMIT}/src/_poems/chapter-3/poem-${poem}.md`;
     assert.equal(isApadanaRawUrl(url), false); await assert.rejects(fetchPublic(url, { json: false }), /outside the supported public sources/);
   }

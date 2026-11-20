@@ -1,0 +1,132 @@
+{
+  "status": "APPROVE_NINE_GROUP_B_SOURCE_AND_FINITE_NORMALIZATION_SCOPES_ONLY",
+  "baseline": "cdbefd514164a559bc5aaab631c267f3084e31a6",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "approved_ids": [
+    "tha-ap253",
+    "tha-ap254",
+    "tha-ap255",
+    "tha-ap256",
+    "tha-ap257",
+    "tha-ap258",
+    "tha-ap259",
+    "tha-ap260",
+    "tha-ap261"
+  ],
+  "approved_publisher_poems": [
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259
+  ],
+  "goldens_sha256": "6f217a19e96a6d171a4c3a171778f50bc1e973c8c74948b7751a2b9ab5cc6a2a",
+  "expected_profiles_sha256": "dcb7eb11ee17006331bcbc6333e689feb8f01f44666cbb858896ad0cd3ba7332",
+  "expected_links_sha256": "e81b97b665cdec6157eb91a31d7c3857e4f03d38d53523f70ab33d927856a227",
+  "independent_normalization_sha256": "7986d346426dafd578715a66bdc96d2a91538f9f718936a54eebd0c8460b8502",
+  "comparison_sha256": "9363d5470d7b03faf2969042497ef3108e3768a4fcc1156c6f8da004f210e3b6",
+  "originals_read_before_derivation": true,
+  "own_derivation_sealed_before_author_inspection": true,
+  "all_exact_normalized_strings_and_notes_match": true,
+  "metadata_phase_updates_explicitly_reviewed": 3,
+  "narrative_identity_proof_sha256": "beac3b3d140f40dc91a43704e22f101a3afd87b1890b9b6f263bb036a1fb8d94",
+  "rights": {
+    "license": "CC BY-NC-SA 4.0",
+    "specific_over_generic": true,
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "notices": [
+      {
+        "path": "LICENSE.md",
+        "bytes": 19093,
+        "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+        "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+      },
+      {
+        "path": "src/_pages/about.md",
+        "bytes": 12404,
+        "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+        "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+      },
+      {
+        "path": "src/_includes/site/footer.njk",
+        "bytes": 555,
+        "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+        "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+      },
+      {
+        "path": "src/_includes/layouts/epub-metadata.xml",
+        "bytes": 603,
+        "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+        "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+      },
+      {
+        "path": "src/_data/site.json",
+        "bytes": 659,
+        "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+        "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+      },
+      {
+        "path": "src/_poems/_poems.json",
+        "bytes": 135,
+        "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+        "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+      },
+      {
+        "path": "src/_poems/chapter-3/chapter-3.json",
+        "bytes": 27,
+        "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+        "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0"
+      }
+    ],
+    "full_notices_attribution_revision_changes_required": true,
+    "noncommercial_sharealike_required": true,
+    "live_only_bodies_notes_apparatus": true,
+    "no_media_approval": true
+  },
+  "held_scope_exclusions": [
+    {
+      "publisher_poem": 260,
+      "canonical_owner": "tha-ap262",
+      "reason": "Malformed duplicate Pandoc C/C plus literal HTML display in chapter summary; note5 belongs only to held summary, no normalization or activation approved."
+    },
+    {
+      "publisher_poem": 234,
+      "canonical_owner": "tha-ap236",
+      "reason": "Separate identity exception outside scope."
+    },
+    {
+      "canonical_owner": "tha-ap3",
+      "reason": "Note-only XML omission outside scope; retained in whole XML replay, no repair."
+    }
+  ],
+  "scope": "Nine complete publisher-edition poems251–259 only; no line-complete VRI or word-equivalence claim. Exact owner/token/count presentation only; no generic HTML, body/note editing, canonical repair, held260 activation or arbitrary partial-page content authentication.",
+  "totals": {
+    "poems": 9,
+    "body_paragraphs": 63,
+    "stanza_entries": 36,
+    "printed_local_labels": 36,
+    "poem_notes": 34,
+    "prefaces": 1,
+    "preface_notes": 0,
+    "summaries": 0,
+    "paired_displays": 14
+  },
+  "source_approval": true,
+  "normalization_approval": true,
+  "external_activations": 0,
+  "runtime_approval": false,
+  "release_approval": false,
+  "physical_device_human_assistive_or_specialist_acceptance": false,
+  "remaining_gates": [
+    "Parent finite curation and both source groups approval before integration",
+    "Runtime/source/cache/citation/note/reader safeguards and regressions",
+    "Package/source-rights/no-English-bundling/strict-widget/browser gates",
+    "Exact-commit CI and old validation reconciliation before authorized dev-only publication"
+  ]
+}

@@ -70,6 +70,55 @@ export function parseTheraApadana(raw, profile) {
   if (at < 0 && (!['tha-ap30', 'tha-ap88'].includes(profile.id) || profile.note_count !== 0 || profile.note_numbers.length)) fail();
   let poem = at < 0 ? rest : rest.slice(0, at).trim();
   const entries = [...(at < 0 ? '' : rest.slice(at)).matchAll(/^\[\^(\d+)\]:[ \t]*([^]*?)(?=^\[\^\d+\]:|(?![^]))/gm)];
+  // These new exact artifacts use only the established Pandoc display syntax.
+  // Bind every reviewed pair to its source paragraph or note before rendering.
+  if (['tha-ap238', 'tha-ap242'].includes(profile.id)) {
+    const upper = '[C]{.diacritics data-state=on}[Ch]{.no-diacritics data-state=off}';
+    const lower = '[c]{.diacritics data-state=on}[ch]{.no-diacritics data-state=off}';
+    const checkPairs = (value, expected) => {
+      let remaining = value;
+      for (const token of expected) {
+        if (remaining.split(token).length !== 2) fail();
+        remaining = remaining.replace(token, '');
+      }
+      if (/\{\.(?:no-)?diacritics\b/.test(remaining)) fail();
+    };
+    if (profile.id === 'tha-ap238') {
+      const paragraphs = poem.split('\n\n');
+      if (paragraphs.length !== 7) fail();
+      for (const [i, paragraph] of paragraphs.entries()) checkPairs(paragraph, i === 3 ? [upper] : []);
+    } else checkPairs(poem, []);
+    for (const [i, entry] of entries.entries()) {
+      checkPairs(entry[2], i === 1 ? (profile.id === 'tha-ap238' ? [lower, upper] : [lower]) : []);
+    }
+  }
+  // Publisher253/254/256 have these fourteen exact source-owned display pairs.
+  // Preserve the reviewed heading/colophon and stanza coordinates, including
+  // duplicate lower-case pairs inside individual notes; accept no extra pair.
+  if (['tha-ap255', 'tha-ap256', 'tha-ap258'].includes(profile.id)) {
+    const upper = '[C]{.diacritics data-state=on}[Ch]{.no-diacritics data-state=off}';
+    const lower = '[c]{.diacritics data-state=on}[ch]{.no-diacritics data-state=off}';
+    const checkPairs = (value, expected) => {
+      let remaining = value;
+      for (const [token, count] of expected) {
+        if (remaining.split(token).length !== count + 1) fail();
+        remaining = remaining.split(token).join('');
+      }
+      if (/\{\.(?:no-)?diacritics\b/.test(remaining)) fail();
+    };
+    const paragraphs = poem.split('\n\n');
+    if (paragraphs.length !== (profile.id === 'tha-ap258' ? 6 : 7)) fail();
+    for (const [i, paragraph] of paragraphs.entries()) {
+      const expected = profile.id === 'tha-ap258' ? (i === 1 ? [[upper, 1]] : [])
+        : [0, 5, 6].includes(i) ? [[profile.id === 'tha-ap255' ? upper : lower, 1]] : [];
+      checkPairs(paragraph, expected);
+    }
+    for (const [i, entry] of entries.entries()) {
+      const expected = profile.id === 'tha-ap255' ? (i === 0 ? [[upper, 1], [lower, 2]] : i === 2 ? [[lower, 2]] : [])
+        : profile.id === 'tha-ap256' && i === 0 ? [[upper, 1], [lower, 1]] : [];
+      checkPairs(entry[2], expected);
+    }
+  }
   // Publisher226 alone owns these two exact paired note displays. The existing
   // presentation rule keeps the state-on spelling; no new grammar is accepted.
   const pairedNotes = profile.id === 'tha-ap228' ? {
@@ -153,7 +202,7 @@ export function parseTheraApadana(raw, profile) {
   }
   let chapter_summary;
   if (profile.chapter_summary) {
-    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182', 'tha-ap192', 'tha-ap202', 'tha-ap212', 'tha-ap222', 'tha-ap252', 'tha-ap232'].includes(profile.id)) fail();
+    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182', 'tha-ap192', 'tha-ap202', 'tha-ap212', 'tha-ap222', 'tha-ap252', 'tha-ap232', 'tha-ap242'].includes(profile.id)) fail();
     // Publisher230 joins its summary heading to the verse paragraph. Keep the
     // exact original hard break, with no synthetic blank paragraph after it.
     const marker = profile.id === 'tha-ap232' ? '\n\nThe Summary:  \n' : '\n\nThe Summary:\n\n';
@@ -169,7 +218,7 @@ export function parseTheraApadana(raw, profile) {
   if (new Set(owned).size !== owned.length || owned.length !== notes.length || notes.some(n => !owned.includes(n.number))) fail();
   // Publisher101 alone uses ## for its poem heading, beside a separate ## preface.
   const headings = [...poem.matchAll(profile.id === 'tha-ap103' ? /^## \\\[101\. /gm : /^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223'].includes(profile.id) !== (split > 0)) fail();
+  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253'].includes(profile.id) !== (split > 0)) fail();
   const preface = poem.slice(0, split), body = poem.slice(split); refs(preface, []); refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text.split(/\n\n+/);
   const joinedColophons = ['tha-ap134', 'tha-ap184'].includes(profile.id);

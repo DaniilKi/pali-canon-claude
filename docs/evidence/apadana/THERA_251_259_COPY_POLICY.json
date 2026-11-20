@@ -1,0 +1,38 @@
+{
+  "metadata_only": [
+    "GOLDENS.json",
+    "EXPECTED_PROFILES.json",
+    "EXPECTED_LINKS.json",
+    "SOURCE_APPROVAL.json",
+    "NORMALIZATION_COMPARISON.json",
+    "RIGHTS_REVIEW.json",
+    "COPY_POLICY.json",
+    "FILE_SHA256S.json",
+    "README.md",
+    "REPLAY_VALIDATION.json",
+    "BASELINE_266_METADATA.json"
+  ],
+  "stdlib_script": "replay.py",
+  "must_never_copy_into_repository_or_package": [
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json",
+    "raw original Markdown bodies/notes/prefaces/apparatus",
+    "__pycache__",
+    "author_replay.py",
+    "finish_packet.py"
+  ],
+  "source_activation_count": 0,
+  "runtime_release_approval": false,
+  "approved_candidate_ids": [
+    "tha-ap253",
+    "tha-ap254",
+    "tha-ap255",
+    "tha-ap256",
+    "tha-ap257",
+    "tha-ap258",
+    "tha-ap259",
+    "tha-ap260",
+    "tha-ap261"
+  ],
+  "copy_requires_separate_independent_GroupB_approval_and_parent_GO": true,
+  "do_not_overwrite_old_packets": true
+}
