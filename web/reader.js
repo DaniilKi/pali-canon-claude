@@ -243,10 +243,10 @@ function chapterSummary(data, target, level) {
 function collectionSummary(data, target, level) {
   if (!data.collection_summary) return; // Separately validated ownership; never part of poem pagination.
   const summary = data.collection_summary, section = el('section');
-  const firstHundred = summary.parent_id === 'tha-ap102', heading = firstHundred ? 'Therā Apadāna first-hundred chapter summary and colophons · not poem text' : 'Canonical collection summary · not poem text';
+  const firstHundred = summary.parent_id === 'tha-ap102', secondHundred = summary.parent_id === 'tha-ap202', heading = firstHundred ? 'Therā Apadāna first-hundred chapter summary and colophons · not poem text' : secondHundred ? 'Therā Apadāna second-hundred chapter summary and colophons · not poem text' : 'Canonical collection summary · not poem text';
   section.setAttribute('aria-label', heading);
   section.append(el('h' + level, heading), el('p', summary.text, 'translation'));
-  section.append(el('p', firstHundred ? 'This summary covers the publisher’s first hundred Therā poems and first ten chapters. It does not mark the end of the Therā Apadāna. Original counts and titles are preserved; they are not a measure of indexed translation coverage. It is separate from the poem and chapter summary, and is not poem quotation evidence.' : 'The publisher’s collection summary is separate from this poem and its chapter summary. It is not poem quotation evidence.'));
+  section.append(el('p', firstHundred ? 'This summary covers the publisher’s first hundred Therā poems and first ten chapters. It does not mark the end of the Therā Apadāna. Original counts and titles are preserved; they are not a measure of indexed translation coverage. It is separate from the poem and chapter summary, and is not poem quotation evidence.' : secondHundred ? 'This summary covers the publisher’s second hundred Therā poems and chapters eleven to twenty. Its stated 666 is the publisher’s original edition statement, not a validated corpus total. It does not mark the end of all Therā poems. It is separate from the poem and chapter summary, and is not poem quotation evidence.' : 'The publisher’s collection summary is separate from this poem and its chapter summary. It is not poem quotation evidence.'));
   section.append(el('h' + level, 'Collection summary notes · editorial, not poem notes'));
   const list = el('ol');
   for (const note of summary.translator_notes) { const item = el('li'); item.value = note.number; item.append(el('p', note.text, 'translator-note')); list.append(item); }

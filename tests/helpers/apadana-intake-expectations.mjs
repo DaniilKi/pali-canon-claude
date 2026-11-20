@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 
 const historical=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
-const intake=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_141_180_APPROVAL.json',import.meta.url),'utf8'));
+const intake=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_181_220_APPROVAL.json',import.meta.url),'utf8'));
 assert.equal(intake.schema,'reviewed-apadana-intake-v1');
 assert.equal(intake.status,'approved');
 assert.equal(intake.publisher_revision,'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4');
@@ -14,6 +14,7 @@ assert.deepEqual(records.map(row=>row.id),intake.expected_profile_ids);
 assert.ok(records.every(row=>/^(?:thi|tha)-ap\d+$/.test(row.id)&&Number.isInteger(row.poem)&&row.poem>0&&['chapter-3','chapter-4'].includes(row.publisher_chapter)));
 
 export const CURRENT_APADANA_IDS=Object.freeze([...intake.expected_profile_ids]);
+export const CURRENT_APADANA_RECORDS=Object.freeze(records.map(row=>Object.freeze({...row})));
 export const CURRENT_THERA_IDS=Object.freeze(records.filter(row=>row.publisher_chapter==='chapter-3').map(row=>row.id));
 export const BASELINE_APADANA_IDS=Object.freeze([...historical.baseline_ids]);
 /** Select only immutable pre-D250 records, using their reviewed publisher metadata. */

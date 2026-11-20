@@ -1,7 +1,7 @@
 /** Finite, live-only Walters/Whitman Apadāna. No translated bodies are bundled. */
 import { fetchPublic } from './http.mjs';
 import { digest, plainMarkdown } from './apadana-presentation.mjs';
-import { parseTheraApadana, theraMultiLabelQuotation } from './apadana-thera.mjs';
+import { parseTheraApadana, theraMultiLabelQuotation, theraJoinedHeadingStanza } from './apadana-thera.mjs';
 import { THERA_APADANA_PROFILES } from './apadana-thera-profiles.mjs';
 export { digest, plainMarkdown };
 import { APADANA_PROFILES, APADANA_COMMIT, APADANA_LICENSE, APADANA_TRANSLATOR, APADANA_LICENSE_URL } from './apadana-profiles.mjs';
@@ -188,7 +188,7 @@ export function validateLink(link, id, unit, book) {
   }
   if (['partial_scope', 'shared_scope', 'section', 'parts'].some(key => Object.hasOwn(link, key))) fail();
   for (const key of ['title', 'reference', 'mapping_notes']) if (JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
-  for (const key of ['publisher_chapter', 'index_revision', 'publisher_verse_labels', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions', 'editorial_gap']) {
+  for (const key of ['publisher_chapter', 'index_revision', 'publisher_verse_labels', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions', 'editorial_gap', 'exact_ref_url', 'colophons_share_physical_paragraph']) {
     if (Object.hasOwn(link, key) !== Object.hasOwn(profile, key) || JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
   }
   if (link.english !== undefined && link.english !== profile.title) fail();
@@ -211,9 +211,11 @@ export function quotationText(result) {
       || result.whole_unit_coverage === false) fail();
     if (digest(result.text || '') !== profile.body_sha256) fail();
     if (profile.stanza_layout) {
+      if (profile.id === 'tha-ap210' && ['paragraph', 'first_line', 'stanza_layout'].some(key => Object.hasOwn(result, key))) fail();
       const paragraphs = result.text.split(/\n\n+/);
       return profile.stanza_layout.map((stanza, i) => {
-        const text = paragraphs[i + 1].replace(/\[Note \d+\]/g, '').trim();
+        const entry = profile.id === 'tha-ap210' ? theraJoinedHeadingStanza(paragraphs, stanza, profile, i) : paragraphs[i + 1];
+        const text = entry.replace(/\[Note \d+\]/g, '').trim();
         if (stanza.finite_multi_label) return theraMultiLabelQuotation(text, stanza, profile, i);
         if (!stanza.suffix || !text.endsWith(stanza.suffix)) fail();
         return text.slice(0, -stanza.suffix.length).trim();

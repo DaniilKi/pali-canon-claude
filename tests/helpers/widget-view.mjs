@@ -3,9 +3,9 @@ import { runInNewContext } from 'node:vm';
 import { WIDGET_HTML } from '../../src/chatgpt-widget.mjs';
 
 export class Element {
-  constructor(tag = '') { this.tagName = tag; this.children = []; this.value = ''; this.attributes = {}; this.listeners = {}; }
-  set textContent(value) { this.value = String(value); this.children = []; }
-  get textContent() { return this.value + this.children.map(c => c.textContent).join(''); }
+  constructor(tag = '') { this.tagName = tag; this.children = []; this.value = ''; this._text = ''; this.attributes = {}; this.listeners = {}; }
+  set textContent(value) { this._text = String(value); this.children = []; }
+  get textContent() { return this._text + this.children.map(c => c.textContent).join(''); }
   get firstChild() { return this.children[0]; }
   get lastChild() { return this.children.at(-1); }
   appendChild(child) { this.children.push(child); return child; }

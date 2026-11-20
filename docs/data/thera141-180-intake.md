@@ -33,3 +33,5 @@ Two bounded CI groups retain every prior57 job and add source tests, independent
 Expected whole-link totals are2,789; directly indexed texts1,685 and2,108 with inherited verse links; grouped member-aware counts1,659/2,082. Partial22, shared12/110subjects and daily1288 remain unchanged.
 
 The [physical-device and assistive-technology matrix](../qa/manual-device-accessibility-matrix.md) is prepared for a later human pass and remains entirely NOT RUN. Automated viewports, simulated hosts, codepoint checks and axe do not provide physical-device, signed-in-host, human assistive or specialist acceptance. Runtime tests use pinned fixtures, not a live upstream availability certification.
+
+The later [D253 intake](thera181-220-intake.md) completes the older 168-profile cached-note integrity follow-up described above; this document retains the original D252 scope and counts.

@@ -1,14 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {parseApadana} from '../src/apadana.mjs';
 import { APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATOR, APADANA_PROFILES } from '../src/apadana-profiles.mjs';
 import { translatorNotes } from '../web/milinda-sources.mjs';
-import { apadanaId, scopeDescriptor, validateChapterSummary, validatePublisherDivisions, validateEnglishPage } from '../web/translation-policy.mjs';
+import { apadanaId, validateApadanaChoice, scopeDescriptor, validateChapterSummary, validatePublisherDivisions, validateEnglishPage } from '../web/translation-policy.mjs';
 import { comparisonChoices } from '../web/translation-comparison.mjs';
 
 const clone = value => structuredClone(value);
 const emptySha = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 const owned = numbers => numbers.map(number => ({number, text: 'Synthetic editorial note ' + number}));
 const withContent = descriptor => ({...clone(descriptor), text: 'Synthetic separately owned text', translator_notes: owned(descriptor.note_numbers)});
+const checkout = process.env.APADANA_SOURCE_CHECKOUT;
+let actualSource = false;
+function sourceTest(name, fn) { test('source-backed ' + name, {skip: !checkout}, async () => { actualSource = true; try { await fn(); } finally { actualSource = false; } }); }
 function fixture(n) {
   const uid = 'thi-ap' + n, p = APADANA_PROFILES[uid];
   const choice = {translation_id: apadanaId(uid), translator: APADANA_TRANSLATOR, license: APADANA_LICENSE, translation_revision: APADANA_COMMIT, url: p.url};
@@ -21,10 +26,14 @@ function fixture(n) {
     translator_notes: owned(p.note_numbers || Array.from({length: p.note_count}, (_, i) => i + 1)), mapping_notes: [...p.mapping_notes], notes: [...p.mapping_notes], next_offset: null};
   if (p.chapter_summary) data.chapter_summary = withContent(p.chapter_summary);
   if (p.publisher_divisions) data.publisher_divisions = p.publisher_divisions.map(withContent);
+  if (actualSource) {
+    Object.assign(data, parseApadana(readFileSync(`${checkout}/src/_poems/chapter-4/poem-${String(p.poem).padStart(3, '0')}.md`, 'utf8'), p));
+    args.limit = data.limit = 30000; assert.ok(data.text.length <= data.limit);
+  }
   return {uid, choice, args, data, context: {uid, choices: [choice], accepted: null}};
 }
 
-test('all twenty exact poem choices and pages retain finite metadata in individual and comparison access', () => {
+sourceTest('all twenty exact poem choices and pages retain finite metadata in individual and comparison access', () => {
   for (let n = 1; n <= 20; n++) {
     const {uid, choice, args, data, context} = fixture(n);
     assert.equal(scopeDescriptor(choice, uid), null, uid);
@@ -34,7 +43,7 @@ test('all twenty exact poem choices and pages retain finite metadata in individu
   }
 });
 
-test('publisher prefaces follow pinned presence for poems1 and11 only', () => {
+sourceTest('publisher prefaces follow pinned presence for poems1 and11 only', () => {
   for (let n = 1; n <= 20; n++) {
     const {data, args, context} = fixture(n);
     const expected = n === 1 || n === 11;
@@ -75,7 +84,7 @@ test('large/sparse note permission belongs only to exact known poem IDs; generic
   assert.throws(() => translatorNotes({...fixture(1).data, translator_notes: []}), /translator-note/);
 });
 
-test('poem17 publisher division has exact descriptor and separately owned note21', () => {
+sourceTest('poem17 publisher division has exact descriptor and separately owned note21', () => {
   const {uid, choice, data, args, context} = fixture(17);
   validatePublisherDivisions(choice, uid); validatePublisherDivisions(data, uid, true);
   assert.deepEqual(data.publisher_divisions[0].translator_notes.map(n => n.number), [21]);
@@ -107,7 +116,7 @@ test('poem17 publisher division has exact descriptor and separately owned note21
   }
 });
 
-test('both chapter summaries preserve their original parent refs and own note8 or27', () => {
+sourceTest('both chapter summaries preserve their original parent refs and own note8 or27', () => {
   for (const [n, number] of [[10, 8], [20, 27]]) {
     const {uid, choice, data, args, context} = fixture(n);
     validateChapterSummary(choice, uid); validateChapterSummary(data, uid, true);
@@ -134,7 +143,7 @@ test('ordinary providers cannot introduce even empty Apadāna division metadata'
   }
 });
 
-test('continuation keeps exact edition identity and revalidates summary/division ownership', () => {
+sourceTest('continuation keeps exact edition identity and revalidates summary/division ownership', () => {
   for (const n of [1, 10, 11, 17, 18, 19, 20]) {
     const {data, args, context} = fixture(n);
     const next = {...args, offset: 500, prefix_sha256: 'a'.repeat(64)};
@@ -147,5 +156,55 @@ test('continuation keeps exact edition identity and revalidates summary/division
     assert.throws(() => validateEnglishPage({...data, offset: 500, prefix_sha256: 'b'.repeat(64)}, next, context), /pinned Apadāna/);
     if (data.publisher_divisions) assert.throws(() => validateEnglishPage({...data, offset: 500, prefix_sha256: next.prefix_sha256, publisher_divisions: []}, next, context), /publisher-division/);
     if (data.chapter_summary) assert.throws(() => validateEnglishPage({...data, offset: 500, prefix_sha256: next.prefix_sha256, chapter_summary: fixture(n === 10 ? 20 : 10).data.chapter_summary}, next, context), /chapter-summary/);
+  }
+});
+
+// Metadata contracts run without a source checkout. Invented note wording is
+// deliberately refused; complete content positives live in the source phase.
+test('all twenty historical metadata choices and invented-note refusal remain unconditional', () => {
+  for (let n = 1; n <= 20; n++) {
+    const f = fixture(n);
+    assert.equal(scopeDescriptor(f.choice, f.uid), null, f.uid);
+    assert.deepEqual(comparisonChoices([f.choice], f.uid), [f.choice]);
+    assert.doesNotThrow(() => validateApadanaChoice(f.choice, f.uid, false));
+    assert.deepEqual(translatorNotes(f.data), f.data.translator_notes);
+    assert.equal(Boolean(f.data.publisher_paratext), n === 1 || n === 11);
+    assert.throws(() => validateEnglishPage(f.data, f.args, f.context), /poem-note content/);
+  }
+});
+test('original division and chapter metadata mutants stay unconditional and scope-specific', () => {
+  const f = fixture(17);
+  validatePublisherDivisions(f.choice, f.uid); validatePublisherDivisions(f.data, f.uid, true);
+  assert.deepEqual(f.data.publisher_divisions[0].translator_notes.map(n => n.number), [21]);
+  for (const mutate of [
+    v => {delete v.publisher_divisions;}, v => {v.publisher_divisions = null;}, v => {v.publisher_divisions = [];},
+    v => {v.publisher_divisions.push(clone(v.publisher_divisions[0]));}, v => {v.publisher_divisions[0].before_local_label = '21';},
+    v => {v.publisher_divisions[0].before_publisher_label = '247';}, v => {v.publisher_divisions[0].body_sha256 = 'f'.repeat(64);},
+    v => {v.publisher_divisions[0].notes_sha256 = 'f'.repeat(64);}, v => {v.publisher_divisions[0].note_numbers = [22];},
+    v => {v.publisher_divisions[0].kind = 'canonical_chapter_summary';}, v => {v.publisher_divisions[0].extra = true;},
+  ]) {
+    const page = clone(f.data); mutate(page); assert.throws(() => validatePublisherDivisions(page, f.uid, true), /publisher-division/);
+    const choice = clone(f.choice); mutate(choice); assert.throws(() => scopeDescriptor(choice, f.uid), /publisher-division/);
+  }
+  for (const patch of [{text: ''}, {text: 'x'.repeat(50001)}, {translator_notes: []}, {translator_notes: [{number: 22, text: 'Foreign poem note'}]}, {translator_notes: [{number: 21, text: 'Note', extra: true}]}, {translator_notes: [{number: 21, text: 'x'.repeat(50001)}]}]) {
+    const changed = clone(f.data); Object.assign(changed.publisher_divisions[0], patch);
+    assert.throws(() => validatePublisherDivisions(changed, f.uid, true), /publisher-division/);
+  }
+  assert.throws(() => scopeDescriptor({...f.choice, publisher_divisions: f.data.publisher_divisions}, f.uid), /publisher-division/);
+  for (const n of [1, 10, 11, 18, 20]) {
+    const other = fixture(n);
+    assert.throws(() => scopeDescriptor({...other.choice, publisher_divisions: f.choice.publisher_divisions}, other.uid), /owner changed/);
+    assert.throws(() => validatePublisherDivisions({...other.data, publisher_divisions: f.data.publisher_divisions}, other.uid, true), /owner changed/);
+  }
+  for (const [n, number] of [[10, 8], [20, 27]]) {
+    const x = fixture(n); validateChapterSummary(x.choice, x.uid); validateChapterSummary(x.data, x.uid, true);
+    assert.deepEqual(x.data.chapter_summary.translator_notes.map(n => n.number), [number]);
+    for (const patch of [
+      {parent_id: 'thi-ap' + (n === 10 ? 20 : 10)}, {first_ref: x.uid + '/1'}, {root_start: 0}, {root_end: 1},
+      {note_numbers: [number === 8 ? 27 : 8]}, {translator_notes: [{number: number === 8 ? 27 : 8, text: 'Reassigned'}]},
+      {translator_notes: [{number, text: 'Note', extra: true}]}, {translator_notes: [{number, text: ''}]}, {unexpected: true},
+    ]) { const changed = clone(x.data); Object.assign(changed.chapter_summary, patch); assert.throws(() => validateChapterSummary(changed, x.uid, true), /chapter-summary/); }
+    assert.throws(() => scopeDescriptor({...x.choice, chapter_summary: x.data.chapter_summary}, x.uid), /chapter-summary/);
+    assert.throws(() => validateChapterSummary({...x.data, chapter_summary: undefined}, x.uid, true), /chapter-summary/);
   }
 });

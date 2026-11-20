@@ -381,7 +381,10 @@ def main():
             server.terminate(); server.wait(timeout=10)
 
 
-def browser_checks(args,base,rows,expected,whole,metadata,widgets,html,patches,checks,scans,reviewed_order,summary_origins):
+def browser_checks(args,base,rows,expected,whole,metadata,widgets,html,patches,checks,scans,reviewed_order,summary_origins,*,scope_captions=None):
+    scope_captions = {} if scope_captions is None else scope_captions
+    assert isinstance(scope_captions,dict) and not set(scope_captions)-{('tha-ap202','collection_summary')}
+    assert all(isinstance(value,str) and value.endswith(' · not poem text') for value in scope_captions.values())
     with sync_playwright() as pw:
         browser = pw.chromium.launch(executable_path=os.environ.get('PALI_BROWSER','/usr/bin/chromium'),headless=True)
         for width in (390,1280):
@@ -474,6 +477,7 @@ def browser_checks(args,base,rows,expected,whole,metadata,widgets,html,patches,c
                             contracts = contracts if isinstance(contracts,list) else [contracts]
                             if key == 'collection_summary' and uid == 'tha-ap102':
                                 caption = 'Therā Apadāna first-hundred chapter summary and colophons · not poem text'
+                            caption = scope_captions.get((uid,key),caption)
                             regions = page.get_by_role('region',name=caption,exact=True)
                             assert regions.count() == len(contracts)
                             for region,c in zip(regions.all(),contracts,strict=True):
@@ -535,13 +539,16 @@ def browser_checks(args,base,rows,expected,whole,metadata,widgets,html,patches,c
                 checks.append({'width':width,'theme':theme,'check':'all selected actual source reader bodies/notes/apparatus, revision navigation, single-source comparison refusal, cached drift refusal, synthetic local drafts/reload/export','sources':len(expected),'mutations':len(patches)})
                 context.close()
                 engine.check_widgets(browser,html,widgets,patches,width,theme,checks)
-                widget_apparatus(browser,html,widgets,width,theme,checks)
+                widget_apparatus(browser,html,widgets,width,theme,checks,scope_captions=scope_captions)
                 print(compact({'phase':'viewport-pass','width':width,'theme':theme}),file=sys.stderr,flush=True)
         browser.close()
 
 
-def widget_apparatus(browser,html,widgets,width,theme,checks):
+def widget_apparatus(browser,html,widgets,width,theme,checks,*,scope_captions=None):
     """Narrow positive apparatus ownership check supplementing the D249 engine."""
+    scope_captions = {} if scope_captions is None else scope_captions
+    assert isinstance(scope_captions,dict) and not set(scope_captions)-{('tha-ap202','collection_summary')}
+    assert all(isinstance(value,str) and value.endswith(' · not poem text') for value in scope_captions.values())
     selected = {u:w for u,w in widgets.items() if any(w['english'].get(k) for k in ('publisher_paratext','chapter_summary','collection_summary','publisher_divisions','editorial_gap'))}
     if not selected:return
     for bridge in ('Apps SDK','MCP Apps'):
@@ -571,6 +578,7 @@ def widget_apparatus(browser,html,widgets,width,theme,checks):
                 scopes = scopes if isinstance(scopes,list) else [scopes]
                 if key == 'collection_summary' and uid == 'tha-ap102':
                     caption = 'Therā Apadāna first-hundred chapter summary and colophons · not poem text'
+                caption = scope_captions.get((uid,key),caption)
                 regions = frame.get_by_role('region',name=caption,exact=True)
                 expect(regions).to_have_count(len(scopes))
                 for region,scope in zip(regions.all(),scopes,strict=True):

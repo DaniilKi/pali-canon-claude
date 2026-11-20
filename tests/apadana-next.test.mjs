@@ -65,13 +65,26 @@ test('actual API long continuations and widget preserve sparse notes and source-
     if(n===17)assert.equal(widget.english.publisher_divisions[0].translator_notes[0].number,21);
   }
   const before=fetches.length;await assert.rejects(english.translation(canon.resolve('thi-ap12').unit,id(17)),/not linked/);assert.equal(fetches.length,before);
-  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v27.html');
+  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v28.html');
 });
 
-test('embedded reader executes sparse note and publisher division ownership guards',async()=>{
-  const vm=await import('node:vm');const sandbox=vm.createContext({});vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('),WIDGET_HTML.indexOf('  function render(d) {'))+';globalThis.check=checkedApadana;',sandbox);
+test('source-enabled embedded reader executes sparse note and publisher division ownership guards',{skip:!checkout},async()=>{
+  const vm=await import('node:vm');const sandbox=vm.createContext({TextEncoder});vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('),WIDGET_HTML.indexOf('  function render(d) {'))+';globalThis.check=checkedApadana;',sandbox);
   const p=APADANA_PROFILES['thi-ap17'],english={...p,translation_id:id(17),fetched_url:p.raw_url,license_url:'https://creativecommons.org/licenses/by-nc-sa/4.0/',text:'Synthetic poem',attribution:'Synthetic attribution',changes:'Synthetic extraction',notes:[...p.mapping_notes],publisher_paratext:'',translator_notes:p.note_numbers.map(number=>({number,text:'Synthetic note'})),publisher_divisions:p.publisher_divisions.map(d=>({...d,text:'Synthetic division',translator_notes:[{number:21,text:'Synthetic division note'}]}))};
+  const invented={text_id:p.id,english};assert.equal(sandbox.check(invented).english,null);
+  Object.assign(english,parseApadana(source(p.poem),p));
   const value={text_id:p.id,english};assert.equal(sandbox.check(value),value);
   for(const patch of [{publisher_divisions:undefined},{publisher_divisions:[{...english.publisher_divisions[0],before_local_label:'23'}]},{publisher_divisions:[{...english.publisher_divisions[0],translator_notes:[{number:1,text:'Renumbered'}]}]},{translator_notes:Array.from({length:119},(_,i)=>({number:i+1,text:'Renumbered'}))}])assert.equal(sandbox.check({...value,english:{...english,...patch}}).english,null);
+  assert.equal(sandbox.check({text_id:'mn1',english:{source:'dhammatalks.org',translation_id:'dt:MN/MN1',publisher_divisions:[]}}).english,null);
+});
+
+test('embedded sparse poem metadata remains finite and invented poem-note content refuses offline',async()=>{
+  const vm=await import('node:vm'),sandbox=vm.createContext({TextEncoder});
+  vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('),WIDGET_HTML.indexOf('  function render(d) {'))+';globalThis.check=checkedApadana;',sandbox);
+  const p=APADANA_PROFILES['thi-ap17'];
+  assert.deepEqual(p.note_numbers,[...Array.from({length:20},(_,i)=>i+1),...Array.from({length:99},(_,i)=>i+22)]);
+  assert.deepEqual(p.publisher_divisions[0].note_numbers,[21]);
+  const english={...p,translation_id:id(17),fetched_url:p.raw_url,license_url:'https://creativecommons.org/licenses/by-nc-sa/4.0/',text:'Synthetic poem',attribution:'Synthetic attribution',changes:'Synthetic extraction',notes:[...p.mapping_notes],publisher_paratext:'',translator_notes:p.note_numbers.map(number=>({number,text:'Synthetic note'}))};
+  assert.equal(sandbox.check({text_id:p.id,english}).english,null);
   assert.equal(sandbox.check({text_id:'mn1',english:{source:'dhammatalks.org',translation_id:'dt:MN/MN1',publisher_divisions:[]}}).english,null);
 });

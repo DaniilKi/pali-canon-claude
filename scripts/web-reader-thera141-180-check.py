@@ -7,6 +7,7 @@ oracles remain independent sealed receipts, never generated from runtime profile
 import argparse,gzip,hashlib,importlib.util,json,os,re,socket,subprocess,sys,tempfile,time,urllib.request
 from datetime import datetime,timezone
 from pathlib import Path
+from web_reader_apadana_intake import reviewed_intake
 ROOT=Path(__file__).resolve().parents[1]
 BASE='05fc4e29540fc0799145dc28838bedb7d964b2c7'
 spec=importlib.util.spec_from_file_location('d251',ROOT/'scripts/web-reader-thera-pair-intake-check.py')
@@ -117,10 +118,16 @@ def main():
     manifest = json.loads((server_dir/'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT/'server/data/apadana.json').read_text())
     old, canon = baseline()
-    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 168 and set(manifest['links']) == set(old['links'])|all_approved
+    current_curation = reviewed_intake(ROOT)
+    current_ids = current_curation['expected_profile_ids']
+    assert current_ids[:206] == approval['expected_profile_ids'], 'Historical206 cohort changed'
+    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 168
+    assert set(old['links'])|all_approved == set(approval['expected_profile_ids'])
+    assert set(manifest['links']) == set(current_ids), 'Current independently curated membership differs'
     rows = manifest['links']
     assert {k:v for k,v in manifest['source'].items() if k != 'policy'} == {k:v for k,v in old['source'].items() if k != 'policy'}, 'Existing source/rights provenance changed'
-    assert manifest['source']['policy'] == old['source']['policy'].replace('168 finite','206 finite').replace('128 explicitly mapped Therā','166 explicitly mapped Therā')
+    current_thera_count = sum(row['publisher_chapter'] == 'chapter-3' for row in current_curation['baseline_records']+current_curation['approved_records'])
+    assert manifest['source']['policy'] == old['source']['policy'].replace('168 finite',str(len(current_ids))+' finite').replace('128 explicitly mapped Therā',str(current_thera_count)+' explicitly mapped Therā')
     commentary_parts=git_bytes('server/data/commentary.json.gz.parts.json')
     assert (server_dir/'data/commentary.json.gz.parts.json').read_bytes() == commentary_parts
     for part in json.loads(commentary_parts)['parts']:

@@ -1,17 +1,22 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { runInNewContext } from 'node:vm';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { createServer } from '../src/server.mjs';
 import * as canon from '../src/canon.mjs';
 import { load, getCommentary, commentaryReadingSource } from '../src/commentary.mjs';
-import { readPassage, WIDGET_VERSION, WIDGET_TOOL, registerChatgptWidget } from '../src/chatgpt-widget.mjs';
+import { readPassage, WIDGET_VERSION, WIDGET_TOOL, WIDGET_HTML, registerChatgptWidget } from '../src/chatgpt-widget.mjs';
 import { APADANA_PROFILES, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_TRANSLATOR } from '../src/apadana-profiles.mjs';
 import { assertPositionPin, sourceRevision } from '../web/reading-position.mjs';
 import { SCRIPTS } from '../src/script.mjs';
 import { expectedSegments } from '../scripts/evidence/study-scripts.mjs';
-import { fixture, view } from './helpers/widget-view.mjs';
+import { fixture, view, Element } from './helpers/widget-view.mjs';
+import { parseApadana, digest as textDigest } from '../src/apadana.mjs';
+import { validateApadanaChoice } from '../web/translation-policy.mjs';
 const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const edition = '2d134ff9ef60f70a1eb03c9370580228811a3070';
 const revision = () => edition + '-tha19-c-' + digest(load().units['tha-ap19'].map(i => load().passages[i])).slice(0, 24);
@@ -176,8 +181,24 @@ function apadanaFixture(uid) {
   return { ...fixture(), text_id: uid, english };
 }
 
-test('current widget displays the two finite post-poem/summary recitation placements without invented before labels or empty summary notes', () => {
-  assert.equal(WIDGET_VERSION, 'v27');
+// Exercise the existing finite rendering block directly. This tests captions and
+// empty note headings without presenting invented notes as accepted source data.
+function renderApparatusOnly(data) {
+  const start=WIDGET_HTML.indexOf('      if (d.english.translation_revision) {');
+  const end=WIDGET_HTML.indexOf('      if (d.english.truncated)',start);
+  assert.ok(start>=0&&end>start);
+  const render=runInNewContext('(function(d,en){en.appendChild(el("div","en",d.english.text));'+WIDGET_HTML.slice(start,end)+';return en;})',
+    {TextEncoder,el(tag,className,text){const node=new Element(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;}});
+  return render(data,new Element('div')).textContent;
+}
+function assertSourceMetadata(uid) {
+  const p=APADANA_PROFILES[uid],choice=canon.describe(canon.resolve(uid).unit).english.find(row=>row.translation_id===canon.translationId(p));
+  assert.ok(choice);validateApadanaChoice(choice,uid,false);
+  for(const key of ['chapter_summary','collection_summary','publisher_preface','publisher_divisions'])assert.deepEqual(choice[key],p[key]);
+}
+
+test('finite rendering keeps both post-poem/summary placements while widget refuses invented poem notes', () => {
+  assert.equal(WIDGET_VERSION, 'v28');
   for (const bridge of ['Apps SDK', 'MCP Apps']) for (const [uid, placement, caption] of [
     ['tha-ap19', 'after_poem', 'After the publisher poem.'], ['tha-ap32', 'after_chapter_summary', 'After the chapter summary.'],
   ]) {
@@ -185,16 +206,20 @@ test('current widget displays the two finite post-poem/summary recitation placem
     const division = p.publisher_divisions[0];
     assert.deepEqual(Object.keys(division).sort(), ['body_sha256', 'kind', 'label', 'note_numbers', 'notes_sha256', 'parent_id', 'placement']);
     assert.equal(division.kind, 'publisher_recitation'); assert.equal(division.parent_id, uid); assert.equal(division.placement, placement); assert.deepEqual(division.note_numbers, []);
-    const widget = view(bridge); widget.output(apadanaFixture(uid));
-    const english = widget.elements.english.textContent;
+    assertSourceMetadata(uid);
+    const invented=apadanaFixture(uid),widget = view(bridge); widget.output(invented);
+    assert.ok(!widget.elements.english.textContent.includes(invented.english.text),'Synthetic nonempty poem notes refuse before source display');
+    const english = renderApparatusOnly(invented);
     assert.match(english, /Synthetic poem wording/); assert.ok(english.includes(caption)); assert.ok(!english.includes('undefined')); assert.ok(!english.includes('Before publisher local stanza'));
     assert.ok(!english.includes('Recitation notes ·')); assert.ok(!english.includes('Chapter summary notes ·'));
   }
 });
 
-test('widget preserves old Theri before-stanza and nonempty summary-note UI and shares locator metadata without source words', async () => {
+test('finite Theri captions stay unconditional, invented notes refuse, and commentary shares only locator metadata', async () => {
   for (const uid of ['thi-ap10', 'thi-ap20', 'thi-ap28', 'thi-ap30', 'thi-ap31', 'thi-ap40']) {
-    const widget = view('Apps SDK'); widget.output(apadanaFixture(uid)); const p = APADANA_PROFILES[uid], english = widget.elements.english.textContent;
+    assertSourceMetadata(uid);
+    const invented=apadanaFixture(uid),widget = view('Apps SDK'); widget.output(invented); const p = APADANA_PROFILES[uid], english = renderApparatusOnly(invented);
+    assert.ok(!widget.elements.english.textContent.includes(invented.english.text),'Synthetic nonempty poem notes refuse before source display');
     assert.match(english, /Synthetic poem wording/);
     if (p.chapter_summary) assert.ok(english.includes('Chapter summary notes · editorial, not poem notes'));
     for (const division of p.publisher_divisions || []) assert.ok(english.includes('Before publisher local stanza ' + division.before_local_label + ', printed global label ' + division.before_publisher_label + '.'));
@@ -206,4 +231,50 @@ test('widget preserves old Theri before-stanza and nonempty summary-note UI and 
   assert.equal(metadata.source.commit, edition); assert.equal(metadata.source.locator_revision, revision());
   assert.equal(metadata.pali.read_with.arguments.source_commit, revision());
   const serialized = JSON.stringify(metadata); assert.ok(!serialized.includes(page.pali.segments[0].text));
+});
+
+test('source-enabled original eight recitation/summary owners display in both hosts before ownership mutations',{skip:!process.env.APADANA_SOURCE_CHECKOUT},async()=>{
+  const ids=['tha-ap19','tha-ap32','thi-ap10','thi-ap20','thi-ap28','thi-ap30','thi-ap31','thi-ap40'];
+  const previous=globalThis.fetch,raws=new Map(),actual=[];
+  for(const uid of ids){
+    const p=APADANA_PROFILES[uid],path=p.path.replace(/^\/text\//,'').replace(/\/$/,'.md');
+    const raw=readFileSync(join(process.env.APADANA_SOURCE_CHECKOUT,'src/_poems',path),'utf8');
+    assert.equal(textDigest(raw),p.raw_sha256);raws.set(p.raw_url,raw);
+  }
+  globalThis.fetch=async url=>{assert.ok(raws.has(url.href),'Only the exact eight source fixtures can reach transport');return new Response(raws.get(url.href));};
+  try{
+    // All original-source display positives run before any corruption checks.
+    for(const uid of ids){
+      const p=APADANA_PROFILES[uid],parsed=parseApadana(raws.get(p.raw_url),p);
+      const page=await readPassage({uid,translation:canon.translationId(p),englishCharacters:30000});
+      assert.ok(page.english,page.english_error);assert.equal(page.english.text,parsed.text);
+      assert.deepEqual(page.english.translator_notes,parsed.translator_notes);
+      for(const key of ['chapter_summary','collection_summary','publisher_preface','publisher_divisions'])assert.deepEqual(page.english[key],parsed[key]);
+      validateApadanaChoice(page.english,uid,true);
+      for(const bridge of ['Apps SDK','MCP Apps']){
+        const widget=view(bridge);widget.output(page);const english=widget.elements.english.textContent;
+        assert.ok(english.includes(parsed.text),uid+' original poem is displayed');
+        for(const division of p.publisher_divisions||[]){
+          const caption=division.placement==='after_poem'?'After the publisher poem.':division.placement==='after_chapter_summary'?'After the chapter summary.':'Before publisher local stanza '+division.before_local_label+', printed global label '+division.before_publisher_label+'.';
+          assert.ok(english.includes(caption));assert.ok(!english.includes('undefined'));
+          if(!division.note_numbers.length)assert.ok(!english.includes('Recitation notes ·'));
+          if(division.placement==='after_poem'||division.placement==='after_chapter_summary')assert.ok(!english.includes('Before publisher local stanza'));
+        }
+        if(p.chapter_summary)assert.equal(english.includes('Chapter summary notes · editorial, not poem notes'),p.chapter_summary.note_numbers.length>0);
+        if(p.publisher_preface)assert.ok(english.includes('Preface notes · editorial, not poem notes'));
+        if(p.collection_summary)assert.ok(english.includes('Collection summary notes · editorial, not poem notes'));
+      }
+      actual.push(page);
+    }
+    assert.equal(actual.length,8);
+    for(const page of actual){
+      const p=APADANA_PROFILES[page.text_id],patches=[];
+      for(const key of ['chapter_summary','collection_summary','publisher_preface'])if(p[key])patches.push({[key]:undefined},{[key]:{...page.english[key],parent_id:'mn1'}});
+      if(p.publisher_divisions)patches.push({publisher_divisions:[]},{publisher_divisions:page.english.publisher_divisions.map(d=>({...d,parent_id:'mn1'}))});
+      for(const patch of patches){
+        const changed={...page.english,...patch};assert.throws(()=>validateApadanaChoice(changed,page.text_id,true),/Apadāna/);
+        for(const bridge of ['Apps SDK','MCP Apps']){const widget=view(bridge);widget.output({...page,english:changed});assert.ok(!widget.elements.english.textContent.includes(page.english.text),'Owned apparatus corruption refuses after source-positive display');}
+      }
+    }
+  }finally{globalThis.fetch=previous;}
 });

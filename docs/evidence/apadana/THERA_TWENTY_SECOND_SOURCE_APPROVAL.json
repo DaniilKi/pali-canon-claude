@@ -1,0 +1,49 @@
+{
+  "baseline": "94c607310845b84dc3cd51ba3a19ce6fecd28683",
+  "decision": "CONDITIONAL SOURCE-ONLY APPROVAL; independent source/root/runtime/CI approval required before activation",
+  "approved_ids": [
+    "tha-ap213",
+    "tha-ap214",
+    "tha-ap215",
+    "tha-ap216",
+    "tha-ap217",
+    "tha-ap218",
+    "tha-ap219",
+    "tha-ap220",
+    "tha-ap221",
+    "tha-ap222"
+  ],
+  "approved_poems": [
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    218,
+    219,
+    220
+  ],
+  "goldens_sha256": "921f5678f24bac155e9ec294e6ddc0d677aa1facc04835d060b17bbddc2b4af7",
+  "source_review_sha256": "3c8d13040cf801c621abf2ef00cacd25e50a3e66eda8129640fa1ea801ace3d1",
+  "rights_sha256": "ccda9db739e911423d91d26706988b3d8cfc3b00f76ea59f94041af9c538e06c",
+  "xml_replay_sha256": "196c3cbfc19f9b25b799c26b8e14534d12508067cfd7a81e2b4edb3cf259d2d2",
+  "holds_in_batch": [],
+  "outside_holds_preserved": [
+    70,
+    140,
+    158,
+    159
+  ],
+  "not_authorized": [
+    "main",
+    "deploy",
+    "force push",
+    "outreach",
+    "English/notes/apparatus bundling",
+    "unreviewed activation",
+    "scripture reconstruction",
+    "canonical or private-data mutation"
+  ]
+}

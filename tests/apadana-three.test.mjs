@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import * as canon from '../src/canon.mjs';
 import {parseApadana,validateLink,quotationText,digest} from '../src/apadana.mjs';
 import {APADANA_PROFILES} from '../src/apadana-profiles.mjs';
-import {validateChapterSummary,scopeDescriptor} from '../web/translation-policy.mjs';
+import {validateChapterSummary,scopeDescriptor,validateApadanaChoice} from '../web/translation-policy.mjs';
 const summary=APADANA_PROFILES['thi-ap10'].chapter_summary;
 
 test('chapter summary identity and note8 cannot be omitted, reassigned or downgraded',()=>{
@@ -79,13 +79,41 @@ test('widget cursors pin the paired mapping and reject historical4/5 offsets bef
   }
 });
 
-test('embedded reader executes finite chapter ownership guards before rendering any source',async()=>{
+test('embedded finite chapter ownership checks remain unconditional while invented poem notes refuse',async()=>{
   const vm=await import('node:vm'),{WIDGET_HTML}=await import('../src/chatgpt-widget.mjs');
   const code=WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('),WIDGET_HTML.indexOf('  function render(d) {'));
-  const sandbox=vm.createContext({});vm.runInContext(code+';globalThis.check=checkedApadana;',sandbox);
+  const sandbox=vm.createContext({TextEncoder});vm.runInContext(code+';globalThis.check=checkedApadana;globalThis.chapterCheck=checkedChapterSummary;',sandbox);
   const p=APADANA_PROFILES['thi-ap10'];
   const english={...p,translation_id:'ap:chapter-4/poem-010',fetched_url:p.raw_url,license_url:'https://creativecommons.org/licenses/by-nc-sa/4.0/',text:'Synthetic poem text',attribution:'Synthetic attribution',changes:'Synthetic extraction',notes:[...p.mapping_notes],publisher_paratext:'',translator_notes:Array.from({length:7},(_,i)=>({number:i+1,text:'Synthetic note'})),chapter_summary:{...summary,text:'Synthetic chapter',translator_notes:[{number:8,text:'Synthetic chapter note'}]}};
-  const original={text_id:'thi-ap10',english};assert.equal(sandbox.check(original),original);
-  for(const chapter_summary of [undefined,{...english.chapter_summary,parent_id:'thi-ap9'},{...english.chapter_summary,translator_notes:[{number:1,text:'Misnumbered'}]},{...english.chapter_summary,extra:true}])assert.equal(sandbox.check({...original,english:{...english,chapter_summary}}).english,null);
+  const choice=canon.describe(canon.resolve('thi-ap10').unit).english.find(row=>row.translation_id===english.translation_id);
+  validateApadanaChoice(choice,'thi-ap10',false);
+  assert.ok(sandbox.chapterCheck(english,p),'Finite summary shape/ownership can be tested independently of poem content');
+  const original={text_id:'thi-ap10',english};assert.equal(sandbox.check(original).english,null,'Invented nonempty poem notes cannot be a positive source fixture');
+  for(const chapter_summary of [undefined,{...english.chapter_summary,parent_id:'thi-ap9'},{...english.chapter_summary,translator_notes:[{number:1,text:'Misnumbered'}]},{...english.chapter_summary,extra:true}]){
+    assert.ok(!sandbox.chapterCheck({...english,chapter_summary},p),'Summary ownership mutation fails its own finite helper');
+    assert.equal(sandbox.check({...original,english:{...english,chapter_summary}}).english,null);
+  }
   assert.equal(sandbox.check({text_id:'mn1',english:{source:'dhammatalks.org',translation_id:'dt:MN/MN1',chapter_summary:{text:'Unowned chapter'}}}).english,null);
+});
+
+test('source-enabled original poem10 passes embedded content checks before chapter ownership mutations',{skip:!checkout},async()=>{
+  const vm=await import('node:vm'),{WIDGET_HTML,readPassage}=await import('../src/chatgpt-widget.mjs');
+  const sandbox=vm.createContext({TextEncoder});
+  vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('),WIDGET_HTML.indexOf('  function render(d) {'))+';globalThis.check=checkedApadana;',sandbox);
+  const p=APADANA_PROFILES['thi-ap10'],raw=readFileSync(`${checkout}/src/_poems/chapter-4/poem-010.md`,'utf8'),parsed=parseApadana(raw,p),previous=globalThis.fetch;
+  globalThis.fetch=async url=>{assert.equal(url.href,p.raw_url);return new Response(raw);};
+  try{
+    const original=await readPassage({uid:p.id,translation:canon.translationId(p),englishCharacters:30000});
+    assert.ok(original.english,original.english_error);
+    assert.equal(original.english.text,parsed.text);assert.deepEqual(original.english.translator_notes,parsed.translator_notes);
+    assert.deepEqual(original.english.chapter_summary,parsed.chapter_summary);
+    assert.equal(sandbox.check(original),original,'Complete original-source response passes before corruption probes');
+    validateApadanaChoice(original.english,p.id,true);
+    const english=original.english;
+    for(const chapter_summary of [undefined,{...english.chapter_summary,parent_id:'thi-ap9'},{...english.chapter_summary,translator_notes:[{number:1,text:'Misnumbered'}]},{...english.chapter_summary,extra:true}]){
+      const changed={...english,chapter_summary};
+      assert.equal(sandbox.check({...original,english:changed}).english,null);
+      assert.throws(()=>validateApadanaChoice(changed,p.id,true),/Apadāna/);
+    }
+  }finally{globalThis.fetch=previous;}
 });

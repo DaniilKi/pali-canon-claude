@@ -27,7 +27,7 @@ import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v27';
+export const WIDGET_VERSION = 'v28';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -40,9 +40,7 @@ export const SKYBRIDGE_MIME = 'text/html+skybridge';
 const WIDGET_HASH_SOURCE = typeof __PALI_WIDGET_HASH_SOURCE__ === 'string' ? __PALI_WIDGET_HASH_SOURCE__ : contentSha256.toString();
 
 const APADANA_PINS = ['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'];
-const PINNED_NEW_PARATEXT_IDS = ["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102","tha-ap103","tha-ap104","tha-ap105","tha-ap106","tha-ap107","tha-ap108","tha-ap109","tha-ap110","tha-ap111","tha-ap112","tha-ap113","tha-ap114","tha-ap115","tha-ap116","tha-ap117","tha-ap118","tha-ap119","tha-ap120","tha-ap121","tha-ap122","tha-ap123","tha-ap124","tha-ap125","tha-ap126","tha-ap127","tha-ap128","tha-ap129","tha-ap130","tha-ap131","tha-ap132","tha-ap133","tha-ap134","tha-ap135","tha-ap136","tha-ap137","tha-ap138","tha-ap139","tha-ap140","tha-ap141","tha-ap143","tha-ap144","tha-ap145","tha-ap146","tha-ap147","tha-ap148","tha-ap149","tha-ap150","tha-ap151","tha-ap152","tha-ap153","tha-ap154","tha-ap155","tha-ap156","tha-ap157","tha-ap158","tha-ap159","tha-ap162","tha-ap163","tha-ap164","tha-ap165","tha-ap166","tha-ap167","tha-ap168","tha-ap169","tha-ap170","tha-ap171","tha-ap172","tha-ap173","tha-ap174","tha-ap175","tha-ap176","tha-ap177","tha-ap178","tha-ap179","tha-ap180","tha-ap181","tha-ap182"];
-// Finite new-source poem-note pins; the prior168 contracts remain unchanged.
-const PINNED_POEM_NOTE_IDS = ["tha-ap143","tha-ap144","tha-ap145","tha-ap146","tha-ap147","tha-ap148","tha-ap149","tha-ap150","tha-ap151","tha-ap152","tha-ap153","tha-ap154","tha-ap155","tha-ap156","tha-ap157","tha-ap158","tha-ap159","tha-ap162","tha-ap163","tha-ap164","tha-ap165","tha-ap166","tha-ap167","tha-ap168","tha-ap169","tha-ap170","tha-ap171","tha-ap172","tha-ap173","tha-ap174","tha-ap175","tha-ap176","tha-ap177","tha-ap178","tha-ap179","tha-ap180","tha-ap181","tha-ap182"];
+const PINNED_NEW_PARATEXT_IDS = ["tha-ap44","tha-ap63","tha-ap64","tha-ap65","tha-ap66","tha-ap67","tha-ap68","tha-ap69","tha-ap70","tha-ap71","tha-ap73","tha-ap74","tha-ap75","tha-ap76","tha-ap77","tha-ap78","tha-ap79","tha-ap80","tha-ap81","tha-ap82","tha-ap83","tha-ap84","tha-ap85","tha-ap86","tha-ap87","tha-ap88","tha-ap89","tha-ap90","tha-ap91","tha-ap92","tha-ap93","tha-ap94","tha-ap95","tha-ap96","tha-ap97","tha-ap98","tha-ap99","tha-ap100","tha-ap101","tha-ap102","tha-ap103","tha-ap104","tha-ap105","tha-ap106","tha-ap107","tha-ap108","tha-ap109","tha-ap110","tha-ap111","tha-ap112","tha-ap113","tha-ap114","tha-ap115","tha-ap116","tha-ap117","tha-ap118","tha-ap119","tha-ap120","tha-ap121","tha-ap122","tha-ap123","tha-ap124","tha-ap125","tha-ap126","tha-ap127","tha-ap128","tha-ap129","tha-ap130","tha-ap131","tha-ap132","tha-ap133","tha-ap134","tha-ap135","tha-ap136","tha-ap137","tha-ap138","tha-ap139","tha-ap140","tha-ap141","tha-ap143","tha-ap144","tha-ap145","tha-ap146","tha-ap147","tha-ap148","tha-ap149","tha-ap150","tha-ap151","tha-ap152","tha-ap153","tha-ap154","tha-ap155","tha-ap156","tha-ap157","tha-ap158","tha-ap159","tha-ap162","tha-ap163","tha-ap164","tha-ap165","tha-ap166","tha-ap167","tha-ap168","tha-ap169","tha-ap170","tha-ap171","tha-ap172","tha-ap173","tha-ap174","tha-ap175","tha-ap176","tha-ap177","tha-ap178","tha-ap179","tha-ap180","tha-ap181","tha-ap182","tha-ap183","tha-ap184","tha-ap185","tha-ap186","tha-ap187","tha-ap188","tha-ap189","tha-ap190","tha-ap191","tha-ap192","tha-ap193","tha-ap194","tha-ap195","tha-ap196","tha-ap197","tha-ap198","tha-ap199","tha-ap200","tha-ap201","tha-ap202","tha-ap203","tha-ap204","tha-ap205","tha-ap206","tha-ap207","tha-ap208","tha-ap209","tha-ap210","tha-ap211","tha-ap212","tha-ap213","tha-ap214","tha-ap215","tha-ap216","tha-ap217","tha-ap218","tha-ap219","tha-ap220","tha-ap221","tha-ap222"];
 
 const WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: canon.translationId(p), url: p.url, fetched_url: p.raw_url, note_count: p.note_count,
@@ -621,7 +619,7 @@ export const WIDGET_HTML = `<!doctype html>
       Object.keys(expected).every(function (key) { return JSON.stringify(s[key]) === JSON.stringify(expected[key]); }) &&
       typeof s.text === 'string' && s.text.trim() && s.text.length <= 50000 && Array.isArray(s.translator_notes) && s.translator_notes.length === expected.note_numbers.length &&
       s.translator_notes.every(function (n, i) { return n && Object.keys(n).sort().join(',') === 'number,text' && n.number === expected.note_numbers[i] && typeof n.text === 'string' && n.text.trim() && n.text.length <= 50000; }) &&
-      (['tha-ap82','tha-ap92','tha-ap102','tha-ap112','tha-ap122','tha-ap132','tha-ap152','tha-ap162','tha-ap172','tha-ap182'].indexOf(expected.parent_id) === -1 || checkedPinnedContent(s, expected));
+      (['tha-ap82','tha-ap92','tha-ap102','tha-ap112','tha-ap122','tha-ap132','tha-ap152','tha-ap162','tha-ap172','tha-ap182','tha-ap192','tha-ap202','tha-ap212','tha-ap222'].indexOf(expected.parent_id) === -1 || checkedPinnedContent(s, expected));
   }
   function checkedPublisherPreface(e, p) {
     if (!p.publisher_preface) return !Object.prototype.hasOwnProperty.call(e, 'publisher_preface');
@@ -639,9 +637,11 @@ export const WIDGET_HTML = `<!doctype html>
     if (!p.collection_summary) return !Object.prototype.hasOwnProperty.call(e, 'collection_summary');
     var expected = p.collection_summary;
     return expected.kind === 'canonical_collection_summary' && expected.parent_id === uid &&
-      (uid === 'thi-ap40' ? JSON.stringify(expected.note_numbers) === '[11,12]' : uid === 'tha-ap102' &&
+      (uid === 'thi-ap40' ? JSON.stringify(expected.note_numbers) === '[11,12]' : uid === 'tha-ap102' ?
         JSON.stringify(expected.note_numbers) === '[4]' && expected.label === 'Therā Apadāna first-hundred chapter summary and colophons' &&
-        expected.root_start === 5145 && expected.root_end === 5152 && expected.first_ref === 'tha-ap102/12' && expected.last_ref === 'tha-ap102/15') &&
+        expected.root_start === 5145 && expected.root_end === 5152 && expected.first_ref === 'tha-ap102/12' && expected.last_ref === 'tha-ap102/15' : uid === 'tha-ap202' &&
+        JSON.stringify(expected.note_numbers) === '[6,7]' && expected.label === 'Therā Apadāna second-hundred chapter summary and colophons' &&
+        expected.root_start === 7417 && expected.root_end === 7424 && expected.first_ref === 'tha-ap202/11' && expected.last_ref === 'tha-ap202/15') &&
       checkedChapterSummary({chapter_summary: e.collection_summary}, {chapter_summary: expected});
   }
   function checkedPublisherDivisions(e, p, uid) {
@@ -692,7 +692,7 @@ export const WIDGET_HTML = `<!doctype html>
         (${JSON.stringify(PINNED_NEW_PARATEXT_IDS)}.indexOf(d.text_id) === -1 || checkedContentHash(e.publisher_paratext, p.paratext_sha256)) &&
         Array.isArray(e.translator_notes) && e.translator_notes.length === p.note_count &&
         e.translator_notes.every(function (note, i) { return note && Object.keys(note).sort().join(',') === 'number,text' && note.number === (p.note_numbers ? p.note_numbers[i] : i + 1) && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
-        (${JSON.stringify(PINNED_POEM_NOTE_IDS)}.indexOf(d.text_id) === -1 || checkedContentHash(JSON.stringify(e.translator_notes), p.notes_sha256)) &&
+        checkedContentHash(JSON.stringify(e.translator_notes), p.notes_sha256) &&
         checkedChapterSummary(e, p) && checkedPublisherPreface(e, p) && checkedCollectionSummary(e, p, d.text_id) && checkedPublisherDivisions(e, p, d.text_id) && checkedEditorialGap(e, p, d.text_id) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
     return Object.assign({}, d, { english: null, english_error: 'Apadāna publisher identity, terms, edition notices or source pins changed. No English was displayed.' });
   }
@@ -795,11 +795,12 @@ export const WIDGET_HTML = `<!doctype html>
         }
         if (d.english.collection_summary) {
           var collection = el('section', ''), cs = d.english.collection_summary;
-          var firstHundred = cs.parent_id === 'tha-ap102', collectionHeading = firstHundred ? 'Therā Apadāna first-hundred chapter summary and colophons · not poem text' : 'Canonical collection summary · not poem text';
+          var firstHundred = cs.parent_id === 'tha-ap102', secondHundred = cs.parent_id === 'tha-ap202', collectionHeading = firstHundred ? 'Therā Apadāna first-hundred chapter summary and colophons · not poem text' : secondHundred ? 'Therā Apadāna second-hundred chapter summary and colophons · not poem text' : 'Canonical collection summary · not poem text';
           collection.setAttribute('aria-label', collectionHeading);
           collection.appendChild(el('h3', '', collectionHeading));
           collection.appendChild(el('p', 'en', cs.text));
           if (firstHundred) collection.appendChild(el('p', 'note', 'This summary covers the publisher’s first hundred Therā poems and first ten chapters. It does not mark the end of the Therā Apadāna. Original counts and titles are preserved; they are not a measure of indexed translation coverage. It is separate from the poem and chapter summary, and is not poem quotation evidence.'));
+          if (secondHundred) collection.appendChild(el('p', 'note', 'This summary covers the publisher’s second hundred Therā poems and chapters eleven to twenty. Its stated 666 is the publisher’s original edition statement, not a validated corpus total. It does not mark the end of all Therā poems. It is separate from the poem and chapter summary, and is not poem quotation evidence.'));
           collection.appendChild(el('h3', '', 'Collection summary notes · editorial, not poem notes'));
           var collectionNotes = el('ol', '');
           cs.translator_notes.forEach(function (n) { var li = el('li', '', n.text); li.value = n.number; collectionNotes.appendChild(li); });

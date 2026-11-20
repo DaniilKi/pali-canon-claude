@@ -1,4 +1,4 @@
-import {CURRENT_THERA_IDS} from './helpers/apadana-intake-expectations.mjs';
+import {CURRENT_THERA_IDS,CURRENT_APADANA_RECORDS} from './helpers/apadana-intake-expectations.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -28,11 +28,10 @@ test('all forty reviewed Theri poems preserve publisher order, exact canonical l
 });
 test('reviewed Thera subset uses literal profile owners and stays separate from all forty Theri poems',()=>{
  const expected=profiles.filter(p=>p.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem);
- const curated=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_141_180_APPROVAL.json',import.meta.url),'utf8'));
  const historical=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_PAIR_INTAKE_APPROVAL.json',import.meta.url),'utf8'));
  const oldIds=[...historical.baseline_records,...historical.approved_records].filter(row=>row.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem).map(row=>row.id);
  assert.deepEqual(expected.filter(row=>oldIds.includes(row.id)).map(row=>row.id),oldIds,'Every preceding Therā owner retains publisher order');
- const expectedIds=[...curated.baseline_records,...curated.approved_records].filter(row=>row.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem).map(row=>row.id);
+ const expectedIds=[...CURRENT_APADANA_RECORDS].filter(row=>row.publisher_chapter==='chapter-3').sort((a,b)=>a.poem-b.poem).map(row=>row.id);
  assert.deepEqual(expected.map(p=>p.id),expectedIds);
  assert.equal(expected.length,CURRENT_THERA_IDS.length);
  for(const p of expected){
@@ -42,7 +41,7 @@ test('reviewed Thera subset uses literal profile owners and stays separate from 
   assert.match(nav.note,/not complete Therā or line-complete VRI English/);
   const last=nav.groups.find(g=>g.poems.some(row=>row.uid===p.id)).poems.at(-1);
   assert.equal(nav.summary?.uid,APADANA_PROFILES[last.uid].chapter_summary?last.uid:undefined);
-  for(const target of ['thi-ap1','tha-ap11','tha-ap12','tha-ap72','tha-ap142','tha-ap160','tha-ap161','tha-ap183','tha-ap999'])assert.throws(()=>apadanaEditionLink(fixture(p.id),target),/unavailable/);
+  for(const target of ['thi-ap1','tha-ap11','tha-ap12','tha-ap72','tha-ap142','tha-ap160','tha-ap161','tha-ap223','tha-ap999'])assert.throws(()=>apadanaEditionLink(fixture(p.id),target),/unavailable/);
  }
  const first=expected[0];assert.equal(first.poem,11);assert.equal(first.id,'tha-ap13');assert.notEqual(first.id,'tha-ap'+first.poem);
 });

@@ -11,6 +11,7 @@ import { THERA_APADANA_PROFILES } from '../src/apadana-thera-profiles.mjs';
 import { parseTheraApadana } from '../src/apadana-thera.mjs';
 import { parseApadana, quotationText, digest, rootDigest, validateLink } from '../src/apadana.mjs';
 import { fetchPublic } from '../src/http.mjs';
+import { CURRENT_APADANA_IDS } from './helpers/apadana-intake-expectations.mjs';
 import { readPassage } from '../src/chatgpt-widget.mjs';
 import { validateApadanaChoice, validateEnglishPage } from '../web/translation-policy.mjs';
 
@@ -74,7 +75,10 @@ test('141–180 intake is exactly independently approved38 and preserves all168 
   assert.equal(approved.length, 38);
   assert.deepEqual(approved, approval.approved_records.map(row => row.id));
   assert.equal(approval.baseline_ids.length, 168);
-  assert.deepEqual(Object.keys(APADANA_PROFILES), [...approval.baseline_ids, ...approved]);
+  const historical206 = [...approval.baseline_ids, ...approved];
+  assert.equal(historical206.length, 206);
+  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0, 206), historical206);
+  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
   const data = canon.load(), manifest = JSON.parse(readFileSync('server/data/apadana.json', 'utf8'));
   for (const uid of approval.baseline_ids) {
     const oldLink = baseline.profile_objects[uid], { english: _english, match: _match, ...oldProfile } = oldLink;
@@ -109,7 +113,7 @@ test('141–180 intake is exactly independently approved38 and preserves all168 
     validateLink(p, uid, u, book);
     assert.ok(Object.isFrozen(p) && Object.isFrozen(p.stanza_layout));
   }
-  for (const uid of ['tha-ap72', 'tha-ap142', 'tha-ap160', 'tha-ap161', 'tha-ap12', 'tha-ap183']) assert.equal(APADANA_PROFILES[uid], undefined);
+  for (const uid of ['tha-ap72', 'tha-ap142', 'tha-ap160', 'tha-ap161', 'tha-ap12', 'tha-ap223']) assert.equal(APADANA_PROFILES[uid], undefined);
   for (const row of rights) { assert.equal(row.license, 'CC BY-NC-SA 4.0'); assert.equal(row.live_only, true); assert.equal(row.media_fetches, 0); }
 });
 
@@ -170,7 +174,7 @@ test('source-enabled unreviewed wording, profile fields, layout shapes and held 
     for (const patch of [{ id: 'tha-ap160' }, { poem: 158 }, { stanza_layout: [] }, { note_numbers: [999] }, { raw_sha256: digest(raw + '\n') }, { chapter_summary: {} }, { publisher_divisions: [] }, { editorial_gap: {} }]) assert.throws(() => parseTheraApadana(raw, { ...p, ...patch }), /differs/);
   }
   let calls = 0; globalThis.fetch = async () => { calls++; throw Error('Held source transport'); };
-  for (const poem of ['010', '070', '140', '158', '159', '181', '570']) {
+  for (const poem of ['010', '070', '140', '158', '159', '221', '570']) {
     const url = `https://raw.githubusercontent.com/apadana-translation/apadana-site/${APADANA_COMMIT}/src/_poems/chapter-3/poem-${poem}.md`;
     assert.equal(isApadanaRawUrl(url), false); await assert.rejects(fetchPublic(url, { json: false }), /outside the supported public sources/);
   }

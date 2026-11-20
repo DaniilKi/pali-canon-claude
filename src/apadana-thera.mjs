@@ -19,6 +19,37 @@ export function theraMultiLabelQuotation(paragraph, stanza, profile, index) {
   return lines.join('\n');
 }
 
+/** The exact208 artifact shares its heading and first stanza in one paragraph.
+ * These five literal selectors preserve the body; they are not a selector grammar.
+ * Independent source-review hashes bind the heading, physical paragraph and each
+ * selected entry before this helper returns any quotation words.
+ */
+export function theraJoinedHeadingStanza(paragraphs, stanza, profile, index) {
+  const known = THERA_APADANA_PROFILES[profile?.id];
+  const entryPins = [
+    '43c7716457f885548bdbdfad7513748f2b2158f7071e2cd8ebf7c9327cbce5fa',
+    '5239342f4d5ab74d39857c87b18040d5a10a360b2e36d1114bc9fa11a2bdf73c',
+    '1315d2eb2c1af78f09d7c0415bbbf0acd60e17509403cfa88518d320b1462013',
+    '654b8629d9de28da53723a21c230f836a8c0c4bc21696c893bced0dae7415eb6',
+    'b4e1c4f75ab4dd1966238d108fa34c773067eac526cfe2115db1a46259ebb42f',
+  ];
+  if (profile?.id !== 'tha-ap210' || profile.poem !== 208 || !known
+    || JSON.stringify(profile) !== JSON.stringify(known)
+    || known.raw_sha256 !== 'd616cbea21dc15386ee4253c6c73e053380e35d62f6e88e8b8052a8d93213a76'
+    || !Number.isInteger(index) || index < 0 || index > 4 || known.stanza_layout.length !== 5
+    || JSON.stringify(stanza) !== JSON.stringify(known.stanza_layout[index])
+    || Object.keys(stanza).sort().join(',') !== 'first_line,lines,local_label,paragraph,publisher_label,suffix'
+    || stanza.paragraph !== index || stanza.first_line !== [2, 1, 1, 1, 1][index] || stanza.lines !== 4
+    || !Array.isArray(paragraphs) || paragraphs.length !== 7
+    || digest(paragraphs[0]) !== '5a66ec001d3cc36f1f1546a3f72cfe92abfda97e3335791af9b818934c13e330'
+    || digest(paragraphs[0].split('\n')[0]) !== '2a9ae565ec013f54a8f5d6b036ca95a8a6e3d8a65d955debdc3704999bfb3882') fail();
+  const lines = paragraphs[stanza.paragraph].split('\n');
+  if (lines.length !== stanza.lines + stanza.first_line - 1) fail();
+  const selected = lines.slice(stanza.first_line - 1).join('\n');
+  if (digest(selected) !== entryPins[index]) fail();
+  return selected;
+}
+
 export function parseTheraApadana(raw, profile) {
   const known = THERA_APADANA_PROFILES[profile?.id];
   if (!known || JSON.stringify(profile) !== JSON.stringify(known) || digest(raw) !== known.raw_sha256
@@ -97,8 +128,9 @@ export function parseTheraApadana(raw, profile) {
   }
   let collection_summary;
   if (profile.collection_summary) {
-    // The first-hundred endmatter is distinct from the tenth chapter summary.
-    if (profile.id !== 'tha-ap102' || profile.poem !== 100) fail();
+    // Each hundred's endmatter is distinct from its separately owned chapter.
+    if (!((profile.id === 'tha-ap102' && profile.poem === 100)
+      || (profile.id === 'tha-ap202' && profile.poem === 200))) fail();
     const marker = '\n\nThen there is the Summary of Chapters:\n\n', parts = poem.split(marker);
     if (parts.length !== 2) fail();
     poem = parts[0];
@@ -109,7 +141,7 @@ export function parseTheraApadana(raw, profile) {
   }
   let chapter_summary;
   if (profile.chapter_summary) {
-    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182'].includes(profile.id)) fail();
+    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182', 'tha-ap192', 'tha-ap202', 'tha-ap212', 'tha-ap222'].includes(profile.id)) fail();
     const marker = '\n\nThe Summary:\n\n', parts = poem.split(marker); if (parts.length !== 2) fail();
     poem = parts[0]; const summaryRaw = marker.trim() + '\n\n' + parts[1], text = present(summaryRaw), translator_notes = notesFor(profile.chapter_summary.note_numbers);
     refs(summaryRaw, profile.chapter_summary.note_numbers);
@@ -120,11 +152,12 @@ export function parseTheraApadana(raw, profile) {
   if (new Set(owned).size !== owned.length || owned.length !== notes.length || notes.some(n => !owned.includes(n.number))) fail();
   // Publisher101 alone uses ## for its poem heading, beside a separate ## preface.
   const headings = [...poem.matchAll(profile.id === 'tha-ap103' ? /^## \\\[101\. /gm : /^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173'].includes(profile.id) !== (split > 0)) fail();
+  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213'].includes(profile.id) !== (split > 0)) fail();
   const preface = poem.slice(0, split), body = poem.slice(split); refs(preface, []); refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text.split(/\n\n+/);
-  const colophons = profile.id === 'tha-ap134' ? paragraphs.at(-1).split('\n') : paragraphs.slice(-2);
-  if (paragraphs.length !== profile.stanza_layout.length + (profile.id === 'tha-ap134' ? 2 : 3) || !paragraphs[0].startsWith(`[${profile.poem}. `)
+  const joinedColophons = ['tha-ap134', 'tha-ap184'].includes(profile.id);
+  const colophons = joinedColophons ? paragraphs.at(-1).split('\n') : paragraphs.slice(-2);
+  if (paragraphs.length !== profile.stanza_layout.length + (joinedColophons || profile.id === 'tha-ap210' ? 2 : 3) || !paragraphs[0].startsWith(`[${profile.poem}. `)
     || colophons.length !== 2
     || !(profile.id === 'tha-ap34' ? /^This indeed / : profile.id === 'tha-ap48' ? /^Thus indeed, / : /^Thus indeed /).test(colophons[0])
     || !(['tha-ap33', 'tha-ap45'].includes(profile.id) ? /^The Legend of / : /^The legend of /).test(colophons[1])
@@ -132,8 +165,9 @@ export function parseTheraApadana(raw, profile) {
     || digest(JSON.stringify(translator_notes)) !== profile.notes_sha256 || digest(publisher_paratext) !== profile.paratext_sha256) fail();
   for (const [i, stanza] of profile.stanza_layout.entries()) {
     if (stanza.finite_multi_label) { theraMultiLabelQuotation(paragraphs[i + 1], stanza, profile, i); continue; }
-    if (!stanza.suffix || paragraphs[i + 1].split('\n').length !== stanza.lines
-      || !paragraphs[i + 1].replace(/\[Note \d+\]/g, '').trim().endsWith(stanza.suffix)) fail();
+    const entry = profile.id === 'tha-ap210' ? theraJoinedHeadingStanza(paragraphs, stanza, profile, i) : paragraphs[i + 1];
+    if (!stanza.suffix || entry.split('\n').length !== stanza.lines
+      || !entry.replace(/\[Note \d+\]/g, '').trim().endsWith(stanza.suffix)) fail();
   }
   return { title, text, translator_notes, publisher_paratext, ...(editorial_gap ? {editorial_gap} : {}), ...(chapter_summary ? {chapter_summary} : {}), ...(collection_summary ? {collection_summary} : {}), ...(publisher_divisions ? {publisher_divisions} : {}) };
 }

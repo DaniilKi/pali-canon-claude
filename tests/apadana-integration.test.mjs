@@ -8,7 +8,8 @@ import * as english from '../src/english.mjs';
 import { fetchPublic, ALLOWED_HOSTS } from '../src/http.mjs';
 import { englishScope, verifyQuote } from '../src/verify.mjs';
 import { APADANA_COMMIT, APADANA_LICENSE, APADANA_PROFILES, APADANA_TRANSLATOR } from '../src/apadana-profiles.mjs';
-import { scopeDescriptor, validateEnglishPage } from '../web/translation-policy.mjs';
+import {parseApadana} from '../src/apadana.mjs';
+import { validateApadanaChoice, scopeDescriptor, validateEnglishPage } from '../web/translation-policy.mjs';
 import { comparisonChoices } from '../web/translation-comparison.mjs';
 
 const fetchOriginal = globalThis.fetch;
@@ -77,7 +78,8 @@ test('browser and comparison reject phantom owners, revised metadata, changed pa
     translator_notes: Array.from({length: profile.note_count}, (_, i) => ({number: i + 1, text:'Synthetic note.'})), mapping_notes: [...profile.mapping_notes], notes: [...profile.mapping_notes], next_offset: null };
   assert.equal(scopeDescriptor(selected, uid), null);
   assert.deepEqual(comparisonChoices([selected], uid), [selected]);
-  assert.equal(validateEnglishPage(response, args, context), null);
+  assert.doesNotThrow(() => validateApadanaChoice(selected, uid, false));
+  assert.throws(() => validateEnglishPage(response, args, context), /poem-note content/);
   assert.throws(() => scopeDescriptor(selected, 'thi-ap2'), /identity or terms changed/);
   assert.throws(() => scopeDescriptor({ ...selected, translation_scope: null }, uid), /identity or terms changed/);
   for (const patched of [
@@ -105,7 +107,7 @@ test('quotation verification forwards the exact publisher revision and refuses a
   await assert.rejects(verify(options.text, async () => ({...response, translation_revision: 'f'.repeat(40)})), /identity changed/);
 });
 
-const official = process.env.APADANA_OFFICIAL_CHECKOUT;
+const official = process.env.APADANA_OFFICIAL_CHECKOUT || process.env.APADANA_SOURCE_CHECKOUT;
 test('optional pinned publisher bytes reach reading, continuation and quotation paths', { skip: !official }, async () => {
   globalThis.fetch = async url => {
     assert.equal(url.href, profile.raw_url);
@@ -133,4 +135,29 @@ test('optional pinned publisher bytes reach reading, continuation and quotation 
       assert.ok(!result.text.includes(note), owner + ': editorial caveat entered poem wording');
     }
   }
+});
+
+// Exact original content and field-mutant contracts, now with authentic source
+// wording and poem notes before any negative control.
+test('source-enabled browser and comparison reject phantom owners, revised metadata, changed paths and substituted providers', {skip: !official}, () => {
+  const selected = choice();
+  const context = { uid, choices: [selected], accepted: null };
+  const args = { uid, translation: id, limit: 6000, translation_revision: APADANA_COMMIT };
+  const pins = Object.fromEntries(['raw_sha256', 'body_sha256', 'notes_sha256', 'paratext_sha256', 'root_sha256'].map(key => [key, profile[key]]));
+  const response = { ...selected, ...pins, text_id: uid, source: 'apadana', offset: 0, limit: 6000, text: 'Synthetic text, not the real source.', attribution: 'Jonathan S. Walters and Whitman College',
+    changes: 'Synthetic extraction notice', fetched_url: profile.raw_url, license_url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/', publisher_paratext: 'Synthetic preface',
+    translator_notes: Array.from({length: profile.note_count}, (_, i) => ({number: i + 1, text:'Synthetic note.'})), mapping_notes: [...profile.mapping_notes], notes: [...profile.mapping_notes], next_offset: null };
+  Object.assign(response, parseApadana(readFileSync(join(official, 'src/_poems/chapter-4/poem-001.md'), 'utf8'), profile));
+  assert.equal(scopeDescriptor(selected, uid), null);
+  assert.deepEqual(comparisonChoices([selected], uid), [selected]);
+  assert.equal(validateEnglishPage(response, args, context), null);
+  assert.throws(() => scopeDescriptor(selected, 'thi-ap2'), /identity or terms changed/);
+  assert.throws(() => scopeDescriptor({ ...selected, translation_scope: null }, uid), /identity or terms changed/);
+  for (const patched of [
+    { translation_revision: 'f'.repeat(40) }, { publisher_paratext: '' }, { translator_notes: [] },
+    { license: 'CC BY 4.0' }, { notes_sha256: '0'.repeat(64) }, { fetched_url: profile.url }, { url: profile.url + '?changed' }, { source: 'dhammatalks.org' },
+  ]) assert.throws(() => validateEnglishPage({ ...response, ...patched }, args, context), /pinned Apadāna/i);
+  const substitute = { ...response, translation_id: 'dt:MN/MN10', source: 'dhammatalks.org' };
+  delete substitute.translation_revision; delete substitute.publisher_paratext;
+  assert.throws(() => validateEnglishPage(substitute, args, { ...context, choices: [selected, substitute] }), /pinned Apadāna/i);
 });

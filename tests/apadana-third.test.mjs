@@ -11,7 +11,7 @@ import { APADANA_PROFILES, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL,
 import { parseApadana, plainMarkdown, quotationText, digest, validateLink } from '../src/apadana.mjs';
 import { verifyQuote } from '../src/verify.mjs';
 import { readPassage, WIDGET_HTML, WIDGET_URI } from '../src/chatgpt-widget.mjs';
-import { apadanaId, scopeDescriptor, validateEnglishPage } from '../web/translation-policy.mjs';
+import { apadanaId, validateApadanaChoice, validateChapterSummary, validatePublisherDivisions, scopeDescriptor, validateEnglishPage } from '../web/translation-policy.mjs';
 import { comparisonChoices } from '../web/translation-comparison.mjs';
 import { translatorNotes } from '../web/milinda-sources.mjs';
 
@@ -27,6 +27,7 @@ const rawSource = p => readFileSync(join(checkout, `src/_poems/chapter-4/poem-${
 const parsed = p => parseApadana(rawSource(p), p);
 const owned = numbers => numbers.map(number => ({ number, text: 'Synthetic editorial note ' + number }));
 const withContent = descriptor => ({ ...clone(descriptor), text: 'Synthetic separately owned apparatus', translator_notes: owned(descriptor.note_numbers) });
+let actualSource = false;
 function fixture(n) {
   const p = profile(n), uid = p.id;
   const choice = { translation_id: apadanaId(uid), translator: APADANA_TRANSLATOR, license: APADANA_LICENSE, translation_revision: APADANA_COMMIT, url: p.url };
@@ -39,6 +40,7 @@ function fixture(n) {
     license_url: APADANA_LICENSE_URL, publisher_paratext: p.paratext_sha256 === emptySha ? '' : 'Synthetic publisher preface', translator_notes: owned(p.note_numbers), next_offset: null };
   if (p.chapter_summary) data.chapter_summary = withContent(p.chapter_summary);
   if (p.publisher_divisions) data.publisher_divisions = p.publisher_divisions.map(withContent);
+  if (actualSource) { Object.assign(data, parsed(p)); args.limit = data.limit = 30000; assert.ok(data.text.length <= data.limit); }
   return { uid, choice, data, args, context: { uid, choices: [choice], accepted: null } };
 }
 function pinnedFetch(calls) {
@@ -230,7 +232,38 @@ test('source-enabled API continuations preserve edition and apparatus while refu
   assert.equal(calls.length, before);
 });
 
-test('reader and comparison guards preserve all ten identities, zero-note division, summary ownership and pinned continuation', () => {
+test('all ten third-chapter metadata identities, apparatus mutants and invented-content refusal stay unconditional', () => {
+  actualSource = false;
+  for (let n = 21; n <= 30; n++) {
+    const f = fixture(n);
+    assert.equal(scopeDescriptor(f.choice, f.uid), null);
+    assert.deepEqual(comparisonChoices([f.choice], f.uid), [f.choice]);
+    assert.doesNotThrow(() => validateApadanaChoice(f.choice, f.uid, false));
+    assert.deepEqual(translatorNotes(f.data).map(note => note.number), profile(n).note_numbers);
+    assert.throws(() => validateEnglishPage(f.data, f.args, f.context), /poem-note content/);
+    for (const patch of [{translation_revision: 'f'.repeat(40)}, {license: 'CC BY 4.0'}, {translation_scope: null}])
+      assert.throws(() => validateApadanaChoice({...f.choice, ...patch}, f.uid, false), /pinned Apadāna/);
+  }
+  const f28 = fixture(28), f30 = fixture(30);
+  assert.deepEqual(f28.data.publisher_divisions[0].translator_notes, []);
+  validatePublisherDivisions(f28.choice, f28.uid); validatePublisherDivisions(f28.data, f28.uid, true);
+  for (const division of [undefined, [], [{...f28.data.publisher_divisions[0], note_numbers: [1], translator_notes: owned([1])}], [{...f28.data.publisher_divisions[0], before_local_label: '49'}]])
+    assert.throws(() => validatePublisherDivisions({...f28.data, publisher_divisions: division}, f28.uid, true), /publisher-division/);
+  validateChapterSummary(f30.choice, f30.uid); validateChapterSummary(f30.data, f30.uid, true);
+  for (const patch of [{parent_id: 'thi-ap20'}, {first_ref: 'thi-ap30/1'}, {root_start: 9760}, {note_numbers: [1, 2]}, {translator_notes: owned([44, 43])}, {translator_notes: owned([43])}]) {
+    const changed = clone(f30.data); Object.assign(changed.chapter_summary, patch);
+    assert.throws(() => validateChapterSummary(changed, f30.uid, true), /chapter-summary/);
+  }
+  assert.throws(() => translatorNotes({...f30.data, translator_notes: [...f30.data.translator_notes, ...f30.data.chapter_summary.translator_notes]}), /translator-note/);
+  for (const [from, to, field] of [[f28, f30, 'publisher_divisions'], [f30, f28, 'chapter_summary']])
+    assert.throws(() => scopeDescriptor({...to.choice, [field]: from.choice[field]}, to.uid), /owner changed/);
+  const sandbox = vm.createContext({TextEncoder});
+  vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);
+  for (const n of [21, 28, 30]) { const f = fixture(n); assert.equal(sandbox.check({text_id: f.uid, english: f.data}).english, null); }
+});
+
+test('source-enabled reader and comparison guards preserve all ten identities, zero-note division, summary ownership and pinned continuation', {skip: !checkout}, () => {
+  actualSource = true;
   for (let n = 21; n <= 30; n++) {
     const { uid, choice, data, args, context } = fixture(n);
     assert.equal(scopeDescriptor(choice, uid), null);
@@ -260,9 +293,10 @@ test('reader and comparison guards preserve all ten identities, zero-note divisi
   }
 });
 
-test('current embedded reader executes third-chapter apparatus guards before rendering', () => {
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v27.html');
-  const sandbox = vm.createContext({});
+test('source-enabled current embedded reader executes third-chapter apparatus guards before rendering', {skip: !checkout}, () => {
+  actualSource = true;
+  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v28.html');
+  const sandbox = vm.createContext({TextEncoder});
   vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);
   for (const n of [21, 28, 30]) {
     const f = fixture(n), value = { text_id: f.uid, english: f.data };
