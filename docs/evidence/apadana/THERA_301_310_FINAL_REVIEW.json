@@ -1,0 +1,245 @@
+{
+  "schema": "independent-local-implementation-review-v1",
+  "status": "GO_EXACT_D263_LOCAL_UNPUBLISHED_IMPLEMENTATION_ONLY",
+  "reviewed_utc": "2026-11-20T14:19:55.049136+00:00",
+  "base_commit": "4c69f023c9fe1093ad8aadf0ac7f3caf766d92f0",
+  "scope": {
+    "publisher_poems": [
+      301,
+      302,
+      303,
+      304,
+      305,
+      308,
+      309,
+      310
+    ],
+    "canonical_ids": [
+      "tha-ap303",
+      "tha-ap304",
+      "tha-ap305",
+      "tha-ap306",
+      "tha-ap307",
+      "tha-ap310",
+      "tha-ap311",
+      "tha-ap312"
+    ],
+    "new_first_English_choices": 8,
+    "total_choices": 325,
+    "complete_publisher_edition_poems": true,
+    "line_complete_VRI_or_full_chapter31_claim": false,
+    "body_paragraphs": 58,
+    "physical_stanza_entries": 34,
+    "printed_labels": 36,
+    "poem_notes": 31,
+    "separate_summary_notes": 1,
+    "source310_summary_note_numbers": [
+      8
+    ],
+    "source310_poem_note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "summary_count_order_and_held306307_notice_preserved": true
+  },
+  "reviewer_independence": {
+    "original_source_expectations_and_portable_derivation_authored_by_reviewer": true,
+    "production_parser_client_helpers_tests_harness_integration_authored_by_others": true,
+    "independent_source_review_B_retained": true,
+    "implementation_review_independent_of_implementers": true,
+    "source_authorship_not_presented_as_second_independent_source_review": true
+  },
+  "snapshot": {
+    "file": "THERA_301_310_FINAL_REVIEW_SNAPSHOT.json",
+    "external_path": "/tmp/pali-301-310-preflight/FINAL_REVIEW_SNAPSHOT.json",
+    "sha256": "a01a478ca3ba0cc34c1a3ce29c8334f66952da6e8e0d7ff054963e700b49abee",
+    "project_files": 91,
+    "all_current_bytes_rehashed_exact": true,
+    "superseded_unapproved_snapshot": "49dedb7bd42a7bef2c53c1b3055637ece1dcd31fd6d590724e1b049ab1fefd8a",
+    "sole_correction": "Intake guide opening now distinguishes completed local runtime/test/install gates from separate final snapshot/local commit/remote CI. Other90 files unchanged."
+  },
+  "preceding_review_seals": {
+    "source_static": {
+      "sha256": "1a21f6b159bdf6ad3160d25212f5249d2fb631091c9dd0076d66656bde271618"
+    },
+    "helper_test_static": {
+      "sha256": "c146d5fb8c8cb2f93349300fd6b038a25a661a3fa1d908bafbf8068137c3dc09"
+    },
+    "source_copy_bindings": {
+      "sha256": "50f35158f8234b83cd7a94c8e2766f8400dca069c0a9632f17e1418990969bdf"
+    },
+    "final_verification": {
+      "sha256": "36f3369e63c03501f7a3e21b17eed9a15872510cf1143dfd8ab8d9e9c49b7f44"
+    }
+  },
+  "local_validation": {
+    "file": "THERA_301_310_LOCAL_VALIDATION.json",
+    "sha256": "f283f326be61fff2afbc286d7967224fd6495d228dc173bd204df216774eab9a",
+    "full_check": {
+      "tests": 1806,
+      "suites": 0,
+      "pass": 1583,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 223,
+      "todo": 0,
+      "duration_ms": 303071.824914,
+      "exit_code": 0,
+      "audit_texts": 8544,
+      "audit_problems": 0,
+      "full_log_sha256": "a8814e0f5692e74649741586573ee1690b6dd311e641bc0aa955bc1133a881a7",
+      "observed_utc": "2026-11-20T14:13:36.968852+00:00"
+    },
+    "focused": {
+      "tests": 14,
+      "pass": 14,
+      "fail": 0,
+      "skip": 0,
+      "first_project_run": true,
+      "log_sha256": "ae7cb43228d3e85c3f656200f3f66f9e074b97cfdc779aebe0d2d7cfbbd209e5"
+    },
+    "integrity": {
+      "tests": 33,
+      "pass": 33,
+      "first_project_run": true,
+      "log_sha256": "9ee714208e868b545113cb4aaf3b3832db9760a344e1d50bf58b5788bc1eb1d8"
+    },
+    "smoke": {
+      "exit": 0,
+      "tools": 34,
+      "checks": 64,
+      "log_sha256": "8262dd13f13f0c45ba6d7152bb6f931f5a2aedcc728d7498a2547e961de2aa97"
+    },
+    "evals": {
+      "exit": 0,
+      "pass": 195,
+      "live_skips": 6,
+      "questions": 201,
+      "log_sha256": "c12336d756c1baa68acfba6a887cd0d9d34ede0fbdbe9a99c12c5b12d586d87f"
+    }
+  },
+  "actual_installed_evidence": {
+    "archive_sha256": "cf4b958ce15a79ac58357cb1d18eff65142bd1e9699ce98e233a9ac115ba656d",
+    "independent_archive_approval_sha256": "4a93ee27111f81e77e533318931bc6fad8f371a1ad0a0259fb9c585e3ed1944d",
+    "archive_regular_members_checkout_and_genuine_install_byte_exact": 39,
+    "runtime_exact_path_length_SHA_files": 34,
+    "independent_runtime_approval_sha256": "bae09c75ce5bb5d90e62044b60f5ac468e0c3c0569484117e28f938720aabf09",
+    "native_observations": 72,
+    "fixture_source_cells": 32,
+    "deny_English_cells": 32,
+    "saved_note_draft_original_note_cells": 8,
+    "viewports": [
+      1280,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "native_each_body_one6000_character_page": true,
+    "native_Next_page_acceptance_claim": false,
+    "stdio_actual500_character_pages": 17,
+    "whole_poem_public_quotation_checks": 8,
+    "independent_physical_quote_entries": 34,
+    "summary_public_query_verdict": "not_found_in_scope",
+    "summary_outside_poem_and_quote": true,
+    "per_mode_held_refusals": 8,
+    "per_mode_Pali_reads": 16,
+    "strict_widget_complete_v38_resource_strings": 2,
+    "widget_alignment_selected_sample": 3,
+    "widget_exhaustive8544_alignment_claim": false,
+    "adversarial_guard_blocked_calls": [
+      42,
+      50
+    ],
+    "observed_external_forwarding": 0,
+    "guard_scope": "finite Node fetch/socket/DNS hooks and literal127synthetic lookup selftest; no OS packet capture claim",
+    "owned_server_groups": [
+      520210,
+      520452
+    ],
+    "both_groups_absent_and_leaders_reaped": true,
+    "kill_fallback_used": false,
+    "native_receipt_sha256": "b52aac47e23191a77427c5eba63ef590be820bde7389f91490a0e6f79552a658",
+    "launch_sha256": "3fae653867001177fdf30eb30133c4c536f4ad6026b2f6ecbea7c270ceb09d44"
+  },
+  "preservation": {
+    "all_old_tracked_paths_present": 1456,
+    "unchanged_old_tracked_paths": 1409,
+    "reviewed_old_changes": 47,
+    "all_old317_link_and_profile_objects_exact": true,
+    "all_non_Apadana_data_files_exact": 26,
+    "canonical_units": 8544,
+    "canonical_books": 61,
+    "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+    "source_note_sidecar_unchanged": true,
+    "old_evidence_and_workflows_unchanged": true,
+    "prior_checkpoints_harness_d317_diagnostic348_retained_by_root_receipt": true,
+    "private_local_drafts_saved_notes_and_citations_preserved": true,
+    "production_scope": "Pure8profiles/import+spread, one finite summary owner312, eight finite paratext client owners and summary-content owner312, widgetv38; no generic grammar/schema/DOM/SHA/build/auditor change.",
+    "historical_function_and_literal_oracles_preserved": true,
+    "V1_source_evidence_and_V2_exact_notice_inverse_retained": true
+  },
+  "rights_and_source_limits": {
+    "specific_text_terms": "Jonathan S. Walters/Whitman College CC BY-NC-SA4.0; generic siteCCBY does not relax textual terms.",
+    "full_notices_provenance_disclaimer_changes_NC_SA_retained": true,
+    "live_only_consent_English_metadata_and_hashes_only_bundled": true,
+    "new_media_commercial_grant": false,
+    "all_existing_holds_unchanged": true,
+    "publisher306307_excluded_as_canonical308309": true,
+    "publisher260266280_excluded": true,
+    "source49_versus_actual51_preserved": true,
+    "summary_edition_order_difference_displayed": true,
+    "no_wording_reconstruction_or_variant_inference": true
+  },
+  "limitations": [
+    "223 optional-source cases skipped in full check; all14 newest source-enabled cases separately passed with0skips.",
+    "Six explicitly live evaluation cases skipped; fixture success does not establish live upstream availability.",
+    "Chromium viewport emulation and simulated widget bridges are not physical-device, human assistive, signed-in-host, Firefox/WebKit/Safari or specialist acceptance. No new axe-scan claim.",
+    "Complete publisher-edition translation is not line-complete VRI or full chapter31 coverage; remaining queue/holds are not activated.",
+    "Whole-body hash metadata does not authenticate arbitrary forged partial-page words; backend raw-source checks and authentic displayed-output evidence have distinct scopes.",
+    "No PWA/offline-library claim.",
+    "This local-only candidate has no exact new-commit remote CI result."
+  ],
+  "existing_remote_job": {
+    "run": 44700419900,
+    "head": "2449c43da05030e4069aa09c1f1f515ece599c6a",
+    "job": 136167153764,
+    "conclusion": "cancelled",
+    "started": "2026-11-20T08:10:20Z",
+    "completed": "2026-11-20T14:10:39Z",
+    "elapsed_seconds": 21619,
+    "step6_cancelled_at": "2026-11-20T14:10:33Z",
+    "decoded_log_sha256": "ba0418c375f5a36ae404bf4a6447e5d201ac429694adf12605f13ef9921972f7",
+    "decoded_log_bytes": 254312,
+    "decoded_UTF16_length": 253936,
+    "explicit_not_ok_test_lines": 0,
+    "only_CI_error": "The operation was canceled.",
+    "cause_or_cancel_actor_established": false,
+    "annotations_not_available": true,
+    "remote_actions_by_root": [],
+    "new_candidate_CI_approval_inferred": false
+  },
+  "concrete_blockers": [],
+  "local_implementation_approval": true,
+  "permission_for_root_only": {
+    "copy_this_exact_review_as": "docs/evidence/apadana/THERA_301_310_FINAL_REVIEW.json",
+    "copy_exact_snapshot_as": "docs/evidence/apadana/THERA_301_310_FINAL_REVIEW_SNAPSHOT.json",
+    "add_only_these2_metadata_files_to_the91_reviewed_files": true,
+    "normal_local_commit_of93_exact_files": true,
+    "further_changes_to_reviewed91": false
+  },
+  "remote_CI_approval": false,
+  "release_approval": false,
+  "push_approval": false,
+  "main_change_approval": false,
+  "deployment_approval": false,
+  "force_push_approval": false,
+  "outreach_approval": false,
+  "project_code_test_build_server_Git_network_execution_by_reviewer": false
+}

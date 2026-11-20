@@ -226,7 +226,7 @@ export function parseTheraApadana(raw, profile) {
   }
   let chapter_summary;
   if (profile.chapter_summary) {
-    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182', 'tha-ap192', 'tha-ap202', 'tha-ap212', 'tha-ap222', 'tha-ap252', 'tha-ap232', 'tha-ap242', 'tha-ap272'].includes(profile.id)) fail();
+    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182', 'tha-ap192', 'tha-ap202', 'tha-ap212', 'tha-ap222', 'tha-ap252', 'tha-ap232', 'tha-ap242', 'tha-ap272', 'tha-ap312'].includes(profile.id)) fail();
     // Publisher230 joins its summary heading to the verse paragraph. Keep the
     // exact original hard break, with no synthetic blank paragraph after it.
     const marker = profile.id === 'tha-ap232' ? '\n\nThe Summary:  \n' : '\n\nThe Summary:\n\n';

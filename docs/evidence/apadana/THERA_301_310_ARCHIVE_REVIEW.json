@@ -1,0 +1,303 @@
+{
+  "schema": "reviewed-current325-final-archive-approval-v1",
+  "status": "APPROVE_EXACT_ARCHIVE_BYTES_LOCAL_UNPUBLISHED_ONLY",
+  "reviewed_utc": "2026-11-20T14:01:02.977304+00:00",
+  "archive": "/tmp/pali-301-310-installed/pali-canon-mcp-2.1.0.tgz",
+  "archive_sha256": "cf4b958ce15a79ac58357cb1d18eff65142bd1e9699ce98e233a9ac115ba656d",
+  "archive_bytes": 40724221,
+  "member_inventory": {
+    "file": "/tmp/pali-301-310-package-review/ARCHIVE_MEMBER_INVENTORY.json",
+    "sha256": "2e97d8712fddf00fe00f4d9775fe605ed5eafeb0ef4e24b9c36fb3f16661e452"
+  },
+  "genuine_install": "/tmp/pali-301-310-installed/genuine/node_modules/pali-canon-mcp",
+  "runtime_approval": {
+    "sha256": "bae09c75ce5bb5d90e62044b60f5ac468e0c3c0569484117e28f938720aabf09",
+    "bytes": 15403
+  },
+  "root_install_receipt": {
+    "sha256": "3cd1fe12bfda3291e30e87b1871dc6052bccc500f13cc3a40b702bd3a11caf08",
+    "bytes": 11630
+  },
+  "verification": {
+    "regular_archive_members": 39,
+    "actual_archive_checkout_installed_byte_equal": 39,
+    "actual_installed_inventory_no_extra_files": true,
+    "runtime_files_equal_frozen_review": 34,
+    "prior_links_literal_exact": 317,
+    "new_A_B_maps_literal_exact": 8,
+    "total_ordered_links": 325,
+    "canon_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+    "canon_units": 8544,
+    "canon_books": 61,
+    "source_note_sidecar_sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+    "runtime_review_input_authorities_rehashed_unchanged": 20,
+    "source_build_closure_and_notice_inverse_reuse": "Bound immutable bae09runtime review; no new behavior claim.",
+    "offline_no_scripts_zero_registry": "Root sealed receipt; not reexecuted by reviewer."
+  },
+  "copy_policy_review": {
+    "A": {
+      "file": "THERA_301_310_COPY_POLICY.json",
+      "sha256": "d5cee3bdc61e461256b0ab5e31b6d2773129db35545ebf162386269276e267fc"
+    },
+    "B": {
+      "sha256": "e9d1099906737e0674c40de66bcd9b0844922e8b46a48837fca972ac2e19d054",
+      "bytes": 528
+    },
+    "metadata_hashes_only": true,
+    "scope": "Exact8publisher-edition poems; summary312 separately owns note8;49vs51/held306307 caveats remain; no wholechapter or linecompleteVRI claim.",
+    "finite_original_text_probes": 88,
+    "probe_scan_payloads": 42,
+    "probe_hits": 0,
+    "probe_coverage": [
+      {
+        "id": "tha-ap303",
+        "publisher": 301,
+        "body_probes": 9,
+        "note_probes": 7,
+        "original_note_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "notes_with_robust_long_fragments": [
+          3,
+          5,
+          6
+        ],
+        "short_or_markup_split_notes_without_robust_fragment": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "id": "tha-ap304",
+        "publisher": 302,
+        "body_probes": 7,
+        "note_probes": 0,
+        "original_note_numbers": [
+          1,
+          2,
+          3
+        ],
+        "notes_with_robust_long_fragments": [],
+        "short_or_markup_split_notes_without_robust_fragment": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "tha-ap305",
+        "publisher": 303,
+        "body_probes": 6,
+        "note_probes": 10,
+        "original_note_numbers": [
+          1,
+          2,
+          3
+        ],
+        "notes_with_robust_long_fragments": [
+          1,
+          2,
+          3
+        ],
+        "short_or_markup_split_notes_without_robust_fragment": []
+      },
+      {
+        "id": "tha-ap306",
+        "publisher": 304,
+        "body_probes": 12,
+        "note_probes": 6,
+        "original_note_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "notes_with_robust_long_fragments": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "short_or_markup_split_notes_without_robust_fragment": [
+          1,
+          5,
+          7
+        ]
+      },
+      {
+        "id": "tha-ap307",
+        "publisher": 305,
+        "body_probes": 5,
+        "note_probes": 1,
+        "original_note_numbers": [
+          1,
+          2,
+          3
+        ],
+        "notes_with_robust_long_fragments": [
+          2
+        ],
+        "short_or_markup_split_notes_without_robust_fragment": [
+          1,
+          3
+        ]
+      },
+      {
+        "id": "tha-ap310",
+        "publisher": 308,
+        "body_probes": 4,
+        "note_probes": 0,
+        "original_note_numbers": [
+          1
+        ],
+        "notes_with_robust_long_fragments": [],
+        "short_or_markup_split_notes_without_robust_fragment": [
+          1
+        ]
+      },
+      {
+        "id": "tha-ap311",
+        "publisher": 309,
+        "body_probes": 6,
+        "note_probes": 0,
+        "original_note_numbers": [
+          1
+        ],
+        "notes_with_robust_long_fragments": [],
+        "short_or_markup_split_notes_without_robust_fragment": [
+          1
+        ]
+      },
+      {
+        "id": "tha-ap312",
+        "publisher": 310,
+        "body_probes": 8,
+        "note_probes": 7,
+        "original_note_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "notes_with_robust_long_fragments": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "short_or_markup_split_notes_without_robust_fragment": [
+          1,
+          6,
+          7,
+          8
+        ]
+      }
+    ],
+    "probe_limit": "Finite long-fragment absence plus exact metadata-only sealed maps/member whitelist; not an exhaustive semantic proof. Short notes/title labels can appear as metadata and are not asserted absent. No probe wording saved/output.",
+    "no_media_members": true,
+    "probe_method": "At least30-character original ASCII word/punctuation runs with\u22655words, maximum72characters, taken in-memory from non-heading original body lines or original numbered note definitions after tag stripping only. All8 poems have body probes; note fragment coverage/omissions explicitly enumerated. Checked all39 literal members plus2decompressedgzip members and logical canon; no wording saved."
+  },
+  "inputs": {
+    "/tmp/pali-301-310-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json": {
+      "sha256": "bae09c75ce5bb5d90e62044b60f5ac468e0c3c0569484117e28f938720aabf09",
+      "bytes": 15403
+    },
+    "/tmp/pali-301-310-installed/PACKAGE_INSTALL_RECEIPT.json": {
+      "sha256": "3cd1fe12bfda3291e30e87b1871dc6052bccc500f13cc3a40b702bd3a11caf08",
+      "bytes": 11630
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_301_310_APPROVAL.json": {
+      "sha256": "5b6ee312e81f422e464922a53354800f492c571ec98f837fa119ba01de6c7042",
+      "bytes": 47207
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_301_310_EXPECTED_PROFILES.json": {
+      "sha256": "e2c5c83e4a9062bd68bb56728e0e536c8a549810fff1071aaa087b7d32bcbaf7",
+      "bytes": 27958
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_301_310_EXPECTED_LINKS.json": {
+      "sha256": "422f6790a7b3866704091d2c70814b600458e61918035966a4746c5ac345f034",
+      "bytes": 28617
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_301_310_SOURCE_APPROVAL.json": {
+      "sha256": "276fcc2b31713b8e1553f7a6b05ff6a0d5089d9d71f3f23d2efb6bd00bf598a3",
+      "bytes": 82765
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_301_310_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "sha256": "dc85d778b6d8569cb4231b7e493ff60338de0fc0013744ea37909135f1a253da",
+      "bytes": 64234
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_301_310_COPY_POLICY.json": {
+      "sha256": "d5cee3bdc61e461256b0ab5e31b6d2773129db35545ebf162386269276e267fc",
+      "bytes": 1871
+    },
+    "/tmp/pali-thera301-310-local/docs/evidence/apadana/THERA_301_310_INDEPENDENT_COPY_POLICY.json": {
+      "sha256": "e9d1099906737e0674c40de66bcd9b0844922e8b46a48837fca972ac2e19d054",
+      "bytes": 528
+    },
+    "/tmp/pali-301-310-preflight/TRACKED_BASELINE_317.json": {
+      "sha256": "a1da899a978257b82433f9965e5edb89fcbb6db27a1d6ba28bc35e0da4accd0e",
+      "bytes": 2563109
+    },
+    "/tmp/pali-after280-source-prep/raw/src/_poems/chapter-3/poem-301.md": {
+      "sha256": "bfcec617ee5987e83bfb8f7577212a6d2ba12d8723e2d266438bde3eb750ca7c",
+      "bytes": 1703
+    },
+    "/tmp/pali-after280-source-prep/raw/src/_poems/chapter-3/poem-302.md": {
+      "sha256": "d917549c9e0b73e3ca1d9813f3191571cc005cf3df5391cf981ac815300581fa",
+      "bytes": 999
+    },
+    "/tmp/pali-after280-source-prep/raw/src/_poems/chapter-3/poem-303.md": {
+      "sha256": "3e14bdff87cdd14d8b5d82c6dfffb15b44db4da9c8b2f2903439407232169f75",
+      "bytes": 1840
+    },
+    "/tmp/pali-after280-source-prep/raw/src/_poems/chapter-3/poem-304.md": {
+      "sha256": "42019b58ec5d47b70a11a45e35c57f766d77e1f7706eac1233425e81570c16cd",
+      "bytes": 2766
+    },
+    "/tmp/pali-after280-source-prep/raw/src/_poems/chapter-3/poem-305.md": {
+      "sha256": "a5d7840990e96df7d0a0721c7801c560c8bb987eeb9d9cd4f09572e953a48a6a",
+      "bytes": 1070
+    },
+    "/tmp/pali-after280-source-prep/raw/src/_poems/chapter-3/poem-308.md": {
+      "sha256": "a0294e61e20e01f34c013bd2f12781116ce6f469dce8a515b063b100a8d06818",
+      "bytes": 866
+    },
+    "/tmp/pali-after280-source-prep/raw/src/_poems/chapter-3/poem-309.md": {
+      "sha256": "e24177fc5986ce7220c72731e93f07ebff8f47d1b19f3b27de0d9ce6241ec620",
+      "bytes": 880
+    },
+    "/tmp/pali-after280-source-prep/raw/src/_poems/chapter-3/poem-310.md": {
+      "sha256": "f96bb36873c528c5fc05128c415978bbb2ae0f0c32b7e4dd0f49d7f3af0dffe6",
+      "bytes": 2252
+    }
+  },
+  "client_authorship_limit": "Reviewer authored only two finite client inputs. This byte/source-authority review is not independent final review of all implementation.",
+  "reviewer_execution_scope": "Own standard-library tar/JSON/gzip/hash reads only; no project code/build/browser/server/Git/test/network execution.",
+  "archive_byte_approval": true,
+  "behavior_approval": false,
+  "full_check_approval": false,
+  "implementation_acceptance": false,
+  "remote_CI_approval": false,
+  "release_or_push_approval": false,
+  "remaining_gates": [
+    "Independent final implementation and root behavioral/full-check evidence remain separate.",
+    "No remote publication authorization."
+  ],
+  "review_script": {
+    "path": "/tmp/pali-301-310-package-review/review_archive325.py",
+    "sha256": "88b72492bf4b36663b069a722481a03a65e8beb5dd1ba2b89575428fba175c9b"
+  }
+}

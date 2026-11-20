@@ -1,0 +1,17 @@
+{
+  "status": "B_ORIGINAL_FIRST_EIGHT_PRECOMPARE_CORE_IMMUTABLE",
+  "files": {
+    "derive_metadata_B.py": "3b2a37806c72675a373c231eb53bfdc0f5cdde3308ae254b5c1bea4859aac789",
+    "INDEPENDENT_NORMALIZATION.json": "e676ddea79a40ef1d6b6c9ed035159ce6f7bff8df317c058c4f77804b0a1f4c3",
+    "ORIGINAL_XML_AND_CONTEXT.json": "c50cd1c9c80148fa5241f3ca3cf6af6debf4a1b078752d715a7f088cadc4a274",
+    "ROOT_SEGMENT_AND_APPARATUS.json": "0249f3cd1b7da1e4249df5086f7caff8e1772a5c455b30607242e5d4885bbf5a",
+    "RIGHTS_REVIEW.json": "5d5fb19711861d997e31fca9bf947abe256ead24467cec0ce6bb725bae9e2ce0",
+    "COPY_POLICY.json": "e9d1099906737e0674c40de66bcd9b0844922e8b46a48837fca972ac2e19d054",
+    "README.md": "b5c9faedb18deb4b30d03cc6e6025c51e5a2c9599bc00d8c2cadb9c0e0cd01ab"
+  },
+  "A_core_recipe_or_new_production_outputs_read": false,
+  "production_normalizer_import_or_execution": false,
+  "full_wording_payload_files_created": false,
+  "media_network_requests": 0,
+  "runtime_activation_release_push_approval": false
+}

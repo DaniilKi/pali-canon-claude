@@ -1,0 +1,125 @@
+{
+  "status": "APPROVE_SPECIFIC_TEXT_TERMS_FOR_EIGHT_PINNED_POEMS_AND_SEPARATE_SUMMARY_ONLY",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "full_original_artifacts_read": true,
+  "applicable_license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "creator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "specific_notice_evidence": {
+    "about": "The Translation identifies PTS/BJTS mixed-edition method, uncertain readings, bracketed interpolations and note conventions; License explicitly applies CC-BY-NC-SA to translation text and site code.",
+    "footer": "Specific NC-SA link and Walters/Whitman publisher attribution.",
+    "epub": "Walters creator, Walters/Whitman publisher and explicit NC-SA4 URI.",
+    "LICENSE": "Full CC BY-NC-SA4 legal code, including attribution, source/license/disclaimer and change notices, NC, SA and no endorsement/downstream restrictions.",
+    "generic_site_json": "Developer Dana Johnson generic CC-BY4 metadata does not supersede the specific translation notices."
+  },
+  "required_notices": [
+    "creator and designated attribution",
+    "supplied copyright",
+    "CC BY-NC-SA4 link/text",
+    "warranty disclaimer notice",
+    "exact source URI and revision",
+    "truthful presentation/extraction modifications and previous modification indications",
+    "noncommercial limitation",
+    "ShareAlike for adapted material",
+    "no endorsement",
+    "no additional downstream restrictions"
+  ],
+  "per_poem_exceptions_found": false,
+  "per_poem_scope": {
+    "tha-ap303": {
+      "poem": 301,
+      "raw_sha256": "bfcec617ee5987e83bfb8f7577212a6d2ba12d8723e2d266438bde3eb750ca7c",
+      "license": "CC BY-NC-SA 4.0",
+      "media_approved": false
+    },
+    "tha-ap304": {
+      "poem": 302,
+      "raw_sha256": "d917549c9e0b73e3ca1d9813f3191571cc005cf3df5391cf981ac815300581fa",
+      "license": "CC BY-NC-SA 4.0",
+      "media_approved": false
+    },
+    "tha-ap305": {
+      "poem": 303,
+      "raw_sha256": "3e14bdff87cdd14d8b5d82c6dfffb15b44db4da9c8b2f2903439407232169f75",
+      "license": "CC BY-NC-SA 4.0",
+      "media_approved": false
+    },
+    "tha-ap306": {
+      "poem": 304,
+      "raw_sha256": "42019b58ec5d47b70a11a45e35c57f766d77e1f7706eac1233425e81570c16cd",
+      "license": "CC BY-NC-SA 4.0",
+      "media_approved": false
+    },
+    "tha-ap307": {
+      "poem": 305,
+      "raw_sha256": "a5d7840990e96df7d0a0721c7801c560c8bb987eeb9d9cd4f09572e953a48a6a",
+      "license": "CC BY-NC-SA 4.0",
+      "media_approved": false
+    },
+    "tha-ap310": {
+      "poem": 308,
+      "raw_sha256": "a0294e61e20e01f34c013bd2f12781116ce6f469dce8a515b063b100a8d06818",
+      "license": "CC BY-NC-SA 4.0",
+      "media_approved": false
+    },
+    "tha-ap311": {
+      "poem": 309,
+      "raw_sha256": "e24177fc5986ce7220c72731e93f07ebff8f47d1b19f3b27de0d9ce6241ec620",
+      "license": "CC BY-NC-SA 4.0",
+      "media_approved": false
+    },
+    "tha-ap312": {
+      "poem": 310,
+      "raw_sha256": "f96bb36873c528c5fc05128c415978bbb2ae0f0c32b7e4dd0f49d7f3af0dffe6",
+      "license": "CC BY-NC-SA 4.0",
+      "media_approved": false
+    }
+  },
+  "no_new_grant_inferred": [
+    "commercial use",
+    "audio/performances",
+    "fonts/images/media",
+    "third party permissions beyond supplied grant"
+  ],
+  "app_policy": "English live-only after consent; repository/package stores metadata and hashes only. No complete English/Pali payload outputs from this review.",
+  "runtime_or_redistribution_acceptance": false
+}

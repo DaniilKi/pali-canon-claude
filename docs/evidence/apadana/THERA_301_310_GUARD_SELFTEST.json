@@ -1,0 +1,33 @@
+{
+  "schema": "finite-offline-guard-adversarial-selftest-v1",
+  "status": "passed",
+  "scope": "Literal127.0.0.1 callback/listen and no outbound connections. No project server, parser or source wording emitted; no OS packet-capture claim.",
+  "stage": "/tmp/pali-guard-adversarial-waqg6N",
+  "contract_sha256": "e6f57bb56a8aa910cb843fb6a557f2382fb7b37b4d68eb8f9f0397242caad7bc",
+  "preload_sha256": "59a6595363455bd9230ec46488fe9b56ced70d7255621b542432ccc18d0ca5ae",
+  "runs": [
+    {
+      "status": "passed",
+      "mode": "fixture",
+      "expected_blocked_calls": 42,
+      "fixture_reads": 8,
+      "literal_listen": true,
+      "external_network_forwarded": 0,
+      "literal_callbacks": 4,
+      "ledger_sha256": "1aa5f72d2eadc47ecc5a2af75579d55b3166e5141dbddedfec88b9f23adcaf52",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "status": "passed",
+      "mode": "deny-all",
+      "expected_blocked_calls": 50,
+      "fixture_reads": 0,
+      "literal_listen": true,
+      "external_network_forwarded": 0,
+      "literal_callbacks": 4,
+      "ledger_sha256": "fa8048132f25929b410f54b7ffa0b79ad396ed532554c410fc1c0815ed78921c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "external_network_forwarded": 0
+}

@@ -1,0 +1,398 @@
+{
+  "original_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "VRI_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "physical_elements": 14646,
+  "canonical_tuples": 14645,
+  "all14645_tuples_exact": true,
+  "omitted_note_only_elements": [
+    {
+      "physical_element_zero_based": 1130,
+      "raw_utf16le_byte_interval": [
+        196320,
+        196466
+      ],
+      "raw_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723"
+    }
+  ],
+  "canonical_repair": false,
+  "normalization_transform_metadata": [
+    {
+      "poem": 301,
+      "owner": "note3",
+      "kind": "complementary_pandoc",
+      "state_on": "cc",
+      "state_off": "chch",
+      "raw_sha256": "4974d71293c4c32d70cc38a57a1801cc5b7743bce2500321c456d5a279b9ec7d"
+    },
+    {
+      "poem": 301,
+      "owner": "note5",
+      "kind": "complementary_pandoc",
+      "state_on": "cc",
+      "state_off": "chch",
+      "raw_sha256": "4974d71293c4c32d70cc38a57a1801cc5b7743bce2500321c456d5a279b9ec7d"
+    },
+    {
+      "poem": 301,
+      "owner": "note6",
+      "kind": "complementary_pandoc",
+      "state_on": "cc",
+      "state_off": "chch",
+      "raw_sha256": "4974d71293c4c32d70cc38a57a1801cc5b7743bce2500321c456d5a279b9ec7d"
+    },
+    {
+      "poem": 302,
+      "owner": "stanza3",
+      "kind": "complementary_pandoc",
+      "state_on": "c",
+      "state_off": "ch",
+      "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+    },
+    {
+      "poem": 304,
+      "owner": "note2",
+      "kind": "abbreviation_label",
+      "label": "BJTS",
+      "count": 1,
+      "raw_sha256": "f827420f2982713da78c69827acbb3f32ec4d78d3aa2fa67dc98fdbefab0d969"
+    },
+    {
+      "poem": 304,
+      "owner": "note3",
+      "kind": "complementary_pandoc",
+      "state_on": "c",
+      "state_off": "ch",
+      "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+    },
+    {
+      "poem": 304,
+      "owner": "note3",
+      "kind": "complementary_pandoc",
+      "state_on": "c",
+      "state_off": "ch",
+      "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+    },
+    {
+      "poem": 304,
+      "owner": "note3",
+      "kind": "abbreviation_label",
+      "label": "BJTS",
+      "count": 1,
+      "raw_sha256": "f827420f2982713da78c69827acbb3f32ec4d78d3aa2fa67dc98fdbefab0d969"
+    },
+    {
+      "poem": 304,
+      "owner": "note3",
+      "kind": "abbreviation_label",
+      "label": "PTS",
+      "count": 2,
+      "raw_sha256": "9b877f3632e06743f55149a504555292a80664a289f6be161797d6206df3d00b"
+    },
+    {
+      "poem": 304,
+      "owner": "note3",
+      "kind": "literal_greater_than_entity",
+      "raw_sha256": "77d57e39b407cbca2770fb31b55c148c757f4f84d1e2ce824c7d5cf9412a6298",
+      "text_sha256": "62b67e1f685b7fef51102005dddd27774be3fee38c42965c53aab035d0b6b221"
+    },
+    {
+      "poem": 304,
+      "owner": "note4",
+      "kind": "complementary_pandoc",
+      "state_on": "c",
+      "state_off": "ch",
+      "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+    },
+    {
+      "poem": 304,
+      "owner": "note6",
+      "kind": "abbreviation_label",
+      "label": "BJTS",
+      "count": 1,
+      "raw_sha256": "f827420f2982713da78c69827acbb3f32ec4d78d3aa2fa67dc98fdbefab0d969"
+    },
+    {
+      "poem": 304,
+      "owner": "note6",
+      "kind": "abbreviation_label",
+      "label": "PTS",
+      "count": 1,
+      "raw_sha256": "9b877f3632e06743f55149a504555292a80664a289f6be161797d6206df3d00b"
+    },
+    {
+      "poem": 305,
+      "owner": "note2",
+      "kind": "abbreviation_label",
+      "label": "BJTS",
+      "count": 1,
+      "raw_sha256": "f827420f2982713da78c69827acbb3f32ec4d78d3aa2fa67dc98fdbefab0d969"
+    },
+    {
+      "poem": 305,
+      "owner": "note2",
+      "kind": "abbreviation_label",
+      "label": "PTS",
+      "count": 1,
+      "raw_sha256": "9b877f3632e06743f55149a504555292a80664a289f6be161797d6206df3d00b"
+    },
+    {
+      "poem": 310,
+      "owner": "note3",
+      "kind": "abbreviation_label",
+      "label": "BJTS",
+      "count": 1,
+      "raw_sha256": "f827420f2982713da78c69827acbb3f32ec4d78d3aa2fa67dc98fdbefab0d969"
+    },
+    {
+      "poem": 310,
+      "owner": "note3",
+      "kind": "abbreviation_label",
+      "label": "PTS",
+      "count": 1,
+      "raw_sha256": "9b877f3632e06743f55149a504555292a80664a289f6be161797d6206df3d00b"
+    }
+  ],
+  "upstream_src_tree_sha256": "d049c106325b6b4644b8f779d025753af1d0a51d360961b79fa9d5659755488f",
+  "all_eight_source_blob_memberships_verified": true,
+  "boundary_only_source_artifacts": [
+    {
+      "publisher_poem": 300,
+      "raw_sha256": "adbaebf31e860c965079b5f2c9dd9ef4df7a4105c1c6e4d11810e61772bd55ed",
+      "git_blob_sha1": "b5907a64d21bfb5e31518265cab7e6d1dcd50998",
+      "source_scope_or_normalization_approval": false
+    },
+    {
+      "publisher_poem": 306,
+      "raw_sha256": "49938f1b1a77371d1c57e8c634bcc4c0a11ecfde470e5f291df93fc39ea45501",
+      "git_blob_sha1": "cd65d8922c63b79583ce04f499c69353a089ff22",
+      "source_scope_or_normalization_approval": false
+    },
+    {
+      "publisher_poem": 307,
+      "raw_sha256": "ada8b191a0d51a5820d2648c8b8ca774ce1e8c2ab02a039e903a1964e740ad64",
+      "git_blob_sha1": "62be9412d6b026ea27dbc4d1c8cd19eea1f86512",
+      "source_scope_or_normalization_approval": false
+    },
+    {
+      "publisher_poem": 311,
+      "raw_sha256": "299ba3436c1d72026b66a8d6e4d3edb4f39f7b489c6c9cfcc94c1facb88a9599",
+      "git_blob_sha1": "9d4404387ed07c5db43452ec1ec5cafd62491df5",
+      "source_scope_or_normalization_approval": false
+    }
+  ],
+  "chapter31_original_label_audit": [
+    {
+      "publisher_poem": 301,
+      "raw_sha256": "bfcec617ee5987e83bfb8f7577212a6d2ba12d8723e2d266438bde3eb750ca7c",
+      "physical_entries": 4,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "printed_global_labels_verbatim": [
+        "2717",
+        "2718",
+        "2719",
+        "2720"
+      ],
+      "approved_in_this_scope": true
+    },
+    {
+      "publisher_poem": 302,
+      "raw_sha256": "d917549c9e0b73e3ca1d9813f3191571cc005cf3df5391cf981ac815300581fa",
+      "physical_entries": 4,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "printed_global_labels_verbatim": [
+        "2721",
+        "2722",
+        "2723",
+        "2724"
+      ],
+      "approved_in_this_scope": true
+    },
+    {
+      "publisher_poem": 303,
+      "raw_sha256": "3e14bdff87cdd14d8b5d82c6dfffb15b44db4da9c8b2f2903439407232169f75",
+      "physical_entries": 4,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "printed_global_labels_verbatim": [
+        "2725",
+        "2726",
+        "2727",
+        "2728"
+      ],
+      "approved_in_this_scope": true
+    },
+    {
+      "publisher_poem": 304,
+      "raw_sha256": "42019b58ec5d47b70a11a45e35c57f766d77e1f7706eac1233425e81570c16cd",
+      "physical_entries": 7,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "printed_global_labels_verbatim": [
+        "2729",
+        "2730",
+        "2731",
+        "2732",
+        "2733",
+        "2734",
+        "2735"
+      ],
+      "approved_in_this_scope": true
+    },
+    {
+      "publisher_poem": 305,
+      "raw_sha256": "a5d7840990e96df7d0a0721c7801c560c8bb987eeb9d9cd4f09572e953a48a6a",
+      "physical_entries": 4,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "printed_global_labels_verbatim": [
+        "2736",
+        "2737",
+        "2738",
+        "2739"
+      ],
+      "approved_in_this_scope": true
+    },
+    {
+      "publisher_poem": 306,
+      "raw_sha256": "49938f1b1a77371d1c57e8c634bcc4c0a11ecfde470e5f291df93fc39ea45501",
+      "physical_entries": 7,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        4
+      ],
+      "printed_global_labels_verbatim": [
+        "2740",
+        "2741-2742",
+        "2743",
+        "2744",
+        "2745",
+        "2746",
+        "2747"
+      ],
+      "approved_in_this_scope": false
+    },
+    {
+      "publisher_poem": 307,
+      "raw_sha256": "ada8b191a0d51a5820d2648c8b8ca774ce1e8c2ab02a039e903a1964e740ad64",
+      "physical_entries": 6,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "printed_global_labels_verbatim": [
+        "2748-49",
+        "2750",
+        "2751",
+        "2752",
+        "2753",
+        "2754"
+      ],
+      "approved_in_this_scope": false
+    },
+    {
+      "publisher_poem": 308,
+      "raw_sha256": "a0294e61e20e01f34c013bd2f12781116ce6f469dce8a515b063b100a8d06818",
+      "physical_entries": 4,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "printed_global_labels_verbatim": [
+        "2755",
+        "2756",
+        "2757",
+        "2758"
+      ],
+      "approved_in_this_scope": true
+    },
+    {
+      "publisher_poem": 309,
+      "raw_sha256": "e24177fc5986ce7220c72731e93f07ebff8f47d1b19f3b27de0d9ce6241ec620",
+      "physical_entries": 3,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "printed_global_labels_verbatim": [
+        "2759-2760",
+        "2761",
+        "2762"
+      ],
+      "approved_in_this_scope": true
+    },
+    {
+      "publisher_poem": 310,
+      "raw_sha256": "f96bb36873c528c5fc05128c415978bbb2ae0f0c32b7e4dd0f49d7f3af0dffe6",
+      "physical_entries": 4,
+      "printed_local_label_occurrences": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "printed_global_labels_verbatim": [
+        "2763",
+        "2764-2765",
+        "2766",
+        "2767"
+      ],
+      "approved_in_this_scope": true
+    }
+  ],
+  "chapter31_counts": {
+    "VRI_stated": 51,
+    "VRI_numbered": 51,
+    "publisher_stated_summary": 49,
+    "publisher_printed_local_label_occurrences": 51,
+    "publisher_physical_entries": 47,
+    "approved_subset_local_labels": 36,
+    "approved_subset_physical_entries": 34,
+    "held_publishers": [
+      306,
+      307
+    ],
+    "whole_chapter_english_approval": false
+  }
+}

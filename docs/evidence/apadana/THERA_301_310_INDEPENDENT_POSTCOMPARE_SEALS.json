@@ -1,0 +1,12 @@
+{
+  "status": "B_FINAL_SOURCE_FINITE_NORMALIZATION_EXACT_V2_MAPS_ONLY",
+  "files": {
+    "A_CORE_COMPARISON.json": "169242d2fa51d0f81622a99edd2d709a5f371cb814a2a12fee01326e0086205d",
+    "V2_NOTICE_COMPARISON.json": "e2ec4738ec437c3756940cc6b63df38eebfa0cad65c0a540dacb68394d030385",
+    "SOURCE_APPROVAL.json": "dc85d778b6d8569cb4231b7e493ff60338de0fc0013744ea37909135f1a253da",
+    "compare_A_core.py": "6491688896d131ad004773459d75eabeb4c1353005d4b6dd44e95e4151d9a86f",
+    "review_v2_and_approve.py": "95b6cd5419159dffc85ec45d37c53dc260e30418fe8ec27976b6e56a3a32c86d"
+  },
+  "precompare_sha256": "9b8869021c486ea67f572721a9f82919761e1ab10ed447f60345136f69e521ea",
+  "runtime_activation_release_push_approval": false
+}

@@ -1,0 +1,795 @@
+{
+  "status": "B_INDEPENDENT_ROOT_SEGMENT_BOUNDARIES_AND_APPARATUS_NOT_RUNTIME_APPROVAL",
+  "unit_proofs": [
+    {
+      "id": "tha-ap303",
+      "segments": [
+        {
+          "ref": "tha-ap303/1",
+          "type": "heading",
+          "blocks": [
+            9046,
+            9047
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "1dc8e08e30b22d8360d4f2188a5a35b6110c82b8c5e76ca5758d39063b2cf83c",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap303/2",
+          "type": "heading",
+          "blocks": [
+            9047,
+            9048
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "c90757bba14ec5fe59851b78d79b9586e27805a15ef18d7c3fb1c0cbbd5dd62d",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap303/3",
+          "type": "verse",
+          "blocks": [
+            9048,
+            9051
+          ],
+          "vri_paragraph": "1",
+          "pali_text_sha256": "2ea253ce88a77d0ba631dbe087263957b383ff702abd7319e4a7caaf098c8a11",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap303/4",
+          "type": "verse",
+          "blocks": [
+            9051,
+            9054
+          ],
+          "vri_paragraph": "2",
+          "pali_text_sha256": "b150f9e24f370c8a0d3ce835877f42be7ac68fa5cbf5a7e1e5f6b50615b7a4ef",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap303/5",
+          "type": "verse",
+          "blocks": [
+            9054,
+            9057
+          ],
+          "vri_paragraph": "3",
+          "pali_text_sha256": "3ec98f6a996bb9d8e278172e84573775eaf13b1bf40ef0e8da9fa6530b281604",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap303/6",
+          "type": "verse",
+          "blocks": [
+            9057,
+            9060
+          ],
+          "vri_paragraph": "4",
+          "pali_text_sha256": "67b9e0a1446ef1fa07d2cbe013aed8b30e605e38a91c6ed258f862e5fe717780",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap303/7",
+          "type": "prose",
+          "blocks": [
+            9060,
+            9061
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "8c5759c3c726990a24c2a3ca6e03aef5084223013fd40b1126f9a7c9fbce10c7",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap303/8",
+          "type": "prose",
+          "blocks": [
+            9061,
+            9062
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "50f19e57d20e88c2ac725eed4567b19fb215ba75784234759e6a3a7d3c88ee59",
+          "VRI_note_sha256s": []
+        }
+      ],
+      "poem_last_ref": "tha-ap303/8",
+      "publisher_preface_absent": true,
+      "untranslated_VRI_chapter_heading_ref": "tha-ap303/1"
+    },
+    {
+      "id": "tha-ap304",
+      "segments": [
+        {
+          "ref": "tha-ap304/1",
+          "type": "heading",
+          "blocks": [
+            9062,
+            9063
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "fd46a467be602ccfbeed5476260b22d14bac054d9c351e10a1b82dc1385cb6e1",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap304/2",
+          "type": "verse",
+          "blocks": [
+            9063,
+            9066
+          ],
+          "vri_paragraph": "5",
+          "pali_text_sha256": "391b77b8cf7e632e4671931b43d4e6d8240d69a892da7f1ae6774949b37ee759",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap304/3",
+          "type": "verse",
+          "blocks": [
+            9066,
+            9069
+          ],
+          "vri_paragraph": "6",
+          "pali_text_sha256": "f4603a69b2b8d8da8053096d741b302b3f17c4144297ba7330d39e9d2ff70e1a",
+          "VRI_note_sha256s": [
+            "6fb22aca4af15a7b686af46e3bf8b4f553440a2fcc4c4f2895ce2846c35d42ca"
+          ]
+        },
+        {
+          "ref": "tha-ap304/4",
+          "type": "verse",
+          "blocks": [
+            9069,
+            9072
+          ],
+          "vri_paragraph": "7",
+          "pali_text_sha256": "0a74d08d2e7b0f13886515e9144b8b52d253499f3e96c546ccd4b483010b4db6",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap304/5",
+          "type": "verse",
+          "blocks": [
+            9072,
+            9074
+          ],
+          "vri_paragraph": "8",
+          "pali_text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap304/6",
+          "type": "prose",
+          "blocks": [
+            9074,
+            9075
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "bfa9519110a8a9b3949e6665b0989d88d81cca8f6dd92b94189644ec4a4de789",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap304/7",
+          "type": "prose",
+          "blocks": [
+            9075,
+            9076
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "56f68f995aeda97710dac0718af11ee71094d64c947e710ee93861274d28d5cc",
+          "VRI_note_sha256s": []
+        }
+      ],
+      "poem_last_ref": "tha-ap304/7",
+      "publisher_preface_absent": true
+    },
+    {
+      "id": "tha-ap305",
+      "segments": [
+        {
+          "ref": "tha-ap305/1",
+          "type": "heading",
+          "blocks": [
+            9076,
+            9077
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "b8c41a88f410d719977819ef0808f9f66e07152421ed88db18be59083b2dcc09",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap305/2",
+          "type": "verse",
+          "blocks": [
+            9077,
+            9080
+          ],
+          "vri_paragraph": "9",
+          "pali_text_sha256": "6a2c08982ae6e42ccd307b04343a3fe72c95bc8b45932e2f40aea93d0db4be4f",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap305/3",
+          "type": "verse",
+          "blocks": [
+            9080,
+            9083
+          ],
+          "vri_paragraph": "10",
+          "pali_text_sha256": "f1fabbb9357fce1773d2bb81cc15f4e4b4d5b1651e1f49f03e8de31b8ba0f8a2",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap305/4",
+          "type": "verse",
+          "blocks": [
+            9083,
+            9086
+          ],
+          "vri_paragraph": "11",
+          "pali_text_sha256": "77f0f3479af844bfc8d64f2763156db39905bd6d5ea9879b437c778cb50e3972",
+          "VRI_note_sha256s": [
+            "db7013ba0c3a620da264fae8c79004be51f22d93b23dea730dc92de6958f5514"
+          ]
+        },
+        {
+          "ref": "tha-ap305/5",
+          "type": "verse",
+          "blocks": [
+            9086,
+            9088
+          ],
+          "vri_paragraph": "12",
+          "pali_text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap305/6",
+          "type": "prose",
+          "blocks": [
+            9088,
+            9089
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "251f17cf425aa4ed2776cbbcbfeac5b085fb013b6b0ae5a583d45c303217dd0b",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap305/7",
+          "type": "prose",
+          "blocks": [
+            9089,
+            9090
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "066f273c3e70cc2b4f9de29ae58375b839129c565be9953a9c0b8f3c3c50a008",
+          "VRI_note_sha256s": []
+        }
+      ],
+      "poem_last_ref": "tha-ap305/7",
+      "publisher_preface_absent": true
+    },
+    {
+      "id": "tha-ap306",
+      "segments": [
+        {
+          "ref": "tha-ap306/1",
+          "type": "heading",
+          "blocks": [
+            9090,
+            9091
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "98f426f6dfda7dfc7bdc1e1f6d271786cde59342540d6ef51f5e60525913a1a9",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap306/2",
+          "type": "verse",
+          "blocks": [
+            9091,
+            9094
+          ],
+          "vri_paragraph": "13",
+          "pali_text_sha256": "6e9a6abe1b09d123efc7a807425f2087d3f969a1d23d6d7c953d71d26b676c1b",
+          "VRI_note_sha256s": [
+            "7a3685620580edec1cc3b0b655947a96f0ae4cf51c9f73c32b1c8eb5b7a36503",
+            "2d1f30fd2bd22a4fe73e98e3b0edb324c99d17447b4dbbc47ea4c3ff872fda8e"
+          ]
+        },
+        {
+          "ref": "tha-ap306/3",
+          "type": "verse",
+          "blocks": [
+            9094,
+            9097
+          ],
+          "vri_paragraph": "14",
+          "pali_text_sha256": "60f92c6f5b04a71983c0e003917b57e8558e810d22fe72a416590c67926e6b0a",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap306/4",
+          "type": "verse",
+          "blocks": [
+            9097,
+            9100
+          ],
+          "vri_paragraph": "15",
+          "pali_text_sha256": "0b246340cc880b90da03e1e756d0e98cd5a47deaeb1cab6238c61cd640ef1837",
+          "VRI_note_sha256s": [
+            "6b0682873871dedf9a41d0ebda37cd42cbc9a6e841daa9fcb6b8bc9e0bedfdf9"
+          ]
+        },
+        {
+          "ref": "tha-ap306/5",
+          "type": "verse",
+          "blocks": [
+            9100,
+            9103
+          ],
+          "vri_paragraph": "16",
+          "pali_text_sha256": "50b2f90f359f762dd11dc4fae89c93e9b07cd2d1f092e1216495fcad2faf4e29",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap306/6",
+          "type": "verse",
+          "blocks": [
+            9103,
+            9106
+          ],
+          "vri_paragraph": "17",
+          "pali_text_sha256": "b1a27c9711b05fc6bcee55581ec38c2f84275d27c91b6ad7a8453b6cce39f1b4",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap306/7",
+          "type": "verse",
+          "blocks": [
+            9106,
+            9109
+          ],
+          "vri_paragraph": "18",
+          "pali_text_sha256": "f1bbc932fe13f81c78bdede56747ee7467d9dc7a2c90cb49da32a28cc25ee606",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap306/8",
+          "type": "verse",
+          "blocks": [
+            9109,
+            9111
+          ],
+          "vri_paragraph": "19",
+          "pali_text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap306/9",
+          "type": "prose",
+          "blocks": [
+            9111,
+            9112
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "df0406fe1c6d907ebd160e2b69b56210b3dc5a3dcd587c49146d80f25fd4054c",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap306/10",
+          "type": "prose",
+          "blocks": [
+            9112,
+            9113
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "378d80ab3c0bf93f5779a30a9736f4ef8e081a70b21dd0894a426a69834c08ac",
+          "VRI_note_sha256s": []
+        }
+      ],
+      "poem_last_ref": "tha-ap306/10",
+      "publisher_preface_absent": true
+    },
+    {
+      "id": "tha-ap307",
+      "segments": [
+        {
+          "ref": "tha-ap307/1",
+          "type": "heading",
+          "blocks": [
+            9113,
+            9114
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "b2a3c27c34bca9fefe0a5ebd822038a50b131ae47715d9160fb06eeb28c1763c",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap307/2",
+          "type": "verse",
+          "blocks": [
+            9114,
+            9117
+          ],
+          "vri_paragraph": "20",
+          "pali_text_sha256": "e4295f64677ffbbb141c804ac17e2886ad1dd833291c5e27aa9669cc5f8115d2",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap307/3",
+          "type": "verse",
+          "blocks": [
+            9117,
+            9120
+          ],
+          "vri_paragraph": "21",
+          "pali_text_sha256": "b4f483583bd723f8b4ee51a8e2c9a0531f5e13c4954f4b14b42117875b4eae99",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap307/4",
+          "type": "verse",
+          "blocks": [
+            9120,
+            9123
+          ],
+          "vri_paragraph": "22",
+          "pali_text_sha256": "5857b2540de3af4fad5807618d4be2535e34214e02ce7783a49c649457979890",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap307/5",
+          "type": "verse",
+          "blocks": [
+            9123,
+            9125
+          ],
+          "vri_paragraph": "23",
+          "pali_text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap307/6",
+          "type": "prose",
+          "blocks": [
+            9125,
+            9126
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "29e4de3902701cc60bc05da31aababa0224f2c75367c1b680029796ace7d1c5b",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap307/7",
+          "type": "prose",
+          "blocks": [
+            9126,
+            9127
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "4cca530acda216d6e9da4b2483636af42042ff4e44df33bed2c25a2f809a5439",
+          "VRI_note_sha256s": []
+        }
+      ],
+      "poem_last_ref": "tha-ap307/7",
+      "publisher_preface_absent": true
+    },
+    {
+      "id": "tha-ap310",
+      "segments": [
+        {
+          "ref": "tha-ap310/1",
+          "type": "heading",
+          "blocks": [
+            9176,
+            9177
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "0d0f8c875da227ceb3da3398f06e32285b8d46b2025498980f747b3eba53d3a5",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap310/2",
+          "type": "verse",
+          "blocks": [
+            9177,
+            9180
+          ],
+          "vri_paragraph": "39",
+          "pali_text_sha256": "ed07874d9c90d6e723a5fa8b64c37ae1258ebb9b93cecbd27941092702ebc805",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap310/3",
+          "type": "verse",
+          "blocks": [
+            9180,
+            9183
+          ],
+          "vri_paragraph": "40",
+          "pali_text_sha256": "054f8c2b76c8c08e4193cc20d86da37b1cba2c286f2dae64e6ff4a018c050860",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap310/4",
+          "type": "verse",
+          "blocks": [
+            9183,
+            9186
+          ],
+          "vri_paragraph": "41",
+          "pali_text_sha256": "44ecbacc6d9ccd500e6a3f8481d0453bd032ac04ae64914a04e77ab1d7238649",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap310/5",
+          "type": "verse",
+          "blocks": [
+            9186,
+            9188
+          ],
+          "vri_paragraph": "42",
+          "pali_text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap310/6",
+          "type": "prose",
+          "blocks": [
+            9188,
+            9189
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "0795f40721be901513b48dbbd27c7b2e01c0141ca3a17a6801c6e31e9de484c5",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap310/7",
+          "type": "prose",
+          "blocks": [
+            9189,
+            9190
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "3fbf2f76a4a2f58c1f0f321c0521c696fe53a6c771ca8d9c36ed600cc4624b87",
+          "VRI_note_sha256s": []
+        }
+      ],
+      "poem_last_ref": "tha-ap310/7",
+      "publisher_preface_absent": true
+    },
+    {
+      "id": "tha-ap311",
+      "segments": [
+        {
+          "ref": "tha-ap311/1",
+          "type": "heading",
+          "blocks": [
+            9190,
+            9191
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "38e37493560a6ba64e6525c53c3f99e324cf6514e28728dd6a243b7ff04897bf",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap311/2",
+          "type": "verse",
+          "blocks": [
+            9191,
+            9194
+          ],
+          "vri_paragraph": "43",
+          "pali_text_sha256": "b4b7df7f6596fa29d42b0c44f9a20c3cb40ae619beb8855a79fe2f28560d65ba",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap311/3",
+          "type": "verse",
+          "blocks": [
+            9194,
+            9197
+          ],
+          "vri_paragraph": "44",
+          "pali_text_sha256": "11f117ab28ab5d2914cb24ec90df696a4dd1616b89852b1ace65278639ea12bb",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap311/4",
+          "type": "verse",
+          "blocks": [
+            9197,
+            9200
+          ],
+          "vri_paragraph": "45",
+          "pali_text_sha256": "fd95ea139c8eb2fb658fff78f0917026078d05e552666ad5aa331c8a9a79aa77",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap311/5",
+          "type": "verse",
+          "blocks": [
+            9200,
+            9202
+          ],
+          "vri_paragraph": "46",
+          "pali_text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap311/6",
+          "type": "prose",
+          "blocks": [
+            9202,
+            9203
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "f2fd78c8234f3fa285bd00f3db83dff3943b5cb470a58ed89e0236dfc687b2a9",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap311/7",
+          "type": "prose",
+          "blocks": [
+            9203,
+            9204
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "f26d6a37a8b0efc2f29f1438ab8d4e878c8e0002507b95cb3a21e8d3a0c92d14",
+          "VRI_note_sha256s": []
+        }
+      ],
+      "poem_last_ref": "tha-ap311/7",
+      "publisher_preface_absent": true
+    },
+    {
+      "id": "tha-ap312",
+      "segments": [
+        {
+          "ref": "tha-ap312/1",
+          "type": "heading",
+          "blocks": [
+            9204,
+            9205
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "3aeadf60ebb8cac7b1dc846d759cdc579e27d91ba1e549165f7e70ece0a6b688",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/2",
+          "type": "verse",
+          "blocks": [
+            9205,
+            9208
+          ],
+          "vri_paragraph": "47",
+          "pali_text_sha256": "881d6739acfd5163ee744896d64e830b5f37ddc9f78c3a71460173836dbd4078",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/3",
+          "type": "verse",
+          "blocks": [
+            9208,
+            9211
+          ],
+          "vri_paragraph": "48",
+          "pali_text_sha256": "ff74942da519ecf2c05fecf6d750ef48ff8a6874e49bc8bfaec7c62bbebefa04",
+          "VRI_note_sha256s": [
+            "d22a42ed9d4a693ca07f6a2f14bb62e88249901a5a9ff9d63b44233d1d00dce5"
+          ]
+        },
+        {
+          "ref": "tha-ap312/4",
+          "type": "verse",
+          "blocks": [
+            9211,
+            9214
+          ],
+          "vri_paragraph": "49",
+          "pali_text_sha256": "91651cd55650ebe32e7fc7b1588dddfdb1b04370f5752edc123d09bcf7194c26",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/5",
+          "type": "verse",
+          "blocks": [
+            9214,
+            9217
+          ],
+          "vri_paragraph": "50",
+          "pali_text_sha256": "d008682c9a3b30e520acc3970ecb80c579ed797cbee594858247e415dd8eb1cd",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/6",
+          "type": "verse",
+          "blocks": [
+            9217,
+            9219
+          ],
+          "vri_paragraph": "51",
+          "pali_text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/7",
+          "type": "prose",
+          "blocks": [
+            9219,
+            9220
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "b20c62be62aaa7d463396cb7fd5488c613452061acbbd8bb55febe80417eb134",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/8",
+          "type": "prose",
+          "blocks": [
+            9220,
+            9221
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "3aa570a2a2d2658b4efce8a77d3c9bc11c901bdb84129e4bd1c3d968b9cb8dc0",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/9",
+          "type": "prose",
+          "blocks": [
+            9221,
+            9222
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "69538c2078457d999aac20b778346fe2a94daf14414953dfd7e7b1ad393898c3",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/10",
+          "type": "prose",
+          "blocks": [
+            9222,
+            9223
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "67a4c9f8fb9153db7fddd800b94ba1c2915cecec6690962c6fd9f04ad7005ecd",
+          "VRI_note_sha256s": []
+        },
+        {
+          "ref": "tha-ap312/11",
+          "type": "verse",
+          "blocks": [
+            9223,
+            9226
+          ],
+          "vri_paragraph": null,
+          "pali_text_sha256": "51e695e592d3e6b6621780001c599cd418de7b5e48ccdf4f3b5e9a2d82b1d12e",
+          "VRI_note_sha256s": []
+        }
+      ],
+      "poem_last_ref": "tha-ap312/8",
+      "publisher_preface_absent": true,
+      "summary_first_ref": "tha-ap312/9",
+      "summary_last_ref": "tha-ap312/11",
+      "summary_note_numbers": [
+        8
+      ],
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "source_heading_inferred_from_poem_title": false,
+  "canonical_bytes_or_refs_changed": false,
+  "production_parser_imported": false,
+  "runtime_release_approval": false
+}

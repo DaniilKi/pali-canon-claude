@@ -40,7 +40,7 @@ function embeddedGuard() {
 }
 
 test('all152 historical metadata and caveat contracts remain unconditional while invented poem-note content refuses', () => {
-  assert.equal(WIDGET_VERSION, 'v37');
+  assert.equal(WIDGET_VERSION, 'v38');
   const checked = embeddedGuard();
   assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
   // Preserve the exact historical metadata cohort. Content must now contain

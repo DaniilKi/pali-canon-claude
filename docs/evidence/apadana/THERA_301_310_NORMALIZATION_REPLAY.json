@@ -1,0 +1,15 @@
+{
+  "status": "PASS_EIGHT_ORIGINAL_SOURCE_AND_FINITE_NORMALIZATION_METADATA_ONLY",
+  "files": {
+    "GOLDENS.json": "7b72f06b87db9e5c2d192cc0194f6602782d3ec29f29ecb5333ad665ebdd799f",
+    "EXPECTED_PROFILES.json": "e2c5c83e4a9062bd68bb56728e0e536c8a549810fff1071aaa087b7d32bcbaf7",
+    "EXPECTED_LINKS.json": "422f6790a7b3866704091d2c70814b600458e61918035966a4746c5ac345f034"
+  },
+  "original_first_facts_sha256": "f7a8355557cecb81877a59d88812b91964807435790a07b4ca84dd448368b089",
+  "poems": 8,
+  "all_xml_tuple_count": 14645,
+  "full_english_payload_files_written": 0,
+  "full_pali_payload_files_written": 0,
+  "runtime_approval": false,
+  "release_approval": false
+}

@@ -1,0 +1,53 @@
+{
+  "status": "V2_METADATA_ONLY_SAFE_COPY_ONE_FINITE_DISPLAY_NOTICE",
+  "safe_copy": [
+    "core/GOLDENS.json",
+    "core/EXPECTED_PROFILES.json",
+    "core/EXPECTED_LINKS.json",
+    "original-first/ORIGINAL_FACTS.json",
+    "ORIGINAL_FIRST_SEALS.json",
+    "PRECOMPARE_SEALS.json",
+    "SOURCE_APPROVAL.json",
+    "RIGHTS_REVIEW.json",
+    "COPY_POLICY.json",
+    "README.md",
+    "SEALS.json",
+    "portable/review_thera301_310.py",
+    "portable/STATIC_PARAMETERIZATION_REVIEW.json",
+    "v2/NOTICE_ONLY_INVERSE_REVIEW.json",
+    "v2/NOTICE_ONLY.diff"
+  ],
+  "never_copy": [
+    "raw publisher Markdown",
+    "original XML/full canonical source",
+    "complete normalized English/Pali/notes buffers",
+    "media",
+    "private drafts or saved data"
+  ],
+  "full_payload_files_created": 0,
+  "full_buffers": "in-memory only; no full payload writer/stdout mode",
+  "finite_presentation": [
+    "exact observed c/ch and cc/chch complementary state-on pairs",
+    "Markdown heading/emphasis and abbr presentation removal",
+    "HTML greater-than entity decoding",
+    "footnote references become explicit Note labels",
+    "hardbreak trailing padding removed with exact lines/paragraphs retained"
+  ],
+  "preserve": [
+    "literal ŋ/xxx/Or glossary?/more?",
+    "all original uncertain and alternative interpretations",
+    "mixed-edition names and source typos",
+    "309 combined1–2 and310 combined2–3",
+    "310 summary note8 distinct from poem notes1–7",
+    "source49 summary versus actual51",
+    "all other holds including306/307"
+  ],
+  "not_approved": [
+    "whole chapter31",
+    "line-complete VRI",
+    "new wording or source repair",
+    "media/commercial grant",
+    "runtime/package/CI/release/push"
+  ],
+  "v1_history": "Entire initial A original-first/core/formal/portable packet remains immutable; v2 maps are authoritative for reader display."
+}
