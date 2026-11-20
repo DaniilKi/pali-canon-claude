@@ -1,0 +1,15 @@
+{
+  "status": "PASS_TWO_ORIGINAL_SOURCE_AND_FINITE_NORMALIZATION_METADATA_ONLY",
+  "files": {
+    "GOLDENS.json": "b42235084b629146e898c03ca3c3623899fdb52aa0212492d65d315f1bfd330d",
+    "EXPECTED_PROFILES.json": "469448bac323d2e64f12ed16b5ce8e72439ee2a5471ee58106d3a4e47416df7a",
+    "EXPECTED_LINKS.json": "f56c00dc91c62cad541a57181ca035524939bdcfbff4b89b5263128a3a522848"
+  },
+  "original_first_facts_sha256": "1f178d9e6c346459651a972020d08e46934890a4fdf47a33d78ab8e18a3960aa",
+  "poems": 2,
+  "all_xml_tuple_count": 14645,
+  "full_english_payload_files_written": 0,
+  "full_pali_payload_files_written": 0,
+  "runtime_approval": false,
+  "release_approval": false
+}

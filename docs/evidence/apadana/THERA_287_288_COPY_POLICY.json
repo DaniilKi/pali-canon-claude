@@ -1,0 +1,37 @@
+{
+  "status": "METADATA_ONLY_TWO_SOURCE_COPY_POLICY",
+  "safe_to_copy": [
+    "core/GOLDENS.json",
+    "core/EXPECTED_PROFILES.json",
+    "core/EXPECTED_LINKS.json",
+    "core/REPLAY_RECEIPT.json",
+    "SOURCE_APPROVAL.json",
+    "RIGHTS_REVIEW.json",
+    "COPY_POLICY.json",
+    "A_B_COMPARISON.json",
+    "PRECOMPARE_SEALS.json",
+    "ORIGINAL_FIRST_SEALS.json",
+    "original-first/ORIGINAL_FACTS.json",
+    "SEALS.json",
+    "README.md",
+    "portable/review_thera287_288.py"
+  ],
+  "forbidden": [
+    "raw originalMarkdown/XML",
+    "complete English/Pali body or normalized notes payloads",
+    "mp3/audio or other media",
+    "private drafts/saved data"
+  ],
+  "full_payload_files_written": 0,
+  "full_buffers": "Memory only; no full-wording output mode or stdout",
+  "allowed_changes": [
+    "remove Markdown heading/emphasis/abbreviation presentation only",
+    "decode literal bracket escapes",
+    "footnote labels become explicit [Note N] references",
+    "remove hard-break padding but preserve paragraph/line/word/typography/numbering"
+  ],
+  "scope": "Exactly publisher287288 totha-ap289290; existing308 and other holds untouched",
+  "uncertainty": "Keep original288note4 multiple family-reference interpretations unchanged, not an editorial resolution",
+  "no_audio_activation": true,
+  "runtime_release_push_approval": false
+}

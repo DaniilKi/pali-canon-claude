@@ -1,0 +1,139 @@
+{
+  "tha-ap289": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-287.md",
+    "id": "tha-ap289",
+    "publisher_chapter": "chapter-3",
+    "poem": 287,
+    "verses": [
+      2652,
+      2654
+    ],
+    "root_verses": [
+      30,
+      32
+    ],
+    "note_count": 1,
+    "note_numbers": [
+      1
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-287/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-287/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-287.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Apadāniya",
+    "reference": "Therā Apadāna publisher poem 287; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "39615a18e301e85bcec5c9e06b92f6daa6e936768ad6357348063ff873993960",
+    "body_sha256": "f36c9f693c5c21ba3092134e5d3e832b7903a55ce4b29841eab44c9972f6398f",
+    "notes_sha256": "39ac66b378ba922a17873306edc8a6e8631b6eac6b32ab10ad522c27baf50040",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "e0d5cbda7ffe5c57c562733bb551e05f28962c145cd29fc6217c9d4e44f25ed4",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2652",
+        "suffix": "(1) [2652]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2653",
+        "suffix": "(2) [2653]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2654",
+        "suffix": "(3) [2654]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 287 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap289; title and numbering alone do not establish the mapping.",
+      "Original audio front matter names a recitation file and reciter/date/location; it is source metadata only. No audio fetched, bundled, linked as approved media, or granted media/commercial rights.",
+      "Publisher praises apadānas of the plural Well-Gone Ones/Great Sages, with own-hands wording; no named Buddha or invented recipient is supplied.",
+      "Publisher expands the attainment formula while actual VRI stanza32 has peyyāla abbreviation; preserve both without reconstructing words."
+    ]
+  },
+  "tha-ap290": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-288.md",
+    "id": "tha-ap290",
+    "publisher_chapter": "chapter-3",
+    "poem": 288,
+    "verses": [
+      2655,
+      2659
+    ],
+    "root_verses": [
+      33,
+      37
+    ],
+    "note_count": 7,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-288/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-288/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-288.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sattāhapabbajita",
+    "reference": "Therā Apadāna publisher poem 288; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "54fb2fa63503c20ac3e234424e2b23e92de78feeb3f40ea0938aa4d3d5840229",
+    "body_sha256": "6a374da419148479e447b5e81611fff11698184c8204209f6f349a9f6c065109",
+    "notes_sha256": "142aa466d49a19a3d70eaaf5b6028e33df021116429a97ce426a2c1c91fe71c2",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "5049fa6453a073788a816903e29830ba943744077143df6897d9c32b75f257bc",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2655",
+        "suffix": "(1) [2655]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2656",
+        "suffix": "(2) [2656]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2657",
+        "suffix": "(3) [2657]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2658",
+        "suffix": "(4) [2658]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2659",
+        "suffix": "(5) [2659]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 288 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap290; title and numbering alone do not establish the mapping.",
+      "Preserve the complete uncertain family-reference discussion in original note4; it offers multiple meanings and does not establish one intended referent or cause.",
+      "Publisher note3 vyasana and actual VRI byasana remain source-edition spellings without harmonization or invented variant apparatus.",
+      "Publisher Sunikkhama and actual VRI Sunikkhamā remain as printed; retain sixty-seventh aeon and seven rulers rather than normalizing number or names.",
+      "Publisher expands the final attainment formula where actual VRI stanza37 is abbreviated; scope correspondence does not prove word/line equivalence."
+    ]
+  }
+}

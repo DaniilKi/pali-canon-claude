@@ -1,0 +1,91 @@
+{
+  "status": "APPROVE_EXACT_LOCAL310_ARCHIVE_PACKAGE_BYTES_ONLY",
+  "reviewed_utc": "2026-11-20T12:16:31.076905+00:00",
+  "archive": {
+    "path": "/tmp/pali-287-288-installed/pali-canon-mcp-2.1.0.tgz",
+    "bytes": 40682325,
+    "sha256": "23217891504d4a0d17ec2fa2fa6959336c3d6e6a48af92427a283a33552ff12e"
+  },
+  "installation": "/tmp/pali-287-288-installed/genuine/node_modules/pali-canon-mcp",
+  "root_receipt": {
+    "path": "/tmp/pali-287-288-installed/PACKAGE_INSTALL_RECEIPT.json",
+    "bytes": 11630,
+    "sha256": "fa53429fd1ef50c96fa6389a3b6d4651aa56ae8a0e47403aa726c3499ffa469b"
+  },
+  "runtime_review": {
+    "path": "/tmp/pali-287-288-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+    "bytes": 10075,
+    "sha256": "57c3b1c4efdc5b75b9718f77259c5ef4ee25a85e15b257f6f64b8235f3a71daf"
+  },
+  "member_inventory": {
+    "path": "/tmp/pali-287-288-package-review/FINAL_ARCHIVE_MEMBER_INVENTORY.json",
+    "bytes": 6605,
+    "sha256": "1b6b4cabc7157f5ac5f2511c2a602c0e33d55a95d3b609832afab3b619fe48da"
+  },
+  "members": 39,
+  "runtime_members": 34,
+  "all39_tar_checkout_fresh_offline_install_byte_identical": true,
+  "all34_runtime_exact_frozen57_approval": true,
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "canonical_units": 8544,
+  "canonical_books": 61,
+  "source_note_sidecar_sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+  "source_closure_recheck": {
+    "old_src_web_build_inputs": 102,
+    "changed_only_frozen_wrapper_and_two_clients": true,
+    "current_client_hashes_and_reverse_projections_exact": true,
+    "new_module_JSON_exact_both_independent_maps": true,
+    "all_old308_links_still_exact": true
+  },
+  "English_media_bundle_review": {
+    "actual_body_or_translator_note_media_payload_fields_in_new_manifest_and_profiles": 0,
+    "exact_plaintext_original_probes": 6,
+    "probe_matches_in39members": 0,
+    "probe_scope": "Exact unformatted original spans only, not a claim every token is absent; sealed metadata-only module/data plus immutable other29 runtime paths establish the bounded new-data scope.",
+    "source_artifacts": [
+      {
+        "id": "tha-ap289",
+        "path": "src/_poems/chapter-3/poem-287.md",
+        "raw_sha256": "39615a18e301e85bcec5c9e06b92f6daa6e936768ad6357348063ff873993960"
+      },
+      {
+        "id": "tha-ap290",
+        "path": "src/_poems/chapter-3/poem-288.md",
+        "raw_sha256": "54fb2fa63503c20ac3e234424e2b23e92de78feeb3f40ea0938aa4d3d5840229"
+      }
+    ],
+    "wording_exported_by_reviewer": false,
+    "media_files_or_new_media_rights": false
+  },
+  "prior_authorities_unchanged": [
+    {
+      "path": "/tmp/pali-281-285-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 10141,
+      "sha256": "809efc477aec7bd16c6d5077114ba5932663ecf110076899f9dc5ef85917519f"
+    },
+    {
+      "path": "/tmp/pali-281-285-package-review/FINAL_ARCHIVE_APPROVAL.json",
+      "bytes": 4560,
+      "sha256": "df5c90b059dde425654eac1531271a5d77ed396cba95c7e1b9f24c509cb8a956"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 9979,
+      "sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/FINAL_PACKAGE_APPROVAL.json",
+      "bytes": 6955,
+      "sha256": "8b3e2b7a861debfb43a088603680c6129520384501b9a0847a57e2fbd8b55b61"
+    }
+  ],
+  "reviewer_authorship_limit": "Reviewer authored only two finite client guard/version changes, not all production changes. This byte review is separate from root reviewer A final implementation acceptance.",
+  "reviewer_project_code_server_build_tests_Git_network_execution": false,
+  "archive_package_byte_approval": true,
+  "behavioral_harness_approval": false,
+  "full_check_approval": false,
+  "implementation_acceptance": false,
+  "remote_ci_approval": false,
+  "publication_release_or_push_approval": false,
+  "remaining_scope": "Installed behavioral proof, full-check/final implementation and CI/publication gates remain separate and are not claimed by this archive review."
+}

@@ -76,7 +76,7 @@ test('the projection cannot mask canonical or all285 profile/link changes',()=>{
  const heldBytes=readFileSync(new URL('../docs/evidence/apadana/THERA_HELD234_APPROVAL.json',import.meta.url));
  assert.equal(sha(heldBytes),'14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7');
  const historicalIds=JSON.parse(heldBytes).expected_profile_ids;assert.equal(historicalIds.length,285);assert.equal(new Set(historicalIds).size,285);
- assert.equal(CURRENT_APADANA_IDS.length,308);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);
+ assert.equal(CURRENT_APADANA_IDS.length,310);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(0,285),historicalIds);
  const historicalProfiles=Object.fromEntries(historicalIds.map(id=>{assert.ok(Object.hasOwn(APADANA_PROFILES,id),id+' prior profile retained');return [id,APADANA_PROFILES[id]];}));
  assert.equal(jsonSha(historicalProfiles),before.profiles_sha256);

@@ -1,0 +1,9 @@
+{
+  "status": "SEALED_ORIGINAL_FIRST_TWO_BEFORE_NEW_PROFILE_OR_PEER_OUTPUT",
+  "files": {
+    "derive_original_facts.py": "3c806b894c8e4f2e46b2a15d5be6f9bcbe2bad6c0d5cf8a95bdd2be743403a7a",
+    "original-first/ORIGINAL_FACTS.json": "1f178d9e6c346459651a972020d08e46934890a4fdf47a33d78ab8e18a3960aa",
+    "original-first/REPLAY_RECEIPT.json": "a471ceaa14e489eac006287c18eff4652e9580a67a2c8e3c56389d5b7b68043c"
+  },
+  "full_payload_files_written": 0
+}

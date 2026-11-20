@@ -1,0 +1,1181 @@
+{
+  "review_type": "ORIGINAL_FIRST_SOURCE_AND_FINITE_NORMALIZATION_REVIEW_A",
+  "baseline": "0f572239fc459001f75cd5265d3eaeac66425b66",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "original_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "rights": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "publisher_routing": {
+    "category": "chapter-3",
+    "route_template": "/text/{{ category | slug }}/{{ page.fileSlug }}/index.html",
+    "all_orders_match_printed_poem_numbers": true
+  },
+  "all14645_original_XML_tuples_match_baseline": true,
+  "baseline_note_only_omission": {
+    "original_physical_element": 1130,
+    "separately_indexed_Sariputta_record_unchanged": true,
+    "not_part_of_this_intake": true
+  },
+  "poems": [
+    {
+      "path": "src/_poems/chapter-3/poem-287.md",
+      "bytes": 851,
+      "raw_sha256": "39615a18e301e85bcec5c9e06b92f6daa6e936768ad6357348063ff873993960",
+      "git_blob_sha1": "6afcc92836258ad7d54877ed70a717988e99201f",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-287.md",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-287.md",
+      "id": "tha-ap289",
+      "publisher_chapter": "chapter-3",
+      "poem": 287,
+      "title": "Apadāniya",
+      "source_scope_decision": "APPROVE_EXACT_COMPLETE_PUBLISHER_POEM_AND_FINITE_PRESENTATION_ONLY",
+      "narrative_identity": "Praise of apadānas of the plural Well-Gone Great Sages and worship at their feet; ninety-two aeons and the fruit of extolling.",
+      "identity_basis": "Exact full source narrative/title/colophons compared with actual original Pali/XML and both canonical neighbors; not a name/number-only match.",
+      "front_matter_raw_sha256": "d639ba1d62fafcc501fd4e4d1ac304dc18bb8dc0b22604876ef4a266dc1b24e1",
+      "source_raw_body_sha256": "620a7483883ca07b3bb726f2861fb80a28b4c094a76de7ff4d225c7ab8f5753b",
+      "raw_definitions_sha256": "c584c648b3822a4b25ac2494da129da2d9addd03bafec52d589a2695fa2c4452",
+      "body_sha256": "f36c9f693c5c21ba3092134e5d3e832b7903a55ce4b29841eab44c9972f6398f",
+      "notes_sha256": "39ac66b378ba922a17873306edc8a6e8631b6eac6b32ab10ad522c27baf50040",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "e70bbe8d31d37e20f5137e7cd3f088a3b6652593a2d74b41a27ce528989bc4c4",
+          "lines": 1,
+          "characters": 24
+        },
+        {
+          "paragraph": 1,
+          "sha256": "0ec59ea364b6cc62bcf8a1244f82fae9c276f2a4057b02eed502e8a6131ca449",
+          "lines": 4,
+          "characters": 158
+        },
+        {
+          "paragraph": 2,
+          "sha256": "5ccd15a25d74be101cef26912b24ad3c486632d8ea4fe73aaf334405f20aaf22",
+          "lines": 4,
+          "characters": 136
+        },
+        {
+          "paragraph": 3,
+          "sha256": "e1bf2796aff289dab1f3df2ae039b42ade4f9189f3ae2d3fc422ba5ff510019e",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 4,
+          "sha256": "997ba9c01d209bcc9c15aadee952f9a7929fff8ad89933f5e6ee985b7d94e083",
+          "lines": 1,
+          "characters": 57
+        },
+        {
+          "paragraph": 5,
+          "sha256": "3ef825a3f267b94c87aee5fe954991bf9ddf9d85999c5c4bbe45bf87ac529c10",
+          "lines": 1,
+          "characters": 42
+        }
+      ],
+      "physical_stanza_count": 3,
+      "printed_local_verse_label_count": 3,
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2652",
+          "suffix": "(1) [2652]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2653",
+          "suffix": "(2) [2653]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2654",
+          "suffix": "(3) [2654]",
+          "lines": 4
+        }
+      ],
+      "note_count": 1,
+      "original_note_count": 1,
+      "note_numbers": [
+        1
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "reference_owner": "poem_title",
+          "raw_sha256": "3462248047243034314820363d2f00cd9b966cf1df0f0851268c990b69c21a91",
+          "body_sha256": "c672583dc13a140ecc74d04050e0f0c08f48093a9457b6cc786218fd7673ebc5",
+          "characters": 12
+        }
+      ],
+      "original_raw_body_paragraph_count": 6,
+      "normalized_body_paragraph_count": 6,
+      "publisher_preface": {
+        "kind": "none",
+        "runtime_publisher_preface_descriptor": false,
+        "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paragraph_count": 0,
+        "paragraphs": [],
+        "note_numbers": [],
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "publisher_divisions": [],
+      "original_audio_frontmatter_present": true,
+      "audio_or_media_rights_approval": false,
+      "presentation_recipe": {
+        "paired_display_inventory": [],
+        "allowed_changes": [
+          "exact publisher words, punctuation, case, Unicode retained",
+          "choose exact observed state-on complementary spelling member",
+          "drop Markdown presentation markers, retain literal brackets and unfinished xxx",
+          "footnote references become [Note N]; ordered note definitions remain poem-owned",
+          "chapter heading remains separate editorial paratext",
+          "only stanza text without references/printed numbering is quotation scope",
+          "Pali correspondence is identity/boundary evidence, not word/line equivalence"
+        ],
+        "Unicode_normalization": false
+      },
+      "root": {
+        "id": "tha-ap289",
+        "book": 36,
+        "start": 8802,
+        "end": 8813,
+        "title": "Apadāniyattheraapadānaṃ",
+        "root_sha256": "e0d5cbda7ffe5c57c562733bb551e05f28962c145cd29fc6217c9d4e44f25ed4",
+        "root_verses": [
+          30,
+          32
+        ],
+        "numbered_stanza_count": 3,
+        "vri": "30–32",
+        "index_revision": null,
+        "first_ref": "tha-ap289/1",
+        "last_ref": "tha-ap289/6",
+        "segments": [
+          {
+            "ref": "tha-ap289/1",
+            "type": "heading",
+            "blocks": [
+              8802,
+              8803
+            ],
+            "vri_paragraph": null,
+            "text_sha256": "c714fb745b01c10d2ed73e3ffd10b86e5d8d8b13a50d701d0f3aaa93df2efdb7",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap289/2",
+            "type": "verse",
+            "blocks": [
+              8803,
+              8806
+            ],
+            "vri_paragraph": "30",
+            "text_sha256": "574480d0762807ce14be2ab58eff74ef27f0b1132c6d1daf11b0506ccfd2a816",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap289/3",
+            "type": "verse",
+            "blocks": [
+              8806,
+              8809
+            ],
+            "vri_paragraph": "31",
+            "text_sha256": "c1af4c00f4f84fcd26e04d54e9de468d343558ba242fc27bc94b938b6f1211f8",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap289/4",
+            "type": "verse",
+            "blocks": [
+              8809,
+              8811
+            ],
+            "vri_paragraph": "32",
+            "text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap289/5",
+            "type": "prose",
+            "blocks": [
+              8811,
+              8812
+            ],
+            "vri_paragraph": null,
+            "text_sha256": "da2c8a8e55c7bc5d64fe243c9162d38739199e0b377023fd41bd5f5d54d79970",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap289/6",
+            "type": "prose",
+            "blocks": [
+              8812,
+              8813
+            ],
+            "vri_paragraph": null,
+            "text_sha256": "fcff5d102a603bb5bb449bedd4e2cb07a781c75f11b9d01d3daf49dc4dab6286",
+            "variant_count": 0
+          }
+        ]
+      },
+      "root_original_XML": {
+        "canonical_block_range": [
+          8802,
+          8813
+        ],
+        "XML_physical_element_range_zero_based": [
+          8803,
+          8814
+        ],
+        "range_convention": "half-open",
+        "raw_UTF16LE_byte_range": [
+          1482444,
+          1484170
+        ],
+        "raw_UTF16LE_sha256": "f8baa736fa85afb15747428ddc725c111b96baf680834ac46abf440ed16f974a",
+        "ET_serialization_sha256": "73380bde008dcb7cf6d788087a0775caf1fdb1bb23997d1a1d381207be20efa9",
+        "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+      },
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 287 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap289; title and numbering alone do not establish the mapping.",
+        "Original audio front matter names a recitation file and reciter/date/location; it is source metadata only. No audio fetched, bundled, linked as approved media, or granted media/commercial rights.",
+        "Publisher praises apadānas of the plural Well-Gone Ones/Great Sages, with own-hands wording; no named Buddha or invented recipient is supplied.",
+        "Publisher expands the attainment formula while actual VRI stanza32 has peyyāla abbreviation; preserve both without reconstructing words."
+      ],
+      "poem_only_root_sha256": "e0d5cbda7ffe5c57c562733bb551e05f28962c145cd29fc6217c9d4e44f25ed4",
+      "verse_scope_correspondences": [
+        {
+          "publisher_physical_entry": 1,
+          "local_label": "1",
+          "global_label": "2652",
+          "normalized_English_paragraph_sha256": "0ec59ea364b6cc62bcf8a1244f82fae9c276f2a4057b02eed502e8a6131ca449",
+          "VRI_scope_units": [
+            {
+              "vri_label": 30,
+              "canonical_blocks": [
+                8803,
+                8806
+              ],
+              "block_tuple_sha256": "dfef1414a9c81ad9c94e4a3e9ec38b2a1f3647c767a260e2d2b4685b7b43bb88",
+              "original_XML": {
+                "canonical_block_range": [
+                  8803,
+                  8806
+                ],
+                "XML_physical_element_range_zero_based": [
+                  8804,
+                  8807
+                ],
+                "range_convention": "half-open",
+                "raw_UTF16LE_byte_range": [
+                  1482556,
+                  1483008
+                ],
+                "raw_UTF16LE_sha256": "79163ca00812f53db6ee0c02ab6ce15e81581efb4cb76d27ef67ea143c64cd3b",
+                "ET_serialization_sha256": "2c767f4bfb08637d3561dcb0b78e7e51c1bcc384f8232fd8ebb4def680da5eac",
+                "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+              },
+              "actual_segment_ref": "tha-ap289/2"
+            }
+          ],
+          "ordinal_scope_and_narrative_evidence_not_word_or_line_equivalence": true
+        },
+        {
+          "publisher_physical_entry": 2,
+          "local_label": "2",
+          "global_label": "2653",
+          "normalized_English_paragraph_sha256": "5ccd15a25d74be101cef26912b24ad3c486632d8ea4fe73aaf334405f20aaf22",
+          "VRI_scope_units": [
+            {
+              "vri_label": 31,
+              "canonical_blocks": [
+                8806,
+                8809
+              ],
+              "block_tuple_sha256": "2714425b530431caf295cb61685089684c7c52aa4e2b8f5b357d4d84ba9570e8",
+              "original_XML": {
+                "canonical_block_range": [
+                  8806,
+                  8809
+                ],
+                "XML_physical_element_range_zero_based": [
+                  8807,
+                  8810
+                ],
+                "range_convention": "half-open",
+                "raw_UTF16LE_byte_range": [
+                  1483024,
+                  1483524
+                ],
+                "raw_UTF16LE_sha256": "a069ee01914c12c2590084161e2ee8e9d76bfc18ae668cbcadc98fa550b0d366",
+                "ET_serialization_sha256": "36a845819dcef2364f274d26e4f44f481af650c3085b25337871aa7eb1a297f5",
+                "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+              },
+              "actual_segment_ref": "tha-ap289/3"
+            }
+          ],
+          "ordinal_scope_and_narrative_evidence_not_word_or_line_equivalence": true
+        },
+        {
+          "publisher_physical_entry": 3,
+          "local_label": "3",
+          "global_label": "2654",
+          "normalized_English_paragraph_sha256": "e1bf2796aff289dab1f3df2ae039b42ade4f9189f3ae2d3fc422ba5ff510019e",
+          "VRI_scope_units": [
+            {
+              "vri_label": 32,
+              "canonical_blocks": [
+                8809,
+                8811
+              ],
+              "block_tuple_sha256": "7573fd95e8f9ecbf0ded59999be04c7d432fa6980d6f1669de5f3419f03f2874",
+              "original_XML": {
+                "canonical_block_range": [
+                  8809,
+                  8811
+                ],
+                "XML_physical_element_range_zero_based": [
+                  8810,
+                  8812
+                ],
+                "range_convention": "half-open",
+                "raw_UTF16LE_byte_range": [
+                  1483540,
+                  1483858
+                ],
+                "raw_UTF16LE_sha256": "f1c773b1ef860cd610e22c79f3f6b8c5ff0a89f5a3d4df92abb3779866a52de7",
+                "ET_serialization_sha256": "d182fc9bd7a8d28e21e301033bca63bbb9a5d946499e749f9ea19085417e675f",
+                "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+              },
+              "actual_segment_ref": "tha-ap289/4"
+            }
+          ],
+          "ordinal_scope_and_narrative_evidence_not_word_or_line_equivalence": true
+        }
+      ],
+      "quotation_proofs": [
+        {
+          "physical_entry": 1,
+          "sha256": "45129c35166685f5d01863701f618ffec32035a9f8c8efa7f26d5d756917c364",
+          "characters": 147,
+          "notes_and_printed_numbering_excluded": true,
+          "body_colophons_and_editorial_paratext_excluded": true
+        },
+        {
+          "physical_entry": 2,
+          "sha256": "ce9965f34397302a464cb288e2145747c13792d20729ca32c3d38d735382ea8b",
+          "characters": 125,
+          "notes_and_printed_numbering_excluded": true,
+          "body_colophons_and_editorial_paratext_excluded": true
+        },
+        {
+          "physical_entry": 3,
+          "sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters": 127,
+          "notes_and_printed_numbering_excluded": true,
+          "body_colophons_and_editorial_paratext_excluded": true
+        }
+      ],
+      "original_VRI_notes": [],
+      "source_approval": true,
+      "normalization_approval": true,
+      "activation": false,
+      "neighbors": {
+        "previous_block": {
+          "index": 8801,
+          "sha256": "dae98197d424b0187529dc7d7608489551a1952b682ba59b0f629efcf5b7b457",
+          "original_XML": {
+            "canonical_block_range": [
+              8801,
+              8802
+            ],
+            "XML_physical_element_range_zero_based": [
+              8802,
+              8803
+            ],
+            "range_convention": "half-open",
+            "raw_UTF16LE_byte_range": [
+              1482304,
+              1482428
+            ],
+            "raw_UTF16LE_sha256": "9d404921ca5bf8e5d5819f64240f0035c21d3a2969290e4c54a939766ff7944d",
+            "ET_serialization_sha256": "5fedbf528cf048ca634f79ef0779a5f320e6439b4423266c7d134b4871256077",
+            "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+          }
+        },
+        "next_block": {
+          "index": 8813,
+          "sha256": "912f797d4b513ea931406e51a17f9f13fa9a15d075ebb51162f319fc04369eff",
+          "original_XML": {
+            "canonical_block_range": [
+              8813,
+              8814
+            ],
+            "XML_physical_element_range_zero_based": [
+              8814,
+              8815
+            ],
+            "range_convention": "half-open",
+            "raw_UTF16LE_byte_range": [
+              1484186,
+              1484296
+            ],
+            "raw_UTF16LE_sha256": "f86467f417314d7e9e48227096023fe78ce2f5c1c2caa89958784a16c9c10c25",
+            "ET_serialization_sha256": "b1bcfe4c2b62abf43685a9c96545c95515a5e665ef11184926297a53363412fd",
+            "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+          }
+        },
+        "previous_unit": {
+          "id": "tha-ap288",
+          "metadata": {
+            "id": "tha-ap288",
+            "book": 36,
+            "start": 8782,
+            "end": 8802,
+            "title": "Upaṭṭhākadāyakattheraapadānaṃ",
+            "collection": "ap",
+            "acronym": "Tha Ap 288",
+            "vri": "24–29",
+            "pts": {
+              "volume": 1,
+              "page": 241,
+              "end_page": 241
+            }
+          }
+        },
+        "next_unit": {
+          "id": "tha-ap290",
+          "metadata": {
+            "id": "tha-ap290",
+            "book": 36,
+            "start": 8813,
+            "end": 8830,
+            "title": "Sattāhapabbajitattheraapadānaṃ",
+            "collection": "ap",
+            "acronym": "Tha Ap 290",
+            "vri": "33–37",
+            "pts": {
+              "volume": 1,
+              "page": 241,
+              "end_page": 242
+            }
+          }
+        },
+        "publisher_previous": 286,
+        "publisher_next": 288,
+        "boundary_only_publishers_outside_selected_scope": true
+      }
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-288.md",
+      "bytes": 1514,
+      "raw_sha256": "54fb2fa63503c20ac3e234424e2b23e92de78feeb3f40ea0938aa4d3d5840229",
+      "git_blob_sha1": "d5ac99efd8992b2873a03926f550082555d41582",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-288.md",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-288.md",
+      "id": "tha-ap290",
+      "publisher_chapter": "chapter-3",
+      "poem": 288,
+      "title": "Sattāhapabbajita",
+      "source_scope_decision": "APPROVE_EXACT_COMPLETE_PUBLISHER_POEM_AND_FINITE_PRESENTATION_ONLY",
+      "narrative_identity": "Renunciation for a week following calamity/family division in Vipassi’s community; ninety-one aeons; seven Sunikkhama rulers in the sixty-seventh aeon.",
+      "identity_basis": "Exact full source narrative/title/colophons compared with actual original Pali/XML and both canonical neighbors; not a name/number-only match.",
+      "front_matter_raw_sha256": "fd034cc2858038a04896cb0d4b7469490d95d63ad8abdef1cbf3949698b481fd",
+      "source_raw_body_sha256": "d056bbbe418e99a41ca931190feba0db69cec060bc83068f3688a421bb9f86ad",
+      "raw_definitions_sha256": "b9856a16d3a5e2b2300036b8f54d7ca05e2f116a8bd9fd6e5cdf55a7fb472806",
+      "body_sha256": "6a374da419148479e447b5e81611fff11698184c8204209f6f349a9f6c065109",
+      "notes_sha256": "142aa466d49a19a3d70eaaf5b6028e33df021116429a97ce426a2c1c91fe71c2",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": [
+        {
+          "paragraph": 0,
+          "sha256": "003140aba4d824aedc3238f60521c8360c949487121d032ef3f48d8a56c852b4",
+          "lines": 1,
+          "characters": 31
+        },
+        {
+          "paragraph": 1,
+          "sha256": "3c5811addf8cff9df787d4532ff6f3d3bef96db2532d5afa3feb3591e3035762",
+          "lines": 4,
+          "characters": 163
+        },
+        {
+          "paragraph": 2,
+          "sha256": "a9e27ae7cb667f085224bab789bf6af07a44814842e108c869c3caf5af1ce085",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 3,
+          "sha256": "9cfec56995d94996c66a4fff245470cc73b8563ee3906df6defd4d036971b5c4",
+          "lines": 4,
+          "characters": 132
+        },
+        {
+          "paragraph": 4,
+          "sha256": "bb0f281996aa200933e6e4baadcc359d1ed8fefc4c19b217d24e8fda29c41c3c",
+          "lines": 4,
+          "characters": 163
+        },
+        {
+          "paragraph": 5,
+          "sha256": "aedd3ebc969c6124034a8914f2931d9ca0b9b8d8d5913f84cbc89bc2e115270a",
+          "lines": 4,
+          "characters": 138
+        },
+        {
+          "paragraph": 6,
+          "sha256": "947c5ad45151eee3df3f0c32739084aa9039ca34324c6714593f004c7262b7f3",
+          "lines": 1,
+          "characters": 64
+        },
+        {
+          "paragraph": 7,
+          "sha256": "138be7a6b9b48b413e886cf6f5b8b1d5b6fde6c0c90941916b2beae024098ad8",
+          "lines": 1,
+          "characters": 49
+        }
+      ],
+      "physical_stanza_count": 5,
+      "printed_local_verse_label_count": 5,
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2655",
+          "suffix": "(1) [2655]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2656",
+          "suffix": "(2) [2656]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2657",
+          "suffix": "(3) [2657]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2658",
+          "suffix": "(4) [2658]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2659",
+          "suffix": "(5) [2659]",
+          "lines": 4
+        }
+      ],
+      "note_count": 7,
+      "original_note_count": 7,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "owner": "poem",
+          "reference_owner": "poem_title",
+          "raw_sha256": "50605e11a3e4fec0c36dae46a936044adbf64c2b7f2d9af4528100f810c41413",
+          "body_sha256": "50605e11a3e4fec0c36dae46a936044adbf64c2b7f2d9af4528100f810c41413",
+          "characters": 22
+        },
+        {
+          "number": 2,
+          "owner": "poem",
+          "reference_owner": "poem_body",
+          "raw_sha256": "903683d3308911b3b092560b7bd0084314208cdd211a9de8e6cdc8246304a820",
+          "body_sha256": "5146d49a07bb30e40868945073b79478e72e73a09b6ad953cbea5be929639506",
+          "characters": 56
+        },
+        {
+          "number": 3,
+          "owner": "poem",
+          "reference_owner": "poem_body",
+          "raw_sha256": "28789bda1d7ba7448ac89b7b6fc5bb709505953086bb5db365558099631a2542",
+          "body_sha256": "2216b52a67ee510c94e134bfc5b0cf3d54a27e39c5d5b283fd061e1d05c521f7",
+          "characters": 58
+        },
+        {
+          "number": 4,
+          "owner": "poem",
+          "reference_owner": "poem_body",
+          "raw_sha256": "81abdb86295609f7446f271f152c446d0c299032c849bde318553b7fcf9ed032",
+          "body_sha256": "81abdb86295609f7446f271f152c446d0c299032c849bde318553b7fcf9ed032",
+          "characters": 142
+        },
+        {
+          "number": 5,
+          "owner": "poem",
+          "reference_owner": "poem_body",
+          "raw_sha256": "41159cfb745942a968f4556f766722c15de860c1a772162eec03772d08395870",
+          "body_sha256": "6581c8cc13bb9046904cb9ed09c8710c4947646a366f6ae476dbdf72a7bcda2a",
+          "characters": 26
+        },
+        {
+          "number": 6,
+          "owner": "poem",
+          "reference_owner": "poem_body",
+          "raw_sha256": "50cfe520fc0a8187f2f56f422e5e15bae8ab51806cfc9d8a51a27f1e48e9760b",
+          "body_sha256": "cb25a7c49fd138508c299ec264d851b070652d2b8c699a726374999b63634235",
+          "characters": 86
+        },
+        {
+          "number": 7,
+          "owner": "poem",
+          "reference_owner": "poem_body",
+          "raw_sha256": "864867b6d4a231fd5e633d4ff9395d0163b0d8e08f14bde90ba44ed4240133bf",
+          "body_sha256": "864867b6d4a231fd5e633d4ff9395d0163b0d8e08f14bde90ba44ed4240133bf",
+          "characters": 16
+        }
+      ],
+      "original_raw_body_paragraph_count": 8,
+      "normalized_body_paragraph_count": 8,
+      "publisher_preface": {
+        "kind": "none",
+        "runtime_publisher_preface_descriptor": false,
+        "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paragraph_count": 0,
+        "paragraphs": [],
+        "note_numbers": [],
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "publisher_divisions": [],
+      "original_audio_frontmatter_present": false,
+      "audio_or_media_rights_approval": false,
+      "presentation_recipe": {
+        "paired_display_inventory": [],
+        "allowed_changes": [
+          "exact publisher words, punctuation, case, Unicode retained",
+          "choose exact observed state-on complementary spelling member",
+          "drop Markdown presentation markers, retain literal brackets and unfinished xxx",
+          "footnote references become [Note N]; ordered note definitions remain poem-owned",
+          "chapter heading remains separate editorial paratext",
+          "only stanza text without references/printed numbering is quotation scope",
+          "Pali correspondence is identity/boundary evidence, not word/line equivalence"
+        ],
+        "Unicode_normalization": false
+      },
+      "root": {
+        "id": "tha-ap290",
+        "book": 36,
+        "start": 8813,
+        "end": 8830,
+        "title": "Sattāhapabbajitattheraapadānaṃ",
+        "root_sha256": "5049fa6453a073788a816903e29830ba943744077143df6897d9c32b75f257bc",
+        "root_verses": [
+          33,
+          37
+        ],
+        "numbered_stanza_count": 5,
+        "vri": "33–37",
+        "index_revision": null,
+        "first_ref": "tha-ap290/1",
+        "last_ref": "tha-ap290/8",
+        "segments": [
+          {
+            "ref": "tha-ap290/1",
+            "type": "heading",
+            "blocks": [
+              8813,
+              8814
+            ],
+            "vri_paragraph": null,
+            "text_sha256": "075da8f36a3216ad4a42e5b43163f3babc4c71880e34aa0a4c6439809b65955a",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap290/2",
+            "type": "verse",
+            "blocks": [
+              8814,
+              8817
+            ],
+            "vri_paragraph": "33",
+            "text_sha256": "ef09cfb3f069a3f4c9de2ab447b690d95c3974a4ef10f252fb22a86b0393c462",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap290/3",
+            "type": "verse",
+            "blocks": [
+              8817,
+              8820
+            ],
+            "vri_paragraph": "34",
+            "text_sha256": "1a55ac9ca25342990fe5f3216c3eb9f23cf447bee606c819908e5f314a16c76d",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap290/4",
+            "type": "verse",
+            "blocks": [
+              8820,
+              8823
+            ],
+            "vri_paragraph": "35",
+            "text_sha256": "0c58954d736ad589aa37663dff98ce038372dcde0f01f6485329f9fd15293a5e",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap290/5",
+            "type": "verse",
+            "blocks": [
+              8823,
+              8826
+            ],
+            "vri_paragraph": "36",
+            "text_sha256": "88b61a653a83dd3ec551168ecf1b792ed3ec2ea5a1858511c75e90c879e85664",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap290/6",
+            "type": "verse",
+            "blocks": [
+              8826,
+              8828
+            ],
+            "vri_paragraph": "37",
+            "text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap290/7",
+            "type": "prose",
+            "blocks": [
+              8828,
+              8829
+            ],
+            "vri_paragraph": null,
+            "text_sha256": "f1624f352e3dc56ac27f84427631b3bb948b7619a583d0d4f07816885a895577",
+            "variant_count": 0
+          },
+          {
+            "ref": "tha-ap290/8",
+            "type": "prose",
+            "blocks": [
+              8829,
+              8830
+            ],
+            "vri_paragraph": null,
+            "text_sha256": "2f13f5430b822b72bb57dc80c6bd0fae19b106e416e2d26822059504a7a469fe",
+            "variant_count": 0
+          }
+        ]
+      },
+      "root_original_XML": {
+        "canonical_block_range": [
+          8813,
+          8830
+        ],
+        "XML_physical_element_range_zero_based": [
+          8814,
+          8831
+        ],
+        "range_convention": "half-open",
+        "raw_UTF16LE_byte_range": [
+          1484186,
+          1486992
+        ],
+        "raw_UTF16LE_sha256": "e5fd493b6ce22b82f8f27cb034db5d6c14a9580d0f64eba4e82fec1201ba07f6",
+        "ET_serialization_sha256": "73bdafe93f49c8ab1153e8a679a0d11de0c09c488f5765a6a224c6782eec7fb3",
+        "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+      },
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 288 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap290; title and numbering alone do not establish the mapping.",
+        "Preserve the complete uncertain family-reference discussion in original note4; it offers multiple meanings and does not establish one intended referent or cause.",
+        "Publisher note3 vyasana and actual VRI byasana remain source-edition spellings without harmonization or invented variant apparatus.",
+        "Publisher Sunikkhama and actual VRI Sunikkhamā remain as printed; retain sixty-seventh aeon and seven rulers rather than normalizing number or names.",
+        "Publisher expands the final attainment formula where actual VRI stanza37 is abbreviated; scope correspondence does not prove word/line equivalence."
+      ],
+      "poem_only_root_sha256": "5049fa6453a073788a816903e29830ba943744077143df6897d9c32b75f257bc",
+      "verse_scope_correspondences": [
+        {
+          "publisher_physical_entry": 1,
+          "local_label": "1",
+          "global_label": "2655",
+          "normalized_English_paragraph_sha256": "3c5811addf8cff9df787d4532ff6f3d3bef96db2532d5afa3feb3591e3035762",
+          "VRI_scope_units": [
+            {
+              "vri_label": 33,
+              "canonical_blocks": [
+                8814,
+                8817
+              ],
+              "block_tuple_sha256": "822d7efaee739fe9d869b7e9cff33f35e0534f12e5fb9effcf2dbfbc5e97dcbf",
+              "original_XML": {
+                "canonical_block_range": [
+                  8814,
+                  8817
+                ],
+                "XML_physical_element_range_zero_based": [
+                  8815,
+                  8818
+                ],
+                "range_convention": "half-open",
+                "raw_UTF16LE_byte_range": [
+                  1484312,
+                  1484814
+                ],
+                "raw_UTF16LE_sha256": "aaf76c3c1c47ac7debef91a4a5fb8d84d74c7bb1b5d9cc5a9b2984eece64546b",
+                "ET_serialization_sha256": "54384927aebf2edf223ce6158aa4ff8f09a148f7076a20ed6bbbc3e9583eb096",
+                "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+              },
+              "actual_segment_ref": "tha-ap290/2"
+            }
+          ],
+          "ordinal_scope_and_narrative_evidence_not_word_or_line_equivalence": true
+        },
+        {
+          "publisher_physical_entry": 2,
+          "local_label": "2",
+          "global_label": "2656",
+          "normalized_English_paragraph_sha256": "a9e27ae7cb667f085224bab789bf6af07a44814842e108c869c3caf5af1ce085",
+          "VRI_scope_units": [
+            {
+              "vri_label": 34,
+              "canonical_blocks": [
+                8817,
+                8820
+              ],
+              "block_tuple_sha256": "16fb9d85e2f4f9761b4af21fe3cd462be1c587d527ce62774dcd551645a688e5",
+              "original_XML": {
+                "canonical_block_range": [
+                  8817,
+                  8820
+                ],
+                "XML_physical_element_range_zero_based": [
+                  8818,
+                  8821
+                ],
+                "range_convention": "half-open",
+                "raw_UTF16LE_byte_range": [
+                  1484830,
+                  1485280
+                ],
+                "raw_UTF16LE_sha256": "1efd54042672755dfdf0d0b9fe848fb1187c1438cd409c5a0905e1383f392ad3",
+                "ET_serialization_sha256": "cca78a3c53509cd1891b8271e059dce14eaaf0cf863a68284810cbdb7f9dd629",
+                "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+              },
+              "actual_segment_ref": "tha-ap290/3"
+            }
+          ],
+          "ordinal_scope_and_narrative_evidence_not_word_or_line_equivalence": true
+        },
+        {
+          "publisher_physical_entry": 3,
+          "local_label": "3",
+          "global_label": "2657",
+          "normalized_English_paragraph_sha256": "9cfec56995d94996c66a4fff245470cc73b8563ee3906df6defd4d036971b5c4",
+          "VRI_scope_units": [
+            {
+              "vri_label": 35,
+              "canonical_blocks": [
+                8820,
+                8823
+              ],
+              "block_tuple_sha256": "877c67fe95f2081f542ffab2d4e60e228e7b9911bdde9bac422fe49520b5f5af",
+              "original_XML": {
+                "canonical_block_range": [
+                  8820,
+                  8823
+                ],
+                "XML_physical_element_range_zero_based": [
+                  8821,
+                  8824
+                ],
+                "range_convention": "half-open",
+                "raw_UTF16LE_byte_range": [
+                  1485296,
+                  1485748
+                ],
+                "raw_UTF16LE_sha256": "5b122756a024f75d2157a1f85bf607c672dc2dd1113ee7b6ea01dda263b3da60",
+                "ET_serialization_sha256": "f5137506deb8e01d54d730da59ab4bd788334b6a53405c9608150b44ee440f7a",
+                "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+              },
+              "actual_segment_ref": "tha-ap290/4"
+            }
+          ],
+          "ordinal_scope_and_narrative_evidence_not_word_or_line_equivalence": true
+        },
+        {
+          "publisher_physical_entry": 4,
+          "local_label": "4",
+          "global_label": "2658",
+          "normalized_English_paragraph_sha256": "bb0f281996aa200933e6e4baadcc359d1ed8fefc4c19b217d24e8fda29c41c3c",
+          "VRI_scope_units": [
+            {
+              "vri_label": 36,
+              "canonical_blocks": [
+                8823,
+                8826
+              ],
+              "block_tuple_sha256": "9ef3c37c8ade569d4ce127e56fb8c6659099bbef7fb3e03327f013a26a8bc930",
+              "original_XML": {
+                "canonical_block_range": [
+                  8823,
+                  8826
+                ],
+                "XML_physical_element_range_zero_based": [
+                  8824,
+                  8827
+                ],
+                "range_convention": "half-open",
+                "raw_UTF16LE_byte_range": [
+                  1485764,
+                  1486268
+                ],
+                "raw_UTF16LE_sha256": "a301f534e3e5229a093cdd8d6e394be1b9bf7bf7ad62727334fbb909ad04d78b",
+                "ET_serialization_sha256": "24c24aac816dbb2035ce93a11ad0393fe53ac98b286623364146e5a35a43280c",
+                "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+              },
+              "actual_segment_ref": "tha-ap290/5"
+            }
+          ],
+          "ordinal_scope_and_narrative_evidence_not_word_or_line_equivalence": true
+        },
+        {
+          "publisher_physical_entry": 5,
+          "local_label": "5",
+          "global_label": "2659",
+          "normalized_English_paragraph_sha256": "aedd3ebc969c6124034a8914f2931d9ca0b9b8d8d5913f84cbc89bc2e115270a",
+          "VRI_scope_units": [
+            {
+              "vri_label": 37,
+              "canonical_blocks": [
+                8826,
+                8828
+              ],
+              "block_tuple_sha256": "a5eb729262118203db9164259b4e5ea9d15eec27e203a159fe3c188b7125f557",
+              "original_XML": {
+                "canonical_block_range": [
+                  8826,
+                  8828
+                ],
+                "XML_physical_element_range_zero_based": [
+                  8827,
+                  8829
+                ],
+                "range_convention": "half-open",
+                "raw_UTF16LE_byte_range": [
+                  1486284,
+                  1486602
+                ],
+                "raw_UTF16LE_sha256": "f1229598671b5748daf0ca2762505d20e3e1e84bd635305397fa064bb0fd7b19",
+                "ET_serialization_sha256": "d5fd4930d2894e7beeb4af7d65383d1084fa231edbdff67808b6c508d815f756",
+                "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+              },
+              "actual_segment_ref": "tha-ap290/6"
+            }
+          ],
+          "ordinal_scope_and_narrative_evidence_not_word_or_line_equivalence": true
+        }
+      ],
+      "quotation_proofs": [
+        {
+          "physical_entry": 1,
+          "sha256": "1bca5d8b03ceb9d49455da3e966d5f82d36d5e85e983341709d9d2fe301a9437",
+          "characters": 120,
+          "notes_and_printed_numbering_excluded": true,
+          "body_colophons_and_editorial_paratext_excluded": true
+        },
+        {
+          "physical_entry": 2,
+          "sha256": "b4ba8050637547da4d7639e7d7951c10d35ea58ba509e6edfb498aa183054f84",
+          "characters": 119,
+          "notes_and_printed_numbering_excluded": true,
+          "body_colophons_and_editorial_paratext_excluded": true
+        },
+        {
+          "physical_entry": 3,
+          "sha256": "56f69fbe0d9d6871938b89e2ecca5ba647b8ad96ce7c3f7b67ed70a456ea1f21",
+          "characters": 121,
+          "notes_and_printed_numbering_excluded": true,
+          "body_colophons_and_editorial_paratext_excluded": true
+        },
+        {
+          "physical_entry": 4,
+          "sha256": "e09da3088714d4f315be495ff82d4b1ab740bb7404f62436ada9798f9e8bb4df",
+          "characters": 144,
+          "notes_and_printed_numbering_excluded": true,
+          "body_colophons_and_editorial_paratext_excluded": true
+        },
+        {
+          "physical_entry": 5,
+          "sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters": 127,
+          "notes_and_printed_numbering_excluded": true,
+          "body_colophons_and_editorial_paratext_excluded": true
+        }
+      ],
+      "original_VRI_notes": [],
+      "source_approval": true,
+      "normalization_approval": true,
+      "activation": false,
+      "neighbors": {
+        "previous_block": {
+          "index": 8812,
+          "sha256": "cd444a74700d8900c8fbbb44c8e32bde9652122f8c7877010bc78306245d110e",
+          "original_XML": {
+            "canonical_block_range": [
+              8812,
+              8813
+            ],
+            "XML_physical_element_range_zero_based": [
+              8813,
+              8814
+            ],
+            "range_convention": "half-open",
+            "raw_UTF16LE_byte_range": [
+              1484058,
+              1484170
+            ],
+            "raw_UTF16LE_sha256": "081696e66b538819d89a6f60dae72ac12873c02405356468c2413e829850356a",
+            "ET_serialization_sha256": "3f1cba5ae463e7926e55e6e00cb88a0d1843526ea927b6996a715b81053194f2",
+            "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+          }
+        },
+        "next_block": {
+          "index": 8830,
+          "sha256": "9e38b9718b65f5e1b6e5df751c44d1f2cddf1c0532beb2d58056745097b36262",
+          "original_XML": {
+            "canonical_block_range": [
+              8830,
+              8831
+            ],
+            "XML_physical_element_range_zero_based": [
+              8831,
+              8832
+            ],
+            "range_convention": "half-open",
+            "raw_UTF16LE_byte_range": [
+              1487008,
+              1487118
+            ],
+            "raw_UTF16LE_sha256": "0612b90f95dc85821771ca0ef004bf8b4240cacacc5b9d88bafab50690487ec6",
+            "ET_serialization_sha256": "6fecd4e0084c024ce4d30898e7c3a275f1361a8aa27529e8960d099415707f0d",
+            "ET_domain": "ElementTree UTF8 serialization includes tails; distinct from exact raw UTF16LE source slice and normalized canonical tuples."
+          }
+        },
+        "previous_unit": {
+          "id": "tha-ap289",
+          "metadata": {
+            "id": "tha-ap289",
+            "book": 36,
+            "start": 8802,
+            "end": 8813,
+            "title": "Apadāniyattheraapadānaṃ",
+            "collection": "ap",
+            "acronym": "Tha Ap 289",
+            "vri": "30–32",
+            "pts": {
+              "volume": 1,
+              "page": 241,
+              "end_page": 241
+            }
+          }
+        },
+        "next_unit": {
+          "id": "tha-ap291",
+          "metadata": {
+            "id": "tha-ap291",
+            "book": 36,
+            "start": 8830,
+            "end": 8847,
+            "title": "Buddhupaṭṭhāyikattheraapadānaṃ",
+            "collection": "ap",
+            "acronym": "Tha Ap 291",
+            "vri": "38–42",
+            "pts": {
+              "volume": 1,
+              "page": 242,
+              "end_page": 242
+            }
+          }
+        },
+        "publisher_previous": 287,
+        "publisher_next": 289,
+        "boundary_only_publishers_outside_selected_scope": true
+      }
+    }
+  ],
+  "totals": {
+    "poems": 2,
+    "body_paragraphs": 14,
+    "stanza_entries": 8,
+    "printed_local_labels": 8,
+    "poem_notes": 8,
+    "chapter_heading_paratexts": 0,
+    "paratext_notes": 0,
+    "summaries": 0,
+    "summary_notes": 0,
+    "paired_display_occurrences": 0
+  },
+  "excluded_publishers": [
+    260,
+    266,
+    280
+  ],
+  "source_approval_count": 2,
+  "normalization_approval_count": 2,
+  "runtime_approval": false,
+  "release_approval": false
+}

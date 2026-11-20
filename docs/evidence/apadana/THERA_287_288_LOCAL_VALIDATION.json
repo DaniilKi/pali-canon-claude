@@ -1,0 +1,120 @@
+{
+  "schema": "local-unpublished-two-source-validation-v1",
+  "status": "LOCAL_VALIDATION_PASSED_FINAL_INDEPENDENT_REVIEW_SEPARATE",
+  "observed_utc": "2026-11-20T12:24:56.013104+00:00",
+  "base_commit": "0f572239fc459001f75cd5265d3eaeac66425b66",
+  "new_publishers": [
+    287,
+    288
+  ],
+  "new_canonical_ids": [
+    "tha-ap289",
+    "tha-ap290"
+  ],
+  "choices": 310,
+  "added_first_English_choices": 2,
+  "source_scope": {
+    "body_paragraphs": 14,
+    "physical_four_line_entries": 8,
+    "labels": 8,
+    "poem_notes": 8,
+    "paratexts": 0,
+    "summaries": 0,
+    "media_approval": false,
+    "whole_publisher_edition_not_line_complete_VRI_or_chapter": true
+  },
+  "focused": {
+    "tests": 12,
+    "pass": 12,
+    "fail": 0,
+    "skip": 0,
+    "first_run": true,
+    "log_sha256": "1b86bc372406b084f3abe19bba1d97f5943dca16d03b77773fb8e4d299352933"
+  },
+  "acceptance_integrity": {
+    "tests": 25,
+    "passed": 25,
+    "log_sha256": "7acd7850b7d81b566472813e5f5ce9fa4919923a2b20d4bf9e3cb687c2752c89"
+  },
+  "full_check": {
+    "exit": 0,
+    "tests": 1780,
+    "passed": 1577,
+    "optional_source_skips": 203,
+    "fail": 0,
+    "cancel": 0,
+    "duration_ms": 333683.586898,
+    "log_sha256": "0b30df92e02f0f7a5053e3d38bda2422fc84b95ef811ee9072e8d2b0dc530fe9",
+    "audit_texts": 8544,
+    "audit_problems": 0
+  },
+  "smoke": {
+    "tools": 34,
+    "checks": 64,
+    "completion_marker": "MCP smoke passed: 34 tools, 64 checks. Live=false",
+    "log_sha256": "8262dd13f13f0c45ba6d7152bb6f931f5a2aedcc728d7498a2547e961de2aa97"
+  },
+  "evals": {
+    "questions": 201,
+    "passed": 195,
+    "live_skips": 6,
+    "non_skipped_score": 1,
+    "exit": 0,
+    "log_sha256": "c12336d756c1baa68acfba6a887cd0d9d34ede0fbdbe9a99c12c5b12d586d87f"
+  },
+  "archive": {
+    "sha256": "23217891504d4a0d17ec2fa2fa6959336c3d6e6a48af92427a283a33552ff12e",
+    "members": 39,
+    "runtime_files": 34,
+    "byte_review_sha256": "b9c41a69cf880e0eb517207d98dc3f4cf37293dc54b54b21f113e41372b580fb"
+  },
+  "installed": {
+    "native_observations": 24,
+    "fixture_poem_observations": 8,
+    "deny_all_English_refusals": 8,
+    "saved_note_draft_cells": 8,
+    "widths": [
+      1280,
+      390
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "source_notes_and_Pali_citations_preserved": true,
+    "stdio_500char_pages": 4,
+    "quotation_checks": 2,
+    "distinct_poem_notes": 8,
+    "native_page_size": 6000,
+    "both_fit_single_native_page_no_Nextpage_claim": true,
+    "strict_widget_complete_resources": 2,
+    "widget_version": 36,
+    "strict_widget_alignment_sample": 3,
+    "external_network_forwarded": 0,
+    "guard_expected_blocked_calls": [
+      34,
+      36
+    ],
+    "owned_process_groups_absent_leaders_reaped": true,
+    "first_execution_passed": true,
+    "native_receipt_sha256": "905269c159fdf3ce6890cd1c0b61634e758b795c38d235b3b2a925fc8501b364",
+    "launch_receipt_sha256": "cdffaefd773ae4fa3394bc7823baa72b8dcb57ce243de2dcc8d80d523e58544f",
+    "harness_freeze_sha256": "b1d6d71d9ad1a25b2bdc5bb8bd5c1a7f30c6ec7b881e3740c99874da2b20976b"
+  },
+  "preservation": {
+    "file": "/tmp/pali-287-288-preflight/FINAL_PRESERVATION.json",
+    "sha256": "3d2d78863dfa95379527c88859999cb64e4891710e501413ab9cc87035de1b8c"
+  },
+  "independent_preserved_lines": {
+    "file": "/tmp/pali-287-288-preflight/PRESERVED_INDEPENDENT_LINES.json",
+    "sha256": "3af087db6b9cda7bfc432576ce6045474363dc56b233c88806c7052f286727c0"
+  },
+  "no_push_run_rerun_cancel_merge_deploy_outreach": true,
+  "limits": [
+    "Final independent snapshot review is separate",
+    "Remote exact-commit CI not run",
+    "Physical devices/human AT/signed-in hosts/live upstream/specialist acceptance not established",
+    "English remains live-only; pinned-source fixture reads and pure outage refusal are distinct",
+    "Remaining33oforiginal40candidates and separate earlier holds inactive"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "status": "B_ORIGINAL_FIRST_TWO_PRECOMPARE_CORE_IMMUTABLE",
+  "files": {
+    "derive_metadata_B.py": "0b732ac7e6ec620f7f5d5ff3d2c7d0bf528edd6878357a95a6ebf55635775cd8",
+    "INDEPENDENT_NORMALIZATION.json": "7265761964af7b6495eda228129d54074ca789cf76574ad34410c53f6e605936",
+    "ORIGINAL_XML_AND_CONTEXT.json": "9f8f2688694547c41eda4ada83faa1915651065ca673f90548aa30f001e8456c",
+    "RIGHTS_REVIEW.json": "026491aa445f36a7992f6d4ce71b918f013f4623e33dea7a58862cbdf735fded",
+    "COPY_POLICY.json": "ee41663e17ea4ef0e12a3e30d06a2039af49cef040aa84a075db98ce1d6e3a81",
+    "README.md": "1afa910cdce21aae6af8cc6c1fdf1a79401b0e2818ba38c2022afb6aa2a38cd5"
+  },
+  "A_new_derivation_or_new_profile_schema_read": false,
+  "production_normalizer_used": false,
+  "wording_payload_files_created": false,
+  "audio_media_requests": 0,
+  "runtime_activation_release_push_approval": false
+}

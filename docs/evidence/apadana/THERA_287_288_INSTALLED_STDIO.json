@@ -1,0 +1,65 @@
+{
+  "schema": "installed-two-poem-stdio-v1",
+  "status": "passed",
+  "limitations": "Pinned local source replay and deny-all installed API checks; no live provider, browser UI, device or human assistive claim. Expected content is independent hashes only.",
+  "authority_scope": "Exact local310inventory and root39memberofflineinstall bytecomparison only; observed checks do not grant finalarchive, implementation, fullcheck, remoteCI, release or push approval.",
+  "launch_receipt": "/tmp/pali-two-installed-Zph8on/launch.json",
+  "contract_sha256": "4449ac6391b7e7f3d7068fb6ec292898cb04f9f9f9636a92fca42f1d503e49a6",
+  "runs": [
+    {
+      "mode": "fixture",
+      "status": "passed",
+      "poems": 2,
+      "notes": 8,
+      "pages": 4,
+      "quotes": 2,
+      "pali_reads": 5,
+      "held_refusals": 3,
+      "per_poem": [
+        {
+          "id": "tha-ap289",
+          "pages": 2,
+          "body_sha256": "f36c9f693c5c21ba3092134e5d3e832b7903a55ce4b29841eab44c9972f6398f",
+          "notes_sha256": "39ac66b378ba922a17873306edc8a6e8631b6eac6b32ab10ad522c27baf50040",
+          "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "quotation_text_sha256": "3dacee2159b8134c59a21f601567d2af49c3e547f8e3fec83cdd3ae91ecb83ac"
+        },
+        {
+          "id": "tha-ap290",
+          "pages": 2,
+          "body_sha256": "6a374da419148479e447b5e81611fff11698184c8204209f6f349a9f6c065109",
+          "notes_sha256": "142aa466d49a19a3d70eaaf5b6028e33df021116429a97ce426a2c1c91fe71c2",
+          "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "quotation_text_sha256": "f42e21a6faad2a7368cc85c80d860cc064576c34570b35d59b6322a05ec4eefd"
+        }
+      ],
+      "provider_log_sha256": "dcaf4d6b7d85c196c74a9e31682318e286e48612078f5dfa131765d118219130",
+      "external_network_forwarded": 0
+    },
+    {
+      "mode": "deny-all",
+      "status": "passed",
+      "poems": 0,
+      "notes": 0,
+      "pages": 0,
+      "quotes": 0,
+      "pali_reads": 5,
+      "held_refusals": 3,
+      "per_poem": [
+        {
+          "id": "tha-ap289",
+          "refused": true
+        },
+        {
+          "id": "tha-ap290",
+          "refused": true
+        }
+      ],
+      "provider_log_sha256": "1b57a7ca0a91e991aa8cae9f04ce196f7a49c3bacaaa292eebbd122f04f97bec",
+      "external_network_forwarded": 0
+    }
+  ],
+  "registry_count": 310,
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "external_network_forwarded": 0
+}

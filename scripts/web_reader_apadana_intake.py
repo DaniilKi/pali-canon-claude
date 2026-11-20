@@ -318,8 +318,97 @@ def read_281_285(root):
     return current
 
 
+def read_287_288(root):
+    previous=read_281_285(root)
+    current=_sealed(root,{'file':'THERA_287_288_APPROVAL.json',
+                         'sha256':'e159aefc7ad0f2a36a10dffa95fd5cf97650b95969820344f70aee0dd2c7e95e'})
+    assert current['schema']=='reviewed-apadana-intake-v1' and current['status']=='approved'
+    assert current['base_commit']=='0f572239fc459001f75cd5265d3eaeac66425b66'
+    assert current['publisher_revision']==previous['publisher_revision']
+    assert current['vri_revision']==previous['vri_revision']
+    assert current['previous_intake']=={'file':'THERA_281_285_APPROVAL.json',
+                                        'sha256':'52c1813c72685a7a78f4f29ed860035c06e61f1b209f601ed0b2e9a36de3206f'}
+    assert _sealed(root,current['previous_intake'])==previous
+    assert current['baseline_ids']==previous['expected_profile_ids'] and len(current['baseline_ids'])==308
+    assert current['baseline_records']==previous['baseline_records']+previous['approved_records']
+    ids=['tha-ap289','tha-ap290'];publishers=[287,288]
+    records=[{'id':'tha-ap289','publisher_chapter':'chapter-3','poem':287},
+             {'id':'tha-ap290','publisher_chapter':'chapter-3','poem':288}]
+    assert current['approved_ids']==ids and current['approved_records']==records
+    assert not set(ids)&set(current['baseline_ids'])
+    assert current['expected_profile_ids']==current['baseline_ids']+ids
+    assert len(current['expected_profile_ids'])==len(set(current['expected_profile_ids']))==310
+    assert current['held_ids']==previous['held_ids']
+    assert not set(current['held_ids'])&set(current['expected_profile_ids'])
+    assert current['explicitly_not_activated_publishers']==[poem for poem in previous['explicitly_not_activated_publishers'] if poem not in publishers]
+    assert current['before_canon_sha256']==current['after_canon_sha256']==previous['after_canon_sha256']
+    assert current['source_and_normalization_only'] is True and current['media_approval'] is False
+    assert current['runtime_approval'] is False and current['release_approval'] is False and current['external_activations']==0
+    profiles=_sealed(root,current['expected_profiles']);links=_sealed(root,current['expected_links'])
+    assert list(profiles)==list(links)==ids
+    author=_sealed(root,current['source_approval']);peer=_sealed(root,current['independent_source_approval'])
+    assert author['status']=='SOURCE_AND_FINITE_NORMALIZATION_APPROVED_TWO_REVIEW_A_ONLY'
+    assert author['baseline']==current['base_commit']
+    assert peer['status']=='APPROVE_TWO_EXACT_PUBLISHER287_288_SOURCE_FINITE_NORMALIZATION_AND_MAPS_ONLY'
+    for packet in (author,peer):
+        assert packet['publisher_revision']==current['publisher_revision'] and packet['vri_revision']==current['vri_revision']
+        assert packet['canonical_logical_sha256']==current['after_canon_sha256']
+        assert packet['approved_ids']==ids
+        assert packet['source_approval_count']==packet['normalization_approval_count']==2
+        assert packet['approved_profile_objects']==profiles and packet['approved_link_objects']==links
+        assert packet['runtime_approval'] is False and packet['release_approval'] is False
+        assert packet['push_approval'] is False and packet['activation_approval'] is False
+    assert author['source_approval'] is True and author['normalization_approval'] is True
+    assert author['approved_publisher_poems']==publishers and peer['approved_records']==records
+    assert peer['B_independent_normalization_sha256']==current['independent_normalization']['sha256']
+    normalized=_sealed(root,current['independent_normalization'])
+    assert normalized['status']=='B_ORIGINAL_FIRST_TWO_NORMALIZED_METADATA_SEALED_BEFORE_A_COMPARISON'
+    assert normalized['publisher_revision']==current['publisher_revision'] and normalized['vri_revision']==current['vri_revision']
+    assert normalized['production_parser_or_A_outputs_used'] is False and normalized['runtime_or_release_approval'] is False
+    assert [row['canonical_owner'] for row in normalized['poems']]==ids
+    assert [row['publisher_poem'] for row in normalized['poems']]==publishers
+    assert len(current['goldens'])==1
+    golden=_sealed(root,current['goldens'][0])
+    assert golden['baseline']==current['base_commit']
+    assert golden['publisher_revision']==current['publisher_revision'] and golden['vri_revision']==current['vri_revision']
+    assert golden['canonical_logical_sha256']==current['after_canon_sha256']
+    assert [row['id'] for row in golden['poems']]==ids
+    for row,proof in zip(golden['poems'],normalized['poems'],strict=True):
+        uid=row['id']
+        assert row['poem']==proof['publisher_poem'] and row['path']==proof['source_path']
+        for field in ('raw_sha256','body_sha256','notes_sha256','paratext_sha256'):
+            assert profiles[uid][field]==row[field]==proof[field]
+        assert profiles[uid]['root_sha256']==row['root']['root_sha256']==proof['root_sha256']
+        assert profiles[uid]['stanza_layout']==row['stanza_layout']==proof['stanza_layout']
+        assert [part['sha256'] for part in row['body_paragraphs']]==proof['body_paragraph_sha256s']
+        assert row['note_numbers']==proof['poem_note_numbers']==profiles[uid]['note_numbers']
+        assert links[uid]==dict(profiles[uid],english=profiles[uid]['title'],match='individually-reviewed-whole-poem')
+    for original,descriptor in (('GOLDENS.json',current['goldens'][0]),('EXPECTED_PROFILES.json',current['expected_profiles']),('EXPECTED_LINKS.json',current['expected_links'])):
+        assert author['core_seals'][original]==peer['A_reviewed_artifacts'][original]['sha256']==descriptor['sha256']
+    compact=_sealed(root,current['baseline_freeze'])
+    assert compact['schema']=='reviewed-apadana-baseline-compact-v1' and compact['profiles']==308
+    assert compact['baseline']==current['base_commit'] and compact['ordered_ids']==current['baseline_ids']
+    assert list(compact['profile_object_sha256'])==list(compact['translation_object_sha256'])==current['baseline_ids']
+    assert compact['prior308_authority']==current['previous_intake']
+    assert compact['canon_logical_sha256']==current['before_canon_sha256']
+    assert compact['canon_units']==8544 and compact['canon_books']==61
+    replay=_sealed(root,current['baseline_reconstruction_review'])
+    assert replay['full_objects_equal'] is True and replay['exact_ordered_ids']==308
+    assert replay['prior308_approval_sha256']==current['previous_intake']['sha256']
+    assert replay['compact_sha256']==current['baseline_freeze']['sha256']
+    seals=_sealed(root,current['normalization_seals'])
+    for original,descriptor in (('core/GOLDENS.json',current['goldens'][0]),('core/EXPECTED_PROFILES.json',current['expected_profiles']),('core/EXPECTED_LINKS.json',current['expected_links'])):
+        assert seals['files'][original]==descriptor['sha256']
+    assert seals['full_payload_files']==0 and seals['runtime_release_push_approval'] is False
+    for field in ('normalization_replay','copy_policy'):_sealed(root,current[field])
+    for family in ('source_reviews','rights'):
+        assert current[family]
+        for descriptor in current[family]:_sealed(root,descriptor)
+    return current
+
+
 def reviewed_intake(root):
-    return read_281_285(root)
+    return read_287_288(root)
 
 
 def curated_303_additions(root,anchor_filename):
@@ -350,8 +439,8 @@ def curated_303_additions(root,anchor_filename):
     return {'curation':current,'anchor':anchor,'ids':ids,'profiles':profiles,'links':links}
 
 
-def curated_additions(root,anchor_filename):
-    current=reviewed_intake(root)
+def curated_308_additions(root,anchor_filename):
+    current=read_281_285(root)
     if anchor_filename=='THERA_261_280_APPROVAL.json':
         anchor=read_261_280(root)
         ids=[];profiles={};links={}
@@ -360,6 +449,25 @@ def curated_additions(root,anchor_filename):
         anchor=historical['anchor']
         ids=list(historical['ids']);profiles=dict(historical['profiles']);links=dict(historical['links'])
         assert historical['curation']==read_261_280(root)
+    extra_profiles=_sealed(root,current['expected_profiles']);extra_links=_sealed(root,current['expected_links'])
+    assert list(extra_profiles)==list(extra_links)==current['approved_ids']
+    assert not set(extra_profiles)&(set(anchor['expected_profile_ids'])|set(ids))
+    ids.extend(current['approved_ids']);profiles.update(extra_profiles);links.update(extra_links)
+    assert current['expected_profile_ids']==anchor['expected_profile_ids']+ids
+    assert list(profiles)==list(links)==ids
+    return {'curation':current,'anchor':anchor,'ids':ids,'profiles':profiles,'links':links}
+
+
+def curated_additions(root,anchor_filename):
+    current=reviewed_intake(root)
+    if anchor_filename=='THERA_281_285_APPROVAL.json':
+        anchor=read_281_285(root)
+        ids=[];profiles={};links={}
+    else:
+        historical=curated_308_additions(root,anchor_filename)
+        anchor=historical['anchor']
+        ids=list(historical['ids']);profiles=dict(historical['profiles']);links=dict(historical['links'])
+        assert historical['curation']==read_281_285(root)
     extra_profiles=_sealed(root,current['expected_profiles']);extra_links=_sealed(root,current['expected_links'])
     assert list(extra_profiles)==list(extra_links)==current['approved_ids']
     assert not set(extra_profiles)&(set(anchor['expected_profile_ids'])|set(ids))

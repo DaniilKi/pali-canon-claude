@@ -1,15 +1,15 @@
 """Finite acceptance oracles from sealed independent reviews, never runtime output.
 
-Historical evidence stays untouched. Catalogue gates retain all 303 old objects
-and add exactly five separately reviewed sources. Runtime acceptance remains the
-separately reviewed303-choice authority until a new inventory is approved.
+Historical evidence stays untouched. Catalogue gates retain all 308 old objects
+and add exactly two separately reviewed sources. Runtime acceptance remains the
+separately reviewed308-choice authority until a new inventory is approved.
 """
 import hashlib
 import json
 import subprocess
 from pathlib import Path
 
-from web_reader_apadana_intake import curated_303_additions, read_281_285
+from web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288
 
 CURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'
 FREEZE_SHA = '24e63f5fb14ec74946d20349d78ae2b405e1636ca561f757660113226d6537dc'
@@ -69,7 +69,7 @@ def approved303_catalogue(root):
     return {'ids': ids, 'links': links, 'profiles': profiles, 'source': source}
 
 
-def approved_catalogue(root):
+def approved308_catalogue(root):
     previous = approved303_catalogue(root)
     current = read_281_285(root)
     evidence = Path(root) / 'docs/evidence/apadana'
@@ -115,15 +115,61 @@ def approved_catalogue(root):
     return {'ids': ids, 'links': links, 'profiles': profiles, 'source': source}
 
 
+def approved_catalogue(root):
+    previous = approved308_catalogue(root)
+    current = read_287_288(root)
+    evidence = Path(root) / 'docs/evidence/apadana'
+    compact = sealed(evidence / current['baseline_freeze']['file'], current['baseline_freeze']['sha256'])
+    assert compact['schema'] == 'reviewed-apadana-baseline-compact-v1'
+    assert compact['baseline'] == current['base_commit'] == '0f572239fc459001f75cd5265d3eaeac66425b66'
+    assert compact['profiles'] == 308 and compact['ordered_ids'] == previous['ids'] == current['baseline_ids']
+    assert compact['prior308_authority'] == current['previous_intake']
+    assert compact['object_hash_domain'] == 'SHA256 UTF8 compact JSON with preserved insertion order, equivalent to JSON.stringify for these source objects; independently compared for all308.'
+    object_sha = lambda value: hashlib.sha256(json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode('utf-8')).hexdigest()
+    assert list(compact['profile_object_sha256']) == list(compact['translation_object_sha256']) == previous['ids']
+    for uid in previous['ids']:
+        assert object_sha(previous['profiles'][uid]) == compact['profile_object_sha256'][uid], 'Prior308 profile differs from independently reconstructed object: ' + uid
+        assert object_sha(previous['links'][uid]) == compact['translation_object_sha256'][uid], 'Prior308 link differs from independently reconstructed object: ' + uid
+    assert object_sha(previous['source']) == compact['manifest_source_sha256']
+    assert compact['canon_logical_sha256'] == current['before_canon_sha256'] == current['after_canon_sha256']
+    assert compact['canon_units'] == 8544 and compact['canon_books'] == 61
+    runtime308 = sealed(evidence / 'THERA_281_285_RUNTIME_REVIEW.json', CURRENT_308_RUNTIME_REVIEW_SHA)
+    for name, expected in compact['data_file_sha256'].items():
+        assert name.startswith('server/data/') and '..' not in Path(name).parts
+        assert runtime308['files'][name.removeprefix('server/')]['sha256'] == expected
+        if name != 'server/data/apadana.json':
+            assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == expected, 'Unrelated data changed: ' + name
+    profiles = dict(previous['profiles'])
+    links = dict(previous['links'])
+    extra_profiles = sealed(evidence / current['expected_profiles']['file'], current['expected_profiles']['sha256'])
+    extra_links = sealed(evidence / current['expected_links']['file'], current['expected_links']['sha256'])
+    assert list(extra_profiles) == list(extra_links) == current['approved_ids']
+    assert not set(extra_profiles) & set(profiles)
+    profiles.update(extra_profiles)
+    links.update(extra_links)
+    ids = current['expected_profile_ids']
+    assert len(ids) == len(set(ids)) == 310 and ids == previous['ids'] + current['approved_ids']
+    assert list(profiles) == list(links) == ids
+    assert {uid: profiles[uid] for uid in previous['ids']} == previous['profiles'], 'All308 prior full profile objects retained'
+    assert {uid: links[uid] for uid in previous['ids']} == previous['links'], 'All308 prior full link objects retained'
+    assert len([uid for uid in ids if uid.startswith('thi-ap')]) == 40
+    assert len([uid for uid in ids if uid.startswith('tha-ap')]) == 270
+    source = dict(previous['source'])
+    policy = source['policy']
+    assert policy.count('308 finite') == policy.count('268 explicitly mapped Therā') == 1
+    source['policy'] = policy.replace('308 finite', '310 finite').replace('268 explicitly mapped Therā', '270 explicitly mapped Therā')
+    return {'ids': ids, 'links': links, 'profiles': profiles, 'source': source}
+
+
 def assert_catalogue(manifest, approved):
-    assert manifest['links'] == approved['links'], 'Exact independently reviewed 308 link objects changed'
+    assert manifest['links'] == approved['links'], 'Exact independently reviewed 310 link objects changed'
     assert manifest['source'] == approved['source'], 'Reviewed source rights or finite policy changed'
 
 
 def assert_profiles(root, approved):
     probe = "import{APADANA_PROFILES}from'./src/apadana-profiles.mjs';console.log(JSON.stringify(APADANA_PROFILES));"
     observed = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', probe], cwd=root, encoding='utf-8'))
-    assert observed == approved['profiles'], 'Exact independently reviewed 308 profile objects changed'
+    assert observed == approved['profiles'], 'Exact independently reviewed 310 profile objects changed'
 
 
 def reviewed_2449_runtime(root):
@@ -164,7 +210,7 @@ def reviewed_303_runtime(root):
 CURRENT_308_RUNTIME_REVIEW_SHA = '809efc477aec7bd16c6d5077114ba5932663ecf110076899f9dc5ef85917519f'
 
 
-def approved_runtime(root):
+def reviewed_308_runtime(root):
     # Preserve every previous runtime authority; admit only this exact reviewed
     # inventory with the five finite source308/v35 byte changes.
     previous = reviewed_303_runtime(root)
@@ -181,6 +227,33 @@ def approved_runtime(root):
     assert len(files) == proof['runtime_files'] == 34 and set(files) == set(previous)
     assert sorted(name for name in files if files[name] != previous[name]) == delta
     assert proof['allowed_changed_paths_from_prior303'] == delta and proof['unchanged_runtime_paths'] == 29
+    assert files['data/source-notes.json'] == previous['data/source-notes.json']
+    assert all(not Path(name).is_absolute() and '..' not in Path(name).parts for name in files)
+    return files
+
+
+
+CURRENT_310_RUNTIME_REVIEW_SHA = '57c3b1c4efdc5b75b9718f77259c5ef4ee25a85e15b257f6f64b8235f3a71daf'
+
+
+def approved_runtime(root):
+    # Preserve the exact 308/303/2449 authorities; only these independently
+    # reviewed two-source/v36 bytes may replace the five allowed records.
+    previous = reviewed_308_runtime(root)
+    proof = sealed(Path(root) / 'docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json', CURRENT_310_RUNTIME_REVIEW_SHA)
+    assert proof['schema'] == 'reviewed-current310-runtime-approval-v1'
+    assert proof['status'] == 'APPROVE_EXACT_CURRENT34_RUNTIME_INVENTORY_LOCAL_UNPUBLISHED_ONLY'
+    assert proof['baseline'] == '0f572239fc459001f75cd5265d3eaeac66425b66'
+    assert proof['runtime_inventory_approval'] is True and proof['release_or_push_approval'] is False
+    assert proof['curation']['sha256'] == 'e159aefc7ad0f2a36a10dffa95fd5cf97650b95969820344f70aee0dd2c7e95e'
+    assert proof['baseline_compact']['sha256'] == 'ab925be47a5bbfe8a021443c4e779b7ec56a68ef802fdb2e752f759aa9858c9e'
+    assert proof['source_authorities']['expected_profiles']['sha256'] == '469448bac323d2e64f12ed16b5ce8e72439ee2a5471ee58106d3a4e47416df7a'
+    assert proof['source_authorities']['expected_links']['sha256'] == 'f56c00dc91c62cad541a57181ca035524939bdcfbff4b89b5263128a3a522848'
+    files = proof['files']
+    delta = ['data/apadana.json', 'http-worker.cjs', 'http.cjs', 'index.cjs', 'web/reader.js']
+    assert len(files) == proof['runtime_files'] == 34 and set(files) == set(previous)
+    assert sorted(name for name in files if files[name] != previous[name]) == delta
+    assert proof['allowed_changed_paths_from_prior308'] == delta and proof['unchanged_runtime_paths'] == 29
     assert files['data/source-notes.json'] == previous['data/source-notes.json']
     assert all(not Path(name).is_absolute() and '..' not in Path(name).parts for name in files)
     return files

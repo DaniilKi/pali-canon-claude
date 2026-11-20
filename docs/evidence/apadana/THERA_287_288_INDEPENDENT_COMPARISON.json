@@ -1,0 +1,55 @@
+{
+  "status": "B_INDEPENDENT_POSTSEAL_A_CORE_COMPARISON_APPROVES_TWO_SOURCE_AND_FINITE_NORMALIZATION_SCOPES_ONLY",
+  "A_core_sha256": "1f178d9e6c346459651a972020d08e46934890a4fdf47a33d78ab8e18a3960aa",
+  "B_core_sha256": "7265761964af7b6495eda228129d54074ca789cf76574ad34410c53f6e605936",
+  "B_precompare_seals_sha256": "a71a0d774112eb023bad5eddaee4f016e1246fd9e83ef95ad33164fb170b38f1",
+  "approved_ids": [
+    "tha-ap289",
+    "tha-ap290"
+  ],
+  "results": [
+    {
+      "id": "tha-ap289",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    },
+    {
+      "id": "tha-ap290",
+      "all_five_scope_pins_equal": true,
+      "all_body_paragraph_and_line_pins_equal": true,
+      "all_notes_number_text_and_owner_equal": true,
+      "all_quotation_entries_equal": true,
+      "XML_raw_scope_and_neighbors_equal": true,
+      "complete_publisher_edition_only": true
+    }
+  ],
+  "rights_six_artifacts_equal": true,
+  "counts": {
+    "poems": 2,
+    "body_paragraphs": 14,
+    "physical_stanza_entries": 8,
+    "local_verse_labels": 8,
+    "poem_notes": 8,
+    "chapter_headings": 0,
+    "chapter_summaries": 0
+  },
+  "scope_clarifications": [
+    "All eight four-line entries remain scope correspondences, not proven English/Pāli word or line equivalence.",
+    "Publisher287 audio frontmatter remains metadata-only with no media fetch, payload export, link capability or rights approval.",
+    "Publisher288 original note4 retains all alternative family-reference interpretations; no intended referent or cause is settled.",
+    "Publisher vyasana versus VRI byasana and Sunikkhama versus Sunikkhamā remain distinct source spellings; no variant is invented."
+  ],
+  "holds_or_material_disagreements": [],
+  "exact_profile_and_link_approval": "PENDING_A_FINAL_MAP_REVIEW",
+  "source_scope_approval_count": 2,
+  "finite_normalization_scope_approval_count": 2,
+  "runtime_approval": false,
+  "release_approval": false,
+  "activation_approval": false,
+  "project_execution_or_changes": false,
+  "full_wording_files_created": false
+}

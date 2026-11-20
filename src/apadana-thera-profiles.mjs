@@ -1,3 +1,4 @@
+import { THERA_287_288_PROFILES } from './apadana-thera287-288-profiles.mjs';
 import { THERA_281_285_PROFILES } from './apadana-thera281-285-profiles.mjs';
 /** Finite independently reviewed Therā publisher-edition poems; unlisted scopes remain held. English bodies and notes remain live-only. */
 import { THERA_261_280_PROFILES } from './apadana-thera261-280-profiles.mjs';
@@ -22057,5 +22058,6 @@ export const THERA_APADANA_PROFILES = deepFreeze({
     ]
   },
   ...THERA_261_280_PROFILES,
-  ...THERA_281_285_PROFILES
+  ...THERA_281_285_PROFILES,
+  ...THERA_287_288_PROFILES
 });

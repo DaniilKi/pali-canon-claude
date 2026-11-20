@@ -1,0 +1,33 @@
+{
+  "schema": "finite-offline-guard-adversarial-selftest-v1",
+  "status": "passed",
+  "scope": "Literal127.0.0.1 callback/listen and no outbound connections. No project server, parser or source wording emitted; no OS packet-capture claim.",
+  "stage": "/tmp/pali-guard-adversarial-Q5bBmw",
+  "contract_sha256": "4449ac6391b7e7f3d7068fb6ec292898cb04f9f9f9636a92fca42f1d503e49a6",
+  "preload_sha256": "c5aae9d265214f3051d5d7ede9962516c2b7bb51b434ef61cc1b628502158074",
+  "runs": [
+    {
+      "status": "passed",
+      "mode": "fixture",
+      "expected_blocked_calls": 34,
+      "fixture_reads": 2,
+      "literal_listen": true,
+      "external_network_forwarded": 0,
+      "literal_callbacks": 4,
+      "ledger_sha256": "3b38138025bd2db38f2eb72455b86f5e401c19040a880c336fb06792768b25cd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "status": "passed",
+      "mode": "deny-all",
+      "expected_blocked_calls": 36,
+      "fixture_reads": 0,
+      "literal_listen": true,
+      "external_network_forwarded": 0,
+      "literal_callbacks": 4,
+      "ledger_sha256": "0c7643c6d7b7d4a6e00f474abecd097ad4c4ce5d71ab045e197bdbf5fd63b282",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "external_network_forwarded": 0
+}

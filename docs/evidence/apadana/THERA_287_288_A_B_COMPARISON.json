@@ -1,0 +1,34 @@
+{
+  "status": "A_B_TWO_ORIGINAL_FIRST_CORE_EXACT_MATCH",
+  "A_precompare_sha256": "cae50b032c30d7bd0f6a0bebdf3c7942412c77da2be69cbf48ecb0a7a84213f1",
+  "B_precompare_sha256": "a71a0d774112eb023bad5eddaee4f016e1246fd9e83ef95ad33164fb170b38f1",
+  "B_normalization_sha256": "7265761964af7b6495eda228129d54074ca789cf76574ad34410c53f6e605936",
+  "matched": [
+    {
+      "id": "tha-ap289",
+      "source_raw_body_notes_empty_paratext_root_all_exact": true,
+      "all_paragraph_hashes_and_lines_exact": true,
+      "all_owned_note_hashes_numbers_exact": true,
+      "all_stanza_labels_and_quotation_entry_hashes_exact": true,
+      "raw_XML_and_canonical_tuple_hashes_exact_distinct_domains": true
+    },
+    {
+      "id": "tha-ap290",
+      "source_raw_body_notes_empty_paratext_root_all_exact": true,
+      "all_paragraph_hashes_and_lines_exact": true,
+      "all_owned_note_hashes_numbers_exact": true,
+      "all_stanza_labels_and_quotation_entry_hashes_exact": true,
+      "raw_XML_and_canonical_tuple_hashes_exact_distinct_domains": true
+    }
+  ],
+  "core_A_was_sealed_before_B_read": true,
+  "normalization_counts": {
+    "poems": 2,
+    "body_paragraphs": 14,
+    "entries": 8,
+    "notes": 8,
+    "paratext": 0,
+    "summaries": 0
+  },
+  "runtime_release_approval": false
+}

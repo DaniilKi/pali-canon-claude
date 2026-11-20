@@ -1,0 +1,20 @@
+{
+  "original_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "VRI_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "physical_elements": 14646,
+  "canonical_tuples": 14645,
+  "all14645_tuples_exact": true,
+  "omitted_note_only_elements": [
+    {
+      "physical_element_zero_based": 1130,
+      "raw_utf16le_byte_interval": [
+        196320,
+        196466
+      ],
+      "raw_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723"
+    }
+  ],
+  "canonical_repair": false,
+  "normalization_transform_metadata": []
+}

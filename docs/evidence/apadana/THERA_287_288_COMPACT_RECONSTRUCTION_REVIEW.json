@@ -1,0 +1,13 @@
+{
+  "status": "READ_ONLY_METADATA308_RECONSTRUCTION_AND_COMPACT_COMMITMENTS_MATCH",
+  "method": "Own stdlib JSON/hash metadata reads only; no project helper/parser/runtime imported or executed. Reconstruct immutable246 plus sealed10+10+18+1+18+5 maps; keep all prior source objects exact.",
+  "baseline": "0f572239fc459001f75cd5265d3eaeac66425b66",
+  "prior308_approval_sha256": "52c1813c72685a7a78f4f29ed860035c06e61f1b209f601ed0b2e9a36de3206f",
+  "external_full_sha256": "c443bdc6633b77f6160c2e94e79ad969fdb68769ee0d7185305cbb8857fa08e4",
+  "compact_sha256": "ab925be47a5bbfe8a021443c4e779b7ec56a68ef802fdb2e752f759aa9858c9e",
+  "full_objects_equal": true,
+  "exact_ordered_ids": 308,
+  "per_id_profile_and_link_digests_matching": 308,
+  "source_manifest_equal_and_digest_matching": true,
+  "new287_288_source_normalization_runtime_approval": false
+}

@@ -1,0 +1,70 @@
+{
+  "status": "UNCHANGED_PINNED_SPECIFIC_TEXT_GRANT_APPLIES_TO_EXACT_TWO",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "source_ids": [
+    "tha-ap289",
+    "tha-ap290"
+  ],
+  "specific_translation_license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "creator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "six_artifacts_verified_byte_unchanged": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "prior_full_notice_read_review": {
+    "path": "/tmp/pali-281-285-source-A/RIGHTS_REVIEW.json",
+    "sha256": "3a74cd523e5d402f45cc4543c4dc3b04fc2869ed5c122fe8639885f97abd60df"
+  },
+  "fresh_notice_or_media_grant_claim": false,
+  "generic_site_CC_BY_relaxes_specific_text_grant": false,
+  "requirements": [
+    "noncommercial",
+    "sharealike for adaptations",
+    "retain creator/publisher attribution and copyright if supplied",
+    "retain license and disclaimer/source URI with pinned revision",
+    "disclose faithful presentation extraction and prior changes",
+    "no downstream restrictions or implied endorsement"
+  ],
+  "app_policy": "Consent-gated live-only English/notes; metadata and hashes only bundled",
+  "publisher287_audio_frontmatter": "Original file mentions mp3/reciter/date/location; textual-source evidence only, no audio fetch, approved media link, bundling, commercial or audio rights inference",
+  "audio_media_network_requests": 0,
+  "media_or_commercial_approval": false,
+  "source_textual_scope_only": true,
+  "runtime_release_push_approval": false
+}

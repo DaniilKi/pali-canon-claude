@@ -1,0 +1,11 @@
+{
+  "status": "B_POSTCOMPARISON_SOURCE_FINITE_NORMALIZATION_ONLY",
+  "files": {
+    "A_CORE_COMPARISON.json": "61c6cb5e9bf43199c5ecaf952a116550111f4c3bd64c06367cab5f99af536c37",
+    "SOURCE_APPROVAL.json": "4563f12df0490ae0b35b16c90c835ecce4fa8ee979857a3a9fadeb84f0a23fce",
+    "compare_A_core.py": "e233ffb183003185d7d824aa03ccf0e5cdb3cff1859f5f524a3c9a7ad7c481ff",
+    "approve_A_maps.py": "76c4c93c6d4764fd42b5f1b6029d1df694b493b8a234b4bfb7736334667bfec3"
+  },
+  "precompare_seals_sha256": "a71a0d774112eb023bad5eddaee4f016e1246fd9e83ef95ad33164fb170b38f1",
+  "runtime_release_approval": false
+}
