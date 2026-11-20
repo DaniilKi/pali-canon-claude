@@ -7,6 +7,7 @@ import { createHash } from 'node:crypto';
 import * as canon from '../src/canon.mjs';
 import { textSegments } from '../src/variants.mjs';
 import { APADANA_PROFILES } from '../src/apadana-profiles.mjs';
+import { CURRENT_APADANA_IDS } from './helpers/apadana-intake-expectations.mjs';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { createServer } from '../src/server.mjs';
@@ -33,10 +34,18 @@ test('separately indexed note preserves all old unit and book identities, source
     assert.equal(sha(list.map((u) => [u.id, sha(u), [u.book, u.start, u.end]])), baseline[`${kind}_metadata_sha256`]);
     assert.equal(sha(list.map((u) => [u.id, canon.readingSource(u)])), baseline[`${kind}_sources_sha256`]);
   }
-  assert.equal(Object.keys(APADANA_PROFILES).length, baseline.profile_count);
-  assert.equal(sha(APADANA_PROFILES), baseline.profiles_sha256);
+  const heldBytes = readFileSync(new URL('../docs/evidence/apadana/THERA_HELD234_APPROVAL.json', import.meta.url));
+  assert.equal(createHash('sha256').update(heldBytes).digest('hex'), '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7');
+  const historicalIds = JSON.parse(heldBytes).expected_profile_ids;
+  assert.equal(historicalIds.length, 285);assert.equal(historicalIds.length, baseline.profile_count);assert.equal(new Set(historicalIds).size, 285);
+  assert.equal(CURRENT_APADANA_IDS.length, 303);assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
+  assert.deepEqual(CURRENT_APADANA_IDS.slice(0, 285), historicalIds);
+  const historicalProfiles = Object.fromEntries(historicalIds.map(id => { assert.ok(Object.hasOwn(APADANA_PROFILES, id), id + ' prior profile retained');return [id, APADANA_PROFILES[id]]; }));
+  assert.equal(sha(historicalProfiles), baseline.profiles_sha256);
   const { links } = JSON.parse(readFileSync(new URL('../server/data/apadana.json', import.meta.url)));
-  assert.equal(sha(links), baseline.links_sha256);
+  assert.deepEqual(Object.keys(links), CURRENT_APADANA_IDS);
+  const historicalLinks = Object.fromEntries(historicalIds.map(id => { assert.ok(Object.hasOwn(links, id), id + ' prior translation retained');return [id, links[id]]; }));
+  assert.equal(sha(historicalLinks), baseline.links_sha256);
 });
 
 test('complete old segment objects remain unchanged in all 8544 units and 61 books under every existing variant mode', () => {

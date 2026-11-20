@@ -1,5 +1,7 @@
 # Coverage
 
+**Current local unpublished D259:** eighteen approved publisher-edition poems (261–265,267–279 only) add first English choices locally: 303 Apadāna choices (40 Therī,263 Therā), 2,886 whole links and 1,782/2,205 indexed direct/inherited coverage. Actual `listSources` member-aware coverage is 1,756/2,179 of 8,445; its accounting differs from indexed CLI totals. Remote dev at intake start is `2449…` with 285 choices; local `d31757b…` contains an unpublished fix, and diagnostic `348…` is excluded. All 285 earlier profile/link objects remain exact. Client/v34 integration and focused/package checks are complete locally; the linked intake guide records full-check and independent final acceptance. Remote CI and publication remain separate. Earlier capsules below retain their historical scopes. [Finite intake and validation status](data/thera261-280-local-intake.md).
+
 **Current local unpublished D257:** publisher poem 234 (`tha-ap236`) now has independent source/normalization approval and finite local integration, preserving all 284 preceding choices. Measured local totals are 285 choices (40 Therī, 245 Therā), 2,868 whole links and 1,764/2,187 indexed direct/inherited units. Member-aware 1,738/2,161 awaits actual metadata verification. The 39-choice local stack remains unpublished; remote dev is `a9755d2` (246 choices). Focused/full/package/browser/final review and remote CI gates remain pending; no push is authorized. Earlier D254–D256 counts and hold statements retain their historical intake scope. [Current scope and separate holds](data/thera-held-cases-review.md).
 
 **Current local D256 candidate intake:** two separately reviewed source groups contain eighteen candidates over preserved local `cdbefd514164a559bc5aaab631c267f3084e31a6` (266 choices). Separate formal source gates now approve the exact A/B scopes; measured local coverage is 284 choices (40 Therī, 244 Therā), 2,867 whole links, 1,763/2,186 indexed direct/inherited and 1,737/2,160 actual member-aware units. The 38-choice local stack remains unpublished; combined validation gates are recorded separately below. Remote dev stays `a9755d2` (246 choices); no push while prior macOS CI is unresolved. Earlier D254/D255 statements below retain their historical scopes. [D256 finite scope and gates](data/thera-remaining-lowrisk-intake.md).
@@ -11,6 +13,8 @@
 What Pali Canon for Claude contains in version 2.1.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json`, `server/data/anandajoti.json` and `server/data/apadana.json`).
 
 ## Summary
+
+These tables describe the current local D259 index. Earlier intake capsules and dated batch totals describe their own historical snapshots.
 
 | | |
 |---|---|
@@ -25,7 +29,7 @@ What Pali Canon for Claude contains in version 2.1.0, computed directly from the
 | Thai, Myanmar and VRI page markers | 56,050 (21,781 Thai, 16,687 Myanmar, 17,582 VRI), shown in `get_text` and accepted as citations such as "Thai MN 1.103"; 56,048 resolve back to a text containing the marker |
 | Variant readings | 18,725 VRI notes; 16,632 (88.8%) give at least one reading attributed to editions by siglum (`get_text` `variants: "structured"`) |
 | Scripts | Roman, plus Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao and Lanna by transliteration. The first five are tested against VRI's own script editions; Lao and Lanna have no VRI edition and are tested by round trip only |
-| English translation links | 2,829 links covering 1,725 texts directly, 2,148 including verses that share their chapter's translation (63 of them placed by the content-based linker, [#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)). `list_sources` reports the same per collection as `translation_coverage`, counting grouped ranges through their members (1,699 and 2,122 of 8,445) |
+| English translation links | Current local index: 2,886 links. CLI indexed coverage: 1,782 directly / 2,205 including inherited links. Actual `list_sources.translation_coverage.total` member-aware coverage: 1,756 / 2,179 of 8,445. These accounting views differ. There are 63 content-based placements; source-level scope review remains necessary |
 | Commentary (Aṭṭhakathā) | VRI commentaries aligned to the texts by VRI paragraph number (`get_commentary`, `get_text` `commentary: true`): DN 34/34, MN 152/152, SN 1,800/1,954, AN 1,598/2,085, Dhp 449/449, Ja 512/547, Vinaya 370/443 texts; every text the commentary numbers is aligned except 8 known exceptions. `server/data/commentary.json.gz`, 10.8 MB |
 | Post-canonical books | All 109 VRI Ṭīkā and Añña books (Visuddhimagga, its Mahāṭīkā, Abhidhammatthasaṅgaha, Mahāvaṃsa and the sub-commentaries), labelled `canonical: false` (`get_post_canonical`, `search_post_canonical`). `server/data/postcanonical.json.gz`, 14.5 MB |
 | Word analysis | Digital Pāḷi Dictionary v0.4.20261026 subset: 89,763 headwords, 753 roots and the word forms of the bundled texts; 99.73% of words in the citable text passages are known (`analyse_passage`, offline `lookup_pali`). `server/data/dpd.json.gz`, 5.3 MB |
@@ -54,7 +58,7 @@ All 61 root files can also be read from beginning to end using `get_text` with a
 | Petavatthu | Pv | 51 | | | 1 |
 | Theragāthā | Thag | 264 | | | 107 |
 | Therīgāthā | Thig | 73 | | | 36 |
-| Apadāna (Thera and Therī) | Ap | 603 | | | 246 |
+| Apadāna (Thera and Therī) | Ap | 603 | | | 303 |
 | Buddhavaṃsa | Bv | 29 | | | — |
 | Cariyāpiṭaka | Cp | 35 | | | — |
 | Jātaka (the verses of the 547 birth stories) | Ja | 547 | | | — |
@@ -99,7 +103,7 @@ Whole-unit counts exclude partial-unit and shared-page translation mappings. `np
 | Ṭhānissaro Bhikkhu, dhammatalks.org | 1,270 | Current versions of his translations |
 | Access to Insight | 1,160 | Ṭhānissaro's earlier versions (879) and about 25 other translators, among them Maurice Walshe, John D. Ireland, Andrew Olendzki, Acharya Buddharakkhita, Nyanaponika Thera, Piyadassi Thera, Ñāṇamoli Thera and Bhikkhu Bodhi; each page keeps its own licence notice |
 | Ānandajoti Bhikkhu, Ancient Buddhist Texts | 153 | Line-by-line Pāli and English (CC BY-SA 3.0): Udāna, Dhammapada chapters, most of the Pārāyanavagga, the Bhikkhunīsaṃyutta, DN 16, several MN, SN and AN suttas, two parts of the Dhammasaṅgaṇī mātikā and Vibhaṅga 6–7. Each link is checked against the Pāli on the page |
-| Jonathan S. Walters, Whitman College | 246 | 40 Therī and 206 first indexed complete publisher-edition Therā choices; live from pinned publisher Markdown (CC BY-NC-SA 4.0), without bundled wording or notes |
+| Jonathan S. Walters, Whitman College | 303 | 40 Therī and 263 reviewed complete publisher-edition Therā choices; live from pinned publisher Markdown (CC BY-NC-SA 4.0), without bundled wording or notes |
 
 A translation is linked only on strong evidence: a matching number and title, a PTS start page that identifies exactly one text, or a confirmed title. When the evidence is ambiguous we leave the text unlinked, so some texts that do have a translation online are not linked yet. A second, content-based pass ([#37](https://github.com/DaniilKi/pali-canon-claude/issues/37)) places a page only when rare names in the English occur in exactly one nearby Pāli text, or its Pāli title names exactly one; each such link stores its evidence and is audited.
 

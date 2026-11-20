@@ -1,0 +1,19 @@
+{
+  "scope": "Reviewer metadata clarifications only; no original or normalized wording changes",
+  "precompare_normalization_sha256": "d0a4f90d9cd1cca53ebcc3d6c84e721103624d75566399f587e7d439fc6cc121",
+  "corrections": [
+    {
+      "publisher_poem": 268,
+      "field": "mandatory_mapping_limits",
+      "reason": "Remove reviewer-only stray adjective unsupported by the source; source payload and hashes already preserve exact original notes.",
+      "replacement": "Publisher saḷala/salala spelling and the kinnara description remain attributed original translator notes; no independent botanical or mythological verification is asserted."
+    },
+    {
+      "publisher_poem": 279,
+      "field": "mandatory_mapping_limits",
+      "reason": "Avoid inferring the exact witness chosen by the translator.",
+      "replacement": "Record publisher Bright, VRI subbato and its sappabho (syā.) variant without inferring which witness or interpretation the translator selected. Preserve original note2 about Romasa as a Lonely Buddha."
+    }
+  ],
+  "all_source_wording_and_normalization_pins_unchanged": true
+}

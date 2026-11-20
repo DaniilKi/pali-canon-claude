@@ -1,0 +1,19 @@
+{
+  "source_approval": {
+    "file": "SOURCE_APPROVAL.json",
+    "sha256": "8ce46b4cca025f55c61e10b8cd8c81fd154dbe7b811f433e7f33e2b29d95dae6"
+  },
+  "recommended_copyable_normalization": {
+    "file": "FINAL_APPROVED_NORMALIZATION_EXPORT.json",
+    "sha256": "e1c5d8d61de785a15b912269840c79793a259c39fa89ddcdba5bc30528df497c"
+  },
+  "scope": "Metadata-only reviewed export corrects two reviewer-prose issues and makes heading-only/no-prose and chapter27 41/42/39 limits explicit. Original sources, raw/body/notes/paratext/root pins, numbering, boundaries, note ownership and all sealed precompare cores remain byte-identical.",
+  "clarifications": {
+    "file": "REVIEWER_B_CLARIFICATIONS.json",
+    "sha256": "bdd2cedb213ae95c614879f169009f16f9ea1ffb11009098395dff473ec8d5d1"
+  },
+  "source_and_normalization_approval_count": 18,
+  "new_coverage_or_activation": false,
+  "runtime_approval": false,
+  "release_approval": false
+}

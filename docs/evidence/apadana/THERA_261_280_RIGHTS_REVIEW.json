@@ -1,0 +1,92 @@
+{
+  "status": "APPROVE_SPECIFIC_RIGHTS_APPLICABILITY_FOR_EXACT18_SOURCE_SCOPES_ONLY",
+  "baseline": "d31757b922fe2fa1fcf7bd903469e608f4eef6fb",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "approved_ids": [
+    "tha-ap263",
+    "tha-ap264",
+    "tha-ap265",
+    "tha-ap266",
+    "tha-ap267",
+    "tha-ap269",
+    "tha-ap270",
+    "tha-ap271",
+    "tha-ap272",
+    "tha-ap273",
+    "tha-ap274",
+    "tha-ap275",
+    "tha-ap276",
+    "tha-ap277",
+    "tha-ap278",
+    "tha-ap279",
+    "tha-ap280",
+    "tha-ap281"
+  ],
+  "all18_originals_and_full_notices_read": true,
+  "per_poem_exceptions_observed": [],
+  "rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json",
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+    }
+  ],
+  "prior_independent_rights_review_sha256": "1000bf5c57f2252640de96d0cd32ac8aaac1886d79e0d61001213e063d2001a5",
+  "translation_license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "creator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "specific_grant_over_generic_siteCCBY": true,
+  "required_notices": "Preserve supplied creator/publisher/copyright/source/revision/fulllicense/disclaimer notices, sourceandlicense links, prior modifications and truthful extraction changes. No commercial use, added downstream restrictions or endorsement; share adaptations under compatibleBY-NC-SAterms.",
+  "edition_scope": "PTS/BJTS publisher-edition poems with original notes and explicitedition differences; not line-completeVRI or a new criticaledition.",
+  "application_policy": "Consent-based live-onlyEnglish. Metadata/hashes only inproject/package; never translated bodies/notes/prefaces/summaries.",
+  "media_audio_fonts_images_rights_approved": false,
+  "English_payloads_external_only": true,
+  "source_approval_count": 18,
+  "normalization_approval_count": 18,
+  "runtime_approval": false,
+  "release_approval": false
+}

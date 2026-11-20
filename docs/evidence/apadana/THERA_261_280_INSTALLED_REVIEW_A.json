@@ -1,0 +1,93 @@
+{
+  "status": "INSTALLED_SOURCE_AND_STRICT_WIDGET_PROOFS_FINAL_PACKAGE_BYTES_RECONCILED_FINAL_FULLCHECK_PENDING",
+  "reviewed_utc": "2026-11-20T10:27:30.940787+00:00",
+  "installed_English_proof": {
+    "path": "/tmp/pali-261-280-installed/INSTALLED_ENGLISH_PROOF.json",
+    "sha256": "c3b4a1366735f826ded2475e867ffa2a9302b44c8c997dbabe78dd3b1707e940"
+  },
+  "installed_launch": {
+    "path": "/tmp/pali-installed261-280-h9r7WW/launch.json",
+    "sha256": "03eaf2ada81b0afbb133eef44fceda364bb16fbc1dddcc115539e0e9d74d9482"
+  },
+  "verifier_source_freeze": {
+    "path": "/tmp/pali-261-280-installed/AUTHOR_FREEZE.json",
+    "sha256": "3eb0134a2243558681054c6840f687c209bd740729009f4c05d941396aca6180"
+  },
+  "source_independence": "Actual installed paged/fullwording/notes/paratext/summary compared to exact separately derivedBpayload; pins independently matchA. Reviewer authoredsourceA, not verifier/runtime/client.",
+  "actual_runs": {
+    "fresh_stdio_processes": 2,
+    "fixture_complete_publisher_poems": 18,
+    "full_source_pages": 36,
+    "owned_notes": 59,
+    "Pali_reads_across_both": 42,
+    "held_refusals_each_run": 3,
+    "denyall_English_refusals": 18,
+    "denyall_attempts": 54,
+    "actual_forwarded_network": 0,
+    "lowlevel_attempts": 0,
+    "network_scope": "ProcessAPI interception/ledgers, not OSpacketcapture."
+  },
+  "strict_widget": {
+    "proof": {
+      "path": "/tmp/pali-261-280-installed/INSTALLED_WIDGET_PROOF.json",
+      "sha256": "86f55127248ecc4ab2c6d448ae746b603d8603aabd1518cf85f87178c1b22168"
+    },
+    "log": {
+      "path": "/tmp/pali-261-280-installed/INSTALLED_WIDGET.log",
+      "sha256": "b4b40d2e2a125f4d122125e9ff766768f836a427c409d92030d562d90a70f7cf"
+    },
+    "whole_resource_equality": true,
+    "resources": [
+      "ui://pali-canon/reader-v34.html",
+      "ui://pali-canon/reader-v34.skybridge.html"
+    ],
+    "aligned_units": 8544,
+    "network_attempts": 0,
+    "no_nativeDOM_or_signedin_humanhost_claim": true
+  },
+  "final_package": {
+    "receipt": {
+      "path": "/tmp/pali-261-280-installed/final/FINAL_PACKAGE_RECEIPT.json",
+      "sha256": "7ef2952e3cb2bc8d93abb1ef1df90400858dec4907802883c5368f6957b56a6d"
+    },
+    "archive": {
+      "path": "/tmp/pali-261-280-installed/final/pali-canon-mcp-2.1.0.tgz",
+      "sha256": "c06b4497891115cdf9701aa743c93ad9e5c3e0f55d4929d6ad8bab409919fd53"
+    },
+    "all39_tar_checkout_freshinstalled_bytes_exact": true,
+    "all34_runtime_bytes_equal42ccd_inventory": true,
+    "proof_reuse": "ActualEnglish/widget runs bind original24c957archive. Finalc06b449archive changesonlyouterREADME/THIRD_PARTY and has byteidentical34runtime; proofs are reused by exactbytes, not presented as repeatedexecution.",
+    "no_new_installed_browser_a11y_execution_claim": true
+  },
+  "historical_test_adaptation": {
+    "file": "tests/apadana-held234.test.mjs",
+    "sha256": "d97b7bbb166396dbc2f16ad294a367cd255744a02ff3e5444fb276ac1464d0fb",
+    "only_four_assertions_replace_two_legacy_wholemap_assertions": true,
+    "rest_of_file_exact_by_literal_reverse": true,
+    "old285prefix_and_full303_sealedcuration_both_required": true,
+    "CURRENT_APADANA_IDS_authority": "thera261280Evidence reads independentsealed e25curation; not runtimeprofilekeys.",
+    "targeted_log": {
+      "path": "/tmp/pali-261-280-preflight/HELD234_TARGETED_CORRECTION.log",
+      "sha256": "d8a2604a54062a54ef480ed035268bdb6c9409d1db2db92448acc45f84d3a70d"
+    },
+    "targeted_pass_fail_skip": [
+      1,
+      0,
+      0
+    ],
+    "first_full_history": "1756total/1570pass/185optional-source skips/1failure on old285-vs303 equality; root reports finalfullretryactive. No finalfullpass asserted yet."
+  },
+  "known_accepted_UI_caption_limit": "Inherited Publisherpreface caption used for bare261/271 chapterheadings; strings remain separately owned/note-free/editorial, not scripture/prosepreface descriptors. Root documents followup.",
+  "excluded_source_publishers": [
+    260,
+    266,
+    280
+  ],
+  "final_local_implementation_approval": false,
+  "remote_ci_release_push_approval": false,
+  "pending": [
+    "FinalfullPASS and finalimmutablefile/docreceipt",
+    "Anyunrunnew18Chromium/a11y/device/specialist/remoteCIgates explicitlyunverified"
+  ],
+  "reviewer_operations": "Read-only code/log/metadata/hash/tar inspection and externalmetadata writes only; no projectcode/API/test/build/Git/CI/networkexecution."
+}

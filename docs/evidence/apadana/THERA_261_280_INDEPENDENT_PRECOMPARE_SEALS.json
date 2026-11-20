@@ -1,0 +1,25 @@
+{
+  "status": "SEALED_BEFORE_REVIEWER_A_OR_AUTHOR_EXPECTATIONS",
+  "counts": {
+    "poems": 18,
+    "body_paragraphs": 129,
+    "physical_stanza_entries": 75,
+    "printed_local_verse_labels": 76,
+    "poem_owned_notes": 59,
+    "prefaces": 2,
+    "chapter_summaries": 1,
+    "pandoc_display_pairs": 19,
+    "html_display_pairs": 3
+  },
+  "files": {
+    "RIGHTS_REVIEW.json": "f8e816b077679fce9cba49487e014d1926fce1e19f77a9c79868530e1d607f14",
+    "COPY_POLICY.json": "b8684c63a031937cebf800ac6c63b710f7381417687654cdb512ea7181c49ee1",
+    "INDEPENDENT_NORMALIZATION.json": "d0a4f90d9cd1cca53ebcc3d6c84e721103624d75566399f587e7d439fc6cc121",
+    "ORIGINAL_XML_AND_CONTEXT.json": "23c751a6a2d8a1ecbd73428d9f8d3d159149afaaf6225be36e7f1fb442d6b160",
+    "BASELINE_285_FREEZE.json": "a1b781a7620ac4b97eeac2191f3f943dae3cebec47c18e0389fcb92583589f71",
+    "INDEPENDENT_PAYLOADS_EXTERNAL_ONLY.json": "4e757128c36069b43b4a9df8e648871c1a319ad64068aec8f6bb72e17b9cfa59",
+    "derive_B.py": "7ef0b204e8dee4ac32c40a03d8246358b5ca40325bea1244166f8516961b36c9"
+  },
+  "created_utc": "2026-11-20T09:34:22.092394+00:00",
+  "scope": "Originals-first independent B derivation only, no runtime/activation/release approval"
+}

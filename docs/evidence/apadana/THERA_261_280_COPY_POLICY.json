@@ -1,0 +1,21 @@
+{
+  "status": "METADATA_ONLY_PROJECT_COPY_POLICY",
+  "allowed_metadata_only_files": [
+    "GOLDENS.json",
+    "EXPECTED_PROFILES.json",
+    "EXPECTED_LINKS.json",
+    "SOURCE_REVIEW.json",
+    "RIGHTS_REVIEW.json",
+    "SOURCE_APPROVAL.json",
+    "PRECOMPARISON_DERIVATION_SEALS.json",
+    "COPY_POLICY.json",
+    "SEALS.json"
+  ],
+  "external_only_never_copy_into_project_package": [
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json",
+    "PALI_BLOCKS_EXTERNAL_ONLY.json"
+  ],
+  "derive_script": "External original-source replay only; copying into repository requires parent review of portability, inputseals and absence of payload literals. No implicitcopyapproved.",
+  "raw_English_source_documents": "Do not copy into project/package. Runtime English fetch remains explicit-consent/live-only.",
+  "source_and_runtime_approval_are_separate": true
+}

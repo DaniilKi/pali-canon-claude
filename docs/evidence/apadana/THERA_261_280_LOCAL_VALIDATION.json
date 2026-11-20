@@ -1,0 +1,251 @@
+{
+  "status": "LOCAL_GATES_PASSED_PENDING_FINAL_INDEPENDENT_ACCEPTANCE",
+  "scope": "18 local unpublished publisher261–265,267–279 only",
+  "base": "d31757b922fe2fa1fcf7bd903469e608f4eef6fb",
+  "branch": "feature/thera261-280-eighteen-local",
+  "prior_fix_preserved": "d31757b922fe2fa1fcf7bd903469e608f4eef6fb",
+  "diagnostic_preserved_separately": "348adb0cc0a0dec04b01fbf44a4c212e3e0d4941",
+  "first_full_check": {
+    "total": 1756,
+    "pass": 1570,
+    "fail": 1,
+    "skipped": 185,
+    "cancelled": 0,
+    "sole_failure": "Historical285 metadata fixture compared to full303 registry; no source bytes changed"
+  },
+  "targeted_historical_fixture_correction": {
+    "pass": 1,
+    "fail": 0,
+    "old285_hashes_preserved": true,
+    "patch_sha256": "d97b7bbb166396dbc2f16ad294a367cd255744a02ff3e5444fb276ac1464d0fb"
+  },
+  "integrity_acceptance_cases": 17,
+  "focused_source_client_unique_cases": 13,
+  "source_client_history": "12 passed initially; one test-only APIchoice-schema expectation corrected and targeted1 passed. Originalfailurelog retained.",
+  "metadata_source_replay": {
+    "all6_original_buffer_hashes_exact": true,
+    "safe_metadata_files_written": 4,
+    "full_wording_payload_files_written": 0,
+    "negative_controls": 7
+  },
+  "smoke": {
+    "tools": 34,
+    "checks": 64,
+    "exit": 0
+  },
+  "evals": {
+    "questions": 201,
+    "pass": 195,
+    "live_skips": 6,
+    "fail": 0,
+    "exit": 0
+  },
+  "installed_english": {
+    "poems": 18,
+    "notes": 59,
+    "pages": 36,
+    "fresh_processes": 2,
+    "pali_reads": 42,
+    "held_refusals": 6,
+    "expected_denied_fetch_attempts": 54,
+    "actual_network_forwarded": 0,
+    "scope": "Pinned original fixture replay, not live publisher acceptance"
+  },
+  "strict_installed_widget": {
+    "aligned_units": 8544,
+    "resources": 2,
+    "version": 34,
+    "network_attempts": 0
+  },
+  "remaining_external_gates": [
+    "Prior exact macOS job136167153764 observed in_progress09:25:50UTC; no new query/rerun/cancel",
+    "No content push authorized; new exact remoteCI not run",
+    "Live provider, signed-in-host, physical-device, humanassistive/specialist acceptance not claimed"
+  ],
+  "known_ui_followup": "Generic publisher-preface caption also labels separately owned bare chapter headings from261/271; wording and note ownership correct",
+  "completed_utc": "2026-11-20T10:30:21.746179+00:00",
+  "environment": {
+    "os": "Linux",
+    "node": "v24.22.1",
+    "npm": "11.9.0"
+  },
+  "final_full_check": {
+    "exit": 0,
+    "tests": 1756,
+    "pass": 1571,
+    "fail": 0,
+    "cancelled": 0,
+    "optional_skips": 185,
+    "duration_ms": 297734.873766,
+    "audit_texts": 8544,
+    "audit_failures": 0,
+    "full_retry_reason": "Sole historical285-vs303 fixture failure corrected; repository AGENTS requires passing full check; no good remote job repeated"
+  },
+  "evidence_files": {
+    "/tmp/pali-261-280-preflight/BASELINE_285_FREEZE.json": {
+      "bytes": 2479912,
+      "sha256": "dabf5d711fa8be38196e5de7b3b1c7b24462407ef4f50769a447e3c3c609ef44"
+    },
+    "/tmp/pali-261-280-preflight/DIRECT_SOURCE_EXTRACTION.json": {
+      "bytes": 3296,
+      "sha256": "99995da10029f96cd6ba64993947aac4d45ccc6527e06150ad4a684801ee488b"
+    },
+    "/tmp/pali-261-280-preflight/MANIFEST_REPRODUCTION.json": {
+      "bytes": 173,
+      "sha256": "3d202dc8f51c971a48b50003bc76e312757b22a56828fa7fd781152344c02f8c"
+    },
+    "/tmp/pali-261-280-preflight/PRESERVATION.json": {
+      "bytes": 1565,
+      "sha256": "fd5896b0aa386df9a5e1c6b81cc6ad151ab14a2387ace1d4f96c89499953b541"
+    },
+    "/tmp/pali-261-280-preflight/CURRENT_COVERAGE.json": {
+      "bytes": 23208,
+      "sha256": "2d074af32894aa9961920cdc4a3e40f6c5ec47edf44aa3fa5a7b09cd32849036"
+    },
+    "/tmp/pali-261-280-preflight/CURRENT_SOURCE_API.json": {
+      "bytes": 28164,
+      "sha256": "2b1555b1e8dc55948361f3c15459231f6e313ce3f948e6befe9f2db508f89de1"
+    },
+    "/tmp/pali-261-280-preflight/FOCUSED_SOURCE_CLIENT.log": {
+      "bytes": 2687,
+      "sha256": "042ea449a64a5ddfbaecfc9dade3d1ba0cbb78e22b951e103a3948c63d3bf7ac"
+    },
+    "/tmp/pali-261-280-preflight/FOCUSED_CAPABILITY_CORRECTION.log": {
+      "bytes": 230,
+      "sha256": "92c9a125ae3ae985910716744502724e79c252578e772148115d63e0c4504118"
+    },
+    "/tmp/pali-261-280-preflight/FULL_CHECK.log": {
+      "bytes": 205265,
+      "sha256": "4d3a419cbfc8f4083e8c0c52556cfc78d9d738d84087d41c6328601b4a4ef294"
+    },
+    "/tmp/pali-261-280-preflight/HELD234_TARGETED_CORRECTION.log": {
+      "bytes": 247,
+      "sha256": "d8a2604a54062a54ef480ed035268bdb6c9409d1db2db92448acc45f84d3a70d"
+    },
+    "/tmp/pali-261-280-preflight/FINAL_FULL_CHECK.log": {
+      "bytes": 203563,
+      "sha256": "7a4b00aab44167171e9e6456732630655ce5383dee54948f1caebe7142abbe85"
+    },
+    "/tmp/pali-261-280-preflight/ACCEPTANCE_17.log": {
+      "bytes": 116,
+      "sha256": "8aa379250abda4b24800bec366ce6908c94f994049903ed4b4fe0b569216bb74"
+    },
+    "/tmp/pali-261-280-preflight/SMOKE.log": {
+      "bytes": 3745,
+      "sha256": "8262dd13f13f0c45ba6d7152bb6f931f5a2aedcc728d7498a2547e961de2aa97"
+    },
+    "/tmp/pali-261-280-preflight/EVALS.log": {
+      "bytes": 1419,
+      "sha256": "c12336d756c1baa68acfba6a887cd0d9d34ede0fbdbe9a99c12c5b12d586d87f"
+    },
+    "/tmp/pali-261-280-preflight/INITIAL_MAC_STATUS.json": {
+      "bytes": 3905,
+      "sha256": "aaf06caecbd7c457b2957a8cffa88d9b962a0f6c9ed1a1ee7c92315001ec53dc"
+    },
+    "/tmp/pali-261-280-installed/ready/READY_PACKAGE_RECEIPT.json": {
+      "bytes": 12540,
+      "sha256": "974923363fddea974ffee029d9de56cd76e6f481e50099d8220e290c981fa9cd"
+    },
+    "/tmp/pali-261-280-installed/WIDGET_EXECUTION_BINDING.json": {
+      "bytes": 1226,
+      "sha256": "4cd4cb6bc38a4e0d86fc02c3ea4d1dcaaa83e425516e9d1d9f820cc1bb14fda6"
+    },
+    "/tmp/pali-261-280-installed/INSTALLED_WIDGET_PROOF.json": {
+      "bytes": 798,
+      "sha256": "86f55127248ecc4ab2c6d448ae746b603d8603aabd1518cf85f87178c1b22168"
+    },
+    "/tmp/pali-261-280-installed/INSTALLED_ENGLISH_PROOF.json": {
+      "bytes": 12672,
+      "sha256": "c3b4a1366735f826ded2475e867ffa2a9302b44c8c997dbabe78dd3b1707e940"
+    }
+  },
+  "ready_package": {
+    "archive": "/tmp/pali-261-280-installed/ready/pali-canon-mcp-2.1.0.tgz",
+    "sha256": "6a7972c9236de4d0ddc4407cdd1cf87702c4b4fdde4cf54dbd5e2a0e455b99e0",
+    "members": 39,
+    "runtime_files": 34,
+    "all39_archive_checkout_installed_exact": true,
+    "ready_independent_addendum_sha256": "b064560e9c6873fc8233e09ff8250445ccf63c701a08db896fac8a5a7930684f",
+    "proof_reuse": "Outer docs only changed, independently rehashed and reviewed; same34 runtime executes previously passed installed proofs"
+  },
+  "reviewed_file_hashes": {
+    "AGENTS.md": "ad845411db968f30468d6ab8b79d413465da558f366ec359cc11bd63055b13b2",
+    "README.md": "0be339cd9f5e2f0d66f6f621164bfaaf7d9ebf4c4a745b3d9002d14d70a2665f",
+    "THIRD_PARTY.md": "813f0d920df3ced0ce9b493b51e7431977936106fd325b808165c5857320908b",
+    "docs/coverage.md": "8994a4834cbdd0f6cf61aab0a8f74c285d7187a53b6fa241d70b86cbc2d6862c",
+    "docs/data/thera261-280-local-intake.md": "6355628653ee7b44f12abfe97bb906b4d9b3c4765ed4c3f7e5b3c21c519d6899",
+    "docs/decisions.md": "704e4853648dd9b33924682cb08ab3667d0dfe6d1f3ae17262ffe1d830b8a977",
+    "docs/evidence/apadana/THERA_261_280_APPROVAL.json": "e25da6522df6f88bfcbf5fade43c6a8972d050425f5a6af1e6043d60440f896b",
+    "docs/evidence/apadana/THERA_261_280_BASELINE_FREEZE.json": "dabf5d711fa8be38196e5de7b3b1c7b24462407ef4f50769a447e3c3c609ef44",
+    "docs/evidence/apadana/THERA_261_280_COPY_POLICY.json": "ff99af2233a33396874a0030df50ae3867e7c67ea9634046a12c7cb29718a04f",
+    "docs/evidence/apadana/THERA_261_280_EXPECTED_LINKS.json": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371",
+    "docs/evidence/apadana/THERA_261_280_EXPECTED_PROFILES.json": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046",
+    "docs/evidence/apadana/THERA_261_280_FINAL_PACKAGE_REVIEW.json": "8b3e2b7a861debfb43a088603680c6129520384501b9a0847a57e2fbd8b55b61",
+    "docs/evidence/apadana/THERA_261_280_GOLDENS.json": "c92b06cc14d73b6e2cb2ce053b5997d4786d4191c5ae54abb66d6711ded54ca1",
+    "docs/evidence/apadana/THERA_261_280_IMPLEMENTATION_REVIEW_B.json": "d9ad935751907cb56b604f0a11589efcf1a2b5d3aa7992136c23563f52c6641b",
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_CLARIFICATIONS.json": "bdd2cedb213ae95c614879f169009f16f9ea1ffb11009098395dff473ec8d5d1",
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_COMPARISON.json": "769c0fbec36933c489b1fd83bb423a8414226cc9f81901ee660b93bb16d46e2e",
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_NORMALIZATION.json": "e1c5d8d61de785a15b912269840c79793a259c39fa89ddcdba5bc30528df497c",
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_PRECOMPARE_SEALS.json": "76da2cceacd25c69395897dc14a7fca7b344af002c906278261f640b63e2c445",
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_RIGHTS_REVIEW.json": "f8e816b077679fce9cba49487e014d1926fce1e19f77a9c79868530e1d607f14",
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_RIGHTS_SCOPE_ADDENDUM.json": "3190b70a46e109c75d983a24d83d12b30c63ec6603d911406303b1808c2d0209",
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_SOURCE_APPROVAL.json": "8ce46b4cca025f55c61e10b8cd8c81fd154dbe7b811f433e7f33e2b29d95dae6",
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_XML_CONTEXT.json": "23c751a6a2d8a1ecbd73428d9f8d3d159149afaaf6225be36e7f1fb442d6b160",
+    "docs/evidence/apadana/THERA_261_280_INSTALLED_REVIEW_A.json": "e4e0ba3380c4b1b9f1a590a550a343d8259f8e8fde34325509796058bf7a5fae",
+    "docs/evidence/apadana/THERA_261_280_NORMALIZATION_SEALS.json": "e9f2e235ab04a3be59ebf745a6111ccbcc7613eeb62cf99251b5526b69e4ae06",
+    "docs/evidence/apadana/THERA_261_280_PORTABLE_SEALS.json": "c5d068d0090a3f0c960268a004a99bf5acf897a0d8393fec68527cb6d29eba6f",
+    "docs/evidence/apadana/THERA_261_280_PRECOMPARISON_DERIVATION_SEALS.json": "d9f0b989ed295f020d5842de0783373f8146e38540cdb097262e8d0536e8cb4d",
+    "docs/evidence/apadana/THERA_261_280_READY_PACKAGE_REVIEW.json": "b064560e9c6873fc8233e09ff8250445ccf63c701a08db896fac8a5a7930684f",
+    "docs/evidence/apadana/THERA_261_280_REPLAY_CONTROLS.json": "b64567e553d6e0a7e5630af42fa0eadd7be18b4768dfb338c965a0676b1b8282",
+    "docs/evidence/apadana/THERA_261_280_REPLAY_RESULT.json": "4501997174d404c755729268075975d9882e2a7ea3839e3db1d243f2935f2f36",
+    "docs/evidence/apadana/THERA_261_280_REPLAY_REVIEW.json": "0ef772311dc0a0ad36ec641b7cefeab9122fa11c4a0f5ead2a4d807bde931917",
+    "docs/evidence/apadana/THERA_261_280_RIGHTS_REVIEW.json": "2eae724eebc6ceab2d9acea65894eb383106fc98bbdd74c805c18964ce279edc",
+    "docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c",
+    "docs/evidence/apadana/THERA_261_280_SOURCE_APPROVAL.json": "dee7e7fa8e55cb539fbb7f4c9d09413eef931ad323f674ec8fd8ac8d31fd6ae5",
+    "docs/evidence/apadana/THERA_261_280_SOURCE_APPROVAL_ADDENDUM.json": "e8d8ea5f08b339936c2ddfc9f7981925699590ede8cb914eccb5796297facf22",
+    "docs/evidence/apadana/THERA_261_280_SOURCE_REVIEW.json": "9d302203f245d11b83d3fcdf4f65d3877af76552a984158ccd798dfc8ef2c98c",
+    "docs/evidence/apadana/THERA_261_280_STATIC_IMPLEMENTATION_REVIEW_A.json": "a9350dec79e24634a1bc721940dc9ff8b3d45ecce61077528d0a8f7eef639633",
+    "docs/sources.md": "e86de627710b34434aea27afd190cf7f7b1baafc6c5bba2b48068cc618081f24",
+    "scripts/apadana/review_thera261_280.py": "e8998c346781bc8dccf19dc2ff0704fe92f2a3741321347278b01298fdbb0d52",
+    "scripts/web-reader-thera-held234-check.py": "06b0b939a380e6176cecc6317333aeced9ccdd640f227deca54d6fbe1547b9c8",
+    "scripts/web-reader-thera-remaining-check.py": "452780084799aaf880c11b87c2e9c23fecdccc4e431a11f77da222269ffff1e5",
+    "scripts/web_reader_apadana_intake.py": "3554dbaa8a1ba80f47921245d6156999aebb7408220dfa6abd69b641dcef31f8",
+    "scripts/web_reader_approved_acceptance.py": "2c5e158e335e2407c285fdffdfec710f5ce2f86f48dd014a736d5107f95f0a14",
+    "server/data/apadana.json": "64abecbc2900f69ea5f366dcabf61d861c621508f3115c32b401e453585d9251",
+    "server/http-worker.cjs": "49fca6cd830f26dc2465088b10f264ee0f84c0533923d50e86a902ab883d6825",
+    "server/http.cjs": "b7b43ec186340653c4bf9f16e20c18049e1392047485968c1854c7893b0e368e",
+    "server/index.cjs": "048556f70060cb951194b351fda1097a1a253c133f61eeeb03b0bdf716bed22b",
+    "server/web/reader.js": "3d42038ede076f4635c1537c0af0963db3779d5bd8f4b50443ae3d65de9f4285",
+    "src/apadana-thera-profiles.mjs": "edab9fd6365f934d8c2effa9bc40ef0cb483b5ff3e491018b88e86a412456995",
+    "src/apadana-thera.mjs": "a39f13bc1cdb61f04d376699578d746502e7e4e93cb2fdcc45e2861dae64305c",
+    "src/apadana-thera261-280-profiles.mjs": "8883e4a4c21467e71d81799d37a72ff25d82d30249360d6520d64de3c9a03599",
+    "src/chatgpt-widget.mjs": "1a19a73cdfd318c63db42f1ea2e5f91a56e58ca0a236a64865a87ed868d6e35d",
+    "tests/apadana-disclosures.test.mjs": "c3782cb51d57da8b021e8f11c189bcf8fb67ad3d2a3bef8b43baad8a02650770",
+    "tests/apadana-fourth-client.test.mjs": "a659f08150bf8597728c3ce9bcf5165bdbf8d31fcd70ab0ba6420249da9ab34c",
+    "tests/apadana-fourth.test.mjs": "ae6b4feba28973441a885242c1d6ba343052ad49d972a610efca69f8d1f7a084",
+    "tests/apadana-held234.test.mjs": "d97b7bbb166396dbc2f16ad294a367cd255744a02ff3e5444fb276ac1464d0fb",
+    "tests/apadana-next.test.mjs": "7fe787850e1e718b69a5915b5f6e397f38c0594803023324e4ea1a83498b9148",
+    "tests/apadana-thera.test.mjs": "23561b32d8ed95bb4e16f07fb3d739d52f6c02376c767069425e673a6dbb7be7",
+    "tests/apadana-third.test.mjs": "3ad159fc1f6b875ca62020b75ace7990262e4b5540aca41c037fca5b00f3a684",
+    "tests/approved-acceptance.test.mjs": "3e48fa57cfcc42cb6a4c9e1bc4e33471d5791ebeb2d0c8ed2a639dcb2d9abf18",
+    "tests/approved_acceptance.py": "2597229523087789cd18e02ea3e5aeb09f47389b39cdab85500a2003520b2782",
+    "tests/held234-client.test.mjs": "4999d26a97dcb80d4b3bfdd4a816f069cd128c24f82f30eb01cba21c2b428d14",
+    "tests/helpers/apadana-intake-expectations.mjs": "6a6904600329e7bd1461b90f83b621c78b27875ff6d92828e3b031a93ab8a255",
+    "tests/helpers/thera-remaining-client.mjs": "08e1fa2eb9a9fbd7c96a521275f3eeb1df36e6a9a6584fab6fad613ea6f01b60",
+    "tests/helpers/thera261-280-evidence.mjs": "6774d018bdd6e63cb825903d49e1802a6f810fb305fbfa969b34591e87e4eb7a",
+    "tests/source-notes-baseline-projection.test.mjs": "d5697fd75a322224f4f49c7eb86c7fdc617e1f3c2386b0aecf16a381fadfae5a",
+    "tests/source-notes-compatibility.test.mjs": "4508e8d1725abbb5dc077d69c7d0c429e00b8bdbb22cb558dd1ac0dfe095a543",
+    "tests/thera-commentary-locators.test.mjs": "d9f0c67011b5cede23466327db79cb86b67a719281113559363c1167fb86ff5f",
+    "tests/thera141-180-client.test.mjs": "72163a7c78480a09f3d4a8db0665d78929982f251b2a2b3b03daf4c7930de7fb",
+    "tests/thera181-220-client.test.mjs": "d130346e652ad536ec2990614e5efae4952f2a80ea8b435018cc03b9b8c0cec0",
+    "tests/thera221-230-client.test.mjs": "028c357536cc105fe1ef63e543fda2cb1c87c6fd6d822fe2e8548be86a0e4175",
+    "tests/thera241-250-client.test.mjs": "068026589faa8d2efd645d9bedc7e2fed504d0fd39e93b174331ef75778e2d4b",
+    "tests/thera261-280-client.test.mjs": "99c8ea767456d86d5a45af4d250337536433b019d915c4ae29215d9397a949cd",
+    "tests/thera261-280-source.test.mjs": "b42645a4f537ce13a9d7a655acdcc1b30899b2c24a1e46e79a64f114afb48456",
+    "tests/widget-hosted-selections.test.mjs": "d01d37be31d5fecfbd5e02d7487fa2dcc2a6e577ea491c116b39c252cc85c8a0",
+    "web/translation-policy.mjs": "27663fc9b94b385c1451323d1c0505a423f60eb0ce18241bcf6af2d6c7a0b6d0"
+  },
+  "file_manifest_scope": "All currently changed code/data/docs/test/review files; excludes this receipt itself and the subsequently copied final independent approval to avoid self-reference.",
+  "final_acceptance_pending": true,
+  "no_remote_mutation_this_task": true
+}

@@ -1,0 +1,57 @@
+{
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "notice_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    }
+  ],
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "attribution": "Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints (Apadāna)",
+  "specific_translation_notices_override_generic_site_CC_BY": true,
+  "scope": "Text translation and its owned translator apparatus; original-wording fixtures external only, metadata and hashes only may be copied",
+  "english_bodies_notes_and_apparatus_live_only": true,
+  "no_audio_or_media_rights": true,
+  "noncommercial_sharealike_attribution_and_change_disclosure_required": true,
+  "edition": "Publisher uses PTS/BJTS; independently read VRI for identity and boundaries only, not line-complete translation equivalence",
+  "no_new_rights_for_held_poems": true
+}

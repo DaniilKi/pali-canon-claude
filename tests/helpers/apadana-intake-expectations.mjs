@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {remainingEvidence} from './thera-remaining-evidence.mjs';
 import {held234Evidence} from './thera-held234-evidence.mjs';
+import {thera261280Evidence} from './thera261-280-evidence.mjs';
 
 const historical=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
 const previousBytes=readFileSync(new URL('../../docs/evidence/apadana/THERA_241_250_APPROVAL.json',import.meta.url));
@@ -31,9 +32,22 @@ assert.equal(createHash('sha256').update(intakeBytes).digest('hex'),'4ae2cd3fea1
 assert.equal(latest.previous_intake.sha256,createHash('sha256').update(intakeBytes).digest('hex'));
 assert.deepEqual(latest.baseline_ids,intake.expected_profile_ids);
 assert.deepEqual(latest.baseline_records,[...intake.baseline_records,...intake.approved_records]);
-const current=held234Evidence().approval;
-assert.deepEqual(current.baseline_ids,latest.expected_profile_ids);
-assert.deepEqual(current.baseline_records,[...latest.baseline_records,...latest.approved_records]);
+const held234=held234Evidence().approval;
+assert.deepEqual(held234.baseline_ids,latest.expected_profile_ids);
+assert.deepEqual(held234.baseline_records,[...latest.baseline_records,...latest.approved_records]);
+const newIntake=thera261280Evidence(),current=newIntake.approval;
+assert.deepEqual(newIntake.previous,held234,'The sealed285 intake remains the exact historical anchor');
+assert.deepEqual(current.baseline_ids,held234.expected_profile_ids);
+assert.deepEqual(current.baseline_records,[...held234.baseline_records,...held234.approved_records]);
+const approvedPairs=[[263,261],[264,262],[265,263],[266,264],[267,265],[269,267],[270,268],[271,269],[272,270],[273,271],[274,272],[275,273],[276,274],[277,275],[278,276],[279,277],[280,278],[281,279]];
+const approvedRecords=approvedPairs.map(([canonical,poem])=>({id:'tha-ap'+canonical,publisher_chapter:'chapter-3',poem}));
+assert.deepEqual(current.approved_records,approvedRecords);
+assert.deepEqual(current.approved_ids,approvedRecords.map(row=>row.id));
+assert.ok(current.approved_ids.every(id=>!current.baseline_ids.includes(id)));
+assert.deepEqual(current.expected_profile_ids,[...held234.expected_profile_ids,...current.approved_ids]);
+assert.equal(current.baseline_ids.length,285);assert.equal(current.expected_profile_ids.length,303);
+assert.equal(new Set(current.expected_profile_ids).size,303);
+for(const id of ['tha-ap262','tha-ap268','tha-ap282']){assert.ok(current.held_ids.includes(id));assert.ok(!current.expected_profile_ids.includes(id));}
 const records=[...current.baseline_records,...current.approved_records];
 assert.deepEqual(records.map(row=>row.id),current.expected_profile_ids);
 assert.ok(records.every(row=>/^(?:thi|tha)-ap\d+$/.test(row.id)&&Number.isInteger(row.poem)&&row.poem>0&&['chapter-3','chapter-4'].includes(row.publisher_chapter)));

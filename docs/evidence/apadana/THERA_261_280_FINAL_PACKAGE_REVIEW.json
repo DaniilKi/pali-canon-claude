@@ -1,0 +1,163 @@
+{
+  "status": "APPROVE_EXACT_FINAL_LOCAL_UNPUBLISHED_PACKAGE_BYTES_AND_REUSED_UNCHANGED_RUNTIME_PROOFS",
+  "reviewed_utc": "2026-11-20T10:24:34.601574+00:00",
+  "archive": {
+    "path": "/tmp/pali-261-280-installed/final/pali-canon-mcp-2.1.0.tgz",
+    "bytes": 40666112,
+    "sha256": "c06b4497891115cdf9701aa743c93ad9e5c3e0f55d4929d6ad8bab409919fd53"
+  },
+  "installation": "/tmp/pali-261-280-installed/final/genuine/node_modules/pali-canon-mcp",
+  "runtime_inventory": {
+    "path": "/tmp/pali-261-280-package-review/APPROVED_CURRENT_RUNTIME_INVENTORY.json",
+    "bytes": 6156,
+    "sha256": "88a7d25370a3afd2522946f07706432a0e139dd1c989efa2d72c0dfaf9147e1e"
+  },
+  "member_inventory": {
+    "path": "/tmp/pali-261-280-package-review/FINAL_PACKAGE_MEMBER_INVENTORY.json",
+    "bytes": 6641,
+    "sha256": "94807b969b35645952d7cfc8f7351f731701fe7e6f4f0bed898bec019c0c1bd0"
+  },
+  "members": 39,
+  "runtime_members": 34,
+  "outer_members": 5,
+  "prior_runtime_approval": {
+    "path": "/tmp/pali-261-280-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+    "bytes": 9979,
+    "sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+  },
+  "final_package_byte_approval": true,
+  "final_archive_all39_tar_checkout_install_exact": true,
+  "runtime34_exact_prior_independently_approved_and_executed": true,
+  "doc_only_repack_changed_members": [
+    "README.md",
+    "THIRD_PARTY.md"
+  ],
+  "execution_reuse": {
+    "root_explicitly_authorized": true,
+    "original_executed_archive_sha256": "24c9579342fc124ca972e0349c33264836eec3eeda33cf54ea32efd10ee7d1a3",
+    "original_actual_installed_server": "/tmp/pali-261-280-installed/genuine/node_modules/pali-canon-mcp/server",
+    "final_archive_was_not_reexecuted": true,
+    "reason": "Final repack changes outer documentation only; every34 executable/data/web byte equals both previously executed isolated package and final fresh offline install. Passed runtime gates reused without relabelling the original archive or rerunning completed checks.",
+    "english_fixture": {
+      "poems": 18,
+      "poem_notes": 59,
+      "pages": 36,
+      "pali_reads": 21,
+      "held_refusals": 3,
+      "network_forwarded": 0
+    },
+    "english_deny_all": {
+      "pali_reads": 21,
+      "held_refusals": 3,
+      "denied_fetch_attempts": 54,
+      "low_level_network_attempts": 0,
+      "network_forwarded": 0
+    },
+    "strict_widget": {
+      "resources": [
+        "ui://pali-canon/reader-v34.html",
+        "ui://pali-canon/reader-v34.skybridge.html"
+      ],
+      "aligned_checked": 8544,
+      "network_attempts": 0
+    }
+  },
+  "source_and_preservation": {
+    "old285_profile_objects": true,
+    "old285_link_objects": true,
+    "new18_exact_both_independent_maps": true,
+    "prior_parser_and_profile_wrapper_exact_reverse_projection": true,
+    "client196_guard_ids_plus_exact18_and_summary272_only": true,
+    "source_note_association_privacy_focus_macros_unchanged_by_exact_client_projection": true,
+    "all_canon_commentary_source_note_other29runtime_paths_unchanged": true
+  },
+  "bundled_new_long_English_probes": 126,
+  "bundled_probe_matches": 0,
+  "known_reader_limit": "Inherited generic publisher_paratext caption calls source261/271 bare chapter headings a publisher preface. Documented terminology limitation, no source content/notes ownership change; not claimed fixed.",
+  "prior_af303_authority_and_old_inventory_immutable": true,
+  "proof_bindings": [
+    {
+      "path": "/tmp/pali-261-280-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+      "bytes": 9979,
+      "sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/BUILD_INPUT_CLOSURE_REVIEW.json",
+      "bytes": 1594,
+      "sha256": "2dcc273738513d568456c8ede91741697eaa2219364a2d6fe0d8f80f2021b806"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/PROSPECTIVE_RUNTIME.json",
+      "bytes": 6750,
+      "sha256": "57598adb23498a38fce9e0c7bd8c0cd12b879ea5bd41ead8f03ab3a6886da485"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/INSTALLED_ENGLISH_PROOF.json",
+      "bytes": 12672,
+      "sha256": "c3b4a1366735f826ded2475e867ffa2a9302b44c8c997dbabe78dd3b1707e940"
+    },
+    {
+      "path": "/tmp/pali-installed261-280-h9r7WW/launch.json",
+      "bytes": 7648,
+      "sha256": "03eaf2ada81b0afbb133eef44fceda364bb16fbc1dddcc115539e0e9d74d9482"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/WIDGET_EXECUTION_BINDING.json",
+      "bytes": 1226,
+      "sha256": "4cd4cb6bc38a4e0d86fc02c3ea4d1dcaaa83e425516e9d1d9f820cc1bb14fda6"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/INSTALLED_WIDGET_PROOF.json",
+      "bytes": 798,
+      "sha256": "86f55127248ecc4ab2c6d448ae746b603d8603aabd1518cf85f87178c1b22168"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/INSTALLED_WIDGET.log",
+      "bytes": 665,
+      "sha256": "b4b40d2e2a125f4d122125e9ff766768f836a427c409d92030d562d90a70f7cf"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/AUTHOR_FREEZE.json",
+      "bytes": 527,
+      "sha256": "3eb0134a2243558681054c6840f687c209bd740729009f4c05d941396aca6180"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/verify-installed.mjs",
+      "bytes": 20125,
+      "sha256": "7d3a75d85d4cff4099cd00d321f90b9f35aad3f36ef1bbd5a6332068e3f25842"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/offline-fetch.cjs",
+      "bytes": 4041,
+      "sha256": "3aa054c3df50389c0a3e0a09b5151773fe5fe5b107c262e3dcae3f57039e746d"
+    },
+    {
+      "path": "/tmp/pali-261-280-installed/final/FINAL_PACKAGE_RECEIPT.json",
+      "bytes": 12502,
+      "sha256": "7ef2952e3cb2bc8d93abb1ef1df90400858dec4907802883c5368f6957b56a6d"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/APPROVED_CURRENT_RUNTIME_INVENTORY.json",
+      "bytes": 6156,
+      "sha256": "88a7d25370a3afd2522946f07706432a0e139dd1c989efa2d72c0dfaf9147e1e"
+    },
+    {
+      "path": "/tmp/pali-261-280-package-review/FINAL_PACKAGE_MEMBER_INVENTORY.json",
+      "bytes": 6641,
+      "sha256": "94807b969b35645952d7cfc8f7351f731701fe7e6f4f0bed898bec019c0c1bd0"
+    }
+  ],
+  "reviewer_project_execution_or_build_or_git": false,
+  "reviewer_independence_limit": "This reviewer authored the narrow two client guard edits; independently rechecked exact package inventory/tar/install bytes, source A/B authority and whole old285 metadata preservation. Does not replace independent source or final implementation reviewer.",
+  "implementation_approval": false,
+  "full_check_approval": false,
+  "browser_manual_or_human_acceptance": false,
+  "remote_ci_approval": false,
+  "release_approval": false,
+  "push_approval": false,
+  "remaining_gates": [
+    "Root resolves stale historical fixture and completes exact-final full check",
+    "Separate independent implementation review and required browser acceptance",
+    "Exact-commit remote CI and other deployment/publication gates remain separate"
+  ]
+}

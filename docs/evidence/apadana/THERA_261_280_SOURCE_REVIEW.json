@@ -1,0 +1,265 @@
+{
+  "status": "INDEPENDENT18_EXACT_SOURCE_SCOPE_AND_FINITE_NORMALIZATION_ONLY",
+  "baseline": "d31757b922fe2fa1fcf7bd903469e608f4eef6fb",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "source_reviews": [
+    {
+      "publisher_poem": 261,
+      "id": "tha-ap263",
+      "mapping_basis": "Two water-born flowers offered toSiddhattha: one at hisfeet and one skyward.",
+      "specific_caveats": [
+        "Publisher chapter Padumukkhepa differs from VRI Padumukkhipavagga; the chapter heading is separately owned, not poem scripture. Poem-title note1 remains poem-owned even though it explains chaptername.",
+        "Publisher verse4 prints thirty-second aeon and normalized diacritic name Antalikkhacara, whereas VRI verse4 reads chattiṃsa (thirty-six) and Antalikkhakaro. Preserve both editions without correction or inferred cause."
+      ],
+      "root_sha256": "029fa22a4f834d5dee4daf2f5c92d87a8c41d0d1fe7c51e5eec61080e016e32f",
+      "source_raw_sha256": "403fe6481528abc65551a040308d90c7db86366749918dd24b7caf2b6eb5823d",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 262,
+      "id": "tha-ap264",
+      "mapping_basis": "Oil applied at theBodhi railing afterSiddhattha passedaway.",
+      "specific_caveats": [
+        "Publisher final attainment formula is expanded while VRI abbreviates it with peyyāla; do not equate matching ordinal counts with line-complete translation. Preserve original oil/railing and chronology wording."
+      ],
+      "root_sha256": "4fdbf0e77159b587dcf806c6aa13e49ab30a8144d94d5e8ec5dbe6ed75d5cdfc",
+      "source_raw_sha256": "81f021e748a2f0e62d9d8dcfc31b1c94acccc05101c0b5e936364bd082b7f8d3",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 263,
+      "id": "tha-ap265",
+      "mapping_basis": "Half-moon offering atTissaBodhi; flower interpretation qualified by translatornote.",
+      "specific_caveats": [
+        "Publisher Devapa and its uncertain-name note5 differ from VRI devalo; publisher flower interpretation remains attributed translator/commentary apparatus. VRI verse11 reads canda with recorded puppha variant. Preserve uncertainties and three original HTML diacritic display pairs."
+      ],
+      "root_sha256": "adb7f802e0bd01791057d863e1b3225af0b0af959b955a82d2e3d59c63aea4e8",
+      "source_raw_sha256": "bd26ab528dfcfbb8a74ac61ebb3c313803c0f90b0eb686de5829a9ab0f383755",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 264,
+      "id": "tha-ap266",
+      "mapping_basis": "God descends and donates five lamps.",
+      "specific_caveats": [
+        "Publisher Araṇadīpiya differs from VRI Padīpadāyaka and the actual VRI colophon variant apaṇṇadīpiyo; full god-descends/five-lamps/94aeons/Samantacakkhu narrative and neighbors establish identity.",
+        "Retain the original publisher wording “I’ve come to no know bad rebirth” exactly; no typographic correction."
+      ],
+      "root_sha256": "4d07f57d3998f25f2265aa33843966205f0115400847e68b7ae0cc7dd74a8b00",
+      "source_raw_sha256": "7c9fd2506e6ab7ce6724d1bdad5711c0f0cbf221770a86b4ca853c37bac896af",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 265,
+      "id": "tha-ap267",
+      "mapping_basis": "HimalayanRomasa mountain; tuberous roots donated toascetic and blessing.",
+      "specific_caveats": [
+        "Romasa is the mountain here, distinct from the Lonely Buddha in publisher279. Preserve translator uncertainty and long cross-references in note2; do not infer names-only identities."
+      ],
+      "root_sha256": "b3b63d077b51dad939f60e9ba2f35770c7ba087dc8cd3c99e8a900f662e975a0",
+      "source_raw_sha256": "d567908df1fbe524d1dceb5249792285ac13698ceb00d1827e690e9bd2e02a66",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 267,
+      "id": "tha-ap269",
+      "mapping_basis": "Forester seesSiddhattha travelling throughsky and raises joinedhands.",
+      "specific_caveats": [
+        "Preserve publisher Javahaŋsaka with literal U+014Bŋ, while VRI uses Javahaṃsaka. Forester/Candabhāgā/Siddhattha travelling throughsky/joinedhands narrative and neighbors establish identity."
+      ],
+      "root_sha256": "6f6de5ae124b515eface8b276bbb98dc5a74091b1df0452a5a01796afe730236",
+      "source_raw_sha256": "b709182900fb67ebcb07cac1dc93323537fb728572c0137a56bfb6db1e4a3c91",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 268,
+      "id": "tha-ap270",
+      "mapping_basis": "Kinnara atCandabhāgā offers saḷala flower toVipassi.",
+      "specific_caveats": [
+        "Retain publisher Saḷala/BJTS salala botanical variant and translator kinnara explanation as notes. VRI peyyāla remains independent of the expanded English attainment formula."
+      ],
+      "root_sha256": "ac5909414534d25579b5de3f153526633c2095102e5dff0b97f56cd05a6c3936",
+      "source_raw_sha256": "6b0570a3bbd59623a4b31bb42844ea95bef47b8c9087056e15d58be94108b6a7",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 269,
+      "id": "tha-ap271",
+      "mapping_basis": "Terrifyingdemon atHimalayan lake receivesVipassi and worships.",
+      "specific_caveats": [
+        "Publisher Upāgatabhāsaniya differs from VRI Upāgatāsaya. VRI colophon notes upāgatahāsaniyo (syā.) and upāgatāhāsaniyo (ka.), not the exact publisher form; do not invent an attested spelling.",
+        "Preserve publisher note3 BJTS heṭṭhasīso/PTSpoṭṭhasīso decision and demon/lake/Vipassi narrative; VRI main text has heṭhasīlo. No edition harmonization."
+      ],
+      "root_sha256": "c07a6cf27b8977be5e39d519effc1d5501162101dd695097c6b1812165b287e5",
+      "source_raw_sha256": "b44da3a6a345f3b84c3385088f5bc31be08cd1d4472a048c0e0435eb6b94c478",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 270,
+      "id": "tha-ap272",
+      "mapping_basis": "Vipassi at riverbank; uncertain manner of helpinghimcross, no boats.",
+      "specific_caveats": [
+        "Publisher Taraṇiya is Vipassi at the riverbank with no boats and uncertain means of crossing; it is distinct from excluded publisher280 highwaybridge narrative even though titles repeat.",
+        "Original chapter summary declares41 although the ten source poems print42 labels/global2540–2581; VRI summary also states41 while its numbered chapter stanzas total42. Preserve original counts and wording without inferred repair.",
+        "This summary covers all ten publisher poems including excluded publisher266/canonicaltha-ap268. Only nine poems/39printed labels in that chapter qualify here; chapter-summary display does not activate the held poem or establish complete chapter English coverage."
+      ],
+      "root_sha256": "fd546cbbbb3dd14c07aca83ce1e4d5ce5a3634cd6458a6d4ef4bd96b04c14a85",
+      "source_raw_sha256": "8306a7610504e3dc50988bbc699142f1d12bb2dd93164171738a87a9286d86e9",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 271,
+      "id": "tha-ap273",
+      "mapping_basis": "Chair and pillow donation; titlevariant explicitly discussed innote1.",
+      "specific_caveats": [
+        "Publisher Suvaṇṇabimbohaniya/chapterBimbohana differs from VRI Suvaṇṇabibbohaniya/Bibbohana; publisher note1 and actual VRI bimbohanañca (sī.pī.) note retain edition spellings. Chapter heading is separately owned."
+      ],
+      "root_sha256": "c10552d7beed7e5eea6fe40803cb49323e0417f4afd907af775ae6c412b8ad65",
+      "source_raw_sha256": "22b520029aeca960eee34afead09c2e6df62114b8d19d601e45b973edb7bd129",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 272,
+      "id": "tha-ap274",
+      "mapping_basis": "Teacher approaches throughmindmadebody; sesamehandful donation.",
+      "specific_caveats": [
+        "Publisher verse4 names Nandiya whereas VRI verse8 reads tantiso with recorded khantiyo (syā.) variant. Preserve these independent edition names; do not silently correct or invent a recorded Nandiya variant."
+      ],
+      "root_sha256": "a5b3ea0c115e1cc2477252755c0887b81028acb30278070a69bc9e6172401fb3",
+      "source_raw_sha256": "5c5def6ca7898e9147c0018ca78e551617d04382b4d9642b9e7280dc85e080d0",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 273,
+      "id": "tha-ap275",
+      "mapping_basis": "Dweller nearsea/mountains donates boxofflowers toSiddhattha.",
+      "specific_caveats": [
+        "Publisher Caṅgoṭakiya differs from VRI Caṅkoṭakiya; actual VRI note records caṅgoṭaka (sī.) and alternative approach wording. Preserve sea/mountain/box/Siddhattha narrative and translator note2; do not equate every first-stanza line across editions."
+      ],
+      "root_sha256": "4c699ea9019ae341c7ed5884473d5bc885e3e0ad6dc7123dbe0947cc1bbf4b8a",
+      "source_raw_sha256": "16e8b024b8a60fe12e0fc8c3bef4d0cf70a6daf601a2fd55086b2942d60e580f",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 274,
+      "id": "tha-ap276",
+      "mapping_basis": "Unguent offering toKoṇḍañña; first displayedentry combines twostanzas.",
+      "specific_caveats": [
+        "Publisher local1–2/global2595–2596 is one eight-line physical display corresponding by scope to VRI numbered14–15. Preserve the compound labels and all eight lines; no reconstructed or split wording.",
+        "Keep the publisher’s glossary and uncertain Cirappa-name note5 attributed to this poem; VRI abbreviation/reading notes remain independent."
+      ],
+      "root_sha256": "75b666fb51838938ec4cae3021decef4c3c973ba101fd0b34ce1ed62a7ef9e62",
+      "source_raw_sha256": "a61ddef76c3fef1d2ebbd4e1ebbc3dd3030498817ec388dd3fd21673e195a1af",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 275,
+      "id": "tha-ap277",
+      "mapping_basis": "Dwelling/leafmat/flowermat forTissa; joininghands.",
+      "specific_caveats": [
+        "Publisher Ekañjaliya differs from VRI Ekañjalika; preserve poem note7 and the distinct Eka-añjalika rebirth name, without harmonizing typography or names."
+      ],
+      "root_sha256": "5a81e8432cb5e7163f4bfc6c11f3e6a3f8a41361783a64924e91b3f479d27515",
+      "source_raw_sha256": "07a6546dcebee3b2b34cce4412c6a9798e59905875498f9a2a656d48d34a7658",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 276,
+      "id": "tha-ap278",
+      "mapping_basis": "Plaster donation with explicit cloth/bark/stupa alternative interpretation innotes2–3.",
+      "specific_caveats": [
+        "Publisher Potthadāyaka differs from VRI Potthakadāyaka. Retain original plaster/cloth/bark/stupa/recipient uncertainty in notes1–3, not a settled reconstruction or expanded root scripture."
+      ],
+      "root_sha256": "6f05b8104c113d1808eb0a8661674c54a5b6b8c8506e48b87f3d253037e3d5ec",
+      "source_raw_sha256": "d40d20c0a13cbb9a8d82a8683d9577ad7ca88086e76f9bb78808717db138fcb0",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 277,
+      "id": "tha-ap279",
+      "mapping_basis": "Sevenmāluvāblooms/shrineworship; commentary sandshrine explanation remainsnote3.",
+      "specific_caveats": [
+        "Publisher verse3 says seventy-seven aeons; VRI verse29 reads Sattasaṭṭhi (sixty-seven). The actual VRI note varies king-number/name wording and does not record seventy-seven; do not infer a cause or correction.",
+        "Shrine construction from sand is publisher commentary note3, not additional verse text; preserve poem-note ownership."
+      ],
+      "root_sha256": "a621ed773941d17fc89844820de2936d32756b9b0f94a5c463d1dbf271520f02",
+      "source_raw_sha256": "282c52ffe569b0e962903ef0025e1b2e777c67a13ec7ad3f2dde264674f0f51b",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 278,
+      "id": "tha-ap280",
+      "mapping_basis": "HimalayanIndus; bulbousroots donation toBrightOne.",
+      "specific_caveats": [
+        "Retain publisher BJTS/commentary brightness reading and bulbous-root interpretation as attributed notes; VRI main text suppabhāsaṃ and independent wording remain unchanged."
+      ],
+      "root_sha256": "d466f9d78a02b9baeb56064b38c0a2da810bdeb6f58dfe69e650ec6c86cb1da6",
+      "source_raw_sha256": "8d8f18f73b88e10f502bf3212d07c2632bf3025c9e39b99cdd259a83260480dc",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    },
+    {
+      "publisher_poem": 279,
+      "id": "tha-ap281",
+      "mapping_basis": "RomasaLonelyBuddha receives one whitelotus.",
+      "specific_caveats": [
+        "Romasa is the Lonely Buddha here, distinct from publisher265 mountain; VRI main text subbato and recorded sappabho (syā.) remain independent of publisher “Bright” interpretation."
+      ],
+      "root_sha256": "b8e50f8d94536538063b150642f35f8ffc31b1a635db86a64a69f4635fa7f737",
+      "source_raw_sha256": "91750e33e65d43ef1d5973c2bfb27f89bd96cfdc701172a8d7201f24e699faf8",
+      "both_original_XML_neighbors_verified": true,
+      "all_words_notes_boundaries_owned": true,
+      "complete_publisher_poem_not_line_complete_VRI": true
+    }
+  ],
+  "totals": {
+    "poems": 18,
+    "body_paragraphs": 129,
+    "stanza_entries": 75,
+    "printed_local_labels": 76,
+    "poem_notes": 59,
+    "chapter_heading_paratexts": 2,
+    "paratext_notes": 0,
+    "summaries": 1,
+    "summary_notes": 0,
+    "paired_display_occurrences": 22
+  },
+  "all_originals_read_before_any_peer_output": true,
+  "production_imports_or_oracle": false,
+  "normalization_source_approvals": 18,
+  "runtime_release_approval": false
+}

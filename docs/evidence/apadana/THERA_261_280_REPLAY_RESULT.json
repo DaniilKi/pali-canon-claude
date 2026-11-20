@@ -1,0 +1,92 @@
+{
+  "status": "PASS_EXACT18_ORIGINAL_SOURCE_AND_FINITE_NORMALIZATION_REPLAY",
+  "baseline": "d31757b922fe2fa1fcf7bd903469e608f4eef6fb",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "source_root": "/tmp/pali-publisher261-280-readonly/raw",
+  "canon": "/tmp/pali-thera221-260-scout/canon-current.json",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "xml": "/tmp/pali-sariputta-release/vri-fixture/romn/s0510m1.mul.xml",
+  "original_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "independent_A_authority": "/tmp/pali-261-280-source-review-A/GOLDENS.json",
+  "independent_A_authority_sha256": "c92b06cc14d73b6e2cb2ce053b5997d4786d4191c5ae54abb66d6711ded54ca1",
+  "all14645_original_XML_tuples_verified": true,
+  "verified_source_files": 26,
+  "boundary_only_excluded_publishers": [
+    266,
+    280
+  ],
+  "excluded_publishers": [
+    260,
+    266,
+    280
+  ],
+  "approved_source_IDs": [
+    "tha-ap263",
+    "tha-ap264",
+    "tha-ap265",
+    "tha-ap266",
+    "tha-ap267",
+    "tha-ap269",
+    "tha-ap270",
+    "tha-ap271",
+    "tha-ap272",
+    "tha-ap273",
+    "tha-ap274",
+    "tha-ap275",
+    "tha-ap276",
+    "tha-ap277",
+    "tha-ap278",
+    "tha-ap279",
+    "tha-ap280",
+    "tha-ap281"
+  ],
+  "totals": {
+    "poems": 18,
+    "body_paragraphs": 129,
+    "stanza_entries": 75,
+    "printed_local_labels": 76,
+    "poem_notes": 59,
+    "chapter_heading_paratexts": 2,
+    "paratext_notes": 0,
+    "summaries": 1,
+    "summary_notes": 0,
+    "paired_display_occurrences": 22
+  },
+  "mode": "metadata-only",
+  "all6_derived_output_sha256s": {
+    "GOLDENS.json": "c92b06cc14d73b6e2cb2ce053b5997d4786d4191c5ae54abb66d6711ded54ca1",
+    "EXPECTED_PROFILES.json": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046",
+    "EXPECTED_LINKS.json": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371",
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json": "5b5d03bc8d27b6702fafd6254ed0038e8fadcc9bb32a42c190957cad34fc4989",
+    "PALI_BLOCKS_EXTERNAL_ONLY.json": "8f235a72c875b9c3d96397db28192a1d077c6321066868981bd2d6488452dcc2",
+    "SOURCE_REVIEW.json": "9d302203f245d11b83d3fcdf4f65d3877af76552a984158ccd798dfc8ef2c98c"
+  },
+  "outputs": {
+    "GOLDENS.json": "c92b06cc14d73b6e2cb2ce053b5997d4786d4191c5ae54abb66d6711ded54ca1",
+    "EXPECTED_PROFILES.json": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046",
+    "EXPECTED_LINKS.json": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371",
+    "SOURCE_REVIEW.json": "9d302203f245d11b83d3fcdf4f65d3877af76552a984158ccd798dfc8ef2c98c"
+  },
+  "written_output_names": [
+    "GOLDENS.json",
+    "EXPECTED_PROFILES.json",
+    "EXPECTED_LINKS.json",
+    "SOURCE_REVIEW.json"
+  ],
+  "full_payload_files_written": 0,
+  "safe_metadata_only_outputs": [
+    "GOLDENS.json",
+    "EXPECTED_PROFILES.json",
+    "EXPECTED_LINKS.json",
+    "SOURCE_REVIEW.json"
+  ],
+  "external_payloads_never_copy_into_project_package": [
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json",
+    "PALI_BLOCKS_EXTERNAL_ONLY.json"
+  ],
+  "production_imports_or_runtime_oracle": false,
+  "runtime_approval": false,
+  "release_approval": false,
+  "activations": 0
+}

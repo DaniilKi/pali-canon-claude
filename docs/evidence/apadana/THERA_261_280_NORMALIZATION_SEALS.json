@@ -1,0 +1,23 @@
+{
+  "status": "INDEPENDENT_REVIEW_A_18_SOURCE_AND_FINITE_NORMALIZATION_ONLY",
+  "baseline": "d31757b922fe2fa1fcf7bd903469e608f4eef6fb",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "files": {
+    "COPY_POLICY.json": "ff99af2233a33396874a0030df50ae3867e7c67ea9634046a12c7cb29718a04f",
+    "EXPECTED_LINKS.json": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371",
+    "EXPECTED_PROFILES.json": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046",
+    "GOLDENS.json": "c92b06cc14d73b6e2cb2ce053b5997d4786d4191c5ae54abb66d6711ded54ca1",
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json": "5b5d03bc8d27b6702fafd6254ed0038e8fadcc9bb32a42c190957cad34fc4989",
+    "PALI_BLOCKS_EXTERNAL_ONLY.json": "8f235a72c875b9c3d96397db28192a1d077c6321066868981bd2d6488452dcc2",
+    "PRECOMPARISON_DERIVATION_SEALS.json": "d9f0b989ed295f020d5842de0783373f8146e38540cdb097262e8d0536e8cb4d",
+    "README.md": "2be0c37295f9fcffc4b7e6fc844092d4ba4465ddd8e2b76993c35af778ce82a4",
+    "RIGHTS_REVIEW.json": "2eae724eebc6ceab2d9acea65894eb383106fc98bbdd74c805c18964ce279edc",
+    "SOURCE_APPROVAL.json": "dee7e7fa8e55cb539fbb7f4c9d09413eef931ad323f674ec8fd8ac8d31fd6ae5",
+    "SOURCE_REVIEW.json": "9d302203f245d11b83d3fcdf4f65d3877af76552a984158ccd798dfc8ef2c98c",
+    "derive_originals.py": "afd27cd82ae3ba66567ad8d935d959fa3396f46926da2545ba58a1691fcd582d"
+  },
+  "source_approval_count": 18,
+  "normalization_approval_count": 18,
+  "runtime_release_activation_approval": false,
+  "full_English_and_Pali_payloads_external_only": true
+}

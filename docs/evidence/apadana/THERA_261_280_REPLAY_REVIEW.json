@@ -1,0 +1,84 @@
+{
+  "status": "B_APPROVE_EXACT_PORTABLE_V3_VERIFIER_CODE_COPY_METADATA_ONLY_REPLAY_VALIDATED",
+  "approved_script_sha256": "e8998c346781bc8dccf19dc2ff0704fe92f2a3741321347278b01298fdbb0d52",
+  "approved_copy_target": "scripts/apadana/review_thera261_280.py",
+  "source_script": "/tmp/pali-261-280-source-review-A/portable-v3/review_thera261_280.py",
+  "portable_packet_seal": {
+    "file": "/tmp/pali-261-280-source-review-A/portable-v3/SEALS.json",
+    "sha256": "c5d068d0090a3f0c960268a004a99bf5acf897a0d8393fec68527cb6d29eba6f"
+  },
+  "scope": "Copy verifier code and separately listed safe metadata only; no normalized English or fullPali fixture outputs. No runtime or release approval.",
+  "independent_static_checks": {
+    "all10_derivation_function_ASTs_unchanged_from_v2": true,
+    "normalization_source_functions_unchanged_from_original_A_except_buffered_save_adapter": true,
+    "standard_library_only": true,
+    "no_production_parser_or_runtime_or_normalized_payload_input_oracle": true,
+    "all6_derived_buffers_checked_against_original_A_seals_before_any_write": true,
+    "explicit_metadata_only_fixed4_write_whitelist": [
+      "GOLDENS.json",
+      "EXPECTED_PROFILES.json",
+      "EXPECTED_LINKS.json",
+      "SOURCE_REVIEW.json"
+    ],
+    "default_full_export_git_or_package_ancestor_guard_remains_strict": true,
+    "resolved_output_ancestors_checked": true,
+    "source_evidence_code_descendant_exclusive_destination_guards_retained": true,
+    "existing_outputs_never_overwritten": true
+  },
+  "root_owned_execution": {
+    "positive_result_file": "/tmp/pali-261-280-portable-v3-metadata-root/REPLAY_RESULT.json",
+    "positive_result_sha256": "4501997174d404c755729268075975d9882e2a7ea3839e3db1d243f2935f2f36",
+    "all6_derived_hashes": {
+      "GOLDENS.json": "c92b06cc14d73b6e2cb2ce053b5997d4786d4191c5ae54abb66d6711ded54ca1",
+      "EXPECTED_PROFILES.json": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046",
+      "EXPECTED_LINKS.json": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371",
+      "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json": "5b5d03bc8d27b6702fafd6254ed0038e8fadcc9bb32a42c190957cad34fc4989",
+      "PALI_BLOCKS_EXTERNAL_ONLY.json": "8f235a72c875b9c3d96397db28192a1d077c6321066868981bd2d6488452dcc2",
+      "SOURCE_REVIEW.json": "9d302203f245d11b83d3fcdf4f65d3877af76552a984158ccd798dfc8ef2c98c"
+    },
+    "actual_metadata_files": {
+      "GOLDENS.json": "c92b06cc14d73b6e2cb2ce053b5997d4786d4191c5ae54abb66d6711ded54ca1",
+      "EXPECTED_PROFILES.json": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046",
+      "EXPECTED_LINKS.json": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371",
+      "SOURCE_REVIEW.json": "9d302203f245d11b83d3fcdf4f65d3877af76552a984158ccd798dfc8ef2c98c"
+    },
+    "full_payload_files_written": 0,
+    "full_payload_file_absence_independently_observed": true,
+    "negative_controls": {
+      "file": "/tmp/pali-261-280-portable-v3-controls/ROOT_REPLAY_CONTROLS.json",
+      "sha256": "b64567e553d6e0a7e5630af42fa0eadd7be18b4768dfb338c965a0676b1b8282",
+      "count": 7,
+      "all_reject_without_output_or_prior_byte_change": true,
+      "qualification": "Ambient /tmp/.git applies to both git-only and package-only negatives; independent static guard review separately checks OR semantics. No unknown markers removed or changed."
+    },
+    "v1_good_full_replay_preserved": "/tmp/pali-261-280-portable-replay-root",
+    "v2_guard_failures_and_ambient_markers_preserved": true
+  },
+  "copy_policy": {
+    "safe": [
+      "verifier source code",
+      "GOLDENS.json",
+      "EXPECTED_PROFILES.json",
+      "EXPECTED_LINKS.json",
+      "SOURCE_REVIEW.json",
+      "hash/count-only replay receipts"
+    ],
+    "never_copy_original_wording_payloads": [
+      "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json",
+      "PALI_BLOCKS_EXTERNAL_ONLY.json"
+    ],
+    "metadata_only_is_required_in_marker_containing_staging_roots": true
+  },
+  "reviewer_operations": "Read/hash/JSON/Python AST only. B did not execute verifier, project tests/parsers/APIs/build/Git/remote actions; all replay/negative execution was root-owned.",
+  "implementation_review": {
+    "file": "IMPLEMENTATION_REVIEW.json",
+    "sha256": "d9ad935751907cb56b604f0a11589efcf1a2b5d3aa7992136c23563f52c6641b"
+  },
+  "unchanged_source_approvals": {
+    "A": "dee7e7fa8e55cb539fbb7f4c9d09413eef931ad323f674ec8fd8ac8d31fd6ae5",
+    "B": "8ce46b4cca025f55c61e10b8cd8c81fd154dbe7b811f433e7f33e2b29d95dae6"
+  },
+  "runtime_approval": false,
+  "release_approval": false,
+  "push_approval": false
+}

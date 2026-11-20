@@ -1,0 +1,93 @@
+{
+  "status": "APPROVE_READY_DOC_ONLY_REPACK_LOCAL_UNPUBLISHED_PACKAGE_BYTES",
+  "reviewed_utc": "2026-11-20T10:29:21.933183+00:00",
+  "prior_approval": {
+    "path": "/tmp/pali-261-280-package-review/FINAL_PACKAGE_APPROVAL.json",
+    "bytes": 6955,
+    "sha256": "8b3e2b7a861debfb43a088603680c6129520384501b9a0847a57e2fbd8b55b61"
+  },
+  "prior_c06_archive": {
+    "path": "/tmp/pali-261-280-installed/final/pali-canon-mcp-2.1.0.tgz",
+    "bytes": 40666112,
+    "sha256": "c06b4497891115cdf9701aa743c93ad9e5c3e0f55d4929d6ad8bab409919fd53"
+  },
+  "prior_approval_and_archive_preserved_immutable": true,
+  "ready_archive": {
+    "path": "/tmp/pali-261-280-installed/ready/pali-canon-mcp-2.1.0.tgz",
+    "bytes": 40666150,
+    "sha256": "6a7972c9236de4d0ddc4407cdd1cf87702c4b4fdde4cf54dbd5e2a0e455b99e0"
+  },
+  "ready_installation": "/tmp/pali-261-280-installed/ready/genuine/node_modules/pali-canon-mcp",
+  "ready_member_inventory": {
+    "path": "/tmp/pali-261-280-package-review/READY_PACKAGE_MEMBER_INVENTORY.json",
+    "bytes": 6658,
+    "sha256": "6f116072e7d387852a4878b3e6ba07ff3c5e5f6d7354ce3f905cc55d492e6b86"
+  },
+  "root_ready_receipt": {
+    "path": "/tmp/pali-261-280-installed/ready/READY_PACKAGE_RECEIPT.json",
+    "bytes": 12540,
+    "sha256": "974923363fddea974ffee029d9de56cd76e6f481e50099d8220e290c981fa9cd"
+  },
+  "members": 39,
+  "runtime_members": 34,
+  "all39_tar_checkout_fresh_offline_install_exact": true,
+  "all34_runtime_identical_to_prior_approved_and_executed_bytes": true,
+  "changes_only": {
+    "README.md": {
+      "prior": {
+        "bytes": 44554,
+        "sha256": "5147a5e7383263db198d813dd1dfb6cb2d9ef6188e87bf42f9df8f0e9fc466d7"
+      },
+      "ready": {
+        "bytes": 44649,
+        "sha256": "0be339cd9f5e2f0d66f6f621164bfaaf7d9ebf4c4a745b3d9002d14d70a2665f"
+      },
+      "reviewed_diff": {
+        "path": "/tmp/pali-261-280-package-review/READY_README.md.diff",
+        "bytes": 2344,
+        "sha256": "b96363aaeb7ae84160de297e2a61155d8710564afc401f8031ce1ac431788a67"
+      }
+    },
+    "THIRD_PARTY.md": {
+      "prior": {
+        "bytes": 39496,
+        "sha256": "a37b4d0a98cdbaf0a432bb21baf70a46b1f4cd59f9ca2ebf05f106680d1fde32"
+      },
+      "ready": {
+        "bytes": 39547,
+        "sha256": "813f0d920df3ced0ce9b493b51e7431977936106fd325b808165c5857320908b"
+      },
+      "reviewed_diff": {
+        "path": "/tmp/pali-261-280-package-review/READY_THIRD_PARTY.md.diff",
+        "bytes": 2006,
+        "sha256": "654e43c1c024bc23de2935c03f39da8c1e26b87af2f1666b7f366cb3253e8bfe"
+      }
+    }
+  },
+  "documentation_review": "Only latest D259 status capsules change: focused/client/package checks are complete locally, linked intake guide owns evolving full/final acceptance; remote/publication gates remain separate. Rights/scope/held texts remain unchanged. No full-check or implementation approval is inferred.",
+  "proof_reuse": {
+    "root_explicitly_authorized": true,
+    "unchanged_34_runtime_proofs_reused": true,
+    "prior_proof_bindings_all_rehashed_unchanged": true,
+    "prior_executed_archive_sha256": "24c9579342fc124ca972e0349c33264836eec3eeda33cf54ea32efd10ee7d1a3",
+    "ready_archive_not_reexecuted_or_relabelled": true,
+    "reference": {
+      "path": "/tmp/pali-261-280-package-review/FINAL_PACKAGE_APPROVAL.json",
+      "bytes": 6955,
+      "sha256": "8b3e2b7a861debfb43a088603680c6129520384501b9a0847a57e2fbd8b55b61"
+    }
+  },
+  "current_runtime_approval": {
+    "path": "/tmp/pali-261-280-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+    "bytes": 9979,
+    "sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+  },
+  "reviewer_project_execution_build_test_or_git": false,
+  "local_package_byte_approval": true,
+  "full_check_approval": false,
+  "implementation_acceptance": false,
+  "physical_human_assistive_or_signedin_acceptance": false,
+  "remote_ci_approval": false,
+  "release_or_push_approval": false,
+  "remaining_gates": "Root full-check retry and separate independent final implementation/guide review remain outside this package addendum."
+}

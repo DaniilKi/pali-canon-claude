@@ -7,7 +7,7 @@ or human assistive acceptance. Full English is never written to reports.
 import argparse,gzip,hashlib,importlib.util,json,os,re,signal,socket,subprocess,sys,tempfile,time,traceback,urllib.request
 from datetime import datetime,timezone
 from pathlib import Path
-from web_reader_apadana_intake import reviewed_intake
+from web_reader_apadana_intake import reviewed_held234_intake,curated_additions
 from web_reader_approved_acceptance import assert_runtime
 ROOT=Path(__file__).resolve().parents[1]
 BASE='7d5ac90845402b322dabf2c5120d1485b15c0bda'
@@ -66,7 +66,10 @@ def main():
     def timeout_signal(_signal,_frame):raise TimeoutError('Bounded one-source acceptance deadline')
     signal.signal(signal.SIGALRM,timeout_signal);signal.alarm(args.timeout_seconds)
     approval=json.loads(args.approval.read_text());evidence_dir=ROOT/'docs/evidence/apadana'
-    assert approval==reviewed_intake(ROOT)
+    assert approval==reviewed_held234_intake(ROOT)
+    current_additions=curated_additions(ROOT,'THERA_HELD234_APPROVAL.json')
+    current_curation=current_additions['curation'];current_ids=current_curation['expected_profile_ids']
+    assert len(current_ids)==303 and len(current_additions['ids'])==18
     assert approval['base_commit']==BASE and approval['approved_ids']==[UID] and len(approval['baseline_ids'])==284
     assert approval['expected_profile_ids']==approval['baseline_ids']+[UID] and len(set(approval['expected_profile_ids']))==285
     assert approval['before_canon_sha256']==approval['after_canon_sha256']
@@ -89,7 +92,17 @@ def main():
         assert json.loads((server_dir.parent/'package.json').read_text())['name']=='pali-canon-mcp'
     manifest=json.loads((server_dir/'data/apadana.json').read_text());rows=manifest['links']
     assert manifest==json.loads((ROOT/'server/data/apadana.json').read_text())
-    assert set(rows)==set(approval['expected_profile_ids']) and rows[UID]==links[UID]
+    assert current_curation['baseline_ids']==approval['expected_profile_ids']
+    assert current_ids==approval['expected_profile_ids']+current_additions['ids']
+    assert set(rows)==set(current_ids) and rows[UID]==links[UID]
+    prior=sealed(evidence_dir,current_curation['baseline_freeze'])
+    assert prior['baseline']==current_curation['base_commit'] and prior['profiles']==285
+    assert list(prior['translation_objects'])==approval['expected_profile_ids']
+    for old_id,old_row in prior['translation_objects'].items():assert rows[old_id]==old_row, 'Historical source changed: '+old_id
+    for new_id,new_row in current_additions['links'].items():assert rows[new_id]==new_row, 'Current addition differs from independent pins: '+new_id
+    old_source=prior['manifest_source']
+    assert {key:value for key,value in manifest['source'].items() if key!='policy'}=={key:value for key,value in old_source.items() if key!='policy'}
+    assert manifest['source']['policy']==old_source['policy'].replace('285 finite','303 finite').replace('245 explicitly mapped Therā','263 explicitly mapped Therā')
     assert rows[NEIGHBOR]['poem']==235 and rows[NEIGHBOR]['path']=='/text/chapter-3/poem-235/' and rows[NEIGHBOR]['title']=='Vediyadāyaka'
     assert rows[UID]['poem']==234 and rows[UID]['path']=='/text/chapter-3/poem-234/' and rows[UID]['title']=='Kilañjadāyaka'
     assert rows[UID]['raw_sha256']!=rows[NEIGHBOR]['raw_sha256'] and rows[UID]['body_sha256']!=rows[NEIGHBOR]['body_sha256']
@@ -122,11 +135,11 @@ def main():
         base = 'http://127.0.0.1:'+str(port)
         server_argv=['node','--require',str(preload),str(server_dir/'http.cjs')]
         launch_path=args.launch_receipt or (args.report.with_suffix('.launch.json') if args.report else mode_root/(stage.name+'.launch.json'))
-        launch={'status':'launching','compiled_after_runs':False,'started_utc':utc_now(),'mode':mode,'selected_source_count':1,'registry_profiles':285,'source_approval':approval['independent_source_approval'],'independent_normalization':approval['independent_normalization'],
+        launch={'status':'launching','compiled_after_runs':False,'started_utc':utc_now(),'mode':mode,'selected_source_count':1,'registry_profiles':len(current_ids),'source_approval':approval['independent_source_approval'],'independent_normalization':approval['independent_normalization'],
             'harness_pid':os.getpid(),'harness_argv':[sys.executable,*sys.argv],'harness_cwd':str(Path.cwd()),'server_argv':server_argv,
             'server_cwd':str(stage),'source_fixture':str(checkout),'official_checkout_provenance':str(args.official_checkout.resolve()) if args.official_checkout else None,'timeout_seconds':args.timeout_seconds,'server_directory':str(server_dir),'outside_source_tree':bool(args.server_dir),'runtime_origin':'isolated-npm-install' if args.server_dir else 'repository-compiled',
             'server_file_sha256':launch_hashes,'harness_sha256':launch_harness,'helper_sha256':launch_helpers,
-            'approval_sha256':digest(args.approval.read_bytes()),'current_curation_sha256':digest((ROOT/'docs/evidence/apadana/THERA_HELD234_APPROVAL.json').read_bytes()),
+            'approval_sha256':digest(args.approval.read_bytes()),'current_curation_sha256':digest((ROOT/'docs/evidence/apadana/THERA_261_280_APPROVAL.json').read_bytes()),'current_additions_ids':current_additions['ids'],
             'package_archive':str(args.package_archive.resolve()) if args.package_archive else None,
             'package_sha256':digest(args.package_archive.read_bytes()) if args.package_archive else None}
         def write_launch():
@@ -289,7 +302,7 @@ try{
                 scaled.browser_checks(args,base,rows,expected,whole,metadata,widgets,html,patches,checks,scans,order,{})
             events=[json.loads(line) for line in ledger.read_text().splitlines()]
             assert events and all(e['ok'] for e in events) and {e['url'] for e in events}==set(files)
-            report={'mode':mode,'server_directory':str(server_dir),'runtime_origin':launch['runtime_origin'],'launch_receipt':str(launch_path),'selected_source_count':1,'registry_profiles':285,'passed':len(checks),'checks':checks,'sources':receipts,'source_artifacts':artifacts,'source_approval':approval['independent_source_approval'],'independent_normalization':approval['independent_normalization'],'curation_sha256':digest(args.approval.read_bytes()),'harness_sha256':launch_harness,'helper_sha256':launch_helpers,'server_file_sha256':launch_hashes,'package_sha256':launch['package_sha256'],'browser_run':not args.mcp_only,'full_batch_acceptance':not args.mcp_only,'pinned_provider_reads':len(events),'upstream_provider_requests':0,'a11y':{'performed':args.a11y,'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Exact local pinned originals over actual HTTP; Chromium390/1280 and two simulated host bridges. No live-provider, physical-device, signed-in-host, human AT, specialist or release claim. Client hash-metadata refusal does not authenticate arbitrary forged partial-page wording. Publisher wording/notes/private drafts excluded from reports.'}
+            report={'mode':mode,'server_directory':str(server_dir),'runtime_origin':launch['runtime_origin'],'launch_receipt':str(launch_path),'selected_source_count':1,'registry_profiles':len(current_ids),'passed':len(checks),'checks':checks,'sources':receipts,'source_artifacts':artifacts,'source_approval':approval['independent_source_approval'],'independent_normalization':approval['independent_normalization'],'curation_sha256':digest(args.approval.read_bytes()),'current_curation_sha256':launch['current_curation_sha256'],'current_additions_ids':current_additions['ids'],'harness_sha256':launch_harness,'helper_sha256':launch_helpers,'server_file_sha256':launch_hashes,'package_sha256':launch['package_sha256'],'browser_run':not args.mcp_only,'full_batch_acceptance':not args.mcp_only,'pinned_provider_reads':len(events),'upstream_provider_requests':0,'a11y':{'performed':args.a11y,'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Exact local pinned originals over actual HTTP; Chromium390/1280 and two simulated host bridges. No live-provider, physical-device, signed-in-host, human AT, specialist or release claim. Client hash-metadata refusal does not authenticate arbitrary forged partial-page wording. Publisher wording/notes/private drafts excluded from reports.'}
             assert report['a11y']['violations']==0
             if args.a11y:
                 for width in (390,1280):

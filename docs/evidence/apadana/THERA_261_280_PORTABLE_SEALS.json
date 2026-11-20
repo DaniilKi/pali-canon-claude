@@ -1,0 +1,21 @@
+{
+  "status": "V3_METADATA_ONLY_STATIC_PACKET_PENDING_ROOT_EXECUTION_AND_B_REVIEW",
+  "files": {
+    "review_thera261_280.py": "e8998c346781bc8dccf19dc2ff0704fe92f2a3741321347278b01298fdbb0d52",
+    "METADATA_ONLY_ADAPTER.diff": "0f237a9b53a5e8fca0c89ab131726aea40c20a6514e6daf89f2913dc4e40d7ba",
+    "STATIC_METADATA_ONLY_REVIEW.json": "2ebb21ed8931bd7a7a1a9a6ba58d102b4f3e3d287c1363df84c9e97851fd8335",
+    "COPY_POLICY.json": "3cc3ff8a98d3debfedcd4b4c2c7b9b9814fd88979e8443a8c7e30321efef7468",
+    "README.md": "3b07b0f7f3af5de6251b930433892a1d5be8cb0ad20fc1aa0679c9b34406a68a"
+  },
+  "source_versions": {
+    "original_A_source_approval_sha256": "dee7e7fa8e55cb539fbb7f4c9d09413eef931ad323f674ec8fd8ac8d31fd6ae5",
+    "original_A_seals_sha256": "e9f2e235ab04a3be59ebf745a6111ccbcc7613eeb62cf99251b5526b69e4ae06",
+    "v1_script_sha256": "26f86753659de93938b11a67bc2e00d3877916f93fff7d2f374ebecdc777f795",
+    "v1_seals_sha256": "32dc8e1df47ce3d4b90c26f3952212fae2191f9f9c7c15939d24f7006f359753",
+    "v2_script_sha256": "b56a801e3ef7a4c5fe05dbcf9fea4d16adcee54483b2d95fb74a943212a7e6d1",
+    "v2_seals_sha256": "d351bc9996aab6ada5c9c3c4d74fb645e2c6bb98c52b8602e08354a4798a3d67"
+  },
+  "original_source_approvals_and_expected6outputs_unchanged": true,
+  "script_execution_by_reviewer": false,
+  "runtime_release_approval": false
+}

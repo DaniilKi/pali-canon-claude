@@ -1,0 +1,20 @@
+{
+  "publisher_rights_review": {
+    "file": "RIGHTS_REVIEW.json",
+    "sha256": "f8e816b077679fce9cba49487e014d1926fce1e19f77a9c79868530e1d607f14"
+  },
+  "publisher_specific_terms": "CC BY-NC-SA 4.0 with attribution to Jonathan S. Walters and Whitman College; translation-specific about/footer/ePub/legal notices govern instead of generic site CC BY.",
+  "vri_provenance": {
+    "name": "Chaṭṭha Saṅgāyana Tipiṭaka (VRI)",
+    "repository": "https://github.com/VipassanaTech/tipitaka-xml",
+    "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org",
+    "terms": "Made freely available by VRI for non-commercial use with attribution."
+  },
+  "vri_scope": "Identity/boundary comparison with unchanged VRI original; no witness collation or root wording repair.",
+  "only_metadata_and_hashes_copyable": true,
+  "english_text_notes_and_apparatus_external_live_only": true,
+  "no_audio_media_or_third_party_new_rights": true,
+  "no_commercial_or_additional_downstream_restrictions_approved": true,
+  "no_runtime_or_activation_or_release_approval": true
+}

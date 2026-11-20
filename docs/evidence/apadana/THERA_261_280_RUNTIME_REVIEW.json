@@ -1,0 +1,250 @@
+{
+  "status": "APPROVE_EXACT_34_RUNTIME_BYTES_LOCAL_UNPUBLISHED_ONLY",
+  "created_utc": "2026-11-20T10:16:40.600572+00:00",
+  "baseline": "d31757b922fe2fa1fcf7bd903469e608f4eef6fb",
+  "runtime_inventory_authority": {
+    "path": "/tmp/pali-261-280-installed/PROSPECTIVE_RUNTIME.json",
+    "bytes": 6750,
+    "sha256": "57598adb23498a38fce9e0c7bd8c0cd12b879ea5bd41ead8f03ab3a6886da485"
+  },
+  "files": {
+    "THIRD_PARTY_LICENSES.txt": {
+      "bytes": 12861,
+      "sha256": "378d7454a776c1ef18accaa55f817cfb429ef713a8ec75e68ad83affb70ba015"
+    },
+    "data/anandajoti.json": {
+      "bytes": 47765,
+      "sha256": "7ff6df1b2d91418aef2ceacca43dc652cbf1d8363b70fccfb4106e23fd0af669"
+    },
+    "data/apadana.json": {
+      "bytes": 1235354,
+      "sha256": "64abecbc2900f69ea5f366dcabf61d861c621508f3115c32b401e453585d9251"
+    },
+    "data/bmc.json": {
+      "bytes": 40743,
+      "sha256": "01f68a8a0c4aa1a9c21f7743c5172beccd3cce9133037830f8ee7836c4810a63"
+    },
+    "data/canon.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "526ba969d0fc3ce62fde7d11764313de43b91a2f71375d602cd647a43b601632"
+    },
+    "data/canon.json.gz.part-0002": {
+      "bytes": 1367632,
+      "sha256": "24169740dd71b5ee86767ef72daea44759201987ffb72975afaca5d31b4c0832"
+    },
+    "data/canon.json.gz.parts.json": {
+      "bytes": 455,
+      "sha256": "639a938e11a230acbf0a87a18c180c820013d95795b7f951439a8cae674b91a7"
+    },
+    "data/commentary.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "581fb24ed95f5ba4a30f7ca02be4dced03f81315f34d3aa6e8a8601a97f2d946"
+    },
+    "data/commentary.json.gz.part-0002": {
+      "bytes": 4194304,
+      "sha256": "40d18b97cd9859a80eced012436e84cecad1654a78a33a98b7e3ed8f9700bf98"
+    },
+    "data/commentary.json.gz.part-0003": {
+      "bytes": 2443283,
+      "sha256": "905cc7de1186d860c0fd4902c11610cf38d2c3d05fe47ce987b3f22b7d68f06b"
+    },
+    "data/commentary.json.gz.parts.json": {
+      "bytes": 631,
+      "sha256": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156"
+    },
+    "data/dhamma_lists.json": {
+      "bytes": 37147,
+      "sha256": "6e14b77fd25d8b524da9ce9a3405220c3fbc9286c82d2096d8f0ca7cdd56b33c"
+    },
+    "data/dpd.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "7f6790cfaca70ad2d5d9dc829420b491288a23d666b3a5ba2f9e0046cc165081"
+    },
+    "data/dpd.json.gz.part-0002": {
+      "bytes": 1294765,
+      "sha256": "25e831647c47c1f97b6d325cf285f2ec761ba1b2ee64f516d3c036c5b2b5af12"
+    },
+    "data/dpd.json.gz.parts.json": {
+      "bytes": 451,
+      "sha256": "5c530a5afef657ceac06a484bfea0e6ecc725c18a38a0f7e3bc687b6028b5854"
+    },
+    "data/dppn.json": {
+      "bytes": 1207,
+      "sha256": "e3d1bb4af928e8cda64bfd92fe2254569043ee97d9d124583b48eca0201cf959"
+    },
+    "data/glossary.json.gz": {
+      "bytes": 1523979,
+      "sha256": "a47a735d7a376882609cd6cb56804403adbf10c21e136c36a4c277e09d746d64"
+    },
+    "data/parallels.json.gz": {
+      "bytes": 487205,
+      "sha256": "a5c99363bdec68bdaea8ea111eaea74a1c1bc0755235e1c2e49493d86414b385"
+    },
+    "data/postcanonical.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "3b21aeb1467103dda9b7bdff1a8a06b134df11454003a623ae617d6c452efbd9"
+    },
+    "data/postcanonical.json.gz.part-0002": {
+      "bytes": 4194304,
+      "sha256": "7943baafd6927bdedd408058f75f5a28c7934dddef660932355692976c297147"
+    },
+    "data/postcanonical.json.gz.part-0003": {
+      "bytes": 4194304,
+      "sha256": "a67a0f4c851845de4d519f86f4f5aaae8a86ade22a4a0e7559160b8056073d2e"
+    },
+    "data/postcanonical.json.gz.part-0004": {
+      "bytes": 1927665,
+      "sha256": "13b966525a2d9b312c79c368ba43cfa9cda545124f5692097966aaf0c0d6c82b"
+    },
+    "data/postcanonical.json.gz.parts.json": {
+      "bytes": 808,
+      "sha256": "310a3db600ad23af025d6f62cfe6f37d56a7fb48f0cda7eaa55a7035bf2e0080"
+    },
+    "data/reviewed-ati-sections.json": {
+      "bytes": 102044,
+      "sha256": "91fde828f07be060a616127e0920b41935a25e180757418036b145a9cfc5214a"
+    },
+    "data/reviewed-partial-pages.json": {
+      "bytes": 40136,
+      "sha256": "55495a36fb429de09b3c7c07bae68da87cd76115df7342647babeeba31afbd76"
+    },
+    "data/source-notes.json": {
+      "bytes": 4218,
+      "sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e"
+    },
+    "data/topics.json": {
+      "bytes": 339961,
+      "sha256": "b1d022643419d6b122138999eb6813db615654cb625a827ea64c256e74facbfb"
+    },
+    "data/translations.json": {
+      "bytes": 748991,
+      "sha256": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6"
+    },
+    "http-worker.cjs": {
+      "bytes": 2705443,
+      "sha256": "49fca6cd830f26dc2465088b10f264ee0f84c0533923d50e86a902ab883d6825"
+    },
+    "http.cjs": {
+      "bytes": 2773188,
+      "sha256": "b7b43ec186340653c4bf9f16e20c18049e1392047485968c1854c7893b0e368e"
+    },
+    "index.cjs": {
+      "bytes": 2582845,
+      "sha256": "048556f70060cb951194b351fda1097a1a253c133f61eeeb03b0bdf716bed22b"
+    },
+    "web/index.html": {
+      "bytes": 4289,
+      "sha256": "084bdf021db7d6229b5f8948b5ce5758cb112f0faf5fbffe2e9dadf8fa9ed0f9"
+    },
+    "web/reader.css": {
+      "bytes": 19037,
+      "sha256": "b124a83028222fa258d91c6fb53636c438e523a6934da995252568b0b69e7f1d"
+    },
+    "web/reader.js": {
+      "bytes": 1649120,
+      "sha256": "3d42038ede076f4635c1537c0af0963db3779d5bd8f4b50443ae3d65de9f4285"
+    }
+  },
+  "changed_paths_from_preserved2449": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "preserved_old_paths": 29,
+  "prior_immutable_authority": {
+    "path": "/tmp/pali-thera261-280-local/tests/fixtures/reviewed-runtime-2449.json",
+    "bytes": 5634,
+    "sha256": "cd6fd0af3f72c8e907130dd40aec4660e2ce8b8155ec7959a178e59517c53080"
+  },
+  "prior_implementation_approval_sha256": "af30339018c4843e4da2599fcabf25797173c58398123dc365ad09f6a2ced00f",
+  "old_authority_not_overwritten": true,
+  "source_authorities": {
+    "THERA_261_280_SOURCE_APPROVAL.json": {
+      "path": "/tmp/pali-thera261-280-local/docs/evidence/apadana/THERA_261_280_SOURCE_APPROVAL.json",
+      "bytes": 135106,
+      "sha256": "dee7e7fa8e55cb539fbb7f4c9d09413eef931ad323f674ec8fd8ac8d31fd6ae5"
+    },
+    "THERA_261_280_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "path": "/tmp/pali-thera261-280-local/docs/evidence/apadana/THERA_261_280_INDEPENDENT_SOURCE_APPROVAL.json",
+      "bytes": 113391,
+      "sha256": "8ce46b4cca025f55c61e10b8cd8c81fd154dbe7b811f433e7f33e2b29d95dae6"
+    },
+    "THERA_261_280_APPROVAL.json": {
+      "path": "/tmp/pali-thera261-280-local/docs/evidence/apadana/THERA_261_280_APPROVAL.json",
+      "bytes": 43330,
+      "sha256": "e25da6522df6f88bfcbf5fade43c6a8972d050425f5a6af1e6043d60440f896b"
+    },
+    "THERA_261_280_EXPECTED_PROFILES.json": {
+      "path": "/tmp/pali-thera261-280-local/docs/evidence/apadana/THERA_261_280_EXPECTED_PROFILES.json",
+      "bytes": 51258,
+      "sha256": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046"
+    },
+    "THERA_261_280_EXPECTED_LINKS.json": {
+      "path": "/tmp/pali-thera261-280-local/docs/evidence/apadana/THERA_261_280_EXPECTED_LINKS.json",
+      "bytes": 52754,
+      "sha256": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371"
+    },
+    "THERA_261_280_BASELINE_FREEZE.json": {
+      "path": "/tmp/pali-thera261-280-local/docs/evidence/apadana/THERA_261_280_BASELINE_FREEZE.json",
+      "bytes": 2479912,
+      "sha256": "dabf5d711fa8be38196e5de7b3b1c7b24462407ef4f50769a447e3c3c609ef44"
+    }
+  },
+  "preservation": {
+    "old285_profile_objects": true,
+    "old285_link_objects": true,
+    "new18_exact_both_independent_maps": true,
+    "prior_parser_and_profile_wrapper_exact_reverse_projection": true,
+    "client196_guard_ids_plus_exact18_and_summary272_only": true,
+    "source_note_association_privacy_focus_macros_unchanged_by_exact_client_projection": true,
+    "all_canon_commentary_source_note_other29runtime_paths_unchanged": true
+  },
+  "source_boundary_review": {
+    "exact263_source_HTML_c_ch_scope": true,
+    "261_271_bare_heading_not_prose_preface": true,
+    "270_summary_kind": "canonical_chapter_summary",
+    "summary41_vs42_and_held266_warning_retained": true,
+    "274_combined_eight_line_stanza_uses_existing_quotation_path": true,
+    "excluded_publishers": [
+      260,
+      266,
+      280
+    ],
+    "excluded_canonical_ids": [
+      "tha-ap262",
+      "tha-ap268",
+      "tha-ap282"
+    ],
+    "no_generated_scripture_or_line_complete_VRI_claim": true
+  },
+  "current_candidate_archive": {
+    "archive": "/tmp/pali-261-280-installed/pali-canon-mcp-2.1.0.tgz",
+    "sha256": "24c9579342fc124ca972e0349c33264836eec3eeda33cf54ea32efd10ee7d1a3",
+    "members": 39,
+    "runtime_members": 34,
+    "installed": "/tmp/pali-261-280-installed/genuine/node_modules/pali-canon-mcp",
+    "tar_and_install_all39_byte_equal": true,
+    "tar_and_checkout_runtime34_byte_equal": true,
+    "outer_docs_may_repack": true,
+    "final_archive_approval": false
+  },
+  "bundle_rights_checks": {
+    "independent_B_long_English_body_note_paratext_probe_count": 126,
+    "bundled_matches": 0,
+    "probe_wording_recorded": false
+  },
+  "project_code_executed_by_reviewer": false,
+  "independence_limit": "This reviewer authored the narrow two client guard edits; independently rechecked exact package inventory/tar/install bytes, source A/B authority and whole old285 metadata preservation. Does not replace independent source or final implementation reviewer.",
+  "remaining_gates": [
+    "Final outer-document/archive freeze and recheck after possible repack",
+    "Observed strict installed widget audit and installed live-source offline-preload proof",
+    "Root final full/browser/compatibility checks and independent implementation review"
+  ],
+  "final_package_approval": false,
+  "runtime_inventory_approval": true,
+  "remote_ci_approval": false,
+  "release_approval": false,
+  "push_approval": false
+}

@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "portable_script_sha256": "e8998c346781bc8dccf19dc2ff0704fe92f2a3741321347278b01298fdbb0d52",
+  "positive_mode": "metadata-only",
+  "all6_hashes_match_original_A": true,
+  "safe_metadata_written": 4,
+  "full_payload_files_written": 0,
+  "results": [
+    {
+      "case": "default-ambient",
+      "exit_code": 1,
+      "no_output_created_or_prior_bytes_changed": true
+    },
+    {
+      "case": "metadata-source",
+      "exit_code": 1,
+      "no_output_created_or_prior_bytes_changed": true
+    },
+    {
+      "case": "metadata-evidence",
+      "exit_code": 1,
+      "no_output_created_or_prior_bytes_changed": true
+    },
+    {
+      "case": "metadata-code",
+      "exit_code": 1,
+      "no_output_created_or_prior_bytes_changed": true
+    },
+    {
+      "case": "metadata-no-overwrite",
+      "exit_code": 1,
+      "no_output_created_or_prior_bytes_changed": true
+    },
+    {
+      "case": "package-only",
+      "exit_code": 1,
+      "no_output_created_or_prior_bytes_changed": true
+    },
+    {
+      "case": "git-only",
+      "exit_code": 1,
+      "no_output_created_or_prior_bytes_changed": true
+    }
+  ],
+  "qualification": "Ambient /tmp/.git applies to both git-only and package-only negatives; independent static guard review separately checks OR semantics. No unknown markers removed or changed."
+}

@@ -28,8 +28,9 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_current_full_objects_and_profiles(self):
         assert_catalogue(self.manifest, self.approved)
         assert_profiles(ROOT, self.approved)
-        self.assertEqual(len(self.approved['links']), 285)
-        self.assertNotIn('tha-ap262', self.approved['links'])
+        self.assertEqual(len(self.approved['links']), 303)
+        for uid in ('tha-ap262', 'tha-ap268', 'tha-ap282'):
+            self.assertNotIn(uid, self.approved['links'])
 
     def test_missing_old_identity(self):
         self.rejects_catalogue(lambda m: m['links'].pop('tha-ap13'))
@@ -45,6 +46,12 @@ class ApprovedAcceptance(unittest.TestCase):
 
     def test_later_object_changed(self):
         self.rejects_catalogue(lambda m: m['links']['tha-ap236'].__setitem__('body_sha256','0'*64))
+
+    def test_missing_new_source_identity(self):
+        self.rejects_catalogue(lambda m: m['links'].pop('tha-ap263'))
+
+    def test_new_source_pin_changed(self):
+        self.rejects_catalogue(lambda m: m['links']['tha-ap265'].__setitem__('raw_sha256','0'*64))
 
     def test_rights_policy_changed(self):
         self.rejects_catalogue(lambda m: m['source'].__setitem__('policy','At least 246 entries'))
@@ -83,6 +90,21 @@ class ApprovedAcceptance(unittest.TestCase):
             data=json.loads((ROOT/'tests/fixtures/reviewed-runtime-2449.json').read_text(encoding='utf-8'))
             data['files']['data/source-notes.json']['sha256']='0'*64
             (dest/'reviewed-runtime-2449.json').write_text(json.dumps(data),encoding='utf-8')
+            with self.assertRaises(AssertionError): approved_runtime(root)
+
+
+    def test_current_runtime_review_tampering(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            for name in ('tests/fixtures/reviewed-runtime-2449.json',
+                    'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json'):
+                target=root/name;target.parent.mkdir(parents=True,exist_ok=True)
+                target.write_bytes((ROOT/name).read_bytes())
+            name='docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json'
+            target=root/name;target.parent.mkdir(parents=True,exist_ok=True)
+            data=json.loads((ROOT/name).read_text(encoding='utf-8'))
+            data['files']['index.cjs']['sha256']='0'*64
+            target.write_text(json.dumps(data),encoding='utf-8')
             with self.assertRaises(AssertionError): approved_runtime(root)
 
 

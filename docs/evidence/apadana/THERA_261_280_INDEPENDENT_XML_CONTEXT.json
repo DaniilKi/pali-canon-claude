@@ -1,0 +1,54 @@
+{
+  "xml": {
+    "xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "raw_physical_elements": 14646,
+    "existing_book_tuples": 14645,
+    "all_existing_tuples_exact": true,
+    "omitted_note_only_elements": [
+      {
+        "physical_element_zero_based": 1130,
+        "raw_utf16le_byte_interval": [
+          196320,
+          196466
+        ],
+        "raw_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723"
+      }
+    ],
+    "source_book_blocks_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+    "no_canonical_repair": true
+  },
+  "context_only": [
+    {
+      "publisher_poem": 266,
+      "raw_sha256": "ab02aa96bcdbd0db833bf8bb2bcd835ffbfa5653f2059952d0366e1f41a59428",
+      "bytes": 1126,
+      "approved": false,
+      "reason": "Held malformed publisher markup; read only to verify neighboring source identity and chapter apparatus context"
+    },
+    {
+      "publisher_poem": 280,
+      "raw_sha256": "2b7f892502f3667171201859e6ab640df47d4c4f1227b641e23071902d952765",
+      "bytes": 1650,
+      "approved": false,
+      "reason": "Held malformed publisher markup; read only to verify neighboring source identity and chapter apparatus context"
+    }
+  ],
+  "river270_vs_bridge280": {
+    "approved_270_owner": "tha-ap272",
+    "held_280_owner": "tha-ap282",
+    "river_pali": [
+      "Nāvā na vijjate tattha",
+      "Nadītīre ṭhito satthā",
+      "tāresiṃ lokanāyakaṃ"
+    ],
+    "bridge_pali": [
+      "Mahāpathamhi visame",
+      "setu kārāpito mayā",
+      "setudānassidaṃ phalaṃ"
+    ],
+    "narratives_are_distinct": true,
+    "title_not_sufficient": true
+  },
+  "not_reviewed_260": true
+}

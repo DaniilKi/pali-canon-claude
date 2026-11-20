@@ -1,0 +1,72 @@
+{
+  "status": "B_STATIC_303_IMPLEMENTATION_METADATA_CLIENT_ACCEPTANCE_REVIEW_NO_NEW_CONCRETE_DEFECT",
+  "operations": "Read/hash/JSON/AST only; no project imports/parsers/APIs/tests/build/Git/remote execution by reviewer",
+  "current_profile_link_count": 303,
+  "all285_prior_objects_unchanged": true,
+  "exact18_group_module_matches_A_and_B_approved_maps": true,
+  "held_canonical262_268_282_absent": true,
+  "canonical_bytes_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "unchanged_reader_private_storage_citation_and_sidecar_code": {
+    "src/apadana.mjs": "1b88b0067caa2d655fda0ee2433d0f3683fe3ef35b9b2108ea8dfbab7e6f6217",
+    "src/server.mjs": "7a04c8715136bcec8fdec9c1370a4a86d47cfd3f623ec7160622bd1d7e5324d4",
+    "src/canon.mjs": "29280c9df1f34627ad56240434f2bca456bafa1819d7a028c9a227c592cce425",
+    "src/source-notes.mjs": "0d7cf1e2cca1fe9702dcdad4d5a26aff1759b9f4a4ebe9a8d553b29650ef7d63",
+    "src/source-notes-profiles.mjs": "f83ac1be7ad1586a46569632aac37462f4e7da8a18b47050a29008cff70090e5",
+    "web/source-notes-policy.mjs": "5897a88723b8d5ae3515db018e731d0c7bdb8bf5271d05645afb427b86d9ece5",
+    "web/reader.js": "7158816561af99d414a82716776e7a2d36373c682aa36ddcf333a9e5424ad47d",
+    "web/passage-notes.mjs": "a53892c7bc9d304a26534eb0b9f1425c0475492b9688ba1e064893ae574c65fc",
+    "web/note-draft-recovery.mjs": "4e37817ec2f96f687d24bcdfec0281884165c1a24f08676efd2e7ca3702f8708",
+    "web/local-storage-write.mjs": "d2a185be3c61028ca14745ac1e517a588a41e3ced270ea0ee64999887ae9eac0",
+    "web/study-backup.mjs": "7b62f3748d3749445dea821af4df1df855e6cdd8275000da3e1aece78e8ba3ad"
+  },
+  "parser_review": "Exact canonical265/publisher263/rawhash guard permits only3existinglowercasec/chHTML displays inheadingandbothcolophons; noteownersdisallowHTML; chapterheadingowners263/273and summary272only appended; commonquoteparserunchanged. No broadergrammarobserved.",
+  "client_review": "Both finiteparatextlists areexactoldprefixplus18; summary272body/notepinsadded; widgetv34. Existingguardlogic/hashmacrosand source-note/privacy remainunchanged. No completepartial-pagebodyauthenticationclaim.",
+  "root_focused_evidence": {
+    "initial_log_sha256": "042ea449a64a5ddfbaecfc9dade3d1ba0cbb78e22b951e103a3948c63d3bf7ac",
+    "initial_pass": 12,
+    "initial_failure": "one test used choice API object for private registeredprofilepins",
+    "single_assertion_correction": "choice[key] to p[key]; no APIchange or weaker pincomparison",
+    "targeted_log_sha256": "92c9a125ae3ae985910716744502724e79c252578e772148115d63e0c4504118",
+    "targeted_pass": 1,
+    "unique_successful_outcomes": 13,
+    "claimed_clean_single_fullrun": false
+  },
+  "current_acceptance_files": {
+    "scripts/web_reader_approved_acceptance.py": "2c5e158e335e2407c285fdffdfec710f5ce2f86f48dd014a736d5107f95f0a14",
+    "tests/approved_acceptance.py": "2597229523087789cd18e02ea3e5aeb09f47389b39cdab85500a2003520b2782",
+    "docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+  },
+  "acceptance_review": {
+    "old2449_inventory_sha256": "cd6fd0af3f72c8e907130dd40aec4660e2ce8b8155ec7959a178e59517c53080",
+    "old_af303_implementation_authority_unchanged": true,
+    "current_review_sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c",
+    "current_runtime_paths": 34,
+    "preserved_records": 29,
+    "exact_reviewed_delta": [
+      "data/apadana.json",
+      "http-worker.cjs",
+      "http.cjs",
+      "index.cjs",
+      "web/reader.js"
+    ],
+    "old_sidecar_bytes_preserved": true,
+    "old_runtime_authority_delegated_not_replaced": true,
+    "new_current_review_tamper_negative_present": true,
+    "17_root_Python_cases_pass_log_sha256": "8aa379250abda4b24800bec366ce6908c94f994049903ed4b4fe0b569216bb74",
+    "independence_limit": "Current exactruntimeinventory review authored by narrow2clientfileauthor, disclosed in sealedreview; rootfinalindependentreview/full/package/browsergatesremainseparate."
+  },
+  "implementation_files_sha256": {
+    "src/apadana-thera-profiles.mjs": "edab9fd6365f934d8c2effa9bc40ef0cb483b5ff3e491018b88e86a412456995",
+    "src/apadana-thera261-280-profiles.mjs": "8883e4a4c21467e71d81799d37a72ff25d82d30249360d6520d64de3c9a03599",
+    "src/apadana-thera.mjs": "a39f13bc1cdb61f04d376699578d746502e7e4e93cb2fdcc45e2861dae64305c",
+    "server/data/apadana.json": "64abecbc2900f69ea5f366dcabf61d861c621508f3115c32b401e453585d9251",
+    "web/translation-policy.mjs": "27663fc9b94b385c1451323d1c0505a423f60eb0ce18241bcf6af2d6c7a0b6d0",
+    "src/chatgpt-widget.mjs": "1a19a73cdfd318c63db42f1ea2e5f91a56e58ca0a236a64865a87ed868d6e35d"
+  },
+  "runtime_or_release_approval": false,
+  "remaining_limits": [
+    "Root full/package/browser/finalcommitCI remainsseparate",
+    "No physical-device/humanassistiveacceptance",
+    "No line-completeVRI or wholechapterEnglishclaim"
+  ]
+}

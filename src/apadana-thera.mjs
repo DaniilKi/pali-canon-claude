@@ -78,6 +78,22 @@ export function parseTheraApadana(raw, profile) {
   if (at < 0 && (!['tha-ap30', 'tha-ap88'].includes(profile.id) || profile.note_count !== 0 || profile.note_numbers.length)) fail();
   let poem = at < 0 ? rest : rest.slice(0, at).trim();
   const entries = [...(at < 0 ? '' : rest.slice(at)).matchAll(/^\[\^(\d+)\]:[ \t]*([^]*?)(?=^\[\^\d+\]:|(?![^]))/gm)];
+  // Only the exact263 artifact owns these three HTML c/ch displays: its
+  // heading and both colophons. Keep their state-on spelling through the
+  // existing renderer, refusing duplicate/off-only/foreign-owner controls.
+  if (profile.id === 'tha-ap265') {
+    if (profile.poem !== 263 || profile.path !== '/text/chapter-3/poem-263/'
+      || profile.raw_sha256 !== 'bd26ab528dfcfbb8a74ac61ebb3c313803c0f90b0eb686de5829a9ab0f383755') fail();
+    const token = '<span class="diacritics" data-state="on">c</span><span class="no-diacritics" data-state="off">ch</span>';
+    const checkHtmlPairs = (value, count) => {
+      if (value.split(token).length !== count + 1
+        || /<span\b[^>]*\bclass="(?:no-)?diacritics"/.test(value.split(token).join(''))) fail();
+    };
+    const paragraphs = poem.split('\n\n');
+    if (paragraphs.length !== 7) fail();
+    for (const [i, paragraph] of paragraphs.entries()) checkHtmlPairs(paragraph, [0, 5, 6].includes(i) ? 1 : 0);
+    for (const entry of entries) checkHtmlPairs(entry[2], 0);
+  }
   // These new exact artifacts use only the established Pandoc display syntax.
   // Bind every reviewed pair to its source paragraph or note before rendering.
   if (['tha-ap238', 'tha-ap242'].includes(profile.id)) {
@@ -210,7 +226,7 @@ export function parseTheraApadana(raw, profile) {
   }
   let chapter_summary;
   if (profile.chapter_summary) {
-    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182', 'tha-ap192', 'tha-ap202', 'tha-ap212', 'tha-ap222', 'tha-ap252', 'tha-ap232', 'tha-ap242'].includes(profile.id)) fail();
+    if (!['tha-ap22', 'tha-ap32', 'tha-ap42', 'tha-ap52', 'tha-ap62', 'tha-ap82', 'tha-ap92', 'tha-ap102', 'tha-ap112', 'tha-ap122', 'tha-ap132', 'tha-ap152', 'tha-ap162', 'tha-ap172', 'tha-ap182', 'tha-ap192', 'tha-ap202', 'tha-ap212', 'tha-ap222', 'tha-ap252', 'tha-ap232', 'tha-ap242', 'tha-ap272'].includes(profile.id)) fail();
     // Publisher230 joins its summary heading to the verse paragraph. Keep the
     // exact original hard break, with no synthetic blank paragraph after it.
     const marker = profile.id === 'tha-ap232' ? '\n\nThe Summary:  \n' : '\n\nThe Summary:\n\n';
@@ -226,7 +242,7 @@ export function parseTheraApadana(raw, profile) {
   if (new Set(owned).size !== owned.length || owned.length !== notes.length || notes.some(n => !owned.includes(n.number))) fail();
   // Publisher101 alone uses ## for its poem heading, beside a separate ## preface.
   const headings = [...poem.matchAll(profile.id === 'tha-ap103' ? /^## \\\[101\. /gm : /^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253'].includes(profile.id) !== (split > 0)) fail();
+  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253', 'tha-ap263', 'tha-ap273'].includes(profile.id) !== (split > 0)) fail();
   const preface = poem.slice(0, split), body = poem.slice(split); refs(preface, []); refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text.split(/\n\n+/);
   const joinedColophons = ['tha-ap134', 'tha-ap184'].includes(profile.id);
