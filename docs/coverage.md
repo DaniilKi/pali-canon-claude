@@ -1,5 +1,7 @@
 # Coverage
 
+**Baseline and local overlay:** totals below describe D253 at remote dev `a9755d2`. D254 prepares publisher 241–250 locally only; it has no released coverage delta. Measured unpublished local totals are 256 Apadāna choices, 2,839 whole links and 1,735/2,158 direct/inherited units; actual grouped member-aware totals are 1,709/2,132. See [the unpublished intake](data/thera241-250-local-intake.md); historical batch totals remain intact.
+
 What Pali Canon for Claude contains in version 2.1.0, computed directly from the bundled data (`server/data/canon.json.gz`, `server/data/translations.json`, `server/data/anandajoti.json` and `server/data/apadana.json`).
 
 ## Summary
@@ -226,3 +228,8 @@ Publisher141–157,160–180 add38 first indexed English choices,312 body paragr
 ### Forty further complete publisher-edition choices (D253)
 
 Publisher 181–220 add 40 first indexed English choices, preserving all previous 206. Reviewed Apadāna coverage becomes **246** choices (40 Therī, 206 Therā); overall whole links **2,829**, indexed direct/inherited **1,725/2,148**, grouped member-aware **1,699/2,122**. The new batch has 336 body paragraphs, 218 physical printed entries, 221 local labels and 207 poem notes, with four separately owned apparatus notes. These are complete publisher-edition poems, **not line-complete VRI translations**. All canonical books, commentary, boundaries and locator revisions remain unchanged. Publisher 70/140/158/159 remain held and 353 Therā files remain unapproved. Partial 22, shared 12/110 subjects and daily 1,288 are unchanged. Historical rows above retain their original batch totals. [Source evidence and acceptance limits](data/thera181-220-intake.md).
+
+
+### Local unpublished publisher 241–250 (D254)
+
+The local coverage command measures ten additional whole publisher-edition choices: **256 Apadāna choices** (40 Therī, 216 Therā), **2,839 whole links** overall and **1,735/2,158** indexed direct/inherited units. All prior 246 profile objects remain exact. The canonical 61 books/8,544 units, 265 approximate mappings and 1,259 grouped members remain unchanged, as do partial 22 and shared 12/110 subjects. Actual `listSources` verification confirms grouped member-aware 1,709/2,132; daily rotation remains 1,288, with 2026-11-01 still selecting `sn11.22`. These are local measurements, not a released delta or line-complete VRI coverage. The broad check passed before one later descriptive role-string correction; targeted metadata verification passed afterward. Final corrected-snapshot rebuild, package/browser execution and prior exact CI reconciliation remain pending. [Source scope and local evidence](data/thera241-250-local-intake.md).

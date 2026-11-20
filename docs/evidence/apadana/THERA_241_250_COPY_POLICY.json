@@ -1,0 +1,18 @@
+{
+  "metadata_only": [
+    "GOLDENS.json",
+    "EXPECTED_PROFILES.json",
+    "EXPECTED_LINKS.json",
+    "SOURCE_APPROVAL.json",
+    "RIGHTS_REVIEW.json",
+    "NORMALIZATION_COMPARISON.json",
+    "REPLAY_VALIDATION.json",
+    "FILE_SHA256S.json"
+  ],
+  "stdlib_script": "replay.py",
+  "must_never_copy_into_repository_or_package": [
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json"
+  ],
+  "source_activation_count": 0,
+  "runtime_release_approval": false
+}

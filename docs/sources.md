@@ -1,5 +1,7 @@
 # Source library
 
+**Local unpublished D254:** publisher 241–250 has exact raw-source approval within the independent 221–260 review. Faithful normalization and runtime/release approval remain separate. Only these ten are in this local implementation; the source approvals below are preserved historical records. [Local scope, caveats and gates](data/thera241-250-local-intake.md).
+
 Every source this project uses, links to, plans to use, or has decided not to use, with the reason and a direct link. The aim is that anyone, scholar or newcomer, can see exactly where each word comes from and go to the original.
 
 Last reviewed: 1 November 2026 (v2.1.0).

@@ -1,5 +1,7 @@
 # Handoff: tasks for a person
 
+**Local unpublished D254:** publisher 241–250 is under isolated implementation, with no dev advance authorized while prior exact CI is unresolved. Independent normalization/descriptor checks, focused source/client checks, broad check, corrected-snapshot build, smoke/evals, offline package equivalence and strict installed widget audit have passed locally. The broad check predates one later descriptive role-string correction; final metadata/build/smoke/evals/package/audit cover that correction. All three local browser modes passed 51 checks over ten sources each, including 360 accessibility scans with zero violations; these are pinned-fixture Chromium/simulated-bridge results, not live-provider or physical/human acceptance. Consult the external local release/review receipt for final independent approval status. Prior exact macOS CI reconciliation remains pending; no push is authorized. Specialist, physical-device and human assistive acceptance remain open. [Local intake and evidence limits](docs/data/thera241-250-local-intake.md). Historical handoff items below retain their original scope.
+
 This file lists every task that an AI agent cannot or should not do: adding secrets, creating accounts, sending letters, submitting to directories, and testing in real apps. Each line says what to do and links to the place to do it. Tick a box when it is done, and remove the line once the change is merged.
 
 Last updated: 1 November 2026, after the v2.1.0 release of the [roadmap](https://github.com/DaniilKi/pali-canon-claude/issues/52).

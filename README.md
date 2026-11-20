@@ -1,5 +1,7 @@
 # Pali Canon for Claude
 
+**Local unpublished work (D254):** ten further Therā publisher-edition poems (241–250) are being prepared in an isolated checkout. The scope and validation gates are recorded in [the local intake](docs/data/thera241-250-local-intake.md). The remote dev baseline and totals below remain at `a9755d2`; this is not a release or a claim of line-complete VRI translation coverage.
+
 **The Theravāda Buddhist scriptures, word for word, with exact citations: for Claude and the age of AI.**
 
 Pali Canon for Claude gives Claude the complete Pāli Tipiṭaka, the scripture of Theravāda Buddhism. With it, Claude can read the actual text, quote it accurately, cite it precisely, and show published English translations side by side. It runs on your own computer and the Pāli text works without internet.
