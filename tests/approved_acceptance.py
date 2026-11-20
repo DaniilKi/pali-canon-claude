@@ -16,7 +16,7 @@ class ApprovedAcceptance(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.approved = approved_catalogue(ROOT)
-        cls.manifest = json.loads((ROOT / 'server/data/apadana.json').read_text())
+        cls.manifest = json.loads((ROOT / 'server/data/apadana.json').read_text(encoding='utf-8'))
         cls.inventory = approved_runtime(ROOT)
 
     def rejects_catalogue(self, change):
@@ -52,9 +52,9 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_curation_seal_tampering(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary);dest=root/'docs/evidence/apadana';dest.mkdir(parents=True)
-            data=json.loads((ROOT/'docs/evidence/apadana/THERA_HELD234_APPROVAL.json').read_text())
+            data=json.loads((ROOT/'docs/evidence/apadana/THERA_HELD234_APPROVAL.json').read_text(encoding='utf-8'))
             data['approved_ids']=['tha-ap262']
-            (dest/'THERA_HELD234_APPROVAL.json').write_text(json.dumps(data))
+            (dest/'THERA_HELD234_APPROVAL.json').write_text(json.dumps(data),encoding='utf-8')
             with self.assertRaises(AssertionError): approved_catalogue(root)
 
     def test_current_runtime_exact_paths_and_bytes(self):
@@ -80,9 +80,9 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_inventory_seal_tampering(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary);dest=root/'tests/fixtures';dest.mkdir(parents=True)
-            data=json.loads((ROOT/'tests/fixtures/reviewed-runtime-2449.json').read_text())
+            data=json.loads((ROOT/'tests/fixtures/reviewed-runtime-2449.json').read_text(encoding='utf-8'))
             data['files']['data/source-notes.json']['sha256']='0'*64
-            (dest/'reviewed-runtime-2449.json').write_text(json.dumps(data))
+            (dest/'reviewed-runtime-2449.json').write_text(json.dumps(data),encoding='utf-8')
             with self.assertRaises(AssertionError): approved_runtime(root)
 
 

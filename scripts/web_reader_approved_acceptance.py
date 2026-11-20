@@ -60,7 +60,7 @@ def assert_catalogue(manifest, approved):
 
 def assert_profiles(root, approved):
     probe = "import{APADANA_PROFILES}from'./src/apadana-profiles.mjs';console.log(JSON.stringify(APADANA_PROFILES));"
-    observed = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', probe], cwd=root, text=True))
+    observed = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', probe], cwd=root, encoding='utf-8'))
     assert observed == approved['profiles'], 'Exact independently reviewed 285 profile objects changed'
 
 
