@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {runInNewContext} from 'node:vm';
+import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';
 
 const GROUP='vrieditionnote',BASE='ff798f681147e12160167fbeb9ef1927bb54c45c';
 const BASE_WORKFLOW_SHA='caba90b591b0b8855513730d4a4252afdcab467e710baf8d65ae00d0f981c8e9';
 const REPORTS=['standalone-source-notes.report.json','standalone-source-notes-launch.report.json','standalone-source-notes-a11y.report.json','standalone-source-notes-a11y-launch.report.json','standalone-source-notes-independent.report.json','installed-source-notes.report.json','installed-source-notes-launch.report.json'];
-const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
+const read=name=>{const raw=readFileSync(new URL('../'+name,import.meta.url),'utf8');return name==='.github/workflows/check.yml'?projectCheckStageWorkflow(raw):raw;};
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const steps=text=>text.match(/^      - [^]*?(?=^      - |^  [a-z][\w-]*:|(?![^]))/gm)||[];
 const named=(text,name)=>{const found=steps(text).filter(step=>step.startsWith('      - name: '+name+'\n'));assert.equal(found.length,1,name);return found[0];};
