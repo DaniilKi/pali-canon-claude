@@ -22033,6 +22033,84 @@
         "Publisher local3 says thirty-eighth aeon; VRI35 main says twenty-eighth, with a\u1E6D\u1E6Dhati\u1E43se variant. This is an observed edition difference only.",
         "Note2 explicitly leaves singular locative/plural object interpretation open; note3 preserves the unusual name and iti interpretation. Do not disambiguate or normalize the source wording."
       ]
+    },
+    "tha-ap236": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+      "id": "tha-ap236",
+      "publisher_chapter": "chapter-3",
+      "poem": 234,
+      "verses": [
+        2437,
+        2441
+      ],
+      "root_verses": [
+        14,
+        18
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-234/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-234/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Kila\xF1jad\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 234; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+      "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+      "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "321ba6fcf2fcdee0f55e0faf21663a73c9e66ff41169b8572fd526ac2c19ed8a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2437",
+          "suffix": "(1) [2437]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2438",
+          "suffix": "(2) [2438]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2439",
+          "suffix": "(3) [2439]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2440",
+          "suffix": "(4) [2440]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2441",
+          "suffix": "(5) [2441]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 234 to canonical tha-ap236. Shared numbers alone do not establish any other mapping.",
+        "Original path poem-234.md and printed234 identify this exact poem, while original frontmatter order235 duplicates separate poem235. Preserve all three facts.",
+        "Declared publisher permalink uses category plus page.fileSlug, not order: source identity and route are tied to poem-234. This is template evidence, not a live rendered-route check.",
+        "Future runtime identity checks must finite-pin this exact exception and keep printed234 distinct from235; do not rewrite original metadata or route by order.",
+        "Publisher Jutindhara follows original VRI jutindharo variant beside main jaladdharo.",
+        "Original publisher file poem-234.md has frontmatter order235 and printed poem234. Its Kila\xF1jad\u0101yaka title, mat narrative, four poem notes and both colophons belong to canonicaltha-ap236; neither order235 nor a numeric offset identifies another text.",
+        "The publisher permalink derives from category plus page.fileSlug, so this choice stays /text/chapter-3/poem-234/. Separate poem-235.md/order235/printed235 is Vediyad\u0101yaka, the railing gift to Vipassi, canonicaltha-ap237; no source substitution or metadata correction is made.",
+        "The earlier nine-poem source intake (D256) held publisher234 and reviewed33entries; its publisher240 summary warning is retained as historical intake provenance. This separately reviewed publisher234 choice does not rewrite that earlier approval or its source objects. Original full-chapter38count remains a source statement, not a line-complete VRI or generated coverage claim."
+      ]
     }
   });
 
@@ -32050,7 +32128,7 @@
   }
 
   // web/translation-policy.mjs
-  var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261"]);
+  var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236"]);
   var apadanaId = (uid2) => APADANA_PROFILES[uid2]?.path ? "ap:" + APADANA_PROFILES[uid2].path.replace(/^\/text\/|\/$/g, "") : void 0;
   var apadanaFamily = (id5) => typeof id5 === "string" && /^ap:/i.test(id5.trim());
   var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own(value, "translation_revision") || own(value, "publisher_paratext") || own(value, "chapter_summary") || own(value, "publisher_divisions") || own(value, "publisher_preface") || own(value, "collection_summary") || own(value, "editorial_gap");

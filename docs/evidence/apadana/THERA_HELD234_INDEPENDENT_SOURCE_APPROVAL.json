@@ -1,0 +1,484 @@
+{
+  "status": "APPROVE_ONE_EXACT_PUBLISHER234_SOURCE_AND_FINITE_NORMALIZATION_IDENTITY_SCOPE_ONLY",
+  "created_utc": "2026-11-20T06:11:06.102260+00:00",
+  "baseline": "7d5ac90845402b322dabf2c5120d1485b15c0bda",
+  "approved_ids": [
+    "tha-ap236"
+  ],
+  "approved_publisher_poems": [
+    234
+  ],
+  "source_approval": true,
+  "normalization_approval": true,
+  "source_approval_count": 1,
+  "normalization_approval_count": 1,
+  "runtime_approval": false,
+  "release_approval": false,
+  "remote_ci_approval": false,
+  "physical_device_or_human_assistive_acceptance": false,
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "original_xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "independence": {
+    "original_expectations_sealed_before_author_inspection": true,
+    "production_parser_or_author_code_imported_or_executed": false,
+    "original_seals_preserved": true,
+    "runtime_contract_read_only_for_hash_domain": true,
+    "root_hash_domain_addendum": "Preauthor original proof stores raw unit block-array digest. Registered root envelope independently computed from those same presealed values; both hashes retained with explicit domains.",
+    "whole_original_xml_replay": {
+      "blocks": 14645,
+      "differences": 0,
+      "existing_empty_note_only_omissions": [
+        {
+          "after_replayed_block": 1129,
+          "rend": "gatha1",
+          "notes": 1,
+          "note_sha256s": [
+            "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60"
+          ]
+        }
+      ]
+    }
+  },
+  "review_files": {
+    "PREAUTHOR_DERIVATION_SEALS.json": {
+      "file": "PREAUTHOR_DERIVATION_SEALS.json",
+      "sha256": "e173b6a8b11f09686ef7c51816a612e3a8b75270130f72cedd1c2936ff0ba7ba"
+    },
+    "AUTHOR_COMPARISON_START.json": {
+      "file": "AUTHOR_COMPARISON_START.json",
+      "sha256": "4c9106820d01fb967eb026cad3f8d3c8dc24ccc763cfcc1f047693c7759c8aa5"
+    },
+    "ORIGINAL_DERIVATION.json": {
+      "file": "ORIGINAL_DERIVATION.json",
+      "sha256": "5a094525bdeb12c31d2cf211393d9bbee71cc73838249e36096245611606cb5d"
+    },
+    "ROOT_HASH_DOMAIN_ADDENDUM.json": {
+      "file": "ROOT_HASH_DOMAIN_ADDENDUM.json",
+      "sha256": "547006669f2051455d862c4ffb54eb3f99e900765fae438f3c362fdff9c2d5d3"
+    },
+    "NORMALIZATION_COMPARISON.json": {
+      "file": "NORMALIZATION_COMPARISON.json",
+      "sha256": "d01ba75f5da2ec82d9791d7714a7f5166a5a091e98d51cfe9ee875cc6ad06c23"
+    },
+    "INDEPENDENT_NORMALIZATION.json": {
+      "file": "INDEPENDENT_NORMALIZATION.json",
+      "sha256": "bdc46f96753c743b0d099beb1334719f9cd061f6e3a1ece275de29d1c6d8ebf7"
+    },
+    "derive_originals.py": {
+      "file": "derive_originals.py",
+      "sha256": "798e421717a7358c1aa990982ba615c894195bb33da2bd2646df8defe984a910"
+    },
+    "compare_author.py": {
+      "file": "compare_author.py",
+      "sha256": "bcd920e26cfe99c944d1e936739e2eb9a22d2e8692241b854281168ed92e21a7"
+    }
+  },
+  "author_artifacts": {
+    "GOLDENS.json": {
+      "file": "GOLDENS.json",
+      "sha256": "f431e9c1e69ef7bcafe6a511a3bbddc87e64739a5df5910ed6ee65f31a642ce9"
+    },
+    "EXPECTED_PROFILES.json": {
+      "file": "EXPECTED_PROFILES.json",
+      "sha256": "af6d434558dc690935a4cc12672999de9114afaeed259c4039492f8e6bd32efc"
+    },
+    "EXPECTED_LINKS.json": {
+      "file": "EXPECTED_LINKS.json",
+      "sha256": "279a6106888c4978da6abe40207cba84f4f994e5aad5014bf3023da27f095d77"
+    },
+    "PROPOSED_RUNTIME.json": {
+      "file": "PROPOSED_RUNTIME.json",
+      "sha256": "a24f7d46368234d5b3909a877ec332d3ed1f16d5f42e8ec4f336449e4d4883d6"
+    },
+    "RIGHTS_REVIEW.json": {
+      "file": "RIGHTS_REVIEW.json",
+      "sha256": "adbff4f08816f74432dc72c5bd5c462fba5904692b33b4893d3e4cfb0ace3d98"
+    },
+    "COPY_POLICY.json": {
+      "file": "COPY_POLICY.json",
+      "sha256": "6970a7eeeed5a1ec2093756aa9e577e8856871518705bfb7f1f5ffde707ece46"
+    }
+  },
+  "independent_normalization": {
+    "file": "INDEPENDENT_NORMALIZATION.json",
+    "sha256": "bdc46f96753c743b0d099beb1334719f9cd061f6e3a1ece275de29d1c6d8ebf7"
+  },
+  "approved_profile_objects": {
+    "tha-ap236": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+      "id": "tha-ap236",
+      "publisher_chapter": "chapter-3",
+      "poem": 234,
+      "verses": [
+        2437,
+        2441
+      ],
+      "root_verses": [
+        14,
+        18
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-234/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-234/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Kilañjadāyaka",
+      "reference": "Therā Apadāna publisher poem 234; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+      "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+      "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "321ba6fcf2fcdee0f55e0faf21663a73c9e66ff41169b8572fd526ac2c19ed8a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2437",
+          "suffix": "(1) [2437]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2438",
+          "suffix": "(2) [2438]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2439",
+          "suffix": "(3) [2439]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2440",
+          "suffix": "(4) [2440]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2441",
+          "suffix": "(5) [2441]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 234 to canonical tha-ap236. Shared numbers alone do not establish any other mapping.",
+        "Original path poem-234.md and printed234 identify this exact poem, while original frontmatter order235 duplicates separate poem235. Preserve all three facts.",
+        "Declared publisher permalink uses category plus page.fileSlug, not order: source identity and route are tied to poem-234. This is template evidence, not a live rendered-route check.",
+        "Future runtime identity checks must finite-pin this exact exception and keep printed234 distinct from235; do not rewrite original metadata or route by order.",
+        "Publisher Jutindhara follows original VRI jutindharo variant beside main jaladdharo.",
+        "Original publisher file poem-234.md has frontmatter order235 and printed poem234. Its Kilañjadāyaka title, mat narrative, four poem notes and both colophons belong to canonicaltha-ap236; neither order235 nor a numeric offset identifies another text.",
+        "The publisher permalink derives from category plus page.fileSlug, so this choice stays /text/chapter-3/poem-234/. Separate poem-235.md/order235/printed235 is Vediyadāyaka, the railing gift to Vipassi, canonicaltha-ap237; no source substitution or metadata correction is made.",
+        "The earlier nine-poem source intake (D256) held publisher234 and reviewed33entries; its publisher240 summary warning is retained as historical intake provenance. This separately reviewed publisher234 choice does not rewrite that earlier approval or its source objects. Original full-chapter38count remains a source statement, not a line-complete VRI or generated coverage claim."
+      ]
+    }
+  },
+  "approved_link_objects": {
+    "tha-ap236": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+      "id": "tha-ap236",
+      "publisher_chapter": "chapter-3",
+      "poem": 234,
+      "verses": [
+        2437,
+        2441
+      ],
+      "root_verses": [
+        14,
+        18
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-234/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-234/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Kilañjadāyaka",
+      "reference": "Therā Apadāna publisher poem 234; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+      "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+      "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "321ba6fcf2fcdee0f55e0faf21663a73c9e66ff41169b8572fd526ac2c19ed8a",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2437",
+          "suffix": "(1) [2437]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2438",
+          "suffix": "(2) [2438]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2439",
+          "suffix": "(3) [2439]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2440",
+          "suffix": "(4) [2440]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2441",
+          "suffix": "(5) [2441]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 234 to canonical tha-ap236. Shared numbers alone do not establish any other mapping.",
+        "Original path poem-234.md and printed234 identify this exact poem, while original frontmatter order235 duplicates separate poem235. Preserve all three facts.",
+        "Declared publisher permalink uses category plus page.fileSlug, not order: source identity and route are tied to poem-234. This is template evidence, not a live rendered-route check.",
+        "Future runtime identity checks must finite-pin this exact exception and keep printed234 distinct from235; do not rewrite original metadata or route by order.",
+        "Publisher Jutindhara follows original VRI jutindharo variant beside main jaladdharo.",
+        "Original publisher file poem-234.md has frontmatter order235 and printed poem234. Its Kilañjadāyaka title, mat narrative, four poem notes and both colophons belong to canonicaltha-ap236; neither order235 nor a numeric offset identifies another text.",
+        "The publisher permalink derives from category plus page.fileSlug, so this choice stays /text/chapter-3/poem-234/. Separate poem-235.md/order235/printed235 is Vediyadāyaka, the railing gift to Vipassi, canonicaltha-ap237; no source substitution or metadata correction is made.",
+        "The earlier nine-poem source intake (D256) held publisher234 and reviewed33entries; its publisher240 summary warning is retained as historical intake provenance. This separately reviewed publisher234 choice does not rewrite that earlier approval or its source objects. Original full-chapter38count remains a source statement, not a line-complete VRI or generated coverage claim."
+      ],
+      "english": "Kilañjadāyaka",
+      "match": "individually-reviewed-whole-poem"
+    }
+  },
+  "source_identity": {
+    "file_slug": "poem-234",
+    "printed_poem_number": 234,
+    "frontmatter_order": 235,
+    "canonical_owner": "tha-ap236",
+    "path": "/text/chapter-3/poem-234/",
+    "neighbor235_is_distinct": true
+  },
+  "canonical_unit": {
+    "id": "tha-ap236",
+    "book": 36,
+    "start": 8015,
+    "end": 8032,
+    "title": "Kilañjadāyakattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 236",
+    "vri": "14–18",
+    "pts": {
+      "volume": 1,
+      "page": 219,
+      "end_page": 219
+    }
+  },
+  "coverage": {
+    "type": "complete publisher-edition poem",
+    "line_complete_vri_translation": false,
+    "body_paragraphs": 8,
+    "physical_stanzas": 5,
+    "printed_local_labels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "publisher_global_labels": [
+      2437,
+      2438,
+      2439,
+      2440,
+      2441
+    ],
+    "vri_stanza_labels": [
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "poem_note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "prefaces": 0,
+    "chapter_summaries": 0,
+    "colophons": 2,
+    "pali_segments": 8
+  },
+  "rights": {
+    "specific_translation_license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "generic_site_json_CC_BY_4_not_applied_to_translation": true,
+    "source_attribution_fullnotices_revision_changes_required": true,
+    "live_only_English_hashes_only_repository": true,
+    "media_approval": false
+  },
+  "rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+    },
+    {
+      "path": "src/_poems/chapter-3/chapter-3.json",
+      "bytes": 27,
+      "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+      "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/chapter-3.json"
+    }
+  ],
+  "edition_limits": [
+    "Raw filename/route and printed heading identify publisher234; original frontmatter order235 is retained, not corrected; separate neighbor235 also has order235.",
+    "Narrative aligns Tivarā/Siddhattha/mat gift/94aeons/77aeons/five stanzas to canonical236, not neighboring railing donor canonical237.",
+    "Published Jutindhara follows recorded VRI sī. jutindharo variant against main jaladdharo; preserve both, do not harmonize.",
+    "Publisher note2 explicitly compares BJTS/PTS naḷakāro/nalakāro; VRI main already naḷakāro. Preserve original note without reassignment.",
+    "Publisher fifth stanza prints full English while original VRI18 contains …pe…; complete publisher-edition poem does not mean line-complete VRI wording or an expanded Pāli reconstruction."
+  ],
+  "neighbors": [
+    {
+      "path": "src/_poems/chapter-3/poem-233.md",
+      "bytes": 1492,
+      "raw_sha256": "df3b7ead796df9c71820fff88c3a9073ecf399fe15747e9e95e8059f5eea085e",
+      "git_blob_sha1": "3ac421ca87222cf4cdf69eba175df380d0f9b28d",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-233.md",
+      "canonical_owner": "tha-ap235",
+      "frontmatter": {
+        "title": "Sālapupphiya",
+        "order": "233",
+        "category": "chapter-3"
+      },
+      "unit": {
+        "id": "tha-ap235",
+        "book": 36,
+        "start": 7998,
+        "end": 8015,
+        "title": "Sālapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 235",
+        "vri": "9–13",
+        "pts": {
+          "volume": 1,
+          "page": 218,
+          "end_page": 219
+        }
+      },
+      "root_sha256": "3605a86ccbc8b553bd466daa76d3d022e82056e4c80c80f339c6f65394c082c2"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-235.md",
+      "bytes": 915,
+      "raw_sha256": "39760489bd14dd018c44b4f40626f3619da2abed79e8a5d58fca4b4da7b868ed",
+      "git_blob_sha1": "b141bcb8613001943a4b0fc6a4c73e2e5de8ded8",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-235.md",
+      "canonical_owner": "tha-ap237",
+      "frontmatter": {
+        "title": "Vediyadāyaka",
+        "order": "235",
+        "category": "chapter-3"
+      },
+      "unit": {
+        "id": "tha-ap237",
+        "book": 36,
+        "start": 8032,
+        "end": 8046,
+        "title": "Vedikārakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 237",
+        "vri": "19–22",
+        "pts": {
+          "volume": 1,
+          "page": 219,
+          "end_page": 220
+        }
+      },
+      "root_sha256": "99e55878b8d1050e06e3191c068d771eed0acc9765c4e181b63f674bcb00f79d"
+    }
+  ],
+  "finite_parser_identity_proposal": {
+    "source_approved_only": true,
+    "scope": "Exact tha-ap236 profile, publisher poem234, path /text/chapter-3/poem-234/, raw SHA24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a; expected original frontmatter order235 only after authentic known-profile/raw-SHA checks.",
+    "must_preserve": [
+      "Existing strict title/printed-number/chapter/path/raw-hash/notes/body/root guards",
+      "Source YAML order235 and printed234 unchanged; route derives from original fileSlug234",
+      "Distinct source235/canonical237 unchanged",
+      "No new descriptor fields, generic metadata-mismatch acceptance, route-by-order, or source reconstruction",
+      "All four original notes, physical paragraph/stanza boundaries, edition variants and both colophons"
+    ]
+  },
+  "required_next_gates": [
+    "Independently review actual narrow runtime/client/cache changes and meaningful integrity regressions",
+    "Preserve all284 existing profile/link objects and canonical blocks/citations/private data",
+    "Keep historical sourceA9/33 approval and chapter240 summary wording/caveat intact",
+    "Keep publisher260/canonical262 and earlier Sāriputta omission held unless separately reviewed",
+    "Strict packaged widget audit, actual source/backend/client/browser acceptance and exact-commit CI before authorized dev advancement",
+    "Keep full English/notes external and live-only; repository contains hashes/metadata only; attribution, source/revision, applicable complete notices, noncommercial/share-alike and extraction-change disclosure accompany delivery"
+  ],
+  "limits": [
+    "Source and finite normalization identity review only; no runtime/package/browser/remote-CI results claimed",
+    "Filename-template routing verified from pinned originals; live rendered-route availability not verified",
+    "No physical-device, human assistive, new specialist endorsement or legal opinion claimed",
+    "No approval for audio/media, generated wording, expanded abbreviated Pāli, or different source revisions"
+  ],
+  "repo_runtime_git_build_or_network_changes": false
+}

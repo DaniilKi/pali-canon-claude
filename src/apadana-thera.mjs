@@ -54,8 +54,16 @@ export function parseTheraApadana(raw, profile) {
   const known = THERA_APADANA_PROFILES[profile?.id];
   if (!known || JSON.stringify(profile) !== JSON.stringify(known) || digest(raw) !== known.raw_sha256
     || profile.publisher_chapter !== 'chapter-3') fail();
+  // This exact file keeps original order235 beside printed poem234. Its
+  // filename/path and raw pin identify it independently of the sorting value.
+  let expectedOrder = profile.poem;
+  if (profile.id === 'tha-ap236') {
+    if (profile.poem !== 234 || profile.path !== '/text/chapter-3/poem-234/'
+      || profile.raw_sha256 !== '24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a') fail();
+    expectedOrder = 235;
+  }
   const front = raw.match(/^---\n([^]*?)\n---\n/);
-  if (!front || !new RegExp(`^order: ${profile.poem}$`, 'm').test(front[1]) || !/^category: chapter-3$/m.test(front[1])) fail();
+  if (!front || !new RegExp(`^order: ${expectedOrder}$`, 'm').test(front[1]) || !/^category: chapter-3$/m.test(front[1])) fail();
   const title = front[1].match(/^title: (.+)$/m)?.[1]; if (title !== profile.title) fail();
   const present = value => plainMarkdown((['tha-ap42', 'tha-ap121'].includes(profile.id) ? value.replace(/<span class="diacritics" data-state="on">(c|cc)<\/span><span class="no-diacritics" data-state="off">(ch|chch)<\/span>/g, (_all, diacritic, alternate) => {
     // Only this exact reviewed artifact has both single and doubled alternatives.

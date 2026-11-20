@@ -97,7 +97,7 @@ def remaining_groups(root,curation=None):
     return result
 
 
-def reviewed_intake(root):
+def reviewed_remaining_intake(root):
     previous=_reviewed_221_230(root)
     current=_read_intake(root,'THERA_REMAINING_APPROVAL.json')
     assert current['previous_intake']['file']=='THERA_221_230_APPROVAL.json'
@@ -112,16 +112,58 @@ def reviewed_intake(root):
     return current
 
 
+def reviewed_intake(root):
+    previous=reviewed_remaining_intake(root)
+    current=_read_intake(root,'THERA_HELD234_APPROVAL.json')
+    assert current['previous_intake']['file']=='THERA_REMAINING_APPROVAL.json'
+    assert _sealed(root,current['previous_intake'])==previous
+    assert current['base_commit']=='7d5ac90845402b322dabf2c5120d1485b15c0bda'
+    assert current['baseline_ids']==previous['expected_profile_ids'] and len(current['baseline_ids'])==284
+    assert current['baseline_records']==previous['baseline_records']+previous['approved_records']
+    assert current['approved_ids']==['tha-ap236']
+    assert current['approved_records']==[{'id':'tha-ap236','publisher_chapter':'chapter-3','poem':234}]
+    assert len(current['expected_profile_ids'])==285
+    profiles=_sealed(root,current['expected_profiles']);links=_sealed(root,current['expected_links'])
+    assert set(profiles)==set(links)=={'tha-ap236'}
+    peer=_sealed(root,current['independent_source_approval'])
+    assert peer['status']=='APPROVE_ONE_EXACT_PUBLISHER234_SOURCE_AND_FINITE_NORMALIZATION_IDENTITY_SCOPE_ONLY'
+    assert peer['baseline']==current['base_commit'] and peer['publisher_revision']==current['publisher_revision']
+    assert peer['approved_ids']==current['approved_ids'] and peer['approved_publisher_poems']==[234]
+    assert peer['source_approval'] is True and peer['normalization_approval'] is True
+    assert peer['source_approval_count']==peer['normalization_approval_count']==1
+    assert peer['runtime_approval'] is False and peer['release_approval'] is False
+    assert peer['approved_profile_objects']==profiles and peer['approved_link_objects']==links
+    assert current['independent_source_approval']['sha256']=='9b7b6cf1d4efe45ee06330551651e1baaf76f20226a35c47a07224592d1cfb8d'
+    assert len(current['goldens'])==1
+    golden=_sealed(root,current['goldens'][0])
+    assert golden['baseline']==current['base_commit'] and golden['publisher_revision']==current['publisher_revision']
+    assert [row['id'] for row in golden['poems']]==current['approved_ids']
+    for field in ('source_approval','independent_normalization','normalization_replay','normalization_seals','copy_policy'):
+        _sealed(root,current[field])
+    for family in ('source_reviews','rights'):
+        assert current[family]
+        for descriptor in current[family]:_sealed(root,descriptor)
+    assert current['before_canon_sha256']==current['after_canon_sha256']==previous['after_canon_sha256']
+    assert current['runtime_approval'] is False and current['release_approval'] is False
+    assert 'tha-ap236' not in current['held_ids'] and 'tha-ap262' in current['held_ids']
+    return current
+
+
 def curated_additions(root,anchor_filename):
     current=reviewed_intake(root)
-    assert anchor_filename in ('THERA_241_250_APPROVAL.json','THERA_221_230_APPROVAL.json')
-    anchor=_reviewed_241_250(root) if anchor_filename=='THERA_241_250_APPROVAL.json' else _reviewed_221_230(root)
+    anchors={'THERA_241_250_APPROVAL.json':_reviewed_241_250,
+             'THERA_221_230_APPROVAL.json':_reviewed_221_230,
+             'THERA_REMAINING_APPROVAL.json':reviewed_remaining_intake}
+    assert anchor_filename in anchors
+    anchor=anchors[anchor_filename](root)
     pieces=[]
     if anchor_filename=='THERA_241_250_APPROVAL.json':
         packet=_reviewed_221_230(root)
         pieces.append({'ids':packet['approved_ids'],'profiles':_sealed(root,packet['expected_profiles']),'links':_sealed(root,packet['expected_links'])})
-    for group in remaining_groups(root,current).values():
-        pieces.append({'ids':group['approved_ids'],'profiles':group['profiles'],'links':group['links']})
+    if anchor_filename!='THERA_REMAINING_APPROVAL.json':
+        for group in remaining_groups(root,reviewed_remaining_intake(root)).values():
+            pieces.append({'ids':group['approved_ids'],'profiles':group['profiles'],'links':group['links']})
+    pieces.append({'ids':current['approved_ids'],'profiles':_sealed(root,current['expected_profiles']),'links':_sealed(root,current['expected_links'])})
     ids=[];profiles={};links={}
     for piece in pieces:
         assert set(piece['ids'])==set(piece['profiles'])==set(piece['links'])

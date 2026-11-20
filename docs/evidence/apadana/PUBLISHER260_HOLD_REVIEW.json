@@ -1,0 +1,156 @@
+{
+  "schema": "source-case-hold-evidence-v1",
+  "baseline": "7d5ac90845402b322dabf2c5120d1485b15c0bda",
+  "publisher_poem": 260,
+  "canonical_id": "tha-ap262",
+  "status": "HELD_NO_RUNTIME_OR_NORMALIZED_APPARATUS_APPROVAL",
+  "author_decision": {
+    "status": "KEEP_PUBLISHER260_CANONICAL262_HELD",
+    "baseline": "7d5ac90845402b322dabf2c5120d1485b15c0bda",
+    "source_only_findings": {
+      "complete_publisher_poem_body": true,
+      "body_paragraphs": 7,
+      "physical_stanza_entries": 4,
+      "printed_labels": 5,
+      "normalized_poem_note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "poem_Pali_bounds": [
+        8375,
+        8392
+      ],
+      "canonical_container_Pali_bounds": [
+        8375,
+        8397
+      ],
+      "held_apparatus_Pali_bounds": [
+        8392,
+        8397
+      ],
+      "held_summary_paragraphs": 3,
+      "held_note_numbers": [
+        5
+      ],
+      "source_wording_generated_or_repaired": false
+    },
+    "reason": "Current normalized Apadāna ownership/display contract cannot represent this malformed chapter apparatus faithfully or silently discard its note5. Source-only poem derivation is not sufficient for ordinary whole-container activation. No normalized chapter-summary approval exists.",
+    "recommended_next_step": "Define and independently approve one finite source-apparatus representation/coverage contract before any runtime activation. Until then retain284 choices and existing holds.",
+    "options": [
+      {
+        "name": "Explicitly scoped poem-only selection",
+        "source_feasibility": "Body and notes1–4 normalize independently and completely; raw summary/note5 remain separately pinned/unavailable.",
+        "coverage": "Complete publisher poem; partial canonical container until a separately reviewed coverage rule says otherwise. Proposed candidate conservatively sets whole_unit_coverage:false.",
+        "requires": "New exact-ID unavailable_apparatus descriptor + strict source partition/ownership and scoped-source client/cache/cursor rules; user-visible mandatory unavailable notice; current generic route must refuse until supported."
+      },
+      {
+        "name": "Escaped literal publisher-markup apparatus",
+        "source_feasibility": "Losslessly reversible exact original summary + complete raw note5 definition are available externally. The malformed duplicate C/C, literal span pair, and all three well-formed display pairs remain byte-exact.",
+        "coverage": "Do not call it a normalized/clean translation or infer a repaired name. No whole-container coverage upgrade before representation semantics are independently accepted.",
+        "requires": "New exact-ID representation publisher_raw_markup_utf8, rendered solely through textContent/pre-wrap. Never innerHTML/Markdown/DOM execution or generic stripping; preserve every original marker, paragraph and note5 ownership. Separate non-poem caption and quotation exclusion; authentic positives and mutation/refusal checks."
+      }
+    ],
+    "prototype_files": [
+      "PROFILE_CANDIDATE_DO_NOT_ACTIVATE.json",
+      "LINK_CANDIDATE_DO_NOT_ACTIVATE.json"
+    ],
+    "prototype_compatibility": "Unsupported design candidates only; not approved registry data, no new extractor or descriptor activation permission.",
+    "other_holds_untouched": [
+      "publisher234/canonical236",
+      "Sāriputta note-only evidence"
+    ],
+    "runtime_approval": false,
+    "release_approval": false,
+    "activation_count": 0,
+    "project_writes": 0
+  },
+  "independent_review": {
+    "status": "CONSERVATIVE_PUBLISHER260_NORMALIZATION_RUNTIME_HOLD_INDEPENDENTLY_CONFIRMED",
+    "publisher_poem": 260,
+    "canonical_id": "tha-ap262",
+    "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "raw_path": "/tmp/pali-thera221-260-scout/raw/src/_poems/chapter-3/poem-260.md",
+    "raw_sha256": "1d6ba6e749112ced76c1274551d67a40187efb94e86273bbbbea9aab0c41f458",
+    "git_blob_sha1": "c65b610f2e9f6056afbc432886468fcafc0513ad",
+    "raw_bytes": 3066,
+    "poem_owned_note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "summary_owned_note_numbers": [
+      5
+    ],
+    "no_preface": true,
+    "combined_first_entry": {
+      "local_labels": "1-2",
+      "global_labels": "2535-2536",
+      "physical_entries": 1,
+      "lines": 8
+    },
+    "summary_paragraph_count_including_The_summary_label": 3,
+    "paired_syntax_inventory": {
+      "well_formed_upper_Pandoc_summary": 1,
+      "malformed_duplicate_C_C_both_state_on_summary": 1,
+      "literal_HTML_C_Ch_summary": 1,
+      "well_formed_lower_Pandoc_summary_note5": 2,
+      "poem_pairs": 0
+    },
+    "token_hashes": {
+      "upper": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+      "lower": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+      "malformed": "80516e00dbf5770695272d44612d5f3e1a9b0ea55c8498593fbdba3fd3907558",
+      "literal_HTML": "a5865db27b5975d83ebce3ee30c1df2385e1655bc4585615da80a1a3f45bb622"
+    },
+    "unmodified_owner_hashes": {
+      "raw_poem_section": "871768316cfd747b72eb2c6a66ccc0bd4df75345760e1fcad1e614f01c9b230f",
+      "raw_summary_after_label": "733da2e9ba7c3fd75d1d5fdb70bee10da6449120082b56fd77f575510909d1db",
+      "raw_note5_definition_text": "44e4ca207a6b2dee7b8fd7326b08fea7559037cbdf1024f2f14ea463153e6cec"
+    },
+    "finding": "The source really contains all three distinct summary display forms and a separate note5. Standard well-formed pair selection cannot silently deduplicate C/C, invent Ch or swallow literal HTML. Raw inspection is not normalized/rendered approval. Notes1–4 belong to poem;note5 only to summary. Current known-profile guard refuses this unregistered choice before source access; no candidate profile grants activation.",
+    "body_alone_future_scope": "Could be separately reviewed in future only if exact body/notes1–4 and combined1–2entry are verified, separate summary/note5 explicitly withheld/disclosed and publisher chapter completeness not claimed. That scope is not approved in current one234task.",
+    "still_held": true,
+    "normalization_approval": false,
+    "runtime_approval": false,
+    "activation_approval": false,
+    "rights": "Specific Walters/Whitman NC-SA4.0 remains; genericCCBY grants no relaxation. Exact wording/malformed syntax stays in original artifacts, never repaired by inference.",
+    "reviewer_operations": "Original raw UTF8/header/body/note reference/syntax ownership read and stdlibmetadata only; no production parser/test/build/Git/network/browser/CI execution."
+  },
+  "requirements": {
+    "status": "UNRESOLVED_REPRESENTATION_GATE",
+    "required_before_activation": [
+      "Independent original-first verification of body/notes1–4 hashes, exact combined1–2 eight-line entry, note ownership, first/last boundaries, VRI37–41 variants and Amita/tense uncertainty.",
+      "Choose and independently review one explicit apparatus/coverage contract. No source word, C/C token, literal span, pair alternative or note5 may disappear or be reassigned.",
+      "Require exact full raw artifact pin, complete partition into header/poem/apparatus/allfive definitions, exact descriptor owner/field presence and raw summary/note5 pins before English fetch/display. Retain all previous284 objects and canonical/private/citation data.",
+      "Poem-only candidate must explicitly exclude canonical apparatus refs9–11 and warn that summary/note5 are unavailable; it must not inherit ordinary whole-unit/default-source counting or whole-unit consent silently.",
+      "Literal candidate must display original UTF-8 markup as escaped literal text with distinct non-poem/not-normalized caption; no browser interpretation, CSS toggle stripping, entity decoding or corrected concatenation.",
+      "Standalone, comparison, both widget bridges and caches must refuse changed/missing/forged held descriptors, foreign owners, phantom note5 on poem, changed raw token/paragraph/byte hashes and unsafe revision/cursors while retaining Pāli.",
+      "Quotation excludes both colophons, heading, summary and note5; complete valid poem positives precede corrupt-source controls. Paging cannot mix versions or move raw apparatus into poem continuation.",
+      "Meaningful browser keyboard/mobile emulation, installed package/no-English-bundling and strict whole-widget equality gates; physical/human/specialist acceptance remains separate.",
+      "Independent final runtime/source review, full checks and exact-commit CI before any authorized dev-only advance; no main, force, deployment or outreach."
+    ],
+    "current_gate_reason": "The exact representation/coverage schema and acceptance do not yet exist; rights/source availability does not authorize an invented normalized summary.",
+    "cleared_holds": [],
+    "activation_count": 0
+  },
+  "evidence_seals": [
+    {
+      "external_path": "/tmp/pali-held260-author/DECISION.json",
+      "sha256": "e47cb9286501b1d98560f3fdaeb25d6c291957ced38adb16f900871738446fdb"
+    },
+    {
+      "external_path": "/tmp/pali-held260-author/HOLD_REQUIREMENTS.json",
+      "sha256": "62013cea3cb94501e1a9f110f42df0eb6e7182bd45fee7d3a152abcbf891186e"
+    },
+    {
+      "external_path": "/tmp/pali-held-cases-implementation-review/PUBLISHER260_CONSERVATIVE_HOLD_REVIEW.json",
+      "sha256": "8f5def62d0ce2b8cb109c26afa1a65361bc39256efb2a7e9b8dc24aa15204ef1"
+    }
+  ],
+  "scope_qualification": "Counts/other holds in source reports describe the initial284-choice checkpoint. A separately reviewed source234 change must not retroactively alter these reports.",
+  "activation_authority": false,
+  "translated_payload_packaged": false
+}

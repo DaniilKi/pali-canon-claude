@@ -33,9 +33,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// node_modules/content-type/index.js
+// ../pali-thera-remaining-local/node_modules/content-type/index.js
 var require_content_type = __commonJS({
-  "node_modules/content-type/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/content-type/index.js"(exports2) {
     "use strict";
     var PARAM_REGEXP = /; *([!#$%&'*+.^_`|~0-9A-Za-z-]+) *= *("(?:[\u000b\u0020\u0021\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u000b\u0020-\u00ff])*"|[!#$%&'*+.^_`|~0-9A-Za-z-]+) */g;
     var TEXT_REGEXP = /^[\u000b\u0020-\u007e\u0080-\u00ff]+$/;
@@ -137,9 +137,9 @@ var require_content_type = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/codegen/code.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/code.js
 var require_code = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.regexpCode = exports2.getEsmExportName = exports2.getProperty = exports2.safeStringify = exports2.stringify = exports2.strConcat = exports2.addCodeArg = exports2.str = exports2._ = exports2.nil = exports2._Code = exports2.Name = exports2.IDENTIFIER = exports2._CodeOrName = void 0;
@@ -291,9 +291,9 @@ var require_code = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/codegen/scope.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/scope.js
 var require_scope = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ValueScope = exports2.ValueScopeName = exports2.Scope = exports2.varKinds = exports2.UsedValueState = void 0;
@@ -436,9 +436,9 @@ var require_scope = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/codegen/index.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/index.js
 var require_codegen = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.or = exports2.and = exports2.not = exports2.CodeGen = exports2.operators = exports2.varKinds = exports2.ValueScopeName = exports2.ValueScope = exports2.Scope = exports2.Name = exports2.regexpCode = exports2.stringify = exports2.getProperty = exports2.nil = exports2.strConcat = exports2.str = exports2._ = void 0;
@@ -1156,9 +1156,9 @@ var require_codegen = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/util.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/util.js
 var require_util = __commonJS({
-  "node_modules/ajv/dist/compile/util.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/util.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.checkStrictMode = exports2.getErrorPath = exports2.Type = exports2.useFunc = exports2.setEvaluated = exports2.evaluatedPropsToName = exports2.mergeEvaluated = exports2.eachItem = exports2.unescapeJsonPointer = exports2.escapeJsonPointer = exports2.escapeFragment = exports2.unescapeFragment = exports2.schemaRefOrVal = exports2.schemaHasRulesButRef = exports2.schemaHasRules = exports2.checkUnknownRules = exports2.alwaysValidSchema = exports2.toHash = void 0;
@@ -1323,9 +1323,9 @@ var require_util = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/names.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/names.js
 var require_names = __commonJS({
-  "node_modules/ajv/dist/compile/names.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/names.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -1362,9 +1362,9 @@ var require_names = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/errors.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/errors.js
 var require_errors = __commonJS({
-  "node_modules/ajv/dist/compile/errors.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/errors.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendErrors = exports2.resetErrorsCount = exports2.reportExtraError = exports2.reportError = exports2.keyword$DataError = exports2.keywordError = void 0;
@@ -1484,9 +1484,9 @@ var require_errors = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/boolSchema.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/boolSchema.js
 var require_boolSchema = __commonJS({
-  "node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.boolOrEmptySchema = exports2.topBoolOrEmptySchema = void 0;
@@ -1535,9 +1535,9 @@ var require_boolSchema = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/rules.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/rules.js
 var require_rules = __commonJS({
-  "node_modules/ajv/dist/compile/rules.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/rules.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getRules = exports2.isJSONType = void 0;
@@ -1566,9 +1566,9 @@ var require_rules = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/applicability.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/applicability.js
 var require_applicability = __commonJS({
-  "node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.shouldUseRule = exports2.shouldUseGroup = exports2.schemaHasRulesForType = void 0;
@@ -1589,9 +1589,9 @@ var require_applicability = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/dataType.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/dataType.js
 var require_dataType = __commonJS({
-  "node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.reportTypeError = exports2.checkDataTypes = exports2.checkDataType = exports2.coerceAndCheckDataType = exports2.getJSONTypes = exports2.getSchemaTypes = exports2.DataType = void 0;
@@ -1773,9 +1773,9 @@ var require_dataType = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/defaults.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/defaults.js
 var require_defaults = __commonJS({
-  "node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.assignDefaults = void 0;
@@ -1810,9 +1810,9 @@ var require_defaults = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/code.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/code.js
 var require_code2 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/code.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateUnion = exports2.validateArray = exports2.usePattern = exports2.callValidateCode = exports2.schemaProperties = exports2.allSchemaProperties = exports2.noPropertyInData = exports2.propertyInData = exports2.isOwnProperty = exports2.hasPropFunc = exports2.reportMissingProp = exports2.checkMissingProp = exports2.checkReportMissingProp = void 0;
@@ -1943,9 +1943,9 @@ var require_code2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/keyword.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/keyword.js
 var require_keyword = __commonJS({
-  "node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateKeywordUsage = exports2.validSchemaType = exports2.funcKeywordCode = exports2.macroKeywordCode = void 0;
@@ -2061,9 +2061,9 @@ var require_keyword = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/subschema.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/subschema.js
 var require_subschema = __commonJS({
-  "node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendSubschemaMode = exports2.extendSubschemaData = exports2.getSubschema = void 0;
@@ -2144,9 +2144,9 @@ var require_subschema = __commonJS({
   }
 });
 
-// node_modules/fast-deep-equal/index.js
+// ../pali-thera-remaining-local/node_modules/fast-deep-equal/index.js
 var require_fast_deep_equal = __commonJS({
-  "node_modules/fast-deep-equal/index.js"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/fast-deep-equal/index.js"(exports2, module2) {
     "use strict";
     module2.exports = function equal(a, b) {
       if (a === b) return true;
@@ -2179,9 +2179,9 @@ var require_fast_deep_equal = __commonJS({
   }
 });
 
-// node_modules/json-schema-traverse/index.js
+// ../pali-thera-remaining-local/node_modules/json-schema-traverse/index.js
 var require_json_schema_traverse = __commonJS({
-  "node_modules/json-schema-traverse/index.js"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/json-schema-traverse/index.js"(exports2, module2) {
     "use strict";
     var traverse = module2.exports = function(schema, opts, cb) {
       if (typeof opts == "function") {
@@ -2267,9 +2267,9 @@ var require_json_schema_traverse = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/resolve.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/resolve.js
 var require_resolve = __commonJS({
-  "node_modules/ajv/dist/compile/resolve.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/resolve.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getSchemaRefs = exports2.resolveUrl = exports2.normalizeId = exports2._getFullPath = exports2.getFullPath = exports2.inlineRef = void 0;
@@ -2423,9 +2423,9 @@ var require_resolve = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/index.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/index.js
 var require_validate = __commonJS({
-  "node_modules/ajv/dist/compile/validate/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/validate/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getData = exports2.KeywordCxt = exports2.validateFunctionCode = void 0;
@@ -2931,9 +2931,9 @@ var require_validate = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/validation_error.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/runtime/validation_error.js
 var require_validation_error = __commonJS({
-  "node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var ValidationError = class extends Error {
@@ -2947,9 +2947,9 @@ var require_validation_error = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/ref_error.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/ref_error.js
 var require_ref_error = __commonJS({
-  "node_modules/ajv/dist/compile/ref_error.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/ref_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var resolve_1 = require_resolve();
@@ -2964,9 +2964,9 @@ var require_ref_error = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/index.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/compile/index.js
 var require_compile = __commonJS({
-  "node_modules/ajv/dist/compile/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/compile/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.resolveSchema = exports2.getCompilingSchema = exports2.resolveRef = exports2.compileSchema = exports2.SchemaEnv = void 0;
@@ -3188,9 +3188,9 @@ var require_compile = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/refs/data.json
+// ../pali-thera-remaining-local/node_modules/ajv/dist/refs/data.json
 var require_data = __commonJS({
-  "node_modules/ajv/dist/refs/data.json"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/refs/data.json"(exports2, module2) {
     module2.exports = {
       $id: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#",
       description: "Meta-schema for $data reference (JSON AnySchema extension proposal)",
@@ -3207,9 +3207,9 @@ var require_data = __commonJS({
   }
 });
 
-// node_modules/fast-uri/lib/utils.js
+// ../pali-thera-remaining-local/node_modules/fast-uri/lib/utils.js
 var require_utils = __commonJS({
-  "node_modules/fast-uri/lib/utils.js"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
     "use strict";
     var isUUID = RegExp.prototype.test.bind(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu);
     var isIPv4 = RegExp.prototype.test.bind(/^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u);
@@ -3741,9 +3741,9 @@ var require_utils = __commonJS({
   }
 });
 
-// node_modules/fast-uri/lib/schemes.js
+// ../pali-thera-remaining-local/node_modules/fast-uri/lib/schemes.js
 var require_schemes = __commonJS({
-  "node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
     "use strict";
     var { isUUID } = require_utils();
     var URN_REG = /^([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-./:;=@]|%[\da-f]{2})+)$/iu;
@@ -3952,9 +3952,9 @@ var require_schemes = __commonJS({
   }
 });
 
-// node_modules/fast-uri/index.js
+// ../pali-thera-remaining-local/node_modules/fast-uri/index.js
 var require_fast_uri = __commonJS({
-  "node_modules/fast-uri/index.js"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/fast-uri/index.js"(exports2, module2) {
     "use strict";
     var { normalizeIPv6, removeDotSegments, removeDotSegmentsRelative, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, serializePathEncoding, normalizeQueryFragmentEncoding, encodeQuery, encodeFragment, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = require_utils();
     var { SCHEMES, getSchemeHandler } = require_schemes();
@@ -4382,9 +4382,9 @@ var require_fast_uri = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/uri.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/runtime/uri.js
 var require_uri = __commonJS({
-  "node_modules/ajv/dist/runtime/uri.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/runtime/uri.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var uri = require_fast_uri();
@@ -4393,9 +4393,9 @@ var require_uri = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/core.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/core.js
 var require_core = __commonJS({
-  "node_modules/ajv/dist/core.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/core.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = void 0;
@@ -5004,9 +5004,9 @@ var require_core = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/id.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/id.js
 var require_id = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var def = {
@@ -5019,9 +5019,9 @@ var require_id = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/ref.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/ref.js
 var require_ref = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.callRef = exports2.getValidate = void 0;
@@ -5141,9 +5141,9 @@ var require_ref = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/index.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/index.js
 var require_core2 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var id_1 = require_id();
@@ -5162,9 +5162,9 @@ var require_core2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitNumber.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitNumber.js
 var require_limitNumber = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5194,9 +5194,9 @@ var require_limitNumber = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/multipleOf.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/multipleOf.js
 var require_multipleOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5222,9 +5222,9 @@ var require_multipleOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/ucs2length.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/runtime/ucs2length.js
 var require_ucs2length = __commonJS({
-  "node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     function ucs2length(str) {
@@ -5248,9 +5248,9 @@ var require_ucs2length = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitLength.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitLength.js
 var require_limitLength = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5280,9 +5280,9 @@ var require_limitLength = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/pattern.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/pattern.js
 var require_pattern = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5317,9 +5317,9 @@ var require_pattern = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitProperties.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitProperties.js
 var require_limitProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5346,9 +5346,9 @@ var require_limitProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/required.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/required.js
 var require_required = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5428,9 +5428,9 @@ var require_required = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitItems.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitItems.js
 var require_limitItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5457,9 +5457,9 @@ var require_limitItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/equal.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/runtime/equal.js
 var require_equal = __commonJS({
-  "node_modules/ajv/dist/runtime/equal.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/runtime/equal.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var equal = require_fast_deep_equal();
@@ -5468,9 +5468,9 @@ var require_equal = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
 var require_uniqueItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var dataType_1 = require_dataType();
@@ -5535,9 +5535,9 @@ var require_uniqueItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/const.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/const.js
 var require_const = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5564,9 +5564,9 @@ var require_const = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/enum.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/enum.js
 var require_enum = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5613,9 +5613,9 @@ var require_enum = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/index.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/index.js
 var require_validation = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var limitNumber_1 = require_limitNumber();
@@ -5651,9 +5651,9 @@ var require_validation = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
 var require_additionalItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateAdditionalItems = void 0;
@@ -5704,9 +5704,9 @@ var require_additionalItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/items.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/items.js
 var require_items = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateTuple = void 0;
@@ -5761,9 +5761,9 @@ var require_items = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
 var require_prefixItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var items_1 = require_items();
@@ -5778,9 +5778,9 @@ var require_prefixItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/items2020.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/items2020.js
 var require_items2020 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5813,9 +5813,9 @@ var require_items2020 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/contains.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/contains.js
 var require_contains = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5907,9 +5907,9 @@ var require_contains = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/dependencies.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/dependencies.js
 var require_dependencies = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateSchemaDeps = exports2.validatePropertyDeps = exports2.error = void 0;
@@ -6001,9 +6001,9 @@ var require_dependencies = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
 var require_propertyNames = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6044,9 +6044,9 @@ var require_propertyNames = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
 var require_additionalProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6150,9 +6150,9 @@ var require_additionalProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/properties.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/properties.js
 var require_properties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var validate_1 = require_validate();
@@ -6208,9 +6208,9 @@ var require_properties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
 var require_patternProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6282,9 +6282,9 @@ var require_patternProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/not.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/not.js
 var require_not = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6313,9 +6313,9 @@ var require_not = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/anyOf.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/anyOf.js
 var require_anyOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6330,9 +6330,9 @@ var require_anyOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/oneOf.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/oneOf.js
 var require_oneOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6388,9 +6388,9 @@ var require_oneOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/allOf.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/allOf.js
 var require_allOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6415,9 +6415,9 @@ var require_allOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/if.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/if.js
 var require_if = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6484,9 +6484,9 @@ var require_if = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/thenElse.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/thenElse.js
 var require_thenElse = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6502,9 +6502,9 @@ var require_thenElse = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/index.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/index.js
 var require_applicator = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var additionalItems_1 = require_additionalItems();
@@ -6550,9 +6550,9 @@ var require_applicator = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/format/format.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/format/format.js
 var require_format = __commonJS({
-  "node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6640,9 +6640,9 @@ var require_format = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/format/index.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/format/index.js
 var require_format2 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var format_1 = require_format();
@@ -6651,9 +6651,9 @@ var require_format2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/metadata.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/metadata.js
 var require_metadata = __commonJS({
-  "node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.contentVocabulary = exports2.metadataVocabulary = void 0;
@@ -6674,9 +6674,9 @@ var require_metadata = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/draft7.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/draft7.js
 var require_draft7 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var core_1 = require_core2();
@@ -6696,9 +6696,9 @@ var require_draft7 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/discriminator/types.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/discriminator/types.js
 var require_types = __commonJS({
-  "node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.DiscrError = void 0;
@@ -6710,9 +6710,9 @@ var require_types = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/discriminator/index.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/discriminator/index.js
 var require_discriminator = __commonJS({
-  "node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6815,9 +6815,9 @@ var require_discriminator = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/refs/json-schema-draft-07.json
+// ../pali-thera-remaining-local/node_modules/ajv/dist/refs/json-schema-draft-07.json
 var require_json_schema_draft_07 = __commonJS({
-  "node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
     module2.exports = {
       $schema: "http://json-schema.org/draft-07/schema#",
       $id: "http://json-schema.org/draft-07/schema#",
@@ -6972,9 +6972,9 @@ var require_json_schema_draft_07 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/ajv.js
+// ../pali-thera-remaining-local/node_modules/ajv/dist/ajv.js
 var require_ajv = __commonJS({
-  "node_modules/ajv/dist/ajv.js"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/ajv/dist/ajv.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.MissingRefError = exports2.ValidationError = exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = exports2.Ajv = void 0;
@@ -7042,9 +7042,9 @@ var require_ajv = __commonJS({
   }
 });
 
-// node_modules/ajv-formats/dist/formats.js
+// ../pali-thera-remaining-local/node_modules/ajv-formats/dist/formats.js
 var require_formats = __commonJS({
-  "node_modules/ajv-formats/dist/formats.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv-formats/dist/formats.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatNames = exports2.fastFormats = exports2.fullFormats = void 0;
@@ -7245,9 +7245,9 @@ var require_formats = __commonJS({
   }
 });
 
-// node_modules/ajv-formats/dist/limit.js
+// ../pali-thera-remaining-local/node_modules/ajv-formats/dist/limit.js
 var require_limit = __commonJS({
-  "node_modules/ajv-formats/dist/limit.js"(exports2) {
+  "../pali-thera-remaining-local/node_modules/ajv-formats/dist/limit.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatLimitDefinition = void 0;
@@ -7317,9 +7317,9 @@ var require_limit = __commonJS({
   }
 });
 
-// node_modules/ajv-formats/dist/index.js
+// ../pali-thera-remaining-local/node_modules/ajv-formats/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/ajv-formats/dist/index.js"(exports2, module2) {
+  "../pali-thera-remaining-local/node_modules/ajv-formats/dist/index.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var formats_1 = require_formats();
@@ -7362,15 +7362,15 @@ var require_dist = __commonJS({
 // src/http-server.mjs
 var import_node_http3 = require("node:http");
 
-// node_modules/@hono/node-server/dist/constants-BLSFu_RU.mjs
+// ../pali-thera-remaining-local/node_modules/@hono/node-server/dist/constants-BLSFu_RU.mjs
 var X_ALREADY_SENT = "x-hono-already-sent";
 
-// node_modules/@hono/node-server/dist/index.mjs
+// ../pali-thera-remaining-local/node_modules/@hono/node-server/dist/index.mjs
 var import_node_http = require("node:http");
 var import_node_http2 = require("node:http2");
 var import_node_stream = require("node:stream");
 
-// node_modules/hono/dist/helper/websocket/index.js
+// ../pali-thera-remaining-local/node_modules/hono/dist/helper/websocket/index.js
 var defineWebSocketHelper = (handler) => {
   return ((...args) => {
     if (typeof args[0] === "function") {
@@ -7391,7 +7391,7 @@ var defineWebSocketHelper = (handler) => {
   });
 };
 
-// node_modules/@hono/node-server/dist/index.mjs
+// ../pali-thera-remaining-local/node_modules/@hono/node-server/dist/index.mjs
 var RequestError = class extends Error {
   constructor(message, options) {
     super(message, options);
@@ -8558,7 +8558,7 @@ var upgradeWebSocket = defineWebSocketHelper(async (c, events, options) => {
   return new Response();
 });
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/mediaType.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/mediaType.js
 var import_content_type = __toESM(require_content_type(), 1);
 function mediaTypeEssence(header) {
   if (!header) {
@@ -8581,7 +8581,7 @@ function isJsonContentType(header) {
   return mediaTypeEssence(header) === "application/json";
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/requestBody.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/requestBody.js
 var DEFAULT_MAX_REQUEST_BODY_SIZE = 4 * 1024 * 1024;
 var MAX_BATCH_SIZE = 100;
 function requestBodyTooLargeMessage(maxBytes) {
@@ -8625,7 +8625,7 @@ async function readRequestBody(request, maxBytes = DEFAULT_MAX_REQUEST_BODY_SIZE
   return { tooLarge: false, text: text2 + decoder.decode() };
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/sseKeepAlive.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/sseKeepAlive.js
 var DEFAULT_SSE_KEEP_ALIVE_MS = 15e3;
 var MAX_TIMER_DELAY_MS = 2 ** 31 - 1;
 function armSseKeepAlive(intervalMs, onTick) {
@@ -8637,7 +8637,7 @@ function armSseKeepAlive(intervalMs, onTick) {
   return timer;
 }
 
-// node_modules/zod/v4/core/core.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/core.js
 var NEVER = Object.freeze({
   status: "aborted"
 });
@@ -8696,7 +8696,7 @@ function config(newConfig) {
   return globalConfig;
 }
 
-// node_modules/zod/v4/core/util.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/util.js
 var util_exports = {};
 __export(util_exports, {
   BIGINT_FORMAT_RANGES: () => BIGINT_FORMAT_RANGES,
@@ -9217,7 +9217,7 @@ var Class = class {
   }
 };
 
-// node_modules/zod/v4/core/errors.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/errors.js
 var initializer = (inst, def) => {
   inst.name = "$ZodError";
   Object.defineProperty(inst, "_zod", {
@@ -9292,7 +9292,7 @@ function formatError(error2, _mapper) {
   return fieldErrors;
 }
 
-// node_modules/zod/v4/core/parse.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/parse.js
 var _parse = (_Err) => (schema, value, _ctx, _params) => {
   const ctx = _ctx ? Object.assign(_ctx, { async: false }) : { async: false };
   const result = schema._zod.run({ value, issues: [] }, ctx);
@@ -9344,7 +9344,7 @@ var _safeParseAsync = (_Err) => async (schema, value, _ctx) => {
 };
 var safeParseAsync = /* @__PURE__ */ _safeParseAsync($ZodRealError);
 
-// node_modules/zod/v4/core/regexes.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/regexes.js
 var cuid = /^[cC][^\s-]{8,}$/;
 var cuid2 = /^[0-9a-z]+$/;
 var ulid = /^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$/;
@@ -9402,7 +9402,7 @@ var _null = /null/i;
 var lowercase = /^[^A-Z]*$/;
 var uppercase = /^[^a-z]*$/;
 
-// node_modules/zod/v4/core/checks.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/checks.js
 var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
   var _a;
   inst._zod ?? (inst._zod = {});
@@ -9787,7 +9787,7 @@ var $ZodCheckOverwrite = /* @__PURE__ */ $constructor("$ZodCheckOverwrite", (ins
   };
 });
 
-// node_modules/zod/v4/core/doc.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/doc.js
 var Doc = class {
   constructor(args = []) {
     this.content = [];
@@ -9823,14 +9823,14 @@ var Doc = class {
   }
 };
 
-// node_modules/zod/v4/core/versions.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/versions.js
 var version = {
   major: 4,
   minor: 0,
   patch: 0
 };
 
-// node_modules/zod/v4/core/schemas.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/schemas.js
 var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   var _a;
   inst ?? (inst = {});
@@ -11068,7 +11068,7 @@ function handleRefineResult(result, payload, input, inst) {
   }
 }
 
-// node_modules/zod/v4/locales/en.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/locales/en.js
 var parsedType = (data5) => {
   const t = typeof data5;
   switch (t) {
@@ -11186,7 +11186,7 @@ function en_default() {
   };
 }
 
-// node_modules/zod/v4/core/registries.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/registries.js
 var $ZodRegistry = class {
   constructor() {
     this._map = /* @__PURE__ */ new Map();
@@ -11234,7 +11234,7 @@ function registry() {
 }
 var globalRegistry = /* @__PURE__ */ registry();
 
-// node_modules/zod/v4/core/api.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/api.js
 function _string(Class2, params) {
   return new Class2({
     type: "string",
@@ -11673,7 +11673,7 @@ function _refine(Class2, fn, _params) {
   return schema;
 }
 
-// node_modules/zod/v4/core/to-json-schema.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/core/to-json-schema.js
 var JSONSchemaGenerator = class {
   constructor(params) {
     this.counter = 0;
@@ -12440,7 +12440,7 @@ function isTransforming(_schema, _ctx) {
   throw new Error(`Unknown schema type: ${def.type}`);
 }
 
-// node_modules/zod/v4/classic/iso.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/classic/iso.js
 var iso_exports = {};
 __export(iso_exports, {
   ZodISODate: () => ZodISODate,
@@ -12481,7 +12481,7 @@ function duration2(params) {
   return _isoDuration(ZodISODuration, params);
 }
 
-// node_modules/zod/v4/classic/errors.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/classic/errors.js
 var initializer2 = (inst, issues) => {
   $ZodError.init(inst, issues);
   inst.name = "ZodError";
@@ -12515,13 +12515,13 @@ var ZodRealError = $constructor("ZodError", initializer2, {
   Parent: Error
 });
 
-// node_modules/zod/v4/classic/parse.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/classic/parse.js
 var parse2 = /* @__PURE__ */ _parse(ZodRealError);
 var parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
 var safeParse2 = /* @__PURE__ */ _safeParse(ZodRealError);
 var safeParseAsync2 = /* @__PURE__ */ _safeParseAsync(ZodRealError);
 
-// node_modules/zod/v4/classic/schemas.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/classic/schemas.js
 var ZodType = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
   $ZodType.init(inst, def);
   inst.def = def;
@@ -13132,10 +13132,10 @@ function preprocess(fn, schema) {
   return pipe(transform(fn), schema);
 }
 
-// node_modules/zod/v4/classic/external.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/classic/external.js
 config(en_default());
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
 var LATEST_PROTOCOL_VERSION = "2025-11-25";
 var DEFAULT_NEGOTIATED_PROTOCOL_VERSION = "2025-03-26";
 var SUPPORTED_PROTOCOL_VERSIONS = [LATEST_PROTOCOL_VERSION, "2025-06-18", "2025-03-26", "2024-11-05", "2024-10-07"];
@@ -14668,7 +14668,7 @@ var UrlElicitationRequiredError = class extends McpError {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/webStandardStreamableHttp.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/webStandardStreamableHttp.js
 var WebStandardStreamableHTTPServerTransport = class {
   constructor(options = {}) {
     this._started = false;
@@ -15411,7 +15411,7 @@ data:
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/streamableHttp.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/streamableHttp.js
 var StreamableHTTPServerTransport = class {
   constructor(options = {}) {
     this._requestContext = /* @__PURE__ */ new WeakMap();
@@ -15538,7 +15538,7 @@ function pairedReopenRoute(args, id) {
   return "#read?" + new URLSearchParams({ uid: id });
 }
 
-// node_modules/zod/v3/external.js
+// ../pali-thera-remaining-local/node_modules/zod/v3/external.js
 var external_exports = {};
 __export(external_exports, {
   BRAND: () => BRAND,
@@ -15650,7 +15650,7 @@ __export(external_exports, {
   void: () => voidType
 });
 
-// node_modules/zod/v3/helpers/util.js
+// ../pali-thera-remaining-local/node_modules/zod/v3/helpers/util.js
 var util;
 (function(util2) {
   util2.assertEqual = (_) => {
@@ -15784,7 +15784,7 @@ var getParsedType2 = (data5) => {
   }
 };
 
-// node_modules/zod/v3/ZodError.js
+// ../pali-thera-remaining-local/node_modules/zod/v3/ZodError.js
 var ZodIssueCode = util.arrayToEnum([
   "invalid_type",
   "invalid_literal",
@@ -15902,7 +15902,7 @@ ZodError2.create = (issues) => {
   return error2;
 };
 
-// node_modules/zod/v3/locales/en.js
+// ../pali-thera-remaining-local/node_modules/zod/v3/locales/en.js
 var errorMap = (issue2, _ctx) => {
   let message;
   switch (issue2.code) {
@@ -16005,7 +16005,7 @@ var errorMap = (issue2, _ctx) => {
 };
 var en_default2 = errorMap;
 
-// node_modules/zod/v3/errors.js
+// ../pali-thera-remaining-local/node_modules/zod/v3/errors.js
 var overrideErrorMap = en_default2;
 function setErrorMap(map) {
   overrideErrorMap = map;
@@ -16014,7 +16014,7 @@ function getErrorMap() {
   return overrideErrorMap;
 }
 
-// node_modules/zod/v3/helpers/parseUtil.js
+// ../pali-thera-remaining-local/node_modules/zod/v3/helpers/parseUtil.js
 var makeIssue = (params) => {
   const { data: data5, path, errorMaps, issueData } = params;
   const fullPath = [...path, ...issueData.path || []];
@@ -16124,14 +16124,14 @@ var isDirty = (x) => x.status === "dirty";
 var isValid = (x) => x.status === "valid";
 var isAsync = (x) => typeof Promise !== "undefined" && x instanceof Promise;
 
-// node_modules/zod/v3/helpers/errorUtil.js
+// ../pali-thera-remaining-local/node_modules/zod/v3/helpers/errorUtil.js
 var errorUtil;
 (function(errorUtil2) {
   errorUtil2.errToObj = (message) => typeof message === "string" ? { message } : message || {};
   errorUtil2.toString = (message) => typeof message === "string" ? message : message?.message;
 })(errorUtil || (errorUtil = {}));
 
-// node_modules/zod/v3/types.js
+// ../pali-thera-remaining-local/node_modules/zod/v3/types.js
 var ParseInputLazyPath = class {
   constructor(parent, value, path, key3) {
     this._cachedPath = [];
@@ -19579,7 +19579,7 @@ var coerce = {
 };
 var NEVER2 = INVALID;
 
-// node_modules/zod/v4/mini/schemas.js
+// ../pali-thera-remaining-local/node_modules/zod/v4/mini/schemas.js
 var ZodMiniType = /* @__PURE__ */ $constructor("ZodMiniType", (inst, def) => {
   if (!inst._zod)
     throw new Error("Uninitialized schema in ZodMiniType.");
@@ -19625,7 +19625,7 @@ function object2(shape, params) {
   return new ZodMiniObject(def);
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
 function isZ4Schema(s) {
   const schema = s;
   return !!schema._zod;
@@ -19785,12 +19785,12 @@ function getLiteralValue(schema) {
   return void 0;
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
 function isTerminal(status) {
   return status === "completed" || status === "failed" || status === "cancelled";
 }
 
-// node_modules/zod-to-json-schema/dist/esm/Options.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/Options.js
 var ignoreOverride = /* @__PURE__ */ Symbol("Let zodToJsonSchema decide on which parser to use");
 var defaultOptions = {
   name: void 0,
@@ -19824,7 +19824,7 @@ var getDefaultOptions = (options) => typeof options === "string" ? {
   ...options
 };
 
-// node_modules/zod-to-json-schema/dist/esm/Refs.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/Refs.js
 var getRefs = (options) => {
   const _options = getDefaultOptions(options);
   const currentPath = _options.name !== void 0 ? [..._options.basePath, _options.definitionPath, _options.name] : _options.basePath;
@@ -19845,7 +19845,7 @@ var getRefs = (options) => {
   };
 };
 
-// node_modules/zod-to-json-schema/dist/esm/errorMessages.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/errorMessages.js
 function addErrorMessage(res, key3, errorMessage, refs) {
   if (!refs?.errorMessages)
     return;
@@ -19861,7 +19861,7 @@ function setResponseValueAndErrors(res, key3, value, errorMessage, refs) {
   addErrorMessage(res, key3, errorMessage, refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
 var getRelativePath = (pathA, pathB) => {
   let i = 0;
   for (; i < pathA.length && i < pathB.length; i++) {
@@ -19871,7 +19871,7 @@ var getRelativePath = (pathA, pathB) => {
   return [(pathA.length - i).toString(), ...pathB.slice(i)].join("/");
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/any.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/any.js
 function parseAnyDef(refs) {
   if (refs.target !== "openAi") {
     return {};
@@ -19887,7 +19887,7 @@ function parseAnyDef(refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/array.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/array.js
 function parseArrayDef(def, refs) {
   const res = {
     type: "array"
@@ -19911,7 +19911,7 @@ function parseArrayDef(def, refs) {
   return res;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js
 function parseBigintDef(def, refs) {
   const res = {
     type: "integer",
@@ -19957,24 +19957,24 @@ function parseBigintDef(def, refs) {
   return res;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js
 function parseBooleanDef() {
   return {
     type: "boolean"
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/branded.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/branded.js
 function parseBrandedDef(_def, refs) {
   return parseDef(_def.type._def, refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/catch.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/catch.js
 var parseCatchDef = (def, refs) => {
   return parseDef(def.innerType._def, refs);
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/date.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/date.js
 function parseDateDef(def, refs, overrideDateStrategy) {
   const strategy = overrideDateStrategy ?? refs.dateStrategy;
   if (Array.isArray(strategy)) {
@@ -20033,7 +20033,7 @@ var integerDateParser = (def, refs) => {
   return res;
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/default.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/default.js
 function parseDefaultDef(_def, refs) {
   return {
     ...parseDef(_def.innerType._def, refs),
@@ -20041,12 +20041,12 @@ function parseDefaultDef(_def, refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/effects.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/effects.js
 function parseEffectsDef(_def, refs) {
   return refs.effectStrategy === "input" ? parseDef(_def.schema._def, refs) : parseAnyDef(refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/enum.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/enum.js
 function parseEnumDef(def) {
   return {
     type: "string",
@@ -20054,7 +20054,7 @@ function parseEnumDef(def) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js
 var isJsonSchema7AllOfType = (type) => {
   if ("type" in type && type.type === "string")
     return false;
@@ -20096,7 +20096,7 @@ function parseIntersectionDef(def, refs) {
   } : void 0;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/literal.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/literal.js
 function parseLiteralDef(def, refs) {
   const parsedType2 = typeof def.value;
   if (parsedType2 !== "bigint" && parsedType2 !== "number" && parsedType2 !== "boolean" && parsedType2 !== "string") {
@@ -20116,7 +20116,7 @@ function parseLiteralDef(def, refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/string.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/string.js
 var emojiRegex2 = void 0;
 var zodPatterns = {
   /**
@@ -20441,7 +20441,7 @@ function stringifyRegExpWithFlags(regex, refs) {
   return pattern;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/record.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/record.js
 function parseRecordDef(def, refs) {
   if (refs.target === "openAi") {
     console.warn("Warning: OpenAI may not support records in schemas! Try an array of key-value pairs instead.");
@@ -20493,7 +20493,7 @@ function parseRecordDef(def, refs) {
   return schema;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/map.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/map.js
 function parseMapDef(def, refs) {
   if (refs.mapStrategy === "record") {
     return parseRecordDef(def, refs);
@@ -20518,7 +20518,7 @@ function parseMapDef(def, refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
 function parseNativeEnumDef(def) {
   const object3 = def.values;
   const actualKeys = Object.keys(def.values).filter((key3) => {
@@ -20532,7 +20532,7 @@ function parseNativeEnumDef(def) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/never.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/never.js
 function parseNeverDef(refs) {
   return refs.target === "openAi" ? void 0 : {
     not: parseAnyDef({
@@ -20542,7 +20542,7 @@ function parseNeverDef(refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/null.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/null.js
 function parseNullDef(refs) {
   return refs.target === "openApi3" ? {
     enum: ["null"],
@@ -20552,7 +20552,7 @@ function parseNullDef(refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/union.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/union.js
 var primitiveMappings = {
   ZodString: "string",
   ZodNumber: "number",
@@ -20620,7 +20620,7 @@ var asAnyOf = (def, refs) => {
   return anyOf.length ? { anyOf } : void 0;
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js
 function parseNullableDef(def, refs) {
   if (["ZodString", "ZodNumber", "ZodBigInt", "ZodBoolean", "ZodNull"].includes(def.innerType._def.typeName) && (!def.innerType._def.checks || !def.innerType._def.checks.length)) {
     if (refs.target === "openApi3") {
@@ -20652,7 +20652,7 @@ function parseNullableDef(def, refs) {
   return base && { anyOf: [base, { type: "null" }] };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/number.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/number.js
 function parseNumberDef(def, refs) {
   const res = {
     type: "number"
@@ -20701,7 +20701,7 @@ function parseNumberDef(def, refs) {
   return res;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/object.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/object.js
 function parseObjectDef(def, refs) {
   const forceOptionalIntoNullable = refs.target === "openAi";
   const result = {
@@ -20771,7 +20771,7 @@ function safeIsOptional(schema) {
   }
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/optional.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/optional.js
 var parseOptionalDef = (def, refs) => {
   if (refs.currentPath.toString() === refs.propertyPath?.toString()) {
     return parseDef(def.innerType._def, refs);
@@ -20790,7 +20790,7 @@ var parseOptionalDef = (def, refs) => {
   } : parseAnyDef(refs);
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js
 var parsePipelineDef = (def, refs) => {
   if (refs.pipeStrategy === "input") {
     return parseDef(def.in._def, refs);
@@ -20810,12 +20810,12 @@ var parsePipelineDef = (def, refs) => {
   };
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/promise.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/promise.js
 function parsePromiseDef(def, refs) {
   return parseDef(def.type._def, refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/set.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/set.js
 function parseSetDef(def, refs) {
   const items = parseDef(def.valueType._def, {
     ...refs,
@@ -20835,7 +20835,7 @@ function parseSetDef(def, refs) {
   return schema;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js
 function parseTupleDef(def, refs) {
   if (def.rest) {
     return {
@@ -20863,24 +20863,24 @@ function parseTupleDef(def, refs) {
   }
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js
 function parseUndefinedDef(refs) {
   return {
     not: parseAnyDef(refs)
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js
 function parseUnknownDef(refs) {
   return parseAnyDef(refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js
 var parseReadonlyDef = (def, refs) => {
   return parseDef(def.innerType._def, refs);
 };
 
-// node_modules/zod-to-json-schema/dist/esm/selectParser.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/selectParser.js
 var selectParser = (def, typeName, refs) => {
   switch (typeName) {
     case ZodFirstPartyTypeKind.ZodString:
@@ -20956,7 +20956,7 @@ var selectParser = (def, typeName, refs) => {
   }
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parseDef.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/parseDef.js
 function parseDef(def, refs, forceResolution = false) {
   const seenItem = refs.seen.get(def);
   if (refs.override) {
@@ -21012,7 +21012,7 @@ var addMeta = (def, refs, jsonSchema) => {
   return jsonSchema;
 };
 
-// node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js
+// ../pali-thera-remaining-local/node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js
 var zodToJsonSchema = (schema, options) => {
   const refs = getRefs(options);
   let definitions = typeof options === "object" && options.definitions ? Object.entries(options.definitions).reduce((acc, [name2, schema2]) => ({
@@ -21074,7 +21074,7 @@ var zodToJsonSchema = (schema, options) => {
   return combined;
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-json-schema-compat.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-json-schema-compat.js
 function mapMiniTarget(t) {
   if (!t)
     return "draft-7";
@@ -21116,7 +21116,7 @@ function parseWithCompat(schema, data5) {
   return result.data;
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js
 var DEFAULT_REQUEST_TIMEOUT_MSEC = 6e4;
 var Protocol = class {
   constructor(_options) {
@@ -22093,7 +22093,7 @@ function mergeCapabilities(base, additional) {
   return result;
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/validation/ajv-provider.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/validation/ajv-provider.js
 var import_ajv = __toESM(require_ajv(), 1);
 var import_ajv_formats = __toESM(require_dist(), 1);
 function createDefaultAjvInstance() {
@@ -22161,7 +22161,7 @@ var AjvJsonSchemaValidator = class {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
 var ExperimentalServerTasks = class {
   constructor(_server) {
     this._server = _server;
@@ -22374,7 +22374,7 @@ var ExperimentalServerTasks = class {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/helpers.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/helpers.js
 function assertToolsCallTaskCapability(requests, method, entityName) {
   if (!requests) {
     throw new Error(`${entityName} does not support task creation (required for ${method})`);
@@ -22409,7 +22409,7 @@ function assertClientRequestTaskCapability(requests, method, entityName) {
   }
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
 var Server = class extends Protocol {
   /**
    * Initializes this server with the given name and version information.
@@ -22780,7 +22780,7 @@ var Server = class extends Protocol {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/completable.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/completable.js
 var COMPLETABLE_SYMBOL = /* @__PURE__ */ Symbol.for("mcp.completable");
 function isCompletable(schema) {
   return !!schema && typeof schema === "object" && COMPLETABLE_SYMBOL in schema;
@@ -22794,7 +22794,7 @@ var McpZodTypeKind;
   McpZodTypeKind2["Completable"] = "McpCompletable";
 })(McpZodTypeKind || (McpZodTypeKind = {}));
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/toolNameValidation.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/toolNameValidation.js
 var TOOL_NAME_REGEX = /^[A-Za-z0-9._-]{1,128}$/;
 function validateToolName(name) {
   const warnings = [];
@@ -22852,7 +22852,7 @@ function validateAndWarnToolName(name) {
   return result.isValid;
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/mcp-server.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/mcp-server.js
 var ExperimentalMcpServerTasks = class {
   constructor(_mcpServer) {
     this._mcpServer = _mcpServer;
@@ -22867,7 +22867,7 @@ var ExperimentalMcpServerTasks = class {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js
+// ../pali-thera-remaining-local/node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js
 function toolInputElementCount(value, max) {
   let count = 0;
   const stack = [value];
@@ -45716,6 +45716,84 @@ var THERA_APADANA_PROFILES = deepFreeze({
       "Publisher local3 says thirty-eighth aeon; VRI35 main says twenty-eighth, with a\u1E6D\u1E6Dhati\u1E43se variant. This is an observed edition difference only.",
       "Note2 explicitly leaves singular locative/plural object interpretation open; note3 preserves the unusual name and iti interpretation. Do not disambiguate or normalize the source wording."
     ]
+  },
+  "tha-ap236": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+    "id": "tha-ap236",
+    "publisher_chapter": "chapter-3",
+    "poem": 234,
+    "verses": [
+      2437,
+      2441
+    ],
+    "root_verses": [
+      14,
+      18
+    ],
+    "note_count": 4,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-234/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-234/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Kila\xF1jad\u0101yaka",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 234; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+    "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+    "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "321ba6fcf2fcdee0f55e0faf21663a73c9e66ff41169b8572fd526ac2c19ed8a",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2437",
+        "suffix": "(1) [2437]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2438",
+        "suffix": "(2) [2438]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2439",
+        "suffix": "(3) [2439]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2440",
+        "suffix": "(4) [2440]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2441",
+        "suffix": "(5) [2441]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 234 to canonical tha-ap236. Shared numbers alone do not establish any other mapping.",
+      "Original path poem-234.md and printed234 identify this exact poem, while original frontmatter order235 duplicates separate poem235. Preserve all three facts.",
+      "Declared publisher permalink uses category plus page.fileSlug, not order: source identity and route are tied to poem-234. This is template evidence, not a live rendered-route check.",
+      "Future runtime identity checks must finite-pin this exact exception and keep printed234 distinct from235; do not rewrite original metadata or route by order.",
+      "Publisher Jutindhara follows original VRI jutindharo variant beside main jaladdharo.",
+      "Original publisher file poem-234.md has frontmatter order235 and printed poem234. Its Kila\xF1jad\u0101yaka title, mat narrative, four poem notes and both colophons belong to canonicaltha-ap236; neither order235 nor a numeric offset identifies another text.",
+      "The publisher permalink derives from category plus page.fileSlug, so this choice stays /text/chapter-3/poem-234/. Separate poem-235.md/order235/printed235 is Vediyad\u0101yaka, the railing gift to Vipassi, canonicaltha-ap237; no source substitution or metadata correction is made.",
+      "The earlier nine-poem source intake (D256) held publisher234 and reviewed33entries; its publisher240 summary warning is retained as historical intake provenance. This separately reviewed publisher234 choice does not rewrite that earlier approval or its source objects. Original full-chapter38count remains a source statement, not a line-complete VRI or generated coverage claim."
+    ]
   }
 });
 
@@ -55731,8 +55809,13 @@ function theraJoinedHeadingStanza(paragraphs, stanza, profile, index4) {
 function parseTheraApadana(raw, profile) {
   const known = THERA_APADANA_PROFILES[profile?.id];
   if (!known || JSON.stringify(profile) !== JSON.stringify(known) || digest(raw) !== known.raw_sha256 || profile.publisher_chapter !== "chapter-3") fail2();
+  let expectedOrder = profile.poem;
+  if (profile.id === "tha-ap236") {
+    if (profile.poem !== 234 || profile.path !== "/text/chapter-3/poem-234/" || profile.raw_sha256 !== "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a") fail2();
+    expectedOrder = 235;
+  }
   const front = raw.match(/^---\n([^]*?)\n---\n/);
-  if (!front || !new RegExp(`^order: ${profile.poem}$`, "m").test(front[1]) || !/^category: chapter-3$/m.test(front[1])) fail2();
+  if (!front || !new RegExp(`^order: ${expectedOrder}$`, "m").test(front[1]) || !/^category: chapter-3$/m.test(front[1])) fail2();
   const title = front[1].match(/^title: (.+)$/m)?.[1];
   if (title !== profile.title) fail2();
   const present = (value) => plainMarkdown((["tha-ap42", "tha-ap121"].includes(profile.id) ? value.replace(/<span class="diacritics" data-state="on">(c|cc)<\/span><span class="no-diacritics" data-state="off">(ch|chch)<\/span>/g, (_all, diacritic, alternate) => {
@@ -68031,7 +68114,7 @@ function createServer2({ executeTool } = {}) {
 // src/chatgpt-widget.mjs
 var import_node_crypto10 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v31";
+var WIDGET_VERSION = "v32";
 var NAVIGATION_TIMEOUT_MS = 9e4;
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
@@ -68039,7 +68122,7 @@ var MCP_APP_MIME = "text/html;profile=mcp-app";
 var SKYBRIDGE_MIME = "text/html+skybridge";
 var WIDGET_HASH_SOURCE = true ? "function contentSha256(text) {\n  if (typeof text !== 'string' || text.length > 100000 || typeof TextEncoder !== 'function') throw Error('Editorial content integrity checking is unavailable.');\n  const input = new TextEncoder().encode(text), length = input.length;\n  const bytes = new Uint8Array(Math.ceil((length + 9) / 64) * 64);\n  bytes.set(input); bytes[length] = 0x80;\n  const view = new DataView(bytes.buffer);\n  view.setUint32(bytes.length - 8, Math.floor(length / 0x20000000));\n  view.setUint32(bytes.length - 4, (length * 8) >>> 0);\n  const constants = [\n    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,\n    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,\n    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,\n    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,\n    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,\n    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,\n    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,\n    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2,\n  ];\n  const state = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];\n  const words = new Uint32Array(64), rotate = (value, n) => (value >>> n) | (value << (32 - n));\n  for (let offset = 0; offset < bytes.length; offset += 64) {\n    for (let i = 0; i < 16; i++) words[i] = view.getUint32(offset + 4 * i);\n    for (let i = 16; i < 64; i++) {\n      const x = words[i - 15], y = words[i - 2];\n      const s0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >>> 3), s1 = rotate(y, 17) ^ rotate(y, 19) ^ (y >>> 10);\n      words[i] = (words[i - 16] + s0 + words[i - 7] + s1) >>> 0;\n    }\n    let [a,b,c,d,e,f,g,h] = state;\n    for (let i = 0; i < 64; i++) {\n      const sum1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25), choice = (e & f) ^ (~e & g);\n      const first = (h + sum1 + choice + constants[i] + words[i]) >>> 0;\n      const sum0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22), majority = (a & b) ^ (a & c) ^ (b & c);\n      h=g; g=f; f=e; e=(d+first)>>>0; d=c; c=b; b=a; a=(first+sum0+majority)>>>0;\n    }\n    for (const [i,value] of [a,b,c,d,e,f,g,h].entries()) state[i] = (state[i] + value) >>> 0;\n  }\n  return state.map(value => value.toString(16).padStart(8, '0')).join('');\n}" : contentSha256.toString();
 var APADANA_PINS = ["raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256"];
-var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261"];
+var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236"];
 var WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: translationId(p),
   url: p.url,

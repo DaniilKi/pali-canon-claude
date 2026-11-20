@@ -1,0 +1,54 @@
+{
+  "baseline": "7d5ac90845402b322dabf2c5120d1485b15c0bda",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "goldens_sha256": "f431e9c1e69ef7bcafe6a511a3bbddc87e64739a5df5910ed6ee65f31a642ce9",
+  "expected_profiles_sha256": "af6d434558dc690935a4cc12672999de9114afaeed259c4039492f8e6bd32efc",
+  "expected_links_sha256": "279a6106888c4978da6abe40207cba84f4f994e5aad5014bf3023da27f095d77",
+  "raw_source_v2_seals": {
+    "GOLDENS.json": "46821de4c13466a9142d3fbf38aa4f86ccf63ea601180646f63055f169533b0f",
+    "SOURCE_REVIEW.json": "bc9419b06a9e920cc034f57e0154e56c798ae9bfbb49b917e90bb7700227acc1",
+    "RIGHTS_REVIEW.json": "11326226c65efaae2aa657b709eb4bf5bc651c573656f3a3143257fbd1fb0ad3",
+    "AMENDMENT.json": "19ea89ba87cde832a2935b0ea3ba18f5963da2f6d0f6e556031b861e07f79226"
+  },
+  "source_approval_count": 1,
+  "normalization_approval_count": 1,
+  "external_activations": 0,
+  "runtime_release_approval": false,
+  "status": "PROPOSAL_ONLY_NOT_IMPLEMENTED",
+  "new_choice": "tha-ap236",
+  "expected_registry_count_after_own_case": 285,
+  "expected_theri_count": 40,
+  "expected_thera_count": 245,
+  "new_descriptor_fields": [],
+  "minimal_parser_change": {
+    "file": "src/apadana-thera.mjs",
+    "placement": "After authentic known-profile/rawSHA check; before existing frontmatter order comparison.",
+    "guard": "let expectedOrder = profile.poem;\nif (profile.id === 'tha-ap236') {\n  if (profile.poem !== 234 || profile.path !== '/text/chapter-3/poem-234/'\n    || profile.raw_sha256 !== '24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a') fail();\n  expectedOrder = 235;\n}\n// Existing frontmatter order comparison uses expectedOrder; all other checks remain.\n",
+    "scope": "Literal own-ID/raw-revision/path exception only, not generic frontmatter_order metadata or order-based routing; original raw bytes unchanged."
+  },
+  "other_finite_changes": [
+    "Append exact single pure profile and link from sealed expected maps, preserving all284 existing objects byte-for-byte.",
+    "Add tha-ap236 to actual publisher_paratext content-pin lists in standalone policy and widget, including its authentic empty string. Existing actual note/body/source/root pins remain mandatory.",
+    "Refresh embedded widget profile resource version after finite table change (plannedv32 if no competing approved widget change). Preserve sharedSHA literal/buildmacro and strict whole-resource audit.",
+    "Update source policy current count285(40Therī245Therā) only; no rights/date or sourcefile rewrite.",
+    "No new summary, preface, editorial-gap, selector, source namespace, canonical revision, locator migration, provider fallback or host."
+  ],
+  "required_positive_cases": [
+    "Exact original raw order235+printed234+filename234 renders Kilañjadāyaka only with four owned notes.",
+    "Neighbour publisher235/order235/printed235 remains distinct Vediyadāyaka/canonicaltha-ap237 with unchanged profile and body.",
+    "Actual source/cache/individual/comparison/widget paths preserve source terms/revision/body/note/empty-paratext pins and Pāli on refusal."
+  ],
+  "required_refusals": [
+    "Edited source order234, printed235 or title/notes/wording changes refuse raw pin before words.",
+    "Link/rawURL/path/id confusion with neighbour235 refuses before fetch; numericorder235 never selects another poem.",
+    "Same-count cached note corruption, forged metadata/source revision and nonempty forged preface refuse English.",
+    "Stale prefix/offset/source revision cannot borrow another edition/page or attach private drafts to substituted words."
+  ],
+  "preservation": [
+    "All284previousprofiles/links exact, including D256 historical nine-poem/33entry approval note.",
+    "Existing285th choice is new and separately reviewed; do not rewrite history to imply the previous summary gate had approved it.",
+    "Canon/book/commentary/locator/private drafts/notes unchanged; source260/note5 and oldholds untouched."
+  ],
+  "future_validation": "Parent-owned focused source/client/quote/cache regressions, strict packaged widget audit/no English bundling/browser and exactcommitCI after peer+rootGO. No such acceptance is claimed by this source packet."
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "source-case-hold-evidence-v1",
+  "baseline": "7d5ac90845402b322dabf2c5120d1485b15c0bda",
+  "unit": "tha-ap3",
+  "status": "SOURCE_NOTE_CONFIRMED_IMPLEMENTATION_HELD",
+  "source_evidence_confirmed": true,
+  "source_provenance": {
+    "name": "Chaṭṭha Saṅgāyana Tipiṭaka (VRI)",
+    "repository": "https://github.com/VipassanaTech/tipitaka-xml",
+    "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org",
+    "terms": "Made freely available by VRI for non-commercial use with attribution."
+  },
+  "source_xml": {
+    "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+    "bytes": 2464074
+  },
+  "note_integrity_and_original_location": {
+    "utf8_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60",
+    "physical_element_zero_based": 1130,
+    "source_line_one_based": 4531,
+    "raw_utf16le_bytes": [
+      196320,
+      196466
+    ],
+    "raw_utf16le_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723",
+    "ET_utf8_with_tail_sha256": "d2d01a2c784fd9654f825e239e7a40861aa7e6b94390542a42b786644533790a",
+    "hypothetical_five_field_block_sha256": "69b805ef1d07f2c277e3477d35f73416927eafb9523a4e9b38e7b0b87f39d9df",
+    "hash_representations_distinct": true,
+    "no_root_body_text": true,
+    "no_page_breaks": true
+  },
+  "location": {
+    "unit": "tha-ap3",
+    "current_empty_marker_ref": "tha-ap3/236",
+    "current_following_body_ref": "tha-ap3/237",
+    "current_following_unnumbered_verse_ref": "tha-ap3/238",
+    "book_empty_marker_ref": "vri-book:s0510m1/387",
+    "book_following_body_ref": "vri-book:s0510m1/388",
+    "physical_XML_element_zero_based": 1130,
+    "baseline_previous_block": 1129,
+    "baseline_following_block": 1130,
+    "previous_number": "372",
+    "qualification": "These record original physical placement. Do not infer a unique lexical/stanza owner or a verified Thai witness reading from the remark."
+  },
+  "cause": {
+    "file": "scripts/canon/vri.py",
+    "lines": [
+      89,
+      94
+    ],
+    "finding": "Parser extracts notes, then discards a no-visible-text block unless hangnum or n is present. The unnumbered gatha1 has one note and no root body, so its already-extracted note is lost."
+  },
+  "source_rights_assessment": "Same pinned VRI XML and textual apparatus as the already bundled canon. Established baseline VRI terms permit noncommercial use with attribution; retain full existing VRI provenance/terms and describe extraction repair. This investigation did not retrieve or independently renew an upstream rights notice; the supplied local VRI snapshot contains XML only. No Walters/Whitman rights are invoked for this Pāli note; no additional translation/media rights are approved.",
+  "compatibility_at284_checkpoint": {
+    "canonical_body_segment_refs_unchanged_in_independent_simulation": true,
+    "raw_block_offset_delta": 1,
+    "unit_spans_affected": 420,
+    "existing_thera_root_profile_pins_affected": 244,
+    "performed_on_repository": false,
+    "qualification": "Numbers/body remain stable in this strictly note-only insertion simulation. Existing absolute block spans, book/canon hashes and root pins include positions and would change. Production integration, source-position and compatibility tests remain unrun."
+  },
+  "do_not": [
+    "Do not change source bodytext to gatha1 or merge/rebuild372stanza; that is an unsupported wording/segmentation repair.",
+    "Do not append note to neighboring existing body/verse notes without preserving its distinct original XML owner; do not count it as scripture, commentary, translator note or quotation wording.",
+    "Do not deduplicate/correct gāthāyo to nearby existing373gāthāro; these original strings are distinct.",
+    "Do not globally loosen no-visible-block parser retention under the old source/locator pins. It shifts420spans and244reviewedTherārootpins plus historical fullcanon/book checks.",
+    "Do not silently migrate saved passages/drafts or make a whole-body hash imply authentication of arbitrary partial-page text."
+  ],
+  "proposed_additive_sidecar": {
+    "design": "One finite separately labelled VRI source-note sidecar, outside canonical body block arrays and segment payloads. Expose additive source_notes metadata in get_text and read_passage for this exact unit/source-book position; native/widget consumers render it as original edition apparatus. The original omitted element remains independently identifiable rather than reassigned to neighboring text.",
+    "identity_pins": {
+      "file": "s0510m1.mul.xml",
+      "edition_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+      "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+      "physical_element_zero_based": 1130,
+      "raw_utf16le_byte_interval": [
+        196320,
+        196466
+      ],
+      "raw_element_sha256": "986c6f423be82278f4a62441de602fcda1e412493c4a51570bd5ab712a1ec723",
+      "note_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60"
+    },
+    "location_contract": "After original hangnum372, before following original bodytext at current block1130. Associated display point may reference empty marker tha-ap3/236/book387 as a navigation anchor ONLY, with an explicit statement that the source note has its own note-onlygatha1 element and semantic stanza span is not independently verified.",
+    "ownership_contract": "Original VRI edition remark, not root text; preserve exact wording. It is not a claim of independent Thai-edition collation. Keep nearby existing373note distinct and unmodified.",
+    "invariants": [
+      "All canonical books/blocks/unit spans/source commit unchanged.",
+      "All currently returned segment ref/type/text/page/source_blocks/variant fields and existing exact-anchor fingerprints unchanged.",
+      "All284Apadāna source/link/root descriptors unchanged.",
+      "Existing private saved refs, offsets, source pins and drafts untouched.",
+      "Existing source-note omission evidence remains historical; new repair evidence is a separate artifact."
+    ],
+    "proof_and_schema": "New finite record schema should carry a stable record ID, original-source pins and distinct apparatus/extraction revision or record hash outside source.locator_revision. Reject absent/duplicate/mutated record, wrong file/unit/neighbor/source/notes without fallback. Do not add unsupported keys to existing strict source objects or silently alter returned segment objects.",
+    "page_contract": "Define one explicit page anchor for note visibility in uid and book modes, including offset/limit/exact/context. Return its presence once for matching pages and disclose source-note availability at whole-unit opening. Never associate the text with an arbitrary neighboring passage on pagination boundaries.",
+    "cache_contract": "Bundled canonical data is process-loaded and remains identical under this sidecar design. Existing liveCache caches live English/dictionary responses, not these canonical reads. Native reader performs POST tools/call, with private-only local/session storage. New apparatus caching, if introduced, must bind record/extraction revision; do not reuse source commit alone as proof of sidecar completeness. Rebuild both widget resources/native bundle and verify actual installed bytes; do not rely on stale host-restored render state."
+  },
+  "required_verification": [
+    "Independent review of exact proposed finite record and additive API schema, source ownership wording and raw pins before production activation.",
+    "Mutation controls: note diacritics/gāthāyo vs gāthāro, XMLbytes/hash/elementindex, upstream commit, original before/after neighbors, unit/book IDs, duplicate record, unrelated unit/book, absent/wrong integrity pin; all fail without inferred note reassignment.",
+    "Compare every preexisting block/unit/source/canonical/commentary byte and all284profiles; compare all canonical/source-book rendered segment arrays and existing exact/context anchors against frozen prior baseline. No locator/source pin or private-data migration.",
+    "Exercise get_text none/raw/structured and read_passage uid/book/exact/context/paging, marker372 and both surrounding passages. Confirm original373note remains exactly once in its old field and missing note exactly once in the separate apparatus field; no root-text search/quote/analysis contamination.",
+    "Actual native/widget browser rendering with keyboard/mobile emulation and accessible apparatus labels; adversarial foreign note/mutated record must be refused. Saved citations/drafts and multi-tab draft flows remain unchanged, no claims of physical or human assistive acceptance.",
+    "Root-owned focused/fullcheck, strict full-resource widget equality, real offline package byte binding and exact final commitCI after priorMac reconciliation. Rights/full VRI notices and extraction-change disclosure preserved."
+  ],
+  "source_review": {
+    "external_path": "/tmp/pali-sariputta-note-review/SOURCE_NOTE_REPAIR_REVIEW.json",
+    "sha256": "a33d6dc134ee78014d5635d46fc1b6e55d3873dc548ecd547a79ea702bc2d14a"
+  },
+  "implementation_approval": false,
+  "activation_authority": false,
+  "note_text_added_to_canonical_data": false,
+  "no_english_publisher_payload": true
+}

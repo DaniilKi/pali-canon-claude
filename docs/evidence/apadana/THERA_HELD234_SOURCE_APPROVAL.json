@@ -1,0 +1,159 @@
+{
+  "baseline": "7d5ac90845402b322dabf2c5120d1485b15c0bda",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "goldens_sha256": "f431e9c1e69ef7bcafe6a511a3bbddc87e64739a5df5910ed6ee65f31a642ce9",
+  "expected_profiles_sha256": "af6d434558dc690935a4cc12672999de9114afaeed259c4039492f8e6bd32efc",
+  "expected_links_sha256": "279a6106888c4978da6abe40207cba84f4f994e5aad5014bf3023da27f095d77",
+  "raw_source_v2_seals": {
+    "GOLDENS.json": "46821de4c13466a9142d3fbf38aa4f86ccf63ea601180646f63055f169533b0f",
+    "SOURCE_REVIEW.json": "bc9419b06a9e920cc034f57e0154e56c798ae9bfbb49b917e90bb7700227acc1",
+    "RIGHTS_REVIEW.json": "11326226c65efaae2aa657b709eb4bf5bc651c573656f3a3143257fbd1fb0ad3",
+    "AMENDMENT.json": "19ea89ba87cde832a2935b0ea3ba18f5963da2f6d0f6e556031b861e07f79226"
+  },
+  "source_approval_count": 1,
+  "normalization_approval_count": 1,
+  "external_activations": 0,
+  "runtime_release_approval": false,
+  "status": "SOURCE_AND_NORMALIZATION_QUALIFIED_FOR_ONE_FINITE_ORDER_EXCEPTION; SEPARATE_PEER_APPROVAL_PENDING",
+  "reviewer": "runtime_241_250 role reused as originals-first held234 source author; AI-assisted, not human philological acceptance",
+  "approved_ids": [
+    "tha-ap236"
+  ],
+  "approved_publisher_poems": [
+    234
+  ],
+  "approved_records": [
+    {
+      "id": "tha-ap236",
+      "publisher_poem": 234,
+      "frontmatter_order": 235,
+      "printed_number": 234,
+      "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+      "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+      "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "321ba6fcf2fcdee0f55e0faf21663a73c9e66ff41169b8572fd526ac2c19ed8a",
+      "body_paragraph_count": 8,
+      "physical_stanza_count": 5,
+      "printed_local_labels": 5,
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "apparatus": {},
+      "source_identity_audit": {
+        "kind": "audit_metadata_only_not_new_runtime_descriptor",
+        "frontmatter_order": 235,
+        "printed_poem_number": 234,
+        "filename": "poem-234.md",
+        "canonical_id": "tha-ap236",
+        "category": "chapter-3",
+        "permalink_template": "/text/{{ category | slug }}/{{ page.fileSlug }}/index.html",
+        "route": "/text/chapter-3/poem-234/",
+        "order_rewritten": false,
+        "printed_number_rewritten": false,
+        "neighbor_publisher_poem": 235,
+        "neighbor_canonical_id": "tha-ap237",
+        "neighbor_title": "Vediyadāyaka"
+      },
+      "edition_caveats": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+        "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 234 to canonical tha-ap236. Shared numbers alone do not establish any other mapping.",
+        "Original path poem-234.md and printed234 identify this exact poem, while original frontmatter order235 duplicates separate poem235. Preserve all three facts.",
+        "Declared publisher permalink uses category plus page.fileSlug, not order: source identity and route are tied to poem-234. This is template evidence, not a live rendered-route check.",
+        "Future runtime identity checks must finite-pin this exact exception and keep printed234 distinct from235; do not rewrite original metadata or route by order.",
+        "Publisher Jutindhara follows original VRI jutindharo variant beside main jaladdharo.",
+        "Original publisher file poem-234.md has frontmatter order235 and printed poem234. Its Kilañjadāyaka title, mat narrative, four poem notes and both colophons belong to canonicaltha-ap236; neither order235 nor a numeric offset identifies another text.",
+        "The publisher permalink derives from category plus page.fileSlug, so this choice stays /text/chapter-3/poem-234/. Separate poem-235.md/order235/printed235 is Vediyadāyaka, the railing gift to Vipassi, canonicaltha-ap237; no source substitution or metadata correction is made.",
+        "The earlier nine-poem source intake (D256) held publisher234 and reviewed33entries; its publisher240 summary warning is retained as historical intake provenance. This separately reviewed publisher234 choice does not rewrite that earlier approval or its source objects. Original full-chapter38count remains a source statement, not a line-complete VRI or generated coverage claim."
+      ],
+      "normalization_approval": true,
+      "source_approval": true,
+      "external_activation": false
+    }
+  ],
+  "identity_basis": {
+    "title_and_colophons": "Exact Kilañjadāyaka identity in original source and VRI tha-ap236.",
+    "narrative": "Tivarā basket-maker, Siddhattha mat gift,94aeons,Jutindhara royal variant; distinct from neighboring Vediyadāyaka railing gift to Vipassi.",
+    "source_order_not_identity": true,
+    "original_order235_preserved": true,
+    "original_printed234_preserved": true,
+    "filename_and_route234_preserved": true,
+    "canonical_bounds": [
+      8015,
+      8032
+    ],
+    "vri_numbered_stanzas": [
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "no_boundary_or_locator_repair": true
+  },
+  "scope": "One complete original PTS/BJTS publisher-edition poem only; five printed entries and four poem-owned notes. Not line-complete VRI. No wording or source metadata correction.",
+  "method": [
+    "Read exact original body, all four notes, full corresponding Pāli story/variant/neighboring boundaries, original publisher routing and rights artifacts.",
+    "Independently derive every normalized string/hash/label/note owner with standard library only; no production-parser output oracle.",
+    "Replay all14645 original XML canonical tuples against exact canonical logical SHA, leaving Sāriputta note-only omission separate and unchanged."
+  ],
+  "upstream_binding": {
+    "official_tree_receipt_sha256": "47d1e30da0285159d6ca69c24e33035bd9b24b89c2bacac2b8d3a9bd6bc83da9",
+    "publisher_commit_binding_sha256": "657aaa0867bfa1b7896bfe0bbdb552afe2475904d5660aed0ae3716e9c14fb09",
+    "selected_original_artifacts": [
+      {
+        "path": "src/_poems/chapter-3/poem-234.md",
+        "bytes": 1290,
+        "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+        "official_git_blob_sha1": "34c19fddf4fd561aae3ed5a3fcb774f80f689a94"
+      },
+      {
+        "path": "src/_poems/chapter-3/poem-235.md",
+        "bytes": 915,
+        "raw_sha256": "39760489bd14dd018c44b4f40626f3619da2abed79e8a5d58fca4b4da7b868ed",
+        "official_git_blob_sha1": "b141bcb8613001943a4b0fc6a4c73e2e5de8ded8"
+      }
+    ]
+  },
+  "descriptor_shapes": {
+    "profiles": "pure existing profile schema only; poem234 denotes printed poem; no new frontmatter_order runtime field",
+    "links": "same profile fields plus english and match only",
+    "source_identity_audit": "metadata proof only, never a new runtime apparatus descriptor"
+  },
+  "external_payload": {
+    "file": "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json",
+    "sha256": "1f0285a2994824097ffa581fd76ab778bcedf6870f164e6eaf0aa59a54a2ae1c",
+    "must_never_copy_into_repository_or_package": true
+  },
+  "changes_notice": "Presentation extraction only: remove reviewed Markdown heading/emphasis markers and abbreviation tags; unescape literal brackets and cross-reference punctuation; replace footnote references with explicit note labels; remove Markdown hard-break padding while preserving every line and physical paragraph. Preserve publisher wording, typography, original printed234, original frontmatterorder235, exactpoem-234route, all five printed stanza labels, four poem notes and both colophons. No source metadata or translation wording is rewritten, generated or harmonized to VRI. Complete publisher-edition poem is not a line-complete VRI translation.",
+  "finite_guard_proposal": "PROPOSED_RUNTIME.json",
+  "current_refusal_evidence": "CURRENT_BEHAVIOR.json",
+  "rendered_route_comparison": "ROOT_RENDERED_OBSERVATION.json",
+  "portable_replay": {
+    "script": "scripts/apadana/review_thera_held234.py",
+    "sha256": "e626abc5b256d75eca30202b221869d0e3ba387c3dd3281f2b407e42f40a922d",
+    "stdlib_only": true,
+    "external_v2_packet_optional": true
+  },
+  "prior284_objects_must_remain_byte_exact": true,
+  "previous_D256_held_summary_note_remains_historical_provenance": true,
+  "out_of_scope": [
+    "publisher260/canonical262 malformed summary and note5",
+    "old70/140/158/159 holds",
+    "Sāriputta note-only omission",
+    "canonical repairs/citation revisions/private-note or draft migrations",
+    "runtime/client/package/browser/exactcommitCI/release/deploy/outreach"
+  ],
+  "remaining_gates": [
+    "Separate originals-first independent peer source+normalization approval",
+    "Root implementation GO and finite guard/client/cache regressions",
+    "Preserve all284 old profile/link objects exactly; validate neighbour235 separately",
+    "Parent-owned package/no-English-bundling/strict-widget/browser/exactcommitCI gates; priorCIreconciliation",
+    "Physical-device/human-assistive/specialist acceptance remains external"
+  ]
+}

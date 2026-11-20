@@ -1,0 +1,13 @@
+{
+  "status": "HASH_DOMAIN_CLARIFICATION_AFTER_SEALED_ORIGINAL_DERIVATION",
+  "created_utc": "2026-11-20T06:10:19.738920+00:00",
+  "preauthor_proof_sha256": "5a094525bdeb12c31d2cf211393d9bbee71cc73838249e36096245611606cb5d",
+  "preauthor_raw_block_array_digest_mislabelled_root_sha256": "0c40640710f11d68ba3e32545746a67e1df9ed619df1ba0c41c0d26d82cb4a2c",
+  "registered_root_digest": "321ba6fcf2fcdee0f55e0faf21663a73c9e66ff41169b8572fd526ac2c19ed8a",
+  "registered_hash_recipe": "SHA256 UTF8 compactJSON object in exact key order id,book,start,end,blocks; all values and original blocks were independently identified and sealed before author inspection.",
+  "contract_reference": "/tmp/pali-held-cases-local/src/apadana.mjs:9",
+  "contract_file_sha256": "1b88b0067caa2d655fda0ee2433d0f3683fe3ef35b9b2108ea8dfbab7e6f6217",
+  "production_parser_imported_or_called": false,
+  "author_root_hash_used_as_expected_oracle": false,
+  "original_sealed_files_changed": false
+}

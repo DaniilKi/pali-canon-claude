@@ -1,0 +1,16 @@
+{
+  "status": "SEALED_BEFORE_ANY_AUTHOR_OUTPUT_READ",
+  "created_utc": "2026-11-20T06:05:36.313676+00:00",
+  "files": {
+    "derive_originals.py": "798e421717a7358c1aa990982ba615c894195bb33da2bd2646df8defe984a910",
+    "EXPECTED_NORMALIZED_EXTERNAL_ONLY.json": "725a8f23e9d8dc1ecb5a686c0caede86041247199976d815e6f591715349bc06",
+    "ORIGINAL_DERIVATION.json": "5a094525bdeb12c31d2cf211393d9bbee71cc73838249e36096245611606cb5d"
+  },
+  "author_paths_read": [],
+  "source_inputs": {
+    "raw234": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+    "canonical": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+    "XML": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "upstream_tree_receipt": "47d1e30da0285159d6ca69c24e33035bd9b24b89c2bacac2b8d3a9bd6bc83da9"
+  }
+}

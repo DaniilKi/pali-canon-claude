@@ -1,0 +1,24 @@
+{
+  "metadata_only": [
+    "GOLDENS.json",
+    "EXPECTED_PROFILES.json",
+    "EXPECTED_LINKS.json",
+    "SOURCE_APPROVAL.json",
+    "RIGHTS_REVIEW.json",
+    "NORMALIZATION_COMPARISON.json",
+    "REPLAY_VALIDATION.json",
+    "CURRENT_BEHAVIOR.json",
+    "PROPOSED_RUNTIME.json",
+    "ROOT_RENDERED_OBSERVATION.json",
+    "NEIGHBOR_COMPARISON.json",
+    "FILE_SHA256S.json",
+    "COPY_POLICY.json"
+  ],
+  "stdlib_script": "replay.py",
+  "must_never_copy_into_repository_or_package": [
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json"
+  ],
+  "external_activations": 0,
+  "runtime_release_approval": false,
+  "repo_copy_requires_separate_peer_source_normalization_approval_and_root_GO": true
+}

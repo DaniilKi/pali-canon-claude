@@ -1,0 +1,395 @@
+{
+  "status": "INDEPENDENT_ORIGINALS_DERIVED_BEFORE_AUTHOR_INSPECTION; NOT_RUNTIME_APPROVAL",
+  "created_utc": "2026-11-20T06:05:36.252696+00:00",
+  "author_output_inspected": false,
+  "method": "Own stdlib normalization from original234MD and complete-notice/routing reads; complete14645-block XML replay against supplied canonical snapshot. No production parser/import, author file lookup, reconstructed wording or canonical repair.",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "artifact": {
+    "path": "src/_poems/chapter-3/poem-234.md",
+    "bytes": 1290,
+    "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+    "git_blob_sha1": "34c19fddf4fd561aae3ed5a3fcb774f80f689a94",
+    "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md"
+  },
+  "frontmatter": {
+    "title": "Kilañjadāyaka",
+    "order": "235",
+    "category": "chapter-3"
+  },
+  "identity": {
+    "file_slug": "poem-234",
+    "printed_poem_number": 234,
+    "frontmatter_order": 235,
+    "canonical_owner": "tha-ap236",
+    "path": "/text/chapter-3/poem-234/",
+    "neighbor235_is_distinct": true
+  },
+  "unit": {
+    "id": "tha-ap236",
+    "book": 36,
+    "start": 8015,
+    "end": 8032,
+    "title": "Kilañjadāyakattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 236",
+    "vri": "14–18",
+    "pts": {
+      "volume": 1,
+      "page": 219,
+      "end_page": 219
+    }
+  },
+  "root_sha256": "0c40640710f11d68ba3e32545746a67e1df9ed619df1ba0c41c0d26d82cb4a2c",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "original_xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "xml_replay": {
+    "blocks": 14645,
+    "differences": 0,
+    "existing_empty_note_only_omissions": [
+      {
+        "after_replayed_block": 1129,
+        "rend": "gatha1",
+        "notes": 1,
+        "note_sha256s": [
+          "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60"
+        ]
+      }
+    ]
+  },
+  "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+  "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+  "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "body_paragraphs": [
+    {
+      "paragraph": 0,
+      "sha256": "4149f873178ff6bb91e1672144a220cf74e0486ea3942b04a7100f25b11b1945",
+      "lines": 1,
+      "characters": 28
+    },
+    {
+      "paragraph": 1,
+      "sha256": "a4edd310fe68271b2018ebed6b84017348c3ed616921f581e251744efb21e0c6",
+      "lines": 4,
+      "characters": 137
+    },
+    {
+      "paragraph": 2,
+      "sha256": "0dd8d4dc5c69766f42c8758ca2f73646be35838c2b04a91cba8b0389f84e4ffe",
+      "lines": 4,
+      "characters": 150
+    },
+    {
+      "paragraph": 3,
+      "sha256": "b06331450b01fb6688acc93f0494bbd5f1a00a50332aba95e793c7350dad2105",
+      "lines": 4,
+      "characters": 145
+    },
+    {
+      "paragraph": 4,
+      "sha256": "a3b43b498fb56857940794c2d953bff39822aa152c531d1e37802faf4089bfa9",
+      "lines": 4,
+      "characters": 147
+    },
+    {
+      "paragraph": 5,
+      "sha256": "fda7f2b447f319f3fb1cd627fd8ac5e86f8c2838750494f8c397d84a0384b565",
+      "lines": 4,
+      "characters": 138
+    },
+    {
+      "paragraph": 6,
+      "sha256": "cd2bcf2a975aa2656d397a63173d5875778d87beb6a8fade3ccefba61fd44b60",
+      "lines": 1,
+      "characters": 61
+    },
+    {
+      "paragraph": 7,
+      "sha256": "7cdf74fbba0715e24ce27ff5f045fa38664ccb31d617270a35f7b87e53ad82fb",
+      "lines": 1,
+      "characters": 46
+    }
+  ],
+  "stanza_layout": [
+    {
+      "local_label": "1",
+      "publisher_label": "2437",
+      "suffix": "(1) [2437]",
+      "lines": 4
+    },
+    {
+      "local_label": "2",
+      "publisher_label": "2438",
+      "suffix": "(2) [2438]",
+      "lines": 4
+    },
+    {
+      "local_label": "3",
+      "publisher_label": "2439",
+      "suffix": "(3) [2439]",
+      "lines": 4
+    },
+    {
+      "local_label": "4",
+      "publisher_label": "2440",
+      "suffix": "(4) [2440]",
+      "lines": 4
+    },
+    {
+      "local_label": "5",
+      "publisher_label": "2441",
+      "suffix": "(5) [2441]",
+      "lines": 4
+    }
+  ],
+  "physical_stanzas": 5,
+  "printed_local_labels": 5,
+  "publisher_global_labels": [
+    2437,
+    2441
+  ],
+  "vri_stanza_labels": [
+    14,
+    18
+  ],
+  "note_numbers": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "note_text_sha256s": [
+    {
+      "number": 1,
+      "sha256": "7c7f9559ba944a6bafb87a4929785c2ccb0b81987bf2dd4106136c731fe9bb31"
+    },
+    {
+      "number": 2,
+      "sha256": "232a24a074bb23d527467d8868d700d11246dc97eb9549bd51c4a1391e309672"
+    },
+    {
+      "number": 3,
+      "sha256": "d487294758276b7ffb09f8c1484cca7f234effc4c1a4b37a68f24d7d439f9d7f"
+    },
+    {
+      "number": 4,
+      "sha256": "236438cf40334b1519f84f9de0794d60e90c638fb4dfeab819296a5e0bcd66e2"
+    }
+  ],
+  "preface": {
+    "paragraphs": 0,
+    "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "note_numbers": [],
+    "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "summary": null,
+  "operations": {
+    "hard_break_padding_lines": 15,
+    "heading_markers_removed": 1,
+    "emphasis_pairs_removed": 4,
+    "note_labels_presented": 4,
+    "escaped_punctuation_unescaped": 24,
+    "exact_abbreviation_wrappers_removed": {
+      "BJTS": 1,
+      "PTS": 2
+    }
+  },
+  "rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "raw_sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/LICENSE.md"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "raw_sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_data/site.json"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "raw_sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "raw_sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "raw_sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "raw_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/_poems.json"
+    },
+    {
+      "path": "src/_poems/chapter-3/chapter-3.json",
+      "bytes": 27,
+      "raw_sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+      "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/chapter-3.json"
+    }
+  ],
+  "rights_conclusion": {
+    "specific_translation_license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "generic_site_json_CC_BY_4_not_applied_to_translation": true,
+    "source_attribution_fullnotices_revision_changes_required": true,
+    "live_only_English_hashes_only_repository": true,
+    "media_approval": false
+  },
+  "neighbors": [
+    {
+      "path": "src/_poems/chapter-3/poem-233.md",
+      "bytes": 1492,
+      "raw_sha256": "df3b7ead796df9c71820fff88c3a9073ecf399fe15747e9e95e8059f5eea085e",
+      "git_blob_sha1": "3ac421ca87222cf4cdf69eba175df380d0f9b28d",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-233.md",
+      "canonical_owner": "tha-ap235",
+      "frontmatter": {
+        "title": "Sālapupphiya",
+        "order": "233",
+        "category": "chapter-3"
+      },
+      "unit": {
+        "id": "tha-ap235",
+        "book": 36,
+        "start": 7998,
+        "end": 8015,
+        "title": "Sālapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 235",
+        "vri": "9–13",
+        "pts": {
+          "volume": 1,
+          "page": 218,
+          "end_page": 219
+        }
+      },
+      "root_sha256": "3605a86ccbc8b553bd466daa76d3d022e82056e4c80c80f339c6f65394c082c2"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-235.md",
+      "bytes": 915,
+      "raw_sha256": "39760489bd14dd018c44b4f40626f3619da2abed79e8a5d58fca4b4da7b868ed",
+      "git_blob_sha1": "b141bcb8613001943a4b0fc6a4c73e2e5de8ded8",
+      "pinned_raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-235.md",
+      "canonical_owner": "tha-ap237",
+      "frontmatter": {
+        "title": "Vediyadāyaka",
+        "order": "235",
+        "category": "chapter-3"
+      },
+      "unit": {
+        "id": "tha-ap237",
+        "book": 36,
+        "start": 8032,
+        "end": 8046,
+        "title": "Vedikārakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 237",
+        "vri": "19–22",
+        "pts": {
+          "volume": 1,
+          "page": 219,
+          "end_page": 220
+        }
+      },
+      "root_sha256": "99e55878b8d1050e06e3191c068d771eed0acc9765c4e181b63f674bcb00f79d"
+    }
+  ],
+  "edition_limits": [
+    "Raw filename/route and printed heading identify publisher234; original frontmatter order235 is retained, not corrected; separate neighbor235 also has order235.",
+    "Narrative aligns Tivarā/Siddhattha/mat gift/94aeons/77aeons/five stanzas to canonical236, not neighboring railing donor canonical237.",
+    "Published Jutindhara follows recorded VRI sī. jutindharo variant against main jaladdharo; preserve both, do not harmonize.",
+    "Publisher note2 explicitly compares BJTS/PTS naḷakāro/nalakāro; VRI main already naḷakāro. Preserve original note without reassignment.",
+    "Publisher fifth stanza prints full English while original VRI18 contains …pe…; complete publisher-edition poem does not mean line-complete VRI wording or an expanded Pāli reconstruction."
+  ],
+  "profile_evidence": {
+    "id": "tha-ap236",
+    "publisher_chapter": "chapter-3",
+    "poem": 234,
+    "title": "Kilañjadāyaka",
+    "verses": [
+      2437,
+      2441
+    ],
+    "root_verses": [
+      14,
+      18
+    ],
+    "note_count": 4,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-234/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-234/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+    "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+    "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "0c40640710f11d68ba3e32545746a67e1df9ed619df1ba0c41c0d26d82cb4a2c",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2437",
+        "suffix": "(1) [2437]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2438",
+        "suffix": "(2) [2438]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2439",
+        "suffix": "(3) [2439]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2440",
+        "suffix": "(4) [2440]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2441",
+        "suffix": "(5) [2441]",
+        "lines": 4
+      }
+    ]
+  },
+  "payload_external_only_sha256": "725a8f23e9d8dc1ecb5a686c0caede86041247199976d815e6f591715349bc06",
+  "source_approval": false,
+  "normalization_approval": false,
+  "runtime_approval": false,
+  "release_approval": false
+}

@@ -1,5 +1,7 @@
 # Third-party content and dependencies
 
+**Local unpublished D257:** independently approved publisher poem 234 adds one complete publisher-edition choice under the same specific Walters/Whitman CC BY-NC-SA 4.0 grant, retaining full attribution, licence, source/revision and extraction/change notices. Local choices now total 285 (40 Therī, 245 Therā); only metadata/hashes are packaged and English/notes stay live-only. No media rights, remote CI or publication approval is inferred. [Current scope and separate holds](docs/data/thera-held-cases-review.md).
+
 **Local unpublished D256 candidate intake:** eighteen additional Walters/Whitman publisher-edition poems are under separate source/normalization review. The specific pinned CC BY-NC-SA 4.0 textual grant remains controlling, with complete attribution, source/revision, disclaimer and extraction/change notices, noncommercial/share-alike terms and no implied endorsement. Bodies, notes and apparatus remain live-only; bundle metadata/hashes only. Separate formal source gates cover the exact A/B scopes; the local registry now has 284 choices (40 Therī, 244 Therā), while remote dev stays at 246. No media approval, remote validation or publication is inferred. [D256 finite scope and gates](docs/data/thera-remaining-lowrisk-intake.md).
 
 The reviewed SN 27.5 section retains the original ©1994 Thanissaro Bhikkhu

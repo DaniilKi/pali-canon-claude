@@ -16,6 +16,7 @@ import { readPassage } from '../../src/chatgpt-widget.mjs';
 import { validateApadanaChoice, validateEnglishPage } from '../../web/translation-policy.mjs';
 
 import {remainingEvidence} from './thera-remaining-evidence.mjs';
+import {held234Evidence} from './thera-held234-evidence.mjs';
 
 export function registerRemainingSourceTests(batch){
 const {approval,group,combined,independent,baseline,inputs,reviews,rights,sourceApproval,previous,expectedProfiles,expectedLinks,independentlyNormalized,approved,golden,peerGolden}=remainingEvidence(batch);
@@ -129,7 +130,9 @@ test('group '+batch+' intake is exactly independently approved9 and preserves al
     validateLink(p, uid, u, book);
     assert.ok(Object.isFrozen(p) && Object.isFrozen(p.stanza_layout));
   }
-  for (const uid of ['tha-ap72', 'tha-ap142', 'tha-ap160', 'tha-ap161', 'tha-ap12', 'tha-ap236', 'tha-ap262']) assert.equal(APADANA_PROFILES[uid], undefined);
+  assert.equal(approved.includes('tha-ap236'),false,'The frozen D256 source group did not approve publisher234');
+  assert.deepEqual(APADANA_PROFILES['tha-ap236'],held234Evidence().profiles['tha-ap236'],'Current new236 requires its separate exact authority');
+  for (const uid of ['tha-ap72', 'tha-ap142', 'tha-ap160', 'tha-ap161', 'tha-ap12', 'tha-ap262']) assert.equal(APADANA_PROFILES[uid], undefined);
   for (const row of rights) { assert.equal(row.license, 'CC BY-NC-SA 4.0'); assert.equal(row.english_bodies_notes_and_apparatus_live_only, true); assert.equal(row.no_audio_or_media_rights, true); assert.equal(row.normalized_wording_changes, false); }
 });
 
@@ -206,7 +209,8 @@ test('group '+batch+' finite literal paired displays, chapter ownership and note
       assert.equal(record.chapter_summary.publisher_stated_total,38);assert.equal(record.chapter_summary.approved_subset_entries,33);
       assert.equal(record.chapter_summary.publisher_stated_total-record.chapter_summary.approved_subset_entries,5,'Original38 includes the held five-stanza source234');
       assert.equal(record.chapter_summary.held_publisher_poem,234);assert.equal(record.chapter_summary.held_canonical_id,'tha-ap236');
-      assert.equal(APADANA_PROFILES['tha-ap236'],undefined);
+      assert.equal(approved.includes('tha-ap236'),false,'Summary33 was the historical nine-poem intake');
+      assert.deepEqual(APADANA_PROFILES['tha-ap236'],held234Evidence().profiles['tha-ap236']);
       const warning=profile.mapping_notes.find(note=>note.includes('38')&&note.includes('33')&&note.includes('234'));
       assert.ok(warning,'The original full chapter count cannot imply approval of held poem234');
     }
@@ -257,7 +261,7 @@ test('group '+batch+' source-enabled unreviewed wording, profile fields, layout 
     for (const patch of [{ id: 'tha-ap160' }, { poem: 158 }, { path: '/text/chapter-3/poem-234/' }, { raw_url: p.raw_url.replace(APADANA_COMMIT, '0'.repeat(40)) }, { translation_revision: '0'.repeat(40) }, { root_sha256: '0'.repeat(64) }, { body_sha256: '0'.repeat(64) }, { notes_sha256: '0'.repeat(64) }, { paratext_sha256: '0'.repeat(64) }, { stanza_layout: [] }, { note_numbers: [999] }, { raw_sha256: digest(raw + '\n') }, { publisher_preface: {} }, { chapter_summary: {} }, { publisher_divisions: [] }, { editorial_gap: {} }]) assert.throws(() => parseTheraApadana(raw, { ...p, ...patch }), /differs/);
   }
   let calls = 0; globalThis.fetch = async () => { calls++; throw Error('Held source transport'); };
-  for (const poem of ['010', '070', '140', '158', '159', '234', '260', '570']) {
+  for (const poem of ['010', '070', '140', '158', '159', '260', '570']) {
     const url = `https://raw.githubusercontent.com/apadana-translation/apadana-site/${APADANA_COMMIT}/src/_poems/chapter-3/poem-${poem}.md`;
     assert.equal(isApadanaRawUrl(url), false); await assert.rejects(fetchPublic(url, { json: false }), /outside the supported public sources/);
   }

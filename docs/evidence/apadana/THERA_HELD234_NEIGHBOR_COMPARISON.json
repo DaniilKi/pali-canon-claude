@@ -1,0 +1,27 @@
+{
+  "status": "ORIGINAL_NEIGHBOR_DISTINCT",
+  "held_source": {
+    "path": "src/_poems/chapter-3/poem-234.md",
+    "title": "Kilañjadāyaka",
+    "order": 235,
+    "printed": 234,
+    "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+    "canonical_id": "tha-ap236",
+    "story": "Tivarābasket-maker/Siddhatthamat/Jutindhara"
+  },
+  "neighbor_source": {
+    "path": "src/_poems/chapter-3/poem-235.md",
+    "bytes": 915,
+    "raw_sha256": "39760489bd14dd018c44b4f40626f3619da2abed79e8a5d58fca4b4da7b868ed",
+    "official_git_blob_sha1": "b141bcb8613001943a4b0fc6a4c73e2e5de8ded8",
+    "title": "Vediyadāyaka",
+    "order": 235,
+    "printed": 235,
+    "canonical_id": "tha-ap237",
+    "story": "VipassiBodhirailing/Sūriyassama"
+  },
+  "permalink_template_sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+  "routing_uses_filename_slug_not_order": true,
+  "order_collision_does_not_authorize_alias_or_substitution": true,
+  "rendered_page_comparison_separate": "ROOT_RENDERED_OBSERVATION.json"
+}

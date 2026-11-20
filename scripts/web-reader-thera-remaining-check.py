@@ -9,7 +9,7 @@ from datetime import datetime,timezone
 from pathlib import Path
 from playwright.sync_api import expect,sync_playwright
 from web_reader_test_helpers import read_tool
-from web_reader_apadana_intake import REMAINING_IDS,REMAINING_PUBLISHERS,remaining_groups,reviewed_intake
+from web_reader_apadana_intake import REMAINING_IDS,REMAINING_PUBLISHERS,remaining_groups,reviewed_remaining_intake,curated_additions
 ROOT=Path(__file__).resolve().parents[1]
 BASE='cdbefd514164a559bc5aaab631c267f3084e31a6'
 spec=importlib.util.spec_from_file_location('d251',ROOT/'scripts/web-reader-thera-pair-intake-check.py')
@@ -172,8 +172,11 @@ def main():
     assert approval['schema'] == 'reviewed-apadana-intake-v1'
     assert approval['status'] == 'approved'
     evidence_dir = ROOT/'docs/evidence/apadana'
-    assert approval==reviewed_intake(ROOT), 'Only the exact independently curated remaining intake is accepted'
+    assert approval==reviewed_remaining_intake(ROOT), 'Only the exact independently curated remaining intake is accepted'
     groups=remaining_groups(ROOT,approval)
+    additions=curated_additions(ROOT,'THERA_REMAINING_APPROVAL.json')
+    current_curation=additions['curation']
+    current_ids=current_curation['expected_profile_ids']
     selected_groups=['A','B'] if args.batch=='all' else [args.batch]
     all_evidence=[groups[name]['goldens'] for name in ('A','B')]
     evidence=[groups[name]['goldens'] for name in selected_groups]
@@ -221,18 +224,20 @@ def main():
     manifest = json.loads((server_dir/'data/apadana.json').read_text())
     assert manifest == json.loads((ROOT/'server/data/apadana.json').read_text())
     old, canon = baseline()
-    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 266 and set(manifest['links']) == set(old['links'])|all_approved
+    assert set(old['links']) == set(approval['baseline_ids']) and len(old['links']) == 266 and set(approval['expected_profile_ids']) == set(old['links'])|all_approved
+    assert set(manifest['links']) == set(current_ids) == set(approval['expected_profile_ids'])|set(additions['ids'])
+    for uid,row in additions['links'].items():assert manifest['links'][uid]==row, 'New current source differs from separate independent pins: '+uid
     rows = manifest['links']
     assert {k:v for k,v in manifest['source'].items() if k != 'policy'} == {k:v for k,v in old['source'].items() if k != 'policy'}, 'Existing source/rights provenance changed'
-    assert manifest['source']['policy'] == old['source']['policy'].replace('266 finite',str(266+len(all_approved))+' finite').replace('226 explicitly mapped Therā',str(226+len(all_approved))+' explicitly mapped Therā')
+    assert manifest['source']['policy'] == old['source']['policy'].replace('266 finite',str(len(current_ids))+' finite').replace('226 explicitly mapped Therā',str(sum(row['publisher_chapter']=='chapter-3' for row in current_curation['baseline_records']+current_curation['approved_records']))+' explicitly mapped Therā')
     commentary_parts=git_bytes('server/data/commentary.json.gz.parts.json')
     assert (server_dir/'data/commentary.json.gz.parts.json').read_bytes() == commentary_parts
     for part in json.loads(commentary_parts)['parts']:
         name=part if isinstance(part,str) else part['file']
         assert (server_dir/'data'/name).read_bytes() == git_bytes('server/data/'+name), 'Existing commentary shard changed'
     for uid,row in old['links'].items():assert rows[uid] == row, 'Previous source changed: '+uid
-    profile_probe="""import assert from'node:assert/strict';import{APADANA_PROFILES as current}from'./src/apadana-profiles.mjs';process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),url=x=>'data:text/javascript;base64,'+Buffer.from(x).toString('base64');const old=await import(url(p.root.replace('./apadana-thera-profiles.mjs',url(p.thera))));assert.equal(Object.keys(old.APADANA_PROFILES).length,266);for(const[id,row]of Object.entries(old.APADANA_PROFILES))assert.deepEqual(current[id],row,id);assert.equal(Object.keys(current).length,284);for(const[id,row]of Object.entries(p.approved))assert.deepEqual(current[id],row,id);console.log(JSON.stringify({preserved:266,approved:18}));"""
-    old_profiles={'root':git_bytes('src/apadana-profiles.mjs').decode(),'thera':git_bytes('src/apadana-thera-profiles.mjs').decode(),'approved':independent['expected_profiles']}
+    profile_probe="""import assert from'node:assert/strict';import{APADANA_PROFILES as current}from'./src/apadana-profiles.mjs';process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),url=x=>'data:text/javascript;base64,'+Buffer.from(x).toString('base64');const old=await import(url(p.root.replace('./apadana-thera-profiles.mjs',url(p.thera))));assert.equal(Object.keys(old.APADANA_PROFILES).length,266);for(const[id,row]of Object.entries(old.APADANA_PROFILES))assert.deepEqual(current[id],row,id);assert.equal(Object.keys(current).length,p.current_ids.length);assert.deepEqual(Object.keys(current),p.current_ids);for(const[id,row]of Object.entries(p.additions))assert.deepEqual(current[id],row,id);for(const[id,row]of Object.entries(p.approved))assert.deepEqual(current[id],row,id);console.log(JSON.stringify({preserved:266,approved:18}));"""
+    old_profiles={'root':git_bytes('src/apadana-profiles.mjs').decode(),'thera':git_bytes('src/apadana-thera-profiles.mjs').decode(),'approved':independent['expected_profiles'],'additions':additions['profiles'],'current_ids':current_ids}
     profile_run=subprocess.run(['node','--input-type=module','-e',profile_probe],cwd=ROOT,input=compact(old_profiles),text=True,capture_output=True,timeout=90)
     assert profile_run.returncode == 0 and json.loads(profile_run.stdout)=={'preserved':266,'approved':18}, 'Previous browser source profile check failed: '+compact({'returncode':profile_run.returncode,'signal':-profile_run.returncode if profile_run.returncode<0 else None,'stderr_tail':profile_run.stderr[-2000:]})
     probe = "import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;process.stdout.write(gunzipSync(readBundled(JSON.parse(s))).toString());"
@@ -305,11 +310,11 @@ def main():
         base = 'http://127.0.0.1:'+str(port)
         server_argv=['node','--require',str(preload),str(server_dir/'http.cjs')]
         launch_path=args.launch_receipt or (args.report.with_suffix('.launch.json') if args.report else mode_root/(stage.name+'.launch.json'))
-        launch={'status':'launching','compiled_after_runs':False,'started_utc':utc_now(),'mode':mode,'batch':args.batch,'selected_groups':selected_groups,'selected_source_count':len(expected),'registry_profiles':284,'source_group_seals':source_group_seals,
+        launch={'status':'launching','compiled_after_runs':False,'started_utc':utc_now(),'mode':mode,'batch':args.batch,'selected_groups':selected_groups,'selected_source_count':len(expected),'registry_profiles':len(current_ids),'source_group_seals':source_group_seals,
             'harness_argv':[sys.executable,*sys.argv],'harness_cwd':str(Path.cwd()),'server_argv':server_argv,
             'server_cwd':str(stage),'server_directory':str(server_dir),'outside_source_tree':bool(args.server_dir),'runtime_origin':'isolated-npm-install' if args.server_dir else 'repository-compiled',
             'server_file_sha256':launch_hashes,'harness_sha256':launch_harness,'helper_sha256':launch_helpers,
-            'approval_sha256':digest(args.approval.read_bytes()),
+            'approval_sha256':digest(args.approval.read_bytes()),'current_curation_sha256':digest((ROOT/'docs/evidence/apadana/THERA_HELD234_APPROVAL.json').read_bytes()),'current_additions_ids':additions['ids'],
             'package_archive':str(args.package_archive.resolve()) if args.package_archive else None,
             'package_sha256':digest(args.package_archive.read_bytes()) if args.package_archive else None}
         def write_launch():
@@ -342,7 +347,7 @@ def main():
             assert rpc('get_text',{'book':book_id,'offset':0,'source_commit':PIN}).get('isError')
             checks.append({'check':'unchanged direct source-book authority accepts VRI pin and refuses unit-mapping pin'})
             metadata = {uid:tool('get_text',{'uid':uid,'limit':200}) for uid in rows}
-            for held in set(('tha-ap72','tha-ap142','tha-ap160','tha-ap161','tha-ap236','tha-ap262'))|set(approval['held_ids']):
+            for held in set(('tha-ap72','tha-ap142','tha-ap160','tha-ap161','tha-ap262'))|set(current_curation['held_ids']):
                 assert not tool('get_text',{'uid':held,'limit':200})['english_available'], 'Held source activated: '+held
             for uid,g in expected.items():
                 normalized=normalized_segments(g,canon)
@@ -498,7 +503,7 @@ try{
                 scaled.browser_checks(args,base,rows,expected,whole,metadata,widgets,html,patches,checks,scans,order,origins,scope_captions=scope_captions)
             events = [json.loads(line) for line in ledger.read_text().splitlines()]
             assert all(e['ok'] for e in events) and {e['url'] for e in events} == set(files)
-            report = {'mode':mode,'server_directory':str(server_dir),'outside_source_tree':bool(args.server_dir),'runtime_origin':'isolated-npm-install' if args.server_dir else 'repository-compiled','launch_receipt':str(launch_path),'started_utc':launch['started_utc'],'passed':len(checks),'baseline':BASE,'batch':args.batch,'selected_groups':selected_groups,'selected_source_count':len(expected),'registry_profiles':284,'registry_new_sources':18,'source_group_seals':source_group_seals,'all18_source_browser_acceptance':args.batch=='all' and not args.pilot and not args.mcp_only,'pilot_only':args.pilot,'legacy_note_regression_sources':list(LEGACY_NOTE_IDS),'full_batch_acceptance':not args.pilot and not args.mcp_only,'new_sources':len(expected),'browser_run':not args.mcp_only,'checks':checks,'sources':receipts,'source_artifacts':artifacts,'curation_sha256':digest(args.approval.read_bytes()),'independent_source_authorities':'Two separate nine-source approvals; no aggregate independent18 derivation is claimed','harness_sha256':launch_harness,'helper_sha256':launch_helpers,'server_file_sha256':launch_hashes,'pinned_provider_reads':len(events),'upstream_provider_requests':0,'a11y':{'performed':args.a11y,'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Actual HTTP MCP from the recorded server directory; exact local pinned official source fixtures. Chromium viewport and two simulated host bridges, not physical devices, signed-in host, human AT, specialist or new rights acceptance. No live upstream availability claim. Actual full-body positives match independent source hashes; client refusal of altered registered whole-body hash metadata does not prove cryptographic authentication of arbitrary forged partial-page wording. Report excludes publisher wording, notes and private draft bodies.'}
+            report = {'mode':mode,'server_directory':str(server_dir),'outside_source_tree':bool(args.server_dir),'runtime_origin':'isolated-npm-install' if args.server_dir else 'repository-compiled','launch_receipt':str(launch_path),'started_utc':launch['started_utc'],'passed':len(checks),'baseline':BASE,'batch':args.batch,'selected_groups':selected_groups,'selected_source_count':len(expected),'registry_profiles':len(current_ids),'registry_new_sources':18,'current_additions_ids':additions['ids'],'current_curation_sha256':digest((ROOT/'docs/evidence/apadana/THERA_HELD234_APPROVAL.json').read_bytes()),'source_group_seals':source_group_seals,'all18_source_browser_acceptance':args.batch=='all' and not args.pilot and not args.mcp_only,'pilot_only':args.pilot,'legacy_note_regression_sources':list(LEGACY_NOTE_IDS),'full_batch_acceptance':not args.pilot and not args.mcp_only,'new_sources':len(expected),'browser_run':not args.mcp_only,'checks':checks,'sources':receipts,'source_artifacts':artifacts,'curation_sha256':digest(args.approval.read_bytes()),'independent_source_authorities':'Two separate nine-source approvals; no aggregate independent18 derivation is claimed','harness_sha256':launch_harness,'helper_sha256':launch_helpers,'server_file_sha256':launch_hashes,'pinned_provider_reads':len(events),'upstream_provider_requests':0,'a11y':{'performed':args.a11y,'scans':len(scans),'violations':sum(len(s['violations']) for s in scans),'results':scans},'limits':'Actual HTTP MCP from the recorded server directory; exact local pinned official source fixtures. Chromium viewport and two simulated host bridges, not physical devices, signed-in host, human AT, specialist or new rights acceptance. No live upstream availability claim. Actual full-body positives match independent source hashes; client refusal of altered registered whole-body hash metadata does not prove cryptographic authentication of arbitrary forged partial-page wording. Report excludes publisher wording, notes and private draft bodies.'}
             assert report['a11y']['violations'] == 0
             if args.a11y:
                 # Historical pair scans intentionally omit theme; keep every row above.

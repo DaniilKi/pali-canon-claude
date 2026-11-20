@@ -21975,5 +21975,83 @@ export const THERA_APADANA_PROFILES = deepFreeze({
       "Publisher local3 says thirty-eighth aeon; VRI35 main says twenty-eighth, with aṭṭhatiṃse variant. This is an observed edition difference only.",
       "Note2 explicitly leaves singular locative/plural object interpretation open; note3 preserves the unusual name and iti interpretation. Do not disambiguate or normalize the source wording."
     ]
+  },
+  "tha-ap236": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+    "id": "tha-ap236",
+    "publisher_chapter": "chapter-3",
+    "poem": 234,
+    "verses": [
+      2437,
+      2441
+    ],
+    "root_verses": [
+      14,
+      18
+    ],
+    "note_count": 4,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-234/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-234/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-234.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Kilañjadāyaka",
+    "reference": "Therā Apadāna publisher poem 234; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+    "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+    "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "321ba6fcf2fcdee0f55e0faf21663a73c9e66ff41169b8572fd526ac2c19ed8a",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2437",
+        "suffix": "(1) [2437]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2438",
+        "suffix": "(2) [2438]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2439",
+        "suffix": "(3) [2439]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2440",
+        "suffix": "(4) [2440]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2441",
+        "suffix": "(5) [2441]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; do not infer missing words, stanza equivalence or other mappings by number.",
+      "Explicit full-source narrative/title/colophon review maps publisher chapter-3 poem 234 to canonical tha-ap236. Shared numbers alone do not establish any other mapping.",
+      "Original path poem-234.md and printed234 identify this exact poem, while original frontmatter order235 duplicates separate poem235. Preserve all three facts.",
+      "Declared publisher permalink uses category plus page.fileSlug, not order: source identity and route are tied to poem-234. This is template evidence, not a live rendered-route check.",
+      "Future runtime identity checks must finite-pin this exact exception and keep printed234 distinct from235; do not rewrite original metadata or route by order.",
+      "Publisher Jutindhara follows original VRI jutindharo variant beside main jaladdharo.",
+      "Original publisher file poem-234.md has frontmatter order235 and printed poem234. Its Kilañjadāyaka title, mat narrative, four poem notes and both colophons belong to canonicaltha-ap236; neither order235 nor a numeric offset identifies another text.",
+      "The publisher permalink derives from category plus page.fileSlug, so this choice stays /text/chapter-3/poem-234/. Separate poem-235.md/order235/printed235 is Vediyadāyaka, the railing gift to Vipassi, canonicaltha-ap237; no source substitution or metadata correction is made.",
+      "The earlier nine-poem source intake (D256) held publisher234 and reviewed33entries; its publisher240 summary warning is retained as historical intake provenance. This separately reviewed publisher234 choice does not rewrite that earlier approval or its source objects. Original full-chapter38count remains a source statement, not a line-complete VRI or generated coverage claim."
+    ]
   }
 });

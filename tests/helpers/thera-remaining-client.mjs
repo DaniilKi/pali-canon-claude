@@ -14,6 +14,8 @@ import { validateComparisonPage } from '../../web/translation-comparison.mjs';
 import { view } from './widget-view.mjs';
 
 import {remainingEvidence} from './thera-remaining-evidence.mjs';
+import {CURRENT_APADANA_IDS} from './apadana-intake-expectations.mjs';
+import {held234Evidence} from './thera-held234-evidence.mjs';
 
 export function registerRemainingClientTests(batch){
 const {approval,combined,independent,baseline,inputs:goldens,approved,golden}=remainingEvidence(batch);
@@ -80,12 +82,14 @@ test('group '+batch+' new client capabilities preserve the independently frozen2
   assert.deepEqual(approved, independent.approved_ids); assert.equal(approved.length, 9);
   assert.equal(approval.baseline_ids.length, 266);
   assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0, 266), approval.baseline_ids);
-  assert.deepEqual(Object.keys(APADANA_PROFILES), combined.expected_profile_ids);
+  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,284), combined.expected_profile_ids);
+  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
+  assert.deepEqual(APADANA_PROFILES['tha-ap236'],held234Evidence().profiles['tha-ap236']);
   for (const id of approval.baseline_ids) {
     const profile = baseline.profile_objects[id];
     assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');
   }
-  assert.equal(WIDGET_VERSION, 'v31');
+  assert.equal(WIDGET_VERSION, 'v32');
   for (const id of approved) {
     const profile = APADANA_PROFILES[id], record = golden(id);
     assert.deepEqual(profile.mapping_notes, record.mapping_notes);

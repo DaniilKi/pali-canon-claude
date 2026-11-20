@@ -1,0 +1,218 @@
+{
+  "status": "INDEPENDENT_ORIGINAL_DERIVED_EXPECTATIONS; NOT_RUNTIME_APPROVAL",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "original_xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "preauthor_seal_sha256": "e173b6a8b11f09686ef7c51816a612e3a8b75270130f72cedd1c2936ff0ba7ba",
+  "method": "Own stdlib normalization from original234MD and complete-notice/routing reads; complete14645-block XML replay against supplied canonical snapshot. No production parser/import, author file lookup, reconstructed wording or canonical repair.",
+  "poems": [
+    {
+      "id": "tha-ap236",
+      "canonical_owner": "tha-ap236",
+      "publisher_poem": 234,
+      "frontmatter_order": 235,
+      "printed_poem_number": 234,
+      "raw_sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+      "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+      "notes_sha256": "b3b14f552c816b24c708a6208e8bea6233464597e4a05264de2cd7d531b5e8e3",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "321ba6fcf2fcdee0f55e0faf21663a73c9e66ff41169b8572fd526ac2c19ed8a",
+      "raw_unit_blocks_sha256": "0c40640710f11d68ba3e32545746a67e1df9ed619df1ba0c41c0d26d82cb4a2c",
+      "body_paragraphs": 8,
+      "body_paragraph_sha256s": [
+        "4149f873178ff6bb91e1672144a220cf74e0486ea3942b04a7100f25b11b1945",
+        "a4edd310fe68271b2018ebed6b84017348c3ed616921f581e251744efb21e0c6",
+        "0dd8d4dc5c69766f42c8758ca2f73646be35838c2b04a91cba8b0389f84e4ffe",
+        "b06331450b01fb6688acc93f0494bbd5f1a00a50332aba95e793c7350dad2105",
+        "a3b43b498fb56857940794c2d953bff39822aa152c531d1e37802faf4089bfa9",
+        "fda7f2b447f319f3fb1cd627fd8ac5e86f8c2838750494f8c397d84a0384b565",
+        "cd2bcf2a975aa2656d397a63173d5875778d87beb6a8fade3ccefba61fd44b60",
+        "7cdf74fbba0715e24ce27ff5f045fa38664ccb31d617270a35f7b87e53ad82fb"
+      ],
+      "body_paragraph_lines": [
+        1,
+        4,
+        4,
+        4,
+        4,
+        4,
+        1,
+        1
+      ],
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2437",
+          "suffix": "(1) [2437]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2438",
+          "suffix": "(2) [2438]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2439",
+          "suffix": "(3) [2439]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2440",
+          "suffix": "(4) [2440]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2441",
+          "suffix": "(5) [2441]",
+          "lines": 4
+        }
+      ],
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "note_text_sha256s": [
+        {
+          "number": 1,
+          "sha256": "7c7f9559ba944a6bafb87a4929785c2ccb0b81987bf2dd4106136c731fe9bb31"
+        },
+        {
+          "number": 2,
+          "sha256": "232a24a074bb23d527467d8868d700d11246dc97eb9549bd51c4a1391e309672"
+        },
+        {
+          "number": 3,
+          "sha256": "d487294758276b7ffb09f8c1484cca7f234effc4c1a4b37a68f24d7d439f9d7f"
+        },
+        {
+          "number": 4,
+          "sha256": "236438cf40334b1519f84f9de0794d60e90c638fb4dfeab819296a5e0bcd66e2"
+        }
+      ],
+      "preface": {
+        "paragraphs": 0,
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "note_numbers": [],
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "chapter_summary": null,
+      "pali_segments": [
+        {
+          "ref": "tha-ap236/1",
+          "type": "heading",
+          "blocks": [
+            8015,
+            8016
+          ],
+          "vri_paragraph": null,
+          "text_sha256": "049c704d032d3533a890e3534aa483299f4956111ce8280c1751f1156e2304df",
+          "variant_count": 0
+        },
+        {
+          "ref": "tha-ap236/2",
+          "type": "verse",
+          "blocks": [
+            8016,
+            8019
+          ],
+          "vri_paragraph": "14",
+          "text_sha256": "1a30ee4d3efcfb78a4e3ea0c6d4dadc06444aa02973d9cf1ae7c1e3be5c2ea9d",
+          "variant_count": 0
+        },
+        {
+          "ref": "tha-ap236/3",
+          "type": "verse",
+          "blocks": [
+            8019,
+            8022
+          ],
+          "vri_paragraph": "15",
+          "text_sha256": "5382345df5e06c31cf168fd8a7b5ebdd70f3a33bb6c476dca9a66adbb249d132",
+          "variant_count": 0
+        },
+        {
+          "ref": "tha-ap236/4",
+          "type": "verse",
+          "blocks": [
+            8022,
+            8025
+          ],
+          "vri_paragraph": "16",
+          "text_sha256": "5ff3c32b8073a6f39849630ce1c1a6c4712176fd31dc9ba8adca74c2cbd383d4",
+          "variant_count": 0
+        },
+        {
+          "ref": "tha-ap236/5",
+          "type": "verse",
+          "blocks": [
+            8025,
+            8028
+          ],
+          "vri_paragraph": "17",
+          "text_sha256": "c6ca0717f59576e42abf46f33fb6e3f30909bcf8eac420d19d352356489d85ed",
+          "variant_count": 1
+        },
+        {
+          "ref": "tha-ap236/6",
+          "type": "verse",
+          "blocks": [
+            8028,
+            8030
+          ],
+          "vri_paragraph": "18",
+          "text_sha256": "7e580c9eaabe19dc0612e854cbd200782d78fd0a7fb8e30cede8cd01a2a8cd5f",
+          "variant_count": 0
+        },
+        {
+          "ref": "tha-ap236/7",
+          "type": "prose",
+          "blocks": [
+            8030,
+            8031
+          ],
+          "vri_paragraph": null,
+          "text_sha256": "83f8b1afae66fe0acf9b0a12c42a7faa539ae1c33817f2449830aebd2a66db8e",
+          "variant_count": 0
+        },
+        {
+          "ref": "tha-ap236/8",
+          "type": "prose",
+          "blocks": [
+            8031,
+            8032
+          ],
+          "vri_paragraph": null,
+          "text_sha256": "98e49a680e530577b855f423fe72722fd1076f49759f9f603f4827a6a115e37a",
+          "variant_count": 0
+        }
+      ],
+      "original_identity_and_route": {
+        "file_slug": "poem-234",
+        "printed_poem_number": 234,
+        "frontmatter_order": 235,
+        "canonical_owner": "tha-ap236",
+        "path": "/text/chapter-3/poem-234/",
+        "neighbor235_is_distinct": true
+      }
+    }
+  ],
+  "totals": {
+    "poems": 1,
+    "body_paragraphs": 8,
+    "stanza_entries": 5,
+    "printed_local_labels": 5,
+    "poem_notes": 4,
+    "prefaces": 0,
+    "summaries": 0,
+    "paired_displays": 0
+  },
+  "runtime_approval": false,
+  "release_approval": false
+}

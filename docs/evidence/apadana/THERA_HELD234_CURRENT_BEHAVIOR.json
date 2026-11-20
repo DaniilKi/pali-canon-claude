@@ -1,0 +1,50 @@
+{
+  "status": "BASELINE_HELD_CASE_REFUSES_BEFORE_NETWORK",
+  "baseline": "7d5ac90845402b322dabf2c5120d1485b15c0bda",
+  "registered_profile_count": 284,
+  "canonical236_registered": false,
+  "registry236_registered": false,
+  "official234raw_url_allowlisted": false,
+  "network_attempts": 0,
+  "errors": {
+    "registered_link": {
+      "refused": true,
+      "error": "Apadāna source metadata or content differs from the reviewed pinned publication."
+    },
+    "direct_provider": {
+      "refused": true,
+      "error": "Apadāna source metadata or content differs from the reviewed pinned publication."
+    },
+    "cached_standalone_choice": {
+      "refused": true,
+      "error": "The pinned Apadāna source identity or terms changed. No English source was displayed."
+    },
+    "cached_quotation_identity": {
+      "refused": true,
+      "error": "Apadāna source metadata or content differs from the reviewed pinned publication."
+    }
+  },
+  "static_frontmatter_observation": {
+    "raw_order": 235,
+    "printed_poem": 234,
+    "current_generic_order234_regex_matches_original": false,
+    "interpretation": "With naive registration alone, the unchanged generic order===profile.poem check would reject original order235. This is a direct static predicate observation, not a production-parser approval."
+  },
+  "cache_scope": {
+    "apadana_provider_is_not_wrapped_in_liveCache": true,
+    "successful_raw_fetch_is_rehashed_and_parsed_before_English_pagination": true,
+    "general_failed_fetches_not_cached": true,
+    "unknown_cached_source_identity_refuses": true,
+    "no_silent_same_order_substitution_or_apadana_outage_fallback": true,
+    "physical_browser_or_network_cache_acceptance": "NOT_RUN"
+  },
+  "source_code_hashes": {
+    "src/apadana-thera.mjs": "800bec4f024044e658c604898ecf5cb2e8c6a155368c138f65510a416f6ec320",
+    "src/apadana.mjs": "1b88b0067caa2d655fda0ee2433d0f3683fe3ef35b9b2108ea8dfbab7e6f6217",
+    "src/english.mjs": "4eef7b7ea35c89a12c64c17d323eefa487bac128266665ab4e8a11f7c0c0907e",
+    "src/cache.mjs": "a61a03da36a72fd4fcec3e2d869e46d4699f15bc41a5210dd1b5b67d787541f7",
+    "web/translation-policy.mjs": "9e712a7fcc7c3fc1abce4e33cf8eb60f806f43be8f7dfef2c79ed2851abd5b88",
+    "src/chatgpt-widget.mjs": "08615325187d78f7f4f54e1473e0547891afce44b362ee5145289dc8ada8adad"
+  },
+  "approval_limit": "Negative baseline behavior observations only; source/normalization authority comes solely from originals-first standard-library packet and separate peer review."
+}

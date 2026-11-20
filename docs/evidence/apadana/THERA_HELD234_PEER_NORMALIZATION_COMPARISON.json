@@ -1,0 +1,31 @@
+{
+  "status": "MATCH_ORIGINAL_DERIVED_NORMALIZATION_AND_FINITE_IDENTITY_PROPOSAL",
+  "created_utc": "2026-11-20T06:10:19.739843+00:00",
+  "preauthor_seal_sha256": "e173b6a8b11f09686ef7c51816a612e3a8b75270130f72cedd1c2936ff0ba7ba",
+  "source_scope": "One exact publisher234/canonicaltha-ap236 complete publisher-edition poem, no line-complete VRI claim",
+  "all_complete_normalized_body_strings_equal": true,
+  "all_four_original_note_strings_equal": true,
+  "all_eight_body_paragraphs_equal": true,
+  "all_five_stanza_layouts_equal": true,
+  "both_original_colophons_equal": true,
+  "first_final_stanzas_equal": true,
+  "no_preface_or_summary_or_foreign_notes": true,
+  "all_profile_evidence_equal": true,
+  "exact_pure_profile_link_match": true,
+  "registered_root_recipe_verified_independently": true,
+  "raw_block_root_and_registered_root_domains_distinguished": true,
+  "exact_pali_segment_metadata_equal": true,
+  "source_identity_proposal": "APPROVABLE_LITERAL_OWN_ID_RAW_PIN_PATH_ORDER_EXCEPTION_ONLY",
+  "author_artifacts": {
+    "GOLDENS.json": "f431e9c1e69ef7bcafe6a511a3bbddc87e64739a5df5910ed6ee65f31a642ce9",
+    "EXPECTED_PROFILES.json": "af6d434558dc690935a4cc12672999de9114afaeed259c4039492f8e6bd32efc",
+    "EXPECTED_LINKS.json": "279a6106888c4978da6abe40207cba84f4f994e5aad5014bf3023da27f095d77",
+    "NORMALIZED_PAYLOADS_EXTERNAL_ONLY.json": "1f0285a2994824097ffa581fd76ab778bcedf6870f164e6eaf0aa59a54a2ae1c",
+    "PROPOSED_RUNTIME.json": "a24f7d46368234d5b3909a877ec332d3ed1f16d5f42e8ec4f336449e4d4883d6",
+    "RIGHTS_REVIEW.json": "adbff4f08816f74432dc72c5bd5c462fba5904692b33b4893d3e4cfb0ace3d98",
+    "COPY_POLICY.json": "6970a7eeeed5a1ec2093756aa9e577e8856871518705bfb7f1f5ffde707ece46"
+  },
+  "repo_or_runtime_edit": false,
+  "production_or_author_code_executed": false,
+  "runtime_or_browser_or_release_approval": false
+}

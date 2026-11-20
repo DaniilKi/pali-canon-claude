@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {remainingEvidence} from './thera-remaining-evidence.mjs';
+import {held234Evidence} from './thera-held234-evidence.mjs';
 
 const historical=JSON.parse(readFileSync(new URL('../../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
 const previousBytes=readFileSync(new URL('../../docs/evidence/apadana/THERA_241_250_APPROVAL.json',import.meta.url));
@@ -30,11 +31,14 @@ assert.equal(createHash('sha256').update(intakeBytes).digest('hex'),'4ae2cd3fea1
 assert.equal(latest.previous_intake.sha256,createHash('sha256').update(intakeBytes).digest('hex'));
 assert.deepEqual(latest.baseline_ids,intake.expected_profile_ids);
 assert.deepEqual(latest.baseline_records,[...intake.baseline_records,...intake.approved_records]);
-const records=[...latest.baseline_records,...latest.approved_records];
-assert.deepEqual(records.map(row=>row.id),latest.expected_profile_ids);
+const current=held234Evidence().approval;
+assert.deepEqual(current.baseline_ids,latest.expected_profile_ids);
+assert.deepEqual(current.baseline_records,[...latest.baseline_records,...latest.approved_records]);
+const records=[...current.baseline_records,...current.approved_records];
+assert.deepEqual(records.map(row=>row.id),current.expected_profile_ids);
 assert.ok(records.every(row=>/^(?:thi|tha)-ap\d+$/.test(row.id)&&Number.isInteger(row.poem)&&row.poem>0&&['chapter-3','chapter-4'].includes(row.publisher_chapter)));
 
-export const CURRENT_APADANA_IDS=Object.freeze([...latest.expected_profile_ids]);
+export const CURRENT_APADANA_IDS=Object.freeze([...current.expected_profile_ids]);
 export const CURRENT_APADANA_RECORDS=Object.freeze(records.map(row=>Object.freeze({...row})));
 export const CURRENT_THERA_IDS=Object.freeze(records.filter(row=>row.publisher_chapter==='chapter-3').map(row=>row.id));
 export const BASELINE_APADANA_IDS=Object.freeze([...historical.baseline_ids]);
