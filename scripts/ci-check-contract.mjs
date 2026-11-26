@@ -1,9 +1,8 @@
 // CI may expose the existing full check as separate, fail-closed steps only
 // while this exact command contract holds. No test filtering or retry is added.
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-import {resolve} from 'node:path';
-import {pathToFileURL} from 'node:url';
+import {readFileSync,realpathSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
 
 export const CHECK_STAGES=Object.freeze([
   Object.freeze({script:'build',command:'npm run build',body:'node scripts/build.mjs'}),
@@ -20,7 +19,9 @@ export function verifyCheckContract(pkg){
   return CHECK_STAGES;
 }
 
-if(process.argv[1]&&pathToFileURL(resolve(process.argv[1])).href===import.meta.url){
+// Node resolves a main-module alias, while argv can retain /var or a junction.
+// Compare filesystem identities so an aliased CLI cannot silently skip its gate.
+if(process.argv[1]&&realpathSync(process.argv[1])===realpathSync(fileURLToPath(import.meta.url))){
   const stages=verifyCheckContract(JSON.parse(readFileSync(new URL('../package.json',import.meta.url),'utf8')));
   console.log(JSON.stringify({status:'passed',node:process.version,platform:process.platform,arch:process.arch,commands:stages.map(stage=>stage.command)}));
 }
