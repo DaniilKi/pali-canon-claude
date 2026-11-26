@@ -1,0 +1,34 @@
+{
+  "schema": "frozen-first-partition-candidate-before-fileURL-fix-v1",
+  "commit": "1fde302ebed0dec2875a4c9935d74c36d2c38df5",
+  "files": {
+    "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
+      "file": "SOURCE_INVERSES.json",
+      "sha256": "2d31f7632a9f48b52ca581a5494fc79da3d15815a68bf608f6a0b067d509659c"
+    },
+    "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json": {
+      "file": "SOURCE_INVERSE_REVIEW.json",
+      "sha256": "e27c7a5b619fed49aefe05d1ff03824ea2c187c4c4fce0cd389976650dfb81d4"
+    },
+    "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json": {
+      "file": "LEAF_REBIND_REVIEW.json",
+      "sha256": "c53646501241dfd045775e816f4fabaefd81d49d1bf15953a8be55ea45042ff7"
+    },
+    "tests/helpers/intake359-source-input.mjs": {
+      "file": "intake359-source-input.mjs.txt",
+      "sha256": "5c408c5b5b19c112f5236fbf0a722c251ab2cd86a2c446fa067ee3ded2651460"
+    },
+    "docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json": {
+      "file": "BASELINE_C7E_TEST_FILES.json",
+      "sha256": "95cf44c6885b2bff6c217f3f9d575d15837af475fc08e468fb6fca4adab151bf"
+    },
+    "scripts/ci-test-partitions.mjs": {
+      "file": "ci-test-partitions.mjs.txt",
+      "sha256": "42df19ec38e74b32595118ad15a9883f5e8dd53543575d25409ff35d172c4d09"
+    },
+    "tests/ci-test-partitions.test.mjs": {
+      "file": "ci-test-partitions.test.mjs.txt",
+      "sha256": "0be7353a550d1a21b82e00675343b5e5ce2353c439d6773dc5758ac459b0a6ce"
+    }
+  }
+}

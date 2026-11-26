@@ -1,0 +1,30 @@
+{
+  "schema": "independent-ci-reporter-file-url-correction-review-v1",
+  "status": "GO_EXACT_TWO_FILE_FILEURL_CORRECTION_PENDING_BASELINE_WORKFLOW_MAP_AND_FINAL_COMMIT_REBIND",
+  "predecessor_commit": "1fde302ebed0dec2875a4c9935d74c36d2c38df5",
+  "new_files_sha256": {
+    "scripts/ci-test-partitions.mjs": "f72eec4f412d92b81303e790bdca221155524f2847b533276f0b9b283ee40aec",
+    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+    "tests/ci-test-partitions.test.mjs": "3fb50a86968c3a94b249e0b02c9b8afa2447418e2bb4e5c1eed7c7a443b788f9"
+  },
+  "author_receipt": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/partition-runner-review/file-url-correction/CORRECTION_RECEIPT.json",
+    "sha256": "320afe0d457990971b7c91710ff2ec79e74611421ca165d76e035a56967d5562"
+  },
+  "runner_whole_source_inverse_exact_single_expression_change": true,
+  "reporter_module_byte_identical": true,
+  "QA_whole_source_inverse_exact_only_existing_case7_protocol_and_path_roundtrip_assertions": true,
+  "all_original_QA_assertions_and8_case_inventory_preserved": true,
+  "339_original_test_driver_application_fixture_and_runtime_scope_unchanged": true,
+  "static_semantics": "pathToFileURL receives the absolute resolved reporter path and returns its file URL href, avoiding Windows drive-letter interpretation as an unsupported ESM URL scheme. File operands/serial flag/reporter position/child timeouts/event collector/aggregate and required workflow topology unchanged.",
+  "meaningful_regression": "Existing actual CLI case7 now requires reporter URL protocol file: and lossless fileURLToPath roundtrip to the exact owned reporter source. It still launches the genuine reporter and checks terminal output. Native Windows acceptance remains a next exactCI gate.",
+  "required_remaining": [
+    "Root refresh only two new-source hashes in independently anchored339 baseline, workflow baselineSHA literal, corresponding workflow maprow+loader SHA",
+    "Archive exact1fde current proofs before replacement and rebind finite source frame",
+    "New exact candidate nativeWindows20 fourparts+Linux20reference exactaggregate and every other required gate must pass before dev advancement"
+  ],
+  "test_execution_by_reviewer": false,
+  "app_build_network_Gitmutation_tracked_edits_or_CIactions_by_reviewer": false,
+  "nativeWindows_completion_CI_passed_dev_main_deploy_or_release_claim": false,
+  "blocking_findings": []
+}

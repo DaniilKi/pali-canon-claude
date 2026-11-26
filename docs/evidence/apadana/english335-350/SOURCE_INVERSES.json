@@ -7,11 +7,11 @@
   "files": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "b07e1a9aa4bd22406c329b509caeae9da89c81a842204a7f2c7bd54d4c102f79",
+      "current_sha256": "2470a5654875db540367fa71cc1d6ab68148e76898607dbdf0ec483b4c2db019",
       "hunks": [
         {
           "before": "permissions:\n  contents: read\njobs:\n  hosted-memory:\n",
-          "after": "permissions:\n  contents: read\nenv:\n  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json\n  CI_TEST_BASELINE_SHA: 95cf44c6885b2bff6c217f3f9d575d15837af475fc08e468fb6fca4adab151bf\njobs:\n  hosted-memory:\n"
+          "after": "permissions:\n  contents: read\nenv:\n  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json\n  CI_TEST_BASELINE_SHA: 9692ebb90d7cf4d3ab18c05712c9aefd40a4f0d83f15c152128858fff89224de\njobs:\n  hosted-memory:\n"
         },
         {
           "before": "            src/_poems/chapter-3/poem-333.md\n            src/_poems/chapter-3/poem-334.md\n            src/_poems/chapter-3/chapter-3.json\n      - name: Validate all Apadāna source and rights pins before browser retrieval\n        if: matrix.group == 'apadana'\n",

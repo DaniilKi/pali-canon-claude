@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: 95cf44c6885b2bff6c217f3f9d575d15837af475fc08e468fb6fca4adab151bf
+  CI_TEST_BASELINE_SHA: 9692ebb90d7cf4d3ab18c05712c9aefd40a4f0d83f15c152128858fff89224de
 jobs:
   hosted-memory:
     name: Hosted memory budget

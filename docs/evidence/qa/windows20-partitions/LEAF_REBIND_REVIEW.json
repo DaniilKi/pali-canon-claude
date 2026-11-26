@@ -1,61 +1,42 @@
 {
-  "schema": "independent-windows20-partitions-final-source-leaf-review-v1",
-  "status": "GO_EXACT_FROZEN_QA_SOURCE_LEAF_FOR_COMMIT_AND_REQUIRED_NATIVE_CI_VALIDATION",
-  "predecessor_commit": "c7e5939c3c479a78d3537e17deac6318162f3896",
-  "runtime_component_unchanged": "aec778d99aabccec6794a641072e463830e85542",
+  "schema": "independent-windows20-reporter-fileURL-correction-final-source-leaf-review-v1",
+  "status": "GO_EXACT_NARROW_REPORTER_FILEURL_SOURCE_LEAF_FOR_SUCCESSOR_COMMIT_AND_REQUIRED_NATIVE_CI",
+  "predecessor_commit": "1fde302ebed0dec2875a4c9935d74c36d2c38df5",
+  "unchanged_application_component": "aec778d99aabccec6794a641072e463830e85542",
   "source_inverse_review": {
     "file": "SOURCE_INVERSE_REVIEW.json",
-    "sha256": "e27c7a5b619fed49aefe05d1ff03824ea2c187c4c4fce0cd389976650dfb81d4"
+    "sha256": "c5a531134da8caeeb673e459b86ab0df8dd4db3c10ae1bd0f2e4cd39ef8bd903"
   },
-  "independent_implementation_review": {
+  "narrow_implementation_static_review": {
     "file": "STATIC_REVIEW.json",
-    "sha256": "15d5636719d8cfbb5d3ad7f00a6e030776444244f6e27365d5349747c5c8ba8f"
+    "sha256": "e349a0674b979856292976fa3db7a7772af1180d46bd85536ec4d36dd1d444a5"
   },
-  "current72_map_changed_only_workflow_and_AGENTS_row_objects": true,
-  "other70_deep_ordered_row_objects_byte_exact_C7": true,
-  "loader_only_map_SHA_literal_changed_pathset_callback_privategraph_body_unchanged": true,
-  "literal_dollar_preservation": {
-    "hunks": 11,
-    "all_replayed_as_literal_strings": true
+  "original_first_partition_STATIC_review_scope_preserved": "First implementation review remains explicitly1fde/source42df/QA0be7. This additional narrow review covers f72e runner +3fb50 existing-case7 assertions and does not rewrite prior failure or claim nativeWindows success.",
+  "new3_implementation_hashes": {
+    "scripts/ci-test-partitions.mjs": "f72eec4f412d92b81303e790bdca221155524f2847b533276f0b9b283ee40aec",
+    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+    "tests/ci-test-partitions.test.mjs": "3fb50a86968c3a94b249e0b02c9b8afa2447418e2bb4e5c1eed7c7a443b788f9"
   },
-  "immutable1001_original_index_unchanged": true,
-  "all824_prior_authorities_unchanged": true,
-  "C7_predecessor_authority_archives_exact_Git_bytes": {
-    "SOURCE_INVERSES.json": {
-      "bytes": 343948,
-      "sha256": "a710cefe1098d7403054f472698de28adf1a71440082ae8f02e6d5b5e00e0001"
-    },
-    "SOURCE_INVERSE_REVIEW.json": {
-      "bytes": 219842,
-      "sha256": "c931bbcafeae261f39101fa4c0fcbdff6cc21d5aa53a2e7f2b520fbdbc18788d"
-    },
-    "LEAF_REBIND_REVIEW.json": {
-      "bytes": 2736,
-      "sha256": "9d396f9d8b25f6b6f57369ca8cd7eeb1faecae1c2ae726eef5c9a31e9dd85e0b"
-    },
-    "intake359-source-input.mjs.txt": {
-      "bytes": 8361,
-      "sha256": "5d0b20295fad9cbe682b068ac2061ec42db82b8778766bd94d63b6245a12b8a0"
-    }
-  },
-  "reviewed339_C7_test_hash_baseline_and_frozen3_new_harness_files_exact": true,
-  "all339_original_tests_public_driver_and_fixture_assertions_unchanged": true,
-  "all39_package_members_current_GitC7_and_freshinstalled_exact": true,
-  "all_src_web_server_packagejson_fixture_bytes_unchanged": true,
-  "current34_runtime839e_2b19_leaf_unchanged": true,
-  "no_English_translation_or_private_study_data_changes": true,
-  "pending_current_review_replacement": "Preserved C7 scope receipts are archived exactly. Root may copy this source review and leaf review as the new current QA metadata before final commit, retaining archive copies.",
-  "required_remaining": [
-    "Bind final immutable commit/currentQAclosure and unchanged39 package component reuse",
-    "Actual fullLinux20 reference and four nativeWindows20 serial partitions must all complete and exactaggregatepass under original child assertions/deadlines",
-    "Every required sameSHA workflow/OS/Node/postcheck gate must pass before dev-only promotion"
+  "baseline_index_sha256": "9692ebb90d7cf4d3ab18c05712c9aefd40a4f0d83f15c152128858fff89224de",
+  "baseline_only_two_new_source_hash_substitutions": true,
+  "all339_original_C7_test_hashes_driver_counts_and2068plus8_expected_inventory_unchanged": true,
+  "workflow_only_baseline_index_hash_literal_changed": true,
+  "CI_topology_bounds_flags_required_artifacts_and_all_postgates_unchanged_from1fde": true,
+  "sourceMap_only_workflow_row_changed_and_other71_ordered_objects_exact1fde": true,
+  "loader_only_map_hash_constant_changed": true,
+  "all72_197hunks11literal_dollars_forward_and_inverse_exact": true,
+  "original1001index_and929unchanged_and824oldauthorityfixture_bytes_unchanged": true,
+  "before_fileURL_manifest_and_all7_authority_code_index_archives_equal_exact_Git1fde": true,
+  "archive_manifest_sha256": "a0b75d186b1c7c55b2773b331bbdd09c103a2c56e9f1710e616177c4b7ab4865",
+  "all39_worktree_Git1fde_and_actualfreshinstalled_bytes_exact": true,
+  "all_src_web_server_packagejson_fixture_andcurrent34_runtime_leaf_unchanged": true,
+  "no_English_wording_notes_private_data_or_rights_scope_changes": true,
+  "remaining_required": [
+    "Root copy new source/leaf correction receipts retaining first implementation and exact1fde archive scopes",
+    "Strict finalimmutable commit/source/39binding",
+    "Actual sameSHA nativeWindows20 fourpartitions+Linux20fullreference exactaggregate and every required workflow gate green before dev advancement"
   ],
-  "scope_limits": [
-    "No actual nativeWindows partition completion inferred from static source/QA fixtures.",
-    "No behavior/runtime/rights/sourceactivation/main/deploy approval.",
-    "Current C7/dev3d remain preserved until exact successor gates pass."
-  ],
-  "reviewer_actions": "Own stdlib read-only Git/source/hash/metadata inspection only; no app/JS/tests/browser/build/network/Gitmutation or tracked-file edits.",
-  "blocking_findings": [],
-  "CI_passed_dev_release_or_project_completion_claim": false
+  "reviewer_actions": "Read-only stdlib source/JSON/Gitobject/hash inspection only; no JavaScript/application/test/browser/build/network/Gitmutation or tracked edits.",
+  "CI_passed_nativeWindows_success_dev_main_deploy_or_release_claim": false,
+  "blocking_findings": []
 }

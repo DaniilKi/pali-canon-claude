@@ -3,10 +3,10 @@
   "status": "GO_EXACT_SOURCE_QA_CHECKPOINT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "snapshot_commit": null,
-  "after_domain": "physical worktree Windows20 CI partitions candidate over exactC7",
+  "after_domain": "physical Windows20 CI partitions reporter-fileURL correction over1fde",
   "live_working_tree_claimed": true,
-  "map_sha256": "2d31f7632a9f48b52ca581a5494fc79da3d15815a68bf608f6a0b067d509659c",
-  "loader_sha256": "5c408c5b5b19c112f5236fbf0a722c251ab2cd86a2c446fa067ee3ded2651460",
+  "map_sha256": "7d84a31a125251c92cda1dde20d404117f06ca7fe4dac5fc36240a4b7b317f55",
+  "loader_sha256": "63e76fb8b6a1904a127b78fb65bff8b3c422de9a76f74e7bbfc28cc80aa87088",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
   "changed_existing_exactly_mapped": 72,
@@ -17,7 +17,7 @@
   "rows": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "b07e1a9aa4bd22406c329b509caeae9da89c81a842204a7f2c7bd54d4c102f79",
+      "current_sha256": "2470a5654875db540367fa71cc1d6ab68148e76898607dbdf0ec483b4c2db019",
       "hunks": 7
     },
     "AGENTS.md": {

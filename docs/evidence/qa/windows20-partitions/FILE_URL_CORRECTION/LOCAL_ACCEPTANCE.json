@@ -1,0 +1,36 @@
+{
+  "schema": "native-reporter-file-URL-correction-local-acceptance-v1",
+  "prior_candidate": "1fde302ebed0dec2875a4c9935d74c36d2c38df5",
+  "observed_native_failure": {
+    "workflow_run": 45912889341,
+    "example_job": 140225181656,
+    "category": "ERR_UNSUPPORTED_ESM_URL_SCHEME",
+    "before_tests": true,
+    "reason": "Windows drive-letter reporter path must be a file URL"
+  },
+  "only_code_changes": [
+    "Reporter argument uses pathToFileURL(resolve(...)).href",
+    "Existing case7 adds protocol and exact filesystem roundtrip assertions"
+  ],
+  "baseline_index_sha256": "9692ebb90d7cf4d3ab18c05712c9aefd40a4f0d83f15c152128858fff89224de",
+  "source_map_sha256": "7d84a31a125251c92cda1dde20d404117f06ca7fe4dac5fc36240a4b7b317f55",
+  "loader_sha256": "63e76fb8b6a1904a127b78fb65bff8b3c422de9a76f74e7bbfc28cc80aa87088",
+  "original339testfiles_and_driver_unchanged": true,
+  "expected_tests": 2076,
+  "QA_node20": {
+    "pass": 8,
+    "skip": 0,
+    "fail": 0,
+    "seconds": 2.117,
+    "log_sha256": "5c99b1089610d6210d6b11d7b51302c03fc343dca6865bc1890b9e423df21504"
+  },
+  "all72_source_rows197hunks11dollar_hunks1001originals824frozen_pass": true,
+  "all39_package_members_unchanged": true,
+  "reviews": {
+    "STATIC_REVIEW.json": "e349a0674b979856292976fa3db7a7772af1180d46bd85536ec4d36dd1d444a5",
+    "SOURCE_INVERSE_REVIEW.json": "c5a531134da8caeeb673e459b86ab0df8dd4db3c10ae1bd0f2e4cd39ef8bd903",
+    "LEAF_REBIND_REVIEW.json": "c5581a3f3833a74aa99040811f3794c363fb6097ced973a833eb06282f1aaa59"
+  },
+  "new_exact_native_CI": "PENDING; no promotion from first failed candidate or local results",
+  "main_production_dev_changed": false
+}
