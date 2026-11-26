@@ -1,0 +1,464 @@
+{
+  "schema": "finite-six-boundary-to-c1-source-inverses-v1",
+  "base_commit": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "source_inputs_only": true,
+  "runtime_or_corpus_projection": false,
+  "files": {
+    ".github/workflows/check.yml": {
+      "c1_sha256": "468738198fef11555154be77ecf7c2e36a286c4019586e70dadc7155bf0a4160",
+      "current_sha256": "91874910d8169c41f0e15000a22ed416d29c4ca3ad2779623c2864e909f9b587",
+      "hunks": [
+        {
+          "before": "        run: |\n          node --test --test-reporter=tap tests/apadana-four-boundary-migration.test.mjs tests/apadana-four-locator-consumers.test.mjs | tee reviewed-four-boundary.tap\n          node --input-type=module -e 'import assert from \"node:assert/strict\"; import {readFileSync} from \"node:fs\"; const tap=readFileSync(\"reviewed-four-boundary.tap\",\"utf8\"); for(const [key,value] of [[\"tests\",13],[\"pass\",13],[\"fail\",0],[\"cancelled\",0],[\"skipped\",0],[\"todo\",0]]) assert.match(tap,new RegExp(\"^# \"+key+\" \"+value+\"$\",\"m\"));'\n      - name: Validate independently reviewed Therā expansion and held-source refusals\n        if: matrix.group == 'apadanatheraexpansion'\n        run: |\n",
+          "after": "        run: |\n          node --test --test-reporter=tap tests/apadana-four-boundary-migration.test.mjs tests/apadana-four-locator-consumers.test.mjs | tee reviewed-four-boundary.tap\n          node --input-type=module -e 'import assert from \"node:assert/strict\"; import {readFileSync} from \"node:fs\"; const tap=readFileSync(\"reviewed-four-boundary.tap\",\"utf8\"); for(const [key,value] of [[\"tests\",13],[\"pass\",13],[\"fail\",0],[\"cancelled\",0],[\"skipped\",0],[\"todo\",0]]) assert.match(tap,new RegExp(\"^# \"+key+\" \"+value+\"$\",\"m\"));'\n      - name: Require six-poem source and saved-citation compatibility without skips\n        if: matrix.group == 'apadanatherapair101'\n        timeout-minutes: 5\n        shell: bash\n        env:\n          VRI_SOURCE_CHECKOUT: .fixtures/apadana-vri-pinned\n        run: |\n          node --test --test-reporter=tap tests/apadana-six-boundary-migration.test.mjs tests/apadana-six-locator-consumers.test.mjs tests/apadana-six-cached-consumers.test.mjs tests/six-boundary-history.test.mjs tests/six-boundary-source-input.test.mjs tests/six-boundary-ci.test.mjs | tee reviewed-six-boundary.tap\n          node --input-type=module -e 'import assert from \"node:assert/strict\"; import {readFileSync} from \"node:fs\"; const tap=readFileSync(\"reviewed-six-boundary.tap\",\"utf8\"); for(const [key,value] of [[\"tests\",23],[\"pass\",23],[\"fail\",0],[\"cancelled\",0],[\"skipped\",0],[\"todo\",0]]) assert.match(tap,new RegExp(\"^# \"+key+\" \"+value+\"$\",\"m\"));'\n      - name: Validate independently reviewed Therā expansion and held-source refusals\n        if: matrix.group == 'apadanatheraexpansion'\n        run: |\n"
+        },
+        {
+          "before": "            reviewed-publisher312-319.tap\n            reviewed-publisher321-329.tap\n            reviewed-publisher331-334.tap\n            standalone-reader.report.json\n            standalone-print.report.json\n            standalone-saved.report.json\n",
+          "after": "            reviewed-publisher312-319.tap\n            reviewed-publisher321-329.tap\n            reviewed-publisher331-334.tap\n            reviewed-six-boundary.tap\n            standalone-reader.report.json\n            standalone-print.report.json\n            standalone-saved.report.json\n"
+        }
+      ]
+    },
+    "scripts/canon/build_canon.py": {
+      "c1_sha256": "18f0e3446b0f186449300a61f51b0c1534d044cb35264b5af644f044e59d3ceb",
+      "current_sha256": "ab07b1a0d30f2c8608068c0563ec44fa85be58016034cfca64b567678a6afde2",
+      "hunks": [
+        {
+          "before": "from apadana_thera_spans import apadana_thera_spans  # noqa: E402\nfrom apadana_thera_pair_spans import apadana_thera_pair_spans  # noqa: E402\nfrom apadana_thera333_spans import apadana_thera333_spans  # noqa: E402\nfrom thag_sixteen_spans import thag_sixteen_spans  # noqa: E402\n\nBOOKS = OrderedDict([\n",
+          "after": "from apadana_thera_spans import apadana_thera_spans  # noqa: E402\nfrom apadana_thera_pair_spans import apadana_thera_pair_spans  # noqa: E402\nfrom apadana_thera333_spans import apadana_thera333_spans  # noqa: E402\nfrom apadana_thera340_spans import apadana_thera340_spans  # noqa: E402\nfrom thag_sixteen_spans import thag_sixteen_spans  # noqa: E402\n\nBOOKS = OrderedDict([\n"
+        },
+        {
+          "before": "    corrected.update(apadana_thera_spans(b.books, b.units))\n    corrected.update(apadana_thera_pair_spans(b.books, b.units))\n    corrected.update(apadana_thera333_spans(b.books, b.units))\n    corrected.update(thag_sixteen_spans(b.books, b.units))\n    for u in b.units:\n        if u['collection'] in ('pv', 'vv') or u['id'] in corrected:\n",
+          "after": "    corrected.update(apadana_thera_spans(b.books, b.units))\n    corrected.update(apadana_thera_pair_spans(b.books, b.units))\n    corrected.update(apadana_thera333_spans(b.books, b.units))\n    corrected.update(apadana_thera340_spans(b.books, b.units))\n    corrected.update(thag_sixteen_spans(b.books, b.units))\n    for u in b.units:\n        if u['collection'] in ('pv', 'vv') or u['id'] in corrected:\n"
+        }
+      ]
+    },
+    "scripts/web_reader_approved_acceptance.py": {
+      "c1_sha256": "26fc2315af9b3bc37c4b8aaa0647897cb81561f3b79f894874a32c311800c2c7",
+      "current_sha256": "f7dea47b7fd4019c1750f8402341a196c0deee73bc56a70bc1541e7e64039c2d",
+      "hunks": [
+        {
+          "before": "from pathlib import Path\nfrom web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records\n\nfrom web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA, read_331_334, APPROVAL343_SHA, IDS343_NEW\n\nCURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'\n",
+          "after": "from pathlib import Path\nfrom web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records\n\nfrom web_reader_six_boundary_history import (assert_six_current_canonical_data, historical_c1_data_bytes, six_runtime_records, assert_preserved_c1_catalogue)\nfrom web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA, read_331_334, APPROVAL343_SHA, IDS343_NEW\n\nCURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'\n"
+        },
+        {
+          "before": "    assert object_sha(previous['source']) == baseline['manifest_source_sha256']\n    for name, pin in baseline['data_file_sha256'].items():\n        assert name.startswith('server/data/') and '..' not in Path(name).parts and name != 'server/data/apadana.json'\n        assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == pin\n    assert len(baseline['data_file_sha256']) == 26\n    profiles, links = dict(previous['profiles']), dict(previous['links'])\n    extra = [sealed(directory / current[key]['file'], current[key]['sha256']) for key in ('expected_profiles', 'expected_links')]\n",
+          "after": "    assert object_sha(previous['source']) == baseline['manifest_source_sha256']\n    for name, pin in baseline['data_file_sha256'].items():\n        assert name.startswith('server/data/') and '..' not in Path(name).parts and name != 'server/data/apadana.json'\n        assert hashlib.sha256(historical_c1_data_bytes(root, name)).hexdigest() == pin\n    assert len(baseline['data_file_sha256']) == 26\n    profiles, links = dict(previous['profiles']), dict(previous['links'])\n    extra = [sealed(directory / current[key]['file'], current[key]['sha256']) for key in ('expected_profiles', 'expected_links')]\n"
+        },
+        {
+          "before": "    return files\n\n\ndef approved_catalogue(root):\n    return approved343_catalogue(root)\n\n\ndef approved_runtime(root):\n    return approved343_runtime(root)\n",
+          "after": "    return files\n\n\ndef historical_c1_approved_catalogue(root):\n    return approved343_catalogue(root)\n\n\ndef historical_c1_approved_runtime(root):\n    return approved343_runtime(root)\n\n\ndef approved_six_catalogue(root):\n    assert_six_current_canonical_data(root)\n    previous = approved343_catalogue(root)\n    assert_preserved_c1_catalogue(root, previous)\n    return previous\n\ndef approved_six_runtime(root):\n    return six_runtime_records(root, approved343_runtime(root))\n\ndef approved_catalogue(root):\n    return approved_six_catalogue(root)\n\ndef approved_runtime(root):\n    return approved_six_runtime(root)\n"
+        }
+      ]
+    },
+    "scripts/web_reader_four_boundary_history.py": {
+      "c1_sha256": "0588afde3d8d38858b2a67a09dcd7600f09d2baced27ebe3a9c6085ce9546a87",
+      "current_sha256": "ba229d1dec554841af7d732cffa70b2087dde09f49fb4391e7cb289f8f57435e",
+      "hunks": [
+        {
+          "before": "No production loader imports this helper. No ambient switch or current fallback.\nThe pure logical inverse is separate from exact complete-input acceptance.\n\"\"\"\nimport copy\nimport gzip\nimport hashlib\n",
+          "after": "No production loader imports this helper. No ambient switch or current fallback.\nThe pure logical inverse is separate from exact complete-input acceptance.\n\"\"\"\nfrom web_reader_six_boundary_history import (canon_before_six, c1_logical_input, historical_c1_data_bytes, copy_six_historical_fixture, C1_DATA_PATHS)\n\nimport copy\nimport gzip\nimport hashlib\n"
+        },
+        {
+          "before": "    return json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode('utf-8')\n\n\ndef regular(root, relative):\n    path = Path(root)\n    parts = Path(relative).parts\n    if not parts or Path(relative).is_absolute() or any(p in ('..', '.') for p in parts):\n",
+          "after": "    return json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode('utf-8')\n\n\ndef historical_c1_regular(root, relative):\n    path = Path(root)\n    parts = Path(relative).parts\n    if not parts or Path(relative).is_absolute() or any(p in ('..', '.') for p in parts):\n"
+        },
+        {
+          "before": "    raise ValueError('Mixed or unreviewed four-poem metadata')\n\n\ndef canon_before_four(canon):\n    \"\"\"Pure strict inverse: retain unrelated mutations for negative tests.\n\n    This is not a saved-locator migration and does not assert a whole-input SHA.\n",
+          "after": "    raise ValueError('Mixed or unreviewed four-poem metadata')\n\n\ndef historical_c1_canon_before_four(canon):\n    \"\"\"Pure strict inverse: retain unrelated mutations for negative tests.\n\n    This is not a saved-locator migration and does not assert a whole-input SHA.\n"
+        },
+        {
+          "before": "    return out\n\n\ndef historical_canon_bytes(raw):\n    \"\"\"Exact complete new snapshot -> exact old logical JSON, without file writes.\"\"\"\n    if digest(raw) != NEW_CANON_SHA:\n        raise ValueError('Exact complete current canonical bytes required')\n",
+          "after": "    return out\n\n\ndef historical_c1_historical_canon_bytes(raw):\n    \"\"\"Exact complete new snapshot -> exact old logical JSON, without file writes.\"\"\"\n    if digest(raw) != NEW_CANON_SHA:\n        raise ValueError('Exact complete current canonical bytes required')\n"
+        },
+        {
+          "before": "    return raw\n\n\ndef copy_historical_fixture(source_root, destination_root):\n    \"\"\"Provision only the three sealed old byte inputs in an owned test fixture.\"\"\"\n    for name in CHANGED_DATA:\n        relative = 'tests/fixtures/canon-before333/' + Path(name).name\n",
+          "after": "    return raw\n\n\ndef historical_c1_copy_historical_fixture(source_root, destination_root):\n    \"\"\"Provision only the three sealed old byte inputs in an owned test fixture.\"\"\"\n    for name in CHANGED_DATA:\n        relative = 'tests/fixtures/canon-before333/' + Path(name).name\n"
+        },
+        {
+          "before": "        target.parent.mkdir(parents=True, exist_ok=True)\n        with target.open('xb') as stream:\n            stream.write(raw)\n",
+          "after": "        target.parent.mkdir(parents=True, exist_ok=True)\n        with target.open('xb') as stream:\n            stream.write(raw)\n\n\n# Explicit future→C1 input frames before the unchanged historical four bodies.\ndef regular(root, relative):\n    if relative in C1_DATA_PATHS:\n        return historical_c1_data_bytes(root, relative)\n    return historical_c1_regular(root, relative)\n\ndef canon_before_four(canon):\n    return historical_c1_canon_before_four(canon_before_six(canon))\n\ndef historical_canon_bytes(raw):\n    return historical_c1_historical_canon_bytes(c1_logical_input(raw))\n\ndef copy_historical_fixture(source_root, destination_root):\n    copy_six_historical_fixture(source_root, destination_root)\n    return historical_c1_copy_historical_fixture(source_root, destination_root)\n"
+        }
+      ]
+    },
+    "src/analyse.mjs": {
+      "c1_sha256": "bb0334f6e038813afc319b34220439cad2c21cf008f4a9b40fd1546fde39f861",
+      "current_sha256": "5263431a352c2e6ef8120fc1183f134ce02083ccff6c14323ae4ad505027309e",
+      "hunks": [
+        {
+          "before": "    book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root-book ID from browse_canon node \"books\", as with get_text book mode. Give book instead of uid; source-file positions are not individual canonical identities.'),\n    segment: z.union([z.string().trim().min(1).max(200), z.number().int().min(1)]).optional().describe('Exact segment ref from get_text or get_post_canonical, or its number. Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),\n    paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('Exact VRI paragraph label instead of segment. In every scope, a label matching several segments is an error: choose an exact segment ref. Give at most one selector; omit both for the first body segment.'),\n    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe('Expected citation locator revision from the Pāli reader. Required for explicit tha-ap107/108 and tha-ap333–336 segment, paragraph or word offset after their boundary repair.'),\n    offset: z.number().int().min(0).max(100000).optional().describe('Word offset within the segment, for continuation.'),\n    limit: z.number().int().min(1).max(200).default(60).describe('Words per call.'),\n  }, (args) => analysePassage(args));\n",
+          "after": "    book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root-book ID from browse_canon node \"books\", as with get_text book mode. Give book instead of uid; source-file positions are not individual canonical identities.'),\n    segment: z.union([z.string().trim().min(1).max(200), z.number().int().min(1)]).optional().describe('Exact segment ref from get_text or get_post_canonical, or its number. Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),\n    paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('Exact VRI paragraph label instead of segment. In every scope, a label matching several segments is an error: choose an exact segment ref. Give at most one selector; omit both for the first body segment.'),\n    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe('Expected citation locator revision from the Pāli reader. Required for an explicit segment, paragraph or word offset in any registered repaired canonical unit; keep the edition commit separately as provenance.'),\n    offset: z.number().int().min(0).max(100000).optional().describe('Word offset within the segment, for continuation.'),\n    limit: z.number().int().min(1).max(200).default(60).describe('Words per call.'),\n  }, (args) => analysePassage(args));\n"
+        }
+      ]
+    },
+    "src/chatgpt-widget.mjs": {
+      "c1_sha256": "c36422b6aab199fdf27909c3f190c01c34e65f3ba1bf97e1e0ac837ecea579ee",
+      "current_sha256": "c205b72c355e1ad064e886cd85f79c48c2f3af21ec478beb8ae8f440ab50b55b",
+      "hunks": [
+        {
+          "before": "import { HostedToolError } from './hosted-tool-error.mjs';\n\nexport const WIDGET_TOOL = 'read_passage_widget';\nexport const WIDGET_VERSION = 'v42';\n// Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.\nexport const NAVIGATION_TIMEOUT_MS = 90000;\nexport const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;\n",
+          "after": "import { HostedToolError } from './hosted-tool-error.mjs';\n\nexport const WIDGET_TOOL = 'read_passage_widget';\nexport const WIDGET_VERSION = 'v43';\n// Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.\nexport const NAVIGATION_TIMEOUT_MS = 90000;\nexport const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;\n"
+        },
+        {
+          "before": "      script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),\n      translation: z.string().trim().min(1).max(200).optional().describe('At the start: \"default\", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),\n      english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),\n      offset: z.number().int().min(0).max(100000).optional().describe('Pāli segment offset for continuation. Repaired tha-ap107/108 and tha-ap333–336 positions, including 0, require the returned source_commit.'),\n      limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),\n      english_translation_revision: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Exact source revision for a pinned Apadāna selection or continuation.'),\n      english_prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset.'),\n",
+          "after": "      script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),\n      translation: z.string().trim().min(1).max(200).optional().describe('At the start: \"default\", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),\n      english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),\n      offset: z.number().int().min(0).max(100000).optional().describe('Pāli segment offset for continuation. Every explicit position in a registered repaired canonical unit, including 0, requires the returned current source_commit locator pin.'),\n      limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),\n      english_translation_revision: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Exact source revision for a pinned Apadāna selection or continuation.'),\n      english_prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset.'),\n"
+        },
+        {
+          "before": "    }\n    queueSize();\n  }\n  function render(d) {\n    if (closed) return;\n    if (!d || typeof d !== 'object') return;\n    if (d === rendered) { refreshSourceNotes(d); return; }\n    if (!d.pali && typeof d.error !== 'string') return;\n    var repairedPins = ${JSON.stringify(REPAIRED_CANONICAL_LOCATORS)};\n    if (Object.prototype.hasOwnProperty.call(repairedPins, d.text_id) && (!d.source || d.source.locator_revision !== repairedPins[d.text_id])) d = { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' };\n    abandon(); generation++; awaitingSelection = false;\n    if (!d.pali) {\n      if (typeof d.error !== 'string') return;\n",
+          "after": "    }\n    queueSize();\n  }\n  function checkedCanonicalLocator(d) {\n    if (!d || typeof d !== 'object') return d;\n    var repairedPins = ${JSON.stringify(REPAIRED_CANONICAL_LOCATORS)};\n    return Object.prototype.hasOwnProperty.call(repairedPins, d.text_id) && (!d.source || d.source.locator_revision !== repairedPins[d.text_id])\n      ? { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' } : d;\n  }\n  function render(d) {\n    if (closed) return;\n    if (!d || typeof d !== 'object') return;\n    d = checkedCanonicalLocator(d);\n    if (d === rendered) { refreshSourceNotes(d); return; }\n    if (!d.pali && typeof d.error !== 'string') return;\n    abandon(); generation++; awaitingSelection = false;\n    if (!d.pali) {\n      if (typeof d.error !== 'string') return;\n"
+        },
+        {
+          "before": "        if (freshMetadata || freshOutput) toolResult(result);\n      } else if (freshOutput) render(output);\n      else if (freshMetadata && result && result.structuredContent) toolResult(result);\n      if (!freshOutput && output) refreshSourceNotes(output);\n    }\n  }\n  function requested(args) {\n",
+          "after": "        if (freshMetadata || freshOutput) toolResult(result);\n      } else if (freshOutput) render(output);\n      else if (freshMetadata && result && result.structuredContent) toolResult(result);\n      if (!freshOutput && output) {\n        var locatorChecked = checkedCanonicalLocator(output);\n        if (locatorChecked !== output) render(locatorChecked);\n        else refreshSourceNotes(output);\n      }\n    }\n  }\n  function requested(args) {\n"
+        }
+      ]
+    },
+    "src/locator-policy.mjs": {
+      "c1_sha256": "c0ec6c2aada146c86efb38c6a82e3110bae9b92edf6ceabc9bd9dd30ca16f6fe",
+      "current_sha256": "fe987a89d4c540bc5b1f78706869dbff9823cac5b8a78d5104dca56695cba149",
+      "hunks": [
+        {
+          "before": "/** Closed, reviewed citation namespaces. Never infer a revision from an ID pattern. */\nexport const APADANA_FOUR_INDEX_REVISION = 'apadana-thera333-336-v1';\nexport const APADANA_FOUR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_FOUR_INDEX_REVISION;\nexport const REPAIRED_CANONICAL_LOCATORS = Object.freeze({\n  'tha-ap107': APADANA_PAIR_LOCATOR_REVISION, 'tha-ap108': APADANA_PAIR_LOCATOR_REVISION,\n  'tha-ap333': APADANA_FOUR_LOCATOR_REVISION, 'tha-ap334': APADANA_FOUR_LOCATOR_REVISION,\n  'tha-ap335': APADANA_FOUR_LOCATOR_REVISION, 'tha-ap336': APADANA_FOUR_LOCATOR_REVISION,\n});\nexport const requiredCanonicalRevision = id => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id) ? REPAIRED_CANONICAL_LOCATORS[id] : null;\nexport const isRepairedCanonical = (id, revision) => requiredCanonicalRevision(id) !== null && revision === requiredCanonicalRevision(id);\n",
+          "after": "/** Closed, reviewed citation namespaces. Never infer a revision from an ID pattern. */\nexport const APADANA_FOUR_INDEX_REVISION = 'apadana-thera333-336-v1';\nexport const APADANA_FOUR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_FOUR_INDEX_REVISION;\n/** Three exact newly reviewed pairs; do not infer intervening or adjacent IDs. */\nexport const APADANA_SIX_INDEX_REVISION = 'apadana-thera340-341-343-344-346-347-v1';\nexport const APADANA_SIX_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_SIX_INDEX_REVISION;\nexport const REPAIRED_CANONICAL_LOCATORS = Object.freeze({\n  'tha-ap107': APADANA_PAIR_LOCATOR_REVISION, 'tha-ap108': APADANA_PAIR_LOCATOR_REVISION,\n  'tha-ap333': APADANA_FOUR_LOCATOR_REVISION, 'tha-ap334': APADANA_FOUR_LOCATOR_REVISION,\n  'tha-ap335': APADANA_FOUR_LOCATOR_REVISION, 'tha-ap336': APADANA_FOUR_LOCATOR_REVISION,\n  'tha-ap340': APADANA_SIX_LOCATOR_REVISION, 'tha-ap341': APADANA_SIX_LOCATOR_REVISION,\n  'tha-ap343': APADANA_SIX_LOCATOR_REVISION, 'tha-ap344': APADANA_SIX_LOCATOR_REVISION,\n  'tha-ap346': APADANA_SIX_LOCATOR_REVISION, 'tha-ap347': APADANA_SIX_LOCATOR_REVISION,\n});\nexport const requiredCanonicalRevision = id => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id) ? REPAIRED_CANONICAL_LOCATORS[id] : null;\nexport const isRepairedCanonical = (id, revision) => requiredCanonicalRevision(id) !== null && revision === requiredCanonicalRevision(id);\n"
+        }
+      ]
+    },
+    "src/server.mjs": {
+      "c1_sha256": "9714eef39185e993922577e296f5424af53d40b11beff295b653b17c7f42e150",
+      "current_sha256": "217e53a17b314b368b2a0ebe75007d066d5e8222a79644df7644ada3c4b6f526",
+      "hunks": [
+        {
+          "before": "  tool('get_text', 'Read Pāli from the VRI edition: give uid for a sutta/section, or book for a complete source book including its front matter (IDs from browse_canon node \"books\"). Give exactly one of uid and book. Long texts are paginated by segment, with VRI paragraphs, PTS and Thai/Myanmar/VRI page breaks and optional raw/structured variants. With uid, optionally add English (translation: \"default\" or a translation_id from get_metadata) or aligned commentary. The Pāli works offline. Set script for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (transliterated from VRI Roman); uid may also be typed in those scripts.', {\n    uid: citation.optional(),\n    book: z.string().trim().min(1).max(100).optional().describe('A complete VRI root book: use an exact ID from browse_canon node \"books\" (e.g. vin02m1). Give book instead of uid. Source-file segment references are not standard sutta/rule citations; English and aligned commentary require uid.'),\n    offset: z.number().int().min(0).max(100000).optional().describe('Segment offset for continuation. For the repaired tha-ap107/108 and tha-ap333–336 pair, every explicit position including 0 requires source_commit from the reader.'),\n    source_commit: z.string().regex(/^[a-zA-Z0-9._-]{1,100}$/).optional().describe('Expected source locator revision from the selected reader. Preserve it for positional reads; a changed source or mapping refuses before wording.'),\n    limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),\n    includeVariants: z.boolean().default(false).describe('Include variant readings recorded by VRI.'),\n",
+          "after": "  tool('get_text', 'Read Pāli from the VRI edition: give uid for a sutta/section, or book for a complete source book including its front matter (IDs from browse_canon node \"books\"). Give exactly one of uid and book. Long texts are paginated by segment, with VRI paragraphs, PTS and Thai/Myanmar/VRI page breaks and optional raw/structured variants. With uid, optionally add English (translation: \"default\" or a translation_id from get_metadata) or aligned commentary. The Pāli works offline. Set script for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (transliterated from VRI Roman); uid may also be typed in those scripts.', {\n    uid: citation.optional(),\n    book: z.string().trim().min(1).max(100).optional().describe('A complete VRI root book: use an exact ID from browse_canon node \"books\" (e.g. vin02m1). Give book instead of uid. Source-file segment references are not standard sutta/rule citations; English and aligned commentary require uid.'),\n    offset: z.number().int().min(0).max(100000).optional().describe('Segment offset for continuation. Every explicit position in a registered repaired canonical unit, including 0, requires the current source_commit locator pin from its reader.'),\n    source_commit: z.string().regex(/^[a-zA-Z0-9._-]{1,100}$/).optional().describe('Expected source locator revision from the selected reader. Preserve it for positional reads; a changed source or mapping refuses before wording.'),\n    limit: z.number().int().min(1).max(200).default(60).describe('Segments per page.'),\n    includeVariants: z.boolean().default(false).describe('Include variant readings recorded by VRI.'),\n"
+        }
+      ]
+    },
+    "tests/apadana-disclosures.test.mjs": {
+      "c1_sha256": "e9cce61e66dd0d13eb59aea92a3b315973116ab365f260b3cc09cf44acef24ef",
+      "current_sha256": "26f8090564aa436e9475f7054df43d6b72d4bb9b919836dc3dc2ebe4796828ab",
+      "hunks": [
+        {
+          "before": "}\n\ntest('all152 historical metadata and caveat contracts remain unconditional while invented poem-note content refuses', () => {\n  assert.equal(WIDGET_VERSION, 'v42');\n  const checked = embeddedGuard();\n  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);\n  // Preserve the exact historical metadata cohort. Content must now contain\n",
+          "after": "}\n\ntest('all152 historical metadata and caveat contracts remain unconditional while invented poem-note content refuses', () => {\n  assert.equal(WIDGET_VERSION, 'v43');\n  const checked = embeddedGuard();\n  assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);\n  // Preserve the exact historical metadata cohort. Content must now contain\n"
+        }
+      ]
+    },
+    "tests/apadana-fourth-client.test.mjs": {
+      "c1_sha256": "71a09536ad257b315a00e4521cccb4fe97d8e078bd7fc0a4c1bf4a906c34242e",
+      "current_sha256": "4c217719991afd06a7e3825695483d5065b484d3fc1fbc344d16b12ff10d6375",
+      "hunks": [
+        {
+          "before": "};\n\ntest('all forty finite choices preserve exact apparatus in individual, comparison and embedded validation', () => {\n  assert.equal(WIDGET_VERSION, 'v42');\n  const check = checked();\n  for (let n = 1; n <= 40; n++) {\n    const f = fixture(n);\n",
+          "after": "};\n\ntest('all forty finite choices preserve exact apparatus in individual, comparison and embedded validation', () => {\n  assert.equal(WIDGET_VERSION, 'v43');\n  const check = checked();\n  for (let n = 1; n <= 40; n++) {\n    const f = fixture(n);\n"
+        },
+        {
+          "before": "// Original full-page, comparison and embedded assertions replay unchanged only\n// after parsing the exact registered raw artifact; synthetic notes never pass.\nsourceTest('all forty finite choices preserve exact apparatus in individual, comparison and embedded validation', () => {\n  assert.equal(WIDGET_VERSION, 'v42');\n  const check = checked();\n  for (let n = 1; n <= 40; n++) {\n    const f = fixture(n);\n",
+          "after": "// Original full-page, comparison and embedded assertions replay unchanged only\n// after parsing the exact registered raw artifact; synthetic notes never pass.\nsourceTest('all forty finite choices preserve exact apparatus in individual, comparison and embedded validation', () => {\n  assert.equal(WIDGET_VERSION, 'v43');\n  const check = checked();\n  for (let n = 1; n <= 40; n++) {\n    const f = fixture(n);\n"
+        }
+      ]
+    },
+    "tests/apadana-fourth.test.mjs": {
+      "c1_sha256": "8d1465cddf7d2af8d57176432fff42f54f5bfb21294b4aa70f7adcda1bd31765",
+      "current_sha256": "c557e9ec4b374acf6c649316fe5cf37c62127b4ad9faa008753e6d4e5c16a2ef",
+      "hunks": [
+        {
+          "before": "});\n\ntest('source-enabled current reading API exposes preface notes once and separates both summaries from poem and notes', { skip: !checkout }, async () => {\n  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v42.html'); onlyPinnedFetch([]);\n  for (const n of [31, 33, 35, 40]) {\n    const value = await readPassage({ uid: pFor(n).id, translation: idFor(n) });\n    assert.ok(!value.english_error, value.english_error);\n",
+          "after": "});\n\ntest('source-enabled current reading API exposes preface notes once and separates both summaries from poem and notes', { skip: !checkout }, async () => {\n  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v43.html'); onlyPinnedFetch([]);\n  for (const n of [31, 33, 35, 40]) {\n    const value = await readPassage({ uid: pFor(n).id, translation: idFor(n) });\n    assert.ok(!value.english_error, value.english_error);\n"
+        }
+      ]
+    },
+    "tests/apadana-next.test.mjs": {
+      "c1_sha256": "463880f8849a554042f2fef195b280066b1fd13dfdd94e1167ed473c3360aca6",
+      "current_sha256": "07b50abad3064a2d25c93649a41000b1cf5939f86ad7860562bce2d5c03f6782",
+      "hunks": [
+        {
+          "before": "    if(n===17)assert.equal(widget.english.publisher_divisions[0].translator_notes[0].number,21);\n  }\n  const before=fetches.length;await assert.rejects(english.translation(canon.resolve('thi-ap12').unit,id(17)),/not linked/);assert.equal(fetches.length,before);\n  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v42.html');\n});\n\ntest('source-enabled embedded reader executes sparse note and publisher division ownership guards',{skip:!checkout},async()=>{\n",
+          "after": "    if(n===17)assert.equal(widget.english.publisher_divisions[0].translator_notes[0].number,21);\n  }\n  const before=fetches.length;await assert.rejects(english.translation(canon.resolve('thi-ap12').unit,id(17)),/not linked/);assert.equal(fetches.length,before);\n  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v43.html');\n});\n\ntest('source-enabled embedded reader executes sparse note and publisher division ownership guards',{skip:!checkout},async()=>{\n"
+        }
+      ]
+    },
+    "tests/apadana-thera.test.mjs": {
+      "c1_sha256": "e87746d4ee6a902740aeed4060294e724a0c732ff773bce983b643db1603917a",
+      "current_sha256": "17b5d3c718c419cffbab625e0a404357dafc4a9671f81e6931e651db693fc5bd",
+      "hunks": [
+        {
+          "before": "});\n\ntest('source-enabled current reading API returns the new family and note-free apparatus without old-family collisions', { skip: !checkout }, async () => {\n  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v42.html'); onlyPinnedFetch([]);\n  for (const uid of ['tha-ap13', 'tha-ap19', 'tha-ap22', 'tha-ap23', 'tha-ap24', 'tha-ap30', 'tha-ap32']) {\n    const p = thera(uid), value = await readPassage({ uid, translation: tid(p), englishCharacters: 500 });\n    assert.ok(!value.english_error, value.english_error); assert.equal(value.text_id, uid);\n",
+          "after": "});\n\ntest('source-enabled current reading API returns the new family and note-free apparatus without old-family collisions', { skip: !checkout }, async () => {\n  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v43.html'); onlyPinnedFetch([]);\n  for (const uid of ['tha-ap13', 'tha-ap19', 'tha-ap22', 'tha-ap23', 'tha-ap24', 'tha-ap30', 'tha-ap32']) {\n    const p = thera(uid), value = await readPassage({ uid, translation: tid(p), englishCharacters: 500 });\n    assert.ok(!value.english_error, value.english_error); assert.equal(value.text_id, uid);\n"
+        }
+      ]
+    },
+    "tests/apadana-third.test.mjs": {
+      "c1_sha256": "f22d871384f3a3bc91b2c487857b996236a963261b31f89dce02e15c48a28125",
+      "current_sha256": "05c68f75897240b227f21307c5712c30712614f72afd1e3e6aae174442e4fde5",
+      "hunks": [
+        {
+          "before": "\ntest('source-enabled current embedded reader executes third-chapter apparatus guards before rendering', {skip: !checkout}, () => {\n  actualSource = true;\n  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v42.html');\n  const sandbox = vm.createContext({TextEncoder});\n  vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);\n  for (const n of [21, 28, 30]) {\n",
+          "after": "\ntest('source-enabled current embedded reader executes third-chapter apparatus guards before rendering', {skip: !checkout}, () => {\n  actualSource = true;\n  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v43.html');\n  const sandbox = vm.createContext({TextEncoder});\n  vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);\n  for (const n of [21, 28, 30]) {\n"
+        }
+      ]
+    },
+    "tests/apadana_four_boundary_acceptance.py": {
+      "c1_sha256": "ac432a793d7242a225c84915f0a1c571772c218021ca10dc7be33059855c6354",
+      "current_sha256": "5b61afe2d8294b6cf3051c358aad018a40f81f1f667be16799d6a4c46f675760",
+      "hunks": [
+        {
+          "before": "from unittest import mock\n\nROOT = Path(__file__).resolve().parents[1]\nsys.path.insert(0, str(ROOT / 'scripts/canon'))\nimport apadana_thera333_spans as four\n\n",
+          "after": "from unittest import mock\n\nROOT = Path(__file__).resolve().parents[1]\nsys.path.insert(0, str(ROOT / 'scripts'))\nfrom web_reader_six_boundary_history import c1_logical_input\nsys.path.insert(0, str(ROOT / 'scripts/canon'))\nimport apadana_thera333_spans as four\n\n"
+        },
+        {
+          "before": "            pieces.append(b)\n        raw = b''.join(pieces)\n        assert len(raw) == manifest['size'] and sha(raw) == manifest['sha256']\n    return gzip.decompress(raw)\ndef records(canon, ids):\n    return {uid: next(u for u in canon['units'] if u['id'] == uid) for uid in ids}\ndef parsed_books(canon):\n",
+          "after": "            pieces.append(b)\n        raw = b''.join(pieces)\n        assert len(raw) == manifest['size'] and sha(raw) == manifest['sha256']\n    logical = gzip.decompress(raw)\n    return c1_logical_input(logical) if name == 'canon.json.gz' else logical\ndef records(canon, ids):\n    return {uid: next(u for u in canon['units'] if u['id'] == uid) for uid in ids}\ndef parsed_books(canon):\n"
+        }
+      ]
+    },
+    "tests/approved_acceptance.py": {
+      "c1_sha256": "e883431b3a92a5e186eae17890429127fe4319dee179fbb9221433582f78ae3d",
+      "current_sha256": "6730178f0d41ccdcca74ef543b2a6186df509b387b964c0dc9764c150e9b0875",
+      "hunks": [
+        {
+          "before": "                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json')\n            for name in names:\n                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())\n            self.assertEqual(len(approved_runtime(root)),34)\n            target=root/'docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json';data=json.loads(target.read_text(encoding='utf-8'))\n            data['files']['index.cjs']['sha256']='0'*64;target.write_text(json.dumps(data),encoding='utf-8')\n            with self.assertRaises(AssertionError): approved_runtime(root)\n",
+          "after": "                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json',\n                'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json')\n            for name in names:\n                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())\n            self.assertEqual(len(approved_runtime(root)),34)\n            target=root/'docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json';data=json.loads(target.read_text(encoding='utf-8'))\n            data['files']['index.cjs']['sha256']='0'*64;target.write_text(json.dumps(data),encoding='utf-8')\n            with self.assertRaises(AssertionError): approved_runtime(root)\n"
+        },
+        {
+          "before": "                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json')\n            for name in names:\n                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())\n            self.assertEqual(len(approved_runtime(root)),34)\n            target=root/'docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json';data=json.loads(target.read_text(encoding='utf-8'))\n            data['files']['index.cjs']['sha256']='0'*64;target.write_text(json.dumps(data),encoding='utf-8')\n            with self.assertRaises(AssertionError): approved_runtime(root)\n",
+          "after": "                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json',\n                'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json')\n            for name in names:\n                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())\n            self.assertEqual(len(approved_runtime(root)),34)\n            target=root/'docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json';data=json.loads(target.read_text(encoding='utf-8'))\n            data['files']['index.cjs']['sha256']='0'*64;target.write_text(json.dumps(data),encoding='utf-8')\n            with self.assertRaises(AssertionError): approved_runtime(root)\n"
+        },
+        {
+          "before": "                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json')\n            for name in names:\n                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())\n            self.assertEqual(len(approved_runtime(root)),34)\n            target=root/'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json'\n            data=json.loads(target.read_text(encoding='utf-8'));data['files']['index.cjs']['sha256']='0'*64\n            target.write_text(json.dumps(data),encoding='utf-8')\n",
+          "after": "                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json',\n                'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json')\n            for name in names:\n                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())\n            self.assertEqual(len(approved_runtime(root)),34)\n            target=root/'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json'\n            data=json.loads(target.read_text(encoding='utf-8'));data['files']['index.cjs']['sha256']='0'*64\n            target.write_text(json.dumps(data),encoding='utf-8')\n"
+        },
+        {
+          "before": "                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json')\n            for name in names:\n                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())\n            self.assertEqual(len(approved_runtime(root)),34)\n            target=root/'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json'\n            data=json.loads(target.read_text(encoding='utf-8'));data['files']['index.cjs']['sha256']='0'*64\n            target.write_text(json.dumps(data),encoding='utf-8')\n",
+          "after": "                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json',\n                'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json',\n                'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json',\n                'docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json')\n            for name in names:\n                target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())\n            self.assertEqual(len(approved_runtime(root)),34)\n            target=root/'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json'\n            data=json.loads(target.read_text(encoding='utf-8'));data['files']['index.cjs']['sha256']='0'*64\n            target.write_text(json.dumps(data),encoding='utf-8')\n"
+        }
+      ]
+    },
+    "tests/current339-source-inverses.test.mjs": {
+      "c1_sha256": "acd26c785247c7975fe7f735c059815e1b9f6ac44a69b36f594577d1a1d565c7",
+      "current_sha256": "6cc03a61b85cea7fc5a921921f141973c90654bf1b8769375a8ea0b0400c6fdc",
+      "hunks": [
+        {
+          "before": "const readFileSync=frozen440FileReader(readCurrentFileSync);\nconst sha=x=>createHash('sha256').update(x).digest('hex');\ntest('actual current343 and v42 bindings retain every exact D4 assertion through finite source inputs',()=>{\n assert.equal(CURRENT_APADANA_IDS.length,343);assert.equal(WIDGET_VERSION,'v42');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v42.html');\n assert.ok(Object.keys(sourceInverses.files).length>=20);\n const reader=d4FileReader(readCurrentFileSync);\n for(const [path,row]of Object.entries(sourceInverses.files)){\n",
+          "after": "const readFileSync=frozen440FileReader(readCurrentFileSync);\nconst sha=x=>createHash('sha256').update(x).digest('hex');\ntest('actual current343 and v42 bindings retain every exact D4 assertion through finite source inputs',()=>{\n assert.equal(CURRENT_APADANA_IDS.length,343);assert.equal(WIDGET_VERSION,'v43');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v43.html');\n assert.ok(Object.keys(sourceInverses.files).length>=20);\n const reader=d4FileReader(readCurrentFileSync);\n for(const [path,row]of Object.entries(sourceInverses.files)){\n"
+        }
+      ]
+    },
+    "tests/current343-bindings.test.mjs": {
+      "c1_sha256": "14f143431b82c46c2796b44955dcea2cf0bb1be0b8d1a9c849f53d14182440f7",
+      "current_sha256": "3bc42296f6e4e5abe573d4ab328ab85f37c051d50dc01abc07703f1b66809363",
+      "hunks": [
+        {
+          "before": "import test from 'node:test';import assert from 'node:assert/strict';\nimport {APADANA_PROFILES} from '../src/apadana-profiles.mjs';import {WIDGET_VERSION,WIDGET_URI} from '../src/chatgpt-widget.mjs';import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';import {publisher343Authority,requireProfiles343} from './helpers/intake343-metadata.mjs';\nconst a=publisher343Authority();function bindings(x){assert.deepEqual(Object.keys(x),['ids','version','uri']);assert.deepEqual(x.ids,a.approval.expected_profile_ids);assert.equal(x.ids.length,343);assert.equal(new Set(x.ids).size,343);assert.equal(x.version,'v42');assert.equal(x.uri,'ui://pali-canon/reader-v42.html');}\ntest('actual current imports bind exact343 identities to widget v42',()=>{bindings({ids:CURRENT_APADANA_IDS,version:WIDGET_VERSION,uri:WIDGET_URI});requireProfiles343(APADANA_PROFILES);assert.deepEqual(CURRENT_APADANA_IDS.slice(-4),['tha-ap333','tha-ap334','tha-ap335','tha-ap336']);});\ntest('binding refuses omitted substituted duplicated reordered IDs and stale widget namespaces',()=>{const good={ids:CURRENT_APADANA_IDS,version:WIDGET_VERSION,uri:WIDGET_URI};for(const ids of [good.ids.slice(1),good.ids.map((x,i)=>i===342?'tha-ap337':x),[...good.ids.slice(0,-1),good.ids[0]],good.ids.slice().reverse()])assert.throws(()=>bindings({...good,ids}));for(const bad of [{...good,version:'v41'},{...good,uri:'ui://pali-canon/reader-v41.html'},{ids:good.ids,version:good.version}])assert.throws(()=>bindings(bad));});\ntest('four source-authorized IDs retain the repaired canonical locator namespace independently of widget UI version',()=>{assert.equal(a.compact.canonical_logical_sha256,'46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8');assert.deepEqual(a.approval.approved_records,[331,332,333,334].map((poem,i)=>({id:'tha-ap'+(333+i),publisher_chapter:'chapter-3',poem})));for(const id of a.newIds)assert.deepEqual(APADANA_PROFILES[id],a.profiles[id]);assert.equal(WIDGET_VERSION,'v42');});\n",
+          "after": "import test from 'node:test';import assert from 'node:assert/strict';\nimport {APADANA_PROFILES} from '../src/apadana-profiles.mjs';import {WIDGET_VERSION,WIDGET_URI} from '../src/chatgpt-widget.mjs';import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';import {publisher343Authority,requireProfiles343} from './helpers/intake343-metadata.mjs';\nconst a=publisher343Authority();function bindings(x){assert.deepEqual(Object.keys(x),['ids','version','uri']);assert.deepEqual(x.ids,a.approval.expected_profile_ids);assert.equal(x.ids.length,343);assert.equal(new Set(x.ids).size,343);assert.equal(x.version,'v43');assert.equal(x.uri,'ui://pali-canon/reader-v43.html');}\ntest('actual current imports bind exact343 identities to widget v43',()=>{bindings({ids:CURRENT_APADANA_IDS,version:WIDGET_VERSION,uri:WIDGET_URI});requireProfiles343(APADANA_PROFILES);assert.deepEqual(CURRENT_APADANA_IDS.slice(-4),['tha-ap333','tha-ap334','tha-ap335','tha-ap336']);});\ntest('binding refuses omitted substituted duplicated reordered IDs and stale widget namespaces',()=>{const good={ids:CURRENT_APADANA_IDS,version:WIDGET_VERSION,uri:WIDGET_URI};for(const ids of [good.ids.slice(1),good.ids.map((x,i)=>i===342?'tha-ap337':x),[...good.ids.slice(0,-1),good.ids[0]],good.ids.slice().reverse()])assert.throws(()=>bindings({...good,ids}));for(const bad of [{...good,version:'v42'},{...good,uri:'ui://pali-canon/reader-v42.html'},{ids:good.ids,version:good.version}])assert.throws(()=>bindings(bad));});\ntest('four source-authorized IDs retain the repaired canonical locator namespace independently of widget UI version',()=>{assert.equal(a.compact.canonical_logical_sha256,'46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8');assert.deepEqual(a.approval.approved_records,[331,332,333,334].map((poem,i)=>({id:'tha-ap'+(333+i),publisher_chapter:'chapter-3',poem})));for(const id of a.newIds)assert.deepEqual(APADANA_PROFILES[id],a.profiles[id]);assert.equal(WIDGET_VERSION,'v43');});\n"
+        }
+      ]
+    },
+    "tests/four-history-data.test.mjs": {
+      "c1_sha256": "5555f14b2fc3cc304264aa41677e001d2cbba8b7693bfe67057cbfdc8b6670c6",
+      "current_sha256": "234276661885dba30a370f503ec3fdb8ad392cb72b74878556de5b4d5c5dd951",
+      "hunks": [
+        {
+          "before": "import assert from 'node:assert/strict';\nimport{readFileSync}from'node:fs';\nimport{createHash}from'node:crypto';\nimport{readBundled}from'../src/bundled-data.mjs';\nimport{projectHistorical440Data,historical440DataReader}from'./helpers/four-history-data.mjs';\nconst sha=x=>createHash('sha256').update(x).digest('hex');\nconst pins={\n",
+          "after": "import assert from 'node:assert/strict';\nimport{readFileSync}from'node:fs';\nimport{createHash}from'node:crypto';\nimport{readBundled as readActualBundled}from'../src/bundled-data.mjs';\nimport{c1BundledReader}from'./helpers/six-history-data.mjs';\nconst readBundled=c1BundledReader(readActualBundled);\nimport{projectHistorical440Data,historical440DataReader}from'./helpers/four-history-data.mjs';\nconst sha=x=>createHash('sha256').update(x).digest('hex');\nconst pins={\n"
+        }
+      ]
+    },
+    "tests/held234-client.test.mjs": {
+      "c1_sha256": "ac695ab58a75b6a2a8532c9b66dbfe8491e8412cc32c87089e298f379a20c2cc",
+      "current_sha256": "5aba4947bbdae8b2abc0ac1835edc87026729c1a863cca987103c859c493c263",
+      "hunks": [
+        {
+          "before": "}\n\ntest('new236 requires separate one-source authority while prior284 and neighbor235 source objects remain exact',()=>{\n assert.equal(WIDGET_VERSION,'v42');assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,284),e.previous.expected_profile_ids);\n for(const id of e.previous.expected_profile_ids)assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id]);\n assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.peer.approved_profile_objects['tha-ap236']);\n",
+          "after": "}\n\ntest('new236 requires separate one-source authority while prior284 and neighbor235 source objects remain exact',()=>{\n assert.equal(WIDGET_VERSION,'v43');assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,284),e.previous.expected_profile_ids);\n for(const id of e.previous.expected_profile_ids)assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id]);\n assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.peer.approved_profile_objects['tha-ap236']);\n"
+        }
+      ]
+    },
+    "tests/helpers/canon-before-four.mjs": {
+      "c1_sha256": "0e68a2f48faf94a8fc6c1fbcac614870c9ae3ba1411d4cba14c64e301d7373b2",
+      "current_sha256": "456880b0e9263cee421a8983a7de39ddc2e8cd7ff2100539507172d0e722b7a7",
+      "hunks": [
+        {
+          "before": "// TEST-ONLY historical inverse. Never import from src/, web/ or server bundles.\nimport assert from 'node:assert/strict';\nimport {createHash} from 'node:crypto';\n",
+          "after": "import {canonBeforeSix,c1LogicalInput} from './canon-before-six.mjs';\n// TEST-ONLY historical inverse. Never import from src/, web/ or server bundles.\nimport assert from 'node:assert/strict';\nimport {createHash} from 'node:crypto';\n"
+        },
+        {
+          "before": "  assert.ok(equals(oldUnits) || equals(newUnits), 'Mixed or unreviewed four-poem metadata');\n  return equals(newUnits) ? 'new' : 'old';\n}\nexport function canonBeforeFour(canon) {\n  state(canon);\n  return {...canon, units: canon.units.map(unit => Object.hasOwn(oldUnits,unit.id) ? structuredClone(oldUnits[unit.id]) : unit)};\n}\nexport function exactHistoricalCanonBytes(raw) {\n  assert.equal(digest(raw), NEW_CANON_SHA, 'Exact complete current canonical snapshot required');\n  const canon = JSON.parse(raw);\n  assert.equal(state(canon), 'new');\n",
+          "after": "  assert.ok(equals(oldUnits) || equals(newUnits), 'Mixed or unreviewed four-poem metadata');\n  return equals(newUnits) ? 'new' : 'old';\n}\nfunction historicalC1CanonBeforeFour(canon) {\n  state(canon);\n  return {...canon, units: canon.units.map(unit => Object.hasOwn(oldUnits,unit.id) ? structuredClone(oldUnits[unit.id]) : unit)};\n}\nfunction historicalC1ExactHistoricalCanonBytes(raw) {\n  assert.equal(digest(raw), NEW_CANON_SHA, 'Exact complete current canonical snapshot required');\n  const canon = JSON.parse(raw);\n  assert.equal(state(canon), 'new');\n"
+        },
+        {
+          "before": "  assert.equal(digest(historical), OLD_CANON_SHA);\n  return historical;\n}\n",
+          "after": "  assert.equal(digest(historical), OLD_CANON_SHA);\n  return historical;\n}\n\nexport function canonBeforeFour(canon){return historicalC1CanonBeforeFour(canonBeforeSix(canon));}\nexport function exactHistoricalCanonBytes(raw){return historicalC1ExactHistoricalCanonBytes(c1LogicalInput(raw));}\n"
+        }
+      ]
+    },
+    "tests/helpers/four-history-data.mjs": {
+      "c1_sha256": "f007f1f2c240b4e82a17182e0ab95136620cfd441af36545e23e848c7a82834b",
+      "current_sha256": "120fd4be794fead0f8326bbb5184feb00ceda976a7362b6b12a13e31dfe0a3c8",
+      "hunks": [
+        {
+          "before": "/** Explicit historical test inputs only. Production loaders never import this. */\nimport assert from 'node:assert/strict';\nimport {readFileSync} from 'node:fs';\nimport {createHash} from 'node:crypto';\nimport {gunzipSync} from 'node:zlib';\nimport {readBundled} from '../../src/bundled-data.mjs';\nimport {exactHistoricalCanonBytes} from './canon-before-four.mjs';\nconst root=new URL('../../',import.meta.url),sha=x=>createHash('sha256').update(x).digest('hex');\nconst directory='docs/evidence/apadana/boundaries333-336/runtime/';\n",
+          "after": "/** Explicit historical test inputs only. Production loaders never import this. */\nimport assert from 'node:assert/strict';\nimport {readFileSync as readActualFileSync} from 'node:fs';\nimport {c1DataFileReader,c1BundledReader,normalizeC1DataInput} from './six-history-data.mjs';\nconst readFileSync=c1DataFileReader(readActualFileSync);\nimport {createHash} from 'node:crypto';\nimport {gunzipSync} from 'node:zlib';\nimport {readBundled as readActualBundled} from '../../src/bundled-data.mjs';\nconst readBundled=c1BundledReader(readActualBundled);\nimport {exactHistoricalCanonBytes} from './canon-before-four.mjs';\nconst root=new URL('../../',import.meta.url),sha=x=>createHash('sha256').update(x).digest('hex');\nconst directory='docs/evidence/apadana/boundaries333-336/runtime/';\n"
+        },
+        {
+          "before": " if(identity!==validated){exactHistoricalCanonBytes(gunzipSync(readBundled(new URL('server/data/canon.json.gz',root))));validated=identity;}\n return inventory.files;\n}\nexport function projectHistorical440Data(path,bytes){\n if(typeof path!=='string'||!Object.hasOwn(old,path))return bytes;\n assert.ok(Buffer.isBuffer(bytes));const records=actualData(),observed=sha(bytes);\n assert.ok(observed===records[path.slice(7)].sha256||observed===old[path],'Only exact current or explicit historical bytes may enter');\n",
+          "after": " if(identity!==validated){exactHistoricalCanonBytes(gunzipSync(readBundled(new URL('server/data/canon.json.gz',root))));validated=identity;}\n return inventory.files;\n}\nfunction historicalC1ProjectHistorical440Data(path,bytes){\n if(typeof path!=='string'||!Object.hasOwn(old,path))return bytes;\n assert.ok(Buffer.isBuffer(bytes));const records=actualData(),observed=sha(bytes);\n assert.ok(observed===records[path.slice(7)].sha256||observed===old[path],'Only exact current or explicit historical bytes may enter');\n"
+        },
+        {
+          "before": " const raw=reader(path,...options),bytes=typeof raw==='string'?Buffer.from(raw):raw;\n const old=projectHistorical440Data(path,bytes);return old===bytes?raw:typeof raw==='string'?old.toString('utf8'):old;\n};}\n",
+          "after": " const raw=reader(path,...options),bytes=typeof raw==='string'?Buffer.from(raw):raw;\n const old=projectHistorical440Data(path,bytes);return old===bytes?raw:typeof raw==='string'?old.toString('utf8'):old;\n};}\n\nexport function projectHistorical440Data(path,bytes){return historicalC1ProjectHistorical440Data(path,normalizeC1DataInput(path,bytes));}\n"
+        }
+      ]
+    },
+    "tests/helpers/intake343-ci-baseline.mjs": {
+      "c1_sha256": "0d5594365179dbcc803937909b8e66e596ff39b9eaa402c2d62d553090784420",
+      "current_sha256": "bdbd6195836d2774d93a3ff75483dc849261087c66d6776d2872be91ad29d1a1",
+      "hunks": [
+        {
+          "before": "/** Exact additive CI inverse; all preceding historical workflow bodies survive. */\nimport assert from 'node:assert/strict';import {createHash} from 'node:crypto';\nconst sha=x=>createHash('sha256').update(x).digest('hex');\nexport const AC_WORKFLOW_SHA='645ad6c605b5ebd15e35051b8b3107616c6b3ed56848bfdeb2af7fc8219fb2be';\n",
+          "after": "/** Exact additive CI inverse; all preceding historical workflow bodies survive. */\nimport {normalizeC1SourceInput} from './six-boundary-source-input.mjs';\nimport assert from 'node:assert/strict';import {createHash} from 'node:crypto';\nconst sha=x=>createHash('sha256').update(x).digest('hex');\nexport const AC_WORKFLOW_SHA='645ad6c605b5ebd15e35051b8b3107616c6b3ed56848bfdeb2af7fc8219fb2be';\n"
+        },
+        {
+          "before": "export const SOURCE_BLOCK=\"            src/_poems/chapter-3/poem-331.md\\n            src/_poems/chapter-3/poem-332.md\\n            src/_poems/chapter-3/poem-333.md\\n            src/_poems/chapter-3/poem-334.md\\n\";\nexport const REQUIRED_STEP=\"      - name: Require all reviewed publisher331-334 source and preface client cases\\n        if: matrix.group == 'apadana'\\n        timeout-minutes: 10\\n        shell: bash\\n        env:\\n          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned\\n          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned\\n        run: |\\n          node --test --test-reporter=tap tests/thera331-334-source.test.mjs tests/thera331-334-preface-client.test.mjs | tee reviewed-publisher331-334.tap\\n          node --input-type=module -e 'import assert from \\\"node:assert/strict\\\"; import {readFileSync} from \\\"node:fs\\\"; const tap=readFileSync(\\\"reviewed-publisher331-334.tap\\\",\\\"utf8\\\"); for(const [key,value] of [[\\\"tests\\\",13],[\\\"pass\\\",13],[\\\"fail\\\",0],[\\\"cancelled\\\",0],[\\\"skipped\\\",0],[\\\"todo\\\",0]]) assert.match(tap,new RegExp(\\\"^# \\\"+key+\\\" \\\"+value+\\\"$\\\",\\\"m\\\"));'\\n\";\nexport const REPORT_LINE=\"            reviewed-publisher331-334.tap\\n\";\nexport function projectIntake343Workflow(text,{requireCurrent=false}={}){\n assert.equal(typeof text,'string');\n const present=text.includes('publisher331-334')||text.includes('reviewed-publisher331-334')||SOURCE_PATHS.some(p=>text.includes(p));\n if(!present){assert.equal(requireCurrent,false,'Current343 CI gate required');assert.equal(sha(text),AC_WORKFLOW_SHA,'Explicit complete ac workflow only');return text;}\n",
+          "after": "export const SOURCE_BLOCK=\"            src/_poems/chapter-3/poem-331.md\\n            src/_poems/chapter-3/poem-332.md\\n            src/_poems/chapter-3/poem-333.md\\n            src/_poems/chapter-3/poem-334.md\\n\";\nexport const REQUIRED_STEP=\"      - name: Require all reviewed publisher331-334 source and preface client cases\\n        if: matrix.group == 'apadana'\\n        timeout-minutes: 10\\n        shell: bash\\n        env:\\n          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned\\n          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned\\n        run: |\\n          node --test --test-reporter=tap tests/thera331-334-source.test.mjs tests/thera331-334-preface-client.test.mjs | tee reviewed-publisher331-334.tap\\n          node --input-type=module -e 'import assert from \\\"node:assert/strict\\\"; import {readFileSync} from \\\"node:fs\\\"; const tap=readFileSync(\\\"reviewed-publisher331-334.tap\\\",\\\"utf8\\\"); for(const [key,value] of [[\\\"tests\\\",13],[\\\"pass\\\",13],[\\\"fail\\\",0],[\\\"cancelled\\\",0],[\\\"skipped\\\",0],[\\\"todo\\\",0]]) assert.match(tap,new RegExp(\\\"^# \\\"+key+\\\" \\\"+value+\\\"$\\\",\\\"m\\\"));'\\n\";\nexport const REPORT_LINE=\"            reviewed-publisher331-334.tap\\n\";\nfunction historicalC1ProjectIntake343Workflow(text,{requireCurrent=false}={}){\n assert.equal(typeof text,'string');\n const present=text.includes('publisher331-334')||text.includes('reviewed-publisher331-334')||SOURCE_PATHS.some(p=>text.includes(p));\n if(!present){assert.equal(requireCurrent,false,'Current343 CI gate required');assert.equal(sha(text),AC_WORKFLOW_SHA,'Explicit complete ac workflow only');return text;}\n"
+        },
+        {
+          "before": " let old=text;for(const delta of [SOURCE_BLOCK,REQUIRED_STEP,REPORT_LINE]){assert.equal(old.split(delta).length-1,1,'Exact finite CI addition once');old=old.replace(delta,'');}\n assert.equal(sha(old),AC_WORKFLOW_SHA,'All ac gates, jobs, assertions and bounds remain byte-exact');return old;\n}\n",
+          "after": " let old=text;for(const delta of [SOURCE_BLOCK,REQUIRED_STEP,REPORT_LINE]){assert.equal(old.split(delta).length-1,1,'Exact finite CI addition once');old=old.replace(delta,'');}\n assert.equal(sha(old),AC_WORKFLOW_SHA,'All ac gates, jobs, assertions and bounds remain byte-exact');return old;\n}\nexport function projectIntake343Workflow(text,options){return historicalC1ProjectIntake343Workflow(normalizeC1SourceInput('.github/workflows/check.yml',text),options);}\n"
+        }
+      ]
+    },
+    "tests/helpers/intake343-source-input.mjs": {
+      "c1_sha256": "9170a4c6e7dd83b2bf16a9a828518d308faa32cba68bba9f9456a513c077b9fe",
+      "current_sha256": "28e1d1773ce0e108263e096301d7d5517f2c3c54fc120c0446278cca0edb1db3",
+      "hunks": [
+        {
+          "before": "/** SOURCE INPUTS ONLY. No runtime/corpus/tool response is transformed. */\nimport assert from 'node:assert/strict';import{readFileSync}from'node:fs';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';import{relative,sep}from'node:path';\nconst sha=x=>createHash('sha256').update(x).digest('hex'),root=fileURLToPath(new URL('../../',import.meta.url));\n",
+          "after": "import {normalizeC1SourceInput,normalizeC1SourceReader} from './six-boundary-source-input.mjs';\n/** SOURCE INPUTS ONLY. No runtime/corpus/tool response is transformed. */\nimport assert from 'node:assert/strict';import{readFileSync}from'node:fs';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';import{relative,sep}from'node:path';\nconst sha=x=>createHash('sha256').update(x).digest('hex'),root=fileURLToPath(new URL('../../',import.meta.url));\n"
+        },
+        {
+          "before": "export function intake343SourceProofBytes(){return Buffer.from(raw);}\nexport const intake343SourceInverses=decodeIntake343SourceInverses(raw);\nfunction freeze(value){if(value&&typeof value==='object'){for(const x of Object.values(value))freeze(x);Object.freeze(value);}return value;}freeze(intake343SourceInverses);\nexport function projectACSource(path,source,{requireCurrent=false}={}){const row=intake343SourceInverses.files[path];if(!row){assert.equal(requireCurrent,false);return source;}assert.equal(typeof source,'string');if(!requireCurrent&&sha(source)===row.ac_sha256)return source;assert.equal(sha(source),row.current_sha256,'Only exact current343 or explicit historicalac source');let old=source;for(const h of row.hunks){assert.equal(old.split(h.after).length-1,1);old=old.replace(h.after,h.before);}assert.equal(sha(old),row.ac_sha256,'Whole immutableac source restored');return old;}\nexport function normalizeACSourceInput(path,source){const row=intake343SourceInverses.files[path];return row&&typeof source==='string'&&sha(source)===row.current_sha256?projectACSource(path,source,{requireCurrent:true}):source;}\nexport function acFileReader(reader){assert.equal(typeof reader,'function');return(path,...options)=>{const raw=reader(path,...options),key=typeof path==='string'?path:path instanceof URL&&path.protocol==='file:'?relative(root,fileURLToPath(path)).split(sep).join('/'):null;if(!key||!Object.hasOwn(intake343SourceInverses.files,key))return raw;assert.ok(options.length===0||options.length===1&&options[0]==='utf8');const old=projectACSource(key,raw.toString('utf8'));return typeof raw==='string'?old:Buffer.from(old);};}\n",
+          "after": "export function intake343SourceProofBytes(){return Buffer.from(raw);}\nexport const intake343SourceInverses=decodeIntake343SourceInverses(raw);\nfunction freeze(value){if(value&&typeof value==='object'){for(const x of Object.values(value))freeze(x);Object.freeze(value);}return value;}freeze(intake343SourceInverses);\nfunction historicalC1ProjectACSource(path,source,{requireCurrent=false}={}){const row=intake343SourceInverses.files[path];if(!row){assert.equal(requireCurrent,false);return source;}assert.equal(typeof source,'string');if(!requireCurrent&&sha(source)===row.ac_sha256)return source;assert.equal(sha(source),row.current_sha256,'Only exact current343 or explicit historicalac source');let old=source;for(const h of row.hunks){assert.equal(old.split(h.after).length-1,1);old=old.replace(h.after,h.before);}assert.equal(sha(old),row.ac_sha256,'Whole immutableac source restored');return old;}\nfunction historicalC1NormalizeACSourceInput(path,source){const row=intake343SourceInverses.files[path];return row&&typeof source==='string'&&sha(source)===row.current_sha256?projectACSource(path,source,{requireCurrent:true}):source;}\nfunction historicalC1AcFileReader(reader){assert.equal(typeof reader,'function');return(path,...options)=>{const raw=reader(path,...options),key=typeof path==='string'?path:path instanceof URL&&path.protocol==='file:'?relative(root,fileURLToPath(path)).split(sep).join('/'):null;if(!key||!Object.hasOwn(intake343SourceInverses.files,key))return raw;assert.ok(options.length===0||options.length===1&&options[0]==='utf8');const old=projectACSource(key,raw.toString('utf8'));return typeof raw==='string'?old:Buffer.from(old);};}\n\nexport function projectACSource(path,source,options){return historicalC1ProjectACSource(path,normalizeC1SourceInput(path,source),options);}\nexport function normalizeACSourceInput(path,source){return historicalC1NormalizeACSourceInput(path,normalizeC1SourceInput(path,source));}\nexport function acFileReader(reader){return historicalC1AcFileReader(normalizeC1SourceReader(reader));}\n"
+        }
+      ]
+    },
+    "tests/helpers/thera-remaining-client.mjs": {
+      "c1_sha256": "8d44a70b7781e9644a27e68c4a3facb5b851649eecde9cb1f8c7b167573f7748",
+      "current_sha256": "45009afc6e61e4f8c82501737c54f3564386192689d992b8984eba7157bdd305",
+      "hunks": [
+        {
+          "before": "    const profile = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v42');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n",
+          "after": "    const profile = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v43');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n"
+        }
+      ]
+    },
+    "tests/intake343-source-input.test.mjs": {
+      "c1_sha256": "8fef4ee5ed7f6cb231f17a4627d64fdda1aa6a5c1d8cb3478c9d3e7fcd25a98c",
+      "current_sha256": "83dce7a5616758fd40ca81e7f6dbb2ee8f24b2a2665e6b4d5c6d829600d2b6de",
+      "hunks": [
+        {
+          "before": "import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';\nimport {intake343SourceInverses,decodeIntake343SourceInverses,intake343SourceProofBytes,projectACSource,normalizeACSourceInput,acFileReader} from './helpers/intake343-source-input.mjs';\nimport {boundarySourceInverses,frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';import {sourceInverses,d4FileReader} from './helpers/current339-source-inverse.mjs';\nconst sha=x=>createHash('sha256').update(x).digest('hex');\n",
+          "after": "import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readActualFileSync} from 'node:fs';import {normalizeC1SourceReader} from './helpers/six-boundary-source-input.mjs';const readFileSync=normalizeC1SourceReader(readActualFileSync);import {createHash} from 'node:crypto';\nimport {intake343SourceInverses,decodeIntake343SourceInverses,intake343SourceProofBytes,projectACSource,normalizeACSourceInput,acFileReader} from './helpers/intake343-source-input.mjs';\nimport {boundarySourceInverses,frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';import {sourceInverses,d4FileReader} from './helpers/current339-source-inverse.mjs';\nconst sha=x=>createHash('sha256').update(x).digest('hex');\n"
+        }
+      ]
+    },
+    "tests/thera-commentary-locators.test.mjs": {
+      "c1_sha256": "f65483dd88b32d065bde38ac2edbaa8af74858fda72fcfc7245ff56fcf94fdf2",
+      "current_sha256": "c5a4e3ee0f0e7688b8650e973abf467c7f5672cf0ccef820c0d594978f629b35",
+      "hunks": [
+        {
+          "before": "}\n\ntest('finite rendering keeps both post-poem/summary placements while widget refuses invented poem notes', () => {\n  assert.equal(WIDGET_VERSION, 'v42');\n  for (const bridge of ['Apps SDK', 'MCP Apps']) for (const [uid, placement, caption] of [\n    ['tha-ap19', 'after_poem', 'After the publisher poem.'], ['tha-ap32', 'after_chapter_summary', 'After the chapter summary.'],\n  ]) {\n",
+          "after": "}\n\ntest('finite rendering keeps both post-poem/summary placements while widget refuses invented poem notes', () => {\n  assert.equal(WIDGET_VERSION, 'v43');\n  for (const bridge of ['Apps SDK', 'MCP Apps']) for (const [uid, placement, caption] of [\n    ['tha-ap19', 'after_poem', 'After the publisher poem.'], ['tha-ap32', 'after_chapter_summary', 'After the chapter summary.'],\n  ]) {\n"
+        }
+      ]
+    },
+    "tests/thera141-180-client.test.mjs": {
+      "c1_sha256": "e3d76c966fbe5a469b7f85fe3b3453353e0f4ed374a022f1054d6064bf223918",
+      "current_sha256": "8b378d2bce59b65d3b9b747929cc93baaafa4d87f097a26946d758686a7e9d28",
+      "hunks": [
+        {
+          "before": "    const { english: _english, match: _match, ...profile } = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v42');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n",
+          "after": "    const { english: _english, match: _match, ...profile } = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v43');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n"
+        }
+      ]
+    },
+    "tests/thera181-220-client.test.mjs": {
+      "c1_sha256": "0d3faf9d27f9312bebf1b13e856f0f1959568959a4adf726cd485140cdce00c7",
+      "current_sha256": "0077c58a961eccd86a5236e4b76d382309e251cde40555a9d307c89b5822e11d",
+      "hunks": [
+        {
+          "before": "    const { english: _english, match: _match, ...profile } = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v42');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n",
+          "after": "    const { english: _english, match: _match, ...profile } = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v43');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n"
+        }
+      ]
+    },
+    "tests/thera221-230-client.test.mjs": {
+      "c1_sha256": "c621a37fcff8a78044b1fa1ab2243a0f1c6fea6d6aaf0e64238527f1178aa0ec",
+      "current_sha256": "e202244d5bd4fd311f834457f80accabef44cdb8054506a40e667145eb867676",
+      "hunks": [
+        {
+          "before": "    const profile = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v42');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n",
+          "after": "    const profile = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v43');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n"
+        }
+      ]
+    },
+    "tests/thera241-250-client.test.mjs": {
+      "c1_sha256": "75054d5abb83b7511dc68dfbc293eddccb1a7c206a592b4ce42cc646d63f9557",
+      "current_sha256": "0bc6cbb252e5c182b7b19abb1ff0b722dd514859a354b08f2f7c85d1e1b84baf",
+      "hunks": [
+        {
+          "before": "    const profile = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v42');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n",
+          "after": "    const profile = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v43');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n"
+        }
+      ]
+    },
+    "tests/thera312-319-client.test.mjs": {
+      "c1_sha256": "99a15843e09e9f8fd6548f55752b3f91cf1a7d1d85e2919e5958083afd798946",
+      "current_sha256": "3230ef5f2b812effe5c5ad7f3d16bcc8543f68b310ade4c5984ccb7c541f29b7",
+      "hunks": [
+        {
+          "before": "\n// 1. Metadata-only capability and no-auto-fetch behavior remains meaningful without a raw fixture.\ntest('exact333 client capabilities retain every325 old object and40+293 identities with no automatic English or held311/320 transport',async()=>{\n  e.assertProfiles(APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,'v42');\n  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);\n  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,303);\n  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Metadata or held request attempted provider transport');};\n",
+          "after": "\n// 1. Metadata-only capability and no-auto-fetch behavior remains meaningful without a raw fixture.\ntest('exact333 client capabilities retain every325 old object and40+293 identities with no automatic English or held311/320 transport',async()=>{\n  e.assertProfiles(APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,'v43');\n  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);\n  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,303);\n  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Metadata or held request attempted provider transport');};\n"
+        }
+      ]
+    },
+    "tests/thera321-329-client.test.mjs": {
+      "c1_sha256": "0414ab07a1a6fc4c54a8c644792d5c053be44043b365f83ebfac5f39bc49de97",
+      "current_sha256": "4b3cc7100f364e2386190e5ade68fd23e7743b2e6cc3c0ee72c856f596fa4e14",
+      "hunks": [
+        {
+          "before": "\n// 1. Metadata-only capability and no-auto-fetch behavior remains meaningful without a raw fixture.\ntest('current343 clients retain the reviewed339 cohort and40+303 identities with no automatic English or remaining held-source transport',async()=>{\n  e.assertProfiles(APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,'v42');\n  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);\n  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,303);\n  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Metadata or held request attempted provider transport');};\n",
+          "after": "\n// 1. Metadata-only capability and no-auto-fetch behavior remains meaningful without a raw fixture.\ntest('current343 clients retain the reviewed339 cohort and40+303 identities with no automatic English or remaining held-source transport',async()=>{\n  e.assertProfiles(APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,'v43');\n  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);\n  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,303);\n  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Metadata or held request attempted provider transport');};\n"
+        }
+      ]
+    },
+    "tests/thera331-334-source.test.mjs": {
+      "c1_sha256": "56c68937b843ec58ed23935c342725e5b204ffd4733d1d93ffe529749adc1744",
+      "current_sha256": "05aee8096e6847f5fdbccccbaf46846cc3b7829cf5b96887d8f7505adfb624a8",
+      "hunks": [
+        {
+          "before": "import test,{afterEach}from'node:test';\nimport assert from'node:assert/strict';\nimport{readFileSync}from'node:fs';\nimport{join}from'node:path';\nimport*as canon from'../src/canon.mjs';\nimport*as english from'../src/english.mjs';\n",
+          "after": "import test,{afterEach}from'node:test';\nimport assert from'node:assert/strict';\nimport {readFileSync as readActualFileSync} from 'node:fs';\nimport {c1DataFileReader} from './helpers/six-history-data.mjs';\nconst readFileSync=c1DataFileReader(readActualFileSync);\nimport{join}from'node:path';\nimport*as canon from'../src/canon.mjs';\nimport*as english from'../src/english.mjs';\n"
+        }
+      ]
+    },
+    "tests/widget-hosted-selections.test.mjs": {
+      "c1_sha256": "0596dec4027a248a581cb7f608666deeaa8e196285a81c0389e78ae4faf9ff38",
+      "current_sha256": "54aab0be8ea13ac68e5f06b9b119474a83f35f5d7bbe36b81f3930aaee0ed012",
+      "hunks": [
+        {
+          "before": "    const tool = (await client.listTools()).tools.find(t => t.name === WIDGET_TOOL);\n    assert.equal(tool._meta.ui.resourceUri, WIDGET_URI); assert.equal(tool._meta['openai/outputTemplate'], SKYBRIDGE_URI);\n    assert.deepEqual(tool._meta.ui.visibility, ['model', 'app']); assert.equal(tool._meta['openai/widgetAccessible'], true);\n    assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v42.html');\n    for (const script of SCRIPTS) {\n      const post = await call({ uid: transliterate('Vism 1.1', 'roman', script), script, limit: 2 });\n      assert.equal(post.canonical, false); assert.equal(post.text_id, undefined); assert.equal(post.english, null);\n",
+          "after": "    const tool = (await client.listTools()).tools.find(t => t.name === WIDGET_TOOL);\n    assert.equal(tool._meta.ui.resourceUri, WIDGET_URI); assert.equal(tool._meta['openai/outputTemplate'], SKYBRIDGE_URI);\n    assert.deepEqual(tool._meta.ui.visibility, ['model', 'app']); assert.equal(tool._meta['openai/widgetAccessible'], true);\n    assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v43.html');\n    for (const script of SCRIPTS) {\n      const post = await call({ uid: transliterate('Vism 1.1', 'roman', script), script, limit: 2 });\n      assert.equal(post.canonical, false); assert.equal(post.text_id, undefined); assert.equal(post.english, null);\n"
+        }
+      ]
+    },
+    "web/reader.js": {
+      "c1_sha256": "5b50ef8bda17f87e02b211a164debf1c4dc59a66fb233d1b1eaad00915c93d16",
+      "current_sha256": "d2495dca01a5b5e3e3d794f58c4cea8422a61f8d002ad34fa1c6ee90812ace71",
+      "hunks": [
+        {
+          "before": "  const studyToken = ++studyEpoch, target = studyTarget('Looking up the selected passage in the bundled dictionary…');\n  try {\n    const data = await tool('analyse_passage', args, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;\n    if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error('The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.');\n    if (expected.kind === 'post' && data.canonical !== false) throw new Error('The analysis lacks its later-work source label.');\n    target.replaceChildren(el('h3', 'Word study · dictionary reference'));\n    target.append(el('p', data.guidance, 'notice')); notes(data, target);\n",
+          "after": "  const studyToken = ++studyEpoch, target = studyTarget('Looking up the selected passage in the bundled dictionary…');\n  try {\n    const data = await tool('analyse_passage', args, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;\n    if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || (args.source_commit !== undefined && sourceRevision({ source: data.text_source }) !== args.source_commit) || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error('The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.');\n    if (expected.kind === 'post' && data.canonical !== false) throw new Error('The analysis lacks its later-work source label.');\n    target.replaceChildren(el('h3', 'Word study · dictionary reference'));\n    target.append(el('p', data.guidance, 'notice')); notes(data, target);\n"
+        }
+      ]
+    }
+  }
+}

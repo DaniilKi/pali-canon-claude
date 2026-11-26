@@ -1,0 +1,506 @@
+{
+  "schema": "independent-regenerated-six-boundary-source-inverse-v3-review-v1",
+  "status": "GO_EXACT_V3_SOURCE_INVERSE_AND_LOADER_FOR_ROOT_BINDING",
+  "source_map": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/generated-source-inverse-v3/SIX_BOUNDARY_SOURCE_INVERSES.json",
+    "sha256": "8109fc3557518af7c832cd6bc057a61a51408363861ffb27d216ebe4b6345c41"
+  },
+  "generation_receipt": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/generated-source-inverse-v3/GENERATION_RECEIPT.json",
+    "sha256": "499810a1f737e822da447b458b5e1403214c42a6046f6e1a9fb64fe5662c15d8"
+  },
+  "path_plan": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/SOURCE_PATH_PLAN_V3.json",
+    "sha256": "26676cf5e137d92005cee4070eb80c49734d4d9dd8656ab791afa0c23c2e441d"
+  },
+  "path_plan_review": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/source-plan-review/FINAL_SOURCE_PATH_PLAN_V3_GO.json",
+    "sha256": "d063086fedb5d4ebb90b7e756d0a0864f50514bc80cf7b5858337efb893d17f1"
+  },
+  "original_manifest": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/c1-source-originals/ORIGINAL_MANIFEST.json",
+    "sha256": "b7e5999f51bcab0e9232fcaabb909e67aa759767a036fe8a0b8a6c5e81f7cf18"
+  },
+  "previous_map": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/generated-source-inverse-v1/SIX_BOUNDARY_SOURCE_INVERSES.json",
+    "sha256": "7440a63fed4f5317279bd671aeaf9354c8e9bb71e5ab6057c881c80e8e415a82"
+  },
+  "peer_operation_scope_review": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/independent-critique/OPERATION_SCOPE_STATIC_REVIEW.json",
+    "sha256": "0048077bd0722c7c334f6f9e0777e02421b85ff56a7dc1b959f92cd20348d1e8"
+  },
+  "checks": {
+    "exact_same36_ordered_existing_paths": true,
+    "all36_current_hashes_match_actual_applied_sources": true,
+    "all36_target_hashes_match_sealed_C1_originals": true,
+    "all60_hunks_match_unique_exact_current_spans_and_restore_whole_original_bytes": true,
+    "all704_C1_source_files_accounted_for": true,
+    "other668_original_source_files_unchanged": true,
+    "34_raw_JSON_row_value_spans_byte_identical_to_previous_map": true,
+    "only_changed_rows": [
+      "scripts/web_reader_approved_acceptance.py",
+      "scripts/web_reader_four_boundary_history.py"
+    ],
+    "changed_row_hunk_counts_remain": [
+      3,
+      6
+    ],
+    "same_source_only_header_no_runtime_or_corpus_projection": true,
+    "strict_row_and_hunk_shapes_preserved": true
+  },
+  "rows": [
+    {
+      "path": ".github/workflows/check.yml",
+      "hunks": 2,
+      "current_sha256": "91874910d8169c41f0e15000a22ed416d29c4ca3ad2779623c2864e909f9b587",
+      "c1_sha256": "468738198fef11555154be77ecf7c2e36a286c4019586e70dadc7155bf0a4160",
+      "restored_bytes": 166603,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "scripts/canon/build_canon.py",
+      "hunks": 2,
+      "current_sha256": "ab07b1a0d30f2c8608068c0563ec44fa85be58016034cfca64b567678a6afde2",
+      "c1_sha256": "18f0e3446b0f186449300a61f51b0c1534d044cb35264b5af644f044e59d3ceb",
+      "restored_bytes": 39394,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "hunks": 3,
+      "current_sha256": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9",
+      "c1_sha256": "26fc2315af9b3bc37c4b8aaa0647897cb81561f3b79f894874a32c311800c2c7",
+      "restored_bytes": 50398,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": false
+    },
+    {
+      "path": "scripts/web_reader_four_boundary_history.py",
+      "hunks": 6,
+      "current_sha256": "1944ccb445fd6e63e4facaa1f5fb5957006f0b113997298971fd15eac5debf18",
+      "c1_sha256": "0588afde3d8d38858b2a67a09dcd7600f09d2baced27ebe3a9c6085ce9546a87",
+      "restored_bytes": 15799,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": false
+    },
+    {
+      "path": "src/analyse.mjs",
+      "hunks": 1,
+      "current_sha256": "5263431a352c2e6ef8120fc1183f134ce02083ccff6c14323ae4ad505027309e",
+      "c1_sha256": "bb0334f6e038813afc319b34220439cad2c21cf008f4a9b40fd1546fde39f861",
+      "restored_bytes": 23623,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "src/chatgpt-widget.mjs",
+      "hunks": 4,
+      "current_sha256": "c205b72c355e1ad064e886cd85f79c48c2f3af21ec478beb8ae8f440ab50b55b",
+      "c1_sha256": "c36422b6aab199fdf27909c3f190c01c34e65f3ba1bf97e1e0ac837ecea579ee",
+      "restored_bytes": 91800,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "src/locator-policy.mjs",
+      "hunks": 1,
+      "current_sha256": "fe987a89d4c540bc5b1f78706869dbff9823cac5b8a78d5104dca56695cba149",
+      "c1_sha256": "c0ec6c2aada146c86efb38c6a82e3110bae9b92edf6ceabc9bd9dd30ca16f6fe",
+      "restored_bytes": 3533,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "src/server.mjs",
+      "hunks": 1,
+      "current_sha256": "217e53a17b314b368b2a0ebe75007d066d5e8222a79644df7644ada3c4b6f526",
+      "c1_sha256": "9714eef39185e993922577e296f5424af53d40b11beff295b653b17c7f42e150",
+      "restored_bytes": 29581,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/apadana-disclosures.test.mjs",
+      "hunks": 1,
+      "current_sha256": "26f8090564aa436e9475f7054df43d6b72d4bb9b919836dc3dc2ebe4796828ab",
+      "c1_sha256": "e9cce61e66dd0d13eb59aea92a3b315973116ab365f260b3cc09cf44acef24ef",
+      "restored_bytes": 9882,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/apadana-fourth-client.test.mjs",
+      "hunks": 2,
+      "current_sha256": "4c217719991afd06a7e3825695483d5065b484d3fc1fbc344d16b12ff10d6375",
+      "c1_sha256": "71a09536ad257b315a00e4521cccb4fe97d8e078bd7fc0a4c1bf4a906c34242e",
+      "restored_bytes": 27793,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/apadana-fourth.test.mjs",
+      "hunks": 1,
+      "current_sha256": "c557e9ec4b374acf6c649316fe5cf37c62127b4ad9faa008753e6d4e5c16a2ef",
+      "c1_sha256": "8d1465cddf7d2af8d57176432fff42f54f5bfb21294b4aa70f7adcda1bd31765",
+      "restored_bytes": 18125,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/apadana-next.test.mjs",
+      "hunks": 1,
+      "current_sha256": "07b50abad3064a2d25c93649a41000b1cf5939f86ad7860562bce2d5c03f6782",
+      "c1_sha256": "463880f8849a554042f2fef195b280066b1fd13dfdd94e1167ed473c3360aca6",
+      "restored_bytes": 9288,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/apadana-thera.test.mjs",
+      "hunks": 1,
+      "current_sha256": "17b5d3c718c419cffbab625e0a404357dafc4a9671f81e6931e651db693fc5bd",
+      "c1_sha256": "e87746d4ee6a902740aeed4060294e724a0c732ff773bce983b643db1603917a",
+      "restored_bytes": 20548,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/apadana-third.test.mjs",
+      "hunks": 1,
+      "current_sha256": "05c68f75897240b227f21307c5712c30712614f72afd1e3e6aae174442e4fde5",
+      "c1_sha256": "f22d871384f3a3bc91b2c487857b996236a963261b31f89dce02e15c48a28125",
+      "restored_bytes": 23148,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/apadana_four_boundary_acceptance.py",
+      "hunks": 2,
+      "current_sha256": "5b61afe2d8294b6cf3051c358aad018a40f81f1f667be16799d6a4c46f675760",
+      "c1_sha256": "ac432a793d7242a225c84915f0a1c571772c218021ca10dc7be33059855c6354",
+      "restored_bytes": 21947,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/approved_acceptance.py",
+      "hunks": 4,
+      "current_sha256": "6730178f0d41ccdcca74ef543b2a6186df509b387b964c0dc9764c150e9b0875",
+      "c1_sha256": "e883431b3a92a5e186eae17890429127fe4319dee179fbb9221433582f78ae3d",
+      "restored_bytes": 18358,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/current339-source-inverses.test.mjs",
+      "hunks": 1,
+      "current_sha256": "6cc03a61b85cea7fc5a921921f141973c90654bf1b8769375a8ea0b0400c6fdc",
+      "c1_sha256": "acd26c785247c7975fe7f735c059815e1b9f6ac44a69b36f594577d1a1d565c7",
+      "restored_bytes": 1541,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/current343-bindings.test.mjs",
+      "hunks": 1,
+      "current_sha256": "3bc42296f6e4e5abe573d4ab328ab85f37c051d50dc01abc07703f1b66809363",
+      "c1_sha256": "14f143431b82c46c2796b44955dcea2cf0bb1be0b8d1a9c849f53d14182440f7",
+      "restored_bytes": 1998,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/four-history-data.test.mjs",
+      "hunks": 1,
+      "current_sha256": "234276661885dba30a370f503ec3fdb8ad392cb72b74878556de5b4d5c5dd951",
+      "c1_sha256": "5555f14b2fc3cc304264aa41677e001d2cbba8b7693bfe67057cbfdc8b6670c6",
+      "restored_bytes": 2079,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/held234-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "5aba4947bbdae8b2abc0ac1835edc87026729c1a863cca987103c859c493c263",
+      "c1_sha256": "ac695ab58a75b6a2a8532c9b66dbfe8491e8412cc32c87089e298f379a20c2cc",
+      "restored_bytes": 10138,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/helpers/canon-before-four.mjs",
+      "hunks": 3,
+      "current_sha256": "456880b0e9263cee421a8983a7de39ddc2e8cd7ff2100539507172d0e722b7a7",
+      "c1_sha256": "0e68a2f48faf94a8fc6c1fbcac614870c9ae3ba1411d4cba14c64e301d7373b2",
+      "restored_bytes": 3485,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/helpers/four-history-data.mjs",
+      "hunks": 3,
+      "current_sha256": "120fd4be794fead0f8326bbb5184feb00ceda976a7362b6b12a13e31dfe0a3c8",
+      "c1_sha256": "f007f1f2c240b4e82a17182e0ab95136620cfd441af36545e23e848c7a82834b",
+      "restored_bytes": 2849,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/helpers/intake343-ci-baseline.mjs",
+      "hunks": 3,
+      "current_sha256": "bdbd6195836d2774d93a3ff75483dc849261087c66d6776d2872be91ad29d1a1",
+      "c1_sha256": "0d5594365179dbcc803937909b8e66e596ff39b9eaa402c2d62d553090784420",
+      "restored_bytes": 2482,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/helpers/intake343-source-input.mjs",
+      "hunks": 2,
+      "current_sha256": "28e1d1773ce0e108263e096301d7d5517f2c3c54fc120c0446278cca0edb1db3",
+      "c1_sha256": "9170a4c6e7dd83b2bf16a9a828518d308faa32cba68bba9f9456a513c077b9fe",
+      "restored_bytes": 5481,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/helpers/thera-remaining-client.mjs",
+      "hunks": 1,
+      "current_sha256": "45009afc6e61e4f8c82501737c54f3564386192689d992b8984eba7157bdd305",
+      "c1_sha256": "8d44a70b7781e9644a27e68c4a3facb5b851649eecde9cb1f8c7b167573f7748",
+      "restored_bytes": 17148,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/intake343-source-input.test.mjs",
+      "hunks": 1,
+      "current_sha256": "83dce7a5616758fd40ca81e7f6dbb2ee8f24b2a2665e6b4d5c6d829600d2b6de",
+      "c1_sha256": "8fef4ee5ed7f6cb231f17a4627d64fdda1aa6a5c1d8cb3478c9d3e7fcd25a98c",
+      "restored_bytes": 4019,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/thera-commentary-locators.test.mjs",
+      "hunks": 1,
+      "current_sha256": "c5a4e3ee0f0e7688b8650e973abf467c7f5672cf0ccef820c0d594978f629b35",
+      "c1_sha256": "f65483dd88b32d065bde38ac2edbaa8af74858fda72fcfc7245ff56fcf94fdf2",
+      "restored_bytes": 23301,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/thera141-180-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "8b378d2bce59b65d3b9b747929cc93baaafa4d87f097a26946d758686a7e9d28",
+      "c1_sha256": "e3d76c966fbe5a469b7f85fe3b3453353e0f4ed374a022f1054d6064bf223918",
+      "restored_bytes": 9888,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/thera181-220-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "0077c58a961eccd86a5236e4b76d382309e251cde40555a9d307c89b5822e11d",
+      "c1_sha256": "0d3faf9d27f9312bebf1b13e856f0f1959568959a4adf726cd485140cdce00c7",
+      "restored_bytes": 16356,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/thera221-230-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "e202244d5bd4fd311f834457f80accabef44cdb8054506a40e667145eb867676",
+      "c1_sha256": "c621a37fcff8a78044b1fa1ab2243a0f1c6fea6d6aaf0e64238527f1178aa0ec",
+      "restored_bytes": 17095,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/thera241-250-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "0bc6cbb252e5c182b7b19abb1ff0b722dd514859a354b08f2f7c85d1e1b84baf",
+      "c1_sha256": "75054d5abb83b7511dc68dfbc293eddccb1a7c206a592b4ce42cc646d63f9557",
+      "restored_bytes": 17095,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/thera312-319-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "3230ef5f2b812effe5c5ad7f3d16bcc8543f68b310ade4c5984ccb7c541f29b7",
+      "c1_sha256": "99a15843e09e9f8fd6548f55752b3f91cf1a7d1d85e2919e5958083afd798946",
+      "restored_bytes": 22617,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/thera321-329-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "4b3cc7100f364e2386190e5ade68fd23e7743b2e6cc3c0ee72c856f596fa4e14",
+      "c1_sha256": "0414ab07a1a6fc4c54a8c644792d5c053be44043b365f83ebfac5f39bc49de97",
+      "restored_bytes": 20895,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/thera331-334-source.test.mjs",
+      "hunks": 1,
+      "current_sha256": "05aee8096e6847f5fdbccccbaf46846cc3b7829cf5b96887d8f7505adfb624a8",
+      "c1_sha256": "56c68937b843ec58ed23935c342725e5b204ffd4733d1d93ffe529749adc1744",
+      "restored_bytes": 9397,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "tests/widget-hosted-selections.test.mjs",
+      "hunks": 1,
+      "current_sha256": "54aab0be8ea13ac68e5f06b9b119474a83f35f5d7bbe36b81f3930aaee0ed012",
+      "c1_sha256": "0596dec4027a248a581cb7f608666deeaa8e196285a81c0389e78ae4faf9ff38",
+      "restored_bytes": 3138,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    },
+    {
+      "path": "web/reader.js",
+      "hunks": 1,
+      "current_sha256": "d2495dca01a5b5e3e3d794f58c4cea8422a61f8d002ad34fa1c6ee90812ace71",
+      "c1_sha256": "5b50ef8bda17f87e02b211a164debf1c4dc59a66fb233d1b1eaad00915c93d16",
+      "restored_bytes": 175339,
+      "restored_entire_source_exact": true,
+      "previous_row_unchanged": true
+    }
+  ],
+  "new_code_bindings": {
+    "total_paths": 17,
+    "generation_bound_paths": 16,
+    "sole_separate_sealholder": "tests/helpers/six-boundary-source-input.mjs",
+    "all16_generation_hashes_exact_current_and_equal_plan_without_sealholder": true,
+    "new_since_previous_plan": [
+      "tests/six-operation-scope.test.mjs",
+      "tests/six_operation_scope_controls.py"
+    ],
+    "sole_prior_new_code_source_change": "scripts/web_reader_six_boundary_history.py",
+    "all17_exact_final_records": {
+      "scripts/canon/apadana_thera340_spans.py": {
+        "bytes": 8644,
+        "sha256": "1ffaf4393d7e20d675eaa29494ce5a45c4e5ea55902ef3a18c84639fe8e52f92",
+        "source": "current applied source"
+      },
+      "scripts/canon/repair_apadana_thera340_spans.py": {
+        "bytes": 5567,
+        "sha256": "63399fcdf2e80d629d210be2e0bc4ec502e79bca5ffebe06fb5773851b2388c2",
+        "source": "current applied source"
+      },
+      "scripts/web_reader_six_boundary_history.py": {
+        "bytes": 18398,
+        "sha256": "10c9300cc03fd9299ba3e510c74af1e859d758eda08e1c878fd6364fc4fba330",
+        "source": "current applied source"
+      },
+      "tests/apadana-six-boundary-migration.test.mjs": {
+        "bytes": 1266,
+        "sha256": "f50a02065a9994a2493f23f61f86fe2b9ac2b4b43f2de952c1d7085ff04f1ba1",
+        "source": "current applied source"
+      },
+      "tests/apadana-six-cached-consumers.test.mjs": {
+        "bytes": 5651,
+        "sha256": "362f071524547f4a7356cfb0762450a1e62da12a1f835b17d2fc8eab4d88d94a",
+        "source": "current applied source"
+      },
+      "tests/apadana-six-locator-consumers.test.mjs": {
+        "bytes": 16650,
+        "sha256": "2a6ddd4d1c4e954bd19c4e0e8799594209810c9bc63cffff8c83ea5dd00d3764",
+        "source": "current applied source"
+      },
+      "tests/apadana_six_boundary_acceptance.py": {
+        "bytes": 24280,
+        "sha256": "52f6897d2bb3e153a5e1d72129db559f779fd144d229d8c14953dd72953fcb56",
+        "source": "current applied source"
+      },
+      "tests/helpers/canon-before-six.mjs": {
+        "bytes": 3656,
+        "sha256": "83d1472a1d05fe40a961e8e00aa5c1df3c895fa4c331ebe42f64657bd0ee85d4",
+        "source": "current applied source"
+      },
+      "tests/helpers/six-boundary-source-input.mjs": {
+        "bytes": 5502,
+        "sha256": "49d672321c34c2fb492ac9fdc1bbba26f13df991f9d2a94a73a6625988de6474",
+        "source": "external final loader proposal pending root copy"
+      },
+      "tests/helpers/six-history-data.mjs": {
+        "bytes": 8570,
+        "sha256": "4ca6826427cb3d6e112565f64065105882c5a5fe3d42f0dbe031d90f0ee2772d",
+        "source": "current applied source"
+      },
+      "tests/helpers/six-regular-file.mjs": {
+        "bytes": 1081,
+        "sha256": "35ce8fa9db0393a2fee97ba6c37267f2f1000889dad3447dc3da7ceffe8c7875",
+        "source": "current applied source"
+      },
+      "tests/six-boundary-ci.test.mjs": {
+        "bytes": 2905,
+        "sha256": "0e895fee1f58528f8ee22729b60604864a6c4fed3c4c84946c050596e056ce48",
+        "source": "current applied source"
+      },
+      "tests/six-boundary-history.test.mjs": {
+        "bytes": 688,
+        "sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e",
+        "source": "current applied source"
+      },
+      "tests/six-boundary-source-input.test.mjs": {
+        "bytes": 7378,
+        "sha256": "2f3bf8e7a9c51fb341b71130030af0becc29b939fd5f22c790f702068fda9e07",
+        "source": "current applied source"
+      },
+      "tests/six-operation-scope.test.mjs": {
+        "bytes": 821,
+        "sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
+        "source": "current applied source"
+      },
+      "tests/six_boundary_history_acceptance.py": {
+        "bytes": 8487,
+        "sha256": "d74777bcf8f6d0ab02a5c51a96fe48a08b03483057511a01f755f6bbf04e0ee2",
+        "source": "current applied source"
+      },
+      "tests/six_operation_scope_controls.py": {
+        "bytes": 9101,
+        "sha256": "ae4265fd6bfd60c3c1c0d734b0b38e580c8d32a193ab438d7d4ef39ad7f5ea48",
+        "source": "current applied source"
+      }
+    }
+  },
+  "loader": {
+    "proposal": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/generated-source-inverse-v3/FINAL_LOADER_PROPOSAL.mjs",
+      "sha256": "49d672321c34c2fb492ac9fdc1bbba26f13df991f9d2a94a73a6625988de6474"
+    },
+    "target": "tests/helpers/six-boundary-source-input.mjs",
+    "current_target_before_root_binding_sha256": "49d672321c34c2fb492ac9fdc1bbba26f13df991f9d2a94a73a6625988de6474",
+    "only_change": "One literal7440a63fed4f5317279bd671aeaf9354c8e9bb71e5ab6057c881c80e8e415a82 ->8109fc3557518af7c832cd6bc057a61a51408363861ffb27d216ebe4b6345c41",
+    "whole_proposal_equals_current_target_with_only_exact_one_literal_replaced": true,
+    "ordered_pathlist_code_and_all_old_loader_guards_byte_unchanged": true,
+    "root_copy_and_postcopy_hash_binding_pending": true
+  },
+  "assertion_preservation": {
+    "current3_helpers_equal_exact_peer_reviewed_V2_patch": true,
+    "all3_patch_inverse_returns_exact32f_source_hashes": true,
+    "original_function_AST_proofs_independently_replayed": 45,
+    "runtime_bodies_preserved_after_single_scope_rejection_guard": 2,
+    "proof": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/proposal-v2/OLD_BODY_AST_PRESERVATION.json",
+      "sha256": "eaa85d961bf0ede462cdd80a65f040a4a6aef5efb85182746605ec29a00b56b8"
+    },
+    "semantics_scope": "PeerGO004807 covers finite private per-public-call immutable data scope and controls; this review independently binds source/path/inverse preservation, not performance or runtime behavior."
+  },
+  "blocking_findings": [],
+  "root_next_steps": [
+    "Copy only exact reviewed inverse map and final loader proposal; preserve old7440 map under explicit history path.",
+    "Bind copied map8109 and loader49d672 hashes before execution. Any further source change affecting36rows/17new records requires regeneration/review.",
+    "Run root-owned controls, historical and required exact-commit CI under unchanged limits. Linux evidence does not certify Windows acceptance.",
+    "Keep unchanged39-member app/runtime/data and existing behavior evidence separately bound; source-only review does not approve release/dev/main/deploy."
+  ],
+  "review_method": "Read-only source/JSON/hash inspection, literal inverse replay in memory, raw JSON row-span comparison, PythonAST parse/comparison only. No application or helper imports/code execution, tests, build, Git, network or tracked edits."
+}

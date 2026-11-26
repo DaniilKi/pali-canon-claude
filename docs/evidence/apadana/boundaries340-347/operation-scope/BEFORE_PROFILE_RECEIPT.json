@@ -1,0 +1,13 @@
+{
+  "suite": "/tmp/pali-boundaries340-nov26/tests/approved_current333_authority_negatives.py",
+  "exact_parent_confirmed_head": "32f29a5fb45f2cfa33368f42592b9c4d9570cbd9",
+  "suite_sha256": "f8fb368777231010d2c69a8f7edbc9aea20e8d4caf35ff9f34f2191e425fd815",
+  "seconds": 107.07785321200208,
+  "exit_code": 0,
+  "external_deadline": false,
+  "internal_deadline_seconds": 115,
+  "outer_deadline_seconds": 120,
+  "source_or_assertions_modified": false,
+  "network_or_live_provider_execution": false,
+  "profile": "current333-exact32f.cprof"
+}

@@ -3,7 +3,7 @@
 No production loader imports this helper. No ambient switch or current fallback.
 The pure logical inverse is separate from exact complete-input acceptance.
 """
-from web_reader_six_boundary_history import (canon_before_six, c1_logical_input, historical_c1_data_bytes, copy_six_historical_fixture, C1_DATA_PATHS)
+from web_reader_six_boundary_history import (canon_before_six, c1_logical_input, _historical_c1_data_bytes as historical_c1_data_bytes, copy_six_historical_fixture, C1_DATA_PATHS)
 
 import copy
 import gzip

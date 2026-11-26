@@ -34,11 +34,11 @@
     },
     "scripts/web_reader_approved_acceptance.py": {
       "c1_sha256": "26fc2315af9b3bc37c4b8aaa0647897cb81561f3b79f894874a32c311800c2c7",
-      "current_sha256": "f7dea47b7fd4019c1750f8402341a196c0deee73bc56a70bc1541e7e64039c2d",
+      "current_sha256": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9",
       "hunks": [
         {
           "before": "from pathlib import Path\nfrom web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records\n\nfrom web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA, read_331_334, APPROVAL343_SHA, IDS343_NEW\n\nCURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'\n",
-          "after": "from pathlib import Path\nfrom web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records\n\nfrom web_reader_six_boundary_history import (assert_six_current_canonical_data, historical_c1_data_bytes, six_runtime_records, assert_preserved_c1_catalogue)\nfrom web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA, read_331_334, APPROVAL343_SHA, IDS343_NEW\n\nCURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'\n"
+          "after": "from pathlib import Path\nfrom web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records\n\nfrom web_reader_six_boundary_history import (_assert_six_current_canonical_data as assert_six_current_canonical_data, _historical_c1_data_bytes as historical_c1_data_bytes, six_runtime_records, assert_preserved_c1_catalogue, _c1_operation_scope, _reject_c1_scope)\nfrom web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA, read_331_334, APPROVAL343_SHA, IDS343_NEW\n\nCURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'\n"
         },
         {
           "before": "    assert object_sha(previous['source']) == baseline['manifest_source_sha256']\n    for name, pin in baseline['data_file_sha256'].items():\n        assert name.startswith('server/data/') and '..' not in Path(name).parts and name != 'server/data/apadana.json'\n        assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == pin\n    assert len(baseline['data_file_sha256']) == 26\n    profiles, links = dict(previous['profiles']), dict(previous['links'])\n    extra = [sealed(directory / current[key]['file'], current[key]['sha256']) for key in ('expected_profiles', 'expected_links')]\n",
@@ -46,17 +46,17 @@
         },
         {
           "before": "    return files\n\n\ndef approved_catalogue(root):\n    return approved343_catalogue(root)\n\n\ndef approved_runtime(root):\n    return approved343_runtime(root)\n",
-          "after": "    return files\n\n\ndef historical_c1_approved_catalogue(root):\n    return approved343_catalogue(root)\n\n\ndef historical_c1_approved_runtime(root):\n    return approved343_runtime(root)\n\n\ndef approved_six_catalogue(root):\n    assert_six_current_canonical_data(root)\n    previous = approved343_catalogue(root)\n    assert_preserved_c1_catalogue(root, previous)\n    return previous\n\ndef approved_six_runtime(root):\n    return six_runtime_records(root, approved343_runtime(root))\n\ndef approved_catalogue(root):\n    return approved_six_catalogue(root)\n\ndef approved_runtime(root):\n    return approved_six_runtime(root)\n"
+          "after": "    return files\n\n\ndef _historical_c1_approved_catalogue_body(root):\n    return approved343_catalogue(root)\n\n\ndef historical_c1_approved_runtime(root):\n    _reject_c1_scope(root)\n    return approved343_runtime(root)\n\n\ndef _approved_six_catalogue_body(root):\n    assert_six_current_canonical_data(root)\n    previous = approved343_catalogue(root)\n    assert_preserved_c1_catalogue(root, previous)\n    return previous\n\ndef approved_six_runtime(root):\n    _reject_c1_scope(root)\n    return six_runtime_records(root, approved343_runtime(root))\n\ndef approved_catalogue(root):\n    return approved_six_catalogue(root)\n\ndef approved_runtime(root):\n    return approved_six_runtime(root)\n\n\ndef historical_c1_approved_catalogue(root):\n    with _c1_operation_scope(root) as scoped:\n        return _historical_c1_approved_catalogue_body(scoped)\n\n\ndef approved_six_catalogue(root):\n    with _c1_operation_scope(root) as scoped:\n        return _approved_six_catalogue_body(scoped)\n"
         }
       ]
     },
     "scripts/web_reader_four_boundary_history.py": {
       "c1_sha256": "0588afde3d8d38858b2a67a09dcd7600f09d2baced27ebe3a9c6085ce9546a87",
-      "current_sha256": "ba229d1dec554841af7d732cffa70b2087dde09f49fb4391e7cb289f8f57435e",
+      "current_sha256": "1944ccb445fd6e63e4facaa1f5fb5957006f0b113997298971fd15eac5debf18",
       "hunks": [
         {
           "before": "No production loader imports this helper. No ambient switch or current fallback.\nThe pure logical inverse is separate from exact complete-input acceptance.\n\"\"\"\nimport copy\nimport gzip\nimport hashlib\n",
-          "after": "No production loader imports this helper. No ambient switch or current fallback.\nThe pure logical inverse is separate from exact complete-input acceptance.\n\"\"\"\nfrom web_reader_six_boundary_history import (canon_before_six, c1_logical_input, historical_c1_data_bytes, copy_six_historical_fixture, C1_DATA_PATHS)\n\nimport copy\nimport gzip\nimport hashlib\n"
+          "after": "No production loader imports this helper. No ambient switch or current fallback.\nThe pure logical inverse is separate from exact complete-input acceptance.\n\"\"\"\nfrom web_reader_six_boundary_history import (canon_before_six, c1_logical_input, _historical_c1_data_bytes as historical_c1_data_bytes, copy_six_historical_fixture, C1_DATA_PATHS)\n\nimport copy\nimport gzip\nimport hashlib\n"
         },
         {
           "before": "    return json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode('utf-8')\n\n\ndef regular(root, relative):\n    path = Path(root)\n    parts = Path(relative).parts\n    if not parts or Path(relative).is_absolute() or any(p in ('..', '.') for p in parts):\n",

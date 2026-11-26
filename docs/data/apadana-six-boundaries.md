@@ -105,3 +105,7 @@ See [local receipts](../evidence/apadana/boundaries340-347/acceptance/FULL_CHECK
 and the [executed installed-browser evidence](../evidence/apadana/boundaries340-347/installed-browser/REPORT.json).
 Remote candidate CI and safe dev integration are distinct final gates; the final
 release receipt and exact GitHub commit checks determine their outcome.
+
+## Test validation cost
+
+[Test-only operation-scope validation repair](apadana-validation-operation-scope.md) documents the measured nested full-data scans, strict per-public-call freshness, preserved historical bodies and independent source-map review. This does not change the application or relax the release checks.

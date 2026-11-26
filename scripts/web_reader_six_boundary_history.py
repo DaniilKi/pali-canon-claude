@@ -1,5 +1,8 @@
 """Finite TEST-INPUT history only; production/runtime responses are never rewritten."""
 import copy
+from contextlib import contextmanager
+from types import MappingProxyType
+from threading import get_ident
 import gzip
 import hashlib
 import json
@@ -185,9 +188,11 @@ def six_runtime_records(root, previous):
     return proof_records(root)
 
 
-def assert_six_current_canonical_data(root):
+def _capture_actual_data(root):
     global _VALIDATED_CONTENT
+    _reject_c1_scope(root)
     records = proof_records(root)
+    actual = {}
     keys = []
     data = sorted(name for name in records if name.startswith('data/'))
     assert len(data) == 27, 'All26 nonAP data plus preservedAP data before history'
@@ -196,12 +201,13 @@ def assert_six_current_canonical_data(root):
         checksum = digest(raw)
         assert {'bytes':len(raw),'sha256':checksum} == records[name]
         keys.append(checksum)
-    manifest = json.loads(regular(root,'server/data/canon.json.gz.parts.json'))
+        actual['server/'+name] = raw
+    manifest = json.loads(actual['server/data/canon.json.gz.parts.json'])
     assert manifest['version'] == 1
     assert [p['file'] for p in manifest['parts']] == ['canon.json.gz.part-0001','canon.json.gz.part-0002']
     chunks = []
     for part in manifest['parts']:
-        raw = regular(root,'server/data/'+part['file'])
+        raw = actual['server/data/'+part['file']]
         assert type(part['size']) is int and len(raw) == part['size'] and digest(raw) == part['sha256']
         chunks.append(raw)
     packed = b''.join(chunks)
@@ -210,17 +216,108 @@ def assert_six_current_canonical_data(root):
     if key != _VALIDATED_CONTENT:
         exact_c1_canon_bytes(gzip.decompress(packed),root)
         _VALIDATED_CONTENT = key
-    return records
+    return records, actual
+
+
+def assert_six_current_canonical_data(root):
+    """Every genuine public call validates fresh proofs and all27 actual data."""
+    _reject_c1_scope(root)
+    return _capture_actual_data(root)[0]
+
+
+def _assert_six_current_canonical_data(root):
+    if isinstance(root, _C1OperationScope):
+        return _scope_records(root)
+    return assert_six_current_canonical_data(root)
 
 
 def historical_c1_data_bytes(root, name):
+    """Public getter never accepts a carried/escaped operation scope."""
+    _reject_c1_scope(root)
     if name not in C1_DATA_PATHS:
-        # All unchanged actual bytes are checked by unchanged original assertions.
         return regular(root,name)
-    assert_six_current_canonical_data(root)
-    raw = regular(root,'tests/fixtures/canon-before-six/'+Path(name).name)
-    assert {'bytes':len(raw),'sha256':digest(raw)} == parent343_records(root)[name.removeprefix('server/')]
-    return raw
+    with _c1_operation_scope(root) as scoped:
+        return _historical_c1_data_bytes(scoped,name)
+
+
+def _historical_c1_data_bytes(root, name):
+    """Private old-chain input reader; not a public token/callback API."""
+    if not isinstance(root, _C1OperationScope):
+        return historical_c1_data_bytes(root,name)
+    _scope_records(root)  # source/runtime/C1 proof files are ALWAYS reread.
+    if name in root._fixtures:
+        return root._fixtures[name]
+    if name in root._actual:
+        # Unchanged data retains its original guarded physical read semantics.
+        raw = regular(root,name)
+        assert raw == root._actual[name], 'Actual data changed inside operation'
+        return raw
+    raise ValueError('Path outside the finite operation data snapshot')
+
+
+class _C1OperationScope:
+    __slots__ = ('_root','_records','_actual','_fixtures','_active','_owner')
+
+    def __init__(self, root, records, actual, fixtures):
+        object.__setattr__(self,'_root',Path(root).absolute())  # lexical, never resolve symlinks
+        object.__setattr__(self,'_records',MappingProxyType({k:MappingProxyType(dict(v)) for k,v in records.items()}))
+        object.__setattr__(self,'_actual',MappingProxyType(dict(actual)))
+        object.__setattr__(self,'_fixtures',MappingProxyType(dict(fixtures)))
+        object.__setattr__(self,'_active',True)
+        object.__setattr__(self,'_owner',get_ident())
+
+    def __setattr__(self, name, value):
+        raise AttributeError('Operation scope is immutable')
+
+    def _check(self):
+        if not self._active or self._owner != get_ident():
+            raise ValueError('Closed or foreign-thread operation scope')
+        if self._root.is_symlink() or not self._root.is_dir():
+            raise ValueError('Operation source root changed or is a symlink')
+
+    def __fspath__(self):
+        self._check()
+        return str(self._root)
+
+    def _close(self):
+        object.__setattr__(self,'_active',False)
+        object.__setattr__(self,'_records',MappingProxyType({}))
+        object.__setattr__(self,'_actual',MappingProxyType({}))
+        object.__setattr__(self,'_fixtures',MappingProxyType({}))
+
+
+def _reject_c1_scope(root):
+    if isinstance(root,_C1OperationScope):
+        raise ValueError('Public entry requires a root, never a carried operation scope')
+
+
+def _scope_records(scoped):
+    if type(scoped) is not _C1OperationScope:
+        raise ValueError('Exact private operation scope required')
+    scoped._check()
+    records = proof_records(scoped)  # physical guarded proof reread, no snapshot fallback
+    assert records == scoped._records
+    return records
+
+
+@contextmanager
+def _c1_operation_scope(root):
+    """One synchronous private operation. No scope survives return or exception."""
+    _reject_c1_scope(root)
+    records, actual = _capture_actual_data(root)
+    assert len(actual) == 27 and all(type(raw) is bytes for raw in actual.values())
+    previous = parent343_records(root)
+    fixtures = {}
+    for name in C1_DATA_PATHS:
+        raw = regular(root,'tests/fixtures/canon-before-six/'+Path(name).name)
+        assert {'bytes':len(raw),'sha256':digest(raw)} == previous[name.removeprefix('server/')]
+        fixtures[name] = raw
+    scoped = _C1OperationScope(root,records,actual,fixtures)
+    del records, actual, fixtures
+    try:
+        yield scoped
+    finally:
+        scoped._close()
 
 
 def safe_destination(root, relative):
@@ -252,6 +349,8 @@ def safe_destination(root, relative):
 
 
 def copy_six_historical_fixture(source_root, destination_root):
+    _reject_c1_scope(source_root)
+    _reject_c1_scope(destination_root)
     names = [PROOF_DIRECTORY+'/'+ORACLE_NAME,
              PROOF_DIRECTORY+'/C1_IMMUTABLE_EXPECTATIONS.json',
              PROOF_DIRECTORY+'/runtime/'+INVENTORY_NAME,PROOF_DIRECTORY+'/runtime/'+REVIEW_NAME,

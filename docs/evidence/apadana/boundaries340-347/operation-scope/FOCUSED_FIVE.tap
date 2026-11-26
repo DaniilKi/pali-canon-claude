@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: independent intake and runtime acceptance reject omissions, substitutions and drift
+ok 1 - independent intake and runtime acceptance reject omissions, substitutions and drift
+  ---
+  duration_ms: 6937.460877
+  type: 'test'
+  ...
+# Subtest: separate current333 authorities reject new proof loss, substitutions, tampering and historical fallback
+ok 2 - separate current333 authorities reject new proof loss, substitutions, tampering and historical fallback
+  ---
+  duration_ms: 27135.570073
+  type: 'test'
+  ...
+# Subtest: separate current339 authorities reject new proof loss, substitutions, tampering and historical fallback
+ok 3 - separate current339 authorities reject new proof loss, substitutions, tampering and historical fallback
+  ---
+  duration_ms: 27650.285346
+  type: 'test'
+  ...
+# Subtest: actual held234 metadata preflight keeps the full325,333 and339 bridges into current343 and rejects baseline corruption
+ok 4 - actual held234 metadata preflight keeps the full325,333 and339 bridges into current343 and rejects baseline corruption
+  ---
+  duration_ms: 14770.357086
+  type: 'test'
+  ...
+# Subtest: private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes
+ok 5 - private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes
+  ---
+  duration_ms: 16211.634189
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 38162.555201

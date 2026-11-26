@@ -1,0 +1,494 @@
+{
+  "schema": "independent-Windows32f-C1-runner-and-nested-validation-cost-assessment-v1",
+  "status": "EVIDENCE_SUPPORTS_SCOPED_DUPLICATE_VALIDATION_FIX_FIRST_NOT_TIMEOUT_INCREASE_OR_RUNNER_CAUSE_CLAIM",
+  "exact_C1_and32f_Windows_comparison": {
+    "139944268141": {
+      "job_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45830085874/job/139944268141",
+      "cohort": "C1",
+      "node_family": "Node20",
+      "exact_head_sha_in_log": "c1b2433481399b2125f6645a75bf4105cb212440",
+      "job_conclusion_from_parent_or_GitHub": "success",
+      "decoded_log": {
+        "file": "JOB_139944268141.log",
+        "bytes": 816371,
+        "sha256": "35d3b480f92bc3f2f1cfa8a473dfc6bd6f9fdf650d27f2c723a060598e24d2c2",
+        "source_tool": "GitHub fetch_workflow_job_logs; decoded text re-encoded UTF8 retaining CRLF/BOM"
+      },
+      "versions": {
+        "node": "v20.20.2",
+        "npm": "10.8.2",
+        "Python": "3.12.10",
+        "runner_image": "windows-2025-vs2026",
+        "runner_image_version": "20261116.315.1",
+        "provisioner_version": "20261111.635"
+      },
+      "selected_tests": {
+        "approved33": {
+          "test_name": "independent intake and runtime acceptance reject omissions, substitutions and drift",
+          "wrapper_duration_ms": 16014.1593,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "current333_negative7": {
+          "test_name": "separate current333 authorities reject new proof loss, substitutions, tampering and historical fallback",
+          "wrapper_duration_ms": 32382.814,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "current339_negative7": {
+          "test_name": "separate current339 authorities reject new proof loss, substitutions, tampering and historical fallback",
+          "wrapper_duration_ms": 32820.5811,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "held234_chain7": {
+          "test_name": "actual held234 metadata preflight keeps the full325,333 and339 bridges into current343 and rejects baseline corruption",
+          "wrapper_duration_ms": 25200.3952,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        }
+      },
+      "actual_availableParallelism_CPU_load_memory_disk_metrics_logged": false,
+      "full_suite_reported_duration_ms": [
+        "504266.1343"
+      ],
+      "run_id": 45830085874
+    },
+    "139966699350": {
+      "job_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45830085874/job/139966699350",
+      "cohort": "C1",
+      "node_family": "Node22",
+      "exact_head_sha_in_log": "c1b2433481399b2125f6645a75bf4105cb212440",
+      "job_conclusion_from_parent_or_GitHub": "success",
+      "decoded_log": {
+        "file": "JOB_139966699350.log",
+        "bytes": 905477,
+        "sha256": "1ac68f4dca0081f29297df0830f71807012b75212d60d99ba7ad4d860e2aa1b4",
+        "source_tool": "GitHub fetch_workflow_job_logs; decoded text re-encoded UTF8 retaining CRLF/BOM"
+      },
+      "versions": {
+        "node": "v22.23.5",
+        "npm": "10.9.9",
+        "Python": "3.12.10",
+        "runner_image": "windows-2025-vs2026",
+        "runner_image_version": "20261123.321.1",
+        "provisioner_version": "20261111.635"
+      },
+      "selected_tests": {
+        "approved33": {
+          "test_name": "independent intake and runtime acceptance reject omissions, substitutions and drift",
+          "wrapper_duration_ms": 8373.4341,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "current333_negative7": {
+          "test_name": "separate current333 authorities reject new proof loss, substitutions, tampering and historical fallback",
+          "wrapper_duration_ms": 27802.1172,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "current339_negative7": {
+          "test_name": "separate current339 authorities reject new proof loss, substitutions, tampering and historical fallback",
+          "wrapper_duration_ms": 27479.9301,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "held234_chain7": {
+          "test_name": "actual held234 metadata preflight keeps the full325,333 and339 bridges into current343 and rejects baseline corruption",
+          "wrapper_duration_ms": 25062.0297,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        }
+      },
+      "actual_availableParallelism_CPU_load_memory_disk_metrics_logged": false,
+      "full_suite_reported_duration_ms": [
+        "459271.4502"
+      ],
+      "run_id": 45830085874
+    },
+    "139983659978": {
+      "job_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45841385967/job/139983659978",
+      "cohort": "32f",
+      "node_family": "Node22",
+      "exact_head_sha_in_log": "32f29a5fb45f2cfa33368f42592b9c4d9570cbd9",
+      "job_conclusion_from_parent_or_GitHub": "failure",
+      "decoded_log": {
+        "file": "JOB_139983659978.log",
+        "bytes": 915924,
+        "sha256": "e290c45a93b07f3a97c4f55d3a565f154afbad465593b5d9f8c958edee3a62c4",
+        "source_tool": "GitHub fetch_workflow_job_logs; decoded text re-encoded UTF8 retaining CRLF/BOM"
+      },
+      "versions": {
+        "node": "v22.23.5",
+        "npm": "10.9.9",
+        "Python": "3.12.10",
+        "runner_image": "windows-2025-vs2026",
+        "runner_image_version": "20261116.315.1",
+        "provisioner_version": "20261111.635"
+      },
+      "selected_tests": {
+        "approved33": {
+          "test_name": "independent intake and runtime acceptance reject omissions, substitutions and drift",
+          "wrapper_duration_ms": 30030.5648,
+          "result": "not ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": 9,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "current333_negative7": {
+          "test_name": "separate current333 authorities reject new proof loss, substitutions, tampering and historical fallback",
+          "wrapper_duration_ms": 120022.2983,
+          "result": "not ok",
+          "explicit_ETIMEDOUT_logged": true,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "current339_negative7": {
+          "test_name": "separate current339 authorities reject new proof loss, substitutions, tampering and historical fallback",
+          "wrapper_duration_ms": 120013.8469,
+          "result": "not ok",
+          "explicit_ETIMEDOUT_logged": true,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "held234_chain7": {
+          "test_name": "actual held234 metadata preflight keeps the full325,333 and339 bridges into current343 and rejects baseline corruption",
+          "wrapper_duration_ms": 30020.0975,
+          "result": "not ok",
+          "explicit_ETIMEDOUT_logged": true,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "six_history7": {
+          "test_name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+          "wrapper_duration_ms": 44191.0667,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        }
+      },
+      "actual_availableParallelism_CPU_load_memory_disk_metrics_logged": false,
+      "full_suite_reported_duration_ms": [
+        "722909.0829"
+      ],
+      "run_id": 45841385967
+    },
+    "139983660415": {
+      "job_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45841385967/job/139983660415",
+      "cohort": "32f",
+      "node_family": "Node20",
+      "exact_head_sha_in_log": "32f29a5fb45f2cfa33368f42592b9c4d9570cbd9",
+      "job_conclusion_from_parent_or_GitHub": "failure",
+      "decoded_log": {
+        "file": "JOB_139983660415.log",
+        "bytes": 826774,
+        "sha256": "143d0f25ad62d3c6dd220c5460a3376c77c076c9ed113bb78635ecc26816786a",
+        "source_tool": "GitHub fetch_workflow_job_logs; decoded text re-encoded UTF8 retaining CRLF/BOM"
+      },
+      "versions": {
+        "node": "v20.20.2",
+        "npm": "10.8.2",
+        "Python": "3.12.10",
+        "runner_image": "windows-2025-vs2026",
+        "runner_image_version": "20261116.315.1",
+        "provisioner_version": "20261111.635"
+      },
+      "selected_tests": {
+        "approved33": {
+          "test_name": "independent intake and runtime acceptance reject omissions, substitutions and drift",
+          "wrapper_duration_ms": 29770.0459,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "current333_negative7": {
+          "test_name": "separate current333 authorities reject new proof loss, substitutions, tampering and historical fallback",
+          "wrapper_duration_ms": 120030.226,
+          "result": "not ok",
+          "explicit_ETIMEDOUT_logged": true,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "current339_negative7": {
+          "test_name": "separate current339 authorities reject new proof loss, substitutions, tampering and historical fallback",
+          "wrapper_duration_ms": 120022.8185,
+          "result": "not ok",
+          "explicit_ETIMEDOUT_logged": true,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "held234_chain7": {
+          "test_name": "actual held234 metadata preflight keeps the full325,333 and339 bridges into current343 and rejects baseline corruption",
+          "wrapper_duration_ms": 30018.5497,
+          "result": "not ok",
+          "explicit_ETIMEDOUT_logged": true,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        },
+        "six_history7": {
+          "test_name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+          "wrapper_duration_ms": 42952.0848,
+          "result": "ok",
+          "explicit_ETIMEDOUT_logged": false,
+          "unittest_completed_dots_if_unambiguously_printed": null,
+          "Python_internal_Ran_duration_observable": false
+        }
+      },
+      "actual_availableParallelism_CPU_load_memory_disk_metrics_logged": false,
+      "full_suite_reported_duration_ms": [
+        "764564.7813"
+      ],
+      "run_id": 45841385967
+    }
+  },
+  "interpretation": [
+    "The same seven-case333/339 test modules are byte-identical to C1. C1 Windows20/22 both complete them around27\u201333s;32f Windows20/22 both reach the120s ceiling. This is a repeated new-candidate regression, unlike the earlier isolated C1 held234 timeout.",
+    "Successful Node wrapper duration includes Python startup, setup, execution and teardown. The passing wrapper captures and does not print the internal unittest Ran7 duration, so exact internal Python seconds cannot honestly be recovered from these logs.",
+    "The approved33 Node22 failure shows9 completed unittest dots and about30s. Its wrapper asserts result.status but omits result.error/signal, so that log does not itself explicitly print ETIMEDOUT. It is consistent with its30s deadline; no specific blocked method is established.",
+    "Reporter timestamps may be buffered by file and emitted in source order; do not subtract test durations from TAP emission timestamps to claim actual test start/overlap."
+  ],
+  "runner_architecture": {
+    "script_sha256": "c0396da9b603e0d834850decf10db09720364acea48d301229826c5964d526ee",
+    "every_sorted_test_file_still_discovered": true,
+    "one_node_test_process_default_file_concurrency": true,
+    "official_Node22_documentation": {
+      "file": "OFFICIAL_NODE22_TEST_CONCURRENCY_EXCERPT.json",
+      "sha256": "ce219fa65c875bed333d8e50ec74d940a15cb6bea5daba4c95d450c632f63971",
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.23.0/doc/api/cli.md",
+      "rule": "Maximum concurrent test files defaults to os.availableParallelism()-1 under normal process isolation.",
+      "actual_runner_parallelism_unknown": true
+    },
+    "same_runner_image_and_Node_Python_versions_do_not_prove_same_load": true
+  },
+  "independent_profiler_evidence_read_not_rerun": {
+    "receipt_sha256": "18a0c3b9b913de32ef874b659aea7179a374fb130ff60e9901b0985b6cdb49f6",
+    "function_metadata_sha256": "81417381d4477677829995681184f5eca59a958cdb1458dd858d3a663eb6bf8e",
+    "exact32f_suite": "/tmp/pali-boundaries340-nov26/tests/approved_current333_authority_negatives.py",
+    "profiled_wall_seconds": 107.07785321200208,
+    "profile_overhead_not_controlled": true,
+    "selected_function_costs": [
+      {
+        "file": "/tmp/pali-boundaries340-nov26/scripts/web_reader_approved_acceptance.py",
+        "line": 716,
+        "function": "approved_catalogue",
+        "total_calls": 16,
+        "self_seconds": 0.000133754,
+        "cumulative_seconds": 98.46031265900001
+      },
+      {
+        "file": "/tmp/pali-boundaries340-nov26/scripts/web_reader_six_boundary_history.py",
+        "line": 216,
+        "function": "historical_c1_data_bytes",
+        "total_calls": 2231,
+        "self_seconds": 0.055895204000000004,
+        "cumulative_seconds": 80.887776016
+      },
+      {
+        "file": "/tmp/pali-boundaries340-nov26/scripts/web_reader_six_boundary_history.py",
+        "line": 188,
+        "function": "assert_six_current_canonical_data",
+        "total_calls": 1940,
+        "self_seconds": 0.43857137300000004,
+        "cumulative_seconds": 80.368287752
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _hashlib.openssl_sha256>",
+        "total_calls": 201046,
+        "self_seconds": 67.494382892,
+        "cumulative_seconds": 67.494382892
+      },
+      {
+        "file": "/tmp/pali-boundaries340-nov26/tests/approved_current333_authority_negatives.py",
+        "line": 49,
+        "function": "setUpClass",
+        "total_calls": 1,
+        "self_seconds": 0.0008716520000000001,
+        "cumulative_seconds": 10.569342912000002
+      }
+    ],
+    "observation": "16 catalogue validations consume98.46/107.07 profiledseconds;1940 full27 data validations consume80.37 cumulative seconds; SHA256 selfcost67.49 seconds. The dominant path is nested catalogue validation, not merely fixture setup/copy. The profile proves repeated expensive work on this Linux sample; it does not isolate the Windows hardware contribution."
+  },
+  "static_cost_path": {
+    "source_line_references": {
+      "scripts/test.mjs": {
+        ".filter((name)": [
+          8
+        ],
+        "['--test'": [
+          9
+        ]
+      },
+      "scripts/web_reader_six_boundary_history.py": {
+        "def assert_six_current_canonical_data": [
+          188
+        ],
+        "assert len(data) == 27": [
+          193
+        ],
+        "def historical_c1_data_bytes": [
+          216
+        ],
+        "assert_six_current_canonical_data(root)": [
+          188,
+          220
+        ],
+        "def copy_six_historical_fixture": [
+          254
+        ],
+        "for p in C1_DATA_PATHS": [
+          172,
+          260,
+          264
+        ],
+        "historical_c1_data_bytes(source_root,p)": [
+          265
+        ]
+      },
+      "scripts/web_reader_four_boundary_history.py": {
+        "def assert_current_canonical_data": [
+          163
+        ],
+        "def historical_data_bytes": [
+          196
+        ],
+        "def regular(root": [
+          224
+        ],
+        "return historical_c1_data_bytes": [
+          226
+        ],
+        "def copy_historical_fixture": [
+          235
+        ],
+        "copy_six_historical_fixture": [
+          6,
+          236
+        ]
+      },
+      "tests/approved_current333_authority_negatives.py": {
+        "def setUpClass": [
+          50
+        ],
+        "shutil.copytree": [
+          56
+        ],
+        "historical_data_bytes(ROOT, name)": [
+          75
+        ],
+        "def current_positive": [
+          94
+        ]
+      },
+      "tests/approved_acceptance.py": {
+        "def setUpClass": [
+          17
+        ],
+        "shutil.copytree": [
+          64,
+          130,
+          181,
+          231,
+          282
+        ],
+        "copy_historical_fixture": [
+          63,
+          68
+        ]
+      },
+      "tests/check-ci-stages.test.mjs": {
+        "--test-concurrency": [
+          23
+        ],
+        "npm test": [
+          24,
+          64,
+          77,
+          80
+        ],
+        "verifyCheckContract": [
+          10,
+          24,
+          30,
+          34,
+          71
+        ]
+      }
+    },
+    "mechanism": "Old four-boundary regular reads for changed data call historical_c1_data_bytes, which calls the new full27 guard. One old-four validation requests multiple historical files; nested catalogue cohorts invoke this repeatedly. copy_six also performs its full guard, then4getter calls that each rescan, then rereads bytes to copy.",
+    "old33_fixtures": "Multiple tests copy the complete evidence directory and construct owned fixtures; no hardlink/shared mutable fixture is appropriate. Preserve each positive-before-mutation and all33 methods.",
+    "copy_only_optimization_insufficient_for_measured_catalogue_hotpath": true
+  },
+  "held234_specific": {
+    "all4test_intake_AST_source_files_byte_exact_C1": true,
+    "source_hashes": {
+      "tests/held234_current333_chain.py": "5edaa72747f2c1eafbb461745ac642ac13b4aca66dca4b2c1ce9e449d612e52b",
+      "tests/held234-current333-chain.test.mjs": "5ad609829ccabd1a3c90e7b9e9e99e382b02bf0d2dc288cdd0b02ef48186fe8e",
+      "scripts/web_reader_apadana_intake.py": "75fc772cde076fe64176108725c3cdbde8cc66d7db2e449384de52a54d71e730",
+      "scripts/web-reader-thera-held234-check.py": "577b1f45c3482dd547b47a1e8e512ec699ac1c197f6c227aef66800e21b314de"
+    },
+    "intake_imports_only": [
+      "hashlib",
+      "json",
+      "pathlib"
+    ],
+    "actual_preflight_finite_metadata_AST_only": true,
+    "new_full27_guard_not_in_its_call_graph": true,
+    "same_host_C1_v2_prior_parent_measurements_seconds": [
+      14.389,
+      14.479
+    ],
+    "C1_Windows_success_wrapper_seconds": [
+      25.2003952,
+      25.0620297
+    ],
+    "32f_Windows_deadline_wrapper_seconds": [
+      30.0185497,
+      30.0200975
+    ],
+    "cause": "Unchanged metadata workload slower under the new full-run context is consistent with shared-resource contention, but overlap, CPU/load and disk metrics were not recorded. Contention is an inference, not established cause. No intrinsic held234 code or full27-read addition is identified."
+  },
+  "recommended_low_risk_action": {
+    "first": "Optimize duplicate nested verification within one validation/copy operation using an immutable operation-owned checked-byte snapshot. Every public gate/operation must freshly read/hash all27 actual data files plus mandatory proofs; reuse only the exact checked bytes inside that call. No ambient/mtime/path cache, skip flag, caller-forgeable reusable token, historical fallback, hardlink mutation sharing or app/current-data projection.",
+    "must_preserve": [
+      "All tests/files/assertions, positive-before-mutation controls and zero-skip gate23",
+      "30s and120s child bounds and existing parent/workflow deadlines",
+      "Actual current read/hash validation for every27 file at each public operation boundary",
+      "Proof loss, substitution, same-size/same-mtime edits, changed input root, symlink and unrelated mutations remain observable on the next public call",
+      "Immutable existing source/digest/runtime authorities via renewed finite source map and separately reviewed literal binding"
+    ],
+    "required_validation": "Run targeted full old33 + both7-case suites with exact source-negative controls under the same bounds; then require exact new-commit Windows20/22 CI and preserve all good32f results without blind reruns."
+  },
+  "runner_alternatives_not_selected_now": [
+    {
+      "option": "Set explicit --test-concurrency=1 in scripts/test.mjs",
+      "benefit": "No filelock or stale-owner machinery; all files/assertions remain and child timers start only when a file executes.",
+      "limits": "Changes scheduling for the whole suite and may exceed existing30minute full-test step. Actual Windows parallelism/overlap was not logged. Must separately prove complete inventory and unchanged deadlines; the raw CI check-stage command guard forbids inserting --test-concurrency into workflow commands. Not justified before the measured hotpath fix."
+    },
+    {
+      "option": "Filelock or cross-process Python coordinator",
+      "limits": "Bounded lock acquisition still consumes Node125s parent budget; two120s children can make a waiter fail even though its own child deadline is unchanged. Stale-owner recovery, crash cleanup and lock-domain bypass add failure modes. Do not silently extend parent timers, retry, skip or claim a lock cures intrinsic repeated hashing. Not recommended as the first change."
+    }
+  ],
+  "if_unchanged_held234_still_fails_after_hotpath_fix": "Add separately reviewed metadata-only start/end/elapsed timestamps inside the relevant test process and log availableParallelism/Node/Python versions. Explicit timestamps remain meaningful despite reporter buffering. Consider a bounded isolated equivalent-case comparison only when supported by the new failure; no blind rerun, broader timeout or unsupported Windows/antivirus diagnosis.",
+  "scope": "Read-only GitHub job-log reads, local saved evidence/source analysis and profiler receipt inspection only. No application/test/Builder/build/browser/Git mutation/CI rerun/cancellation/push or tracked edit."
+}

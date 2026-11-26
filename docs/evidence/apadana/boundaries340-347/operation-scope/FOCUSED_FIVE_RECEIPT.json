@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/approved-acceptance.test.mjs",
+    "tests/approved-current333-authority-negatives.test.mjs",
+    "tests/approved-current339-authority-negatives.test.mjs",
+    "tests/held234-current333-chain.test.mjs",
+    "tests/six-operation-scope.test.mjs"
+  ],
+  "started_utc": "2026-11-26T15:16:08.617051+00:00",
+  "elapsed_seconds": 38.28664718000073,
+  "exit_code": 0,
+  "outer_timeout": false,
+  "outer_deadline_seconds": 170,
+  "original_child_deadlines_unchanged": true,
+  "log": "FOCUSED_FIVE.log",
+  "log_sha256": "180aa507d791ed061783238f57613fbb1f840577a70f09581011c2f8d1648f1e"
+}

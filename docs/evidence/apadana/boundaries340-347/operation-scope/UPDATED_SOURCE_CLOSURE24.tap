@@ -1,0 +1,154 @@
+TAP version 13
+# Subtest: separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads
+ok 1 - separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads
+  ---
+  duration_ms: 1446.290022
+  type: 'test'
+  ...
+# Subtest: omitted duplicate substituted reordered or unrelated current source edits refuse after each exact positive
+ok 2 - omitted duplicate substituted reordered or unrelated current source edits refuse after each exact positive
+  ---
+  duration_ms: 1112.238245
+  type: 'test'
+  ...
+# Subtest: whole proof bytes are immutable even for semantically equal JSON and altered baseline hashes paths or hunks
+ok 3 - whole proof bytes are immutable even for semantically equal JSON and altered baseline hashes paths or hunks
+  ---
+  duration_ms: 38.100534
+  type: 'test'
+  ...
+# Subtest: unlisted data runtime and ordinary strings never undergo source-input projection
+ok 4 - unlisted data runtime and ordinary strings never undergo source-input projection
+  ---
+  duration_ms: 4.257436
+  type: 'test'
+  ...
+# Subtest: explicit file URL source reads retain the same finite frozen440 boundary
+ok 5 - explicit file URL source reads retain the same finite frozen440 boundary
+  ---
+  duration_ms: 211.410916
+  type: 'test'
+  ...
+# Subtest: nested D4 file URL reads normalize declared current source before retained historical assertions
+ok 6 - nested D4 file URL reads normalize declared current source before retained historical assertions
+  ---
+  duration_ms: 27.261784
+  type: 'test'
+  ...
+# Subtest: actual current343 and v42 bindings retain every exact D4 assertion through finite source inputs
+ok 7 - actual current343 and v42 bindings retain every exact D4 assertion through finite source inputs
+  ---
+  duration_ms: 907.059835
+  type: 'test'
+  ...
+# Subtest: actual current imports bind exact343 identities to widget v43
+ok 8 - actual current imports bind exact343 identities to widget v43
+  ---
+  duration_ms: 6.29609
+  type: 'test'
+  ...
+# Subtest: binding refuses omitted substituted duplicated reordered IDs and stale widget namespaces
+ok 9 - binding refuses omitted substituted duplicated reordered IDs and stale widget namespaces
+  ---
+  duration_ms: 64.637586
+  type: 'test'
+  ...
+# Subtest: four source-authorized IDs retain the repaired canonical locator namespace independently of widget UI version
+ok 10 - four source-authorized IDs retain the repaired canonical locator namespace independently of widget UI version
+  ---
+  duration_ms: 0.283729
+  type: 'test'
+  ...
+# Subtest: explicit historical data inputs preserve exact old byte pins while real loading stays current
+ok 11 - explicit historical data inputs preserve exact old byte pins while real loading stays current
+  ---
+  duration_ms: 5539.492336
+  type: 'test'
+  ...
+# Subtest: historical data byte substitutions cannot hide tampered supplied current input after a cached positive
+ok 12 - historical data byte substitutions cannot hide tampered supplied current input after a cached positive
+  ---
+  duration_ms: 1600.803993
+  type: 'test'
+  ...
+# Subtest: unlisted runtime files and metadata retain byte identity and are never projected
+ok 13 - unlisted runtime files and metadata retain byte identity and are never projected
+  ---
+  duration_ms: 2.210059
+  type: 'test'
+  ...
+# Subtest: current343 gate restores the complete ac workflow before all historical CI inverses
+ok 14 - current343 gate restores the complete ac workflow before all historical CI inverses
+  ---
+  duration_ms: 11.677529
+  type: 'test'
+  ...
+# Subtest: required source/client inventory is exactly eight plus five runnable cases
+ok 15 - required source/client inventory is exactly eight plus five runnable cases
+  ---
+  duration_ms: 0.698043
+  type: 'test'
+  ...
+# Subtest: source paths cannot be omitted substituted duplicated reordered or broadened
+ok 16 - source paths cannot be omitted substituted duplicated reordered or broadened
+  ---
+  duration_ms: 38.932392
+  type: 'test'
+  ...
+# Subtest: mandatory13 gate refuses changed suites counts skips guards shell env bounds or report
+ok 17 - mandatory13 gate refuses changed suites counts skips guards shell env bounds or report
+  ---
+  duration_ms: 14.141132
+  type: 'test'
+  ...
+# Subtest: unrelated earlier gate historical object fetch budget or matrix changes fail whole ac identity
+ok 18 - unrelated earlier gate historical object fetch budget or matrix changes fail whole ac identity
+  ---
+  duration_ms: 7.207779
+  type: 'test'
+  ...
+# Subtest: every declared current source restores its complete immutable ac input
+ok 19 - every declared current source restores its complete immutable ac input
+  ---
+  duration_ms: 192.765673
+  type: 'test'
+  ...
+# Subtest: source omissions substitutions duplicates and unrelated mutations cannot project
+ok 20 - source omissions substitutions duplicates and unrelated mutations cannot project
+  ---
+  duration_ms: 319.436916
+  type: 'test'
+  ...
+# Subtest: proof omission reorder substitution hash hunk and byte tampering fail the mandatory seal
+ok 21 - proof omission reorder substitution hash hunk and byte tampering fail the mandatory seal
+  ---
+  duration_ms: 6.60621
+  type: 'test'
+  ...
+# Subtest: string Buffer fileURL and nested historical readers retain exact declared source identities
+ok 22 - string Buffer fileURL and nested historical readers retain exact declared source identities
+  ---
+  duration_ms: 737.328224
+  type: 'test'
+  ...
+# Subtest: exact-current normalization never converts unknown supplied mutations
+ok 23 - exact-current normalization never converts unknown supplied mutations
+  ---
+  duration_ms: 252.198382
+  type: 'test'
+  ...
+# Subtest: unlisted runtime corpus and URLs are not projected
+ok 24 - unlisted runtime corpus and URLs are not projected
+  ---
+  duration_ms: 4.926886
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9093.469661

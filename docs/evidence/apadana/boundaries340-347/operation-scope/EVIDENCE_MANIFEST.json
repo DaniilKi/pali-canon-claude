@@ -1,0 +1,121 @@
+{
+  "scope": "Test-only performance repair and exact unchanged application component binding. Updated mandatory23 and sourceclosure24 pass locally without skips. Exact new candidate CI pending.",
+  "files": [
+    {
+      "file": "EXACT32F_TERMINAL_CI.json",
+      "bytes": 11224,
+      "sha256": "2efc1a05b35d64295914a09b96d527d3fa49f90a3c3038efde0e285da47cf7ee"
+    },
+    {
+      "file": "WINDOWS22_FAILURE_CONTEXT.json",
+      "bytes": 22159,
+      "sha256": "4acf2ef76d0ca719d24d36f6b583eb677087e7428fe2b818e974de4870f0c995"
+    },
+    {
+      "file": "WINDOWS20_FAILURE_CONTEXT.json",
+      "bytes": 17680,
+      "sha256": "806d6eb9e05e41c568154563ab1e7462b31d5c84381950437b23ca8bb8604428"
+    },
+    {
+      "file": "BEFORE_PROFILE_RECEIPT.json",
+      "bytes": 540,
+      "sha256": "18a0c3b9b913de32ef874b659aea7179a374fb130ff60e9901b0985b6cdb49f6"
+    },
+    {
+      "file": "BEFORE_PROFILE_TOP.json",
+      "bytes": 7130,
+      "sha256": "c453ee184eb73fa8953836c91b7d8f307f51af3f45cf5b4af4e36a08809ed504"
+    },
+    {
+      "file": "AFTER_PROFILE_RECEIPT.json",
+      "bytes": 545,
+      "sha256": "7090ea22ee60a1da9852d3cc7ad71e035952087cdf319bb4dd5f5a47b5db5591"
+    },
+    {
+      "file": "AFTER_PROFILE_TOP.json",
+      "bytes": 6930,
+      "sha256": "73b690a90f38330701272fa8e3dbbd0e2fd382eccbf52b4ae81dd3dc090b52aa"
+    },
+    {
+      "file": "BEFORE_AFTER_COMPARISON.json",
+      "bytes": 2865,
+      "sha256": "2f59ff24434b0cfef549f34036c69133c2b58e3750e6f8e24f4b3a0fc6b89c89"
+    },
+    {
+      "file": "FOCUSED_FIVE.tap",
+      "bytes": 1515,
+      "sha256": "180aa507d791ed061783238f57613fbb1f840577a70f09581011c2f8d1648f1e"
+    },
+    {
+      "file": "FOCUSED_FIVE_RECEIPT.json",
+      "bytes": 656,
+      "sha256": "0da9e91b65fe7028b18aceb3e4fc2254187f2e9c5d27163bfde94f0166f01587"
+    },
+    {
+      "file": "INDEPENDENT_STATIC_REVIEW.json",
+      "bytes": 4780,
+      "sha256": "0048077bd0722c7c334f6f9e0777e02421b85ff56a7dc1b959f92cd20348d1e8"
+    },
+    {
+      "file": "OLD_BODY_AST_PRESERVATION.json",
+      "bytes": 7161,
+      "sha256": "eaa85d961bf0ede462cdd80a65f040a4a6aef5efb85182746605ec29a00b56b8"
+    },
+    {
+      "file": "REVIEWED_PATCH_FILES.json",
+      "bytes": 747,
+      "sha256": "fc9eae037514af01a6c8522107e6a2bf889815da4c69744507279ddb4f5a439f"
+    },
+    {
+      "file": "REVIEWED_PATCH.json",
+      "bytes": 9879,
+      "sha256": "83155b95e1dca4ca3ef82d562711d465409e6cb5a8482316ee97f2a044fe3aaa"
+    },
+    {
+      "file": "RUNNER_COST_ASSESSMENT.json",
+      "bytes": 23273,
+      "sha256": "095d6245d209196909a8fa93a9b95730b1590d0cc49faacd4e5784e991ef3766"
+    },
+    {
+      "file": "SOURCE_PATH_PLAN_V3.json",
+      "bytes": 2607,
+      "sha256": "26676cf5e137d92005cee4070eb80c49734d4d9dd8656ab791afa0c23c2e441d"
+    },
+    {
+      "file": "SOURCE_GENERATION_RECEIPT_V3.json",
+      "bytes": 3878,
+      "sha256": "499810a1f737e822da447b458b5e1403214c42a6046f6e1a9fb64fe5662c15d8"
+    },
+    {
+      "file": "INDEPENDENT_PATH_PLAN_V3_GO.json",
+      "bytes": 6182,
+      "sha256": "d063086fedb5d4ebb90b7e756d0a0864f50514bc80cf7b5858337efb893d17f1"
+    },
+    {
+      "file": "INDEPENDENT_SOURCE_INVERSE_V3_REVIEW.json",
+      "bytes": 22503,
+      "sha256": "d9b2e26584917e733b3646c5357102a46ab71d62e4e74f223ad06637b7e52089"
+    },
+    {
+      "file": "UPDATED_SOURCE_CLOSURE24.tap",
+      "bytes": 5978,
+      "sha256": "0a7133d8b0f880803bcb94d64f5d8d09f577adda9ed172a01652a5624240b582"
+    },
+    {
+      "file": "UNCHANGED_APPLICATION_COMPONENTS.json",
+      "bytes": 6610,
+      "sha256": "f2b23b0e2d0e9725091fe3585dfbe23c32e7f367c978d7d1f599e433fdc04c6f"
+    },
+    {
+      "file": "source-inverse-v3-review.md",
+      "bytes": 1662,
+      "sha256": "6afe63b84d209494d771e905e2ef7d100d46ea12a0de8cf5abbec94bc0756408"
+    },
+    {
+      "file": "UPDATED_MANDATORY23.tap",
+      "bytes": 6220,
+      "sha256": "5ad093bdf977260595d4a98bad8ab0f0e2004b4afaca9a55f19c350d56f19604"
+    }
+  ],
+  "raw_text_representation": "Raw patch and pstats listings use UTF8 JSON envelopes retaining their original byte count/hash and exact content, so strict whitespace checks remain enabled."
+}

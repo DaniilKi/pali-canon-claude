@@ -1,0 +1,17 @@
+[
+  {
+    "path": "scripts/web_reader_six_boundary_history.py",
+    "exact32f_sha256": "de6857453c0ab3fe06cc741caf2694f0eaaab7cdd9345ace02fbf7dec8b8601c",
+    "proposal_sha256": "10c9300cc03fd9299ba3e510c74af1e859d758eda08e1c878fd6364fc4fba330"
+  },
+  {
+    "path": "scripts/web_reader_four_boundary_history.py",
+    "exact32f_sha256": "ba229d1dec554841af7d732cffa70b2087dde09f49fb4391e7cb289f8f57435e",
+    "proposal_sha256": "1944ccb445fd6e63e4facaa1f5fb5957006f0b113997298971fd15eac5debf18"
+  },
+  {
+    "path": "scripts/web_reader_approved_acceptance.py",
+    "exact32f_sha256": "f7dea47b7fd4019c1750f8402341a196c0deee73bc56a70bc1541e7e64039c2d",
+    "proposal_sha256": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9"
+  }
+]

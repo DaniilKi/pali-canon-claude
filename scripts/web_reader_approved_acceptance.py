@@ -11,7 +11,7 @@ import subprocess
 from pathlib import Path
 from web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records
 
-from web_reader_six_boundary_history import (assert_six_current_canonical_data, historical_c1_data_bytes, six_runtime_records, assert_preserved_c1_catalogue)
+from web_reader_six_boundary_history import (_assert_six_current_canonical_data as assert_six_current_canonical_data, _historical_c1_data_bytes as historical_c1_data_bytes, six_runtime_records, assert_preserved_c1_catalogue, _c1_operation_scope, _reject_c1_scope)
 from web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA, read_331_334, APPROVAL343_SHA, IDS343_NEW
 
 CURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'
@@ -696,21 +696,23 @@ def approved343_runtime(root):
     return files
 
 
-def historical_c1_approved_catalogue(root):
+def _historical_c1_approved_catalogue_body(root):
     return approved343_catalogue(root)
 
 
 def historical_c1_approved_runtime(root):
+    _reject_c1_scope(root)
     return approved343_runtime(root)
 
 
-def approved_six_catalogue(root):
+def _approved_six_catalogue_body(root):
     assert_six_current_canonical_data(root)
     previous = approved343_catalogue(root)
     assert_preserved_c1_catalogue(root, previous)
     return previous
 
 def approved_six_runtime(root):
+    _reject_c1_scope(root)
     return six_runtime_records(root, approved343_runtime(root))
 
 def approved_catalogue(root):
@@ -718,3 +720,13 @@ def approved_catalogue(root):
 
 def approved_runtime(root):
     return approved_six_runtime(root)
+
+
+def historical_c1_approved_catalogue(root):
+    with _c1_operation_scope(root) as scoped:
+        return _historical_c1_approved_catalogue_body(scoped)
+
+
+def approved_six_catalogue(root):
+    with _c1_operation_scope(root) as scoped:
+        return _approved_six_catalogue_body(scoped)

@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: finite six-poem data, all89 source crosswalk and atomic migration gates
+ok 1 - finite six-poem data, all89 source crosswalk and atomic migration gates
+  ---
+  duration_ms: 21954.667071
+  type: 'test'
+  ...
+# Subtest: pinned original XML six-poem repair, global/raw/PTS/rights and bounded CLI refusals
+ok 2 - pinned original XML six-poem repair, global/raw/PTS/rights and bounded CLI refusals
+  ---
+  duration_ms: 38754.059667
+  type: 'test'
+  ...
+# Subtest: both embedded bridges recheck repaired pins before same-object cached output can retain Pali
+ok 3 - both embedded bridges recheck repaired pins before same-object cached output can retain Pali
+  ---
+  duration_ms: 1872.307681
+  type: 'test'
+  ...
+# Subtest: native word-study display refuses stale cached locator metadata even when ref text and authentic commit match
+ok 4 - native word-study display refuses stale cached locator metadata even when ref text and authentic commit match
+  ---
+  duration_ms: 1710.981789
+  type: 'test'
+  ...
+# Subtest: six newly repaired owners registry rejects missing/bad current metadata and old expected pins; unrelated IDs remain outside
+ok 5 - six newly repaired owners registry rejects missing/bad current metadata and old expected pins; unrelated IDs remain outside
+  ---
+  duration_ms: 5.15528
+  type: 'test'
+  ...
+# Subtest: registered native whole reads stay fresh while every explicit zero/later position requires its exact current pin
+ok 6 - registered native whole reads stay fresh while every explicit zero/later position requires its exact current pin
+  ---
+  duration_ms: 1886.375276
+  type: 'test'
+  ...
+# Subtest: bare slash/colon and external positional URL tails cannot silently become fresh whole reads
+ok 7 - bare slash/colon and external positional URL tails cannot silently become fresh whole reads
+  ---
+  duration_ms: 63.360464
+  type: 'test'
+  ...
+# Subtest: word study segment/paragraph/word-offset gates precede replacement text and return current text-source provenance
+ok 8 - word study segment/paragraph/word-offset gates precede replacement text and return current text-source provenance
+  ---
+  duration_ms: 1481.314511
+  type: 'test'
+  ...
+# Subtest: widget exact/context/continuation roundtrip preserves current pins; stale/missing zero positions refuse
+ok 9 - widget exact/context/continuation roundtrip preserves current pins; stale/missing zero positions refuse
+  ---
+  duration_ms: 17.963675
+  type: 'test'
+  ...
+# Subtest: actual canonical search commands carry the six exact pins and cached source/command corruption refuses
+ok 10 - actual canonical search commands carry the six exact pins and cached source/command corruption refuses
+  ---
+  duration_ms: 3926.179025
+  type: 'test'
+  ...
+# Subtest: actual Pali quotation source commands reject stale newly repaired owner pins before UI verdict display
+ok 11 - actual Pali quotation source commands reject stale newly repaired owner pins before UI verdict display
+  ---
+  duration_ms: 1981.583999
+  type: 'test'
+  ...
+# Subtest: both embedded host render paths reject stale/missing newly repaired owner payloads before Pali/English display
+ok 12 - both embedded host render paths reject stale/missing newly repaired owner payloads before Pali/English display
+  ---
+  duration_ms: 25.697824
+  type: 'test'
+  ...
+# Subtest: wire recovery admits only newly repaired whole-unit routes and untouched raw-book/unaffected positions keep provenance
+ok 13 - wire recovery admits only newly repaired whole-unit routes and untouched raw-book/unaffected positions keep provenance
+  ---
+  duration_ms: 39.781543
+  type: 'test'
+  ...
+# Subtest: all eighty-nine historical source positions refuse without rebasing, including stable and vanished references
+ok 14 - all eighty-nine historical source positions refuse without rebasing, including stable and vanished references
+  ---
+  duration_ms: 38.443624
+  type: 'test'
+  ...
+# Subtest: bulk citation exports disclose effective locator namespaces without changing edition provenance or exporting words
+ok 15 - bulk citation exports disclose effective locator namespaces without changing edition provenance or exporting words
+  ---
+  duration_ms: 1157.814521
+  type: 'test'
+  ...
+# Subtest: all89 freshly owned segments match original-source text notes pages and coordinates
+ok 16 - all89 freshly owned segments match original-source text notes pages and coordinates
+  ---
+  duration_ms: 27.85146
+  type: 'test'
+  ...
+# Subtest: actual six-boundary CI has the exact mandatory23 zero-skip source and consumer cases
+ok 17 - actual six-boundary CI has the exact mandatory23 zero-skip source and consumer cases
+  ---
+  duration_ms: 5.611098
+  type: 'test'
+  ...
+# Subtest: six-boundary gate cannot lose a suite source fixture count bound shell or artifact
+ok 18 - six-boundary gate cannot lose a suite source fixture count bound shell or artifact
+  ---
+  duration_ms: 40.14106
+  type: 'test'
+  ...
+# Subtest: six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback
+ok 19 - six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback
+  ---
+  duration_ms: 20141.164229
+  type: 'test'
+  ...
+# Subtest: every physical future source restores whole C1 with strict string Buffer and fileURL identity
+ok 20 - every physical future source restores whole C1 with strict string Buffer and fileURL identity
+  ---
+  duration_ms: 244.337441
+  type: 'test'
+  ...
+# Subtest: unknown source mutations remain unknown and proof bytes never allow fallback
+ok 21 - unknown source mutations remain unknown and proof bytes never allow fallback
+  ---
+  duration_ms: 113.80128
+  type: 'test'
+  ...
+# Subtest: all nested source frames retain literal D4 URL behavior and original old hashes
+ok 22 - all nested source frames retain literal D4 URL behavior and original old hashes
+  ---
+  duration_ms: 715.771334
+  type: 'test'
+  ...
+# Subtest: runtime data and unlisted URLs are never source-projected
+ok 23 - runtime data and unlisted URLs are never source-projected
+  ---
+  duration_ms: 2992.248119
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 60825.921509

@@ -1,0 +1,57 @@
+{
+  "schema": "same-suite-before-after-operation-scope-profile-v1",
+  "base_head": "32f29a5fb45f2cfa33368f42592b9c4d9570cbd9",
+  "after_state": "root-applied independently reviewed dirty v2 helpers; not a new committedSHA",
+  "same_original_seven_case_suite_sha256": "f8fb368777231010d2c69a8f7edbc9aea20e8d4caf35ff9f34f2191e425fd815",
+  "reviewed_patch_sha256": "7960c57413ae2f5e5596bc60826221ff5709dea49040631c33a9a7efd9a18baf",
+  "before": {
+    "seven_tests_passed": true,
+    "unittest_seconds": 107.006,
+    "profile_total_seconds": 107.07109526999992,
+    "profile_calls": 55204408,
+    "actual27_scans": 1940,
+    "actual27_scan_cumulative_seconds": 80.368287752,
+    "estimated_actual27_bytes_hashed": 79834296060,
+    "proof_records_calls": 1955
+  },
+  "after": {
+    "seven_tests_passed": true,
+    "unittest_seconds": 35.373,
+    "profile_total_seconds": 35.46546445200001,
+    "profile_calls": 42184762,
+    "actual27_capture_calls": 40,
+    "actual27_capture_cumulative_seconds": 3.463486016,
+    "estimated_actual27_bytes_hashed": 1646067960,
+    "proof_records_calls": 2302,
+    "proof_records_cumulative_seconds": 7.864034810000001,
+    "private_scope_proof_rechecks": 2247,
+    "private_scope_recheck_cumulative_seconds": 7.917044001000001,
+    "digest_cumulative_seconds": 1.9469840230000002
+  },
+  "data_files": 27,
+  "data_bytes_per_scan": 41151699,
+  "scan_reduction_percent": 97.9381443298969,
+  "profile_time_reduction_percent": 66.87671461418493,
+  "proofs_still_fresh": "_scope_records invokes physical proof_records before every private scope access; count and callers retained inPROFILE_FUNCTIONS. No global/mtimecache introduced.",
+  "source_hash_inventory_after": {
+    "scripts/web_reader_six_boundary_history.py": "10c9300cc03fd9299ba3e510c74af1e859d758eda08e1c878fd6364fc4fba330",
+    "scripts/web_reader_four_boundary_history.py": "1944ccb445fd6e63e4facaa1f5fb5957006f0b113997298971fd15eac5debf18",
+    "scripts/web_reader_approved_acceptance.py": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9",
+    "tests/approved_current333_authority_negatives.py": "f8fb368777231010d2c69a8f7edbc9aea20e8d4caf35ff9f34f2191e425fd815",
+    "tests/approved-current333-authority-negatives.test.mjs": "a038ccfad8b73ef758437f4f922671225660966c1fab711cab6f459ff9841237"
+  },
+  "source_files_identical_before_after_profile": true,
+  "original_profile_and_receipt_immutable": true,
+  "bounds_identical": {
+    "internal": 115,
+    "external": 120,
+    "deadline_hit": false
+  },
+  "further_tests_or_profiles_started": false,
+  "limitations": [
+    "cProfile overhead included in both measurements; not an unprofiled benchmark",
+    "No Windows runtime/device access; rootmustverifyexactWindowsCI",
+    "No claim held234timeout cause isolated or cured",
+    "Source-map regeneration+independentreview andexactCI remain rootgates"
+  ]
+}

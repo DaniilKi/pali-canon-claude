@@ -1,0 +1,72 @@
+{
+  "schema": "independent-private-operation-snapshot-static-review-v1",
+  "status": "GO_EXACT_PATCH_AND_CONTROLS_FOR_BOUNDED_EXECUTION",
+  "reviewer": "/root/candidate317_entry",
+  "base_candidate": "32f29a5fb45f2cfa33368f42592b9c4d9570cbd9",
+  "patch_sha256": "7960c57413ae2f5e5596bc60826221ff5709dea49040631c33a9a7efd9a18baf",
+  "inventory_sha256": "fc9eae037514af01a6c8522107e6a2bf889815da4c69744507279ddb4f5a439f",
+  "files": [
+    {
+      "path": "scripts/web_reader_six_boundary_history.py",
+      "exact32f_sha256": "de6857453c0ab3fe06cc741caf2694f0eaaab7cdd9345ace02fbf7dec8b8601c",
+      "proposal_sha256": "10c9300cc03fd9299ba3e510c74af1e859d758eda08e1c878fd6364fc4fba330"
+    },
+    {
+      "path": "scripts/web_reader_four_boundary_history.py",
+      "exact32f_sha256": "ba229d1dec554841af7d732cffa70b2087dde09f49fb4391e7cb289f8f57435e",
+      "proposal_sha256": "1944ccb445fd6e63e4facaa1f5fb5957006f0b113997298971fd15eac5debf18"
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "exact32f_sha256": "f7dea47b7fd4019c1750f8402341a196c0deee73bc56a70bc1541e7e64039c2d",
+      "proposal_sha256": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9"
+    }
+  ],
+  "original_AST_proofs_independently_replayed": 45,
+  "runtime_functions_preserved_after_single_reject_guard": 2,
+  "reviewed_semantics": [
+    "Every ordinary public actual-data gate freshly reads guarded mandatory proofs and all27 actual files; capture stores only verified bytes and the existing full logical-canon assertion remains.",
+    "Public entry points refuse active or expired carried scopes. Only private named old-chain aliases consume scoped historical inputs.",
+    "Private lexical pathlike scope carries immutable bytes/frozen maps,checks owning thread/root regularity,never resolves away root symlinks,and closes in finally on return or exception.",
+    "Scoped historical reads reread sealed physical proofs each access; exact4C1fixtures are verified before scope creation. Other data retains guarded physical reads and equality with checked snapshot.",
+    "Original oldfour function bodies remain literally AST-identical; two catalogue bodies retained under exact declaration rename. Runtime chain gets only explicit scope rejection, no needless27 scan.",
+    "Only one approved catalogue operation reuses its captured immutable bytes. Subsequent public calls and modified same-size/mtime data cannot reuse previous success.",
+    "Exact final lifecycle amendment deletes redundant generator locals before yield; it changes no assertion or output.",
+    "No runtime,data,source-rights,source-boundary,application,oldhash,timeout,skip or runnerconcurrency change in this three-file proposal."
+  ],
+  "controls": {
+    "python_sha256": "ae4265fd6bfd60c3c1c0d734b0b38e580c8d32a193ab438d7d4ef39ad7f5ea48",
+    "node_sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
+    "new_python_cases": 7,
+    "child_timeout_seconds": 60,
+    "parent_timeout_seconds": 65,
+    "existing_seven_and_mandatory23_untouched": true,
+    "prior_HOLD": "Original temporary fixture lacked a genuine old-catalogue positive; corrected fixture now provisions full old/new authority closure and asserts genuine343 positive before mutations and after restore.",
+    "meaningful_static_controls": [
+      "exact4fixture typed bytes and expiredscope refusal",
+      "all tested public active/closed scope rejection and reentry",
+      "exception close with captured escaped handle",
+      "same-size/mtime representative data changes after prior success",
+      "all6 mandatory proofs tampered/missing inside active scope",
+      "each4 original fixture tampered/missing",
+      "coherent within-operation snapshot with next public call fresh refusal",
+      "one-capture counter for actual full approved catalogue,not a walltime assertion"
+    ]
+  },
+  "remaining_required_evidence": [
+    "Root must execute proposed controls and existing33/333negative7/339negative7/held234 under unchanged child limits.",
+    "Preserve original32f Windows failures; passing Linux profile does not by itself establish Windows root cause or acceptance.",
+    "Regenerate/review finite source inverse map and prove unchanged39package/app before component reuse.",
+    "Exact new-SHA Windows20/22 plus normal requiredCI must pass before dev promotion."
+  ],
+  "not_approved": [
+    "timeout increase",
+    "runtime or rights change",
+    "source activation",
+    "test skip",
+    "ambient/rootpath/mtime cache",
+    "runnerconcurrency change without evidence",
+    "dev/main/deploy/release"
+  ],
+  "execution_scope": "Stdlib hash/AST/source inspection and read-onlyGit objects only. No application/test import or execution,build,network,Git mutation or project edit."
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "independent-final-six-boundary-source-path-plan-v3-review-v1",
+  "status": "GO_FINAL_PATH_SCOPE_FOR_ROOT_GENERATOR_ONLY",
+  "source_path_plan": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/SOURCE_PATH_PLAN_V3.json",
+    "sha256": "26676cf5e137d92005cee4070eb80c49734d4d9dd8656ab791afa0c23c2e441d",
+    "base_commit": "c1b2433481399b2125f6645a75bf4105cb212440",
+    "existing_count": 36,
+    "new_count": 17,
+    "exact_existing_paths": [
+      ".github/workflows/check.yml",
+      "scripts/canon/build_canon.py",
+      "scripts/web_reader_approved_acceptance.py",
+      "scripts/web_reader_four_boundary_history.py",
+      "src/analyse.mjs",
+      "src/chatgpt-widget.mjs",
+      "src/locator-policy.mjs",
+      "src/server.mjs",
+      "tests/apadana-disclosures.test.mjs",
+      "tests/apadana-fourth-client.test.mjs",
+      "tests/apadana-fourth.test.mjs",
+      "tests/apadana-next.test.mjs",
+      "tests/apadana-thera.test.mjs",
+      "tests/apadana-third.test.mjs",
+      "tests/apadana_four_boundary_acceptance.py",
+      "tests/approved_acceptance.py",
+      "tests/current339-source-inverses.test.mjs",
+      "tests/current343-bindings.test.mjs",
+      "tests/four-history-data.test.mjs",
+      "tests/held234-client.test.mjs",
+      "tests/helpers/canon-before-four.mjs",
+      "tests/helpers/four-history-data.mjs",
+      "tests/helpers/intake343-ci-baseline.mjs",
+      "tests/helpers/intake343-source-input.mjs",
+      "tests/helpers/thera-remaining-client.mjs",
+      "tests/intake343-source-input.test.mjs",
+      "tests/thera-commentary-locators.test.mjs",
+      "tests/thera141-180-client.test.mjs",
+      "tests/thera181-220-client.test.mjs",
+      "tests/thera221-230-client.test.mjs",
+      "tests/thera241-250-client.test.mjs",
+      "tests/thera312-319-client.test.mjs",
+      "tests/thera321-329-client.test.mjs",
+      "tests/thera331-334-source.test.mjs",
+      "tests/widget-hosted-selections.test.mjs",
+      "web/reader.js"
+    ],
+    "exact_new_paths": [
+      "scripts/canon/apadana_thera340_spans.py",
+      "scripts/canon/repair_apadana_thera340_spans.py",
+      "scripts/web_reader_six_boundary_history.py",
+      "tests/apadana-six-boundary-migration.test.mjs",
+      "tests/apadana-six-cached-consumers.test.mjs",
+      "tests/apadana-six-locator-consumers.test.mjs",
+      "tests/apadana_six_boundary_acceptance.py",
+      "tests/helpers/canon-before-six.mjs",
+      "tests/helpers/six-boundary-source-input.mjs",
+      "tests/helpers/six-history-data.mjs",
+      "tests/helpers/six-regular-file.mjs",
+      "tests/six-boundary-ci.test.mjs",
+      "tests/six-boundary-history.test.mjs",
+      "tests/six-boundary-source-input.test.mjs",
+      "tests/six-operation-scope.test.mjs",
+      "tests/six_boundary_history_acceptance.py",
+      "tests/six_operation_scope_controls.py"
+    ]
+  },
+  "original_authority": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/c1-source-originals/ORIGINAL_MANIFEST.json",
+    "sha256": "b7e5999f51bcab0e9232fcaabb909e67aa759767a036fe8a0b8a6c5e81f7cf18",
+    "original_source_files": 704,
+    "all704_original_bytes_and_hashes_previously_reverified_in_this_lane": true
+  },
+  "actual_source_scope": {
+    "current_changed_original_files_exactly36_and_equal_ordered_plan": true,
+    "other668_original_source_files_unchanged": true,
+    "same36_existing_paths_as_approved_planV2": true,
+    "only_new_paths_since_planV2": [
+      "tests/six-operation-scope.test.mjs",
+      "tests/six_operation_scope_controls.py"
+    ],
+    "all17_new_paths_absent_from_C1_and_regular_current_files": true,
+    "runtime_corpus_generated_data_docs_not_projected": true,
+    "source_universe_scope": "Exact source-input original manifest plus new plan paths; workflowYAML only, not unrelated issue-template metadata."
+  },
+  "operation_scope_patch": {
+    "patch_sha256": "7960c57413ae2f5e5596bc60826221ff5709dea49040631c33a9a7efd9a18baf",
+    "peer_semantic_GO": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/independent-critique/OPERATION_SCOPE_STATIC_REVIEW.json",
+      "sha256": "0048077bd0722c7c334f6f9e0777e02421b85ff56a7dc1b959f92cd20348d1e8"
+    },
+    "current3files_exact_peer_reviewed_proposal_bytes": true,
+    "current3files_reverse_patch_restores_exact32f_inventory_hashes": true,
+    "original_function_AST_proofs_independently_replayed": 45,
+    "runtime_original_bodies_preserved_after_only_one_scope_reject_guard": 2,
+    "old_body_proof_sha256": "eaa85d961bf0ede462cdd80a65f040a4a6aef5efb85182746605ec29a00b56b8",
+    "files": [
+      {
+        "path": "scripts/web_reader_six_boundary_history.py",
+        "exact32f_sha256": "de6857453c0ab3fe06cc741caf2694f0eaaab7cdd9345ace02fbf7dec8b8601c",
+        "proposal_sha256": "10c9300cc03fd9299ba3e510c74af1e859d758eda08e1c878fd6364fc4fba330"
+      },
+      {
+        "path": "scripts/web_reader_four_boundary_history.py",
+        "exact32f_sha256": "ba229d1dec554841af7d732cffa70b2087dde09f49fb4391e7cb289f8f57435e",
+        "proposal_sha256": "1944ccb445fd6e63e4facaa1f5fb5957006f0b113997298971fd15eac5debf18"
+      },
+      {
+        "path": "scripts/web_reader_approved_acceptance.py",
+        "exact32f_sha256": "f7dea47b7fd4019c1750f8402341a196c0deee73bc56a70bc1541e7e64039c2d",
+        "proposal_sha256": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9"
+      }
+    ],
+    "controls": {
+      "tests/six-operation-scope.test.mjs": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
+      "tests/six_operation_scope_controls.py": "ae4265fd6bfd60c3c1c0d734b0b38e580c8d32a193ab438d7d4ef39ad7f5ea48",
+      "both_current_files_equal_exact_peer_reviewed_external_controls": true
+    }
+  },
+  "blocking_findings": [],
+  "not_map_approval": "Generator output still requires every-row original restoration and unchanged-row/new-path seal review. Old7440 inverse is not current-source authority after the two existing helper rows changed.",
+  "method": "Read-only source/JSON/hash inspection, unified-patch inverse in memory, PythonAST parse/comparison only. No application/code/test import or execution, build, Git, network or repository edits."
+}
