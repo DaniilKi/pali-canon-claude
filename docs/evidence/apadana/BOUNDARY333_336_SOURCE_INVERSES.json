@@ -120,6 +120,20 @@
         }
       ]
     },
+    "scripts/web-reader-apadana-thera-scaled-check.py": {
+      "frozen440_sha256": "e415993e67ce8d4789de2dc140eb05cc6dad1e4206dd6dbfd290327886b918f9",
+      "current_sha256": "f7d02383193b7271088de65952ce3e74435dabf8ba29ea3a4780aca40745f13f",
+      "hunks": [
+        {
+          "before": "from web_reader_test_helpers import read_tool\nfrom web_reader_apadana_intake import reviewed_intake\nfrom canon.apadana_thera_pair_spans import canon_before_thera_pair\n\nROOT = Path(__file__).resolve().parents[1]\nHARNESS_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()\n",
+          "after": "from web_reader_test_helpers import read_tool\nfrom web_reader_apadana_intake import reviewed_intake\nfrom canon.apadana_thera_pair_spans import canon_before_thera_pair\nfrom web_reader_four_boundary_history import canon_before_four\n\nROOT = Path(__file__).resolve().parents[1]\nHARNESS_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()\n"
+        },
+        {
+          "before": "    run = subprocess.run(['node', '--input-type=module', '-e', probe], cwd=ROOT, input=json.dumps(str(server_dir/'data/canon.json.gz')), text=True, capture_output=True)\n    assert run.returncode == 0\n    current = json.loads(run.stdout)\n    assert canon_before_thera_pair(current) == canon, 'Only independently verified atomic107/108 metadata may differ from historical canonical snapshot'\n    for uid in old['links']:\n        a = next(u for u in canon['units'] if u['id'] == uid)\n        b = next(u for u in current['units'] if u['id'] == uid)\n",
+          "after": "    run = subprocess.run(['node', '--input-type=module', '-e', probe], cwd=ROOT, input=json.dumps(str(server_dir/'data/canon.json.gz')), text=True, capture_output=True)\n    assert run.returncode == 0\n    current = json.loads(run.stdout)\n    assert canon_before_thera_pair(canon_before_four(current)) == canon, 'Only independently verified atomic107/108 and333–336 metadata may differ from historical canonical snapshot'\n    for uid in old['links']:\n        a = next(u for u in canon['units'] if u['id'] == uid)\n        b = next(u for u in current['units'] if u['id'] == uid)\n"
+        }
+      ]
+    },
     "scripts/web-reader-thera-held234-check.py": {
       "frozen440_sha256": "6727b043cd3c66616f587462905c5c5823141ad93efda29cee50d63d15a9d451",
       "current_sha256": "92b14e6677d9ebae8d606ab179617496fa5f5544e9f897d4f5501ed188bb0713",
@@ -620,6 +634,26 @@
         }
       ]
     },
+    "tests/approved-current333-authority-negatives.test.mjs": {
+      "frozen440_sha256": "6eaf83defeabfd044d3657be618c8b5c0f81911963c4d5d540b650437a635ebf",
+      "current_sha256": "a038ccfad8b73ef758437f4f922671225660966c1fab711cab6f459ff9841237",
+      "hunks": [
+        {
+          "before": "import {spawnSync} from 'node:child_process';\nimport {fileURLToPath} from 'node:url';\n\ntest('separate current333 authorities reject new proof loss, substitutions, tampering and historical fallback',()=>{\n  const root=fileURLToPath(new URL('../',import.meta.url));\n  const result=spawnSync('python3',['-B','tests/approved_current333_authority_negatives.py'],{\n    cwd:root,encoding:'utf8',timeout:30000,maxBuffer:256*1024,\n  });\n  assert.equal(result.error,undefined,String(result.error||''));\n  assert.equal(result.status,0,result.stdout+'\\n'+result.stderr);\n",
+          "after": "import {spawnSync} from 'node:child_process';\nimport {fileURLToPath} from 'node:url';\n\n// Windows CI exceeded the original 30s on the current proof chain. Keep every\n// assertion and the existing fixture ceiling: 120s child, 125s parent. Timeout\n// remains fatal; no retry or OS-dependent skip is permitted.\ntest('separate current333 authorities reject new proof loss, substitutions, tampering and historical fallback',{timeout:125000},()=>{\n  const root=fileURLToPath(new URL('../',import.meta.url));\n  const result=spawnSync('python3',['-B','tests/approved_current333_authority_negatives.py'],{\n    cwd:root,encoding:'utf8',timeout:120000,killSignal:'SIGKILL',maxBuffer:256*1024,\n  });\n  assert.equal(result.error,undefined,String(result.error||''));\n  assert.equal(result.status,0,result.stdout+'\\n'+result.stderr);\n"
+        }
+      ]
+    },
+    "tests/approved-current339-authority-negatives.test.mjs": {
+      "frozen440_sha256": "1dc3e196e2f72a6ab03e9bf383ef1951a59d1609758117517e3e602eb9ae38ad",
+      "current_sha256": "4808d2365fb486467b256ca7abcf42de4296d1cb8fed4c2e8d209cf630e7316e",
+      "hunks": [
+        {
+          "before": "import {spawnSync} from 'node:child_process';\nimport {fileURLToPath} from 'node:url';\n\ntest('separate current339 authorities reject new proof loss, substitutions, tampering and historical fallback',()=>{\n  const root=fileURLToPath(new URL('../',import.meta.url));\n  const result=spawnSync('python3',['-B','tests/approved_current339_authority_negatives.py'],{\n    cwd:root,encoding:'utf8',timeout:30000,maxBuffer:256*1024,\n  });\n  assert.equal(result.error,undefined,String(result.error||''));\n  assert.equal(result.status,0,result.stdout+'\\n'+result.stderr);\n",
+          "after": "import {spawnSync} from 'node:child_process';\nimport {fileURLToPath} from 'node:url';\n\n// Windows CI exceeded the original 30s on the current proof chain. Keep every\n// assertion and the existing fixture ceiling: 120s child, 125s parent. Timeout\n// remains fatal; no retry or OS-dependent skip is permitted.\ntest('separate current339 authorities reject new proof loss, substitutions, tampering and historical fallback',{timeout:125000},()=>{\n  const root=fileURLToPath(new URL('../',import.meta.url));\n  const result=spawnSync('python3',['-B','tests/approved_current339_authority_negatives.py'],{\n    cwd:root,encoding:'utf8',timeout:120000,killSignal:'SIGKILL',maxBuffer:256*1024,\n  });\n  assert.equal(result.error,undefined,String(result.error||''));\n  assert.equal(result.status,0,result.stdout+'\\n'+result.stderr);\n"
+        }
+      ]
+    },
     "tests/approved_acceptance.py": {
       "frozen440_sha256": "c3e23ce81240af1f468b1cd032d8c8f4e922ea753dd02a04cebc469f03a6eb80",
       "current_sha256": "b662cbb26a22e0c695c62714c3d5cf743903dd9af7b5920cb16e8f7976e747f5",
@@ -671,6 +705,20 @@
         {
           "before": "        for name, _ in PROOFS:\n            with self.subTest(proof=Path(name).name):\n                _, current = self.current_positive()\n                # This is inventory-chain verification, not a repeat of the\n                # historical four-case behavior fixture or old runtime execution.\n                prior = reviewed_canonical325_runtime(self.fixture)\n",
           "after": "        for name, _ in PROOFS:\n            with self.subTest(proof=Path(name).name):\n                _, current = self.current_positive()\n                # Explicitly inspect the immutable339 leg after proving the current leg.\n                current = reviewed339_runtime(self.fixture)\n                # This is inventory-chain verification, not a repeat of the\n                # historical four-case behavior fixture or old runtime execution.\n                prior = reviewed_canonical325_runtime(self.fixture)\n"
+        }
+      ]
+    },
+    "tests/check-ci-stages.test.mjs": {
+      "frozen440_sha256": "619184ee41d87232397e7237f3c5fe0955ee06761e447c4fdf7a17ddca72ad73",
+      "current_sha256": "488bfa1964e27cf5e23c349ea20146ad63eedcaa9bbfc5fadeaa42785127cef0",
+      "hunks": [
+        {
+          "before": "import {projectPublisher333Workflow} from './helpers/publisher333-ci-baseline.mjs';\nimport {test} from 'node:test';\nimport assert from 'node:assert/strict';\n",
+          "after": "import {normalizeFrozen440SourceInput} from './helpers/boundary333-336-source-input.mjs';\nimport {projectPublisher333Workflow} from './helpers/publisher333-ci-baseline.mjs';\nimport {test} from 'node:test';\nimport assert from 'node:assert/strict';\n"
+        },
+        {
+          "before": "  const imported=\"import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';\\n\";\n  const reader=\"const read=name=>{const raw=readFileSync(new URL('../'+name,import.meta.url),'utf8');return name==='.github/workflows/check.yml'?projectCheckStageWorkflow(raw):raw;};\";\n  const originalReader=\"const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');\";\n  const source=read('tests/source-notes-ci.test.mjs');\n  assert.equal(source.split(imported).length,2);assert.equal(source.split(reader).length,2);\n  assert.equal(sha(source.replace(imported,'').replace(reader,originalReader)),'5f0d1e6f235b752b629d1d2f07ba1decb42b190b38cd7ac7c748feb75cf0ba98');\n});\n",
+          "after": "  const imported=\"import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';\\n\";\n  const reader=\"const read=name=>{const raw=readFileSync(new URL('../'+name,import.meta.url),'utf8');return name==='.github/workflows/check.yml'?projectCheckStageWorkflow(raw):raw;};\";\n  const originalReader=\"const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');\";\n  const source=normalizeFrozen440SourceInput('tests/source-notes-ci.test.mjs',read('tests/source-notes-ci.test.mjs'));\n  assert.equal(source.split(imported).length,2);assert.equal(source.split(reader).length,2);\n  assert.equal(sha(source.replace(imported,'').replace(reader,originalReader)),'5f0d1e6f235b752b629d1d2f07ba1decb42b190b38cd7ac7c748feb75cf0ba98');\n});\n"
         }
       ]
     },

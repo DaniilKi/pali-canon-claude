@@ -282,7 +282,7 @@ class FourBoundaryData(Fixture):
         self.assertEqual(digest(untouched), pin)
 
     def test_08_build_hook_is_unique_and_before_numbering_and_pts_annotation(self):
-        tree = ast.parse((ROOT / 'scripts/canon/build_canon.py').read_text())
+        tree = ast.parse((ROOT / 'scripts/canon/build_canon.py').read_text(encoding='utf-8'))
         imports = [n for n in tree.body if isinstance(n, ast.ImportFrom) and n.module == 'apadana_thera333_spans']
         self.assertEqual(len(imports), 1)
         self.assertEqual([a.name for a in imports[0].names], ['apadana_thera333_spans'])

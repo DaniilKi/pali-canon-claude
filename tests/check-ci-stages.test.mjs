@@ -1,3 +1,4 @@
+import {normalizeFrozen440SourceInput} from './helpers/boundary333-336-source-input.mjs';
 import {projectPublisher333Workflow} from './helpers/publisher333-ci-baseline.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
@@ -93,7 +94,7 @@ test('every previous source-note CI assertion is retained byte for byte',()=>{
   const imported="import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';\n";
   const reader="const read=name=>{const raw=readFileSync(new URL('../'+name,import.meta.url),'utf8');return name==='.github/workflows/check.yml'?projectCheckStageWorkflow(raw):raw;};";
   const originalReader="const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');";
-  const source=read('tests/source-notes-ci.test.mjs');
+  const source=normalizeFrozen440SourceInput('tests/source-notes-ci.test.mjs',read('tests/source-notes-ci.test.mjs'));
   assert.equal(source.split(imported).length,2);assert.equal(source.split(reader).length,2);
   assert.equal(sha(source.replace(imported,'').replace(reader,originalReader)),'5f0d1e6f235b752b629d1d2f07ba1decb42b190b38cd7ac7c748feb75cf0ba98');
 });

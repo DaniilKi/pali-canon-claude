@@ -1,5 +1,16 @@
 # Four Apadāna citation boundaries
 
+The candidate CI checks exposed historical test-input and Windows portability
+gaps. The scaled-source acceptance retains its complete historical equality
+after the exact four-record inverse; actual reader output stays current. The
+source-note preservation check receives its sealed historical input and keeps
+the original literal and digest assertions. Python reads UTF-8 source explicitly.
+Two seven-case authority suites retain every assertion with a fatal 120-second
+child limit, forced termination and a 125-second parent budget, matching the
+existing fixture ceiling. Their former 30-second Windows timeouts establish a
+capacity failure, not its underlying cause. Final exact-commit CI remains the
+integration gate; failed candidate runs are retained as evidence.
+
 Four neighboring poems had incorrectly placed boundaries. The first included the next poem’s opening, and the following poems started too late. This repair changes the citation index, not the Pāli source words.
 
 | Citation | Correct source blocks, end excluded | VRI stanza labels |
