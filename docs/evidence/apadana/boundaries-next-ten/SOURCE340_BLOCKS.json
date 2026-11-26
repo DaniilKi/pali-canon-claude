@@ -1,0 +1,2523 @@
+{
+  "source_only": true,
+  "rows": [
+    {
+      "book": 36,
+      "block": 10350,
+      "tuple_sha256": "254759f168d024ebe32294c7d6772d7901a63561e5635d457df6faa2f8ed9dcd",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10351,
+      "tuple_sha256": "5d2c7d5d2a8c34b346b8878b32c1c67baa14255bf5fe0f3d85ad8f07feb641f7",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10352,
+      "tuple_sha256": "2b5a2683b6b3eae28df325880f125c698354bd541096d1735c9a3881e0ef955b",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10353,
+      "tuple_sha256": "a176071c7698d37213c46327ed1318cf0b7e6e8b1dec9ebb6e036e5a29039d3a",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10354,
+      "tuple_sha256": "57810156662530ce1dcbfbc454188e080e7a512f7685a9ac7eb279732890f60f",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10355,
+      "tuple_sha256": "dadb974e5db968e530d95d52750e738d7f5e2da015ae4e1e7dcd5bd42934db34",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10356,
+      "tuple_sha256": "9aff1983b3c4fd79f8e9852be9e0fe2311fdb7c63eb0ab00c85d4baa98bbc2ef",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10357,
+      "tuple_sha256": "6c939c9ca6ceaeee80e7eb93582bfdd2aa1c90d92e7b334ee773346fba1100cb",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10358,
+      "tuple_sha256": "1d6fec5d2aab82ec7ac4459fb499d5cf32cd23fc81b5d29f0c01de03b4a07b48",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10359,
+      "tuple_sha256": "f9557d4a5659aa14af6c201f3782de33958667969905f62538a6b7436288afba",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10360,
+      "tuple_sha256": "335531e47128260fbe0b0639d457c84ff33bc9140e5bf2b377346d1f6541ad68",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10361,
+      "tuple_sha256": "9f4e60a8ec6952a49814477fc19d8238990f661cb4f81507d53210da71e6ba8a",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10362,
+      "tuple_sha256": "acb1b58a11dacdd97195756c7726e0ba253e78d890c9d20fe74fd77a560cf21b",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10363,
+      "tuple_sha256": "7eb7b7f03f899b471551b0f427aa9b033725dd80b2722d17d4f953f977cbe179",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10364,
+      "tuple_sha256": "bbc538b9d71c4c65cc9bdb8b9f48bf62df70ed2c3a8f13159400ae12e1442904",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10365,
+      "tuple_sha256": "c58935e78f288d8da2f71a7f4970ae780e338bc9ef91ede0ac96bab0a4397275",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10366,
+      "tuple_sha256": "5d1c905809b39dd6ea9072678eaa6d23b2e0ed0e5bca431c7697da31e999665b",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10367,
+      "tuple_sha256": "bd75756dc7844b54a57d12384bff4304c75ce072b0ea1a9a2dbaccc179cdeafb",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10368,
+      "tuple_sha256": "00536571438eeb943f4ac4857eeebf65d1f703af0c51192ffd35221481ff6edf",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10369,
+      "tuple_sha256": "35eb81dda8043ebc2147b2bbcc1f3fc6626492cb2e7e830f1e8f0e8267614720",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10370,
+      "tuple_sha256": "b2f4ab6a6f2a9c050dd3a15b4f3c56b4257e7aabaab43769061626d9177059c6",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10371,
+      "tuple_sha256": "11763ce065fa36f05e20d917094c1a0c085178b69deca70c2ca996e79a7a624c",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10372,
+      "tuple_sha256": "8937f81fe53069a36f5e648ae9a55a2d9f40c7196cc75a262d6f9be70a1b5c76",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10373,
+      "tuple_sha256": "c65ecf59294c191be8e9419f3326079bdecb249cc6f670ee94ccc3e428900a69",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10374,
+      "tuple_sha256": "fed0e17db35e3022ca47e684cfe85ab770fe75be31824b7d21a7bf235ba1ac26",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10375,
+      "tuple_sha256": "be6c5a215a2cbf04a9f7790c323e99c1ba5e0c09a49bb3ded9dad04130a0e340",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10376,
+      "tuple_sha256": "acb1b58a11dacdd97195756c7726e0ba253e78d890c9d20fe74fd77a560cf21b",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10377,
+      "tuple_sha256": "8216cbecf220319ec5e2fbea069f549f8c80a72273b186fc9fc3d90afbfa3077",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10378,
+      "tuple_sha256": "bbc538b9d71c4c65cc9bdb8b9f48bf62df70ed2c3a8f13159400ae12e1442904",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10379,
+      "tuple_sha256": "66f47332c4bfda8eb576a240b31705df9f83f0457c7ea9db10a059c113ae1142",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10380,
+      "tuple_sha256": "b3835cf6cbd44c95f0b217ee5de222bc15217b8a18596a7c432425a6648c6972",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10381,
+      "tuple_sha256": "ee69b5ca9e91987b02e435403f480f9e31aad290ff06d985298cc98b18b34e49",
+      "old_owner": "tha-ap349",
+      "new_owner": "tha-ap349"
+    },
+    {
+      "book": 36,
+      "block": 10763,
+      "tuple_sha256": "e1d6c101a153f1c71ed7bc298b43254a12282258ae0061dd7747b4781af93f61",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10764,
+      "tuple_sha256": "1e5302a3d66ceaf9db2f2e969cd3f97a8bef8d75b2ebb14c0bcd264f9a1289ea",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10765,
+      "tuple_sha256": "bc4bcaa647da3cb71c1485d1bac3873ddfa03001aeca10540c80d143d6e27dd8",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10766,
+      "tuple_sha256": "a1526c0de8ee21ecf8e8ee0443adb3546042b48b0eb663c527d73777728f3bb9",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10767,
+      "tuple_sha256": "6f5c947c072e5d75b93d015c9321fb1ab7ba697e76ef3444835a0f9a6802f327",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10768,
+      "tuple_sha256": "86975e87eacac5d6c9bee16769cb24e420e821938d6e66aeee2064394aa1aa38",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10769,
+      "tuple_sha256": "ac93473ff238718618ec50b48932ca4d8cc8bf595d85f9ae34f2093a24d53488",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10770,
+      "tuple_sha256": "c324a7336820a731397850cf77e0a6c7288352ff712e11709ff61400543fa3ed",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10771,
+      "tuple_sha256": "cb8d559ef692cca374b36d1c928287d3d74d37e8f92274fce24a3da7be8c6ecf",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10772,
+      "tuple_sha256": "ae07e174b39ee15baacfd46eee4aa5ffd65f5bc4202ca074a7989c987bbfda37",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10773,
+      "tuple_sha256": "51c131a8873e84f5163efcc92e1c15ae974dba641309407e5de8368b6c1707e2",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10774,
+      "tuple_sha256": "35ab8c54ae82a695dbe73a3fffd093157b8b1ba512400ff8ece49fb0fb463cc9",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10775,
+      "tuple_sha256": "510a2f922310cc46f49f1a6b93373c73afe78ced45869bbf26c1690ebb449060",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10776,
+      "tuple_sha256": "ad0c5609350d2274c87f2f7cfdd84e5f91d2a22e3e9a6f93eea138adce63638d",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10777,
+      "tuple_sha256": "b58678a7e0691efb6c490404cbd4bc54041f790e691b45bc44edc25280592359",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10778,
+      "tuple_sha256": "b64688fb94a994d0e9a16742d737e5a26c4013259714853289130b5196571e94",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10779,
+      "tuple_sha256": "7375e83315485f6c5a0b2e2b370c48a20c9bb4cad35ece4bfdccfbc8e2b47d8b",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10780,
+      "tuple_sha256": "ffaa898573b5549404804f024ce63caa8bbdc256b026bdc004f92d17e517d462",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10781,
+      "tuple_sha256": "acb1b58a11dacdd97195756c7726e0ba253e78d890c9d20fe74fd77a560cf21b",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10782,
+      "tuple_sha256": "8621f41c6bfab159868346e627fd806ab7f7d487867227f155bb0499c91f1d81",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10783,
+      "tuple_sha256": "bbc538b9d71c4c65cc9bdb8b9f48bf62df70ed2c3a8f13159400ae12e1442904",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10784,
+      "tuple_sha256": "857576b4574f944c715e75a67f68ff5bddbcb95fbaa5fd8ab4eed9b529298770",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10785,
+      "tuple_sha256": "6a241e6d08397c171a7301118d9d625b4ea5551d628d24793edffd5f1de51c8f",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 36,
+      "block": 10786,
+      "tuple_sha256": "6eaecd29166f0a340df37f26558b6b7d06623253fdaf0af877d86f011fa9fa5e",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10787,
+      "tuple_sha256": "5e852591222046ce9e484f9943ea4aecb454a8f686c99cb8e4abef5c35813595",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10788,
+      "tuple_sha256": "b9f43521a0cc0a5dea7340f8018e323a44fc395aa33f0842fca0cf14b6fe7b38",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10789,
+      "tuple_sha256": "d10371fe2560ae14416dc8fb3ffdec89601c5a50f3cfa3a668cf1f0dc86edd37",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10790,
+      "tuple_sha256": "ab2f91e14bd5eda179b30ac6f785838c9a82d97b976e7c25d705d6c4f8cfb61e",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10791,
+      "tuple_sha256": "ff81ce1b616da252e51bf3bd6c974750417c98a79c69ebcfc11c3ae1e40c3bac",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10792,
+      "tuple_sha256": "3e799117f35299a84bd949e2fd5531626128bb366365109e5d3e2010698a160a",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10793,
+      "tuple_sha256": "19fda9d0bcb8f677bc125e94d80571cdaa836704f93f122d0f348329e46cc898",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10794,
+      "tuple_sha256": "3a7d3b645a9bb414d7a3d63117e670290e8b608c40a6b8d2ea09e071803d0c99",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10795,
+      "tuple_sha256": "e3857e82fed88d87b36d0a55dd723009e2897f591b573a67f145f43deae5ca37",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10796,
+      "tuple_sha256": "6abdc2a402aa284291cc80e3b0ad6251b2dc68f4439cef5e521c7f17c15c54f1",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10797,
+      "tuple_sha256": "4b8479b9188d65d9d889a840146e6aff6032eff69495ff658888b77cd7940670",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10798,
+      "tuple_sha256": "ae3bbffe0a045646ba5fae0f087a2598a44cd24cb0b8726db7b593149e9973e9",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10799,
+      "tuple_sha256": "9c5555ab40238dcd97102504a25f1ea6bc6a6ac73d587b0fd4e3f000e78d754d",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10800,
+      "tuple_sha256": "c4dff9559ccb5c647c8e69180776c5e4dc2daa04ef84fd568c38b99c371400c1",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10801,
+      "tuple_sha256": "d332305fb223daebdac293d7f4b2795729f6a1cf2003ed611f69c2c9e7efb6e6",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10802,
+      "tuple_sha256": "e991538bf6f74572ce545bf475870c41b27cd450d1e7f789bd29dfca67697ff0",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10803,
+      "tuple_sha256": "69ef96dbeb676490ded98a69e4d82de7469b75d10bcdae19e7233cfe23089858",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10804,
+      "tuple_sha256": "5342144a8cdf5e44f673a3cc7e2f0a2d094d216a8aa5c793b1e60a442e50f7b1",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10805,
+      "tuple_sha256": "c7bd3f8312f3d58c6d215d8423244fa649ee2f0158db5c87a5025fb75f9ba8f7",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10806,
+      "tuple_sha256": "4e3b8081bc00722291d1412bbd0aab1dbb2e0d47eb98344ddb99b0728d6ca7f5",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10807,
+      "tuple_sha256": "fdd1b338a1369b95975c67f420d347cd97b2d2733d6f5abb105e5e7727c901f9",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10808,
+      "tuple_sha256": "06a427f6d8fa6832848609c63e134bf75b222388f21acb6c214679a24510b88b",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10809,
+      "tuple_sha256": "d9efb043231083c90873f77ffc58eddd900a3f9aaf3a244bcee6c31870017dcb",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10810,
+      "tuple_sha256": "acb1b58a11dacdd97195756c7726e0ba253e78d890c9d20fe74fd77a560cf21b",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10811,
+      "tuple_sha256": "fc01dc3ca7c5bddd67c00b312a3b3b57380697d282e7b6f929252d21c6f889cd",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10812,
+      "tuple_sha256": "500765cbad7f651ed7a0880df7f812aabeb3dfce80b084c0fc7b018df085a82a",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10813,
+      "tuple_sha256": "edba8615f2ecd94edfed553b78fb7319cf8b651ef5b22ded3e115df82f831385",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 36,
+      "block": 10814,
+      "tuple_sha256": "da757639280b6337fcaff224a2f1b0c33efd40d60bd36cc2f4495fa2a72ea876",
+      "old_owner": "tha-ap375",
+      "new_owner": "tha-ap375"
+    },
+    {
+      "book": 37,
+      "block": 1,
+      "tuple_sha256": "582464b19104f53bcdde7d9f72f980da1f8cda697051a184bc46571eeab30ca0",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 2,
+      "tuple_sha256": "3815da45ca72e5a757437731b4d8e535559aedd61193ed4078e4638cf1133bf3",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 3,
+      "tuple_sha256": "c135d03bc96215620cf20be1d5eee5fc47b80e1d24e97d6d7d1f5cebb21065a9",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 4,
+      "tuple_sha256": "7ea7dc5a8628b7260d55f6e0cce7fbb360cb6cc0700904a75d1a27b97ed7861b",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 5,
+      "tuple_sha256": "8692db7533609b362a68c843bfa19ec140dba38dd6215a313115beae798af75e",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 6,
+      "tuple_sha256": "88ef98516f93c829729fedb015c65aaf92af724fdf51acf7977fdfaf592cbade",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 7,
+      "tuple_sha256": "caeea3a279c29488892c69de571d85f9897b46891a49c3d906371297d23d3bf0",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 8,
+      "tuple_sha256": "d7be085f951582b2310fb5a6cff2e0e0433545e37a601f55b244f3e92cee296a",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 9,
+      "tuple_sha256": "93aa2824a350ba3e2ca4d713cb6ff1df778c687d3fafc4a83e494bbc0345bcf5",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 10,
+      "tuple_sha256": "7ea1cce0d796aeca1c42059bfc19dbadb403267b2744208bf7abeb8ddd08afde",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 11,
+      "tuple_sha256": "16a1fc70645770d8f5749eee1cf77f9584db73e4ad4c5e87f8f6aae8aa03b962",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 12,
+      "tuple_sha256": "51c4a49cf85b34b7c0372cb3712b057ab7a9be89119acf80d77c39c3a9852567",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 13,
+      "tuple_sha256": "004ba9d7855e181018d55b97080b49dcebc95c364817785f75f358341460455e",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 14,
+      "tuple_sha256": "315bd80301e82756125fc5ee7bcdf1da6016328b08fe5c0569917318979102a2",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 15,
+      "tuple_sha256": "2c1b50a5f2fa9f54f4eef16a725851e8badb94ac2ac989355325f98f48c468a8",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 16,
+      "tuple_sha256": "df1e88d4b5cfbaef2f302495a8050dbd359fb78bdce1167391b78a63e1453121",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 17,
+      "tuple_sha256": "36147c3855cbb614eb7702cc3470a19242e21f1246c909ceb86e6bb176ee581c",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 18,
+      "tuple_sha256": "845a179585638311e86ffcbf663998837aca9a7f4f460de87a86ef20d69a3677",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 19,
+      "tuple_sha256": "39e66dcfdf414e727c32e51e866838257572945752a908da38e71b5581a44e2a",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 20,
+      "tuple_sha256": "8456ca6d88dd182cf6cb77445895184df3455fe8412c37ca58e1375177a2857b",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 21,
+      "tuple_sha256": "1e5302a3d66ceaf9db2f2e969cd3f97a8bef8d75b2ebb14c0bcd264f9a1289ea",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 22,
+      "tuple_sha256": "bd0c535941b03dd2f61c94a8c302d9df7ac6aa3975e8f17d2a893f6bbe3656ac",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 23,
+      "tuple_sha256": "bca3d6cfbe231c8f566fc90059957a0897adda10044ddb1b27791bacf65d5f6b",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 24,
+      "tuple_sha256": "6f5c947c072e5d75b93d015c9321fb1ab7ba697e76ef3444835a0f9a6802f327",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 25,
+      "tuple_sha256": "a61dc7c0db9d18c9301f3f54a0e38d3330c99682cb0467bddb586f85294582aa",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 26,
+      "tuple_sha256": "1c04fb7892557af381296af9e3ecd47e383a3b33129fdf26871a0063e2fd886e",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 27,
+      "tuple_sha256": "c324a7336820a731397850cf77e0a6c7288352ff712e11709ff61400543fa3ed",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 28,
+      "tuple_sha256": "3bc2c77a4313c11b726a04f2260d70ab2d371e6af5d98f9dd3e73fcc350f8f0d",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 29,
+      "tuple_sha256": "8cecab96ef39adb73d35a4001e0ff6213f8ad4caa0849d26ecd97a89657d25c3",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 30,
+      "tuple_sha256": "51c131a8873e84f5163efcc92e1c15ae974dba641309407e5de8368b6c1707e2",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 31,
+      "tuple_sha256": "8e4b3b442b904bc36a1c01ba73b86a220b32a69811cf54dae204e74f7a885743",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 32,
+      "tuple_sha256": "b5e7ae796ffe9f9d1d3a00ca995ecf05b9bf18b6470c0008621a059f0857f8d0",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 33,
+      "tuple_sha256": "ad0c5609350d2274c87f2f7cfdd84e5f91d2a22e3e9a6f93eea138adce63638d",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 34,
+      "tuple_sha256": "c5401b6a27bc07995dad6859093fe5a4c910433599c1cb4be5f40aacf85cc24e",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 35,
+      "tuple_sha256": "1ffbb0b5e0e63ff5873f4507bdc2de7b2ec6a89a67cfcd388f2adebb08243e99",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 36,
+      "tuple_sha256": "7375e83315485f6c5a0b2e2b370c48a20c9bb4cad35ece4bfdccfbc8e2b47d8b",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 37,
+      "tuple_sha256": "b827df989f05fc742c6a7d92725dc20ad104554907ef69eef356593e4c4011a2",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 38,
+      "tuple_sha256": "2d17b8c12df007cb187955414508a81b5743e17b70e8d4b99224eacdcb842572",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 39,
+      "tuple_sha256": "8621f41c6bfab159868346e627fd806ab7f7d487867227f155bb0499c91f1d81",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 40,
+      "tuple_sha256": "534273f5eb39af540765b77cf81f462343a320ce478c2b475ae005c6e505abc8",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 41,
+      "tuple_sha256": "5202c02101f3b312299e4c623b3fa212f29b74fed35e070baacf1ff44413cb9d",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 42,
+      "tuple_sha256": "5e852591222046ce9e484f9943ea4aecb454a8f686c99cb8e4abef5c35813595",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 43,
+      "tuple_sha256": "bd600d1bbbfa0e0d65fa837ab0186fb253f1023d70d731dd5c2ba2c817489bcb",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 44,
+      "tuple_sha256": "3cf5d8c6fdd155a98b84b44008d0ee8fd39312dc8c08cd9fd5784855e5940212",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 45,
+      "tuple_sha256": "ab2f91e14bd5eda179b30ac6f785838c9a82d97b976e7c25d705d6c4f8cfb61e",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 46,
+      "tuple_sha256": "c94aff9fe7d873078e8feb3dd5f75bd4eced2fe40269e76a4c7558cc46498c97",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 47,
+      "tuple_sha256": "35ad008a4ae70a51577c854094ee5f78890229a9839448b499c46ad5995ff599",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 48,
+      "tuple_sha256": "4b127d8f07c952bdb5808e38abc9da899f391386bfb67fe9873b8c6a6d8cc103",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 49,
+      "tuple_sha256": "bf8b70d9882702600f9df9415cf3294fd336f599fad9d6e87860e29864df9af9",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 50,
+      "tuple_sha256": "04a8880fdd162923d5fcf1baf918c01a5ad049162c5b3e33ddfa87735fa7a783",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 51,
+      "tuple_sha256": "00c6a246a05baa1f20a2f9f92266d2619071a6244866c61ff8ceed4fa5d9a37a",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 52,
+      "tuple_sha256": "19fda9d0bcb8f677bc125e94d80571cdaa836704f93f122d0f348329e46cc898",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 53,
+      "tuple_sha256": "a7b9493373db1f89ce763978611f14afa1252390af7d976f03a2795f84e3465d",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 54,
+      "tuple_sha256": "05e9cc49cb407f6093bd477d2c47014323b4509d340febed4144eae202339a36",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 55,
+      "tuple_sha256": "6abdc2a402aa284291cc80e3b0ad6251b2dc68f4439cef5e521c7f17c15c54f1",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 56,
+      "tuple_sha256": "3fa4296ee71cb59f4f34cd53880899046a920ae2e786ec1f0604a24d085bb98e",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 57,
+      "tuple_sha256": "ba7a0153e16115b55a335a87048908eabb36fb37d6739a8c3860b4afa469bfd7",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 58,
+      "tuple_sha256": "9c5555ab40238dcd97102504a25f1ea6bc6a6ac73d587b0fd4e3f000e78d754d",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 59,
+      "tuple_sha256": "86f5c431c36369e19b2edfd6e24ea6cf69cc905623812f4313c18f6be163de3c",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 60,
+      "tuple_sha256": "720b18630b5a42a780f2bb0923dd5d599e479240091a38102925c52b01d6c45e",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 61,
+      "tuple_sha256": "e991538bf6f74572ce545bf475870c41b27cd450d1e7f789bd29dfca67697ff0",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 62,
+      "tuple_sha256": "d76a32d60fec0a373c43d878c0d049dec04c9bc245783fd57d85da159680cbc5",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 63,
+      "tuple_sha256": "0305e6f0d77de167d11f623d428c87481d37abdbdb0cb5ebf169cae70a5a536f",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 64,
+      "tuple_sha256": "c7bd3f8312f3d58c6d215d8423244fa649ee2f0158db5c87a5025fb75f9ba8f7",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 65,
+      "tuple_sha256": "9ec5ffd621bea4f223b3fa9b08920ec8b568dc9fa45091fbfeb2ee3875670aaa",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 66,
+      "tuple_sha256": "3e8e7e553a6a214aac1d5b52143df54174d22a38dfcb7a0bac16c72e64b3eb0b",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 67,
+      "tuple_sha256": "06a427f6d8fa6832848609c63e134bf75b222388f21acb6c214679a24510b88b",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 68,
+      "tuple_sha256": "6d4a77cd6c0ebeaa26ae8aeb9a2efc857a2535464b94905f7f6552889e9d5d2e",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 69,
+      "tuple_sha256": "e9816a8fb2f4f2254fee445f83bd49f59bc6847c879ab3c936da4ba0d47377a6",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 70,
+      "tuple_sha256": "fc01dc3ca7c5bddd67c00b312a3b3b57380697d282e7b6f929252d21c6f889cd",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 71,
+      "tuple_sha256": "477c1a201b78d22c007cfbcdd43c9230fcf4726390f996b7e95bcdcca5db4c96",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 72,
+      "tuple_sha256": "f7dcee5b124a1b6a3d4a853f76e6b9b23dfd42cb90b7ef96b4e7739bf08b3867",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 73,
+      "tuple_sha256": "ac27b648e2689eb67cd2efb25a4891c3ffbbc5dd9639b3afe307e4dafbaaf5b9",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 74,
+      "tuple_sha256": "19e3328c7d615abc3ba2233500d8e54e75a0f3504f66046ee72b5012a1b304e7",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 75,
+      "tuple_sha256": "cd043a005f66dc53ab0b94178d72230f9a5912e9d50ca0caff9d7e1b7aaa6378",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 76,
+      "tuple_sha256": "149c64364bc8894a946c411865ff6ccb7f22ecdb82f7f277a463b55dd31b5022",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 77,
+      "tuple_sha256": "8ea596f1ac0a20e053fbd2e574de746469eb374f266c7378142c8e0dca7b37b3",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 78,
+      "tuple_sha256": "0cf419476b67673be7e1fa0273cf52d71d912820123eb2f74a173a48b0edf7a1",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 79,
+      "tuple_sha256": "e3c173c2db996ae8e1f52a97991939221f4b016204a6456a40c226e2487fa388",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 80,
+      "tuple_sha256": "e835eaec74a4fe32b9d6fa306d2e122d54b4eba0edd2c1d4096642e4b71a484a",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 81,
+      "tuple_sha256": "8c94f752c5d435a827bf9ec367fa12226857d9296f33edca87ba603685d306b2",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 82,
+      "tuple_sha256": "90440b97833aea3650422f802c0779409752b6a69c68956f5461578e7422551d",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 83,
+      "tuple_sha256": "8adca5e5ad1fe7741ef351ffd22892268e17fd91b7aa206a54fc63a4a4ced5f2",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 84,
+      "tuple_sha256": "98315675a2961e87ca897c8bc55abd6c0e8165cf6ca71d44cc9131b0ea3c3e9a",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 85,
+      "tuple_sha256": "ba2d226eea06f27eaea628a0e1a85c0e67a58120647016314a6fe19b81254cff",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 86,
+      "tuple_sha256": "822a18af9a7b1bae311442a640a8811fe3c35c9d2429b7d44bfe692e9290b954",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 87,
+      "tuple_sha256": "955347d4457327176c656a66593728d21c106b073a15351a3c29e1e9ec03996b",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 88,
+      "tuple_sha256": "60c1174d0e6f2c6f41fd1af0ab3b12571d9ca639dc54f28cff347ae6a6026c48",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 89,
+      "tuple_sha256": "cb5a92cedddbcec4d9cd81fb787c20c7ef2fda8cbda709d0446c203051df5cab",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 90,
+      "tuple_sha256": "05a937930a565a6e54af71fabe8f46bb27429beac7b82917a6210fd330290de7",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 91,
+      "tuple_sha256": "1c860368f43976a8ae5ab991160b1c836564e2ace6a9814a4aef58a3fa303afe",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 92,
+      "tuple_sha256": "ed2240ea5cae29f22e6577feb11f82ce0729f3fad79691ad5ee8082ca76eddf3",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 93,
+      "tuple_sha256": "b30bcacc5f44d760afae7e627508f1ed89eafd798f8549faef3d100b6638eb18",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 94,
+      "tuple_sha256": "3a282c46fe71b310cc11dadb7a801a8c68fb806ad746e4989ff675a480f4dfbf",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 95,
+      "tuple_sha256": "f523103d6fab3ee8afab808a0d4e488f5fe0523b8788b710212fe53582cb54d5",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 96,
+      "tuple_sha256": "6b1c58efcafd27279661320ff0674acc4cdfa16f7f4c7569a405d2baf8ed4f89",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 97,
+      "tuple_sha256": "ec60eeec7da7a7138b4fde67153f994e1b4880f1a10081d9d1e48cefdd01be4d",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 98,
+      "tuple_sha256": "67a4db87f4a2575bfb8436dbae3f0bdc9325902bd8cfd5a265f731f116643300",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 99,
+      "tuple_sha256": "753482663d13bb1255e06a2aa6c9b2b59b90bc17ef51284c29dec8f0fa5317a7",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 100,
+      "tuple_sha256": "08bd4c787cb3f4687e23412006f3b0f3644d50c9d72423027a43b35d48b1b5a1",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 101,
+      "tuple_sha256": "dc3ef65d209b1992cc87d26156323516981218ae5a74940f064305f2230ca76c",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 102,
+      "tuple_sha256": "8c2e5b0b57cd176ffd308ad122b85f19cdc40a3c19ac9fcb8626566aaf64f36a",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 103,
+      "tuple_sha256": "483f63e75087ba3a8e98ff8ba437e7925763161181995ea6f12ed9209e13381f",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 104,
+      "tuple_sha256": "37b66d2750c27fe5c408a58f7aab0d8e833e7d24ee19e237a9296b74f1dd5b21",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 105,
+      "tuple_sha256": "fb8dedf17723cc492d56ae4ff53228efdd9b49e648c6f05b834d54b205174b80",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 106,
+      "tuple_sha256": "d56ca4cc239edb8d4a27d090a10c11041ebdd418d4937157d0f99fbc4384c87e",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 107,
+      "tuple_sha256": "f6c402f9ac438cfe6b344f6b122dfabdf351588a1b53f5af578145e488d358e5",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 108,
+      "tuple_sha256": "0091169617d2075d26e0f6e704ac296c75063fc5a298d862822f74428ec37c62",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 109,
+      "tuple_sha256": "59a7acfab760057dd461e3b1934932e8088e1854f73acdf2aee920229b6c56c3",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 110,
+      "tuple_sha256": "fefbd3af50767be5241d117705f0056beada9ceee3c090019955b03d89485850",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 111,
+      "tuple_sha256": "bbc538b9d71c4c65cc9bdb8b9f48bf62df70ed2c3a8f13159400ae12e1442904",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 112,
+      "tuple_sha256": "6b32bcd76972edc38a086bcdf238aa89d2cbf370b89503d9c62f67086fc10321",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 113,
+      "tuple_sha256": "86cd474efc298312a749471f0071383510e312b508f4176094982f5f7950e25f",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 190,
+      "tuple_sha256": "9a2eb51f543f12a09d70d84608d456dd72bb6f3e7cea3dc62312c67d475e9c43",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 191,
+      "tuple_sha256": "e4b4f1f24bbe72e7dfed2e9439d04ced376701b2ac51784c961d492ee0b2d0e6",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 192,
+      "tuple_sha256": "a2b62f0767c04fb214169043023723ffb2014d925e67dea66987cc591c3fd00e",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 193,
+      "tuple_sha256": "7923d59a29a412fb12b07514a3054cbe700615df2e676de03b2eebf03b364b01",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 194,
+      "tuple_sha256": "95a39ec1eb7049f34c4e824a9674c96ec8beb4bec69af8cc9a235c99838d66e5",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 195,
+      "tuple_sha256": "2f0f5dc36c606347779cb15e5642500cd529e8028ecbf96d9ec7842c82e78970",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 196,
+      "tuple_sha256": "35b7f5994c16897689d6418d39da601c1a29bca236a569d2347c5f4df2dcc1cc",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 197,
+      "tuple_sha256": "84886935095a0b98971fc270fc270d764c82957b0d0594307fe9f6bf1a0b8bb6",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 198,
+      "tuple_sha256": "b93e5a5be1786d64162e3665ea9a135d606ab7ca9220c0a01067f783f8847741",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 199,
+      "tuple_sha256": "79050efffac660ac38138bde7761be8c6f7ff547114e53c34a5bac58de7fcb0a",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 200,
+      "tuple_sha256": "7f81241c5e746f4e9365b8caf64894c02058c4edff467e46d7e1def11de19083",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 201,
+      "tuple_sha256": "aa60c449533a23335f201ad8efecb3a592658da14e65895fc448c414618804aa",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 202,
+      "tuple_sha256": "acb1b58a11dacdd97195756c7726e0ba253e78d890c9d20fe74fd77a560cf21b",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 203,
+      "tuple_sha256": "52de6bdcc72b86e1c83217758ad8e0ab36562ad0f8e2cac626e822ff8a6c0d38",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 204,
+      "tuple_sha256": "4465b4c5f55a7efe0e315625e9bb3b7b859e12a75f523ebbc0e079bc7149f29d",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 205,
+      "tuple_sha256": "770a9f4ff3057528fa5b3feda953bb506b6728a3472220c8f2ecc43ec8931142",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 206,
+      "tuple_sha256": "59a7acfab760057dd461e3b1934932e8088e1854f73acdf2aee920229b6c56c3",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 207,
+      "tuple_sha256": "e1be8979a5c5e09a1376f31603017eb0e5efd4c1ce5f739d3dbcc3c94ba28103",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 208,
+      "tuple_sha256": "21d26fadbb3a50e5d6be17a24b320a99e7cef29a6395750363496ce1d0273231",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 209,
+      "tuple_sha256": "01fe5aafee0606fb34b61aededca915b9912c4315ba1d3e7c951a411b6c1fd37",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 210,
+      "tuple_sha256": "5ccc26ea7d501ea789c8af041253ae8fc35c045226a30532efbbb83c897fa068",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 211,
+      "tuple_sha256": "dd0197e0a1ae68cba2f3af85d9728e487762cb066ef438e03eb52a3d74da0e6d",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 212,
+      "tuple_sha256": "3616de2178410afd5ae827ec69d61e5b60aaa76f75ad79e4a74cfdbd2e17901f",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 213,
+      "tuple_sha256": "320d96acd6c20a95db0c383927d5ed190356240595e55cf14d72dd4f014412a4",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 214,
+      "tuple_sha256": "7c689c74f7447b29e66291d03bf55d0a7a8e05b386c394b47075d116339bcf82",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 215,
+      "tuple_sha256": "c97f1c37cb6fe8683e160feed19edb82b098ad9a19fcb56b7a2236c793a920b9",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 216,
+      "tuple_sha256": "307b3f0ce1f63d514b3c88b8cfd522c8093174bd6086165ff07b18f31047a0ff",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 217,
+      "tuple_sha256": "f9cf4f05e8cddf14ab8f1fe8d3d5a61c240d8b4434bd02ac22a5d83b941c250b",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 218,
+      "tuple_sha256": "c8b2c001db2a44c2374ed03670def2d94d0526be07b502cdaabaeb3a077643eb",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 219,
+      "tuple_sha256": "67ba31fae0f9899f3314971872fa65dec1bd1d3a53ea67213c859e5e609cceb3",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 220,
+      "tuple_sha256": "6e0ff86e814d58f8f22e6a92a151ef745da1768f4bb03b3ccd79ba80a9b1d22f",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 221,
+      "tuple_sha256": "0e75cf75a0b4b8a73d6e8fb31b067c4ddc712529f600c3386e570b6a116cb1ee",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 222,
+      "tuple_sha256": "aa755faa0be62d4ab01324c815b29e59819b257b261dc01294cc82ac374704ff",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 223,
+      "tuple_sha256": "aa0b3a066d8702c2eb60de47c6241460391cab1156cb4f62e4307972e5db33a0",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 224,
+      "tuple_sha256": "7389a12f8e1b6e0277e7e4a7070fa041b05c9a24cd8c41140c1e4da157e4a759",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 225,
+      "tuple_sha256": "a3302da414c58f377557d1decacb9a48690f23196caa3a9dfce76e4cdf9d78f0",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 226,
+      "tuple_sha256": "69ef96dbeb676490ded98a69e4d82de7469b75d10bcdae19e7233cfe23089858",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 227,
+      "tuple_sha256": "79050efffac660ac38138bde7761be8c6f7ff547114e53c34a5bac58de7fcb0a",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 228,
+      "tuple_sha256": "3ff22e78d3eb558a84f51e2c347fc3fa2ddb800dbdc1e710c7387bd07560ad0e",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 229,
+      "tuple_sha256": "d70c4c5295cc40c976580436357d215d9d8a7134094e1a344b7f95e7cfbf9a48",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 230,
+      "tuple_sha256": "9bd4ae887de1cd883342ea324f628817106f194d52e3766d7b616ba92997f5e7",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 231,
+      "tuple_sha256": "fc9f1c87f752caf1a49b66b9da950e3a0d740fe2e5943bea403c4cdc8d5e3dc8",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 232,
+      "tuple_sha256": "e4435727ccb60772b6a49879aed9c0fe7f2f1403409e2b4acfcd02fa76560875",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 233,
+      "tuple_sha256": "af9c21371b9b2f8afee6af9f57dc9e651cb0b1546d81aae9bd53d8343c5211e5",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 234,
+      "tuple_sha256": "387214ae3929550a6a8e11fc1b4062a2c8ebca1613a51b91cdbcb400b7278142",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 235,
+      "tuple_sha256": "f6c402f9ac438cfe6b344f6b122dfabdf351588a1b53f5af578145e488d358e5",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 236,
+      "tuple_sha256": "bec3de73e23320e7ac8da90c32fa178014c1cdf50369c7a9408082f8f18c0f34",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 237,
+      "tuple_sha256": "59a7acfab760057dd461e3b1934932e8088e1854f73acdf2aee920229b6c56c3",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 238,
+      "tuple_sha256": "6b95584cb579551af96be2a7a45f780ff0cf182fce7f7490cebd46dbe3867084",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 239,
+      "tuple_sha256": "bbc538b9d71c4c65cc9bdb8b9f48bf62df70ed2c3a8f13159400ae12e1442904",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 240,
+      "tuple_sha256": "a3bc1e8feea98df345973d08a93134083361d2b35d3b29ab4975f7e0ee60a9d9",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 241,
+      "tuple_sha256": "86e9ad175260460d906af92be8a88c8441ee0d96adc8f68ab02a2b7ff6fd06eb",
+      "old_owner": "tha-ap427",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 242,
+      "tuple_sha256": "8f9d4cf2ff75f5a6b356e0a99aa38d878c554b6dcb8aaefa6bcf1704f4c4d68d",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 243,
+      "tuple_sha256": "04faf1582d69590227c74ce23b6269d1b0025eb62649870acde2c509b7ad4df8",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 244,
+      "tuple_sha256": "85838ba929f8743b11fafd68dc0c1c8c4a0673ddc1e2d27cf76d02031579f527",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 245,
+      "tuple_sha256": "da00049509a1ca2ba7ac90522bef12ad715e16a1cbab6cb087c00ef5b877f1cd",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 246,
+      "tuple_sha256": "8ce11473f95bd358463f78240e4a7ad4876fb59b760243a3267263b7ecb1ccb1",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 247,
+      "tuple_sha256": "cb9123723fafaa34b81c39b0187252836e4726cd9e0dbd224432c3a85b4856c2",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 248,
+      "tuple_sha256": "70c9009b8a098cbeac7e61b5bae99740d79e2602ca524c3bf183369a16b1c500",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 249,
+      "tuple_sha256": "d1fc8d525cd3b0db4b447ad8f793a83f30c5d60b0482803d7cdb2dc9703a3a57",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 250,
+      "tuple_sha256": "10bfef6330d9da5aeebedd18f0aa249ecbcc89898c14d8d29fe4ead9048a5d15",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 251,
+      "tuple_sha256": "8659172b930fc92c0033b32a28c49c2f14744f7276c64e2873c1c71da9543ea7",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 252,
+      "tuple_sha256": "36c0796eee8cd30effc810da4f4c2efafb662e46316d42230efbf9e6609a1225",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 253,
+      "tuple_sha256": "9609571d69152376ff77dbce167b631836fd562a144bbf960dc669533f5b3bf4",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 254,
+      "tuple_sha256": "b7996bb0713f4b69031f4a138b068346ab0c330b6156d1554d69bbaabddae65b",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 255,
+      "tuple_sha256": "6708e99b63534b33dfa2fd0df664b10856a673ce157eccd3fc507ec140423778",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 256,
+      "tuple_sha256": "61d1132981a3d297ef13430cc1313b4f87172799be8b32fa8f6556f4a1998acb",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 257,
+      "tuple_sha256": "ee57505128e017f3d8a4a46fa62d8f7fa96da7d50eaa68351c354d202e99f1f8",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 258,
+      "tuple_sha256": "6159923f681b5d9ee2d9712906da334365b8ecd2b179f4d4ed3704f0d8dceaa9",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 259,
+      "tuple_sha256": "f3e51a2e0eb47cdd7564a454542374fd52749852a9fb2cbf17c00c27b8622d77",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 260,
+      "tuple_sha256": "0f1265d9c1115b6ddb7bcfd59d7d84ec03f56bf44dd4c63da71900840076fa34",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 261,
+      "tuple_sha256": "17ea52b3fb62cc3bf04a085db348c9d88665fed154638fedf11ab66f99c071da",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 262,
+      "tuple_sha256": "5df81bdcee27164885e82c79322a4613b16632f4638a9ce15b53d02b79784e0e",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 263,
+      "tuple_sha256": "fa3e9fc2b41f10b4719091435e18c3263852c253b9d4b684651a5e0765ab80e6",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 264,
+      "tuple_sha256": "9a7a8ce96d3ad7e24272d5c82d0ee385bb4acebff743b21d7d3731d75178df09",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 265,
+      "tuple_sha256": "f6c402f9ac438cfe6b344f6b122dfabdf351588a1b53f5af578145e488d358e5",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 266,
+      "tuple_sha256": "37badfd986da8e2dd90e50ab10daa893c8fe0e3530457c5c99675a656daff7ac",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 267,
+      "tuple_sha256": "59a7acfab760057dd461e3b1934932e8088e1854f73acdf2aee920229b6c56c3",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 268,
+      "tuple_sha256": "7a30cd807a1a2d039535788c60000f403fc2693783b4c21361004855f93e7d6e",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 269,
+      "tuple_sha256": "bbc538b9d71c4c65cc9bdb8b9f48bf62df70ed2c3a8f13159400ae12e1442904",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 270,
+      "tuple_sha256": "76d6363f9b361398598f8e1b2ea8d4aa705057e9fbee0e8077dab15cd17a28bf",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 271,
+      "tuple_sha256": "bf8b70d9882702600f9df9415cf3294fd336f599fad9d6e87860e29864df9af9",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 272,
+      "tuple_sha256": "186075d69dea2d9d4edb82580ae046901e238d310e4d01a06bbbc58ded2a768a",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 273,
+      "tuple_sha256": "85e2a2ac3b4f751230e2a645c59ba5c1741f979ab8f183f87671dcf8ba9b7d62",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 274,
+      "tuple_sha256": "70356ddfd184a9d4b9eed7eda4525e98b18f2b31ccb0843d22b83b4ea4a0863e",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 275,
+      "tuple_sha256": "e283ef335eb3f4bb3d68e89e485bc4007b39258c0ede47cf5a7e1016dac43202",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 276,
+      "tuple_sha256": "3bfd337d1e9e193465fc04debf798e83c4a88624e7aefe16a626b73025da160e",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 277,
+      "tuple_sha256": "2197534818b3be66229a5e36ad723ed86fbbf44de095fa02f5f7a4f74b9c1196",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 278,
+      "tuple_sha256": "a41ad247d5e46bb712fdd9d73bae417769b240f0c55b982594564922b0c9b0b1",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 279,
+      "tuple_sha256": "e24e6b0254270f1b246284242bc97153b1795605e85f74dfd5a9fd6ea1a62f18",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 280,
+      "tuple_sha256": "1562553a9650a9288d7206b3b756dd51c8d7ba86727b2c4a6c0c73a4941338b0",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 281,
+      "tuple_sha256": "98a003bbce03c03b2bc100683174503121af32300643324f47186db03e6973a0",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 282,
+      "tuple_sha256": "081d78df952272eaaeffb2fcc86eb9cb09c92288dc4541c71dafcb6e27d8204e",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 283,
+      "tuple_sha256": "39c06e5018abd6ddda397becfcda2c661a96763611e32eba7732204e3b76653d",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 284,
+      "tuple_sha256": "d6a28dacdafb9816a08181d98e74949b3a1fc7b2fcb09cee013217e335612dea",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 285,
+      "tuple_sha256": "45821c3ffea97ea16399128e197a0de33b9f59ab04349e2a701c69737a63a7cf",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 286,
+      "tuple_sha256": "bf14ecb3de2a27ec22576187857ab23d3874ec3b9445177c56115b88b2e96bcc",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 287,
+      "tuple_sha256": "786c90b8e5d53df25cd84f5ab66824e390d4a2e8bcefce1a69261deb65a5c8bc",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 288,
+      "tuple_sha256": "aa0c64f8aa3d5d81dbe40708fcf662c6be0b0cce525cdd2ec5b415048672e4c9",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 289,
+      "tuple_sha256": "2f2003d6097edf5d7c09ec2b251fe475170b69ece7430e1adbe454ded00e2dd6",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 290,
+      "tuple_sha256": "43dc68a9057ecd8c8c77a74ce3cc4222315472e0c2d619210c0b7732531dbf20",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 291,
+      "tuple_sha256": "ee08948d966d9d15a3df0bd063d26551505d1a7ee3106e5973d6274e40994f76",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 292,
+      "tuple_sha256": "d667e2adb32cc66eb018e8fc27c74a7db0c30a018e7757db1df15b1752ccf53a",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 293,
+      "tuple_sha256": "fd656929838004c2cbeb81b6317607d532ad52355ab8d498db9cf6c08e5a146e",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 294,
+      "tuple_sha256": "55fffa980b26a17e6e4dce7c8100fad3bae1a2f8f16377446ee4a2633bd22566",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 295,
+      "tuple_sha256": "6a56b02186713a74a26ac8680b1a96468908c001b7ce1516242dec1fc3a3ee98",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 296,
+      "tuple_sha256": "3e7980df33178585265ecb3158b9d9b5ef904d9e44b1892d662d0a894d36939d",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 297,
+      "tuple_sha256": "69ef96dbeb676490ded98a69e4d82de7469b75d10bcdae19e7233cfe23089858",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 298,
+      "tuple_sha256": "79050efffac660ac38138bde7761be8c6f7ff547114e53c34a5bac58de7fcb0a",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 299,
+      "tuple_sha256": "f4f76b2f615cf5acef4559a3db7fe5b5946e12d9dbc1e71ea74b9351c0a4d3df",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 300,
+      "tuple_sha256": "1728454f12a0ca2decbf7b2f3fb1a8d4b09d1a46849817441b19a38647eb7f53",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 301,
+      "tuple_sha256": "bc3e87f7a2e0d33d2bb4fe830cbec2ded43c0c279b2626ba00bbddaa36d7fbb8",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 302,
+      "tuple_sha256": "b877e3ed4349ea842858dbc91738f79f94d2366ad1bf6817a7c22af6709fee64",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 303,
+      "tuple_sha256": "3e8bf89f9a8402e948fed35f903ac567938f06d628b9e74074e971ea1a15293c",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 304,
+      "tuple_sha256": "0f1265d9c1115b6ddb7bcfd59d7d84ec03f56bf44dd4c63da71900840076fa34",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 305,
+      "tuple_sha256": "8423a41803c242239cd369a7f8fae0e5046b5d5e95bb5a15a2f14c46ea3d304f",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 306,
+      "tuple_sha256": "251550bd53073580620de7dd8960bb31701565e48c0ec9fc6c87abc642091b7e",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 307,
+      "tuple_sha256": "8c89c6a2a6e1784be1342fc073dd382ff52967f9a268bc480b7f113bb5871b71",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 308,
+      "tuple_sha256": "724892e3c830ad8ed044ec19e95e288ac77e3b440eb345100ba6c1fb1227e7a3",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 309,
+      "tuple_sha256": "ce3daa5632bd92d8130bdb57bb45f52d8071a47571532a49c23f7535fcbf2177",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 310,
+      "tuple_sha256": "a0d81f87d7ed2367ad431fc25c0e65b31232e70a9ef06d6ab58c9e679348171a",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 311,
+      "tuple_sha256": "d0dce167ebe04d011b979dfad2d82df174dfe645171fdf62194b5cb3f6da5759",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 312,
+      "tuple_sha256": "2beffcd8bdd2b57067cb14655477086187ea2d09a5c9098774ee60a4fe93009d",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 313,
+      "tuple_sha256": "278fe51d621977899df27a20a2c42c3c0aedb84e02c7b1bc44fcd133793fbb9a",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 314,
+      "tuple_sha256": "1e40fbf52864a989695409772e2eff85ca35ec01cea1abbe0ce52e382f866758",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 315,
+      "tuple_sha256": "99cb54c6a65fa8342a8a2bad405b7daadadcebbd89847c507fd3c3818ec5eec8",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 316,
+      "tuple_sha256": "f3fe87cd78aeb61ee96047cfb8e966f7ef4f7dc569de31bd8891e9e2630d1bd5",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 317,
+      "tuple_sha256": "99350883425f66821d310839429a0325eb4127d95eb8ee1e2a4643ab7b126c17",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 318,
+      "tuple_sha256": "e085b4eb666928640e202f159a8e5182e52dc4f1e36e167b76295f7759629642",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 319,
+      "tuple_sha256": "2496772675e086da6104c1659a9f93d7c732697059ba1109ccf924a912289a66",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 320,
+      "tuple_sha256": "f6357fa406046d97208eed008d5c761bac42654a6801564cd6fa40e174255162",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 321,
+      "tuple_sha256": "c9adfd836bfe32daa96e99ac5460a661d144be9aacd18f8b0608a570e29590dc",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 322,
+      "tuple_sha256": "e6475d381acb1a8f2146ababceb256ab4dc34da76619a69fc33b168288ae1048",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 323,
+      "tuple_sha256": "baf72dd473e01fcf223fa8ca7bf2c040b6609011a4dd5d7cbe217a9881fa9287",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 324,
+      "tuple_sha256": "e2c8bb0684c0beff6cd5806a9a7e26ac446938fb345c74cc56e002be30d03e2b",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 325,
+      "tuple_sha256": "f6c402f9ac438cfe6b344f6b122dfabdf351588a1b53f5af578145e488d358e5",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 326,
+      "tuple_sha256": "325c6f02688c465683bb843124e45914c388df6f132036b24c12dc8345e38ba4",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 327,
+      "tuple_sha256": "59a7acfab760057dd461e3b1934932e8088e1854f73acdf2aee920229b6c56c3",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 328,
+      "tuple_sha256": "308dc7d7c0e1377eb302505d2201a3b05ea93328225e400110f2be39da76292b",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 329,
+      "tuple_sha256": "665a8211fc2e2182a7c894af458b1cd5433360c795e3743b5cb72cf2a69a464d",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 330,
+      "tuple_sha256": "135a60a8a20e342c3387e7f5ec79066b7fd05052e6ab929d1c10df8a12dc22d1",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 331,
+      "tuple_sha256": "5ccc26ea7d501ea789c8af041253ae8fc35c045226a30532efbbb83c897fa068",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 332,
+      "tuple_sha256": "cfefb101173e43d18b3c34c49859095d66f53e03d47ba154f04003d2ea0d493d",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    }
+  ],
+  "notes": [
+    {
+      "book": 36,
+      "block": 10352,
+      "note_index": 0,
+      "text_sha256": "5d2c9a7f34a4199e4219ecf0097b8ee1a911ef2739edf5c061eec9881d7435fe",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10355,
+      "note_index": 0,
+      "text_sha256": "33359e596ef59bcafcb91be6cd123c9f64e9daf82fd39d8746d3392aba05a6ab",
+      "old_owner": "tha-ap348",
+      "new_owner": "tha-ap348"
+    },
+    {
+      "book": 36,
+      "block": 10777,
+      "note_index": 0,
+      "text_sha256": "ca82365fb64690ce0d0941422c46341292a995b61046031967c10edaea543c31",
+      "old_owner": "tha-ap374",
+      "new_owner": "tha-ap374"
+    },
+    {
+      "book": 37,
+      "block": 26,
+      "note_index": 0,
+      "text_sha256": "9d680e78dd2d6cdc59e614043fceabe32e4f89d13e84bc60a2378c6c6fc4b864",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 31,
+      "note_index": 0,
+      "text_sha256": "a0b0eae63740cf186a386b6e3c87e80d593fee87ecec243f06787966ff85a60f",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 34,
+      "note_index": 0,
+      "text_sha256": "146ca9ff774317e9bd512c0f682208a294250ebd7f21fd8f3c8cc97671f22e6a",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 37,
+      "note_index": 0,
+      "text_sha256": "193e856a17da534b1d450e421c3b50be922057db4edfedd815d2577aec4da818",
+      "old_owner": "tha-ap423",
+      "new_owner": "tha-ap423"
+    },
+    {
+      "book": 37,
+      "block": 78,
+      "note_index": 0,
+      "text_sha256": "e1c3a2b60173f7febd6ebdab47e277c53d18090aba49557e75dac42501ebe8d6",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 80,
+      "note_index": 0,
+      "text_sha256": "aa45f400efbf6048bb252f79e6f17a611e2883e26e9d9b18794a120a52c2bc6d",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 83,
+      "note_index": 0,
+      "text_sha256": "b5529581b23dea5e9153c8bf4b0eb42f506b74c71103fe2d71f5bc3d008dae9c",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 87,
+      "note_index": 0,
+      "text_sha256": "cb5d557cc19f6692d483a8dcd390e1d24422048e04c235d070f56081b59b0023",
+      "old_owner": "tha-ap424",
+      "new_owner": "tha-ap424"
+    },
+    {
+      "book": 37,
+      "block": 192,
+      "note_index": 0,
+      "text_sha256": "a6c8ed554ab7b1ab7d9fbda73356b9257be6ccb9341f234fafdb4c5134d2618c",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 196,
+      "note_index": 0,
+      "text_sha256": "05381b3e181bbc58c6ba3e8d13bce5558a00e474f3ef126e7251e59e0061f43a",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap426"
+    },
+    {
+      "book": 37,
+      "block": 214,
+      "note_index": 0,
+      "text_sha256": "b55494a387305ddc5172364579ecdd864977bd862939856a6c4096b9c8fe21a4",
+      "old_owner": "tha-ap426",
+      "new_owner": "tha-ap427"
+    },
+    {
+      "book": 37,
+      "block": 254,
+      "note_index": 0,
+      "text_sha256": "461d3f7b90437b3ee9f3dd2a31756fd524c5c1b52274e82d5cff02bdab7fc2b6",
+      "old_owner": "tha-ap428",
+      "new_owner": "tha-ap428"
+    },
+    {
+      "book": 37,
+      "block": 303,
+      "note_index": 0,
+      "text_sha256": "0cf59ec1c32092899c29ab427e767002fe58860c2e4769af0e6f020f0358030f",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    },
+    {
+      "book": 37,
+      "block": 311,
+      "note_index": 0,
+      "text_sha256": "b368ca2720231f6079425e4a8cb9855fcd8f69594f9d9a6a7b6c7248b72efebc",
+      "old_owner": "tha-ap429",
+      "new_owner": "tha-ap429"
+    }
+  ]
+}

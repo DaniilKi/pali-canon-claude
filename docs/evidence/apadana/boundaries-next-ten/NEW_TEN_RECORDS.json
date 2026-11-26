@@ -1,0 +1,162 @@
+{
+  "tha-ap348": {
+    "id": "tha-ap348",
+    "book": 36,
+    "start": 10350,
+    "end": 10367,
+    "title": "Campakapupphiyattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 348",
+    "vri": "39–43",
+    "pts": {
+      "volume": 1,
+      "page": 279,
+      "end_page": 279
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap349": {
+    "id": "tha-ap349",
+    "book": 36,
+    "start": 10367,
+    "end": 10382,
+    "title": "Padumapūjakattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 349",
+    "vri": "44–47",
+    "pts": {
+      "volume": 1,
+      "page": 279,
+      "end_page": 280
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap374": {
+    "id": "tha-ap374",
+    "book": 36,
+    "start": 10763,
+    "end": 10786,
+    "title": "Pāṭalipupphiyattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 374",
+    "vri": "6–12",
+    "pts": {
+      "volume": 1,
+      "page": 290,
+      "end_page": 290
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap375": {
+    "id": "tha-ap375",
+    "book": 36,
+    "start": 10786,
+    "end": 10815,
+    "title": "Tīṇuppalamāliyattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 375",
+    "vri": "13–21",
+    "pts": {
+      "volume": 1,
+      "page": 290,
+      "end_page": 291
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap423": {
+    "id": "tha-ap423",
+    "book": 37,
+    "start": 1,
+    "end": 51,
+    "title": "Sakiṃsammajjakattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 423",
+    "vri": "1–14",
+    "pts": {
+      "volume": 2,
+      "page": 379,
+      "end_page": 379
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap424": {
+    "id": "tha-ap424",
+    "book": 37,
+    "start": 51,
+    "end": 114,
+    "title": "Ekadussadāyakattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 424",
+    "vri": "15–35",
+    "pts": {
+      "volume": 2,
+      "page": 379,
+      "end_page": 380
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap426": {
+    "id": "tha-ap426",
+    "book": 37,
+    "start": 190,
+    "end": 212,
+    "title": "Sattakadambapupphiyattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 426",
+    "vri": "61–67",
+    "pts": {
+      "volume": 2,
+      "page": 382,
+      "end_page": 383
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap427": {
+    "id": "tha-ap427",
+    "book": 37,
+    "start": 212,
+    "end": 242,
+    "title": "Koraṇḍapupphiyattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 427",
+    "vri": "68–77",
+    "pts": {
+      "volume": 2,
+      "page": 383,
+      "end_page": 383
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap428": {
+    "id": "tha-ap428",
+    "book": 37,
+    "start": 242,
+    "end": 273,
+    "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 428",
+    "vri": "78–87",
+    "pts": {
+      "volume": 2,
+      "page": 383,
+      "end_page": 384
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  },
+  "tha-ap429": {
+    "id": "tha-ap429",
+    "book": 37,
+    "start": 273,
+    "end": 333,
+    "title": "Ekadhammassavaniyattheraapadānaṃ",
+    "collection": "ap",
+    "acronym": "Tha Ap 429",
+    "vri": "88–106",
+    "pts": {
+      "volume": 2,
+      "page": 384,
+      "end_page": 385
+    },
+    "index_revision": "apadana-thera-next10-v1"
+  }
+}

@@ -1,0 +1,916 @@
+{
+  "schema": "independent-original-first-next-ten-source-oracle-v1",
+  "status": "PRESEALED_EXACT_TEN_RECORD_FUTURE_EXPECTATIONS_NOT_ACTIVATION",
+  "application_baseline_commit": "dd7b697df2c54308084fffd934af38130d01f952",
+  "research_commit": "902bc627",
+  "targets": [
+    "tha-ap348",
+    "tha-ap349",
+    "tha-ap374",
+    "tha-ap375",
+    "tha-ap423",
+    "tha-ap424",
+    "tha-ap426",
+    "tha-ap427",
+    "tha-ap428",
+    "tha-ap429"
+  ],
+  "index_revision": "apadana-thera-next10-v1",
+  "index_revision_length": 23,
+  "locator_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera-next10-v1",
+  "locator_revision_length": 64,
+  "old_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "future_canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "serialization": "UTF-8 JSON ensure_ascii=False,separators=(comma,colon),existing key/unit order retained; append index_revision only to each of10target objects",
+  "source_preseals": {
+    "next-boundaries348-375/producer-a/PRESEALED_SOURCE_REVIEW.json": "996c470c30f8513faa5219352fad4f55db120898286e46779520ded1fe069eaf",
+    "next-boundaries348-375/producer-b/PRESEALED_REVIEW.json": "2a39ee56a56708e90df7b26111e79905697f16d0ee1ccf33731a95ea4f1aed05",
+    "book37-first-three-pairs/A/FINAL_SEAL.json": "7c1c8449a4acd17e83121d1b403d9d02c33f9891936e3f19b411d9393cac087c",
+    "book37-first-three-pairs/B/PRESEALED_REVIEW.json": "1420b5674a940e3c237eb342246e13e067d3197916d8d0475e1c822dd5af662c"
+  },
+  "source_joint_reports": {
+    "Book36": "5a8efdc0c5108dc70fa8de15e5c93e1ffe2e3feb8b683e10f2c245ddd8a391d0",
+    "Book37": "95bd32c722d083f2f8f16e7cbd269e284d95847b40b3337226e8f2e1efbe7c67"
+  },
+  "original_sources": {
+    "36": {
+      "path": "/tmp/pali-sariputta-release/vri-fixture/romn/s0510m1.mul.xml",
+      "bytes": 2464074,
+      "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+      "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+      "VRI_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "physical_elements": 14646,
+      "retained_tuples": 14645,
+      "omitted_note_only_indices": [
+        1130
+      ],
+      "full_tuple_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+      "full_original_tuple_equality_current": true
+    },
+    "37": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/book37-recovery/s0510m2.mul.xml",
+      "bytes": 1779576,
+      "sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+      "git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+      "VRI_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "physical_elements": 10673,
+      "retained_tuples": 10672,
+      "omitted_note_only_indices": [
+        8858
+      ],
+      "full_tuple_sha256": "bd0177c2025298415abd2e90e1d576d2418127e08ce339699ad725960089f8cc",
+      "full_original_tuple_equality_current": true
+    }
+  },
+  "records": [
+    {
+      "id": "tha-ap348",
+      "before": {
+        "id": "tha-ap348",
+        "book": 36,
+        "start": 10350,
+        "end": 10371,
+        "title": "Campakapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 348",
+        "vri": "39–44",
+        "pts": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 279
+        }
+      },
+      "after": {
+        "id": "tha-ap348",
+        "book": 36,
+        "start": 10350,
+        "end": 10367,
+        "title": "Campakapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 348",
+        "vri": "39–43",
+        "pts": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 279
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "27b06e7b45604fff1e3d8816091cab373ae9841fb7a7034b0497980a745d542b",
+      "after_object_sha256": "60281934c1bde82f5c7d0d1c30ab672d9b3cd34dea88ee61e04820daa0f4d2cb",
+      "before_root_tuple_sha256": "e63617c38f5c4b18851adb3a19b97fc24602b2080d00b77d28dba847848f0bbd",
+      "after_root_tuple_sha256": "313e098c9ee6b1723484c7ec183354026b1a86275ad2797fb447f65a6a11378c",
+      "after_source_scope_tuple_sha256": "38394e6f41241dac057f5c57a60a1975dddd5a7f9016e09f3298aa338cf2d445"
+    },
+    {
+      "id": "tha-ap349",
+      "before": {
+        "id": "tha-ap349",
+        "book": 36,
+        "start": 10371,
+        "end": 10382,
+        "title": "Padumapūjakattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 349",
+        "vri": "45–47",
+        "pts": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 280
+        }
+      },
+      "after": {
+        "id": "tha-ap349",
+        "book": 36,
+        "start": 10367,
+        "end": 10382,
+        "title": "Padumapūjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 349",
+        "vri": "44–47",
+        "pts": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 280
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "847bca06a621f1f7c513d532edb79bfd04a0fbfe1764c15d06840e5da17328d7",
+      "after_object_sha256": "abcf3e9d5863d786530562abbed6083f6f2a9713b4935e4339e3a7fec4fb3ce2",
+      "before_root_tuple_sha256": "0a27b659a4b58d1ddde51b59628c810e7e7087b566b1435a12e41188b8d59993",
+      "after_root_tuple_sha256": "21d5622baf0a013867875a196450361957ca47fe3ac70c087b28fda5081e7878",
+      "after_source_scope_tuple_sha256": "d9a36c56efd66ee6e2e5491ae448ccb15d1c779abbb14af4db45067112232800"
+    },
+    {
+      "id": "tha-ap374",
+      "before": {
+        "id": "tha-ap374",
+        "book": 36,
+        "start": 10763,
+        "end": 10790,
+        "title": "Pāṭalipupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 374",
+        "vri": "6–13",
+        "pts": {
+          "volume": 1,
+          "page": 290,
+          "end_page": 291
+        }
+      },
+      "after": {
+        "id": "tha-ap374",
+        "book": 36,
+        "start": 10763,
+        "end": 10786,
+        "title": "Pāṭalipupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 374",
+        "vri": "6–12",
+        "pts": {
+          "volume": 1,
+          "page": 290,
+          "end_page": 290
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "b84fe1c4a3a2c1a20154b315d3ccd5b4cbb5092dd3b26530c0d124026bc58dd9",
+      "after_object_sha256": "a5642a19f503559989ddfc3d9eb8dddf35b93747eb4adb40e12025e405043fa7",
+      "before_root_tuple_sha256": "662ac50ca43383562a0ddb10bfa9d462f68c9a591186f284d579bfef0228f4a1",
+      "after_root_tuple_sha256": "814a91a847a6b961d27802320695213fdc9f46071a165a4f64b4d2397d2c46bf",
+      "after_source_scope_tuple_sha256": "2717de98526990d518fecd251eee6ad1cbb2612d794127490deada80154db94a"
+    },
+    {
+      "id": "tha-ap375",
+      "before": {
+        "id": "tha-ap375",
+        "book": 36,
+        "start": 10790,
+        "end": 10815,
+        "title": "Tīṇuppalamāliyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 375",
+        "vri": "14–21",
+        "pts": {
+          "volume": 1,
+          "page": 291,
+          "end_page": 291
+        }
+      },
+      "after": {
+        "id": "tha-ap375",
+        "book": 36,
+        "start": 10786,
+        "end": 10815,
+        "title": "Tīṇuppalamāliyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 375",
+        "vri": "13–21",
+        "pts": {
+          "volume": 1,
+          "page": 290,
+          "end_page": 291
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "aa813a42f474a7df15ebbd76a5e802be2fd979b8f3291e5691c25459a7026731",
+      "after_object_sha256": "8c20e96ef049da34d3c66903b2a6fa8e929d7118f6a4b18d7066ea1dc7061406",
+      "before_root_tuple_sha256": "1663038b94836802b1be1c6895c3ca117d2de85533a59a576dec35a665d197f4",
+      "after_root_tuple_sha256": "d3ca1d5646abfbfdbc3d628c224fda364703cef972f162c1a8c28df5c0e33055",
+      "after_source_scope_tuple_sha256": "05cc97e4b9526b29d7fb3eda54a3d7ede8ea452a34b38bc4c738393b77de616d"
+    },
+    {
+      "id": "tha-ap423",
+      "before": {
+        "id": "tha-ap423",
+        "book": 37,
+        "start": 1,
+        "end": 55,
+        "title": "Sakiṃsammajjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 423",
+        "vri": "1–15",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 379
+        }
+      },
+      "after": {
+        "id": "tha-ap423",
+        "book": 37,
+        "start": 1,
+        "end": 51,
+        "title": "Sakiṃsammajjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 423",
+        "vri": "1–14",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 379
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "7c41b847f27e51992de93adaa45d3ecf546b90dee6c690cc09e0284c1fffce8f",
+      "after_object_sha256": "b0a64dfa113d141e925e570e0a7e480b802f834ab82642a8f5bc2dd06ec942d5",
+      "before_root_tuple_sha256": "07239a946a29b5acd8fb138637310d0514bc107a6a6b453d831cd49c95a90970",
+      "after_root_tuple_sha256": "5c3445d23d2e244fdbdeea67294c3216cd65233c4431ba48820e655ebf8c716e",
+      "after_source_scope_tuple_sha256": "005963069b2cd1fe611633b52669155c2c7941195a71e347826f5b6b93909512"
+    },
+    {
+      "id": "tha-ap424",
+      "before": {
+        "id": "tha-ap424",
+        "book": 37,
+        "start": 55,
+        "end": 114,
+        "title": "Ekadussadāyakattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 424",
+        "vri": "16–35",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 380
+        }
+      },
+      "after": {
+        "id": "tha-ap424",
+        "book": 37,
+        "start": 51,
+        "end": 114,
+        "title": "Ekadussadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 424",
+        "vri": "15–35",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 380
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "e70e0a7b95c60dfd496c6e32de486582d56e66f3aa4dccd1e1a5a88a4695aa48",
+      "after_object_sha256": "92068a8ec6482d711fdc5ad65739bf9111cb717500988fb7e5720c61a1360e4b",
+      "before_root_tuple_sha256": "844fb2e2473a48c4a6711577cfd53ed7ffeff7ff1e1f004c3bb379ffea094e82",
+      "after_root_tuple_sha256": "ff5eead4dd46ee319334f8cc073cfc9c9d9f9c43b4397d96da74e5c52210278b",
+      "after_source_scope_tuple_sha256": "8984d780b1e5b065c2a1124f0d2876c88eeb05c64afe3b2586f6ecc9c62db4d7"
+    },
+    {
+      "id": "tha-ap426",
+      "before": {
+        "id": "tha-ap426",
+        "book": 37,
+        "start": 190,
+        "end": 216,
+        "title": "Sattakadambapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 426",
+        "vri": "61–68",
+        "pts": {
+          "volume": 2,
+          "page": 382,
+          "end_page": 383
+        }
+      },
+      "after": {
+        "id": "tha-ap426",
+        "book": 37,
+        "start": 190,
+        "end": 212,
+        "title": "Sattakadambapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 426",
+        "vri": "61–67",
+        "pts": {
+          "volume": 2,
+          "page": 382,
+          "end_page": 383
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "9ea1e9e707336b579bb9394061b349a3537e8ca132a125d7f088fd22c872bde1",
+      "after_object_sha256": "24b9e5d70a6109e5c4a84b8819d72f850d78a09caa85656dd6940d344187972d",
+      "before_root_tuple_sha256": "cd9c1f1dd0d8e44ef51e99d80c48113b068356e94d68d824dc1dd09bf28a0816",
+      "after_root_tuple_sha256": "4b682d2123cf20ad1b19d14d9575861a43e75b429c8745caf86fe6fd6358ba61",
+      "after_source_scope_tuple_sha256": "dc5c8e42e8c62ba66889003485703194582f3074362f5c7046b42e08e374b5d0"
+    },
+    {
+      "id": "tha-ap427",
+      "before": {
+        "id": "tha-ap427",
+        "book": 37,
+        "start": 216,
+        "end": 242,
+        "title": "Koraṇḍapupphiyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 427",
+        "vri": "69–77",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 383
+        }
+      },
+      "after": {
+        "id": "tha-ap427",
+        "book": 37,
+        "start": 212,
+        "end": 242,
+        "title": "Koraṇḍapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 427",
+        "vri": "68–77",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 383
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "5beb6e25b3be446096b34fe5c28c119de71d8cfc0865334038240148f61142f2",
+      "after_object_sha256": "da0dcf448310b48148ae6d22e39f6bd126922ccb4c68e129f93adf8b23d6d11a",
+      "before_root_tuple_sha256": "29e18ace895c088fe08b12dbf1f9cc8f22ff72f7874a272f1188acfa7d330dec",
+      "after_root_tuple_sha256": "a0b586de43de1e25865474d3c755cfffbc6c8e7fbbc4c0851d20dac4b9989929",
+      "after_source_scope_tuple_sha256": "9379bc159a8565b9b9509bf3e6fa5a3f33fe56c04a9865c03a5953b852c7319a"
+    },
+    {
+      "id": "tha-ap428",
+      "before": {
+        "id": "tha-ap428",
+        "book": 37,
+        "start": 242,
+        "end": 277,
+        "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 428",
+        "vri": "78–88",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 384
+        }
+      },
+      "after": {
+        "id": "tha-ap428",
+        "book": 37,
+        "start": 242,
+        "end": 273,
+        "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 428",
+        "vri": "78–87",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 384
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "3d015b4a090bef8e16c95c6c432884fbaf00bd8689ad0ea51eadb73a17187bf5",
+      "after_object_sha256": "40e59266ad4d3e010d939c2345901513adff20657a97763e2c123f59a369491b",
+      "before_root_tuple_sha256": "6e7432612e15fa0ccc21f00d266b9ddcd844f9a00ef932c00bc37d84d8f2420e",
+      "after_root_tuple_sha256": "934a54c5fb6fa6d477748db6c50da14c5aee5cd9b6d2b21a74ce140eaa1de529",
+      "after_source_scope_tuple_sha256": "58316e17e50f59aff1bfd55654abb4ec53bf703d6ee862d232ca27203c91b7b2"
+    },
+    {
+      "id": "tha-ap429",
+      "before": {
+        "id": "tha-ap429",
+        "book": 37,
+        "start": 277,
+        "end": 333,
+        "title": "Ekadhammassavaniyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 429",
+        "vri": "89–106",
+        "pts": {
+          "volume": 2,
+          "page": 384,
+          "end_page": 385
+        }
+      },
+      "after": {
+        "id": "tha-ap429",
+        "book": 37,
+        "start": 273,
+        "end": 333,
+        "title": "Ekadhammassavaniyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 429",
+        "vri": "88–106",
+        "pts": {
+          "volume": 2,
+          "page": 384,
+          "end_page": 385
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "before_object_sha256": "47b11c9ac81e22ba22187abdcd2cd99e807f8ed1e9bb38992396e5685ebf0ff7",
+      "after_object_sha256": "2144d947dc2b9dc89a8ec3cdb1496e97e0c778455990a848fdee11440a450d9e",
+      "before_root_tuple_sha256": "4eec63df321d7b126f5c9d6260e9dcee0dcc5826cf10da098461303bb7d5e4e1",
+      "after_root_tuple_sha256": "2c327928fddb1b7b3e31b9f05cd00c78bb16ad70232730427438f77c1f634ddb",
+      "after_source_scope_tuple_sha256": "990d1083a5c612c63aa0f4a904ded7954cf8d6c900d632e2eaa9f63cb242192d"
+    }
+  ],
+  "pair_proofs": [
+    {
+      "ids": [
+        "tha-ap348",
+        "tha-ap349"
+      ],
+      "book": 36,
+      "old_cut": 10371,
+      "new_cut": 10367,
+      "union": [
+        10350,
+        10382
+      ],
+      "union_tuple_sha256": "896c0bf28dc2e13e1086bf051576b71e84e8e83d7136e44f2e95feaea65fd694",
+      "moved_prefix": [
+        10367,
+        10371
+      ],
+      "moved_prefix_tuple_sha256": "2cd823cb2c6b5dc606f3c8b7d0c87c0e624aaf0df9f4c8f14f6569eb5b47a2ec"
+    },
+    {
+      "ids": [
+        "tha-ap374",
+        "tha-ap375"
+      ],
+      "book": 36,
+      "old_cut": 10790,
+      "new_cut": 10786,
+      "union": [
+        10763,
+        10815
+      ],
+      "union_tuple_sha256": "77a0e15a4181139ad6c7f90e4d030f90fcdf4c1c63703739813710acae192282",
+      "moved_prefix": [
+        10786,
+        10790
+      ],
+      "moved_prefix_tuple_sha256": "f474f1786b0b1c5540bad985a836754c4938054a0d520b9c8c43fb85f455f5a2"
+    },
+    {
+      "ids": [
+        "tha-ap423",
+        "tha-ap424"
+      ],
+      "book": 37,
+      "old_cut": 55,
+      "new_cut": 51,
+      "union": [
+        1,
+        114
+      ],
+      "union_tuple_sha256": "592dfb05c416afec8f523730fac395378b8da51e62decb8562c9ca7e4b6d3687",
+      "moved_prefix": [
+        51,
+        55
+      ],
+      "moved_prefix_tuple_sha256": "afe017ad38b34f2596634f18a06f0120db67de85fa24b0f5a4e75094ec5391e0"
+    },
+    {
+      "ids": [
+        "tha-ap426",
+        "tha-ap427"
+      ],
+      "book": 37,
+      "old_cut": 216,
+      "new_cut": 212,
+      "union": [
+        190,
+        242
+      ],
+      "union_tuple_sha256": "bf79110a3afac5ed13961b2af548b4a02d4b2109f44537e943d42aa77fdefa3c",
+      "moved_prefix": [
+        212,
+        216
+      ],
+      "moved_prefix_tuple_sha256": "101000efc35d8d8e7bdae1ab4dca61458ad9067d5fae71c2e10df0132dfc5005"
+    },
+    {
+      "ids": [
+        "tha-ap428",
+        "tha-ap429"
+      ],
+      "book": 37,
+      "old_cut": 277,
+      "new_cut": 273,
+      "union": [
+        242,
+        333
+      ],
+      "union_tuple_sha256": "bd9cda600115b8c8d0c838377676bca7173d1a08dab9d20a83412fd8eaa0677e",
+      "moved_prefix": [
+        273,
+        277
+      ],
+      "moved_prefix_tuple_sha256": "44c2779f5f21f78264317d72ae75bea7154adafe2359e7024721582bb42d603f"
+    }
+  ],
+  "preservation": {
+    "whole_unit_count": 8544,
+    "all61_books_sha256": "ad8c7cbfa8249d4f21eb94bd59b556e8823e5870dcf0a657bfaedee5a0fd4883",
+    "full_other8534_records_sha256": "a405ca4d151057e54ce0478b33c5f751d59b0e074264f8060cfd4063a43fe5d2",
+    "other_full_records": 8534,
+    "strict_ten_inverse_equal_original_complete_bytes": true,
+    "all_prior_namespaces": {
+      "thag2.13": "thag-pair-v1",
+      "thag2.14": "thag-pair-v1",
+      "thag16.3": "thag16-3-5-v1",
+      "thag16.4": "thag16-3-5-v1",
+      "thag16.5": "thag16-3-5-v1",
+      "tha-ap19": "apadana-thera11-30-v1",
+      "tha-ap20": "apadana-thera11-30-v1",
+      "tha-ap23": "apadana-thera11-30-v1",
+      "tha-ap24": "apadana-thera11-30-v1",
+      "tha-ap107": "apadana-thera105-106-v1",
+      "tha-ap108": "apadana-thera105-106-v1",
+      "tha-ap333": "apadana-thera333-336-v1",
+      "tha-ap334": "apadana-thera333-336-v1",
+      "tha-ap335": "apadana-thera333-336-v1",
+      "tha-ap336": "apadana-thera333-336-v1",
+      "tha-ap340": "apadana-thera340-341-343-344-346-347-v1",
+      "tha-ap341": "apadana-thera340-341-343-344-346-347-v1",
+      "tha-ap343": "apadana-thera340-341-343-344-346-347-v1",
+      "tha-ap344": "apadana-thera340-341-343-344-346-347-v1",
+      "tha-ap346": "apadana-thera340-341-343-344-346-347-v1",
+      "tha-ap347": "apadana-thera340-341-343-344-346-347-v1",
+      "thi-ap4": "apadana-theri45-v1",
+      "thi-ap5": "apadana-theri45-v1",
+      "thi-ap15": "apadana-theri11-20-v1",
+      "thi-ap16": "apadana-theri11-20-v1",
+      "thi-ap17": "apadana-theri11-20-v1",
+      "thi-ap18": "apadana-theri11-20-v1",
+      "thi-ap19": "apadana-theri11-20-v1",
+      "thi-ap20": "apadana-theri11-20-v1",
+      "thi-ap21": "apadana-theri11-20-v1",
+      "thi-ap23": "apadana-theri21-30-v1",
+      "thi-ap24": "apadana-theri21-30-v1",
+      "thi-ap33": "apadana-theri31-40-v1",
+      "thi-ap34": "apadana-theri31-40-v1",
+      "thi-ap35": "apadana-theri31-40-v1",
+      "thi-ap36": "apadana-theri31-40-v1",
+      "thi-ap37": "apadana-theri31-40-v1",
+      "sn12.22": "sn-dasabala-v1",
+      "sn12.21": "sn-dasabala-v1"
+    },
+    "all_prior_namespaces_sha256": "ba425aab433d75f7deaf7388a2a330794ea844233558328ca93ed55c7994ba90",
+    "new_revision_on_exact10_only": true,
+    "canonical_source_object_sha256": "f9fdc140e85234490247cfbcf05f5d19c95d865fc546ca194fefab420f392932",
+    "commentary": {
+      "manifest_sha256": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156",
+      "packed_sha256": "f231b2d57d92e386cf4de06c18f46d9bfdc75a3136a24036967c9719fbeb03cd",
+      "logical_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461"
+    },
+    "commentary_associations": 16473,
+    "no_target_association_or_union_interval_conflict": true,
+    "343_full_profiles_sha256": "10bdd7fe9a67caae44858e2e257724cfbc9d5b6a9a55285c389bba27f5e4bc22",
+    "343_full_links_sha256": "614463dcd3f2584595c9cde0e7526dfcfda0564211e4f1ba2fce1b55f8043309",
+    "343_manifest_sha256": "18ef986dccbc05cabf311ba44d553b0cf415893484428eecdd476bfe2e1f4bbf",
+    "all343_choices_outside10targets": true,
+    "current_data_file_inventory": {
+      "dpd.json.gz.part-0002": {
+        "bytes": 1294765,
+        "sha256": "25e831647c47c1f97b6d325cf285f2ec761ba1b2ee64f516d3c036c5b2b5af12"
+      },
+      "anandajoti.json": {
+        "bytes": 47765,
+        "sha256": "7ff6df1b2d91418aef2ceacca43dc652cbf1d8363b70fccfb4106e23fd0af669"
+      },
+      "dpd.json.gz.parts.json": {
+        "bytes": 451,
+        "sha256": "5c530a5afef657ceac06a484bfea0e6ecc725c18a38a0f7e3bc687b6028b5854"
+      },
+      "dpd.json.gz.part-0001": {
+        "bytes": 4194304,
+        "sha256": "7f6790cfaca70ad2d5d9dc829420b491288a23d666b3a5ba2f9e0046cc165081"
+      },
+      "commentary.json.gz.part-0001": {
+        "bytes": 4194304,
+        "sha256": "581fb24ed95f5ba4a30f7ca02be4dced03f81315f34d3aa6e8a8601a97f2d946"
+      },
+      "parallels.json.gz": {
+        "bytes": 487201,
+        "sha256": "40cbb52a5a2dd0d41fc49f8d8e0ba4d9090abc25ca89a6fe9426a399d9c3e701"
+      },
+      "postcanonical.json.gz.part-0003": {
+        "bytes": 4194304,
+        "sha256": "a67a0f4c851845de4d519f86f4f5aaae8a86ade22a4a0e7559160b8056073d2e"
+      },
+      "dhamma_lists.json": {
+        "bytes": 37147,
+        "sha256": "6e14b77fd25d8b524da9ce9a3405220c3fbc9286c82d2096d8f0ca7cdd56b33c"
+      },
+      "canon.json.gz.part-0002": {
+        "bytes": 1367701,
+        "sha256": "ff1159f50e8701933a0c0dc61b91330d31836aed7b8ab168d388e6eb7ffbbd78"
+      },
+      "glossary.json.gz": {
+        "bytes": 1523979,
+        "sha256": "a47a735d7a376882609cd6cb56804403adbf10c21e136c36a4c277e09d746d64"
+      },
+      "topics.json": {
+        "bytes": 339961,
+        "sha256": "b1d022643419d6b122138999eb6813db615654cb625a827ea64c256e74facbfb"
+      },
+      "dppn.json": {
+        "bytes": 1207,
+        "sha256": "e3d1bb4af928e8cda64bfd92fe2254569043ee97d9d124583b48eca0201cf959"
+      },
+      "postcanonical.json.gz.part-0002": {
+        "bytes": 4194304,
+        "sha256": "7943baafd6927bdedd408058f75f5a28c7934dddef660932355692976c297147"
+      },
+      "translations.json": {
+        "bytes": 748991,
+        "sha256": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6"
+      },
+      "commentary.json.gz.part-0003": {
+        "bytes": 2443283,
+        "sha256": "905cc7de1186d860c0fd4902c11610cf38d2c3d05fe47ce987b3f22b7d68f06b"
+      },
+      "postcanonical.json.gz.parts.json": {
+        "bytes": 808,
+        "sha256": "310a3db600ad23af025d6f62cfe6f37d56a7fb48f0cda7eaa55a7035bf2e0080"
+      },
+      "commentary.json.gz.part-0002": {
+        "bytes": 4194304,
+        "sha256": "40d18b97cd9859a80eced012436e84cecad1654a78a33a98b7e3ed8f9700bf98"
+      },
+      "postcanonical.json.gz.part-0001": {
+        "bytes": 4194304,
+        "sha256": "3b21aeb1467103dda9b7bdff1a8a06b134df11454003a623ae617d6c452efbd9"
+      },
+      "reviewed-ati-sections.json": {
+        "bytes": 102044,
+        "sha256": "91fde828f07be060a616127e0920b41935a25e180757418036b145a9cfc5214a"
+      },
+      "bmc.json": {
+        "bytes": 40743,
+        "sha256": "01f68a8a0c4aa1a9c21f7743c5172beccd3cce9133037830f8ee7836c4810a63"
+      },
+      "canon.json.gz.part-0001": {
+        "bytes": 4194304,
+        "sha256": "526ba969d0fc3ce62fde7d11764313de43b91a2f71375d602cd647a43b601632"
+      },
+      "canon.json.gz.parts.json": {
+        "bytes": 455,
+        "sha256": "f280027739cb7abd6ada384e64756b3d78fc4f7243f5ce9fe95bdfb2f37c6a10"
+      },
+      "apadana.json": {
+        "bytes": 1382420,
+        "sha256": "18ef986dccbc05cabf311ba44d553b0cf415893484428eecdd476bfe2e1f4bbf"
+      },
+      "commentary.json.gz.parts.json": {
+        "bytes": 631,
+        "sha256": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156"
+      },
+      "reviewed-partial-pages.json": {
+        "bytes": 40136,
+        "sha256": "55495a36fb429de09b3c7c07bae68da87cd76115df7342647babeeba31afbd76"
+      },
+      "postcanonical.json.gz.part-0004": {
+        "bytes": 1927665,
+        "sha256": "13b966525a2d9b312c79c368ba43cfa9cda545124f5692097966aaf0c0d6c82b"
+      },
+      "source-notes.json": {
+        "bytes": 4218,
+        "sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e"
+      }
+    }
+  },
+  "notes_and_pages": {
+    "all17_original_note_occurrences": [
+      {
+        "book": 36,
+        "block": 10352,
+        "note_index": 0,
+        "text_sha256": "5d2c9a7f34a4199e4219ecf0097b8ee1a911ef2739edf5c061eec9881d7435fe",
+        "old_owner": "tha-ap348",
+        "new_owner": "tha-ap348"
+      },
+      {
+        "book": 36,
+        "block": 10355,
+        "note_index": 0,
+        "text_sha256": "33359e596ef59bcafcb91be6cd123c9f64e9daf82fd39d8746d3392aba05a6ab",
+        "old_owner": "tha-ap348",
+        "new_owner": "tha-ap348"
+      },
+      {
+        "book": 36,
+        "block": 10777,
+        "note_index": 0,
+        "text_sha256": "ca82365fb64690ce0d0941422c46341292a995b61046031967c10edaea543c31",
+        "old_owner": "tha-ap374",
+        "new_owner": "tha-ap374"
+      },
+      {
+        "book": 37,
+        "block": 26,
+        "note_index": 0,
+        "text_sha256": "9d680e78dd2d6cdc59e614043fceabe32e4f89d13e84bc60a2378c6c6fc4b864",
+        "old_owner": "tha-ap423",
+        "new_owner": "tha-ap423"
+      },
+      {
+        "book": 37,
+        "block": 31,
+        "note_index": 0,
+        "text_sha256": "a0b0eae63740cf186a386b6e3c87e80d593fee87ecec243f06787966ff85a60f",
+        "old_owner": "tha-ap423",
+        "new_owner": "tha-ap423"
+      },
+      {
+        "book": 37,
+        "block": 34,
+        "note_index": 0,
+        "text_sha256": "146ca9ff774317e9bd512c0f682208a294250ebd7f21fd8f3c8cc97671f22e6a",
+        "old_owner": "tha-ap423",
+        "new_owner": "tha-ap423"
+      },
+      {
+        "book": 37,
+        "block": 37,
+        "note_index": 0,
+        "text_sha256": "193e856a17da534b1d450e421c3b50be922057db4edfedd815d2577aec4da818",
+        "old_owner": "tha-ap423",
+        "new_owner": "tha-ap423"
+      },
+      {
+        "book": 37,
+        "block": 78,
+        "note_index": 0,
+        "text_sha256": "e1c3a2b60173f7febd6ebdab47e277c53d18090aba49557e75dac42501ebe8d6",
+        "old_owner": "tha-ap424",
+        "new_owner": "tha-ap424"
+      },
+      {
+        "book": 37,
+        "block": 80,
+        "note_index": 0,
+        "text_sha256": "aa45f400efbf6048bb252f79e6f17a611e2883e26e9d9b18794a120a52c2bc6d",
+        "old_owner": "tha-ap424",
+        "new_owner": "tha-ap424"
+      },
+      {
+        "book": 37,
+        "block": 83,
+        "note_index": 0,
+        "text_sha256": "b5529581b23dea5e9153c8bf4b0eb42f506b74c71103fe2d71f5bc3d008dae9c",
+        "old_owner": "tha-ap424",
+        "new_owner": "tha-ap424"
+      },
+      {
+        "book": 37,
+        "block": 87,
+        "note_index": 0,
+        "text_sha256": "cb5d557cc19f6692d483a8dcd390e1d24422048e04c235d070f56081b59b0023",
+        "old_owner": "tha-ap424",
+        "new_owner": "tha-ap424"
+      },
+      {
+        "book": 37,
+        "block": 192,
+        "note_index": 0,
+        "text_sha256": "a6c8ed554ab7b1ab7d9fbda73356b9257be6ccb9341f234fafdb4c5134d2618c",
+        "old_owner": "tha-ap426",
+        "new_owner": "tha-ap426"
+      },
+      {
+        "book": 37,
+        "block": 196,
+        "note_index": 0,
+        "text_sha256": "05381b3e181bbc58c6ba3e8d13bce5558a00e474f3ef126e7251e59e0061f43a",
+        "old_owner": "tha-ap426",
+        "new_owner": "tha-ap426"
+      },
+      {
+        "book": 37,
+        "block": 214,
+        "note_index": 0,
+        "text_sha256": "b55494a387305ddc5172364579ecdd864977bd862939856a6c4096b9c8fe21a4",
+        "old_owner": "tha-ap426",
+        "new_owner": "tha-ap427"
+      },
+      {
+        "book": 37,
+        "block": 254,
+        "note_index": 0,
+        "text_sha256": "461d3f7b90437b3ee9f3dd2a31756fd524c5c1b52274e82d5cff02bdab7fc2b6",
+        "old_owner": "tha-ap428",
+        "new_owner": "tha-ap428"
+      },
+      {
+        "book": 37,
+        "block": 303,
+        "note_index": 0,
+        "text_sha256": "0cf59ec1c32092899c29ab427e767002fe58860c2e4769af0e6f020f0358030f",
+        "old_owner": "tha-ap429",
+        "new_owner": "tha-ap429"
+      },
+      {
+        "book": 37,
+        "block": 311,
+        "note_index": 0,
+        "text_sha256": "b368ca2720231f6079425e4a8cb9855fcd8f69594f9d9a6a7b6c7248b72efebc",
+        "old_owner": "tha-ap429",
+        "new_owner": "tha-ap429"
+      }
+    ],
+    "note214_future_owner": "tha-ap427",
+    "all_original_notes_pages_and_rendering_tags_unchanged": true,
+    "PTS10788_inline": [
+      {
+        "edition": "T",
+        "page": "1.455",
+        "visible_offset": 20,
+        "visible_prefix_sha256": "725234fc4f638932156dc0292cb0482cdef4b3eb8a345c06ae7f5f68161a9a91"
+      },
+      {
+        "edition": "P",
+        "page": "1.291",
+        "visible_offset": 20,
+        "visible_prefix_sha256": "725234fc4f638932156dc0292cb0482cdef4b3eb8a345c06ae7f5f68161a9a91"
+      }
+    ],
+    "PTS374_375_new": {
+      "tha-ap374": {
+        "volume": 1,
+        "page": 290,
+        "end_page": 290
+      },
+      "tha-ap375": {
+        "volume": 1,
+        "page": 290,
+        "end_page": 291
+      }
+    },
+    "recitation10381": {
+      "kind": "centre",
+      "tuple_sha256": "ee69b5ca9e91987b02e435403f480f9e31aad290ff06d985298cc98b18b34e49",
+      "owner": "tha-ap349",
+      "not_stanza": true
+    }
+  },
+  "namespace_scope": {
+    "fits_current_index_and_widget_analysis_source_pin_regexes": true,
+    "fits_effective80_character_limit": true,
+    "current_closed_locator_registry_not_yet_extended": true,
+    "root_architecture_and_activation_approval_pending": true
+  },
+  "holds": [
+    "This is an independent source/dataset oracle. No complete future dataset is written into the application or activated.",
+    "Root owns namespace policy, closed target registration and compatibility before activation; all144old positional intents require separate refusal/current-version review, including unchanged-source refs.",
+    "Preserve earlier repair helper constants/hooks/authorities with explicit ordered stages/inverses. Do not broaden the Book36 matcher for split Book37 speaker formulas.",
+    "No raw English or personal records accessed;343Englishobjects preserved by exact current hashes, not new source acquisition.",
+    "Runtime/package/browser/fullcheck/exactCI/release/push and private-data migration approval are outside this oracle."
+  ],
+  "source_ownership_presealed_before_isolated_renderer": true,
+  "app_Builder_or_proposed_repair_imports": false,
+  "coverage_gain": 0
+}

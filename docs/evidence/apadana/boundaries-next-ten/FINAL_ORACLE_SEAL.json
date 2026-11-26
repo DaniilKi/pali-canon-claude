@@ -1,0 +1,56 @@
+{
+  "schema": "independent-next-ten-source-oracle-final-seal-v1",
+  "status": "GO_EXACT_SOURCE_DATA_EXPECTATIONS_ONLY_ARCHITECTURE_AND_ACTIVATION_HELD",
+  "future_canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "files": {
+    "POSITION_CROSSWALK144.json": {
+      "bytes": 263672,
+      "sha256": "223bc745f40774b50f41df41073f1b7f8c67b8eb4067ef28556dd4bb22ac439f"
+    },
+    "derive_oracle.py": {
+      "bytes": 17570,
+      "sha256": "c242e8f7d7912ea0417e8e77606c09c3e9d5d28ddfa9883323ea60a90f540744"
+    },
+    "ORACLE_COMPLETION.json": {
+      "bytes": 7083,
+      "sha256": "180d5f87e280ef773a5043d85b00c4f94fe89a02bbe3f040dde0658b7ae30648"
+    },
+    "PRESEALED_ORACLE.json": {
+      "bytes": 914,
+      "sha256": "245ccdf091c8ca8463b64d80037e44f7423fadd24e5edf565add5b5da5802d0b"
+    },
+    "NEW_TEN_RECORDS.json": {
+      "bytes": 3508,
+      "sha256": "c0a008965acd462b45dcf35eaf8e19abd6246f36a9c64fbb4cab5d4fd16962b0"
+    },
+    "SOURCE340_BLOCKS.json": {
+      "bytes": 73319,
+      "sha256": "74900c763c50311ce6a6c9d1b9fbfca46c19b2c1bd42bfbe3f9624db7ed874f0"
+    },
+    "finish_oracle.py": {
+      "bytes": 9256,
+      "sha256": "ab6e485b9cb83ece4d1d9c88df55605e3a7f0a49996377c6a524a0b538090a00"
+    },
+    "render_isolated.mjs": {
+      "bytes": 4099,
+      "sha256": "2fc2d89856d7989a3d3fa1e8ddd492d7dfeb930eb3408d2770e5e00250e514de"
+    },
+    "ISOLATED_RENDER_INPUT.json": {
+      "bytes": 247821,
+      "sha256": "125e8fcdd3706654cbfcde13519d2dd58dda464aeeccdb2556a77a71c3fb330f"
+    },
+    "FUTURE_ORACLE.json": {
+      "bytes": 32025,
+      "sha256": "78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655"
+    },
+    "OLD_TEN_RECORDS.json": {
+      "bytes": 3003,
+      "sha256": "cce5323b93fc6be3a415e9fb75146d8f1e1696ce7530d2634286d00bebff6255"
+    },
+    "ISOLATED_RENDER_POSITIONS.json": {
+      "bytes": 138182,
+      "sha256": "33e6e64703a26c03fc159887ae05248ed5bccec1c5196f29bf3801c176f6d2c1"
+    }
+  },
+  "architecture_runtime_activation_and_release_approval": false
+}

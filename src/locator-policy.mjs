@@ -14,6 +14,9 @@ export const APADANA_FOUR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + 
 /** Three exact newly reviewed pairs; do not infer intervening or adjacent IDs. */
 export const APADANA_SIX_INDEX_REVISION = 'apadana-thera340-341-343-344-346-347-v1';
 export const APADANA_SIX_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_SIX_INDEX_REVISION;
+/** Five reviewed pairs only; neither an ordinal range nor a personal-data migration. */
+export const APADANA_TEN_INDEX_REVISION = 'apadana-thera-next10-v1';
+export const APADANA_TEN_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_TEN_INDEX_REVISION;
 export const REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   'tha-ap107': APADANA_PAIR_LOCATOR_REVISION, 'tha-ap108': APADANA_PAIR_LOCATOR_REVISION,
   'tha-ap333': APADANA_FOUR_LOCATOR_REVISION, 'tha-ap334': APADANA_FOUR_LOCATOR_REVISION,
@@ -21,6 +24,11 @@ export const REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   'tha-ap340': APADANA_SIX_LOCATOR_REVISION, 'tha-ap341': APADANA_SIX_LOCATOR_REVISION,
   'tha-ap343': APADANA_SIX_LOCATOR_REVISION, 'tha-ap344': APADANA_SIX_LOCATOR_REVISION,
   'tha-ap346': APADANA_SIX_LOCATOR_REVISION, 'tha-ap347': APADANA_SIX_LOCATOR_REVISION,
+  'tha-ap348': APADANA_TEN_LOCATOR_REVISION, 'tha-ap349': APADANA_TEN_LOCATOR_REVISION,
+  'tha-ap374': APADANA_TEN_LOCATOR_REVISION, 'tha-ap375': APADANA_TEN_LOCATOR_REVISION,
+  'tha-ap423': APADANA_TEN_LOCATOR_REVISION, 'tha-ap424': APADANA_TEN_LOCATOR_REVISION,
+  'tha-ap426': APADANA_TEN_LOCATOR_REVISION, 'tha-ap427': APADANA_TEN_LOCATOR_REVISION,
+  'tha-ap428': APADANA_TEN_LOCATOR_REVISION, 'tha-ap429': APADANA_TEN_LOCATOR_REVISION,
 });
 export const requiredCanonicalRevision = id => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id) ? REPAIRED_CANONICAL_LOCATORS[id] : null;
 export const isRepairedCanonical = (id, revision) => requiredCanonicalRevision(id) !== null && revision === requiredCanonicalRevision(id);

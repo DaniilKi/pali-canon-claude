@@ -1,0 +1,27 @@
+{
+  "schema": "independent-next-ten-future-oracle-preseal-v1",
+  "files": {
+    "derive_oracle.py": {
+      "bytes": 17570,
+      "sha256": "c242e8f7d7912ea0417e8e77606c09c3e9d5d28ddfa9883323ea60a90f540744"
+    },
+    "NEW_TEN_RECORDS.json": {
+      "bytes": 3508,
+      "sha256": "c0a008965acd462b45dcf35eaf8e19abd6246f36a9c64fbb4cab5d4fd16962b0"
+    },
+    "SOURCE340_BLOCKS.json": {
+      "bytes": 73319,
+      "sha256": "74900c763c50311ce6a6c9d1b9fbfca46c19b2c1bd42bfbe3f9624db7ed874f0"
+    },
+    "FUTURE_ORACLE.json": {
+      "bytes": 32025,
+      "sha256": "78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655"
+    },
+    "OLD_TEN_RECORDS.json": {
+      "bytes": 3003,
+      "sha256": "cce5323b93fc6be3a415e9fb75146d8f1e1696ce7530d2634286d00bebff6255"
+    }
+  },
+  "future_canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "no_activation": true
+}

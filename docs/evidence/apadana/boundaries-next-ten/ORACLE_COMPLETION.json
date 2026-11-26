@@ -1,0 +1,214 @@
+{
+  "schema": "independent-next-ten-source-oracle-completion-v1",
+  "status": "GO_EXACT_SOURCE_DATA_EXPECTATIONS_ONLY_ARCHITECTURE_AND_ACTIVATION_HELD",
+  "future_canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "old_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "index_revision": "apadana-thera-next10-v1",
+  "presealed_oracle_sha256": "78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655",
+  "preseal_sha256": "245ccdf091c8ca8463b64d80037e44f7423fadd24e5edf565add5b5da5802d0b",
+  "fresh_source_rendered_positions": {
+    "old": 144,
+    "new": 144,
+    "categories": {
+      "SAME_REF_SAME_SOURCE_NOT_MIGRATION_AUTHORITY": 65,
+      "OLD_REF_ABSENT": 10,
+      "SAME_REF_DIFFERENT_SOURCE": 69
+    },
+    "per_unit_counts": {
+      "old": {
+        "tha-ap348": 10,
+        "tha-ap349": 6,
+        "tha-ap374": 12,
+        "tha-ap375": 10,
+        "tha-ap423": 24,
+        "tha-ap424": 21,
+        "tha-ap426": 13,
+        "tha-ap427": 10,
+        "tha-ap428": 16,
+        "tha-ap429": 22
+      },
+      "proposed": {
+        "tha-ap348": 8,
+        "tha-ap349": 8,
+        "tha-ap374": 10,
+        "tha-ap375": 12,
+        "tha-ap423": 22,
+        "tha-ap424": 23,
+        "tha-ap426": 11,
+        "tha-ap427": 12,
+        "tha-ap428": 14,
+        "tha-ap429": 24
+      }
+    },
+    "exact_original_proof38_plus106_metadata_reconciled": true,
+    "source_only_owner_moves": [
+      {
+        "book": 36,
+        "source_blocks": [
+          10367,
+          10368
+        ],
+        "old_ref": "tha-ap348/9",
+        "new_ref": "tha-ap349/1",
+        "type": "heading"
+      },
+      {
+        "book": 36,
+        "source_blocks": [
+          10368,
+          10371
+        ],
+        "old_ref": "tha-ap348/10",
+        "new_ref": "tha-ap349/2",
+        "type": "verse"
+      },
+      {
+        "book": 36,
+        "source_blocks": [
+          10786,
+          10787
+        ],
+        "old_ref": "tha-ap374/11",
+        "new_ref": "tha-ap375/1",
+        "type": "heading"
+      },
+      {
+        "book": 36,
+        "source_blocks": [
+          10787,
+          10790
+        ],
+        "old_ref": "tha-ap374/12",
+        "new_ref": "tha-ap375/2",
+        "type": "verse"
+      },
+      {
+        "book": 37,
+        "source_blocks": [
+          51,
+          52
+        ],
+        "old_ref": "tha-ap423/23",
+        "new_ref": "tha-ap424/1",
+        "type": "heading"
+      },
+      {
+        "book": 37,
+        "source_blocks": [
+          52,
+          55
+        ],
+        "old_ref": "tha-ap423/24",
+        "new_ref": "tha-ap424/2",
+        "type": "verse"
+      },
+      {
+        "book": 37,
+        "source_blocks": [
+          212,
+          213
+        ],
+        "old_ref": "tha-ap426/12",
+        "new_ref": "tha-ap427/1",
+        "type": "heading"
+      },
+      {
+        "book": 37,
+        "source_blocks": [
+          213,
+          216
+        ],
+        "old_ref": "tha-ap426/13",
+        "new_ref": "tha-ap427/2",
+        "type": "verse"
+      },
+      {
+        "book": 37,
+        "source_blocks": [
+          273,
+          274
+        ],
+        "old_ref": "tha-ap428/15",
+        "new_ref": "tha-ap429/1",
+        "type": "heading"
+      },
+      {
+        "book": 37,
+        "source_blocks": [
+          274,
+          277
+        ],
+        "old_ref": "tha-ap428/16",
+        "new_ref": "tha-ap429/2",
+        "type": "verse"
+      }
+    ],
+    "all340_source_blocks_once_each": true,
+    "all17notes_preserved": true,
+    "note214_new_position": {
+      "uid": "tha-ap427",
+      "offset": 1,
+      "ref": "tha-ap427/2",
+      "type": "verse",
+      "source_blocks": [
+        213,
+        216
+      ],
+      "vri_paragraph": "68",
+      "text_sha256": "9719051e0ca7608eaeb1663e2905812bcae4133d963aeb79c6e2437d6880c99a",
+      "text_utf16_length": 86,
+      "notes_sha256": "c221d814ec1c245e5018a6194c1028d657e6122de0207b911cf1e5bef6c02aff",
+      "note_count": 1,
+      "note_text_sha256": [
+        "b55494a387305ddc5172364579ecdd864977bd862939856a6c4096b9c8fe21a4"
+      ]
+    },
+    "recitation10381_new_position": {
+      "uid": "tha-ap349",
+      "offset": 7,
+      "ref": "tha-ap349/8",
+      "type": "prose",
+      "source_blocks": [
+        10381,
+        10382
+      ],
+      "text_sha256": "8c602346fb556cc21309a31af77046322b43f622a2b64f60cb165d2331b8a8a1",
+      "text_utf16_length": 21,
+      "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "note_count": 0
+    },
+    "recitation_not_stanza": true
+  },
+  "source_renderer_bindings": {
+    "existing_canon_mjs_sha256": "b496860add5770a775023b28739c4821af459c96803af644a5ecd20fcc69883f",
+    "existing_editions_mjs_sha256": "ab2306502a68171b474969ddd6c96d16e37891c4d451a6e78b8b17bcc505b68b",
+    "exact_finite_extracted_code_sha256": "a56d0935d6f467f2fdb5a1ae8f117425d8b7d1a9d5cce27bb5f4742112a597a5",
+    "isolated_observation_sha256": "33e6e64703a26c03fc159887ae05248ed5bccec1c5196f29bf3801c176f6d2c1",
+    "app_modules_imported": false,
+    "filesystem_network_or_process_inside_VM": false,
+    "raw_source_unchanged": true
+  },
+  "independent_proofs_preserved": {
+    "Book36_A_preseal": "996c470c30f8513faa5219352fad4f55db120898286e46779520ded1fe069eaf",
+    "Book36_B_preseal": "2a39ee56a56708e90df7b26111e79905697f16d0ee1ccf33731a95ea4f1aed05",
+    "Book37_A_final": "7c1c8449a4acd17e83121d1b403d9d02c33f9891936e3f19b411d9393cac087c",
+    "Book37_B_preseal": "1420b5674a940e3c237eb342246e13e067d3197916d8d0475e1c822dd5af662c",
+    "all_pinned_evidence_file_bytes_revalidated": true,
+    "Book37_B_separate_producer_sha256": "0404686b66f7385104e217b560004a9fe8f25b0970ed1c6d836a30821dda485d",
+    "joint_Book36_closure_sha256": "8bc5307043b7c0c723ea863cc3bcc0542556c29711f0561675d471947d2119e8",
+    "joint_Book37_seal_sha256": "2dd0b31f0de2ce02d5991b1eb7b35fc6b0be0f0b8c628b805b66e98daf600b0a"
+  },
+  "namespace_limits": {
+    "requested_index_revision_length": 23,
+    "combined_locator_length": 64,
+    "fits_current40_suffix_and80total_limits": true,
+    "closed_registry_and_prewording_stale_pin_policy_pending_root_review": true
+  },
+  "holds": [
+    "No actual canonical/app/namespace activation performed. Exact10records and full future hash are expectations for root implementation and independent comparison.",
+    "All144legacy positional intentions require current-version policy, including65same-reference/source cases; no private migration is authorized.",
+    "Root must preserve earlier source helpers/hooks/constants and validate an explicit ordered historical inverse. No broadened detector or source-tag normalization.",
+    "All61books/8534unrelated full records/343Englishprofile+linkobjects/commentary/earlier namespaces remain unchanged in this derived snapshot. No rawEnglish or personal data was accessed.",
+    "No tests, builds, server/tool/browser, package, full-repo copying, Git mutation, network, CI, push or release action; isolated existing-renderer computation is source-only evidence."
+  ]
+}

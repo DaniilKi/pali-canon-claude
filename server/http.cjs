@@ -15520,6 +15520,8 @@ var APADANA_FOUR_INDEX_REVISION = "apadana-thera333-336-v1";
 var APADANA_FOUR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_FOUR_INDEX_REVISION;
 var APADANA_SIX_INDEX_REVISION = "apadana-thera340-341-343-344-346-347-v1";
 var APADANA_SIX_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_SIX_INDEX_REVISION;
+var APADANA_TEN_INDEX_REVISION = "apadana-thera-next10-v1";
+var APADANA_TEN_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_TEN_INDEX_REVISION;
 var REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   "tha-ap107": APADANA_PAIR_LOCATOR_REVISION,
   "tha-ap108": APADANA_PAIR_LOCATOR_REVISION,
@@ -15532,7 +15534,17 @@ var REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   "tha-ap343": APADANA_SIX_LOCATOR_REVISION,
   "tha-ap344": APADANA_SIX_LOCATOR_REVISION,
   "tha-ap346": APADANA_SIX_LOCATOR_REVISION,
-  "tha-ap347": APADANA_SIX_LOCATOR_REVISION
+  "tha-ap347": APADANA_SIX_LOCATOR_REVISION,
+  "tha-ap348": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap349": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap374": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap375": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap423": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap424": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap426": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap427": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap428": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap429": APADANA_TEN_LOCATOR_REVISION
 });
 var requiredCanonicalRevision = (id) => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id) ? REPAIRED_CANONICAL_LOCATORS[id] : null;
 var isRepairedCanonical = (id, revision) => requiredCanonicalRevision(id) !== null && revision === requiredCanonicalRevision(id);
@@ -72931,7 +72943,7 @@ function createServer2({ executeTool } = {}) {
 // src/chatgpt-widget.mjs
 var import_node_crypto11 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v43";
+var WIDGET_VERSION = "v44";
 var NAVIGATION_TIMEOUT_MS = 9e4;
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
