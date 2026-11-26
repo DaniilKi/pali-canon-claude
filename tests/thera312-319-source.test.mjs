@@ -37,7 +37,7 @@ test('exact333 identities preserve all325 full ordered profile and link objects,
   e.assertCatalogue(manifest,APADANA_PROFILES);
   assert.equal(APADANA_COMMIT,REV);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);
-  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,303);
+  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,319);
   assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.compact.canonical_logical_sha256);
   assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
   for(const [path,sha] of Object.entries(e.compact.data_file_sha256)) assert.equal(digest(readFileSync(path)),sha,'Preserved original325 data '+path);

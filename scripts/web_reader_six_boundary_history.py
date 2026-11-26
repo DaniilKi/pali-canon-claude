@@ -318,6 +318,9 @@ def _c1_operation_scope(root):
         raw = regular(root,'tests/fixtures/canon-before-six/'+Path(name).name)
         assert {'bytes':len(raw),'sha256':digest(raw)} == previous[name.removeprefix('server/')]
         fixtures[name] = raw
+    # The metadata-only AP343 input is already checked by the new capture.
+    # Ordinary public physical reads and actual copy inputs remain current359.
+    fixtures['server/data/apadana.json'] = actual['server/data/apadana.json']
     scoped = _C1OperationScope(root,records,actual,fixtures)
     del records, actual, fixtures
     try:

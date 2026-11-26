@@ -4,6 +4,7 @@ All mutations use one owned disposable fixture. No app/network/Git/subprocess.
 """
 import contextlib
 import hashlib
+import json
 import os
 import shutil
 import sys
@@ -15,14 +16,56 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import web_reader_six_boundary_history as h
+import web_reader_intake359 as intake359
+from web_reader_next_ten_boundary_history import assert_next_ten_current_canonical_data as assert_actual_next
 from web_reader_four_boundary_history import copy_historical_fixture
 from web_reader_approved_acceptance import (approved_catalogue, approved_runtime,
     historical_c1_approved_catalogue)
 
 
+def independent_current34():
+    raw=(ROOT/'docs/evidence/apadana/english335-350/RUNTIME_INVENTORY.json').read_bytes()
+    assert hashlib.sha256(raw).hexdigest()=='516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b'
+    value=json.loads(raw)
+    assert value['candidate_commit']=='b2280c55ccf29c778abd89f26e3165b367b5ddba'
+    assert len(value['files'])==34
+    return value['files']
+
+
+def historical343_input(root):
+    # Explicit immutable TEST INPUT, never a projection of a current API result.
+    raw=(root/'docs/evidence/apadana/english335-350/BASELINE343_FULL_OBJECTS.json').read_bytes()
+    assert hashlib.sha256(raw).hexdigest()=='74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e'
+    value=json.loads(raw)
+    assert value['commit']=='3d614795cf95e45280603e95f68846c52eba4818'
+    assert list(value['profiles'])==list(value['links']) and len(value['profiles'])==343
+    return {'ids':list(value['profiles']), 'profiles':value['profiles'],
+            'links':value['links'], 'source':value['manifest_source']}
+
+
+def verify_current_and_historical_closure(root,current359,current34):
+    intake359.fresh_proofs(root)  # all13 physical proofs; never a real-root fallback
+    assert assert_actual_next(root)==current34
+    old=historical343_input(root)
+    assert len(current359['ids'])==len(current359['profiles'])==len(current359['links'])==359
+    for uid in old['ids']:
+        assert current359['profiles'][uid]==old['profiles'][uid]
+        assert current359['links'][uid]==old['links'][uid]
+    raw=(root/intake359.AP_FIXTURE).read_bytes()
+    assert hashlib.sha256(raw).hexdigest()=='18ef986dccbc05cabf311ba44d553b0cf415893484428eecdd476bfe2e1f4bbf'
+    assert len(json.loads(raw)['links'])==343
+    actual=(root/'server/data/apadana.json').read_bytes()
+    assert {'bytes':len(actual),'sha256':hashlib.sha256(actual).hexdigest()}==current34['data/apadana.json']
+    assert len(json.loads(actual)['links'])==359
+    h.assert_preserved_c1_catalogue(root,old)
+    return old
+
+
 class SixOperationScopeControls(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        expected34=independent_current34()
+        assert assert_actual_next(ROOT)==expected34
         cls.temp = tempfile.TemporaryDirectory(prefix='pali-six-operation-')
         cls.addClassCleanup(cls.temp.cleanup)
         cls.root = Path(cls.temp.name)
@@ -35,10 +78,11 @@ class SixOperationScopeControls(unittest.TestCase):
             shutil.copyfile(ROOT / name, target)
         cls.parent = h.parent343_records(cls.root)
         cls.approved = approved_catalogue(cls.root)
-        h.assert_preserved_c1_catalogue(cls.root, cls.approved)
-        assert len(cls.approved['ids']) == 343
+        assert len(cls.approved['ids']) == 359
         cls.runtime = approved_runtime(cls.root)
+        assert cls.runtime == expected34
         assert len(cls.runtime) == 34
+        cls.historical343=verify_current_and_historical_closure(cls.root,cls.approved,cls.runtime)
 
     @contextlib.contextmanager
     def change(self, name, missing=False, preserve_mtime=False):

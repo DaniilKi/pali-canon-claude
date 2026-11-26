@@ -717,10 +717,10 @@ def approved_six_runtime(root):
     return six_runtime_records(root, approved343_runtime(root))
 
 def approved_catalogue(root):
-    return approved_next_ten_catalogue(root)
+    return approved359_catalogue(root)
 
 def approved_runtime(root):
-    return approved_next_ten_runtime(root)
+    return approved359_runtime(root)
 
 
 def historical_c1_approved_catalogue(root):
@@ -746,3 +746,20 @@ def approved_next_ten_runtime(root):
         # Retain every old authority before accepting the new inventory graph.
         previous = six_runtime_records(scoped,approved343_runtime(scoped))
         return _next_ten._runtime_records(scoped._next_ten_binding,scoped._root,previous)
+
+
+def approved359_catalogue(root):
+    _reject_c1_scope(root)
+    with _c1_operation_scope(root) as scoped:
+        previous = _approved_six_catalogue_body(scoped)
+        return _next_ten._current359_catalogue(scoped._next_ten_binding, scoped._root, previous)
+
+
+def approved359_runtime(root):
+    _reject_c1_scope(root)
+    with _c1_operation_scope(root) as scoped:
+        previous = six_runtime_records(scoped, approved343_runtime(scoped))
+        historical343 = _next_ten._runtime_records(scoped._next_ten_binding, scoped._root, previous)
+        # Historical343 proof graph is still fully evaluated before actual359.
+        assert len(historical343) == 34
+        return _next_ten._current359_records(scoped._next_ten_binding, scoped._root)

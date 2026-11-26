@@ -1,5 +1,6 @@
 /** Strict TEST-METADATA bridge. Never import from src/web or transform a tool payload. */
 import assert from 'node:assert/strict';
+import {normalize343Metadata,profilesForHistorical343} from './intake359-metadata.mjs';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -32,8 +33,9 @@ assert.deepEqual(approval.approved_records,NEW_IDS.map((id,i)=>({id,publisher_ch
 assert.equal(compact.canonical_logical_sha256,'46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8');
 assert.deepEqual(approval.held_ids,previous.held_ids);for(const id of approval.held_ids)assert.ok(!approval.expected_profile_ids.includes(id));
 function oldMaps(p,l){assert.deepEqual(Object.keys(p),compact.ids);assert.deepEqual(Object.keys(l),compact.ids);for(const id of compact.ids){assert.equal(objectSha(p[id]),compact.profile_object_sha256[id]);assert.equal(objectSha(l[id]),compact.translation_object_sha256[id]);}}
-export function requireProfiles343(observed){assert.deepEqual(Object.keys(observed),approval.expected_profile_ids);for(const id of compact.ids)assert.equal(objectSha(observed[id]),compact.profile_object_sha256[id]);for(const id of NEW_IDS){assert.deepEqual(observed[id],profiles[id]);assert.equal(objectSha(observed[id]),objectSha(profiles[id]));}}
+export function requireProfiles343(observed){observed=profilesForHistorical343(observed);assert.deepEqual(Object.keys(observed),approval.expected_profile_ids);for(const id of compact.ids)assert.equal(objectSha(observed[id]),compact.profile_object_sha256[id]);for(const id of NEW_IDS){assert.deepEqual(observed[id],profiles[id]);assert.equal(objectSha(observed[id]),objectSha(profiles[id]));}}
 export function project343To339(observed,catalogue){
+ ({profiles:observed,catalogue}=normalize343Metadata(observed,catalogue));
  requireProfiles343(observed);assert.deepEqual(Object.keys(catalogue),['version','source','vri_commit','held','links']);assert.equal(catalogue.version,1);assert.equal(catalogue.vri_commit,'2d134ff9ef60f70a1eb03c9370580228811a3070');assert.deepEqual(catalogue.held,{});
  assert.deepEqual(Object.keys(catalogue.links),approval.expected_profile_ids);
  for(const id of compact.ids)assert.equal(objectSha(catalogue.links[id]),compact.translation_object_sha256[id]);
@@ -47,6 +49,7 @@ export function project343To339(observed,catalogue){
 }
 /** Historical test inputs only; strict343 positives must call project343To339. */
 export function historical339Metadata(observed,catalogue){
+ ({profiles:observed,catalogue}=normalize343Metadata(observed,catalogue));
  if(Object.keys(observed).length===343)return project343To339(observed,catalogue);
  oldMaps(observed,catalogue.links);assert.equal(objectSha(catalogue.source),compact.manifest_source_sha256);
  const envelope={...catalogue};delete envelope.links;assert.equal(objectSha(envelope),compact.manifest_envelope_without_links_sha256);return {profiles:observed,catalogue};
@@ -64,6 +67,7 @@ export function currentHeldPublishers(historical){
 export function publisher343Authority(){return {approval,compact,profiles,links,newIds:[...NEW_IDS],newRecords:approval.approved_records};}
 
 export function profilesForHistorical339(observed){
+ observed=profilesForHistorical343(observed);
  if(Object.keys(observed).length===343){requireProfiles343(observed);return Object.freeze(Object.fromEntries(compact.ids.map(id=>[id,observed[id]])));}
  assert.deepEqual(Object.keys(observed),compact.ids);for(const id of compact.ids)assert.equal(objectSha(observed[id]),compact.profile_object_sha256[id]);return observed;
 }

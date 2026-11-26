@@ -1,3 +1,4 @@
+import {normalize343Metadata,profilesForHistorical343} from './intake359-metadata.mjs';
 /** Expectations come from independently sealed originals, never parser output. */
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -38,11 +39,13 @@ export function fourEnglishEvidence(){
     assert.equal(bytes.length,row.raw_bytes);assert.equal(sha(bytes),row.raw_sha256);assert.equal(createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex'),row.git_blob_sha1);return bytes.toString('utf8');
   }
   function assertProfiles(observed){
+    observed=profilesForHistorical343(observed); // Strict full359 guard before old343-only test inputs.
     assert.deepEqual(Object.keys(observed),approval.expected_profile_ids);
     for(const id of compact.ids)assert.equal(objectSha(observed[id]),compact.profile_object_sha256[id],id);
     for(const id of IDS)assert.deepEqual(observed[id],profiles[id]);
   }
   function assertCatalogue(manifest,observed){
+    ({profiles:observed,catalogue:manifest}=normalize343Metadata(observed,manifest));
     assertProfiles(observed);assert.deepEqual(Object.keys(manifest.links),approval.expected_profile_ids);
     for(const id of compact.ids)assert.equal(objectSha(manifest.links[id]),compact.translation_object_sha256[id],id);
     for(const id of IDS)assert.deepEqual(manifest.links[id],links[id]);

@@ -4,6 +4,7 @@ PROPOSAL ONLY. New application/runtime seals intentionally remain invalid until
 an independent inventory/review seals an actual build. No environment overrides,
 mtime cache, virtual root, ambient operation state or public callback injection.
 """
+import web_reader_intake359 as _intake359
 from collections.abc import Mapping
 import copy
 import gzip
@@ -235,12 +236,14 @@ def _packed(data, records):
 
 class _NextTenBinding:
     """Owned by exactly one private operation; not a path or public root token."""
-    __slots__ = ('_root', '_records', '_actual', '_owner', '_active')
+    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359')
 
-    def __init__(self, root, records, actual):
+    def __init__(self, root, records, actual, current359, catalogue359):
         object.__setattr__(self, '_root', _physical_root(root))
         object.__setattr__(self, '_records', _freeze(records))
         object.__setattr__(self, '_actual', MappingProxyType(dict(actual)))
+        object.__setattr__(self, '_current359', _freeze(current359))
+        object.__setattr__(self, '_catalogue359', catalogue359)
         object.__setattr__(self, '_owner', get_ident())
         object.__setattr__(self, '_active', True)
 
@@ -255,6 +258,8 @@ class _NextTenBinding:
         object.__setattr__(self, '_active', False)
         object.__setattr__(self, '_records', MappingProxyType({}))
         object.__setattr__(self, '_actual', MappingProxyType({}))
+        object.__setattr__(self, '_current359', MappingProxyType({}))
+        object.__setattr__(self, '_catalogue359', b'')
 
 
 class _CapturedDDData(Mapping):
@@ -286,6 +291,7 @@ def _binding_records(binding, root):
         raise ValueError('Next-ten operation root identity changed')
     observed = proof_records(binding._root)  # physical proofs; NEVER rescan27
     assert observed == binding._records
+    _intake359.fresh_proofs(binding._root)
     return observed
 
 
@@ -294,18 +300,21 @@ def _capture_six_test_input(root):
     global _VALIDATED_FRAME
     root = _physical_root(root)
     current = proof_records(root)
+    current359, ap343, catalogue359 = _intake359.capture_authority(root, current)
     previous = prior_dd_records(root)
     actual = {}
     identity = []
-    for name in sorted(n for n in current if n.startswith('data/')):
+    for name in sorted(n for n in current359 if n.startswith('data/')):
         raw = regular(root, 'server/' + name)
         checksum = digest(raw)
-        assert {'bytes': len(raw), 'sha256': checksum} == current[name]
+        assert {'bytes': len(raw), 'sha256': checksum} == current359[name]
         identity.append(checksum)
         actual['server/' + name] = raw
     assert len(actual) == 27 and all(type(raw) is bytes for raw in actual.values())
     # No old-actual fallback: every actual data byte must match the new inventory.
+    assert json.loads(actual[_intake359.AP_PATH]) == json.loads(catalogue359)['manifest']
     dd = dict(actual)
+    dd[_intake359.AP_PATH] = ap343
     for name in DD_DATA_PATHS:
         raw = regular(root, FIXTURE_DIRECTORY + '/' + Path(name).name)
         checksum = digest(raw)
@@ -324,7 +333,7 @@ def _capture_six_test_input(root):
         _VALIDATED_FRAME = key
     # Non-core records equal previous and were already physically hashed above;
     # four frozen DD fixtures were independently hashed once at their read.
-    binding = _NextTenBinding(root, current, actual)
+    binding = _NextTenBinding(root, current, actual, current359, catalogue359)
     return previous, _CapturedDDData(dd, binding)
 
 
@@ -352,7 +361,8 @@ def _fixture_names(root):
     return (DIRECTORY + '/' + ORACLE_NAME,
             DIRECTORY + '/runtime/' + INVENTORY_NAME,
             DIRECTORY + '/runtime/' + REVIEW_NAME,
-            *(FIXTURE_DIRECTORY + '/' + Path(name).name for name in DD_DATA_PATHS))
+            *(FIXTURE_DIRECTORY + '/' + Path(name).name for name in DD_DATA_PATHS),
+            *_intake359.fixture_names())
 
 
 def _actual_copy_input(binding, root, name):
@@ -366,6 +376,18 @@ def assert_next_ten_current_canonical_data(root):
     """Public gate: fresh real27 capture on every call, no old-actual fallback."""
     _, actual = _capture_six_test_input(root)
     try:
-        return _binding_records(actual._binding, root)
+        return _current359_records(actual._binding, root)
     finally:
         _release_binding(actual._binding)
+
+
+def _current359_records(binding, root):
+    _binding_records(binding, root)
+    return {name: dict(row) for name, row in binding._current359.items()}
+
+
+def _current359_catalogue(binding, root, previous):
+    _binding_records(binding, root)
+    payload = json.loads(binding._catalogue359)
+    assert previous == payload['previous']
+    return payload['current']

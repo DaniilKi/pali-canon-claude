@@ -1,3 +1,4 @@
+import {normalize343Metadata,requireProfiles359,INTAKE359_PUBLISHERS} from './helpers/intake359-metadata.mjs';
 import test,{afterEach}from'node:test';
 import assert from'node:assert/strict';
 import {readFileSync as readActualFileSync} from 'node:fs';
@@ -19,8 +20,8 @@ afterEach(()=>{globalThis.fetch=originalFetch;liveCache.clear();});
 function transport(calls,mutate){
   liveCache.clear();globalThis.fetch=async(input,init={})=>{const url=typeof input==='string'?input:input.href,id=IDS.find(id=>e.profiles[id].raw_url===url);assert.ok(id,'Only the four exact official source URLs reach transport');assert.ok(!url.includes('SYNTHETIC_PRIVATE_343')&&!JSON.stringify(init).includes('SYNTHETIC_PRIVATE_343'));calls.push(id);return new Response(mutate?mutate(e.artifact(id),id):e.artifact(id));};
 }
-test('current343 preserves every complete339 object, current canonical data and repaired locator namespaces',()=>{
-  const manifest=JSON.parse(readFileSync('server/data/apadana.json'));e.assertCatalogue(manifest,APADANA_PROFILES);
+test('current359 preserves the complete343 metadata cohort and its historical339/source/locator assertions',()=>{
+  const manifest=JSON.parse(readActualFileSync('server/data/apadana.json'));e.assertCatalogue(manifest,APADANA_PROFILES);
   for(const[path,pin]of Object.entries(e.compact.data_file_sha256))assert.equal(sha(readFileSync(path)),pin,path);
   assert.equal(Object.keys(e.compact.data_file_sha256).length,26);
   for(const id of IDS){assert.equal(APADANA_PROFILES[id].index_revision,'apadana-thera333-336-v1');assert.equal(requiredCanonicalRevision(id),VRI+'-apadana-thera333-336-v1');assert.ok(!e.approval.held_ids.includes(id));}
@@ -59,14 +60,24 @@ test('source and prefix drift never substitutes another version and altered righ
   for(const id of IDS){const p=e.profiles[id],unit=canon.resolve(id).unit,first=await english.translation(unit,tid(p),{translation_revision:REV,limit:500}),next=first.continue_with.arguments;const before=calls.length;await assert.rejects(english.translation(unit,tid(p),{...next,translation_revision:'0'.repeat(40)}));assert.equal(calls.length,before);await assert.rejects(english.translation(unit,tid(p),{...next,prefix_sha256:'0'.repeat(64)}),/prefix changed/);assert.equal(calls.at(-1),id);const value=await english.translation(unit,tid(p),next);assert.equal(value.offset,500);assert.equal(value.translation_id,tid(p));const link=canon.load().translations[id].find(v=>tid(v)===tid(p)),old=clone(link);try{link.license='CC0';const count=calls.length;await assert.rejects(english.translation(unit,tid(p),{translation_revision:REV}));assert.equal(calls.length,count);}finally{for(const key of Object.keys(link))delete link[key];Object.assign(link,old);}}
   transport([],raw=>raw+'\n');for(const id of IDS)await assert.rejects(english.translation(canon.resolve(id).unit,tid(e.profiles[id]),{translation_revision:REV,limit:500}));
 });
-test('all remaining dated source exclusions and witness335 stay inactive while exactly331 is reclassified',async()=>{
-  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Unapproved source must not fetch');};const held=[70,140,158,159,...e.approval.explicitly_not_activated_publishers];assert.ok(!held.includes(331));assert.ok(held.includes(335));
+test('prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16',async()=>{
+  requireProfiles359(APADANA_PROFILES);
+  const historicalHeld=[70,140,158,159,...e.approval.explicitly_not_activated_publishers];
+  assert.deepEqual(historicalHeld.filter(poem=>INTAKE359_PUBLISHERS.includes(poem)),[335]);
+  const held=historicalHeld.map(poem=>poem===335?351:poem);
+  assert.deepEqual(held.filter(poem=>poem!==351),historicalHeld.filter(poem=>poem!==335));
+  assert.ok(!INTAKE359_PUBLISHERS.includes(351));
+  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Unapproved source must not fetch');};assert.ok(!held.includes(331));assert.ok(held.includes(351));
   for(const n of held){const id='tha-ap'+(n+2),url=`https://raw.githubusercontent.com/apadana-translation/apadana-site/${REV}/src/_poems/chapter-3/poem-${n}.md`;assert.equal(APADANA_PROFILES[id],undefined);assert.equal(isApadanaRawUrl(url),false);await assert.rejects(fetchPublic(url,{json:false}));await assert.rejects(english.translation(canon.resolve(id).unit,`ap:chapter-3/poem-${n}`));}
   for(const id of IDS)assert.equal(isApadanaRawUrl(e.profiles[id].raw_url),true);const media=e.profiles[IDS[0]].raw_url.replace('.md','.mp3');assert.equal(isApadanaRawUrl(media),false);await assert.rejects(fetchPublic(media,{json:false}));assert.equal(calls,0);
 });
 test('immutable approval and full343 metadata reject same-count substitutions and missing previous objects',()=>{
   const bytes=readFileSync('docs/evidence/apadana/THERA_331_334_APPROVAL.json');decodeApproval(bytes);assert.throws(()=>decodeApproval(Buffer.concat([bytes,Buffer.from(' ')])));
-  const profiles=clone(APADANA_PROFILES),manifest=JSON.parse(readFileSync('server/data/apadana.json'));e.assertCatalogue(manifest,profiles);
+  const currentProfiles=clone(APADANA_PROFILES),currentManifest=JSON.parse(readActualFileSync('server/data/apadana.json'));e.assertCatalogue(currentManifest,currentProfiles);
+  // Only the already guarded359 metadata is converted into this historical343
+  // mutation fixture. Actual source/API responses above retain current data.
+  const {profiles,catalogue:manifest}=normalize343Metadata(currentProfiles,currentManifest);
+  e.assertCatalogue(manifest,profiles);
   const bad=clone(profiles);bad['tha-ap337']=bad['tha-ap336'];delete bad['tha-ap336'];assert.equal(Object.keys(bad).length,343);assert.throws(()=>e.assertProfiles(bad));
   const changed=clone(manifest);changed.links['tha-ap333'].license='CC0';assert.throws(()=>e.assertCatalogue(changed,profiles));delete profiles[e.compact.ids[0]];assert.throws(()=>e.assertProfiles(profiles));
 });

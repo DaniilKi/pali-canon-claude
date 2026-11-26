@@ -1,3 +1,4 @@
+import {profilesForHistorical343,requireProfiles359} from './helpers/intake359-metadata.mjs';
 /** Proposed root-owned test: run only after the four normalized profiles are independently sealed. */
 import test, {afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -79,7 +80,7 @@ function nativePrefaceOnce(data) {
 }
 
 test('two literal note-owning prefaces preserve all339 prior metadata contracts and refuse borrowed owners', () => {
-  assert.equal(Object.keys(APADANA_PROFILES).length, 343); for (const uid of ids) assert.ok(APADANA_PROFILES[uid]);
+  requireProfiles359(APADANA_PROFILES);assert.equal(Object.keys(APADANA_PROFILES).length, 359); for (const uid of ids) assert.ok(APADANA_PROFILES[uid]);
   const p = APADANA_PROFILES['tha-ap333']; assert.ok(p);
   assert.deepEqual(Object.keys(p.publisher_preface).sort(), ['body_sha256','kind','label','note_numbers','notes_sha256','parent_id']);
   assert.equal(p.publisher_preface.kind, 'publisher_preface');
@@ -87,7 +88,8 @@ test('two literal note-owning prefaces preserve all339 prior metadata contracts 
   assert.equal(p.publisher_preface.label, 'Thirty-fourth Therā chapter preface');
   assert.equal(p.publisher_preface.body_sha256, p.paratext_sha256);
   assert.deepEqual(p.publisher_preface.note_numbers, [1]); assert.deepEqual(p.note_numbers, [2,3,4]);
-  const prior = Object.keys(APADANA_PROFILES).filter(uid => !ids.includes(uid)); assert.equal(prior.length, 339);
+  const historical343=profilesForHistorical343(APADANA_PROFILES);
+  const prior = Object.keys(historical343).filter(uid => !ids.includes(uid)); assert.equal(prior.length, 339);
   for (const uid of prior) {
     const old = APADANA_PROFILES[uid], choice = english.available(canon.resolve(uid).unit).find(row => row.translation_id === tid(old));
     validatePublisherPreface(choice, uid); validateApadanaChoice(choice, uid);

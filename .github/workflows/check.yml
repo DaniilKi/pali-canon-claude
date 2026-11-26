@@ -875,6 +875,7 @@ jobs:
           repository: VipassanaTech/tipitaka-xml
           ref: 2d134ff9ef60f70a1eb03c9370580228811a3070
           path: .fixtures/vri-english335-350
+          persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: romn/s0510m1.mul.xml
       - name: Replay sixteen originals without application parser inputs
@@ -1582,6 +1583,9 @@ jobs:
             reviewed-publisher312-319.tap
             reviewed-publisher321-329.tap
             reviewed-publisher331-334.tap
+            reviewed-publisher335-350.tap
+            .fixtures/english16-source-replay/SOURCE_REPLAY_REPORT.json
+            .fixtures/english16-source-replay/SOURCE_REPLAY_SEAL.json
             reviewed-six-boundary.tap
             reviewed-next-ten.tap
             standalone-reader.report.json

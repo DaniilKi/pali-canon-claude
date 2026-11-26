@@ -56,4 +56,4 @@ export function projectPublisher339ClientTo333(path,source){
 
 export function requireProfiles339(observed){return historicalRequireProfiles339(profilesForHistorical339(observed));}
 export function projectPublisher339To333(observed,catalogue){const old=historical339Metadata(observed,catalogue);return historicalProjectPublisher339To333(old.profiles,old.catalogue);}
-export function normalize339InputTo333(observed,catalogue){if(Object.keys(observed).length===343){const old=historical339Metadata(observed,catalogue);return historicalNormalize339InputTo333(old.profiles,old.catalogue);}return historicalNormalize339InputTo333(observed,catalogue);}
+export function normalize339InputTo333(observed,catalogue){if(Object.keys(observed).length===343||Object.keys(observed).length===359){const old=historical339Metadata(observed,catalogue);return historicalNormalize339InputTo333(old.profiles,old.catalogue);}return historicalNormalize339InputTo333(observed,catalogue);}

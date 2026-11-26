@@ -4,6 +4,7 @@ No private records are read or migrated. The Node wrapper supplies hard deadline
 OriginalSource additionally requires the exact public VRI source checkout.
 """
 import ast
+import base64
 import copy
 import gzip
 import hashlib
@@ -22,6 +23,8 @@ sys.path.insert(0, str(ROOT / 'scripts/canon'))
 import apadana_thera340_spans as six
 sys.path.insert(0, str(ROOT / 'scripts'))
 from web_reader_next_ten_boundary_history import dd_logical_input
+from web_reader_approved_acceptance import approved_catalogue, approved_runtime, assert_catalogue, assert_runtime
+from web_reader_intake359 import AP_FIXTURE
 
 OLD_SHA = '46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8'
 NEW_SHA = '0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b'
@@ -93,6 +96,55 @@ def source_preview(u, tuples):
         source_note_sha256=[sha(n.encode()) for n in s['notes']], source_notes_sha256=digest(s['notes']),
         variant_reading_count=len(s['notes'])) for i, s in enumerate(out)]
 
+# Closed, original343 source-code inputs. These are not application/API reads.
+HISTORICAL_PROFILE_SOURCE_PATHS = (
+    'src/apadana-profiles.mjs', 'src/apadana-thera-profiles.mjs',
+    'src/apadana-thera261-280-profiles.mjs', 'src/apadana-thera281-285-profiles.mjs',
+    'src/apadana-thera287-288-profiles.mjs', 'src/apadana-thera292-299-profiles.mjs',
+    'src/apadana-thera301-310-profiles.mjs', 'src/apadana-thera312-319-profiles.mjs',
+    'src/apadana-thera321-329-profiles.mjs', 'src/apadana-thera331-334-profiles.mjs',
+)
+
+
+def historical_profile_source_inputs():
+    """One bounded Node source-only inverse; unknown bytes meet old SHA checks.
+
+    The reviewed JS decoder physically verifies its independent map/index and
+    performs unique literal hunks plus complete3d SHA checks. No unchecked
+    Python reimplementation or historical runtime response projection is used.
+    """
+    program = r"""
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+const {current3dSourceInput} = await import(pathToFileURL(resolve('tests/helpers/intake359-source-input.mjs')));
+const names = JSON.parse(process.argv[1]);
+const expected = ['src/apadana-profiles.mjs','src/apadana-thera-profiles.mjs','src/apadana-thera261-280-profiles.mjs','src/apadana-thera281-285-profiles.mjs','src/apadana-thera287-288-profiles.mjs','src/apadana-thera292-299-profiles.mjs','src/apadana-thera301-310-profiles.mjs','src/apadana-thera312-319-profiles.mjs','src/apadana-thera321-329-profiles.mjs','src/apadana-thera331-334-profiles.mjs'];
+assert.deepEqual(names,expected,'Exact original343 source-file closure');
+let total = 0;
+const result = {};
+for (const name of names) {
+    const raw = readFileSync(resolve(name));
+    assert.ok(raw.length <= 2 * 1024 * 1024,'Bounded public source file');
+    const before = Buffer.from(current3dSourceInput(name,raw.toString('utf8')),'utf8');
+    total += before.length;
+    assert.ok(total <= 3 * 1024 * 1024,'Bounded closed source-file output');
+    result[name] = before.toString('base64');
+}
+process.stdout.write(JSON.stringify(result));
+"""
+    result = subprocess.run(['node', '--input-type=module', '-e', program,
+        json.dumps(HISTORICAL_PROFILE_SOURCE_PATHS)], cwd=ROOT, capture_output=True,
+        encoding='utf-8', timeout=20,
+        env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})
+    assert result.returncode == 0, 'Bounded source-only inverse failed: ' + result.stderr
+    assert not result.stderr and len(result.stdout.encode('utf-8')) <= 5 * 1024 * 1024
+    decoded = json.loads(result.stdout)
+    assert list(decoded) == list(HISTORICAL_PROFILE_SOURCE_PATHS)
+    return {name: base64.b64decode(value, validate=True) for name, value in decoded.items()}
+
+
 class Fixture(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -106,6 +158,18 @@ class Fixture(unittest.TestCase):
         cls.reader = cls.proofs['READER_ORACLES.json']
         cls.preserve = cls.proofs['PRESERVATION_ORACLES.json']['preservation']
         cls.ids = tuple(cls.proof['targets'])
+        # Verify genuine current359 metadata and physical current34 first.
+        # Only afterwards obtain the separate pinned historical343 QA inputs.
+        current359 = approved_catalogue(ROOT)
+        assert len(current359['ids']) == len(current359['profiles']) == len(current359['links']) == 359
+        assert_catalogue(json.loads((ROOT / 'server/data/apadana.json').read_bytes()), current359)
+        runtime359 = approved_runtime(ROOT)
+        assert len(runtime359) == 34
+        assert assert_runtime(ROOT, ROOT / 'server') == {name: row['sha256'] for name, row in runtime359.items()}
+        cls.historical_ap343 = (ROOT / AP_FIXTURE).read_bytes()
+        assert sha(cls.historical_ap343) == cls.preserve['apadana_metadata_file_sha256']
+        assert tuple(cls.preserve['all10_profile_source_files_exact']) == HISTORICAL_PROFILE_SOURCE_PATHS
+        cls.historical_profile_sources = historical_profile_source_inputs()
         assert cls.ids == ('tha-ap340', 'tha-ap341', 'tha-ap343', 'tha-ap344', 'tha-ap346', 'tha-ap347')
         cls.old_records = {r['id']: r['before'] for r in cls.proof['records']}
         cls.new_records = {r['id']: r['future'] for r in cls.proof['records']}
@@ -150,11 +214,11 @@ class SixBoundaryData(Fixture):
         self.assertEqual(digest(other), self.preserve['other8538_unit_records_ordered_sha256'])
         self.assertEqual(digest(self.current['source']), self.preserve['source_policy_sha256'])
         self.assertEqual(digest(self.current['books'][36]['blocks']), six.ROOT_BLOCKS_SHA256)
-        cat = (ROOT / 'server/data/apadana.json').read_bytes()
+        cat = self.historical_ap343
         self.assertEqual(sha(cat), self.preserve['apadana_metadata_file_sha256'])
         self.assertEqual(len(json.loads(cat)['links']), 343)
         for name, r in self.preserve['all10_profile_source_files_exact'].items():
-            b = (ROOT / name).read_bytes()
+            b = self.historical_profile_sources[name]
             self.assertEqual((len(b), sha(b)), (r['bytes'], r['sha256']))
 
     def test_02_atomic_all_six_output_idempotence_and_three_source_unions(self):

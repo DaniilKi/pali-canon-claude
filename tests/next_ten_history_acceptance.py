@@ -28,6 +28,9 @@ PINS = {CURRENT_INVENTORY:'ea2b5cfb7c7a6c9216e2f33a5d1950c128b1ef50cb6c32cf929cf
         CURRENT_REVIEW:'b3197bdcc429700dee09446abd01ff08c6009d4fcaedc3f2f542429c4f497f55',
         DIRECTORY+'FUTURE_ORACLE.json':'78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655',
         DD_INVENTORY:'ba913149e9d704e1b145d1a6a195f95ad20e0d2dbc73fa6da22f16f43f492c08'}
+INTAKE_DIRECTORY = 'docs/evidence/apadana/english335-350/'
+INTAKE_AP343 = 'tests/fixtures/canon-before-intake359/apadana.json'
+INTAKE_PINS = {'BASELINE343.json': '4c122fff1283b3ee5904f1f6ea781572347d6e42140dcdd25d7765e8ab00e138', 'BASELINE343_FULL_OBJECTS.json': '74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e', 'BASELINE_DATA27.json': '8631b90104e01329b74d22cc7632df265e9b9072efd6ba17b5478450b026a99f', 'BASELINE_RUNTIME34.json': '6becdfab6b8e948a6d2df9af1a37131c4c0c727d77db79cf4bb4b93973512f23', 'SOURCE_REVIEW.json': '61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a', 'SOURCE_CURATION.json': 'e777f4dc3b154a448162b8d0c274d44995722903ebef59e133172ee46ecac5da', 'APPROVAL.json': '9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6', 'PROFILES.json': '4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d', 'LINKS.json': 'f284bc4dcbb415a55aa025f654018448ce3578772dea010f12d8e7cfd536da0a', 'EXPECTED_MANIFEST.json': '57b6fd43f4b8273e9542b8a22a6bd84b2042914113d53c94fe727386c5ec0194', 'PROFILE_SCHEMA_REVIEW.json': '7af2686040b00e89730568771ff8d35e64b676b383f014981eb809d4f63203e5', 'RUNTIME_INVENTORY.json': '516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b', 'RUNTIME_REVIEW.json': '646ab8d8fdcabb0130766b056c00997d9e10f6e99a640445628bdff6bb296e76'}
 CORE = ('server/data/canon.json.gz.part-0001', 'server/data/canon.json.gz.part-0002',
         'server/data/canon.json.gz.parts.json', 'server/data/parallels.json.gz')
 CHANGED_DATA = CORE[1:]
@@ -40,17 +43,25 @@ def sealed(relative):
     return json.loads(raw)
 
 
+def sealed_intake(name):
+    raw = (ROOT / (INTAKE_DIRECTORY + name)).read_bytes()
+    assert sha(raw) == INTAKE_PINS[name], 'Independent359 fixture changed: ' + name
+    return json.loads(raw)
+
+
 class NextTenHistoryControls(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # FIRST actual-data operation is a genuine positive on the current root.
         # A refusal/PENDING pin aborts; it can never count as a negative success.
         first = ten.assert_next_ten_current_canonical_data(ROOT)
-        cls.current = sealed(CURRENT_INVENTORY)['files']
+        cls.historical_next = sealed(CURRENT_INVENTORY)['files']
+        cls.current = sealed_intake('RUNTIME_INVENTORY.json')['files']
+        assert sealed_intake('BASELINE_RUNTIME34.json')['files'] == cls.historical_next
         cls.previous = sealed(DD_INVENTORY)['files']
         assert first == cls.current and len(first) == 34
         assert approved_runtime(ROOT) == cls.current
-        assert len(approved_catalogue(ROOT)['ids']) == 343
+        assert len(approved_catalogue(ROOT)['ids']) == 359
         cls.temp = tempfile.TemporaryDirectory(prefix='pali-next-ten-history-')
         cls.addClassCleanup(cls.temp.cleanup)
         cls.root = Path(cls.temp.name)
@@ -64,6 +75,13 @@ class NextTenHistoryControls(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / name, target)
         assert ten.assert_next_ten_current_canonical_data(cls.root) == cls.current
+        # The additive copy helper must retain the complete current359 proof
+        # closure and a SEPARATE old343 AP input, never old actual corpus bytes.
+        for name, pin in INTAKE_PINS.items():
+            assert sha((cls.root / (INTAKE_DIRECTORY + name)).read_bytes()) == pin
+        frozen_ap = (cls.root / INTAKE_AP343).read_bytes()
+        assert {'bytes':len(frozen_ap), 'sha256':sha(frozen_ap)} == cls.historical_next['data/apadana.json']
+        assert len(json.loads(frozen_ap)['links']) == 343
 
     @contextmanager
     def changed(self, relative, *, replacement=None, missing=False):
@@ -87,7 +105,7 @@ class NextTenHistoryControls(unittest.TestCase):
         self.assertEqual(current, self.current)
         self.assertEqual(historical, self.previous)
         self.assertNotEqual(current, historical)
-        self.assertEqual(len(approved_catalogue(self.root)['ids']), 343)
+        self.assertEqual(len(approved_catalogue(self.root)['ids']), 359)
         # Fixture provisioning must leave actual NEW data present and keep each
         # frozen DD input separate; no historical bytes may replace the corpus.
         for name in CORE:
@@ -98,6 +116,10 @@ class NextTenHistoryControls(unittest.TestCase):
             self.assertTrue((self.root / 'tests/fixtures/canon-before-six' / Path(name).name).is_file())
         for name in (DIRECTORY+'FUTURE_ORACLE.json', CURRENT_INVENTORY, CURRENT_REVIEW):
             self.assertEqual(sha((self.root / name).read_bytes()), PINS[name])
+        current_ap = (self.root / 'server/data/apadana.json').read_bytes()
+        self.assertEqual({'bytes':len(current_ap), 'sha256':sha(current_ap)}, self.current['data/apadana.json'])
+        self.assertEqual(len(json.loads(current_ap)['links']),359)
+        self.assertNotEqual(self.current['data/apadana.json'],self.historical_next['data/apadana.json'])
         manifest = json.loads((self.root / CORE[2]).read_bytes())
         packed = b''.join((self.root / 'server/data' / part['file']).read_bytes() for part in manifest['parts'])
         self.assertEqual(sha(gzip.decompress(packed)), 'f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de')
@@ -138,7 +160,7 @@ class NextTenHistoryControls(unittest.TestCase):
         for name in names:
             for missing in (False, True):
                 with self.subTest(name=name, missing=missing):
-                    self.assertEqual(len(approved_catalogue(self.root)['ids']), 343)
+                    self.assertEqual(len(approved_catalogue(self.root)['ids']), 359)
                     with self.changed(name, missing=missing):
                         with self.assertRaises((AssertionError, ValueError, FileNotFoundError)):
                             approved_catalogue(self.root)

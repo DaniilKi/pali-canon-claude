@@ -1,6 +1,6 @@
 """Finite next-ten source/metadata gates against independently sealed expectations.
 
-This file does not project runtime output into an expected dataset. The installed
+This file does not project public tool output into an expected dataset. The installed
 canon must be the exact independently sealed new snapshot; the historical input
 uses only the independently sealed ten old records. No private data is opened.
 """
@@ -21,6 +21,8 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/canon'))
 import apadana_thera_next10_spans as ten
+sys.path.insert(0, str(ROOT / 'scripts'))
+import web_reader_intake359 as intake359
 
 OLD_SHA = '0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b'
 NEW_SHA = 'f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de'
@@ -122,7 +124,8 @@ def profiles_from_compiled_metadata():
                                tail[spread.start():spread.start() + end.start()])
             assert names == ['THERA_261_280_PROFILES', 'THERA_281_285_PROFILES',
                 'THERA_287_288_PROFILES', 'THERA_292_299_PROFILES', 'THERA_301_310_PROFILES',
-                'THERA_312_319_PROFILES', 'THERA_321_329_PROFILES', 'THERA_331_334_PROFILES']
+                'THERA_312_319_PROFILES', 'THERA_321_329_PROFILES', 'THERA_331_334_PROFILES',
+                'THERA_335_350_PROFILES']
             for nested in names:
                 match = re.search(r'var ' + nested + r'\s*=\s*(?:deepFreeze\d*\()?\s*', code)
                 assert match
@@ -340,6 +343,17 @@ class NextTenBoundaryData(Fixture):
     def test_06_exact343_profiles_links_rights_and_finite_derived_parallels_delta(self):
         profiles = profiles_from_compiled_metadata()
         raw = (ROOT / 'server/data/apadana.json').read_bytes();cat = json.loads(raw)
+        # Validate every actual359 compiled profile and the physical AP359 bytes
+        # before selecting the explicit immutable343 historical metadata input.
+        prior_runtime = json.loads((ROOT / 'docs/evidence/apadana/english335-350/BASELINE_RUNTIME34.json').read_bytes())['files']
+        current_runtime, historical343_raw, payload = intake359.capture_authority(ROOT, prior_runtime)
+        approved359 = json.loads(payload)
+        self.assertEqual(len(profiles), 359)
+        self.assertEqual(profiles, approved359['current']['profiles'])
+        self.assertEqual(cat, approved359['manifest'])
+        self.assertEqual({'bytes':len(raw), 'sha256':sha(raw)}, current_runtime['data/apadana.json'])
+        profiles = {uid:profiles[uid] for uid in approved359['previous']['ids']}
+        raw = historical343_raw;cat = json.loads(raw)
         self.assertEqual(len(profiles), 343)
         self.assertEqual(set(profiles), set(cat['links']))
         self.assertFalse(set(profiles).intersection(IDS))
@@ -349,7 +363,7 @@ class NextTenBoundaryData(Fixture):
         for name, pin in self.preserve['current_data_file_inventory'].items():
             if name.startswith('canon.json.gz') or name == 'parallels.json.gz':
                 continue
-            content = (ROOT / 'server/data' / name).read_bytes()
+            content = raw if name == 'apadana.json' else (ROOT / 'server/data' / name).read_bytes()
             self.assertEqual((len(content), sha(content)), (pin['bytes'], pin['sha256']), name)
         # Never use the candidate's observed count as its own expectation.
         # The source-only counter seal is separately produced from frozen DD

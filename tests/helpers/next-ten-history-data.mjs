@@ -1,5 +1,6 @@
 /** Current data is physically validated; historical substitutions are TEST INPUTS ONLY. */
 import assert from 'node:assert/strict';
+import {capture359Authority,fresh359Proofs,AP343_INPUT} from './intake359-metadata.mjs';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath,pathToFileURL} from 'node:url';
@@ -39,21 +40,22 @@ const carriers=new WeakMap();
 // Content-keyed validation memo only: all actual/proof/fixture bytes are read and hashed before use.
 let validatedLogicalKey=null;
 function publicBase(base){assert.ok(!carriers.has(base),'Carried/closed private scope is not a public root');const path=resolve(base instanceof URL?fileURLToPath(base):base);return pathToFileURL(path+sep);}
-function freshProofs(state){assert.equal(state.active,true,'Closed ten-operation scope refused');assert.equal(state.carrier.href,state.href,'Mutated carrier URL refused');for(const [path,pin] of proofs()){assert.match(pin,/^[a-f0-9]{64}$/);assert.equal(sha(readSixRegularRelative(state.base,path)),pin,'Fresh physical ten proof required');}}
+function freshProofs(state){assert.equal(state.active,true,'Closed ten-operation scope refused');assert.equal(state.carrier.href,state.href,'Mutated carrier URL refused');fresh359Proofs(state.base,{runtime:true});for(const [path,pin] of proofs()){assert.match(pin,/^[a-f0-9]{64}$/);assert.equal(sha(readSixRegularRelative(state.base,path)),pin,'Fresh physical ten proof required');}}
 function capture(base){
- const physical=publicBase(base),row=records(physical),actual=new Map();const paths=Object.keys(row.current).filter(p=>p.startsWith('data/')).sort();assert.equal(paths.length,27);
- for(const path of paths){const bytes=readSixRegularRelative(physical,'server/'+path);assert.deepEqual({bytes:bytes.length,sha256:sha(bytes)},row.current[path]);actual.set('server/'+path,bytes);}
+ const physical=publicBase(base),row=records(physical),intake=capture359Authority(physical,row.current),actual=new Map();const paths=Object.keys(intake.current).filter(p=>p.startsWith('data/')).sort();assert.equal(paths.length,27);
+ for(const path of paths){const bytes=readSixRegularRelative(physical,'server/'+path);assert.deepEqual({bytes:bytes.length,sha256:sha(bytes)},intake.current[path]);actual.set('server/'+path,bytes);}
+ assert.deepEqual(JSON.parse(actual.get(AP343_INPUT)),intake.manifest,'Physical current359 manifest matches independent expected metadata');
  // All physical new27 and immutable old4 bytes precede this expensive logical-only memo.
  const prior=new Map(DD7_DATA_PATHS.map(path=>[path,ddFixture(physical,path,row.dd)]));
  const logicalKey=[...proofs().map(([,pin])=>pin),...actual.values()].map(x=>Buffer.isBuffer(x)?sha(x):x).concat([...prior.values()].map(sha)).join(':');
  if(logicalKey!==validatedLogicalKey){exactDD7CanonBytes(gunzipSync(packed(path=>actual.get(path))),{root:physical});assert.equal(sha(gunzipSync(packed(path=>prior.get(path)))),DD7_CANON_SHA);validatedLogicalKey=logicalKey;}
- const carrier=new URL(physical.href),state={base:physical,carrier,href:carrier.href,active:true,current:row.current,dd:row.dd};carriers.set(carrier,state);return state;
+ const carrier=new URL(physical.href),state={base:physical,carrier,href:carrier.href,active:true,current:intake.current,dd:row.dd,ap343:Buffer.from(intake.ap343)};carriers.set(carrier,state);return state;
 }
 export function assertNextTenScope(base){const state=carriers.get(base);assert.ok(state,'Only a private ten-operation carrier is permitted');freshProofs(state);return true;}
 /** Ordinary reads remain physical; only privately owned active carriers can project four data inputs. */
 export function readNextTenSixInput(base,path){
  const state=carriers.get(base);if(!state)return readSixRegularRelative(base,path);freshProofs(state);const raw=readSixRegularRelative(state.base,path);
- if(path.startsWith('server/data/')){const row=state.current[path.slice(7)];assert.ok(row,'Unknown physical current data path');assert.deepEqual({bytes:raw.length,sha256:sha(raw)},row);if(DD7_DATA_PATHS.includes(path))return ddFixture(state.base,path,state.dd);}
+ if(path.startsWith('server/data/')){const row=state.current[path.slice(7)];assert.ok(row,'Unknown physical current data path');assert.deepEqual({bytes:raw.length,sha256:sha(raw)},row);if(path===AP343_INPUT)return Buffer.from(state.ap343);if(DD7_DATA_PATHS.includes(path))return ddFixture(state.base,path,state.dd);}
  return raw;
 }
 function normalizeDD(state,path,raw){if(!DD7_DATA_PATHS.includes(path))return raw;assert.ok(Buffer.isBuffer(raw));freshProofs(state);return raw.length===state.current[path.slice(7)].bytes&&sha(raw)===state.current[path.slice(7)].sha256?ddFixture(state.base,path,state.dd):raw;}
@@ -69,7 +71,7 @@ export function runNextTenSixOperation(operation,args=[],base=root){
   if(operation==='file'&&DD7_DATA_PATHS.includes(name)){assert.ok(options.length===0||options.length===1&&options[0]==='utf8');const bytes=typeof raw==='string'?Buffer.from(raw):raw,old=normalizeDD(state,name,bytes);supplied=old===bytes?raw:typeof raw==='string'?old.toString('utf8'):old;}
   if(operation==='bundled'&&name==='server/data/canon.json.gz'&&Buffer.isBuffer(raw)){const manifest=JSON.parse(readSixRegularRelative(state.base,'server/data/canon.json.gz.parts.json'));if(raw.length===manifest.size&&sha(raw)===manifest.sha256)supplied=packed(path=>ddFixture(state.base,path,state.dd));}
   return operation==='file'?_ddC1FileResult(path,supplied,options,scope):_ddC1BundledResult(path,supplied,options,scope);
- }finally{state.active=false;}
+ }finally{state.active=false;state.ap343=null;}
 }
 /** Current public gate never returns historical runtime records or accepts private/closed scope tokens. */
-export function assertNextTenActualData(base=root){const state=capture(base);try{return state.current;}finally{state.active=false;}}
+export function assertNextTenActualData(base=root){const state=capture(base);try{return state.current;}finally{state.active=false;state.ap343=null;}}

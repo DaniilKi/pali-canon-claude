@@ -12,11 +12,56 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 import web_reader_six_boundary_history as h
+import web_reader_intake359 as intake359
+from web_reader_next_ten_boundary_history import assert_next_ten_current_canonical_data as assert_actual_next
 from web_reader_approved_acceptance import approved_catalogue, approved_runtime
+
+
+def independent_current34():
+    raw=(ROOT/'docs/evidence/apadana/english335-350/RUNTIME_INVENTORY.json').read_bytes()
+    assert hashlib.sha256(raw).hexdigest()=='516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b'
+    value=json.loads(raw)
+    assert value['candidate_commit']=='b2280c55ccf29c778abd89f26e3165b367b5ddba'
+    assert len(value['files'])==34
+    return value['files']
+
+
+def historical343_input(root):
+    # Explicit immutable TEST INPUT, never a projection of a current API result.
+    raw=(root/'docs/evidence/apadana/english335-350/BASELINE343_FULL_OBJECTS.json').read_bytes()
+    assert hashlib.sha256(raw).hexdigest()=='74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e'
+    value=json.loads(raw)
+    assert value['commit']=='3d614795cf95e45280603e95f68846c52eba4818'
+    assert list(value['profiles'])==list(value['links']) and len(value['profiles'])==343
+    return {'ids':list(value['profiles']), 'profiles':value['profiles'],
+            'links':value['links'], 'source':value['manifest_source']}
+
+
+def verify_current_and_historical_closure(root,current359,current34):
+    intake359.fresh_proofs(root)  # all13 physical proofs; never a real-root fallback
+    assert assert_actual_next(root)==current34
+    old=historical343_input(root)
+    assert len(current359['ids'])==len(current359['profiles'])==len(current359['links'])==359
+    for uid in old['ids']:
+        assert current359['profiles'][uid]==old['profiles'][uid]
+        assert current359['links'][uid]==old['links'][uid]
+    raw=(root/intake359.AP_FIXTURE).read_bytes()
+    assert hashlib.sha256(raw).hexdigest()=='18ef986dccbc05cabf311ba44d553b0cf415893484428eecdd476bfe2e1f4bbf'
+    assert len(json.loads(raw)['links'])==343
+    actual=(root/'server/data/apadana.json').read_bytes()
+    assert {'bytes':len(actual),'sha256':hashlib.sha256(actual).hexdigest()}==current34['data/apadana.json']
+    assert len(json.loads(actual)['links'])==359
+    h.assert_preserved_c1_catalogue(root,old)
+    return old
 
 class SixHistoryControls(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        # Genuine current359/new34 before any owned historical input.
+        cls.inventory=independent_current34()
+        assert assert_actual_next(ROOT)==cls.inventory
+        cls.approved=approved_catalogue(ROOT)
+        assert approved_runtime(ROOT)==cls.inventory
         cls.temp=tempfile.TemporaryDirectory(prefix='pali-six-history-')
         cls.addClassCleanup(cls.temp.cleanup)
         cls.root=Path(cls.temp.name)
@@ -24,8 +69,7 @@ class SixHistoryControls(unittest.TestCase):
             target=cls.root/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/name,target)
         h.copy_six_historical_fixture(ROOT,cls.root)
         h.assert_six_current_canonical_data(cls.root)
-        cls.approved=approved_catalogue(ROOT)
-        cls.inventory=approved_runtime(ROOT)
+        cls.historical343=verify_current_and_historical_closure(cls.root,cls.approved,cls.inventory)
         manifest=json.loads((ROOT/'server/data/canon.json.gz.parts.json').read_bytes())
         cls.future=gzip.decompress(b''.join((ROOT/'server/data'/p['file']).read_bytes() for p in manifest['parts']))
         cls.c1=h.exact_c1_canon_bytes(cls.future,ROOT)
@@ -45,7 +89,7 @@ class SixHistoryControls(unittest.TestCase):
         self.assertEqual(h.c1_logical_input(self.c1,self.root),self.c1)
         self.assertEqual(h.c1_logical_input(self.future,self.root),self.c1)
         with self.assertRaises((AssertionError,ValueError)):h.exact_c1_canon_bytes(self.c1,self.root)
-        h.assert_preserved_c1_catalogue(self.root,self.approved)
+        h.assert_preserved_c1_catalogue(self.root,self.historical343)
         for name in h.C1_DATA_PATHS:
             raw=h.historical_c1_data_bytes(self.root,name)
             self.assertEqual({'bytes':len(raw),'sha256':h.digest(raw)},h.parent343_records(self.root)[name.removeprefix('server/')])
@@ -71,8 +115,9 @@ class SixHistoryControls(unittest.TestCase):
                 with self.change(name,missing),self.assertRaises((AssertionError,ValueError)):
                     h.assert_six_current_canonical_data(self.root)
         name=h.PROOF_DIRECTORY+'/C1_IMMUTABLE_EXPECTATIONS.json'
+        h.assert_preserved_c1_catalogue(self.root,self.historical343)
         with self.change(name),self.assertRaises((AssertionError,ValueError)):
-            h.assert_preserved_c1_catalogue(self.root,self.approved)
+            h.assert_preserved_c1_catalogue(self.root,self.historical343)
 
     def test_04_original_C1_bytes_cannot_replace_actual_future_data(self):
         name='server/data/canon.json.gz.part-0002';path=self.root/name;raw=path.read_bytes()
@@ -135,10 +180,10 @@ class SixHistoryControls(unittest.TestCase):
         self.assertNotEqual(self.inventory,prior_inventory)
         changed=copy.deepcopy(parent);changed['data/apadana.json']['sha256']='0'*64
         with self.assertRaises((AssertionError,ValueError)):h.six_runtime_records(self.root,changed)
-        for id in (self.approved['ids'][0],self.approved['ids'][-1]):
-            changed=copy.deepcopy(self.approved);changed['profiles'][id]['id']='tha-ap999'
+        for id in (self.historical343['ids'][0],self.historical343['ids'][-1]):
+            changed=copy.deepcopy(self.historical343);changed['profiles'][id]['id']='tha-ap999'
             with self.assertRaises((AssertionError,ValueError)):h.assert_preserved_c1_catalogue(self.root,changed)
-            changed=copy.deepcopy(self.approved);changed['links'][id]['license']='CC0'
+            changed=copy.deepcopy(self.historical343);changed['links'][id]['license']='CC0'
             with self.assertRaises((AssertionError,ValueError)):h.assert_preserved_c1_catalogue(self.root,changed)
 
 if __name__=='__main__':unittest.main()
