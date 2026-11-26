@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {thera292299Evidence} from './thera292-299-evidence.mjs';
+import {projectPublisher333ClientTo325} from './thera333-legacy-projection.mjs';
 export const digest=value=>createHash('sha256').update(value).digest('hex');
 export const blob=raw=>createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex');
 const BASE='4c69f023c9fe1093ad8aadf0ac7f3caf766d92f0',REV='fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4';
@@ -41,7 +42,7 @@ export function thera301310Evidence(){
  function assertClientProjection(){
   const oldSummary="['tha-ap82','tha-ap92','tha-ap102','tha-ap112','tha-ap122','tha-ap132','tha-ap152','tha-ap162','tha-ap172','tha-ap182','tha-ap192','tha-ap202','tha-ap212','tha-ap222','tha-ap252','tha-ap232','tha-ap242','tha-ap272']",nowSummary=oldSummary.slice(0,-1)+",'tha-ap312']",added=','+IDS.map(id=>JSON.stringify(id)).join(',');
   for(const[path,oldSHA]of [['web/translation-policy.mjs','d617f82098cdf3f12bcf3c5aac3709f7b5569f16939ee1088385506627e34943'],['src/chatgpt-widget.mjs','4cde519747ea8da6194e2444e06e42d7a183bb4eb2c3b904f638e11c456758e5']]){
-   let code=readFileSync(path,'utf8');const found=[...code.matchAll(/^const PINNED_NEW_PARATEXT_IDS = (?:new Set\()?(\[[^\n]+\])\)?;$/gm)];assert.equal(found.length,1);const literal=found[0][1],ids=JSON.parse(literal);assert.equal(ids.length,236);assert.equal(new Set(ids).size,236);assert.deepEqual(ids.slice(-8),IDS);assert.ok(literal.endsWith(added+']'));assert.equal(literal.split(added).length-1,1);const prior=literal.slice(0,-added.length-1)+']';assert.equal(JSON.parse(prior).length,228);code=code.replace(literal,prior);assert.equal(code.split(nowSummary).length-1,1);code=code.replace(nowSummary,oldSummary);
+   let code=projectPublisher333ClientTo325(path,readFileSync(path,'utf8'));const found=[...code.matchAll(/^const PINNED_NEW_PARATEXT_IDS = (?:new Set\()?(\[[^\n]+\])\)?;$/gm)];assert.equal(found.length,1);const literal=found[0][1],ids=JSON.parse(literal);assert.equal(ids.length,236);assert.equal(new Set(ids).size,236);assert.deepEqual(ids.slice(-8),IDS);assert.ok(literal.endsWith(added+']'));assert.equal(literal.split(added).length-1,1);const prior=literal.slice(0,-added.length-1)+']';assert.equal(JSON.parse(prior).length,228);code=code.replace(literal,prior);assert.equal(code.split(nowSummary).length-1,1);code=code.replace(nowSummary,oldSummary);
    if(path==='src/chatgpt-widget.mjs'){const version="export const WIDGET_VERSION = 'v38';";assert.equal(code.split(version).length-1,1);code=code.replace(version,"export const WIDGET_VERSION = 'v37';");}
    assert.equal(digest(code),oldSHA,'Only exact eight paratext IDs, summary312 and widget version differ from preserved317 client');
   }

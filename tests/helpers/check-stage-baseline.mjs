@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {projectPublisher317Workflow} from './publisher317-ci-baseline.mjs';
 import {projectPublisher325Workflow} from './publisher325-ci-baseline.mjs';
+import {projectPublisher333Workflow} from './publisher333-ci-baseline.mjs';
 
 export const ORIGINAL_CHECK_NODE_SHA='5f313dfc4fc7dc743c6212cb970d910cb9be63aed5939faf311398182a67d2cc';
 export const PROPOSED_CHECK_NODE_SHA='551d449d6a0e2359dd517832486f2d26f6704466347da4ca3c3f4971ebb0190e';
@@ -36,5 +37,5 @@ export function projectCheckStageWorkflowOnly(text){
 }
 
 export function projectCheckStageWorkflow(text){
-  return projectPublisher317Workflow(projectCheckStageWorkflowOnly(projectPublisher325Workflow(text)));
+  return projectPublisher317Workflow(projectCheckStageWorkflowOnly(projectPublisher325Workflow(projectPublisher333Workflow(text))));
 }

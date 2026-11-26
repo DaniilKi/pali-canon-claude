@@ -28,7 +28,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_current_full_objects_and_profiles(self):
         assert_catalogue(self.manifest, self.approved)
         assert_profiles(ROOT, self.approved)
-        self.assertEqual(len(self.approved['links']), 325)
+        self.assertEqual(len(self.approved['links']), 333)
         for uid in ('tha-ap262', 'tha-ap268', 'tha-ap282'):
             self.assertNotIn(uid, self.approved['links'])
 
@@ -137,7 +137,9 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/canonical325/CANONICAL_RUNTIME_INVENTORY.json',
-                'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json')
+                'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json',
+                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_INVENTORY.json',
+                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
@@ -176,7 +178,9 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/canonical325/CANONICAL_RUNTIME_INVENTORY.json',
-                'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json')
+                'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json',
+                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_INVENTORY.json',
+                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
@@ -214,7 +218,9 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/canonical325/CANONICAL_RUNTIME_INVENTORY.json',
-                'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json')
+                'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json',
+                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_INVENTORY.json',
+                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
@@ -253,7 +259,9 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/canonical325/CANONICAL_RUNTIME_INVENTORY.json',
-                'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json')
+                'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json',
+                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_INVENTORY.json',
+                'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)

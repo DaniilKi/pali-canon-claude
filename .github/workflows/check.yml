@@ -833,6 +833,14 @@ jobs:
             src/_poems/chapter-3/poem-308.md
             src/_poems/chapter-3/poem-309.md
             src/_poems/chapter-3/poem-310.md
+            src/_poems/chapter-3/poem-312.md
+            src/_poems/chapter-3/poem-313.md
+            src/_poems/chapter-3/poem-314.md
+            src/_poems/chapter-3/poem-315.md
+            src/_poems/chapter-3/poem-316.md
+            src/_poems/chapter-3/poem-317.md
+            src/_poems/chapter-3/poem-318.md
+            src/_poems/chapter-3/poem-319.md
             src/_poems/chapter-3/chapter-3.json
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
@@ -857,6 +865,16 @@ jobs:
         run: |
           node --test --test-reporter=tap tests/thera301-310-source.test.mjs tests/thera301-310-client.test.mjs | tee reviewed-publisher301-310.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher301-310.tap","utf8"); for(const [key,value] of [["tests",14],["pass",14],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all reviewed publisher312-319 source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera312-319-source.test.mjs tests/thera312-319-client.test.mjs | tee reviewed-publisher312-319.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher312-319.tap","utf8"); for(const [key,value] of [["tests",14],["pass",14],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Check original and new Apadāna parser refusals against pinned source
         if: matrix.group == 'apadana'
         run: APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-parser.test.mjs tests/apadana-integration.test.mjs tests/apadana-pair-boundary.test.mjs tests/apadana-three.test.mjs
@@ -1443,6 +1461,7 @@ jobs:
             widget-browser.report.json
             reviewed-publisher261-299.tap
             reviewed-publisher301-310.tap
+            reviewed-publisher312-319.tap
             standalone-reader.report.json
             standalone-print.report.json
             standalone-saved.report.json
@@ -1740,6 +1759,12 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
       - name: Verify complete check command contract
         timeout-minutes: 1
         run: node scripts/ci-check-contract.mjs

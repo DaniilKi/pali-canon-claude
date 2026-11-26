@@ -262,7 +262,7 @@ test('source-enabled all twenty APIs retain 500-character continuations, edition
 });
 
 test('source-enabled current reading API returns the new family and note-free apparatus without old-family collisions', { skip: !checkout }, async () => {
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v38.html'); onlyPinnedFetch([]);
+  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v39.html'); onlyPinnedFetch([]);
   for (const uid of ['tha-ap13', 'tha-ap19', 'tha-ap22', 'tha-ap23', 'tha-ap24', 'tha-ap30', 'tha-ap32']) {
     const p = thera(uid), value = await readPassage({ uid, translation: tid(p), englishCharacters: 500 });
     assert.ok(!value.english_error, value.english_error); assert.equal(value.text_id, uid);

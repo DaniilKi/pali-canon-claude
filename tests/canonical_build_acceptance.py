@@ -9,7 +9,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from web_reader_approved_acceptance import approved_runtime, reviewed_325_runtime, assert_runtime
+from web_reader_approved_acceptance import reviewed_canonical325_runtime as approved_runtime, reviewed_325_runtime
+from web_reader_canonical325_fixture import materialize_canonical325, assert_historical_runtime as assert_runtime
+_HISTORICAL_CANONICAL325 = materialize_canonical325(ROOT)
+ROOT = Path(_HISTORICAL_CANONICAL325.name)
 
 
 class CanonicalBuildAcceptance(unittest.TestCase):

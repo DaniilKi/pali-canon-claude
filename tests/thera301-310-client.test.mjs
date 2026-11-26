@@ -3,13 +3,16 @@ import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
-import {APADANA_PROFILES,APADANA_COMMIT} from '../src/apadana-profiles.mjs';
+import {APADANA_PROFILES as CURRENT_APADANA_PROFILES,APADANA_COMMIT} from '../src/apadana-profiles.mjs';
 import {parseApadana} from '../src/apadana.mjs';
 import {readPassage} from '../src/chatgpt-widget.mjs';
 import {validateApadanaChoice,validateEnglishPage} from '../web/translation-policy.mjs';
 import {validateComparisonPage} from '../web/translation-comparison.mjs';
 import {view} from './helpers/widget-view.mjs';
 import {thera301310Evidence,digest} from './helpers/thera301-310-evidence.mjs';
+import {readFileSync} from 'node:fs';
+import {projectPublisher333To325} from './helpers/thera333-legacy-projection.mjs';
+const APADANA_PROFILES=projectPublisher333To325(CURRENT_APADANA_PROFILES,JSON.parse(readFileSync('server/data/apadana.json','utf8'))).profiles;
 const e=thera301310Evidence(),originalFetch=globalThis.fetch,cases=new Map(),clone=value=>JSON.parse(JSON.stringify(value)),tid=p=>canon.translationId(p);
 afterEach(()=>{globalThis.fetch=originalFetch;});
 function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e.profiles[id].raw_url===url.href);assert.ok(id,'Only an exact eight-poem Markdown source URL may reach transport');assert.ok(url.href.endsWith('.md'));calls.push(id);return new Response(e.artifact(id));};}

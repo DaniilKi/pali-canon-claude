@@ -1,0 +1,466 @@
+{
+  "schema": "reviewed-current333-runtime-approval-v1",
+  "status": "APPROVE_EXACT_CURRENT34_RUNTIME_INVENTORY_SOURCE_SCOPE_ONLY",
+  "baseline": "104b57a6891ddae645c51e39eb3d27b89b64ffdf",
+  "candidate_commit": "446bdb361da0926bc02d6d70b0e8de32d053be7a",
+  "inventory_only": true,
+  "runtime_inventory_approval": true,
+  "finite_source_diff_approval": true,
+  "behavioral_harness_approval": false,
+  "full_check_approval": false,
+  "final_archive_package_approval": false,
+  "implementation_acceptance": false,
+  "remote_ci_approval": false,
+  "release_or_push_approval": false,
+  "independent_inventory": {
+    "file": "INDEPENDENT333_RUNTIME_INVENTORY.json",
+    "sha256": "2d6c97ba2ff5728324c487ee3244bd86d016b77a3761ad89c61a0a9ac4a2b8a7"
+  },
+  "files": {
+    "THIRD_PARTY_LICENSES.txt": {
+      "bytes": 12861,
+      "sha256": "378d7454a776c1ef18accaa55f817cfb429ef713a8ec75e68ad83affb70ba015"
+    },
+    "data/anandajoti.json": {
+      "bytes": 47765,
+      "sha256": "7ff6df1b2d91418aef2ceacca43dc652cbf1d8363b70fccfb4106e23fd0af669"
+    },
+    "data/apadana.json": {
+      "bytes": 1340783,
+      "sha256": "54f8aca3659deff4c652a1ffe0103b6ad059f190bc2227c063710e3db85d0975"
+    },
+    "data/bmc.json": {
+      "bytes": 40743,
+      "sha256": "01f68a8a0c4aa1a9c21f7743c5172beccd3cce9133037830f8ee7836c4810a63"
+    },
+    "data/canon.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "526ba969d0fc3ce62fde7d11764313de43b91a2f71375d602cd647a43b601632"
+    },
+    "data/canon.json.gz.part-0002": {
+      "bytes": 1367632,
+      "sha256": "24169740dd71b5ee86767ef72daea44759201987ffb72975afaca5d31b4c0832"
+    },
+    "data/canon.json.gz.parts.json": {
+      "bytes": 455,
+      "sha256": "639a938e11a230acbf0a87a18c180c820013d95795b7f951439a8cae674b91a7"
+    },
+    "data/commentary.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "581fb24ed95f5ba4a30f7ca02be4dced03f81315f34d3aa6e8a8601a97f2d946"
+    },
+    "data/commentary.json.gz.part-0002": {
+      "bytes": 4194304,
+      "sha256": "40d18b97cd9859a80eced012436e84cecad1654a78a33a98b7e3ed8f9700bf98"
+    },
+    "data/commentary.json.gz.part-0003": {
+      "bytes": 2443283,
+      "sha256": "905cc7de1186d860c0fd4902c11610cf38d2c3d05fe47ce987b3f22b7d68f06b"
+    },
+    "data/commentary.json.gz.parts.json": {
+      "bytes": 631,
+      "sha256": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156"
+    },
+    "data/dhamma_lists.json": {
+      "bytes": 37147,
+      "sha256": "6e14b77fd25d8b524da9ce9a3405220c3fbc9286c82d2096d8f0ca7cdd56b33c"
+    },
+    "data/dpd.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "7f6790cfaca70ad2d5d9dc829420b491288a23d666b3a5ba2f9e0046cc165081"
+    },
+    "data/dpd.json.gz.part-0002": {
+      "bytes": 1294765,
+      "sha256": "25e831647c47c1f97b6d325cf285f2ec761ba1b2ee64f516d3c036c5b2b5af12"
+    },
+    "data/dpd.json.gz.parts.json": {
+      "bytes": 451,
+      "sha256": "5c530a5afef657ceac06a484bfea0e6ecc725c18a38a0f7e3bc687b6028b5854"
+    },
+    "data/dppn.json": {
+      "bytes": 1207,
+      "sha256": "e3d1bb4af928e8cda64bfd92fe2254569043ee97d9d124583b48eca0201cf959"
+    },
+    "data/glossary.json.gz": {
+      "bytes": 1523979,
+      "sha256": "a47a735d7a376882609cd6cb56804403adbf10c21e136c36a4c277e09d746d64"
+    },
+    "data/parallels.json.gz": {
+      "bytes": 487205,
+      "sha256": "a5c99363bdec68bdaea8ea111eaea74a1c1bc0755235e1c2e49493d86414b385"
+    },
+    "data/postcanonical.json.gz.part-0001": {
+      "bytes": 4194304,
+      "sha256": "3b21aeb1467103dda9b7bdff1a8a06b134df11454003a623ae617d6c452efbd9"
+    },
+    "data/postcanonical.json.gz.part-0002": {
+      "bytes": 4194304,
+      "sha256": "7943baafd6927bdedd408058f75f5a28c7934dddef660932355692976c297147"
+    },
+    "data/postcanonical.json.gz.part-0003": {
+      "bytes": 4194304,
+      "sha256": "a67a0f4c851845de4d519f86f4f5aaae8a86ade22a4a0e7559160b8056073d2e"
+    },
+    "data/postcanonical.json.gz.part-0004": {
+      "bytes": 1927665,
+      "sha256": "13b966525a2d9b312c79c368ba43cfa9cda545124f5692097966aaf0c0d6c82b"
+    },
+    "data/postcanonical.json.gz.parts.json": {
+      "bytes": 808,
+      "sha256": "310a3db600ad23af025d6f62cfe6f37d56a7fb48f0cda7eaa55a7035bf2e0080"
+    },
+    "data/reviewed-ati-sections.json": {
+      "bytes": 102044,
+      "sha256": "91fde828f07be060a616127e0920b41935a25e180757418036b145a9cfc5214a"
+    },
+    "data/reviewed-partial-pages.json": {
+      "bytes": 40136,
+      "sha256": "55495a36fb429de09b3c7c07bae68da87cd76115df7342647babeeba31afbd76"
+    },
+    "data/source-notes.json": {
+      "bytes": 4218,
+      "sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e"
+    },
+    "data/topics.json": {
+      "bytes": 339961,
+      "sha256": "b1d022643419d6b122138999eb6813db615654cb625a827ea64c256e74facbfb"
+    },
+    "data/translations.json": {
+      "bytes": 748991,
+      "sha256": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6"
+    },
+    "http-worker.cjs": {
+      "bytes": 2805822,
+      "sha256": "a187242280fa4a7b460e1dbaa74ceea9bb79aeaf4b2916baedd2d9eb3f5812b4"
+    },
+    "http.cjs": {
+      "bytes": 2873567,
+      "sha256": "dc1f08cb2b8824a743b4a379cd7c7c60161137685c81de37072fc62e3b20d2df"
+    },
+    "index.cjs": {
+      "bytes": 2682822,
+      "sha256": "88b7d98c9a6843c16b18216d25e7a4d180842c258ed53e89c15fac850f92a20b"
+    },
+    "web/index.html": {
+      "bytes": 4289,
+      "sha256": "084bdf021db7d6229b5f8948b5ce5758cb112f0faf5fbffe2e9dadf8fa9ed0f9"
+    },
+    "web/reader.css": {
+      "bytes": 19037,
+      "sha256": "b124a83028222fa258d91c6fb53636c438e523a6934da995252568b0b69e7f1d"
+    },
+    "web/reader.js": {
+      "bytes": 1753950,
+      "sha256": "91337ab7eef779899796aba779f610ce53f45636a1ab670a50b85371fc753249"
+    }
+  },
+  "runtime_files": 34,
+  "allowed_changed_paths_from_prior_canonical325": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_runtime_paths": 29,
+  "prior_immutable_authorities": {
+    "precanonical325_runtime": "bae09c75ce5bb5d90e62044b60f5ac468e0c3c0569484117e28f938720aabf09",
+    "canonical325_inventory": "11b2d9865505b2cd09812deadb0bf77c891edde783054c4e2bd4fe34900d4b84",
+    "canonical325_review": "fc062462c6c6c7e98a285cc833cc1bd59e0a0c47b851b8066f257efc95b85908",
+    "immutable104_manifest_sha256": "82af9b9b9075c5f5ee719b70d481f2d16ac210f7c294a04999e7d675a2204b2f"
+  },
+  "curation": {
+    "file": "THERA_312_319_APPROVAL.json",
+    "sha256": "cc8480e22bb9a1615af86cee2e153c77695f4d20c21fd8f147e31f8658ca610d"
+  },
+  "source_authorities": {
+    "expected_profiles": {
+      "file": "THERA_312_319_EXPECTED_PROFILES.json",
+      "sha256": "6cea3367548b0cb04462e4f3edbeb6cb54f2baa5e9ea3f7f65b2abbd6f69f5a2"
+    },
+    "expected_links": {
+      "file": "THERA_312_319_EXPECTED_LINKS.json",
+      "sha256": "fbfd6695444f1849e970b2e15aead5c73c11836afa45c4d9fa7cac411822be09"
+    },
+    "goldens": {
+      "file": "THERA_312_319_GOLDENS.json",
+      "sha256": "0d8b3a8352ed5c2d23c888367c08bcdb3db4d704c1b224fec482344141a83774"
+    },
+    "baseline_freeze": {
+      "file": "THERA_312_319_BASELINE325_COMPACT.json",
+      "sha256": "918dd529acab9d88e88812f7eb9841181eaa534e19705e4ce5f66c9fe52ecf3f"
+    },
+    "baseline_reconstruction_review": {
+      "file": "THERA_312_319_BASELINE325_REVIEW.json",
+      "sha256": "4b2d8755785ebbbfe5678ad9546ec7507b9a0c3306b8d5c659fbbb9ed7de7328"
+    },
+    "independent_normalization": {
+      "file": "THERA_312_319_INDEPENDENT_NORMALIZATION.json",
+      "sha256": "c241db766b26468bffb9154eb502981b9974f07edf39b26c7a4536b69e6c8bc7"
+    },
+    "independent_notice_review": {
+      "file": "THERA_312_319_INDEPENDENT_NOTICE_REVIEW.json",
+      "sha256": "1fb1f8f4a5402034bddb21652a5d0a4a5594000d0b16eb739ebaa638874f91ba"
+    },
+    "source_approval": {
+      "file": "THERA_312_319_SOURCE_REVIEW.json",
+      "sha256": "4f027e9e56e787c63806d6b85bd2710dac0af14eeca43459975ef251b8fc591e"
+    },
+    "notice_inverse": {
+      "file": "THERA_312_319_NOTICE_INVERSE.json",
+      "sha256": "2efb08f14d9bbc36b2b6b1904d43bb906ec5ae4d269677bc41403659ebbee929"
+    },
+    "source_scopes": {
+      "file": "THERA_312_319_SOURCE_SCOPES_V2.json",
+      "sha256": "29eb74b6f831840adddbc215727fd35002d7909e6fc6a7e35d891667df4a25ae"
+    }
+  },
+  "independence": {
+    "reviewer_authored_app_source_or_expected333_profiles": false,
+    "expectation_method": "Read and compared all independently normalized B-approved8 profile/link objects; derived exact333 manifest bytes from pinned104325 manifest plus only those8 objects and two finite source-policy counters. Reviewed finite source and compiled byte inverses to complete104 files. Then independently reproduced metadata and build from frozen446 source in a private extracted snapshot with copied real dependencies.",
+    "independent_source_metadata_proofs": "Final normalized-source GO1fb1f8f4a5402034bddb21652a5d0a4a5594000d0b16eb739ebaa638874f91ba; original-first oracles c241db766b26468bffb9154eb502981b9974f07edf39b26c7a4536b69e6c8bc7; independent original-source review4f027e9e56e787c63806d6b85bd2710dac0af14eeca43459975ef251b8fc591e.",
+    "current_generated_output_used_as_its_own_expectation": false,
+    "private_snapshot": "/tmp/pali333-evidence-nov26/runtime-review/repro446bdb3-z4brqixm/snapshot",
+    "frozen_archive_sha256": "58d0e44c65922209dd59f2eff542f8209bf929fe30c093c4f299e6c633708d78",
+    "regular_copied_top_level_node_modules": true,
+    "one_independent_build": true,
+    "metadata_reproduction": "Pinned local source fixture333poems plus6rights; parser/body/notes/paratext/root/title/numbering checks passed for all333, no live source route selected. Manifest hash54f8aca3659deff4c652a1ffe0103b6ad059f190bc2227c063710e3db85d0975 was independently reproduced.",
+    "commands_receipt": {
+      "path": "/tmp/pali333-evidence-nov26/runtime-review/repro446bdb3-z4brqixm/REPRO_COMMANDS.json",
+      "sha256": "c3574fa32d74bbe5c446819e8ed71f97cbb91e9d16b5bbb8179cfe5e4633c877"
+    },
+    "one_build_log_sha256": "86bae430e4b7b813b596f1acced734c7eb315ba1dab7470c844e227bde6f0e5c",
+    "npm_offline_notifier_disabled": "Explicit --offline --no-update-notifier plus notifier-disabled environment; complete npm debug log contains no HTTP/fetch entries. This is not a physical network-isolation certification.",
+    "reviewer_tooling_corrections": "Preserved v1/v2 stdlib replay copies show two reviewer assumptions corrected: legacyTheri defaults omit publisher_chapter, and esbuild literal metadata uses JavaScript x-hex escapes rather than JSON-only escapes. Parity-aware string-token conversion accepts only those escapes before exact independent object comparison. No project source or compiled bytes changed and no metadata/build command was repeated.",
+    "historical_fixture_authorship_disclosure": "Reviewer authored only an external unapplied historical canonical325 test adapter proposal. It is not part of frozen446 runtime and is not self-approved by this runtime seal; separate cross-review remains required."
+  },
+  "preservation": {
+    "old_ordered_full_profile_objects": 325,
+    "old_ordered_full_link_objects": 325,
+    "new_exact_profiles_links": 8,
+    "old_Theri_exact": 40,
+    "new_Thera_total": 293,
+    "profile_total": 333,
+    "new_publishers": [
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319
+    ],
+    "new_canonical_ids": [
+      "tha-ap314",
+      "tha-ap315",
+      "tha-ap316",
+      "tha-ap317",
+      "tha-ap318",
+      "tha-ap319",
+      "tha-ap320",
+      "tha-ap321"
+    ],
+    "all_existing_holds_unchanged": [
+      "tha-ap72",
+      "tha-ap142",
+      "tha-ap160",
+      "tha-ap161",
+      "tha-ap262",
+      "tha-ap268",
+      "tha-ap282",
+      "tha-ap308",
+      "tha-ap309"
+    ],
+    "explicitly_not_activated_publishers": [
+      260,
+      266,
+      280,
+      286,
+      289,
+      290,
+      291,
+      297,
+      300,
+      306,
+      307,
+      311,
+      320
+    ],
+    "canon_8544_units_61_books_and_all_non_AP_data_exact": true,
+    "source_note_sidecar_exact": {
+      "bytes": 4218,
+      "sha256": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e"
+    },
+    "source_rights_manifest_only_exact_once_counter_change": "325\u2192333 finite publisher-edition choices;285\u2192293 mappedThera. Every other field including notices, six rights artifact pins and restrictive terms unchanged.",
+    "new_scope": "Eight complete publisher-edition poems,73paragraphs/49physical quotation entries/50printed labels/34poem notes; no new headings, summary, publisher preface or audio. No line-complete VRI claim.",
+    "old_summary312_note8_and_V1_V2_inverse_unchanged": true,
+    "translated_bodies_complete_translator_notes_or_media_bundled": false
+  },
+  "source_build_closure": {
+    "old_source_changes": {
+      "src/apadana-thera-profiles.mjs": {
+        "old_sha256": "acd2da889fed0cde51a5cfa2e0ad1234f9a24d324a7b5306149958e1a0dce31d",
+        "new_sha256": "1d22a25023c92c222143080fb293752101a897c62ed2f2ddc457fe58f7200c47",
+        "finite_inverse_recovers_entire_old_file": true
+      },
+      "src/chatgpt-widget.mjs": {
+        "old_sha256": "4a99a25704b6ad56b217cabc63334887a5388c65380f0539a0b4d271aeb5663d",
+        "new_sha256": "5397258206f6c7439abb1a301981f459e5580df12f1d6efa1ff1f1e1afafb619",
+        "finite_inverse_recovers_entire_old_file": true
+      },
+      "web/translation-policy.mjs": {
+        "old_sha256": "d94ee9b91a30e4883056b6c4e2e12d7af1ea58d1720d4bda7a99fd672ad66af7",
+        "new_sha256": "327299730f8fde603c0a7bbf86a0797545bc7c5ba1f481e073bd8fad5082550e",
+        "finite_inverse_recovers_entire_old_file": true
+      }
+    },
+    "new_app_module": "src/apadana-thera312-319-profiles.mjs: exact pure approved JSON literal only.",
+    "nonruntime_new_script": "scripts/apadana/review_thera312_319.py: metadata review support, not imported by application/build.",
+    "unchanged": [
+      "src/apadana.mjs",
+      "src/apadana-thera.mjs",
+      "src/english.mjs",
+      "src/http.mjs",
+      "src/providers.mjs",
+      "web/reader.js",
+      "scripts/build.mjs",
+      "scripts/apadana/build.mjs",
+      "package.json",
+      "package-lock.json"
+    ],
+    "compiled_exact_inverses": {
+      "http-worker.cjs": {
+        "reviewed_changes": [
+          "exact8_literal_module",
+          "append8_aggregator",
+          "v38_to_v39",
+          "finite8_client_guard"
+        ],
+        "op_counts": [
+          [
+            "insert",
+            0,
+            649
+          ],
+          [
+            "replace",
+            1,
+            2
+          ],
+          [
+            "replace",
+            1,
+            1
+          ],
+          [
+            "replace",
+            1,
+            1
+          ]
+        ],
+        "exact_whole_old_canonical325_inverse": true,
+        "old_sha256": "f450f7c69e8e94b3cdb93acde74ee3f6ba875702b2ff588ff21aae8ca8eedb27",
+        "new_sha256": "a187242280fa4a7b460e1dbaa74ceea9bb79aeaf4b2916baedd2d9eb3f5812b4"
+      },
+      "http.cjs": {
+        "reviewed_changes": [
+          "exact8_literal_module",
+          "append8_aggregator",
+          "v38_to_v39",
+          "finite8_client_guard"
+        ],
+        "op_counts": [
+          [
+            "insert",
+            0,
+            649
+          ],
+          [
+            "replace",
+            1,
+            2
+          ],
+          [
+            "replace",
+            1,
+            1
+          ],
+          [
+            "replace",
+            1,
+            1
+          ]
+        ],
+        "exact_whole_old_canonical325_inverse": true,
+        "old_sha256": "a113d0130c32868b0936d84a2d7689d12144aa944947d58b7d994abc3c7eb22b",
+        "new_sha256": "dc1f08cb2b8824a743b4a379cd7c7c60161137685c81de37072fc62e3b20d2df"
+      },
+      "index.cjs": {
+        "reviewed_changes": [
+          "exact8_literal_module",
+          "append8_aggregator"
+        ],
+        "op_counts": [
+          [
+            "insert",
+            0,
+            649
+          ],
+          [
+            "replace",
+            1,
+            2
+          ]
+        ],
+        "exact_whole_old_canonical325_inverse": true,
+        "old_sha256": "94d185b913ddb9c5ffd25237df5e666ff38800e87dc214baed22c966be06f708",
+        "new_sha256": "88b7d98c9a6843c16b18216d25e7a4d180842c258ed53e89c15fac850f92a20b"
+      },
+      "web/reader.js": {
+        "reviewed_changes": [
+          "exact8_literal_module",
+          "append8_aggregator",
+          "finite8_client_guard"
+        ],
+        "op_counts": [
+          [
+            "insert",
+            0,
+            649
+          ],
+          [
+            "replace",
+            1,
+            2
+          ],
+          [
+            "replace",
+            1,
+            1
+          ]
+        ],
+        "exact_whole_old_canonical325_inverse": true,
+        "old_sha256": "2d22a552a8a0fbf9ac27ba6a2fb6113895624840ad8f646445ad09f79b8aa4b7",
+        "new_sha256": "91337ab7eef779899796aba779f610ce53f45636a1ab670a50b85371fc753249"
+      }
+    },
+    "entire_three_CJS_plus_browser_bundle_restore_104_after_only_finite_metadata_inverse": true,
+    "dependency_labels_remain_portable": true,
+    "arbitrary_byte_changes_hidden_by_inverse": false
+  },
+  "replay_evidence": {
+    "file": "FROZEN446_SOURCE_RUNTIME_REPLAY.json",
+    "sha256": "f6062fc6c15f5f0da2dc879eea73b765cd78fdacbd7f3007d42a5901b418cbac",
+    "reviewer_script_sha256": "d96974bd6047f7355156d17566a4c16f5c9caa0b50737674b7ea081ff0d02b8d"
+  },
+  "required_integration_gate": "New333 approved_runtime must call historical canonical325 authority unconditionally, require this exact new independent inventory/review and fail closed on missing/tampered authority. Do not replace oldbae/11b2/fc062 seals, old canonical inverses or current33 negative assertions.",
+  "not_approved": [
+    "Actual final333 installed reader/stdio/widget behavior and source-negative gates.",
+    "Final package39members/new archive/installation/finalGitSHA binding.",
+    "Full project tests, exact-SHA Linux/macOS/Windows/browser CI, push, main, tags or deployment.",
+    "Historical fixture adapter implementation or its validation, which requires separate reviewer.",
+    "Live providers, specialist translation/alignment, physical-device or human assistive acceptance."
+  ],
+  "actions": "Only authorized one private metadata reproduction and one private npm build, plus read-only old/frozen Git objects, stdlib source/hash/metadata replay. No shared checkout edits, full tests, workflows, Git mutation or network probes."
+}

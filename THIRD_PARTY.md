@@ -1,5 +1,7 @@
 # Third-party content and dependencies
 
+**D265 textual intake:** only publisher poems 312–319 are added under the specific Walters/Whitman CC BY-NC-SA 4.0 grant. Preserve complete attribution, source/revision, licence, disclaimer and extraction/change notices, noncommercial/share-alike terms and no endorsement. English bodies, notes and apparatus remain live-only; only metadata and hashes are bundled. No media rights or commercial permission are added. [Exact scope and evidence](docs/data/thera312-319-intake.md).
+
 **Current local D263 intake:** only publisher poems 301–305 and 308–310 are added under the specific Walters/Whitman CC BY-NC-SA 4.0 textual grant. Preserve full attribution, source/revision, licence, disclaimer and extraction/change notices, noncommercial/share-alike terms and no endorsement. English bodies, notes and apparatus remain live-only; only metadata/hashes are bundled. No media approval. See [the finite guide](docs/data/thera301-310-local-intake.md) for latest local acceptance.
 
 **Current local D262 intake:** only publisher poems 292–296 and 298–299 are added under the specific Walters/Whitman CC BY-NC-SA 4.0 textual grant. Preserve complete attribution, source/revision, licence, disclaimer and extraction/change notices, noncommercial/share-alike terms and no endorsement. English bodies/notes stay live-only; metadata/hashes only are bundled. No media approval. See [the finite guide](docs/data/thera292-299-local-intake.md) for latest local acceptance.

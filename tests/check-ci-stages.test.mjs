@@ -1,3 +1,4 @@
+import {projectPublisher333Workflow} from './helpers/publisher333-ci-baseline.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,mkdtempSync,mkdirSync,writeFileSync,rmSync,symlinkSync} from 'node:fs';
@@ -9,7 +10,7 @@ import {verifyCheckContract} from '../scripts/ci-check-contract.mjs';
 import {CHECK_STAGE_STEPS,PROPOSED_CHECK_NODE_SHA,projectCheckStageWorkflow,projectCheckStageWorkflowOnly} from './helpers/check-stage-baseline.mjs';
 
 const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
-const current=read('.github/workflows/check.yml');
+const current=projectPublisher333Workflow(read('.github/workflows/check.yml'));
 const pkg=JSON.parse(read('package.json'));
 const sha=text=>createHash('sha256').update(text).digest('hex');
 

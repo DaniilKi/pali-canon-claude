@@ -1,0 +1,9 @@
+{
+  "status": "APPROVE_EXACT_CURRENT34_RUNTIME_INVENTORY_SOURCE_SCOPE_ONLY",
+  "candidate_commit": "446bdb361da0926bc02d6d70b0e8de32d053be7a",
+  "inventory_sha256": "2d6c97ba2ff5728324c487ee3244bd86d016b77a3761ad89c61a0a9ac4a2b8a7",
+  "review_sha256": "a0174f27978b598aca0b7a674b571dc731833861cdd90f9a7358004c68295b6f",
+  "replay_sha256": "f6062fc6c15f5f0da2dc879eea73b765cd78fdacbd7f3007d42a5901b418cbac",
+  "commands_sha256": "c3574fa32d74bbe5c446819e8ed71f97cbb91e9d16b5bbb8179cfe5e4633c877",
+  "source_runtime_only_no_behavior_release_or_push": true
+}

@@ -1,5 +1,7 @@
 # AGENTS.md
 
+**D265 additive intake:** publisher 312–319 only map to `tha-ap314`–`tha-ap321`, extending the verified `104b57a` baseline to 333 choices (40 Therī, 293 Therā). Preserve all 325 earlier objects, source holds and canonical/private data. [Current finite scope and gates](docs/data/thera312-319-intake.md). Current Git refs and exact-commit CI determine integration; older capsules retain their historical scope.
+
 **D264 reconciliation:** the scoped 325-choice candidate reconciles D263 onto dev baseline `39def03fefbbc0e6eb50f35121a239928ddb5332`. Current Git refs and exact-commit CI determine integration status; older local-only capsules below retain their historical scope. Eight publisher-edition scopes received a fresh independent raw/rights/alignment review; publisher 306/307 and every prior hold remain excluded. [Current reconciliation guide](docs/data/thera325-reconciliation.md).
 
 Use regular dependencies inside each build worktree. A dependency symlink in the older D263 checkout embedded another worktree's path in three generated CJS debug labels. The portable rebuild has a separate sealed runtime authority layered after the preserved old authority; do not restore local paths or replace the old seal. Keep strict whole-widget equality, actual installed entrypoint tests, the existing 49-case gate and the separate 14-case gate. Main, tags and production are outside this continuation.

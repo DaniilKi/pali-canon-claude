@@ -1802,3 +1802,26 @@ A normal worktree build exposed another worktree's dependency path in three D263
 Keep the mandatory 49-case source/client gate and add a separate bounded 14-pass/zero-skip gate with exactly eight new pinned fixtures. The finite inverse preserves the complete prior workflow and all historical assertions. A separate WebKit timeout exposed a source-navigation readiness gap in the compatibility harness. Its Vinaya loop now waits for the exact actual source response, detached old view, complete source words/references and readiness before using ordinary disclosure controls. A controlled Chromium mechanism test establishes that gap; it does not establish the historical WebKit cause. Actual patched WebKit CI remains required.
 
 [Reconciliation evidence and remaining gates](data/thera325-reconciliation.md). Physical devices, human assistive testing and live-publisher availability are separate acceptance scopes.
+
+
+## D265 — Eight source-bound poems with preserved historical acceptance
+
+Publisher poems 312–319 map individually to canonical IDs 314–321, adding eight
+first English choices over verified `104b57a`: 333 choices, comprising 40 Therī and
+293 Therā. Preserve all 325 earlier full objects and all canonical, commentary,
+apparatus and private data. Independent original-source and normalization reviews
+bind 73 paragraphs, 49 physical entries, 50 labels and 34 owned notes. No chapter
+apparatus is added. Preserve note 3's paired c/ch displays in poem 312, the combined
+eight-line entry in poem 319, its unclosed quote and literal titles. Specific
+CC BY-NC-SA 4.0 notices and live-only English remain; held 311/320 and all earlier
+exceptions remain excluded.
+
+Require both new source and independently reproduced 34-file runtime authorities,
+retaining every historical seal. Five runtime files change and 29 remain exact.
+Historical canonical325 tests materialize only fixed104 Git blobs under bounded
+reads without network access; current333 acceptance cannot fall back to old bytes.
+CI provisions the exact104 object separately and adds a bounded 14-case source and
+client gate requiring zero skips. The earlier 49-case and 14-case gates remain
+unchanged. Strict widget equality and actual fresh-installed reader, selector,
+source-pin and private-draft flows remain required.
+[Evidence and acceptance limits](data/thera312-319-intake.md).

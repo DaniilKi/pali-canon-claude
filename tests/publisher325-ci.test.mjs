@@ -1,3 +1,4 @@
+import {projectPublisher333Workflow,projectPublisher333TestSource} from './helpers/publisher333-ci-baseline.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -6,8 +7,8 @@ import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';
 import {PUBLISHER317_STEP} from './helpers/publisher317-ci-baseline.mjs';
 import {PUBLISHER325_ORIGINAL_WORKFLOW_SHA,PUBLISHER325_SOURCE_PATHS,PUBLISHER325_SOURCE_BLOCK,PUBLISHER325_STEP_NAME,PUBLISHER325_STEP,PUBLISHER325_REPORT_LINE,projectPublisher325Workflow} from './helpers/publisher325-ci-baseline.mjs';
 
-const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
-const current=read('.github/workflows/check.yml');
+const read=name=>projectPublisher333TestSource(name,readFileSync(new URL('../'+name,import.meta.url),'utf8'));
+const current=projectPublisher333Workflow(read('.github/workflows/check.yml'));
 const sha=text=>createHash('sha256').update(text).digest('hex');
 const reject=changed=>assert.throws(()=>projectCheckStageWorkflow(changed));
 const approved=[301,302,303,304,305,308,309,310];
