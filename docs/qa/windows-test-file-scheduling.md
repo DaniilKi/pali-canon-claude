@@ -98,3 +98,28 @@ the regenerated V5 receipt changes only the new probe hash to
 `ba247c73b24cfdebc2854189188c0afcfd23229cbb95d4bbfb39fd8f2c51355a`.
 Actual macOS and Windows checks on the corrected commit remain required; a
 Linux alias reproduction and simulated platforms do not replace them.
+
+## Complete synchronous probe observation
+
+On `a719cb4`, the full macOS20 job reached all2,013 cases but the two newly
+added probes failed while parsing their mock observation: the final JSON was
+truncated at8,192 bytes. The actual driver deliberately exits immediately after
+its child status. The mock's asynchronous console write was therefore unsuitable
+for capturing the complete large argument list. A controlled local immediate-exit
+experiment also truncated console output; a synchronous owned-file write retained
+the full JSON. This is a test-observation defect, not a scripture or reader fault.
+
+Each mock invocation now synchronously appends one record to a unique file inside
+its owned temporary fixture. The parent requires empty stdout, bounded complete
+JSON, exactly one invocation, and the same exact executable, arguments, stdio and
+status. Both test bodies, the physical-path alias regression and all deadlines
+remain unchanged. The actual scheduling driver,37-row inverse,334 prior case files
+and39 application package members remain unchanged.
+
+[Failure, mechanism reproduction, local2/2 result and independent review](../evidence/apadana/boundaries340-347/fixture-capture/EVIDENCE_MANIFEST.json)
+are preserved. The V6 generation receipt changes only the new probe hash to
+`db5fa9b37bd3d55240762e3760b26defc425d986a52a3e4d7bb3f3f08c4206a0`.
+A six-leg Ubuntu/macOS/Windows × Node20/22 probe-only preflight must pass before
+the next full release run. Its diagnostic workflow stays off the release branch.
+Actual full exact-candidate CI remains required before dev promotion; earlier
+Windows success and simulated platforms do not substitute for it.

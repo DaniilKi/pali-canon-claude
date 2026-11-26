@@ -18,12 +18,13 @@ function ownedDriver(tempBase=tmpdir()){
  for(const name of names)writeFileSync(join(root,'tests',name),'// Owned synthetic discovery input; never executed.\n');
  writeFileSync(join(root,'tests','ignored.mjs'),'// Not a test file.\n');
  mkdirSync(join(root,'tests','nested'));writeFileSync(join(root,'tests','nested','ignored.test.mjs'),'// Not top-level.\n');
- return {root,script,files:names.sort().map(name=>resolve(root,'tests',name)),close:()=>rmSync(root,{recursive:true,force:true})};
+ return {root,script,captureIndex:0,files:names.sort().map(name=>resolve(root,'tests',name)),close:()=>rmSync(root,{recursive:true,force:true})};
 }
 // The real driver is copied byte-for-byte into an owned fixture. Every child
 // process API is intercepted before import; no synthetic test body can execute.
 const probeSource=String.raw`
 import cp from 'node:child_process';
+import {appendFileSync} from 'node:fs';
 import {syncBuiltinESMExports} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import 'node:path';
@@ -31,7 +32,8 @@ const input=JSON.parse(process.argv[1]);
 for(const name of ['spawn','fork','exec','execSync','execFile','execFileSync'])cp[name]=()=>{throw Error('Unexpected subprocess API: '+name);};
 const mock=(executable,args,options)=>{
  if(executable!==process.execPath||options.stdio!=='inherit')throw Error('Unexpected test child');
- console.log(JSON.stringify({executable,args,stdio:options.stdio}));
+ // The real driver exits immediately; record complete data synchronously.
+ appendFileSync(input.capture,JSON.stringify({executable,args,stdio:options.stdio})+'\n');
  return {status:input.status,...(input.childError?{error:new Error('Synthetic child spawn error')}: {})};
 };
 cp.spawnSync=mock;syncBuiltinESMExports();
@@ -41,13 +43,17 @@ process.argv=[process.execPath,input.script,...input.extra];
 await import(pathToFileURL(input.script).href);
 `;
 function probe(fixture,platform,status,extra=[],childError=false){
- const input={platform,status,script:fixture.script,extra,childError};
+ const capture=join(fixture.root,'capture-'+(fixture.captureIndex++)+'.jsonl');
+ const input={platform,status,script:fixture.script,capture,extra,childError};
  const r=spawnSync(process.execPath,['--input-type=module','-e',probeSource,JSON.stringify(input)],{
   cwd:fixture.root,encoding:'utf8',timeout:10000,killSignal:'SIGKILL',maxBuffer:256*1024,
  });
  assert.equal(r.error,undefined,String(r.error||''));
  assert.equal(r.signal,null,r.stderr);
- const lines=r.stdout.trim().split(/\r?\n/);
+ assert.equal(r.stdout,'','Observation must not depend on asynchronous console flushing');
+ const observation=readFileSync(capture,'utf8');
+ assert.ok(Buffer.byteLength(observation)<=256*1024,'Bounded complete child observation');
+ const lines=observation.trim().split(/\r?\n/);
  assert.equal(lines.length,1,'Exactly one test-runner child invocation');
  const observed=JSON.parse(lines[0]);
  assert.equal(observed.executable,process.execPath);

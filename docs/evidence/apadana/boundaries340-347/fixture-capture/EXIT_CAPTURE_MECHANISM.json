@@ -1,0 +1,13 @@
+{
+  "mechanism": "Immediate process.exit after large console JSON versus synchronous owned-file observation",
+  "payload_characters": 4194304,
+  "stdout_exit_code": 0,
+  "stdout_bytes_observed": 65536,
+  "stdout_complete_JSON": false,
+  "synchronous_exit_code": 0,
+  "synchronous_bytes_observed": 4194318,
+  "synchronous_complete_JSON": true,
+  "synchronous_sha256": "1791a962c245545d7de4122fccfa67aa28aa019e4b365542f3a6d9e7431dbdb6",
+  "owned_fixture_removed": true,
+  "not_application_or_full_CI_acceptance": true
+}

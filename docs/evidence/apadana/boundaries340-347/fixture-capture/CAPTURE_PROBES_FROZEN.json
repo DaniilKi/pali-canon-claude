@@ -1,0 +1,11 @@
+{
+  "case_count": 2,
+  "pass": 2,
+  "fail": 0,
+  "skipped": 0,
+  "elapsed_seconds": 0.918139040004462,
+  "probe_sha256": "db5fa9b37bd3d55240762e3760b26defc425d986a52a3e4d7bb3f3f08c4206a0",
+  "tap_sha256": "447021f52fd900b4a5e3c1594a8e300f9927b31bb6c3a75d337166442a7b8d37",
+  "capture": "Synchronous append to per-probe unique owned-file; complete line count/full JSON/type/args/status preserved; stdout required empty",
+  "application_or_driver_change": false
+}

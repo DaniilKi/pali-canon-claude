@@ -1,0 +1,45 @@
+{
+  "schema": "independent-synchronous-probe-capture-review-v1",
+  "status": "GO_STATIC_NEW_PROBE_ONLY",
+  "reviewed_at_utc": "2026-11-26T16:38:28.407550+00:00",
+  "base_commit": "a719cb4594d0e863b5164f95fa2ac7fba49b995b",
+  "file": "/tmp/pali-boundaries340-nov26/tests/test-runner-scheduling.test.mjs",
+  "old_sha256": "ba247c73b24cfdebc2854189188c0afcfd23229cbb95d4bbfb39fd8f2c51355a",
+  "new_sha256": "db5fa9b37bd3d55240762e3760b26defc425d986a52a3e4d7bb3f3f08c4206a0",
+  "driver_sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad",
+  "whole_source_inverse_to_base": true,
+  "both_test_bodies_byte_identical": true,
+  "worktree_status_observed": "M tests/test-runner-scheduling.test.mjs",
+  "findings": [
+    "Unique per-probe capture path is constructed within the newly owned canonical fixture root using its local increasing counter; no external data path or application state is read or written.",
+    "The mock synchronously appends exactly the existing executable/args/stdio observation before returning to the unmodified real driver. Immediate process.exit cannot discard that already-completed file write.",
+    "Appending rather than overwriting preserves the exactly-one-call check: a second child observation creates a second line and fails the existing line-count assertion.",
+    "Parent requires no stdout, reads the complete capture, enforces the existing 256KiB observation ceiling and parses complete JSON. Full argument, executable, stdio and status assertions remain.",
+    "All original test bodies, realpath+alias regression, synthetic-body interception, trailing options, statuses, child-error cases, 10000ms SIGKILL children, 35000ms parents and two TAP cases are byte-identical.",
+    "Fixture finally cleanup removes all unique capture files together with the owned root; existing linked fixture cleanup remains before alias unlink.",
+    "The only tracked dirty path is the new scheduling probe. Driver and application/package/data files are unchanged from the base."
+  ],
+  "parent_executed_evidence": {
+    "frozen_receipt": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/capture-followup/CAPTURE_PROBES_FROZEN.json",
+    "frozen_receipt_sha256": "bb1d2a02bf499f01c1d55b706c7f2d5cbbb3bb27315107192f5ad5748f6dd9f7",
+    "frozen_tap": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/capture-followup/CAPTURE_PROBES_FROZEN.tap",
+    "frozen_tap_sha256": "447021f52fd900b4a5e3c1594a8e300f9927b31bb6c3a75d337166442a7b8d37",
+    "frozen_result": {
+      "case_count": 2,
+      "pass": 2,
+      "fail": 0,
+      "skipped": 0,
+      "elapsed_seconds": 0.918139040004462
+    },
+    "mechanism_receipt": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/capture-followup/EXIT_CAPTURE_MECHANISM.json",
+    "mechanism_receipt_sha256": "838bdc735ab290a72ec29331c658833d9cbe8261ea16eec5429d56b6ed992568",
+    "mechanism_qualification": "Parent-reported controlled 4MiB console+exit reproduction and synchronous-file contrast; this reviewer did not execute it. Not application or full CI acceptance."
+  },
+  "scope": "Static approval of test-only capture transport repair; no application, driver, source inverse map or deadline change.",
+  "remaining_gates": [
+    "Bind exact new probe hash into the new-code generation receipt and final commit.",
+    "The planned small actual OS/Node20/22 probe matrix must pass before another full candidate matrix.",
+    "Exact full candidate CI remains required; no current physical-device, provider, full OS or release acceptance is claimed."
+  ],
+  "reviewer_executed_application_tests_build_browser_ci_network_git_mutations": false
+}

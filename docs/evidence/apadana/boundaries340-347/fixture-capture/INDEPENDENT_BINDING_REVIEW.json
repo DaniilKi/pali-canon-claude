@@ -1,0 +1,31 @@
+{
+  "schema": "independent-narrow-synchronous-capture-probe-binding-review-v1",
+  "status": "GO_EXACT_PROBE_AND_V6_RECEIPT_BINDING_FOR_CORRECTIVE_CANDIDATE_CI_ONLY",
+  "reviewer": "/root/candidate317_entry",
+  "base_head": "a719cb4594d0e863b5164f95fa2ac7fba49b995b",
+  "corrected_probe_sha256": "db5fa9b37bd3d55240762e3760b26defc425d986a52a3e4d7bb3f3f08c4206a0",
+  "generation_receipt_v6_sha256": "25fdc624291786be3d9578a93d54e2fb95aa1fe6211cfbf6588c0061680f101c",
+  "semantic_peer_review_sha256": "d4284565d1ab95b295887912d3baef116da3faf947e158d3c6e1adbafa360f34",
+  "verified": {
+    "only_one_dirty_tracked_source_file": "tests/test-runner-scheduling.test.mjs",
+    "v5_to_v6_receipt_diff_only_new_probe_hash": true,
+    "all17_new_code_hashes_match_actual_sources": true,
+    "unchanged_plan_sha256": "fef6a96c13f7e9388d01b69ece38171d6a65a5914f696d7fecafe108fdec5ac2",
+    "all37_source_map_rows_and_hunks_byte_identical": true,
+    "unchanged_map_sha256": "21c6076b7954b65f807a7ae044d61fb7f61f8a352e4acc6b28eae5ebbd87aaf7",
+    "unchanged_loader_sha256": "73e11f44693fae80384cf9eb3dc5b723b0087067c9fadfca16ad43ad791a1572",
+    "unchanged_actual_driver_sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad",
+    "all39_current_baseGit_archive_installed_members_exact": true,
+    "all334_original_Node_Python_case_files_unchanged": true,
+    "no_old_assertion_deadline_skip_or_app_change": true
+  },
+  "retained_prior_binding_review_sha256": "953205dfa3d178507620d04c07894d9381eb22dddafa75b048cd0e9ccf0dd649",
+  "remaining_gates": [
+    "Normal final-candidate commit/evidence binding must retain these exact probe and V6 receipt bytes.",
+    "Actual probe/host preflight acceptance is parent-owned and not certified by this binding review.",
+    "Full exact-new-commit Windows20/22,macOS20/22 andall requiredCI must be green before any dev promotion."
+  ],
+  "not_repeated": "704source/staticframe,application/browser/test/build/CI execution not repeated: exact unchanged source/package bindings established.",
+  "scope": "BindingGO only; no dev/main/deploy/sourceactivation/physicaldevice/humanAT/signedhost/liveprovider approval.",
+  "actions": "Read-only Git/hash/JSON/tar inspection. No application/test imports or execution,build,network/CI call,Git mutation ortracked edit."
+}
