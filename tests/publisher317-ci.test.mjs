@@ -4,9 +4,10 @@ import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {projectCheckStageWorkflow,projectCheckStageWorkflowOnly} from './helpers/check-stage-baseline.mjs';
 import {PUBLISHER317_ORIGINAL_WORKFLOW_SHA,PUBLISHER317_SOURCE_PATHS,PUBLISHER317_SOURCE_BLOCK,PUBLISHER317_STEP_NAME,PUBLISHER317_STEP,PUBLISHER317_REPORT_LINE,projectPublisher317Workflow} from './helpers/publisher317-ci-baseline.mjs';
+import {projectPublisher325Workflow} from './helpers/publisher325-ci-baseline.mjs';
 
 const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
-const current=read('.github/workflows/check.yml');
+const current=projectPublisher325Workflow(read('.github/workflows/check.yml'));
 const sha=text=>createHash('sha256').update(text).digest('hex');
 const stagesOnly=projectCheckStageWorkflowOnly(current);
 const reject=changed=>assert.throws(()=>projectCheckStageWorkflow(changed));

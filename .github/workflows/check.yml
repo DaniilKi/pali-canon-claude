@@ -825,6 +825,14 @@ jobs:
             src/_poems/chapter-3/poem-296.md
             src/_poems/chapter-3/poem-298.md
             src/_poems/chapter-3/poem-299.md
+            src/_poems/chapter-3/poem-301.md
+            src/_poems/chapter-3/poem-302.md
+            src/_poems/chapter-3/poem-303.md
+            src/_poems/chapter-3/poem-304.md
+            src/_poems/chapter-3/poem-305.md
+            src/_poems/chapter-3/poem-308.md
+            src/_poems/chapter-3/poem-309.md
+            src/_poems/chapter-3/poem-310.md
             src/_poems/chapter-3/chapter-3.json
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
@@ -839,6 +847,16 @@ jobs:
         run: |
           node --test --test-reporter=tap tests/thera261-280-source.test.mjs tests/thera261-280-client.test.mjs tests/thera281-285-source.test.mjs tests/thera281-285-client.test.mjs tests/thera287-288-source.test.mjs tests/thera287-288-client.test.mjs tests/thera292-299-source.test.mjs tests/thera292-299-client.test.mjs | tee reviewed-publisher261-299.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher261-299.tap","utf8"); for(const [key,value] of [["tests",49],["pass",49],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all reviewed publisher301-310 source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera301-310-source.test.mjs tests/thera301-310-client.test.mjs | tee reviewed-publisher301-310.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher301-310.tap","utf8"); for(const [key,value] of [["tests",14],["pass",14],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Check original and new Apadāna parser refusals against pinned source
         if: matrix.group == 'apadana'
         run: APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-parser.test.mjs tests/apadana-integration.test.mjs tests/apadana-pair-boundary.test.mjs tests/apadana-three.test.mjs
@@ -1424,6 +1442,7 @@ jobs:
           path: |
             widget-browser.report.json
             reviewed-publisher261-299.tap
+            reviewed-publisher301-310.tap
             standalone-reader.report.json
             standalone-print.report.json
             standalone-saved.report.json
