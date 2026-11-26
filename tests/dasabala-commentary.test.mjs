@@ -1,11 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import {findPython, runPython, fixtureStage} from './helpers/bounded-python.mjs';
 import { gunzipSync } from 'node:zlib';
 import { readBundled } from '../src/bundled-data.mjs';
-const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
+const python = findPython({label: 'Dasabala commentary'});
 
 test('short Dasabala commentary migration derives natural evidence and preserves every prior passage atomically', { skip: !python }, () => {
+  fixtureStage('Dasabala commentary', 'prepare-fixture');
   const c = JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')));
   const a = JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz')));
   // Full reviewed source books; unrelated wording need not be copied in each
@@ -13,14 +14,18 @@ test('short Dasabala commentary migration derives natural evidence and preserves
   c.books = c.books.map((b, i) => i === 12 ? b : { ...b, blocks: [] });
   c.units = c.units.filter(u => u.collection === 'sn' || u.id === 'mn1');
   a.books = a.books.map((b, i) => i === 10 ? b : { ...b, blocks: [] });
-  const result = spawnSync(python, ['-c', `
+  const result = runPython(python, ['-c', `
 import copy,json,os,sys,tempfile
 from unittest.mock import patch
+def stage(name):
+ print('[dasabala-python] '+name,file=sys.stderr,flush=True)
+stage('imports')
 sys.path.insert(0,'scripts/canon')
 from repair_dasabala_commentary import repair,TUPLE
 from repair_dasabala_spans import digest
 sys.stdin.reconfigure(encoding='utf-8')
 payload=json.load(sys.stdin);c=payload['canon'];a=payload['commentary']
+stage('input-decoded')
 # Reconstruct only this migration's historical association state, not any
 # source wording, permission, translation registry or corpus boundary.
 matching=[i for i,p in enumerate(a['passages']) if p==TUPLE]
@@ -38,6 +43,7 @@ with tempfile.TemporaryDirectory() as root:
  os.mkdir(os.path.join(root,'romn'))
  with open(os.path.join(root,'romn','s0302a.att.xml'),'wb') as f:f.write(b'offline parser fixture; not actual source evidence')
  before_c=copy.deepcopy(c);before_a=copy.deepcopy(a)
+ stage('first-repair')
  with patch('repair_dasabala_commentary.vri.parse',return_value=copy.deepcopy(parsed)):r=repair(c,a,root)
  assert r['changed'] and r['passage']==TUPLE
  assert c==before_c
@@ -51,10 +57,12 @@ with tempfile.TemporaryDirectory() as root:
  assert r['input_canon_sha256']==r['output_canon_sha256']==digest(c)
  assert r['input_commentary_sha256']==digest(before_a) and r['output_commentary_sha256']==digest(a)
  snapshot=copy.deepcopy(a)
+ stage('idempotence')
  with patch('repair_dasabala_commentary.vri.parse',return_value=copy.deepcopy(parsed)):again=repair(c,a,root)
  assert not again['changed'] and a==snapshot
  assert again['input_commentary_sha256']==again['output_commentary_sha256']==r['output_commentary_sha256']
  for case in ['source_drift','body_drift','root_drift','boundary','pin','prior_binding','duplicate','overlap','counts','commit','neighbour','lemma']:
+  stage('atomic-refusal:'+case)
   badc=copy.deepcopy(before_c);bada=copy.deepcopy(before_a);p=copy.deepcopy(parsed)
   if case=='source_drift':p[-1]['text']+=' Source drift outside reviewed paragraph.'
   if case=='body_drift':
@@ -76,8 +84,9 @@ with tempfile.TemporaryDirectory() as root:
    except ValueError:pass
    else:raise AssertionError(case)
   assert (badc,bada)==untouched,case
+stage('repair-idempotence-and-refusal-assertions-complete')
 print('natural tuple, unchanged prior passages/books/associations, exact receipts, idempotence and 12 atomic refusal controls passed')
-`], { input: JSON.stringify({ canon: c, commentary: a }), encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
+`], { input: JSON.stringify({ canon: c, commentary: a }), encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 }, 'Dasabala commentary migration');
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /12 atomic refusal controls passed/);
 });
