@@ -23,9 +23,9 @@ export const INTAKE359_PINS=Object.freeze({
 });
 export const INTAKE359_RUNTIME_FILE='RUNTIME_INVENTORY.json';
 export const INTAKE359_REVIEW_FILE='RUNTIME_REVIEW.json';
-export const INTAKE359_RUNTIME_SHA='62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e';
-export const INTAKE359_RUNTIME_REVIEW_SHA='b7aa44b6d9822a4508ac4fbc392da8ae76c0ab259469e3c61dc75cac260182bc';
-export const INTAKE359_APP_COMMIT='51e0b7dd98e19f8d633da266e2093b53eb436c53';
+export const INTAKE359_RUNTIME_SHA='839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186';
+export const INTAKE359_RUNTIME_REVIEW_SHA='2b19d690992a3289958a9e944be36484cf4257fa34a9b580e04704206e829b16';
+export const INTAKE359_APP_COMMIT='aec778d99aabccec6794a641072e463830e85542';
 export const AP343_INPUT='server/data/apadana.json';
 export const AP343_FIXTURE='tests/fixtures/canon-before-intake359/apadana.json';
 const freeze=x=>{if(x&&typeof x==='object'){for(const v of Object.values(x))freeze(v);Object.freeze(x);}return x;};

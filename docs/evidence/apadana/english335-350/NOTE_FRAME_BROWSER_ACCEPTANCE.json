@@ -1,0 +1,416 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap337",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 20,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap338",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 22,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap339",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 17,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap340",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 26,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap341",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 23,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap342",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 8,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap343",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 11,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap344",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 6,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap345",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 6,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap346",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 8,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap347",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 7,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap348",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 5,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap349",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 5,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap350",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 12,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap351",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 6,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap352",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 9,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap342",
+      "entry": "/",
+      "width": 1280,
+      "poem_notes": 8,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap343",
+      "entry": "/",
+      "width": 1280,
+      "poem_notes": 11,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap348",
+      "entry": "/",
+      "width": 1280,
+      "poem_notes": 5,
+      "physical_device": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap352",
+      "entry": "/",
+      "width": 1280,
+      "poem_notes": 9,
+      "physical_device": false
+    },
+    {
+      "family": "loaded Saved page truly browser-network-off edit/save/export; online reload stable",
+      "fresh_browser_offline_verified": false,
+      "export_sha256": "320d51fa9bd1a320fd1ce302422c13f813a34cdd9039554b2bdd55db588478ad"
+    }
+  ],
+  "counts": {
+    "api_metadata_sources": 16,
+    "api_catalogue": 1,
+    "compatibility_refusals": 24,
+    "api_full_sources": 16,
+    "api_search_sources": 16,
+    "api_quote_sources": 16,
+    "api_pagination_pages": 9,
+    "pagination_negative_cases": 4,
+    "native_catalogue_cells": 2,
+    "native_saved": 20,
+    "native_word_study": 20,
+    "native_cells": 20,
+    "native_tamper_sources": 2,
+    "host_stale_cases": 160,
+    "host_cells": 32,
+    "host_canonical_stale_cases": 4,
+    "native_legacy_refusals": 2,
+    "offline_local_workflow": 1,
+    "two_tab_conflict": 1,
+    "deny_all_provider": 1
+  },
+  "limitations": "Actual installed HTTP/MCP and Chromium DOM, pinned source fixtures, simulated MCP Apps/Apps SDK. No live provider, signed-in host, physical device or human assistive acceptance.",
+  "contract_sha256": "20ac1344c628fad0a7edb384bb15db2234f0ed443f0b4d1aa33d8fe284e80f9f",
+  "application_component_commit": "aec778d99aabccec6794a641072e463830e85542",
+  "package_snapshot_commit": "aec778d99aabccec6794a641072e463830e85542",
+  "acceptance_scope": "Runtime component and fresh offline installed39 atAPPaec778d99aabccec6794a641072e463830e85542; retains English16 source authority and reviewed cache behavior with finite note/header adjunct. This V6 scope is source/native/host/private flows; unchanged legacy edition-note DOM acceptance is separate. Final QA commit/CI/dev promotion not claimed.",
+  "stage": "/tmp/en16-_3ij33ze",
+  "harness_sha256": "47baf988b41135fcbcc5bd1825f35ed3d1d3d18e1650abf12e74697693a93bd6",
+  "physical_device": false,
+  "human_assistive_testing": false,
+  "fresh_browser_offline_verified": false,
+  "epochs": [
+    {
+      "mode": "pinned-fixture",
+      "pid": 163349,
+      "ledger": "/tmp/en16-_3ij33ze/pinned-fixture.jsonl",
+      "cleanup": {
+        "pid": 163349,
+        "leader_reaped": true,
+        "group_absent": true
+      },
+      "ledger_sha256": "5339d93cec31028165da2a37b3c034697417c3b935fbf443e92cb8c36ce009dc",
+      "fixture_reads": 85,
+      "denied_reads": 0,
+      "actual_upstream_forwarded": 0
+    },
+    {
+      "mode": "deny-all",
+      "pid": 166255,
+      "ledger": "/tmp/en16-_3ij33ze/deny-all.jsonl",
+      "cleanup": {
+        "pid": 166255,
+        "leader_reaped": true,
+        "group_absent": true
+      },
+      "ledger_sha256": "8d9f9b8d8b2e0e6dd451cc938d7ab1cafefffb179faf2fc4e4a4366701f31d87",
+      "fixture_reads": 0,
+      "denied_reads": 3,
+      "actual_upstream_forwarded": 0
+    }
+  ],
+  "selector_diagnostics": [
+    {
+      "id": "tha-ap337",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap338",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap339",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap340",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap341",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap342",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap343",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap344",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap345",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap346",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap347",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap348",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap349",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap350",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap351",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap352",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap342",
+      "entry": "/",
+      "width": 1280,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap343",
+      "entry": "/",
+      "width": 1280,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap348",
+      "entry": "/",
+      "width": 1280,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap352",
+      "entry": "/",
+      "width": 1280,
+      "combobox_count": 1,
+      "expected_option_count": 319,
+      "option_count": 319,
+      "first_mismatch": null
+    }
+  ],
+  "browser_run": true,
+  "upstream_provider_requests_forwarded": 0
+}

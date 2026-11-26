@@ -695,7 +695,7 @@ def read_301_310(root):
 
 
 def reviewed_intake(root):
-    return read_331_334(root)
+    return _reviewed_current359(root)
 
 
 def curated_303_additions(root,anchor_filename):
@@ -1125,7 +1125,7 @@ def read_331_334(root):
     return current
 
 
-def curated_additions(root, anchor_filename):
+def _historical343_curated_additions(root, anchor_filename):
     current = read_331_334(root)
     if anchor_filename == 'THERA_321_329_APPROVAL.json':
         anchor = read_321_329(root)
@@ -1141,3 +1141,114 @@ def curated_additions(root, anchor_filename):
     ids.extend(current['approved_ids']); profiles.update(extra_profiles); links.update(extra_links)
     assert current['expected_profile_ids'] == anchor['expected_profile_ids'] + ids
     return {'curation': current, 'anchor': anchor, 'ids': ids, 'profiles': profiles, 'links': links}
+
+
+# Source-only CURRENT whitelist. Historical read_* / curated_* bodies above
+# retain their exact independent scopes; no runtime/API output is normalized.
+CURRENT_335_350_PAIRS = (
+    ('tha-ap337',335), ('tha-ap338',336), ('tha-ap339',337), ('tha-ap340',338),
+    ('tha-ap341',339), ('tha-ap342',340), ('tha-ap343',341), ('tha-ap344',342),
+    ('tha-ap345',343), ('tha-ap346',344), ('tha-ap347',345), ('tha-ap348',346),
+    ('tha-ap349',347), ('tha-ap350',348), ('tha-ap351',349), ('tha-ap352',350),
+)
+
+
+def _selection_records(records):
+    assert type(records) is list
+    for row in records:
+        assert type(row) is dict and set(row)=={'id','publisher_chapter','poem'}
+        assert type(row['id']) is str and type(row['publisher_chapter']) is str
+        assert row['publisher_chapter'] in ('chapter-3','chapter-4')
+        assert type(row['poem']) is int and row['poem']>0
+    return records
+
+
+def _compose_reviewed_current359(previous,proof):
+    """Assemble only independently pinned source metadata, never observed output.
+
+    This pure seam is separately exercised with synthetic inconsistent selections.
+    The public entry supplies proof ONLY from the sealed359 source authority.
+    """
+    from copy import deepcopy
+    approval=proof['APPROVAL.json']
+    compact=proof['BASELINE343.json']
+    full=proof['BASELINE343_FULL_OBJECTS.json']
+    old_ids=compact['ids']
+    assert len(old_ids)==len(set(old_ids))==343
+    assert previous['expected_profile_ids']==old_ids==list(full['profiles'])==list(full['links'])
+    baseline=[]
+    for uid in old_ids:
+        profile=full['profiles'][uid]
+        assert profile['id']==uid and type(profile['poem']) is int and profile['poem']>0
+        # Original forty Therī profiles lack publisher_chapter. Their exact
+        # sealed profile paths/raw URLs supply the same chapter-4 identity;
+        # no canonical number or unreviewed publisher offset is inferred.
+        chapter='chapter-4' if uid.startswith('thi-ap') else 'chapter-3'
+        assert profile.get('publisher_chapter',chapter)==chapter
+        assert profile['path']=='/text/'+chapter+'/poem-'+str(profile['poem']).zfill(3)+'/'
+        assert profile['raw_url']=='https://raw.githubusercontent.com/apadana-translation/apadana-site/'+approval['publisher_revision']+'/src/_poems/'+chapter+'/poem-'+str(profile['poem']).zfill(3)+'.md'
+        baseline.append({'id':uid,'publisher_chapter':chapter,'poem':profile['poem']})
+    historical=_selection_records(previous['baseline_records']+previous['approved_records'])
+    assert historical==baseline
+    assert sum(row['publisher_chapter']=='chapter-4' for row in baseline)==40
+    extra=[{'id':uid,'publisher_chapter':'chapter-3','poem':poem} for uid,poem in CURRENT_335_350_PAIRS]
+    assert _selection_records(approval['approved_records'])==extra
+    extra_ids=[row['id'] for row in extra]
+    assert approval['approved_ids']==extra_ids==list(proof['PROFILES.json'])==list(proof['LINKS.json'])
+    assert approval['baseline_ids']==previous['expected_profile_ids']==old_ids
+    assert approval['expected_profile_ids']==old_ids+extra_ids
+    assert len(approval['expected_profile_ids'])==len(set(approval['expected_profile_ids']))==359
+    assert list(proof['EXPECTED_MANIFEST.json']['links'])==approval['expected_profile_ids']
+    for row in extra:
+        p=proof['PROFILES.json'][row['id']]
+        assert (p['id'],p['publisher_chapter'],p['poem'])==(row['id'],row['publisher_chapter'],row['poem'])
+    assert type(previous['held_ids']) is list and len(previous['held_ids'])==len(set(previous['held_ids']))
+    assert not set(previous['held_ids'])&set(approval['expected_profile_ids'])
+    assert approval['previous_holds_remain_unchanged'] is True
+    assert approval['source_holds_within_this_exact_sixteen']==[]
+    assert approval['source_and_normalization_only'] is True
+    assert approval['runtime_approval'] is approval['release_approval'] is False
+    result=deepcopy(approval)
+    result['baseline_records']=deepcopy(baseline)
+    result['approved_records']=deepcopy(extra)
+    result['held_ids']=list(previous['held_ids'])
+    result['current_source_approval']={'file':'docs/evidence/apadana/english335-350/APPROVAL.json','sha256':'9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6'}
+    result['historical343_source_approval']={'file':'docs/evidence/apadana/THERA_331_334_APPROVAL.json','sha256':APPROVAL343_SHA}
+    return result
+
+
+def _reviewed_current359(root):
+    # Lazy source-only import avoids approved_catalogue -> historical reader ->
+    # current whitelist recursion and avoids a full actual27 runtime capture for
+    # each browser family query. _authority reads every source seal physically;
+    # its file primitive lazily imports next-ten.regular without calling capture.
+    previous=read_331_334(root)
+    from web_reader_intake359 import _authority
+    return _compose_reviewed_current359(previous,_authority(root))
+
+
+
+def curated_additions(root,anchor_filename):
+    # Public CURRENT additions preserve the exact requested historical anchor.
+    # The old generic343 builder remains an explicit named historical body.
+    from copy import deepcopy
+    historical=_historical343_curated_additions(root,anchor_filename)
+    from web_reader_intake359 import _authority
+    proof=_authority(root)
+    current=_compose_reviewed_current359(historical['curation'],proof)
+    full=proof['BASELINE343_FULL_OBJECTS.json']
+    anchor_ids=historical['anchor']['expected_profile_ids']
+    old_ids=historical['ids']
+    assert historical['curation']['expected_profile_ids']==anchor_ids+old_ids
+    assert list(historical['profiles'])==list(historical['links'])==old_ids
+    for uid in old_ids:
+        assert historical['profiles'][uid]==full['profiles'][uid]
+        assert historical['links'][uid]==full['links'][uid]
+    extra=current['approved_ids']
+    assert not set(extra)&(set(anchor_ids)|set(old_ids))
+    ids=list(old_ids)+list(extra)
+    profiles={**deepcopy(historical['profiles']),**deepcopy(proof['PROFILES.json'])}
+    links={**deepcopy(historical['links']),**deepcopy(proof['LINKS.json'])}
+    assert current['expected_profile_ids']==anchor_ids+ids
+    assert list(profiles)==list(links)==ids
+    return {'curation':current,'anchor':historical['anchor'],'ids':ids,'profiles':profiles,'links':links}

@@ -3,687 +3,367 @@
   "status": "GO_EXACT_SOURCE_QA_CHECKPOINT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "snapshot_commit": null,
-  "after_domain": "physical working tree",
+  "after_domain": "physical working tree at independent recovery review",
   "live_working_tree_claimed": true,
-  "map_sha256": "5f94403d37ee2d45983a990e88ef313305d069b23210e2b029fa175cbb5ee67e",
-  "loader_sha256": "f78e7ad9830d5dc8c925421d0c65be634a94c3628c815e2b81d82a2a35f273ca",
+  "map_sha256": "221799faa7c75fdb30c86026c1d417d58324d5fad48d507db3e4af792e096878",
+  "loader_sha256": "aacd4cde9c2c89dd0c1cab111f53c38f7d7cf171e34b5548fad64d77d5da00b9",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
-  "changed_existing_exactly_mapped": 67,
-  "unchanged_original_source_entries": 934,
-  "hunks": 175,
+  "changed_existing_exactly_mapped": 70,
+  "unchanged_original_source_entries": 931,
+  "hunks": 186,
   "hunks_with_literal_dollars": 9,
   "all_forward_and_inverse_reconstructions_exact": true,
   "rows": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
       "current_sha256": "86afba12056894689a1d8ecaf64d4b79b07b69c04cd577c62c10b020d598712c",
-      "before_bytes": 168694,
-      "current_bytes": 172254,
-      "git_blob": "cd12676ae82696e9d8fbea71ac0091844e2375a6",
-      "hunks": 4,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 4
     },
     "AGENTS.md": {
       "base3d_sha256": "06024baeedc9397364c9ced4f3f6a167d5bccfdebc9182277e491d19d756bd43",
       "current_sha256": "c47adf302a888a80a3a153a3b62fc9e57d7a0e215f06b7aece80b4d66bdd2c9f",
-      "before_bytes": 148545,
-      "current_bytes": 149948,
-      "git_blob": "6efc5e884bb77e28d62d8038eb0fe7b266101bfe",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "README.md": {
       "base3d_sha256": "332a5e35486175ddd115476ccc7acdb351f70e69dfd9a5efa9b0f8014330e42e",
       "current_sha256": "eb9ac940da45a7a6cf5be5bba4fff9bd2cac47e5d8a5bf78e71d618c22179fc7",
-      "before_bytes": 49617,
-      "current_bytes": 50575,
-      "git_blob": "f50b2dcb5b56db65ab64cde3751c35b40849b3d8",
-      "hunks": 6,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 6
     },
     "THIRD_PARTY.md": {
       "base3d_sha256": "31e2fa98f63990dc53a2c37de0edf021d3060ab3d40e396a6e794e87c334f4f3",
       "current_sha256": "4cab5fee97bb977e947c944cab24fa4851d0f15e19696d4a2e11f200dbc65812",
-      "before_bytes": 42444,
-      "current_bytes": 42980,
-      "git_blob": "ecea999cc3ba2396720591a47999ba5ff4081820",
-      "hunks": 2,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 2
     },
     "docs/coverage.md": {
       "base3d_sha256": "032508622febdefaffd69549cc21580f8329d74906841bbed33d5ba2d94e160b",
       "current_sha256": "6886417d8f8f296428218109717af6f4affccd58fb7824ca2cacb6b3d71ddd40",
-      "before_bytes": 41655,
-      "current_bytes": 42556,
-      "git_blob": "39fc674afcf7d133a96a480cb19b20bb463cf320",
-      "hunks": 4,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 4
     },
     "docs/decisions.md": {
       "base3d_sha256": "bea9c72844206c3e816aab93d236d25844fb76c4f3db864ca0d856ed0af542af",
       "current_sha256": "eed213bb0d8f56bb22f8b58e45ec49a1d7852eb7e94c67fd95b81866151efa5b",
-      "before_bytes": 360524,
-      "current_bytes": 361683,
-      "git_blob": "1391b13e21df4e5d9878d7af4b5ec2d0e9883a53",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "docs/sources.md": {
       "base3d_sha256": "bdaec5c51c770ed2b3528f2d4122cd0e4787cf1e66fcba63ef00fb50312e1753",
       "current_sha256": "41e5c286e6f37412a86b153b7df440aed23169979fbff7c50431c1257cf20094",
-      "before_bytes": 69910,
-      "current_bytes": 71106,
-      "git_blob": "2388417d5e01604cd81043c0507bebb99d641b70",
-      "hunks": 2,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 2
+    },
+    "scripts/web-reader-thera-held234-check.py": {
+      "base3d_sha256": "577b1f45c3482dd547b47a1e8e512ec699ac1c197f6c227aef66800e21b314de",
+      "current_sha256": "1ef1c5f7d5b9eb1c7b34f9c035eb6ffd99d39927f7dda137868b8383e08c809d",
+      "hunks": 6
+    },
+    "scripts/web-reader-thera-remaining-check.py": {
+      "base3d_sha256": "f5aac0a06b46e52c04dbefffc3f67a9fee615aa4f900e5e9ae831661c8497cb5",
+      "current_sha256": "406a26f9772e01203d08bcac33cf9c66efd3c223ad36bf235b2324cff3eddf63",
+      "hunks": 2
+    },
+    "scripts/web_reader_apadana_intake.py": {
+      "base3d_sha256": "75fc772cde076fe64176108725c3cdbde8cc66d7db2e449384de52a54d71e730",
+      "current_sha256": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e",
+      "hunks": 3
     },
     "scripts/web_reader_approved_acceptance.py": {
       "base3d_sha256": "e2e2fa8545031e83627d4939bf4eca8e70424affd14708ced7f177e7be4cd28b",
       "current_sha256": "34741ee2a93ee8f96fd5586535df5ee4c507801dcf0255d6f66e0a7412a5b78d",
-      "before_bytes": 52161,
-      "current_bytes": 52897,
-      "git_blob": "a3ef1fd6acc3dae2a4ac20881d7244459025f64e",
-      "hunks": 2,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 2
     },
     "scripts/web_reader_next_ten_boundary_history.py": {
       "base3d_sha256": "6327f0a6ba14dc5de91aeb7c079bf6823d6ab5404620f87a1a9a7b0b302d8bbc",
       "current_sha256": "ae549a7653f140cecc2f6209502d456abacf86f251def075e6559113d309f86e",
-      "before_bytes": 16898,
-      "current_bytes": 17945,
-      "git_blob": "b73016f14bea8f7572f77fa1b36d021aaac22125",
-      "hunks": 8,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 8
     },
     "scripts/web_reader_six_boundary_history.py": {
       "base3d_sha256": "30d2b604761336f995bbaeb3851ebfabd13bc542e18af28757d3bf62299c7348",
       "current_sha256": "e5e46ba522f95b67d79d14ed0d45af2473ce52ab75c10922c660b4152e6020ec",
-      "before_bytes": 21925,
-      "current_bytes": 22157,
-      "git_blob": "4a6322b6fb6b4b70f5b22ba3e47627dd5b7024ad",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "src/apadana-thera-profiles.mjs": {
       "base3d_sha256": "aab6f170adf2592ccbcc5ed3a708dabf6a9ae0c14090558ecb36550579edecd7",
       "current_sha256": "c02a8b6b9f2d8957912ae20373b839ed1083ce519a4d6c82cb3f266e6a5569c5",
-      "before_bytes": 833927,
-      "current_bytes": 834034,
-      "git_blob": "e1dadf6c0ff2b4f8fb812fb1368da2f738bc669e",
-      "hunks": 2,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 2
     },
     "src/apadana-thera.mjs": {
       "base3d_sha256": "13a0c5226e0955b347f9a68b25a61399f50f6ec31c172a609dc9f567ec533720",
       "current_sha256": "660b698f22e52b3daf775efc0d9982f2972592ee0e58868ee637a045831e1896",
-      "before_bytes": 21613,
-      "current_bytes": 31606,
-      "git_blob": "65d67889275c4d2cfa69d4145e744d5a372437ad",
-      "hunks": 7,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 7
     },
     "src/chatgpt-widget.mjs": {
       "base3d_sha256": "32d83409b18c3e1fe07f09796392b1cbff3d27cf5b6d1c72c5170d73aa5efe99",
-      "current_sha256": "a57be01cdf09dab2db0286849be3c3dafa67139fc96e83a1522b9028e9154b26",
-      "before_bytes": 92117,
-      "current_bytes": 97653,
-      "git_blob": "00079a19e76375b0ae8c9e784eccb5cd4845c1f8",
-      "hunks": 9,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "current_sha256": "e90bdc18b77e6ff10c7b3acdaef4840bf67f15cc1b6f0bd715ca9e42d12135e3",
+      "hunks": 9
     },
     "tests/apadana-disclosures.test.mjs": {
       "base3d_sha256": "5b954a2f82874b5f73033d6b70079e125154a334fecec1d519337b475b705253",
       "current_sha256": "fcd3ff8c99fc2b6fd2b4a4872059dc60330a2340aba71dd2c84d3c10a077a989",
-      "before_bytes": 9882,
-      "current_bytes": 9882,
-      "git_blob": "d2da8cfa7cff7eb2e7a083a02499e4a466e5742e",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/apadana-fourth-client.test.mjs": {
       "base3d_sha256": "b61fdcd526a35c452519742fa3b4945a7b970afeaf14100355cde169e319bd3c",
       "current_sha256": "df4bed65dd5c955bdcaf13b4410ece7c372477a0eb6e15f961114507fc96def7",
-      "before_bytes": 27793,
-      "current_bytes": 27793,
-      "git_blob": "c53552f08a360f5cef44507a10585f431dca2729",
-      "hunks": 2,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 2
     },
     "tests/apadana-fourth.test.mjs": {
       "base3d_sha256": "1e54c57174dbe76c76dd17f07f36fd1f5100959576c1e652ab93b0f512e32787",
       "current_sha256": "f669f263793ec25f4b53e5f90e9a4a3ced1ada95f7a4e4cc85661a5148e2cb19",
-      "before_bytes": 18125,
-      "current_bytes": 18125,
-      "git_blob": "f423a6186113a6ff0b4192a9ec16325b699a96dc",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/apadana-held234.test.mjs": {
       "base3d_sha256": "e5aa1a1aede61a543722b370aabd76ada2fab5510e05ac03540483b7ea9b0e50",
       "current_sha256": "0a79f8471c7de7ce43bd0d9c61a65cfc3ec1edbf9ab03e5cfd459607b7bbc774",
-      "before_bytes": 11346,
-      "current_bytes": 11346,
-      "git_blob": "9c613f241096b2cada67d83f93fd29399862ea75",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/apadana-next.test.mjs": {
       "base3d_sha256": "a30221e777e2de57fbcd80f26ff8fee6f227d7032eb1daaa1af69ba05c7779a4",
       "current_sha256": "269efd0aa5b310dc1b0c2274bb07e82f0f74bf285cef43659d705bfa519ae082",
-      "before_bytes": 9288,
-      "current_bytes": 9288,
-      "git_blob": "67f4e72e00c93f7b0d606e4c5ed7aff146c48ad0",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/apadana-thera.test.mjs": {
       "base3d_sha256": "e0541fd39185aea07a4d8fdd3eb5eef8b631cbc19f14552240c3c0ba220f1920",
       "current_sha256": "dff4f38a7d0abb37def716cb93796dc3304e581110e7af705f78a35abff06067",
-      "before_bytes": 20548,
-      "current_bytes": 20548,
-      "git_blob": "3dbe23b5ded1cd13496d2296770c0d49aa1bbd3c",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/apadana-third.test.mjs": {
       "base3d_sha256": "82c90d065397bcea125c05d119d968e07004fd01faca68c19ca0936eb11ee95d",
       "current_sha256": "9c7126f1e074d77f6a167ea52124abc4c86c6bc0f80b8075b4b7a8be460a8db0",
-      "before_bytes": 23148,
-      "current_bytes": 23148,
-      "git_blob": "1e967d7b983e1c4e102c3c3ae483e2f2ac20ca46",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/apadana_next_ten_boundary_acceptance.py": {
       "base3d_sha256": "28557e471b247f1abbd288c1d04418dcde5f7f65f2eca4a9208452d891825f37",
       "current_sha256": "011c42f233840445fd1e1e9a04819515f0f889dea9c5e0be4ca53c94efbe2c80",
-      "before_bytes": 45194,
-      "current_bytes": 46202,
-      "git_blob": "e788da0ab3efcc989d14f571363fbaa707d088ba",
-      "hunks": 5,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 5
     },
     "tests/apadana_six_boundary_acceptance.py": {
       "base3d_sha256": "f8e68d283b11b045d4ced137144e2ee79abd7a488f4b0cbdbe450d398ee5bee9",
       "current_sha256": "367992e6ba81cb8bc5ac70620008054e337080412a64e34ef2054422639c057e",
-      "before_bytes": 24643,
-      "current_bytes": 28533,
-      "git_blob": "4b2f02ff65b3faf1aa0280dfe13b82970ad5adbf",
-      "hunks": 5,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 5
     },
     "tests/approved-acceptance.test.mjs": {
       "base3d_sha256": "30c19361b29b4d35a6193e526fce17111c16a34d65b0479b03ebff7f416b7394",
       "current_sha256": "c52b29e6dbf8fe65a5433bb9a37ae932497138e0343506b3a88166fcdb9f6414",
-      "before_bytes": 542,
-      "current_bytes": 985,
-      "git_blob": "d86417e690d7ef2d41ad9cd2ab74940c6dc504f5",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/approved_acceptance.py": {
       "base3d_sha256": "7cc1bb04dc5f15d6e7062876225186b9d8625aaef1b0dc2ca4ce003cd9949581",
       "current_sha256": "dd58690a02e33918bbe99fdc85eaa37fd36c5a5d69cf3fd6cfec82071cdfb35f",
-      "before_bytes": 22723,
-      "current_bytes": 17676,
-      "git_blob": "479668cea92b0d9c907b2692a06d8f276166d5cf",
-      "hunks": 15,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 15
     },
     "tests/approved_current333_authority_negatives.py": {
       "base3d_sha256": "f8fb368777231010d2c69a8f7edbc9aea20e8d4caf35ff9f34f2191e425fd815",
       "current_sha256": "5171c167fa3228e902bb78391aa15b68ecafcf952a83f6510ae573eae6295dd0",
-      "before_bytes": 10769,
-      "current_bytes": 11811,
-      "git_blob": "f3d244ad1ebfd60d195657efc86a6fc00aeeade3",
-      "hunks": 8,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 8
     },
     "tests/approved_current339_authority_negatives.py": {
       "base3d_sha256": "d3b631acd04efecc97b7b3a34a5eec6c3ba97576425a82e9b5d83ba3d3ba8a5a",
       "current_sha256": "372b421fa7ce95229e96bf46e5fbee6fe835b788fd2a7d89a633680ff581f912",
-      "before_bytes": 10793,
-      "current_bytes": 11835,
-      "git_blob": "1297fcc246d7c8b69a1bf43b9934e090043e4c13",
-      "hunks": 8,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 8
     },
     "tests/current339-source-inverses.test.mjs": {
       "base3d_sha256": "369b9169a90533579f31bee02eeba301b918910d23183cd2e92abb7a51a38b63",
       "current_sha256": "1226b994d18fd9cc7fe470d5865f8ff616c1dd75e42b146a50c34574a005ff6f",
-      "before_bytes": 1541,
-      "current_bytes": 1541,
-      "git_blob": "7176f6948c87680dd5837fe9269235b10ebe0701",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/current343-bindings.test.mjs": {
       "base3d_sha256": "487eac39425cae787b82cdf2c23076bd4ec0fe7c9eb50fa7692e41997fe5c841",
       "current_sha256": "6051a4e330b42442e6c469d226c2c1cd0e5638fe3db1295a191b06b725de8089",
-      "before_bytes": 1998,
-      "current_bytes": 2312,
-      "git_blob": "58bcf55cfae080c938c31c31b5083f96061d2a0a",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/four-boundary-ci.test.mjs": {
       "base3d_sha256": "39bf4a19a3797b4957f0ef3f402c2022b6d4422a476ce3083a9605c4ae9631b5",
       "current_sha256": "d6eeafd5c99bad82802d94d3ed9b92296af9e9302e564c1f0362864dc7f47cd3",
-      "before_bytes": 1577,
-      "current_bytes": 2679,
-      "git_blob": "6df2cad0c9bb89ce1102f0488d7ea7af1a26c1a5",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/held234-client.test.mjs": {
       "base3d_sha256": "59184090e844fb420839c71b20b8483118cb64ea8639f81cf2129398f8567d89",
       "current_sha256": "d9e8caa963afcd1a8ab886d351e4fbc3809811a8a92b7676fcc9ae9936fe1d33",
-      "before_bytes": 10138,
-      "current_bytes": 10138,
-      "git_blob": "4f14539dfe28094d67d5b10ffb2d9f0ffc697a1a",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/helpers/apadana-intake-expectations.mjs": {
       "base3d_sha256": "112a4fb45c32837666a831966ddee0a1de841208e08b13678dca50746626845a",
       "current_sha256": "04740482e298c98b1c8eef909450425e671709b4460573c14aeb97b68018c871",
-      "before_bytes": 18041,
-      "current_bytes": 19167,
-      "git_blob": "9bf57702f96783c8dd790fe5a2f4b642410112b7",
-      "hunks": 3,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 3
     },
     "tests/helpers/intake343-metadata.mjs": {
       "base3d_sha256": "ff1c0ad59c8ed50c1e85334b4e463d50514963b58d446b2b82a64ff965dd67ec",
       "current_sha256": "c21eb796a1a67510f2d1ef82aff4669458462c13d45c9d4e5fbd1d97b7cd0dc9",
-      "before_bytes": 7319,
-      "current_bytes": 7647,
-      "git_blob": "d5ba8e9ca41fbda730d82dcadbbddb7401cb267f",
-      "hunks": 4,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 4
     },
     "tests/helpers/next-ten-history-data.mjs": {
       "base3d_sha256": "d4177d9eb7ffa2315077bf262cb91f60c22a6e7647e5774e80b1fc9d988725f9",
       "current_sha256": "1675eb2102ca54c9e9e01978556801f7c7260b44dd4df1e59b81d5be3f5f6b99",
-      "before_bytes": 11022,
-      "current_bytes": 11472,
-      "git_blob": "d720485a2588e9cdd842431340114528a639043c",
-      "hunks": 4,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 4
     },
     "tests/helpers/next-ten-source-input.mjs": {
       "base3d_sha256": "b6f0230a64d81b1a8dc88dd6a89d34bbd631e9fd041cb14ce8f2c16a6c7f6ade",
       "current_sha256": "03b1cdf8793e461029373f633b4dd9c6dcc9382e57d7733493c031bb3fc2b365",
-      "before_bytes": 5812,
-      "current_bytes": 6901,
-      "git_blob": "88083135af97ac63020ef5654e5cba5b2fec47dc",
-      "hunks": 2,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 2
     },
     "tests/helpers/thera-remaining-client.mjs": {
       "base3d_sha256": "375fe78b9734b92fbcd11bf2891f5ced0b60dd21e3496a2c58ee6fc573782e15",
       "current_sha256": "6db47648af14a865a2d00142dbfd9cf28f127879cc7ab83e6754fd02c530ddf6",
-      "before_bytes": 17148,
-      "current_bytes": 17148,
-      "git_blob": "0898f5b66410570b151b38ca1096bf25b809e765",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/helpers/thera312-319-evidence.mjs": {
       "base3d_sha256": "ef09742f97001b0b39e6bbd584a76ebcbaf0af2d53af30dbe9de30707ab9f717",
       "current_sha256": "5e40cd9dc3671d21401ae2caee09bdd1dae4ee92aa17212290713ef6a46e0c61",
-      "before_bytes": 16031,
-      "current_bytes": 16067,
-      "git_blob": "12598d5b0baf02dc8b7956f2b3d6d719107f986f",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/helpers/thera331-334-evidence.mjs": {
       "base3d_sha256": "75661041468412c3ca317e4b8ef5e69e0535a7419aea13915198edf60564a261",
       "current_sha256": "30d0cbde9b7a5cee4dc39372d5bc88e7b434ee284e8f211f46f4f007fe917eda",
-      "before_bytes": 6395,
-      "current_bytes": 6674,
-      "git_blob": "8f80dda9eacce02e5599b617bdd5f1b601f41112",
-      "hunks": 3,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 3
     },
     "tests/helpers/thera339-legacy-projection.mjs": {
       "base3d_sha256": "007d9cc6ad3125bf0e36a40f57d1ab94a35c50cf94083243ef26869a68ea61bc",
       "current_sha256": "d1ad21ef13adbf5633a544d4bc655bfbc329ac8f691246db4f798af917f97c86",
-      "before_bytes": 10933,
-      "current_bytes": 10969,
-      "git_blob": "b0c4ccfde14b38e93e243f4a006b1a3a66296c15",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/intake343-metadata.test.mjs": {
       "base3d_sha256": "80d60c068c85541bfe82308186321740ce12e9405ff788c37d7fa285b99c842c",
       "current_sha256": "fb86f7ba2a9fe0a61c95fd4c1e2b471f020392b1fb8796c45fcd1623f0e7cdb6",
-      "before_bytes": 4134,
-      "current_bytes": 4266,
-      "git_blob": "cc0f06ddaaa9bf350858695db2225ea75febce43",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/next-ten-history-data.test.mjs": {
       "base3d_sha256": "647d8b50dbc8287f913495628571cf4c877a3f4216f5f53a5ab611db370f976f",
-      "current_sha256": "4bfe47e893d8dc1239ff8a84c245e721363993e1704c509b6e2f21d886c5cb14",
-      "before_bytes": 6244,
-      "current_bytes": 8504,
-      "git_blob": "6ec40e26841aec142b5d7b2886a663710eb1a4ff",
-      "hunks": 3,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "current_sha256": "3695d3eb7692ba02e061513a89125e6e9702521d8c023bcc42de4e6192454c2c",
+      "hunks": 3
     },
     "tests/next_ten_history_acceptance.py": {
       "base3d_sha256": "c80edab2c44dc23e0504af6645287a146aff911f801f9f2750bee8fd9508af73",
-      "current_sha256": "0b13ae56e591d5bed5c4954f78ae1e02b42b4ce5e5f193d9fcc7add401bd3607",
-      "before_bytes": 11887,
-      "current_bytes": 14452,
-      "git_blob": "e6ff1a3313f10ad2bed002669dc55fcadd6964f5",
-      "hunks": 7,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "current_sha256": "11a6516e7396dfddf25608f95502df4cfe43243272291c45388df2c598818462",
+      "hunks": 7
     },
     "tests/six-boundary-source-input.test.mjs": {
       "base3d_sha256": "d30c6c3c1cc79725dd3002cdeadb66b1853b2e3fb6dd12e884f1a621f5989c30",
       "current_sha256": "13c443a8c66893939bcda5c63a744a9648e47ec86020bdd09c9a6a67036569c9",
-      "before_bytes": 8742,
-      "current_bytes": 10067,
-      "git_blob": "770839467010e674364cb03617a777c73904cd55",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/six_boundary_history_acceptance.py": {
       "base3d_sha256": "98a3b5272d3d97e75b456615c17006e8a741f1360e61080c4e848dba6e952cc0",
-      "current_sha256": "ad3a58de093cbd9f350b0eaf7d7da6c4994c5ddb587f10086b755309557f354e",
-      "before_bytes": 8926,
-      "current_bytes": 11476,
-      "git_blob": "c9b09d4043ccb4a47e2d8eebcc8e73fc18bd8088",
-      "hunks": 5,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "current_sha256": "d5d7ed3abc3acf4ef653119c5451af463dcd495232b82bd2ddb7b7d50a3a60f3",
+      "hunks": 5
     },
     "tests/six_operation_scope_controls.py": {
       "base3d_sha256": "ae4265fd6bfd60c3c1c0d734b0b38e580c8d32a193ab438d7d4ef39ad7f5ea48",
-      "current_sha256": "00539b0d1327304cd693aeb435c2cac112399caa77f80fe1a4d3cda91ddb62ca",
-      "before_bytes": 9101,
-      "current_bytes": 11454,
-      "git_blob": "815d473c912897268b6377db2a0e1310cdc48ebe",
-      "hunks": 4,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "current_sha256": "57f491ff0d8be28d76385cd44596e24720b1b97ed1a31ccf529e0093950079c4",
+      "hunks": 4
     },
     "tests/source-notes-baseline-projection.test.mjs": {
       "base3d_sha256": "47fb66193af5db2a26d2750977e1a5c234a081702776bfd6689250c75ec3933c",
       "current_sha256": "6a6464f74ee6bc5eb81759b41bac81fa8a7f8bd4b86ff2e46ffa989142441add",
-      "before_bytes": 7183,
-      "current_bytes": 7183,
-      "git_blob": "c22775b20cfeb9165462b86f0141b7f67dd475dd",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/source-notes-compatibility.test.mjs": {
       "base3d_sha256": "a41b96f9b01952fd3909724ee0df07c44cb377b80077714e36ebeffd35e4e6d4",
       "current_sha256": "38576f7c5b04703a3a1fe370228cfa8edacd2ad244fb19de760880b0f7239c5e",
-      "before_bytes": 6011,
-      "current_bytes": 6011,
-      "git_blob": "db0d27e46e808a641d34469be7db06d7cbf990de",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera-commentary-locators.test.mjs": {
       "base3d_sha256": "afaa815caab9a0aa87221c6fa0e8ca19386aa3854c7d4016ca7153bad078901e",
       "current_sha256": "b7111a62a188669d5c8137d64f391a918d3ce414cfa8a902abcb31db87edeeff",
-      "before_bytes": 23301,
-      "current_bytes": 23301,
-      "git_blob": "a7e587aa6c8a6a6c9c32e99cb4aa80ae862cc65f",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera141-180-client.test.mjs": {
       "base3d_sha256": "25b18d1adbdba02d29d0bf83bc9be2714841b420df1b74abb9b412ac101a9ff3",
       "current_sha256": "1a7d0fe0c294f3f113c6988524456606bacde507aae1d8797258fb0a38b89e42",
-      "before_bytes": 9888,
-      "current_bytes": 9888,
-      "git_blob": "b4c5570ae6187be52ebc8dc6baa45ba26b9f382d",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera181-220-client.test.mjs": {
       "base3d_sha256": "63172b6003463efbd99f880341ef4ca978d4a33f46bac86b71cc29f38b805525",
       "current_sha256": "5374367f8cd1b14ef736deb3678ba0574f975ea2ceeab80ef15a5de1a5473205",
-      "before_bytes": 16356,
-      "current_bytes": 16356,
-      "git_blob": "fd5f5b04deaf6f86adc40694237d50b7c74ff009",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera221-230-client.test.mjs": {
       "base3d_sha256": "91f5f48ad319dc0bc4c5a04b97b4617187a90c6687a2314570a75d46a7694422",
       "current_sha256": "1f24fe34d11fd7883a4d2989558b17123f29c1e0f10279e0ed3d7c46a99d36de",
-      "before_bytes": 17095,
-      "current_bytes": 17095,
-      "git_blob": "64540946fde7b4132e9cea152745f5ab4e5a8e5c",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera241-250-client.test.mjs": {
       "base3d_sha256": "5d86878cb1d89871d7ee8a9a9f160f02252bf382281bb14152dbf6ef051af9e5",
       "current_sha256": "9e2fed56d5320b4a0993ce78ec5aeb88087e621a75416ed27be5bc4ef55c0fab",
-      "before_bytes": 17095,
-      "current_bytes": 17095,
-      "git_blob": "37a1b2f9ae593112574186bdb58941a25d644b54",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera261-280-client.test.mjs": {
       "base3d_sha256": "18b75cc85a80d2c02c89b783f0cef928eaae32067c6ed2c9bac3356a0951cb24",
       "current_sha256": "b151992c96b402bdb9a51939b947c23dac7478b71e0fa3ce7cb19bd80afc5c34",
-      "before_bytes": 12357,
-      "current_bytes": 12357,
-      "git_blob": "0582a2c1317ca97332b1f8194dc13029035c17cf",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera261-280-source.test.mjs": {
       "base3d_sha256": "ad5babdbb6f0789287d1f5c7a588203dbff22be645fe4f745e61076270ec34bb",
       "current_sha256": "2ec3e9692d085393e6a1a759c4ab909464b439a612bc14cd9deb8da71be79bac",
-      "before_bytes": 12411,
-      "current_bytes": 12411,
-      "git_blob": "047a3affe7145444a33b6684aa9412b74e9749e0",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera281-285-client.test.mjs": {
       "base3d_sha256": "0f0633c9eac88361e5c33f182f125a90b3fc27d3b9e70b42df96c33b492a54c6",
       "current_sha256": "2b3782059013f276e7ff1a07cac0618bc5581b1ca074bf6dd491918f874a0f0f",
-      "before_bytes": 11823,
-      "current_bytes": 11823,
-      "git_blob": "eeb5310cc5d76e50a3b935694dde8b9ae2b0a0b1",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera281-285-source.test.mjs": {
       "base3d_sha256": "603b0405a9d3624d0404f8c2248b5dfaae27308e846e1447f5a9f8d924918dba",
       "current_sha256": "5399b275f6f72c7e8c8ecaae2ab526d5c9c409f6d4fc55978cd7492a2eaf0b7c",
-      "before_bytes": 14069,
-      "current_bytes": 14069,
-      "git_blob": "97a40f67a2cfdf04fbbd7922c2f67b77b3e7c04b",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera287-288-client.test.mjs": {
       "base3d_sha256": "b5dac7d98f191bb47b82177498a7b8af01288f4a23075aad4ade3a51f30ddb6f",
       "current_sha256": "cfd6d853a942b0aa3ac94890bd46d8a31d9fd56eec57aa5ab804dd533415af79",
-      "before_bytes": 12861,
-      "current_bytes": 12861,
-      "git_blob": "acd8325d9e4830490763c510866adc55057e3a94",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera287-288-source.test.mjs": {
       "base3d_sha256": "3b8c0c17b2da4774658d01c91952471c4e772eb1f7033c78c2eafdd5f4af03b5",
       "current_sha256": "e040abd687f28a16000c75b6e3eb5d9146554e7c11e3963d33c5f80b7172253f",
-      "before_bytes": 13504,
-      "current_bytes": 13504,
-      "git_blob": "71cc0379c03489e5459371a413f7110b09226451",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera292-299-client.test.mjs": {
       "base3d_sha256": "e2bf3c2539617dd9fc6c29a056ab0c07cade43cf66679191b8a72921ac0927f4",
       "current_sha256": "17d74c6616994cbb9e4b6d458eff5ffdd5cd61b87c9dd07dda98575b3a309cb1",
-      "before_bytes": 13371,
-      "current_bytes": 13371,
-      "git_blob": "f638e517c13b3b16ae5f3fed7471151c9f705682",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera292-299-source.test.mjs": {
       "base3d_sha256": "9dce9181fa697df20531ff36d3589534c3a1e24a81dabc60f9b32e6ca61cbec5",
       "current_sha256": "f972593729f72e27292994693b53a15d14a467ec21cd271b9ad6186073cded77",
-      "before_bytes": 14972,
-      "current_bytes": 14972,
-      "git_blob": "72ea8c587a4182c64f3fe2f1df0e43d14c3112af",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera312-319-client.test.mjs": {
       "base3d_sha256": "e91d74a120072c56acee478f7497283ea3c47ed4a47163996153ae19dc9d6923",
       "current_sha256": "021ad233910a38b5e2b4c3e31a151d312a8c2e3aa2a93b08c2b55adb6e4f4569",
-      "before_bytes": 22617,
-      "current_bytes": 22617,
-      "git_blob": "7ecda837005df65fb15bfde54e891869dd5b12f2",
-      "hunks": 2,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 2
     },
     "tests/thera312-319-source.test.mjs": {
       "base3d_sha256": "d10db6930495a76ebb19ebd3e026d746dc7c4e627986e6039078a1b44b851da1",
       "current_sha256": "27853bbcfa8d0f26b925819eb5c0f1cfc8a31f23bcad3791347a426d4684b505",
-      "before_bytes": 13941,
-      "current_bytes": 13941,
-      "git_blob": "8cb42e31117a97e1d5bab6c8de7890a325df880f",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera321-329-client.test.mjs": {
       "base3d_sha256": "c28fdde2283c4d850b50f39c568290764ecdf4c48484e630dae4d1a01dc70077",
       "current_sha256": "61613a4b97e49ffd1bc39af332903ca47aefc503f86ec368e54ea3eee560ac94",
-      "before_bytes": 20895,
-      "current_bytes": 20895,
-      "git_blob": "a95f598484aa1683828214f449ab6834f1a713ce",
-      "hunks": 2,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 2
     },
     "tests/thera321-329-source.test.mjs": {
       "base3d_sha256": "53ff8e8a2c0052798b077e6f08b755b177b16b9a0eca208fd7c84762102e8e3e",
       "current_sha256": "a128ec7c640e5d60f52c52c39c9670484c3e0922b02210279a11173075df774d",
-      "before_bytes": 9005,
-      "current_bytes": 9011,
-      "git_blob": "77fb80b2470ac60bd9afe1e7e01b3b744bf6ba49",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "tests/thera331-334-preface-client.test.mjs": {
       "base3d_sha256": "c74f7437f0b1db42766cf90f26d47b92ced023a07a6eba292f4b9fcd4b88188c",
       "current_sha256": "5a34166637bc2d0c2faecd8e754bd280a3a1531da2c4ace9537249dfa9434972",
-      "before_bytes": 15558,
-      "current_bytes": 15752,
-      "git_blob": "f372283694120a6c6762ee2464c72286f215af68",
-      "hunks": 3,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 3
     },
     "tests/thera331-334-source.test.mjs": {
       "base3d_sha256": "05aee8096e6847f5fdbccccbaf46846cc3b7829cf5b96887d8f7505adfb624a8",
       "current_sha256": "5bd3a80c12a59daf8a2c9154fd00d7e97aa4616aac4e8497709965554c1dcc0e",
-      "before_bytes": 9544,
-      "current_bytes": 10326,
-      "git_blob": "fd84a3fdb2318331d71a8108e76705451bc6e7f5",
-      "hunks": 4,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 4
     },
     "tests/widget-hosted-selections.test.mjs": {
       "base3d_sha256": "afd221a7e5c575b329455af54ca3687cf54a5b5412c1eaf8b287c60a42030bca",
       "current_sha256": "07fa4aed9b6197cb37c539fbc1962d908796d8a6f133d37d17568415f16c1ce3",
-      "before_bytes": 3138,
-      "current_bytes": 3138,
-      "git_blob": "7b9e3ef7818a4b4a34e0245765292020bf1c92b9",
-      "hunks": 1,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 1
     },
     "web/translation-policy.mjs": {
       "base3d_sha256": "d9c68600adb510594a6d280fb619677d5d3efbb2c75ee3c255e9a75bd25ce9e6",
       "current_sha256": "21fa32a35cd42d89ffa337685d00e74d9ccc54d51a8c72cb8b97f17e2a7ae32a",
-      "before_bytes": 26207,
-      "current_bytes": 26615,
-      "git_blob": "130f9d93c044a6b34ba54f15b0cfd528507455a9",
-      "hunks": 3,
-      "whole_inverse_equals_Git3d": true,
-      "forward_positioned_reconstruction_equals_actual": true
+      "hunks": 3
     }
   },
   "old_frozen_authority_fixture_count": 824,
@@ -4812,5 +4492,10 @@
   "all_old_authorities_equal_Git3d": true,
   "stable_during_verification": true,
   "runtime_or_API_projection_authorized": false,
-  "behavior_package_CI_release_approval": false
+  "behavior_package_CI_release_approval": false,
+  "independent_companion_review": {
+    "file": "FINAL_RECOVERY_REVIEW.json",
+    "sha256": "b126eb5b91e7ff46ee4e14926899fe56f7787bc16c082d5e43a24a8a0b140a2d"
+  },
+  "final_commit_rebind_required": true
 }

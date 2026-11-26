@@ -1,0 +1,33 @@
+{
+  "schema": "independent-current359-suffix-count-correction-review-v1",
+  "status": "GO_EXACT_SOURCE_ROUTING_AND_TWO_LITERAL_TEST_CORRECTION_FOR_TARGETED_VALIDATION",
+  "original_static_review": {
+    "file": "STATIC_REVIEW.json",
+    "sha256": "67fdeab2cbe142436195544f85bf00470e6d9d456091e283407d6ca060a7d3ed"
+  },
+  "correction_reason": "Initial static review missed two incorrect new regression suffix-count literals. Root execution exposed them; independently frozen historical anchor sizes256 and266 prove exact suffixes103 and93. Runtime/source output is not the expectation oracle.",
+  "independent_old_authorities": [
+    {
+      "file": "docs/evidence/apadana/THERA_241_250_APPROVAL.json",
+      "sha256": "4d11c069b21e87ba7b58ea9a55c6b39d0a1beef0c9cd9f824e7c3f6146736df2",
+      "historical_anchor_count": 256,
+      "exact359_suffix_count": 103
+    },
+    {
+      "file": "docs/evidence/apadana/THERA_221_230_APPROVAL.json",
+      "sha256": "4ae2cd3fea1c64e323dfa41c15403c33215e90f8834c7ee0a4db708f77f68bed",
+      "historical_anchor_count": 266,
+      "exact359_suffix_count": 93
+    }
+  ],
+  "original_test_sha256": "e4062bcec92976a770d2908569e1b28ee2252f837197fac3a30ff54308345f6d",
+  "corrected_test_sha256": "573fd944e45bbcb44530fe34be67235f6a37541b553ce04f50549dfd55ce3bf9",
+  "actual_tracked_test_equals_exact_two_literal_correction": true,
+  "whole_file_delta": "--- frozen_proposal\n+++ corrected_test\n@@ -56,7 +56,7 @@\n         self.assertNotIn('web_reader_approved_acceptance',sys.modules)\n \n     def test_02_current_curated_suffixes_preserve_every_old_object_and_add_only_sixteen(self):\n-        for anchor,count in [('THERA_241_250_APPROVAL.json',113),('THERA_221_230_APPROVAL.json',103),\n+        for anchor,count in [('THERA_241_250_APPROVAL.json',103),('THERA_221_230_APPROVAL.json',93),\n                              ('THERA_REMAINING_APPROVAL.json',75),('THERA_HELD234_APPROVAL.json',74),\n                              ('THERA_321_329_APPROVAL.json',20)]:\n             with self.subTest(anchor=anchor):\n",
+  "all_three_production_harness_sources_equal_frozen_proposal": true,
+  "all_other_assertions_and_bounds_unchanged": true,
+  "no_reviewer_execution_of_test_browser_app_build_or_network": true,
+  "root_observed_initial_run": "Four Python methods executed; two subtests failed solely incorrect new suffix count expectations. Other public membership/families, mutations and warm proof loss cases passed. Corrected full regression rerun remains root-owned.",
+  "blocking_source_logic_findings": [],
+  "behavior_CI_dev_release_approval": false
+}

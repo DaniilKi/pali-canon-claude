@@ -1,0 +1,28 @@
+{
+  "schema": "independent-static-targeted-widget-note-header-preservation-production-review-v1",
+  "status": "GO_EXACT_PRODUCTION_SCOPE_FOCUSED_TEST_REVIEW_AND_EXECUTION_PENDING",
+  "production_manifest_sha256": "7b77626a77e14f725a60bdda44e5654ddae3b4d82477a3824fcebb75812b087f",
+  "base_source_sha256": "a57be01cdf09dab2db0286849be3c3dafa67139fc96e83a1522b9028e9154b26",
+  "source_sha256": "e90bdc18b77e6ff10c7b3acdaef4840bf67f15cc1b6f0bd715ca9e42d12135e3",
+  "patch_sha256": "a256e9b66978fb4e0768c23bc4f059c6781ecb52e4b13d71de7455e2c3a81fd4",
+  "base_equals_current_R": true,
+  "exact_unified_patch_reconstructs_proposed_source": true,
+  "existing_embedded_functions_changed_only": [
+    "render",
+    "closeReader"
+  ],
+  "sourceNoteRootKey_refreshSourceNotes_and_policies_byte_unchanged": true,
+  "findings": [
+    "New frames derive only from an already supported strict JSON snapshot using parse then existing descriptor-safe resnapshot; no raw getter/private-state traversal or serialization hook is introduced.",
+    "Relevant-note frame removes exactly top.source_notes and pali.segments. Header frame removes exactly top.text_id and source.commit. All other public fields, notably English,locator_revision,script,offset,read commands/citation, remain keyed.",
+    "Frames are initialized only by full render, not changed by partial refresh. Error render and close clear both. Captured sourceNoteRootRelevant and original root/anchor binding are not changed by adjunct.",
+    "Adjunct requires same input identity, non-null supported snapshot and checkedCanonicalLocator returning the original input. An excluded text_id change selecting a repaired namespace cannot bypass a canonical refusal.",
+    "Partial refresh calls only existing refreshSourceNotes(fresh input); no DOM root rebuild, rendered assignment, pending abandonment, generation increment, navigation rebuild or model-context publication. Original note association and content validation remains authoritative.",
+    "Genuine complete new selection/offset/read-command/English change fails both partial keys and reenters full validation; stable supported full snapshots keep the existing base reuse behavior."
+  ],
+  "pending": [
+    "Final frozen focused tests and parent actual13/four-new cases/browser source-note acceptance.",
+    "Fresh application build/runtime/package/resource seals and final source-map/exactCI binding. No prior app bytes cover this new HTML."
+  ],
+  "review_actions": "Read-only stdlib text/hash review. No app/helper/test imports or execution, build, Git/network, CI or tracked writes."
+}

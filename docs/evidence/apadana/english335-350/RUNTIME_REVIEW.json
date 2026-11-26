@@ -2,14 +2,14 @@
   "schema": "reviewed-intake359-runtime-approval-v1",
   "status": "APPROVE_EXACT_CURRENT34_RUNTIME_INVENTORY_SOURCE_SCOPE_ONLY",
   "baseline": "3d614795cf95e45280603e95f68846c52eba4818",
-  "candidate_commit": "51e0b7dd98e19f8d633da266e2093b53eb436c53",
+  "candidate_commit": "aec778d99aabccec6794a641072e463830e85542",
   "curation_sha256": "9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6",
   "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
   "runtime_files": 34,
   "baseline_runtime_sha256": "6becdfab6b8e948a6d2df9af1a37131c4c0c727d77db79cf4bb4b93973512f23",
   "independent_inventory": {
     "file": "RUNTIME_INVENTORY.json",
-    "sha256": "62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e"
+    "sha256": "839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186"
   },
   "files": {
     "THIRD_PARTY_LICENSES.txt": {
@@ -125,12 +125,12 @@
       "sha256": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6"
     },
     "http-worker.cjs": {
-      "bytes": 2936996,
-      "sha256": "acae67d98e21772f12277f86d604cc24bd86ea820ee178f30e95299360f3571c"
+      "bytes": 2938893,
+      "sha256": "3c28091804514ddac13a7def168ca3498d73d7972e8f335798cf025960e5655e"
     },
     "http.cjs": {
-      "bytes": 3004741,
-      "sha256": "f676de25513e929bf15c4139aa7ea0067576c412e504ed9b245b88b4f9a63e4a"
+      "bytes": 3006638,
+      "sha256": "c07416b4ede93b05fc840a395a818e181e78e998136202f0bc6bd414d670a901"
     },
     "index.cjs": {
       "bytes": 2807202,
@@ -162,15 +162,15 @@
   "finite_source_diff_approval": true,
   "behavioral_harness_approval": false,
   "release_or_push_approval": false,
-  "cache_fix_static_review": {
-    "path": "/tmp/pali-english335-350-evidence-nov26/widget-cache-independent-review/V2_INDEPENDENT_REVIEW.json",
-    "sha256": "ddc668761b178edbc03a0fecc0f1901c6534a0c9e7ba9cf6d680d89c73ac2ec3"
+  "note_header_fix_static_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/widget-cache-note-preservation-independent-review/FINAL_STATIC_REVIEW.json",
+    "sha256": "d3495b259d3bae89de63dddd0f3cd6ef27d38c4772c8e80d5612ab115aac7be1"
   },
   "approved_actual_cache_source": {
     "path": "src/chatgpt-widget.mjs",
-    "sha256": "a57be01cdf09dab2db0286849be3c3dafa67139fc96e83a1522b9028e9154b26"
+    "sha256": "e90bdc18b77e6ff10c7b3acdaef4840bf67f15cc1b6f0bd715ca9e42d12135e3"
   },
-  "application_source_runtime_diff_from_b228": [
+  "application_source_runtime_diff_from_51": [
     "server/http-worker.cjs",
     "server/http.cjs",
     "src/chatgpt-widget.mjs"
@@ -181,32 +181,44 @@
   "all343_old_full_link_objects_and16new_link_objects_unchanged": true,
   "all359_full_profile_objects_unchanged_source_literal_reconstruction": true,
   "source_HTML_review": {
-    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/WIDGET_SOURCE_REVIEW.json",
-    "sha256": "2d0f038e8aa2927a5418abcf32aa5639812567203807b1c7a575d4345156f487"
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-note-preservation-review/WIDGET_SOURCE_REVIEW.json",
+    "sha256": "ca81bd9f762c95e3e8a29779d6f6c93cd71b7a2bb6f525563e6d0fc762696648"
   },
   "source_HTML": {
-    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/SOURCE_WIDGET_HTML.html",
-    "sha256": "51d36309948898574ad712e49a175cb5706e31fd977158b0c9432d99f12d9b73"
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-note-preservation-review/SOURCE_WIDGET_HTML.html",
+    "sha256": "87d68782491e83868793d5624c3cbebe5c51bcbdce80f71ffdbe64df0e41213e",
+    "bytes": 700043
   },
-  "historical_authority_handling": "Preserve originalb2285164/646a leaves unchanged as historical siblings before replacing onlynewlyintroducedcurrent359leaf/pins. All3d andearlier historicalauthorities remainfrozen.",
-  "source_body_note_and_private_data_scope": "No corpuswords/Englishbodies/notes/rights/sourcepins/privateuserdata changed. Cache source snapshot identity only, no newtranslation orautomaticpersonaldata migration.",
-  "test_and_behavior_scope": "Rootreported13newcases/oldwidgetgates separately; thisreviewdoesnotreexecute/adoptthosepasses. Exactrebuiltbundleidentity/sourceapprovalonly, not finalbrowser/CIacceptance.",
+  "whole_two_CJS_inverse_to_preserved_51": {
+    "http-worker.cjs": {
+      "hunks": 6,
+      "restored_prior_sha256": "acae67d98e21772f12277f86d604cc24bd86ea820ee178f30e95299360f3571c",
+      "whole_prior_blob_restored": true
+    },
+    "http.cjs": {
+      "hunks": 6,
+      "restored_prior_sha256": "f676de25513e929bf15c4139aa7ea0067576c412e504ed9b245b88b4f9a63e4a",
+      "whole_prior_blob_restored": true
+    }
+  },
+  "historical_authority_handling": "Keep b2285164/646a and51e062ccc/b7aa sibling leaves unchanged. Replace only the newly introduced current359 runtime leaf/pins after independent review; every3d/older authority remains mandatory.",
+  "source_body_note_and_private_data_scope": "No corpus/English words, notes,rights,source pins or private data changed. Source-note/header partial events preserve only the prior validated view; no automatic personal-data migration.",
+  "test_and_behavior_scope": "Parent reports24 targeted passes separately. This attestation does not execute/adopt them or claim browser/CI acceptance.",
   "limits": [
-    "Fresh39archive/Git/package/installbindingfor51componentremainsrequired; old9f18packagehasoldb228HTTPbundles.",
-    "ActualwholeHTTPHTML equality toindependentlyreconstructednewsourceHTML remainsrequired.",
-    "ActualV6browseragainstoldb228isdiagnosticandcannotcertify51cachefix; strictactualbrowserrefusalchecksrequiredfornewcomponent.",
-    "FinalexactcommitCI/review andphysical/human/signedhost/providerlimits remainseparate."
+    "Fresh actual39 package/archive/install/Git binding and strict both-resource HTML equality are separate gates.",
+    "Exact final commit CI and browser source-note/locator/English regression acceptance remain required.",
+    "No physical-device, signed-in-host, human assistive, provider-health or release claim."
   ],
-  "curations_scope": "Unchanged exactEnglish16/source9232/metadata359/Pali f3;runtimecacheidentityrepaironly.",
+  "curations_scope": "Unchanged English16/source9232/metadata359/Pali f3; finite source-note/header DOM-preservation adjunct only.",
   "supersedes_runtime_component_only": {
-    "previous_component_commit": "b2280c55ccf29c778abd89f26e3165b367b5ddba",
+    "previous_component_commit": "51e0b7dd98e19f8d633da266e2093b53eb436c53",
     "previous_inventory": {
-      "path": "/tmp/pali-english335-350-evidence-nov26/runtime-review/RUNTIME_INVENTORY.json",
-      "sha256": "516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b"
+      "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/RUNTIME_INVENTORY.json",
+      "sha256": "62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e"
     },
     "previous_review": {
-      "path": "/tmp/pali-english335-350-evidence-nov26/runtime-review/RUNTIME_REVIEW.json",
-      "sha256": "646ab8d8fdcabb0130766b056c00997d9e10f6e99a640445628bdff6bb296e76"
+      "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/RUNTIME_REVIEW.json",
+      "sha256": "b7aa44b6d9822a4508ac4fbc392da8ae76c0ab259469e3c61dc75cac260182bc"
     },
     "previous_claims_preserved": true
   },

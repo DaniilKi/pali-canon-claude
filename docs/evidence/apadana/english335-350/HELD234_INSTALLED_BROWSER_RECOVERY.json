@@ -1,0 +1,316 @@
+{
+  "mode": "installed-normal",
+  "server_directory": "/tmp/pali-english335-350-evidence-nov26/package-note-aec/installed/node_modules/pali-canon-mcp/server",
+  "runtime_origin": "isolated-npm-install",
+  "launch_receipt": "/tmp/pali-english335-350-evidence-nov26/ROUTING359_INSTALLED_HELD234_PINNED9.launch.json",
+  "selected_source_count": 1,
+  "registry_profiles": 359,
+  "passed": 16,
+  "checks": [
+    {
+      "check": "neighbor235 separate identity/source original positive",
+      "uid": "tha-ap237"
+    },
+    {
+      "check": "actual complete MCP body equals independent paragraph hashes including first/final stanza and closing colophons; owned poem notes exact",
+      "uid": "tha-ap236",
+      "paragraphs": 8,
+      "physical_entries": 5
+    },
+    {
+      "check": "public synthetic wrong revision/prefix/neighbor source continuation refused",
+      "uid": "tha-ap236",
+      "controls": 4
+    },
+    {
+      "check": "actual MCP source pages accepted by standalone comparison validator; source/body/notices/owned-apparatus mutations refused",
+      "sources": 1,
+      "mutations": 23
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "all selected actual source reader bodies/notes/apparatus, revision navigation, single-source comparison refusal, cached drift refusal, synthetic local drafts/reload/export",
+      "sources": 1,
+      "mutations": 23
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "bridge": "MCP Apps",
+      "check": "Packaged widget HTML; actual MCP payloads accepted;source/notices/summary/division mutations refused before English;P\u0101li retained;zero network;simulated host bridge only",
+      "sources": 1,
+      "tamper_refusals": 23
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "bridge": "Apps SDK",
+      "check": "Packaged widget HTML; actual MCP payloads accepted;source/notices/summary/division mutations refused before English;P\u0101li retained;zero network;simulated host bridge only",
+      "sources": 1,
+      "tamper_refusals": 23
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "all selected actual source reader bodies/notes/apparatus, revision navigation, single-source comparison refusal, cached drift refusal, synthetic local drafts/reload/export",
+      "sources": 1,
+      "mutations": 23
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "bridge": "MCP Apps",
+      "check": "Packaged widget HTML; actual MCP payloads accepted;source/notices/summary/division mutations refused before English;P\u0101li retained;zero network;simulated host bridge only",
+      "sources": 1,
+      "tamper_refusals": 23
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "bridge": "Apps SDK",
+      "check": "Packaged widget HTML; actual MCP payloads accepted;source/notices/summary/division mutations refused before English;P\u0101li retained;zero network;simulated host bridge only",
+      "sources": 1,
+      "tamper_refusals": 23
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "all selected actual source reader bodies/notes/apparatus, revision navigation, single-source comparison refusal, cached drift refusal, synthetic local drafts/reload/export",
+      "sources": 1,
+      "mutations": 23
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "bridge": "MCP Apps",
+      "check": "Packaged widget HTML; actual MCP payloads accepted;source/notices/summary/division mutations refused before English;P\u0101li retained;zero network;simulated host bridge only",
+      "sources": 1,
+      "tamper_refusals": 23
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "bridge": "Apps SDK",
+      "check": "Packaged widget HTML; actual MCP payloads accepted;source/notices/summary/division mutations refused before English;P\u0101li retained;zero network;simulated host bridge only",
+      "sources": 1,
+      "tamper_refusals": 23
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "all selected actual source reader bodies/notes/apparatus, revision navigation, single-source comparison refusal, cached drift refusal, synthetic local drafts/reload/export",
+      "sources": 1,
+      "mutations": 23
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "bridge": "MCP Apps",
+      "check": "Packaged widget HTML; actual MCP payloads accepted;source/notices/summary/division mutations refused before English;P\u0101li retained;zero network;simulated host bridge only",
+      "sources": 1,
+      "tamper_refusals": 23
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "bridge": "Apps SDK",
+      "check": "Packaged widget HTML; actual MCP payloads accepted;source/notices/summary/division mutations refused before English;P\u0101li retained;zero network;simulated host bridge only",
+      "sources": 1,
+      "tamper_refusals": 23
+    }
+  ],
+  "sources": [
+    {
+      "uid": "tha-ap236",
+      "publisher_poem": 234,
+      "body_sha256": "ef8e3760a3afdd2e5fea960df90525fccb139b70b3e8a5f823cffbc13259159e",
+      "pages": 2
+    }
+  ],
+  "source_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_data/site.json",
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    },
+    {
+      "path": "src/_poems/chapter-3/chapter-3.json",
+      "sha256": "50b6544f4689f2fcbd9287a86890cdcd6993c62b94ebcfb2d5419546f9ded2e0",
+      "git_blob_sha1": "8c453df465b0cd793bb169ab2398192dbd7db0a0"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-234.md",
+      "sha256": "24e6aa7f6352e29fa850811602ce63084197d3aab66953a203b3cbe53d26a91a",
+      "git_blob_sha1": "34c19fddf4fd561aae3ed5a3fcb774f80f689a94"
+    }
+  ],
+  "source_approval": {
+    "file": "THERA_HELD234_INDEPENDENT_SOURCE_APPROVAL.json",
+    "sha256": "9b7b6cf1d4efe45ee06330551651e1baaf76f20226a35c47a07224592d1cfb8d"
+  },
+  "independent_normalization": {
+    "file": "THERA_HELD234_INDEPENDENT_NORMALIZATION.json",
+    "sha256": "bdc46f96753c743b0d099beb1334719f9cd061f6e3a1ece275de29d1c6d8ebf7"
+  },
+  "curation_sha256": "14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7",
+  "current_curation_sha256": "9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6",
+  "historical343_curation_sha256": "e68927dcca72d79196786d46ba19290bf0903396993c2fb62dbf2b02150793c8",
+  "current_additions_ids": [
+    "tha-ap263",
+    "tha-ap264",
+    "tha-ap265",
+    "tha-ap266",
+    "tha-ap267",
+    "tha-ap269",
+    "tha-ap270",
+    "tha-ap271",
+    "tha-ap272",
+    "tha-ap273",
+    "tha-ap274",
+    "tha-ap275",
+    "tha-ap276",
+    "tha-ap277",
+    "tha-ap278",
+    "tha-ap279",
+    "tha-ap280",
+    "tha-ap281",
+    "tha-ap283",
+    "tha-ap284",
+    "tha-ap285",
+    "tha-ap286",
+    "tha-ap287",
+    "tha-ap289",
+    "tha-ap290",
+    "tha-ap294",
+    "tha-ap295",
+    "tha-ap296",
+    "tha-ap297",
+    "tha-ap298",
+    "tha-ap300",
+    "tha-ap301",
+    "tha-ap303",
+    "tha-ap304",
+    "tha-ap305",
+    "tha-ap306",
+    "tha-ap307",
+    "tha-ap310",
+    "tha-ap311",
+    "tha-ap312",
+    "tha-ap314",
+    "tha-ap315",
+    "tha-ap316",
+    "tha-ap317",
+    "tha-ap318",
+    "tha-ap319",
+    "tha-ap320",
+    "tha-ap321",
+    "tha-ap323",
+    "tha-ap325",
+    "tha-ap326",
+    "tha-ap327",
+    "tha-ap328",
+    "tha-ap331",
+    "tha-ap333",
+    "tha-ap334",
+    "tha-ap335",
+    "tha-ap336",
+    "tha-ap337",
+    "tha-ap338",
+    "tha-ap339",
+    "tha-ap340",
+    "tha-ap341",
+    "tha-ap342",
+    "tha-ap343",
+    "tha-ap344",
+    "tha-ap345",
+    "tha-ap346",
+    "tha-ap347",
+    "tha-ap348",
+    "tha-ap349",
+    "tha-ap350",
+    "tha-ap351",
+    "tha-ap352"
+  ],
+  "harness_sha256": "1ef1c5f7d5b9eb1c7b34f9c035eb6ffd99d39927f7dda137868b8383e08c809d",
+  "helper_sha256": {
+    "web-reader-apadana-thera-scaled-check.py": "f7d02383193b7271088de65952ce3e74435dabf8ba29ea3a4780aca40745f13f",
+    "web-reader-apadana-thera-expansion-check.py": "3bb1ea7539add5f2e97fea3de0eafd077ef65d5e27c6fcbf7491c3cb4f1b3bc2",
+    "web_reader_test_helpers.py": "b5609004bc7f467f0bbe30481f90a3ec6e297a07984d76fbd6a3a0dcc9516abb",
+    "web_reader_apadana_intake.py": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e",
+    "web_reader_approved_acceptance.py": "34741ee2a93ee8f96fd5586535df5ee4c507801dcf0255d6f66e0a7412a5b78d"
+  },
+  "server_file_sha256": {
+    "THIRD_PARTY_LICENSES.txt": "378d7454a776c1ef18accaa55f817cfb429ef713a8ec75e68ad83affb70ba015",
+    "data/anandajoti.json": "7ff6df1b2d91418aef2ceacca43dc652cbf1d8363b70fccfb4106e23fd0af669",
+    "data/apadana.json": "57b6fd43f4b8273e9542b8a22a6bd84b2042914113d53c94fe727386c5ec0194",
+    "data/bmc.json": "01f68a8a0c4aa1a9c21f7743c5172beccd3cce9133037830f8ee7836c4810a63",
+    "data/canon.json.gz.part-0001": "526ba969d0fc3ce62fde7d11764313de43b91a2f71375d602cd647a43b601632",
+    "data/canon.json.gz.part-0002": "54bb0f581aff105d57b2270cdd2ca59821c722792ffae2c8a40486782c300cf4",
+    "data/canon.json.gz.parts.json": "388a5daaf3a2cf7739b96dc865dbe93455e7e7b268bc22a683c1377180bfa250",
+    "data/commentary.json.gz.part-0001": "581fb24ed95f5ba4a30f7ca02be4dced03f81315f34d3aa6e8a8601a97f2d946",
+    "data/commentary.json.gz.part-0002": "40d18b97cd9859a80eced012436e84cecad1654a78a33a98b7e3ed8f9700bf98",
+    "data/commentary.json.gz.part-0003": "905cc7de1186d860c0fd4902c11610cf38d2c3d05fe47ce987b3f22b7d68f06b",
+    "data/commentary.json.gz.parts.json": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156",
+    "data/dhamma_lists.json": "6e14b77fd25d8b524da9ce9a3405220c3fbc9286c82d2096d8f0ca7cdd56b33c",
+    "data/dpd.json.gz.part-0001": "7f6790cfaca70ad2d5d9dc829420b491288a23d666b3a5ba2f9e0046cc165081",
+    "data/dpd.json.gz.part-0002": "25e831647c47c1f97b6d325cf285f2ec761ba1b2ee64f516d3c036c5b2b5af12",
+    "data/dpd.json.gz.parts.json": "5c530a5afef657ceac06a484bfea0e6ecc725c18a38a0f7e3bc687b6028b5854",
+    "data/dppn.json": "e3d1bb4af928e8cda64bfd92fe2254569043ee97d9d124583b48eca0201cf959",
+    "data/glossary.json.gz": "a47a735d7a376882609cd6cb56804403adbf10c21e136c36a4c277e09d746d64",
+    "data/parallels.json.gz": "96289c87a07dd686bbdafe823cb2b178ee2f65df3b854054f6e1f41db574ed17",
+    "data/postcanonical.json.gz.part-0001": "3b21aeb1467103dda9b7bdff1a8a06b134df11454003a623ae617d6c452efbd9",
+    "data/postcanonical.json.gz.part-0002": "7943baafd6927bdedd408058f75f5a28c7934dddef660932355692976c297147",
+    "data/postcanonical.json.gz.part-0003": "a67a0f4c851845de4d519f86f4f5aaae8a86ade22a4a0e7559160b8056073d2e",
+    "data/postcanonical.json.gz.part-0004": "13b966525a2d9b312c79c368ba43cfa9cda545124f5692097966aaf0c0d6c82b",
+    "data/postcanonical.json.gz.parts.json": "310a3db600ad23af025d6f62cfe6f37d56a7fb48f0cda7eaa55a7035bf2e0080",
+    "data/reviewed-ati-sections.json": "91fde828f07be060a616127e0920b41935a25e180757418036b145a9cfc5214a",
+    "data/reviewed-partial-pages.json": "55495a36fb429de09b3c7c07bae68da87cd76115df7342647babeeba31afbd76",
+    "data/source-notes.json": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+    "data/topics.json": "b1d022643419d6b122138999eb6813db615654cb625a827ea64c256e74facbfb",
+    "data/translations.json": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6",
+    "http-worker.cjs": "3c28091804514ddac13a7def168ca3498d73d7972e8f335798cf025960e5655e",
+    "http.cjs": "c07416b4ede93b05fc840a395a818e181e78e998136202f0bc6bd414d670a901",
+    "index.cjs": "56889c8f98f5139106aa93a4f38d29cdd7506d6aa72f6daf42e91e195db31383",
+    "web/index.html": "084bdf021db7d6229b5f8948b5ce5758cb112f0faf5fbffe2e9dadf8fa9ed0f9",
+    "web/reader.css": "b124a83028222fa258d91c6fb53636c438e523a6934da995252568b0b69e7f1d",
+    "web/reader.js": "91be03a344c5387b0434ff75723e1668458871886f154c54653a4825547c7eea"
+  },
+  "package_sha256": "0cba07ef3556ffe355eb594f074287374ddd78ed49ce29c5168bca1b869aae93",
+  "browser_run": true,
+  "full_batch_acceptance": true,
+  "pinned_provider_reads": 101,
+  "upstream_provider_requests": 0,
+  "a11y": {
+    "performed": false,
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Exact local pinned originals over actual HTTP; Chromium390/1280 and two simulated host bridges. No live-provider, physical-device, signed-in-host, human AT, specialist or release claim. Client hash-metadata refusal does not authenticate arbitrary forged partial-page wording. Publisher wording/notes/private drafts excluded from reports."
+}

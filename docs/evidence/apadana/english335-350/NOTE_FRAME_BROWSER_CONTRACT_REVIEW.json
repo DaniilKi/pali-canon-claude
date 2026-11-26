@@ -1,0 +1,75 @@
+{
+  "schema": "independent-note-header-component-v6-ready-binding-review-v1",
+  "status": "GO_ONE_UNCHANGED_V6_BOUNDED_INSTALLED_RUN_ON_EXACT_REVIEWED_NOTE_HEADER_COMPONENT",
+  "contract": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/reader-plan/READY_NOTE_FRAME_RUN_CONTRACT.json",
+    "sha256": "20ac1344c628fad0a7edb384bb15db2234f0ed443f0b4d1aa33d8fe284e80f9f"
+  },
+  "previous_ready_sha256": "592f2af8b5fca25b90ecee32f1869eeed42e0125c63dd5dc5c2a384de4cd7044",
+  "application_and_package_snapshot_commit": "aec778d99aabccec6794a641072e463830e85542",
+  "changed_contract_leaf_paths": [
+    "/application_commit",
+    "/acceptance_scope",
+    "/runtime_inventory/path",
+    "/runtime_inventory/sha256",
+    "/required_authorities/runtime/path",
+    "/required_authorities/runtime/sha256",
+    "/required_authorities/preservation/path",
+    "/required_authorities/preservation/sha256",
+    "/required_authorities/widget_source/path",
+    "/required_authorities/widget_source/sha256",
+    "/source_widget_HTML/path",
+    "/source_widget_HTML/sha256",
+    "/install_receipt/path",
+    "/install_receipt/sha256",
+    "/Git_archive_installed_binding/path",
+    "/Git_archive_installed_binding/sha256",
+    "/archive/path",
+    "/archive/sha256",
+    "/package_snapshot_commit",
+    "/installed_server_directory"
+  ],
+  "only_authorized_component_scope_package_runtime_HTML_descriptor_rebindings": true,
+  "all_source_oracles_profiles_curation_raw_rights_and_canonical_fixture_descriptors_unchanged": true,
+  "V6_driver_guards_expected_counts_native_host_private_refusal_assertions_and_bounds_unchanged": true,
+  "descriptor_files_rehashed": 28,
+  "runtime34_members_match39_package_members": true,
+  "all39_archive_freshinstalled_exactGit_component_bytes_independently_rehashed": true,
+  "source_HTML_bytes": 700043,
+  "source_HTML_sha256": "87d68782491e83868793d5624c3cbebe5c51bcbdce80f71ffdbe64df0e41213e",
+  "all_source_HTML_dependency_Git_hashes_rehashed": true,
+  "private_synthetic_canary_bytes_absent_all39": true,
+  "runtime_inventory": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-note-preservation-review/RUNTIME_INVENTORY.json",
+    "sha256": "839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186"
+  },
+  "runtime_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-note-preservation-review/RUNTIME_REVIEW.json",
+    "sha256": "2b19d690992a3289958a9e944be36484cf4257fa34a9b580e04704206e829b16"
+  },
+  "install_receipt": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-note-preservation-review/INSTALL_RECEIPT.json",
+    "sha256": "96dc211e0fe784586c261fa3fe5e2cd19b560030eed31329c3a0cc61b3096d20"
+  },
+  "archive_install_binding": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-note-preservation-review/FINAL_COMMIT_ARCHIVE_INSTALLED39.json",
+    "sha256": "3cd3f25adba9e8b43ea9c531d0495f4b794f0082fd166db3c666cee46f1124fd"
+  },
+  "source_HTML_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-note-preservation-review/WIDGET_SOURCE_REVIEW.json",
+    "sha256": "ca81bd9f762c95e3e8a29779d6f6c93cd71b7a2bb6f525563e6d0fc762696648"
+  },
+  "old51_and_b228_claims_preserved": true,
+  "no_app_browser_test_build_network_execution_by_reviewer": true,
+  "behavior_pass_final_CI_or_dev_promotion_claim": false,
+  "blocking_findings": [],
+  "remaining": [
+    "Root one actual unchanged V6 bounded run against this installed component",
+    "Final test/source closure and exact candidate CI green before dev promotion"
+  ],
+  "limitations": [
+    "Static source/component/package binding only",
+    "Legacy source-note DOM acceptance separate",
+    "No physical-device human-assistive signed-host live-provider or fresh-browser offline-install acceptance"
+  ]
+}
