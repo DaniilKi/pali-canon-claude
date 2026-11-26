@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {boundarySourceInverses,boundarySourceProofBytes,decodeBoundarySourceInverses,projectFrozen440Source,frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
+import {d4FileReader} from './helpers/current339-source-inverse.mjs';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 test('separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads',()=>{
  const reader=frozen440FileReader(readFileSync);
@@ -41,4 +42,14 @@ test('explicit file URL source reads retain the same finite frozen440 boundary',
  for(const[path,row]of Object.entries(boundarySourceInverses.files)){
   const value=read(new URL('../'+path,import.meta.url),'utf8');assert.equal(sha(value),row.frozen440_sha256);
  }
+});
+
+test('nested D4 file URL reads normalize declared current source before retained historical assertions',()=>{
+ const reader=d4FileReader(readFileSync),path='tests/check-ci-stages.test.mjs';
+ const url=new URL('../'+path,import.meta.url),row=boundarySourceInverses.files[path];
+ assert.equal(sha(reader(url,'utf8')),row.frozen440_sha256);
+ assert.equal(sha(reader(url)),row.frozen440_sha256);
+ assert.equal(sha(readFileSync(url)),row.current_sha256,'Real source bytes stay current');
+ const runtime=new URL('../server/index.cjs',import.meta.url);
+ assert.deepEqual(reader(runtime),readFileSync(runtime),'Runtime input is never projected');
 });

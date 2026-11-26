@@ -1,4 +1,4 @@
-import {projectFrozen440Source,boundarySourceInverses} from './boundary333-336-source-input.mjs';
+import {projectFrozen440Source,boundarySourceInverses,frozen440FileReader} from './boundary333-336-source-input.mjs';
 /** Exact reviewed test-input inverses only; never transform application output. */
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -15,7 +15,7 @@ function historicalProjectD4Source(path,source){
  for(const hunk of row.hunks){assert.equal(old.split(hunk.after).length-1,1,'Exact finite source hunk once');old=old.replace(hunk.after,hunk.before);}
  assert.equal(sha(old),row.d4_sha256,'Every D4 assertion and fixture byte remains exact: '+path);return old;
 }
-export function d4FileReader(reader){return (path,...options)=>{const raw=reader(path,...options);if(typeof path!=='string'||!sourceInverses.files[path]&&!boundarySourceInverses.files[path])return raw;const old=projectD4Source(path,raw.toString('utf8'));return typeof raw==='string'?old:Buffer.from(old);};}
+export function d4FileReader(reader){const sourceReader=frozen440FileReader(reader);return (path,...options)=>{const raw=sourceReader(path,...options);if(typeof path!=='string'||!sourceInverses.files[path]&&!boundarySourceInverses.files[path])return raw;const old=projectD4Source(path,raw.toString('utf8'));return typeof raw==='string'?old:Buffer.from(old);};}
 
 export function projectD4Source(path,source){
  return historicalProjectD4Source(path,projectFrozen440Source(path,source));
