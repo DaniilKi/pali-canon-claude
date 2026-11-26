@@ -1,0 +1,149 @@
+{
+  "status": "failed",
+  "checks": [
+    {
+      "family": "Installed MCP reads all ten units; old positions refuse and source-book controls stay stable",
+      "units": 10,
+      "old_positions_checked": 144,
+      "primary_namespace_refusals": 1152,
+      "additional_zero_commit_refusals": 288,
+      "get_text_continuation_segments": 144,
+      "widget_continuation_segments": 144,
+      "same_numeric_source_positions_also_refused": 65,
+      "new_segments": 144,
+      "sourcebook_pages": 16
+    },
+    {
+      "check": "initial next10-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "MCP Apps",
+      "width": 390,
+      "sources": 10,
+      "independent_source_segments": 144,
+      "fresh_copy_stale_cases": 20,
+      "same_object_stale_cases": 30,
+      "network_requests": 0
+    },
+    {
+      "check": "initial next10-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "Apps SDK",
+      "width": 390,
+      "sources": 10,
+      "independent_source_segments": 144,
+      "fresh_copy_stale_cases": 20,
+      "same_object_stale_cases": 30,
+      "network_requests": 0
+    },
+    {
+      "check": "initial next10-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "MCP Apps",
+      "width": 1280,
+      "sources": 10,
+      "independent_source_segments": 144,
+      "fresh_copy_stale_cases": 20,
+      "same_object_stale_cases": 30,
+      "network_requests": 0
+    },
+    {
+      "check": "initial next10-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "Apps SDK",
+      "width": 1280,
+      "sources": 10,
+      "independent_source_segments": 144,
+      "fresh_copy_stale_cases": 20,
+      "same_object_stale_cases": 30,
+      "network_requests": 0
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/",
+      "width": 390,
+      "old_records": 20,
+      "export_utf8_bytes": 4697,
+      "export_sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/",
+      "width": 1280,
+      "old_records": 20,
+      "export_utf8_bytes": 4697,
+      "export_sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+      "stored_data_unchanged": true
+    }
+  ],
+  "limitations": "Genuine installed HTTP/MCP and Chromium DOM with synthetic local data; two simulated host bridges. No live publisher, physical-device, human AT or signed-in host acceptance.",
+  "contract_sha256": "9a4ef9e1ee5588f8c5668fcad5b45f4d3478d08df37793b6cc6fe74e5ad9b4cc",
+  "candidate_commit": "6ab4a322108aec740c330e4afd974ee4da808886",
+  "stage": "/tmp/s634-h7mixryl",
+  "server_argv": [
+    "node",
+    "--require",
+    "/tmp/pali-next-ten-evidence-nov26/acceptance-plan/proposal-v2/offline-pali-guard.cjs",
+    "/tmp/pali-next-ten-evidence-nov26/installed/node_modules/pali-canon-mcp/server/http.cjs"
+  ],
+  "server_pid": 120100,
+  "owned_process_group": 120100,
+  "cleanup": {
+    "owned_process_group": 120100,
+    "leader_reaped": true,
+    "group_absent": true
+  },
+  "failure": {
+    "phase": "actual native next10-boundary saved reading and synthetic local data",
+    "category": "TimeoutError",
+    "code": "OPERATION_FAILED",
+    "frames": [
+      {
+        "file": "check-boundary-reader.py",
+        "line": 423,
+        "function": "<module>"
+      },
+      {
+        "file": "check-boundary-reader.py",
+        "line": 410,
+        "function": "main"
+      },
+      {
+        "file": "check-boundary-reader.py",
+        "line": 257,
+        "function": "browser_cases"
+      },
+      {
+        "file": "_generated.py",
+        "line": 18242,
+        "function": "fill"
+      },
+      {
+        "file": "_sync_base.py",
+        "line": 115,
+        "function": "_sync"
+      },
+      {
+        "file": "_locator.py",
+        "line": 219,
+        "function": "fill"
+      },
+      {
+        "file": "_frame.py",
+        "line": 636,
+        "function": "fill"
+      },
+      {
+        "file": "_frame.py",
+        "line": 648,
+        "function": "_fill"
+      },
+      {
+        "file": "_connection.py",
+        "line": 76,
+        "function": "send"
+      },
+      {
+        "file": "_connection.py",
+        "line": 632,
+        "function": "wrap_api_call"
+      }
+    ]
+  }
+}
