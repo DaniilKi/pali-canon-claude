@@ -1,0 +1,27 @@
+{
+  "schema": "independent-two-pair-producer-b-preseal-v1",
+  "status": "SOURCE_SUPPORTS_FOUR_CORE_METADATA_PROPOSALS_ONLY_NO_ACTIVATION",
+  "producer": "b",
+  "current_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "original_xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "other_producer_or_old_screen_read": false,
+  "files": {
+    "derive_source_review.py": {
+      "bytes": 16271,
+      "sha256": "d8eb06294a0eda156939138cf5c3ad06aff0ff3d72f8977ded12d58691d54f4f"
+    },
+    "SOURCE_BLOCK_OWNERSHIP_CROSSWALK.json": {
+      "bytes": 40146,
+      "sha256": "f631bd81b5b646798b454fda25b1002b6b637bf47a476f79174e179081779344"
+    },
+    "PROPOSED_CORE_METADATA.json": {
+      "bytes": 2689,
+      "sha256": "9a02e4a137de6c046213573b3d1aebbc981a0b02ea34f2b037f16922eb992035"
+    },
+    "SOURCE_BOUNDARY_REVIEW.json": {
+      "bytes": 23015,
+      "sha256": "ebd70ccca85a299d16869b61ce3a6a96d31485f90da4fca0cf029beee2680512"
+    }
+  },
+  "no_namespace_or_runtime_activation_approval": true
+}

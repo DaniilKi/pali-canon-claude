@@ -1,0 +1,20 @@
+{
+  "schema": "dual-presealed-next-two-pair-source-handoff-closure-v1",
+  "status": "SOURCE_ONLY_NEXT_HANDOFF_NOT_NAMESPACE_RUNTIME_OR_ACTIVATION",
+  "producer_a_preseal_sha256": "996c470c30f8513faa5219352fad4f55db120898286e46779520ded1fe069eaf",
+  "producer_b_preseal_sha256": "2a39ee56a56708e90df7b26111e79905697f16d0ee1ccf33731a95ea4f1aed05",
+  "files": {
+    "GO_REPORT.json": {
+      "bytes": 7088,
+      "sha256": "5a8efdc0c5108dc70fa8de15e5c93e1ffe2e3feb8b683e10f2c245ddd8a391d0"
+    },
+    "SOURCE_ONLY_NEXT_HANDOFF.md": {
+      "bytes": 4349,
+      "sha256": "12e61444b798a39f41208b67a375bcf8d55aa1a6d33589f81bd57bfd1b6356a3"
+    },
+    "compare_presealed_source_reviews.py": {
+      "bytes": 10711,
+      "sha256": "f559a9c1680fff33ab59de1a70a604b1239c773ccb8157cd2113dd5af5391cbb"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "observed-original-first-two-pair-source-producer-execution-v1",
+  "command": [
+    "python",
+    "-B",
+    "/tmp/pali-boundaries340-evidence-nov26/next-source-review/producer-a/review_original_pairs.py"
+  ],
+  "cwd": "/workspace",
+  "exec_session_id": 60475,
+  "initial_chunk_id": "2e25d3",
+  "terminal_chunk_id": "ab8fc7",
+  "exit_code": 0,
+  "execution_count": 1,
+  "single_total_wall_time": "NOT_MEASURED",
+  "stdout_sha256": "38f9f3c4cd74025e769cbeb9e4a91e0997b3aca18cf428f00b193f6fe2b5da3f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "no_app_Builder_repair_test_build_browser_network_Git_mutation_or_project_edit": true
+}
