@@ -390,9 +390,9 @@ export const WIDGET_HTML = `<!doctype html>
 <footer id="footer"></footer>
 <script>
 (function () {
-  var rendered = null;
+  var rendered = null, renderedInput = null, renderedSnapshot = null;
   var closed = false;
-  var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastMetadata;
+  var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastOutputSnapshot, lastMetadata, lastResultSnapshot;
   var modelCapabilities, modelChannel, modelModality, modelDesired, modelFlight, modelAccepted, modelFailure, modelRevision = 0, modelBlocked = false;
   var linkFlight = null, hostLinks = false;
   var sizeChannel, sizeObserver, sizeFrame, sizeHeight, sizeBlocked = false;
@@ -798,16 +798,81 @@ export const WIDGET_HTML = `<!doctype html>
     return Object.prototype.hasOwnProperty.call(repairedPins, d.text_id) && (!d.source || d.source.locator_revision !== repairedPins[d.text_id])
       ? { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' } : d;
   }
+  // In-memory cache identity only: never read widgetState or local drafts,
+  // never publish this snapshot. Unsupported/non-JSON values disable reuse.
+  // Inspect data descriptors before copying so getters/toJSON are not invoked.
+  function jsonToolSnapshot(value) {
+    var ancestors = [], nodes = 0, characters = 0;
+    function copy(item, depth) {
+      if (++nodes > 20000 || depth > 64) throw 0;
+      if (typeof item === 'string') { if ((characters += item.length) > 2000000) throw 0; return item; }
+      if (item === null || typeof item === 'boolean') return item;
+      if (typeof item === 'number' && Number.isFinite(item)) return item;
+      if (!item || typeof item !== 'object' || ancestors.indexOf(item) !== -1) throw 0;
+      var array = Array.isArray(item), prototype = Object.getPrototypeOf(item);
+      if (prototype !== null) {
+        var constructor = Object.getOwnPropertyDescriptor(prototype, 'constructor');
+        var constructorPrototype = constructor && typeof constructor.value === 'function' && Object.getOwnPropertyDescriptor(constructor.value, 'prototype');
+        if (!constructor || !Object.prototype.hasOwnProperty.call(constructor, 'value') || typeof constructor.value !== 'function'
+          || Function.prototype.toString.call(constructor.value) !== Function.prototype.toString.call(array ? Array : Object)
+          || !constructorPrototype || !Object.prototype.hasOwnProperty.call(constructorPrototype, 'value') || constructorPrototype.value !== prototype
+          || (array ? !Array.isArray(prototype) || Object.getPrototypeOf(Object.getPrototypeOf(prototype)) !== null : Object.getPrototypeOf(prototype) !== null)) throw 0;
+      } else if (array) throw 0;
+      var keys = Reflect.ownKeys(item), result = array ? Object.setPrototypeOf([], null) : Object.create(null);
+      var length = array && Object.getOwnPropertyDescriptor(item, 'length').value;
+      if (array && (length > 20000 || keys.length !== length + 1)) throw 0;
+      ancestors.push(item);
+      for (var i = 0; i < keys.length; i++) {
+        var key = keys[i], descriptor = Object.getOwnPropertyDescriptor(item, key);
+        if (array && key === 'length') continue;
+        if (typeof key !== 'string' || !descriptor || !descriptor.enumerable
+          || !Object.prototype.hasOwnProperty.call(descriptor, 'value')
+          || (characters += key.length) > 2000000
+          || array && (!/^(0|[1-9][0-9]*)$/.test(key) || Number(key) >= length)) throw 0;
+        result[key] = copy(descriptor.value, depth + 1);
+      }
+      ancestors.pop();
+      return result;
+    }
+    try {
+      var snapshot = JSON.stringify(copy(value, 0));
+      return typeof snapshot === 'string' && snapshot.length <= 2000000 ? snapshot : null;
+    } catch (error) { return null; }
+  }
+  function resultSnapshot(result) {
+    if (!result || typeof result !== 'object' || Array.isArray(result)) return null;
+    // Only fields consumed by toolResult are relevant. Host-private metadata
+    // and unrelated response fields are neither inspected nor serialized.
+    try {
+      var prototype = Object.getPrototypeOf(result);
+      if (prototype !== null) {
+        var constructor = Object.getOwnPropertyDescriptor(prototype, 'constructor');
+        var constructorPrototype = constructor && typeof constructor.value === 'function' && Object.getOwnPropertyDescriptor(constructor.value, 'prototype');
+        if (Object.getPrototypeOf(prototype) !== null || !constructor || !Object.prototype.hasOwnProperty.call(constructor, 'value')
+          || !constructorPrototype || !Object.prototype.hasOwnProperty.call(constructorPrototype, 'value') || constructorPrototype.value !== prototype
+          || typeof constructor.value !== 'function' || Function.prototype.toString.call(constructor.value) !== Function.prototype.toString.call(Object)) return null;
+      }
+      var envelope = Object.create(null);
+      for (var name of ['isError', 'structuredContent', 'content']) {
+        var descriptor = Object.getOwnPropertyDescriptor(result, name);
+        if (!descriptor) { if (name in result) return null; continue; }
+        if (!descriptor.enumerable || !Object.prototype.hasOwnProperty.call(descriptor, 'value')) return null;
+        envelope[name] = descriptor.value;
+      }
+      return jsonToolSnapshot(envelope);
+    } catch (error) { return null; }
+  }
   function render(d) {
     if (closed) return;
     if (!d || typeof d !== 'object') return;
+    var input = d, snapshot = jsonToolSnapshot(d);
     d = checkedCanonicalLocator(d);
-    if (d === rendered) { refreshSourceNotes(d); return; }
+    if (input === renderedInput && snapshot !== null && snapshot === renderedSnapshot) { refreshSourceNotes(rendered); return; }
     if (!d.pali && typeof d.error !== 'string') return;
     abandon(); generation++; awaitingSelection = false;
     if (!d.pali) {
       if (typeof d.error !== 'string') return;
-      rendered = d;
+      rendered = d; renderedInput = input; renderedSnapshot = snapshot;
       sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteRootBinding = null; sourceNoteRootRelevant = false; sourceNoteJump = null;
       document.getElementById('title').textContent = d.cancelled ? 'Reading cancelled' : 'Could not open the passage';
       document.getElementById('status').textContent = (d.cancelled ? 'Reading cancelled. ' : 'Could not open the passage. ') + d.error;
@@ -819,7 +884,7 @@ export const WIDGET_HTML = `<!doctype html>
       return;
     }
     d = checkedApadana(d);
-    rendered = d;
+    rendered = d; renderedInput = input; renderedSnapshot = snapshot;
     sourceNoteRootBinding = sourceNoteRootKey(d);
     sourceNoteRootRelevant = sourceNotesPolicy.inspect(d).affected || Object.prototype.hasOwnProperty.call(d, 'source_notes');
     sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteJump = null;
@@ -980,9 +1045,11 @@ export const WIDGET_HTML = `<!doctype html>
       if (lastInput !== input && rendered && window.openai.toolInput) requested(window.openai.toolInput);
       lastInput = input;
       var metadata = window.openai.toolResponseMetadata;
-      var output = window.openai.toolOutput, freshOutput = output !== lastOutput, freshMetadata = metadata !== lastMetadata;
-      lastOutput = output; lastMetadata = metadata;
       var result = metadata && (metadata.mcp_tool_result || metadata.call_tool_result);
+      var output = window.openai.toolOutput, outputSnapshot = jsonToolSnapshot(output), metadataSnapshot = resultSnapshot(result);
+      var freshOutput = output !== lastOutput || output != null && (outputSnapshot === null || outputSnapshot !== lastOutputSnapshot);
+      var freshMetadata = metadata !== lastMetadata || result != null && (metadataSnapshot === null || metadataSnapshot !== lastResultSnapshot);
+      lastOutput = output; lastOutputSnapshot = outputSnapshot; lastMetadata = metadata; lastResultSnapshot = metadataSnapshot;
       if (result && result.isError && (freshMetadata || !freshOutput)) {
         if (freshMetadata || freshOutput) toolResult(result);
       } else if (freshOutput) render(output);
@@ -1008,7 +1075,7 @@ export const WIDGET_HTML = `<!doctype html>
     var canClear = !modelFlight && !modelBlocked, channel = modelChannel, modality = modelModality;
     closed = true; generation++; abandon(); stopSizing();
     if (modelFlight) clearTimeout(modelFlight.timer);
-    modelFlight = null; modelDesired = null; modelAccepted = null; rendered = null; lastOutput = null; lastMetadata = null; lastInput = null;
+    modelFlight = null; modelDesired = null; modelAccepted = null; rendered = null; renderedInput = null; renderedSnapshot = null; lastOutput = null; lastOutputSnapshot = null; lastMetadata = null; lastResultSnapshot = null; lastInput = null;
     sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteRootBinding = null; sourceNoteRootRelevant = false; sourceNoteJump = null;
     awaitingSelection = false;
     ['meta', 'pali', 'english', 'footer', 'navigation'].forEach(function (id) { clear(document.getElementById(id)); });
