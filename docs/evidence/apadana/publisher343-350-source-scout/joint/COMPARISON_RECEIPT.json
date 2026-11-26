@@ -1,0 +1,391 @@
+{
+  "schema": "explicit-two-sealed-publisher343-350-comparison-v1",
+  "status": "NO_MATERIAL_SHARED_FACT_CONFLICT",
+  "compared_utc": "2026-11-26T16:24:33.445872+00:00",
+  "inputs": {
+    "A_report": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english343-350-scout/SCOUT_REPORT.json",
+      "sha256": "54230e096a4424fd274287b4f975fa33a139eed9c88640fcda992922e58860a2"
+    },
+    "A_closure": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english343-350-scout/FINAL_CLOSURE.json",
+      "sha256": "6377885e183ecafefdcf72866ab5cdfb0103070f8ad313963ca391f42dd2f93f"
+    },
+    "A_seal": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english343-350-scout/SCOUT_SEAL.json",
+      "sha256": "0a9b79223e1ec8add03ac9ad935f013c5530defaa2fd181de1aa01d296b4151e"
+    },
+    "B_report": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english343-350-independent-B/SOURCE_REVIEW.json",
+      "sha256": "a5d9bdc08712f2209982873d38c1f88247c60c43f8de15b61fb848b6e85cc4cc"
+    },
+    "B_preseal": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english343-350-independent-B/PRESEALED_REVIEW.json",
+      "sha256": "95e0014e360423320eebf3e5702bd09d02a373fd50bb8fc5b30f05b6f8fe9d42"
+    }
+  },
+  "original_seals_preserved": true,
+  "B_preseal_before_A_interpretation_access": true,
+  "schema_adapters": [
+    "A candidate_canonical_uid/title <-> B canonical_id/publisher_title; exact strings.",
+    "Actual full canonical records compared directly; separately compare explicit B proposed span/title/VRI fields with A source_reviewed_record. Missing B proposed PTS/full-record hash is not filled.",
+    "A stanza publisher_label/lines <-> B publisher_global_label/physical_lines; compare ordered local/global strings,physical line counts and raw paragraph hashes exactly.",
+    "A whole_reviewed_scope_tuple_sha256 and B source_supported_scope.bare_tuple_sha256 both hash bare scoped tuples and compare directly. A actual_current_record_sha256 hashes a canonical object,not B actual_current_root_tuple_sha256; recompute object hash only against B explicit same object.",
+    "A note_numbers <-> B poem_owned_numbers; exact ordered lists. Per-note A hashes and aggregate B raw-note hash remain distinct domains.",
+    "A HTML totals aggregate whole artifact; sum B explicit section-level HTML pairs only. Do not mix with Pandoc display counts.",
+    "A rights path/publisher_revision <-> B upstream_path/source_revision; exact six size/SHA/Git/revision records."
+  ],
+  "records": [
+    {
+      "publisher_poem": 343,
+      "canonical_id": "tha-ap345",
+      "actual_current_root_blocks": [
+        10287,
+        10310
+      ],
+      "source_supported_blocks": [
+        10287,
+        10310
+      ],
+      "actual_index_revision": null,
+      "conditional_future_boundary": false,
+      "source_title": "Dhajadāyakattheraapadānaṃ",
+      "VRI_range": "20–26",
+      "physical_entries": 7,
+      "global_numbered_stanzas": 7,
+      "poem_notes": 6,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_size_SHA_Git_path": true,
+        "title_UID_and_heading_labels": true,
+        "actual_current_complete_record": true,
+        "A_actual_record_object_hash": true,
+        "proposed_source_fields": true,
+        "conditional_status": true,
+        "poem_core_scope": true,
+        "source_bare_tuple_hash_same_domain": true,
+        "all_stanza_label_line_hash_records": true,
+        "printed_local_sequence_including_duplicate3": true,
+        "all_poem_owned_notes": true,
+        "whole_poem_raw_hash": true,
+        "summary_presence": true
+      },
+      "future_source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 344,
+      "canonical_id": "tha-ap346",
+      "actual_current_root_blocks": [
+        10310,
+        10324
+      ],
+      "source_supported_blocks": [
+        10310,
+        10324
+      ],
+      "actual_index_revision": "apadana-thera340-341-343-344-346-347-v1",
+      "conditional_future_boundary": false,
+      "source_title": "Tikiṅkaṇipūjakattheraapadānaṃ",
+      "VRI_range": "27–30",
+      "physical_entries": 4,
+      "global_numbered_stanzas": 4,
+      "poem_notes": 8,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_size_SHA_Git_path": true,
+        "title_UID_and_heading_labels": true,
+        "actual_current_complete_record": true,
+        "A_actual_record_object_hash": true,
+        "proposed_source_fields": true,
+        "conditional_status": true,
+        "poem_core_scope": true,
+        "source_bare_tuple_hash_same_domain": true,
+        "all_stanza_label_line_hash_records": true,
+        "printed_local_sequence_including_duplicate3": true,
+        "all_poem_owned_notes": true,
+        "whole_poem_raw_hash": true,
+        "summary_presence": true
+      },
+      "future_source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 345,
+      "canonical_id": "tha-ap347",
+      "actual_current_root_blocks": [
+        10324,
+        10350
+      ],
+      "source_supported_blocks": [
+        10324,
+        10350
+      ],
+      "actual_index_revision": "apadana-thera340-341-343-344-346-347-v1",
+      "conditional_future_boundary": false,
+      "source_title": "Naḷāgārikattheraapadānaṃ",
+      "VRI_range": "31–38",
+      "physical_entries": 8,
+      "global_numbered_stanzas": 8,
+      "poem_notes": 7,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_size_SHA_Git_path": true,
+        "title_UID_and_heading_labels": true,
+        "actual_current_complete_record": true,
+        "A_actual_record_object_hash": true,
+        "proposed_source_fields": true,
+        "conditional_status": true,
+        "poem_core_scope": true,
+        "source_bare_tuple_hash_same_domain": true,
+        "all_stanza_label_line_hash_records": true,
+        "printed_local_sequence_including_duplicate3": true,
+        "all_poem_owned_notes": true,
+        "whole_poem_raw_hash": true,
+        "summary_presence": true
+      },
+      "future_source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 346,
+      "canonical_id": "tha-ap348",
+      "actual_current_root_blocks": [
+        10350,
+        10371
+      ],
+      "source_supported_blocks": [
+        10350,
+        10367
+      ],
+      "actual_index_revision": null,
+      "conditional_future_boundary": true,
+      "source_title": "Campakapupphiyattheraapadānaṃ",
+      "VRI_range": "39–43",
+      "physical_entries": 5,
+      "global_numbered_stanzas": 5,
+      "poem_notes": 5,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_size_SHA_Git_path": true,
+        "title_UID_and_heading_labels": true,
+        "actual_current_complete_record": true,
+        "A_actual_record_object_hash": true,
+        "proposed_source_fields": true,
+        "conditional_status": true,
+        "poem_core_scope": true,
+        "source_bare_tuple_hash_same_domain": true,
+        "all_stanza_label_line_hash_records": true,
+        "printed_local_sequence_including_duplicate3": true,
+        "all_poem_owned_notes": true,
+        "whole_poem_raw_hash": true,
+        "summary_presence": true
+      },
+      "future_source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 347,
+      "canonical_id": "tha-ap349",
+      "actual_current_root_blocks": [
+        10371,
+        10382
+      ],
+      "source_supported_blocks": [
+        10367,
+        10382
+      ],
+      "actual_index_revision": null,
+      "conditional_future_boundary": true,
+      "source_title": "Padumapūjakattheraapadānaṃ",
+      "VRI_range": "44–47",
+      "physical_entries": 4,
+      "global_numbered_stanzas": 4,
+      "poem_notes": 5,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_size_SHA_Git_path": true,
+        "title_UID_and_heading_labels": true,
+        "actual_current_complete_record": true,
+        "A_actual_record_object_hash": true,
+        "proposed_source_fields": true,
+        "conditional_status": true,
+        "poem_core_scope": true,
+        "source_bare_tuple_hash_same_domain": true,
+        "all_stanza_label_line_hash_records": true,
+        "printed_local_sequence_including_duplicate3": true,
+        "all_poem_owned_notes": true,
+        "whole_poem_raw_hash": true,
+        "summary_presence": true
+      },
+      "future_source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 348,
+      "canonical_id": "tha-ap350",
+      "actual_current_root_blocks": [
+        10382,
+        10417
+      ],
+      "source_supported_blocks": [
+        10382,
+        10417
+      ],
+      "actual_index_revision": null,
+      "conditional_future_boundary": false,
+      "source_title": "Tiṇamuṭṭhidāyakattheraapadānaṃ",
+      "VRI_range": "48–58",
+      "physical_entries": 10,
+      "global_numbered_stanzas": 11,
+      "poem_notes": 12,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_size_SHA_Git_path": true,
+        "title_UID_and_heading_labels": true,
+        "actual_current_complete_record": true,
+        "A_actual_record_object_hash": true,
+        "proposed_source_fields": true,
+        "conditional_status": true,
+        "poem_core_scope": true,
+        "source_bare_tuple_hash_same_domain": true,
+        "all_stanza_label_line_hash_records": true,
+        "printed_local_sequence_including_duplicate3": true,
+        "all_poem_owned_notes": true,
+        "whole_poem_raw_hash": true,
+        "summary_presence": true
+      },
+      "future_source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 349,
+      "canonical_id": "tha-ap351",
+      "actual_current_root_blocks": [
+        10417,
+        10431
+      ],
+      "source_supported_blocks": [
+        10417,
+        10431
+      ],
+      "actual_index_revision": null,
+      "conditional_future_boundary": false,
+      "source_title": "Tindukaphaladāyakattheraapadānaṃ",
+      "VRI_range": "59–62",
+      "physical_entries": 4,
+      "global_numbered_stanzas": 4,
+      "poem_notes": 6,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_size_SHA_Git_path": true,
+        "title_UID_and_heading_labels": true,
+        "actual_current_complete_record": true,
+        "A_actual_record_object_hash": true,
+        "proposed_source_fields": true,
+        "conditional_status": true,
+        "poem_core_scope": true,
+        "source_bare_tuple_hash_same_domain": true,
+        "all_stanza_label_line_hash_records": true,
+        "printed_local_sequence_including_duplicate3": true,
+        "all_poem_owned_notes": true,
+        "whole_poem_raw_hash": true,
+        "summary_presence": true
+      },
+      "future_source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 350,
+      "canonical_id": "tha-ap352",
+      "actual_current_root_blocks": [
+        10431,
+        10450
+      ],
+      "source_supported_blocks": [
+        10431,
+        10450
+      ],
+      "actual_index_revision": null,
+      "conditional_future_boundary": false,
+      "source_title": "Ekañjaliyattheraapadānaṃ",
+      "VRI_range": "63–66",
+      "physical_entries": 3,
+      "global_numbered_stanzas": 4,
+      "poem_notes": 9,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_size_SHA_Git_path": true,
+        "title_UID_and_heading_labels": true,
+        "actual_current_complete_record": true,
+        "A_actual_record_object_hash": true,
+        "proposed_source_fields": true,
+        "conditional_status": true,
+        "poem_core_scope": true,
+        "source_bare_tuple_hash_same_domain": true,
+        "all_stanza_label_line_hash_records": true,
+        "printed_local_sequence_including_duplicate3": true,
+        "all_poem_owned_notes": true,
+        "whole_poem_raw_hash": true,
+        "summary_presence": true,
+        "summary_raw_hash_shape_zero_notes": true
+      },
+      "future_source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    }
+  ],
+  "shared_totals": {
+    "physical_entries": 45,
+    "global_numbered_stanzas": 47,
+    "poem_notes": 58,
+    "note_free_summary": 1,
+    "prefaces": 0
+  },
+  "special_facts_agreed": {
+    "publisher347local_sequence": [
+      1,
+      2,
+      3,
+      3
+    ],
+    "publisher346HTMLpairs": {
+      "upper_C_Ch": 5,
+      "lower_c_ch": 3
+    },
+    "publisher350summary": {
+      "paragraphs": 3,
+      "physical_lines": 6,
+      "notes": [],
+      "literal_count": 66
+    },
+    "recitation10381remains349_no_English_counterpart": true,
+    "current348_349root_cut": 10371,
+    "conditional_source_cut": 10367,
+    "proposed_namespace_or_current_corpus_repair_approval": false
+  },
+  "rights_artifact_checks": {
+    "LICENSE.md": true,
+    "src/_pages/about.md": true,
+    "src/_includes/site/footer.njk": true,
+    "src/_includes/layouts/epub-metadata.xml": true,
+    "src/_data/site.json": true,
+    "src/_poems/_poems.json": true
+  },
+  "one_sided_details_not_backfilled": {
+    "A_only": [
+      "Publisher347local2rebirth/residence wording difference.",
+      "Detailed individual VRI tuple/page/note anchors and per-note raw hashes.",
+      "Current343catalogue SHA and body-paragraph totals; B does not seal those same scalar fields."
+    ],
+    "B_only": [
+      "Sinhala77variant supports publisher345while main VRI74differs.",
+      "Vessabhu Sinhala variant underlying publisher349main-text distinction; bloom/fruit wording.",
+      "Source350proposed summary counterpart10445–10450and explicit closing-before-summary/VRI-numbered-count66description.",
+      "Raw per-heading-line pins and complete10pair inventory; independent A total is not asserted."
+    ],
+    "assessment": "Compatible additional detail,not contradictions. Each remains attributed; no missing field is filled from the other review."
+  },
+  "method_scope_difference": "A asserts full14645tuple original-book equality; B independently compared163target XML fields(type,label,text,notes) plus book pin,not page reconstruction. Neither method is promoted to the other.",
+  "normalization_runtime_activation": "HOLD",
+  "comparison_uses_metadata_hashes_only_no_app_parser_tests_build_Git_CI_network": true
+}

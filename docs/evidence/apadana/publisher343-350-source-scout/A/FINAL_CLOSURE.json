@@ -1,0 +1,10 @@
+{
+  "schema": "bounded-eight-poem343-350-final-closure-v1",
+  "status": "EIGHT_SOURCE_CANDIDATES_TWO_BOUNDARY_CONDITIONAL_NO_ACTIVATION",
+  "report_sha256": "54230e096a4424fd274287b4f975fa33a139eed9c88640fcda992922e58860a2",
+  "source_seal_sha256": "0a9b79223e1ec8add03ac9ad935f013c5530defaa2fd181de1aa01d296b4151e",
+  "README_sha256": "014526d8eaa266d037ff2a2967e63d10ef93edbd6cc3edd56183d4b369af8ea4",
+  "activation_count": 0,
+  "boundary_proposal_NOT_ACTIVE": true,
+  "no_implementation_runtime_or_release_approval": true
+}

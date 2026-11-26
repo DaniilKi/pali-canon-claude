@@ -63,3 +63,5 @@ rehashes the same pinned slices in both schemas rather than equating distinct
 hash domains. Original reviews/seals remain unchanged, with one-sided findings
 labeled. Raw publisher files remain external to this research branch; only
 metadata, integrity evidence and the source-only producer are recorded.
+
+The subsequent [coherent16-source plan](thera335-350-coherent-source-plan.md) adds a separately reviewed343–350 shortlist, with two conditional348/349 dependencies. It remains source-only; no current coverage is added.

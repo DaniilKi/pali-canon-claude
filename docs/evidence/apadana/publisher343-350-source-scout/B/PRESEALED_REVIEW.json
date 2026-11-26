@@ -1,0 +1,12 @@
+{
+  "schema": "independent-publisher343-350-raw-first-preseal-v1",
+  "status": "SEALED_BEFORE_A_INTERPRETATION_COMPARISON",
+  "files": {
+    "SOURCE_REVIEW.json": "a5d9bdc08712f2209982873d38c1f88247c60c43f8de15b61fb848b6e85cc4cc",
+    "INPUT_PINS.json": "8535bec789c6fe7606884c4b3cff8871fb0e9b30316ac2c82ec6eabc13f5ef70",
+    "derive_review.py": "40668b0a8450a0c1301e6003f4b05ebae15644cf4e733f009e750f8ec98462a0"
+  },
+  "A_new_interpretation_or_goldens_read": false,
+  "activation_count": 0,
+  "current_release_unchanged": true
+}

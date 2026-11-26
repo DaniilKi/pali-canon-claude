@@ -1,0 +1,80 @@
+{
+  "schema": "directly-verified-combined16-future-source-scope-v1",
+  "status": "GO_SOURCE_RESEARCH_CANDIDATE_SCOPE_ONLY",
+  "inputs": {
+    "prior_joint_seal": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-joint/JOINT_SEAL.json",
+      "sha256": "f7d113f425ccb1abf5a2b22df7bc76612b8ed62df67fd97c51d520d8f1dbb8af"
+    },
+    "prior_A": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/SCOUT_REPORT.json",
+      "sha256": "9c0b486c4f88faec01f772b949e7f9306caabbd2e5768f0e64034b3b4a80f4cc"
+    },
+    "prior_B": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-independent-B/SOURCE_REVIEW.json",
+      "sha256": "8392cadf5d81d34f0a25706d4785294812ce5d4fd64a2f1048d9535f2b63e6cb"
+    },
+    "new_A": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english343-350-scout/SCOUT_REPORT.json",
+      "sha256": "54230e096a4424fd274287b4f975fa33a139eed9c88640fcda992922e58860a2"
+    },
+    "new_B": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english343-350-independent-B/SOURCE_REVIEW.json",
+      "sha256": "a5d9bdc08712f2209982873d38c1f88247c60c43f8de15b61fb848b6e85cc4cc"
+    }
+  },
+  "verified_conditions": {
+    "shared_repository_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "shared_VRI_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "shared_current_canonical_logical_SHA": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+    "common_source_path_prefix": "src/_poems/chapter-3/",
+    "all16_exact_raw_paths_unique_and_pinned": true,
+    "publisher_UID_sets_disjoint": true,
+    "no_numeric_mapping_rule": true,
+    "conditional_source_scopes_adjacent_nonoverlapping_union": [
+      9890,
+      10450
+    ],
+    "source_block_union_count": 560,
+    "union_is_source_only_not_an_applied_future_corpus": true
+  },
+  "totals_verified_from_both_sealed_groups": {
+    "sources": 16,
+    "physical_stanza_entries": 165,
+    "printed_global_stanzas": 171,
+    "global_label_range": [
+      2969,
+      3139
+    ],
+    "poem_notes": 191,
+    "zero_note_summaries": 2,
+    "zero_note_chapter_prefaces": 1,
+    "activation_gain": 0
+  },
+  "conditional_publisher_sources": [
+    346,
+    347
+  ],
+  "summary_publishers": [
+    340,
+    350
+  ],
+  "preface_publishers": [
+    341
+  ],
+  "duplicate_local3_publisher": [
+    347
+  ],
+  "display_pair_total": {
+    "value": 25,
+    "provenance": "B per-poem inventories15+10 only; not a mutually independently recorded A scalar.",
+    "prior_B_aggregate_erratum": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-joint/B_AGGREGATE_ERRATUM.json",
+      "sha256": "20efc828891e6379f8bd25f1fe4cfce4b181a7c0c561bb8db425d8f353db9d6b"
+    },
+    "prior_sealed_B14_not_rewritten": true
+  },
+  "normalization_profile_runtime_activation": "HOLD",
+  "whole_scope_is_publisher_edition_not_line_complete_VRI": true,
+  "root_boundaries_locator_policy_rights_holds_private_records_and_release_unchanged": true
+}
