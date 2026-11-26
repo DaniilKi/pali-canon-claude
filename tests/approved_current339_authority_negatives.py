@@ -16,8 +16,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
+from web_reader_four_boundary_history import historical_data_bytes, copy_historical_fixture
 from web_reader_approved_acceptance import (approved_catalogue, approved_runtime,
-    reviewed_canonical325_runtime, assert_catalogue, assert_runtime,
+    reviewed_canonical325_runtime, reviewed339_runtime, assert_catalogue, assert_runtime,
     assert_runtime_records)
 
 NEW_IDS = ('tha-ap323','tha-ap325','tha-ap326','tha-ap327','tha-ap328','tha-ap331')
@@ -53,6 +54,7 @@ class Current339AuthorityNegatives(unittest.TestCase):
         cls.fixture = Path(cls.temporary.name)
         evidence = cls.fixture / 'docs/evidence/apadana'
         shutil.copytree(ROOT / 'docs/evidence/apadana', evidence)
+        copy_historical_fixture(ROOT, cls.fixture)
         for name in ('tests/fixtures/reviewed-runtime-2449.json',
                 'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json'):
             target = cls.fixture / name
@@ -70,7 +72,7 @@ class Current339AuthorityNegatives(unittest.TestCase):
             source = ROOT / name
             assert source.is_file() and not source.is_symlink()
             raw = source.read_bytes()
-            assert sha(raw) == expected, 'Pinned independent public data changed: ' + name
+            assert sha(historical_data_bytes(ROOT, name)) == expected, 'Pinned independent public data changed: ' + name
             target = cls.fixture / name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(raw)
@@ -183,6 +185,8 @@ class Current339AuthorityNegatives(unittest.TestCase):
         for name, _ in PROOFS:
             with self.subTest(proof=Path(name).name):
                 _, current = self.current_positive()
+                # Explicitly inspect the immutable339 leg after proving the current leg.
+                current = reviewed339_runtime(self.fixture)
                 # This is inventory-chain verification, not a repeat of the
                 # historical four-case behavior fixture or old runtime execution.
                 prior = reviewed_canonical325_runtime(self.fixture)

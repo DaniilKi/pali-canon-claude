@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { canonBeforeTheraPair } from './helpers/canon-before-thera-pair.mjs';
 import {CURRENT_APADANA_IDS, BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 // Frozen D249 whole-coverage plus independently approved net-new Apadāna owners.
@@ -28,7 +29,7 @@ test('AN8.59 preserves exact original prose, omitted stanzas and its own rights 
  assert.ok(row,'Reviewed source activation must exist');assert.equal(manifest.links.length,22);
  assert.equal(scopeHash({...manifest,links:manifest.links.filter(r=>!['an8.59','sn36.15','pli-tv-kd6','pli-tv-kd8','pli-tv-kd1','mil6.4.1'].includes(r.unit_id))}),'0026bf4c52b68dd0e5f4e749902d9530ccc4c8fd5579c848e2263b65c584d006');
  assert.deepEqual(json('server/data/reviewed-partial-pages.json'),manifest);
- assert.equal(scopeHash(canonBeforeTheraPair(canon.load().canon)),'49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1');
+ assert.equal(scopeHash(canonBeforeTheraPair(canonBeforeFour(canon.load().canon))),'49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1');
  const unit=canon.resolve('an8.59').unit,segs=canon.segments(unit),meta=canon.describe(unit),choice=meta.english[0],scope=choice.translation_scope;
  assert.deepEqual([meta.english_available,meta.partial_english_available,meta.english.length],[0,1,1]);
  assert.deepEqual([scope.version,scope.first_ref,scope.last_ref,scope.pali_segments,scope.extractor,scope.whole_unit_coverage],[1,'an8.59/2','an8.59/2',1,extractor,false]);

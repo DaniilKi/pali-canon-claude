@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -18,7 +19,7 @@ const bounds = {
 
 test('both Therā boundary pairs and false commentary ownership change atomically with exact original source parity', { skip: !python }, () => {
   const input = {
-    canon: JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))),
+    canon: canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')))),
     commentary: JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz'))),
   };
   const bi = input.canon.units.find(u => u.id === 'tha-ap19').book;

@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { canonBeforeTheraPair } from './helpers/canon-before-thera-pair.mjs';
 import {CURRENT_APADANA_IDS, BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 // Frozen D249 whole-coverage plus independently approved net-new Apadāna owners.
@@ -86,7 +87,7 @@ test('every held version refuses globally before network access despite partial/
 });
 
 test('historical exclusions, seven retained reviews and fourteen partial descriptors remain immutable; counts distinguish whole and scoped access', () => {
-  assert.equal(scopeHash(canonBeforeTheraPair(canon.load().canon)), '49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1', 'No canonical wording, repaired boundaries or saved-position metadata changes');
+  assert.equal(scopeHash(canonBeforeTheraPair(canonBeforeFour(canon.load().canon))), '49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1', 'No canonical wording, repaired boundaries or saved-position metadata changes');
   assert.equal(exclusions.exclusions.length, 41);
   assert.equal(scopeHash(exclusions.exclusions.slice(0, 24)), '74ea8c7d11dc3de1b97e6cc86d93668577360296507dfcbfb5b4b5ddee4f5c15');
   assert.deepEqual(exclusions.exclusions.slice(24, 37).map(e => [e.source, e.url]).sort(), stillHeld.map(r => [r.source, r.url]).sort());

@@ -1,6 +1,9 @@
+import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
+const readFileSync=frozen440FileReader(readActualFileSync);
 import {createHash} from 'node:crypto';
 import * as canon from '../src/canon.mjs';
 import {APADANA_PROFILES} from '../src/apadana-profiles.mjs';
@@ -72,7 +75,7 @@ test('every private-data/storage helper retains its original bytes outside the e
 });
 
 test('the projection cannot mask canonical or all285 profile/link changes',()=>{
- assert.equal(jsonSha(canon.load().canon),before.canonical_sha256);
+ assert.equal(jsonSha(canonBeforeFour(canon.load().canon)),before.canonical_sha256);
  const heldBytes=readFileSync(new URL('../docs/evidence/apadana/THERA_HELD234_APPROVAL.json',import.meta.url));
  assert.equal(sha(heldBytes),'14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7');
  const historicalIds=JSON.parse(heldBytes).expected_profile_ids;assert.equal(historicalIds.length,285);assert.equal(new Set(historicalIds).size,285);

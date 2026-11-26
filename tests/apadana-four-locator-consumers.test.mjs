@@ -1,6 +1,9 @@
 // Boundary wording/root correctness has its
 // separate independently pinned source suite; these tests exercise locator gates.
 import {test,before,after} from 'node:test';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {buildIndex,toCsv,CSV_COLUMNS} from '../scripts/export-index.mjs';
 import assert from 'node:assert/strict';
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {InMemoryTransport} from '@modelcontextprotocol/sdk/inMemory.js';
@@ -145,4 +148,29 @@ test('wire recovery admits only six exact whole-unit routes and untouched raw-bo
  for(const id of ['tha-ap332','tha-ap337','mn10']){const actual=data(await call('get_text',{uid:id,offset:0,limit:1}));assert.equal(actual.source.commit,ORIGINAL);assert.equal(actual.source.locator_revision,undefined);}
  const book=canon.load().canon.books[unit('tha-ap334').book],bookId=book.file.replace(/\.mul\.xml$/,'');
  const raw=data(await call('get_text',{book:bookId,offset:0,limit:1}));assert.equal(raw.source.commit,ORIGINAL);assert.equal(raw.source.locator_revision,undefined);
+});
+
+
+test('all fifty historical source positions refuse without rebasing, including stable and vanished references',async()=>{
+ const raw=readFileSync('docs/evidence/apadana/boundaries333-336/OLD_SEGMENT_SOURCE_NEW_OWNER_MAP.json');
+ assert.equal(createHash('sha256').update(raw).digest('hex'),'fbf5190392d0285254932a907ee794ddea3db828e8158061bb4aff1c53f0cf8b');
+ const mapping=JSON.parse(raw);assert.equal(mapping.mapping.length,50);
+ for(const row of mapping.mapping){
+  assert.equal(row.automatic_user_data_migration_authorized,false);
+  for(const pin of [undefined,ORIGINAL]){
+   const args={uid:row.old.uid,offset:row.old.segment_index0,limit:1,...(pin?{source_commit:pin}:{})};
+   const error=refusal(await call('get_text',args));assert.equal(error.reopen,'#read?uid='+row.old.uid);
+  }
+ }
+});
+
+test('bulk citation exports disclose effective locator namespaces without changing edition provenance or exporting words',()=>{
+ const index=buildIndex();assert.equal(index.source.commit,ORIGINAL);assert.equal(index.count,8544);
+ for(const id of ids){
+  const row=index.texts.find(t=>t.id===id);assert.equal(row.locator_revision,EXPECTED[id]);
+  assert.equal(row.index_revision,EXPECTED[id].slice(ORIGINAL.length+1));assert.equal(row.segments,undefined);
+  const csv=toCsv({texts:[row]}),lines=csv.trim().split('\r\n');assert.equal(lines.length,2);
+  assert.ok(csv.includes(EXPECTED[id]));assert.ok(CSV_COLUMNS.includes('locator_revision'));
+ }
+ assert.equal(index.texts.find(t=>t.id==='mn10').locator_revision,undefined);
 });

@@ -1,6 +1,9 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
+import {historical440DataReader} from './helpers/four-history-data.mjs';
+const readFileSync=historical440DataReader(readActualFileSync);
 import {join} from 'node:path';
 import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
@@ -16,7 +19,7 @@ afterEach(()=>{globalThis.fetch=originalFetch;liveCache.clear();});
 function transport(calls){globalThis.fetch=async input=>{const url=typeof input==='string'?input:input.href,id=e.ids.find(id=>e.profiles[id].raw_url===url);assert.ok(id,'Exact six-source fixture only');calls.push(id);return new Response(e.artifact(id));};}
 
 test('exact339 preserves all333 ordered fullobjects, canonical roots and all26 unrelated data files',()=>{
- const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));e.assertCatalogue(manifest,APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,299);assert.equal(digest(JSON.stringify(data.canon)),e.compact.canonical_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
+ const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));e.assertCatalogue(manifest,APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,299);assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.compact.canonical_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
  for(const [path,sha] of Object.entries(e.compact.data_file_sha256))assert.equal(digest(readFileSync(path)),sha);
  for(const id of e.ids){const p=APADANA_PROFILES[id],u=data.byId.get(id),r=e.arows[id].root;assert.ok(Object.isFrozen(p));assert.equal(rootDigest(u,data.canon.books[u.book]),p.root_sha256);for(const key of ['id','book','title','start','end'])assert.deepEqual(u[key],r[key]);}
 });

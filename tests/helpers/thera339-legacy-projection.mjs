@@ -1,3 +1,4 @@
+import {projectFrozen440Source} from './boundary333-336-source-input.mjs';
 /** Finite test-input adapter only. Runtime readers/parsers remain current339. */
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -29,7 +30,7 @@ export function projectPublisher339To333(observedProfiles,catalogue){requireProf
 export function historical333FileReader(observedProfiles,reader){assert.equal(typeof reader,'function');return function readHistorical333(path,...options){const raw=reader(path,...options);if(path!=='server/data/apadana.json')return raw;assert.ok(options.length===0||options.length===1&&options[0]==='utf8','Only the existing historical manifest read modes are adapted');const catalogue=JSON.parse(raw.toString('utf8')),projected=projectPublisher339To333(observedProfiles,catalogue).catalogue;const bytes=Buffer.from(JSON.stringify(projected),'utf8');return typeof raw==='string'?bytes.toString('utf8'):bytes;};}
 const CLIENT333_SHA={"web/translation-policy.mjs":"327299730f8fde603c0a7bbf86a0797545bc7c5ba1f481e073bd8fad5082550e","src/chatgpt-widget.mjs":"5397258206f6c7439abb1a301981f459e5580df12f1d6efa1ff1f1e1afafb619"};
 /** Require the entire new source delta, then let unchanged old333→325 assertions run. */
-export function projectPublisher339ClientTo333(path,source){assert.ok(Object.hasOwn(CLIENT333_SHA,path));assert.equal(typeof source,'string');const found=[...source.matchAll(/^const PINNED_NEW_PARATEXT_IDS = (?:new Set\()?(\[[^\n]+\])\)?;$/gm)];assert.equal(found.length,1);const literal=found[0][1],ids=JSON.parse(literal),suffix=','+NEW_IDS.map(id=>JSON.stringify(id)).join(',');assert.equal(ids.length,250);assert.equal(new Set(ids).size,250);assert.deepEqual(ids.filter(id=>NEW_IDS.includes(id)),NEW_IDS);assert.ok(literal.endsWith(suffix+']'));assert.equal(literal.split(suffix).length-1,1);const prior=literal.substring(0,literal.length-suffix.length-1)+']';assert.equal(JSON.parse(prior).length,244);let projected=source.replace(literal,prior);if(path==='src/chatgpt-widget.mjs'){const current="export const WIDGET_VERSION = 'v40';";assert.equal(projected.split(current).length-1,1);projected=projected.replace(current,"export const WIDGET_VERSION = 'v39';");}assert.equal(sha(projected),CLIENT333_SHA[path],'Only exact6 suffix IDs and widgetv40 may differ from full pinnedD4 source');return projected;}
+function historicalProjectPublisher339ClientTo333(path,source){assert.ok(Object.hasOwn(CLIENT333_SHA,path));assert.equal(typeof source,'string');const found=[...source.matchAll(/^const PINNED_NEW_PARATEXT_IDS = (?:new Set\()?(\[[^\n]+\])\)?;$/gm)];assert.equal(found.length,1);const literal=found[0][1],ids=JSON.parse(literal),suffix=','+NEW_IDS.map(id=>JSON.stringify(id)).join(',');assert.equal(ids.length,250);assert.equal(new Set(ids).size,250);assert.deepEqual(ids.filter(id=>NEW_IDS.includes(id)),NEW_IDS);assert.ok(literal.endsWith(suffix+']'));assert.equal(literal.split(suffix).length-1,1);const prior=literal.substring(0,literal.length-suffix.length-1)+']';assert.equal(JSON.parse(prior).length,244);let projected=source.replace(literal,prior);if(path==='src/chatgpt-widget.mjs'){const current="export const WIDGET_VERSION = 'v40';";assert.equal(projected.split(current).length-1,1);projected=projected.replace(current,"export const WIDGET_VERSION = 'v39';");}assert.equal(sha(projected),CLIENT333_SHA[path],'Only exact6 suffix IDs and widgetv40 may differ from full pinnedD4 source');return projected;}
 
 /** A historical caller may present genuine333; old333 assertions still validate it.
  *339 inputs can reach that body only after this complete finite verification. */
@@ -46,4 +47,8 @@ export function normalize339ClientTo333(path,source){
   assert.ok(Object.hasOwn(CLIENT333_SHA,path));
   if(sha(source)===CLIENT333_SHA[path])return source;
   return projectPublisher339ClientTo333(path,source);
+}
+
+export function projectPublisher339ClientTo333(path,source){
+ return historicalProjectPublisher339ClientTo333(path,projectFrozen440Source(path,source));
 }

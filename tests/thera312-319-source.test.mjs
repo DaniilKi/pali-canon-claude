@@ -1,6 +1,9 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
+import {historical440DataReader} from './helpers/four-history-data.mjs';
+const readFileSync=historical440DataReader(readActualFileSync);
 import {join} from 'node:path';
 import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
@@ -35,7 +38,7 @@ test('exact333 identities preserve all325 full ordered profile and link objects,
   assert.equal(APADANA_COMMIT,REV);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,299);
-  assert.equal(digest(JSON.stringify(data.canon)),e.compact.canonical_logical_sha256);
+  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.compact.canonical_logical_sha256);
   assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
   for(const [path,sha] of Object.entries(e.compact.data_file_sha256)) assert.equal(digest(readFileSync(path)),sha,'Preserved original325 data '+path);
   for(const id of e.ids) {

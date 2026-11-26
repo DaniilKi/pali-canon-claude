@@ -1,6 +1,8 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readCurrentFileSync} from 'node:fs';import {createHash} from 'node:crypto';
 import {APADANA_PROFILES} from '../src/apadana-profiles.mjs';
 import {publisher339Authority,requireProfiles339,requireHistorical333Maps,projectPublisher339To333,historical333FileReader,projectPublisher339ClientTo333,normalize339InputTo333} from './helpers/thera339-legacy-projection.mjs';
+const readFileSync=frozen440FileReader(readCurrentFileSync);
 const e=publisher339Authority(),sha=x=>createHash('sha256').update(x).digest('hex'),clone=x=>structuredClone(x),manifest=()=>JSON.parse(readFileSync('server/data/apadana.json','utf8'));
 const project=(p=APADANA_PROFILES,m=manifest())=>projectPublisher339To333(p,m);
 function negative(fn){const p=clone(APADANA_PROFILES),m=manifest();fn(p,m);assert.throws(()=>project(p,m));}

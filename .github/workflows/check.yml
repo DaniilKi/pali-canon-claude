@@ -1018,13 +1018,23 @@ jobs:
           sparse-checkout: |
             romn/s0510m1.mul.xml
             romn/s0510a.att.xml
+      - name: Require four-poem source repair and citation compatibility without skips
+        if: matrix.group == 'apadanatherapair101'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          VRI_SOURCE_CHECKOUT: .fixtures/apadana-vri-pinned
+        run: |
+          node --test --test-reporter=tap tests/apadana-four-boundary-migration.test.mjs tests/apadana-four-locator-consumers.test.mjs | tee reviewed-four-boundary.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-four-boundary.tap","utf8"); for(const [key,value] of [["tests",13],["pass",13],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Validate independently reviewed Therā expansion and held-source refusals
         if: matrix.group == 'apadanatheraexpansion'
         run: |
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-fifth.test.mjs tests/apadana-thera-sixth.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadana-independent-inputs"
-          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/apadana-independent-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadana-independent-inputs/canon-before-thera-pair.json"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadana-independent-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadana-independent-inputs/canon-before-four.json"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/apadana-independent-inputs/canon-before-four.json" --output "$RUNNER_TEMP/apadana-independent-inputs/canon-before-thera-pair.json"
           python scripts/apadana/review_thera_fifth_sixth.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTH_GOLDENS.json --canon "$RUNNER_TEMP/apadana-independent-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadana-independent-review"
           cp "$RUNNER_TEMP/apadana-independent-review/EXTRACTION_COMPARISON.json" standalone-apadana-independent-review.report.json
       - name: Check supplementary Therā source and apparatus ownership
@@ -1046,7 +1056,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
-          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-four.json"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon-before-four.json" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
           python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
           cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatherascaled61-independent.report.json
       - name: Check scaled Therā 61-80 source and apparatus ownership
@@ -1068,7 +1079,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
-          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-four.json"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon-before-four.json" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
           python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
           cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatherascaled81-independent.report.json
       - name: Check scaled Therā 81-100 source and apparatus ownership
@@ -1090,7 +1102,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
-          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-four.json"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon-before-four.json" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
           python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
           cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatheraeditorial-independent.report.json
       - name: Check scaled Therā held42 source and apparatus ownership
@@ -1112,7 +1125,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-thera-pair-intake.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanatherapair101-inputs"
-          python scripts/apadana/review_thera_pair_intake.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanatherapair101-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanatherapair101-independent-review"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanatherapair101-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanatherapair101-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera_pair_intake.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanatherapair101-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanatherapair101-independent-review"
           cp "$RUNNER_TEMP/apadanatherapair101-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanatherapair101-independent.report.json
       - name: Check repaired Therā citations and complete publisher intake 101-120
         if: matrix.group == 'apadanatherapair101'
@@ -1133,7 +1147,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-thera-pair-intake.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanatherapair121-inputs"
-          python scripts/apadana/review_thera_pair_intake.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanatherapair121-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanatherapair121-independent-review"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanatherapair121-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanatherapair121-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera_pair_intake.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanatherapair121-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanatherapair121-independent-review"
           cp "$RUNNER_TEMP/apadanatherapair121-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanatherapair121-independent.report.json
       - name: Check repaired Therā citations and complete publisher intake 121-140
         if: matrix.group == 'apadanatherapair121'
@@ -1154,7 +1169,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera141-180.test.mjs tests/thera141-180-client.test.mjs tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-pair-locator-compat.test.mjs tests/web-tool-result.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera141-inputs"
-          python scripts/apadana/review_thera141_180.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SEVENTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera141-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera141-independent-review"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera141-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera141-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera141_180.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SEVENTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera141-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera141-independent-review"
           cp "$RUNNER_TEMP/apadanathera141-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanathera141-independent.report.json
       - name: Check reviewed Therā 141-160 source and preserved paired citations
         if: matrix.group == 'apadanathera141'
@@ -1175,7 +1191,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera141-180.test.mjs tests/thera141-180-client.test.mjs tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-pair-locator-compat.test.mjs tests/web-tool-result.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera161-inputs"
-          python scripts/apadana/review_thera141_180.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SEVENTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera161-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera161-independent-review"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera161-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera161-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera141_180.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SEVENTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera161-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera161-independent-review"
           cp "$RUNNER_TEMP/apadanathera161-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanathera161-independent.report.json
       - name: Check reviewed Therā 161-180 source and preserved paired citations
         if: matrix.group == 'apadanathera161'
@@ -1196,7 +1213,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera181-220.test.mjs tests/thera181-220-client.test.mjs tests/thera-cached-poem-notes.test.mjs tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-pair-locator-compat.test.mjs tests/web-tool-result.test.mjs tests/apadana-next-client.test.mjs tests/apadana-next.test.mjs tests/apadana-third.test.mjs tests/apadana-fourth-client.test.mjs tests/thera-hundred-client.test.mjs tests/apadana-integration.test.mjs tests/apadana-three.test.mjs tests/thera-commentary-locators.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera181-inputs"
-          python scripts/apadana/review_thera181_220.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_NINETEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTIETH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_FIRST_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_SECOND_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera181-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera181-independent-review"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera181-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera181-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera181_220.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_NINETEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTIETH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_FIRST_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_SECOND_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera181-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera181-independent-review"
           cp "$RUNNER_TEMP/apadanathera181-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanathera181-independent.report.json
       - name: Check reviewed Therā 181-200 source and preserved paired citations
         if: matrix.group == 'apadanathera181'
@@ -1217,7 +1235,8 @@ jobs:
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera181-220.test.mjs tests/thera181-220-client.test.mjs tests/thera-cached-poem-notes.test.mjs tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-pair-locator-compat.test.mjs tests/web-tool-result.test.mjs tests/apadana-next-client.test.mjs tests/apadana-next.test.mjs tests/apadana-third.test.mjs tests/apadana-fourth-client.test.mjs tests/thera-hundred-client.test.mjs tests/apadana-integration.test.mjs tests/apadana-three.test.mjs tests/thera-commentary-locators.test.mjs
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera201-inputs"
-          python scripts/apadana/review_thera181_220.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_NINETEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTIETH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_FIRST_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_SECOND_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera201-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera201-independent-review"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera201-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera201-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera181_220.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_NINETEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTIETH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_FIRST_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_SECOND_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera201-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera201-independent-review"
           cp "$RUNNER_TEMP/apadanathera201-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanathera201-independent.report.json
       - name: Check reviewed Therā 201-220 source and preserved paired citations
         if: matrix.group == 'apadanathera201'
@@ -1237,7 +1256,8 @@ jobs:
         run: |
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera221-inputs"
-          python scripts/apadana/review_thera221_230.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera221-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_221_230_GOLDENS.json --profiles docs/evidence/apadana/THERA_221_230_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_221_230_EXPECTED_LINKS.json --verify-only > standalone-apadanathera221-independent.report.json
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera221-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera221-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera221_230.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera221-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_221_230_GOLDENS.json --profiles docs/evidence/apadana/THERA_221_230_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_221_230_EXPECTED_LINKS.json --verify-only > standalone-apadanathera221-independent.report.json
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera221-230.test.mjs tests/thera221-230-client.test.mjs tests/apadana-thera181-220.test.mjs tests/thera181-220-client.test.mjs tests/apadana-thera241-250.test.mjs tests/thera241-250-client.test.mjs
       - name: Check reviewed Therā 221-230 source and preserved paired citations
         if: matrix.group == 'apadanathera221'
@@ -1260,7 +1280,8 @@ jobs:
         run: |
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera231-inputs"
-          python scripts/apadana/review_thera231_240.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera231-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_231_240_GOLDENS.json --profiles docs/evidence/apadana/THERA_231_240_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_231_240_EXPECTED_LINKS.json --verify-only > standalone-apadanathera231-independent.report.json
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera231-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera231-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera231_240.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera231-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_231_240_GOLDENS.json --profiles docs/evidence/apadana/THERA_231_240_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_231_240_EXPECTED_LINKS.json --verify-only > standalone-apadanathera231-independent.report.json
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera231-240.test.mjs tests/thera231-240-client.test.mjs
       - name: Check remaining Therā group A source and preserved paired citations
         if: matrix.group == 'apadanathera231'
@@ -1283,7 +1304,8 @@ jobs:
         run: |
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera234-inputs"
-          python scripts/apadana/review_thera_held234.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera234-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_HELD234_GOLDENS.json --profiles docs/evidence/apadana/THERA_HELD234_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_HELD234_EXPECTED_LINKS.json --verify-only > standalone-apadanathera234-independent.report.json
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera234-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera234-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera_held234.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera234-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_HELD234_GOLDENS.json --profiles docs/evidence/apadana/THERA_HELD234_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_HELD234_EXPECTED_LINKS.json --verify-only > standalone-apadanathera234-independent.report.json
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-held234.test.mjs tests/held234-client.test.mjs
       - name: Check reviewed Therā publisher234 source and preserved paired citations
         if: matrix.group == 'apadanathera234'
@@ -1306,7 +1328,8 @@ jobs:
         run: |
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera241-inputs"
-          python scripts/apadana/review_thera241_250.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera241-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_TWENTY_FIFTH_GOLDENS.json --profiles docs/evidence/apadana/THERA_241_250_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_241_250_EXPECTED_LINKS.json --verify-only > standalone-apadanathera241-independent.report.json
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera241-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera241-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera241_250.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera241-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_TWENTY_FIFTH_GOLDENS.json --profiles docs/evidence/apadana/THERA_241_250_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_241_250_EXPECTED_LINKS.json --verify-only > standalone-apadanathera241-independent.report.json
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera241-250.test.mjs tests/thera241-250-client.test.mjs
       - name: Check reviewed Therā 241-250 source and preserved paired citations
         if: matrix.group == 'apadanathera241'
@@ -1329,7 +1352,8 @@ jobs:
         run: |
           node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera251-inputs"
-          python scripts/apadana/review_thera251_259.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera251-inputs/canon.json.gz" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_251_259_GOLDENS.json --profiles docs/evidence/apadana/THERA_251_259_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_251_259_EXPECTED_LINKS.json --verify-only > standalone-apadanathera251-independent.report.json
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera251-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera251-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera251_259.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera251-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_251_259_GOLDENS.json --profiles docs/evidence/apadana/THERA_251_259_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_251_259_EXPECTED_LINKS.json --verify-only > standalone-apadanathera251-independent.report.json
           APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera251-259.test.mjs tests/thera251-259-client.test.mjs
       - name: Check remaining Therā group B source and preserved paired citations
         if: matrix.group == 'apadanathera251'
@@ -1351,7 +1375,8 @@ jobs:
         if: matrix.group == 'vrieditionnote'
         run: |
           node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/vrieditionnote-inputs"
-          python scripts/canon/build_source_notes.py --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --canon "$RUNNER_TEMP/vrieditionnote-inputs/canon.json.gz" --manifest scripts/canon/source_note_manifest.json --verify server/data/source-notes.json > standalone-source-notes-independent.report.json
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/vrieditionnote-inputs/canon.json.gz" --output "$RUNNER_TEMP/vrieditionnote-inputs/canon-before-four.json"
+          python scripts/canon/build_source_notes.py --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --canon "$RUNNER_TEMP/vrieditionnote-inputs/canon-before-four.json" --manifest scripts/canon/source_note_manifest.json --verify server/data/source-notes.json > standalone-source-notes-independent.report.json
           VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/source-notes.test.mjs tests/source-notes-client.test.mjs tests/source-notes-compatibility.test.mjs
       - name: Check separate original edition-note reading and preserved root context
         if: matrix.group == 'vrieditionnote'

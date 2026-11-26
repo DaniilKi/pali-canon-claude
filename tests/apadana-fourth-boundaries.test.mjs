@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -20,7 +21,7 @@ const bounds = {
 
 test('three finite fourth-vagga splits preserve all earlier repairs, source blocks and commentary atomically', { skip: !python }, () => {
   const input = {
-    canon: JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))),
+    canon: canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')))),
     commentary: JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz'))),
   };
   const bi = input.canon.units.find(u => u.id === 'thi-ap33').book;

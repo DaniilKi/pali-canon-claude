@@ -307,7 +307,7 @@ def main():
     assert set(manifest['links']) == set(current_intake['expected_profile_ids']), 'Unreviewed current activation'
     rows = manifest['links']
     for uid,row in old['links'].items():assert rows[uid] == row, 'Previous source changed: '+uid
-    probe = "import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';let s='';for await(const c of process.stdin)s+=c;process.stdout.write(gunzipSync(readBundled(JSON.parse(s))).toString());"
+    probe = "import{exactHistoricalCanonBytes}from'./tests/helpers/canon-before-four.mjs';import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';let s='';for await(const c of process.stdin)s+=c;process.stdout.write(exactHistoricalCanonBytes(gunzipSync(readBundled(JSON.parse(s)))).toString());"
     run = subprocess.run(['node','--input-type=module','-e',probe],cwd=ROOT,input=json.dumps(str(server_dir/'data/canon.json.gz')),text=True,capture_output=True)
     assert run.returncode == 0 and digest(run.stdout) == approval['after_canon_sha256'], 'Current logical canonical pin differs'
     current = json.loads(run.stdout)

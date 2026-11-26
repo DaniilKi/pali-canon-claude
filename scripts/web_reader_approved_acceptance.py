@@ -9,6 +9,7 @@ import hashlib
 import json
 import subprocess
 from pathlib import Path
+from web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records
 
 from web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA
 
@@ -93,7 +94,7 @@ def approved308_catalogue(root):
         assert name.startswith('server/data/') and '..' not in Path(name).parts
         assert runtime303['files'][name.removeprefix('server/')]['sha256'] == expected
         if name != 'server/data/apadana.json':
-            assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == expected, 'Unrelated data changed: ' + name
+            assert hashlib.sha256(historical_data_bytes(root, name)).hexdigest() == expected, 'Unrelated data changed: ' + name
     profiles = dict(previous['profiles'])
     links = dict(previous['links'])
     extra_profiles = sealed(evidence / current['expected_profiles']['file'], current['expected_profiles']['sha256'])
@@ -139,7 +140,7 @@ def approved310_catalogue(root):
         assert name.startswith('server/data/') and '..' not in Path(name).parts
         assert runtime308['files'][name.removeprefix('server/')]['sha256'] == expected
         if name != 'server/data/apadana.json':
-            assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == expected, 'Unrelated data changed: ' + name
+            assert hashlib.sha256(historical_data_bytes(root, name)).hexdigest() == expected, 'Unrelated data changed: ' + name
     profiles = dict(previous['profiles'])
     links = dict(previous['links'])
     extra_profiles = sealed(evidence / current['expected_profiles']['file'], current['expected_profiles']['sha256'])
@@ -185,7 +186,7 @@ def approved317_catalogue(root):
         assert name.startswith('server/data/') and '..' not in Path(name).parts
         assert runtime310['files'][name.removeprefix('server/')]['sha256'] == expected
         if name != 'server/data/apadana.json':
-            assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == expected, 'Unrelated data changed: ' + name
+            assert hashlib.sha256(historical_data_bytes(root, name)).hexdigest() == expected, 'Unrelated data changed: ' + name
     profiles = dict(previous['profiles'])
     links = dict(previous['links'])
     extra_profiles = sealed(evidence / current['expected_profiles']['file'], current['expected_profiles']['sha256'])
@@ -231,7 +232,7 @@ def approved325_catalogue(root):
         assert name.startswith('server/data/') and '..' not in Path(name).parts
         assert runtime317['files'][name.removeprefix('server/')]['sha256'] == expected
         if name != 'server/data/apadana.json':
-            assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == expected, 'Unrelated data changed: ' + name
+            assert hashlib.sha256(historical_data_bytes(root, name)).hexdigest() == expected, 'Unrelated data changed: ' + name
     profiles = dict(previous['profiles'])
     links = dict(previous['links'])
     extra_profiles = sealed(evidence / current['expected_profiles']['file'], current['expected_profiles']['sha256'])
@@ -481,7 +482,7 @@ def approved333_catalogue(root):
     assert len(compact['data_file_sha256']) == 26
     for name, expected in compact['data_file_sha256'].items():
         assert name.startswith('server/data/') and '..' not in Path(name).parts and name != 'server/data/apadana.json'
-        assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == expected, 'Unrelated pinned104 data changed: ' + name
+        assert hashlib.sha256(historical_data_bytes(root, name)).hexdigest() == expected, 'Unrelated pinned104 data changed: ' + name
     profiles, links = dict(previous['profiles']), dict(previous['links'])
     extra_profiles = sealed(directory / current['expected_profiles']['file'], current['expected_profiles']['sha256'])
     extra_links = sealed(directory / current['expected_links']['file'], current['expected_links']['sha256'])
@@ -540,7 +541,7 @@ def reviewed333_runtime(root):
     return files
 
 
-def approved_catalogue(root):
+def reviewed339_catalogue(root):
     """Extend the exact historical catalogue with six independently sealed objects."""
     previous = approved333_catalogue(root)
     current = read_321_329(root)
@@ -558,7 +559,7 @@ def approved_catalogue(root):
     assert len(compact['data_file_sha256']) == 26
     for name, expected in compact['data_file_sha256'].items():
         assert name.startswith('server/data/') and '..' not in Path(name).parts and name != 'server/data/apadana.json'
-        assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == expected, 'Unrelated pinnedD4 data changed: ' + name
+        assert hashlib.sha256(historical_data_bytes(root, name)).hexdigest() == expected, 'Unrelated pinnedD4 data changed: ' + name
     profiles, links = dict(previous['profiles']), dict(previous['links'])
     extra_profiles = sealed(directory / current['expected_profiles']['file'], current['expected_profiles']['sha256'])
     extra_links = sealed(directory / current['expected_links']['file'], current['expected_links']['sha256'])
@@ -586,7 +587,7 @@ INDEPENDENT_339_REVIEW_SHA = 'ecfda89f9c3d877e6cffc151a8bdf0aa3594f8a2d9744aaed5
 CANDIDATE_339_COMMIT = '337f8d879db3aae1047d56b0e4094b59c5a409c3'
 
 
-def approved_runtime(root):
+def reviewed339_runtime(root):
     """Require all historical333/canonical325 proofs, then exact current33934."""
     previous = reviewed333_runtime(root)
     directory = Path(root) / 'docs/evidence/apadana/runtime339'
@@ -614,3 +615,13 @@ def approved_runtime(root):
     assert files['data/source-notes.json'] == previous['data/source-notes.json']
     assert all(not Path(name).is_absolute() and '..' not in Path(name).parts for name in files)
     return files
+
+
+# New public gates retain the full immutable339 function bodies above.
+def approved_catalogue(root):
+    assert_current_canonical_data(root)
+    return reviewed339_catalogue(root)
+
+
+def approved_runtime(root):
+    return boundary_runtime_records(root, reviewed339_runtime(root))

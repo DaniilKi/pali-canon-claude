@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 /** Original234 identity exception, independently sealed text and unchanged neighboring235. */
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -38,7 +39,7 @@ test('held234 curation appends only236 to exact284 objects and preserves separat
   assert.equal(CURRENT_APADANA_IDS.length,339);
   for(const id of e.previous.expected_profile_ids){assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id],id+' prior profile exact');assert.deepEqual(manifest.links[id],e.priorLinks[id],id+' prior link exact');}
   assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.profiles['tha-ap236']);assert.deepEqual(manifest.links['tha-ap236'],e.links['tha-ap236']);
-  assert.equal(digest(JSON.stringify(data.canon)),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);
+  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);
   assert.deepEqual(data.byId.get('tha-ap236'),e.peer.canonical_unit);assert.equal(data.byId.get('tha-ap236').index_revision,undefined);
   assert.equal(rootDigest(data.byId.get('tha-ap236'),data.canon.books[36]),e.peerGolden.root_sha256);
   assert.equal(digest(JSON.stringify(data.canon.books[36].blocks.slice(8015,8032))),e.peerGolden.raw_unit_blocks_sha256,'Raw-block and registered-root hash domains remain distinct');

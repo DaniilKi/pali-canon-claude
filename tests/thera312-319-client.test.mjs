@@ -66,7 +66,7 @@ function refuse(host,widget,bad,first,pali,id) {
 
 // 1. Metadata-only capability and no-auto-fetch behavior remains meaningful without a raw fixture.
 test('exact333 client capabilities retain every325 old object and40+293 identities with no automatic English or held311/320 transport',async()=>{
-  e.assertProfiles(APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,'v40');
+  e.assertProfiles(APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,'v41');
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,299);
   let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Metadata or held request attempted provider transport');};

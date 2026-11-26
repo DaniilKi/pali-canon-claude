@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 // Regression oracle captured from approved ff798f6 before the additive note repair.
 // It hashes complete segment objects, including existing variants and citations.
 import test from 'node:test';
@@ -17,7 +18,7 @@ const baseline = JSON.parse(readFileSync(new URL('./fixtures/source-notes-baseli
 const sha = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
 test('separately indexed note preserves all old unit and book identities, source objects and 420 downstream spans', () => {
-  const { canon: data } = canon.load();
+  const data = canonBeforeFour(canon.load().canon);
   assert.equal(sha(data), baseline.canonical_sha256);
   const units = data.units;
   const books = data.books.map((book, i) => ({
@@ -49,7 +50,7 @@ test('separately indexed note preserves all old unit and book identities, source
 });
 
 test('complete old segment objects remain unchanged in all 8544 units and 61 books under every existing variant mode', () => {
-  const { canon: data } = canon.load();
+  const data = canonBeforeFour(canon.load().canon);
   const books = data.books.map((book, i) => ({
     id: `vri-book:${book.file.replace(/\.mul\.xml$/, '')}`, book: i,
     start: 0, end: book.blocks.length,

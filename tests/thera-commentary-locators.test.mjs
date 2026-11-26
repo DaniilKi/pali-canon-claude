@@ -198,7 +198,7 @@ function assertSourceMetadata(uid) {
 }
 
 test('finite rendering keeps both post-poem/summary placements while widget refuses invented poem notes', () => {
-  assert.equal(WIDGET_VERSION, 'v40');
+  assert.equal(WIDGET_VERSION, 'v41');
   for (const bridge of ['Apps SDK', 'MCP Apps']) for (const [uid, placement, caption] of [
     ['tha-ap19', 'after_poem', 'After the publisher poem.'], ['tha-ap32', 'after_chapter_summary', 'After the chapter summary.'],
   ]) {

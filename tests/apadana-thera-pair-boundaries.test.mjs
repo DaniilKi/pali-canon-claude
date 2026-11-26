@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
@@ -11,7 +12,7 @@ import { canonBeforeTheraPair, THERA_PAIR_REVISION, PRE_THERA_PAIR_SHA256 } from
 
 const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
 const sourceRoot = process.env.VRI_SOURCE_CHECKOUT;
-const loaded = () => JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')));
+const loaded = () => canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))));
 const sha = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const corrected = c => {
   const out = structuredClone(c);

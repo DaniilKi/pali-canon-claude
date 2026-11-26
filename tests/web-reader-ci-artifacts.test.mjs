@@ -1,7 +1,9 @@
 import {runInNewContext} from 'node:vm';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readCurrentFileSync} from 'node:fs';
+import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
+const readFileSync=frozen440FileReader(readCurrentFileSync);
 import {createHash} from 'node:crypto';
 
 const REMAINING_GROUPS=['apadanathera231','apadanathera251'];

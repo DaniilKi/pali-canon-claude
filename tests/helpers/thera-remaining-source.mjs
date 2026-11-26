@@ -1,7 +1,11 @@
+import {frozen440FileReader} from './boundary333-336-source-input.mjs';
+import {canonBeforeFour} from './canon-before-four.mjs';
 /** Exact source-scope curation, separate from production profile derivation. */
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
+import {historical440DataReader} from './four-history-data.mjs';
+const readFileSync=frozen440FileReader(historical440DataReader(readActualFileSync));
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import * as canon from '../../src/canon.mjs';
@@ -89,7 +93,7 @@ test('group '+batch+' intake is exactly independently approved9 and preserves al
     assert.deepEqual(APADANA_PROFILES[uid], oldProfile, `${uid} previous profile exact`);
     assert.deepEqual(manifest.links[uid], oldLink, `${uid} previous source link exact`);
   }
-  assert.equal(digest(JSON.stringify(data.canon)), baseline.canon_logical_sha256, 'This intake cannot change canonical words, boundaries or locator revisions');
+  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))), baseline.canon_logical_sha256, 'This intake cannot change canonical words, boundaries or locator revisions');
   for (const uid of approved) {
     const p = APADANA_PROFILES[uid], g = golden(uid), u = data.byId.get(uid), book = data.canon.books[u.book];
     assert.equal(p, THERA_APADANA_PROFILES[uid]);

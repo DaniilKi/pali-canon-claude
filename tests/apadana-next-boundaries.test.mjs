@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -11,7 +12,7 @@ const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).s
 
 test('finite second-vagga repair preserves source wording, older pair, future holds and commentary atomically', { skip: !python }, () => {
   const input = {
-    canon: JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))),
+    canon: canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')))),
     commentary: JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz'))),
   };
   const bi = input.canon.units.find(u => u.id === 'thi-ap15').book;

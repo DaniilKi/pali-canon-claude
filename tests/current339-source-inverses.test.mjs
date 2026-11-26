@@ -1,10 +1,12 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readCurrentFileSync} from 'node:fs';import {createHash} from 'node:crypto';
 import {sourceInverses,projectD4Source,d4FileReader} from './helpers/current339-source-inverse.mjs';
 import {WIDGET_VERSION,WIDGET_URI} from '../src/chatgpt-widget.mjs';
 import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
+const readFileSync=frozen440FileReader(readCurrentFileSync);
 const sha=x=>createHash('sha256').update(x).digest('hex');
-test('actual current339 and v40 bindings retain every exact D4 assertion through finite source inputs',()=>{
- assert.equal(CURRENT_APADANA_IDS.length,339);assert.equal(WIDGET_VERSION,'v40');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v40.html');
+test('actual current339 and v41 bindings retain every exact D4 assertion through finite source inputs',()=>{
+ assert.equal(CURRENT_APADANA_IDS.length,339);assert.equal(WIDGET_VERSION,'v41');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v41.html');
  assert.ok(Object.keys(sourceInverses.files).length>=20);
  const reader=d4FileReader(readFileSync);
  for(const [path,row]of Object.entries(sourceInverses.files)){

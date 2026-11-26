@@ -1,3 +1,4 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -24,7 +25,7 @@ test('exact independently approved18 extend the preserved285 to303 with unchange
  assert.deepEqual(Object.keys(manifest.links),CURRENT_APADANA_IDS);
  assert.deepEqual(Object.keys(manifest.links).slice(0,303),e.approval.expected_profile_ids);
  for(const id of e.approval.baseline_ids){assert.deepEqual(profile(id),e.baseline.profile_objects[id]);assert.deepEqual(manifest.links[id],e.baseline.translation_objects[id]);}
- assert.equal(digest(JSON.stringify(data.canon)),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
+ assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
  for(const id of e.ids){const p=profile(id),b=e.independent(id),u=data.byId.get(id);assert.deepEqual(p,e.profiles[id]);assert.deepEqual(manifest.links[id],e.links[id]);assert.equal(rootDigest(u,data.canon.books[u.book]),b.root_sha256);assert.equal(u.index_revision,undefined);assert.ok(Object.isFrozen(p));}
  for(const id of ['tha-ap262','tha-ap268','tha-ap282'])assert.equal(profile(id),undefined);
  assert.ok(profile('tha-ap266'));assert.ok(profile('tha-ap280'));

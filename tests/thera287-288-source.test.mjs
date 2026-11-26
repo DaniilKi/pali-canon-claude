@@ -1,6 +1,9 @@
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
+import {historical440DataReader} from './helpers/four-history-data.mjs';
+const readFileSync=historical440DataReader(readActualFileSync);
 import {join} from 'node:path';
 import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
@@ -37,7 +40,7 @@ test('exact two approved profiles extend every preserved308 object and link to31
  }
 for(const[current,previous]of [['310 finite complete publisher-edition poems','308 finite complete publisher-edition poems'],['270 explicitly mapped Therā','268 explicitly mapped Therā']]){assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved current counter '+current);priorSource.policy=priorSource.policy.replace(current,previous);}
  assert.equal(digest(JSON.stringify(priorSource)),e.compact.manifest_source_sha256,'All source fields/rights/notices except exact two counters remain unchanged');let preserved=0;for(const[path,sha]of Object.entries(e.compact.data_file_sha256))if(path!=='server/data/apadana.json'){assert.equal(digest(readFileSync(path)),sha,'Unchanged prior data artifact '+path);preserved++;}assert.equal(preserved,26);
- assert.equal(digest(JSON.stringify(data.canon)),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
+ assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
  for(const id of e.ids){const p=profile(id),b=e.independent(id),u=data.byId.get(id);assert.deepEqual(p,e.profiles[id]);assert.deepEqual(manifest.links[id],e.links[id]);assert.equal(rootDigest(u,data.canon.books[u.book]),b.root_sha256);assert.deepEqual({start:u.start,end:u.end,book:u.book},{start:b.canonical.start,end:b.canonical.end,book:b.canonical.book});assert.ok(Object.isFrozen(p));}
  for(const id of ['tha-ap262','tha-ap268','tha-ap282'])assert.equal(profile(id),undefined);assert.ok(profile('tha-ap266'));assert.ok(profile('tha-ap280'));
 });

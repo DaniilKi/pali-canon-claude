@@ -1,3 +1,5 @@
+import {projectHistorical440Data} from './four-history-data.mjs';
+import {normalizeFrozen440SourceInput} from './boundary333-336-source-input.mjs';
 /** Historical intake projection for three exact, separately tested additive
  * source-note changes. This is not a general source-code normalizer.
  * No baseline, profile, corpus, locator or private-data seal is replaced.
@@ -43,7 +45,9 @@ export const SOURCE_NOTE_PROJECTED_FILES=Object.freeze(Object.keys(APPROVED));
  */
 export function sourceNoteBaselineProjection(path,bytes,historicalHash){
  assert.ok(Buffer.isBuffer(bytes),'Historical source projection requires exact bytes');
+ bytes=projectHistorical440Data(path,bytes);
  if(!Object.hasOwn(APPROVED,path))return bytes;
+ bytes=Buffer.from(normalizeFrozen440SourceInput(path,bytes.toString('utf8')),'utf8');
  const approved=APPROVED[path];
  assert.equal(historicalHash,approved.historical_sha256,'No alternate historical authority is accepted');
  assert.equal(digest(bytes),approved.approved_source_note_sha256,'Only the exact approved source-note additions may be projected');

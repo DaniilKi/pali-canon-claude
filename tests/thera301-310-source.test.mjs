@@ -1,3 +1,5 @@
+import {historical440DataReader} from './helpers/four-history-data.mjs';
+import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync as readCurrentFileSync} from 'node:fs';
@@ -12,7 +14,7 @@ import {readPassage} from '../src/chatgpt-widget.mjs';
 import {thera301310Evidence,digest,blob} from './helpers/thera301-310-evidence.mjs';
 import {projectPublisher333To325,historical325FileReader} from './helpers/thera333-legacy-projection.mjs';
 const APADANA_PROFILES=projectPublisher333To325(CURRENT_APADANA_PROFILES,JSON.parse(readCurrentFileSync('server/data/apadana.json','utf8'))).profiles;
-const readFileSync=historical325FileReader(CURRENT_APADANA_PROFILES,readCurrentFileSync);
+const readFileSync=historical325FileReader(CURRENT_APADANA_PROFILES,historical440DataReader(readCurrentFileSync));
 const e=thera301310Evidence(),originalFetch=globalThis.fetch,clone=value=>JSON.parse(JSON.stringify(value));
 const tid=p=>canon.translationId(p),profile=id=>APADANA_PROFILES[id],parsed=id=>parseApadana(e.artifact(id),profile(id));
 afterEach(()=>{globalThis.fetch=originalFetch;});
@@ -24,7 +26,7 @@ test('eight V2 approved profiles extend every preserved317 object and link to325
  for(const id of e.approval.baseline_ids){assert.deepEqual(profile(id),e.baseline.profile_objects[id]);assert.deepEqual(manifest.links[id],e.baseline.translation_objects[id]);assert.equal(digest(JSON.stringify(profile(id))),e.compact.profile_object_sha256[id]);assert.equal(digest(JSON.stringify(manifest.links[id])),e.compact.translation_object_sha256[id]);}
  const priorSource=clone(manifest.source);for(const[current,previous]of [['325 finite complete publisher-edition poems','317 finite complete publisher-edition poems'],['285 explicitly mapped Therā','277 explicitly mapped Therā']]){assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved current counter '+current);priorSource.policy=priorSource.policy.replace(current,previous);}
  assert.equal(digest(JSON.stringify(priorSource)),e.compact.manifest_source_sha256,'Only the exact two approved counters may differ');let preserved=0;for(const[path,sha]of Object.entries(e.compact.data_file_sha256))if(path!=='server/data/apadana.json'){assert.equal(digest(readFileSync(path)),sha,'Unchanged prior data artifact '+path);preserved++;}assert.equal(preserved,26);
- assert.equal(digest(JSON.stringify(data.canon)),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
+ assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
  for(const id of e.ids){const p=profile(id),b=e.independent(id),u=data.byId.get(id);assert.deepEqual(p,e.profiles[id]);assert.deepEqual(manifest.links[id],e.links[id]);assert.equal(rootDigest(u,data.canon.books[u.book]),b.root_sha256);assert.deepEqual({start:u.start,end:u.end,book:u.book},{start:b.canonical.start,end:b.canonical.end,book:b.canonical.book});assert.ok(Object.isFrozen(p));}
  for(const id of ['tha-ap262','tha-ap268','tha-ap282','tha-ap293','tha-ap299','tha-ap302','tha-ap308','tha-ap309'])assert.equal(profile(id),undefined);
  e.assertClientProjection();assert.equal(profile('tha-ap312').mapping_notes.filter(row=>row===e.notice).length,1);

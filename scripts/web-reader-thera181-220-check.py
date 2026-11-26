@@ -198,7 +198,7 @@ def main():
     old_profiles={'root':git_bytes('src/apadana-profiles.mjs').decode(),'thera':git_bytes('src/apadana-thera-profiles.mjs').decode()}
     profile_run=subprocess.run(['node','--input-type=module','-e',profile_probe],cwd=ROOT,input=compact(old_profiles),text=True,capture_output=True)
     assert profile_run.returncode == 0 and json.loads(profile_run.stdout)['preserved'] == 206, 'Previous browser source profile check failed: '+compact({'returncode':profile_run.returncode,'signal':-profile_run.returncode if profile_run.returncode<0 else None,'stderr_tail':profile_run.stderr[-2000:]})
-    probe = "import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';let s='';for await(const c of process.stdin)s+=c;process.stdout.write(gunzipSync(readBundled(JSON.parse(s))).toString());"
+    probe = "import{exactHistoricalCanonBytes}from'./tests/helpers/canon-before-four.mjs';import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';let s='';for await(const c of process.stdin)s+=c;process.stdout.write(exactHistoricalCanonBytes(gunzipSync(readBundled(JSON.parse(s)))).toString());"
     run = subprocess.run(['node','--input-type=module','-e',probe],cwd=ROOT,input=json.dumps(str(server_dir/'data/canon.json.gz')),text=True,capture_output=True)
     assert run.returncode == 0 and digest(run.stdout) == approval['after_canon_sha256'], 'Current logical canonical pin differs'
     current = json.loads(run.stdout)
