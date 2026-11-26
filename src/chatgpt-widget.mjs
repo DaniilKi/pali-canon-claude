@@ -390,7 +390,7 @@ export const WIDGET_HTML = `<!doctype html>
 <footer id="footer"></footer>
 <script>
 (function () {
-  var rendered = null, renderedInput = null, renderedSnapshot = null;
+  var rendered = null, renderedInput = null, renderedSnapshot = null, renderedNoteFrame = null, renderedHeaderFrame = null;
   var closed = false;
   var generation = 0, requestId = 2, pending = null, serverTools = false, awaitingSelection = false, lastInput, lastOutput, lastOutputSnapshot, lastMetadata, lastResultSnapshot;
   var modelCapabilities, modelChannel, modelModality, modelDesired, modelFlight, modelAccepted, modelFailure, modelRevision = 0, modelBlocked = false;
@@ -862,17 +862,45 @@ export const WIDGET_HTML = `<!doctype html>
       return jsonToolSnapshot(envelope);
     } catch (error) { return null; }
   }
+  // Retain only the last fully rendered reading on a partial host edit.
+  // Both frames come from an already strict JSON snapshot, never raw getters,
+  // widgetState or drafts. They are captured only by a complete render below.
+  function viewFrameSnapshot(snapshot, noteFrame) {
+    if (snapshot === null) return null;
+    try {
+      var frame = JSON.parse(snapshot);
+      if (!frame || typeof frame !== 'object' || Array.isArray(frame)) return null;
+      if (noteFrame) delete frame.source_notes;
+      else delete frame.text_id;
+      var descriptor = Object.getOwnPropertyDescriptor(frame, noteFrame ? 'pali' : 'source');
+      var nested = descriptor && descriptor.value;
+      if (nested && typeof nested === 'object' && !Array.isArray(nested)) {
+        if (noteFrame) delete nested.segments;
+        else delete nested.commit;
+      }
+      return jsonToolSnapshot(frame);
+    } catch (error) { return null; }
+  }
   function render(d) {
     if (closed) return;
     if (!d || typeof d !== 'object') return;
     var input = d, snapshot = jsonToolSnapshot(d);
     d = checkedCanonicalLocator(d);
     if (input === renderedInput && snapshot !== null && snapshot === renderedSnapshot) { refreshSourceNotes(rendered); return; }
+    if (input === renderedInput && d === input && snapshot !== null
+      && (sourceNoteRootRelevant && renderedNoteFrame !== null && viewFrameSnapshot(snapshot, true) === renderedNoteFrame
+        || renderedHeaderFrame !== null && viewFrameSnapshot(snapshot, false) === renderedHeaderFrame)) {
+      // An envelope/anchor update cannot replace loaded Pali, nor can edited
+      // selector headers repurpose unchanged words or model context. Keep the
+      // initial root binding, DOM, focus and pending navigation; inspect only
+      // the fresh apparatus. All other changed fields take the full path.
+      refreshSourceNotes(input); return;
+    }
     if (!d.pali && typeof d.error !== 'string') return;
     abandon(); generation++; awaitingSelection = false;
     if (!d.pali) {
       if (typeof d.error !== 'string') return;
-      rendered = d; renderedInput = input; renderedSnapshot = snapshot;
+      rendered = d; renderedInput = input; renderedSnapshot = snapshot; renderedNoteFrame = null; renderedHeaderFrame = null;
       sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteRootBinding = null; sourceNoteRootRelevant = false; sourceNoteJump = null;
       document.getElementById('title').textContent = d.cancelled ? 'Reading cancelled' : 'Could not open the passage';
       document.getElementById('status').textContent = (d.cancelled ? 'Reading cancelled. ' : 'Could not open the passage. ') + d.error;
@@ -887,6 +915,8 @@ export const WIDGET_HTML = `<!doctype html>
     rendered = d; renderedInput = input; renderedSnapshot = snapshot;
     sourceNoteRootBinding = sourceNoteRootKey(d);
     sourceNoteRootRelevant = sourceNotesPolicy.inspect(d).affected || Object.prototype.hasOwnProperty.call(d, 'source_notes');
+    renderedNoteFrame = sourceNoteRootRelevant ? viewFrameSnapshot(snapshot, true) : null;
+    renderedHeaderFrame = viewFrameSnapshot(snapshot, false);
     sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteJump = null;
     document.getElementById('title').textContent = (d.citation || '') + (d.title ? ' · ' + d.title : '');
     var meta = document.getElementById('meta'); clear(meta);
@@ -1075,7 +1105,7 @@ export const WIDGET_HTML = `<!doctype html>
     var canClear = !modelFlight && !modelBlocked, channel = modelChannel, modality = modelModality;
     closed = true; generation++; abandon(); stopSizing();
     if (modelFlight) clearTimeout(modelFlight.timer);
-    modelFlight = null; modelDesired = null; modelAccepted = null; rendered = null; renderedInput = null; renderedSnapshot = null; lastOutput = null; lastOutputSnapshot = null; lastMetadata = null; lastResultSnapshot = null; lastInput = null;
+    modelFlight = null; modelDesired = null; modelAccepted = null; rendered = null; renderedInput = null; renderedSnapshot = null; renderedNoteFrame = null; renderedHeaderFrame = null; lastOutput = null; lastOutputSnapshot = null; lastMetadata = null; lastResultSnapshot = null; lastInput = null;
     sourceNoteUi = []; sourceNoteSignature = null; sourceNoteAnchorNode = null; sourceNoteRootBinding = null; sourceNoteRootRelevant = false; sourceNoteJump = null;
     awaitingSelection = false;
     ['meta', 'pali', 'english', 'footer', 'navigation'].forEach(function (id) { clear(document.getElementById(id)); });
