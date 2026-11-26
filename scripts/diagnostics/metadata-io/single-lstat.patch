@@ -1,0 +1,46 @@
+--- a/scripts/web_reader_next_ten_boundary_history.py
++++ b/scripts/web_reader_next_ten_boundary_history.py
+@@ -12,6 +12,7 @@
+ import json
+ from pathlib import Path
+ import re
++import stat
+ from threading import get_ident
+ from types import MappingProxyType
+ 
+@@ -72,15 +73,32 @@
+             or any(p in ('', '.', '..') for p in relative.split('/'))
+             or re.fullmatch(r'[a-zA-Z0-9_./-]+', relative) is None):
+         raise ValueError('Finite next-ten relative file path required')
+-    if root.is_symlink() or not root.is_dir():
++    try:
++        root_mode = root.lstat().st_mode
++    except OSError:
++        # Preserve the old failure classification without caching metadata.
++        if root.is_symlink() or not root.is_dir():
++            raise ValueError('Next-ten authority root missing or a symlink')
++        raise
++    if stat.S_ISLNK(root_mode) or not stat.S_ISDIR(root_mode):
+         raise ValueError('Next-ten authority root missing or a symlink')
+     path = root
+     parts = relative.split('/')
+     for i, part in enumerate(parts):
+         path = path / part
+-        if path.is_symlink():
++        final = i == len(parts) - 1
++        try:
++            mode = path.lstat().st_mode
++        except OSError:
++            # Failure-only old checks retain exception/refusal behavior.
++            if path.is_symlink():
++                raise ValueError('Next-ten authority symlink refused')
++            if not (path.is_file() if final else path.is_dir()):
++                raise ValueError('Missing regular next-ten authority: ' + relative)
++            raise
++        if stat.S_ISLNK(mode):
+             raise ValueError('Next-ten authority symlink refused')
+-        if not (path.is_file() if i == len(parts) - 1 else path.is_dir()):
++        if not (stat.S_ISREG(mode) if final else stat.S_ISDIR(mode)):
+             raise ValueError('Missing regular next-ten authority: ' + relative)
+     return path.read_bytes()
+ 

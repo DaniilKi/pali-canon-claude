@@ -1,0 +1,71 @@
+name: Bounded Windows metadata I/O diagnostic
+on:
+  push:
+    branches: [diagnostic/pali-metadata-io-nov26]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Materialize exact candidate and reviewed diagnostic bytes
+        timeout-minutes: 2
+        shell: bash
+        env:
+          EXPECTED_DRIVER_SHA: d9591031b4643518cbb9e9be00ab283f1945b28d8aa670bdb353c3a727c3f730
+          EXPECTED_PATCH_SHA: 004ed3e193a5b1efd2ca8221a638da45d542f91e9cc2230459670ba14e7fa9d1
+        run: |
+          python -B - <<'PY'
+          from pathlib import Path
+          import hashlib,json,os,subprocess,tarfile
+          def git(*argv):
+              return subprocess.run(['git',*argv],check=True,capture_output=True,text=True,timeout=20).stdout.strip()
+          old='c7e5939c3c479a78d3537e17deac6318162f3896'
+          expected=['.github/workflows/pali-metadata-io.yml','scripts/diagnostics/metadata-io/driver.py','scripts/diagnostics/metadata-io/single-lstat.patch']
+          assert git('rev-parse','HEAD^')==old
+          assert sorted(git('diff-tree','--no-commit-id','--name-only','-r','HEAD').splitlines())==expected
+          temporary=Path(os.environ['RUNNER_TEMP']);logs=temporary/'metadata-io-bootstrap';logs.mkdir(exist_ok=False)
+          archive=temporary/'metadata-io-candidate.tar';assets=temporary/'metadata-io-assets.tar';destination=temporary/'metadata-io-assets';destination.mkdir(exist_ok=False)
+          subprocess.run(['git','archive','--format=tar','--output='+str(archive),old],check=True,timeout=30)
+          subprocess.run(['git','archive','--format=tar','--output='+str(assets),'HEAD',*expected[1:]],check=True,timeout=20)
+          wanted={expected[1]:'driver.py',expected[2]:'single-lstat.patch'};observed={}
+          with tarfile.open(assets,'r:') as tar:
+              for member in tar.getmembers():
+                  if member.isdir():continue
+                  assert member.isfile() and member.name in wanted and member.name not in observed
+                  raw=tar.extractfile(member).read();assert len(raw)==member.size
+                  (destination/wanted[member.name]).write_bytes(raw)
+                  observed[member.name]={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+          assert sorted(observed)==sorted(wanted)
+          assert observed[expected[1]]['sha256']==os.environ['EXPECTED_DRIVER_SHA']
+          assert observed[expected[2]]['sha256']==os.environ['EXPECTED_PATCH_SHA']
+          receipt={'candidate_commit':old,'diagnostic_commit':git('rev-parse','HEAD'),'only_added_paths':expected,'archive_sha256':hashlib.sha256(archive.read_bytes()).hexdigest(),'assets':observed,'source':'git archive exact blobs, independent of Windows checkout line-ending conversion'}
+          (logs/'BOOTSTRAP.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({'candidate_commit':old,'diagnostic_commit':receipt['diagnostic_commit'],'exact_asset_hashes':True}))
+          PY
+      - name: Run bounded sequential baseline and experiment
+        timeout-minutes: 13
+        shell: pwsh
+        run: |
+          python -B "$env:RUNNER_TEMP/metadata-io-assets/driver.py" run --archive "$env:RUNNER_TEMP/metadata-io-candidate.tar" --patch "$env:RUNNER_TEMP/metadata-io-assets/single-lstat.patch" --owned "$env:RUNNER_TEMP/mio-owned" --artifacts "$env:RUNNER_TEMP/metadata-io-artifacts"
+          exit $LASTEXITCODE
+      - name: Preserve complete public diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bounded-windows-metadata-io
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/metadata-io-bootstrap/
+            ${{ runner.temp }}/metadata-io-artifacts/
