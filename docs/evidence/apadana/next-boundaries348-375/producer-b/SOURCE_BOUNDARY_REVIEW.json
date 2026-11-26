@@ -1,0 +1,803 @@
+{
+  "schema": "independent-original-first-two-pair-boundary-review-v1",
+  "producer": "b",
+  "status": "SOURCE_SUPPORTS_FOUR_CORE_METADATA_PROPOSALS_ONLY_NO_ACTIVATION",
+  "scope": {
+    "ids": [
+      "tha-ap348",
+      "tha-ap349",
+      "tha-ap374",
+      "tha-ap375"
+    ],
+    "source_book": 36,
+    "pairs": 2,
+    "records": 4,
+    "full_other_records_preserved": 8540,
+    "source_books_preserved": 61,
+    "source_block_crosswalk_rows": 84,
+    "source_blocks_changing_owner": 8
+  },
+  "source": {
+    "VRI_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "original_xml_path": "/tmp/pali-sariputta-release/vri-fixture/romn/s0510m1.mul.xml",
+    "XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "XML_git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+    "physical_elements": 14646,
+    "retained_tuples": 14645,
+    "omitted_note_only_physical_indices": [
+      1130
+    ],
+    "entire_book36_tuple_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+    "all_original_tuples_equal_current_book36": true,
+    "current_canonical": {
+      "manifest_sha256": "f280027739cb7abd6ada384e64756b3d78fc4f7243f5ce9fe95bdfb2f37c6a10",
+      "packed_sha256": "271d6dd4b864c3688b175f72b7698c4f8736fa1a30525075333e09279d59d491",
+      "logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b"
+    },
+    "commentary": {
+      "manifest_sha256": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156",
+      "packed_sha256": "f231b2d57d92e386cf4de06c18f46d9bfdc75a3136a24036967c9719fbeb03cd",
+      "logical_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461"
+    }
+  },
+  "records": [
+    {
+      "id": "tha-ap348",
+      "current": {
+        "id": "tha-ap348",
+        "book": 36,
+        "start": 10350,
+        "end": 10371,
+        "title": "Campakapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 348",
+        "vri": "39–44",
+        "pts": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 279
+        }
+      },
+      "current_object_sha256": "27b06e7b45604fff1e3d8816091cab373ae9841fb7a7034b0497980a745d542b",
+      "proposed_core": {
+        "id": "tha-ap348",
+        "book": 36,
+        "start": 10350,
+        "end": 10367,
+        "title": "Campakapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 348",
+        "vri": "39–43",
+        "pts": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 279
+        }
+      },
+      "proposed_core_object_sha256": "1f9608377dcae9560347b7aa82baacd552e40df3e628a3d3035bdb15cb6c1546",
+      "source_span_half_open": [
+        10350,
+        10367
+      ],
+      "source_span_tuple_sha256": "38394e6f41241dac057f5c57a60a1975dddd5a7f9016e09f3298aa338cf2d445",
+      "source_heading": {
+        "block": 10350,
+        "printed_label": "6",
+        "title": "Campakapupphiyattheraapadānaṃ",
+        "tuple_sha256": "254759f168d024ebe32294c7d6772d7901a63561e5635d457df6faa2f8ed9dcd"
+      },
+      "opening_stanza": {
+        "vri": "39",
+        "source_blocks": [
+          10351,
+          10354
+        ],
+        "body_sha256": "9f9ed5b5a9c6d91eedf747de546e330f803b6075ff25446be16a6c1c43b9a94e"
+      },
+      "named_speaker": {
+        "block": 10365,
+        "name": "campakapupphiyo",
+        "tuple_sha256": "c58935e78f288d8da2f71a7f4970ae780e338bc9ef91ede0ac96bab0a4397275"
+      },
+      "closing_colophon": {
+        "block": 10366,
+        "tuple_sha256": "5d1c905809b39dd6ea9072678eaa6d23b2e0ed0e5bca431c7697da31e999665b"
+      },
+      "printed_labels": [
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "notes": [
+        {
+          "block": 10352,
+          "count": 1,
+          "notes_sha256": "bf667cda96e9afd07418a3a4ddedbd3c781a116f1d2883a51f128011c652cd48"
+        },
+        {
+          "block": 10355,
+          "count": 1,
+          "notes_sha256": "e3347760a3d3f0f3875352e000adf2bfdd9b37582148d7c5722008637b018d02"
+        }
+      ],
+      "page_markers": [
+        {
+          "block": 10358,
+          "pages": {
+            "M": [
+              "1.322"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "M",
+              "page": "1.322",
+              "visible_offset": 7
+            }
+          ]
+        },
+        {
+          "block": 10365,
+          "pages": {
+            "T": [
+              "1.435"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "T",
+              "page": "1.435",
+              "visible_offset": 6
+            }
+          ]
+        }
+      ],
+      "PTS_proof": {
+        "carried_at_source_heading": {
+          "marker_block": 10335,
+          "value": "1.279"
+        },
+        "inside_markers": [],
+        "derived": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 279
+        },
+        "first_non_heading_block": 10351,
+        "first_non_heading_is_empty_number_marker": true
+      }
+    },
+    {
+      "id": "tha-ap349",
+      "current": {
+        "id": "tha-ap349",
+        "book": 36,
+        "start": 10371,
+        "end": 10382,
+        "title": "Padumapūjakattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 349",
+        "vri": "45–47",
+        "pts": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 280
+        }
+      },
+      "current_object_sha256": "847bca06a621f1f7c513d532edb79bfd04a0fbfe1764c15d06840e5da17328d7",
+      "proposed_core": {
+        "id": "tha-ap349",
+        "book": 36,
+        "start": 10367,
+        "end": 10382,
+        "title": "Padumapūjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 349",
+        "vri": "44–47",
+        "pts": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 280
+        }
+      },
+      "proposed_core_object_sha256": "1a2d71127f9e24a18a353ee01364f6d19c24291ef1f1e2358fed3d33d159aca8",
+      "source_span_half_open": [
+        10367,
+        10382
+      ],
+      "source_span_tuple_sha256": "d9a36c56efd66ee6e2e5491ae448ccb15d1c779abbb14af4db45067112232800",
+      "source_heading": {
+        "block": 10367,
+        "printed_label": "7",
+        "title": "Padumapūjakattheraapadānaṃ",
+        "tuple_sha256": "bd75756dc7844b54a57d12384bff4304c75ce072b0ea1a9a2dbaccc179cdeafb"
+      },
+      "opening_stanza": {
+        "vri": "44",
+        "source_blocks": [
+          10368,
+          10371
+        ],
+        "body_sha256": "baa0c563b58f89bea31d8a105bedac3ab45b0baa434dde4947c9188d1fcea09b"
+      },
+      "named_speaker": {
+        "block": 10379,
+        "name": "padumapūjako",
+        "tuple_sha256": "66f47332c4bfda8eb576a240b31705df9f83f0457c7ea9db10a059c113ae1142"
+      },
+      "closing_colophon": {
+        "block": 10380,
+        "tuple_sha256": "b3835cf6cbd44c95f0b217ee5de222bc15217b8a18596a7c432425a6648c6972"
+      },
+      "printed_labels": [
+        44,
+        45,
+        46,
+        47
+      ],
+      "notes": [],
+      "page_markers": [
+        {
+          "block": 10369,
+          "pages": {
+            "V": [
+              "1.304"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "V",
+              "page": "1.304",
+              "visible_offset": 20
+            }
+          ]
+        },
+        {
+          "block": 10375,
+          "pages": {
+            "P": [
+              "1.280"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "P",
+              "page": "1.280",
+              "visible_offset": 13
+            }
+          ]
+        }
+      ],
+      "PTS_proof": {
+        "carried_at_source_heading": {
+          "marker_block": 10335,
+          "value": "1.279"
+        },
+        "inside_markers": [
+          {
+            "block": 10375,
+            "pages": [
+              "1.280"
+            ]
+          }
+        ],
+        "derived": {
+          "volume": 1,
+          "page": 279,
+          "end_page": 280
+        },
+        "first_non_heading_block": 10368,
+        "first_non_heading_is_empty_number_marker": true
+      }
+    },
+    {
+      "id": "tha-ap374",
+      "current": {
+        "id": "tha-ap374",
+        "book": 36,
+        "start": 10763,
+        "end": 10790,
+        "title": "Pāṭalipupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 374",
+        "vri": "6–13",
+        "pts": {
+          "volume": 1,
+          "page": 290,
+          "end_page": 291
+        }
+      },
+      "current_object_sha256": "b84fe1c4a3a2c1a20154b315d3ccd5b4cbb5092dd3b26530c0d124026bc58dd9",
+      "proposed_core": {
+        "id": "tha-ap374",
+        "book": 36,
+        "start": 10763,
+        "end": 10786,
+        "title": "Pāṭalipupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 374",
+        "vri": "6–12",
+        "pts": {
+          "volume": 1,
+          "page": 290,
+          "end_page": 290
+        }
+      },
+      "proposed_core_object_sha256": "bd048c0e02e01361a982d17561c53e0bc0cd20891c1467fb8fd1ed0ee5b5f564",
+      "source_span_half_open": [
+        10763,
+        10786
+      ],
+      "source_span_tuple_sha256": "2717de98526990d518fecd251eee6ad1cbb2612d794127490deada80154db94a",
+      "source_heading": {
+        "block": 10763,
+        "printed_label": "2",
+        "title": "Pāṭalipupphiyattheraapadānaṃ",
+        "tuple_sha256": "e1d6c101a153f1c71ed7bc298b43254a12282258ae0061dd7747b4781af93f61"
+      },
+      "opening_stanza": {
+        "vri": "6",
+        "source_blocks": [
+          10764,
+          10767
+        ],
+        "body_sha256": "e1cd4890425f19dbd42b124a441053fadb70c76d73a4f972233f3b338be50dd6"
+      },
+      "named_speaker": {
+        "block": 10784,
+        "name": "pāṭalipupphiyo",
+        "tuple_sha256": "857576b4574f944c715e75a67f68ff5bddbcb95fbaa5fd8ab4eed9b529298770"
+      },
+      "closing_colophon": {
+        "block": 10785,
+        "tuple_sha256": "6a241e6d08397c171a7301118d9d625b4ea5551d628d24793edffd5f1de51c8f"
+      },
+      "printed_labels": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        {
+          "block": 10777,
+          "count": 1,
+          "notes_sha256": "f1d79d50f54209a47093343b7dcf20dabf4cab940a8896a4227770728a23c256"
+        }
+      ],
+      "page_markers": [
+        {
+          "block": 10765,
+          "pages": {
+            "T": [
+              "1.454"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "T",
+              "page": "1.454",
+              "visible_offset": 9
+            }
+          ]
+        },
+        {
+          "block": 10774,
+          "pages": {
+            "V": [
+              "1.318"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "V",
+              "page": "1.318",
+              "visible_offset": 17
+            }
+          ]
+        },
+        {
+          "block": 10777,
+          "pages": {
+            "M": [
+              "1.336"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "M",
+              "page": "1.336",
+              "visible_offset": 8
+            }
+          ]
+        }
+      ],
+      "PTS_proof": {
+        "carried_at_source_heading": {
+          "marker_block": 10747,
+          "value": "1.290"
+        },
+        "inside_markers": [],
+        "derived": {
+          "volume": 1,
+          "page": 290,
+          "end_page": 290
+        },
+        "first_non_heading_block": 10764,
+        "first_non_heading_is_empty_number_marker": true
+      }
+    },
+    {
+      "id": "tha-ap375",
+      "current": {
+        "id": "tha-ap375",
+        "book": 36,
+        "start": 10790,
+        "end": 10815,
+        "title": "Tīṇuppalamāliyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 375",
+        "vri": "14–21",
+        "pts": {
+          "volume": 1,
+          "page": 291,
+          "end_page": 291
+        }
+      },
+      "current_object_sha256": "aa813a42f474a7df15ebbd76a5e802be2fd979b8f3291e5691c25459a7026731",
+      "proposed_core": {
+        "id": "tha-ap375",
+        "book": 36,
+        "start": 10786,
+        "end": 10815,
+        "title": "Tīṇuppalamāliyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 375",
+        "vri": "13–21",
+        "pts": {
+          "volume": 1,
+          "page": 290,
+          "end_page": 291
+        }
+      },
+      "proposed_core_object_sha256": "11ea738795fc2f03458e63128b4f9563a95c352865237c0675f3047f38ee17c5",
+      "source_span_half_open": [
+        10786,
+        10815
+      ],
+      "source_span_tuple_sha256": "05cc97e4b9526b29d7fb3eda54a3d7ede8ea452a34b38bc4c738393b77de616d",
+      "source_heading": {
+        "block": 10786,
+        "printed_label": "3",
+        "title": "Tīṇuppalamāliyattheraapadānaṃ",
+        "tuple_sha256": "6eaecd29166f0a340df37f26558b6b7d06623253fdaf0af877d86f011fa9fa5e"
+      },
+      "opening_stanza": {
+        "vri": "13",
+        "source_blocks": [
+          10787,
+          10790
+        ],
+        "body_sha256": "3ac1ed98af9bdf15e16e2fcc1ef2d1490d1edc76303432b1f0b0c8e88c0a4dd7"
+      },
+      "named_speaker": {
+        "block": 10813,
+        "name": "tīṇuppalamāliyo",
+        "tuple_sha256": "edba8615f2ecd94edfed553b78fb7319cf8b651ef5b22ded3e115df82f831385"
+      },
+      "closing_colophon": {
+        "block": 10814,
+        "tuple_sha256": "da757639280b6337fcaff224a2f1b0c33efd40d60bd36cc2f4495fa2a72ea876"
+      },
+      "printed_labels": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "notes": [],
+      "page_markers": [
+        {
+          "block": 10788,
+          "pages": {
+            "T": [
+              "1.455"
+            ],
+            "P": [
+              "1.291"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "T",
+              "page": "1.455",
+              "visible_offset": 20
+            },
+            {
+              "edition": "P",
+              "page": "1.291",
+              "visible_offset": 20
+            }
+          ]
+        },
+        {
+          "block": 10812,
+          "pages": {
+            "M": [
+              "1.337"
+            ],
+            "V": [
+              "1.319"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "M",
+              "page": "1.337",
+              "visible_offset": 14
+            },
+            {
+              "edition": "V",
+              "page": "1.319",
+              "visible_offset": 14
+            }
+          ]
+        },
+        {
+          "block": 10813,
+          "pages": {
+            "T": [
+              "1.456"
+            ]
+          },
+          "inline_positions": [
+            {
+              "edition": "T",
+              "page": "1.456",
+              "visible_offset": 6
+            }
+          ]
+        }
+      ],
+      "PTS_proof": {
+        "carried_at_source_heading": {
+          "marker_block": 10747,
+          "value": "1.290"
+        },
+        "inside_markers": [
+          {
+            "block": 10788,
+            "pages": [
+              "1.291"
+            ]
+          }
+        ],
+        "derived": {
+          "volume": 1,
+          "page": 290,
+          "end_page": 291
+        },
+        "first_non_heading_block": 10787,
+        "first_non_heading_is_empty_number_marker": true
+      }
+    }
+  ],
+  "pair_proofs": [
+    {
+      "ids": [
+        "tha-ap348",
+        "tha-ap349"
+      ],
+      "current_cut": 10371,
+      "proposed_source_cut": 10367,
+      "preserved_union_half_open": [
+        10350,
+        10382
+      ],
+      "preserved_union_tuple_sha256": "896c0bf28dc2e13e1086bf051576b71e84e8e83d7136e44f2e95feaea65fd694",
+      "moved_prefix_half_open": [
+        10367,
+        10371
+      ],
+      "moved_prefix_tuple_sha256": "2cd823cb2c6b5dc606f3c8b7d0c87c0e624aaf0df9f4c8f14f6569eb5b47a2ec",
+      "moved_notes_count": 0,
+      "actual_moved_page_markers": [
+        {
+          "block": 10369,
+          "pages": {
+            "V": [
+              "1.304"
+            ]
+          }
+        }
+      ],
+      "source_closing_before_next_heading": true,
+      "opening_stanza_precedes_current_right_start": true
+    },
+    {
+      "ids": [
+        "tha-ap374",
+        "tha-ap375"
+      ],
+      "current_cut": 10790,
+      "proposed_source_cut": 10786,
+      "preserved_union_half_open": [
+        10763,
+        10815
+      ],
+      "preserved_union_tuple_sha256": "77a0e15a4181139ad6c7f90e4d030f90fcdf4c1c63703739813710acae192282",
+      "moved_prefix_half_open": [
+        10786,
+        10790
+      ],
+      "moved_prefix_tuple_sha256": "f474f1786b0b1c5540bad985a836754c4938054a0d520b9c8c43fb85f455f5a2",
+      "moved_notes_count": 0,
+      "actual_moved_page_markers": [
+        {
+          "block": 10788,
+          "pages": {
+            "T": [
+              "1.455"
+            ],
+            "P": [
+              "1.291"
+            ]
+          }
+        }
+      ],
+      "source_closing_before_next_heading": true,
+      "opening_stanza_precedes_current_right_start": true
+    }
+  ],
+  "voice_and_boundary_review": [
+    "Canonical348 has its own numbered source heading, a seven-campaka/Sudassana narrative, then the campakapupphiyo speaker formula and sixth-poem colophon at10365–10366. The following Paduma heading and Sambhava opening stanza at10367–10370 precede current349 and belong with the locally closed padumapujako narrative, not348.",
+    "Canonical374 has its own Patali/Vipassi narrative, then the patalipupphiyo speaker formula and second-poem colophon at10784–10785. The following Tinu​ppalamaliya heading and Candabhaga/monkey opening at10786–10789 lead into its Phussa/three-uppala narrative and named tinu​ppalamaliyo closing. The old374 span crosses that explicit boundary.",
+    "Identity uses local source coordinates, full opening-to-speaker-to-colophon continuity and both unchanged neighboring spans. Repeated Tinu​ppalamaliya titles elsewhere do not define identity; no global title match or publisher-number offset was used."
+  ],
+  "apparatus": {
+    "all_source_notes_and_edition_markers_unchanged": true,
+    "recitation_after349": {
+      "block": 10381,
+      "kind": "centre",
+      "tuple_sha256": "ee69b5ca9e91987b02e435403f480f9e31aad290ff06d985298cc98b18b34e49",
+      "unchanged_current_canonical_owner": "tha-ap349",
+      "is_stanza": false,
+      "no_new_paratext_identity_assigned": true
+    },
+    "PTS374_375_subtlety": {
+      "inline_marker_block": 10788,
+      "original_inline_markers": [
+        {
+          "edition": "T",
+          "page": "1.455",
+          "visible_offset": 20
+        },
+        {
+          "edition": "P",
+          "page": "1.291",
+          "visible_offset": 20
+        }
+      ],
+      "right_opening_begins_before_page291_marker": true,
+      "left_proposed_end_page": 290,
+      "right_proposed_start_page": 290,
+      "right_proposed_end_page": 291,
+      "no_page_marker_moved_or_renumbered": true
+    }
+  },
+  "dependencies": {
+    "commentary_total_associations": 16473,
+    "target_commentary_associations": {
+      "tha-ap348": [],
+      "tha-ap349": [],
+      "tha-ap374": [],
+      "tha-ap375": []
+    },
+    "commentary_union_intersections": [],
+    "group_dependencies": [],
+    "target_parallels_edges": false,
+    "parallels_logical_sha256": "f0df75a21e4db6d4362cc42dd2fcb070e49dc551bd0763707aaaab7c9db41a53"
+  },
+  "preservation": {
+    "all61_books_sha256": "ad8c7cbfa8249d4f21eb94bd59b556e8823e5870dcf0a657bfaedee5a0fd4883",
+    "all8540_other_records_sha256": "5950e37f6ec729d6ebd3e1501e94b23adb4aa60d6a3006ed523ee94636e480c7",
+    "neighbor_full_objects": [
+      {
+        "id": "tha-ap347",
+        "book": 36,
+        "start": 10324,
+        "end": 10350,
+        "title": "Naḷāgārikattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 347",
+        "vri": "31–38",
+        "pts": {
+          "volume": 1,
+          "page": 278,
+          "end_page": 279
+        },
+        "index_revision": "apadana-thera340-341-343-344-346-347-v1"
+      },
+      {
+        "id": "tha-ap350",
+        "book": 36,
+        "start": 10382,
+        "end": 10417,
+        "title": "Tiṇamuṭṭhidāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 350",
+        "vri": "48–58",
+        "pts": {
+          "volume": 1,
+          "page": 280,
+          "end_page": 280
+        }
+      },
+      {
+        "id": "tha-ap373",
+        "book": 36,
+        "start": 10744,
+        "end": 10763,
+        "title": "Bodhivandakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 373",
+        "vri": "1–5",
+        "pts": {
+          "volume": 1,
+          "page": 289,
+          "end_page": 290
+        }
+      },
+      {
+        "id": "tha-ap376",
+        "book": 36,
+        "start": 10815,
+        "end": 10835,
+        "title": "Paṭṭipupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 376",
+        "vri": "22–27",
+        "pts": {
+          "volume": 1,
+          "page": 291,
+          "end_page": 292
+        }
+      }
+    ],
+    "neighbor_objects_sha256": "ab230f66faa565464cc348398ec746f0e6d8256b3c7ffe261f50686ec3949dfd",
+    "prior_six_namespace_347_preserved": "apadana-thera340-341-343-344-346-347-v1",
+    "canonical_source_object_sha256": "f9fdc140e85234490247cfbcf05f5d19c95d865fc546ca194fefab420f392932",
+    "no_private_data_read": true
+  },
+  "core_only_proposal_digest": "60f436b858570117dc6271301a865255d953a81b9dcaad138a193f5cecf796fa",
+  "independence": {
+    "other_producer_output_read": false,
+    "old_screen_output_read": false,
+    "app_Builder_or_repair_imports": false,
+    "Builder_annotation_source_read_after_first_original_derivation": {
+      "path": "scripts/canon/build_canon.py",
+      "lines": [
+        338,
+        363
+      ],
+      "role": "Compatibility convention cross-check only; original inline markers independently establish the page carry."
+    }
+  },
+  "not_approved": [
+    "No new locator namespace assigned. This core-only proposal cannot be activated until explicit versioning and stale-position refusal design is independently approved.",
+    "No app/runtime repair, consumer crosswalk, browser behavior, personal-data migration, English source match, rights change, source activation, Git/CI/push or release approval.",
+    "Source-block crosswalk is not an API segment/ref migration; old positional intent must never be silently translated.",
+    "No dataset was written or project file changed. Current32f candidate and its six-record scope remain immutable."
+  ],
+  "source_or_runtime_activation_coverage_gain": 0
+}

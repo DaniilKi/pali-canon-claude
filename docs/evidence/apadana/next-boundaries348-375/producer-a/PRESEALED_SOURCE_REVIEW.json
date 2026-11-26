@@ -1,0 +1,19 @@
+{
+  "schema": "original-first-next-two-pair-source-preseal-v1",
+  "status": "SOURCE_CUTS_QUALIFY_ONLY_NO_ACTIVATION_OR_RUNTIME_APPROVAL",
+  "files": {
+    "review_original_pairs.py": {
+      "bytes": 16893,
+      "sha256": "fe3b5a534d9f63023cdeb4e9d4b6c5afb4f1f46b32cd99438ad63eb0ad7c475e"
+    },
+    "SOURCE_REVIEW.json": {
+      "bytes": 19847,
+      "sha256": "24a9f87d154fc2a13d357d36de4e5a23918330daec8bfc4902807d449e8f6e7e"
+    },
+    "SOURCE38_CROSSWALK.json": {
+      "bytes": 83717,
+      "sha256": "3a67fa86ff41c1cb3886add6f76e24226cbe2df87edd37af99f2b744ef5233dc"
+    }
+  },
+  "source_scope_only_no_new_namespace_or_activation": true
+}

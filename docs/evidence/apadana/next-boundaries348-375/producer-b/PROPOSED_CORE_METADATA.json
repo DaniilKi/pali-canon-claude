@@ -1,0 +1,90 @@
+{
+  "schema": "unactivated-four-source-core-records-v1",
+  "source": {
+    "VRI_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "original_xml_path": "/tmp/pali-sariputta-release/vri-fixture/romn/s0510m1.mul.xml",
+    "XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "XML_git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+    "physical_elements": 14646,
+    "retained_tuples": 14645,
+    "omitted_note_only_physical_indices": [
+      1130
+    ],
+    "entire_book36_tuple_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+    "all_original_tuples_equal_current_book36": true,
+    "current_canonical": {
+      "manifest_sha256": "f280027739cb7abd6ada384e64756b3d78fc4f7243f5ce9fe95bdfb2f37c6a10",
+      "packed_sha256": "271d6dd4b864c3688b175f72b7698c4f8736fa1a30525075333e09279d59d491",
+      "logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b"
+    },
+    "commentary": {
+      "manifest_sha256": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156",
+      "packed_sha256": "f231b2d57d92e386cf4de06c18f46d9bfdc75a3136a24036967c9719fbeb03cd",
+      "logical_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461"
+    }
+  },
+  "records": {
+    "tha-ap348": {
+      "id": "tha-ap348",
+      "book": 36,
+      "start": 10350,
+      "end": 10367,
+      "title": "Campakapupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 348",
+      "vri": "39–43",
+      "pts": {
+        "volume": 1,
+        "page": 279,
+        "end_page": 279
+      }
+    },
+    "tha-ap349": {
+      "id": "tha-ap349",
+      "book": 36,
+      "start": 10367,
+      "end": 10382,
+      "title": "Padumapūjakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 349",
+      "vri": "44–47",
+      "pts": {
+        "volume": 1,
+        "page": 279,
+        "end_page": 280
+      }
+    },
+    "tha-ap374": {
+      "id": "tha-ap374",
+      "book": 36,
+      "start": 10763,
+      "end": 10786,
+      "title": "Pāṭalipupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 374",
+      "vri": "6–12",
+      "pts": {
+        "volume": 1,
+        "page": 290,
+        "end_page": 290
+      }
+    },
+    "tha-ap375": {
+      "id": "tha-ap375",
+      "book": 36,
+      "start": 10786,
+      "end": 10815,
+      "title": "Tīṇuppalamāliyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 375",
+      "vri": "13–21",
+      "pts": {
+        "volume": 1,
+        "page": 290,
+        "end_page": 291
+      }
+    }
+  },
+  "namespace_assigned": false,
+  "not_activation_approval": true
+}

@@ -1,0 +1,8 @@
+{
+  "status": "SOURCE_ONLY_GO_EXACT_FOUR_CORE_PROPOSALS_NO_ACTIVATION",
+  "report_sha256": "a5d36a7c120ed1bb7609800089e51b41c58756f71ae0a6541d3b4cbb7a89cfb0",
+  "script_sha256": "aae14a1abda5dd4fe7b575a03bd7261960072e85ec3c96aa9c2feca741c0884b",
+  "producer_a_preseal_sha256": "996c470c30f8513faa5219352fad4f55db120898286e46779520ded1fe069eaf",
+  "producer_b_preseal_sha256": "2a39ee56a56708e90df7b26111e79905697f16d0ee1ccf33731a95ea4f1aed05",
+  "no_activation_approval": true
+}
