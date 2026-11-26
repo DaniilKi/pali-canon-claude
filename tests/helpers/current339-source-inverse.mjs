@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const bytes=readFileSync(new URL('../../docs/evidence/apadana/CURRENT339_SOURCE_INVERSES.json',import.meta.url));
-assert.equal(sha(bytes),'be2faf75fa1731f5684c0cd60108bf7de93849ccefd81f4fdbb4ae1c3cc3e2e2','Mandatory finite339 source-inverse authority');
+assert.equal(sha(bytes),'23ad6da6cb733e1419be305541565518fc115d1215e6d66764c2f767e153d9b3','Mandatory finite339 source-inverse authority');
 export const sourceInverses=Object.freeze(JSON.parse(bytes));
 assert.equal(sourceInverses.base_commit,'d4dac33e76b449412d7e0cb7a6b93d6189549337');
 export function projectD4Source(path,source){
