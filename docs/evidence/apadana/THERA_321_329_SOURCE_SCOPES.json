@@ -1,0 +1,878 @@
+{
+  "schema": "SOURCE_A-six321-329-reviewed-source-scopes-v1",
+  "base_commit": "d4dac33e76b449412d7e0cb7a6b93d6189549337",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "original_xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "rights": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "poems": [
+    {
+      "publisher": 321,
+      "canonical_candidate": "tha-ap323",
+      "publisher_title": "Ummāpupphiya",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-321.md",
+        "local_path": "/tmp/pali-next330-nov26/source-a/raw/src/_poems/chapter-3/poem-321.md",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-321.md",
+        "bytes": 1743,
+        "sha256": "04a039e32e694a994164c60f000be12fd6461e217d1e91bf1c4689acc6fb43f5",
+        "git_blob_sha1": "1531b911ec22f5f4ed53d9cfef3d0386df9c1292"
+      },
+      "poem_body_scope_lines": [
+        9,
+        43
+      ],
+      "speaking_colophon_line": 41,
+      "closing_colophon_line": 43,
+      "body_paragraphs": 9,
+      "physical_entries": 6,
+      "printed_labels": 6,
+      "global_labels": [
+        2825,
+        2830
+      ],
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "note_owners": [
+        {
+          "number": 1,
+          "definition_line": 45,
+          "owner": {
+            "kind": "poem_title",
+            "paragraph_index": 0,
+            "physical_entry": null
+          }
+        },
+        {
+          "number": 2,
+          "definition_line": 47,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 1,
+            "physical_entry": 1
+          }
+        },
+        {
+          "number": 3,
+          "definition_line": 49,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 2,
+            "physical_entry": 2
+          }
+        },
+        {
+          "number": 4,
+          "definition_line": 51,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 5,
+            "physical_entry": 5
+          }
+        }
+      ],
+      "root_book": 36,
+      "root_span": [
+        9424,
+        9446
+      ],
+      "root_sha256": "e7626ec3b1dbebb06939ed2611f4e1bffe607f60c85173192fa4a968a37c4381",
+      "vri_numbered_labels": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "publisher_paratext": {
+        "role": "publisher_chapter_heading",
+        "normalized_text": "Ummāpupphiya Chapter, the Thirty-Third",
+        "sha256": "a33a7f371a1b4a281febf6eb375c24d6ed25e8b19fb8dbe03692768ffee4b97b",
+        "characters_utf16": 38,
+        "raw_sha256": "a5f58f4ca20241682ffdaa2edfd0f4f9bfc793e24a06c85411c102f851f40f58",
+        "note_numbers": [],
+        "presentation_operations": {
+          "finite_state_on_pairs": 0,
+          "heading_prefix": 1
+        }
+      },
+      "finite_pair_owners": [
+        {
+          "publisher": 321,
+          "owner": "body:5",
+          "exact_on_off_pairs": [
+            {
+              "on": "c",
+              "off": "ch"
+            }
+          ],
+          "count": 1,
+          "source_token_sha256": [
+            "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+          ]
+        }
+      ],
+      "edition_and_notes_caveats": [
+        "Publisher title and both poem colophons use Ummāpupphiya while VRI uses Umāpupphiya; preserve each edition spelling.",
+        "The exact chapter heading precedes the poem as publisher paratext with no notes, not a poem stanza or quotation.",
+        "Only the exact c/ch state-pair in local5/global2829 is presentation-reduced; adjacent literal spelling remains unchanged.",
+        "Publisher royal name Samantacchadana has cch while VRI prints Samantachadano; preserve both edition spellings rather than alter either source."
+      ],
+      "narrative_mapping_evidence": "Siddhattha seated in meditation; flax flowers form a sky canopy, Tusita rebirth and fifty-fifth-aeon king distinguish this source."
+    },
+    {
+      "publisher": 323,
+      "canonical_candidate": "tha-ap325",
+      "publisher_title": "Hāsajanaka",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-323.md",
+        "local_path": "/tmp/pali-next330-nov26/source-a/raw/src/_poems/chapter-3/poem-323.md",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-323.md",
+        "bytes": 1132,
+        "sha256": "5a00c2fbb4615b2178fce1d1400db606dc76b2466396488a42bbeaccabb133f4",
+        "git_blob_sha1": "1e1a91ee97c4bea4739cca695f7890cfe254b1cd"
+      },
+      "poem_body_scope_lines": [
+        7,
+        31
+      ],
+      "speaking_colophon_line": 29,
+      "closing_colophon_line": 31,
+      "body_paragraphs": 7,
+      "physical_entries": 4,
+      "printed_labels": 4,
+      "global_labels": [
+        2837,
+        2840
+      ],
+      "poem_note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "note_owners": [
+        {
+          "number": 1,
+          "definition_line": 33,
+          "owner": {
+            "kind": "poem_title",
+            "paragraph_index": 0,
+            "physical_entry": null
+          }
+        },
+        {
+          "number": 2,
+          "definition_line": 35,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 1,
+            "physical_entry": 1
+          }
+        },
+        {
+          "number": 3,
+          "definition_line": 37,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 2,
+            "physical_entry": 2
+          }
+        }
+      ],
+      "root_book": 36,
+      "root_span": [
+        9466,
+        9480
+      ],
+      "root_sha256": "4c5960e1d2b43e20a3f504093fe59193f3033da6ab11ebf680d77061441441c7",
+      "vri_numbered_labels": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "publisher_paratext": null,
+      "finite_pair_owners": [],
+      "edition_and_notes_caveats": [
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "Note2 explicitly chooses BJTS/commentarial dumagge analysis over an alternative analysis; preserve its literal alternate discussion without claiming a new VRI reading."
+      ],
+      "narrative_mapping_evidence": "Rag robe on a tree, repeated joined palms and laughter, ninety-one aeons; not merely the Hāsajanaka title."
+    },
+    {
+      "publisher": 324,
+      "canonical_candidate": "tha-ap326",
+      "publisher_title": "Saññasāmika",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-324.md",
+        "local_path": "/tmp/pali-next330-nov26/source-a/raw/src/_poems/chapter-3/poem-324.md",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-324.md",
+        "bytes": 3250,
+        "sha256": "e638c3254468f7c4c90cdb7400fb611588faea13f58d253ea93c3b5564b1a84d",
+        "git_blob_sha1": "65aa9361e3e66747cfe621f6a4787db99aad5993"
+      },
+      "poem_body_scope_lines": [
+        7,
+        65
+      ],
+      "speaking_colophon_line": 63,
+      "closing_colophon_line": 65,
+      "body_paragraphs": 13,
+      "physical_entries": 10,
+      "printed_labels": 11,
+      "global_labels": [
+        2841,
+        2851
+      ],
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "note_owners": [
+        {
+          "number": 1,
+          "definition_line": 67,
+          "owner": {
+            "kind": "poem_title",
+            "paragraph_index": 0,
+            "physical_entry": null
+          }
+        },
+        {
+          "number": 2,
+          "definition_line": 69,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 1,
+            "physical_entry": 1
+          }
+        },
+        {
+          "number": 3,
+          "definition_line": 71,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 2,
+            "physical_entry": 2
+          }
+        },
+        {
+          "number": 4,
+          "definition_line": 73,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 3,
+            "physical_entry": 3
+          }
+        },
+        {
+          "number": 5,
+          "definition_line": 75,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 3,
+            "physical_entry": 3
+          }
+        },
+        {
+          "number": 6,
+          "definition_line": 77,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 3,
+            "physical_entry": 3
+          }
+        },
+        {
+          "number": 7,
+          "definition_line": 79,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 3,
+            "physical_entry": 3
+          }
+        },
+        {
+          "number": 8,
+          "definition_line": 81,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 3,
+            "physical_entry": 3
+          }
+        },
+        {
+          "number": 9,
+          "definition_line": 83,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 3,
+            "physical_entry": 3
+          }
+        },
+        {
+          "number": 10,
+          "definition_line": 85,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 6,
+            "physical_entry": 6
+          }
+        },
+        {
+          "number": 11,
+          "definition_line": 87,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 7,
+            "physical_entry": 7
+          }
+        }
+      ],
+      "root_book": 36,
+      "root_span": [
+        9480,
+        9515
+      ],
+      "root_sha256": "b418a78ead6dbd0a359509637abb370520562d490e03ecea9c41a6faa05b33ab",
+      "vri_numbered_labels": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "publisher_paratext": null,
+      "finite_pair_owners": [
+        {
+          "publisher": 324,
+          "owner": "note:7",
+          "exact_on_off_pairs": [
+            {
+              "on": "c",
+              "off": "ch"
+            }
+          ],
+          "count": 1,
+          "source_token_sha256": [
+            "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+          ]
+        }
+      ],
+      "edition_and_notes_caveats": [
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "Publisher Saññasāmika title and both colophons differ from VRI Yaññasāmika; narrative of sacrifice, the seven-year-old and Siddhattha establishes scope.",
+        "Local3–4/globals2843–2844 are one original eight-line stanza entry; do not insert a paragraph or renumber.",
+        "Publisher local6 renders material about others in this world while VRI has diṭṭhe dhamme parattha ca; preserve independent wording without inferred harmonization.",
+        "Note7 owns the exact c/ch state-pair inside its Pāli quotation; it must remain note-owned.",
+        "All eleven note owners, literal ŋ spellings and source-specific BJTS-versus-PTS alternatives remain unchanged, including note10’s creature/non-creature contrast; no editorial reading is resolved."
+      ],
+      "narrative_mapping_evidence": "Seven-year-old learned sacrificer,84000 animals, Siddhattha intervening with non-harm advice and Tusita rebirth."
+    },
+    {
+      "publisher": 325,
+      "canonical_candidate": "tha-ap327",
+      "publisher_title": "Nimittasaññaka",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-325.md",
+        "local_path": "/tmp/pali-next330-nov26/source-a/raw/src/_poems/chapter-3/poem-325.md",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-325.md",
+        "bytes": 1336,
+        "sha256": "4114f320ba1d2054133e125f5be63395c69a669905aaaabadc0002f4c044e842",
+        "git_blob_sha1": "27fa4dad2e4f5496086b0d6468fb97041ec20f65"
+      },
+      "poem_body_scope_lines": [
+        7,
+        41
+      ],
+      "speaking_colophon_line": 39,
+      "closing_colophon_line": 41,
+      "body_paragraphs": 9,
+      "physical_entries": 6,
+      "printed_labels": 6,
+      "global_labels": [
+        2852,
+        2857
+      ],
+      "poem_note_numbers": [
+        1,
+        2
+      ],
+      "note_owners": [
+        {
+          "number": 1,
+          "definition_line": 43,
+          "owner": {
+            "kind": "poem_title",
+            "paragraph_index": 0,
+            "physical_entry": null
+          }
+        },
+        {
+          "number": 2,
+          "definition_line": 45,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 5,
+            "physical_entry": 5
+          }
+        }
+      ],
+      "root_book": 36,
+      "root_span": [
+        9515,
+        9535
+      ],
+      "root_sha256": "d34e90055a62dfb6b14d3e9a4c45a90441605512019cbfa5b1ffdf7cd7419c97",
+      "vri_numbered_labels": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "publisher_paratext": null,
+      "finite_pair_owners": [
+        {
+          "publisher": 325,
+          "owner": "body:1",
+          "exact_on_off_pairs": [
+            {
+              "on": "C",
+              "off": "Ch"
+            }
+          ],
+          "count": 1,
+          "source_token_sha256": [
+            "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e"
+          ]
+        }
+      ],
+      "edition_and_notes_caveats": [
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "Publisher local3 recalls passed Buddhas while VRI30 expressly has past, present and future and te tayo; retain the difference rather than supplement the English.",
+        "Publisher Araññasatta differs from VRI main Araññasattho in verse32.",
+        "Only the exact C/Ch state-pair in Candabhāgā is reduced; source words and punctuation remain unchanged."
+      ],
+      "narrative_mapping_evidence": "Candabhāgā hermitage, golden deer recalling Buddhas, ninety-four aeons and the twenty-seventh-aeon king."
+    },
+    {
+      "publisher": 326,
+      "canonical_candidate": "tha-ap328",
+      "publisher_title": "Annasaŋsāvaka",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-326.md",
+        "local_path": "/tmp/pali-next330-nov26/source-a/raw/src/_poems/chapter-3/poem-326.md",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-326.md",
+        "bytes": 1111,
+        "sha256": "cc2512922ea36830c287594386d23427bbf0997bae426f497254e04df29e38b1",
+        "git_blob_sha1": "f1a6fc4d875c079ab0111efd7cd02e8417b31ce1"
+      },
+      "poem_body_scope_lines": [
+        7,
+        35
+      ],
+      "speaking_colophon_line": 33,
+      "closing_colophon_line": 35,
+      "body_paragraphs": 7,
+      "physical_entries": 4,
+      "printed_labels": 5,
+      "global_labels": [
+        2858,
+        2862
+      ],
+      "poem_note_numbers": [
+        1,
+        2
+      ],
+      "note_owners": [
+        {
+          "number": 1,
+          "definition_line": 37,
+          "owner": {
+            "kind": "poem_title",
+            "paragraph_index": 0,
+            "physical_entry": null
+          }
+        },
+        {
+          "number": 2,
+          "definition_line": 39,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 1,
+            "physical_entry": 1
+          }
+        }
+      ],
+      "root_book": 36,
+      "root_span": [
+        9535,
+        9552
+      ],
+      "root_sha256": "600f08007c20504c43d6ce800a185d00c222bb306419fc6afee579818131fce4",
+      "vri_numbered_labels": [
+        34,
+        35,
+        36,
+        37,
+        38
+      ],
+      "publisher_paratext": null,
+      "finite_pair_owners": [],
+      "edition_and_notes_caveats": [
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "The first original stanza entry combines local1–2/globals2858–2859 into eight lines.",
+        "Publisher Annasaŋsāvaka spelling and VRI Annasaṃsāvaka remain edition-specific; no title or character replacement is inferred.",
+        "The original VRI speaker colophon is typed gathalast and not a new numbered stanza; preserve source blocks and verse38 abbreviation."
+      ],
+      "narrative_mapping_evidence": "Golden Siddhattha with32marks traversing a bazaar, detained for food, one heavenly aeon and ninety-four-aeon merit."
+    },
+    {
+      "publisher": 329,
+      "canonical_candidate": "tha-ap331",
+      "publisher_title": "Pupphacchattiya",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-329.md",
+        "local_path": "/tmp/pali-next330-nov26/source-a/raw/src/_poems/chapter-3/poem-329.md",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-329.md",
+        "bytes": 2152,
+        "sha256": "e49717e32838173c66be52581ccbe092acc250808573f5d23809bb0045c8759a",
+        "git_blob_sha1": "e9b17e247cd8f0ac3363bae31738df5e188da0c4"
+      },
+      "poem_body_scope_lines": [
+        7,
+        55
+      ],
+      "speaking_colophon_line": 53,
+      "closing_colophon_line": 55,
+      "body_paragraphs": 11,
+      "physical_entries": 8,
+      "printed_labels": 9,
+      "global_labels": [
+        2898,
+        2906
+      ],
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "note_owners": [
+        {
+          "number": 1,
+          "definition_line": 57,
+          "owner": {
+            "kind": "poem_title",
+            "paragraph_index": 0,
+            "physical_entry": null
+          }
+        },
+        {
+          "number": 2,
+          "definition_line": 59,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 1,
+            "physical_entry": 1
+          }
+        },
+        {
+          "number": 3,
+          "definition_line": 61,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 2,
+            "physical_entry": 2
+          }
+        },
+        {
+          "number": 4,
+          "definition_line": 63,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 4,
+            "physical_entry": 4
+          }
+        },
+        {
+          "number": 5,
+          "definition_line": 65,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 5,
+            "physical_entry": 5
+          }
+        },
+        {
+          "number": 6,
+          "definition_line": 67,
+          "owner": {
+            "kind": "poem",
+            "paragraph_index": 7,
+            "physical_entry": 7
+          }
+        }
+      ],
+      "root_book": 36,
+      "root_span": [
+        9659,
+        9688
+      ],
+      "root_sha256": "157bac0c8c65b5e42c429eb07c970830820c7681d26395efaf376a11e59c864b",
+      "vri_numbered_labels": [
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81
+      ],
+      "publisher_paratext": null,
+      "finite_pair_owners": [
+        {
+          "publisher": 329,
+          "owner": "body:0",
+          "exact_on_off_pairs": [
+            {
+              "on": "c",
+              "off": "ch"
+            }
+          ],
+          "count": 1,
+          "source_token_sha256": [
+            "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+          ]
+        },
+        {
+          "publisher": 329,
+          "owner": "body:9",
+          "exact_on_off_pairs": [
+            {
+              "on": "c",
+              "off": "ch"
+            }
+          ],
+          "count": 1,
+          "source_token_sha256": [
+            "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+          ]
+        },
+        {
+          "publisher": 329,
+          "owner": "body:10",
+          "exact_on_off_pairs": [
+            {
+              "on": "c",
+              "off": "ch"
+            }
+          ],
+          "count": 1,
+          "source_token_sha256": [
+            "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+          ]
+        }
+      ],
+      "edition_and_notes_caveats": [
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "The first original stanza entry combines local1–2/globals2898–2899 and reorders their clauses relative to VRI73–74; preserve each order independently.",
+        "Exact c/ch state-pairs occur only in the poem heading and the two colophons; retain adjacent literal text.",
+        "Publisher note2 retains its literal xxx editorial placeholder and terminal ellipsis. Do not repair or omit it.",
+        "Publisher note4 compares a distinct earlier poem306, which remains held; a cross-reference grants no activation."
+      ],
+      "narrative_mapping_evidence": "Lotus-flower umbrella for Siddhattha, his prediction, umbrella rising before him and eight Jalasikha kings74aeons ago."
+    }
+  ],
+  "finite_pair_owner_inventory": [
+    {
+      "publisher": 321,
+      "owner": "body:5",
+      "exact_on_off_pairs": [
+        {
+          "on": "c",
+          "off": "ch"
+        }
+      ],
+      "count": 1,
+      "source_token_sha256": [
+        "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+      ]
+    },
+    {
+      "publisher": 324,
+      "owner": "note:7",
+      "exact_on_off_pairs": [
+        {
+          "on": "c",
+          "off": "ch"
+        }
+      ],
+      "count": 1,
+      "source_token_sha256": [
+        "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+      ]
+    },
+    {
+      "publisher": 325,
+      "owner": "body:1",
+      "exact_on_off_pairs": [
+        {
+          "on": "C",
+          "off": "Ch"
+        }
+      ],
+      "count": 1,
+      "source_token_sha256": [
+        "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e"
+      ]
+    },
+    {
+      "publisher": 329,
+      "owner": "body:0",
+      "exact_on_off_pairs": [
+        {
+          "on": "c",
+          "off": "ch"
+        }
+      ],
+      "count": 1,
+      "source_token_sha256": [
+        "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+      ]
+    },
+    {
+      "publisher": 329,
+      "owner": "body:9",
+      "exact_on_off_pairs": [
+        {
+          "on": "c",
+          "off": "ch"
+        }
+      ],
+      "count": 1,
+      "source_token_sha256": [
+        "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+      ]
+    },
+    {
+      "publisher": 329,
+      "owner": "body:10",
+      "exact_on_off_pairs": [
+        {
+          "on": "c",
+          "off": "ch"
+        }
+      ],
+      "count": 1,
+      "source_token_sha256": [
+        "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+      ]
+    }
+  ],
+  "preserved_formal_holds": [
+    "tha-ap72",
+    "tha-ap142",
+    "tha-ap160",
+    "tha-ap161",
+    "tha-ap262",
+    "tha-ap268",
+    "tha-ap282",
+    "tha-ap308",
+    "tha-ap309"
+  ],
+  "separate_current_source_holds": [
+    {
+      "publisher": 322,
+      "canonical_candidate": "tha-ap324",
+      "gate": "Malformed printed heading bracket; hold for separately verified representation."
+    },
+    {
+      "publisher": 327,
+      "canonical_candidate": "tha-ap329",
+      "gate": "Split physical endpoint paragraph, in-poem recitation division/note12, printed2285, and long note27 need separate finite representation."
+    },
+    {
+      "publisher": 328,
+      "canonical_candidate": "tha-ap330",
+      "gate": "10 publisher stanzas vs9 VRI, extra31-aeon verse and original unclosed note2 quotation must remain edition-specific; separate review."
+    },
+    {
+      "publisher": 330,
+      "canonical_candidate": "tha-ap332",
+      "gate": "Separate chapter-summary/note11 ownership; split global label, literal fragment, combined20–21 and107/106/105 chapter-count distinction."
+    },
+    {
+      "publisher": 331,
+      "canonical_candidate": "tha-ap333",
+      "gate": "Boundary-only. Canonical333 contains next Udakapūjaka heading9789 and numbered7 at9790–9792, while334 begins8; separately reviewed paired repair/citation compatibility required."
+    }
+  ],
+  "prior_conditional311_320_unchanged": true,
+  "source_normalization_only": true,
+  "runtime_reader_activation_release_approval": false
+}

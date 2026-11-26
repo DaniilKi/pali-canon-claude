@@ -1,0 +1,1135 @@
+{
+  "schema": "independent-original-first321-330-finite-source-B-v1",
+  "observed_utc": "2026-11-26T08:09:18.437024+00:00",
+  "status": "GO_SIX_SOURCE_AND_NORMALIZATION_ONLY_KEEP_FIVE_PRECISE_HOLDS",
+  "baseline_commit": "d4dac33e76b449412d7e0cb7a6b93d6189549337",
+  "publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "baseline_review_sha256": "ca8d20dd715f281bbe25ade77bd3baed1312e674d920b83237ea26d7946d89d0",
+  "acquisition_receipt_sha256": "557c1baac9072504582774ba62bd47a5ff92c4b64814d4aa3464997052c427f8",
+  "artifacts": {
+    "LICENSE.md": {
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_pages/about.md": {
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_includes/site/footer.njk": {
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_includes/layouts/epub-metadata.xml": {
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_data/site.json": {
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/_poems.json": {
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-321.md": {
+      "bytes": 1743,
+      "sha256": "04a039e32e694a994164c60f000be12fd6461e217d1e91bf1c4689acc6fb43f5",
+      "git_blob_sha1": "1531b911ec22f5f4ed53d9cfef3d0386df9c1292",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-322.md": {
+      "bytes": 1511,
+      "sha256": "75405c932140b6bfd99d7f0ad1ec3afb89624daae4b9dd5da9e7a6bf0b0233b5",
+      "git_blob_sha1": "5c7b0ae10bc34302f50fe43ebfa4273eceea7ff7",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-323.md": {
+      "bytes": 1132,
+      "sha256": "5a00c2fbb4615b2178fce1d1400db606dc76b2466396488a42bbeaccabb133f4",
+      "git_blob_sha1": "1e1a91ee97c4bea4739cca695f7890cfe254b1cd",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-324.md": {
+      "bytes": 3250,
+      "sha256": "e638c3254468f7c4c90cdb7400fb611588faea13f58d253ea93c3b5564b1a84d",
+      "git_blob_sha1": "65aa9361e3e66747cfe621f6a4787db99aad5993",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-325.md": {
+      "bytes": 1336,
+      "sha256": "4114f320ba1d2054133e125f5be63395c69a669905aaaabadc0002f4c044e842",
+      "git_blob_sha1": "27fa4dad2e4f5496086b0d6468fb97041ec20f65",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-326.md": {
+      "bytes": 1111,
+      "sha256": "cc2512922ea36830c287594386d23427bbf0997bae426f497254e04df29e38b1",
+      "git_blob_sha1": "f1a6fc4d875c079ab0111efd7cd02e8417b31ce1",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-327.md": {
+      "bytes": 9126,
+      "sha256": "23fb6fc3e5b0013a6e94bff70234b7e44d2b1bdbfd704ff459c13fb3e9a00a7f",
+      "git_blob_sha1": "5c153a06baa421cca328d3fcb44ccf1ec4f56669",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-328.md": {
+      "bytes": 2307,
+      "sha256": "ef03e80080420596ad25171027f169b98596f169b5d7599887a916fe125e36ca",
+      "git_blob_sha1": "4c735fb96e018a9838773f6310da864ed7607a45",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-329.md": {
+      "bytes": 2152,
+      "sha256": "e49717e32838173c66be52581ccbe092acc250808573f5d23809bb0045c8759a",
+      "git_blob_sha1": "e9b17e247cd8f0ac3363bae31738df5e188da0c4",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-330.md": {
+      "bytes": 5145,
+      "sha256": "4ad75dcf3bcb6db6ec97f7c47dfab728d50a8f3de90d38c7ddf08ca6288d1ba9",
+      "git_blob_sha1": "d058e6b1347f180f881f5e22c36be0442cfaceae",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    "src/_poems/chapter-3/poem-331.md": {
+      "bytes": 1803,
+      "sha256": "b4fa678c98a204bc591a5d6d656961060af3d5164e23516b9c8dfadf98902b4e",
+      "git_blob_sha1": "8e2540ef68328fcfe4efb38501d3d794a99892b5",
+      "pinned_publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    }
+  },
+  "rights": {
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Jonathan S. Walters and Whitman College",
+    "specific_translation_grant_overrides_generic_site_CC_BY": true,
+    "translator_notes_and_publisher_apparatus_with_translation_grant": true,
+    "retain_source_revision_attribution_license_change_notices_and_warranty_qualifications": true,
+    "live_only_English_metadata_hashes_only_bundles": true,
+    "media_or_commercial_approval": false,
+    "new_source_rights_assumed": false
+  },
+  "xml": {
+    "file": "/tmp/pali-next-batch-boundaries/vri/romn/s0510m1.mul.xml",
+    "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+    "physical_elements": 14646,
+    "canonical_blocks": 14645,
+    "all14645_tuples_exact": true,
+    "existing_omitted_empty_note_only_physical_indices": [
+      1130
+    ],
+    "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32"
+  },
+  "per_source": [
+    {
+      "publisher": 321,
+      "canonical_owner": "tha-ap323",
+      "decision": "GO_SOURCE_AND_FINITE_NORMALIZATION_ONLY",
+      "raw_sha256": "04a039e32e694a994164c60f000be12fd6461e217d1e91bf1c4689acc6fb43f5",
+      "git_blob_sha1": "1531b911ec22f5f4ed53d9cfef3d0386df9c1292",
+      "raw_bytes": 1743,
+      "body_sha256": "15f91b22548d399f488e387e49d459486dfe54eb2b3c6a94bf0dd687f9e889ad",
+      "paragraph_sha256s": [
+        "8c87634536903fe532176c6f369cb087e02134249c9074da644a11530c55c53d",
+        "13cf219165056c1e5ce09765cac033859be53df67549c0e4f7982f5bd321f926",
+        "d86b85a9927a303f2fb4aa243b27d956219cc800db97c5d966824f007bce37c6",
+        "b8660d3098b04c57282c85c9dbdb7c662a626626feeb2bc50b7e8feadddc88d0",
+        "35c6bbb9269057a571be4501bae56f36eba1be84d7b8db362a27394b81e5f059",
+        "0939aae9059a3dc046d42975494f0454f0493e6f1d3c0c7ad1655871960b9d91",
+        "6f8c3d1655f6b3c24da8cba9977d23d6400d57dbc07614047e4259e6c26143c5",
+        "c52ef145c7444b6cd558ed8f1d1d86b8c6d6177e81607f86e48b70e006f2434d",
+        "14e8fe3efb287e64346aadbb31cedff2c91953c163a270652762f4bc60c7ee05"
+      ],
+      "body_paragraphs": 9,
+      "physical_entries": 6,
+      "printed_labels": 6,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2825",
+          "suffix": "(1) [2825]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2826",
+          "suffix": "(2) [2826]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2827",
+          "suffix": "(3) [2827]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2828",
+          "suffix": "(4) [2828]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2829",
+          "suffix": "(5) [2829]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2830",
+          "suffix": "(6) [2830]",
+          "lines": 4
+        }
+      ],
+      "notes_sha256": "4145562e1241c6edfe16d5592fde939f9ccc694d36dda0f68675a6b2948f8b8c",
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "1c6427ec5220fee1d31bbc6f15fb3ed19d6d13456b5b54d4c25d4dd465425154",
+          "characters": 34
+        },
+        {
+          "number": 2,
+          "text_sha256": "1cf9d2779d9dff8bd55ca5580afa9eb4175e4821658ec34a8276ba0cd132414f",
+          "characters": 67
+        },
+        {
+          "number": 3,
+          "text_sha256": "bad227d8c00d5578db3013e1b534b2aa7e3fd583478756a9c48ab7ea8df527b8",
+          "characters": 210
+        },
+        {
+          "number": 4,
+          "text_sha256": "0a8026d7502ce773ac493171f5079eefc70c0de25d91c83c09294989f062b408",
+          "characters": 22
+        }
+      ],
+      "paratext": {
+        "body_sha256": "a33a7f371a1b4a281febf6eb375c24d6ed25e8b19fb8dbe03692768ffee4b97b",
+        "paragraphs": 1,
+        "note_numbers": []
+      },
+      "root": {
+        "book": 36,
+        "start": 9424,
+        "end": 9446,
+        "root_sha256": "e7626ec3b1dbebb06939ed2611f4e1bffe607f60c85173192fa4a968a37c4381",
+        "numbered_stanzas": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "previous_id": "tha-ap322",
+        "previous_title": "Kumudamāliyattheraapadānaṃ",
+        "next_id": "tha-ap324",
+        "next_title": "Pulinapūjakattheraapadānaṃ",
+        "original_title": "Umāpupphiyattheraapadānaṃ"
+      },
+      "narrative_witness_terms": [
+        "siddhatthamaparājitaṃ",
+        "Umāpupphaṃ",
+        "uddhaṃvaṇṭā adhomukhā",
+        "tusitaṃ",
+        "Samantachadano"
+      ],
+      "presentation_state_pairs": [
+        {
+          "diacritics": "c",
+          "alternative": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "source_region": "poem"
+        }
+      ],
+      "required_mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 321 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap323; title and numbering alone do not establish the mapping.",
+        "Publisher title and both poem colophons use Ummāpupphiya while VRI uses Umāpupphiya; preserve each edition spelling.",
+        "The exact chapter heading precedes the poem as publisher paratext with no notes, not a poem stanza or quotation.",
+        "Only the exact c/ch state-pair in local5/global2829 is presentation-reduced; adjacent literal spelling remains unchanged."
+      ]
+    },
+    {
+      "publisher": 323,
+      "canonical_owner": "tha-ap325",
+      "decision": "GO_SOURCE_AND_FINITE_NORMALIZATION_ONLY",
+      "raw_sha256": "5a00c2fbb4615b2178fce1d1400db606dc76b2466396488a42bbeaccabb133f4",
+      "git_blob_sha1": "1e1a91ee97c4bea4739cca695f7890cfe254b1cd",
+      "raw_bytes": 1132,
+      "body_sha256": "c06f94c5cd8b29ced1430381b83a2c3370a511b3d4d375f79ca517fa566846c1",
+      "paragraph_sha256s": [
+        "9a5cf261bea4b4c0a858275678d12d63149be6e856db3383621bdf16005634e0",
+        "d25a2618a61e183d887c163a9580b9372ec98d1df24f46f3f49b15168ea5b958",
+        "81762508474a30108a2429fa38f98cb2b39155a6f7dd5613fc3879bb22286e0d",
+        "129328b94527f0420652e0b48a412bab7d43f3c46e0e78209d0f729505f8f44a",
+        "2fa3e47c242bc20224f185f358a9c5183a3b34e743c9a4cf466fcd2602937aeb",
+        "80e56b171643f414894f9eb18161cc935dfcbfb87cee8884492ccc23511a11e1",
+        "f67bbecf140ae0cde517cc438c271816bb9fd969cb88e026f1c95b4603fd1269"
+      ],
+      "body_paragraphs": 7,
+      "physical_entries": 4,
+      "printed_labels": 4,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2837",
+          "suffix": "(1) [2837]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2838",
+          "suffix": "(2) [2838]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2839",
+          "suffix": "(3) [2839]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2840",
+          "suffix": "(4) [2840]",
+          "lines": 4
+        }
+      ],
+      "notes_sha256": "d61a8e662b5c4a4f4cb551896aefed056e65b97a86356ff4640354c0d5a970ea",
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "2d5f0e709d1ea62113d210bb7f5403512bb821bf500986f6f5dea67528c4f49b",
+          "characters": 17
+        },
+        {
+          "number": 2,
+          "text_sha256": "a89308afc7358f718df1fa66d4f9c2b84e0010e10025e575ccd0cb01d0d0a1b8",
+          "characters": 142
+        },
+        {
+          "number": 3,
+          "text_sha256": "eb282a2fa0c60b55a137eac805105cbe7722b745d70c95d50c4ba33bc5d01463",
+          "characters": 36
+        }
+      ],
+      "paratext": {
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paragraphs": 0,
+        "note_numbers": []
+      },
+      "root": {
+        "book": 36,
+        "start": 9466,
+        "end": 9480,
+        "root_sha256": "4c5960e1d2b43e20a3f504093fe59193f3033da6ab11ebf680d77061441441c7",
+        "numbered_stanzas": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "previous_id": "tha-ap324",
+        "previous_title": "Pulinapūjakattheraapadānaṃ",
+        "next_id": "tha-ap326",
+        "next_title": "Yaññasāmikattheraapadānaṃ",
+        "original_title": "Hāsajanakattheraapadānaṃ"
+      },
+      "narrative_witness_terms": [
+        "Dumagge paṃsukūlakaṃ",
+        "laggaṃ",
+        "hāso me udapajjatha",
+        "buddhasaññāyidaṃ"
+      ],
+      "presentation_state_pairs": [],
+      "required_mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 323 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap325; title and numbering alone do not establish the mapping.",
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "Note2 explicitly chooses BJTS/commentarial dumagge analysis over an alternative analysis; preserve its literal alternate discussion without claiming a new VRI reading."
+      ]
+    },
+    {
+      "publisher": 324,
+      "canonical_owner": "tha-ap326",
+      "decision": "GO_SOURCE_AND_FINITE_NORMALIZATION_ONLY",
+      "raw_sha256": "e638c3254468f7c4c90cdb7400fb611588faea13f58d253ea93c3b5564b1a84d",
+      "git_blob_sha1": "65aa9361e3e66747cfe621f6a4787db99aad5993",
+      "raw_bytes": 3250,
+      "body_sha256": "5bb8e84fb2f60809a13342ddabe5cc1c9f089a49742d6adb9034710b18376b2b",
+      "paragraph_sha256s": [
+        "0a2b2c2567ee7ed82ac411b78cd1610d4d4906a03a5a6efe9ed2682b525183eb",
+        "160860ee3df6f1f29ffa5b55e0878d2ccbfae61f9f6567fc18898e61290e9ad0",
+        "ebdf53dc853c927a996f94aad1cd5834db2479a9a56f578fa4da1bb6e9b7bafc",
+        "1bc1f2cdfd6978c80fe30c3a4bdaf0d9496c9b426cf7a8e2d86f5c36b29bbaaa",
+        "8fec2876f96c756ef97c4f92e9bdb16485ab737af52c2e77579b148cf3f7a019",
+        "5029e4f3821d6d6c9cfb526e32b70eb5e7576bee5df0402ed34c54973d17dd6d",
+        "8fa68923234fc325692d7764a5d17421b42f35ca1ef327c7f69c12274a1cb020",
+        "5fc6813fbb3dbd5190253a4b0a21f8bdb22668a56c389e846416e5ee0edbfff7",
+        "a97d0dc0c2e777088eca98107e1b298bc889c5d405aac12e8859b204024ec322",
+        "f6d2bc09200529b2b5c60f4d11854bf48baf28a6461f6c0b948da40bcfa094aa",
+        "2e5705b417cc57443f9826adca274e47395a6f6077d49b80383620d133d373a9",
+        "5760ffbe677978cfdd4090a0092fd470cc31984692ff91870d3abecb09336abf",
+        "1a88cf338be71b833aa9fd937ef2aa574dbf7a1b59341f19592b65c3e2060123"
+      ],
+      "body_paragraphs": 13,
+      "physical_entries": 10,
+      "printed_labels": 11,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2841",
+          "suffix": "(1) [2841]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2842",
+          "suffix": "(2) [2842]",
+          "lines": 4
+        },
+        {
+          "local_label": "3-4",
+          "publisher_label": "2843-2844",
+          "suffix": "(3-4) [2843-2844]",
+          "lines": 8
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2845",
+          "suffix": "(5) [2845]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2846",
+          "suffix": "(6) [2846]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "2847",
+          "suffix": "(7) [2847]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "2848",
+          "suffix": "(8) [2848]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "2849",
+          "suffix": "(9) [2849]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "2850",
+          "suffix": "(10) [2850]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "2851",
+          "suffix": "(11) [2851]",
+          "lines": 4
+        }
+      ],
+      "notes_sha256": "81d01e2c5fb20457fb3b19a5ed732b1d4d33dd4db9ca346b274ba8f373ce6994",
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "a2e5ccd6186c52e9c24d47f43113c8cba3ff7a2cc64d605b40eead2c5a6f7915",
+          "characters": 29
+        },
+        {
+          "number": 2,
+          "text_sha256": "60dc74598fa29e94ec8757b1a04be1d475010f1bce1e690a7ae86a5e3ff1a64b",
+          "characters": 30
+        },
+        {
+          "number": 3,
+          "text_sha256": "8a70c2260e72a7cfe2fc2d95ac41da9a49c61c93ae4f0c50de18d18738b94998",
+          "characters": 88
+        },
+        {
+          "number": 4,
+          "text_sha256": "8dca9a6412f19959b8a21159a03f052331a999241b56658895eb1f830b6a9ca7",
+          "characters": 52
+        },
+        {
+          "number": 5,
+          "text_sha256": "c78606f9c8283c0eecc2fa0a3577c9d9fe2d963d5a62fec7ad4e757709ab46ad",
+          "characters": 105
+        },
+        {
+          "number": 6,
+          "text_sha256": "1585c549d761c6d716d7347450c7953cc1d653ebd4a4497b13c37ea17ebd2348",
+          "characters": 214
+        },
+        {
+          "number": 7,
+          "text_sha256": "28a294d16fdb0162adc40d003f6d2743d549f025ccd8ebb3f3b255c2a0414735",
+          "characters": 43
+        },
+        {
+          "number": 8,
+          "text_sha256": "a91c085da5dd8b0cfed26b20d1f45cea3e2b76f09f6dd65c0f2cadc3fee21b27",
+          "characters": 6
+        },
+        {
+          "number": 9,
+          "text_sha256": "f7cff3061d045c1535cc1cdb4d47dc0b8fe9a18925e67249e2109edbc557dff2",
+          "characters": 26
+        },
+        {
+          "number": 10,
+          "text_sha256": "372850633a7930b90b8961ad3073f8932212b48976eb83de25b1c8b25c993c36",
+          "characters": 142
+        },
+        {
+          "number": 11,
+          "text_sha256": "0bffdc322ad67b7d16a6d53abf7fedd32c1f4ca3bf77f8acea0e7745989fcb7e",
+          "characters": 22
+        }
+      ],
+      "paratext": {
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paragraphs": 0,
+        "note_numbers": []
+      },
+      "root": {
+        "book": 36,
+        "start": 9480,
+        "end": 9515,
+        "root_sha256": "b418a78ead6dbd0a359509637abb370520562d490e03ecea9c41a6faa05b33ab",
+        "numbered_stanzas": [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ],
+        "previous_id": "tha-ap325",
+        "previous_title": "Hāsajanakattheraapadānaṃ",
+        "next_id": "tha-ap327",
+        "next_title": "Nimittasaññakattheraapadānaṃ",
+        "original_title": "Yaññasāmikattheraapadānaṃ"
+      },
+      "narrative_witness_terms": [
+        "Jātiyā sattavassohaṃ",
+        "Cullāsītisahassāni",
+        "Sārathambhupanītāni",
+        "Siddhattho",
+        "Ahiṃsā sabbapāṇīnaṃ"
+      ],
+      "presentation_state_pairs": [
+        {
+          "diacritics": "c",
+          "alternative": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "source_region": "notes"
+        }
+      ],
+      "required_mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 324 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap326; title and numbering alone do not establish the mapping.",
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "Publisher Saññasāmika title and both colophons differ from VRI Yaññasāmika; narrative of sacrifice, the seven-year-old and Siddhattha establishes scope.",
+        "Local3–4/globals2843–2844 are one original eight-line stanza entry; do not insert a paragraph or renumber.",
+        "Publisher local6 renders material about others in this world while VRI has diṭṭhe dhamme parattha ca; preserve independent wording without inferred harmonization.",
+        "Note7 owns the exact c/ch state-pair inside its Pāli quotation; it must remain note-owned."
+      ]
+    },
+    {
+      "publisher": 325,
+      "canonical_owner": "tha-ap327",
+      "decision": "GO_SOURCE_AND_FINITE_NORMALIZATION_ONLY",
+      "raw_sha256": "4114f320ba1d2054133e125f5be63395c69a669905aaaabadc0002f4c044e842",
+      "git_blob_sha1": "27fa4dad2e4f5496086b0d6468fb97041ec20f65",
+      "raw_bytes": 1336,
+      "body_sha256": "0b1e1903b29aab1a02fe14827d70b30b26ff1f351730c92e68c309f91dd0abb4",
+      "paragraph_sha256s": [
+        "d0def4ac186ba7e2743f3146db1414255e5640c3415a1400847ea7816efd0157",
+        "8819ddc2c4a5f576447fbb02e00f7eabb3454203006d9598fd9d3795edc3aa06",
+        "8563f09341da3974cc454a507f034569fd7ef99aefc65ef87520d13cff6c3efa",
+        "f90c145e9f9942a0036d9bd4a67408b0ffa2527d5d447ae544b1d13fe784a878",
+        "6135435727f8fc6e92424bc1f8ad799d6080e981d88d391befb9f5bd5b17a919",
+        "2a5a14702e491d2d52b2677ac2320e57cfbb3100a163ccb3673f00de00a96f58",
+        "408cbf67eb538e726dc054c1d5d9c8b919e38daa5eecd6e832f23763cb07e891",
+        "ff142fa71d04c72dd0f3ccae04589c2f4d6264152f230aaddd9c1bff5dc97adf",
+        "273ee96fe5310636965da4165ea769bea6c81091b0f458639cbc4d60d5ac8a51"
+      ],
+      "body_paragraphs": 9,
+      "physical_entries": 6,
+      "printed_labels": 6,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2852",
+          "suffix": "(1) [2852]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2853",
+          "suffix": "(2) [2853]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2854",
+          "suffix": "(3) [2854]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2855",
+          "suffix": "(4) [2855]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2856",
+          "suffix": "(5) [2856]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2857",
+          "suffix": "(6) [2857]",
+          "lines": 4
+        }
+      ],
+      "notes_sha256": "5216dbac662d9e56ec2851f328f2e24f15d95a440b22e7be2c86a791da6ad888",
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "65ba37e42a811eb51c530e4e0b9c3062ccd5aa575a8eafa45d2497ed5cb0fec4",
+          "characters": 24
+        },
+        {
+          "number": 2,
+          "text_sha256": "9b642da48a9d8f1fdbf845ae35f0b46aa8c0e60d70df9dd11f158a5167b4040d",
+          "characters": 17
+        }
+      ],
+      "paratext": {
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paragraphs": 0,
+        "note_numbers": []
+      },
+      "root": {
+        "book": 36,
+        "start": 9515,
+        "end": 9535,
+        "root_sha256": "d34e90055a62dfb6b14d3e9a4c45a90441605512019cbfa5b1ffdf7cd7419c97",
+        "numbered_stanzas": [
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ],
+        "previous_id": "tha-ap326",
+        "previous_title": "Yaññasāmikattheraapadānaṃ",
+        "next_id": "tha-ap328",
+        "next_title": "Annasaṃsāvakattheraapadānaṃ",
+        "original_title": "Nimittasaññakattheraapadānaṃ"
+      },
+      "narrative_witness_terms": [
+        "Candabhāgānadītīre",
+        "Suvaṇṇamigamaddakkhiṃ",
+        "aññe buddhe",
+        "Araññasattho"
+      ],
+      "presentation_state_pairs": [
+        {
+          "diacritics": "C",
+          "alternative": "Ch",
+          "raw_token_sha256": "8dbde249f9e8473855b9ebff53a5003edef854ca02b8aaf522a8e5241f1e504e",
+          "source_region": "poem"
+        }
+      ],
+      "required_mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 325 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap327; title and numbering alone do not establish the mapping.",
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "Publisher local3 recalls passed Buddhas while VRI30 expressly has past, present and future and te tayo; retain the difference rather than supplement the English.",
+        "Publisher Araññasatta differs from VRI main Araññasattho in verse32.",
+        "Only the exact C/Ch state-pair in Candabhāgā is reduced; source words and punctuation remain unchanged."
+      ]
+    },
+    {
+      "publisher": 326,
+      "canonical_owner": "tha-ap328",
+      "decision": "GO_SOURCE_AND_FINITE_NORMALIZATION_ONLY",
+      "raw_sha256": "cc2512922ea36830c287594386d23427bbf0997bae426f497254e04df29e38b1",
+      "git_blob_sha1": "f1a6fc4d875c079ab0111efd7cd02e8417b31ce1",
+      "raw_bytes": 1111,
+      "body_sha256": "4831183d8a35a08116378402b86f3e37f01f79c3963ff8b22b09d81816d27771",
+      "paragraph_sha256s": [
+        "377315f6a8939966fe871e45c5f3653a67a7031935d74377aac6b6e791978e23",
+        "688d936bc1ff4b881e131de61cdfb1b1865110fe5d9f88955436f2d62f05b240",
+        "9b11d0b2e35523750c1cbff4ef8779aa5e77b36ea470ae56f26919af56a89f9a",
+        "b97e76f74138e2082ac38da9de8a3ab44f01c3390c9a33bcc13ba18d3ca9f97b",
+        "a80ffe9166d18fdd41386ad2a97391cad2528ccb6eeffb4c0b149c04c2d06e50",
+        "91139129ca537bea5472f2b6f9f293f9e6ea1914b0ea402f4fe5fbf4d0f84e34",
+        "04a62bbcf5cb80e134ca7a478a8acc66e9ff7c70b366ceddceb9bd0eb92abc5e"
+      ],
+      "body_paragraphs": 7,
+      "physical_entries": 4,
+      "printed_labels": 5,
+      "layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2858-2859",
+          "suffix": "(1-2) [2858-2859]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2860",
+          "suffix": "(3) [2860]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2861",
+          "suffix": "(4) [2861]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2862",
+          "suffix": "(5) [2862]",
+          "lines": 4
+        }
+      ],
+      "notes_sha256": "41157953fba2eacc8f15bf7a1ea66dc2395bb83bb2f22a7e4babe73044acb9db",
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "ce81fb7e1a59ee50595cb1aa9b6fa2c3a6129dbcc436f68efc31d8234b123321",
+          "characters": 15
+        },
+        {
+          "number": 2,
+          "text_sha256": "8b17de7ebf4ffd277449e3714ae0689da91072a3969c34c502ff6142856facea",
+          "characters": 47
+        }
+      ],
+      "paratext": {
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paragraphs": 0,
+        "note_numbers": []
+      },
+      "root": {
+        "book": 36,
+        "start": 9535,
+        "end": 9552,
+        "root_sha256": "600f08007c20504c43d6ce800a185d00c222bb306419fc6afee579818131fce4",
+        "numbered_stanzas": [
+          34,
+          35,
+          36,
+          37,
+          38
+        ],
+        "previous_id": "tha-ap327",
+        "previous_title": "Nimittasaññakattheraapadānaṃ",
+        "next_id": "tha-ap329",
+        "next_title": "Nigguṇḍipupphiyattheraapadānaṃ",
+        "original_title": "Annasaṃsāvakattheraapadānaṃ"
+      },
+      "narrative_witness_terms": [
+        "gacchantaṃ antarāpaṇe",
+        "bāttiṃsavaralakkhaṇaṃ",
+        "Siddhatthaṃ",
+        "Sambuddhaṃ atināmetvā",
+        "bhikkhādānassidaṃ"
+      ],
+      "presentation_state_pairs": [],
+      "required_mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 326 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap328; title and numbering alone do not establish the mapping.",
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "The first original stanza entry combines local1–2/globals2858–2859 into eight lines.",
+        "Publisher Annasaŋsāvaka spelling and VRI Annasaṃsāvaka remain edition-specific; no title or character replacement is inferred.",
+        "The original VRI speaker colophon is typed gathalast and not a new numbered stanza; preserve source blocks and verse38 abbreviation."
+      ]
+    },
+    {
+      "publisher": 329,
+      "canonical_owner": "tha-ap331",
+      "decision": "GO_SOURCE_AND_FINITE_NORMALIZATION_ONLY",
+      "raw_sha256": "e49717e32838173c66be52581ccbe092acc250808573f5d23809bb0045c8759a",
+      "git_blob_sha1": "e9b17e247cd8f0ac3363bae31738df5e188da0c4",
+      "raw_bytes": 2152,
+      "body_sha256": "7248ea39533bfca46dbc5a83829d6905a6d83d232afc43a83342ea4f96b29808",
+      "paragraph_sha256s": [
+        "f6bab77040963caa88d9232ff2c39d6f395b31eb01b31919b5943eb9265b653f",
+        "81f6545797d46088a45fea6160f51bd32f9ded2bf54251021700a6bc8050152c",
+        "b97eb6fd0ab9ef33e1780b941ca89d61c5d25a468e274f7122c4ae83530cee67",
+        "64de34015c9523452b7e46116a69d7315d3c7d891b6df2b3b1efcf3089195885",
+        "a140de80caf5ddd2ae8ba4c3d691e845d09327bbf7a19055146c4965e7626a5c",
+        "cd72d39500b83ee361b627ffd5a521dedfacaf3efe3d749c724402451c90106a",
+        "581b56abf90bdcc1be298299e1a0c4dbc465a5200115bd8804d33bb9914322d4",
+        "5576f2c9f40e655264213b703c577c9957ed870e48cd63f45532882aae201dd2",
+        "0854146880f98a16a06b3bb42357d954a3e1fd3b6d07eac8145fc47b645b9655",
+        "05b214ca31c0feaf09a5884d0440b5e1127094995e63706de825a6898236cbb0",
+        "25bbffbe0803da62315b0c9de4d1f297bf1fecb21431f5346e33df36329a47d1"
+      ],
+      "body_paragraphs": 11,
+      "physical_entries": 8,
+      "printed_labels": 9,
+      "layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2898-2899",
+          "suffix": "(1-2) [2898-2899]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2900",
+          "suffix": "(3) [2900]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2901",
+          "suffix": "(4) [2901]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2902",
+          "suffix": "(5) [2902]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2903",
+          "suffix": "(6) [2903]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "2904",
+          "suffix": "(7) [2904]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "2905",
+          "suffix": "(8) [2905]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "2906",
+          "suffix": "(9) [2906]",
+          "lines": 4
+        }
+      ],
+      "notes_sha256": "57d5bffa8f38dcb2e7f964f9eeca4d3a09654d3f6cfea85e361800c23d38ebcd",
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "c4de46b87b5efa40fd9b3588c2150b4b6616c436c6fd1d4fbad6fe9eba339810",
+          "characters": 20
+        },
+        {
+          "number": 2,
+          "text_sha256": "2f8558e2296f223e2a67267a01f188c841749d7c77e679656fc311df29b09047",
+          "characters": 138
+        },
+        {
+          "number": 3,
+          "text_sha256": "6e55b4f2153ee66387d4c1163f5f4509d830dccde3a303d1ca2eea2f833dc649",
+          "characters": 19
+        },
+        {
+          "number": 4,
+          "text_sha256": "8f35f42ddd7f0702e13bfe57aa2d8e0d659215e827540a323b8f026bdd85b2f8",
+          "characters": 72
+        },
+        {
+          "number": 5,
+          "text_sha256": "10e5d96f3753e22a3819ae2a31a608d0cd2048a559bb1de2c556f13b3f081ed8",
+          "characters": 35
+        },
+        {
+          "number": 6,
+          "text_sha256": "91addd9bd31156ee56d3bc30624f03a6c620cbcf55db134bad5bd0173e9ba45c",
+          "characters": 20
+        }
+      ],
+      "paratext": {
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paragraphs": 0,
+        "note_numbers": []
+      },
+      "root": {
+        "book": 36,
+        "start": 9659,
+        "end": 9688,
+        "root_sha256": "157bac0c8c65b5e42c429eb07c970830820c7681d26395efaf376a11e59c864b",
+        "numbered_stanzas": [
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81
+        ],
+        "previous_id": "tha-ap330",
+        "previous_title": "Sumanāveḷiyattheraapadānaṃ",
+        "next_id": "tha-ap332",
+        "next_title": "Saparivārachattadāyakattheraapadānaṃ",
+        "original_title": "Pupphacchattiyattheraapadānaṃ"
+      },
+      "narrative_witness_terms": [
+        "Siddhatthassa",
+        "Jalajaṃ",
+        "satapattaṃ",
+        "Pupphassa chattaṃ",
+        "setacchattampi",
+        "aṭṭha jalasikhā"
+      ],
+      "presentation_state_pairs": [
+        {
+          "diacritics": "c",
+          "alternative": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "source_region": "poem"
+        },
+        {
+          "diacritics": "c",
+          "alternative": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "source_region": "poem"
+        },
+        {
+          "diacritics": "c",
+          "alternative": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04",
+          "source_region": "poem"
+        }
+      ],
+      "required_mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+        "Full original publisher chapter-3 poem 329 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap331; title and numbering alone do not establish the mapping.",
+        "VRI final attainment formula remains abbreviated as printed; publisher supplies its own full formula. Do not expand or replace the VRI.",
+        "The first original stanza entry combines local1–2/globals2898–2899 and reorders their clauses relative to VRI73–74; preserve each order independently.",
+        "Exact c/ch state-pairs occur only in the poem heading and the two colophons; retain adjacent literal text.",
+        "Publisher note2 retains its literal xxx editorial placeholder and unfinished quotation punctuation. Do not repair or omit it.",
+        "Publisher note4 compares a distinct earlier poem306, which remains held; a cross-reference grants no activation."
+      ]
+    }
+  ],
+  "holds": [
+    {
+      "publisher": 322,
+      "canonical_owner": "tha-ap324",
+      "decision": "HOLD_NOT_APPROVED_IN_THIS_SUBSET",
+      "raw_sha256": "75405c932140b6bfd99d7f0ad1ec3afb89624daae4b9dd5da9e7a6bf0b0233b5",
+      "git_blob_sha1": "5c7b0ae10bc34302f50fe43ebfa4273eceea7ff7",
+      "root_sha256": "20437def68c3028e8818f8e7cb8b4a920c9ec450c1d9630dd712afcfc9759c41",
+      "reason": "Original poem heading has no opening bracket; strict current heading grammar cannot represent it without a separate finite exception. Preserve literal malformed heading, do not insert a bracket.",
+      "definition_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "publisher": 327,
+      "canonical_owner": "tha-ap329",
+      "decision": "HOLD_NOT_APPROVED_IN_THIS_SUBSET",
+      "raw_sha256": "23fb6fc3e5b0013a6e94bff70234b7e44d2b1bdbfd704ff459c13fb3e9a00a7f",
+      "git_blob_sha1": "5c153a06baa421cca328d3fcb44ccf1ec4f56669",
+      "root_sha256": "483734551391ce578905e3251699ee449e46d42e86733b7767abb419c3fa42c9",
+      "reason": "Original1/2 share one physical paragraph, compound8–9 and18–19 entries, and recitation/note12 precedes10 inside its paragraph; separate exact body/layout/quotation/division ownership machinery required. Global2285 and unfinished note27 must remain.",
+      "definition_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "publisher": 328,
+      "canonical_owner": "tha-ap330",
+      "decision": "HOLD_NOT_APPROVED_IN_THIS_SUBSET",
+      "raw_sha256": "ef03e80080420596ad25171027f169b98596f169b5d7599887a916fe125e36ca",
+      "git_blob_sha1": "4c735fb96e018a9838773f6310da864ed7607a45",
+      "root_sha256": "d1a9da12e65107590f23b719b8bbb239a7852857a14ab45b57f7bde9b987133d",
+      "reason": "Publisher10 labels vs VRI9 numbered stanzas: publisher local8 thirty-one-aeon recollection is absent in this VRI span; separate explicit edition/coverage review before activation.",
+      "definition_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "publisher": 330,
+      "canonical_owner": "tha-ap332",
+      "decision": "HOLD_NOT_APPROVED_IN_THIS_SUBSET",
+      "raw_sha256": "4ad75dcf3bcb6db6ec97f7c47dfab728d50a8f3de90d38c7ddf08ca6288d1ba9",
+      "git_blob_sha1": "d058e6b1347f180f881f5e22c36be0442cfaceae",
+      "root_sha256": "f182e12a69c1d3805f94006f3da3471390a4f956cdadd11f999551c670ab0f89",
+      "reason": "Separate summary owns note11; poem owns1–10. Preserve newline before global2929, comma-leading local16, full chapter summary107 vs105 numbered VRI stanzas, and prediction36 vs VRI88 thirty-two. Requires distinct exact apparatus/representation review.",
+      "definition_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "publisher": 331,
+      "canonical_owner": "tha-ap333",
+      "decision": "HOLD_NOT_APPROVED_IN_THIS_SUBSET",
+      "raw_sha256": "b4fa678c98a204bc591a5d6d656961060af3d5164e23516b9c8dfadf98902b4e",
+      "git_blob_sha1": "8e2540ef68328fcfe4efb38501d3d794a99892b5",
+      "root_sha256": "5b3b0c2ab16df11f94e0662f984801cbf4b259881b8456705b589c19a5ad02c9",
+      "reason": "Boundary control only; indexed canonical333 includes original next Udakapūjaka heading and its first stanza7. Do not activate or repair this adjacent scope in this intake.",
+      "definition_note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "coverage_proposal": {
+    "approved_publishers": [
+      321,
+      323,
+      324,
+      325,
+      326,
+      329
+    ],
+    "approved_ids": [
+      "tha-ap323",
+      "tha-ap325",
+      "tha-ap326",
+      "tha-ap327",
+      "tha-ap328",
+      "tha-ap331"
+    ],
+    "prior_choices": 333,
+    "potential_choices_if_integrated": 339,
+    "net_new_whole_publisher_edition_choices": 6,
+    "body_paragraphs": 56,
+    "physical_entries": 38,
+    "printed_labels": 41,
+    "poem_notes": 28,
+    "publisher_heading_prefaces": 1,
+    "new_summaries": 0,
+    "line_complete_VRI": false
+  },
+  "preserved_holds": {
+    "publishers": [
+      311,
+      320,
+      322,
+      327,
+      328,
+      330
+    ],
+    "formal_canonical_ids": [
+      "tha-ap72",
+      "tha-ap142",
+      "tha-ap160",
+      "tha-ap161",
+      "tha-ap262",
+      "tha-ap268",
+      "tha-ap282",
+      "tha-ap308",
+      "tha-ap309"
+    ]
+  },
+  "original_first": {
+    "new_candidate_metadata_or_sourceA_conclusions_read": false,
+    "originals_and_xml_read_before_new_profiles_formed": true,
+    "baseline_presealed_first": true
+  },
+  "source_approval": true,
+  "normalization_approval": true,
+  "runtime_activation_or_release_approval": false,
+  "limits": [
+    "Exact pinned publisher edition, not line-complete VRI translation, specialist translation accuracy or future upstream freshness.",
+    "No production parser/app imports, tests, builds, network, Git mutation or runtime/release activation.",
+    "Held source apparatus is recorded but not normalized into approved profiles; no invented punctuation, stanza, note or boundary.",
+    "No source bodies, note wording, HTML or private study text written into reports; raw originals remain external."
+  ]
+}

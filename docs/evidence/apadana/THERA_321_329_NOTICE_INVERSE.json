@@ -1,0 +1,38 @@
+{
+  "schema": "three-finite-editorial-note-deltas-v2",
+  "parent_notice_sha256": "fa039c945df99721e72cd1d8e08a3bee09cab5d568c8dd2e3f5b4f62a31b869f",
+  "parent_profiles_sha256": "968ec8364a5261dd43fd30b8ad1c6f922db1a0d354ad36d1f0e791c7a75b15a8",
+  "parent_links_sha256": "edcd995ad46d7e6421ef49b168cb7eb5b5d3b1620b9871ea7759be9e42dc74e3",
+  "sourceA_pre_B_seal_sha256": "2791cca38867606e8100e7ecbc4b055a1194e30dff4639bf22ec94b6c00e94fe",
+  "sourceA_core_profiles_sha256": "9bdd679f39b770917614a401baf13187c5945c06b0613a082e8e6e1b300275f3",
+  "deltas": [
+    {
+      "uid": "tha-ap323",
+      "operation": "append_exact_last_mapping_note",
+      "text": "Publisher royal name Samantacchadana has cch while VRI prints Samantachadano; preserve both edition spellings rather than alter either source."
+    },
+    {
+      "uid": "tha-ap326",
+      "operation": "append_exact_last_mapping_note",
+      "text": "All eleven note owners, literal ŋ spellings and source-specific BJTS-versus-PTS alternatives remain unchanged, including note10’s creature/non-creature contrast; no editorial reading is resolved."
+    },
+    {
+      "uid": "tha-ap331",
+      "operation": "replace_exact_one_mapping_note",
+      "before": "Publisher note2 retains its literal xxx editorial placeholder and unfinished quotation punctuation. Do not repair or omit it.",
+      "after": "Publisher note2 retains its literal xxx editorial placeholder and terminal ellipsis. Do not repair or omit it."
+    }
+  ],
+  "all_six_non_mapping_profile_fields_sourceA_B_equal": true,
+  "all56_paragraph_28_note_38_quotation_hashes_A_B_equal": true,
+  "source_text_pins_layouts_or_ownership_changed": false,
+  "whole_profile_and_link_byte_inverses_to_V1": true,
+  "correction_raw_proof": {
+    "publisher329_note2_raw_sha256": "2f8558e2296f223e2a67267a01f188c841749d7c77e679656fc311df29b09047",
+    "literal_xxx_and_terminal_ellipsis": true,
+    "quotation_characters": 0,
+    "held328_note2_raw_sha256": "9ffda8aa9be5443df01bdeaa097ac45b0f63de46ade06afca83973ac23820513",
+    "held328_unclosed_opening_curly_quote": true
+  },
+  "V1_source_proof_required_mapping_notes_superseded_only_at_three_exact_paths": true
+}
