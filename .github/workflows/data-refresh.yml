@@ -177,6 +177,12 @@ jobs:
           set -o pipefail
           npm run audit 2>&1 | tee "$W/audit.log"
 
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
       - name: Tests (npm test)
         id: tests
         continue-on-error: true

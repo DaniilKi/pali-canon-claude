@@ -51,6 +51,12 @@ jobs:
       - name: Exercise both bounded migration fixtures and negative controls
         timeout-minutes: 6
         run: node --test tests/bounded-python.test.mjs tests/dasabala-spans.test.mjs tests/dasabala-commentary.test.mjs
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
       - name: Run complete test inventory under normal concurrency
         timeout-minutes: 30
         run: npm test
