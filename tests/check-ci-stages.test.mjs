@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
+import {readFileSync,mkdtempSync,mkdirSync,writeFileSync,rmSync,symlinkSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -39,6 +39,29 @@ test('executable contract fails without a success receipt when a lifecycle hook 
     writeFileSync(join(dir,'package.json'),JSON.stringify({...pkg,scripts:{...pkg.scripts,precheck:'node omitted-gate.mjs'}}));
     const child=spawnSync(process.execPath,[join(dir,'scripts/ci-check-contract.mjs')],{encoding:'utf8',timeout:5000});
     assert.equal(child.error,undefined);assert.notEqual(child.status,0);assert.equal(child.stdout,'');assert.match(child.stderr,/lifecycle hook requires explicit CI integration/);
+  }finally{rmSync(dir,{recursive:true,force:true});}
+});
+
+test('a directory alias cannot bypass CLI success receipts or lifecycle refusal',()=>{
+  const dir=mkdtempSync(join(tmpdir(),'pali-check-alias-'));
+  try{
+    const real=join(dir,'real'),alias=join(dir,'alias');
+    mkdirSync(join(real,'scripts'),{recursive:true});
+    writeFileSync(join(real,'scripts/ci-check-contract.mjs'),read('scripts/ci-check-contract.mjs'));
+    symlinkSync(real,alias,process.platform==='win32'?'junction':'dir');
+    for(const invalid of [false,true]){
+      const fixture={...pkg,scripts:{...pkg.scripts,...(invalid?{precheck:'node omitted-gate.mjs'}:{})}};
+      writeFileSync(join(real,'package.json'),JSON.stringify(fixture));
+      const child=spawnSync(process.execPath,[join(alias,'scripts/ci-check-contract.mjs')],{encoding:'utf8',timeout:5000});
+      assert.equal(child.error,undefined);
+      if(invalid){
+        assert.notEqual(child.status,0);assert.equal(child.stdout,'');assert.match(child.stderr,/lifecycle hook requires explicit CI integration/);
+      }else{
+        assert.equal(child.status,0,child.stderr);
+        const receipt=JSON.parse(child.stdout);assert.equal(receipt.status,'passed');
+        assert.deepEqual(receipt.commands,['npm run build','npm test','npm run audit']);
+      }
+    }
   }finally{rmSync(dir,{recursive:true,force:true});}
 });
 
