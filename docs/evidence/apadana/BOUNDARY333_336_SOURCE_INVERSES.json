@@ -90,11 +90,11 @@
     },
     "scripts/export-index.mjs": {
       "frozen440_sha256": "ac645c4a3a1345d7a8635a3e63084b6b34b2c59de551e3366ceb41f13142601d",
-      "current_sha256": "f970bc389dd14541bf7d8d36a64e748cd03be8468db5f4afa96104503fbf56ea",
+      "current_sha256": "fe0eb44f8093e0be7fa271f5f50d8b8c6414934b123feb8e91feefa461533e1a",
       "hunks": [
         {
-          "before": "export const CSV_COLUMNS = [\n  'id', 'citation', 'title', 'pitaka', 'collection', 'kind', 'approximate',\n  'vri_book', 'vri_file', 'vri_paragraphs',\n  'pts', 'pts_volume', 'pts_page', 'pts_end_page',\n  'members', 'english_inherited_from', 'english_count', 'english_urls', 'english_translators',\n  'english_references', 'english_translation_ids', 'english_licenses',\n",
-          "after": "export const CSV_COLUMNS = [\n  'id', 'citation', 'title', 'pitaka', 'collection', 'kind', 'approximate',\n  'vri_book', 'vri_file', 'vri_paragraphs',\n  'index_revision', 'locator_revision',\n  'pts', 'pts_volume', 'pts_page', 'pts_end_page',\n  'members', 'english_inherited_from', 'english_count', 'english_urls', 'english_translators',\n  'english_references', 'english_translation_ids', 'english_licenses',\n"
+          "before": "  'members', 'english_inherited_from', 'english_count', 'english_urls', 'english_translators',\n  'english_references', 'english_translation_ids', 'english_licenses',\n  'partial_english_count', 'partial_english', 'shared_english_count', 'shared_english',\n];\n\nconst CC_BY_NC_4 = 'https://creativecommons.org/licenses/by-nc/4.0/';\n",
+          "after": "  'members', 'english_inherited_from', 'english_count', 'english_urls', 'english_translators',\n  'english_references', 'english_translation_ids', 'english_licenses',\n  'partial_english_count', 'partial_english', 'shared_english_count', 'shared_english',\n  'index_revision', 'locator_revision',\n];\n\nconst CC_BY_NC_4 = 'https://creativecommons.org/licenses/by-nc/4.0/';\n"
         },
         {
           "before": "      kind: u.kind || 'text',\n      approximate: Boolean(u.approximate),\n      vri: { book: info.vri_book, file: info.vri_file, paragraphs: u.vri || null },\n      pts: u.pts ? { label: info.pts, volume: u.pts.volume || null, page: u.pts.page ?? null, end_page: u.pts.end_page ?? u.pts.page ?? null } : null,\n      ...(u.members ? { members: u.members } : {}),\n      english_inherited_from: via ? via.id : null,\n",

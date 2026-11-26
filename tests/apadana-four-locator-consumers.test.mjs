@@ -166,6 +166,8 @@ test('all fifty historical source positions refuse without rebasing, including s
 
 test('bulk citation exports disclose effective locator namespaces without changing edition provenance or exporting words',()=>{
  const index=buildIndex();assert.equal(index.source.commit,ORIGINAL);assert.equal(index.count,8544);
+ const legacy=["id","citation","title","pitaka","collection","kind","approximate","vri_book","vri_file","vri_paragraphs","pts","pts_volume","pts_page","pts_end_page","members","english_inherited_from","english_count","english_urls","english_translators","english_references","english_translation_ids","english_licenses","partial_english_count","partial_english","shared_english_count","shared_english"];
+ const header=toCsv(index).split("\r\n")[0].split(",");assert.deepEqual(header.slice(0,26),legacy);assert.deepEqual(header.slice(26),["index_revision","locator_revision"]);
  for(const id of ids){
   const row=index.texts.find(t=>t.id===id);assert.equal(row.locator_revision,EXPECTED[id]);
   assert.equal(row.index_revision,EXPECTED[id].slice(ORIGINAL.length+1));assert.equal(row.segments,undefined);
