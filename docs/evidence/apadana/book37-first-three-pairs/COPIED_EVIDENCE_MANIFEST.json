@@ -1,0 +1,31 @@
+{
+  "purpose": "Only source evidence, static positional diagnostics and future-work metadata; no repair activation",
+  "files": {
+    "A/FINAL_SEAL.json": "7c1c8449a4acd17e83121d1b403d9d02c33f9891936e3f19b411d9393cac087c",
+    "A/FINAL_SOURCE_REVIEW.json": "adbf84b875acf14b4acc56f63b511b5c27dd23b6de9f112fd73825cb5d7dd55f",
+    "A/ISOLATED_RENDER_INPUT.json": "af92de57e350d9685605d871c7c21f02a8a0306d6effedf1a0b2c4be11f5882f",
+    "A/ISOLATED_RENDER_POSITIONS.json": "3c2115041955f57bc67acbe044b07d5bcc3177e3ef02e0ef11bbe997ddb512cd",
+    "A/PROPOSED_SIX_CORE_RECORDS.json": "81635772bebd4cceab030fa3ff6a0faaaacbe1688c39fc4a62ff1d64cb1b6250",
+    "A/SOURCE106_REFERENCE_CROSSWALK.json": "7d746b55121ff58708c7f3fd5796b3b52db6fcccc755067fc706fb3668bdfdc4",
+    "A/SOURCE256_BLOCK_CROSSWALK.json": "81e02ee06c5fab202fcd09c51defcb749af436069eedf0c70bbbbf82c8f314cb",
+    "A/SOURCE_CORE_REPORT.json": "2657ec938f36bf29b147abf36363940b79f4e8d5d48bb2ffcca6efe5dce7bb7f",
+    "A/SOURCE_ONLY_PRESEAL.json": "2adc596c4c02e30d0b319752bd1701627b4a88780fd9f84266e8e0a1cd3b85ce",
+    "A/derive_source.py": "8bcfa0c54de2881310ec26ef8a0d53a3d0723d01c42d347b297a836a7ffc22e2",
+    "A/render_isolated.mjs": "6538436f9ab38e2e9129909d8980f2387313eda6b6fb7228f068725fdb489e0e",
+    "A/seal_positions.py": "47d349c044df0481e43e6159d36e19199f281659863181b0936bf3df9af82387",
+    "B/BEFORE_AFTER_RECORDS.json": "d8cae8b4dda184acb06ce1af0757f053829b5d203a82bd2048af38f1f2b2cd32",
+    "B/PRESEALED_REVIEW.json": "1420b5674a940e3c237eb342246e13e067d3197916d8d0475e1c822dd5af662c",
+    "B/SEGMENT_CROSSWALK.json": "cb80d057612f17bc5cba2c6cc8cc9b766c6bae8782c5649202e63bb929d987c8",
+    "B/SEGMENT_ORACLES.json": "34842b3568ddf4530b9e7bbd6aaaab191bd3d04a7f5e74ba2d360a0568cc33bd",
+    "B/SOURCE_BINDINGS.json": "9b01a56ead9e905bdc58bcdf8bed301ca0149a752abf3471449dcdc7da901466",
+    "B/SOURCE_REVIEW.json": "b673aefa5a32f5bc173be34122c679418d30a23c75563a614ba50ef59140c2aa",
+    "B/derive_book37.py": "0404686b66f7385104e217b560004a9fe8f25b0970ed1c6d836a30821dda485d",
+    "joint/JOINT_SEAL.json": "2dd0b31f0de2ce02d5991b1eb7b35fc6b0be0f0b8c628b805b66e98daf600b0a",
+    "joint/JOINT_SOURCE_REVIEW.json": "95bd32c722d083f2f8f16e7cbd269e284d95847b40b3337226e8f2e1efbe7c67",
+    "joint/compare_presealed.py": "8bc9343cee1735e38be2dde4ace86970fe4a97afe000e4ca4b16f6e50c3f3894",
+    "joint/INDEPENDENT_COMPARISON_REVIEW.json": "291f663e042e51965978173d4e3ce0c745f4d3f9dcd7f789ef25980b7eaa8b80"
+  },
+  "raw_English_files": false,
+  "private_user_data": false,
+  "runtime_changed": false
+}

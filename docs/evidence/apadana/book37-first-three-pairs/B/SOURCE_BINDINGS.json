@@ -1,0 +1,46 @@
+{
+  "schema": "independent-book37-first3-source-bindings-v1",
+  "raw_XML": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/book37-recovery/s0510m2.mul.xml",
+    "bytes": 1779576,
+    "sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1"
+  },
+  "VRI_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "raw_git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+  "current_canonical_parts_manifest": {
+    "path": "/tmp/pali-boundaries340-nov26/server/data/canon.json.gz.parts.json",
+    "bytes": 455,
+    "sha256": "f280027739cb7abd6ada384e64756b3d78fc4f7243f5ce9fe95bdfb2f37c6a10"
+  },
+  "current_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "book_index": 37,
+  "book_file": "s0510m2.mul.xml",
+  "source_prefix_compared_blocks": 334,
+  "target_pair_union_blocks": 256,
+  "exact_raw_source_tuple_fields": [
+    "style",
+    "VRI_label",
+    "text",
+    "variant_notes",
+    "page_begins"
+  ],
+  "project_sources_read_statically": {
+    "src/canon.mjs": {
+      "path": "/tmp/pali-boundaries340-nov26/src/canon.mjs",
+      "bytes": 47196,
+      "sha256": "b496860add5770a775023b28739c4821af459c96803af644a5ecd20fcc69883f"
+    },
+    "src/editions.mjs": {
+      "path": "/tmp/pali-boundaries340-nov26/src/editions.mjs",
+      "bytes": 12304,
+      "sha256": "ab2306502a68171b474969ddd6c96d16e37891c4d451a6e78b8b17bcc505b68b"
+    },
+    "scripts/canon/build_canon.py": {
+      "path": "/tmp/pali-boundaries340-nov26/scripts/canon/build_canon.py",
+      "bytes": 39529,
+      "sha256": "ab07b1a0d30f2c8608068c0563ec44fa85be58016034cfca64b567678a6afde2"
+    }
+  },
+  "application_or_Builder_imported_or_executed": false,
+  "other_new_review_outputs_read": false
+}

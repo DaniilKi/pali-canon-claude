@@ -1,0 +1,7 @@
+{
+  "report_sha256": "95bd32c722d083f2f8f16e7cbd269e284d95847b40b3337226e8f2e1efbe7c67",
+  "producer_sha256": "8bc9343cee1735e38be2dde4ace86970fe4a97afe000e4ca4b16f6e50c3f3894",
+  "A_seal_sha256": "7c1c8449a4acd17e83121d1b403d9d02c33f9891936e3f19b411d9393cac087c",
+  "B_preseal_sha256": "1420b5674a940e3c237eb342246e13e067d3197916d8d0475e1c822dd5af662c",
+  "activation_approved": false
+}

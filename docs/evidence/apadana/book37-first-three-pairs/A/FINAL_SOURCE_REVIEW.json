@@ -1,0 +1,266 @@
+{
+  "schema": "independent-book37-first-three-pairs-source-and-position-review-v1",
+  "producer": "A",
+  "status": "SOURCE_ONLY_GO_SIX_CORE_PROPOSALS_RUNTIME_NAMESPACE_AND_ACTIVATION_HELD",
+  "original_source": {
+    "XML_path": "/tmp/pali-boundaries340-evidence-nov26/book37-recovery/s0510m2.mul.xml",
+    "XML_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+    "XML_git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+    "VRI_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "physical_elements": 10673,
+    "retained_tuples": 10672,
+    "omitted_note_only_physical_indices": [
+      8858
+    ],
+    "whole_book_tuple_sha256": "bd0177c2025298415abd2e90e1d576d2418127e08ce339699ad725960089f8cc",
+    "all_original_tuples_equal_current_book37": true,
+    "current_canonical": {
+      "manifest_sha256": "f280027739cb7abd6ada384e64756b3d78fc4f7243f5ce9fe95bdfb2f37c6a10",
+      "packed_sha256": "271d6dd4b864c3688b175f72b7698c4f8736fa1a30525075333e09279d59d491",
+      "logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b"
+    }
+  },
+  "source_core_preseal_sha256": "2adc596c4c02e30d0b319752bd1701627b4a88780fd9f84266e8e0a1cd3b85ce",
+  "source_core_report_sha256": "2657ec938f36bf29b147abf36363940b79f4e8d5d48bb2ffcca6efe5dce7bb7f",
+  "six_core_record_proposals_sha256": "81635772bebd4cceab030fa3ff6a0faaaacbe1688c39fc4a62ff1d64cb1b6250",
+  "exact_proposed_cuts": [
+    {
+      "ids": [
+        "tha-ap423",
+        "tha-ap424"
+      ],
+      "old_cut": 55,
+      "proposed_cut": 51,
+      "union": [
+        1,
+        114
+      ],
+      "union_tuple_sha256": "592dfb05c416afec8f523730fac395378b8da51e62decb8562c9ca7e4b6d3687"
+    },
+    {
+      "ids": [
+        "tha-ap426",
+        "tha-ap427"
+      ],
+      "old_cut": 216,
+      "proposed_cut": 212,
+      "union": [
+        190,
+        242
+      ],
+      "union_tuple_sha256": "bf79110a3afac5ed13961b2af548b4a02d4b2109f44537e943d42aa77fdefa3c"
+    },
+    {
+      "ids": [
+        "tha-ap428",
+        "tha-ap429"
+      ],
+      "old_cut": 277,
+      "proposed_cut": 273,
+      "union": [
+        242,
+        333
+      ],
+      "union_tuple_sha256": "bd9cda600115b8c8d0c838377676bca7173d1a08dab9d20a83412fd8eaa0677e"
+    }
+  ],
+  "metadata_delta": "Exactly6core records; three cuts, VRI label endpoints and three right-hand final-niggahita titles. All6PTS objects remain unchanged. No namespace is added.",
+  "source_formula_finding": "The literal preceding bodytext clause is only the final Abhasitthati or Gathayo abhasitthati; the named speaker begins one block earlier in centre. No single prior bodytext ends with the full Book36 formula. Original kinds, capital letters, punctuation and splits are evidence; do not broaden the ten-check detector or flatten/rewrite these source blocks.",
+  "source_bindings": {
+    "all10672_original_book37_tuples_equal_current": true,
+    "all_words_notes_pages_renditions_unchanged": true,
+    "all256_closed_union_blocks_conserved_once_each": true,
+    "variant_notes": 14,
+    "moved_note_owner": "The original note at214moves with Koraṇḍa opening to427; wording/hash unchanged.",
+    "source_page_ownership": "VRI2.3at53moves with424opening; Thai2.34at275moves with429opening. No page is moved in originalXML, relabelled or renumbered."
+  },
+  "position_diagnostic": {
+    "old_segments": 106,
+    "proposed_source_segments": 106,
+    "counts": {
+      "old": {
+        "tha-ap423": 24,
+        "tha-ap424": 21,
+        "tha-ap426": 13,
+        "tha-ap427": 10,
+        "tha-ap428": 16,
+        "tha-ap429": 22
+      },
+      "proposed": {
+        "tha-ap423": 22,
+        "tha-ap424": 23,
+        "tha-ap426": 11,
+        "tha-ap427": 12,
+        "tha-ap428": 14,
+        "tha-ap429": 24
+      }
+    },
+    "category_counts": {
+      "SAME_REF_SAME_SOURCE_NOT_MIGRATION_AUTHORITY": 47,
+      "OLD_REF_ABSENT": 6,
+      "SAME_REF_DIFFERENT_SOURCE": 53
+    },
+    "moved_segments": [
+      {
+        "source_blocks": [
+          51,
+          52
+        ],
+        "old_ref": "tha-ap423/23",
+        "proposed_ref": "tha-ap424/1",
+        "type": "heading"
+      },
+      {
+        "source_blocks": [
+          52,
+          55
+        ],
+        "old_ref": "tha-ap423/24",
+        "proposed_ref": "tha-ap424/2",
+        "type": "verse"
+      },
+      {
+        "source_blocks": [
+          212,
+          213
+        ],
+        "old_ref": "tha-ap426/12",
+        "proposed_ref": "tha-ap427/1",
+        "type": "heading"
+      },
+      {
+        "source_blocks": [
+          213,
+          216
+        ],
+        "old_ref": "tha-ap426/13",
+        "proposed_ref": "tha-ap427/2",
+        "type": "verse"
+      },
+      {
+        "source_blocks": [
+          273,
+          274
+        ],
+        "old_ref": "tha-ap428/15",
+        "proposed_ref": "tha-ap429/1",
+        "type": "heading"
+      },
+      {
+        "source_blocks": [
+          274,
+          277
+        ],
+        "old_ref": "tha-ap428/16",
+        "proposed_ref": "tha-ap429/2",
+        "type": "verse"
+      }
+    ],
+    "all106_exact_original_type_word_note_page_segments_preserved": true,
+    "implementation": "Exact finite existing renderUnitSegments/ptsLabel/editionIndex/editionLabel and their constant declarations evaluated in a no-I/O VM against original source blocks; no app import, lazy loading or tool/server invocation.",
+    "isolated_observation_sha256": "3c2115041955f57bc67acbe044b07d5bcc3177e3ef02e0ef11bbe997ddb512cd",
+    "renderer_source_sha256": "b496860add5770a775023b28739c4821af459c96803af644a5ecd20fcc69883f",
+    "edition_source_sha256": "ab2306502a68171b474969ddd6c96d16e37891c4d451a6e78b8b17bcc505b68b",
+    "extracted_code_sha256": "a56d0935d6f467f2fdb5a1ae8f117425d8b7d1a9d5cce27bb5f4742112a597a5",
+    "source_markup_edge_cases": [
+      {
+        "source_block": 112,
+        "original_kind": "gathalast",
+        "existing_rendered_source_segment": {
+          "uid": "tha-ap424",
+          "offset": 21,
+          "ref": "tha-ap424/22",
+          "type": "verse",
+          "source_blocks": [
+            110,
+            113
+          ],
+          "vri_paragraph": "35",
+          "text_sha256": "cca7ab93fc0a9ffcf5d2bbdf7b9a9473eaae00c287b6618b6b943c0e7b4c44c5",
+          "text_utf16_length": 120,
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0
+        },
+        "no_source_retagging_or_split": true
+      },
+      {
+        "source_block": 240,
+        "original_kind": "gathalast",
+        "existing_rendered_source_segment": {
+          "uid": "tha-ap427",
+          "offset": 10,
+          "ref": "tha-ap427/11",
+          "type": "verse",
+          "source_blocks": [
+            238,
+            241
+          ],
+          "vri_paragraph": "77",
+          "text_sha256": "daa0de315c3e356de1e7ed8c6b7bb26ded589d2cf37187abd13fa07f60a4d0ff",
+          "text_utf16_length": 121,
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0
+        },
+        "no_source_retagging_or_split": true
+      }
+    ],
+    "consecutive_gathalast292_emitted_unlabelled_verse": {
+      "uid": "tha-ap429",
+      "offset": 7,
+      "ref": "tha-ap429/8",
+      "type": "verse",
+      "source_blocks": [
+        292,
+        293
+      ],
+      "pts_page_begins": [
+        "Ap ii 385"
+      ],
+      "text_sha256": "7e75f3575d447a18c37fe94755236fae6ddeb88ae027ec522344bf6eebba8ea6",
+      "text_utf16_length": 41,
+      "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "note_count": 0
+    }
+  },
+  "dependencies": {
+    "commentary": {
+      "manifest_sha256": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156",
+      "packed_sha256": "f231b2d57d92e386cf4de06c18f46d9bfdc75a3136a24036967c9719fbeb03cd",
+      "logical_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461"
+    },
+    "commentary_total_associations": 16473,
+    "accepted_book37_root_intervals": 58,
+    "target_associations": {
+      "tha-ap423": [],
+      "tha-ap424": [],
+      "tha-ap426": [],
+      "tha-ap427": [],
+      "tha-ap428": [],
+      "tha-ap429": []
+    },
+    "union_root_intersections": [],
+    "group_dependencies": [],
+    "target_parallel_edges": false,
+    "parallels_logical_sha256": "f0df75a21e4db6d4362cc42dd2fcb070e49dc551bd0763707aaaab7c9db41a53"
+  },
+  "independence": {
+    "raw_read_before_screen_or_queue_consultation": true,
+    "other_new_reviewer_outputs_read": false,
+    "screen_or_queue_used_as_proof": false,
+    "app_Builder_repair_imports": false,
+    "new_namespace_assigned": false,
+    "renderer_not_used_to_establish_ownership": true
+  },
+  "holds": [
+    "No Book36 signature matcher change is proposed. The raw split formula independently explains why the old literal check fails.",
+    "All106old positions, including47same-reference/same-source cases, need a separately reviewed locator/version policy before any repair activation. No private note/bookmark/draft/export migration is authorized.",
+    "No future namespace, active canon bytes, English identity, translation activation or coverage gain has been produced.",
+    "An independent peer source comparison, exact complete dataset proof, namespace/consumer review, runtime/package/browser acceptance and exact-commitCI remain required for any future implementation.",
+    "This bounded source diagnostic does not assess other Book37screen flags or establish corpus-wide correctness."
+  ],
+  "other_new_reviewer_output_read": false,
+  "private_user_data_accessed": false,
+  "tracked_project_or_Git_CI_mutation": false,
+  "coverage_gain": 0,
+  "runtime_or_release_approval": false
+}

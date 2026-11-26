@@ -1,0 +1,73 @@
+{
+  "schema": "joint-book37-first3-source-only-comparison-v1",
+  "status": "GO_SOURCE_ONLY_INDEPENDENT_AGREEMENT_IMPLEMENTATION_HELD",
+  "A_seal": "7c1c8449a4acd17e83121d1b403d9d02c33f9891936e3f19b411d9393cac087c",
+  "B_preseal": "1420b5674a940e3c237eb342246e13e067d3197916d8d0475e1c822dd5af662c",
+  "before_after_complete_records_compared": 6,
+  "source_cuts": [
+    {
+      "ids": [
+        "tha-ap423",
+        "tha-ap424"
+      ],
+      "old": 55,
+      "proposed": 51
+    },
+    {
+      "ids": [
+        "tha-ap426",
+        "tha-ap427"
+      ],
+      "old": 216,
+      "proposed": 212
+    },
+    {
+      "ids": [
+        "tha-ap428",
+        "tha-ap429"
+      ],
+      "old": 277,
+      "proposed": 273
+    }
+  ],
+  "all_six_PTS_unchanged": true,
+  "raw_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "current_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "rendered_crosswalk_rows_compared": 106,
+  "compared_segment_semantic_fields": [
+    "uid",
+    "offset",
+    "ref",
+    "type",
+    "source_blocks",
+    "text_sha256",
+    "text_utf16_length",
+    "notes_sha256",
+    "note_count",
+    "vri_paragraph",
+    "pts_page_begins",
+    "thai_page_begins",
+    "myanmar_page_begins",
+    "vri_page_begins"
+  ],
+  "categories": {
+    "SAME_NUMERIC_REF_SAME_SOURCE": 47,
+    "VANISHED_OLD_OWNER_REF": 6,
+    "SAME_NUMERIC_REF_DIFFERENT_SOURCE": 53
+  },
+  "moved_source_segments": 6,
+  "moved_source_blocks": 12,
+  "source_union_blocks": 256,
+  "notes_preserved": 14,
+  "schema_asymmetry": "A retains individual note-string hashes not separately present in B. Both independently bind complete ordered note-list hashes/counts; no claim of identical schemas. Missing A optional page arrays normalize only to empty and absent VRIlabel only to null; all other fields exact.",
+  "source_formula_finding": "Named closing speaker fragments span centre and following capitalized bodytext, then left colophon. Do not broaden Book36 matcher or rewrite raw markup.",
+  "rendering_limits": "Existing gathalast speakers112/240 remain inside final verse; standalone unlabelled verse292 retained. This static source model is not runtime acceptance.",
+  "holds": [
+    "No future namespace/activation/English mapping/coverage gain/private data migration.",
+    "All106old positions including47same-source need a separately reviewed version policy.",
+    "Future implementation needs full corpus, consumer, genuine installed/browser and exactCI validation.",
+    "Other24structural flags and lexical lead remain unreviewed."
+  ],
+  "releases_changed": false,
+  "producer_sha256": "8bc9343cee1735e38be2dde4ace86970fe4a97afe000e4ca4b16f6e50c3f3894"
+}

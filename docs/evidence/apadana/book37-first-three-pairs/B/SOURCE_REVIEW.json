@@ -1,0 +1,550 @@
+{
+  "schema": "independent-original-first-book37-first3-source-review-v1",
+  "status": "GO_SOURCE_ONLY_THREE_CUTS_IMPLEMENTATION_AND_ACTIVATION_HELD",
+  "reviewed_utc": "2026-11-26T17:04:00.931549+00:00",
+  "source_supported_cuts": [
+    51,
+    212,
+    273
+  ],
+  "current_cuts": [
+    55,
+    216,
+    277
+  ],
+  "records": [
+    {
+      "id": "tha-ap423",
+      "before": {
+        "id": "tha-ap423",
+        "book": 37,
+        "start": 1,
+        "end": 55,
+        "title": "Sakiṃsammajjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 423",
+        "vri": "1–15",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 379
+        }
+      },
+      "source_supported_proposed": {
+        "id": "tha-ap423",
+        "book": 37,
+        "start": 1,
+        "end": 51,
+        "title": "Sakiṃsammajjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 423",
+        "vri": "1–14",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 379
+        }
+      },
+      "before_record_sha256": "7c41b847f27e51992de93adaa45d3ecf546b90dee6c690cc09e0284c1fffce8f",
+      "proposed_record_sha256": "b49edef78b64cfbdb30dfb4838c8f433e66dd01a5131cfb93a4ad5fc70895ff4",
+      "changed_fields": [
+        "end",
+        "vri"
+      ],
+      "before_segment_count": 24,
+      "proposed_segment_count": 22,
+      "before_scope_tuple_sha256": "716bb19876f2857b7827564195a0d9da9ed635ab8f32263b80803f70c1c04f9b",
+      "proposed_scope_tuple_sha256": "005963069b2cd1fe611633b52669155c2c7941195a71e347826f5b6b93909512",
+      "PTS_fields_changed": false
+    },
+    {
+      "id": "tha-ap424",
+      "before": {
+        "id": "tha-ap424",
+        "book": 37,
+        "start": 55,
+        "end": 114,
+        "title": "Ekadussadāyakattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 424",
+        "vri": "16–35",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 380
+        }
+      },
+      "source_supported_proposed": {
+        "id": "tha-ap424",
+        "book": 37,
+        "start": 51,
+        "end": 114,
+        "title": "Ekadussadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 424",
+        "vri": "15–35",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 380
+        }
+      },
+      "before_record_sha256": "e70e0a7b95c60dfd496c6e32de486582d56e66f3aa4dccd1e1a5a88a4695aa48",
+      "proposed_record_sha256": "a65bdec7318ef3b30fd29a0f50b767ef9546353e9389244294dae3d34eae64bc",
+      "changed_fields": [
+        "start",
+        "title",
+        "vri"
+      ],
+      "before_segment_count": 21,
+      "proposed_segment_count": 23,
+      "before_scope_tuple_sha256": "6410280dc047fb2d030004b7e41dd9611b300f35ad9a679a6a57666faaa240e7",
+      "proposed_scope_tuple_sha256": "8984d780b1e5b065c2a1124f0d2876c88eeb05c64afe3b2586f6ecc9c62db4d7",
+      "PTS_fields_changed": false
+    },
+    {
+      "id": "tha-ap426",
+      "before": {
+        "id": "tha-ap426",
+        "book": 37,
+        "start": 190,
+        "end": 216,
+        "title": "Sattakadambapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 426",
+        "vri": "61–68",
+        "pts": {
+          "volume": 2,
+          "page": 382,
+          "end_page": 383
+        }
+      },
+      "source_supported_proposed": {
+        "id": "tha-ap426",
+        "book": 37,
+        "start": 190,
+        "end": 212,
+        "title": "Sattakadambapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 426",
+        "vri": "61–67",
+        "pts": {
+          "volume": 2,
+          "page": 382,
+          "end_page": 383
+        }
+      },
+      "before_record_sha256": "9ea1e9e707336b579bb9394061b349a3537e8ca132a125d7f088fd22c872bde1",
+      "proposed_record_sha256": "0585b04c4901e9a0bfd8907188c27d4f24d8a682afa60c9b566b877c1613a102",
+      "changed_fields": [
+        "end",
+        "vri"
+      ],
+      "before_segment_count": 13,
+      "proposed_segment_count": 11,
+      "before_scope_tuple_sha256": "e2870f46939fda1099287139f4b0f4db663a8afe4f2fecd131a832492c54141f",
+      "proposed_scope_tuple_sha256": "dc5c8e42e8c62ba66889003485703194582f3074362f5c7046b42e08e374b5d0",
+      "PTS_fields_changed": false
+    },
+    {
+      "id": "tha-ap427",
+      "before": {
+        "id": "tha-ap427",
+        "book": 37,
+        "start": 216,
+        "end": 242,
+        "title": "Koraṇḍapupphiyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 427",
+        "vri": "69–77",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 383
+        }
+      },
+      "source_supported_proposed": {
+        "id": "tha-ap427",
+        "book": 37,
+        "start": 212,
+        "end": 242,
+        "title": "Koraṇḍapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 427",
+        "vri": "68–77",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 383
+        }
+      },
+      "before_record_sha256": "5beb6e25b3be446096b34fe5c28c119de71d8cfc0865334038240148f61142f2",
+      "proposed_record_sha256": "b1609e5e3796b94082403fcb835e000b43a748a9e4963527c53ad9e96da542cf",
+      "changed_fields": [
+        "start",
+        "title",
+        "vri"
+      ],
+      "before_segment_count": 10,
+      "proposed_segment_count": 12,
+      "before_scope_tuple_sha256": "13c418b240ccbe529f6065d9fdb90340f3fe74bc722bb99e99dc00b80c35134c",
+      "proposed_scope_tuple_sha256": "9379bc159a8565b9b9509bf3e6fa5a3f33fe56c04a9865c03a5953b852c7319a",
+      "PTS_fields_changed": false
+    },
+    {
+      "id": "tha-ap428",
+      "before": {
+        "id": "tha-ap428",
+        "book": 37,
+        "start": 242,
+        "end": 277,
+        "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 428",
+        "vri": "78–88",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 384
+        }
+      },
+      "source_supported_proposed": {
+        "id": "tha-ap428",
+        "book": 37,
+        "start": 242,
+        "end": 273,
+        "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 428",
+        "vri": "78–87",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 384
+        }
+      },
+      "before_record_sha256": "3d015b4a090bef8e16c95c6c432884fbaf00bd8689ad0ea51eadb73a17187bf5",
+      "proposed_record_sha256": "f7bf22ee27a7620b111c945fb6e622f400354c86ac30593354f4f56378ca2cda",
+      "changed_fields": [
+        "end",
+        "vri"
+      ],
+      "before_segment_count": 16,
+      "proposed_segment_count": 14,
+      "before_scope_tuple_sha256": "ca9560581ee29b3a944885e93eec7a5f2818755bcc57afba13ec4a5bb0d33504",
+      "proposed_scope_tuple_sha256": "58316e17e50f59aff1bfd55654abb4ec53bf703d6ee862d232ca27203c91b7b2",
+      "PTS_fields_changed": false
+    },
+    {
+      "id": "tha-ap429",
+      "before": {
+        "id": "tha-ap429",
+        "book": 37,
+        "start": 277,
+        "end": 333,
+        "title": "Ekadhammassavaniyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 429",
+        "vri": "89–106",
+        "pts": {
+          "volume": 2,
+          "page": 384,
+          "end_page": 385
+        }
+      },
+      "source_supported_proposed": {
+        "id": "tha-ap429",
+        "book": 37,
+        "start": 273,
+        "end": 333,
+        "title": "Ekadhammassavaniyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 429",
+        "vri": "88–106",
+        "pts": {
+          "volume": 2,
+          "page": 384,
+          "end_page": 385
+        }
+      },
+      "before_record_sha256": "47b11c9ac81e22ba22187abdcd2cd99e807f8ed1e9bb38992396e5685ebf0ff7",
+      "proposed_record_sha256": "1e7d1ebe15f7e51d9f2280ff62666f1fd49866f3d946cb7f982234f8577a380b",
+      "changed_fields": [
+        "start",
+        "title",
+        "vri"
+      ],
+      "before_segment_count": 22,
+      "proposed_segment_count": 24,
+      "before_scope_tuple_sha256": "607721596e9795c0d4b3c583ec5bf3da6b5c6985f13528a0ca46001047ee89cd",
+      "proposed_scope_tuple_sha256": "990d1083a5c612c63aa0f4a904ded7954cf8d6c900d632e2eaa9f63cb242192d",
+      "PTS_fields_changed": false
+    }
+  ],
+  "pairs": [
+    {
+      "left_id": "tha-ap423",
+      "right_id": "tha-ap424",
+      "current_cut": 55,
+      "source_supported_cut": 51,
+      "source_union_half_open": [
+        1,
+        114
+      ],
+      "current_union_tuple_sha256": "592dfb05c416afec8f523730fac395378b8da51e62decb8562c9ca7e4b6d3687",
+      "speaker_fragments": [
+        {
+          "block": 48,
+          "style": "centre",
+          "raw_text": "Itthaṃ sudaṃ āyasmā sakiṃsammajjako thero imā gāthāyo",
+          "tuple_sha256": "4b127d8f07c952bdb5808e38abc9da899f391386bfb67fe9873b8c6a6d8cc103"
+        },
+        {
+          "block": 49,
+          "style": "bodytext",
+          "raw_text": "Abhāsitthāti.",
+          "tuple_sha256": "bf8b70d9882702600f9df9415cf3294fd336f599fad9d6e87860e29864df9af9"
+        }
+      ],
+      "named_closing": {
+        "block": 50,
+        "style": "centre",
+        "text_sha256": "4bc2c7d645f2a8e7c9b54f3eb24805e1cfddbb810060650b8a02c814f317b5d9"
+      },
+      "right_heading": {
+        "block": 51,
+        "title": "Ekadussadāyakattheraapadānaṃ",
+        "text_sha256": "b35ae37df677ddb89189395e97de607ce6c5a5bb6990fed3a60972f18a629aa2"
+      },
+      "opening_VRI_label": "15",
+      "moved_blocks": [
+        {
+          "block": 51,
+          "kind": "subhead",
+          "VRI_label": null,
+          "tuple_sha256": "00c6a246a05baa1f20a2f9f92266d2619071a6244866c61ff8ceed4fa5d9a37a",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        },
+        {
+          "block": 52,
+          "kind": "hangnum",
+          "VRI_label": "15",
+          "tuple_sha256": "19fda9d0bcb8f677bc125e94d80571cdaa836704f93f122d0f348329e46cc898",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        },
+        {
+          "block": 53,
+          "kind": "gatha1",
+          "VRI_label": null,
+          "tuple_sha256": "a7b9493373db1f89ce763978611f14afa1252390af7d976f03a2795f84e3465d",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {
+            "V": [
+              "2.3"
+            ]
+          }
+        },
+        {
+          "block": 54,
+          "kind": "gathalast",
+          "VRI_label": null,
+          "tuple_sha256": "05e9cc49cb407f6093bd477d2c47014323b4509d340febed4144eae202339a36",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        }
+      ],
+      "status": "GO_SOURCE_CUT_ONLY",
+      "Book36_signature_failure": "Previous speaker formula is centre partial + bodytext capitalized continuation, not one complete bodytext formula; source strings/tags are not changed."
+    },
+    {
+      "left_id": "tha-ap426",
+      "right_id": "tha-ap427",
+      "current_cut": 216,
+      "source_supported_cut": 212,
+      "source_union_half_open": [
+        190,
+        242
+      ],
+      "current_union_tuple_sha256": "bf79110a3afac5ed13961b2af548b4a02d4b2109f44537e943d42aa77fdefa3c",
+      "speaker_fragments": [
+        {
+          "block": 209,
+          "style": "centre",
+          "raw_text": "Itthaṃ sudaṃ āyasmā sattakadambapupphiyo thero imā",
+          "tuple_sha256": "01fe5aafee0606fb34b61aededca915b9912c4315ba1d3e7c951a411b6c1fd37"
+        },
+        {
+          "block": 210,
+          "style": "bodytext",
+          "raw_text": "Gāthāyo abhāsitthāti.",
+          "tuple_sha256": "5ccc26ea7d501ea789c8af041253ae8fc35c045226a30532efbbb83c897fa068"
+        }
+      ],
+      "named_closing": {
+        "block": 211,
+        "style": "centre",
+        "text_sha256": "e635534789faed7ab429abafe4d7b73cc7d97b15a97985ea6d1e34b702c679af"
+      },
+      "right_heading": {
+        "block": 212,
+        "title": "Koraṇḍapupphiyattheraapadānaṃ",
+        "text_sha256": "ce59d8fb22fc32d22170c8b582c63c6c2a079bc62292617bf47de5013d5490c9"
+      },
+      "opening_VRI_label": "68",
+      "moved_blocks": [
+        {
+          "block": 212,
+          "kind": "subhead",
+          "VRI_label": null,
+          "tuple_sha256": "3616de2178410afd5ae827ec69d61e5b60aaa76f75ad79e4a74cfdbd2e17901f",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        },
+        {
+          "block": 213,
+          "kind": "hangnum",
+          "VRI_label": "68",
+          "tuple_sha256": "320d96acd6c20a95db0c383927d5ed190356240595e55cf14d72dd4f014412a4",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        },
+        {
+          "block": 214,
+          "kind": "gatha1",
+          "VRI_label": null,
+          "tuple_sha256": "7c689c74f7447b29e66291d03bf55d0a7a8e05b386c394b47075d116339bcf82",
+          "notes_sha256": "c221d814ec1c245e5018a6194c1028d657e6122de0207b911cf1e5bef6c02aff",
+          "note_count": 1,
+          "page_begins": {}
+        },
+        {
+          "block": 215,
+          "kind": "gathalast",
+          "VRI_label": null,
+          "tuple_sha256": "c97f1c37cb6fe8683e160feed19edb82b098ad9a19fcb56b7a2236c793a920b9",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        }
+      ],
+      "status": "GO_SOURCE_CUT_ONLY",
+      "Book36_signature_failure": "Previous speaker formula is centre partial + bodytext capitalized continuation, not one complete bodytext formula; source strings/tags are not changed."
+    },
+    {
+      "left_id": "tha-ap428",
+      "right_id": "tha-ap429",
+      "current_cut": 277,
+      "source_supported_cut": 273,
+      "source_union_half_open": [
+        242,
+        333
+      ],
+      "current_union_tuple_sha256": "bd9cda600115b8c8d0c838377676bca7173d1a08dab9d20a83412fd8eaa0677e",
+      "speaker_fragments": [
+        {
+          "block": 270,
+          "style": "centre",
+          "raw_text": "Itthaṃ sudaṃ āyasmā ghatamaṇḍadāyako thero imā gāthāyo",
+          "tuple_sha256": "76d6363f9b361398598f8e1b2ea8d4aa705057e9fbee0e8077dab15cd17a28bf"
+        },
+        {
+          "block": 271,
+          "style": "bodytext",
+          "raw_text": "Abhāsitthāti.",
+          "tuple_sha256": "bf8b70d9882702600f9df9415cf3294fd336f599fad9d6e87860e29864df9af9"
+        }
+      ],
+      "named_closing": {
+        "block": 272,
+        "style": "centre",
+        "text_sha256": "b52e82c824793bf93513a41a4d3a58bf0cb131084caa676a8ed8a08250b6b398"
+      },
+      "right_heading": {
+        "block": 273,
+        "title": "Ekadhammassavaniyattheraapadānaṃ",
+        "text_sha256": "284b9d68b56bce2249df423782eb15dce306bb78d9441297672f6940a8353bb8"
+      },
+      "opening_VRI_label": "88",
+      "moved_blocks": [
+        {
+          "block": 273,
+          "kind": "subhead",
+          "VRI_label": null,
+          "tuple_sha256": "85e2a2ac3b4f751230e2a645c59ba5c1741f979ab8f183f87671dcf8ba9b7d62",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        },
+        {
+          "block": 274,
+          "kind": "hangnum",
+          "VRI_label": "88",
+          "tuple_sha256": "70356ddfd184a9d4b9eed7eda4525e98b18f2b31ccb0843d22b83b4ea4a0863e",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        },
+        {
+          "block": 275,
+          "kind": "gatha1",
+          "VRI_label": null,
+          "tuple_sha256": "e283ef335eb3f4bb3d68e89e485bc4007b39258c0ede47cf5a7e1016dac43202",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {
+            "T": [
+              "2.34"
+            ]
+          }
+        },
+        {
+          "block": 276,
+          "kind": "gathalast",
+          "VRI_label": null,
+          "tuple_sha256": "3bfd337d1e9e193465fc04debf798e83c4a88624e7aefe16a626b73025da160e",
+          "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "note_count": 0,
+          "page_begins": {}
+        }
+      ],
+      "status": "GO_SOURCE_CUT_ONLY",
+      "Book36_signature_failure": "Previous speaker formula is centre partial + bodytext capitalized continuation, not one complete bodytext formula; source strings/tags are not changed."
+    }
+  ],
+  "segment_stats": {
+    "VANISHED_OLD_OWNER_REF": 6,
+    "SAME_NUMERIC_REF_SAME_SOURCE": 47,
+    "SAME_NUMERIC_REF_DIFFERENT_SOURCE": 53,
+    "old_segments": 106,
+    "proposed_segments": 106,
+    "cross_owner_moved_segments": 6,
+    "moved_source_blocks": 12
+  },
+  "source_words_notes_and_page_tuples_unchanged": true,
+  "PTS_metadata_unchanged_all6": true,
+  "retained_current_rendering_peculiarities": [
+    "423/426/428speakerformula remains two separate centre/bodytext prose fragments.",
+    "424/427speakerformula is original gathalast and remains inside final numbered verse segment.",
+    "429has consecutive gathalast paragraphs at291/292; block292remains a separate unnumbered verse under current rendering. No retagging or verse expansion."
+  ],
+  "defensibility": "Each exact left named closing precedes the next literal subhead and first numbered stanza. Split speaker fragments complete the left formula before that colophon; narrative changes independently corroborate the new owner. Do not generalize Book36single-bodytext signature.",
+  "holds": [
+    "Source-only six proposed records; no canonical file,namespace,application parser or locator policy is changed.",
+    "Every old numeric position needs a separately reviewed version/refusal policy,including stable-looking refs; never migrate notes/bookmarks/drafts/exports automatically.",
+    "Current segmentation is modeled statically,not application-executed acceptance. Preserve literal tag-driven peculiarities and all note/page ownership.",
+    "Downstream commentary/parallels/groups,runtime/index/build/installed/CI verification are not certified by this source-only task.",
+    "No English identity,translation,rights clearance or coverage gain is inferred."
+  ],
+  "A_or_other_new_review_read": false,
+  "activation_count": 0,
+  "full_corpus_proof_or_future_canonical_logical_hash_generated": false,
+  "method": "Independent stdlib raw XML prefix extraction and metadata comparison; complete6current/proposed records; literal current segment model from statically read source; no project module import,app/parser/Builder/tests/build/Git/CI/network/private-data operation."
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "independent-book37-first3-original-first-preseal-v1",
+  "status": "SEALED_BEFORE_ANY_OTHER_NEW_REVIEW_COMPARISON",
+  "files": {
+    "SOURCE_BINDINGS.json": "9b01a56ead9e905bdc58bcdf8bed301ca0149a752abf3471449dcdc7da901466",
+    "SOURCE_REVIEW.json": "b673aefa5a32f5bc173be34122c679418d30a23c75563a614ba50ef59140c2aa",
+    "BEFORE_AFTER_RECORDS.json": "d8cae8b4dda184acb06ce1af0757f053829b5d203a82bd2048af38f1f2b2cd32",
+    "SEGMENT_CROSSWALK.json": "cb80d057612f17bc5cba2c6cc8cc9b766c6bae8782c5649202e63bb929d987c8",
+    "SEGMENT_ORACLES.json": "34842b3568ddf4530b9e7bbd6aaaab191bd3d04a7f5e74ba2d360a0568cc33bd"
+  },
+  "producer": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/book37-first3-B/derive_book37.py",
+    "bytes": 14441,
+    "sha256": "0404686b66f7385104e217b560004a9fe8f25b0970ed1c6d836a30821dda485d"
+  },
+  "other_new_reviews_read": false,
+  "no_activation": true
+}

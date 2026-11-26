@@ -1,0 +1,188 @@
+{
+  "schema": "unactivated-book37-first3-six-core-records-v1",
+  "before": {
+    "tha-ap423": {
+      "id": "tha-ap423",
+      "book": 37,
+      "start": 1,
+      "end": 55,
+      "title": "Sakiṃsammajjakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 423",
+      "vri": "1–15",
+      "pts": {
+        "volume": 2,
+        "page": 379,
+        "end_page": 379
+      }
+    },
+    "tha-ap424": {
+      "id": "tha-ap424",
+      "book": 37,
+      "start": 55,
+      "end": 114,
+      "title": "Ekadussadāyakattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 424",
+      "vri": "16–35",
+      "pts": {
+        "volume": 2,
+        "page": 379,
+        "end_page": 380
+      }
+    },
+    "tha-ap426": {
+      "id": "tha-ap426",
+      "book": 37,
+      "start": 190,
+      "end": 216,
+      "title": "Sattakadambapupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 426",
+      "vri": "61–68",
+      "pts": {
+        "volume": 2,
+        "page": 382,
+        "end_page": 383
+      }
+    },
+    "tha-ap427": {
+      "id": "tha-ap427",
+      "book": 37,
+      "start": 216,
+      "end": 242,
+      "title": "Koraṇḍapupphiyattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 427",
+      "vri": "69–77",
+      "pts": {
+        "volume": 2,
+        "page": 383,
+        "end_page": 383
+      }
+    },
+    "tha-ap428": {
+      "id": "tha-ap428",
+      "book": 37,
+      "start": 242,
+      "end": 277,
+      "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 428",
+      "vri": "78–88",
+      "pts": {
+        "volume": 2,
+        "page": 383,
+        "end_page": 384
+      }
+    },
+    "tha-ap429": {
+      "id": "tha-ap429",
+      "book": 37,
+      "start": 277,
+      "end": 333,
+      "title": "Ekadhammassavaniyattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 429",
+      "vri": "89–106",
+      "pts": {
+        "volume": 2,
+        "page": 384,
+        "end_page": 385
+      }
+    }
+  },
+  "after_core_only": {
+    "tha-ap423": {
+      "id": "tha-ap423",
+      "book": 37,
+      "start": 1,
+      "end": 51,
+      "title": "Sakiṃsammajjakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 423",
+      "vri": "1–14",
+      "pts": {
+        "volume": 2,
+        "page": 379,
+        "end_page": 379
+      }
+    },
+    "tha-ap424": {
+      "id": "tha-ap424",
+      "book": 37,
+      "start": 51,
+      "end": 114,
+      "title": "Ekadussadāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 424",
+      "vri": "15–35",
+      "pts": {
+        "volume": 2,
+        "page": 379,
+        "end_page": 380
+      }
+    },
+    "tha-ap426": {
+      "id": "tha-ap426",
+      "book": 37,
+      "start": 190,
+      "end": 212,
+      "title": "Sattakadambapupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 426",
+      "vri": "61–67",
+      "pts": {
+        "volume": 2,
+        "page": 382,
+        "end_page": 383
+      }
+    },
+    "tha-ap427": {
+      "id": "tha-ap427",
+      "book": 37,
+      "start": 212,
+      "end": 242,
+      "title": "Koraṇḍapupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 427",
+      "vri": "68–77",
+      "pts": {
+        "volume": 2,
+        "page": 383,
+        "end_page": 383
+      }
+    },
+    "tha-ap428": {
+      "id": "tha-ap428",
+      "book": 37,
+      "start": 242,
+      "end": 273,
+      "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 428",
+      "vri": "78–87",
+      "pts": {
+        "volume": 2,
+        "page": 383,
+        "end_page": 384
+      }
+    },
+    "tha-ap429": {
+      "id": "tha-ap429",
+      "book": 37,
+      "start": 273,
+      "end": 333,
+      "title": "Ekadhammassavaniyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 429",
+      "vri": "88–106",
+      "pts": {
+        "volume": 2,
+        "page": 384,
+        "end_page": 385
+      }
+    }
+  },
+  "namespace_assigned": false
+}

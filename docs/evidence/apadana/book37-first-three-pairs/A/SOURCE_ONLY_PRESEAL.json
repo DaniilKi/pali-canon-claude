@@ -1,0 +1,23 @@
+{
+  "status": "SOURCE_CORE_SIX_RECORD_PROPOSALS_QUALIFY_NO_NAMESPACE_OR_ACTIVATION",
+  "files": {
+    "PROPOSED_SIX_CORE_RECORDS.json": {
+      "bytes": 4099,
+      "sha256": "81635772bebd4cceab030fa3ff6a0faaaacbe1688c39fc4a62ff1d64cb1b6250"
+    },
+    "SOURCE_CORE_REPORT.json": {
+      "bytes": 31471,
+      "sha256": "2657ec938f36bf29b147abf36363940b79f4e8d5d48bb2ffcca6efe5dce7bb7f"
+    },
+    "SOURCE256_BLOCK_CROSSWALK.json": {
+      "bytes": 103945,
+      "sha256": "81e02ee06c5fab202fcd09c51defcb749af436069eedf0c70bbbbf82c8f314cb"
+    },
+    "derive_source.py": {
+      "bytes": 15521,
+      "sha256": "8bcfa0c54de2881310ec26ef8a0d53a3d0723d01c42d347b297a836a7ffc22e2"
+    }
+  },
+  "ownership_presealed_before_reader_position_diagnostic": true,
+  "no_namespace_or_activation_approval": true
+}

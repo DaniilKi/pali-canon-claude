@@ -1,0 +1,3184 @@
+{
+  "canon": {
+    "books": [
+      {
+        "file": "vin01m.mul.xml",
+        "collection": "vin-pj",
+        "pitaka": "vinaya",
+        "title": "Pārājikapāḷi"
+      },
+      {
+        "file": "vin02m1.mul.xml",
+        "collection": "vin-pc",
+        "pitaka": "vinaya",
+        "title": "Pācittiyapāḷi"
+      },
+      {
+        "file": "vin02m2.mul.xml",
+        "collection": "vin-mv",
+        "pitaka": "vinaya",
+        "title": "Mahāvaggapāḷi"
+      },
+      {
+        "file": "vin02m3.mul.xml",
+        "collection": "vin-cv",
+        "pitaka": "vinaya",
+        "title": "Cūḷavaggapāḷi"
+      },
+      {
+        "file": "vin02m4.mul.xml",
+        "collection": "vin-pvr",
+        "pitaka": "vinaya",
+        "title": "Parivārapāḷi"
+      },
+      {
+        "file": "s0101m.mul.xml",
+        "collection": "dn",
+        "pitaka": "sutta",
+        "title": "Sīlakkhandhavaggapāḷi"
+      },
+      {
+        "file": "s0102m.mul.xml",
+        "collection": "dn",
+        "pitaka": "sutta",
+        "title": "Mahāvaggapāḷi"
+      },
+      {
+        "file": "s0103m.mul.xml",
+        "collection": "dn",
+        "pitaka": "sutta",
+        "title": "Pāthikavaggapāḷi"
+      },
+      {
+        "file": "s0201m.mul.xml",
+        "collection": "mn",
+        "pitaka": "sutta",
+        "title": "Mūlapaṇṇāsapāḷi"
+      },
+      {
+        "file": "s0202m.mul.xml",
+        "collection": "mn",
+        "pitaka": "sutta",
+        "title": "Majjhimapaṇṇāsapāḷi"
+      },
+      {
+        "file": "s0203m.mul.xml",
+        "collection": "mn",
+        "pitaka": "sutta",
+        "title": "Uparipaṇṇāsapāḷi"
+      },
+      {
+        "file": "s0301m.mul.xml",
+        "collection": "sn",
+        "pitaka": "sutta",
+        "title": "Sagāthāvaggo"
+      },
+      {
+        "file": "s0302m.mul.xml",
+        "collection": "sn",
+        "pitaka": "sutta",
+        "title": "Nidānavaggo"
+      },
+      {
+        "file": "s0303m.mul.xml",
+        "collection": "sn",
+        "pitaka": "sutta",
+        "title": "Khandhavaggo"
+      },
+      {
+        "file": "s0304m.mul.xml",
+        "collection": "sn",
+        "pitaka": "sutta",
+        "title": "Saḷāyatanavaggo"
+      },
+      {
+        "file": "s0305m.mul.xml",
+        "collection": "sn",
+        "pitaka": "sutta",
+        "title": "Mahāvaggo"
+      },
+      {
+        "file": "s0401m.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Ekakanipātapāḷi"
+      },
+      {
+        "file": "s0402m1.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Dukanipātapāḷi"
+      },
+      {
+        "file": "s0402m2.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Tikanipātapāḷi"
+      },
+      {
+        "file": "s0402m3.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Catukkanipātapāḷi"
+      },
+      {
+        "file": "s0403m1.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Pañcakanipātapāḷi"
+      },
+      {
+        "file": "s0403m2.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Chakkanipātapāḷi"
+      },
+      {
+        "file": "s0403m3.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Sattakanipātapāḷi"
+      },
+      {
+        "file": "s0404m1.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Aṭṭhakanipātapāḷi"
+      },
+      {
+        "file": "s0404m2.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Navakanipātapāḷi"
+      },
+      {
+        "file": "s0404m3.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Dasakanipātapāḷi"
+      },
+      {
+        "file": "s0404m4.mul.xml",
+        "collection": "an",
+        "pitaka": "sutta",
+        "title": "Ekādasakanipātapāḷi"
+      },
+      {
+        "file": "s0501m.mul.xml",
+        "collection": "kp",
+        "pitaka": "sutta",
+        "title": "Khuddakapāṭhapāḷi"
+      },
+      {
+        "file": "s0502m.mul.xml",
+        "collection": "dhp",
+        "pitaka": "sutta",
+        "title": "Dhammapadapāḷi"
+      },
+      {
+        "file": "s0503m.mul.xml",
+        "collection": "ud",
+        "pitaka": "sutta",
+        "title": "Udānapāḷi"
+      },
+      {
+        "file": "s0504m.mul.xml",
+        "collection": "iti",
+        "pitaka": "sutta",
+        "title": "Itivuttakapāḷi"
+      },
+      {
+        "file": "s0505m.mul.xml",
+        "collection": "snp",
+        "pitaka": "sutta",
+        "title": "Suttanipātapāḷi"
+      },
+      {
+        "file": "s0506m.mul.xml",
+        "collection": "vv",
+        "pitaka": "sutta",
+        "title": "Vimānavatthupāḷi"
+      },
+      {
+        "file": "s0507m.mul.xml",
+        "collection": "pv",
+        "pitaka": "sutta",
+        "title": "Petavatthupāḷi"
+      },
+      {
+        "file": "s0508m.mul.xml",
+        "collection": "thag",
+        "pitaka": "sutta",
+        "title": "Theragāthāpāḷi"
+      },
+      {
+        "file": "s0509m.mul.xml",
+        "collection": "thig",
+        "pitaka": "sutta",
+        "title": "Therīgāthāpāḷi"
+      },
+      {
+        "file": "s0510m1.mul.xml",
+        "collection": "ap",
+        "pitaka": "sutta",
+        "title": "Therāpadānapāḷi"
+      },
+      {
+        "file": "s0510m2.mul.xml",
+        "collection": "ap",
+        "pitaka": "sutta",
+        "title": "Therāpadānapāḷi",
+        "blocks": [
+          [
+            "centre",
+            null,
+            "Namo tassa bhagavato arahato sammāsambuddhassa",
+            [],
+            {}
+          ],
+          [
+            "nikaya",
+            null,
+            "Khuddakanikāye",
+            [],
+            {}
+          ],
+          [
+            "book",
+            null,
+            "Therāpadānapāḷi",
+            [],
+            {}
+          ],
+          [
+            "title",
+            null,
+            "(Dutiyo bhāgo)",
+            [],
+            {}
+          ],
+          [
+            "chapter",
+            null,
+            "43. Sakiṃsammajjakavaggo",
+            [],
+            {}
+          ],
+          [
+            "subhead",
+            null,
+            "1. Sakiṃsammajjakattheraapadānaṃ",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "1",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Vipassino bhagavato, pāṭaliṃ bodhimuttamaṃ;",
+            [],
+            {
+              "T": [
+                "2.24"
+              ],
+              "M": [
+                "2.1"
+              ],
+              "V": [
+                "2.1"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Disvāva taṃ pādapaggaṃ, tattha cittaṃ pasādayiṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "2",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Sammajjaniṃ gahetvāna, bodhiṃ sammajji tāvade;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Sammajjitvāna taṃ bodhiṃ, avandiṃ pāṭaliṃ ahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "3",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Tattha cittaṃ pasādetvā, sire katvāna añjaliṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Namassamāno taṃ bodhiṃ, gañchiṃ paṭikuṭiṃ ahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "4",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Tādimaggena gacchāmi, saranto bodhimuttamaṃ;",
+            [],
+            {
+              "V": [
+                "2.2"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Ajagaro maṃ pīḷesi, ghorarūpo mahabbalo.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "5",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Āsanne me kataṃ kammaṃ, phalena tosayī mamaṃ;",
+            [],
+            {
+              "P": [
+                "2.379"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Kaḷevaraṃ me gilati, devaloke ramāmahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "6",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Anāvilaṃ mama cittaṃ, visuddhaṃ paṇḍaraṃ sadā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Sokasallaṃ na jānāmi, cittasantāpanaṃ mama.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "7",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kuṭṭhaṃ gaṇḍo kilāso ca, apamāro vitacchikā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Daddu kaṇḍu ca me natthi, phalaṃ sammajjanāyidaṃ .",
+            [
+              "sammajjane idaṃ (sī.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "8",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Soko ca paridevo ca, hadaye me na vijjati;",
+            [],
+            {
+              "M": [
+                "2.2"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Abhantaṃ ujukaṃ cittaṃ, phalaṃ sammajjanāyidaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "9",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Samādhīsu na majjāmi , visadaṃ hoti mānasaṃ;",
+            [
+              "samādhīsu na sajjāmi (sī.), samādhiṃ puna pajjāmi (syā)"
+            ],
+            {
+              "T": [
+                "2.25"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Yaṃ yaṃ samādhimicchāmi, so so sampajjate mamaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "10",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Rajanīye na rajjāmi, atho dussaniyesu ca;",
+            [
+              "dosaniyesu (sī. syā. ka.)"
+            ],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Mohanīye na muyhāmi, phalaṃ sammajjanāyidaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "11",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Ekanavutito kappe, yaṃ kammamakariṃ tadā;",
+            [
+              "ekanavute ito (sī. syā.)"
+            ],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Duggatiṃ nābhijānāmi, phalaṃ sammajjanāyidaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "12",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kilesā jhāpitā mayhaṃ, bhavā sabbe samūhatā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Nāgova bandhanaṃ chetvā, viharāmi anāsavo.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "13",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Svāgataṃ vata me āsi, mama buddhassa santike;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Tisso vijjā anuppattā, kataṃ buddhassa sāsanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "14",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Paṭisambhidā catasso, vimokkhāpi ca aṭṭhime;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Chaḷabhiññā sacchikatā, kataṃ buddhassa sāsanaṃ’’.",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Itthaṃ sudaṃ āyasmā sakiṃsammajjako thero imā gāthāyo",
+            [],
+            {}
+          ],
+          [
+            "bodytext",
+            null,
+            "Abhāsitthāti.",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Sakiṃsammajjakattherassāpadānaṃ paṭhamaṃ.",
+            [],
+            {}
+          ],
+          [
+            "subhead",
+            null,
+            "2. Ekadussadāyakattheraapadānaṃ",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "15",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Nagare haṃsavatiyā, ahosiṃ tiṇahārako;",
+            [],
+            {
+              "V": [
+                "2.3"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Tiṇahārena jīvāmi, tena posemi dārake.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "16",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Padumuttaro nāma jino, sabbadhammāna pāragū;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Tamandhakāraṃ nāsetvā, uppajji lokanāyako.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "17",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Sake ghare nisīditvā, evaṃ cintesi tāvade;",
+            [],
+            {
+              "T": [
+                "2.26"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "‘Buddho loke samuppanno, deyyadhammo na vijjati.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "18",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Idaṃ me sāṭakaṃ ekaṃ, natthi me koci dāyako;",
+            [],
+            {
+              "M": [
+                "2.3"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Dukkho nirayasamphasso, ropayissāmi dakkhiṇaṃ’.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "19",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Evāhaṃ cintayitvāna, sakaṃ cittaṃ pasādayiṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Ekaṃ dussaṃ gahetvāna, buddhaseṭṭhassadāsahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "20",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Ekaṃ dussaṃ daditvāna, ukkuṭṭhiṃ sampavattayiṃ;",
+            [],
+            {
+              "P": [
+                "2.380"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "‘Yadi buddho tuvaṃ vīra, tārehi maṃ mahāmuni’.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "21",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Padumuttaro lokavidū, āhutīnaṃ paṭiggaho;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Mama dānaṃ pakittento, akā me anumodanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "22",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Iminā ekadussena, cetanāpaṇidhīhi ca;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Kappasatasahassāni, vinipātaṃ na gacchasi.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "23",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Chattiṃsakkhattuṃ devindo, devarajjaṃ karissasi;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Tettiṃsakkhattuṃ rājā ca, cakkavattī bhavissasi.",
+            [
+              "cakkavatti (syā.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "24",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Padesarajjaṃ vipulaṃ, gaṇanāto asaṅkhiyaṃ ;",
+            [
+              "asaṅkayaṃ (syā. ka.) evamuparipi"
+            ],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Devaloke manusse vā, saṃsaranto tuvaṃ bhave.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "25",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Rūpavā guṇasampanno, anavakkantadehavā ;",
+            [
+              "anuvattanta… (syā)"
+            ],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Akkhobhaṃ amitaṃ dussaṃ, labhissasi yadicchakaṃ’.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "26",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Idaṃ vatvāna sambuddho, jalajuttamanāmako;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Nabhaṃ abbhuggamī vīro , haṃsarājāva ambare.",
+            [
+              "dhīro (sī. syā.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "27",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Yaṃ yaṃ yonupapajjāmi, devattaṃ atha mānusaṃ;",
+            [],
+            {
+              "T": [
+                "2.27"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Bhoge me ūnatā natthi, ekadussassidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "28",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Paduddhāre paduddhāre, dussaṃ nibbattate mamaṃ;",
+            [],
+            {
+              "V": [
+                "2.4"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Heṭṭhā dussamhi tiṭṭhāmi, uparicchadanaṃ mama.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "29",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Cakkavāḷaṃ upādāya, sakānanaṃ sapabbataṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Icchamāno cahaṃ ajja, dussehacchādayeyya taṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "30",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Teneva ekadussena, saṃsaranto bhavābhave;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Suvaṇṇavaṇṇo hutvāna, saṃsarāmi bhavābhave.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "31",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Vipākaṃ viekadussassa, nājjhagaṃ katthacikkhayaṃ;",
+            [],
+            {
+              "M": [
+                "2.4"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Ayaṃ me antimā jāti, vipaccati idhāpi me.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "32",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Satasahassito kappe, yaṃ dussamadadiṃ tadā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Duggatiṃ nābhijānāmi, ekadussassidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "33",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kilesā jhāpitā mayhaṃ…pe… viharāmi anāsavo.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "34",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Svāgataṃ vata me āsi…pe… kataṃ buddhassa sāsanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "35",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Paṭisambhidā catasso…pe… kataṃ buddhassa sāsanaṃ’’.",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Itthaṃ sudaṃ āyasmā ekadussadāyako thero imā gāthāyo abhāsitthāti;",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Ekadussadāyakattherassāpadānaṃ dutiyaṃ.",
+            [],
+            {}
+          ],
+          [
+            "subhead",
+            null,
+            "3. Ekāsanadāyakattheraapadānaṃ",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "36",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Himavantassāvidūre, gosito nāma pabbato;",
+            [],
+            {
+              "T": [
+                "2.28"
+              ],
+              "P": [
+                "2.381"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Assamo sukato mayhaṃ, paṇṇasālā sumāpitā.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "37",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Nārado nāma nāmena, kassapo iti maṃ vidū;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Suddhimaggaṃ gavesanto, vasāmi gosite tadā.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "38",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Padumuttaro nāma jino, sabbadhammāna pāragū;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Vivekakāmo sambuddho, agañchi anilañjasā.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "39",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Vanagge gacchamānassa, disvā raṃsiṃ mahesino;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Kaṭṭhamañcaṃ paññāpetvā, ajinañca apatthariṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "40",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Āsanaṃ paññāpetvāna, sire katvāna añjaliṃ;",
+            [],
+            {
+              "V": [
+                "2.5"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Somanassaṃ paveditvā, idaṃ vacanamabraviṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "41",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Sallakatto mahāvīra, āturānaṃ tikicchako;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Mamaṃ rogaparetassa , tikicchaṃ dehi nāyaka.",
+            [
+              "rāga… (syā.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "42",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Kallatthikā ye passanti, buddhaseṭṭha tuvaṃ mune;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Dhuvatthasiddhiṃ papponti, etesaṃ ajaro bhave.",
+            [
+              "jajjaro (sī. pī. ka.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "43",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Na me deyyadhammo atthi, pavattaphalabhojihaṃ;",
+            [],
+            {
+              "M": [
+                "2.5"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Idaṃ me āsanaṃ atthi , nisīda kaṭṭhamañcake’.",
+            [
+              "na me deyyaṃ tava atthi (sī. syā.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "44",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Nisīdi tattha bhagavā, asambhītova kesarī;",
+            [
+              "acchambhitova (syā. ka.)"
+            ],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Muhuttaṃ vītināmetvā, idaṃ vacanamabravi.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "45",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Visaṭṭho hohi mā bhāyi, laddho jotiraso tayā;",
+            [
+              "vissattho (sī. pī), vissaṭṭho (syā. ka.)"
+            ],
+            {
+              "T": [
+                "2.29"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Yaṃ tuyhaṃ patthitaṃ sabbaṃ, paripūrissatināgate .",
+            [
+              "paripūrissatāsanaṃ (syā. ka.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "46",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Na moghaṃ taṃ kataṃ tuyhaṃ, puññakkhette anuttare;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Sakkā uddharituṃ attā, yassa cittaṃ paṇīhitaṃ .",
+            [
+              "sunīhitaṃ (syā.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "47",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Imināsanadānena, cetanāpaṇidhīhi ca;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Kappasatasahassāni, vinipātaṃ na gacchasi.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "48",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Paññāsakkhattuṃ devindo, devarajjaṃ karissasi;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Asītikkhattuṃ rājā ca, cakkavattī bhavissasi.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "49",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Padesarajjaṃ vipulaṃ, gaṇanāto asaṅkhiyaṃ;",
+            [],
+            {
+              "P": [
+                "2.382"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Sabbattha sukhito hutvā, saṃsāre saṃsarissasi’.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "50",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Idaṃ vatvāna sambuddho, jalajuttamanāmako;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Nabhaṃ abbhuggamī vīro, haṃsarājāva ambare.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "51",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Hatthiyānaṃ assayānaṃ, sarathaṃ sandamānikaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Labhāmi sabbamevetaṃ, ekāsanassidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "52",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kānanaṃ pavisitvāpi, yadā icchāmi āsanaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Mama saṅkappamaññāya, pallaṅko upatiṭṭhati.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "53",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Vārimajjhagato santo, yadā icchāmi āsanaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Mama saṅkappamaññāya, pallaṅko upatiṭṭhati.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "54",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Yaṃ yaṃ yonupapajjāmi, devattaṃ atha mānusaṃ;",
+            [],
+            {
+              "V": [
+                "2.6"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Pallaṅkasatasahassāni, parivārenti maṃ sadā.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "55",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Duve bhave saṃsarāmi, devatte atha mānuse;",
+            [],
+            {
+              "T": [
+                "2.30"
+              ],
+              "M": [
+                "2.6"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Duve kule pajāyāmi, khattiye atha brāhmaṇe.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "56",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Ekāsanaṃ daditvāna, puññakkhette anuttare;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Dhammapallaṅkamādāya , viharāmi anāsavo.",
+            [
+              "dhammapallaṅkamaññāya (syā. ka.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "57",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Satasahassito kappe, yaṃ dānamadadiṃ tadā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Duggatiṃ nābhijānāmi, ekāsanassidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "58",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kilesā jhāpitā mayhaṃ…pe… viharāmi anāsavo.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "59",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Svāgataṃ vata me āsi…pe… kataṃ buddhassa sāsanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "60",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Paṭisambhidā catasso…pe… kataṃ buddhassa sāsanaṃ’’.",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Itthaṃ sudaṃ āyasmā ekāsanadāyako thero imā gāthāyo",
+            [],
+            {}
+          ],
+          [
+            "bodytext",
+            null,
+            "Abhāsitthāti.",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Ekāsanadāyakattherassāpadānaṃ tatiyaṃ.",
+            [],
+            {}
+          ],
+          [
+            "subhead",
+            null,
+            "4. Sattakadambapupphiyattheraapadānaṃ",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "61",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Himavantassāvidūre, kukkuṭo nāma pabbato;",
+            [
+              "kadambo (sī. syā. pī.)"
+            ],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Tamhi pabbatapādamhi, satta buddhā vasiṃsu te.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "62",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kadambaṃ pupphitaṃ disvā, paggahetvāna añjaliṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Satta mālā gahetvāna, puññacittena okiriṃ.",
+            [
+              "puṇṇacittena (ka.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "63",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Tena kammena sukatena, cetanāpaṇidhīhi ca;",
+            [],
+            {
+              "T": [
+                "2.31"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Jahitvā mānusaṃ dehaṃ, tāvatiṃsamagacchahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "64",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Catunnavutito kappe, yaṃ kammamakariṃ tadā;",
+            [],
+            {
+              "P": [
+                "2.383"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Duggatiṃ nābhijānāmi, buddhapūjāyidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "65",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kilesā jhāpitā mayhaṃ…pe… viharāmi anāsavo.",
+            [],
+            {
+              "V": [
+                "2.7"
+              ]
+            }
+          ],
+          [
+            "hangnum",
+            "66",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Svāgataṃ vata me āsi…pe… kataṃ buddhassa sāsanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "67",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Paṭisambhidā catasso…pe… kataṃ buddhassa sāsanaṃ’’.",
+            [],
+            {
+              "M": [
+                "2.7"
+              ]
+            }
+          ],
+          [
+            "centre",
+            null,
+            "Itthaṃ sudaṃ āyasmā sattakadambapupphiyo thero imā",
+            [],
+            {}
+          ],
+          [
+            "bodytext",
+            null,
+            "Gāthāyo abhāsitthāti.",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Sattakadambapupphiyattherassāpadānaṃ catutthaṃ.",
+            [],
+            {}
+          ],
+          [
+            "subhead",
+            null,
+            "5. Koraṇḍapupphiyattheraapadānaṃ",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "68",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Vanakammiko pure āsiṃ, pitumātumatenahaṃ ;",
+            [
+              "pitupitāmahenahaṃ (sī. syā. pī.)"
+            ],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Pasumārena jīvāmi, kusalaṃ me na vijjati.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "69",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Mama āsayasāmantā, tisso lokagganāyako;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Padāni tīṇi dassesi, anukampāya cakkhumā.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "70",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Akkante ca pade disvā, tissanāmassa satthuno;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Haṭṭho haṭṭhena cittena, pade cittaṃ pasādayiṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "71",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Koraṇḍaṃ pupphitaṃ disvā, pādapaṃ dharaṇīruhaṃ;",
+            [],
+            {
+              "T": [
+                "2.32"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Sakosakaṃ gahetvāna, padaseṭṭhamapūjayiṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "72",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Tena kammena sukatena, cetanāpaṇidhīhi ca;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Jahitvā mānusaṃ dehaṃ, tāvatiṃsamagacchahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "73",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Yaṃ yaṃ yonupapajjāmi, devattaṃ atha mānusaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Koraṇḍavaṇṇakoyeva, suppabhāso bhavāmahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "74",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Dvenavute ito kappe, yaṃ kammamakariṃ tadā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Duggatiṃ nābhijānāmi, padapūjāyidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "75",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kilesā jhāpitā mayhaṃ…pe… viharāmi anāsavo.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "76",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Svāgataṃ vata me āsi…pe… kataṃ buddhassa sāsanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "77",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Paṭisambhidā catasso…pe… kataṃ buddhassa sāsanaṃ’’.",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Itthaṃ sudaṃ āyasmā koraṇḍapupphiyo thero imā gāthāyo abhāsitthāti;",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Koraṇḍapupphiyattherassāpadānaṃ pañcamaṃ.",
+            [],
+            {}
+          ],
+          [
+            "subhead",
+            null,
+            "6. Ghatamaṇḍadāyakattheraapadānaṃ",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "78",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Sucintitaṃ bhagavantaṃ, lokajeṭṭhaṃ narāsabhaṃ;",
+            [],
+            {
+              "M": [
+                "2.8"
+              ],
+              "V": [
+                "2.8"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Upaviṭṭhaṃ mahāraññaṃ, vātābādhena pīḷitaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "79",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Disvā cittaṃ pasādetvā, ghatamaṇḍamupānayiṃ;",
+            [],
+            {
+              "T": [
+                "2.33"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Katattā ācitattā ca, gaṅgā bhāgīrathī ayaṃ.",
+            [],
+            {
+              "P": [
+                "2.384"
+              ]
+            }
+          ],
+          [
+            "hangnum",
+            "80",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Mahāsamuddā cattāro, ghataṃ sampajjare mama;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Ayañca pathavī ghorā, appamāṇā asaṅkhiyā.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "81",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Mama saṅkappamaññāya, bhavate madhusakkarā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Cātuddīpā ime rukkhā, pādapā dharaṇīruhā.",
+            [
+              "catuddisā (syā.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "82",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Mama saṅkappamaññāya, kapparukkhā bhavanti te;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Paññāsakkhattuṃ devindo, devarajjamakārayiṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "83",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Ekapaññāsakkhattuñca, cakkavattī ahosahaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Padesarajjaṃ vipulaṃ, gaṇanāto asaṅkhiyaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "84",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Catunnavutito kappe, yaṃ dānamadadiṃ tadā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Duggatiṃ nābhijānāmi, ghatamaṇḍassidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "85",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kilesā jhāpitā mayhaṃ…pe… viharāmi anāsavo.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "86",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Svāgataṃ vata me āsi…pe… kataṃ buddhassa sāsanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "87",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Paṭisambhidā catasso…pe… kataṃ buddhassa sāsanaṃ’’.",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Itthaṃ sudaṃ āyasmā ghatamaṇḍadāyako thero imā gāthāyo",
+            [],
+            {}
+          ],
+          [
+            "bodytext",
+            null,
+            "Abhāsitthāti.",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Ghatamaṇḍadāyakattherassāpadānaṃ chaṭṭhaṃ.",
+            [],
+            {}
+          ],
+          [
+            "subhead",
+            null,
+            "7. Ekadhammassavaniyattheraapadānaṃ",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "88",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Padumuttaro nāma jino, sabbadhammāna pāragū;",
+            [],
+            {
+              "T": [
+                "2.34"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Catusaccaṃ pakāsento, santāresi bahuṃ janaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "89",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Ahaṃ tena samayena, jaṭilo uggatāpano;",
+            [],
+            {
+              "M": [
+                "2.9"
+              ],
+              "V": [
+                "2.9"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Dhunanto vākacīrāni, gacchāmi ambare tadā.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "90",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Buddhaseṭṭhassa upari, gantuṃ na visahāmahaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Pakkhīva selamāsajja, gamanaṃ na labhāmahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "91",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Udake vokkamitvāna, evaṃ gacchāmi ambare;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Na me idaṃ bhūtapubbaṃ, iriyāpathavikopanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "92",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Handa metaṃ gavesissaṃ, appevatthaṃ labheyyahaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Orohanto antalikkhā, saddamassosi satthuno.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "93",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Sarena rajanīyena, savanīyena vaggunā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Aniccataṃ kathentassa, taññeva uggahiṃ tadā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Aniccasaññamuggayha, agamāsiṃ mamassamaṃ.",
+            [],
+            {
+              "P": [
+                "2.385"
+              ]
+            }
+          ],
+          [
+            "hangnum",
+            "94",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Yāvatāyuṃ vasitvāna, tattha kālaṅkato ahaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Carime vattamānamhi, saddhammassavanaṃ sariṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "95",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Tena kammena sukatena, cetanāpaṇidhīhi ca;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Jahitvā mānusaṃ dehaṃ, tāvatiṃsamagacchahaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "96",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Tiṃsakappasahassāni, devaloke ramiṃ ahaṃ;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Ekapaññāsakkhattuñca, devarajjamakārayiṃ.",
+            [],
+            {
+              "T": [
+                "2.35"
+              ]
+            }
+          ],
+          [
+            "hangnum",
+            "97",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Ekavīsatikkhattuñca , cakkavattī ahosahaṃ;",
+            [
+              "ekatiṃsati… (syā.)"
+            ],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Padesarajjaṃ vipulaṃ, gaṇanāto asaṅkhiyaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "98",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Anubhomi sakaṃ puññaṃ, sukhitohaṃ bhavābhave;",
+            [],
+            {}
+          ],
+          [
+            "gatha2",
+            null,
+            "Anussarāmi taṃ saññaṃ, saṃsaranto bhavābhave;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Na koṭiṃ paṭivijjhāmi, nibbānaṃ accutaṃ padaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "99",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Pitugehe nisīditvā, samaṇo bhāvitindriyo;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Kathaṃsa paridīpento, aniccatamudāhari.",
+            [
+              "kathayaṃ (sī. pī. ka.)"
+            ],
+            {}
+          ],
+          [
+            "hangnum",
+            "100",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘‘Aniccā vata saṅkhārā, uppādavayadhammino;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Uppajjitvā nirujjhanti, tesaṃ vūpasamo sukho’.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "101",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Saha gāthaṃ suṇitvāna, pubbasaññamanussariṃ;",
+            [],
+            {
+              "M": [
+                "2.10"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Ekāsane nisīditvā, arahattamapāpuṇiṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "102",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Jātiyā sattavassena, arahattamapāpuṇiṃ;",
+            [],
+            {
+              "V": [
+                "2.10"
+              ]
+            }
+          ],
+          [
+            "gathalast",
+            null,
+            "Upasampādayī buddho, dhammassavanassidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "103",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Satasahassito kappe, yaṃ dhammamasuṇiṃ tadā;",
+            [],
+            {}
+          ],
+          [
+            "gathalast",
+            null,
+            "Duggatiṃ nābhijānāmi, dhammassavanassidaṃ phalaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "104",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Kilesā jhāpitā mayhaṃ…pe… viharāmi anāsavo.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "105",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Svāgataṃ vata me āsi…pe… kataṃ buddhassa sāsanaṃ.",
+            [],
+            {}
+          ],
+          [
+            "hangnum",
+            "106",
+            "",
+            [],
+            {}
+          ],
+          [
+            "gatha1",
+            null,
+            "‘‘Paṭisambhidā catasso…pe… kataṃ buddhassa sāsanaṃ’’.",
+            [],
+            {
+              "T": [
+                "2.36"
+              ]
+            }
+          ],
+          [
+            "centre",
+            null,
+            "Itthaṃ sudaṃ āyasmā ekadhammassavaniyo thero imā",
+            [],
+            {}
+          ],
+          [
+            "bodytext",
+            null,
+            "Gāthāyo abhāsitthāti.",
+            [],
+            {}
+          ],
+          [
+            "centre",
+            null,
+            "Ekadhammassavaniyattherassāpadānaṃ sattamaṃ.",
+            [],
+            {}
+          ]
+        ]
+      },
+      {
+        "file": "s0511m.mul.xml",
+        "collection": "bv",
+        "pitaka": "sutta",
+        "title": "Buddhavaṃsapāḷi"
+      },
+      {
+        "file": "s0512m.mul.xml",
+        "collection": "cp",
+        "pitaka": "sutta",
+        "title": "Cariyāpiṭakapāḷi"
+      },
+      {
+        "file": "s0513m.mul.xml",
+        "collection": "ja",
+        "pitaka": "sutta",
+        "title": "Jātakapāḷi"
+      },
+      {
+        "file": "s0514m.mul.xml",
+        "collection": "ja",
+        "pitaka": "sutta",
+        "title": "Jātakapāḷi"
+      },
+      {
+        "file": "s0515m.mul.xml",
+        "collection": "mnd",
+        "pitaka": "sutta",
+        "title": "Mahāniddesapāḷi"
+      },
+      {
+        "file": "s0516m.mul.xml",
+        "collection": "cnd",
+        "pitaka": "sutta",
+        "title": "Cūḷaniddesapāḷi"
+      },
+      {
+        "file": "s0517m.mul.xml",
+        "collection": "ps",
+        "pitaka": "sutta",
+        "title": "Paṭisambhidāmaggapāḷi"
+      },
+      {
+        "file": "s0518m.nrf.xml",
+        "collection": "mil",
+        "pitaka": "sutta",
+        "title": "Milindapañha"
+      },
+      {
+        "file": "s0519m.mul.xml",
+        "collection": "ne",
+        "pitaka": "sutta",
+        "title": "Nettippakaraṇapāḷi"
+      },
+      {
+        "file": "s0520m.nrf.xml",
+        "collection": "pe",
+        "pitaka": "sutta",
+        "title": "Peṭakopadesapāḷi"
+      },
+      {
+        "file": "abh01m.mul.xml",
+        "collection": "ds",
+        "pitaka": "abhidhamma",
+        "title": "Dhammasaṅgaṇīpāḷi"
+      },
+      {
+        "file": "abh02m.mul.xml",
+        "collection": "vb",
+        "pitaka": "abhidhamma",
+        "title": "Vibhaṅgapāḷi"
+      },
+      {
+        "file": "abh03m1.mul.xml",
+        "collection": "dt",
+        "pitaka": "abhidhamma",
+        "title": "Dhātukathāpāḷi"
+      },
+      {
+        "file": "abh03m2.mul.xml",
+        "collection": "pp",
+        "pitaka": "abhidhamma",
+        "title": "Puggalapaññattipāḷi"
+      },
+      {
+        "file": "abh03m3.mul.xml",
+        "collection": "kv",
+        "pitaka": "abhidhamma",
+        "title": "Kathāvatthupāḷi"
+      },
+      {
+        "file": "abh03m4.mul.xml",
+        "collection": "ya",
+        "pitaka": "abhidhamma",
+        "title": "Yamakapāḷi (paṭhamo bhāgo)"
+      },
+      {
+        "file": "abh03m5.mul.xml",
+        "collection": "ya",
+        "pitaka": "abhidhamma",
+        "title": "Yamakapāḷi (dutiyo bhāgo)"
+      },
+      {
+        "file": "abh03m6.mul.xml",
+        "collection": "ya",
+        "pitaka": "abhidhamma",
+        "title": "Yamakapāḷi (tatiyo bhāgo)"
+      },
+      {
+        "file": "abh03m7.mul.xml",
+        "collection": "patthana",
+        "pitaka": "abhidhamma",
+        "title": "Paṭṭhānapāḷi"
+      },
+      {
+        "file": "abh03m8.mul.xml",
+        "collection": "patthana",
+        "pitaka": "abhidhamma",
+        "title": "Paṭṭhānapāḷi"
+      },
+      {
+        "file": "abh03m9.mul.xml",
+        "collection": "patthana",
+        "pitaka": "abhidhamma",
+        "title": "Paṭṭhānapāḷi"
+      },
+      {
+        "file": "abh03m10.mul.xml",
+        "collection": "patthana",
+        "pitaka": "abhidhamma",
+        "title": "Paṭṭhānapāḷi"
+      },
+      {
+        "file": "abh03m11.mul.xml",
+        "collection": "patthana",
+        "pitaka": "abhidhamma",
+        "title": "Paṭṭhānapāḷi"
+      }
+    ],
+    "units": [
+      {
+        "id": "tha-ap423",
+        "book": 37,
+        "start": 1,
+        "end": 55,
+        "title": "Sakiṃsammajjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 423",
+        "vri": "1–15",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 379
+        }
+      },
+      {
+        "id": "tha-ap424",
+        "book": 37,
+        "start": 55,
+        "end": 114,
+        "title": "Ekadussadāyakattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 424",
+        "vri": "16–35",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 380
+        }
+      },
+      {
+        "id": "tha-ap426",
+        "book": 37,
+        "start": 190,
+        "end": 216,
+        "title": "Sattakadambapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 426",
+        "vri": "61–68",
+        "pts": {
+          "volume": 2,
+          "page": 382,
+          "end_page": 383
+        }
+      },
+      {
+        "id": "tha-ap427",
+        "book": 37,
+        "start": 216,
+        "end": 242,
+        "title": "Koraṇḍapupphiyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 427",
+        "vri": "69–77",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 383
+        }
+      },
+      {
+        "id": "tha-ap428",
+        "book": 37,
+        "start": 242,
+        "end": 277,
+        "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 428",
+        "vri": "78–88",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 384
+        }
+      },
+      {
+        "id": "tha-ap429",
+        "book": 37,
+        "start": 277,
+        "end": 333,
+        "title": "Ekadhammassavaniyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 429",
+        "vri": "89–106",
+        "pts": {
+          "volume": 2,
+          "page": 384,
+          "end_page": 385
+        }
+      }
+    ]
+  },
+  "old_units": [
+    {
+      "id": "tha-ap423",
+      "book": 37,
+      "start": 1,
+      "end": 55,
+      "title": "Sakiṃsammajjakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 423",
+      "vri": "1–15",
+      "pts": {
+        "volume": 2,
+        "page": 379,
+        "end_page": 379
+      }
+    },
+    {
+      "id": "tha-ap424",
+      "book": 37,
+      "start": 55,
+      "end": 114,
+      "title": "Ekadussadāyakattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 424",
+      "vri": "16–35",
+      "pts": {
+        "volume": 2,
+        "page": 379,
+        "end_page": 380
+      }
+    },
+    {
+      "id": "tha-ap426",
+      "book": 37,
+      "start": 190,
+      "end": 216,
+      "title": "Sattakadambapupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 426",
+      "vri": "61–68",
+      "pts": {
+        "volume": 2,
+        "page": 382,
+        "end_page": 383
+      }
+    },
+    {
+      "id": "tha-ap427",
+      "book": 37,
+      "start": 216,
+      "end": 242,
+      "title": "Koraṇḍapupphiyattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 427",
+      "vri": "69–77",
+      "pts": {
+        "volume": 2,
+        "page": 383,
+        "end_page": 383
+      }
+    },
+    {
+      "id": "tha-ap428",
+      "book": 37,
+      "start": 242,
+      "end": 277,
+      "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 428",
+      "vri": "78–88",
+      "pts": {
+        "volume": 2,
+        "page": 383,
+        "end_page": 384
+      }
+    },
+    {
+      "id": "tha-ap429",
+      "book": 37,
+      "start": 277,
+      "end": 333,
+      "title": "Ekadhammassavaniyattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 429",
+      "vri": "89–106",
+      "pts": {
+        "volume": 2,
+        "page": 384,
+        "end_page": 385
+      }
+    }
+  ],
+  "proposed_units": [
+    {
+      "id": "tha-ap423",
+      "book": 37,
+      "start": 1,
+      "end": 51,
+      "title": "Sakiṃsammajjakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 423",
+      "vri": "1–14",
+      "pts": {
+        "volume": 2,
+        "page": 379,
+        "end_page": 379
+      }
+    },
+    {
+      "id": "tha-ap424",
+      "book": 37,
+      "start": 51,
+      "end": 114,
+      "title": "Ekadussadāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 424",
+      "vri": "15–35",
+      "pts": {
+        "volume": 2,
+        "page": 379,
+        "end_page": 380
+      }
+    },
+    {
+      "id": "tha-ap426",
+      "book": 37,
+      "start": 190,
+      "end": 212,
+      "title": "Sattakadambapupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 426",
+      "vri": "61–67",
+      "pts": {
+        "volume": 2,
+        "page": 382,
+        "end_page": 383
+      }
+    },
+    {
+      "id": "tha-ap427",
+      "book": 37,
+      "start": 212,
+      "end": 242,
+      "title": "Koraṇḍapupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 427",
+      "vri": "68–77",
+      "pts": {
+        "volume": 2,
+        "page": 383,
+        "end_page": 383
+      }
+    },
+    {
+      "id": "tha-ap428",
+      "book": 37,
+      "start": 242,
+      "end": 273,
+      "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 428",
+      "vri": "78–87",
+      "pts": {
+        "volume": 2,
+        "page": 383,
+        "end_page": 384
+      }
+    },
+    {
+      "id": "tha-ap429",
+      "book": 37,
+      "start": 273,
+      "end": 333,
+      "title": "Ekadhammassavaniyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 429",
+      "vri": "88–106",
+      "pts": {
+        "volume": 2,
+        "page": 384,
+        "end_page": 385
+      }
+    }
+  ],
+  "needsBook": [
+    "V|an",
+    "V|sn"
+  ],
+  "presealed_source_report_sha256": "2657ec938f36bf29b147abf36363940b79f4e8d5d48bb2ffcca6efe5dce7bb7f"
+}

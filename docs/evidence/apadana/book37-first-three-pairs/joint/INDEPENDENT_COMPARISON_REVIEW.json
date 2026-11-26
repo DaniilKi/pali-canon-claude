@@ -1,0 +1,89 @@
+{
+  "schema": "independent-joint-book37-first3-comparison-review-v1",
+  "status": "GO_EXACT_JOINT_SOURCE_ONLY_COMPARISON_IMPLEMENTATION_HELD",
+  "reviewed_utc": "2026-11-26T17:10:18.293590+00:00",
+  "joint_report": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/book37-first3-joint/JOINT_SOURCE_REVIEW.json",
+    "sha256": "95bd32c722d083f2f8f16e7cbd269e284d95847b40b3337226e8f2e1efbe7c67"
+  },
+  "joint_seal": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/book37-first3-joint/JOINT_SEAL.json",
+    "sha256": "2dd0b31f0de2ce02d5991b1eb7b35fc6b0be0f0b8c628b805b66e98daf600b0a"
+  },
+  "comparison_producer": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/book37-first3-joint/compare_presealed.py",
+    "sha256": "8bc9343cee1735e38be2dde4ace86970fe4a97afe000e4ca4b16f6e50c3f3894"
+  },
+  "original_seals": {
+    "A": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/book37-first3-A/FINAL_SEAL.json",
+      "sha256": "7c1c8449a4acd17e83121d1b403d9d02c33f9891936e3f19b411d9393cac087c"
+    },
+    "B": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/book37-first3-B/PRESEALED_REVIEW.json",
+      "sha256": "1420b5674a940e3c237eb342246e13e067d3197916d8d0475e1c822dd5af662c"
+    }
+  },
+  "bindings_verified": {
+    "all11_A_files_SHA_and_bytes": true,
+    "all5_B_evidence_files_SHA_plus_separate_producer_SHA": true,
+    "both_original_seals_exact_and_preserved": true,
+    "joint_seal_binds_exact_joint_report_producer_and_original_seals": true,
+    "raw_XML_SHA_Git_blob_VRI_revision_and_current_canonical_logical_SHA_match": true
+  },
+  "semantic_verification": {
+    "complete_before_and_proposed_records": 6,
+    "all6PTS_objects_unchanged": true,
+    "cuts": [
+      51,
+      212,
+      273
+    ],
+    "source_union_blocks": 256,
+    "old_crosswalk_rows": 106,
+    "three_position_slots_each": 318,
+    "nonnull_segment_positions_compared": 312,
+    "absent_numeric_future_slots": 6,
+    "all_common14_semantic_fields_exact_after_explicit_adapter": true,
+    "classification_independently_recomputed_from_source_payload_and_source_blocks": {
+      "SAME_NUMERIC_REF_SAME_SOURCE": 47,
+      "VANISHED_OLD_OWNER_REF": 6,
+      "SAME_NUMERIC_REF_DIFFERENT_SOURCE": 53
+    },
+    "cross_owner_segments": 6,
+    "cross_owner_blocks": 12,
+    "ordered_note_occurrences_preserved": 14,
+    "old_position_no_migration_flags_retained_all106": true
+  },
+  "schema_review": {
+    "B_rename_only": [
+      "VRI_label ->vri_paragraph",
+      "variant_note_count ->note_count",
+      "variant_notes_sha256 ->notes_sha256"
+    ],
+    "optional_missing_A_fields": "Only absent page-begin arrays become[]and absent VRIlabel becomesnull per declared reader shape. Required common fields cannot be default-filled.",
+    "per_note_asymmetry": "A per-note-string SHA array is not in B and is explicitly excluded from common equality. Shared ordered-list SHA and count match. No identical-schema or independent per-note equality claim.",
+    "classification_labels": "Explicit three-entry rename table only; no semantic classification relaxed."
+  },
+  "rendering_scope": {
+    "source_ownership_from_raw_not_renderer": true,
+    "A_method": "Sealed isolated execution of exact dependency-explicit current renderer declarations; no application module/lazy load/server.",
+    "B_method": "Independent Python model of statically read current tag-driven renderer.",
+    "joint_does_not_claim_application_runtime_acceptance": true,
+    "retained_peculiarities": [
+      "Split centre/bodytext speakers and capitalized continuations.",
+      "gathalast speakers112/240inside final numbered verse.",
+      "Separate unnumbered verse292from consecutivegathalast."
+    ],
+    "do_not_broaden_Book36_matcher_or_rewrite_source": true
+  },
+  "scope_holds_verified": [
+    "Implementation,namespace,English mapping,rights/coverage activation and private migration remain held.",
+    "All106legacy positions,including47same-source,require separate versioning/compatibility review.",
+    "Other24structural flags and lexical lead remain unreviewed; this is a scope exclusion,not a new review of that queue.",
+    "Full downstream corpus/consumer/installed/browser/exactCI acceptance is future work,not supplied by this comparison.",
+    "Metadata/producers/docs on separate research branch do not change current release."
+  ],
+  "blocking_findings": [],
+  "review_method": "Read-only hashes/JSON/source inspection and independent metadata-field comparison. Did not rerun either producer,isolated renderer,app,tests,root files,Git,CI,network or tracked writes."
+}
