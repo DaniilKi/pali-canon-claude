@@ -1,0 +1,2 @@
+{"phase":"old","seconds":7.568,"stats":{"documents":8246,"shingles":1145439,"rare_shingles":110726,"stock_shingles_skipped":25574,"candidate_pairs":12642},"rss":571015168}
+{"phase":"new","seconds":7.122,"stats":{"documents":8246,"shingles":1145439,"rare_shingles":110726,"stock_shingles_skipped":25574,"candidate_pairs":12639},"rss":571187200}
