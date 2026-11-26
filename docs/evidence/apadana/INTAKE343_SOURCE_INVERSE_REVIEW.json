@@ -1,19 +1,30 @@
 {
-  "schema": "independent-intake343-finite-source-map-review-v2",
-  "status": "GO_BIND_EXACT_V2_MAP_AND_43_ORDERED_PATHS",
+  "schema": "independent-intake343-finite-source-map-review-v3",
+  "status": "GO_BIND_EXACT_V3_MAP_AND_52_ORDERED_PATHS",
   "base_commit": "ac620911e349b089eedeb93906675c62c9523b24",
-  "map_file": "/tmp/pali-four-english-evidence-nov26/source-inverse-v2/INTAKE343_SOURCE_INVERSES.json",
-  "map_sha256": "2d74683f5597aaac3e72d754bf539daebd0f1c84a1cf74aaa92f39ddf0a3aba7",
-  "path_plan_sha256": "7247a0d6d8ed8a02fee8e050cf127f6feead9b07a4e92b32a33541f7a4a098d6",
+  "map_file": "/tmp/pali-four-english-evidence-nov26/source-inverse-v3/INTAKE343_SOURCE_INVERSES.json",
+  "map_sha256": "4e8e6cf0cdadae669667dca9da0ff255584861de520abf4ef03a1b91a349bca5",
+  "path_plan_sha256": "373c56d43c9f4073adc513dfd87f4ff029dbac7ef8bcbd2071c3d8f5931b947b",
   "original_manifest_sha256": "c5f15fbf5058c390fc03f7bb31eebc9fa0a221c41dab3db7b65f156e63e4a39c",
-  "mapped_paths": 43,
-  "unique_inverse_hunks": 92,
+  "mapped_paths": 52,
+  "unique_inverse_hunks": 101,
   "whole_original_files_verified": 692,
-  "unchanged_original_files": 649,
+  "unchanged_original_files": 640,
   "actual_new_code_paths": 12,
-  "all11_nonsealholder_new_hashes_match_receipt": true,
-  "full_preservation_closure_modules_present": 26,
-  "both_applied_frame_followup_hashes_exact": true,
+  "11_new_nonsealholder_hashes_match_generation_receipt": true,
+  "new_helper_selfexcluded": "tests/helpers/intake343-source-input.mjs",
+  "nine_current_binding_changes_literal_only": [
+    "tests/apadana-held234.test.mjs",
+    "tests/thera261-280-client.test.mjs",
+    "tests/thera261-280-source.test.mjs",
+    "tests/thera281-285-client.test.mjs",
+    "tests/thera281-285-source.test.mjs",
+    "tests/thera287-288-client.test.mjs",
+    "tests/thera287-288-source.test.mjs",
+    "tests/thera292-299-client.test.mjs",
+    "tests/thera292-299-source.test.mjs"
+  ],
+  "all692_path_hashes_sha256": "ca0c1b84e86f16cbcb7f3d6906553c307681da0e91fa496db32e26987e0467ee",
   "complete_scope_parity": true,
   "runtime_or_corpus_projection": false,
   "production_imports_test_projection": false,
@@ -21,8 +32,6 @@
     "CURRENT339_SOURCE_INVERSES.json": "23ad6da6cb733e1419be305541565518fc115d1215e6d66764c2f767e153d9b3",
     "BOUNDARY333_336_SOURCE_INVERSES.json": "7e85c6139b174572cca133360c278f930e9d74c568691759202b7ba8692107f6"
   },
-  "self_reference_excluded": "tests/helpers/intake343-source-input.mjs",
-  "all692_path_hashes_sha256": "ca0c1b84e86f16cbcb7f3d6906553c307681da0e91fa496db32e26987e0467ee",
   "per_path_review": [
     {
       "path": ".github/workflows/check.yml",
@@ -106,6 +115,13 @@
       "hunks": 1,
       "current_sha256": "8d1465cddf7d2af8d57176432fff42f54f5bfb21294b4aa70f7adcda1bd31765",
       "restored_ac_sha256": "e241d077feffd1c6fb37d55edf0d4dcd26613df948a897697c3f548eeb79a40a",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/apadana-held234.test.mjs",
+      "hunks": 1,
+      "current_sha256": "e5aa1a1aede61a543722b370aabd76ada2fab5510e05ac03540483b7ea9b0e50",
+      "restored_ac_sha256": "27b6c4f79860f6ddb55a65ec3b7c77f051bb7f5a7ac41bd25e63bdf5ae6f8e49",
       "whole_original_exact": true
     },
     {
@@ -277,6 +293,62 @@
       "whole_original_exact": true
     },
     {
+      "path": "tests/thera261-280-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "18b75cc85a80d2c02c89b783f0cef928eaae32067c6ed2c9bac3356a0951cb24",
+      "restored_ac_sha256": "b9d2fe49902c2fa15338419408f7563dc30f6a695de55765a5cbd7c688cb01a7",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera261-280-source.test.mjs",
+      "hunks": 1,
+      "current_sha256": "ad5babdbb6f0789287d1f5c7a588203dbff22be645fe4f745e61076270ec34bb",
+      "restored_ac_sha256": "4db73a493b71c82cfc3089d72135769cee5a11ee8e99f0b0c1bd6a8f0585eda4",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera281-285-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "0f0633c9eac88361e5c33f182f125a90b3fc27d3b9e70b42df96c33b492a54c6",
+      "restored_ac_sha256": "186e35a01699ca6b2ba76e83514d93bfbb293e670fcd899ce8649adc3b80a6e8",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera281-285-source.test.mjs",
+      "hunks": 1,
+      "current_sha256": "603b0405a9d3624d0404f8c2248b5dfaae27308e846e1447f5a9f8d924918dba",
+      "restored_ac_sha256": "f62f5c77a4e6a7ba5b5314704d952287c193e001053100b093ba40a448f53a49",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera287-288-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "b5dac7d98f191bb47b82177498a7b8af01288f4a23075aad4ade3a51f30ddb6f",
+      "restored_ac_sha256": "546e04c4857d0cf3cdc828490a66e220d8dbfe552b3de3be5a969d74ec965c4d",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera287-288-source.test.mjs",
+      "hunks": 1,
+      "current_sha256": "3b8c0c17b2da4774658d01c91952471c4e772eb1f7033c78c2eafdd5f4af03b5",
+      "restored_ac_sha256": "a861480d1e3fbf011051ab0157c3cb4f145ad196c44ff3c18edf8020ca29e143",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera292-299-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "e2bf3c2539617dd9fc6c29a056ab0c07cade43cf66679191b8a72921ac0927f4",
+      "restored_ac_sha256": "3071b41a190f2e9f8694fa2c2e545660d020ed000566382692936cc943762326",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera292-299-source.test.mjs",
+      "hunks": 1,
+      "current_sha256": "9dce9181fa697df20531ff36d3589534c3a1e24a81dabc60f9b32e6ca61cbec5",
+      "restored_ac_sha256": "8bae4d998987fcc26553feed108b7f214f3bea54f3cf4abd5b9e086a2d9730e7",
+      "whole_original_exact": true
+    },
+    {
       "path": "tests/thera312-319-client.test.mjs",
       "hunks": 2,
       "current_sha256": "99a15843e09e9f8fd6548f55752b3f91cf1a7d1d85e2919e5958083afd798946",
@@ -339,6 +411,7 @@
     "tests/apadana-disclosures.test.mjs",
     "tests/apadana-fourth-client.test.mjs",
     "tests/apadana-fourth.test.mjs",
+    "tests/apadana-held234.test.mjs",
     "tests/apadana-next.test.mjs",
     "tests/apadana-thera.test.mjs",
     "tests/apadana-third.test.mjs",
@@ -363,6 +436,14 @@
     "tests/thera181-220-client.test.mjs",
     "tests/thera221-230-client.test.mjs",
     "tests/thera241-250-client.test.mjs",
+    "tests/thera261-280-client.test.mjs",
+    "tests/thera261-280-source.test.mjs",
+    "tests/thera281-285-client.test.mjs",
+    "tests/thera281-285-source.test.mjs",
+    "tests/thera287-288-client.test.mjs",
+    "tests/thera287-288-source.test.mjs",
+    "tests/thera292-299-client.test.mjs",
+    "tests/thera292-299-source.test.mjs",
     "tests/thera312-319-client.test.mjs",
     "tests/thera312-319-source.test.mjs",
     "tests/thera321-329-client.test.mjs",
@@ -371,12 +452,11 @@
     "tests/widget-hosted-selections.test.mjs",
     "web/translation-policy.mjs"
   ],
-  "historical_v1_review_preserved": "SOURCE_INVERSE_INDEPENDENT_REVIEW.json/fa4a2a9d\u2026 remains immutable historical receipt",
-  "allowed_next_action": "Bind exact2d746 map SHA and43orderedpaths only, then root26-module preservation closure and fullcheck; original ac/440/D4 hashes and strictunknown-mutation behavior stay intact.",
+  "allowed_next_action": "Root bind exact4e8e mapSHA and52orderedpaths only, then root focused9cohorts/newmap/closure/fullcheck. Preserve oldfa4a and2d maps/reviews as history.",
   "limitations": [
-    "Static stdlib independent byte replay only",
-    "No generator/app imports/tests/build/Git/network execution",
-    "No runtime/source wording/provenance gate replacement",
-    "Final helper literal binding changes its new selfexcluded file only and needs root final review"
+    "Static stdlib actual-byte inverse replay only",
+    "No app imports, tests, build, Git, network or generator execution by reviewer",
+    "No claim about browser harness, runtime execution, or remote CI",
+    "Final newhelper literal bytes remain separate selfexcluded finalreview responsibility"
   ]
 }

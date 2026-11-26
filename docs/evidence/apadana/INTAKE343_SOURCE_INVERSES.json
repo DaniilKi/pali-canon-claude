@@ -196,6 +196,16 @@
         }
       ]
     },
+    "tests/apadana-held234.test.mjs": {
+      "ac_sha256": "27b6c4f79860f6ddb55a65ec3b7c77f051bb7f5a7ac41bd25e63bdf5ae6f8e49",
+      "current_sha256": "e5aa1a1aede61a543722b370aabd76ada2fab5510e05ac03540483b7ea9b0e50",
+      "hunks": [
+        {
+          "before": "  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,285),e.approval.expected_profile_ids);\n  assert.deepEqual(CURRENT_APADANA_IDS.slice(0,285),e.approval.expected_profile_ids);\n  assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);\n  assert.equal(CURRENT_APADANA_IDS.length,339);\n  for(const id of e.previous.expected_profile_ids){assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id],id+' prior profile exact');assert.deepEqual(manifest.links[id],e.priorLinks[id],id+' prior link exact');}\n  assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.profiles['tha-ap236']);assert.deepEqual(manifest.links['tha-ap236'],e.links['tha-ap236']);\n  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);\n",
+          "after": "  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,285),e.approval.expected_profile_ids);\n  assert.deepEqual(CURRENT_APADANA_IDS.slice(0,285),e.approval.expected_profile_ids);\n  assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);\n  assert.equal(CURRENT_APADANA_IDS.length,343);\n  for(const id of e.previous.expected_profile_ids){assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id],id+' prior profile exact');assert.deepEqual(manifest.links[id],e.priorLinks[id],id+' prior link exact');}\n  assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.profiles['tha-ap236']);assert.deepEqual(manifest.links['tha-ap236'],e.links['tha-ap236']);\n  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);\n"
+        }
+      ]
+    },
     "tests/apadana-next.test.mjs": {
       "ac_sha256": "0b4ff86be2d9eb6d00afbd8765fd4b7516289309547b1fe12ae587fbd5682183",
       "current_sha256": "463880f8849a554042f2fef195b280066b1fd13dfdd94e1167ed473c3360aca6",
@@ -529,6 +539,86 @@
         {
           "before": "    const profile = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v41');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n",
           "after": "    const profile = baseline.profile_objects[id];\n    assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');\n  }\n  assert.equal(WIDGET_VERSION, 'v42');\n  for (const id of approved) {\n    const profile = APADANA_PROFILES[id], record = golden(id);\n    assert.deepEqual(profile.mapping_notes, record.mapping_notes);\n"
+        }
+      ]
+    },
+    "tests/thera261-280-client.test.mjs": {
+      "ac_sha256": "b9d2fe49902c2fa15338419408f7563dc30f6a695de55765a5cbd7c688cb01a7",
+      "current_sha256": "18b75cc85a80d2c02c89b783f0cef928eaae32067c6ed2c9bac3356a0951cb24",
+      "hunks": [
+        {
+          "before": "}\n\ntest('all18 capabilities retain exact303 identity order and immutable independently sealed metadata',()=>{\n assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);\n assert.equal(e.approval.expected_profile_ids.length,303);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,303),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,303),e.approval.expected_profile_ids);\n for(const id of e.approval.baseline_ids)assert.deepEqual(APADANA_PROFILES[id],e.baseline.profile_objects[id]);\n",
+          "after": "}\n\ntest('all18 capabilities retain exact303 identity order and immutable independently sealed metadata',()=>{\n assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.equal(e.approval.expected_profile_ids.length,303);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,303),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,303),e.approval.expected_profile_ids);\n for(const id of e.approval.baseline_ids)assert.deepEqual(APADANA_PROFILES[id],e.baseline.profile_objects[id]);\n"
+        }
+      ]
+    },
+    "tests/thera261-280-source.test.mjs": {
+      "ac_sha256": "4db73a493b71c82cfc3089d72135769cee5a11ee8e99f0b0c1bd6a8f0585eda4",
+      "current_sha256": "ad5babdbb6f0789287d1f5c7a588203dbff22be645fe4f745e61076270ec34bb",
+      "hunks": [
+        {
+          "before": "function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e.profiles[id].raw_url===url.href);assert.ok(id,'Only exact18 immutable fixture URLs may reach transport');calls.push(id);return new Response(e.artifact(id));};}\n\ntest('exact independently approved18 extend the preserved285 to303 with unchanged canonical identities and rights',()=>{\n assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);\n assert.equal(e.approval.expected_profile_ids.length,303);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,303),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,303),e.approval.expected_profile_ids);\n const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));\n",
+          "after": "function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e.profiles[id].raw_url===url.href);assert.ok(id,'Only exact18 immutable fixture URLs may reach transport');calls.push(id);return new Response(e.artifact(id));};}\n\ntest('exact independently approved18 extend the preserved285 to303 with unchanged canonical identities and rights',()=>{\n assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.equal(e.approval.expected_profile_ids.length,303);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,303),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,303),e.approval.expected_profile_ids);\n const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));\n"
+        }
+      ]
+    },
+    "tests/thera281-285-client.test.mjs": {
+      "ac_sha256": "186e35a01699ca6b2ba76e83514d93bfbb293e670fcd899ce8649adc3b80a6e8",
+      "current_sha256": "0f0633c9eac88361e5c33f182f125a90b3fc27d3b9e70b42df96c33b492a54c6",
+      "hunks": [
+        {
+          "before": "function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}\n\ntest('all five capabilities retain exact308 identity and every original303 profile without mistaking API choices for private pins',()=>{\n assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);\n assert.equal(e.approval.expected_profile_ids.length,308);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,308),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,308),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(308,310),['tha-ap289','tha-ap290']);\n",
+          "after": "function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}\n\ntest('all five capabilities retain exact308 identity and every original303 profile without mistaking API choices for private pins',()=>{\n assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.equal(e.approval.expected_profile_ids.length,308);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,308),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,308),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(308,310),['tha-ap289','tha-ap290']);\n"
+        }
+      ]
+    },
+    "tests/thera281-285-source.test.mjs": {
+      "ac_sha256": "f62f5c77a4e6a7ba5b5314704d952287c193e001053100b093ba40a448f53a49",
+      "current_sha256": "603b0405a9d3624d0404f8c2248b5dfaae27308e846e1447f5a9f8d924918dba",
+      "hunks": [
+        {
+          "before": "\ntest('exact five independently reviewed profiles extend all preserved303 objects and links to308 without prior catalogue or canonical identity changes',()=>{\n const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));\n assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);\n assert.equal(e.approval.expected_profile_ids.length,308);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,308),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,308),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(308,310),['tha-ap289','tha-ap290']);\n",
+          "after": "\ntest('exact five independently reviewed profiles extend all preserved303 objects and links to308 without prior catalogue or canonical identity changes',()=>{\n const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));\n assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.equal(e.approval.expected_profile_ids.length,308);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,308),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,308),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(308,310),['tha-ap289','tha-ap290']);\n"
+        }
+      ]
+    },
+    "tests/thera287-288-client.test.mjs": {
+      "ac_sha256": "546e04c4857d0cf3cdc828490a66e220d8dbfe552b3de3be5a969d74ec965c4d",
+      "current_sha256": "b5dac7d98f191bb47b82177498a7b8af01288f4a23075aad4ade3a51f30ddb6f",
+      "hunks": [
+        {
+          "before": "function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}\n\ntest('two genuine capabilities retain all308 prior profiles and exact310 identity without audio capability or exposed-choice pin assumptions',()=>{\n assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);\n assert.equal(e.approval.expected_profile_ids.length,310);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,310),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,310),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(310,317),['tha-ap294','tha-ap295','tha-ap296','tha-ap297','tha-ap298','tha-ap300','tha-ap301']);\n",
+          "after": "function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}\n\ntest('two genuine capabilities retain all308 prior profiles and exact310 identity without audio capability or exposed-choice pin assumptions',()=>{\n assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.equal(e.approval.expected_profile_ids.length,310);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,310),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,310),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(310,317),['tha-ap294','tha-ap295','tha-ap296','tha-ap297','tha-ap298','tha-ap300','tha-ap301']);\n"
+        }
+      ]
+    },
+    "tests/thera287-288-source.test.mjs": {
+      "ac_sha256": "a861480d1e3fbf011051ab0157c3cb4f145ad196c44ff3c18edf8020ca29e143",
+      "current_sha256": "3b8c0c17b2da4774658d01c91952471c4e772eb1f7033c78c2eafdd5f4af03b5",
+      "hunks": [
+        {
+          "before": "\ntest('exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities',()=>{\n const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));\n assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);\n assert.equal(e.approval.expected_profile_ids.length,310);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,310),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,310),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(310,317),['tha-ap294','tha-ap295','tha-ap296','tha-ap297','tha-ap298','tha-ap300','tha-ap301']);\n",
+          "after": "\ntest('exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities',()=>{\n const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));\n assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.equal(e.approval.expected_profile_ids.length,310);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,310),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,310),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(310,317),['tha-ap294','tha-ap295','tha-ap296','tha-ap297','tha-ap298','tha-ap300','tha-ap301']);\n"
+        }
+      ]
+    },
+    "tests/thera292-299-client.test.mjs": {
+      "ac_sha256": "3071b41a190f2e9f8694fa2c2e545660d020ed000566382692936cc943762326",
+      "current_sha256": "e2bf3c2539617dd9fc6c29a056ab0c07cade43cf66679191b8a72921ac0927f4",
+      "hunks": [
+        {
+          "before": "function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}\n\ntest('seven genuine V2 capabilities retain all310 prior profiles and exact317 identity without audio capability or exposed-choice pin assumptions',()=>{\n assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);\n assert.equal(e.approval.expected_profile_ids.length,317);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,317),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,317),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(317,325),['tha-ap303','tha-ap304','tha-ap305','tha-ap306','tha-ap307','tha-ap310','tha-ap311','tha-ap312']);for(const id of e.approval.baseline_ids)assert.deepEqual(APADANA_PROFILES[id],e.baseline.profile_objects[id]);\n",
+          "after": "function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}\n\ntest('seven genuine V2 capabilities retain all310 prior profiles and exact317 identity without audio capability or exposed-choice pin assumptions',()=>{\n assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.equal(e.approval.expected_profile_ids.length,317);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,317),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,317),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(317,325),['tha-ap303','tha-ap304','tha-ap305','tha-ap306','tha-ap307','tha-ap310','tha-ap311','tha-ap312']);for(const id of e.approval.baseline_ids)assert.deepEqual(APADANA_PROFILES[id],e.baseline.profile_objects[id]);\n"
+        }
+      ]
+    },
+    "tests/thera292-299-source.test.mjs": {
+      "ac_sha256": "8bae4d998987fcc26553feed108b7f214f3bea54f3cf4abd5b9e086a2d9730e7",
+      "current_sha256": "9dce9181fa697df20531ff36d3589534c3a1e24a81dabc60f9b32e6ca61cbec5",
+      "hunks": [
+        {
+          "before": "\ntest('seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities',()=>{\n const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));\n assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);\n assert.equal(e.approval.expected_profile_ids.length,317);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,317),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,317),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(317,325),['tha-ap303','tha-ap304','tha-ap305','tha-ap306','tha-ap307','tha-ap310','tha-ap311','tha-ap312']);assert.deepEqual(Object.keys(manifest.links),CURRENT_APADANA_IDS);\n",
+          "after": "\ntest('seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities',()=>{\n const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));\n assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.equal(e.approval.expected_profile_ids.length,317);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,317),e.approval.expected_profile_ids);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,317),e.approval.expected_profile_ids);\n assert.deepEqual(CURRENT_APADANA_IDS.slice(317,325),['tha-ap303','tha-ap304','tha-ap305','tha-ap306','tha-ap307','tha-ap310','tha-ap311','tha-ap312']);assert.deepEqual(Object.keys(manifest.links),CURRENT_APADANA_IDS);\n"
         }
       ]
     },
