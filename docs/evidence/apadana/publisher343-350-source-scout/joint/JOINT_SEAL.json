@@ -1,0 +1,15 @@
+{
+  "schema": "joint-publisher343-350-source-only-closure-v1",
+  "status": "GO_FUTURE_SOURCE_WORK_ONLY_ACTIVATION_HELD",
+  "files": {
+    "JOINT_SOURCE_REVIEW.json": "c0386a44f04c51e9a120a9019de0f2eb28b3123b26b2aa96bacaae3bf453b5c6",
+    "COMPARISON_RECEIPT.json": "67a259467dc9073fc25e0efa0e2ebea14fc9279dc71cb60df3553a9de04918e4",
+    "COMBINED16_SOURCE_SCOPE.json": "b2de7458ea6e67ce6c89e85dc392c1397e3eb7b394651f8b608d85d91fbc786b",
+    "README.md": "4cfce0b2ca916978d1c296e67a91ea9e18fa03c3688dfd5dfb0243c5d09f7f24"
+  },
+  "original_A_report_sha256": "54230e096a4424fd274287b4f975fa33a139eed9c88640fcda992922e58860a2",
+  "original_B_report_sha256": "a5d9bdc08712f2209982873d38c1f88247c60c43f8de15b61fb848b6e85cc4cc",
+  "original_B_preseal_sha256": "95e0014e360423320eebf3e5702bd09d02a373fd50bb8fc5b30f05b6f8fe9d42",
+  "original_files_unchanged": true,
+  "activation_gain": 0
+}

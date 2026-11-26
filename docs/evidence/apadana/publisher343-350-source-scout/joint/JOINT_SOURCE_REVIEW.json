@@ -1,0 +1,217 @@
+{
+  "schema": "joint-publisher343-350-future-source-work-only-v1",
+  "status": "GO_FUTURE_SOURCE_WORK_ONLY",
+  "normalization_profile_runtime_activation": "HOLD",
+  "source_candidates": 8,
+  "current_root_mappings_supported": 6,
+  "conditional_proposed_root_mappings_supported": 2,
+  "records": [
+    {
+      "publisher_poem": 343,
+      "canonical_id": "tha-ap345",
+      "actual_current_root": [
+        10287,
+        10310
+      ],
+      "source_supported_root": [
+        10287,
+        10310
+      ],
+      "conditional": false,
+      "source_work": "GO",
+      "activation": "HOLD"
+    },
+    {
+      "publisher_poem": 344,
+      "canonical_id": "tha-ap346",
+      "actual_current_root": [
+        10310,
+        10324
+      ],
+      "source_supported_root": [
+        10310,
+        10324
+      ],
+      "conditional": false,
+      "source_work": "GO",
+      "activation": "HOLD"
+    },
+    {
+      "publisher_poem": 345,
+      "canonical_id": "tha-ap347",
+      "actual_current_root": [
+        10324,
+        10350
+      ],
+      "source_supported_root": [
+        10324,
+        10350
+      ],
+      "conditional": false,
+      "source_work": "GO",
+      "activation": "HOLD"
+    },
+    {
+      "publisher_poem": 346,
+      "canonical_id": "tha-ap348",
+      "actual_current_root": [
+        10350,
+        10371
+      ],
+      "source_supported_root": [
+        10350,
+        10367
+      ],
+      "conditional": true,
+      "source_work": "GO",
+      "activation": "HOLD"
+    },
+    {
+      "publisher_poem": 347,
+      "canonical_id": "tha-ap349",
+      "actual_current_root": [
+        10371,
+        10382
+      ],
+      "source_supported_root": [
+        10367,
+        10382
+      ],
+      "conditional": true,
+      "source_work": "GO",
+      "activation": "HOLD"
+    },
+    {
+      "publisher_poem": 348,
+      "canonical_id": "tha-ap350",
+      "actual_current_root": [
+        10382,
+        10417
+      ],
+      "source_supported_root": [
+        10382,
+        10417
+      ],
+      "conditional": false,
+      "source_work": "GO",
+      "activation": "HOLD"
+    },
+    {
+      "publisher_poem": 349,
+      "canonical_id": "tha-ap351",
+      "actual_current_root": [
+        10417,
+        10431
+      ],
+      "source_supported_root": [
+        10417,
+        10431
+      ],
+      "conditional": false,
+      "source_work": "GO",
+      "activation": "HOLD"
+    },
+    {
+      "publisher_poem": 350,
+      "canonical_id": "tha-ap352",
+      "actual_current_root": [
+        10431,
+        10450
+      ],
+      "source_supported_root": [
+        10431,
+        10450
+      ],
+      "conditional": false,
+      "source_work": "GO",
+      "activation": "HOLD"
+    }
+  ],
+  "raw_heading_pins": [
+    {
+      "publisher_file_order": 343,
+      "PTS_main": 340,
+      "BJTS_fancy": 343,
+      "canonical_id": "tha-ap345",
+      "raw_heading_line_sha256": "672d3ae6cddda68e858f0e92450742fa374fe15023bc8938a4e910a84da78f92",
+      "provenance": "B presealed raw-heading hash; A separately agrees on printed labels/whole raw poem but has no separate raw-heading pin.",
+      "normalized_profile_heading_hash": "NOT_APPROVED_OR_DERIVED"
+    },
+    {
+      "publisher_file_order": 344,
+      "PTS_main": 341,
+      "BJTS_fancy": 344,
+      "canonical_id": "tha-ap346",
+      "raw_heading_line_sha256": "6cf87862a1deb84949cb6c21c4a683b09e059c7bb5b7a938460abeaf3c9053a6",
+      "provenance": "B presealed raw-heading hash; A separately agrees on printed labels/whole raw poem but has no separate raw-heading pin.",
+      "normalized_profile_heading_hash": "NOT_APPROVED_OR_DERIVED"
+    },
+    {
+      "publisher_file_order": 345,
+      "PTS_main": 342,
+      "BJTS_fancy": 345,
+      "canonical_id": "tha-ap347",
+      "raw_heading_line_sha256": "5c5159544bb33e1efa75b0417e7e3f1d7bd5a4e18030d8f0d3672973711de5d4",
+      "provenance": "B presealed raw-heading hash; A separately agrees on printed labels/whole raw poem but has no separate raw-heading pin.",
+      "normalized_profile_heading_hash": "NOT_APPROVED_OR_DERIVED"
+    },
+    {
+      "publisher_file_order": 346,
+      "PTS_main": 343,
+      "BJTS_fancy": 346,
+      "canonical_id": "tha-ap348",
+      "raw_heading_line_sha256": "055342117178fd4656db3929aef98e1a5d9fdb327e895f421568588033d6ac44",
+      "provenance": "B presealed raw-heading hash; A separately agrees on printed labels/whole raw poem but has no separate raw-heading pin.",
+      "normalized_profile_heading_hash": "NOT_APPROVED_OR_DERIVED"
+    },
+    {
+      "publisher_file_order": 347,
+      "PTS_main": 344,
+      "BJTS_fancy": 347,
+      "canonical_id": "tha-ap349",
+      "raw_heading_line_sha256": "071cac45c70d201682dee36737c82e774f504d0841292ea5a813b67503216aeb",
+      "provenance": "B presealed raw-heading hash; A separately agrees on printed labels/whole raw poem but has no separate raw-heading pin.",
+      "normalized_profile_heading_hash": "NOT_APPROVED_OR_DERIVED"
+    },
+    {
+      "publisher_file_order": 348,
+      "PTS_main": 345,
+      "BJTS_fancy": 348,
+      "canonical_id": "tha-ap350",
+      "raw_heading_line_sha256": "dba997469e9e4f95bbdad919df174f565efe89d1171accd3ce495091b9f5a86c",
+      "provenance": "B presealed raw-heading hash; A separately agrees on printed labels/whole raw poem but has no separate raw-heading pin.",
+      "normalized_profile_heading_hash": "NOT_APPROVED_OR_DERIVED"
+    },
+    {
+      "publisher_file_order": 349,
+      "PTS_main": 346,
+      "BJTS_fancy": 349,
+      "canonical_id": "tha-ap351",
+      "raw_heading_line_sha256": "05a68acba8cef27aaad40c318fdd2ff89ffefb72981b959d0a0cb105b58360c5",
+      "provenance": "B presealed raw-heading hash; A separately agrees on printed labels/whole raw poem but has no separate raw-heading pin.",
+      "normalized_profile_heading_hash": "NOT_APPROVED_OR_DERIVED"
+    },
+    {
+      "publisher_file_order": 350,
+      "PTS_main": 347,
+      "BJTS_fancy": 350,
+      "canonical_id": "tha-ap352",
+      "raw_heading_line_sha256": "e4fa4d17af23c3a4fae6cda41c8d5baa75c871b704683233463447dc1e945596",
+      "provenance": "B presealed raw-heading hash; A separately agrees on printed labels/whole raw poem but has no separate raw-heading pin.",
+      "normalized_profile_heading_hash": "NOT_APPROVED_OR_DERIVED"
+    }
+  ],
+  "mandatory_holds": [
+    "All eight require independent finite mixed PTS/BJTS heading and normalized-profile review. Raw heading pins here are source anchors only.",
+    "Publisher346/347must not activate or use current incorrect348/349spans; source-supported cut10367requires separately approved canonical repair/versioning/old-position and private-data compatibility. No new namespace is assigned.",
+    "Keep publisher347literal duplicate local3and use exact global/physical identity; never invent local4.",
+    "Validate exact finite HTML8pair owner/location for346; preserve state-on spelling without generic tag stripping.",
+    "Keep VRI recitation10381with349as untranslated non-stanza paratext. No English publisher division may be invented.",
+    "Only publisher350/canonical352owns this separate note-free6-line summary; source closing order/count/roster differences remain. Independent descriptor/root pins still required.",
+    "Keep all source wording,edition caveats,notes,existing NC-SA constraints,prior343objects/holds/locators and local-only private records. No source outside the eight is newly approved.",
+    "Combined16is a directly verified future source candidate scope,not corpus/normalization/runtime approval or activated coverage. Current release/CI remains independent."
+  ],
+  "coverage_gain": 0,
+  "missing_facts_not_backfilled": true,
+  "source_scope_not_line_complete_VRI": true
+}

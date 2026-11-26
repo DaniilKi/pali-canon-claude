@@ -1,0 +1,51 @@
+{
+  "schema": "eight-source343-350-scout-seal-v1",
+  "status": "EIGHT_SOURCE_CANDIDATES_TWO_BOUNDARY_CONDITIONAL_NO_ACTIVATION",
+  "files": {
+    "ACQUISITION.json": {
+      "bytes": 6621,
+      "sha256": "ed38f182872382a0bbdae8a782ea3d21d9219f25ee37919b9642fa363c4b983e"
+    },
+    "SCOUT_REPORT.json": {
+      "bytes": 78463,
+      "sha256": "54230e096a4424fd274287b4f975fa33a139eed9c88640fcda992922e58860a2"
+    },
+    "scout_sources.py": {
+      "bytes": 23133,
+      "sha256": "6234bd096ea073daffe43a2d1343e5cf63953e96851bfcc94f6e51cbc7b87181"
+    },
+    "originals/src/_poems/chapter-3/poem-344.md": {
+      "bytes": 2010,
+      "sha256": "e75eaf03a0a5054a032132af445ed385a9e11c61f585416001ee85bf3b9dbd41"
+    },
+    "originals/src/_poems/chapter-3/poem-348.md": {
+      "bytes": 4003,
+      "sha256": "6db687c913c84f79fda8bd96aa15dabb95cc13ee4c8824cc03c56f09d942b262"
+    },
+    "originals/src/_poems/chapter-3/poem-345.md": {
+      "bytes": 2278,
+      "sha256": "1c6028fa7c65f1df3bfa79a7e2594a8e46f7086b4ed704d0d250c4c43344b273"
+    },
+    "originals/src/_poems/chapter-3/poem-347.md": {
+      "bytes": 1648,
+      "sha256": "081829ee5ff04149dcc576b3937c68151726c0ada68bf94921e3e5549ce48d4d"
+    },
+    "originals/src/_poems/chapter-3/poem-350.md": {
+      "bytes": 2969,
+      "sha256": "df49aa382e3871129ed5626c2679c6665960ee1d1d45d53917e0923fe710e127"
+    },
+    "originals/src/_poems/chapter-3/poem-343.md": {
+      "bytes": 2175,
+      "sha256": "2f8fdf0c82dcf2b93bf933e77fab59479c163043b4b9eb97bec1be29ae33c581"
+    },
+    "originals/src/_poems/chapter-3/poem-346.md": {
+      "bytes": 2629,
+      "sha256": "2c5a4fecb8f830c10f58109d0c29aac7f136e3264c8a4aea295616486a67dbf6"
+    },
+    "originals/src/_poems/chapter-3/poem-349.md": {
+      "bytes": 1875,
+      "sha256": "25a0755055dd28a6f7ed250bd644798a5c97471c4df26aa7dee4e3d4a5c9a383"
+    }
+  },
+  "no_implementation_activation_or_runtime_approval": true
+}

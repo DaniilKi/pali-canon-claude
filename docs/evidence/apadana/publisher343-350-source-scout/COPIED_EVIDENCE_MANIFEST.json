@@ -1,0 +1,80 @@
+{
+  "schema": "public-source-scout-copied-byte-manifest-v1",
+  "actual_coverage_gain": 0,
+  "normalization_profiles_runtime_activation": "HOLD",
+  "conditional_future_boundary_mappings": 2,
+  "raw_English_or_notes_bundled": false,
+  "release_candidate_changed": false,
+  "files": [
+    {
+      "path": "A/ACQUISITION.json",
+      "bytes": 6621,
+      "sha256": "ed38f182872382a0bbdae8a782ea3d21d9219f25ee37919b9642fa363c4b983e"
+    },
+    {
+      "path": "A/FINAL_CLOSURE.json",
+      "bytes": 527,
+      "sha256": "6377885e183ecafefdcf72866ab5cdfb0103070f8ad313963ca391f42dd2f93f"
+    },
+    {
+      "path": "A/README.md",
+      "bytes": 4452,
+      "sha256": "014526d8eaa266d037ff2a2967e63d10ef93edbd6cc3edd56183d4b369af8ea4"
+    },
+    {
+      "path": "A/SCOUT_REPORT.json",
+      "bytes": 78463,
+      "sha256": "54230e096a4424fd274287b4f975fa33a139eed9c88640fcda992922e58860a2"
+    },
+    {
+      "path": "A/SCOUT_SEAL.json",
+      "bytes": 1925,
+      "sha256": "0a9b79223e1ec8add03ac9ad935f013c5530defaa2fd181de1aa01d296b4151e"
+    },
+    {
+      "path": "A/scout_sources.py",
+      "bytes": 23133,
+      "sha256": "6234bd096ea073daffe43a2d1343e5cf63953e96851bfcc94f6e51cbc7b87181"
+    },
+    {
+      "path": "B/INPUT_PINS.json",
+      "bytes": 7269,
+      "sha256": "8535bec789c6fe7606884c4b3cff8871fb0e9b30316ac2c82ec6eabc13f5ef70"
+    },
+    {
+      "path": "B/PRESEALED_REVIEW.json",
+      "bytes": 530,
+      "sha256": "95e0014e360423320eebf3e5702bd09d02a373fd50bb8fc5b30f05b6f8fe9d42"
+    },
+    {
+      "path": "B/SOURCE_REVIEW.json",
+      "bytes": 53756,
+      "sha256": "a5d9bdc08712f2209982873d38c1f88247c60c43f8de15b61fb848b6e85cc4cc"
+    },
+    {
+      "path": "joint/JOINT_SEAL.json",
+      "bytes": 882,
+      "sha256": "bfc266a5a7ecc74896ee591c61a2bf2d1f8ce4462b617a4de739e413a2f06caa"
+    },
+    {
+      "path": "joint/JOINT_SOURCE_REVIEW.json",
+      "bytes": 7672,
+      "sha256": "c0386a44f04c51e9a120a9019de0f2eb28b3123b26b2aa96bacaae3bf453b5c6"
+    },
+    {
+      "path": "joint/COMPARISON_RECEIPT.json",
+      "bytes": 14486,
+      "sha256": "67a259467dc9073fc25e0efa0e2ebea14fc9279dc71cb60df3553a9de04918e4"
+    },
+    {
+      "path": "joint/COMBINED16_SOURCE_SCOPE.json",
+      "bytes": 3021,
+      "sha256": "b2de7458ea6e67ce6c89e85dc392c1397e3eb7b394651f8b608d85d91fbc786b"
+    },
+    {
+      "path": "joint/README.md",
+      "bytes": 1779,
+      "sha256": "4cfce0b2ca916978d1c296e67a91ea9e18fa03c3688dfd5dfb0243c5d09f7f24"
+    }
+  ]
+}
