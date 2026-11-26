@@ -22215,6 +22215,655 @@ __export(canon_exports, {
   translationScope: () => translationScope
 });
 
+// src/apadana-thera312-319-profiles.mjs
+var THERA_312_319_PROFILES = {
+  "tha-ap314": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-312.md",
+    "id": "tha-ap314",
+    "publisher_chapter": "chapter-3",
+    "poem": 312,
+    "verses": [
+      2771,
+      2776
+    ],
+    "root_verses": [
+      4,
+      9
+    ],
+    "note_count": 7,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-312/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-312/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-312.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Bhojanad\u0101yaka",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 312; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "85b4830c513b60c38a14f5c9493e6faf68449cad54db289bdba8e1641319bc4e",
+    "body_sha256": "0c9448152c0d3c3dc1606892cc82e7a6e7007df68ae38ecdb74545e8b30d8fb4",
+    "notes_sha256": "0eaafc4ec60e71f477067faa50672a48c65cbf801814431bcf4c01ddb18ddba4",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "0b6502bfc22fc09bbfdb4d29d3df48acb42b79828873ea78870d7122d738cc64",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2771",
+        "suffix": "(1) [2771]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2772",
+        "suffix": "(2) [2772]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2773",
+        "suffix": "(3) [2773]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2774",
+        "suffix": "(4) [2774]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2775",
+        "suffix": "(5) [2775]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "2776",
+        "suffix": "(6) [2776]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 312 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap314; title and numbering alone do not establish the mapping.",
+      "Note3 contains two exact HTML c/ch state-pairs in dictionary citation wording; note-owned only, no generic HTML acceptance.",
+      "Publisher king Amittabh\u0101 differs from VRI main Amittaka; preserve publisher title/gloss and VRI independently.",
+      "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyy\u0101la/variants and publisher bracketed additions remain independent; no missing wording inferred."
+    ]
+  },
+  "tha-ap315": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-313.md",
+    "id": "tha-ap315",
+    "publisher_chapter": "chapter-3",
+    "poem": 313,
+    "verses": [
+      2777,
+      2780
+    ],
+    "root_verses": [
+      10,
+      13
+    ],
+    "note_count": 2,
+    "note_numbers": [
+      1,
+      2
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-313/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-313/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-313.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Gatasa\xF1\xF1aka",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 313; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "e711a219aeac27746b5ef61288d60a9968b5164ae049679e158533b17235170a",
+    "body_sha256": "c602c265e973e7afc9035fba701bcb2c2a318c876f696c4cfbc0f409647b3e6b",
+    "notes_sha256": "5faf49c93112df3011eab3a2eccd2a813120fa194218e4ea58519ab0989c97ef",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "4b91ce97969fec5fb3911aefedcff60f34f20b86fa707b2194e32849a493e4c4",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2777",
+        "suffix": "(1) [2777]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2778",
+        "suffix": "(2) [2778]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2779",
+        "suffix": "(3) [2779]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2780",
+        "suffix": "(4) [2780]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 313 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap315; title and numbering alone do not establish the mapping.",
+      "VRI variant notes preserve different joy/robe grammatical readings; publisher interpretation is not a reconstructed VRI line-by-line rendering.",
+      "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyy\u0101la/variants and publisher bracketed additions remain independent; no missing wording inferred."
+    ]
+  },
+  "tha-ap316": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-314.md",
+    "id": "tha-ap316",
+    "publisher_chapter": "chapter-3",
+    "poem": 314,
+    "verses": [
+      2781,
+      2786
+    ],
+    "root_verses": [
+      14,
+      19
+    ],
+    "note_count": 5,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-314/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-314/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-314.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sattapadumiya",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 314; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "643a0384fce5b4fb84a1640b0cc4a7e0e66808ae288ee1f5c40b4d7eaeb2ea5b",
+    "body_sha256": "3c824d1f7b041db183f31a150a501e57056184bb6b3847cf379d5365e5f47732",
+    "notes_sha256": "009d6e173df781fd9cb3c04ef38bc662777047102416531b209350ea09c5bc04",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "168481292916505c5f8099cd6de2390fc4f432f985bc8c702779689ea8a4d4f9",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2781",
+        "suffix": "(1) [2781]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2782",
+        "suffix": "(2) [2782]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2783",
+        "suffix": "(3) [2783]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2784",
+        "suffix": "(4) [2784]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2785",
+        "suffix": "(5) [2785]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "2786",
+        "suffix": "(6) [2786]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 314 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap316; title and numbering alone do not establish the mapping.",
+      "Publisher Sattapadumiya versus PTS Sattapaduminya noted. VRI main has sky-travel, recorded vanena variant matches publisher forest-travel; retain edition distinction.",
+      "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyy\u0101la/variants and publisher bracketed additions remain independent; no missing wording inferred."
+    ]
+  },
+  "tha-ap317": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-315.md",
+    "id": "tha-ap317",
+    "publisher_chapter": "chapter-3",
+    "poem": 315,
+    "verses": [
+      2787,
+      2792
+    ],
+    "root_verses": [
+      20,
+      25
+    ],
+    "note_count": 2,
+    "note_numbers": [
+      1,
+      2
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-315/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-315/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-315.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Pupph\xE2saniya",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 315; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "56a75525b6110ff4ba1c823bb9e20755f3ab26a0bd9d9704af0a27d923d1c2b7",
+    "body_sha256": "ee417a425e5c47bc159992fe06ee9b2b84d8c917fd67b3c9f222eac282300998",
+    "notes_sha256": "ca7534145ec3a89c1e9219f180107ddadc22b1176d7f32f0ced7859fd0cd26a7",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "ed4cdb8764d6bed8fd23badf941e33d4634bd015bffe754704493c4aa01fb751",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2787",
+        "suffix": "(1) [2787]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2788",
+        "suffix": "(2) [2788]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2789",
+        "suffix": "(3) [2789]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2790",
+        "suffix": "(4) [2790]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2791",
+        "suffix": "(5) [2791]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "2792",
+        "suffix": "(6) [2792]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 315 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap317; title and numbering alone do not establish the mapping.",
+      "Publisher literal title Pupph\xE2saniya (circumflex) differs from VRI Pupph\u0101sanad\u0101yaka; preserve original title/spelling and narrative-based mapping.",
+      "Publisher hundred-ray image corresponds to recorded VRI s\u012B./sy\u0101. reading, versus VRI main yellow-ray.",
+      "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyy\u0101la/variants and publisher bracketed additions remain independent; no missing wording inferred."
+    ]
+  },
+  "tha-ap318": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-316.md",
+    "id": "tha-ap318",
+    "publisher_chapter": "chapter-3",
+    "poem": 316,
+    "verses": [
+      2793,
+      2800
+    ],
+    "root_verses": [
+      26,
+      33
+    ],
+    "note_count": 6,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-316/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-316/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-316.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "\u0100sanatthavika",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 316; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "ca1a3b8b0e13449d47531a6ad9078b94d61f3c64845383b004b60a01d61e3116",
+    "body_sha256": "82afa2dff8e172594f2ec072a13c1edc12c1d62f75a1fc3f584a496cbad83abd",
+    "notes_sha256": "d4ae3912c2a2ba936559777a4d0e026b84d0a3651f14e99b3f37d19541f0aa0e",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "0465f9db23356f8095ccf12884dd47e44aee1594468f243f9baace3ad368ac20",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2793",
+        "suffix": "(1) [2793]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2794",
+        "suffix": "(2) [2794]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2795",
+        "suffix": "(3) [2795]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2796",
+        "suffix": "(4) [2796]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2797",
+        "suffix": "(5) [2797]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "2798",
+        "suffix": "(6) [2798]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "2799",
+        "suffix": "(7) [2799]",
+        "lines": 4
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "2800",
+        "suffix": "(8) [2800]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 316 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap318; title and numbering alone do not establish the mapping.",
+      "Publisher \u0100sanatthavika differs from VRI main \u0100sanasanthavika; VRI colophon records \u0101sanatthaviko(s\u012B.sy\u0101.).",
+      "Original note2 leaves throne-object/Buddha-epithet ambiguity unresolved; do not turn it into certainty.",
+      "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyy\u0101la/variants and publisher bracketed additions remain independent; no missing wording inferred."
+    ]
+  },
+  "tha-ap319": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-317.md",
+    "id": "tha-ap319",
+    "publisher_chapter": "chapter-3",
+    "poem": 317,
+    "verses": [
+      2801,
+      2805
+    ],
+    "root_verses": [
+      34,
+      38
+    ],
+    "note_count": 3,
+    "note_numbers": [
+      1,
+      2,
+      3
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-317/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-317/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-317.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Saddasa\xF1\xF1aka",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 317; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "bdf4f61c0e4d3ece47054971b44e341062626a346f5407faaf2825d4e47c1014",
+    "body_sha256": "55690b2532b2ddfa941f7edb4beb9480441609e76f42d4cd3ba444124bed9835",
+    "notes_sha256": "9711247cc2260e43305c4a79344e7465b3da195b2bca46f686c71c50dd0c7f0f",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "9f6ea0977f361d258c9502da92d9135df022934c235d0d9a5a352006ed66bb08",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2801",
+        "suffix": "(1) [2801]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2802",
+        "suffix": "(2) [2802]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2803",
+        "suffix": "(3) [2803]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2804",
+        "suffix": "(4) [2804]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2805",
+        "suffix": "(5) [2805]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 317 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap319; title and numbering alone do not establish the mapping.",
+      "Distinguish other same-title accounts tha-ap90(Phussa/Himalaya) and296(unseen birth announcement) from Siddhattha house sermon here.",
+      "Publisher note3 explicitly follows BJTS alternative against PTS; original VRI has its own main/variant wording, preserve independently.",
+      "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyy\u0101la/variants and publisher bracketed additions remain independent; no missing wording inferred."
+    ]
+  },
+  "tha-ap320": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-318.md",
+    "id": "tha-ap320",
+    "publisher_chapter": "chapter-3",
+    "poem": 318,
+    "verses": [
+      2806,
+      2813
+    ],
+    "root_verses": [
+      39,
+      46
+    ],
+    "note_count": 6,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-318/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-318/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-318.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Tira\u014Bsiya",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 318; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "3fd16d56cd591195aea40e5dcb42c1b956a1256dd59319d19d54d8fac2e6933e",
+    "body_sha256": "4fc327187606d2a42a11dbb4541f9e075bda87d0d9305dfe6912d3926cb5e90f",
+    "notes_sha256": "247dfb32d1e0147b1198ff6ae829a3dde3ce483e25bfebc6246d0e23c64ed69f",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "7f09c2e4686c8b531b4d2c6944a538cbbd1fc02b77fd44aad8f7784fb810c497",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2806",
+        "suffix": "(1) [2806]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2807",
+        "suffix": "(2) [2807]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2808",
+        "suffix": "(3) [2808]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "2809",
+        "suffix": "(4) [2809]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2810",
+        "suffix": "(5) [2810]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "2811",
+        "suffix": "(6) [2811]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "2812",
+        "suffix": "(7) [2812]",
+        "lines": 4
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "2813",
+        "suffix": "(8) [2813]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 318 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap320; title and numbering alone do not establish the mapping.",
+      "Publisher Tira\u014Bsiya uses literal\u014B, VRI Tira\u1E43siya; retain spellings. Note3 explicitly chooses a Buddha-epithet reading rather than resolving it.",
+      "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyy\u0101la/variants and publisher bracketed additions remain independent; no missing wording inferred."
+    ]
+  },
+  "tha-ap321": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-319.md",
+    "id": "tha-ap321",
+    "publisher_chapter": "chapter-3",
+    "poem": 319,
+    "verses": [
+      2814,
+      2820
+    ],
+    "root_verses": [
+      47,
+      53
+    ],
+    "note_count": 3,
+    "note_numbers": [
+      1,
+      2,
+      3
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-319/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-319/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-319.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Kandal\u012Bpupphiya",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 319; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "319537c032118a37e566ae9b3aa6ccb786f8e2d8a2be5b1a76ee1bd76f697e94",
+    "body_sha256": "17e3e916cf68db30df7dbf24a18cebd313a339df8d6343a5e94f810c266a44d7",
+    "notes_sha256": "3c96e659a565755ea9983ee20de86fc5edc60c51dbe662b1f7c2e068259c24e6",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "900652ab049705027fb6791b3c826ecaa3a749bc17ac8fb24e06af9f3a3fc445",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2814",
+        "suffix": "(1) [2814]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2815",
+        "suffix": "(2) [2815]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "2816",
+        "suffix": "(3) [2816]",
+        "lines": 4
+      },
+      {
+        "local_label": "4-5",
+        "publisher_label": "2817-2818",
+        "suffix": "(4-5) [2817-2818]",
+        "lines": 8
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "2819",
+        "suffix": "(6) [2819]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "2820",
+        "suffix": "(7) [2820]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and explicit edition differences; matching ordinal labels are scope evidence, not word/line equivalence.",
+      "Full original publisher chapter-3 poem 319 narrative, title and both colophons, compared with original VRI XML and both canonical neighbors, identify tha-ap321; title and numbering alone do not establish the mapping.",
+      "Combined local4\u20135 is one8-line paragraph and reorders narrative material from VRI50\u201351; no per-stanza English alignment claim.",
+      "Original note3 has balanced Markdown emphasis and an unclosed curly quote. Preserve the raw source unchanged. The established presentation removes only the balanced emphasis markers around sam\u0101dhi; retain the unclosed curly quote exactly and do not add a closing quote. This punctuation alone creates no new hold.",
+      "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyy\u0101la/variants and publisher bracketed additions remain independent; no missing wording inferred."
+    ]
+  }
+};
+
 // src/apadana-thera292-299-profiles.mjs
 var THERA_292_299_PROFILES = {
   "tha-ap294": {
@@ -47094,7 +47743,8 @@ var THERA_APADANA_PROFILES = deepFreeze2({
   ...THERA_281_285_PROFILES,
   ...THERA_287_288_PROFILES,
   ...THERA_292_299_PROFILES,
-  ...THERA_301_310_PROFILES
+  ...THERA_301_310_PROFILES,
+  ...THERA_312_319_PROFILES
 });
 
 // src/apadana-profiles.mjs
@@ -69732,7 +70382,7 @@ function createServer({ executeTool } = {}) {
 // src/chatgpt-widget.mjs
 var import_node_crypto11 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v38";
+var WIDGET_VERSION = "v39";
 var NAVIGATION_TIMEOUT_MS = 9e4;
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
@@ -69741,7 +70391,7 @@ var SKYBRIDGE_MIME = "text/html+skybridge";
 var WIDGET_HASH_SOURCE = true ? "function contentSha256(text) {\n  if (typeof text !== 'string' || text.length > 100000 || typeof TextEncoder !== 'function') throw Error('Editorial content integrity checking is unavailable.');\n  const input = new TextEncoder().encode(text), length = input.length;\n  const bytes = new Uint8Array(Math.ceil((length + 9) / 64) * 64);\n  bytes.set(input); bytes[length] = 0x80;\n  const view = new DataView(bytes.buffer);\n  view.setUint32(bytes.length - 8, Math.floor(length / 0x20000000));\n  view.setUint32(bytes.length - 4, (length * 8) >>> 0);\n  const constants = [\n    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,\n    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,\n    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,\n    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,\n    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,\n    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,\n    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,\n    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2,\n  ];\n  const state = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];\n  const words = new Uint32Array(64), rotate = (value, n) => (value >>> n) | (value << (32 - n));\n  for (let offset = 0; offset < bytes.length; offset += 64) {\n    for (let i = 0; i < 16; i++) words[i] = view.getUint32(offset + 4 * i);\n    for (let i = 16; i < 64; i++) {\n      const x = words[i - 15], y = words[i - 2];\n      const s0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >>> 3), s1 = rotate(y, 17) ^ rotate(y, 19) ^ (y >>> 10);\n      words[i] = (words[i - 16] + s0 + words[i - 7] + s1) >>> 0;\n    }\n    let [a,b,c,d,e,f,g,h] = state;\n    for (let i = 0; i < 64; i++) {\n      const sum1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25), choice = (e & f) ^ (~e & g);\n      const first = (h + sum1 + choice + constants[i] + words[i]) >>> 0;\n      const sum0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22), majority = (a & b) ^ (a & c) ^ (b & c);\n      h=g; g=f; f=e; e=(d+first)>>>0; d=c; c=b; b=a; a=(first+sum0+majority)>>>0;\n    }\n    for (const [i,value] of [a,b,c,d,e,f,g,h].entries()) state[i] = (state[i] + value) >>> 0;\n  }\n  return state.map(value => value.toString(16).padStart(8, '0')).join('');\n}" : contentSha256.toString();
 var SOURCE_NOTES_POLICY_SOURCE = true ? "function createSourceNotesPolicy(hash, fixedMetadata) {\n  function stable(value) {\n    let count = 0;\n    const seen = new Set();\n    function visit(item, depth) {\n      if (++count > 2048 || depth > 20) throw Error('Unsupported source-note data');\n      if (item === null || typeof item === 'boolean') return JSON.stringify(item);\n      if (typeof item === 'string') { if (item.length > 16384) throw Error('Unsupported source-note data'); return JSON.stringify(item); }\n      if (typeof item === 'number' && Number.isFinite(item)) return JSON.stringify(item);\n      if (!item || typeof item !== 'object' || seen.has(item)) throw Error('Unsupported source-note data');\n      seen.add(item);\n      let result;\n      if (Array.isArray(item)) {\n        if (item.length > 256) throw Error('Unsupported source-note data');\n        result = '[' + item.map(child => visit(child, depth + 1)).join(',') + ']';\n      } else {\n        if (Object.prototype.toString.call(item) !== '[object Object]' || Object.getOwnPropertySymbols(item).length) throw Error('Unsupported source-note data');\n        const keys = Object.keys(item).sort();\n        if (keys.length > 64) throw Error('Unsupported source-note data');\n        result = '{' + keys.map(key => JSON.stringify(key) + ':' + visit(item[key], depth + 1)).join(',') + '}';\n      }\n      seen.delete(item); return result;\n    }\n    return visit(value, 0);\n  }\n  // Snapshot trusted finite metadata; mutations of a consumer's object cannot\n  // change the authority against which subsequent restored events are checked.\n  const profile = JSON.parse(stable(fixedMetadata));\n  const warning = 'The separately indexed original edition note could not be verified. The loaded P\u0101li remains available; this apparatus is unavailable.';\n  const owns = (object, key) => Boolean(object && Object.prototype.hasOwnProperty.call(object, key));\n  const keysEqual = (object, keys) => object && !Array.isArray(object) && stable(Object.keys(object).sort()) === stable(keys.slice().sort());\n  function model(state, affected, opening, anchor, entry) {\n    const view = { state, affected, opening, anchor_ref: anchor ? anchor.segment.ref : null,\n      availability: state === 'available' ? JSON.parse(stable(anchor.availability)) : null,\n      entry: entry || null, warning: state === 'unavailable' ? warning : null };\n    view.signature = stable({ state, affected, opening, anchor_ref: view.anchor_ref, entry: Boolean(entry), record_sha256: state === 'available' ? profile.record_sha256 : null });\n    return view;\n  }\n  function inspect(page) {\n    let anchor = null, affected = false, opening = false;\n    try {\n      if (!page || typeof page !== 'object' || Array.isArray(page)) return model('absent', false, false, null, null);\n      const isBook = page.selection === 'source_book';\n      if (isBook && page.book_id === profile.anchors.book.selector.book) anchor = profile.anchors.book;\n      else if (!isBook && page.text_id === profile.anchors.uid.selector.uid && page.canonical !== false && page.content_type !== 'commentary') anchor = profile.anchors.uid;\n      affected = Boolean(anchor);\n      if (!affected) return model(owns(page, 'source_notes') ? 'unavailable' : 'absent', false, false, null, null);\n      const position = page.pali || page;\n      opening = position.offset === 0;\n      const unavailable = () => model('unavailable', true, opening, anchor, null);\n      if (page.canonical === false || !page.source || page.source.commit !== profile.source_commit ||\n          (owns(page.source, 'locator_revision') && page.source.locator_revision !== profile.source_commit) ||\n          (isBook && owns(page, 'text_id') && page.text_id !== null) || (!isBook && owns(page, 'book_id'))) return unavailable();\n      const envelope = page.source_notes;\n      if (!keysEqual(envelope, ['schema','state','extraction_revision','record_sha256','availability','entries','error_code']) ||\n          envelope.schema !== profile.schema || envelope.extraction_revision !== profile.extraction_revision ||\n          envelope.record_sha256 !== profile.record_sha256 || stable(envelope.availability) !== stable(anchor.availability) ||\n          !Array.isArray(envelope.entries) || envelope.entries.length > 1) return unavailable();\n      if (envelope.state === 'unavailable') {\n        if (envelope.error_code !== 'SOURCE_NOTE_UNAVAILABLE' || envelope.entries.length) return unavailable();\n        return unavailable();\n      }\n      if (envelope.state !== 'available' || envelope.error_code !== null) return unavailable();\n      const segments = position.segments;\n      if (!Array.isArray(segments) || segments.length > 200 || !Number.isSafeInteger(position.offset) || position.offset < 0 ||\n          !Number.isSafeInteger(position.returned) || position.returned !== segments.length) return unavailable();\n      const relative = anchor.offset - position.offset, inPage = relative >= 0 && relative < segments.length;\n      const matches = segments.filter(segment => segment && segment.ref === anchor.segment.ref);\n      if (matches.length !== (inPage ? 1 : 0) || (inPage && stable(segments[relative]) !== stable(anchor.segment)) ||\n          envelope.entries.length !== (inPage ? 1 : 0)) return unavailable();\n      if (!inPage) return model('available', true, opening, anchor, null);\n      const record = envelope.entries[0], serialized = stable(record);\n      if (!keysEqual(record, profile.record_keys) || serialized.length > profile.max_record_characters ||\n          hash(serialized) !== profile.record_sha256 || record.id !== profile.record_id ||\n          record.extraction_revision !== profile.extraction_revision || record.text_sha256 !== profile.text_sha256 ||\n          typeof record.text !== 'string' || hash(record.text) !== profile.text_sha256) return unavailable();\n      return model('available', true, opening, anchor, JSON.parse(serialized));\n    } catch { return model('unavailable', affected, opening, anchor, null); }\n  }\n  return { inspect, stable };\n}" : createSourceNotesPolicy.toString();
 var APADANA_PINS = ["raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256"];
-var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287", "tha-ap289", "tha-ap290", "tha-ap294", "tha-ap295", "tha-ap296", "tha-ap297", "tha-ap298", "tha-ap300", "tha-ap301", "tha-ap303", "tha-ap304", "tha-ap305", "tha-ap306", "tha-ap307", "tha-ap310", "tha-ap311", "tha-ap312"];
+var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287", "tha-ap289", "tha-ap290", "tha-ap294", "tha-ap295", "tha-ap296", "tha-ap297", "tha-ap298", "tha-ap300", "tha-ap301", "tha-ap303", "tha-ap304", "tha-ap305", "tha-ap306", "tha-ap307", "tha-ap310", "tha-ap311", "tha-ap312", "tha-ap314", "tha-ap315", "tha-ap316", "tha-ap317", "tha-ap318", "tha-ap319", "tha-ap320", "tha-ap321"];
 var WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: translationId(p),
   url: p.url,

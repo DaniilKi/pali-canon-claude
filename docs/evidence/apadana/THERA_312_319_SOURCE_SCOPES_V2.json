@@ -1,0 +1,474 @@
+{
+  "schema": "source-reviewed-publisher312-319-scopes-v2",
+  "base_commit": "104b57a6891ddae645c51e39eb3d27b89b64ffdf",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "original_xml_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "original_source_review_sha256": "4f027e9e56e787c63806d6b85bd2710dac0af14eeca43459975ef251b8fc591e",
+  "rights": [
+    {
+      "path": "LICENSE.md",
+      "status": "pinned_bytes_verified",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "origin": "retained pinned original rights/routing artifact; exact bytes reverified"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "status": "pinned_bytes_verified",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "origin": "retained pinned original rights/routing artifact; exact bytes reverified"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "status": "pinned_bytes_verified",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "origin": "retained pinned original rights/routing artifact; exact bytes reverified"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "status": "pinned_bytes_verified",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "origin": "retained pinned original rights/routing artifact; exact bytes reverified"
+    },
+    {
+      "path": "src/_data/site.json",
+      "status": "pinned_bytes_verified",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "origin": "retained pinned original rights/routing artifact; exact bytes reverified"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "status": "pinned_bytes_verified",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "origin": "retained pinned original rights/routing artifact; exact bytes reverified"
+    }
+  ],
+  "poems": [
+    {
+      "publisher": 312,
+      "publisher_title": "Bhojanadāyaka",
+      "canonical_candidate": "tha-ap314",
+      "raw_artifact": {
+        "publisher_poem": 312,
+        "path": "src/_poems/chapter-3/poem-312.md",
+        "git_blob_sha1": "3c28bf50dc95e0e1fbdde85105b6e109057dae22",
+        "mode": "100644",
+        "bytes": 2874,
+        "sha256": "85b4830c513b60c38a14f5c9493e6faf68449cad54db289bdba8e1641319bc4e",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-312.md",
+        "origin": "pinned public raw GitHub after preserved partial attempt",
+        "boundary_only": false
+      },
+      "root_book": 36,
+      "root_span": [
+        9239,
+        9259
+      ],
+      "root_sha256": "0b6502bfc22fc09bbfdb4d29d3df48acb42b79828873ea78870d7122d738cc64",
+      "vri_numbered_labels": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "global_labels": [
+        2771,
+        2776
+      ],
+      "body_paragraphs": 9,
+      "physical_entries": 6,
+      "printed_labels": 6,
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "mapping_narrative_evidence": "Vessabhu shining like sal/drumstick/Indra bolt; meal donation; king25aeons.",
+      "edition_and_notes_caveats": [
+        "Note3 contains two exact HTML c/ch state-pairs in dictionary citation wording; note-owned only, no generic HTML acceptance.",
+        "Publisher king Amittabhā differs from VRI main Amittaka; preserve publisher title/gloss and VRI independently.",
+        "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyyāla/variants and publisher bracketed additions remain independent; no missing wording inferred."
+      ]
+    },
+    {
+      "publisher": 313,
+      "publisher_title": "Gatasaññaka",
+      "canonical_candidate": "tha-ap315",
+      "raw_artifact": {
+        "publisher_poem": 313,
+        "path": "src/_poems/chapter-3/poem-313.md",
+        "git_blob_sha1": "39a1e385bf0d0554ae20a7123939046980756abd",
+        "mode": "100644",
+        "bytes": 910,
+        "sha256": "e711a219aeac27746b5ef61288d60a9968b5164ae049679e158533b17235170a",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-313.md",
+        "origin": "pinned public raw GitHub after preserved partial attempt",
+        "boundary_only": false
+      },
+      "root_book": 36,
+      "root_span": [
+        9259,
+        9273
+      ],
+      "root_sha256": "4b91ce97969fec5fb3911aefedcff60f34f20b86fa707b2194e32849a493e4c4",
+      "vri_numbered_labels": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "global_labels": [
+        2777,
+        2780
+      ],
+      "body_paragraphs": 7,
+      "physical_entries": 4,
+      "printed_labels": 4,
+      "poem_note_numbers": [
+        1,
+        2
+      ],
+      "mapping_narrative_evidence": "Siddhattha goes through air to gods; wind moves robe, joy and94aeons.",
+      "edition_and_notes_caveats": [
+        "VRI variant notes preserve different joy/robe grammatical readings; publisher interpretation is not a reconstructed VRI line-by-line rendering.",
+        "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyyāla/variants and publisher bracketed additions remain independent; no missing wording inferred."
+      ]
+    },
+    {
+      "publisher": 314,
+      "publisher_title": "Sattapadumiya",
+      "canonical_candidate": "tha-ap316",
+      "raw_artifact": {
+        "publisher_poem": 314,
+        "path": "src/_poems/chapter-3/poem-314.md",
+        "git_blob_sha1": "5796e21019d95651c92c5c48fa84fca1ab4a099e",
+        "mode": "100644",
+        "bytes": 1551,
+        "sha256": "643a0384fce5b4fb84a1640b0cc4a7e0e66808ae288ee1f5c40b4d7eaeb2ea5b",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-314.md",
+        "origin": "pinned public raw GitHub after preserved partial attempt",
+        "boundary_only": false
+      },
+      "root_book": 36,
+      "root_span": [
+        9273,
+        9293
+      ],
+      "root_sha256": "168481292916505c5f8099cd6de2390fc4f432f985bc8c702779689ea8a4d4f9",
+      "vri_numbered_labels": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "global_labels": [
+        2781,
+        2786
+      ],
+      "body_paragraphs": 9,
+      "physical_entries": 6,
+      "printed_labels": 6,
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "mapping_narrative_evidence": "Brahmin Nesāda riverside hermitage; lotus offerings to Siddhattha; fourPādapāvara7aeons.",
+      "edition_and_notes_caveats": [
+        "Publisher Sattapadumiya versus PTS Sattapaduminya noted. VRI main has sky-travel, recorded vanena variant matches publisher forest-travel; retain edition distinction.",
+        "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyyāla/variants and publisher bracketed additions remain independent; no missing wording inferred."
+      ]
+    },
+    {
+      "publisher": 315,
+      "publisher_title": "Pupphâsaniya",
+      "canonical_candidate": "tha-ap317",
+      "raw_artifact": {
+        "publisher_poem": 315,
+        "path": "src/_poems/chapter-3/poem-315.md",
+        "git_blob_sha1": "f80f1942dd5ff0d8671c129be690f2dcd275c1de",
+        "mode": "100644",
+        "bytes": 1178,
+        "sha256": "56a75525b6110ff4ba1c823bb9e20755f3ab26a0bd9d9704af0a27d923d1c2b7",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-315.md",
+        "origin": "pinned public raw GitHub after preserved partial attempt",
+        "boundary_only": false
+      },
+      "root_book": 36,
+      "root_span": [
+        9293,
+        9313
+      ],
+      "root_sha256": "ed4cdb8764d6bed8fd23badf941e33d4634bd015bffe754704493c4aa01fb751",
+      "vri_numbered_labels": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "global_labels": [
+        2787,
+        2792
+      ],
+      "body_paragraphs": 9,
+      "physical_entries": 6,
+      "printed_labels": 6,
+      "poem_note_numbers": [
+        1,
+        2
+      ],
+      "mapping_narrative_evidence": "Siddhattha brought to hermitage; floral seat, dedication and94aeons.",
+      "edition_and_notes_caveats": [
+        "Publisher literal title Pupphâsaniya (circumflex) differs from VRI Pupphāsanadāyaka; preserve original title/spelling and narrative-based mapping.",
+        "Publisher hundred-ray image corresponds to recorded VRI sī./syā. reading, versus VRI main yellow-ray.",
+        "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyyāla/variants and publisher bracketed additions remain independent; no missing wording inferred."
+      ]
+    },
+    {
+      "publisher": 316,
+      "publisher_title": "Āsanatthavika",
+      "canonical_candidate": "tha-ap318",
+      "raw_artifact": {
+        "publisher_poem": 316,
+        "path": "src/_poems/chapter-3/poem-316.md",
+        "git_blob_sha1": "4776db5d604f4f2857836a92db29751f4d51e45f",
+        "mode": "100644",
+        "bytes": 2399,
+        "sha256": "ca1a3b8b0e13449d47531a6ad9078b94d61f3c64845383b004b60a01d61e3116",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-316.md",
+        "origin": "pinned public raw GitHub after preserved partial attempt",
+        "boundary_only": false
+      },
+      "root_book": 36,
+      "root_span": [
+        9313,
+        9339
+      ],
+      "root_sha256": "0465f9db23356f8095ccf12884dd47e44aee1594468f243f9baace3ad368ac20",
+      "vri_numbered_labels": [
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "global_labels": [
+        2793,
+        2800
+      ],
+      "body_paragraphs": 11,
+      "physical_entries": 8,
+      "printed_labels": 8,
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "mapping_narrative_evidence": "Sikhi and wilderness; lion throne saluted/praised; sevenAtula27aeons.",
+      "edition_and_notes_caveats": [
+        "Publisher Āsanatthavika differs from VRI main Āsanasanthavika; VRI colophon records āsanatthaviko(sī.syā.).",
+        "Original note2 leaves throne-object/Buddha-epithet ambiguity unresolved; do not turn it into certainty.",
+        "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyyāla/variants and publisher bracketed additions remain independent; no missing wording inferred."
+      ]
+    },
+    {
+      "publisher": 317,
+      "publisher_title": "Saddasaññaka",
+      "canonical_candidate": "tha-ap319",
+      "raw_artifact": {
+        "publisher_poem": 317,
+        "path": "src/_poems/chapter-3/poem-317.md",
+        "git_blob_sha1": "7ed2ec98949943b0a5721eb7ba93d3464782ce48",
+        "mode": "100644",
+        "bytes": 1285,
+        "sha256": "bdf4f61c0e4d3ece47054971b44e341062626a346f5407faaf2825d4e47c1014",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-317.md",
+        "origin": "pinned public raw GitHub after preserved partial attempt",
+        "boundary_only": false
+      },
+      "root_book": 36,
+      "root_span": [
+        9339,
+        9356
+      ],
+      "root_sha256": "9f6ea0977f361d258c9502da92d9135df022934c235d0d9a5a352006ed66bb08",
+      "vri_numbered_labels": [
+        34,
+        35,
+        36,
+        37,
+        38
+      ],
+      "global_labels": [
+        2801,
+        2805
+      ],
+      "body_paragraphs": 8,
+      "physical_entries": 5,
+      "printed_labels": 5,
+      "poem_note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "mapping_narrative_evidence": "Siddhattha teaches deathless path in house amid followers; sweet speech/sound heard;94aeons.",
+      "edition_and_notes_caveats": [
+        "Distinguish other same-title accounts tha-ap90(Phussa/Himalaya) and296(unseen birth announcement) from Siddhattha house sermon here.",
+        "Publisher note3 explicitly follows BJTS alternative against PTS; original VRI has its own main/variant wording, preserve independently.",
+        "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyyāla/variants and publisher bracketed additions remain independent; no missing wording inferred."
+      ]
+    },
+    {
+      "publisher": 318,
+      "publisher_title": "Tiraŋsiya",
+      "canonical_candidate": "tha-ap320",
+      "raw_artifact": {
+        "publisher_poem": 318,
+        "path": "src/_poems/chapter-3/poem-318.md",
+        "git_blob_sha1": "2820afa3dd5e11d5e052d870f7560c006df2826f",
+        "mode": "100644",
+        "bytes": 1938,
+        "sha256": "3fd16d56cd591195aea40e5dcb42c1b956a1256dd59319d19d54d8fac2e6933e",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-318.md",
+        "origin": "pinned public raw GitHub after preserved partial attempt",
+        "boundary_only": false
+      },
+      "root_book": 36,
+      "root_span": [
+        9356,
+        9382
+      ],
+      "root_sha256": "7f09c2e4686c8b531b4d2c6944a538cbbd1fc02b77fd44aad8f7784fb810c497",
+      "vri_numbered_labels": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "global_labels": [
+        2806,
+        2813
+      ],
+      "body_paragraphs": 11,
+      "physical_entries": 8,
+      "printed_labels": 8,
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "mapping_narrative_evidence": "Siddhattha mountain and three lights moon/sun/Buddha; deerhide; Ñāṇadhara61aeons.",
+      "edition_and_notes_caveats": [
+        "Publisher Tiraŋsiya uses literalŋ, VRI Tiraṃsiya; retain spellings. Note3 explicitly chooses a Buddha-epithet reading rather than resolving it.",
+        "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyyāla/variants and publisher bracketed additions remain independent; no missing wording inferred."
+      ]
+    },
+    {
+      "publisher": 319,
+      "publisher_title": "Kandalīpupphiya",
+      "canonical_candidate": "tha-ap321",
+      "raw_artifact": {
+        "publisher_poem": 319,
+        "path": "src/_poems/chapter-3/poem-319.md",
+        "git_blob_sha1": "38ce0690207c06d460f8350d0f25667cfbd858ff",
+        "mode": "100644",
+        "bytes": 1736,
+        "sha256": "319537c032118a37e566ae9b3aa6ccb786f8e2d8a2be5b1a76ee1bd76f697e94",
+        "url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-319.md",
+        "origin": "pinned public raw GitHub after preserved partial attempt",
+        "boundary_only": false
+      },
+      "root_book": 36,
+      "root_span": [
+        9382,
+        9405
+      ],
+      "root_sha256": "900652ab049705027fb6791b3c826ecaa3a749bc17ac8fb24e06af9f3a3fc445",
+      "vri_numbered_labels": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "global_labels": [
+        2814,
+        2820
+      ],
+      "body_paragraphs": 9,
+      "physical_entries": 6,
+      "printed_labels": 7,
+      "poem_note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "mapping_narrative_evidence": "Indus farmer; meditating Siddhattha; seven plantain flowers; elephant simile;94aeons.",
+      "edition_and_notes_caveats": [
+        "Combined local4–5 is one8-line paragraph and reorders narrative material from VRI50–51; no per-stanza English alignment claim.",
+        "Original note3 has balanced Markdown emphasis and an unclosed curly quote. Preserve the raw source unchanged. The established presentation removes only the balanced emphasis markers around samādhi; retain the unclosed curly quote exactly and do not add a closing quote. This punctuation alone creates no new hold.",
+        "Complete publisher-edition poem scope is not a line-complete VRI translation. VRI peyyāla/variants and publisher bracketed additions remain independent; no missing wording inferred."
+      ]
+    }
+  ],
+  "totals": {
+    "poems": 8,
+    "body_paragraphs": 73,
+    "physical_entries": 49,
+    "printed_labels": 50,
+    "notes": 34,
+    "headings": 0,
+    "summaries": 0
+  },
+  "normalization_approval": false,
+  "runtime_approval": false,
+  "activation_approval": false,
+  "rights_policy": "Specific Walters/Whitman CC BY-NC-SA 4.0 textual terms; no media grant. English bodies and notes stay live-only. Complete publisher-edition poems, not line-complete VRI or full chapter32.",
+  "notice_only_amendment": {
+    "owner": "tha-ap321",
+    "previous_scope_sha256": "bab9004b3b7a67d0e11b67ba3dc930a0449e93c4361f2b596d35d22a415f2168",
+    "before": "Original note3 has balanced emphasis and only an unclosed curly quote. The separately sealed319 clarification supersedes the original imprecise quote/emphasis wording. Preserve punctuation without adding/deleting quotes or stars; this alone creates no new hold.",
+    "after": "Original note3 has balanced Markdown emphasis and an unclosed curly quote. Preserve the raw source unchanged. The established presentation removes only the balanced emphasis markers around samādhi; retain the unclosed curly quote exactly and do not add a closing quote. This punctuation alone creates no new hold.",
+    "raw_body_notes_layout_root_rights_changed": false
+  }
+}

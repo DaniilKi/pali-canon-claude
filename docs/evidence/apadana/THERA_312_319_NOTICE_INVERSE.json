@@ -1,0 +1,29 @@
+{
+  "schema": "312-319-candidate-v2-one-notice-inverse-v1",
+  "owner": "tha-ap321",
+  "scope_amendment": {
+    "owner": "tha-ap321",
+    "previous_scope_sha256": "bab9004b3b7a67d0e11b67ba3dc930a0449e93c4361f2b596d35d22a415f2168",
+    "before": "Original note3 has balanced emphasis and only an unclosed curly quote. The separately sealed319 clarification supersedes the original imprecise quote/emphasis wording. Preserve punctuation without adding/deleting quotes or stars; this alone creates no new hold.",
+    "after": "Original note3 has balanced Markdown emphasis and an unclosed curly quote. Preserve the raw source unchanged. The established presentation removes only the balanced emphasis markers around samādhi; retain the unclosed curly quote exactly and do not add a closing quote. This punctuation alone creates no new hold.",
+    "raw_body_notes_layout_root_rights_changed": false
+  },
+  "files": {
+    "EXPECTED_PROFILES.json": {
+      "old_sha256": "9744101de0a5f330749f4c11416c40df7a1be09bd01d3cc564873e8d36c506d5",
+      "new_sha256": "6cea3367548b0cb04462e4f3edbeb6cb54f2baa5e9ea3f7f65b2abbd6f69f5a2",
+      "full_byte_inverse_restores_old": true
+    },
+    "EXPECTED_LINKS.json": {
+      "old_sha256": "60a14b81090f7b1d77ba8829ab63f598d243a340688a644bf87a5c4cac59a24f",
+      "new_sha256": "fbfd6695444f1849e970b2e15aead5c73c11836afa45c4d9fa7cac411822be09",
+      "full_byte_inverse_restores_old": true
+    },
+    "GOLDENS.json": {
+      "old_sha256": "a1933c427c3d2a79f72827bb0d1471838ea9f3543b0cec1fcd38ccabcd1d2728",
+      "new_sha256": "0d8b3a8352ed5c2d23c888367c08bcdb3db4d704c1b224fec482344141a83774",
+      "full_byte_inverse_restores_old": true
+    }
+  },
+  "normalized_source_words_notes_quotes_layout_root_rights_changed": false
+}

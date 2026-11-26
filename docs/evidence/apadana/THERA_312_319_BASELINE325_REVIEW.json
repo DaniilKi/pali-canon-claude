@@ -1,0 +1,28 @@
+{
+  "schema": "independent-pinned104-baseline325-compact-review-v1",
+  "status": "PASS",
+  "base_commit": "104b57a6891ddae645c51e39eb3d27b89b64ffdf",
+  "compact_sha256": "918dd529acab9d88e88812f7eb9841181eaa534e19705e4ce5f66c9fe52ecf3f",
+  "full_independent_baseline_sha256": "13fcbdfcce9a2326c6321a311535eacfbe14d1f7db7b520daa17c5651c2991d0",
+  "root_full_snapshot_sha256": "c9125a28625dfa0678cc08bd6a1407ead43b5d202b4224ca61dd69e0f321b1c6",
+  "original_first_readiness_seal_sha256": "9c97745b0c86a113fd32ef3cf98962df955209cb8244b6f457865cee62901200",
+  "all325_full_profiles_equal": true,
+  "all325_full_translation_objects_equal": true,
+  "all325_ordered_ids_exact": true,
+  "manifest_source_exact": true,
+  "all26_non_apadana_data_files_sha256_pinned": true,
+  "canonical_bytes_independently_reconstructed_and_hashed": true,
+  "numeric_property_keys": 0,
+  "static_original_source_files_sha256": {
+    "src/apadana-profiles.mjs": "da0e3d90bcaa8eba3a23364da992888bbd55cd4e368035a880b5576e949ab054",
+    "src/apadana-thera-profiles.mjs": "acd2da889fed0cde51a5cfa2e0ad1234f9a24d324a7b5306149958e1a0dce31d",
+    "src/apadana-thera261-280-profiles.mjs": "8883e4a4c21467e71d81799d37a72ff25d82d30249360d6520d64de3c9a03599",
+    "src/apadana-thera281-285-profiles.mjs": "5fe6d7d66fc08262b612bd958f4163784a3c4fada1e8f704a354eedfc2399e15",
+    "src/apadana-thera287-288-profiles.mjs": "a7bfe381d050e95c40e5f7889251241c29f393a487957a139cf1c1bf3cdd04fd",
+    "src/apadana-thera292-299-profiles.mjs": "7bae858330a6fafc5765b1c9e051ab05223d655c1d1dbc743c7bd383993b1e52",
+    "src/apadana-thera301-310-profiles.mjs": "28bc80a92b88d68242bfeb1d1ec77d343d544de712f91e974c5eb79963a015f7"
+  },
+  "reconstructor_sha256": "f420a4876c4a5141912594e041f904e60125ebddea50a91372e8c00b079a0c0c",
+  "compact_derivation_sha256": "bc068c12fc6ca87a590d8ebb494837773ae5c20937aed0e19491859db37106c1",
+  "scope": "Independent preservation authority from pinned104 literals/data; no current333 objects, app imports, project tests, Git, builds or CI used."
+}
