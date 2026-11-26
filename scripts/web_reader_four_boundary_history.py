@@ -3,6 +3,8 @@
 No production loader imports this helper. No ambient switch or current fallback.
 The pure logical inverse is separate from exact complete-input acceptance.
 """
+from web_reader_six_boundary_history import (canon_before_six, c1_logical_input, historical_c1_data_bytes, copy_six_historical_fixture, C1_DATA_PATHS)
+
 import copy
 import gzip
 import hashlib
@@ -51,7 +53,7 @@ def compact(value):
     return json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
 
 
-def regular(root, relative):
+def historical_c1_regular(root, relative):
     path = Path(root)
     parts = Path(relative).parts
     if not parts or Path(relative).is_absolute() or any(p in ('..', '.') for p in parts):
@@ -91,7 +93,7 @@ def four_state(canon):
     raise ValueError('Mixed or unreviewed four-poem metadata')
 
 
-def canon_before_four(canon):
+def historical_c1_canon_before_four(canon):
     """Pure strict inverse: retain unrelated mutations for negative tests.
 
     This is not a saved-locator migration and does not assert a whole-input SHA.
@@ -104,7 +106,7 @@ def canon_before_four(canon):
     return out
 
 
-def historical_canon_bytes(raw):
+def historical_c1_historical_canon_bytes(raw):
     """Exact complete new snapshot -> exact old logical JSON, without file writes."""
     if digest(raw) != NEW_CANON_SHA:
         raise ValueError('Exact complete current canonical bytes required')
@@ -206,7 +208,7 @@ def historical_data_bytes(root, name):
     return raw
 
 
-def copy_historical_fixture(source_root, destination_root):
+def historical_c1_copy_historical_fixture(source_root, destination_root):
     """Provision only the three sealed old byte inputs in an owned test fixture."""
     for name in CHANGED_DATA:
         relative = 'tests/fixtures/canon-before333/' + Path(name).name
@@ -216,3 +218,20 @@ def copy_historical_fixture(source_root, destination_root):
         target.parent.mkdir(parents=True, exist_ok=True)
         with target.open('xb') as stream:
             stream.write(raw)
+
+
+# Explicit future→C1 input frames before the unchanged historical four bodies.
+def regular(root, relative):
+    if relative in C1_DATA_PATHS:
+        return historical_c1_data_bytes(root, relative)
+    return historical_c1_regular(root, relative)
+
+def canon_before_four(canon):
+    return historical_c1_canon_before_four(canon_before_six(canon))
+
+def historical_canon_bytes(raw):
+    return historical_c1_historical_canon_bytes(c1_logical_input(raw))
+
+def copy_historical_fixture(source_root, destination_root):
+    copy_six_historical_fixture(source_root, destination_root)
+    return historical_c1_copy_historical_fixture(source_root, destination_root)

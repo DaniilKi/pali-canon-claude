@@ -1,5 +1,16 @@
 # AGENTS.md
 
+**Current six-record boundary repair:** only `tha-ap340/341`, `343/344` and
+`346/347` receive corrected source ownership and the explicit
+`apadana-thera340-341-343-344-346-347-v1` locator revision. All 89 old positions
+require deliberate reopening without a current pin, including unchanged numeric
+references. Never migrate personal data automatically. Preserve all source words,
+the other 8,538 records, 343 English choices and earlier locator namespaces.
+Read [finite repair and compatibility rules](docs/data/apadana-six-boundaries.md).
+Book 37 raw transport is verified separately; its structural leads remain
+unapproved. Exact Git/CI receipts determine dev integration. Main and production
+remain outside scope; older capsules keep their historical meaning.
+
 **Current local four-source intake:** publisher 331–334 add four first English choices for corrected `tha-ap333–336`, bringing Apadāna to **343 choices** (40 Therī, 303 Therā), **2,926 whole links**, and measured CLI coverage **1,822 direct / 2,245 including inherited**. All 339 earlier full profile/link objects, canonical/source data, citation safeguards and local-only private study data are preserved. The 23 original notes comprise 22 poem notes and one separately owned chapter-preface note; three poems retain global-only labels. These complete publisher-edition poems are not line-complete VRI translations. Measured public stdio MCP member-aware coverage is 1,796 direct / 2,219 including inherited of 8,445; its accounting differs from the CLI index. [Finite scope and validation limits](docs/data/thera331-334-intake.md). This remains a local candidate until final Git/CI receipts establish integration; older capsules below retain their historical scope.
 
 **Four-poem boundary repair:** `tha-ap333–336` are corrected atomically with a distinct `apadana-thera333-336-v1` locator namespace. Old numeric references, bookmarks and notes must refuse positional reuse without their exact current pin; no automatic personal-data migration. All source blocks, 8,540 other units, commentary and 339 English choices remain unchanged. Read [the finite scope and compatibility rules](docs/data/apadana-four-boundaries.md). Keep historical authorities and the older 107/108 namespace intact. Exact Git/CI receipts determine integration status; main and production are outside scope.

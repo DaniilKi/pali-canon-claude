@@ -1837,3 +1837,28 @@ Keep 321 heading separate, exact paired display ownership and combined entries i
 ## Four adjacent Apadāna boundaries: explicit review instead of rebasing
 
 Repair `tha-ap333–336` atomically against pinned original XML. Give the four owners a finite citation namespace, preserve source words and raw-book positions, and require current pins for every numeric position. Preserve old bookmarks, private notes and exports without automatic migration: identical numeric references can name different text. Extend existing native, browser and embedded-host safeguards rather than create a second reader. Historical tests use explicit inverse/byte fixtures; production loading never projects current data into history. No English source is activated by this correction. See [scope and evidence](data/apadana-four-boundaries.md).
+
+## Three additional Apadāna pairs: finite index correction with unchanged sources
+
+Correct only canonical 340/341, 343/344 and 346/347, under two independently
+presealed original-first derivations. All six complete before/after records,
+178 old/current segment payloads, notes and pages agree. Preserve all 61 books,
+8,538 other full records, earlier locator revisions and all 343 English
+profile/link objects. No source word, English coverage, rights hold or private
+data changes.
+
+Give precisely these six IDs the new closed locator namespace. Every explicit
+position needs the returned current pin: 38 old numeric references collide, six
+vanish and 45 remain numerically unchanged; all require deliberate review.
+Raw source-book positions are stable. Use the existing native, search, quote,
+word-study and saved-reader safeguards, including rechecking an in-place cached
+host result before deduplication and comparing a word-study response's effective
+pin. Never infer a repaired revision from an ID range.
+
+Keep historical source/runtime authorities intact through separately sealed,
+test-only future-to-C1 input inverses and original compressed fixtures. Production
+loads only current data. Source, runtime inventory, installed behavior and exact
+CI are separate gates. Book 37's raw source was recovered and tuple-verified,
+but its preliminary review queue authorizes no edits or activation. See the
+[six-record guide](data/apadana-six-boundaries.md) and
+[Book 37 source-only review](data/apadana-book37-source-screen.md).

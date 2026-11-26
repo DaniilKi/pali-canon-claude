@@ -1,0 +1,13 @@
+{
+  "schema": "source-page-label-ambiguity-clarification-v1",
+  "producer_preseal_unchanged": true,
+  "initial_hypothesis": "Shared edition volume might require a book qualifier.",
+  "correction": "Only an identical volume.page marker reused across different books of a collection creates ambiguity.",
+  "C1_Ap_marker_intersections_between_books36_and37": {
+    "T": [],
+    "M": [],
+    "V": []
+  },
+  "result": "V1 unqualified page labels are correct; no V2 or source/oracle mutation required.",
+  "independent_peer_public_page_label_comparisons_passed": 178
+}

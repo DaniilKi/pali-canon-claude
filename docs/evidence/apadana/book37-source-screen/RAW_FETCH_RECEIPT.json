@@ -1,0 +1,22 @@
+{
+  "schema": "single-authorized-book37-raw-fetch-v1",
+  "requested_url": "https://raw.githubusercontent.com/VipassanaTech/tipitaka-xml/2d134ff9ef60f70a1eb03c9370580228811a3070/romn/s0510m2.mul.xml",
+  "pinned_vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "expected_git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+  "network_attempts": 1,
+  "proxy_and_TLS": "Inherited default environment proxy handling and default TLS trust; no custom proxy/CA/verification bypass",
+  "redirect_policy": "Refuse redirects; no alternate source",
+  "timeout_seconds": 15,
+  "byte_cap": 5000000,
+  "started_utc": "2026-11-26T13:41:57.377318+00:00",
+  "application_imports_tests_build_Git_CI_project_writes": false,
+  "http_status": 200,
+  "bytes": 1779576,
+  "sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+  "exact_bytes_not_stripped_or_reencoded": true,
+  "status": "VERIFIED_EXACT_ORIGINAL_GIT_BLOB",
+  "raw_artifact": "/tmp/pali-boundaries340-evidence-nov26/book37-recovery/s0510m2.mul.xml",
+  "elapsed_seconds": 0.553,
+  "completed_utc": "2026-11-26T13:41:57.930386+00:00"
+}

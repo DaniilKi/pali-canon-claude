@@ -1,0 +1,349 @@
+{
+  "schema": "source-first-exact-six-boundary-record-proposal-v1",
+  "baseline_commit_authorized": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "baseline_commit_blob_binding_independently_checked": false,
+  "old_canon_logical_sha256": "46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8",
+  "future_canon_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "index_revision": "apadana-thera340-341-343-344-346-347-v1",
+  "namespace_characters": 39,
+  "source": {
+    "name": "Chaṭṭha Saṅgāyana Tipiṭaka (VRI)",
+    "repository": "https://github.com/VipassanaTech/tipitaka-xml",
+    "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org",
+    "terms": "Made freely available by VRI for non-commercial use with attribution."
+  },
+  "records": [
+    {
+      "id": "tha-ap340",
+      "before_unit": {
+        "id": "tha-ap340",
+        "book": 36,
+        "start": 10053,
+        "end": 10122,
+        "title": "Uttareyyadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 340",
+        "vri": "90–111",
+        "pts": {
+          "volume": 1,
+          "page": 271,
+          "end_page": 273
+        }
+      },
+      "after_unit": {
+        "id": "tha-ap340",
+        "book": 36,
+        "start": 10053,
+        "end": 10118,
+        "title": "Uttareyyadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 340",
+        "vri": "90–110",
+        "pts": {
+          "volume": 1,
+          "page": 271,
+          "end_page": 273
+        },
+        "index_revision": "apadana-thera340-341-343-344-346-347-v1"
+      },
+      "old_root_sha256": "dbbfc6dde41b806091cc90abaa171739e51c454084e54f5b530bda8acd88634b",
+      "future_root_sha256": "b34e2300ea02eb9dd7e9bccf8de4152d6148d4e9e87f30bac18589d0d9fcbf76"
+    },
+    {
+      "id": "tha-ap341",
+      "before_unit": {
+        "id": "tha-ap341",
+        "book": 36,
+        "start": 10122,
+        "end": 10174,
+        "title": "Dhammasavaniyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 341",
+        "vri": "112–128",
+        "pts": {
+          "volume": 1,
+          "page": 273,
+          "end_page": 274
+        }
+      },
+      "after_unit": {
+        "id": "tha-ap341",
+        "book": 36,
+        "start": 10118,
+        "end": 10174,
+        "title": "Dhammasavaniyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 341",
+        "vri": "111–128",
+        "pts": {
+          "volume": 1,
+          "page": 273,
+          "end_page": 274
+        },
+        "index_revision": "apadana-thera340-341-343-344-346-347-v1"
+      },
+      "old_root_sha256": "05355eb1c9c284d71cc56a94cc982ca009413f688ad1317f818c6167aa5a63f3",
+      "future_root_sha256": "6c1a8d1e4d3c7103cdcda3ba33508005d590f20be90b68bf587dc9bde3c80224"
+    },
+    {
+      "id": "tha-ap343",
+      "before_unit": {
+        "id": "tha-ap343",
+        "book": 36,
+        "start": 10224,
+        "end": 10262,
+        "title": "Ekapadumiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 343",
+        "vri": "1–11",
+        "pts": {
+          "volume": 1,
+          "page": 276,
+          "end_page": 277
+        }
+      },
+      "after_unit": {
+        "id": "tha-ap343",
+        "book": 36,
+        "start": 10224,
+        "end": 10258,
+        "title": "Ekapadumiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 343",
+        "vri": "1–10",
+        "pts": {
+          "volume": 1,
+          "page": 276,
+          "end_page": 277
+        },
+        "index_revision": "apadana-thera340-341-343-344-346-347-v1"
+      },
+      "old_root_sha256": "198ec5696abef65a37b9b6eef7fd4d5a4c91067046f51b0100f71c5b8004bf9a",
+      "future_root_sha256": "ec32530b864d6e11d3c34cb061b6f2ba50f6c5999f1b377837778b269f8dcfe9"
+    },
+    {
+      "id": "tha-ap344",
+      "before_unit": {
+        "id": "tha-ap344",
+        "book": 36,
+        "start": 10262,
+        "end": 10287,
+        "title": "Tīṇuppalamāliyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 344",
+        "vri": "12–19",
+        "pts": {
+          "volume": 1,
+          "page": 277,
+          "end_page": 278
+        }
+      },
+      "after_unit": {
+        "id": "tha-ap344",
+        "book": 36,
+        "start": 10258,
+        "end": 10287,
+        "title": "Tīṇuppalamāliyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 344",
+        "vri": "11–19",
+        "pts": {
+          "volume": 1,
+          "page": 277,
+          "end_page": 278
+        },
+        "index_revision": "apadana-thera340-341-343-344-346-347-v1"
+      },
+      "old_root_sha256": "719abdf6e1838777ae79f411567de172182dce1531539c6e177f9ed63560af92",
+      "future_root_sha256": "57107bc00b720aee0c2c922801e3d675de19ba743e413d2f2447256ca51ca750"
+    },
+    {
+      "id": "tha-ap346",
+      "before_unit": {
+        "id": "tha-ap346",
+        "book": 36,
+        "start": 10310,
+        "end": 10328,
+        "title": "Tikiṅkaṇipūjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 346",
+        "vri": "27–31",
+        "pts": {
+          "volume": 1,
+          "page": 278,
+          "end_page": 278
+        }
+      },
+      "after_unit": {
+        "id": "tha-ap346",
+        "book": 36,
+        "start": 10310,
+        "end": 10324,
+        "title": "Tikiṅkaṇipūjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 346",
+        "vri": "27–30",
+        "pts": {
+          "volume": 1,
+          "page": 278,
+          "end_page": 278
+        },
+        "index_revision": "apadana-thera340-341-343-344-346-347-v1"
+      },
+      "old_root_sha256": "494fa0fb118f8e3f11fc1bb922668b765d5e6ff812d243e8bffe59df6dff70f3",
+      "future_root_sha256": "a2f2a0877c15f482f5c4085aaa2e76a44a78e51ba1884e0c252645510ad720fc"
+    },
+    {
+      "id": "tha-ap347",
+      "before_unit": {
+        "id": "tha-ap347",
+        "book": 36,
+        "start": 10328,
+        "end": 10350,
+        "title": "Naḷāgārikattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 347",
+        "vri": "32–38",
+        "pts": {
+          "volume": 1,
+          "page": 278,
+          "end_page": 279
+        }
+      },
+      "after_unit": {
+        "id": "tha-ap347",
+        "book": 36,
+        "start": 10324,
+        "end": 10350,
+        "title": "Naḷāgārikattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 347",
+        "vri": "31–38",
+        "pts": {
+          "volume": 1,
+          "page": 278,
+          "end_page": 279
+        },
+        "index_revision": "apadana-thera340-341-343-344-346-347-v1"
+      },
+      "old_root_sha256": "046f502675ec14290b3332bb86ace1d52861e656a2981ce7211e205a58929306",
+      "future_root_sha256": "097dd6a238447011620f920a9b2ce19a8b50e157c78a8b3a83e385a6584b350a"
+    }
+  ],
+  "pair_source_evidence": [
+    {
+      "ids": [
+        "tha-ap340",
+        "tha-ap341"
+      ],
+      "old_cut": 10122,
+      "new_cut": 10118,
+      "unchanged_combined_source_span": [
+        10053,
+        10174
+      ],
+      "combined_source_tuple_sha256": "5aff479bc80a399604e4d065228427cd2de35df59f65d06c655c33dc5f2acced",
+      "literal_heading_sha256": "bce7089cfd16f68f2cdeef34d8fbb4da0f582b950fe4b042af5856b7cdbf6abd",
+      "physical_XML_heading_index": 10119,
+      "previous_speaker_sha256": "a13c006647a1d115d52d8461d3851823702ef09cd73091acf9ab9aeda2f5e9fc",
+      "previous_closing_colophon_sha256": "4bc5e1849f8e4245f4bce4f306104b2f620eca48d84ef309e293fef38d89a503",
+      "first_stanza_vri": "111",
+      "old_current_right_first_vri": "112",
+      "first_stanza_source_blocks": [
+        10119,
+        10122
+      ],
+      "prefix_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "prefix_page_markers": [
+        [
+          10120,
+          {
+            "V": [
+              "1.297"
+            ]
+          }
+        ]
+      ],
+      "unchanged_book_source_locator": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "new_unit_locator_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera340-341-343-344-346-347-v1"
+    },
+    {
+      "ids": [
+        "tha-ap343",
+        "tha-ap344"
+      ],
+      "old_cut": 10262,
+      "new_cut": 10258,
+      "unchanged_combined_source_span": [
+        10224,
+        10287
+      ],
+      "combined_source_tuple_sha256": "3c06a95030af2033a3199f25456c56a417df0ecfac3e2eec15e9b045efaab6c1",
+      "literal_heading_sha256": "f9c57fc6618a1c41b5cca9f5f32dd64df307eebed58a3d823dd4baa6dde21523",
+      "physical_XML_heading_index": 10259,
+      "previous_speaker_sha256": "6ca5df48caf97ef78e1d6f2759f731ff3a313651e9abba13d420a3c736f9f3f7",
+      "previous_closing_colophon_sha256": "30094ea3e532a12579c4ae5c944badaff68372350d55f1e39432464091a9c43a",
+      "first_stanza_vri": "11",
+      "old_current_right_first_vri": "12",
+      "first_stanza_source_blocks": [
+        10259,
+        10262
+      ],
+      "prefix_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "prefix_page_markers": [
+        [
+          10260,
+          {
+            "M": [
+              "1.319"
+            ],
+            "V": [
+              "1.301"
+            ]
+          }
+        ]
+      ],
+      "unchanged_book_source_locator": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "new_unit_locator_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera340-341-343-344-346-347-v1"
+    },
+    {
+      "ids": [
+        "tha-ap346",
+        "tha-ap347"
+      ],
+      "old_cut": 10328,
+      "new_cut": 10324,
+      "unchanged_combined_source_span": [
+        10310,
+        10350
+      ],
+      "combined_source_tuple_sha256": "65965a1207c076dc749c44af01fbfd6bd8a5599974103315ec9cd52d34d811d3",
+      "literal_heading_sha256": "2defc61bcc1ca07e1377f776fff1b8d9da6a1f359088710f4140500fa900f34e",
+      "physical_XML_heading_index": 10325,
+      "previous_speaker_sha256": "ba00e271bc4e53419784ebd004e199582bed132c885ba8d6b587c7ffafe4b8f3",
+      "previous_closing_colophon_sha256": "7abf32c834f5a92dfc2f876bdd8d748c92538dda1c85b714db4e2b9660c7ffe0",
+      "first_stanza_vri": "31",
+      "old_current_right_first_vri": "32",
+      "first_stanza_source_blocks": [
+        10325,
+        10328
+      ],
+      "prefix_notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "prefix_page_markers": [
+        [
+          10326,
+          {
+            "M": [
+              "1.321"
+            ]
+          }
+        ]
+      ],
+      "unchanged_book_source_locator": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+      "new_unit_locator_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera340-341-343-344-346-347-v1"
+    }
+  ],
+  "exact_other_unit_count": 8538,
+  "no_English_coverage_gain": true
+}

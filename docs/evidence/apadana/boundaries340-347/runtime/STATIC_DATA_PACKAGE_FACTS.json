@@ -1,0 +1,94 @@
+{
+  "canonical": {
+    "old": "46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8",
+    "new": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+    "changed_records": [
+      "tha-ap340",
+      "tha-ap341",
+      "tha-ap343",
+      "tha-ap344",
+      "tha-ap346",
+      "tha-ap347"
+    ],
+    "other8538_objects_sha256": "8311e112f71561641dfe4da541c68692e7d6c3e1b58e28294a804123dd05e73c",
+    "all61_books_sha256": "ad8c7cbfa8249d4f21eb94bd59b556e8823e5870dcf0a657bfaedee5a0fd4883",
+    "strict_inverse_byte_equal_C1": true
+  },
+  "parallels": {
+    "only_semantic_delta": "source.inputs.canon.json.gz.sha256",
+    "old_input_hash": "6f41a168f033e4f82735cb3c3121dc807cbdaee7c4afae1e61082d5642c70c83",
+    "new_input_hash": "271d6dd4b864c3688b175f72b7698c4f8736fa1a30525075333e09279d59d491",
+    "citations_shared_counts_methods_unchanged": true,
+    "target_edges_present": false
+  },
+  "commentary": {
+    "logical_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461",
+    "all_associations_unchanged": 16473
+  },
+  "English343": {
+    "full_packaged_objects_unchanged": true,
+    "four_compiled_full_profile_object_hashes": {
+      "index.cjs": "10bdd7fe9a67caae44858e2e257724cfbc9d5b6a9a55285c389bba27f5e4bc22",
+      "http.cjs": "10bdd7fe9a67caae44858e2e257724cfbc9d5b6a9a55285c389bba27f5e4bc22",
+      "http-worker.cjs": "10bdd7fe9a67caae44858e2e257724cfbc9d5b6a9a55285c389bba27f5e4bc22",
+      "web/reader.js": "10bdd7fe9a67caae44858e2e257724cfbc9d5b6a9a55285c389bba27f5e4bc22"
+    }
+  },
+  "package": {
+    "archive": "/tmp/pali-boundaries340-evidence-nov26/package/pali-canon-mcp-2.1.0.tgz",
+    "sha256": "d4248e1ece65495a88b76df90bfbdb692ebc8b0f250f387ce157bf9ac99d0e0a",
+    "members": 39,
+    "all39_equal_application_git_worktree_install": true,
+    "nonserver5_unchanged_C1": true,
+    "installed_server_files": 34
+  },
+  "finite_source_diff": {
+    "production5": {
+      "src/analyse.mjs": {
+        "bytes": 23656,
+        "sha256": "5263431a352c2e6ef8120fc1183f134ce02083ccff6c14323ae4ad505027309e"
+      },
+      "src/chatgpt-widget.mjs": {
+        "bytes": 92117,
+        "sha256": "c205b72c355e1ad064e886cd85f79c48c2f3af21ec478beb8ae8f440ab50b55b"
+      },
+      "src/locator-policy.mjs": {
+        "bytes": 4072,
+        "sha256": "fe987a89d4c540bc5b1f78706869dbff9823cac5b8a78d5104dca56695cba149"
+      },
+      "src/server.mjs": {
+        "bytes": 29590,
+        "sha256": "217e53a17b314b368b2a0ebe75007d066d5e8222a79644df7644ada3c4b6f526"
+      },
+      "web/reader.js": {
+        "bytes": 175448,
+        "sha256": "d2495dca01a5b5e3e3d794f58c4cea8422a61f8d002ad34fa1c6ee90812ace71"
+      }
+    },
+    "repair_helpers2_and_build_hook": {
+      "scripts/canon/apadana_thera340_spans.py": {
+        "bytes": 8644,
+        "sha256": "1ffaf4393d7e20d675eaa29494ce5a45c4e5ea55902ef3a18c84639fe8e52f92"
+      },
+      "scripts/canon/repair_apadana_thera340_spans.py": {
+        "bytes": 5567,
+        "sha256": "63399fcdf2e80d629d210be2e0bc4ec502e79bca5ffebe06fb5773851b2388c2"
+      },
+      "scripts/canon/build_canon.py": {
+        "bytes": 39529,
+        "sha256": "ab07b1a0d30f2c8608068c0563ec44fa85be58016034cfca64b567678a6afde2"
+      }
+    },
+    "approved_helper_proposal_byte_equality": true,
+    "old_locator_registry_lines_preserved": true
+  },
+  "runtime_delta": [
+    "data/canon.json.gz.part-0002",
+    "data/canon.json.gz.parts.json",
+    "data/parallels.json.gz",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ]
+}

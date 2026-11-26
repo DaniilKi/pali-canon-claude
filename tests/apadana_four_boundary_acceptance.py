@@ -17,6 +17,8 @@ import unittest
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'scripts'))
+from web_reader_six_boundary_history import c1_logical_input
 sys.path.insert(0, str(ROOT / 'scripts/canon'))
 import apadana_thera333_spans as four
 
@@ -49,7 +51,8 @@ def bundled(name):
             pieces.append(b)
         raw = b''.join(pieces)
         assert len(raw) == manifest['size'] and sha(raw) == manifest['sha256']
-    return gzip.decompress(raw)
+    logical = gzip.decompress(raw)
+    return c1_logical_input(logical) if name == 'canon.json.gz' else logical
 def records(canon, ids):
     return {uid: next(u for u in canon['units'] if u['id'] == uid) for uid in ids}
 def parsed_books(canon):

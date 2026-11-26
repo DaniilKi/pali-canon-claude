@@ -1,0 +1,103 @@
+{
+  "schema": "original-first-six-boundary-oracle-and-unapplied-proposal-closure-v1",
+  "status": "SOURCE_EXPECTATIONS_PRESEALED_DUAL_PRODUCER_EXACT_COMPARISON_PROPOSALS_AWAIT_REVIEW",
+  "files": {
+    "ALL89_CROSSWALK.json": {
+      "bytes": 248391,
+      "sha256": "44a8271cab60fd3fdc5e11580252f6e4ab518a39b3c76924c01a56416e232834"
+    },
+    "EXECUTION_RECEIPT.json": {
+      "bytes": 933,
+      "sha256": "94b0c115248ff5af61970f478ad8b2618010b79d0768c800147a9b34de90090a"
+    },
+    "INDEPENDENT_PEER_COMPARISON.json": {
+      "bytes": 1077,
+      "sha256": "660119df48893309973a4b22ecb6f44402aa910aadc77e92415ec780f1fc595d"
+    },
+    "NEGATIVE_INTEGRITY_CONTROLS.json": {
+      "bytes": 738,
+      "sha256": "3e905c432f976bab7fa4756b4a7973c5ee4ef4705a2d83cde1aa1c5995c8e01d"
+    },
+    "PAGE_LABEL_SCOPE_CLARIFICATION.json": {
+      "bytes": 563,
+      "sha256": "7576ddf790cbd97bcfbe063c56b30eb6b2ee0f7645bca29b3c669da8f65077f4"
+    },
+    "POSITIONAL_POLICY_ORACLES.json": {
+      "bytes": 69623,
+      "sha256": "3611e202e54b1470342e7755680adf72b0c7e6c7288fed0487990c2ab1e09571"
+    },
+    "PRESEALED_SOURCE_ORACLES.json": {
+      "bytes": 2138,
+      "sha256": "8b599611727cf8ce08a72cf9857808648b0642774e7da3cb52b51ea9c8691042"
+    },
+    "PRESERVATION_ORACLES.json": {
+      "bytes": 44517,
+      "sha256": "51f9042cd3054bfdb03299fa2ff4909b85d4cb4b97a75d102a3b2045d8b384b6"
+    },
+    "PROPOSED_SIX_RECORDS.json": {
+      "bytes": 11025,
+      "sha256": "d5fef2d203473e05bf54f6facccc12b2c7b66e6b739232a269650d86247e25dd"
+    },
+    "READER_ORACLES.json": {
+      "bytes": 206377,
+      "sha256": "69e6f7c66480e5b40ddc554ab863d5fb8ac0341b8c7f280ebd9f64bbd4a84516"
+    },
+    "README.md": {
+      "bytes": 4689,
+      "sha256": "b4c49e6ed65e543baf889020c155f878031a33db8fada5bdea48345152b413df"
+    },
+    "SOURCE_DESCRIPTOR.json": {
+      "bytes": 2427,
+      "sha256": "d17625728bc1bbc0878d8f06676102dd52817c6a64ad21d53a678adbd26116ad"
+    },
+    "SYNTHETIC_OLD_POSITION_EXPORT.json": {
+      "bytes": 27429,
+      "sha256": "4a060ad7bf0902271c61d55c76e318bcfbfb6e3a3bf103fac7415ac157cdc421"
+    },
+    "derive_six_oracles.py": {
+      "bytes": 23054,
+      "sha256": "c68ecaeffd7e2e5d328ff57ddc18599b19515c8dc8083b2a1aed4a3d966a159b"
+    },
+    "prepare_proposals.py": {
+      "bytes": 11501,
+      "sha256": "1c63ae379e7c3d62942ba1f1c08800bd471c87cb4f1f453c82eb4af266552b34"
+    },
+    "producer-stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "producer-stdout.log": {
+      "bytes": 539,
+      "sha256": "11a300c1060468bb49ca745687d849c91a36fa3bd5bdc372f5b6548377658d08"
+    },
+    "proposal-v1/COMPLETE_PROPOSAL_MANIFEST.json": {
+      "bytes": 1494,
+      "sha256": "a044f323ceb05380d1c9fc3a64a7f07631ec8f4af34856876e174386643e6628"
+    },
+    "proposal-v1/SOURCE_HELPER_PROPOSAL.json": {
+      "bytes": 890,
+      "sha256": "0b25717f244c825d8f236aa4c52dfb94b8d46210ce6c27ef92ad367b3f24ee3f"
+    },
+    "proposal-v1/build_canon.patch": {
+      "bytes": 895,
+      "sha256": "8c6c0cb779b62c746f44fbf0b2870dbbeb10a047c16168accebf7d25d801446d"
+    },
+    "proposal-v1/scripts/canon/apadana_thera340_spans.py": {
+      "bytes": 8644,
+      "sha256": "1ffaf4393d7e20d675eaa29494ce5a45c4e5ea55902ef3a18c84639fe8e52f92"
+    },
+    "proposal-v1/scripts/canon/repair_apadana_thera340_spans.py": {
+      "bytes": 5567,
+      "sha256": "63399fcdf2e80d629d210be2e0bc4ec502e79bca5ffebe06fb5773851b2388c2"
+    },
+    "proposal-v1/tests/apadana-six-boundary-migration.test.mjs": {
+      "bytes": 1266,
+      "sha256": "f50a02065a9994a2493f23f61f86fe2b9ac2b4b43f2de952c1d7085ff04f1ba1"
+    },
+    "proposal-v1/tests/apadana_six_boundary_acceptance.py": {
+      "bytes": 24280,
+      "sha256": "52f6897d2bb3e153a5e1d72129db559f779fd144d229d8c14953dd72953fcb56"
+    }
+  },
+  "source_only_no_runtime_behavior_CI_release_or_migration_approval": true
+}

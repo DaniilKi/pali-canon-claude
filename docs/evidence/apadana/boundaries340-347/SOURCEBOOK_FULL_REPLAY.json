@@ -1,0 +1,11 @@
+{
+  "schema": "independent-additive-entire-original-book-segment-metadata-comparison-v1",
+  "status": "GO_FULL6018_SOURCE_METADATA",
+  "own_preseal_unchanged": true,
+  "our_entire6018_normalized_metadata_sha256": "a41a77f5e8c62d99d217a8bca862c4b9b152edebe190cd5af3c8a781b0b2bbc9",
+  "other_presealed_entire6018_metadata_sha256": "a41a77f5e8c62d99d217a8bca862c4b9b152edebe190cd5af3c8a781b0b2bbc9",
+  "equal": true,
+  "no_original_expectations_changed": true,
+  "application_or_runtime_execution": false,
+  "source_only_not_runtime_acceptance": true
+}

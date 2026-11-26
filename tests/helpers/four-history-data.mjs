@@ -1,9 +1,12 @@
 /** Explicit historical test inputs only. Production loaders never import this. */
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
+import {c1DataFileReader,c1BundledReader,normalizeC1DataInput} from './six-history-data.mjs';
+const readFileSync=c1DataFileReader(readActualFileSync);
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {readBundled} from '../../src/bundled-data.mjs';
+import {readBundled as readActualBundled} from '../../src/bundled-data.mjs';
+const readBundled=c1BundledReader(readActualBundled);
 import {exactHistoricalCanonBytes} from './canon-before-four.mjs';
 const root=new URL('../../',import.meta.url),sha=x=>createHash('sha256').update(x).digest('hex');
 const directory='docs/evidence/apadana/boundaries333-336/runtime/';
@@ -23,7 +26,7 @@ function actualData(){
  if(identity!==validated){exactHistoricalCanonBytes(gunzipSync(readBundled(new URL('server/data/canon.json.gz',root))));validated=identity;}
  return inventory.files;
 }
-export function projectHistorical440Data(path,bytes){
+function historicalC1ProjectHistorical440Data(path,bytes){
  if(typeof path!=='string'||!Object.hasOwn(old,path))return bytes;
  assert.ok(Buffer.isBuffer(bytes));const records=actualData(),observed=sha(bytes);
  assert.ok(observed===records[path.slice(7)].sha256||observed===old[path],'Only exact current or explicit historical bytes may enter');
@@ -33,3 +36,5 @@ export function historical440DataReader(reader){return(path,...options)=>{
  const raw=reader(path,...options),bytes=typeof raw==='string'?Buffer.from(raw):raw;
  const old=projectHistorical440Data(path,bytes);return old===bytes?raw:typeof raw==='string'?old.toString('utf8'):old;
 };}
+
+export function projectHistorical440Data(path,bytes){return historicalC1ProjectHistorical440Data(path,normalizeC1DataInput(path,bytes));}

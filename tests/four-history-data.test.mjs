@@ -2,7 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import{readFileSync}from'node:fs';
 import{createHash}from'node:crypto';
-import{readBundled}from'../src/bundled-data.mjs';
+import{readBundled as readActualBundled}from'../src/bundled-data.mjs';
+import{c1BundledReader}from'./helpers/six-history-data.mjs';
+const readBundled=c1BundledReader(readActualBundled);
 import{projectHistorical440Data,historical440DataReader}from'./helpers/four-history-data.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const pins={

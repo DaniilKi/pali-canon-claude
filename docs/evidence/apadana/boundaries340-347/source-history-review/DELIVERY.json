@@ -1,0 +1,21 @@
+{
+  "status": "FROZEN_INCREMENTAL_V2_INDEPENDENT_STATIC_GO_PENDING_ROOT_EXECUTION",
+  "patch_sha256": "4d8a1342073516c95524cba6df308683cb889e4d0aa125b2c0a6825bf2559f80",
+  "files": 8,
+  "file_inventory_sha256": "c4b5d2d6a0cb928f78fd4d915b75d2bb958a00ace3f1e53fcb08baa12eb22421",
+  "static_invariants_and_closure_sha256": "1c1845616988ccefbf442f1cac8cc78a11edf15be149d4ab630415860a826e77",
+  "readme_sha256": "6f4b4a199d905caeff73bcbe11d57a7efa35ed3ddab1d6473a7ee487b2ce37b7",
+  "independent_static_GO": "candidate317_entry direct message approves exact4d8a1342073516c95524cba6df308683cb889e4d0aa125b2c0a6825bf2559f80; separate sealed receipt forthcoming",
+  "root_source_and_runtime_bindings_preserved": true,
+  "new_node_top_level_test_count_additions": 0,
+  "existing_new_source_cases": 4,
+  "existing_python_history_inner_cases": 7,
+  "fresh_data_members_checked": 27,
+  "sha_per_fresh_buffer": 1,
+  "all_old_timeouts_and_source_maps_unchanged": true,
+  "workflow_or_intake343_ci_baseline_touched": false,
+  "source_map_bindings_pending": true,
+  "root_targeted_timing_and_runtime_checks_pending": true,
+  "tracked_files_edited_tests_imported_build_git_network": false,
+  "python_source_AST_parse_only": true
+}

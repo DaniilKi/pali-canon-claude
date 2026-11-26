@@ -1,0 +1,59 @@
+{
+  "schema": "independent-static-six-browser-v4-final-scope-binding-review-v1",
+  "status": "GO_BINDINGS",
+  "scope_status": "GO_SCOPE",
+  "contract": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/BROWSER_FINAL_CONTRACT_V4.json",
+    "sha256": "864084c0acb37af49efc273ba0d2c1758fe1a1899d898d585d44c289f27a8f9b"
+  },
+  "proposal_manifest_sha256": "853b89d75777739c6e98649aa0ce66dffbeb6dfa3c6d6d6d3863cb2c94b7de56",
+  "harness_sha256": "901c9ae71694d43a9ffb6776e3616eeeae8a716dc49c8d37a594af1dce84b49c",
+  "exact_delta_sha256": "f369306920c8b38ea2c755137712a9136b20d5faae3d30338293aa1a925a633f",
+  "component_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "source_order_audit": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/browser-independent-review/IMPORT_ORDER_AUDIT.json",
+    "sha256": "8a2191fbd1a1dba13e8ea714792dc4650356488587064445f9899cb53311ae41"
+  },
+  "blocking_findings": [],
+  "narrow_delta_verified": {
+    "whole_Python_AST_diff_is_only_one_readiness_string_literal": true,
+    "actual_V3_to_V4_delta_matches_sealed_patch": true,
+    "same_bookmark_array_length_and_order": true,
+    "flat_rows_only_six_source_defined_fields": true,
+    "exact_keysets_required": true,
+    "strings_and_bounded_safe_integer_offset_only": true,
+    "Object_is_preserves_value_and_type_without_coercion_or_signed_zero_collapse": true,
+    "sorts_only_Object_keys_arrays_not_bookmark_array": true,
+    "no_recursive_object_normalization": true,
+    "later_full_Python_deep_equality_unchanged": true,
+    "raw_UTF8_export_storage_and_recovery_bytes_unchanged": true,
+    "all_other_waits_audited_no_other_whole_object_serialization_order_comparison": true,
+    "source_parseBookmarks_order_confirms_cause": true
+  },
+  "preserved_scope": {
+    "all712_API_refusals_and_original89_old89_current_expectations": true,
+    "original_full_page_checks_and_correct_canonical_word_projection": true,
+    "same_deny_all_guard_launcher_bounds_and_private_records": true,
+    "all19_proposal_file_seals_and14_input_seals": true,
+    "V3_failed_artifact_seals": true,
+    "final_contract_equals_original_be282_except_exact_main_harness_hash": true,
+    "all15_authority_descriptor_seals_rechecked": true,
+    "all3_V4_executable_closure_hashes": true,
+    "all39_installed_and_current_checkout_bytes_equal_both_receipts": true,
+    "independent34_runtime_files_equal_current_and_install": true,
+    "all10_retained_profile_module_bytes_equal_old343_observation": true,
+    "all_original_five_role_and_source_widget_authorities_preserved": true
+  },
+  "V3_history": {
+    "overall_status": "failed",
+    "completed_recorded_families": 5,
+    "native_first_cell_not_claimed_passed": true,
+    "reported_group": 96048,
+    "reported_leader_reaped_and_group_absent": true,
+    "reviewer_fresh_process_observation": false,
+    "final_provider_ledger_success_not_inferred": true
+  },
+  "execution_scope": "One root-owned bounded V4 attempt with this exact contract/app/package; result and owned-process cleanup remain to be observed. A later final commit requires explicit39-member preservation binding.",
+  "limitations": "No behavior/full-check/CI/release/push/physical-device/human-AT/signed-in-host/live-provider acceptance follows from static review.",
+  "app_imports_tests_browser_server_build_install_Git_network_or_repo_proposal_edits": false
+}

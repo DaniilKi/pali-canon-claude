@@ -1,0 +1,74 @@
+{
+  "schema": "independent-role-six-boundary-cross-producer-review-v1",
+  "reviewer_role": "/root/candidate317_entry independent original-first source oracle reviewer",
+  "status": "GO_EXACT_SOURCE_EXPECTATIONS_AND_STATIC_POLICY_ONLY",
+  "our_preseal_sha256": "2e6587d424533af6d548d50eccea205e320fc807d00a64097d4791c1c10098e5",
+  "other_preseal_sha256": "8b599611727cf8ce08a72cf9857808648b0642774e7da3cb52b51ea9c8691042",
+  "compared_other_files": {
+    "derive_six_oracles.py": "c68ecaeffd7e2e5d328ff57ddc18599b19515c8dc8083b2a1aed4a3d966a159b",
+    "PROPOSED_SIX_RECORDS.json": "d5fef2d203473e05bf54f6facccc12b2c7b66e6b739232a269650d86247e25dd",
+    "ALL89_CROSSWALK.json": "44a8271cab60fd3fdc5e11580252f6e4ab518a39b3c76924c01a56416e232834",
+    "READER_ORACLES.json": "69e6f7c66480e5b40ddc554ab863d5fb8ac0341b8c7f280ebd9f64bbd4a84516",
+    "PRESERVATION_ORACLES.json": "51f9042cd3054bfdb03299fa2ff4909b85d4cb4b97a75d102a3b2045d8b384b6",
+    "POSITIONAL_POLICY_ORACLES.json": "3611e202e54b1470342e7755680adf72b0c7e6c7288fed0487990c2ab1e09571",
+    "NEGATIVE_INTEGRITY_CONTROLS.json": "3e905c432f976bab7fa4756b4a7973c5ee4ef4705a2d83cde1aa1c5995c8e01d",
+    "SYNTHETIC_OLD_POSITION_EXPORT.json": "4a060ad7bf0902271c61d55c76e318bcfbfb6e3a3bf103fac7415ac157cdc421"
+  },
+  "future_canon_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "checks": {
+    "six_full_records_and_roots": 6,
+    "all_old_future_payloads": 178,
+    "same_numeric_reference_payloads": 83,
+    "raw_note_occurrences": 17,
+    "whole_profile_objects": 343,
+    "whole_translation_objects": 343,
+    "synthetic_export_records": 89,
+    "positional_refusal_rules": 89,
+    "sourcebook_anchor_pages": 9,
+    "sourcebook_total_segments": 6018
+  },
+  "schema_only_adapters": [
+    "ours text_characters_utf16→other text_utf16_length; note_sha256s→source_note_sha256; notes_sha256→source_notes_sha256; note_count→variant_reading_count.",
+    "ours absent empty page arrays→other explicit empty arrays under rawP/rawT/M/V and normalized page label fields. No page/text/note value was changed.",
+    "ours before/future→other before_unit/after_unit; exact compact JSON order and scalar types compared.",
+    "Crosswalk naming/category translation only; source spans, payload hashes, exact future owner and same-numeric-ref contents independently compared."
+  ],
+  "crosswalk_summary": {
+    "old_segments": 89,
+    "future_segments": 89,
+    "exact_source_payload_preserved": 89,
+    "owner_changes": 6,
+    "reference_changes": 44,
+    "same_ref_different_source": 38,
+    "old_refs_no_longer_present": 6,
+    "unchanged_ref_source": 45
+  },
+  "raw_note_occurrences": 17,
+  "display_qualifier_finding": {
+    "correct_original_V1_labels": true,
+    "Ap_T_M_V_qualifier_needed": [],
+    "exact_book36_37_marker_intersection_counts": {
+      "T": 0,
+      "M": 0,
+      "V": 0
+    },
+    "incorrect_qualifier_inference_retracted": true,
+    "our_preseal_or_values_changed": false,
+    "actual_runtime_behavior_claimed": false
+  },
+  "export_expectations": {
+    "all89_synthetic_inputs_match_original_pin_ref_text": true,
+    "byte_preservation_required": true,
+    "all89_old_or_unversioned_positions_including_offset0_refuse": true,
+    "fresh_whole_reopen_explicit_current_pin_only": true,
+    "automatic_migration_authorized": false,
+    "runtime_private_export_behavior_tested": false
+  },
+  "differences": [],
+  "scope_limits": [
+    "This compares source-derived expectations/static synthetic policy only, not execution of the implementation, repair helper, browser, package or CI.",
+    "No new English scopes, source words, personal records or project files were changed.",
+    "Full old/future89 payloads and9 source-book anchors verified; unrelated mn10 control and extra parallels/file-preservation claims are not new independently derived acceptance here."
+  ],
+  "signed_by_role_not_cryptographic_identity": true
+}

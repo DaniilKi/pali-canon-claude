@@ -1,3 +1,4 @@
+import {canonBeforeSix,c1LogicalInput} from './canon-before-six.mjs';
 // TEST-ONLY historical inverse. Never import from src/, web/ or server bundles.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -19,11 +20,11 @@ function state(canon) {
   assert.ok(equals(oldUnits) || equals(newUnits), 'Mixed or unreviewed four-poem metadata');
   return equals(newUnits) ? 'new' : 'old';
 }
-export function canonBeforeFour(canon) {
+function historicalC1CanonBeforeFour(canon) {
   state(canon);
   return {...canon, units: canon.units.map(unit => Object.hasOwn(oldUnits,unit.id) ? structuredClone(oldUnits[unit.id]) : unit)};
 }
-export function exactHistoricalCanonBytes(raw) {
+function historicalC1ExactHistoricalCanonBytes(raw) {
   assert.equal(digest(raw), NEW_CANON_SHA, 'Exact complete current canonical snapshot required');
   const canon = JSON.parse(raw);
   assert.equal(state(canon), 'new');
@@ -31,3 +32,6 @@ export function exactHistoricalCanonBytes(raw) {
   assert.equal(digest(historical), OLD_CANON_SHA);
   return historical;
 }
+
+export function canonBeforeFour(canon){return historicalC1CanonBeforeFour(canonBeforeSix(canon));}
+export function exactHistoricalCanonBytes(raw){return historicalC1ExactHistoricalCanonBytes(c1LogicalInput(raw));}

@@ -41,7 +41,7 @@ function mutations(value,p){
 }
 
 test('new236 requires separate one-source authority while prior284 and neighbor235 source objects remain exact',()=>{
- assert.equal(WIDGET_VERSION,'v42');assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);
+ assert.equal(WIDGET_VERSION,'v43');assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,284),e.previous.expected_profile_ids);
  for(const id of e.previous.expected_profile_ids)assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id]);
  assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.peer.approved_profile_objects['tha-ap236']);

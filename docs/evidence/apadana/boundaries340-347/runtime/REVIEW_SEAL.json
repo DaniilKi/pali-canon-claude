@@ -1,0 +1,25 @@
+{
+  "status": "APPROVE_EXACT_CURRENT34_RUNTIME_INVENTORY_SOURCE_SCOPE_ONLY",
+  "candidate_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "inventory_sha256": "ba913149e9d704e1b145d1a6a195f95ad20e0d2dbc73fa6da22f16f43f492c08",
+  "review_sha256": "b9b5c3761f65defd45103b3c70cbcac37a8dce4133d9991b18063bceefaa0be9",
+  "allowed_runtime_delta": [
+    "data/canon.json.gz.part-0002",
+    "data/canon.json.gz.parts.json",
+    "data/parallels.json.gz",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "artifact_hashes": {
+    "review_inventory.py": "1d6dca3a32fab8e948de024da83dc1a15c33cb5946b10ec0b46bd9432113216e",
+    "review_widget.py": "41addf2aa7a6fc29a40eb1cf8adf68ddd3867c43c816cbc4e5fa5041910ca728",
+    "INDEPENDENT_SIX_RUNTIME_REVIEW.json": "b9b5c3761f65defd45103b3c70cbcac37a8dce4133d9991b18063bceefaa0be9",
+    "INDEPENDENT_SIX_RUNTIME_INVENTORY.json": "ba913149e9d704e1b145d1a6a195f95ad20e0d2dbc73fa6da22f16f43f492c08",
+    "STATIC_DATA_PACKAGE_FACTS.json": "e86a698f301af69d605400102324bd76415b13523d8a706c091dc15676d89f3d",
+    "STATIC_WIDGET_FACTS.json": "e3ef0a70de3ae5753a1b80c053167133a401b11977e8403346ed7c34f8c7a2c0",
+    "CURRENT34.json": "f6b5781aca72355444e873e64acdab0e02c21d52c852115c325e8c8d9ea2f624"
+  },
+  "behavioral_or_release_approval": false
+}

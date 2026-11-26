@@ -1,0 +1,22 @@
+{
+  "schema": "root-owned-full-local-check-v1",
+  "application_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "status": "PASS",
+  "command": "npm run check",
+  "tests": 2010,
+  "pass": 1755,
+  "fail": 0,
+  "cancelled": 0,
+  "skipped": 255,
+  "todo": 0,
+  "skip_scope": "Existing optional external-source fixtures plus the separately mandatory source-enabled repair class; new mandatory23 gate passed zero skips. No skipped test is claimed executed.",
+  "duration_ms": 434855.193253,
+  "audit_texts": 8544,
+  "audit_failures": 0,
+  "log_sha256": "451d47109c3eccff10918af48b1fe6793e9acb1ece24e0a99a359a75183b36a3",
+  "runtime_unchanged_from_reviewed_application": true,
+  "platform": "Linux x86_64",
+  "node": "v24.22.1",
+  "python": "3.12.14",
+  "remote_ci_or_physical_device_claim": false
+}

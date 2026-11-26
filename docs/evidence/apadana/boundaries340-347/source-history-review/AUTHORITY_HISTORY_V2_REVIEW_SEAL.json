@@ -1,0 +1,10 @@
+{
+  "schema": "independent-static-review-seal-v1",
+  "reviewer_role": "/root/candidate317_entry",
+  "status": "GO_EXACT_INCREMENTAL_APPLICATION_AND_BOUNDED_VALIDATION_ONLY",
+  "files": {
+    "review_v2.py": "5f77a492a92c7163bc6d452eb0c913aeb0495a200edb847d8c4c2ce08ca9a8b5",
+    "AUTHORITY_HISTORY_V2_REVIEW.json": "fac09201b6343d04694a1e733e80ee6f241f101b7c85e8a4d332e01213d2f362",
+    "AUTHORITY_HISTORY_V2_REVIEW.md": "94860b0c5c733b5d3566f4a0858602bc9aee37439f231eefce87ea85372c97b0"
+  }
+}

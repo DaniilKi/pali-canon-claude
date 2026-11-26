@@ -1,0 +1,37 @@
+{
+  "status": "FAILED_HARNESS_SCHEMA_ASSUMPTION_NOT_PRODUCT_ASSERTION",
+  "failure": "Harness asked get_text for vri_paragraphs; this field belongs to get_metadata, as verified from pinned source schema.",
+  "application_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "failure_report_sha256": "f2271a06fe49caff34708852673fc33acf2bc79672b9f125a857c7f1d684b595",
+  "ledger_sha256": "7c38619d5876b2aa189f805153e4c178b7a64f81a66ad1d341b05e505e8aca54",
+  "events": [
+    {
+      "sequence": 1,
+      "kind": "guard-ready",
+      "mode": "deny-all",
+      "allowlisted": 0,
+      "actual_network_forwarded": 0
+    },
+    {
+      "sequence": 2,
+      "kind": "literal-loopback-resolution",
+      "hostname": "127.0.0.1",
+      "family": 4,
+      "all": true
+    },
+    {
+      "sequence": 1,
+      "kind": "guard-ready",
+      "mode": "deny-all",
+      "allowlisted": 0,
+      "actual_network_forwarded": 0
+    }
+  ],
+  "actual_upstream_requests": 0,
+  "owned_cleanup": {
+    "owned_process_group": 95202,
+    "leader_reaped": true,
+    "group_absent": true
+  },
+  "next_action": "Preserve V1; narrowly fix source-backed harness schema, review V2 and bind new contract before one new run."
+}

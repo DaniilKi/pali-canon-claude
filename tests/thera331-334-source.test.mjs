@@ -1,6 +1,8 @@
 import test,{afterEach}from'node:test';
 import assert from'node:assert/strict';
-import{readFileSync}from'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
+import {c1DataFileReader} from './helpers/six-history-data.mjs';
+const readFileSync=c1DataFileReader(readActualFileSync);
 import{join}from'node:path';
 import*as canon from'../src/canon.mjs';
 import*as english from'../src/english.mjs';

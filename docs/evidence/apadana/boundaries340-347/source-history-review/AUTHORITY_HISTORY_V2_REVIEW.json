@@ -1,0 +1,113 @@
+{
+  "schema": "independent-six-authority-history-static-review-v2",
+  "reviewer_role": "/root/candidate317_entry",
+  "status": "GO_EXACT_INCREMENTAL_APPLICATION_AND_BOUNDED_VALIDATION_ONLY",
+  "reviewed_patch_sha256": "4d8a1342073516c95524cba6df308683cb889e4d0aa125b2c0a6825bf2559f80",
+  "reviewed_inventory_sha256": "c4b5d2d6a0cb928f78fd4d915b75d2bb958a00ace3f1e53fcb08baa12eb22421",
+  "prior_HOLD_review_sha256": "f74072a8d0829d9aca9d7d4dc6f556c1c5fde9f946a8a26a7e7de2bb4bff06e4",
+  "verified_files": [
+    {
+      "path": "scripts/web_reader_six_boundary_history.py",
+      "base_sha256": "5c42ae21abb7709deb8896d8445dedc29d0582c032efbbda73a3ca774032fd60",
+      "proposal_sha256": "de6857453c0ab3fe06cc741caf2694f0eaaab7cdd9345ace02fbf7dec8b8601c",
+      "exact_unified_patch_replay": true
+    },
+    {
+      "path": "tests/approved_acceptance.py",
+      "base_sha256": "f301a83a60eab40af0be0d6e94ac505779443d2e8432bd740183d8317b44afa8",
+      "proposal_sha256": "6730178f0d41ccdcca74ef543b2a6186df509b387b964c0dc9764c150e9b0875",
+      "exact_unified_patch_replay": true
+    },
+    {
+      "path": "tests/helpers/canon-before-six.mjs",
+      "base_sha256": "1a5828a42ae808e629bbe9b13997f6a7c23fa1c46c3bbece236f89de5e4887ca",
+      "proposal_sha256": "83d1472a1d05fe40a961e8e00aa5c1df3c895fa4c331ebe42f64657bd0ee85d4",
+      "exact_unified_patch_replay": true
+    },
+    {
+      "path": "tests/helpers/six-boundary-source-input.mjs",
+      "base_sha256": "9243099ca5684967826d70402f650dd64cc5c27bc32a615f52db39c38992369e",
+      "proposal_sha256": "61fcf4dd42f7d4732d7a2baca9a8e05f92aad6cd07c72beff619e61fbc26574e",
+      "exact_unified_patch_replay": true
+    },
+    {
+      "path": "tests/helpers/six-history-data.mjs",
+      "base_sha256": "8252bcc59b5a54b6dcb19be5811db6a0c6949d75332c1ee56ebf28308da008ff",
+      "proposal_sha256": "4ca6826427cb3d6e112565f64065105882c5a5fe3d42f0dbe031d90f0ee2772d",
+      "exact_unified_patch_replay": true
+    },
+    {
+      "path": "tests/helpers/six-regular-file.mjs",
+      "base_sha256": null,
+      "proposal_sha256": "35ce8fa9db0393a2fee97ba6c37267f2f1000889dad3447dc3da7ceffe8c7875",
+      "exact_unified_patch_replay": true
+    },
+    {
+      "path": "tests/six-boundary-source-input.test.mjs",
+      "base_sha256": "5e9b7e93f0b614bcfb327ca7efbf48ee7cbc597638ccc475b6767ef29c2707e9",
+      "proposal_sha256": "2f3bf8e7a9c51fb341b71130030af0becc29b939fd5f22c790f702068fda9e07",
+      "exact_unified_patch_replay": true
+    },
+    {
+      "path": "tests/six_boundary_history_acceptance.py",
+      "base_sha256": "26937ed0f846c96aa86e30b71c9621e7a0609a3a3819e6b5d0b32abce6466dd3",
+      "proposal_sha256": "d74777bcf8f6d0ab02a5c51a96fe48a08b03483057511a01f755f6bbf04e0ee2",
+      "exact_unified_patch_replay": true
+    }
+  ],
+  "old_body_preservation": "V1 independently verified31 exact old-body/whole-file proofs retained; V2 changes none of those retained declarations and only appends mandatory C1 metadata to four legacy fixture proof lists.",
+  "prior_preservation_proof_count": 31,
+  "resolved_findings": [
+    {
+      "finding": "Authentic symlink authority acceptance",
+      "resolution": "Shared JS reader guards explicit root, every descendant directory and regular leaf; oracle and source-map gates use it. Python explicit root now also refused if symlink/non-directory."
+    },
+    {
+      "finding": "Cached import-time source proof masks warm loss/tamper",
+      "resolution": "Each strict projection/normalization rereads guarded sealed map; import inventory serves enumeration only. No transformation uses cached authority after map deletion or tamper."
+    },
+    {
+      "finding": "Incomplete actual-data validation before history",
+      "resolution": "Python and JS freshly read and verify all27 sealed actual data records on every gate call before content-only decompression cache; checksum reused once per freshly read data buffer."
+    },
+    {
+      "finding": "Bundled supplied-reader failure or corruption masked",
+      "resolution": "Supplied reader invoked first; exception propagates; only exact reviewed-current packed Buffer projects. Unknown/historical buffer identity preserved."
+    },
+    {
+      "finding": "Owned fixture destination escape/root alias",
+      "resolution": "Existing owned root required; root/descendant parents/leaf checked; new files exclusive-create, existing files must equal. All27 actual data and mandatory proofs provisioned to preserve genuine positive before controls."
+    }
+  ],
+  "negative_controls_static_review": {
+    "JS_top_level_cases": 4,
+    "Python_inner_cases": 7,
+    "all27_warm_data_mutations": true,
+    "source_map_and_oracle_warm_proof_controls": true,
+    "authentic_symlinks_and_nonfiles": true,
+    "bundled_bad_historical_and_throwing_reader": true,
+    "destination_parent_escape_no_outside_output": true
+  },
+  "runtime_binding_scope": {
+    "inventory_sha256": "ba913149e9d704e1b145d1a6a195f95ad20e0d2dbc73fa6da22f16f43f492c08",
+    "review_sha256": "b9b5c3761f65defd45103b3c70cbcac37a8dce4133d9991b18063bceefaa0be9",
+    "application_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+    "declarative_bindings_preserved": true,
+    "runtime_reexecuted_or_certified_by_this_review": false
+  },
+  "remaining_gates": [
+    "Root must freeze and independently replay final physical source map, bind exact source-map seal/path list; placeholders remain fail closed in reviewed proposal.",
+    "Root must execute focused proof/history controls and required current acceptance against the actual candidate; this is static review only.",
+    "Full installed-reader, exact-SHA CI and dev promotion remain root-owned separate gates."
+  ],
+  "executed": {
+    "stdlib_hash_patch_replay_and_Python_AST_only": true,
+    "project_imports": false,
+    "tests": false,
+    "build": false,
+    "Git": false,
+    "network": false,
+    "project_edits": false
+  },
+  "application_runtime_release_or_push_approval": false
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "independent-six-boundary-source-helper-static-review-v1",
+  "reviewer_role": "/root/candidate317_entry independent original-first source oracle reviewer",
+  "status": "GO_STATIC_EXACT_PROPOSAL_PENDING_ROOT_TESTS",
+  "proposal_manifest_sha256": "0b25717f244c825d8f236aa4c52dfb94b8d46210ce6c27ef92ad367b3f24ee3f",
+  "reviewed_files": {
+    "scripts/canon/apadana_thera340_spans.py": {
+      "bytes": 8644,
+      "sha256": "1ffaf4393d7e20d675eaa29494ce5a45c4e5ea55902ef3a18c84639fe8e52f92"
+    },
+    "scripts/canon/repair_apadana_thera340_spans.py": {
+      "bytes": 5567,
+      "sha256": "63399fcdf2e80d629d210be2e0bc4ec502e79bca5ffebe06fb5773851b2388c2"
+    },
+    "build_canon.patch": {
+      "bytes": 895,
+      "sha256": "8c6c0cb779b62c746f44fbf0b2870dbbeb10a047c16168accebf7d25d801446d"
+    }
+  },
+  "our_preseal_sha256": "2e6587d424533af6d548d50eccea205e320fc807d00a64097d4791c1c10098e5",
+  "cross_producer_review_sha256": "be914edca249badf219bf2365be626fa6fa8857995784db22fab22a4e7ea00ec",
+  "exact_literal_source_alignment": {
+    "six_old_and_future_full_objects_compact_order_types_equal": true,
+    "future0f9_hash_exact": true,
+    "revision39chars_exact": true,
+    "three_terminal_m_changes_only": true,
+    "all_old_PTS_preserved": true,
+    "all_four_neighbour_spans_match_C1": true,
+    "neighbour348_is_read_only_guard_not_a_repaired_target": true
+  },
+  "manual_control_flow_findings": [
+    "six_state requires exactly one of each target and exact complete old or new six-object JSON state, preserving boolean/integer/float distinctions and rejecting mixed/unknown fields.",
+    "before_annotation permits only all six PTS fields absent or the exact annotated state. Partial PTS absence refuses; no global canonical digest is imposed on normal builder preannotation output.",
+    "Whole original book hash, source-book index, target state, member/share dependencies and four unchanged neighbor spans are checked before any target metadata update. All three pairs advance atomically.",
+    "Absent source book is an explicit builder omission no-op. An already-new complete state returns no changes only after the same source/group/neighbor gates.",
+    "The historical inverse replaces only exact six target metadata records while preserving unrelated deliberate changes. Its lack of full-global pin is intentional; it must never rebase runtime/private positions.",
+    "CLI separately enforces full historical C1 inverse and entire commentary hashes, exact XML SHA/blob and parsed entire original book, real commentary associations and accepted source-prefix intersections.",
+    "CLI deep-copies unit metadata before the low-level repair; existing Builder annotation runs against separate book/unit copies and is compared with independently pinned PTS. Source words and commentary are not mutated.",
+    "CLI requires the exact final0f9 hash before publishing canon.units; this is the sole caller-visible mutation. Old input advances once; complete future input inverses to exact C1 and returns an idempotent no-change repair.",
+    "CLI paths must resolve to four different values and the output must not already exist or be a symlink. Gzip output creation is after all validation; no output is written on validation failure. Filesystem write-failure atomicity is not established by this source review.",
+    "Build hook adds exactly one import and one invocation, after older333 repair and before Thag16/numbering/page annotation. It does not use a postannotation whole-canon hash to gate normal builder inputs."
+  ],
+  "commentary_independent_measurement": {
+    "all_unit_associations": 16473,
+    "six_target_unit_associations": 0,
+    "accepted_book36_passage_records": 588,
+    "unique_accepted_source_root_intervals": 12,
+    "all_intervals_valid_int_coordinates": true,
+    "moved_prefix_intersections": 0,
+    "unique_intervals": [
+      [
+        0,
+        2050
+      ],
+      [
+        2050,
+        2509
+      ],
+      [
+        3116,
+        3482
+      ],
+      [
+        5154,
+        5380
+      ],
+      [
+        6836,
+        7008
+      ],
+      [
+        7221,
+        7426
+      ],
+      [
+        8111,
+        8249
+      ],
+      [
+        8399,
+        8552
+      ],
+      [
+        9048,
+        9228
+      ],
+      [
+        9228,
+        9426
+      ],
+      [
+        9426,
+        9769
+      ],
+      [
+        12894,
+        14045
+      ]
+    ]
+  },
+  "static_AST_findings": {
+    "only_update_fields": [
+      "start",
+      "end",
+      "title",
+      "vri",
+      "index_revision"
+    ],
+    "caller_visible_canon_assignment_count": 1,
+    "caller_visible_assignment_after_all_checks": true,
+    "build_hook_added_lines": [
+      "+from apadana_thera340_spans import apadana_thera340_spans  # noqa: E402",
+      "+    corrected.update(apadana_thera340_spans(b.books, b.units))"
+    ]
+  },
+  "blocking_defects_identified": [],
+  "required_runtime_validation": [
+    "Strict six-state positive/negative tests, missing/duplicate/mixed/type/title/number/PTS/revision and source drift cases.",
+    "All-absent preannotation positive plus partial/mixed PTS negatives; omit-book and existing-new idempotence.",
+    "Unrelated deliberate mutation preserved by scoped inverse but refused by the CLI full-global guard.",
+    "Actual pinned XML/annotation repair produces exact0f9 and idempotent second result; validation failures leave input/output untouched.",
+    "All89 old/current locator/refusal/export/private-draft behavior and final package/CI receipts remain separate required gates."
+  ],
+  "limitations": [
+    "AST/literal/data reads and static inspection only: no proposed helper/Builder/app import or execution, no tests/build/Git/network/project edits.",
+    "This GO covers frozen source files only, not application safety, passing tests, source activation, personal-data migration or release approval.",
+    "The low-level builder gate intentionally checks only the reviewed target source/neighbor dependencies; full unrelated-corpus identity is enforced by the separate CLI."
+  ],
+  "signed_by_role_not_cryptographic_identity": true
+}

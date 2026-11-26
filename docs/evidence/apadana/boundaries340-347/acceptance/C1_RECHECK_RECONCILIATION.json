@@ -1,0 +1,46 @@
+{
+  "schema": "exact-C1-automatic-dev-recheck-reconciliation-v1",
+  "commit": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "package_run": 45830085874,
+  "package_run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45830085874",
+  "run_attempt": 2,
+  "status": "completed",
+  "conclusion": "success",
+  "single_retried_job": {
+    "id": 139966699350,
+    "name": "Node 22 / windows-latest",
+    "attempt": 2,
+    "conclusion": "success",
+    "completed_at": "2026-11-26T14:20:19Z",
+    "held234_pass_duration_ms": 25062.0297,
+    "full_inventory": {
+      "tests": 1987,
+      "pass": 1734,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 253
+    }
+  },
+  "initial_failure": {
+    "job": 139944268247,
+    "test": "held234-current333-chain",
+    "reason": "30-second Python subprocess ETIMEDOUT; same C1 prior candidate passed in24.404s",
+    "retry_scope": "Only the completed failed job, after the whole run became terminal; first attempt to request retry while other jobs ran was rejected and executed no retry."
+  },
+  "companion_runs": [
+    {
+      "id": 45830085896,
+      "conclusion": "success"
+    },
+    {
+      "id": 45830085987,
+      "conclusion": "success"
+    },
+    {
+      "id": 45830086080,
+      "conclusion": "success"
+    }
+  ],
+  "assertions_or_timeouts_changed": false,
+  "rerun_remaining_jobs": false
+}

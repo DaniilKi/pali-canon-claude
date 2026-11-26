@@ -1,0 +1,298 @@
+{
+  "schema": "independent-executed-six-boundary-installed-browser-acceptance-review-v1",
+  "status": "GO_BEHAVIOR_EXACT_APP_COMPONENT_ONLY",
+  "requested_verdict": "GOBEHAVIOR_EXACTAPPCOMPONENTONLY",
+  "scope": "Exact root-executed V4 installed HTTP/MCP/native Chromium and simulated-host checks for application component d2462 and sealed 39-member package. This is not CI, release, push, main/deployment or full-project completion approval.",
+  "application_component_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "baseline": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "final_contract": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/BROWSER_FINAL_CONTRACT_V4.json",
+    "sha256": "864084c0acb37af49efc273ba0d2c1758fe1a1899d898d585d44c289f27a8f9b"
+  },
+  "approved_scope_binding_review": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/browser-independent-review/V4_FINAL_BINDING_REVIEW.json",
+    "sha256": "2bf2aeb93d72c2119db4ccb25627a44e87110c37c45737d737abdef365bf800c"
+  },
+  "proposal_manifest": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/browser-proposals/proposal-v4/MANIFEST.json",
+    "sha256": "853b89d75777739c6e98649aa0ce66dffbeb6dfa3c6d6d6d3863cb2c94b7de56"
+  },
+  "harness_closure": {
+    "check-boundary-reader.py": "901c9ae71694d43a9ffb6776e3616eeeae8a716dc49c8d37a594af1dce84b49c",
+    "offline-pali-guard.cjs": "6f5b1415dd1838c06a0125fcc9639d2a142c8dc73306724077b49322a41067ad",
+    "run-bounded.py": "9e5b56f4adadf1c689adc848dbe70cc5e4a57f4cc42560eaa684fc05fe01ddf5"
+  },
+  "actual_execution": {
+    "report": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/browser-run-v4/REPORT.json",
+      "sha256": "09e0cd55c2d3c07c02af9eca04c8bbb49b16187490a3d713d026d5aaf7e28deb"
+    },
+    "command": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/browser-run-v4/six-boundary-a4-command.json",
+      "sha256": "cf051ef1189f495b6933e93bd85b3bc28454ea8f40004654631c94246ced7c87"
+    },
+    "log": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/browser-run-v4/six-boundary-a4.log",
+      "sha256": "f41e2aab1a8b2b178cc67e7d049e684fdc5cff9564ad6f5ccfbf057d40709460"
+    },
+    "status": "passed",
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_seconds": 312.917,
+    "started_utc": "2026-11-26T14:25:59.918912+00:00",
+    "completed_utc": "2026-11-26T14:31:12.835276+00:00",
+    "log_JSON_exactly_equals_report": true,
+    "command_contract_path_hash_installed_server_and_harness_match_sealed_scope": true,
+    "completed_check_records": 15
+  },
+  "source_expectations": {
+    "reader_oracle": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/source-oracles/READER_ORACLES.json",
+      "sha256": "69e6f7c66480e5b40ddc554ab863d5fb8ac0341b8c7f280ebd9f64bbd4a84516"
+    },
+    "historical_crosswalk": {
+      "path": "/tmp/pali-four-english-evidence-nov26/next-boundary-independent-review/OLD_CITATION_CROSSWALK.json",
+      "sha256": "a60394f1f4aa978a0f6ffade5465e8b0e1cfea8e9a9ad6049ec214a3f3f1c621"
+    },
+    "future_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+    "exact_units": [
+      "tha-ap340",
+      "tha-ap341",
+      "tha-ap343",
+      "tha-ap344",
+      "tha-ap346",
+      "tha-ap347"
+    ],
+    "old_positions": 89,
+    "current_positions": 89,
+    "partitions": {
+      "same_numeric_different_source": 38,
+      "vanished_old_ref": 6,
+      "same_numeric_same_source_still_requires_new_pin": 45
+    },
+    "expectations_not_from_installed_responses": true
+  },
+  "executed_coverage_reconciliation": {
+    "MCP": {
+      "completed_report_records": 1,
+      "units": 6,
+      "old_positions": 89,
+      "main_old_position_refusals": 712,
+      "basis": "Successful immutable harness family appends only after89 positions x2tools x4pin states, every current segment, continuation, nine source-book pages and nine old/ordinary controls complete. Report records89 old/89 current and9 pages;712 is the exact sealed loop count, not an additional individually logged counter.",
+      "current_segments": 89,
+      "current_complete_and_continuation_reads": true,
+      "metadata_exact_ID_title_VRI_and_reading_title": true,
+      "malformed_SDK_cases_separate": 12,
+      "context_word_missing_old_pin_representatives": 24,
+      "current_word_analysis_positives": 6,
+      "original_source_book_pages": 9,
+      "prior_and_ordinary_controls": 9,
+      "no_new_English_activations": true
+    },
+    "simulated_hosts": {
+      "completed_report_records": 4,
+      "bridges": [
+        "MCP Apps",
+        "Apps SDK"
+      ],
+      "widths": [
+        390,
+        1280
+      ],
+      "sources_per_cell": 6,
+      "positive_source_cells": 24,
+      "missing_stale_payload_cases": 48,
+      "recorded_network_requests_each_cell": 0,
+      "payload_refs_types_wordhashes_and_ordered_DOM_types_wordhashes_asserted_separately": true
+    },
+    "native_main_matrix": {
+      "completed_report_records": 4,
+      "entrypoints": [
+        "/",
+        "/reader"
+      ],
+      "widths": [
+        390,
+        1280
+      ],
+      "old_synthetic_records_each_cell": 12,
+      "old_saved_openings_total": 48,
+      "old_record_forms": "Pinned original-VRI/offset0 and unversioned exact-ref for every finite unit. Native cases are representative12 records per cell;89old-position exhaustion is the API matrix.",
+      "refusal_before_transient_passage_words": true,
+      "explicit_whole_reopen_no_automatic_note_attachment_or_repin": true,
+      "current_citation_and_copy_link_pin": true,
+      "raw_old_local_and_session_private_bytes_preserved": true,
+      "export_cancel_import_roundtrip_reload_and_source_book_copy": true
+    },
+    "native_mobile_extras": {
+      "completed_report_records": 6,
+      "width": 390,
+      "entrypoints": [
+        "/",
+        "/reader"
+      ],
+      "new_source_pinned_saves_per_entry": 6,
+      "old_records_preserved_each_context": 12,
+      "controlled_actual_data_completion_after_Stop_per_entry": true,
+      "Saved_view_draft_and_focus_preserved_after_Stop": true,
+      "actual_two_tab_stale_save_refusal_recovery_and_cancel_discard_per_entry": true,
+      "recovery_download_bytes_per_entry": 412,
+      "recovery_sha256": "315b5ef1912f11a300a4dcc3e9a1b74679f8994ef6f0fea92e2715a830ddceaf",
+      "not_claimed_at1280": true
+    },
+    "unreported_but_mandatory_completed_gates": {
+      "two_strict_installed_widget_resources_equal_separately_reviewed_source_HTML": true,
+      "widget_version": "v43",
+      "source_HTML_sha256": "76931ba0a3d654f52ba9bf0ad4e68f58cf57c790d68bec2832cc444167f7bcae",
+      "source_not_installed_expected_artifact": true,
+      "package39_member_pre_and_post_immutability": true,
+      "explanation": "These sealed-harness checks precede final passed status even though they are not separate check-array records. Final command exit0 and report/log passed status follow successful cleanup."
+    }
+  },
+  "private_export_evidence": {
+    "synthetic_only": true,
+    "stage_owned_nonsymlink0700": true,
+    "no_real_personal_profile_or_persistent_browser_used": true,
+    "independent_expected_synthetic_UTF8_export_reconstruction_matched_all4_files": true,
+    "exports": [
+      {
+        "name": "synthetic-roundtrip-reader-1280.json",
+        "bytes": 2809,
+        "sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9"
+      },
+      {
+        "name": "synthetic-roundtrip-reader-390.json",
+        "bytes": 2809,
+        "sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9"
+      },
+      {
+        "name": "synthetic-roundtrip-root-1280.json",
+        "bytes": 2809,
+        "sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9"
+      },
+      {
+        "name": "synthetic-roundtrip-root-390.json",
+        "bytes": 2809,
+        "sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9"
+      }
+    ],
+    "all_export_bytes": 2809,
+    "all_export_sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9",
+    "only_import_readiness_object_key_order_normalized_not_values_types_fields_or_bookmark_array": true,
+    "raw_storage_export_recovery_checks_remained_exact": true
+  },
+  "provider_evidence": {
+    "ledger": {
+      "path": "/tmp/s634-7p63nqfn/network.jsonl",
+      "sha256": "7c38619d5876b2aa189f805153e4c178b7a64f81a66ad1d341b05e505e8aca54"
+    },
+    "bytes": 295,
+    "reported_ledger_hash_matches_raw": true,
+    "config": {
+      "path": "/tmp/s634-7p63nqfn/guard.json",
+      "sha256": "8e842fbdc2316de3e430066f1d01302cb7eb2d22b84ac1d554f9535df488937b"
+    },
+    "mode": "deny-all",
+    "fixture_files": 0,
+    "observed_events": [
+      {
+        "sequence": 1,
+        "kind": "guard-ready",
+        "mode": "deny-all",
+        "allowlisted": 0,
+        "actual_network_forwarded": 0
+      },
+      {
+        "sequence": 2,
+        "kind": "literal-loopback-resolution",
+        "hostname": "127.0.0.1",
+        "family": 4,
+        "all": true
+      },
+      {
+        "sequence": 1,
+        "kind": "guard-ready",
+        "mode": "deny-all",
+        "allowlisted": 0,
+        "actual_network_forwarded": 0
+      }
+    ],
+    "events_only_allowed_zero_source_guard_initialization_and_literal_loopback": true,
+    "source_fetch_socket_denial_or_provider_forwarding_events": 0,
+    "reported_upstream_requests": 0,
+    "browser_outside_origin_and_private_sentinel_guards_completed": true,
+    "host_all_requests_denied_and_observed_zero": true
+  },
+  "cleanup": {
+    "reported_owned_HTTP_group": 99006,
+    "reported_leader_reaped": true,
+    "reported_group_absent": true,
+    "read_only_proc_observation_utc": "2026-11-26T14:36:08.016433+00:00",
+    "same_group_members_now": [],
+    "leader_proc_exists_now": false,
+    "fresh_observation_method": "Read /proc/[pid]/stat process-group field and /proc/99006 existence only. No signals sent, no process waited/reaped, and no target process mutated or relaunched by this reviewer.",
+    "outer_exit_not_used_as_HTTP_cleanup_proof": true
+  },
+  "postrun_bindings": {
+    "all39_installed_and_current_checkout_bytes_equal_original_sealed_members": true,
+    "all3_harness_bytes_still_match_final_contract": true,
+    "runtime34_and_original_authorities_retained_from_exact_V4_binding_review": true,
+    "archive_sha256": "d4248e1ece65495a88b76df90bfbdb692ebc8b0f250f387ce157bf9ac99d0e0a",
+    "later_final_commit_requires_explicit39_member_byte_preservation_receipt": true
+  },
+  "preserved_attempt_history": {
+    "V1": {
+      "report": {
+        "path": "/tmp/pali-boundaries340-evidence-nov26/browser-run-v1/REPORT.json",
+        "sha256": "f2271a06fe49caff34708852673fc33acf2bc79672b9f125a857c7f1d684b595"
+      },
+      "failure_analysis": {
+        "path": "/tmp/pali-boundaries340-evidence-nov26/browser-run-v1/FAILURE_ANALYSIS.json",
+        "sha256": "d18d6d14999fbca8556951a51d754e911e40a37a2d4cfbc171212b0b7456a212"
+      },
+      "status": "failed",
+      "completed_check_records": 0,
+      "reason": "Harness asked get_text for metadata-only vri_paragraphs.",
+      "reported_group": 95202,
+      "reported_leader_reaped_and_group_absent": true
+    },
+    "V2": {
+      "status": "not_run",
+      "basis": "Parent/root confirms unused; independent HOLD receipt preserved and no browser-run-v2 artifact directory exists.",
+      "hold_review": {
+        "path": "/tmp/pali-boundaries340-evidence-nov26/browser-independent-review/V2_REVIEW.json",
+        "sha256": "43dca3f902c3428587e480438611180c26a65196dc6272992db007ffd3d88411"
+      },
+      "correction_before_execution": "Canonical word-analysis projection uses four source-backed fields, not full-reading page arrays."
+    },
+    "V3": {
+      "report": {
+        "path": "/tmp/pali-boundaries340-evidence-nov26/browser-run-v3/REPORT.json",
+        "sha256": "bb7d2df21239e5cc006336827cc31444a7b5f4c6f07719eb3159d7744ab97b58"
+      },
+      "failure_analysis": {
+        "path": "/tmp/pali-boundaries340-evidence-nov26/browser-run-v3/FAILURE_ANALYSIS.json",
+        "sha256": "d5813637b8c41129fd4df434790120b612315677d8d55e8f45ac70f8b2978aaa"
+      },
+      "status": "failed",
+      "completed_check_records": 5,
+      "reason": "Import readiness incorrectly compared flat bookmark JSON key insertion order. Native first cell did not complete.",
+      "reported_group": 96048,
+      "reported_leader_reaped_and_group_absent": true
+    },
+    "V4": "Current complete pass; does not relabel V1/V3 as passes or assert V2 executed."
+  },
+  "blocking_findings": [],
+  "excluded_claims": {
+    "CI_approval": false,
+    "release_or_push_approval": false,
+    "main_merge_or_deployment_approval": false,
+    "full_project_complete": false,
+    "physical_device_acceptance": false,
+    "human_assistive_acceptance": false,
+    "signed_in_host_acceptance": false,
+    "live_upstream_availability": false,
+    "all343_English_bodies_browser_revalidated": false
+  },
+  "method": "Read-only evidence/source/JSON/hash inspection, independent synthetic export reconstruction and /proc metadata observation. The actual app/browser execution was performed by root; this reviewer executed no app, tests, browser, server, build, install, Git or network and edited no candidate/proposal files."
+}

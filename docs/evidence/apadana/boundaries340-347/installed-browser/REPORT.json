@@ -1,0 +1,135 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "family": "Installed MCP reads all six units; old positions refuse and source-book controls stay stable",
+      "units": 6,
+      "old_positions_checked": 89,
+      "same_numeric_source_positions_also_refused": 45,
+      "new_segments": 89,
+      "sourcebook_pages": 9
+    },
+    {
+      "check": "initial six-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "MCP Apps",
+      "width": 390,
+      "sources": 6,
+      "independent_source_segments": 89,
+      "stale_cases": 12,
+      "network_requests": 0
+    },
+    {
+      "check": "initial six-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "Apps SDK",
+      "width": 390,
+      "sources": 6,
+      "independent_source_segments": 89,
+      "stale_cases": 12,
+      "network_requests": 0
+    },
+    {
+      "check": "initial six-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "MCP Apps",
+      "width": 1280,
+      "sources": 6,
+      "independent_source_segments": 89,
+      "stale_cases": 12,
+      "network_requests": 0
+    },
+    {
+      "check": "initial six-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "Apps SDK",
+      "width": 1280,
+      "sources": 6,
+      "independent_source_segments": 89,
+      "stale_cases": 12,
+      "network_requests": 0
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/",
+      "width": 390,
+      "old_records": 12,
+      "export_utf8_bytes": 2809,
+      "export_sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/",
+      "width": 1280,
+      "old_records": 12,
+      "export_utf8_bytes": 2809,
+      "export_sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Six explicit current notes use new pins; twelve old records remain unchanged",
+      "new_pins": 6,
+      "old_records_preserved": 12
+    },
+    {
+      "family": "A stopped response completes late without replacing Saved or moving draft focus",
+      "body_completed": true
+    },
+    {
+      "family": "Stale tab save refuses; draft recovery and cancelled discard preserve both versions",
+      "recovery_sha256": "315b5ef1912f11a300a4dcc3e9a1b74679f8994ef6f0fea92e2715a830ddceaf",
+      "recovery_utf8_bytes": 412
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/reader",
+      "width": 390,
+      "old_records": 12,
+      "export_utf8_bytes": 2809,
+      "export_sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/reader",
+      "width": 1280,
+      "old_records": 12,
+      "export_utf8_bytes": 2809,
+      "export_sha256": "05d84bb282bb4dd52992bd7857b753edfbab8e877e161e6f9cbe557fb35857c9",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Six explicit current notes use new pins; twelve old records remain unchanged",
+      "new_pins": 6,
+      "old_records_preserved": 12
+    },
+    {
+      "family": "A stopped response completes late without replacing Saved or moving draft focus",
+      "body_completed": true
+    },
+    {
+      "family": "Stale tab save refuses; draft recovery and cancelled discard preserve both versions",
+      "recovery_sha256": "315b5ef1912f11a300a4dcc3e9a1b74679f8994ef6f0fea92e2715a830ddceaf",
+      "recovery_utf8_bytes": 412
+    }
+  ],
+  "limitations": "Genuine installed HTTP/MCP and Chromium DOM with synthetic local data; two simulated host bridges. No live publisher, physical-device, human AT or signed-in host acceptance.",
+  "contract_sha256": "864084c0acb37af49efc273ba0d2c1758fe1a1899d898d585d44c289f27a8f9b",
+  "candidate_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "stage": "/tmp/s634-7p63nqfn",
+  "server_argv": [
+    "node",
+    "--require",
+    "/tmp/pali-boundaries340-evidence-nov26/browser-proposals/proposal-v4/offline-pali-guard.cjs",
+    "/tmp/pali-boundaries340-evidence-nov26/install/node_modules/pali-canon-mcp/server/http.cjs"
+  ],
+  "server_pid": 99006,
+  "owned_process_group": 99006,
+  "provider_ledger_sha256": "7c38619d5876b2aa189f805153e4c178b7a64f81a66ad1d341b05e505e8aca54",
+  "upstream_requests": 0,
+  "browser_run": true,
+  "physical_device": false,
+  "human_assistive_testing": false,
+  "cleanup": {
+    "owned_process_group": 99006,
+    "leader_reaped": true,
+    "group_absent": true
+  }
+}

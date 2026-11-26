@@ -1,0 +1,1198 @@
+{
+  "schema": "unapproved-book37-source-review-queue-v1",
+  "scope": {
+    "all_thera_records_counted": 563,
+    "screened_book": 37,
+    "screened_records": 141,
+    "screened_ids": [
+      "tha-ap423",
+      "tha-ap563"
+    ],
+    "screened_source_coordinates_half_open": [
+      1,
+      6532
+    ],
+    "whole_book_blocks_parity_checked": 10672,
+    "whole_book_numbered_poem_headings": 181,
+    "scoped_numbered_poem_headings": 141,
+    "out_of_scope_poem_headings": 40,
+    "classification_counts": {
+      "OWN_HEADING_INSIDE": 113,
+      "OWN_MATCHING_HEADING_BEFORE_CURRENT_START": 27,
+      "UNMATCHED_OR_AMBIGUOUS_LOCAL_TITLE": 1
+    },
+    "structural_flags": 27,
+    "strong_signature_flags": 0,
+    "connected_candidate_clusters": 19,
+    "lexical_heading_at_start_cases": 1
+  },
+  "candidates": [
+    {
+      "ids": [
+        "tha-ap423",
+        "tha-ap424"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 55,
+      "source_heading_coordinate_to_review": 51,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "15",
+      "current_first_printed_vri": "16",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "afe017ad38b34f2596634f18a06f0120db67de85fa24b0f5a4e75094ec5391e0",
+        "first_printed_stanza": {
+          "vri": "15",
+          "source_blocks": [
+            52,
+            55
+          ],
+          "body_sha256": "d6ebd8291eb455170061a208e1a4ba2d4ae97d8f9d8db763c990045cc09941b9"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "4bc2c7d645f2a8e7c9b54f3eb24805e1cfddbb810060650b8a02c814f317b5d9"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap426",
+        "tha-ap427"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 216,
+      "source_heading_coordinate_to_review": 212,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "68",
+      "current_first_printed_vri": "69",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "101000efc35d8d8e7bdae1ab4dca61458ad9067d5fae71c2e10df0132dfc5005",
+        "first_printed_stanza": {
+          "vri": "68",
+          "source_blocks": [
+            213,
+            216
+          ],
+          "body_sha256": "9719051e0ca7608eaeb1663e2905812bcae4133d963aeb79c6e2437d6880c99a"
+        },
+        "preceding_speaker_sha256": "ee2f444bff911021475bcf243f1de40c4370f522a15f1a52d6b165f59a90cec6",
+        "preceding_colophon_sha256": "e635534789faed7ab429abafe4d7b73cc7d97b15a97985ea6d1e34b702c679af"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap428",
+        "tha-ap429"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 277,
+      "source_heading_coordinate_to_review": 273,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "88",
+      "current_first_printed_vri": "89",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "44c2779f5f21f78264317d72ae75bea7154adafe2359e7024721582bb42d603f",
+        "first_printed_stanza": {
+          "vri": "88",
+          "source_blocks": [
+            274,
+            277
+          ],
+          "body_sha256": "01e2af7c195da5355f5a0a93b3444d5b3814153bbcdc7e539d88011d8dad7303"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "b52e82c824793bf93513a41a4d3a58bf0cb131084caa676a8ed8a08250b6b398"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap462",
+        "tha-ap463"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 1302,
+      "source_heading_coordinate_to_review": 1298,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "1",
+      "current_first_printed_vri": "2",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": false,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": false,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "88010b89dace8d710a04fee072bcc7f6f7d980d5ca7fd52da46e6128c74d89bf",
+        "first_printed_stanza": {
+          "vri": "1",
+          "source_blocks": [
+            1299,
+            1302
+          ],
+          "body_sha256": "da0b6a732bd0d42e1cf296636fff0f6b7d09186474394d67e5ce4e117dec9dbc"
+        },
+        "preceding_speaker_sha256": "1eab78258e2f90a2f479c2274981cb13ab651fe985829f10bcb49387e2f36064",
+        "preceding_colophon_sha256": "08f4f8c6cfb4ca48a059190f1b0342e1f0a11f9b92e2480d452e1c763189dec0"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap467",
+        "tha-ap468"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 1385,
+      "source_heading_coordinate_to_review": 1381,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "26",
+      "current_first_printed_vri": "27",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "3187ad6e6c927a919d4b0cfd71bde1b255dfe26e7a55de1045fd6439ac852958",
+        "first_printed_stanza": {
+          "vri": "26",
+          "source_blocks": [
+            1382,
+            1385
+          ],
+          "body_sha256": "759d809a1e353398d6e6fffcc8fb9a53277edc3c19b4fc9a639647dd551fd606"
+        },
+        "preceding_speaker_sha256": "ee2f444bff911021475bcf243f1de40c4370f522a15f1a52d6b165f59a90cec6",
+        "preceding_colophon_sha256": "7f629ea4c0061bee82cdf1613386bcef131cdc81c4985dcc97659a36ac8918c3"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap484",
+        "tha-ap485"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 1926,
+      "source_heading_coordinate_to_review": 1922,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "27",
+      "current_first_printed_vri": "28",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "9b97dcf956461dd6ff356b07e60ef850bd2191521f8e011a0cd22cd9c98aced4",
+        "first_printed_stanza": {
+          "vri": "27",
+          "source_blocks": [
+            1923,
+            1926
+          ],
+          "body_sha256": "034d55eb3abcb3f59d67d857e424dee08d555001c2c71cdb9546e0ee085ca6f4"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "096ad019c7061921378b3c46d3f5e135de48aa1c4f0a3b75659457ec83706eef"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap494",
+        "tha-ap495"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 2573,
+      "source_heading_coordinate_to_review": 2569,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "15",
+      "current_first_printed_vri": "16",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "1ef93e5997960e46ae69789ba3d35cfddf3290530e8f61befb5903df797df25f",
+        "first_printed_stanza": {
+          "vri": "15",
+          "source_blocks": [
+            2570,
+            2573
+          ],
+          "body_sha256": "9719051e0ca7608eaeb1663e2905812bcae4133d963aeb79c6e2437d6880c99a"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "41da8c60d388eda389a781c377dfe2238fa24c0fae0229cbe20d4f8150a7fe3e"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap500",
+        "tha-ap501"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 2814,
+      "source_heading_coordinate_to_review": 2810,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "93",
+      "current_first_printed_vri": "94",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "5d0533231a70372735fb8ab9f56c5f396194cfa644c1b5d26a73a5f5ab7e81d4",
+        "first_printed_stanza": {
+          "vri": "93",
+          "source_blocks": [
+            2811,
+            2814
+          ],
+          "body_sha256": "850b2cba374f935ab4d3c9992e82d192343bcfb25fe1a2b5ceba9e83ea87c571"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "96733f662a34d8f10effd8cc0fb58566ef329ce2c08ed3fe2d559080c2996578"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap504",
+        "tha-ap505"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 3038,
+      "source_heading_coordinate_to_review": 3034,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "51",
+      "current_first_printed_vri": "52",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "4b104583ad9c9ed48e11f6efa9cf691baf3795776107df683ec9cc50c6757a47",
+        "first_printed_stanza": {
+          "vri": "51",
+          "source_blocks": [
+            3035,
+            3038
+          ],
+          "body_sha256": "ac598d73b7c3106c6874c0b23d47b6f6bb848a276883f251277e6971a0b1bb6b"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "33ef10867b7cbebfbd02b99135117e78aa80c23bc906ed4dc0f2f4870cb574ae"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap508",
+        "tha-ap509"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 3111,
+      "source_heading_coordinate_to_review": 3107,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "74",
+      "current_first_printed_vri": "75",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "59a763c137c9cfc3cec2887030b67501a3019587e2be61131d210bb3368f77c2",
+        "first_printed_stanza": {
+          "vri": "74",
+          "source_blocks": [
+            3108,
+            3111
+          ],
+          "body_sha256": "049d209e96c566c346e798cab68bcb607ffaa15de3fd5cd9eb3b30d6f9ff7a07"
+        },
+        "preceding_speaker_sha256": "ee2f444bff911021475bcf243f1de40c4370f522a15f1a52d6b165f59a90cec6",
+        "preceding_colophon_sha256": "f25072013d56f49f155d5cd5977316a66eeef76b18cccc15bf4f66baf800e680"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap509",
+        "tha-ap510"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 3130,
+      "source_heading_coordinate_to_review": 3126,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "80",
+      "current_first_printed_vri": "81",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "f05a7e0ff7a229141f75d35b3ee77c1fad8e4a7137f81f88eab0dfbae687ec53",
+        "first_printed_stanza": {
+          "vri": "80",
+          "source_blocks": [
+            3127,
+            3130
+          ],
+          "body_sha256": "2f0dfe52d96721bc83d8ce5e79c601d3bf8c02889c64b7aeb77260a41c035cb9"
+        },
+        "preceding_speaker_sha256": "ee2f444bff911021475bcf243f1de40c4370f522a15f1a52d6b165f59a90cec6",
+        "preceding_colophon_sha256": "e5cbdb3d41edc7cf825867e2d58f1795c88a6d477bc846be42c94b879c5a24b6"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap510",
+        "tha-ap511"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 3146,
+      "source_heading_coordinate_to_review": 3142,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "85",
+      "current_first_printed_vri": "86",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "97579366f8b303df558031e4747c7ca7fbbabfc615588c49163d7e6f0b30c4ac",
+        "first_printed_stanza": {
+          "vri": "85",
+          "source_blocks": [
+            3143,
+            3146
+          ],
+          "body_sha256": "e026aa7dabfb23ee86497052913fb849d9c9fd8408e20ff02be08d41a49c13a7"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "e61d24b2d683d186fcb7c770809a2abe06b5bc7a58a553845843a389afa9795f"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap521",
+        "tha-ap522"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 3443,
+      "source_heading_coordinate_to_review": 3439,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "78",
+      "current_first_printed_vri": "79",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "86276b8af4f42b6cb3e1491e0d6ff6ff42f354353c2c98983b128f145443629a",
+        "first_printed_stanza": {
+          "vri": "78",
+          "source_blocks": [
+            3440,
+            3443
+          ],
+          "body_sha256": "baa0c563b58f89bea31d8a105bedac3ab45b0baa434dde4947c9188d1fcea09b"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "6be3253c482af6b63d525f0a1738c8463560656ff424eecd9ea7dd8734445e11"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap531",
+        "tha-ap532"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 3721,
+      "source_heading_coordinate_to_review": 3717,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "81",
+      "current_first_printed_vri": "82",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "639425cc317b010e47a5c1b53edbdbaae3ac8e93b5f86137850896dd9625ce83",
+        "first_printed_stanza": {
+          "vri": "81",
+          "source_blocks": [
+            3718,
+            3721
+          ],
+          "body_sha256": "d1bb6b4de6613b66afa36437401c17f2d1e4ebebf57cad8d3d9302473fdcd40b"
+        },
+        "preceding_speaker_sha256": "ee2f444bff911021475bcf243f1de40c4370f522a15f1a52d6b165f59a90cec6",
+        "preceding_colophon_sha256": "a4f8c45f428a036d4799b5e1327b13dd58c91df8980663bfed3a1a033d41539b"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap535",
+        "tha-ap536"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 4194,
+      "source_heading_coordinate_to_review": 4190,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "108",
+      "current_first_printed_vri": "109",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "06590a077aa1443b5db2f0aaeb483a9d4e9271d9a38f69cb2b3cd98ff28dc6e1",
+        "first_printed_stanza": {
+          "vri": "108",
+          "source_blocks": [
+            4191,
+            4194
+          ],
+          "body_sha256": "5be595311b93c303795abda9d1ba41bc704b2bc2f33c3b3fab2cde4154871076"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "fcfa8607c8850ba17252f0b97bd500445e17827b65786c036f99a81e91d71f0d"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap538",
+        "tha-ap539"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 4537,
+      "source_heading_coordinate_to_review": 4533,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "221",
+      "current_first_printed_vri": "222",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "c855883b4bb08f89fbd70d1862c6fab9f9099c9c63cfda9084fa8a6cdf9793c8",
+        "first_printed_stanza": {
+          "vri": "221",
+          "source_blocks": [
+            4534,
+            4537
+          ],
+          "body_sha256": "5be595311b93c303795abda9d1ba41bc704b2bc2f33c3b3fab2cde4154871076"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "876207a48e68d296cd80453bc51af502ab06f86ef5854fa37773b8a253c2f418"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap539",
+        "tha-ap540"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 4628,
+      "source_heading_coordinate_to_review": 4624,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "251",
+      "current_first_printed_vri": "252",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "a6d1a74cdf70f920ca2b40c88b8113420b94a95d5ee27563cd26136af5ba4d8c",
+        "first_printed_stanza": {
+          "vri": "251",
+          "source_blocks": [
+            4625,
+            4628
+          ],
+          "body_sha256": "5be595311b93c303795abda9d1ba41bc704b2bc2f33c3b3fab2cde4154871076"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "252bf45bbc1b03fcff50a86f1d23028dd722fcbe03d3f056cae123a7757cb3cd"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap540",
+        "tha-ap541"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 4764,
+      "source_heading_coordinate_to_review": 4760,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "296",
+      "current_first_printed_vri": "297",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "8c601135a8f2b172014781cd5e08637a958abbf1d8aaf76377f61270262123e0",
+        "first_printed_stanza": {
+          "vri": "296",
+          "source_blocks": [
+            4761,
+            4764
+          ],
+          "body_sha256": "5be595311b93c303795abda9d1ba41bc704b2bc2f33c3b3fab2cde4154871076"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "8cfda839c779b25a1d7d9e126200586eb755c2aafba281a16e18d4c9b9f3149d"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap541",
+        "tha-ap542"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 4858,
+      "source_heading_coordinate_to_review": 4854,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "327",
+      "current_first_printed_vri": "328",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "8d24a5217e773160665051e9f6a609805821c80a2ed64e1bee211c5ef9f726a9",
+        "first_printed_stanza": {
+          "vri": "327",
+          "source_blocks": [
+            4855,
+            4858
+          ],
+          "body_sha256": "5be595311b93c303795abda9d1ba41bc704b2bc2f33c3b3fab2cde4154871076"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "60c3c08830485372f40334627cdc955df7d7e8563548439730e8f956f3bd0581"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap546",
+        "tha-ap547"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 5409,
+      "source_heading_coordinate_to_review": 5405,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "143",
+      "current_first_printed_vri": "144",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "c1416a0d848cba7db1d847ffe379d006322e781ce38bca78156bff56d5cedc6d",
+        "first_printed_stanza": {
+          "vri": "143",
+          "source_blocks": [
+            5406,
+            5409
+          ],
+          "body_sha256": "26c63ad8cabcf97530a717571c646b411e15c3a2763b72c7701a3888a0704f17"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "89d149821335a2aedfd33ebeae7cff9f54a4ee606fbb545de92e39a12cd494be"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap550",
+        "tha-ap551"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 5737,
+      "source_heading_coordinate_to_review": 5733,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "251",
+      "current_first_printed_vri": "252",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "c3afbeb78c5ea826aeba906b3fa756172729ecc26a321dcc87ac14e9c6f0e2d6",
+        "first_printed_stanza": {
+          "vri": "251",
+          "source_blocks": [
+            5734,
+            5737
+          ],
+          "body_sha256": "cbe2e9ba8d09f781fb9c45705d73f109ae2a24208e93345bc6e3ceb94dfc96a1"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "41a70453424a3bc78ada31e1259d14ea98206ac6ea80bfb3e6d7e0e99b294dc6"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap551",
+        "tha-ap552"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 5801,
+      "source_heading_coordinate_to_review": 5797,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "272",
+      "current_first_printed_vri": "273",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "15a13a3157ee8f49534671d9ed79291d8e9294da64ff551929129d7f8f164379",
+        "first_printed_stanza": {
+          "vri": "272",
+          "source_blocks": [
+            5798,
+            5801
+          ],
+          "body_sha256": "cbe2e9ba8d09f781fb9c45705d73f109ae2a24208e93345bc6e3ceb94dfc96a1"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "d5b80aec74ff5ac062567a45afb4d14f343f6d5fb7bfa9e9da6c70db1b0039d6"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap556",
+        "tha-ap557"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 6077,
+      "source_heading_coordinate_to_review": 6073,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "49",
+      "current_first_printed_vri": "50",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "52b476a785b1dac1c64e41b42d2088700a89c749f08ef01f367ec98bc14b42db",
+        "first_printed_stanza": {
+          "vri": "49",
+          "source_blocks": [
+            6074,
+            6077
+          ],
+          "body_sha256": "90c5bf1997f96560f05b6a1414e29cbf30438198a6b3ea867081bd5465c810b3"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "83adb498ef0f74911cee966af32a754853936f4208740b4ebc9a36536443f7be"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap558",
+        "tha-ap559"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 6213,
+      "source_heading_coordinate_to_review": 6209,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "93",
+      "current_first_printed_vri": "94",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "b8bec5cc682a28ae91c992ddbc7a31a721fc00a675e5c8c4c4d823aedbf3167d",
+        "first_printed_stanza": {
+          "vri": "93",
+          "source_blocks": [
+            6210,
+            6213
+          ],
+          "body_sha256": "1cc214b85254cdcb6ccefa0bad51c7153b06f2ef5446d39dd5fde9a9a17e67d5"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "9bf33678c76f48fb02b73f4508c08944c27bc3850d47536fa771a323bfb4c415"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap559",
+        "tha-ap560"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 6229,
+      "source_heading_coordinate_to_review": 6225,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "98",
+      "current_first_printed_vri": "99",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "b632df9dbdee7cb5a90f76104a12a58c70ef7d5555732362d3cbc99c20ac27d8",
+        "first_printed_stanza": {
+          "vri": "98",
+          "source_blocks": [
+            6226,
+            6229
+          ],
+          "body_sha256": "034d55eb3abcb3f59d67d857e424dee08d555001c2c71cdb9546e0ee085ca6f4"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "e94a467dc36ba5fe2e96d4a559c4be4a62a02dfa9a992edc8a8217622df43552"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap561",
+        "tha-ap562"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 6303,
+      "source_heading_coordinate_to_review": 6299,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "122",
+      "current_first_printed_vri": "123",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "7de2093fc62b5be02b3603ac63b55a0b74cc0df389d1796e43a49939d0045900",
+        "first_printed_stanza": {
+          "vri": "122",
+          "source_blocks": [
+            6300,
+            6303
+          ],
+          "body_sha256": "6e3028b5b5371f55ecf6cf29b4cc6338bbc57db5055bf9470feae50f9e5f9a44"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "12b456444f9918bad9dbd867768e889defed49385660d6467af7d26bfbc31897"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    },
+    {
+      "ids": [
+        "tha-ap562",
+        "tha-ap563"
+      ],
+      "status": "STRUCTURAL_SCREEN_ONLY_REQUIRES_INDEPENDENT_SOURCE_REVIEW",
+      "current_cut": 6475,
+      "source_heading_coordinate_to_review": 6471,
+      "delta_source_blocks": 4,
+      "first_printed_vri": "179",
+      "current_first_printed_vri": "180",
+      "source_evidence": {
+        "strong_four_block_signature": false,
+        "signature_checks": {
+          "neighbor_end_equals_current_start": true,
+          "heading_owned_by_immediate_left": true,
+          "four_blocks_before_current_start": true,
+          "prefix_exact_subhead_hangnum_gatha1_gathalast": true,
+          "previous_speaker_and_closing_colophon_kinds": true,
+          "previous_speaker_formula": false,
+          "previous_closing_colophon_apadana": true,
+          "first_marker_empty_and_numbered": true,
+          "current_start_is_next_hangnum": true,
+          "consecutive_first_two_printed_stanzas": true
+        },
+        "source_prefix_sha256": "22ee1f64a01b4bd55f1f10eb6a57049e784542e4a7cf7360c962b11a427ff216",
+        "first_printed_stanza": {
+          "vri": "179",
+          "source_blocks": [
+            6472,
+            6475
+          ],
+          "body_sha256": "e84ce02b315e00b266a759436f942c260436a2833b166267bf09f3f80ac1bc64"
+        },
+        "preceding_speaker_sha256": "17317749990b6afc128449cf27274421d690157d13874e8b32f73c1aca81af78",
+        "preceding_colophon_sha256": "eee8401939325fec0e5f2c390503f8ccdd8b1b39acdbaee1e2beb5cc6b82269a"
+      },
+      "no_English_identity_or_number_offset_inferred": true,
+      "no_repair_or_namespace_approval": true
+    }
+  ],
+  "connected_candidate_clusters": [
+    [
+      "tha-ap423",
+      "tha-ap424"
+    ],
+    [
+      "tha-ap426",
+      "tha-ap427"
+    ],
+    [
+      "tha-ap428",
+      "tha-ap429"
+    ],
+    [
+      "tha-ap462",
+      "tha-ap463"
+    ],
+    [
+      "tha-ap467",
+      "tha-ap468"
+    ],
+    [
+      "tha-ap484",
+      "tha-ap485"
+    ],
+    [
+      "tha-ap494",
+      "tha-ap495"
+    ],
+    [
+      "tha-ap500",
+      "tha-ap501"
+    ],
+    [
+      "tha-ap504",
+      "tha-ap505"
+    ],
+    [
+      "tha-ap508",
+      "tha-ap509",
+      "tha-ap510",
+      "tha-ap511"
+    ],
+    [
+      "tha-ap521",
+      "tha-ap522"
+    ],
+    [
+      "tha-ap531",
+      "tha-ap532"
+    ],
+    [
+      "tha-ap535",
+      "tha-ap536"
+    ],
+    [
+      "tha-ap538",
+      "tha-ap539",
+      "tha-ap540",
+      "tha-ap541",
+      "tha-ap542"
+    ],
+    [
+      "tha-ap546",
+      "tha-ap547"
+    ],
+    [
+      "tha-ap550",
+      "tha-ap551",
+      "tha-ap552"
+    ],
+    [
+      "tha-ap556",
+      "tha-ap557"
+    ],
+    [
+      "tha-ap558",
+      "tha-ap559",
+      "tha-ap560"
+    ],
+    [
+      "tha-ap561",
+      "tha-ap562",
+      "tha-ap563"
+    ]
+  ],
+  "not_repair_approval": true
+}

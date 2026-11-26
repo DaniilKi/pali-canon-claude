@@ -1,0 +1,60 @@
+{
+  "status": "FAILED_HARNESS_JSON_OBJECT_KEY_ORDER_ASSUMPTION",
+  "failure": "Import normalizes allowed bookmark key order; strict JSON.stringify equality expected fixture insertion order. Endpoint values/array order remain under exact assertions; no product conclusion from timeout.",
+  "application_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "failure_report_sha256": "bb7d2df21239e5cc006336827cc31444a7b5f4c6f07719eb3159d7744ab97b58",
+  "completed_families": [
+    {
+      "family": "Installed MCP reads all six units; old positions refuse and source-book controls stay stable",
+      "units": 6,
+      "old_positions_checked": 89,
+      "same_numeric_source_positions_also_refused": 45,
+      "new_segments": 89,
+      "sourcebook_pages": 9
+    },
+    {
+      "check": "initial six-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "MCP Apps",
+      "width": 390,
+      "sources": 6,
+      "independent_source_segments": 89,
+      "stale_cases": 12,
+      "network_requests": 0
+    },
+    {
+      "check": "initial six-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "Apps SDK",
+      "width": 390,
+      "sources": 6,
+      "independent_source_segments": 89,
+      "stale_cases": 12,
+      "network_requests": 0
+    },
+    {
+      "check": "initial six-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "MCP Apps",
+      "width": 1280,
+      "sources": 6,
+      "independent_source_segments": 89,
+      "stale_cases": 12,
+      "network_requests": 0
+    },
+    {
+      "check": "initial six-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "Apps SDK",
+      "width": 1280,
+      "sources": 6,
+      "independent_source_segments": 89,
+      "stale_cases": 12,
+      "network_requests": 0
+    }
+  ],
+  "ledger_sha256": "7c38619d5876b2aa189f805153e4c178b7a64f81a66ad1d341b05e505e8aca54",
+  "actual_upstream_requests": 0,
+  "owned_cleanup": {
+    "owned_process_group": 96048,
+    "leader_reaped": true,
+    "group_absent": true
+  },
+  "next_action": "Source-backed object-key-order-only wait fix, independent review, new final V4 contract and one new run; preserve V3."
+}

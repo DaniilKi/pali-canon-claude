@@ -1,0 +1,119 @@
+{
+  "schema": "unexecuted-source-first-six-boundary-installed-reader-proposal-v4",
+  "status": "FROZEN_V4_PENDING_INDEPENDENT_REVIEW_AND_REBINDING",
+  "ids": [
+    "tha-ap340",
+    "tha-ap341",
+    "tha-ap343",
+    "tha-ap344",
+    "tha-ap346",
+    "tha-ap347"
+  ],
+  "old_positions": 89,
+  "future_positions": 89,
+  "English_choices_retained": 343,
+  "new_English_activated": 0,
+  "exact_executable_files": [
+    "check-boundary-reader.py",
+    "offline-pali-guard.cjs",
+    "run-bounded.py"
+  ],
+  "actual_execution": false,
+  "static_python_AST_parse_files": 1,
+  "input_seals": {
+    "/tmp/pali-boundaries333-evidence-nov26/reader-acceptance/proposal-v3/MANIFEST.json": "e80abe6b52ae6a4025f3916bb1f9dc341942acbbdacccaf86d4bac3ff2163455",
+    "/tmp/pali-boundaries333-evidence-nov26/reader-acceptance/proposal-v3/check-boundary-reader.py": "c36090975ca9908c46b1c8801dcdfd4703aa28f0496b337f0c3890322bcb50ab",
+    "/tmp/pali-boundaries333-evidence-nov26/reader-acceptance/proposal-v3/offline-pali-guard.cjs": "6f5b1415dd1838c06a0125fcc9639d2a142c8dc73306724077b49322a41067ad",
+    "/tmp/pali-four-english-evidence-nov26/browser-proposals/proposal-v4/MANIFEST.json": "7568fd031d7deba9c3aff67895b979728da6b44f198c6b508cdc50f83c33980e",
+    "/tmp/pali-four-english-evidence-nov26/browser-proposals/proposal-v4/check-four-english.py": "1b39640b2a06c32c69a7b76cbf91d555ed80cb7a73a2f345c5a5516ba1bd7a6f",
+    "/tmp/pali-boundaries340-nov26/AGENTS.md": "54ca1238aea30037157401b9e3ae078c152f062be95c6cfc292ec8c86567ffa4",
+    "/tmp/pali-boundaries340-evidence-nov26/source-oracles/PRESEALED_SOURCE_ORACLES.json": "8b599611727cf8ce08a72cf9857808648b0642774e7da3cb52b51ea9c8691042",
+    "/tmp/pali-boundaries340-evidence-nov26/source-oracles/READER_ORACLES.json": "69e6f7c66480e5b40ddc554ab863d5fb8ac0341b8c7f280ebd9f64bbd4a84516",
+    "/tmp/pali-boundaries340-evidence-nov26/source-oracles/ALL89_CROSSWALK.json": "44a8271cab60fd3fdc5e11580252f6e4ab518a39b3c76924c01a56416e232834",
+    "/tmp/pali-boundaries340-evidence-nov26/source-oracles/POSITIONAL_POLICY_ORACLES.json": "3611e202e54b1470342e7755680adf72b0c7e6c7288fed0487990c2ab1e09571",
+    "/tmp/pali-boundaries340-evidence-nov26/independent-source-oracle/PRESEALED_ORACLE.json": "2e6587d424533af6d548d50eccea205e320fc807d00a64097d4791c1c10098e5",
+    "/tmp/pali-four-english-evidence-nov26/next-boundary-independent-review/SOURCE_BOUNDARY_REVIEW.json": "5f91dfe0a7c29fadf58f9d71f5a24f22e9c18dc3bd7a9eb2767f4beb3092f05a",
+    "/tmp/pali-four-english-evidence-nov26/next-boundary-independent-review/OLD_CITATION_CROSSWALK.json": "a60394f1f4aa978a0f6ffade5465e8b0e1cfea8e9a9ad6049ec214a3f3f1c621",
+    "/tmp/pali-boundaries340-evidence-nov26/browser-proposals/PLAN.md": "4647b9dda660c2a6d5541b1361617b183c0a64e1cb051ee3befebb2cd6190899"
+  },
+  "files": {
+    "ADAPTATION_RECEIPT.json": {
+      "bytes": 1905,
+      "sha256": "03d288a424a8566d487b143dd2d07b43e648216fa44e806c0a539aba179f0907"
+    },
+    "API_ASSUMPTION_AUDIT.md": {
+      "bytes": 4861,
+      "sha256": "0f1d308a0721793c091bff8b809f84bae8c1f3d3dbf2b9c46afc3d7f0dc6c4e7"
+    },
+    "CASE_INVENTORY.json": {
+      "bytes": 1814,
+      "sha256": "19feba82fd8c5508d65eb53eeda99bb67ba45257b199a56e3abfc6c8acc94a20"
+    },
+    "CONTRACT_DRAFT.json": {
+      "bytes": 4664,
+      "sha256": "3478530e1076bb7849f68a6a46ee921d0dac09e11f1f9dd2293b08da467061f7"
+    },
+    "EXACT_ADAPTATION.patch": {
+      "bytes": 57776,
+      "sha256": "a2d9055f6126bbe3e25f0c389d4a7fc43402ebb20268efb2efa41a41fddd3305"
+    },
+    "IMPORT_READINESS_AUDIT.md": {
+      "bytes": 2757,
+      "sha256": "a2656a53ee19182a75fca68cb04b08c874733fdcdd78bd3adbf4f9aa158ad796"
+    },
+    "PARENT_V1_MANIFEST.json": {
+      "bytes": 3929,
+      "sha256": "0696f25fce965f0ae4a4074231a52e5341eec22186b120a85c79943cc38db33f"
+    },
+    "PARENT_V2_MANIFEST.json": {
+      "bytes": 4616,
+      "sha256": "ea1d07afd88899d28c0ea4ba11cbc05c0c01649805b7b9334a77aee6304065b5"
+    },
+    "PARENT_V3_MANIFEST.json": {
+      "bytes": 5049,
+      "sha256": "db8b0ec9fa2c6d6d32286c7cfc4467cc08ca3eb88df9a317629ed7727671ec7a"
+    },
+    "README.md": {
+      "bytes": 10363,
+      "sha256": "ae52cc974452072d5b08d08c8a8473f3747ca64ce8b4585039e6d74e65d4c1e7"
+    },
+    "V2_CORRECTION_RECEIPT.json": {
+      "bytes": 3277,
+      "sha256": "726a0e799504673e9bf53c1d35cc2f88de622d0ba05926dd5030d25b063b4506"
+    },
+    "V2_EXACT_DELTA.patch": {
+      "bytes": 1759,
+      "sha256": "291cd49720baf52bc4742cb3c4c701b46bc5cdde9273498b573b8e7241f5f64f"
+    },
+    "V3_CORRECTION_RECEIPT.json": {
+      "bytes": 2152,
+      "sha256": "0a5daf63f6a3d71bbfb3535b9bad7fb839021703ba72082bdc656500b48edd22"
+    },
+    "V3_EXACT_DELTA.patch": {
+      "bytes": 2464,
+      "sha256": "73058dcca86b8db950769efe776301752db68bc68cc6953c24832920c92b006a"
+    },
+    "V4_CORRECTION_RECEIPT.json": {
+      "bytes": 2654,
+      "sha256": "aadda0dd516acc9fdca7bbf471f5aab6c1e881fe20eabe7fc59c2ff2484870d4"
+    },
+    "V4_EXACT_DELTA.patch": {
+      "bytes": 3964,
+      "sha256": "f369306920c8b38ea2c755137712a9136b20d5faae3d30338293aa1a925a633f"
+    },
+    "check-boundary-reader.py": {
+      "bytes": 44893,
+      "sha256": "901c9ae71694d43a9ffb6776e3616eeeae8a716dc49c8d37a594af1dce84b49c"
+    },
+    "offline-pali-guard.cjs": {
+      "bytes": 4942,
+      "sha256": "6f5b1415dd1838c06a0125fcc9639d2a142c8dc73306724077b49322a41067ad"
+    },
+    "run-bounded.py": {
+      "bytes": 2213,
+      "sha256": "9e5b56f4adadf1c689adc848dbe70cc5e4a57f4cc42560eaa684fc05fe01ddf5"
+    }
+  },
+  "revision": 4,
+  "parent_manifest_sha256": "db8b0ec9fa2c6d6d32286c7cfc4467cc08ca3eb88df9a317629ed7727671ec7a"
+}

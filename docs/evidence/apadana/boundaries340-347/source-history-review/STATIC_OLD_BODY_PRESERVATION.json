@@ -1,0 +1,162 @@
+{
+  "review": "Static syntax/source comparison only; not executed implementation",
+  "proofs": [
+    {
+      "file": "scripts/web_reader_four_boundary_history.py",
+      "function": "regular",
+      "old_body_AST_unchanged_after_declaration_rename": true
+    },
+    {
+      "file": "scripts/web_reader_four_boundary_history.py",
+      "function": "canon_before_four",
+      "old_body_AST_unchanged_after_declaration_rename": true
+    },
+    {
+      "file": "scripts/web_reader_four_boundary_history.py",
+      "function": "historical_canon_bytes",
+      "old_body_AST_unchanged_after_declaration_rename": true
+    },
+    {
+      "file": "scripts/web_reader_four_boundary_history.py",
+      "function": "copy_historical_fixture",
+      "old_body_AST_unchanged_after_declaration_rename": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "sealed",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved303_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved308_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved310_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved317_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved325_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "assert_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "assert_profiles",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_2449_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_303_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_308_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_310_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_317_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_325_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_canonical325_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "assert_runtime_records",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "assert_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved333_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed333_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed339_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed339_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_four_catalogue",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_four_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved343_runtime",
+      "full_AST_unchanged": true
+    },
+    {
+      "file": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved343_catalogue",
+      "exactly_one_input_reader_expression_inverse_restores_entire_old_AST": true
+    },
+    {
+      "file": "tests/helpers/canon-before-four.mjs",
+      "whole_C1_file_restored_after_exact_declared_input_wrappers": true
+    },
+    {
+      "file": "tests/helpers/intake343-source-input.mjs",
+      "whole_C1_file_restored_after_exact_declared_input_wrappers": true
+    }
+  ],
+  "old_expected_SHA_or_source_map_values_changed": false,
+  "new_intake_or_counter_changes": false,
+  "python_parse_only": true,
+  "app_tests_build_executed": false
+}

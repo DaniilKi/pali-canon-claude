@@ -1,0 +1,10 @@
+{
+  "schema": "additive-sourcebook-full-replay-seal-v1",
+  "status": "GO_FULL6018_SOURCE_METADATA_ONLY",
+  "files": {
+    "verify_whole_book_metadata.py": "29668109b5ee37f0650272b96b185c6c08f7c5f13533e6172d7d1f71e92a1710",
+    "SOURCEBOOK_FULL_REPLAY.json": "0eb04d16460a8d539be728775c03ab93f9121d99e7658f18bb92d531f887f286"
+  },
+  "prior_comparison_seal_unchanged_sha256": "c25f88e0f0b64315e8f66e40da437727f71da9125d621115ce3338bb190665b3",
+  "source_expectations_only": true
+}

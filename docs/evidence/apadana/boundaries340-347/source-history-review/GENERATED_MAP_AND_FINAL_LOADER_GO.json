@@ -1,0 +1,440 @@
+{
+  "schema": "independent-every-row-six-source-inverse-and-two-literal-loader-review-v1",
+  "status": "GO_EXACT_SOURCE_INVERSE_MAP_AND_FINAL_TWO_LITERAL_LOADER_BINDING",
+  "base_commit": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "map": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/generated-source-inverse-v1/SIX_BOUNDARY_SOURCE_INVERSES.json",
+    "bytes": 90076,
+    "sha256": "7440a63fed4f5317279bd671aeaf9354c8e9bb71e5ab6057c881c80e8e415a82",
+    "rows": 36,
+    "hunks": 60,
+    "ordered_paths_exactly_match_final_plan": true,
+    "rows_replayed": [
+      {
+        "path": ".github/workflows/check.yml",
+        "hunks": 2,
+        "current_sha256": "91874910d8169c41f0e15000a22ed416d29c4ca3ad2779623c2864e909f9b587",
+        "C1_sha256": "468738198fef11555154be77ecf7c2e36a286c4019586e70dadc7155bf0a4160",
+        "C1_git_blob_sha1": "af92250d60d09fbdd7fb4dddf4c4de3e73dfdc8f",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "scripts/canon/build_canon.py",
+        "hunks": 2,
+        "current_sha256": "ab07b1a0d30f2c8608068c0563ec44fa85be58016034cfca64b567678a6afde2",
+        "C1_sha256": "18f0e3446b0f186449300a61f51b0c1534d044cb35264b5af644f044e59d3ceb",
+        "C1_git_blob_sha1": "d29b00cdc89e941f648f84bd92214a6b08ed3f1b",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "scripts/web_reader_approved_acceptance.py",
+        "hunks": 3,
+        "current_sha256": "f7dea47b7fd4019c1750f8402341a196c0deee73bc56a70bc1541e7e64039c2d",
+        "C1_sha256": "26fc2315af9b3bc37c4b8aaa0647897cb81561f3b79f894874a32c311800c2c7",
+        "C1_git_blob_sha1": "09404a7745237a71882542d571e3355f59069b81",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "scripts/web_reader_four_boundary_history.py",
+        "hunks": 6,
+        "current_sha256": "ba229d1dec554841af7d732cffa70b2087dde09f49fb4391e7cb289f8f57435e",
+        "C1_sha256": "0588afde3d8d38858b2a67a09dcd7600f09d2baced27ebe3a9c6085ce9546a87",
+        "C1_git_blob_sha1": "d7de6bf31d4d7efa6aeb000bbc45b48f5ff67047",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "src/analyse.mjs",
+        "hunks": 1,
+        "current_sha256": "5263431a352c2e6ef8120fc1183f134ce02083ccff6c14323ae4ad505027309e",
+        "C1_sha256": "bb0334f6e038813afc319b34220439cad2c21cf008f4a9b40fd1546fde39f861",
+        "C1_git_blob_sha1": "1387f5148f3e36de59c790ecb4281cb4961def5f",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "src/chatgpt-widget.mjs",
+        "hunks": 4,
+        "current_sha256": "c205b72c355e1ad064e886cd85f79c48c2f3af21ec478beb8ae8f440ab50b55b",
+        "C1_sha256": "c36422b6aab199fdf27909c3f190c01c34e65f3ba1bf97e1e0ac837ecea579ee",
+        "C1_git_blob_sha1": "d42cf62116f3f18853db66d6c4835efcf1c3df38",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "src/locator-policy.mjs",
+        "hunks": 1,
+        "current_sha256": "fe987a89d4c540bc5b1f78706869dbff9823cac5b8a78d5104dca56695cba149",
+        "C1_sha256": "c0ec6c2aada146c86efb38c6a82e3110bae9b92edf6ceabc9bd9dd30ca16f6fe",
+        "C1_git_blob_sha1": "fefb61bb6ff926bc798395e72f5c50a67db00afc",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "src/server.mjs",
+        "hunks": 1,
+        "current_sha256": "217e53a17b314b368b2a0ebe75007d066d5e8222a79644df7644ada3c4b6f526",
+        "C1_sha256": "9714eef39185e993922577e296f5424af53d40b11beff295b653b17c7f42e150",
+        "C1_git_blob_sha1": "2bc517e1b55d8609beb13edd5ddcaf8c6be51fb8",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/apadana-disclosures.test.mjs",
+        "hunks": 1,
+        "current_sha256": "26f8090564aa436e9475f7054df43d6b72d4bb9b919836dc3dc2ebe4796828ab",
+        "C1_sha256": "e9cce61e66dd0d13eb59aea92a3b315973116ab365f260b3cc09cf44acef24ef",
+        "C1_git_blob_sha1": "3936d5fa473979a30bc631779767d4de2700ee1d",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/apadana-fourth-client.test.mjs",
+        "hunks": 2,
+        "current_sha256": "4c217719991afd06a7e3825695483d5065b484d3fc1fbc344d16b12ff10d6375",
+        "C1_sha256": "71a09536ad257b315a00e4521cccb4fe97d8e078bd7fc0a4c1bf4a906c34242e",
+        "C1_git_blob_sha1": "fc5aae619c73fcc6adfa78e7b1f81b0b18ef0f88",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/apadana-fourth.test.mjs",
+        "hunks": 1,
+        "current_sha256": "c557e9ec4b374acf6c649316fe5cf37c62127b4ad9faa008753e6d4e5c16a2ef",
+        "C1_sha256": "8d1465cddf7d2af8d57176432fff42f54f5bfb21294b4aa70f7adcda1bd31765",
+        "C1_git_blob_sha1": "31531c5ceb1adaca0b823c492e2e03f329882aac",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/apadana-next.test.mjs",
+        "hunks": 1,
+        "current_sha256": "07b50abad3064a2d25c93649a41000b1cf5939f86ad7860562bce2d5c03f6782",
+        "C1_sha256": "463880f8849a554042f2fef195b280066b1fd13dfdd94e1167ed473c3360aca6",
+        "C1_git_blob_sha1": "40a35e46d5bb325ae8845f30bd33c5bf42389572",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/apadana-thera.test.mjs",
+        "hunks": 1,
+        "current_sha256": "17b5d3c718c419cffbab625e0a404357dafc4a9671f81e6931e651db693fc5bd",
+        "C1_sha256": "e87746d4ee6a902740aeed4060294e724a0c732ff773bce983b643db1603917a",
+        "C1_git_blob_sha1": "4deaf564f498a834ca1677e893e7ce7a354646c1",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/apadana-third.test.mjs",
+        "hunks": 1,
+        "current_sha256": "05c68f75897240b227f21307c5712c30712614f72afd1e3e6aae174442e4fde5",
+        "C1_sha256": "f22d871384f3a3bc91b2c487857b996236a963261b31f89dce02e15c48a28125",
+        "C1_git_blob_sha1": "b91d9b30a879b75d3584652bcf866d4fe5ece700",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/apadana_four_boundary_acceptance.py",
+        "hunks": 2,
+        "current_sha256": "5b61afe2d8294b6cf3051c358aad018a40f81f1f667be16799d6a4c46f675760",
+        "C1_sha256": "ac432a793d7242a225c84915f0a1c571772c218021ca10dc7be33059855c6354",
+        "C1_git_blob_sha1": "0897aba537b3781082e44f6ca0da067311477a56",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/approved_acceptance.py",
+        "hunks": 4,
+        "current_sha256": "6730178f0d41ccdcca74ef543b2a6186df509b387b964c0dc9764c150e9b0875",
+        "C1_sha256": "e883431b3a92a5e186eae17890429127fe4319dee179fbb9221433582f78ae3d",
+        "C1_git_blob_sha1": "263593159e6b11e0c81efa083f8aeb7071db8e79",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/current339-source-inverses.test.mjs",
+        "hunks": 1,
+        "current_sha256": "6cc03a61b85cea7fc5a921921f141973c90654bf1b8769375a8ea0b0400c6fdc",
+        "C1_sha256": "acd26c785247c7975fe7f735c059815e1b9f6ac44a69b36f594577d1a1d565c7",
+        "C1_git_blob_sha1": "b51d5890ac10f590eb6b4c07f288ecc661e29a2b",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/current343-bindings.test.mjs",
+        "hunks": 1,
+        "current_sha256": "3bc42296f6e4e5abe573d4ab328ab85f37c051d50dc01abc07703f1b66809363",
+        "C1_sha256": "14f143431b82c46c2796b44955dcea2cf0bb1be0b8d1a9c849f53d14182440f7",
+        "C1_git_blob_sha1": "66e96efcde42962524bbc8e11025d37f9c931e91",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/four-history-data.test.mjs",
+        "hunks": 1,
+        "current_sha256": "234276661885dba30a370f503ec3fdb8ad392cb72b74878556de5b4d5c5dd951",
+        "C1_sha256": "5555f14b2fc3cc304264aa41677e001d2cbba8b7693bfe67057cbfdc8b6670c6",
+        "C1_git_blob_sha1": "b986e4a505e5f6cf2cc4a7bc2d853b24fd0a5c0e",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/held234-client.test.mjs",
+        "hunks": 1,
+        "current_sha256": "5aba4947bbdae8b2abc0ac1835edc87026729c1a863cca987103c859c493c263",
+        "C1_sha256": "ac695ab58a75b6a2a8532c9b66dbfe8491e8412cc32c87089e298f379a20c2cc",
+        "C1_git_blob_sha1": "691d5b7dfa4277fc9845dfddeecce6f86a930a96",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/helpers/canon-before-four.mjs",
+        "hunks": 3,
+        "current_sha256": "456880b0e9263cee421a8983a7de39ddc2e8cd7ff2100539507172d0e722b7a7",
+        "C1_sha256": "0e68a2f48faf94a8fc6c1fbcac614870c9ae3ba1411d4cba14c64e301d7373b2",
+        "C1_git_blob_sha1": "d6cf4118d6ae5c6dda51334316f2965d06a328b1",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/helpers/four-history-data.mjs",
+        "hunks": 3,
+        "current_sha256": "120fd4be794fead0f8326bbb5184feb00ceda976a7362b6b12a13e31dfe0a3c8",
+        "C1_sha256": "f007f1f2c240b4e82a17182e0ab95136620cfd441af36545e23e848c7a82834b",
+        "C1_git_blob_sha1": "debe2128d5d25cb94c6d7a98f20157c29e5c5908",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/helpers/intake343-ci-baseline.mjs",
+        "hunks": 3,
+        "current_sha256": "bdbd6195836d2774d93a3ff75483dc849261087c66d6776d2872be91ad29d1a1",
+        "C1_sha256": "0d5594365179dbcc803937909b8e66e596ff39b9eaa402c2d62d553090784420",
+        "C1_git_blob_sha1": "3b382e66edf9ec2963802ba05c92a8a8518c0acd",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/helpers/intake343-source-input.mjs",
+        "hunks": 2,
+        "current_sha256": "28e1d1773ce0e108263e096301d7d5517f2c3c54fc120c0446278cca0edb1db3",
+        "C1_sha256": "9170a4c6e7dd83b2bf16a9a828518d308faa32cba68bba9f9456a513c077b9fe",
+        "C1_git_blob_sha1": "3cc7dcb52cb41992aeb77c203fefcd718ae17f93",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/helpers/thera-remaining-client.mjs",
+        "hunks": 1,
+        "current_sha256": "45009afc6e61e4f8c82501737c54f3564386192689d992b8984eba7157bdd305",
+        "C1_sha256": "8d44a70b7781e9644a27e68c4a3facb5b851649eecde9cb1f8c7b167573f7748",
+        "C1_git_blob_sha1": "26bdd883ddd056b7606194d2e5d45a6f3dfe00a2",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/intake343-source-input.test.mjs",
+        "hunks": 1,
+        "current_sha256": "83dce7a5616758fd40ca81e7f6dbb2ee8f24b2a2665e6b4d5c6d829600d2b6de",
+        "C1_sha256": "8fef4ee5ed7f6cb231f17a4627d64fdda1aa6a5c1d8cb3478c9d3e7fcd25a98c",
+        "C1_git_blob_sha1": "45e751b3362d889e93c1f1d8442c3bfa4b6de52e",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/thera-commentary-locators.test.mjs",
+        "hunks": 1,
+        "current_sha256": "c5a4e3ee0f0e7688b8650e973abf467c7f5672cf0ccef820c0d594978f629b35",
+        "C1_sha256": "f65483dd88b32d065bde38ac2edbaa8af74858fda72fcfc7245ff56fcf94fdf2",
+        "C1_git_blob_sha1": "ab44477a7d29d63ee35f0f27f2da000f65662f0a",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/thera141-180-client.test.mjs",
+        "hunks": 1,
+        "current_sha256": "8b378d2bce59b65d3b9b747929cc93baaafa4d87f097a26946d758686a7e9d28",
+        "C1_sha256": "e3d76c966fbe5a469b7f85fe3b3453353e0f4ed374a022f1054d6064bf223918",
+        "C1_git_blob_sha1": "24214a34f2512b506871a41c645bec86ee1cb3a7",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/thera181-220-client.test.mjs",
+        "hunks": 1,
+        "current_sha256": "0077c58a961eccd86a5236e4b76d382309e251cde40555a9d307c89b5822e11d",
+        "C1_sha256": "0d3faf9d27f9312bebf1b13e856f0f1959568959a4adf726cd485140cdce00c7",
+        "C1_git_blob_sha1": "1435d8ca71c0172799c5347586da35010b56d2e6",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/thera221-230-client.test.mjs",
+        "hunks": 1,
+        "current_sha256": "e202244d5bd4fd311f834457f80accabef44cdb8054506a40e667145eb867676",
+        "C1_sha256": "c621a37fcff8a78044b1fa1ab2243a0f1c6fea6d6aaf0e64238527f1178aa0ec",
+        "C1_git_blob_sha1": "03a207ecf212a4e53aa7d9bc1b17dd12f52fa3c8",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/thera241-250-client.test.mjs",
+        "hunks": 1,
+        "current_sha256": "0bc6cbb252e5c182b7b19abb1ff0b722dd514859a354b08f2f7c85d1e1b84baf",
+        "C1_sha256": "75054d5abb83b7511dc68dfbc293eddccb1a7c206a592b4ce42cc646d63f9557",
+        "C1_git_blob_sha1": "a42cf69633cb2712cb7d9a7201a512b57b50eda3",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/thera312-319-client.test.mjs",
+        "hunks": 1,
+        "current_sha256": "3230ef5f2b812effe5c5ad7f3d16bcc8543f68b310ade4c5984ccb7c541f29b7",
+        "C1_sha256": "99a15843e09e9f8fd6548f55752b3f91cf1a7d1d85e2919e5958083afd798946",
+        "C1_git_blob_sha1": "2071dcfed10bff6f762a0adb8e5746f070cbba1f",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/thera321-329-client.test.mjs",
+        "hunks": 1,
+        "current_sha256": "4b3cc7100f364e2386190e5ade68fd23e7743b2e6cc3c0ee72c856f596fa4e14",
+        "C1_sha256": "0414ab07a1a6fc4c54a8c644792d5c053be44043b365f83ebfac5f39bc49de97",
+        "C1_git_blob_sha1": "edd5afd0e93c8b0f05e5d46e9ff83f2322bd7042",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/thera331-334-source.test.mjs",
+        "hunks": 1,
+        "current_sha256": "05aee8096e6847f5fdbccccbaf46846cc3b7829cf5b96887d8f7505adfb624a8",
+        "C1_sha256": "56c68937b843ec58ed23935c342725e5b204ffd4733d1d93ffe529749adc1744",
+        "C1_git_blob_sha1": "f670a3dc8ff6f0981643688bb90b66976ec4a2a2",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "tests/widget-hosted-selections.test.mjs",
+        "hunks": 1,
+        "current_sha256": "54aab0be8ea13ac68e5f06b9b119474a83f35f5d7bbe36b81f3930aaee0ed012",
+        "C1_sha256": "0596dec4027a248a581cb7f608666deeaa8e196285a81c0389e78ae4faf9ff38",
+        "C1_git_blob_sha1": "0a94148efc0598ee1c89971c802c4c35b2c613a2",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      },
+      {
+        "path": "web/reader.js",
+        "hunks": 1,
+        "current_sha256": "d2495dca01a5b5e3e3d794f58c4cea8422a61f8d002ad34fa1c6ee90812ace71",
+        "C1_sha256": "5b50ef8bda17f87e02b211a164debf1c4dc59a66fb233d1b1eaad00915c93d16",
+        "C1_git_blob_sha1": "b8c7509dda6542230b7a8d3985398fe7c9c4d6a2",
+        "whole_original_bytes_restored": true,
+        "every_after_hunk_occurs_once_in_declared_sequence": true
+      }
+    ]
+  },
+  "immutable_C1_originals": {
+    "manifest_sha256": "b7e5999f51bcab0e9232fcaabb909e67aa759767a036fe8a0b8a6c5e81f7cf18",
+    "all704_rehashed_again_and_SHA1_equal_prior_direct_git_object_proof": true,
+    "prior_direct_Git_object_review_sha256": "bb66197dcc22f1e32451592df96717af3522e7a07a3efb693be8f5e1653b5693",
+    "whole_C1_original_bytes_restored_for_every36row": true
+  },
+  "declared_path_scope": {
+    "plan_sha256": "43581cb3b3ebf56d0369c79f7a020727a9632aebb69066906204a80d72efc2fc",
+    "existing": 36,
+    "new": 15,
+    "new_non_holder_hashes": 14,
+    "all14new_code_bytes_match_generation_receipt": {
+      "scripts/canon/apadana_thera340_spans.py": {
+        "bytes": 8644,
+        "sha256": "1ffaf4393d7e20d675eaa29494ce5a45c4e5ea55902ef3a18c84639fe8e52f92"
+      },
+      "scripts/canon/repair_apadana_thera340_spans.py": {
+        "bytes": 5567,
+        "sha256": "63399fcdf2e80d629d210be2e0bc4ec502e79bca5ffebe06fb5773851b2388c2"
+      },
+      "scripts/web_reader_six_boundary_history.py": {
+        "bytes": 14629,
+        "sha256": "de6857453c0ab3fe06cc741caf2694f0eaaab7cdd9345ace02fbf7dec8b8601c"
+      },
+      "tests/apadana-six-boundary-migration.test.mjs": {
+        "bytes": 1266,
+        "sha256": "f50a02065a9994a2493f23f61f86fe2b9ac2b4b43f2de952c1d7085ff04f1ba1"
+      },
+      "tests/apadana-six-cached-consumers.test.mjs": {
+        "bytes": 5651,
+        "sha256": "362f071524547f4a7356cfb0762450a1e62da12a1f835b17d2fc8eab4d88d94a"
+      },
+      "tests/apadana-six-locator-consumers.test.mjs": {
+        "bytes": 16650,
+        "sha256": "2a6ddd4d1c4e954bd19c4e0e8799594209810c9bc63cffff8c83ea5dd00d3764"
+      },
+      "tests/apadana_six_boundary_acceptance.py": {
+        "bytes": 24280,
+        "sha256": "52f6897d2bb3e153a5e1d72129db559f779fd144d229d8c14953dd72953fcb56"
+      },
+      "tests/helpers/canon-before-six.mjs": {
+        "bytes": 3656,
+        "sha256": "83d1472a1d05fe40a961e8e00aa5c1df3c895fa4c331ebe42f64657bd0ee85d4"
+      },
+      "tests/helpers/six-history-data.mjs": {
+        "bytes": 8570,
+        "sha256": "4ca6826427cb3d6e112565f64065105882c5a5fe3d42f0dbe031d90f0ee2772d"
+      },
+      "tests/helpers/six-regular-file.mjs": {
+        "bytes": 1081,
+        "sha256": "35ce8fa9db0393a2fee97ba6c37267f2f1000889dad3447dc3da7ceffe8c7875"
+      },
+      "tests/six-boundary-ci.test.mjs": {
+        "bytes": 2905,
+        "sha256": "0e895fee1f58528f8ee22729b60604864a6c4fed3c4c84946c050596e056ce48"
+      },
+      "tests/six-boundary-history.test.mjs": {
+        "bytes": 688,
+        "sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e"
+      },
+      "tests/six-boundary-source-input.test.mjs": {
+        "bytes": 7378,
+        "sha256": "2f3bf8e7a9c51fb341b71130030af0becc29b939fd5f22c790f702068fda9e07"
+      },
+      "tests/six_boundary_history_acceptance.py": {
+        "bytes": 8487,
+        "sha256": "d74777bcf8f6d0ab02a5c51a96fe48a08b03483057511a01f755f6bbf04e0ee2"
+      }
+    },
+    "self_seal_holder": "tests/helpers/six-boundary-source-input.mjs",
+    "no_self_loader_inverse_row_or_receipt_hash": true,
+    "server_runtime_corpus_data_docs_outputs_excluded_from_rows": true
+  },
+  "generation_receipt": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/generated-source-inverse-v1/GENERATION_RECEIPT.json",
+    "sha256": "8ec3977f21946cfa8a74e47cbdb8b1f658ccfcb99340e23535a1a302e347e711",
+    "original_manifest_plan_map_ordered_paths_and_new_files_independently_matched": true
+  },
+  "final_loader": {
+    "proposal_path": "/tmp/pali-boundaries340-evidence-nov26/FINAL_LOADER_PROPOSAL.mjs",
+    "sha256": "0e2d58294fe21c008204549537e4b0d7bcc431ffa6ffc975837b818d3f1e9d31",
+    "current_pending_loader_sha256": "61fcf4dd42f7d4732d7a2baca9a8e05f92aad6cd07c72beff619e61fbc26574e",
+    "exact_changes_only": [
+      "replace single PENDING map SHA literal with7440a63f\u2026",
+      "replace single PENDING ordered path literal with exact36ordered map paths"
+    ],
+    "all_other_code_byte_identical_to_peer_reviewed_current_v2": true,
+    "regular_proof_file_reader_retained": true,
+    "fresh_relevant_proof_reads_retained": true,
+    "deep_frozen_export_and_fresh_maps_retained": true,
+    "strict_current_sha_then_unique_inverse_then_complete_C1_sha_checks_retained": true,
+    "no_app_source_or_packaged_bundle_imports_this_source_projection_helper": true,
+    "production_source_or_packaged_files_checked": 109
+  },
+  "scope": "Source text for historical verification only. No source reader is installed in production source/bundles, no runtime/corpus/tool payload paths are mapped, and no actual app/test code was executed. Explicit historical canonical fixtures remain a separate reviewed authority layer, not this map.",
+  "pending": [
+    "Root must copy exactly this approved map and loader then run bounded source/history/current-data controls.",
+    "Any source edit after this receipt invalidates its current_sha256 binding and requires a fresh finite map/review rather than weakening a row.",
+    "This is not test, runtime/package behavior, CI, release, dev promotion or deployment approval."
+  ],
+  "actions": "Independent stdlib UTF8/hash/unique-hunk replay and static code checks only. No tests, app import/execution, build, network, Git mutation or tracked writes."
+}

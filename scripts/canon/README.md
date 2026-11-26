@@ -17,6 +17,25 @@ For the embedding experiment, set `PALI_CANON_DATA_DIR` to that directory. Pytho
 
 ## Rebuild from pinned sources
 
+### Six reviewed Therā records (340/341, 343/344, 346/347)
+
+The finite `apadana_thera340_spans.py` helper applies only these three reviewed
+pair cuts before verse/page annotation. It verifies all six complete old or new
+records, the full original source book and immediate neighbors; mixed states
+refuse. Use the original `romn/s0510m1.mul.xml` from pinned VRI commit
+`2d134ff9ef60f70a1eb03c9370580228811a3070`:
+
+```sh
+python3 scripts/canon/repair_apadana_thera340_spans.py /tmp/pali-inputs/canon.json.gz /tmp/pali-inputs/commentary.json.gz /tmp/pali-vri /tmp/canon-six-fixed.gz
+```
+
+Inputs and output must differ, and output must be new. The CLI verifies exact
+raw Git blob, full source tuples, commentary ownership and PTS before publishing
+an exact six-record delta. Inspect its receipt, then install the canonical output,
+regenerate parallels, shard/build and run the relevant checks. This adds no
+English and never migrates saved references. See
+[scope and compatibility](../../docs/data/apadana-six-boundaries.md).
+
 ### Reviewed Therī Apadāna4/5 paired boundary
 
 `apadana_spans.py` applies only the reviewed Saṅkamanatthā/Naḷamālikā

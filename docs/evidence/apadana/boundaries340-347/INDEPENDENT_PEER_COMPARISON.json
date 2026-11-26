@@ -1,0 +1,26 @@
+{
+  "schema": "source-producer-post-preseal-independent-peer-comparison-v1",
+  "status": "GO_SOURCE_ONLY_SIX_RECORDS_AND178_SEGMENT_METADATA_COMPARISONS",
+  "producer_preseal_sha256": "8b599611727cf8ce08a72cf9857808648b0642774e7da3cb52b51ea9c8691042",
+  "independent_peer_preseal_sha256": "2e6587d424533af6d548d50eccea205e320fc807d00a64097d4791c1c10098e5",
+  "independent_peer_future_oracle_sha256": "01bc011f958165274ce1a09850dd5cbe4f495a14242c7b96e3fd4ab0e152c397",
+  "records_compared": 6,
+  "old_plus_future_segment_metadata_compared": 178,
+  "exact_fields": [
+    "full6before/after objects",
+    "root hashes",
+    "refs",
+    "types",
+    "source coordinates",
+    "VRI labels",
+    "UTF16 lengths",
+    "text hashes",
+    "complete note hashes/counts/individual hashes",
+    "raw page markers",
+    "normalized public page labels"
+  ],
+  "differences": 0,
+  "future_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "no_SUT_outputs_or_code_execution": true,
+  "activation_runtime_behavior_CI_or_release_approval": false
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "source-first-six-boundary-preseal-v1",
+  "status": "PRESEALED_SOURCE_ORACLES_AWAIT_INDEPENDENT_COMPARISON",
+  "baseline_commit_authorized": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "source_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "source_XML_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "old_canon_logical_sha256": "46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8",
+  "future_canon_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "index_revision": "apadana-thera340-341-343-344-346-347-v1",
+  "namespace_characters": 39,
+  "ids": [
+    "tha-ap340",
+    "tha-ap341",
+    "tha-ap343",
+    "tha-ap344",
+    "tha-ap346",
+    "tha-ap347"
+  ],
+  "files": {
+    "derive_six_oracles.py": {
+      "bytes": 23054,
+      "sha256": "c68ecaeffd7e2e5d328ff57ddc18599b19515c8dc8083b2a1aed4a3d966a159b"
+    },
+    "PROPOSED_SIX_RECORDS.json": {
+      "bytes": 11025,
+      "sha256": "d5fef2d203473e05bf54f6facccc12b2c7b66e6b739232a269650d86247e25dd"
+    },
+    "ALL89_CROSSWALK.json": {
+      "bytes": 248391,
+      "sha256": "44a8271cab60fd3fdc5e11580252f6e4ab518a39b3c76924c01a56416e232834"
+    },
+    "READER_ORACLES.json": {
+      "bytes": 206377,
+      "sha256": "69e6f7c66480e5b40ddc554ab863d5fb8ac0341b8c7f280ebd9f64bbd4a84516"
+    },
+    "PRESERVATION_ORACLES.json": {
+      "bytes": 44517,
+      "sha256": "51f9042cd3054bfdb03299fa2ff4909b85d4cb4b97a75d102a3b2045d8b384b6"
+    },
+    "POSITIONAL_POLICY_ORACLES.json": {
+      "bytes": 69623,
+      "sha256": "3611e202e54b1470342e7755680adf72b0c7e6c7288fed0487990c2ab1e09571"
+    },
+    "NEGATIVE_INTEGRITY_CONTROLS.json": {
+      "bytes": 738,
+      "sha256": "3e905c432f976bab7fa4756b4a7973c5ee4ef4705a2d83cde1aa1c5995c8e01d"
+    },
+    "SYNTHETIC_OLD_POSITION_EXPORT.json": {
+      "bytes": 27429,
+      "sha256": "4a060ad7bf0902271c61d55c76e318bcfbfb6e3a3bf103fac7415ac157cdc421"
+    }
+  },
+  "source_only_not_implementation_runtime_behavior_CI_release_or_personal_data_migration_approval": true
+}

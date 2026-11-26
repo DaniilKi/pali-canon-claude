@@ -1,0 +1,34 @@
+{
+  "schema": "source-first-six-boundary-oracle-negative-controls-v1",
+  "stdlib_only_not_application_tests": true,
+  "controls": [
+    {
+      "control": "one_original_XML_byte_substituted",
+      "rejected": true
+    },
+    {
+      "control": "source_first_stanza_word_changed",
+      "rejected": true
+    },
+    {
+      "control": "source_note_changed",
+      "rejected": true
+    },
+    {
+      "control": "source_edition_page_changed",
+      "rejected": true
+    },
+    {
+      "control": "one_of_six_repairs_missing",
+      "rejected": true
+    },
+    {
+      "control": "one_of_six_locator_namespaces_substituted",
+      "rejected": true
+    },
+    {
+      "control": "unapproved348_349_change",
+      "rejected": true
+    }
+  ]
+}

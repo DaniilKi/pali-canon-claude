@@ -11,6 +11,7 @@ import subprocess
 from pathlib import Path
 from web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records
 
+from web_reader_six_boundary_history import (assert_six_current_canonical_data, historical_c1_data_bytes, six_runtime_records, assert_preserved_c1_catalogue)
 from web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA, read_331_334, APPROVAL343_SHA, IDS343_NEW
 
 CURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'
@@ -647,7 +648,7 @@ def approved343_catalogue(root):
     assert object_sha(previous['source']) == baseline['manifest_source_sha256']
     for name, pin in baseline['data_file_sha256'].items():
         assert name.startswith('server/data/') and '..' not in Path(name).parts and name != 'server/data/apadana.json'
-        assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == pin
+        assert hashlib.sha256(historical_c1_data_bytes(root, name)).hexdigest() == pin
     assert len(baseline['data_file_sha256']) == 26
     profiles, links = dict(previous['profiles']), dict(previous['links'])
     extra = [sealed(directory / current[key]['file'], current[key]['sha256']) for key in ('expected_profiles', 'expected_links')]
@@ -695,9 +696,25 @@ def approved343_runtime(root):
     return files
 
 
-def approved_catalogue(root):
+def historical_c1_approved_catalogue(root):
     return approved343_catalogue(root)
 
 
-def approved_runtime(root):
+def historical_c1_approved_runtime(root):
     return approved343_runtime(root)
+
+
+def approved_six_catalogue(root):
+    assert_six_current_canonical_data(root)
+    previous = approved343_catalogue(root)
+    assert_preserved_c1_catalogue(root, previous)
+    return previous
+
+def approved_six_runtime(root):
+    return six_runtime_records(root, approved343_runtime(root))
+
+def approved_catalogue(root):
+    return approved_six_catalogue(root)
+
+def approved_runtime(root):
+    return approved_six_runtime(root)

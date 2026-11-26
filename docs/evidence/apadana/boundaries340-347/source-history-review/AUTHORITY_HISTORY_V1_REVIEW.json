@@ -1,0 +1,231 @@
+{
+  "schema": "independent-six-authority-history-static-review-v1",
+  "reviewer_role": "/root/candidate317_entry",
+  "status": "HOLD_NARROW_FAIL_CLOSED_AND_ADVERSARIAL_INPUT_FIXES",
+  "reviewed_patch_sha256": "6f716f78031cae36ee29335ad1ba1a93f068926ed1b8024bcc84569c82b03853",
+  "reviewed_inventory_sha256": "dd5b7fa79f1555548d64c4eaa0124b2829c981e5202e1d2a5796a1606f293d1a",
+  "verified_frozen_files": 35,
+  "verified_full_baseline_file_hashes": 28,
+  "independently_replayed_old_body_proofs": [
+    {
+      "path": "scripts/web_reader_four_boundary_history.py",
+      "function": "regular",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_four_boundary_history.py",
+      "function": "canon_before_four",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_four_boundary_history.py",
+      "function": "historical_canon_bytes",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_four_boundary_history.py",
+      "function": "copy_historical_fixture",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "sealed",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved303_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved308_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved310_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved317_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved325_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "assert_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "assert_profiles",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_2449_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_303_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_308_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_310_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_317_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_325_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_canonical325_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "assert_runtime_records",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "assert_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved333_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed333_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed339_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed339_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_four_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "reviewed_four_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved343_runtime",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "function": "approved343_catalogue",
+      "exact_AST_preserved": true
+    },
+    {
+      "path": "tests/helpers/canon-before-four.mjs",
+      "whole_C1_file_inverse": true
+    },
+    {
+      "path": "tests/helpers/intake343-source-input.mjs",
+      "whole_C1_file_inverse": true
+    }
+  ],
+  "preservation_proof_count": 31,
+  "positive_findings": [
+    "Six\u2192C1\u2192oldfour canonical and data-reader composition is acyclic under the named explicit C1 selector.",
+    "Strict future logical inverse rejects C1; separate c1_logical_input intentionally permits exact C1. Pure inverse retains unrelated mutations.",
+    "approved_six_catalogue validates changed current physical data before the complete retained approved343 catalogue chain, then checks all343 profile/link object hashes.",
+    "approved_six_runtime retains the full approved343 runtime chain; no substituted installed runtime records.",
+    "Old approved343 catalogue has only one historical-data-read-expression change; old runtime/catalogue and four-history bodies retain full AST or exact finite wholefile inverses.",
+    "Source normalization transforms only exact future sources to C1; unknown supplied source bytes continue to retained older strict guards. No343 count/curation or old seal is weakened."
+  ],
+  "blocking_findings": [
+    {
+      "id": "JS_MANDATORY_PROOF_SYMLINK",
+      "files": [
+        "tests/helpers/canon-before-six.mjs",
+        "tests/helpers/six-boundary-source-input.mjs"
+      ],
+      "witness": "sixAuthority() and the source-map module read mandatory proof bytes with direct readFileSync and no file/parent symlink refusal. An authentic-byte symlink therefore passes the hash guard.",
+      "required_fix": "Guard proof root/file/parent components before every mandatory proof read; physical authentic-byte symlink controls."
+    },
+    {
+      "id": "SOURCE_MAP_WARM_PROOF_CACHE",
+      "files": [
+        "tests/helpers/six-boundary-source-input.mjs"
+      ],
+      "witness": "The mandatory map raw bytes are captured at import, and strict source functions thereafter use frozen cached objects without rereading the physical proof. Removing or corrupting the file after a positive remains hidden.",
+      "required_fix": "Reread and verify actual regular map proof on strict/current public gates without widening historical accepted bytes; physical warm-positive missing/tampered-map controls."
+    },
+    {
+      "id": "UNCHANGED_DATA_NOT_GATED_BEFORE_HISTORY",
+      "files": [
+        "scripts/web_reader_six_boundary_history.py",
+        "tests/helpers/six-history-data.mjs"
+      ],
+      "witness": "assert_six_current_canonical_data()/assertSixActualData() hash only four changed-history paths, not actual unchanged apadana/source-note/commentary/other data. Their direct historical reads can succeed after such mutations until later old catalogue assertions.",
+      "required_fix": "Validate every actual data record and mandatory C1 metadata proof before substituting any historical bytes; reread on every call and add warm-positive unchanged-data mutation controls. Provision minimal/legacy owned fixtures accordingly."
+    },
+    {
+      "id": "PACKED_READER_INPUT_MASKED",
+      "files": [
+        "tests/helpers/six-history-data.mjs"
+      ],
+      "witness": "c1BundledReader(reader) discards the supplied canonical reader and returns ambient c1PackedCanon(). Supplied corrupted bytes or a throwing reader are hidden by valid physical inputs.",
+      "required_fix": "Consume supplied bytes/errors; project only exact reviewed current packed bytes after physical guard, preserve unknown supplied bytes for old strict rejection. Test corrupt/historical/error reader cases."
+    },
+    {
+      "id": "OWNED_FIXTURE_DESTINATION_SYMLINK",
+      "files": [
+        "scripts/web_reader_six_boundary_history.py"
+      ],
+      "witness": "regular() does not inspect root itself; copy_six_historical_fixture() mkdir/open follows an existing destination-parent symlink, potentially writing outside the owned fixture.",
+      "required_fix": "Check source/destination root and each destination parent before writes; authentic-byte and parent-symlink controls proving no outside file creation."
+    }
+  ],
+  "placeholder_status": {
+    "source_oracle_future_hash": "Explicit INVALID placeholders; source-approved bindings may be filled separately.",
+    "runtime_inventory_review_commit_delta": "INVALID pending independent actual build review, not passed.",
+    "source_map_and_ordered_path_set": "INVALID pending final original-source-map freeze/review; not passed."
+  },
+  "not_executed": [
+    "Python/JS candidate modules",
+    "tests",
+    "builds",
+    "Git",
+    "network",
+    "project edits"
+  ],
+  "next_action": "Author incremental v1\u2192v2 fix; preserve v1 patch/seals/failed-case descriptions, then independent static delta review before root executions."
+}

@@ -1,0 +1,178 @@
+TAP version 13
+# Subtest: separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads
+ok 1 - separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads
+  ---
+  duration_ms: 639.653613
+  type: 'test'
+  ...
+# Subtest: omitted duplicate substituted reordered or unrelated current source edits refuse after each exact positive
+ok 2 - omitted duplicate substituted reordered or unrelated current source edits refuse after each exact positive
+  ---
+  duration_ms: 430.031313
+  type: 'test'
+  ...
+# Subtest: whole proof bytes are immutable even for semantically equal JSON and altered baseline hashes paths or hunks
+ok 3 - whole proof bytes are immutable even for semantically equal JSON and altered baseline hashes paths or hunks
+  ---
+  duration_ms: 17.86209
+  type: 'test'
+  ...
+# Subtest: unlisted data runtime and ordinary strings never undergo source-input projection
+ok 4 - unlisted data runtime and ordinary strings never undergo source-input projection
+  ---
+  duration_ms: 9.261073
+  type: 'test'
+  ...
+# Subtest: explicit file URL source reads retain the same finite frozen440 boundary
+ok 5 - explicit file URL source reads retain the same finite frozen440 boundary
+  ---
+  duration_ms: 149.295249
+  type: 'test'
+  ...
+# Subtest: nested D4 file URL reads normalize declared current source before retained historical assertions
+ok 6 - nested D4 file URL reads normalize declared current source before retained historical assertions
+  ---
+  duration_ms: 5.237243
+  type: 'test'
+  ...
+# Subtest: actual current343 and v42 bindings retain every exact D4 assertion through finite source inputs
+ok 7 - actual current343 and v42 bindings retain every exact D4 assertion through finite source inputs
+  ---
+  duration_ms: 565.052592
+  type: 'test'
+  ...
+# Subtest: four-boundary historical inputs remain strict after cached positive reads
+ok 8 - four-boundary historical inputs remain strict after cached positive reads
+  ---
+  duration_ms: 8671.147897
+  type: 'test'
+  ...
+# Subtest: explicit historical data inputs preserve exact old byte pins while real loading stays current
+ok 9 - explicit historical data inputs preserve exact old byte pins while real loading stays current
+  ---
+  duration_ms: 5262.411206
+  type: 'test'
+  ...
+# Subtest: historical data byte substitutions cannot hide tampered supplied current input after a cached positive
+ok 10 - historical data byte substitutions cannot hide tampered supplied current input after a cached positive
+  ---
+  duration_ms: 1442.565492
+  type: 'test'
+  ...
+# Subtest: unlisted runtime files and metadata retain byte identity and are never projected
+ok 11 - unlisted runtime files and metadata retain byte identity and are never projected
+  ---
+  duration_ms: 6.270672
+  type: 'test'
+  ...
+# Subtest: current343 gate restores the complete ac workflow before all historical CI inverses
+ok 12 - current343 gate restores the complete ac workflow before all historical CI inverses
+  ---
+  duration_ms: 8.093426
+  type: 'test'
+  ...
+# Subtest: required source/client inventory is exactly eight plus five runnable cases
+ok 13 - required source/client inventory is exactly eight plus five runnable cases
+  ---
+  duration_ms: 0.591624
+  type: 'test'
+  ...
+# Subtest: source paths cannot be omitted substituted duplicated reordered or broadened
+ok 14 - source paths cannot be omitted substituted duplicated reordered or broadened
+  ---
+  duration_ms: 15.877826
+  type: 'test'
+  ...
+# Subtest: mandatory13 gate refuses changed suites counts skips guards shell env bounds or report
+ok 15 - mandatory13 gate refuses changed suites counts skips guards shell env bounds or report
+  ---
+  duration_ms: 14.031486
+  type: 'test'
+  ...
+# Subtest: unrelated earlier gate historical object fetch budget or matrix changes fail whole ac identity
+ok 16 - unrelated earlier gate historical object fetch budget or matrix changes fail whole ac identity
+  ---
+  duration_ms: 8.593466
+  type: 'test'
+  ...
+# Subtest: every declared current source restores its complete immutable ac input
+ok 17 - every declared current source restores its complete immutable ac input
+  ---
+  duration_ms: 137.929935
+  type: 'test'
+  ...
+# Subtest: source omissions substitutions duplicates and unrelated mutations cannot project
+ok 18 - source omissions substitutions duplicates and unrelated mutations cannot project
+  ---
+  duration_ms: 180.22167
+  type: 'test'
+  ...
+# Subtest: proof omission reorder substitution hash hunk and byte tampering fail the mandatory seal
+ok 19 - proof omission reorder substitution hash hunk and byte tampering fail the mandatory seal
+  ---
+  duration_ms: 7.68316
+  type: 'test'
+  ...
+# Subtest: string Buffer fileURL and nested historical readers retain exact declared source identities
+ok 20 - string Buffer fileURL and nested historical readers retain exact declared source identities
+  ---
+  duration_ms: 581.429916
+  type: 'test'
+  ...
+# Subtest: exact-current normalization never converts unknown supplied mutations
+ok 21 - exact-current normalization never converts unknown supplied mutations
+  ---
+  duration_ms: 130.502435
+  type: 'test'
+  ...
+# Subtest: unlisted runtime corpus and URLs are not projected
+ok 22 - unlisted runtime corpus and URLs are not projected
+  ---
+  duration_ms: 5.086831
+  type: 'test'
+  ...
+# Subtest: actual six-boundary CI has the exact mandatory23 zero-skip source and consumer cases
+ok 23 - actual six-boundary CI has the exact mandatory23 zero-skip source and consumer cases
+  ---
+  duration_ms: 3.031352
+  type: 'test'
+  ...
+# Subtest: six-boundary gate cannot lose a suite source fixture count bound shell or artifact
+ok 24 - six-boundary gate cannot lose a suite source fixture count bound shell or artifact
+  ---
+  duration_ms: 19.06564
+  type: 'test'
+  ...
+# Subtest: every physical future source restores whole C1 with strict string Buffer and fileURL identity
+ok 25 - every physical future source restores whole C1 with strict string Buffer and fileURL identity
+  ---
+  duration_ms: 275.327156
+  type: 'test'
+  ...
+# Subtest: unknown source mutations remain unknown and proof bytes never allow fallback
+ok 26 - unknown source mutations remain unknown and proof bytes never allow fallback
+  ---
+  duration_ms: 124.39189
+  type: 'test'
+  ...
+# Subtest: all nested source frames retain literal D4 URL behavior and original old hashes
+ok 27 - all nested source frames retain literal D4 URL behavior and original old hashes
+  ---
+  duration_ms: 910.653636
+  type: 'test'
+  ...
+# Subtest: runtime data and unlisted URLs are never source-projected
+ok 28 - runtime data and unlisted URLs are never source-projected
+  ---
+  duration_ms: 3559.30317
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8784.577548

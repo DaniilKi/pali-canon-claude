@@ -1,0 +1,35 @@
+{
+  "schema": "book37-source-only-evidence-closure-v1",
+  "status": "VERIFIED_ORIGINAL_AND_UNAPPROVED_SCREEN_ONLY",
+  "files": {
+    "RAW_FETCH_RECEIPT.json": {
+      "bytes": 1180,
+      "sha256": "014ce43f1f29e4e35bec86b5dfc41072061d1907887dd8f453d5f6aea1bcbf04"
+    },
+    "s0510m2.mul.xml": {
+      "bytes": 1779576,
+      "sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1"
+    },
+    "screen_book37.py": {
+      "bytes": 14804,
+      "sha256": "40c4724e7832c69e6098c9c62028cc77539c9661f34d6649f7f077efa0b1a83e"
+    },
+    "BOOK37_SOURCE_SCREEN.json": {
+      "bytes": 236192,
+      "sha256": "5972c17a6a70c56acf479296878deff5d60b21e1c7f861b2caaeee41080d1328"
+    },
+    "BOOK37_CANDIDATE_QUEUE.json": {
+      "bytes": 46607,
+      "sha256": "ba235c850d2ee7eed8fe2ee0c2e5040f64d335ec24e62bb6aa22072904f7a0e7"
+    },
+    "BOOK37_SCREEN_SEAL.json": {
+      "bytes": 1946,
+      "sha256": "488e97fe063c8f2f6d8338f815ce06d81782875c2332207c0c351018a3880066"
+    },
+    "README.md": {
+      "bytes": 3526,
+      "sha256": "79b90d210490682061fb66b3e2e51611695780e7b38d39842f546406c89ba089"
+    }
+  },
+  "no_repair_approval": true
+}

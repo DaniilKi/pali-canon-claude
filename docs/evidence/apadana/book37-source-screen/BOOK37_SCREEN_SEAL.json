@@ -1,0 +1,44 @@
+{
+  "status": "SCREEN_QUEUE_ONLY_NO_NEW_REPAIR_APPROVAL",
+  "scope": {
+    "all_thera_records_counted": 563,
+    "screened_book": 37,
+    "screened_records": 141,
+    "screened_ids": [
+      "tha-ap423",
+      "tha-ap563"
+    ],
+    "screened_source_coordinates_half_open": [
+      1,
+      6532
+    ],
+    "whole_book_blocks_parity_checked": 10672,
+    "whole_book_numbered_poem_headings": 181,
+    "scoped_numbered_poem_headings": 141,
+    "out_of_scope_poem_headings": 40,
+    "classification_counts": {
+      "OWN_HEADING_INSIDE": 113,
+      "OWN_MATCHING_HEADING_BEFORE_CURRENT_START": 27,
+      "UNMATCHED_OR_AMBIGUOUS_LOCAL_TITLE": 1
+    },
+    "structural_flags": 27,
+    "strong_signature_flags": 0,
+    "connected_candidate_clusters": 19,
+    "lexical_heading_at_start_cases": 1
+  },
+  "report_sha256": "5972c17a6a70c56acf479296878deff5d60b21e1c7f861b2caaeee41080d1328",
+  "queue_sha256": "ba235c850d2ee7eed8fe2ee0c2e5040f64d335ec24e62bb6aa22072904f7a0e7",
+  "script_sha256": "40c4724e7832c69e6098c9c62028cc77539c9661f34d6649f7f077efa0b1a83e",
+  "raw_XML_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "raw_XML_git_blob_sha1": "c2a96aed52fb5de3e7fe66442633e5f045cf5bdf",
+  "baseline_logical_sha256": "46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8",
+  "prior_422_artifacts_preserved": {
+    "ARTIFACT_CLOSURE.json": "56fcef3446c9974bd93b3fe2cd862638857c90a64d16a12b89bc70c9e7fa7086",
+    "CANDIDATE_QUEUE.json": "032df81b9e9f81316227f6de4a5fc068a651c3fa8254689b8e088026ee73351f",
+    "README.md": "9b9e5648efe84ba5478357500e9610b33ab0f14f353c32328513e6da780ac83c",
+    "SCREEN_REPORT.json": "87795d9eb1abfbcf8403b3e3487c6aa5ea13d6ff2d7095ceac279d0ddd364f50",
+    "SCREEN_SEAL.json": "34738dc6c057ce10227dd6649bc3c97148298059c99e02d4bb1c49bb18990ab4",
+    "screen_boundaries.py": "d0825ca811d2833c802c3af0ab94655afc1dfa31246345192cfa048cc9f5faf1"
+  },
+  "no_new_repair_approval": true
+}

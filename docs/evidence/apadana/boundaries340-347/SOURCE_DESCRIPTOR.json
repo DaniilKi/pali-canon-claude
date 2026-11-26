@@ -1,0 +1,46 @@
+{
+  "schema": "complete-source-only-six-boundary-descriptor-v1",
+  "baseline_commit_authorized": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "baseline_commit_blob_comparison_performed": false,
+  "source": {
+    "name": "Chaṭṭha Saṅgāyana Tipiṭaka (VRI)",
+    "repository": "https://github.com/VipassanaTech/tipitaka-xml",
+    "commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "attribution": "Vipassana Research Institute (VRI), Chaṭṭha Saṅgāyana Tipiṭaka, www.tipitaka.org",
+    "terms": "Made freely available by VRI for non-commercial use with attribution."
+  },
+  "XML": {
+    "path": "/tmp/pali-sariputta-release/vri-fixture/romn/s0510m1.mul.xml",
+    "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+    "retained_tuples": 14645,
+    "physical_elements": 14646,
+    "whole_tuple_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+    "all_current_book36_tuples_equal": true,
+    "omitted_note_only_physical_index": 1130
+  },
+  "exact_ids": [
+    "tha-ap340",
+    "tha-ap341",
+    "tha-ap343",
+    "tha-ap344",
+    "tha-ap346",
+    "tha-ap347"
+  ],
+  "old_logical_canon": "46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8",
+  "future_logical_canon": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "index_revision": "apadana-thera340-341-343-344-346-347-v1",
+  "namespace_characters": 39,
+  "effective_locator_characters": 80,
+  "title_changes": "Only the3right-hand titles gain the exact original subhead terminalṃ. No spelling harmonization or English title replacement.",
+  "preservation_oracle_sha256": "51f9042cd3054bfdb03299fa2ff4909b85d4cb4b97a75d102a3b2045d8b384b6",
+  "independent_peer_comparison_sha256": "660119df48893309973a4b22ecb6f44402aa910aadc77e92415ec780f1fc595d",
+  "commentary_root_segments_intersecting_any_moved_prefix": 0,
+  "notes": "588 accepted book36 commentary passages were examined by source-coordinate intervals; none intersects the3moved4-block prefixes. The fullcommentary logical SHA and all16473 associations remain fixed.",
+  "parallel_existing_edges_targeting_these6": 0,
+  "no_rights_or_translation_hold_clearance": true,
+  "no_new_English": true,
+  "348_349_and_book37_not_included": true,
+  "commentary_accepted_book36_passages": 588,
+  "commentary_distinct_accepted_book36_root_segments": 12
+}

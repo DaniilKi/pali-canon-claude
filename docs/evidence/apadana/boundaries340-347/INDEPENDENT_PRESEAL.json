@@ -1,0 +1,40 @@
+{
+  "schema": "independent-six-boundary-original-first-preseal-v1",
+  "status": "PRESEALED_BEFORE_OTHER_PRODUCER_COMPARISON",
+  "files": {
+    "derive_oracle.py": "e005ee345ece2ff4d297569112311941187340b79600d804263972d01495722f",
+    "FUTURE_ORACLE.json": "01bc011f958165274ce1a09850dd5cbe4f495a14242c7b96e3fd4ab0e152c397",
+    "OLD89_FUTURE89_CROSSWALK.json": "d2382896ddb145f3e5e8be84d542006bc898edc7c44bb6ed240425ac08c92353",
+    "ENGLISH343_OBJECT_PRESERVATION.json": "36dfa75ddde430221dedebec64ced469ada126448d66d8e628d9cc7e6506b96f"
+  },
+  "old_canonical_logical_sha256": "46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8",
+  "future_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "exact_targets": [
+    "tha-ap340",
+    "tha-ap341",
+    "tha-ap343",
+    "tha-ap344",
+    "tha-ap346",
+    "tha-ap347"
+  ],
+  "crosswalk_summary": {
+    "old_segments": 89,
+    "future_segments": 89,
+    "exact_source_payload_preserved": 89,
+    "owner_changes": 6,
+    "reference_changes": 44,
+    "same_ref_different_source": 38,
+    "old_refs_no_longer_present": 6,
+    "unchanged_ref_source": 45
+  },
+  "all343_English_objects_preserved": true,
+  "measured_target_commentary_associations": 0,
+  "other_producer_or_runtime_outputs_read": false,
+  "app_Builder_repair_import_or_execution": false,
+  "static_existing_contract_reading_disclosed": [
+    "src/canon.mjs renderer and PTS label contract",
+    "src/editions.mjs label ambiguity contract",
+    "scripts/canon/build_canon.py existing PTS annotation rule inspected statically only; no Builder imported/executed. PTS expectations independently reduced to actual empty-hangnum opening/carry proof."
+  ],
+  "source_or_repair_runtime_activation_release_approval": false
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "independent-static-six-browser-v2-review-v1",
+  "status": "CHANGES_REQUIRED",
+  "proposal_manifest_sha256": "ea1d07afd88899d28c0ea4ba11cbc05c0c01649805b7b9334a77aee6304065b5",
+  "harness_sha256": "02ad9b2b44823ced82f732b82caa27e68ddd60ed30881567bf31dee3fd231c3d",
+  "execution_performed": false,
+  "blocking_findings": [
+    {
+      "id": "CANONICAL_ANALYSE_PAGE_FIELDS_NOT_IN_RESPONSE",
+      "callsite": "check-boundary-reader.py api_cases: segments([analysed[segment]],[verse])",
+      "actual_source": "src/analyse.mjs:330 canonical analysePassage segment has ref,type,optional vri_paragraph,text only.",
+      "oracle_evidence": "First selected current verse tha-ap340/2 has nonempty pts_page_begins and myanmar_page_begins. Five of six selected verses have nonempty source page-marker expectations.",
+      "consequence": "Shared segments() comparator requires these reading-only fields and deterministically fails the legitimate word-analysis positive. This is a harness schema defect, not a demonstrated product failure.",
+      "required_change": "Use a narrow word-analysis comparator asserting exact ref/type/text SHA/VRI paragraph against unchanged oracle. Preserve all full page-marker assertions for get_text, widget and source-book results. Update schema audit; freeze/review V3 before root execution."
+    }
+  ],
+  "approved_v2_delta": "get_metadata exact ID/title/VRI assertion is source-correct and preserves get_text title assertion. Detecting ap: translation_id strengthens no-new-English check.",
+  "delta_and_seals": {
+    "exact_whole_v1_to_v2_delta_is_one_three_line_replacement": true,
+    "full_delta_patch_matches_actual_diff": true,
+    "unchanged_guard_and_launcher": true,
+    "all12_proposal_file_seals": true,
+    "all14_input_seals": true,
+    "source_audit_input_seals": true,
+    "failed_v1_artifact_seals": true,
+    "all712_refusal_checks_and_original_source_expectations_preserved": true
+  },
+  "remaining_schema_audit": {
+    "findings_beyond_blocker": [],
+    "reviewed": "Actual get_metadata via server/canon/Roman localization; get_text variants/canon segment projection; full and continued widget response and page markers; source-book projection; canonical analyse segment+text_source; English translation ID/source display contract; native labels/routes; widget DOM direct source-text extraction.",
+    "prior_static_scope_review_limitation": "The endpoint-specific canonical word-analysis page-marker mismatch was missed by the V1 static scope review. This V2 review supersedes any implied approval of that comparator."
+  },
+  "v1_failure": {
+    "report_status": "failed",
+    "checks_completed": 0,
+    "failure": "KeyError before matrix/browser, get_text lacks vri_paragraphs",
+    "owned_group": 95202,
+    "cleanup_from_preserved_root_report": {
+      "leader_reaped": true,
+      "group_absent": true
+    },
+    "upstream_requests_from_preserved_ledger": 0,
+    "fresh_process_observation_by_this_reviewer": false
+  },
+  "candidate_or_proposal_modified": false,
+  "app_imports_tests_browser_server_build_Git_network": false
+}

@@ -1,4 +1,4 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readActualFileSync} from 'node:fs';import {normalizeC1SourceReader} from './helpers/six-boundary-source-input.mjs';const readFileSync=normalizeC1SourceReader(readActualFileSync);import {createHash} from 'node:crypto';
 import {intake343SourceInverses,decodeIntake343SourceInverses,intake343SourceProofBytes,projectACSource,normalizeACSourceInput,acFileReader} from './helpers/intake343-source-input.mjs';
 import {boundarySourceInverses,frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';import {sourceInverses,d4FileReader} from './helpers/current339-source-inverse.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');

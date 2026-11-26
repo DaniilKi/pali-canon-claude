@@ -6,7 +6,7 @@ import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 const readFileSync=frozen440FileReader(readCurrentFileSync);
 const sha=x=>createHash('sha256').update(x).digest('hex');
 test('actual current343 and v42 bindings retain every exact D4 assertion through finite source inputs',()=>{
- assert.equal(CURRENT_APADANA_IDS.length,343);assert.equal(WIDGET_VERSION,'v42');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v42.html');
+ assert.equal(CURRENT_APADANA_IDS.length,343);assert.equal(WIDGET_VERSION,'v43');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v43.html');
  assert.ok(Object.keys(sourceInverses.files).length>=20);
  const reader=d4FileReader(readCurrentFileSync);
  for(const [path,row]of Object.entries(sourceInverses.files)){

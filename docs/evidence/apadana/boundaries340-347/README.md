@@ -1,0 +1,23 @@
+# Original-first six-unit boundary oracles
+
+These external artifacts propose **only `tha-ap340/341`, `343/344` and `346/347`**, over the authorized C1 baseline. They do not include348/349, book37, English additions, rights holds or personal-data migration.
+
+The complete pinned original `s0510m1.mul.xml` reproduces all14,645 current book36 tuples, including notes and page markers. Source-supported cuts are10118,10258 and10324. The right-hand titles gain only the literal original terminal`ṃ`; all six records receive the closed39-character namespace `apadana-thera340-341-343-344-346-347-v1`. Effective locator length is80characters.
+
+The expected canonical logical SHA is **`0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b`**, from old`46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8`. This is independently serialized from the complete frozen canonical input with precisely the six source-derived record replacements. It is not inferred from application output. Git blob binding of the C1 checkout itself was outside this producer's authorization; the parent must supply the exact commit binding separately.
+
+All89 old/future source segments preserve their complete text hashes,17 source notes, type, original coordinate spans and raw/public page markers. The old-reference categories are38 numeric collisions,6 absent old-owner refs and45 same-number/same-source positions. **All89 require the new positional pin**, including offset0 and stable-looking numbers. The source crosswalk does not authorize automatic transfer of notes, bookmarks, drafts or exports. Its deterministic synthetic89-record export vector must remain byte-identical and does not define a new application export schema.
+
+Preservation pins cover all61 books, the other8,538 unit objects, source attribution/non-commercial terms, all343 full English link/profile objects through their existing independent literal/source authority, and both older locator namespaces. Commentary has16,473 associations and no target association. The588 accepted book36 passages occupy12 distinct root intervals; none intersects a moved prefix. No existing parallel citation/shared edge targets these six units. Source-coordinate identities survive; a rebuilt derived index still needs its own review and exact input hashes.
+
+`PRESEALED_SOURCE_ORACLES.json` freezes the producer before peer or application comparison. `INDEPENDENT_PEER_COMPARISON.json` subsequently records zero differences against the independent presealed peer: six complete records/root hashes and178 old-plus-future segment metadata comparisons, including notes and page labels. A volume-only page-label concern was investigated and rejected: no identical Thai/Myanmar/VRI Ap volume.page marker is shared across the two Ap books. The original oracles remained unchanged; the reasoning correction is preserved separately.
+
+The original-first producer ran once, using only standard-library XML/JSON/hash logic, with seven intentional integrity-refusal controls. No application module was imported or executed. No application tests, build, browser, Git, network, CI or tracked edit was performed.
+
+## Unapplied implementation proposal
+
+`proposal-v1/scripts/canon/apadana_thera340_spans.py` and its CLI are external proposals awaiting independent review/root execution. The builder helper permits only complete old or complete new six-record states (or all-six missing PTS before annotation), checks full source bytes and fixed neighboring boundaries, and validates everything before mutation. The CLI separately gates exact old/new global inputs, original SHA/blob, unchanged commentary/root evidence, source-derived PTS and exact final digest. `build_canon.patch` contains exactly one import and one call after the earlier333–336 repair and before numbering/PTS annotation.
+
+The new regression proposal has10 data cases and3 original-source cases: all62 mixed states, strict fields/types/duplicates, raw/book/group/unrelated/rights/commentary/PTS refusal, all89 source/ref policies, old namespaces, builder order and bounded CLI overwrite refusal. The Python child has a120-second hard limit withSIGKILL and a125-second parent bound; nested CLI refusals have20-second bounds. The source lane is skipped only when the VRI source environment is absent; mandatory CI must provide the pinned fixture and require zero skips. The proposed code was AST-parsed only, never imported or tested by this producer. The parent owns application, tests/build, independent runtime/package/installed acceptance and exact-commit CI.
+
+No runtime, behavior, physical-device/human-assistive, release, push or deployment approval is conveyed here.

@@ -1,0 +1,37 @@
+{
+  "schema": "independent-static-six-widget-html-review-v1",
+  "application_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "version": "v43",
+  "source_HTML_sha256": "76931ba0a3d654f52ba9bf0ad4e68f58cf57c790d68bec2832cc444167f7bcae",
+  "bytes": 663269,
+  "source_export_root_receipt_sha256": "896e5d8f662bca10c71634a5696284720e198b90f8d32b4cc1723110d846e352",
+  "prior_source_HTML_sha256": "ed9f73ae7a6ede4372b85d3761b6fdc733cf3fb8643d38a2241b9ce5e797f449",
+  "all19_interpolations_closed": true,
+  "interpolation_changes": [
+    "WIDGET_VERSION",
+    "JSON.stringify(REPAIRED_CANONICAL_LOCATORS)"
+  ],
+  "previous6_locator_values_preserved": {
+    "tha-ap107": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera105-106-v1",
+    "tha-ap108": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera105-106-v1",
+    "tha-ap333": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera333-336-v1",
+    "tha-ap334": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera333-336-v1",
+    "tha-ap335": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera333-336-v1",
+    "tha-ap336": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera333-336-v1"
+  },
+  "new6_locator_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera340-341-343-344-346-347-v1",
+  "all343_widget_profile_values_unchanged": true,
+  "both_HTTP_bundle_templates_equal_source": {
+    "http.cjs": {
+      "template_equal_exact_application_source": true,
+      "whole_HTML_reconstruction_sha256": "76931ba0a3d654f52ba9bf0ad4e68f58cf57c790d68bec2832cc444167f7bcae"
+    },
+    "http-worker.cjs": {
+      "template_equal_exact_application_source": true,
+      "whole_HTML_reconstruction_sha256": "76931ba0a3d654f52ba9bf0ad4e68f58cf57c790d68bec2832cc444167f7bcae"
+    }
+  },
+  "index_CJS_widget_HTML": "not present, expected stdio entrypoint",
+  "no_application_import_or_execution": true,
+  "no_behavioral_or_release_approval": true
+}

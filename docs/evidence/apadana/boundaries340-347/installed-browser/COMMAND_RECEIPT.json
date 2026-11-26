@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "python3",
+    "/tmp/pali-boundaries340-evidence-nov26/browser-proposals/proposal-v4/check-boundary-reader.py",
+    "--contract",
+    "/tmp/pali-boundaries340-evidence-nov26/BROWSER_FINAL_CONTRACT_V4.json",
+    "--contract-sha",
+    "864084c0acb37af49efc273ba0d2c1758fe1a1899d898d585d44c289f27a8f9b",
+    "--server-dir",
+    "/tmp/pali-boundaries340-evidence-nov26/install/node_modules/pali-canon-mcp/server",
+    "--report",
+    "/tmp/pali-boundaries340-evidence-nov26/browser-run-v4/REPORT.json",
+    "--browser",
+    "/usr/bin/chromium"
+  ],
+  "cwd": "/tmp/s634o-q283t_mz",
+  "started_utc": "2026-11-26T14:25:59.918912+00:00",
+  "completed_utc": "2026-11-26T14:31:12.835276+00:00",
+  "elapsed_seconds": 312.917,
+  "exit_code": 0,
+  "timed_out": false,
+  "owned_short_tmpdir": "/tmp/s634o-q283t_mz",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TMPDIR": "/tmp/s634o-q283t_mz",
+    "PALI_BROWSER": "/usr/bin/chromium"
+  },
+  "log": "/tmp/pali-boundaries340-evidence-nov26/browser-run-v4/six-boundary-a4.log",
+  "log_sha256": "f41e2aab1a8b2b178cc67e7d049e684fdc5cff9564ad6f5ccfbf057d40709460",
+  "http_cleanup_limit": "HTTP child owns a separate session. Outer deadline/exit does not prove HTTP group absent; require explicit inner cleanup or independently observed owned-group absence."
+}

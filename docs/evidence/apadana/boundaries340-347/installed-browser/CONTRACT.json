@@ -1,0 +1,102 @@
+{
+  "schema": "reviewed-six-boundary-reader-v1",
+  "execution_status": "READY_REVIEWED_BINDING",
+  "project": "/tmp/pali-boundaries340-nov26",
+  "base_commit": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "candidate_commit": "d2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6",
+  "ids": [
+    "tha-ap340",
+    "tha-ap341",
+    "tha-ap343",
+    "tha-ap344",
+    "tha-ap346",
+    "tha-ap347"
+  ],
+  "index_revision": "apadana-thera340-341-343-344-346-347-v1",
+  "locator_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera340-341-343-344-346-347-v1",
+  "original_source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "future_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "oracles": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/source-oracles/READER_ORACLES.json",
+    "sha256": "69e6f7c66480e5b40ddc554ab863d5fb8ac0341b8c7f280ebd9f64bbd4a84516"
+  },
+  "crosswalk": {
+    "path": "/tmp/pali-four-english-evidence-nov26/next-boundary-independent-review/OLD_CITATION_CROSSWALK.json",
+    "sha256": "a60394f1f4aa978a0f6ffade5465e8b0e1cfea8e9a9ad6049ec214a3f3f1c621"
+  },
+  "source_oracle_preseal": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/source-oracles/PRESEALED_SOURCE_ORACLES.json",
+    "sha256": "8b599611727cf8ce08a72cf9857808648b0642774e7da3cb52b51ea9c8691042"
+  },
+  "independent_source_preseal": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/independent-source-oracle/PRESEALED_ORACLE.json",
+    "sha256": "2e6587d424533af6d548d50eccea205e320fc807d00a64097d4791c1c10098e5"
+  },
+  "control_ids": [
+    "tha-ap107",
+    "tha-ap108",
+    "tha-ap333",
+    "tha-ap334",
+    "tha-ap335",
+    "tha-ap336",
+    "tha-ap342",
+    "tha-ap345",
+    "mn10"
+  ],
+  "retained_profile_observation": {
+    "path": "/tmp/pali-four-english-evidence-nov26/ACTUAL343_PROFILE_OBSERVATION.json",
+    "sha256": "f8bc0cfdcb97ed77e48076626754303a349041cc2aaa8d566853bc524213d664"
+  },
+  "required_authorities": {
+    "source_boundary_review": {
+      "path": "/tmp/pali-four-english-evidence-nov26/next-boundary-independent-review/SOURCE_BOUNDARY_REVIEW.json",
+      "sha256": "5f91dfe0a7c29fadf58f9d71f5a24f22e9c18dc3bd7a9eb2767f4beb3092f05a"
+    },
+    "source_oracle_review": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/independent-source-oracle/cross-review/INDEPENDENT_CROSS_PRODUCER_REVIEW.json",
+      "sha256": "be914edca249badf219bf2365be626fa6fa8857995784db22fab22a4e7ea00ec"
+    },
+    "historical_preservation_review": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/runtime-independent-review/STATIC_DATA_PACKAGE_FACTS.json",
+      "sha256": "e86a698f301af69d605400102324bd76415b13523d8a706c091dc15676d89f3d"
+    },
+    "runtime_review": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/runtime-independent-review/INDEPENDENT_SIX_RUNTIME_REVIEW.json",
+      "sha256": "b9b5c3761f65defd45103b3c70cbcac37a8dce4133d9991b18063bceefaa0be9"
+    },
+    "widget_source_review": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/runtime-independent-review/STATIC_WIDGET_FACTS.json",
+      "sha256": "e3ef0a70de3ae5753a1b80c053167133a401b11977e8403346ed7c34f8c7a2c0"
+    }
+  },
+  "runtime_inventory": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/runtime-independent-review/INDEPENDENT_SIX_RUNTIME_INVENTORY.json",
+    "sha256": "ba913149e9d704e1b145d1a6a195f95ad20e0d2dbc73fa6da22f16f43f492c08"
+  },
+  "install_receipt": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/INSTALL_BINDING_RECEIPT.json",
+    "sha256": "b5e8525203b2650c07101f83bdf8554787b0385d49b745259b5f9794062321bb"
+  },
+  "final_commit_binding": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/APPLICATION_PACKAGE_BINDING.json",
+    "sha256": "28238a29050f2e845bb3e9dd5ce269982b6110f064ab4238b722ed9eec428ab8"
+  },
+  "archive": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/package/pali-canon-mcp-2.1.0.tgz",
+    "sha256": "d4248e1ece65495a88b76df90bfbdb692ebc8b0f250f387ce157bf9ac99d0e0a"
+  },
+  "expected_source_widget_html": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/SOURCE_WIDGET_v43.html",
+    "sha256": "76931ba0a3d654f52ba9bf0ad4e68f58cf57c790d68bec2832cc444167f7bcae"
+  },
+  "widget_version": "v43",
+  "widget_uris": [
+    "ui://pali-canon/reader-v43.html",
+    "ui://pali-canon/reader-v43.skybridge.html"
+  ],
+  "harness_closure": {
+    "check-boundary-reader.py": "901c9ae71694d43a9ffb6776e3616eeeae8a716dc49c8d37a594af1dce84b49c",
+    "offline-pali-guard.cjs": "6f5b1415dd1838c06a0125fcc9639d2a142c8dc73306724077b49322a41067ad",
+    "run-bounded.py": "9e5b56f4adadf1c689adc848dbe70cc5e4a57f4cc42560eaa684fc05fe01ddf5"
+  }
+}
