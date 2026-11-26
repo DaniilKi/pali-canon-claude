@@ -1,4 +1,4 @@
-import { assertCanonicalLocator, isRepairedApadanaPair, pairedReopenRoute } from '../src/locator-policy.mjs';
+import { assertCanonicalLocator, isRepairedCanonical, canonicalReopenRoute } from '../src/locator-policy.mjs';
 /** A source-pinned locator only. Never source text, completion evidence or English consent. */
 const string=(x,max)=>typeof x==='string'&&x.length>0&&x.length<=max&&!/[\u0000-\u001f\u007f<>]/.test(x);
 const integer=x=>Number.isSafeInteger(x)&&x>=0&&x<=100000;
@@ -21,7 +21,7 @@ export function readingPosition(context, offset, ref, revision) {
 }
 export function assertPositionPin(args,data) {
  const revision=sourceRevision(data);
- try { assertCanonicalLocator(data.text_id, revision, { expected: args.has('source')?args.get('source'):args.has('page_source')?args.get('page_source'):undefined, positional:args.has('ref')||args.has('offset') }); } catch(error) { if(isRepairedApadanaPair(data.text_id,revision))error.reopen=pairedReopenRoute(args,data.text_id); throw error; }
+ try { assertCanonicalLocator(data.text_id, revision, { expected: args.has('source')?args.get('source'):args.has('page_source')?args.get('page_source'):undefined, positional:args.has('ref')||args.has('offset') }); } catch(error) { if(isRepairedCanonical(data.text_id,revision))error.reopen=canonicalReopenRoute(args,data.text_id); throw error; }
  if(!args.has('source'))return;
  if(args.getAll('source').length!==1||!source(args.get('source'))||!string(args.get('ref'),400)||!/^\d+$/.test(args.get('offset')||'')||!integer(Number(args.get('offset'))))throw Error('The saved reading position is incomplete. Open its source from the Library; no nearby passage was substituted.');
  if(sourceRevision(data)!==args.get('source')){const error=Error('The source or citation mapping revision changed since this reading position was saved. Review the current source explicitly before continuing; no replacement wording was displayed.');error.code='READING_SOURCE_CHANGED';throw error;}

@@ -1,4 +1,4 @@
-import { assertCanonicalLocator, APADANA_PAIR_LOCATOR_REVISION } from './locator-policy.mjs';
+import { assertCanonicalLocator, REPAIRED_CANONICAL_LOCATORS } from './locator-policy.mjs';
 /**
  * ChatGPT app (OpenAI Apps SDK / MCP Apps) reading widget, served by the hosted HTTP endpoint only.
  *
@@ -30,7 +30,7 @@ import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v40';
+export const WIDGET_VERSION = 'v41';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -303,7 +303,7 @@ export function registerChatgptWidget(server, { executeTool } = {}) {
       script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: z.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
-      offset: z.number().int().min(0).max(100000).optional().describe('Pāli segment offset for continuation. Repaired tha-ap107/108 positions, including 0, require the returned source_commit.'),
+      offset: z.number().int().min(0).max(100000).optional().describe('Pāli segment offset for continuation. Repaired tha-ap107/108 and tha-ap333–336 positions, including 0, require the returned source_commit.'),
       limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),
       english_translation_revision: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Exact source revision for a pinned Apadāna selection or continuation.'),
       english_prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset.'),
@@ -792,7 +792,8 @@ export const WIDGET_HTML = `<!doctype html>
     if (!d || typeof d !== 'object') return;
     if (d === rendered) { refreshSourceNotes(d); return; }
     if (!d.pali && typeof d.error !== 'string') return;
-    if ((d.text_id === 'tha-ap107' || d.text_id === 'tha-ap108') && (!d.source || d.source.locator_revision !== '${APADANA_PAIR_LOCATOR_REVISION}')) d = { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' };
+    var repairedPins = ${JSON.stringify(REPAIRED_CANONICAL_LOCATORS)};
+    if (Object.prototype.hasOwnProperty.call(repairedPins, d.text_id) && (!d.source || d.source.locator_revision !== repairedPins[d.text_id])) d = { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' };
     abandon(); generation++; awaitingSelection = false;
     if (!d.pali) {
       if (typeof d.error !== 'string') return;

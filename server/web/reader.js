@@ -290,6 +290,46 @@
     }
   });
 
+  // src/locator-policy.mjs
+  var APADANA_PAIR_SOURCE_COMMIT = "2d134ff9ef60f70a1eb03c9370580228811a3070";
+  var APADANA_PAIR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-apadana-thera105-106-v1";
+  var APADANA_FOUR_INDEX_REVISION = "apadana-thera333-336-v1";
+  var APADANA_FOUR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_FOUR_INDEX_REVISION;
+  var REPAIRED_CANONICAL_LOCATORS = Object.freeze({
+    "tha-ap107": APADANA_PAIR_LOCATOR_REVISION,
+    "tha-ap108": APADANA_PAIR_LOCATOR_REVISION,
+    "tha-ap333": APADANA_FOUR_LOCATOR_REVISION,
+    "tha-ap334": APADANA_FOUR_LOCATOR_REVISION,
+    "tha-ap335": APADANA_FOUR_LOCATOR_REVISION,
+    "tha-ap336": APADANA_FOUR_LOCATOR_REVISION
+  });
+  var requiredCanonicalRevision = (id5) => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id5) ? REPAIRED_CANONICAL_LOCATORS[id5] : null;
+  var isRepairedCanonical = (id5, revision5) => requiredCanonicalRevision(id5) !== null && revision5 === requiredCanonicalRevision(id5);
+  var isCanonicalReopenRoute = (route2) => typeof route2 === "string" && Object.keys(REPAIRED_CANONICAL_LOCATORS).some((id5) => route2 === "#read?uid=" + id5);
+  function canonicalReopenRoute(args, id5) {
+    return requiredCanonicalRevision(id5) ? "#read?" + new URLSearchParams({ uid: id5 }) : null;
+  }
+  function assertCanonicalLocator(id5, revision5, { expected, positional = false } = {}) {
+    if (requiredCanonicalRevision(id5) && !isRepairedCanonical(id5, revision5)) {
+      const error = Error("The reviewed citation mapping is unavailable or changed. Reopen the whole current text explicitly; no saved position or note was moved.");
+      error.code = "READING_SOURCE_CHANGED";
+      error.reopen = canonicalReopenRoute(null, id5);
+      throw error;
+    }
+    if (expected !== void 0 && expected !== revision5) {
+      const error = Error("The source or citation mapping revision changed. Reopen the whole current text explicitly and compare its source positions; no replacement wording was displayed and no saved reference or note was moved.");
+      error.code = "READING_SOURCE_CHANGED";
+      if (isRepairedCanonical(id5, revision5)) error.reopen = canonicalReopenRoute(null, id5);
+      throw error;
+    }
+    if (positional && expected === void 0 && isRepairedCanonical(id5, revision5)) {
+      const error = Error("This unversioned numeric position is ambiguous after the reviewed Apad\u0101na boundary repair. Reopen the whole current text explicitly, then use a returned source-pinned reading link. Keep old citations and personal notes for separate review; no passage or note was substituted.");
+      error.code = "READING_LOCATOR_AMBIGUOUS";
+      error.reopen = canonicalReopenRoute(null, id5);
+      throw error;
+    }
+  }
+
   // web/tool-result.mjs
   var object = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   function readingToolResult(result) {
@@ -307,38 +347,13 @@
     if (result.isError || data?.error) {
       const error = Error(typeof data?.error === "string" && data.error ? data.error : "This selection could not be retrieved.");
       if (data?.code === "READING_SOURCE_CHANGED") error.code = data.code;
-      if (["READING_SOURCE_CHANGED", "READING_LOCATOR_AMBIGUOUS"].includes(data?.code) && /^#read\?uid=tha-ap10[78]$/.test(data?.reopen || "")) {
+      if (["READING_SOURCE_CHANGED", "READING_LOCATOR_AMBIGUOUS"].includes(data?.code) && isCanonicalReopenRoute(data?.reopen)) {
         error.code = data.code;
         error.reopen = data.reopen;
       }
       throw error;
     }
     return data;
-  }
-
-  // src/locator-policy.mjs
-  var APADANA_PAIR_SOURCE_COMMIT = "2d134ff9ef60f70a1eb03c9370580228811a3070";
-  var APADANA_PAIR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-apadana-thera105-106-v1";
-  var APADANA_PAIR_INDEX_REVISION = "apadana-thera105-106-v1";
-  var isApadanaPair = (id5) => id5 === "tha-ap107" || id5 === "tha-ap108";
-  var isRepairedApadanaPair = (id5, revision5) => isApadanaPair(id5) && typeof revision5 === "string" && revision5.endsWith("-" + APADANA_PAIR_INDEX_REVISION);
-  function assertCanonicalLocator(id5, revision5, { expected, positional = false } = {}) {
-    if (expected !== void 0 && expected !== revision5) {
-      const error = Error("The source or citation mapping revision changed. Reopen the whole current text explicitly and compare its source positions; no replacement wording was displayed and no saved reference or note was moved.");
-      error.code = "READING_SOURCE_CHANGED";
-      if (isRepairedApadanaPair(id5, revision5)) error.reopen = pairedReopenRoute(null, id5);
-      throw error;
-    }
-    if (positional && expected === void 0 && isRepairedApadanaPair(id5, revision5)) {
-      const error = Error("This unversioned numeric position is ambiguous after the paired Apad\u0101na boundary repair. Reopen the whole current text explicitly, then use a returned source-pinned reading link. Keep old citations and personal notes for separate review; no passage or note was substituted.");
-      error.code = "READING_LOCATOR_AMBIGUOUS";
-      error.reopen = pairedReopenRoute(null, id5);
-      throw error;
-    }
-  }
-  function pairedReopenRoute(args, id5) {
-    if (!isApadanaPair(id5)) return null;
-    return "#read?" + new URLSearchParams({ uid: id5 });
   }
 
   // src/apadana-thera321-329-profiles.mjs
@@ -36520,7 +36535,7 @@
     try {
       assertCanonicalLocator(data.text_id, revision5, { expected: args.has("source") ? args.get("source") : args.has("page_source") ? args.get("page_source") : void 0, positional: args.has("ref") || args.has("offset") });
     } catch (error) {
-      if (isRepairedApadanaPair(data.text_id, revision5)) error.reopen = pairedReopenRoute(args, data.text_id);
+      if (isRepairedCanonical(data.text_id, revision5)) error.reopen = canonicalReopenRoute(args, data.text_id);
       throw error;
     }
     if (!args.has("source")) return;
@@ -36740,9 +36755,9 @@
       item = matches[0] ?? null;
       if (item) bookmarkShape(item);
       if (item && own3(item, "source_commit") && item.source_commit !== context.source_commit) throw Error("The saved source revision differs. Review or edit this personal note in Saved; it was not associated with the current passage.");
-      if (item && isRepairedApadanaPair(context.uid, context.source_commit) && own3(item, "source_commit") && item.offset !== context.offset) throw Error("The saved position differs. Review this personal note in Saved; it was not associated with the current passage.");
+      if (item && isRepairedCanonical(context.uid, context.source_commit) && own3(item, "source_commit") && item.offset !== context.offset) throw Error("The saved position differs. Review this personal note in Saved; it was not associated with the current passage.");
       const legacy = Boolean(item && !own3(item, "source_commit"));
-      if (legacy && isRepairedApadanaPair(context.uid, context.source_commit)) throw Error("This unversioned saved reference needs separate source review after the paired Apad\u0101na boundary repair. Its note and draft remain in Saved, unchanged; they cannot be attached to this current passage.");
+      if (legacy && isRepairedCanonical(context.uid, context.source_commit)) throw Error("This unversioned saved reference needs separate source review after the reviewed Apad\u0101na boundary repair. Its note and draft remain in Saved, unchanged; they cannot be attached to this current passage.");
       return { eligible: true, reason: null, warning: legacy ? "Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned." : null, legacy, item: clone(item), key: key4 };
     } catch (error) {
       return { eligible: false, reason: error.message, warning: null, legacy: false, item: null, key: key4 ?? null };
@@ -36954,7 +36969,7 @@
     if (pinned2) return { href, pinned: true, notice: "Saved source version: opening checks the revision before displaying wording." };
     const args = new URLSearchParams(href.slice(6));
     args.delete("source");
-    return { href: "#read?" + args, pinned: false, notice: (isApadanaPair(item.uid) ? "Needs source review after the paired Apad\u0101na boundary repair. This unversioned position will refuse; reopen the whole current poem separately. Your saved note and reference stay unchanged. " : "") + "Legacy bookmark: no source version was saved. Opening checks its reference against the current source; this is not a saved copy of the old wording." };
+    return { href: "#read?" + args, pinned: false, notice: (requiredCanonicalRevision(item.uid) ? "Needs source review after the reviewed Apad\u0101na boundary repair. This unversioned position will refuse; reopen the whole current poem separately. Your saved note and reference stay unchanged. " : "") + "Legacy bookmark: no source version was saved. Opening checks its reference against the current source; this is not a saved copy of the old wording." };
   }
 
   // web/saved-passages.mjs
@@ -37674,7 +37689,7 @@
     if (data.equally_similar_texts !== void 0 && (!Number.isSafeInteger(data.equally_similar_texts) || data.equally_similar_texts < 2 || !text11(data.citation_note))) fail10();
     for (const m of data.matches) {
       const command6 = m.read_with, span = m.source_span;
-      if (isApadanaPair(m.text_id) && command6?.source_commit !== APADANA_PAIR_LOCATOR_REVISION) fail10();
+      if (requiredCanonicalRevision(m.text_id) && command6?.source_commit !== requiredCanonicalRevision(m.text_id)) fail10();
       if (!/^[a-z][a-z0-9.-]*$/.test(m.text_id || "") || !text11(m.citation) || !text11(m.matched_text) || !text11(m.edition) || !text11(m.segment_ref) || typeof m.similarity !== "number" || !Number.isFinite(m.similarity) || m.similarity < 0 || m.similarity > 1 || command6?.tool !== "get_text" || command6.uid !== m.text_id || !integer9(command6.offset) || !integer9(command6.limit) || command6.limit < 1 || command6.limit > 200 || span?.offset !== command6.offset || span.first_segment_ref !== m.segment_ref || !integer9(span.end_offset) || span.end_offset <= span.offset || !text11(span.last_segment_ref)) fail10();
     }
     if (data.verdict !== "not_found_in_scope" && !data.matches.length) fail10();
@@ -38781,7 +38796,7 @@
     if (host === "suttacentral.net") {
       const first = url.pathname.split("/").filter(Boolean)[0] || "";
       if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError("Unrecognised SuttaCentral link.");
-      if (isApadanaPair(first)) {
+      if (requiredCanonicalRevision(first)) {
         let positionalPath;
         try {
           positionalPath = url.pathname.split("/").filter(Boolean).slice(1).some((part) => /\p{N}/u.test(decodeURIComponent(part)));
@@ -38995,7 +39010,7 @@
   }
   function command2(command6, hit4, script, body = false, context = false) {
     if (!keysOnly(command6, ["tool", "uid", "offset", "limit", "script", "source_commit"]) || command6.tool !== "get_text" || command6.uid !== hit4.id || own8(command6, "script") && command6.script !== script) fail5();
-    const requiredPin = body && isRepairedApadanaPair(hit4.id, sourceRevision({ source: hit4.source }));
+    const requiredPin = body && isRepairedCanonical(hit4.id, sourceRevision({ source: hit4.source }));
     if ((requiredPin || own8(command6, "source_commit")) && command6.source_commit !== sourceRevision({ source: hit4.source })) fail5();
     if (script !== "roman" && command6.script !== script) fail5();
     if (body) {
@@ -39006,7 +39021,7 @@
   function checkHit(hit4, edition, selected, body) {
     identity2(hit4);
     source2(hit4.source, edition);
-    if (isApadanaPair(hit4.id) && sourceRevision({ source: hit4.source }) !== APADANA_PAIR_LOCATOR_REVISION) fail5();
+    if (requiredCanonicalRevision(hit4.id) && !isRepairedCanonical(hit4.id, sourceRevision({ source: hit4.source }))) fail5();
     command2(hit4.read_with, hit4, selected.script, body);
     if (body) {
       if (!text6(hit4.excerpt, 4e3) || hit4.segment_ref !== `${hit4.id}/${hit4.read_with.offset + 1}`) fail5();
@@ -40981,7 +40996,7 @@
     open = noteDrafts.has(key4) || Boolean(savedRecord(context)?.note);
     function mark() {
       const state = passageNoteState(local.saved, context), active = Boolean(savedRecord(context));
-      if (!state.eligible && isRepairedApadanaPair(context.uid, context.source_commit)) {
+      if (!state.eligible && isRepairedCanonical(context.uid, context.source_commit)) {
         control.textContent = "Saved reference needs review";
         control.disabled = true;
         control.setAttribute("aria-pressed", "false");
@@ -41244,7 +41259,7 @@
       offset = window2.offset;
     }
     const kind = book2 ? "book" : ["commentary", "post"].includes(args.get("kind")) ? args.get("kind") : "canon";
-    const request2 = { ...kind === "book" ? { book: book2 } : kind === "post" ? { citation: uid2 } : { uid: uid2 }, ...kind !== "canon" || args.has("offset") || window2 ? { offset } : {}, ...kind === "canon" && (args.has("source") || args.has("page_source")) ? { source_commit: args.get("source") || args.get("page_source") } : {}, limit: window2?.limit || 30, script: $("script").value };
+    const request2 = { ...kind === "book" ? { book: book2 } : kind === "post" ? { citation: uid2 } : { uid: uid2 }, ...kind !== "canon" || args.has("offset") || args.has("ref") || window2 ? { offset } : {}, ...kind === "canon" && (args.has("source") || args.has("page_source")) ? { source_commit: args.get("source") || args.get("page_source") } : {}, limit: window2?.limit || 30, script: $("script").value };
     const data = await tool(kind === "commentary" ? "get_commentary" : kind === "post" ? "get_post_canonical" : "get_text", request2);
     if (token !== epoch) return;
     if (!Array.isArray(data.segments)) throw new Error("Choose an individual book or passage to read.");
@@ -41689,7 +41704,7 @@
   }
   function canonStudyPin(data) {
     const revision5 = sourceRevision(data);
-    return isRepairedApadanaPair(data.text_id, revision5) ? { source_commit: revision5 } : {};
+    return isRepairedCanonical(data.text_id, revision5) ? { source_commit: revision5 } : {};
   }
   async function wordStudy(args, expected, token) {
     const studyToken = ++studyEpoch, target = studyTarget("Looking up the selected passage in the bundled dictionary\u2026");

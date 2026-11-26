@@ -1,3 +1,4 @@
+import { isCanonicalReopenRoute } from '../src/locator-policy.mjs';
 /** MCP failures can contain plain SDK validation text rather than JSON. */
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
@@ -15,7 +16,7 @@ export function readingToolResult(result) {
   if (result.isError || data?.error) {
     const error = Error(typeof data?.error === 'string' && data.error ? data.error : 'This selection could not be retrieved.');
     if (data?.code === 'READING_SOURCE_CHANGED') error.code = data.code;
-    if (['READING_SOURCE_CHANGED', 'READING_LOCATOR_AMBIGUOUS'].includes(data?.code) && /^#read\?uid=tha-ap10[78]$/.test(data?.reopen || '')) {
+    if (['READING_SOURCE_CHANGED', 'READING_LOCATOR_AMBIGUOUS'].includes(data?.code) && isCanonicalReopenRoute(data?.reopen)) {
       error.code = data.code; error.reopen = data.reopen;
     }
     throw error;

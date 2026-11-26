@@ -1,0 +1,10 @@
+{
+  "schema": "independent-four-boundary-source-review-seal-v1",
+  "status": "GO_SOURCE_BOUNDARIES_FOUR_UNIT_PROPOSAL_ONLY",
+  "files": {
+    "review_original_boundaries.py": "281634914fd72634ba89ae8864bcffcb6042fc7abc6b00e9f0f5ca6b9af6a667",
+    "SOURCE_REVIEW.json": "0287b0529ac82d7a72a5653283e1ed52fcb495ef6aec885d3c59c100a101696d",
+    "OLD_SEGMENT_SOURCE_NEW_OWNER_MAP.json": "fbf5190392d0285254932a907ee794ddea3db828e8158061bb4aff1c53f0cf8b"
+  },
+  "no_implementation_or_activation": true
+}

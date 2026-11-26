@@ -1,3 +1,4 @@
+import { requiredCanonicalRevision } from '../src/locator-policy.mjs';
 // Compare paginated MCP output with the source corpus. Kept separate for negative regression fixtures.
 import assert from 'node:assert/strict';
 
@@ -7,9 +8,9 @@ import assert from 'node:assert/strict';
  */
 export async function canonicalReadArguments(call, { uid, id, source }) {
   const args = { uid };
-  if (!['tha-ap107', 'tha-ap108'].includes(id)) return args;
+  if (!requiredCanonicalRevision(id)) return args;
   assert.match(source?.commit || '', /^[a-f0-9]{40}$/, 'reviewed canonical source commit');
-  assert.equal(source?.locator_revision, `${source.commit}-apadana-thera105-106-v1`, 'current repaired pair locator revision');
+  assert.equal(source?.locator_revision, requiredCanonicalRevision(id), 'current repaired pair locator revision');
   const reopened = await call('get_text', { uid, limit: 1 });
   assert.equal(reopened.text_id, id, 'fresh auditor reopening selected a different canonical owner');
   assert.deepEqual(reopened.source, source, 'auditor source or mapping differs from the reviewed corpus');

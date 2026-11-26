@@ -1,4 +1,4 @@
-import { isRepairedApadanaPair } from '../src/locator-policy.mjs';
+import { isRepairedCanonical } from '../src/locator-policy.mjs';
 /** Browser-local personal metadata only. These checks do not authenticate source wording. */
 import { parseBookmarks } from './bookmark-import.mjs';
 
@@ -49,9 +49,9 @@ export function passageNoteState(saved, context) {
     item = matches[0] ?? null;
     if (item) bookmarkShape(item);
     if (item && own(item, 'source_commit') && item.source_commit !== context.source_commit) throw Error('The saved source revision differs. Review or edit this personal note in Saved; it was not associated with the current passage.');
-    if (item && isRepairedApadanaPair(context.uid, context.source_commit) && own(item, 'source_commit') && item.offset !== context.offset) throw Error('The saved position differs. Review this personal note in Saved; it was not associated with the current passage.');
+    if (item && isRepairedCanonical(context.uid, context.source_commit) && own(item, 'source_commit') && item.offset !== context.offset) throw Error('The saved position differs. Review this personal note in Saved; it was not associated with the current passage.');
     const legacy = Boolean(item && !own(item, 'source_commit'));
-    if (legacy && isRepairedApadanaPair(context.uid, context.source_commit)) throw Error('This unversioned saved reference needs separate source review after the paired Apadāna boundary repair. Its note and draft remain in Saved, unchanged; they cannot be attached to this current passage.');
+    if (legacy && isRepairedCanonical(context.uid, context.source_commit)) throw Error('This unversioned saved reference needs separate source review after the reviewed Apadāna boundary repair. Its note and draft remain in Saved, unchanged; they cannot be attached to this current passage.');
     return { eligible: true, reason: null, warning: legacy ? 'Unversioned bookmark: no source revision was saved. Check the reference before using this personal note; editing leaves it unversioned.' : null, legacy, item: clone(item), key };
   } catch (error) {
     // Unsupported local metadata stays stored/exportable. Do not clone a rejected

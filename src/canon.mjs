@@ -1,4 +1,4 @@
-import { assertCanonicalLocator, isRepairedApadanaPair } from './locator-policy.mjs';
+import { assertCanonicalLocator, isRepairedCanonical } from './locator-policy.mjs';
 import { APADANA_BASE, APADANA_COMMIT, APADANA_LICENSE, APADANA_LICENSE_URL, APADANA_PROFILES, APADANA_TRANSLATOR } from './apadana-profiles.mjs';
 import { validateLink as validateApadanaLink } from './apadana.mjs';
 import {assertRegisteredPartial} from './partial-source-registry.mjs';
@@ -523,10 +523,10 @@ export function readingSource(unit) {
   return { ...original, locator_revision };
 }
 
-/** Only this finite repaired pair requires a source pin for native numeric positions. */
+/** Only the finite reviewed repair registry requires pins for native numeric positions. */
 export function positionalReadingPin(unit) {
   const revision = readingSource(unit).locator_revision || source().commit;
-  return isRepairedApadanaPair(unit.id, revision) ? { source_commit: revision } : {};
+  return isRepairedCanonical(unit.id, revision) ? { source_commit: revision } : {};
 }
 
 export function describe(u, notes = []) {

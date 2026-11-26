@@ -2,7 +2,7 @@ import { createSourceNotesPolicy } from './source-notes-policy.mjs';
 import { contentSha256 } from './content-sha256.mjs';
 import { SOURCE_NOTES_PROFILE } from '../src/source-notes-profiles.mjs';
 import { readingToolResult } from './tool-result.mjs';
-import { isRepairedApadanaPair } from '../src/locator-policy.mjs';
+import { isRepairedCanonical } from '../src/locator-policy.mjs';
 import { apadanaEditionNavigation, apadanaEditionLink } from './apadana-edition-navigation.mjs';
 import { parseNoteDraftJournal, stageNoteDraftEntry, removeNoteDraftEntry, reconcileNoteDraftJournal, guardedNoteDraftJournalWrite } from './note-draft-recovery.mjs';
 import { createFocusOwnership } from './focus-ownership.mjs';
@@ -683,7 +683,7 @@ function attachPassageNote(selector, data, segment, container, control, token) {
   catch (error) { region.append(el('p', 'This source has no safe note reference: ' + error.message, 'notice'), link('See saved bookmark and note', '#saved')); return; }
   highlightTargets.push({ node: container, context, token });
   const key = noteKey(context); open = noteDrafts.has(key) || Boolean(savedRecord(context)?.note);
-  function mark() { const state = passageNoteState(local.saved, context), active = Boolean(savedRecord(context)); if (!state.eligible && isRepairedApadanaPair(context.uid, context.source_commit)) { control.textContent = 'Saved reference needs review'; control.disabled = true; control.setAttribute('aria-pressed', 'false'); container.classList.remove('marked', 'personal-highlight'); return; } control.disabled = false; control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); container.classList.toggle('personal-highlight', savedPassageHighlighted(local.saved, context, local.highlight_saved !== false)); }
+  function mark() { const state = passageNoteState(local.saved, context), active = Boolean(savedRecord(context)); if (!state.eligible && isRepairedCanonical(context.uid, context.source_commit)) { control.textContent = 'Saved reference needs review'; control.disabled = true; control.setAttribute('aria-pressed', 'false'); container.classList.remove('marked', 'personal-highlight'); return; } control.disabled = false; control.textContent = active ? 'Saved ✓' : 'Save passage'; control.setAttribute('aria-pressed', String(active)); container.classList.toggle('marked', active); container.classList.toggle('personal-highlight', savedPassageHighlighted(local.saved, context, local.highlight_saved !== false)); }
   function ensure() {
     const change = passageNoteTransaction(local.saved, noteDrafts, context, { type: 'ensure' });
     const durable = commitNoteChange(change, true); mark();
@@ -822,7 +822,7 @@ async function read(args, token, { scriptRefresh = false, ownsFocus = () => fals
     window = planWindow(plan, uid, args.has('offset') ? Number(args.get('offset')) : undefined); offset = window.offset;
   }
   const kind = book ? 'book' : ['commentary', 'post'].includes(args.get('kind')) ? args.get('kind') : 'canon';
-  const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), ...(kind !== 'canon' || args.has('offset') || window ? { offset } : {}), ...(kind === 'canon' && (args.has('source') || args.has('page_source')) ? { source_commit: args.get('source') || args.get('page_source') } : {}), limit: window?.limit || 30, script: $('script').value };
+  const request = { ...(kind === 'book' ? { book } : kind === 'post' ? { citation: uid } : { uid }), ...(kind !== 'canon' || args.has('offset') || args.has('ref') || window ? { offset } : {}), ...(kind === 'canon' && (args.has('source') || args.has('page_source')) ? { source_commit: args.get('source') || args.get('page_source') } : {}), limit: window?.limit || 30, script: $('script').value };
   const data = await tool(kind === 'commentary' ? 'get_commentary' : kind === 'post' ? 'get_post_canonical' : 'get_text', request); if (token !== epoch) return;
   if (!Array.isArray(data.segments)) throw new Error('Choose an individual book or passage to read.');
   assertPositionPin(args, data); assertPagePin(args, data);
@@ -1042,7 +1042,7 @@ async function commentary(uid, token, offset = 0) {
 function studyTarget(message) {
   requests.cancelGroup('study'); const target = $('study'); target.replaceChildren(el('p', message)); target.tabIndex = -1; target.setAttribute('aria-label', 'Study tools, separate from scripture'); target.focus({ preventScroll: true }); target.scrollIntoView({ block: 'start' }); return target;
 }
-function canonStudyPin(data) { const revision = sourceRevision(data); return isRepairedApadanaPair(data.text_id, revision) ? { source_commit: revision } : {}; }
+function canonStudyPin(data) { const revision = sourceRevision(data); return isRepairedCanonical(data.text_id, revision) ? { source_commit: revision } : {}; }
 async function wordStudy(args, expected, token) {
   const studyToken = ++studyEpoch, target = studyTarget('Looking up the selected passage in the bundled dictionary…');
   try {

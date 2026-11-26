@@ -14,6 +14,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const CSV_COLUMNS = [
   'id', 'citation', 'title', 'pitaka', 'collection', 'kind', 'approximate',
   'vri_book', 'vri_file', 'vri_paragraphs',
+  'index_revision', 'locator_revision',
   'pts', 'pts_volume', 'pts_page', 'pts_end_page',
   'members', 'english_inherited_from', 'english_count', 'english_urls', 'english_translators',
   'english_references', 'english_translation_ids', 'english_licenses',
@@ -136,6 +137,7 @@ export function buildIndex() {
       kind: u.kind || 'text',
       approximate: Boolean(u.approximate),
       vri: { book: info.vri_book, file: info.vri_file, paragraphs: u.vri || null },
+      ...(u.index_revision ? { index_revision: u.index_revision, locator_revision: canon.readingSource(u).locator_revision } : {}),
       pts: u.pts ? { label: info.pts, volume: u.pts.volume || null, page: u.pts.page ?? null, end_page: u.pts.end_page ?? u.pts.page ?? null } : null,
       ...(u.members ? { members: u.members } : {}),
       english_inherited_from: via ? via.id : null,
@@ -186,6 +188,7 @@ export function toCsv(index) {
       id: t.id, citation: t.citation, title: t.title, pitaka: t.pitaka, collection: t.collection, kind: t.kind,
       approximate: t.approximate ? 'true' : 'false',
       vri_book: t.vri.book, vri_file: t.vri.file, vri_paragraphs: t.vri.paragraphs,
+      index_revision: t.index_revision, locator_revision: t.locator_revision,
       pts: t.pts?.label, pts_volume: t.pts?.volume, pts_page: t.pts?.page, pts_end_page: t.pts?.end_page,
       members: (t.members || []).join(' | '),
       english_inherited_from: t.english_inherited_from,

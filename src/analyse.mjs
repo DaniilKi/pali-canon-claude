@@ -396,7 +396,7 @@ export function register({ tool, z }) {
     book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root-book ID from browse_canon node "books", as with get_text book mode. Give book instead of uid; source-file positions are not individual canonical identities.'),
     segment: z.union([z.string().trim().min(1).max(200), z.number().int().min(1)]).optional().describe('Exact segment ref from get_text or get_post_canonical, or its number. Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors.'),
     paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe('Exact VRI paragraph label instead of segment. In every scope, a label matching several segments is an error: choose an exact segment ref. Give at most one selector; omit both for the first body segment.'),
-    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe('Expected citation locator revision from the Pāli reader. Required for explicit tha-ap107/108 segment, paragraph or word offset after their boundary repair.'),
+    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe('Expected citation locator revision from the Pāli reader. Required for explicit tha-ap107/108 and tha-ap333–336 segment, paragraph or word offset after their boundary repair.'),
     offset: z.number().int().min(0).max(100000).optional().describe('Word offset within the segment, for continuation.'),
     limit: z.number().int().min(1).max(200).default(60).describe('Words per call.'),
   }, (args) => analysePassage(args));

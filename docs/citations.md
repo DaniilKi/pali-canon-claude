@@ -253,3 +253,8 @@ Use the exact `translation_id` returned in metadata and continuation arguments.
 Do not manufacture a fragment by changing the citation number. The substantive
 question, original notes, complete notice and untranslated-paratext caveat stay
 together. See [the fourteen-question review](data/milinda-reviewed-questions.md).
+
+
+### Four corrected Apadāna boundaries
+
+`tha-ap333–336` use a new citation mapping version. Old numeric positions refuse rather than open replacement words. Whole-text reopening is an explicit fresh read, and old bookmarks, notes and exports remain unchanged. Use the source pin returned by the current reader for positional commands. Raw source-book references stay stable. See [the repair and saved-reference rules](data/apadana-four-boundaries.md).

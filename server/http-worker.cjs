@@ -20656,26 +20656,41 @@ var InMemoryTransport = class _InMemoryTransport {
 // src/locator-policy.mjs
 var APADANA_PAIR_SOURCE_COMMIT = "2d134ff9ef60f70a1eb03c9370580228811a3070";
 var APADANA_PAIR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-apadana-thera105-106-v1";
-var APADANA_PAIR_INDEX_REVISION = "apadana-thera105-106-v1";
-var isApadanaPair = (id) => id === "tha-ap107" || id === "tha-ap108";
-var isRepairedApadanaPair = (id, revision) => isApadanaPair(id) && typeof revision === "string" && revision.endsWith("-" + APADANA_PAIR_INDEX_REVISION);
+var APADANA_FOUR_INDEX_REVISION = "apadana-thera333-336-v1";
+var APADANA_FOUR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_FOUR_INDEX_REVISION;
+var REPAIRED_CANONICAL_LOCATORS = Object.freeze({
+  "tha-ap107": APADANA_PAIR_LOCATOR_REVISION,
+  "tha-ap108": APADANA_PAIR_LOCATOR_REVISION,
+  "tha-ap333": APADANA_FOUR_LOCATOR_REVISION,
+  "tha-ap334": APADANA_FOUR_LOCATOR_REVISION,
+  "tha-ap335": APADANA_FOUR_LOCATOR_REVISION,
+  "tha-ap336": APADANA_FOUR_LOCATOR_REVISION
+});
+var requiredCanonicalRevision = (id) => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id) ? REPAIRED_CANONICAL_LOCATORS[id] : null;
+var isRepairedCanonical = (id, revision) => requiredCanonicalRevision(id) !== null && revision === requiredCanonicalRevision(id);
+var isCanonicalReopenRoute = (route) => typeof route === "string" && Object.keys(REPAIRED_CANONICAL_LOCATORS).some((id) => route === "#read?uid=" + id);
+function canonicalReopenRoute(args, id) {
+  return requiredCanonicalRevision(id) ? "#read?" + new URLSearchParams({ uid: id }) : null;
+}
 function assertCanonicalLocator(id, revision, { expected, positional = false } = {}) {
+  if (requiredCanonicalRevision(id) && !isRepairedCanonical(id, revision)) {
+    const error2 = Error("The reviewed citation mapping is unavailable or changed. Reopen the whole current text explicitly; no saved position or note was moved.");
+    error2.code = "READING_SOURCE_CHANGED";
+    error2.reopen = canonicalReopenRoute(null, id);
+    throw error2;
+  }
   if (expected !== void 0 && expected !== revision) {
     const error2 = Error("The source or citation mapping revision changed. Reopen the whole current text explicitly and compare its source positions; no replacement wording was displayed and no saved reference or note was moved.");
     error2.code = "READING_SOURCE_CHANGED";
-    if (isRepairedApadanaPair(id, revision)) error2.reopen = pairedReopenRoute(null, id);
+    if (isRepairedCanonical(id, revision)) error2.reopen = canonicalReopenRoute(null, id);
     throw error2;
   }
-  if (positional && expected === void 0 && isRepairedApadanaPair(id, revision)) {
-    const error2 = Error("This unversioned numeric position is ambiguous after the paired Apad\u0101na boundary repair. Reopen the whole current text explicitly, then use a returned source-pinned reading link. Keep old citations and personal notes for separate review; no passage or note was substituted.");
+  if (positional && expected === void 0 && isRepairedCanonical(id, revision)) {
+    const error2 = Error("This unversioned numeric position is ambiguous after the reviewed Apad\u0101na boundary repair. Reopen the whole current text explicitly, then use a returned source-pinned reading link. Keep old citations and personal notes for separate review; no passage or note was substituted.");
     error2.code = "READING_LOCATOR_AMBIGUOUS";
-    error2.reopen = pairedReopenRoute(null, id);
+    error2.reopen = canonicalReopenRoute(null, id);
     throw error2;
   }
-}
-function pairedReopenRoute(args, id) {
-  if (!isApadanaPair(id)) return null;
-  return "#read?" + new URLSearchParams({ uid: id });
 }
 
 // node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
@@ -60704,7 +60719,7 @@ function parseUrl(raw) {
   if (host === "suttacentral.net") {
     const first = url.pathname.split("/").filter(Boolean)[0] || "";
     if (!/^[a-z][a-z0-9.-]*$/.test(first)) throw new CitationError("Unrecognised SuttaCentral link.");
-    if (isApadanaPair(first)) {
+    if (requiredCanonicalRevision(first)) {
       let positionalPath;
       try {
         positionalPath = url.pathname.split("/").filter(Boolean).slice(1).some((part) => new RegExp("\\p{N}", "u").test(decodeURIComponent(part)));
@@ -61377,7 +61392,7 @@ function readingSource(unit) {
 }
 function positionalReadingPin(unit) {
   const revision = readingSource(unit).locator_revision || source().commit;
-  return isRepairedApadanaPair(unit.id, revision) ? { source_commit: revision } : {};
+  return isRepairedCanonical(unit.id, revision) ? { source_commit: revision } : {};
 }
 function describe(u, notes = []) {
   const d = load();
@@ -64213,7 +64228,7 @@ function register2({ tool, z }) {
     book: z.string().trim().min(1).max(100).optional().describe('Complete VRI root-book ID from browse_canon node "books", as with get_text book mode. Give book instead of uid; source-file positions are not individual canonical identities.'),
     segment: z.union([z.string().trim().min(1).max(200), z.number().int().min(1)]).optional().describe("Exact segment ref from get_text or get_post_canonical, or its number. Give segment or paragraph, never both. Omit both for the first body segment; blank values are errors."),
     paragraph: z.union([z.string().trim().min(1).max(20), z.number().int().min(0)]).optional().describe("Exact VRI paragraph label instead of segment. In every scope, a label matching several segments is an error: choose an exact segment ref. Give at most one selector; omit both for the first body segment."),
-    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe("Expected citation locator revision from the P\u0101li reader. Required for explicit tha-ap107/108 segment, paragraph or word offset after their boundary repair."),
+    source_commit: z.string().regex(/^[a-f0-9]{40}(?:-[a-zA-Z0-9._-]{1,40})?$/).optional().describe("Expected citation locator revision from the P\u0101li reader. Required for explicit tha-ap107/108 and tha-ap333\u2013336 segment, paragraph or word offset after their boundary repair."),
     offset: z.number().int().min(0).max(1e5).optional().describe("Word offset within the segment, for continuation."),
     limit: z.number().int().min(1).max(200).default(60).describe("Words per call.")
   }, (args) => analysePassage(args));
@@ -70687,7 +70702,7 @@ function createServer({ executeTool } = {}) {
         return { isError: true, content: [{ type: "text", text: JSON.stringify({
           error: error2.message || "Request failed.",
           ...error2.code === "READING_SOURCE_CHANGED" ? { code: error2.code } : {},
-          ...error2.reopen && /^#read\?uid=tha-ap10[78]$/.test(error2.reopen) && ["READING_SOURCE_CHANGED", "READING_LOCATOR_AMBIGUOUS"].includes(error2.code) ? { code: error2.code, reopen: error2.reopen } : {},
+          ...error2.reopen && isCanonicalReopenRoute(error2.reopen) && ["READING_SOURCE_CHANGED", "READING_LOCATOR_AMBIGUOUS"].includes(error2.code) ? { code: error2.code, reopen: error2.reopen } : {},
           recovery: "Check the citation with resolve_reference or browse_canon. Never invent missing text."
         }) }] };
       }
@@ -70718,7 +70733,7 @@ function createServer({ executeTool } = {}) {
   tool("get_text", 'Read P\u0101li from the VRI edition: give uid for a sutta/section, or book for a complete source book including its front matter (IDs from browse_canon node "books"). Give exactly one of uid and book. Long texts are paginated by segment, with VRI paragraphs, PTS and Thai/Myanmar/VRI page breaks and optional raw/structured variants. With uid, optionally add English (translation: "default" or a translation_id from get_metadata) or aligned commentary. The P\u0101li works offline. Set script for Sinhala, Thai, Myanmar, Devanagari, Khmer, Lao or Lanna (transliterated from VRI Roman); uid may also be typed in those scripts.', {
     uid: citation.optional(),
     book: external_exports.string().trim().min(1).max(100).optional().describe('A complete VRI root book: use an exact ID from browse_canon node "books" (e.g. vin02m1). Give book instead of uid. Source-file segment references are not standard sutta/rule citations; English and aligned commentary require uid.'),
-    offset: external_exports.number().int().min(0).max(1e5).optional().describe("Segment offset for continuation. For the repaired tha-ap107/108 pair, every explicit position including 0 requires source_commit from the reader."),
+    offset: external_exports.number().int().min(0).max(1e5).optional().describe("Segment offset for continuation. For the repaired tha-ap107/108 and tha-ap333\u2013336 pair, every explicit position including 0 requires source_commit from the reader."),
     source_commit: external_exports.string().regex(/^[a-zA-Z0-9._-]{1,100}$/).optional().describe("Expected source locator revision from the selected reader. Preserve it for positional reads; a changed source or mapping refuses before wording."),
     limit: external_exports.number().int().min(1).max(200).default(60).describe("Segments per page."),
     includeVariants: external_exports.boolean().default(false).describe("Include variant readings recorded by VRI."),
@@ -70906,7 +70921,7 @@ function createServer({ executeTool } = {}) {
 // src/chatgpt-widget.mjs
 var import_node_crypto11 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v40";
+var WIDGET_VERSION = "v41";
 var NAVIGATION_TIMEOUT_MS = 9e4;
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
@@ -71274,7 +71289,7 @@ function registerChatgptWidget(server, { executeTool } = {}) {
       script: external_exports.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: external_exports.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: external_exports.boolean().default(true).describe("Fetch an English translation (live). false shows the P\u0101li only."),
-      offset: external_exports.number().int().min(0).max(1e5).optional().describe("P\u0101li segment offset for continuation. Repaired tha-ap107/108 positions, including 0, require the returned source_commit."),
+      offset: external_exports.number().int().min(0).max(1e5).optional().describe("P\u0101li segment offset for continuation. Repaired tha-ap107/108 and tha-ap333\u2013336 positions, including 0, require the returned source_commit."),
       limit: external_exports.number().int().min(1).max(80).default(40).describe("P\u0101li segments to show."),
       english_translation_revision: external_exports.string().regex(/^[a-f0-9]{40}$/).optional().describe("Exact source revision for a pinned Apad\u0101na selection or continuation."),
       english_prefix_sha256: external_exports.string().regex(/^[a-f0-9]{64}$/).optional().describe("Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset."),
@@ -71761,7 +71776,8 @@ var WIDGET_HTML = `<!doctype html>
     if (!d || typeof d !== 'object') return;
     if (d === rendered) { refreshSourceNotes(d); return; }
     if (!d.pali && typeof d.error !== 'string') return;
-    if ((d.text_id === 'tha-ap107' || d.text_id === 'tha-ap108') && (!d.source || d.source.locator_revision !== '${APADANA_PAIR_LOCATOR_REVISION}')) d = { error: 'The paired Apad\u0101na citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' };
+    var repairedPins = ${JSON.stringify(REPAIRED_CANONICAL_LOCATORS)};
+    if (Object.prototype.hasOwnProperty.call(repairedPins, d.text_id) && (!d.source || d.source.locator_revision !== repairedPins[d.text_id])) d = { error: 'The paired Apad\u0101na citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' };
     abandon(); generation++; awaitingSelection = false;
     if (!d.pali) {
       if (typeof d.error !== 'string') return;

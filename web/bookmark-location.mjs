@@ -1,4 +1,4 @@
-import { isApadanaPair } from '../src/locator-policy.mjs';
+import { requiredCanonicalRevision } from '../src/locator-policy.mjs';
 /** A saved reference is not a frozen copy; enforce its known revision before wording. */
 import {readingPosition} from './reading-position.mjs';
 export function bookmarkLocation(item, context) {
@@ -12,5 +12,5 @@ export function bookmarkLocation(item, context) {
   const href = readingPosition(context, offset, item.ref, pinned ? item.source_commit : 'legacy');
   if (pinned) return {href, pinned: true, notice: 'Saved source version: opening checks the revision before displaying wording.'};
   const args = new URLSearchParams(href.slice(6)); args.delete('source');
-  return {href: '#read?' + args, pinned: false, notice: (isApadanaPair(item.uid) ? 'Needs source review after the paired Apadāna boundary repair. This unversioned position will refuse; reopen the whole current poem separately. Your saved note and reference stay unchanged. ' : '') + 'Legacy bookmark: no source version was saved. Opening checks its reference against the current source; this is not a saved copy of the old wording.'};
+  return {href: '#read?' + args, pinned: false, notice: (requiredCanonicalRevision(item.uid) ? 'Needs source review after the reviewed Apadāna boundary repair. This unversioned position will refuse; reopen the whole current poem separately. Your saved note and reference stay unchanged. ' : '') + 'Legacy bookmark: no source version was saved. Opening checks its reference against the current source; this is not a saved copy of the old wording.'};
 }

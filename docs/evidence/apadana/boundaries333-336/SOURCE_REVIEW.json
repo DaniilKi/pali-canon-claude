@@ -1,0 +1,468 @@
+{
+  "schema": "independent-original-source-four-boundary-review-v1",
+  "status": "GO_SOURCE_BOUNDARIES_FOUR_UNIT_PROPOSAL_ONLY",
+  "reviewed_utc": "2026-11-26T09:34:44.865658+00:00",
+  "frozen_worktree": "/tmp/pali-boundaries333-nov26",
+  "current_data_sha256": "1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32",
+  "source_pins": {
+    "XML": {
+      "path": "/tmp/pali-sariputta-release/vri-fixture/romn/s0510m1.mul.xml",
+      "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+      "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+      "VRI_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070"
+    },
+    "publisher331": {
+      "path": "/tmp/pali-next330-nov26/source-a/raw/src/_poems/chapter-3/poem-331.md",
+      "sha256": "b4fa678c98a204bc591a5d6d656961060af3d5164e23516b9c8dfadf98902b4e",
+      "git_blob_sha1": "8e2540ef68328fcfe4efb38501d3d794a99892b5",
+      "publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    }
+  },
+  "full_source_replay": {
+    "physical_elements": 14646,
+    "retained_tuples": 14645,
+    "full_book_tuple_differences": 0,
+    "note_only_omission": {
+      "physical_index": 1130,
+      "note_sha256": "e4544e7b41ad8ed3f72d281f9735359c51aac2f8c758588731a1135e4a03fa60"
+    },
+    "source_book": 36,
+    "source_file": "s0510m1.mul.xml",
+    "full_book_blocks_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44"
+  },
+  "records": [
+    {
+      "id": "tha-ap333",
+      "old_record": {
+        "id": "tha-ap333",
+        "book": 36,
+        "start": 9767,
+        "end": 9793,
+        "title": "Gandhadhūpiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 333",
+        "vri": "1–7",
+        "pts": {
+          "volume": 1,
+          "page": 267,
+          "end_page": 267
+        }
+      },
+      "proposed_new_record": {
+        "id": "tha-ap333",
+        "book": 36,
+        "start": 9767,
+        "end": 9789,
+        "title": "Gandhadhūpiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 333",
+        "vri": "1–6",
+        "pts": {
+          "volume": 1,
+          "page": 267,
+          "end_page": 267
+        },
+        "index_revision": "apadana-thera333-336-v1"
+      },
+      "old_record_sha256": "088b74fb024a208b85b1d0a27bca784064c6891a3b817fa8225e0981ee9d59c9",
+      "proposed_new_record_sha256": "dd886a0988a80774f9ec7a05e8596af4cbf93dd6d25b0898f99884e2c155f653",
+      "old_root_sha256": "5b3b0c2ab16df11f94e0662f984801cbf4b259881b8456705b589c19a5ad02c9",
+      "proposed_new_root_sha256": "b6e505c63777cbec11bc988b4c86e085e41a6039c05f2c60e635e3acc4140356",
+      "original_heading": {
+        "block": 9768,
+        "physical_XML_index": 9769,
+        "text": "1. Gandhadhūpiyattheraapadānaṃ"
+      },
+      "original_numbered_labels": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "original_speaking_colophon": {
+        "block": 9787,
+        "physical_XML_index": 9788,
+        "text": "Itthaṃ sudaṃ āyasmā gandhadhūpiyo thero imā gāthāyo abhāsitthāti."
+      },
+      "original_closing_colophon": {
+        "block": 9788,
+        "physical_XML_index": 9789,
+        "text": "Gandhadhūpiyattherassāpadānaṃ paṭhamaṃ."
+      },
+      "PTS_independently_derived_from_XML": {
+        "volume": 1,
+        "page": 267,
+        "end_page": 267
+      }
+    },
+    {
+      "id": "tha-ap334",
+      "old_record": {
+        "id": "tha-ap334",
+        "book": 36,
+        "start": 9793,
+        "end": 9816,
+        "title": "Udakapūjakattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 334",
+        "vri": "8–14",
+        "pts": {
+          "volume": 1,
+          "page": 267,
+          "end_page": 267
+        }
+      },
+      "proposed_new_record": {
+        "id": "tha-ap334",
+        "book": 36,
+        "start": 9789,
+        "end": 9812,
+        "title": "Udakapūjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 334",
+        "vri": "7–13",
+        "pts": {
+          "volume": 1,
+          "page": 267,
+          "end_page": 267
+        },
+        "index_revision": "apadana-thera333-336-v1"
+      },
+      "old_record_sha256": "917c9612425186e57e1dde59bd9ed774ec79a042cfed4399aecd74560635c1d0",
+      "proposed_new_record_sha256": "a6f635b94e38246ffa3d63d0315ce3f88816b087cabb27caac259345d25523c2",
+      "old_root_sha256": "669d0b52ed3e524a51ca43a9c031b18fbc1c4bf7c9b1cb972ce3a764962bd8eb",
+      "proposed_new_root_sha256": "0e70d05be72e1b91a9f55f6426c42f34b5e27e89b7f172702cad7267f36e51fb",
+      "original_heading": {
+        "block": 9789,
+        "physical_XML_index": 9790,
+        "text": "2. Udakapūjakattheraapadānaṃ"
+      },
+      "original_numbered_labels": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "original_speaking_colophon": {
+        "block": 9810,
+        "physical_XML_index": 9811,
+        "text": "Itthaṃ sudaṃ āyasmā udakapūjako thero imā gāthāyo abhāsitthāti."
+      },
+      "original_closing_colophon": {
+        "block": 9811,
+        "physical_XML_index": 9812,
+        "text": "Udakapūjakattherassāpadānaṃ dutiyaṃ."
+      },
+      "PTS_independently_derived_from_XML": {
+        "volume": 1,
+        "page": 267,
+        "end_page": 267
+      }
+    },
+    {
+      "id": "tha-ap335",
+      "old_record": {
+        "id": "tha-ap335",
+        "book": 36,
+        "start": 9816,
+        "end": 9833,
+        "title": "Punnāgapupphiyattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 335",
+        "vri": "15–19",
+        "pts": {
+          "volume": 1,
+          "page": 267,
+          "end_page": 267
+        }
+      },
+      "proposed_new_record": {
+        "id": "tha-ap335",
+        "book": 36,
+        "start": 9812,
+        "end": 9829,
+        "title": "Punnāgapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 335",
+        "vri": "14–18",
+        "pts": {
+          "volume": 1,
+          "page": 267,
+          "end_page": 267
+        },
+        "index_revision": "apadana-thera333-336-v1"
+      },
+      "old_record_sha256": "ec06a2407a456a497c96181e0fad1f444ee7ba635825e7f3d6c02aa1da79ea2a",
+      "proposed_new_record_sha256": "c0a6e11f1e54cba6a28e0568474fba34a8321f67f3a144c1761bf5c451d5168e",
+      "old_root_sha256": "20279eaae2a7c86f34b7c214db47ecb7394e9ca759f0ee0488db63e82c041699",
+      "proposed_new_root_sha256": "bb279af85bd0ee35b5ce94514fc45cf9de979426046c9c995dd9907d98994511",
+      "original_heading": {
+        "block": 9812,
+        "physical_XML_index": 9813,
+        "text": "3. Punnāgapupphiyattheraapadānaṃ"
+      },
+      "original_numbered_labels": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "original_speaking_colophon": {
+        "block": 9827,
+        "physical_XML_index": 9828,
+        "text": "Itthaṃ sudaṃ āyasmā punnāgapupphiyo thero imā gāthāyo abhāsitthāti."
+      },
+      "original_closing_colophon": {
+        "block": 9828,
+        "physical_XML_index": 9829,
+        "text": "Punnāgapupphiyattherassāpadānaṃ tatiyaṃ."
+      },
+      "PTS_independently_derived_from_XML": {
+        "volume": 1,
+        "page": 267,
+        "end_page": 267
+      }
+    },
+    {
+      "id": "tha-ap336",
+      "old_record": {
+        "id": "tha-ap336",
+        "book": 36,
+        "start": 9833,
+        "end": 9890,
+        "title": "Ekadussadāyakattheraapadāna",
+        "collection": "ap",
+        "acronym": "Tha Ap 336",
+        "vri": "20–37",
+        "pts": {
+          "volume": 1,
+          "page": 267,
+          "end_page": 267
+        }
+      },
+      "proposed_new_record": {
+        "id": "tha-ap336",
+        "book": 36,
+        "start": 9829,
+        "end": 9890,
+        "title": "Ekadussadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 336",
+        "vri": "19–37",
+        "pts": {
+          "volume": 1,
+          "page": 267,
+          "end_page": 267
+        },
+        "index_revision": "apadana-thera333-336-v1"
+      },
+      "old_record_sha256": "6dc799b86e94a9645f462068c7b716c30723a85ee567761ff9295e47789b7c5d",
+      "proposed_new_record_sha256": "2621b3636e44661dd8fdd95c91f010e36cb0301feabbdc33f19aa0b9c785ed6d",
+      "old_root_sha256": "1c8bd9bd800480bc9252bb828e044be5c919af30a2f18a7b088403899e4bbbab",
+      "proposed_new_root_sha256": "79293b1bc92ea4b2555c63442c49b7478132c1ee40ee075b987a60a981573e18",
+      "original_heading": {
+        "block": 9829,
+        "physical_XML_index": 9830,
+        "text": "4. Ekadussadāyakattheraapadānaṃ"
+      },
+      "original_numbered_labels": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "original_speaking_colophon": {
+        "block": 9888,
+        "physical_XML_index": 9889,
+        "text": "Itthaṃ sudaṃ āyasmā ekadussadāyako thero imā gāthāyo abhāsitthāti."
+      },
+      "original_closing_colophon": {
+        "block": 9889,
+        "physical_XML_index": 9890,
+        "text": "Ekadussadāyakattherassāpadānaṃ catutthaṃ."
+      },
+      "PTS_independently_derived_from_XML": {
+        "volume": 1,
+        "page": 267,
+        "end_page": 267
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "next_start": 9789,
+      "closing_colophon_before": 9788,
+      "next_block_kind": "subhead",
+      "next_block_text": "2. Udakapūjakattheraapadānaṃ"
+    },
+    {
+      "next_start": 9812,
+      "closing_colophon_before": 9811,
+      "next_block_kind": "subhead",
+      "next_block_text": "3. Punnāgapupphiyattheraapadānaṃ"
+    },
+    {
+      "next_start": 9829,
+      "closing_colophon_before": 9828,
+      "next_block_kind": "subhead",
+      "next_block_text": "4. Ekadussadāyakattheraapadānaṃ"
+    },
+    {
+      "next_start": 9890,
+      "closing_colophon_before": 9889,
+      "next_block_kind": "subhead",
+      "next_block_text": "5. Phusitakampiyattheraapadānaṃ"
+    }
+  ],
+  "union": {
+    "start": 9767,
+    "end": 9890,
+    "blocks": 123,
+    "sha256": "870dde544fd31e39265250f928d18e15ad05a7f56607cb84275053e424e9e39b",
+    "complete_four_partition_no_gaps_or_overlap": true
+  },
+  "neighbors": [
+    {
+      "id": "tha-ap332",
+      "book": 36,
+      "start": 9688,
+      "end": 9767,
+      "title": "Saparivārachattadāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 332",
+      "vri": "82–105",
+      "pts": {
+        "volume": 1,
+        "page": 265,
+        "end_page": 267
+      }
+    },
+    {
+      "id": "tha-ap337",
+      "book": 36,
+      "start": 9890,
+      "end": 9938,
+      "title": "Phusitakampiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 337",
+      "vri": "38–52",
+      "pts": {
+        "volume": 1,
+        "page": 267,
+        "end_page": 269
+      }
+    }
+  ],
+  "PTS_annotation": {
+    "preceding_P_marker_block": 9753,
+    "preceding_P_marker_physical_XML_index": 9754,
+    "preceding_P_value": "1.267",
+    "P_markers_inside_union": [],
+    "all_old_and_proposed_pts": {
+      "volume": 1,
+      "page": 267,
+      "end_page": 267
+    },
+    "opening_offset_branch_relevant": false
+  },
+  "segment_mapping_summary": {
+    "old_segments": 50,
+    "proposed_segments": 50,
+    "exact_source_match_for_every_old_segment": 50,
+    "cross_owner_moves": 6,
+    "changed_numeric_ref_collisions": 38,
+    "old_numeric_refs_no_longer_present": 2,
+    "same_ref_and_source": 10
+  },
+  "source_identity331_only": {
+    "frontmatter": {
+      "title": "Gandhathūpiya",
+      "order": 331,
+      "category": "chapter-3"
+    },
+    "printed_labels": [
+      [
+        "1",
+        "2931"
+      ],
+      [
+        "2",
+        "2932"
+      ],
+      [
+        "3-4",
+        "2933-2934"
+      ],
+      [
+        "5",
+        "2935"
+      ],
+      [
+        "6",
+        "2936"
+      ]
+    ],
+    "poem_colophons_match_frontmatter": true,
+    "chapter34_source_context_matches_XML": true,
+    "distinctive_narrative_witnesses_match": true,
+    "numeric_plus2_used_as_identity_proof": false,
+    "publisher_VRI_title_difference_retained": true,
+    "repeated_source95_cross_reference_not_a_mapping_authority": true,
+    "notes": {
+      "1": "chapter heading",
+      "2": "poem heading",
+      "3": "stanza1",
+      "4": "stanza2"
+    },
+    "publisher332_334_English_originals_reviewed": false,
+    "translation_activation_approval": false
+  },
+  "preservation_targets": {
+    "other_unit_count": 8540,
+    "other_unit_records_ordered_sha256": "b2d4cef723f611cc1a9e254e5eb1e88972e893a68d8aa3a8a38f54d53db88243",
+    "all61_books_sha256": "ad8c7cbfa8249d4f21eb94bd59b556e8823e5870dcf0a657bfaedee5a0fd4883",
+    "catalogue339_sha256": "5dc0bcc92f6ce15cebe9c0948e266c7f2950c99c7b0a9bcddf53f75526d249fe",
+    "four_have_no_approved_Apadana_English": true,
+    "commentary_raw_logical_sha256": "8b9c055181913097bb37cbe0046e8c64efcabea884aad49d272a424cd1207461",
+    "commentary_associations": 16473,
+    "target_commentary_associations": 0,
+    "group_shared_dependencies": 0
+  },
+  "ambiguity_policy": "Mapping is valid only for the exact frozen1c40 old records. An unversioned locator or the VRI commit alone is not permission to infer an arbitrary historic index or silently rebind a note. Even ten stable same-ref/source cases remain subject to the finite repaired-group positional gate.",
+  "safety_conditions": [
+    "All four records must change atomically with one new explicit locator revision; a two-unit partial fix leaves wrong boundaries.",
+    "Old positional links, including offset0 and saved note refs, must refuse before substitute wording until explicitly reopened with the new locator pin.",
+    "Keep old1c40/source/339 profiles and all historical26-byte authorities immutable; add finite inverse/current proof rather than rewrite old expectations.",
+    "No English332–334 identity/rights scope is proved here; publisher331 remains boundary-only.",
+    "Pāli titles are copied from exact original subheads, not rewritten to publisher spellings; source blocks/notes/pages are never altered."
+  ],
+  "not_approved": [
+    "application implementation",
+    "automated personal-data migration",
+    "runtime/build/package/CI acceptance",
+    "English catalogue activation",
+    "physical-device or human assistive acceptance"
+  ],
+  "actions": "Original byte/blob checks, stdlib XML/canonical/page/segment metadata analysis only. No application imports, test suites, build, source fetch, Git operations, repo edits or publishing."
+}
