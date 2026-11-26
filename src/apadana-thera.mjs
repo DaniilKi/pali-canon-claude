@@ -2,6 +2,9 @@
 import { THERA_APADANA_PROFILES } from './apadana-thera-profiles.mjs';
 import { digest, plainMarkdown } from './apadana-presentation.mjs';
 const fail = () => { throw new Error('Apadāna source metadata or content differs from the reviewed pinned publication.'); };
+// These three pinned originals explicitly print BJTS-only fancy-brace headings.
+// Their source ordering, canonical identities and printed labels are distinct.
+const BJTS_ONLY_HEADINGS = Object.freeze({ 'tha-ap334': 332, 'tha-ap335': 333, 'tha-ap336': 334 });
 
 /** Only the exact Sobhita artifact combines original labels in physical paragraphs. */
 export function theraMultiLabelQuotation(paragraph, stanza, profile, index) {
@@ -259,16 +262,37 @@ export function parseTheraApadana(raw, profile) {
     if (digest(text) !== profile.chapter_summary.body_sha256 || digest(JSON.stringify(translator_notes)) !== profile.chapter_summary.notes_sha256) fail();
     chapter_summary = { ...profile.chapter_summary, text, translator_notes };
   }
-  const owned = [...profile.note_numbers, ...(profile.editorial_gap?.note_numbers || []), ...(profile.chapter_summary?.note_numbers || []), ...(profile.collection_summary?.note_numbers || []), ...(profile.publisher_divisions || []).flatMap(s => s.note_numbers)];
+  const owned = [...profile.note_numbers, ...(profile.publisher_preface?.note_numbers || []), ...(profile.editorial_gap?.note_numbers || []), ...(profile.chapter_summary?.note_numbers || []), ...(profile.collection_summary?.note_numbers || []), ...(profile.publisher_divisions || []).flatMap(s => s.note_numbers)];
   if (new Set(owned).size !== owned.length || owned.length !== notes.length || notes.some(n => !owned.includes(n.number))) fail();
   // Publisher101 alone uses ## for its poem heading, beside a separate ## preface.
   const headings = [...poem.matchAll(profile.id === 'tha-ap103' ? /^## \\\[101\. /gm : /^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253', 'tha-ap263', 'tha-ap273', 'tha-ap283', 'tha-ap323'].includes(profile.id) !== (split > 0)) fail();
-  const preface = poem.slice(0, split), body = poem.slice(split); refs(preface, []); refs(body, profile.note_numbers);
+  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253', 'tha-ap263', 'tha-ap273', 'tha-ap283', 'tha-ap323', 'tha-ap333'].includes(profile.id) !== (split > 0)) fail();
+  const preface = poem.slice(0, split), body = poem.slice(split); refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text.split(/\n\n+/);
+  let publisher_preface;
+  if (profile.publisher_preface) {
+    const scope = profile.publisher_preface;
+    if (profile.id !== 'tha-ap333' || profile.poem !== 331
+      || Object.keys(scope).sort().join(',') !== 'body_sha256,kind,label,note_numbers,notes_sha256,parent_id'
+      || scope.kind !== 'publisher_preface' || scope.parent_id !== profile.id
+      || scope.label !== 'Thirty-fourth Therā chapter preface'
+      || JSON.stringify(scope.note_numbers) !== '[1]' || scope.body_sha256 !== profile.paratext_sha256) fail();
+    refs(preface, scope.note_numbers);
+    const notes = notesFor(scope.note_numbers);
+    if (digest(publisher_paratext) !== scope.body_sha256 || digest(JSON.stringify(notes)) !== scope.notes_sha256) fail();
+    // The preface wording remains solely in publisher_paratext; note1 stays editorial.
+    publisher_preface = { ...scope, translator_notes: notes };
+  } else refs(preface, []);
+  const bjtsPoem = BJTS_ONLY_HEADINGS[profile.id];
+  if (Object.hasOwn(profile, 'publisher_heading_sha256') !== (bjtsPoem !== undefined)) fail();
+  const headingMatches = bjtsPoem === undefined ? paragraphs[0].startsWith(`[${profile.poem}. `)
+    : profile.poem === bjtsPoem && /^[a-f0-9]{64}$/.test(profile.publisher_heading_sha256)
+      && digest(paragraphs[0]) === profile.publisher_heading_sha256
+      && paragraphs[0].startsWith(`{*${bjtsPoem}, BJTS only: `)
+      && profile.stanza_layout.every(stanza => stanza.local_label === null);
   const joinedColophons = ['tha-ap134', 'tha-ap184'].includes(profile.id);
   const colophons = joinedColophons ? paragraphs.at(-1).split('\n') : paragraphs.slice(-2);
-  if (paragraphs.length !== profile.stanza_layout.length + (joinedColophons || profile.id === 'tha-ap210' ? 2 : 3) || !paragraphs[0].startsWith(`[${profile.poem}. `)
+  if (paragraphs.length !== profile.stanza_layout.length + (joinedColophons || profile.id === 'tha-ap210' ? 2 : 3) || !headingMatches
     || colophons.length !== 2
     || !(profile.id === 'tha-ap34' ? /^This indeed / : profile.id === 'tha-ap48' ? /^Thus indeed, / : /^Thus indeed /).test(colophons[0])
     || !(['tha-ap33', 'tha-ap45'].includes(profile.id) ? /^The Legend of / : /^The legend of /).test(colophons[1])
@@ -280,5 +304,5 @@ export function parseTheraApadana(raw, profile) {
     if (!stanza.suffix || entry.split('\n').length !== stanza.lines
       || !entry.replace(/\[Note \d+\]/g, '').trim().endsWith(stanza.suffix)) fail();
   }
-  return { title, text, translator_notes, publisher_paratext, ...(editorial_gap ? {editorial_gap} : {}), ...(chapter_summary ? {chapter_summary} : {}), ...(collection_summary ? {collection_summary} : {}), ...(publisher_divisions ? {publisher_divisions} : {}) };
+  return { title, text, translator_notes, publisher_paratext, ...(publisher_preface ? {publisher_preface} : {}), ...(editorial_gap ? {editorial_gap} : {}), ...(chapter_summary ? {chapter_summary} : {}), ...(collection_summary ? {collection_summary} : {}), ...(publisher_divisions ? {publisher_divisions} : {}) };
 }

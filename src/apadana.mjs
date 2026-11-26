@@ -188,7 +188,7 @@ export function validateLink(link, id, unit, book) {
   }
   if (['partial_scope', 'shared_scope', 'section', 'parts'].some(key => Object.hasOwn(link, key))) fail();
   for (const key of ['title', 'reference', 'mapping_notes']) if (JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
-  for (const key of ['publisher_chapter', 'index_revision', 'publisher_verse_labels', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions', 'editorial_gap', 'exact_ref_url', 'colophons_share_physical_paragraph']) {
+  for (const key of ['publisher_chapter', 'index_revision', 'publisher_verse_labels', 'publisher_heading_sha256', 'publisher_preface', 'chapter_summary', 'collection_summary', 'note_numbers', 'root_verses', 'stanza_layout', 'publisher_divisions', 'editorial_gap', 'exact_ref_url', 'colophons_share_physical_paragraph']) {
     if (Object.hasOwn(link, key) !== Object.hasOwn(profile, key) || JSON.stringify(link[key]) !== JSON.stringify(profile[key])) fail();
   }
   if (link.english !== undefined && link.english !== profile.title) fail();
@@ -257,6 +257,8 @@ export async function translation(link) {
       + (theri && profile.poem === 17 ? ' The publisher recitation division and its original note 21 are displayed separately, before the identified publisher stanza, outside poem text and quotation evidence.' : '')
       + (theri && [18, 24, 27, 33].includes(profile.poem) ? ' Exact paired HTML display spans retain the diacritic spelling and remove only its alternate display; original editorial placeholders remain unchanged.' : '')
       + (theri && profile.poem === 31 ? ' The fourth-chapter publisher preface owns original note 1, separately from poem notes 2–18. Original duplicate local stanza 11 is retained; no number is inferred or corrected.' : '')
+      + (!theri && profile.id === 'tha-ap333' ? ' The thirty-fourth-chapter publisher preface owns original note 1 separately from poem notes 2–4. Its wording appears once as editorial paratext; no preface wording or note is poem quotation evidence. The combined printed local 3–4/global 2933–2934 entry stays intact.' : '')
+      + (!theri && ['tha-ap334', 'tha-ap335', 'tha-ap336'].includes(profile.id) ? ' The original fancy-brace heading and literal asterisk identify a BJTS-only publisher poem. These originals print global verse labels without local stanza numbers; no local numbers are generated. Physical English entries and VRI stanza boundaries are independent edition evidence, not line-by-line alignment.' : '')
       + (theri && profile.poem === 40 ? ' The publisher collection summary and its original notes 11–12 are separately scoped from the chapter summary and notes 8–10 and from poem text and notes 1–7. Original summary counts and closing colophons are retained without inferring complete VRI line alignment.' : '')
       + (theri && profile.poem === 19 ? ' One paragraph break separates printed publisher stanza 534 from local 24/global 535, originally printed in the same paragraph; wording and labels are unchanged.' : '')
       + (theri && profile.poem === 21 ? ' One paragraph break separates the publisher combined local 38-39/global 676-677 stanza from local 40/global 678; wording and labels are unchanged.' : '')

@@ -1,0 +1,14 @@
+{
+  "schema": "independent-original331-334-source-review-seal-v1",
+  "status": "GO_EXACT_ORIGINAL_SCOPES_ONLY_IMPLEMENTATION_AND_ACTIVATION_HELD",
+  "files": {
+    "ORIGINAL_SOURCE_REVIEW.json": "dace9bc63059c211f0ae090dc69a2bd4487b2fbeaee9fdce0579eae40c0c65a2",
+    "README.md": "61f0afc77f4c6232da07ab1bab4a91159b0dee79d735f7c37f68d69113941f89",
+    "REPRESENTATION_ADDENDUM.json": "8b3238ee98cbdacb2ed9be04c8a656648c0998c91b2560669a34af9f98387b5e",
+    "review_originals.py": "b070842c107ec54255aede7953ae6852303fa71fc3a350f64d591a2ae36ad398"
+  },
+  "source_only": true,
+  "activation_approved": false,
+  "normalization_approved": false,
+  "no_application_import_tests_build_git_network": true
+}

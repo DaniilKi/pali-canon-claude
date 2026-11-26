@@ -1,0 +1,12 @@
+{
+  "status": "GO_EXACT_FOUR_PUBLISHER_EDITION_NORMALIZATIONS_ONLY",
+  "approval_sha256": "bd1891106e99c3dacc5748618a87be913df20949a83f62a40d320d95c71d004d",
+  "comparison_sha256": "b8223fd106b0cdf96a85e754967b779758fddcf8fff1b444449fd7a91639d8f1",
+  "schema_adapter_sha256": "a3ac33cf868c3ecd7f6480457f6eb905013d88556787d30950472cd479f3af4a",
+  "original_preseal_sha256": "3b1c53934f2b19b8d61d8cb29dbfa458c5da436c8c0cf300139473b7c10357df",
+  "source_normalization_only_no_runtime_or_release": true,
+  "supplemental_scope_check": {
+    "file": "SUPPLEMENTAL_SCOPE_LINK_CHECK.json",
+    "sha256": "bb94a39704cf07583b2183926b229d0fef3e71a4c491150fe4147a3aafc7d2d4"
+  }
+}

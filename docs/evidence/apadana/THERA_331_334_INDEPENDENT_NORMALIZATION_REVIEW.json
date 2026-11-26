@@ -1,0 +1,317 @@
+{
+  "schema": "independent-four-english-normalization-approval-v1",
+  "status": "GO_EXACT_FOUR_PUBLISHER_EDITION_NORMALIZATIONS_ONLY",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8",
+  "approved_publishers": [
+    331,
+    332,
+    333,
+    334
+  ],
+  "approved_ids": [
+    "tha-ap333",
+    "tha-ap334",
+    "tha-ap335",
+    "tha-ap336"
+  ],
+  "source_boundary_witness335_is_not_an_intake": true,
+  "source_only_review": {
+    "path": "/tmp/pali-next334-source-review-nov26/independent-review/ORIGINAL_SOURCE_REVIEW.json",
+    "sha256": "dace9bc63059c211f0ae090dc69a2bd4487b2fbeaee9fdce0579eae40c0c65a2",
+    "seal_sha256": "6d08449e9c18e134cd9cc88dfde799cfc03fdde05971608b24d105b0e0468087"
+  },
+  "producer_preseal_sha256": "5096b5d7ced86b6805b91cb7592d47eb256dcf3dfc8376cebf3b5ad02ae8811e",
+  "approved_producer_files": {
+    "DERIVATION_RECEIPT.json": "69da091f1cc00ee7c1cda8ab8b43d8e995f7b6d95a24f8b43e044b0a49b2dd98",
+    "EXPECTED_LINKS.json": "0562f11a03d6f137ed68b968f3d416809ef7760af9f4760c99a3a034e757863e",
+    "EXPECTED_PROFILES.json": "966b29f832f48ca292051acea4c001c72a20e8dfb5d495486ba1f5b373888fcb",
+    "GOLDENS.json": "b4a70845d190e0ec300b63a8022f263fa444eecbefe47e3a884681d532f40696",
+    "SOURCE_SCOPES.json": "a439afd330ac28f16547ff5b433eb8622014ead9fa9682370da5471fad5f353e"
+  },
+  "independent_original_first_evidence": {
+    "proof": {
+      "file": "INDEPENDENT_ORIGINAL_FIRST_PROOF.json",
+      "sha256": "c27c6aea04e3be33244c4e231ba4aefe5509d2b32b4fada1fd268b1c6a8afc51"
+    },
+    "pre_comparison_seal": {
+      "file": "PRE_COMPARISON_SEAL.json",
+      "sha256": "3b1c53934f2b19b8d61d8cb29dbfa458c5da436c8c0cf300139473b7c10357df"
+    },
+    "derivation_script": {
+      "file": "derive_independent_originals.py",
+      "sha256": "23a95aa8ee68de5a82db85d58d326aacb5c1683625941d983980972206a43c7a"
+    }
+  },
+  "cross_comparison": {
+    "file": "PRODUCER_CROSS_COMPARISON.json",
+    "sha256": "b8223fd106b0cdf96a85e754967b779758fddcf8fff1b444449fd7a91639d8f1",
+    "field_comparisons": 785,
+    "content_or_metadata_differences_after_explicit_schema_adapter": 0
+  },
+  "required_schema_adapter": {
+    "file": "NORMALIZATION_SCHEMA_ADAPTER.json",
+    "sha256": "a3ac33cf868c3ecd7f6480457f6eb905013d88556787d30950472cd479f3af4a"
+  },
+  "per_source": [
+    {
+      "id": "tha-ap333",
+      "publisher": 331,
+      "decision": "GO_EXACT_NORMALIZED_PUBLISHER_SCOPE",
+      "body_sha256": "3c05b02f8ca8e7651a2e51e25f0758bc49eae5f6b38d3dad99e6521d6f51ee0c",
+      "notes_sha256": "4a169fea608184fe58d6a5cb5cc87165cf59d4fb4e9c463c627a442339c17964",
+      "effective_paratext_sha256": "12568de794147c89a721132263b864d049685e5cb7ae55cabe49975588d1b8fe",
+      "root_sha256": "b6e505c63777cbec11bc988b4c86e085e41a6039c05f2c60e635e3acc4140356",
+      "body_characters_utf16": 1001,
+      "poem_notes": [
+        2,
+        3,
+        4
+      ],
+      "preface_notes": [
+        1
+      ],
+      "whole_profile_object_sha256": "5cf310e4d4f56b10b11516e15148e8492e318ec2e5613f9953f4776b7e819b23",
+      "whole_link_object_sha256": "0616e9b68950fb9488f329b7e464845cc36f9f9495a950c23fe393c12091e582",
+      "source_eligibility": "GO_COMPLETE_PINNED_PUBLISHER_EDITION_SCOPE_ONLY",
+      "normalization_decision": "GO_EXACT_PRESEALED_METADATA",
+      "raw_git_blob_sha1": "8e2540ef68328fcfe4efb38501d3d794a99892b5",
+      "body_paragraphs": 8,
+      "physical_stanza_entries": 5,
+      "printed_global_labels": 6,
+      "printed_local_labels": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "stanza_layout_sha256": "924bf3205e5cdf66873190fac572a76291addf9f812d087b8f262cf9ecf365c0",
+      "publisher_heading_sha256": "d623e141f50b1424c2f6e829cbb7760cb928e5e3c2dbf7de89e3d19f12039054",
+      "pages500": 3,
+      "stanza_quotations": 5,
+      "publisher_preface_descriptor": {
+        "kind": "publisher_preface",
+        "parent_id": "tha-ap333",
+        "label": "Thirty-fourth Therā chapter preface",
+        "body_sha256": "12568de794147c89a721132263b864d049685e5cb7ae55cabe49975588d1b8fe",
+        "notes_sha256": "73b65b2a80b68ba1e62ed6bc90f98c1e63d8f22e241337827dca2d621e274acc",
+        "note_numbers": [
+          1
+        ]
+      },
+      "publisher_preface_exact_six_keys_textless": true,
+      "body_notes_attribution_license_scope_checked": true,
+      "note_ownership_fully_compared": true,
+      "local_number_inference": false,
+      "line_complete_VRI_claim": false
+    },
+    {
+      "id": "tha-ap334",
+      "publisher": 332,
+      "decision": "GO_EXACT_NORMALIZED_PUBLISHER_SCOPE",
+      "body_sha256": "613aa452420398b80893160bcd17da88204d5ebfe1695060bcc2a7d0a51480e4",
+      "notes_sha256": "0b54f16d431d7a1b816cf9ca88a52f784f95bb446c2584e46ef36c30f30e8016",
+      "effective_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "0e70d05be72e1b91a9f55f6426c42f34b5e27e89b7f172702cad7267f36e51fb",
+      "body_characters_utf16": 1161,
+      "poem_notes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "preface_notes": [],
+      "whole_profile_object_sha256": "939a412686bd0dafea83ca1e8d597b2d3622da910d5ccb33b93b8b8318a90d21",
+      "whole_link_object_sha256": "959e6ad6485abf5ab5fe3ca603a198d1ecc48bd75b741ad42d487a2dc34f9e35",
+      "source_eligibility": "GO_COMPLETE_PINNED_PUBLISHER_EDITION_SCOPE_ONLY",
+      "normalization_decision": "GO_EXACT_PRESEALED_METADATA",
+      "raw_git_blob_sha1": "41d86773604b95cf0698e0e9fc19f6b5ff5d9bed",
+      "body_paragraphs": 10,
+      "physical_stanza_entries": 7,
+      "printed_global_labels": 7,
+      "printed_local_labels": [],
+      "stanza_layout_sha256": "4d8ad12065ebb2fd2e56f3796c4afc737bb144bda9c7043cc09135adfd7a14a7",
+      "publisher_heading_sha256": "c6d6821fc3a5c74389fdf1d46e5e3380dbb62e58156594d54ded55281979e55d",
+      "pages500": 3,
+      "stanza_quotations": 7,
+      "publisher_preface_descriptor": null,
+      "publisher_preface_exact_six_keys_textless": false,
+      "body_notes_attribution_license_scope_checked": true,
+      "note_ownership_fully_compared": true,
+      "local_number_inference": false,
+      "line_complete_VRI_claim": false
+    },
+    {
+      "id": "tha-ap335",
+      "publisher": 333,
+      "decision": "GO_EXACT_NORMALIZED_PUBLISHER_SCOPE",
+      "body_sha256": "1c64b4d49c8232a0f12de6608e2188fc840dde42714e29e3972e59105a5ca9bf",
+      "notes_sha256": "95e563f20f04d3d76b438a1099ac7e814d590a83205a6f0105d133e2b0ce1846",
+      "effective_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "bb279af85bd0ee35b5ce94514fc45cf9de979426046c9c995dd9907d98994511",
+      "body_characters_utf16": 874,
+      "poem_notes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "preface_notes": [],
+      "whole_profile_object_sha256": "1eb49837997139dbb119a3e958558669cab3941d8aa0713571e8404e80fda5ce",
+      "whole_link_object_sha256": "4ccc71196de9095d27ddd517b99bc0eb555a6715424a056449efab333646202e",
+      "source_eligibility": "GO_COMPLETE_PINNED_PUBLISHER_EDITION_SCOPE_ONLY",
+      "normalization_decision": "GO_EXACT_PRESEALED_METADATA",
+      "raw_git_blob_sha1": "1a934bc3068da402ba0f0550cd393fe0f07eb092",
+      "body_paragraphs": 8,
+      "physical_stanza_entries": 5,
+      "printed_global_labels": 5,
+      "printed_local_labels": [],
+      "stanza_layout_sha256": "2d400d26b9fc7bc087d1f9ae34a1c731c6ed8d4685808f364e78455caa5079ed",
+      "publisher_heading_sha256": "03ecf1056510522a8596d4b371db9e111eb420e7ae2c48698210a779969e65e6",
+      "pages500": 2,
+      "stanza_quotations": 5,
+      "publisher_preface_descriptor": null,
+      "publisher_preface_exact_six_keys_textless": false,
+      "body_notes_attribution_license_scope_checked": true,
+      "note_ownership_fully_compared": true,
+      "local_number_inference": false,
+      "line_complete_VRI_claim": false
+    },
+    {
+      "id": "tha-ap336",
+      "publisher": 334,
+      "decision": "GO_EXACT_NORMALIZED_PUBLISHER_SCOPE",
+      "body_sha256": "a79016e88685f51463621cb98d7d7ca9b8ec0a084aafdff498edcf8fc1be1836",
+      "notes_sha256": "3ce6b8e3384b6a12ea1589ed4803f87d75032f71378fcb66c0209cabebd13bd7",
+      "effective_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "79293b1bc92ea4b2555c63442c49b7478132c1ee40ee075b987a60a981573e18",
+      "body_characters_utf16": 2993,
+      "poem_notes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "preface_notes": [],
+      "whole_profile_object_sha256": "cc6e052a1f276f011cebf6719d676c1233966a442528b7bd45c57221073753f6",
+      "whole_link_object_sha256": "ec902cb3d3b4fd47212699f99307c222090f8d5200d826b093c20c18aaa1a550",
+      "source_eligibility": "GO_COMPLETE_PINNED_PUBLISHER_EDITION_SCOPE_ONLY",
+      "normalization_decision": "GO_EXACT_PRESEALED_METADATA",
+      "raw_git_blob_sha1": "18fa12248c64c360d1137240bf24fdabfa8a8d1f",
+      "body_paragraphs": 22,
+      "physical_stanza_entries": 19,
+      "printed_global_labels": 20,
+      "printed_local_labels": [],
+      "stanza_layout_sha256": "964d768d9afe7401252b62ddc9c20242d1dc3840725506f88635a9e646245e92",
+      "publisher_heading_sha256": "cda93528a026ed61890871558dc073d56f0ae863470f5759556152fd62577b20",
+      "pages500": 6,
+      "stanza_quotations": 19,
+      "publisher_preface_descriptor": null,
+      "publisher_preface_exact_six_keys_textless": false,
+      "body_notes_attribution_license_scope_checked": true,
+      "note_ownership_fully_compared": true,
+      "local_number_inference": false,
+      "line_complete_VRI_claim": false
+    }
+  ],
+  "totals": {
+    "complete_publisher_edition_choices": 4,
+    "body_paragraphs": 48,
+    "physical_stanza_entries": 36,
+    "printed_global_labels": 38,
+    "printed_local_labels": 6,
+    "absent_local_label_entries": 31,
+    "combined_eight_line_entries": 2,
+    "poem_notes": 22,
+    "separate_preface_notes": 1,
+    "preface_scopes": 1,
+    "body_characters_utf16": 6029,
+    "poem_note_characters_utf16": 3650,
+    "preface_note_characters_utf16": 286,
+    "pages500": 14,
+    "stanza_quotation_entries": 36
+  },
+  "rights": {
+    "translation_license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "specific_translation_grant_over_generic_siteCCBY": true,
+    "body_notes_apparatus_included": true,
+    "media_audio_fonts_images_commercial_approval": false,
+    "metadata_only_bundles_English_live_only": true,
+    "retain_attribution_revision_license_modification_and_warranty_notices": true
+  },
+  "six_original_rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "source_caveats": [
+    "331 preserves publisher Gandhathūpiya and its BJTS-attributed chapter title versus the distinct VRI spellings and chapter label.",
+    "331 chapter heading stays once in publisher_paratext; six-key publisher_preface is textless metadata/notes. Chapter note1 never enters poem notes2–4 or quotations.",
+    "332–334 preserve fancy braces, literal asterisk, BJTS-only heading statements and heading-owned notes. Their absent local stanza numbers remain null.",
+    "331 combined3–4/global2933–2934 and334 combined globals2951–2952 retain original eight-line physical entries.",
+    "334 has20 publisher global labels versus19 VRI numbered stanzas, with differing partitions; no one-entry/one-line alignment or VRI wording supplementation is approved.",
+    "334 note4 amendment statement and English/VRI number tension, note7 mixed quotation marks and note8 repeated-foot discussion remain exactly source-owned and unchanged. Specialist interpretation remains external.",
+    "Cross-references to earlier or later publisher poems do not approve those sources or alternate canonical mappings.335 remains a boundary witness only."
+  ],
+  "preservation_scope": "The proposed files contain only the four new independently approved identities and no prior339 replacements. Preservation of all339 old full objects and holds remains a required separate implementation/baseline gate; it was not inferred from candidate output in this source normalization review.",
+  "potential_catalogue_if_correctly_added": {
+    "prior_choices": 339,
+    "additive_choices": 4,
+    "potential_choices": 343,
+    "not_an_actual_runtime_coverage_measurement": true
+  },
+  "no_app_parser_imports_runtime_tests_build_git_network_or_candidate_edits": true,
+  "English_bodies_or_notes_written_to_repo_ready_review": false,
+  "normalization_approval": true,
+  "runtime_inventory_approval": false,
+  "implementation_activation_approval": false,
+  "behavioral_acceptance_approval": false,
+  "CI_or_release_approval": false,
+  "reviewer_corrections_preserved": "Original empty-paratext interpretation and empty-array comparator assumption remain preserved in original preseal/v1 comparator evidence; only explicit representation expectations were corrected. No source or producer text was changed."
+}

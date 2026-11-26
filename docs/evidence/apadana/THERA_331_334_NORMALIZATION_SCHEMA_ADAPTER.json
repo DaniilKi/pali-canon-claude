@@ -1,0 +1,24 @@
+{
+  "schema": "explicit-four-normalization-representation-adapter-v1",
+  "status": "APPROVE_ONLY_NONEMPTY_PARATEXT_WITH_TEXTLESS_PREFACE_DESCRIPTOR",
+  "source_preseal_retained_unchanged": {
+    "file": "PRE_COMPARISON_SEAL.json",
+    "sha256": "3b1c53934f2b19b8d61d8cb29dbfa458c5da436c8c0cf300139473b7c10357df"
+  },
+  "original_independent_proof_retained_unchanged": {
+    "file": "INDEPENDENT_ORIGINAL_FIRST_PROOF.json",
+    "sha256": "c27c6aea04e3be33244c4e231ba4aefe5509d2b32b4fada1fd268b1c6a8afc51"
+  },
+  "single_semantic_field": {
+    "id": "tha-ap333",
+    "field": "publisher_paratext_sha256",
+    "reviewer_initial_assumption": "Empty publisher_paratext because preface was treated as carrying wording separately",
+    "approved_contract": "Nonempty publisher_paratext carries original normalized chapter heading exactly once. publisher_preface contains exactly six metadata fields and its separately owned note1; no text field and no duplicated heading.",
+    "expected_sha256_from_independent_preface_body": "12568de794147c89a721132263b864d049685e5cb7ae55cabe49975588d1b8fe",
+    "already_presealed_field_used": "rows.tha-ap333.preface.descriptor.body_sha256",
+    "source_text_or_hash_rederived_from_producer": false,
+    "no_body_note_quote_root_or_ownership_value_changed": true
+  },
+  "empty_optional_group_type_correction": "No publisher divisions is an empty array, not null. Initial comparator type assumption and its four differences are preserved in v1 evidence. No producer metadata changed.",
+  "corrected_assumptions_are_reviewers_not_app_defects": true
+}

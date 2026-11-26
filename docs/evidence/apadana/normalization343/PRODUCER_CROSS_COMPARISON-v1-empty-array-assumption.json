@@ -1,0 +1,132 @@
+{
+  "schema": "independent-four-normalization-cross-comparison-v1",
+  "status": "HOLD_EXACT_DIFFERENCES",
+  "independent_preseal_sha256": "3b1c53934f2b19b8d61d8cb29dbfa458c5da436c8c0cf300139473b7c10357df",
+  "independent_proof_sha256": "c27c6aea04e3be33244c4e231ba4aefe5509d2b32b4fada1fd268b1c6a8afc51",
+  "producer_preseal_sha256": "5096b5d7ced86b6805b91cb7592d47eb256dcf3dfc8376cebf3b5ad02ae8811e",
+  "producer_files": {
+    "DERIVATION_RECEIPT.json": "69da091f1cc00ee7c1cda8ab8b43d8e995f7b6d95a24f8b43e044b0a49b2dd98",
+    "EXPECTED_LINKS.json": "0562f11a03d6f137ed68b968f3d416809ef7760af9f4760c99a3a034e757863e",
+    "EXPECTED_PROFILES.json": "966b29f832f48ca292051acea4c001c72a20e8dfb5d495486ba1f5b373888fcb",
+    "GOLDENS.json": "b4a70845d190e0ec300b63a8022f263fa444eecbefe47e3a884681d532f40696",
+    "SOURCE_SCOPES.json": "a439afd330ac28f16547ff5b433eb8622014ead9fa9682370da5471fad5f353e"
+  },
+  "field_comparisons": 772,
+  "differences": [
+    {
+      "field": "tha-ap333.no_invented_publisher_divisions",
+      "independent": [],
+      "producer": null
+    },
+    {
+      "field": "tha-ap334.no_invented_publisher_divisions",
+      "independent": [],
+      "producer": null
+    },
+    {
+      "field": "tha-ap335.no_invented_publisher_divisions",
+      "independent": [],
+      "producer": null
+    },
+    {
+      "field": "tha-ap336.no_invented_publisher_divisions",
+      "independent": [],
+      "producer": null
+    }
+  ],
+  "rows": [
+    {
+      "id": "tha-ap333",
+      "publisher": 331,
+      "decision": "HOLD_DIFFERENCES",
+      "body_sha256": "3c05b02f8ca8e7651a2e51e25f0758bc49eae5f6b38d3dad99e6521d6f51ee0c",
+      "notes_sha256": "4a169fea608184fe58d6a5cb5cc87165cf59d4fb4e9c463c627a442339c17964",
+      "effective_paratext_sha256": "12568de794147c89a721132263b864d049685e5cb7ae55cabe49975588d1b8fe",
+      "root_sha256": "b6e505c63777cbec11bc988b4c86e085e41a6039c05f2c60e635e3acc4140356",
+      "body_characters_utf16": 1001,
+      "poem_notes": [
+        2,
+        3,
+        4
+      ],
+      "preface_notes": [
+        1
+      ],
+      "whole_profile_object_sha256": "5cf310e4d4f56b10b11516e15148e8492e318ec2e5613f9953f4776b7e819b23",
+      "whole_link_object_sha256": "0616e9b68950fb9488f329b7e464845cc36f9f9495a950c23fe393c12091e582"
+    },
+    {
+      "id": "tha-ap334",
+      "publisher": 332,
+      "decision": "HOLD_DIFFERENCES",
+      "body_sha256": "613aa452420398b80893160bcd17da88204d5ebfe1695060bcc2a7d0a51480e4",
+      "notes_sha256": "0b54f16d431d7a1b816cf9ca88a52f784f95bb446c2584e46ef36c30f30e8016",
+      "effective_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "0e70d05be72e1b91a9f55f6426c42f34b5e27e89b7f172702cad7267f36e51fb",
+      "body_characters_utf16": 1161,
+      "poem_notes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "preface_notes": [],
+      "whole_profile_object_sha256": "939a412686bd0dafea83ca1e8d597b2d3622da910d5ccb33b93b8b8318a90d21",
+      "whole_link_object_sha256": "959e6ad6485abf5ab5fe3ca603a198d1ecc48bd75b741ad42d487a2dc34f9e35"
+    },
+    {
+      "id": "tha-ap335",
+      "publisher": 333,
+      "decision": "HOLD_DIFFERENCES",
+      "body_sha256": "1c64b4d49c8232a0f12de6608e2188fc840dde42714e29e3972e59105a5ca9bf",
+      "notes_sha256": "95e563f20f04d3d76b438a1099ac7e814d590a83205a6f0105d133e2b0ce1846",
+      "effective_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "bb279af85bd0ee35b5ce94514fc45cf9de979426046c9c995dd9907d98994511",
+      "body_characters_utf16": 874,
+      "poem_notes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "preface_notes": [],
+      "whole_profile_object_sha256": "1eb49837997139dbb119a3e958558669cab3941d8aa0713571e8404e80fda5ce",
+      "whole_link_object_sha256": "4ccc71196de9095d27ddd517b99bc0eb555a6715424a056449efab333646202e"
+    },
+    {
+      "id": "tha-ap336",
+      "publisher": 334,
+      "decision": "HOLD_DIFFERENCES",
+      "body_sha256": "a79016e88685f51463621cb98d7d7ca9b8ec0a084aafdff498edcf8fc1be1836",
+      "notes_sha256": "3ce6b8e3384b6a12ea1589ed4803f87d75032f71378fcb66c0209cabebd13bd7",
+      "effective_paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "79293b1bc92ea4b2555c63442c49b7478132c1ee40ee075b987a60a981573e18",
+      "body_characters_utf16": 2993,
+      "poem_notes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "preface_notes": [],
+      "whole_profile_object_sha256": "cc6e052a1f276f011cebf6719d676c1233966a442528b7bd45c57221073753f6",
+      "whole_link_object_sha256": "ec902cb3d3b4fd47212699f99307c222090f8d5200d826b093c20c18aaa1a550"
+    }
+  ],
+  "schema_adapter": {
+    "reason": "Original-first reviewer assumed separate preface wording would leave publisher_paratext empty. Parent clarified approved representation: publisher_paratext stores heading ONCE, while six-key publisher_preface contains only metadata and notes, never duplicate wording.",
+    "changed_expectation": "Only tha-ap333 effective publisher_paratext_sha256 uses the independently presealed preface body hash12568de…; no source wording/body/notes/ownership/quote or root value was changed. Original preseal remains immutable.",
+    "empty_runtime_publisher_paratext_not_approved": true,
+    "no_text_key_in_preface_descriptor": true
+  },
+  "no_app_parser_import_runtime_test_build_git_or_network": true,
+  "English_bodies_or_notes_written": false,
+  "runtime_activation_release_approval": false
+}

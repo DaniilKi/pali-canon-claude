@@ -1,0 +1,29 @@
+{
+  "status": "GO_SUPPLEMENTAL_SCOPE_METADATA_LINKS",
+  "GOLDENS_source_scope_sha256_exact": true,
+  "finite_combined_entries_independently_exact": [
+    {
+      "publisher_poem": 331,
+      "physical_entry": 3,
+      "local_label": "3-4",
+      "publisher_label": "2933-2934",
+      "lines": 8
+    },
+    {
+      "publisher_poem": 334,
+      "physical_entry": 3,
+      "local_label": null,
+      "publisher_label": "2951-2952",
+      "lines": 8
+    }
+  ],
+  "finite_literal_asterisk_owners_exact": [
+    332,
+    333,
+    334
+  ],
+  "scope_root_labels_revision_and_source_only_flags_exact": true,
+  "all_numeric_total_fields_equal_independent_approval": true,
+  "source_scope_file_sha256": "a439afd330ac28f16547ff5b433eb8622014ead9fa9682370da5471fad5f353e",
+  "no_app_imports_execution_or_candidate_read": true
+}

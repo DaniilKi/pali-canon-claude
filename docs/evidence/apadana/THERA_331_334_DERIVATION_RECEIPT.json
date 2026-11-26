@@ -1,0 +1,49 @@
+{
+  "schema": "original-first-four-normalization-producer-receipt-v1",
+  "producer_sha256": "775093388e6264f4df8d0f8c0a1bb4718d8c06afd3e506f9307885864a65dcd1",
+  "inputs": {
+    "source": "/tmp/pali-next334-source-review-nov26/originals",
+    "canon": "/tmp/pali-boundaries333-evidence-nov26/canon-four.gz",
+    "xml": "/tmp/pali-sariputta-release/vri-fixture/romn/s0510m1.mul.xml",
+    "source_review": "/tmp/pali-next334-source-review-nov26/independent-review/ORIGINAL_SOURCE_REVIEW.json"
+  },
+  "output": {
+    "SOURCE_SCOPES.json": {
+      "bytes": 15107,
+      "sha256": "a439afd330ac28f16547ff5b433eb8622014ead9fa9682370da5471fad5f353e"
+    },
+    "EXPECTED_PROFILES.json": {
+      "bytes": 18303,
+      "sha256": "966b29f832f48ca292051acea4c001c72a20e8dfb5d495486ba1f5b373888fcb"
+    },
+    "EXPECTED_LINKS.json": {
+      "bytes": 18632,
+      "sha256": "0562f11a03d6f137ed68b968f3d416809ef7760af9f4760c99a3a034e757863e"
+    },
+    "GOLDENS.json": {
+      "bytes": 97650,
+      "sha256": "b4a70845d190e0ec300b63a8022f263fa444eecbefe47e3a884681d532f40696"
+    }
+  },
+  "totals": {
+    "poems": 4,
+    "body_paragraphs": 48,
+    "physical_stanza_entries": 36,
+    "printed_global_labels": 38,
+    "printed_local_labels": 6,
+    "entries_with_absent_local_label": 31,
+    "original_notes": 23,
+    "poem_notes": 22,
+    "preface_notes": 1,
+    "preface_scopes": 1,
+    "combined_eight_line_entries": 2,
+    "pages500": 14,
+    "body_characters_utf16": 6029,
+    "poem_note_characters_utf16": 3650,
+    "preface_note_characters_utf16": 286
+  },
+  "metadata_hashes_only": true,
+  "English_bodies_or_notes_written": false,
+  "app_import_build_tests_Git_network": false,
+  "runtime_activation_release_approval": false
+}

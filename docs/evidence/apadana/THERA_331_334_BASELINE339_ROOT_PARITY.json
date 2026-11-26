@@ -1,0 +1,13 @@
+{
+  "utc": "2026-11-26T12:00:13.354Z",
+  "base": "ac620911e349b089eedeb93906675c62c9523b24",
+  "source_authority_compact_sha256": "038e2565ee0b7803e4a2d3a33bd0d8e4d832deea89962b2686a72d77d3d10b8a",
+  "all339_profile_objects_exact": true,
+  "all339_translation_objects_exact": true,
+  "full_catalogue_bytes_sha256": "5dc0bcc92f6ce15cebe9c0948e266c7f2950c99c7b0a9bcddf53f75526d249fe",
+  "all26_non_apadana_data_pins_exact": true,
+  "canonical_logical_sha256": "46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8",
+  "books": 61,
+  "units": 8544,
+  "new_profile_activation": false
+}

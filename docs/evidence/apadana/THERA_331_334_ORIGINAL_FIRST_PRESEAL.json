@@ -1,0 +1,97 @@
+{
+  "schema": "presealed-original-first-four-normalization-proposal-v1",
+  "status": "INDEPENDENT_METADATA_PROPOSAL_READY_FOR_CROSS_REVIEW",
+  "producer": {
+    "path": "produce_original.py",
+    "sha256": "775093388e6264f4df8d0f8c0a1bb4718d8c06afd3e506f9307885864a65dcd1"
+  },
+  "files": {
+    "DERIVATION_RECEIPT.json": "69da091f1cc00ee7c1cda8ab8b43d8e995f7b6d95a24f8b43e044b0a49b2dd98",
+    "EXPECTED_LINKS.json": "0562f11a03d6f137ed68b968f3d416809ef7760af9f4760c99a3a034e757863e",
+    "EXPECTED_PROFILES.json": "966b29f832f48ca292051acea4c001c72a20e8dfb5d495486ba1f5b373888fcb",
+    "GOLDENS.json": "b4a70845d190e0ec300b63a8022f263fa444eecbefe47e3a884681d532f40696",
+    "SOURCE_SCOPES.json": "a439afd330ac28f16547ff5b433eb8622014ead9fa9682370da5471fad5f353e"
+  },
+  "totals": {
+    "poems": 4,
+    "body_paragraphs": 48,
+    "physical_stanza_entries": 36,
+    "printed_global_labels": 38,
+    "printed_local_labels": 6,
+    "entries_with_absent_local_label": 31,
+    "original_notes": 23,
+    "poem_notes": 22,
+    "preface_notes": 1,
+    "preface_scopes": 1,
+    "combined_eight_line_entries": 2,
+    "pages500": 14,
+    "body_characters_utf16": 6029,
+    "poem_note_characters_utf16": 3650,
+    "preface_note_characters_utf16": 286
+  },
+  "rows": [
+    {
+      "id": "tha-ap333",
+      "publisher": 331,
+      "body_utf16": 1001,
+      "body_sha256": "3c05b02f8ca8e7651a2e51e25f0758bc49eae5f6b38d3dad99e6521d6f51ee0c",
+      "poem_notes_sha256": "4a169fea608184fe58d6a5cb5cc87165cf59d4fb4e9c463c627a442339c17964",
+      "all_original_notes": 4,
+      "heading_sha256": "d623e141f50b1424c2f6e829cbb7760cb928e5e3c2dbf7de89e3d19f12039054",
+      "preface_utf16": 48,
+      "preface_sha256": "12568de794147c89a721132263b864d049685e5cb7ae55cabe49975588d1b8fe",
+      "preface_note_numbers": [
+        1
+      ],
+      "pages500": 3,
+      "root_sha256": "b6e505c63777cbec11bc988b4c86e085e41a6039c05f2c60e635e3acc4140356"
+    },
+    {
+      "id": "tha-ap334",
+      "publisher": 332,
+      "body_utf16": 1161,
+      "body_sha256": "613aa452420398b80893160bcd17da88204d5ebfe1695060bcc2a7d0a51480e4",
+      "poem_notes_sha256": "0b54f16d431d7a1b816cf9ca88a52f784f95bb446c2584e46ef36c30f30e8016",
+      "all_original_notes": 6,
+      "heading_sha256": "c6d6821fc3a5c74389fdf1d46e5e3380dbb62e58156594d54ded55281979e55d",
+      "preface_utf16": 0,
+      "preface_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "preface_note_numbers": [],
+      "pages500": 3,
+      "root_sha256": "0e70d05be72e1b91a9f55f6426c42f34b5e27e89b7f172702cad7267f36e51fb"
+    },
+    {
+      "id": "tha-ap335",
+      "publisher": 333,
+      "body_utf16": 874,
+      "body_sha256": "1c64b4d49c8232a0f12de6608e2188fc840dde42714e29e3972e59105a5ca9bf",
+      "poem_notes_sha256": "95e563f20f04d3d76b438a1099ac7e814d590a83205a6f0105d133e2b0ce1846",
+      "all_original_notes": 4,
+      "heading_sha256": "03ecf1056510522a8596d4b371db9e111eb420e7ae2c48698210a779969e65e6",
+      "preface_utf16": 0,
+      "preface_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "preface_note_numbers": [],
+      "pages500": 2,
+      "root_sha256": "bb279af85bd0ee35b5ce94514fc45cf9de979426046c9c995dd9907d98994511"
+    },
+    {
+      "id": "tha-ap336",
+      "publisher": 334,
+      "body_utf16": 2993,
+      "body_sha256": "a79016e88685f51463621cb98d7d7ca9b8ec0a084aafdff498edcf8fc1be1836",
+      "poem_notes_sha256": "3ce6b8e3384b6a12ea1589ed4803f87d75032f71378fcb66c0209cabebd13bd7",
+      "all_original_notes": 9,
+      "heading_sha256": "cda93528a026ed61890871558dc073d56f0ae863470f5759556152fd62577b20",
+      "preface_utf16": 0,
+      "preface_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "preface_note_numbers": [],
+      "pages500": 6,
+      "root_sha256": "79293b1bc92ea4b2555c63442c49b7478132c1ee40ee075b987a60a981573e18"
+    }
+  ],
+  "candidate_metadata_or_SUT_output_used": false,
+  "SUT_parser_read_or_imported_during_derivation": false,
+  "English_body_or_notes_written": false,
+  "runtime_activation_release_approval": false,
+  "producer_is_approval": false
+}

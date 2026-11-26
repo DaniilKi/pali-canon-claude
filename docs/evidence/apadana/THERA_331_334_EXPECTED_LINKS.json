@@ -1,0 +1,477 @@
+{
+  "tha-ap333": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-331.md",
+    "id": "tha-ap333",
+    "publisher_chapter": "chapter-3",
+    "poem": 331,
+    "verses": [
+      2931,
+      2936
+    ],
+    "root_verses": [
+      1,
+      6
+    ],
+    "note_count": 3,
+    "note_numbers": [
+      2,
+      3,
+      4
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-331/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-331/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-331.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Gandhathūpiya",
+    "reference": "Therā Apadāna publisher poem 331; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "b4fa678c98a204bc591a5d6d656961060af3d5164e23516b9c8dfadf98902b4e",
+    "body_sha256": "3c05b02f8ca8e7651a2e51e25f0758bc49eae5f6b38d3dad99e6521d6f51ee0c",
+    "notes_sha256": "4a169fea608184fe58d6a5cb5cc87165cf59d4fb4e9c463c627a442339c17964",
+    "paratext_sha256": "12568de794147c89a721132263b864d049685e5cb7ae55cabe49975588d1b8fe",
+    "root_sha256": "b6e505c63777cbec11bc988b4c86e085e41a6039c05f2c60e635e3acc4140356",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "2931",
+        "suffix": "(1) [2931]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "2932",
+        "suffix": "(2) [2932]",
+        "lines": 4
+      },
+      {
+        "local_label": "3-4",
+        "publisher_label": "2933-2934",
+        "suffix": "(3-4) [2933-2934]",
+        "lines": 8
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "2935",
+        "suffix": "(5) [2935]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "2936",
+        "suffix": "(6) [2936]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; matching scope does not imply word/line equivalence.",
+      "The canonical scope uses the reviewed atomic tha-ap333–336 boundary revision. Preserve source and locator pins; no old position, citation, note or private draft may be automatically rebased.",
+      "Full original narrative of the scented offering to Siddhattha, chapter context, title and both colophons identify tha-ap333; no identity is inferred from a numerical offset.",
+      "Publisher Gandhathūpiya and the supplied Gandhathūpiya chapter name remain distinct from VRI Gandhadhūpiya and Gandhodakavaggo. Publisher chapter note1 attributes its chapter-name choice to BJTS versus PTS; preserve that discussion without changing either source.",
+      "The publisher chapter heading owns original note1 outside the poem. Poem heading owns note2; poem notes are exactly2–4. Never copy or reassign chapter note1 into poem text, poem notes or quotation evidence.",
+      "Publisher local3–4/global2933–2934 is one original eight-line entry. Preserve its combined labels and wording, not an invented stanza split.",
+      "Poem note2 alleges conflation with publisher95; retain that attributed cross-reference without approving a mapping to the earlier poem."
+    ],
+    "index_revision": "apadana-thera333-336-v1",
+    "publisher_verse_labels": [
+      "2931",
+      "2932",
+      "2933-2934",
+      "2935",
+      "2936"
+    ],
+    "publisher_preface": {
+      "kind": "publisher_preface",
+      "parent_id": "tha-ap333",
+      "label": "Thirty-fourth Therā chapter preface",
+      "body_sha256": "12568de794147c89a721132263b864d049685e5cb7ae55cabe49975588d1b8fe",
+      "notes_sha256": "73b65b2a80b68ba1e62ed6bc90f98c1e63d8f22e241337827dca2d621e274acc",
+      "note_numbers": [
+        1
+      ]
+    },
+    "english": "Gandhathūpiya",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap334": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-332.md",
+    "id": "tha-ap334",
+    "publisher_chapter": "chapter-3",
+    "poem": 332,
+    "verses": [
+      2937,
+      2943
+    ],
+    "root_verses": [
+      7,
+      13
+    ],
+    "note_count": 6,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-332/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-332/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-332.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Udakapūjaka",
+    "reference": "Therā Apadāna publisher poem 332; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "4bdc8cc3749555de984ac177e2f23ce2cfae4d745a71844ac2d2009d1531a61a",
+    "body_sha256": "613aa452420398b80893160bcd17da88204d5ebfe1695060bcc2a7d0a51480e4",
+    "notes_sha256": "0b54f16d431d7a1b816cf9ca88a52f784f95bb446c2584e46ef36c30f30e8016",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "0e70d05be72e1b91a9f55f6426c42f34b5e27e89b7f172702cad7267f36e51fb",
+    "stanza_layout": [
+      {
+        "local_label": null,
+        "publisher_label": "2937",
+        "suffix": "[2937]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2938",
+        "suffix": "[2938]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2939",
+        "suffix": "[2939]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2940",
+        "suffix": "[2940]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2941",
+        "suffix": "[2941]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2942",
+        "suffix": "[2942]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2943",
+        "suffix": "[2943]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; matching scope does not imply word/line equivalence.",
+      "The canonical scope uses the reviewed atomic tha-ap333–336 boundary revision. Preserve source and locator pins; no old position, citation, note or private draft may be automatically rebased.",
+      "Full original golden-Buddha, hand-tossed-water and Padumuttara prophecy narrative, title and both colophons identify tha-ap334; no identity is inferred from a numerical offset.",
+      "The complete fancy-brace heading explicitly identifies BJTS-only332, including its literal asterisk and both title notes1–2. The seven stanza entries print only globals2937–2943; no local labels are supplied or inferred.",
+      "Heading note2 owns the publisher explanation of three poems absent in its PTS witnesses and the divergence of PTS main versus BJTS brace numbering. Retain it as an attributed edition statement, not a newly verified manuscript conclusion or chapter-preface note.",
+      "Heading note1 claims an earlier duplicate at publisher106; this does not approve a new identity, substitute source or root reuse.",
+      "VRI13 remains abbreviated with peyyāla; the full published attainment formula belongs to the publisher edition and does not expand the VRI. Note5 keeps its mixed straight/curly quotation punctuation."
+    ],
+    "index_revision": "apadana-thera333-336-v1",
+    "publisher_verse_labels": [
+      "2937",
+      "2938",
+      "2939",
+      "2940",
+      "2941",
+      "2942",
+      "2943"
+    ],
+    "publisher_heading_sha256": "c6d6821fc3a5c74389fdf1d46e5e3380dbb62e58156594d54ded55281979e55d",
+    "english": "Udakapūjaka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap335": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-333.md",
+    "id": "tha-ap335",
+    "publisher_chapter": "chapter-3",
+    "poem": 333,
+    "verses": [
+      2944,
+      2948
+    ],
+    "root_verses": [
+      14,
+      18
+    ],
+    "note_count": 4,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-333/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-333/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-333.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Punnāgapupphiya",
+    "reference": "Therā Apadāna publisher poem 333; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "563afee319204fbf60b53ef7516e6fd0ffe44b13dec33760fefc8b68972a8be6",
+    "body_sha256": "1c64b4d49c8232a0f12de6608e2188fc840dde42714e29e3972e59105a5ca9bf",
+    "notes_sha256": "95e563f20f04d3d76b438a1099ac7e814d590a83205a6f0105d133e2b0ce1846",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "bb279af85bd0ee35b5ce94514fc45cf9de979426046c9c995dd9907d98994511",
+    "stanza_layout": [
+      {
+        "local_label": null,
+        "publisher_label": "2944",
+        "suffix": "[2944]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2945",
+        "suffix": "[2945]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2946",
+        "suffix": "[2946]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2947",
+        "suffix": "[2947]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2948",
+        "suffix": "[2948]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; matching scope does not imply word/line equivalence.",
+      "The canonical scope uses the reviewed atomic tha-ap333–336 boundary revision. Preserve source and locator pins; no old position, citation, note or private draft may be automatically rebased.",
+      "Full original hunter, flowering punnāga, sand-stupa and Tamonuda narrative, title and both colophons identify tha-ap335; no identity is inferred from a numerical offset.",
+      "The complete fancy-brace heading explicitly identifies BJTS-only333, including its literal asterisk and original title note1. Five stanza entries print only globals2944–2948; no local labels are supplied or inferred.",
+      "Title note1 claims an earlier duplicate at publisher159; retain its original punctuation and discussion without approving a different canonical root. Note4 keeps its speculative etymology and question mark without scholarly correction.",
+      "VRI18 remains abbreviated with peyyāla; the full published attainment formula belongs to the publisher edition and does not expand the VRI."
+    ],
+    "index_revision": "apadana-thera333-336-v1",
+    "publisher_verse_labels": [
+      "2944",
+      "2945",
+      "2946",
+      "2947",
+      "2948"
+    ],
+    "publisher_heading_sha256": "03ecf1056510522a8596d4b371db9e111eb420e7ae2c48698210a779969e65e6",
+    "english": "Punnāgapupphiya",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap336": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-334.md",
+    "id": "tha-ap336",
+    "publisher_chapter": "chapter-3",
+    "poem": 334,
+    "verses": [
+      2949,
+      2968
+    ],
+    "root_verses": [
+      19,
+      37
+    ],
+    "note_count": 9,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-334/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-334/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-334.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Ekadussadāyaka",
+    "reference": "Therā Apadāna publisher poem 334; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "a3694e139df9486a268e4e70ea6fe169d4a89827e6dfac3ea38def83340321f6",
+    "body_sha256": "a79016e88685f51463621cb98d7d7ca9b8ec0a084aafdff498edcf8fc1be1836",
+    "notes_sha256": "3ce6b8e3384b6a12ea1589ed4803f87d75032f71378fcb66c0209cabebd13bd7",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "79293b1bc92ea4b2555c63442c49b7478132c1ee40ee075b987a60a981573e18",
+    "stanza_layout": [
+      {
+        "local_label": null,
+        "publisher_label": "2949",
+        "suffix": "[2949]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2950",
+        "suffix": "[2950]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2951-2952",
+        "suffix": "[2951-2952]",
+        "lines": 8
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2953",
+        "suffix": "[2953]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2954",
+        "suffix": "[2954]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2955",
+        "suffix": "[2955]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2956",
+        "suffix": "[2956]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2957",
+        "suffix": "[2957]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2958",
+        "suffix": "[2958]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2959",
+        "suffix": "[2959]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2960",
+        "suffix": "[2960]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2961",
+        "suffix": "[2961]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2962",
+        "suffix": "[2962]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2963",
+        "suffix": "[2963]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2964",
+        "suffix": "[2964]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2965",
+        "suffix": "[2965]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2966",
+        "suffix": "[2966]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2967",
+        "suffix": "[2967]",
+        "lines": 4
+      },
+      {
+        "local_label": null,
+        "publisher_label": "2968",
+        "suffix": "[2968]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and all explicit edition differences; matching scope does not imply word/line equivalence.",
+      "The canonical scope uses the reviewed atomic tha-ap333–336 boundary revision. Preserve source and locator pins; no old position, citation, note or private draft may be automatically rebased.",
+      "Full original Haṃsavatī grass-bearer, children, single-cloth gift and Padumuttara prophecy narrative, title and both colophons identify tha-ap336; no identity is inferred from a numerical offset.",
+      "The complete fancy-brace heading explicitly identifies BJTS-only334, including its literal asterisk and original title note1. Nineteen physical entries print twenty global labels2949–2968; no local labels are supplied or inferred.",
+      "Globals2951–2952 remain one original eight-line entry. Printed globals2957–2959 divide material across VRI27–28 differently; preserve the publisher partition and never claim one-entry/one-VRI-stanza or line-complete correspondence.",
+      "Note2 attributes a later duplicate419 {422} and an editorial-supply explanation. Preserve the note without approving that later source or a replacement mapping.",
+      "Note4 retains the published amendment statement kappasatahassāni to kappasattasahassāni alongside the English hundred-thousand wording and untouched VRI26 Kappasatasahassāni. Do not silently reconcile their apparent tension; interpretation remains for specialist review.",
+      "Retain the repeated wording discussed in note8 and the supplied finite-verb reading in note7, including its mixed straight/curly quotation punctuation. VRI37 remains abbreviated with peyyāla; the full published formula does not expand it."
+    ],
+    "index_revision": "apadana-thera333-336-v1",
+    "publisher_verse_labels": [
+      "2949",
+      "2950",
+      "2951-2952",
+      "2953",
+      "2954",
+      "2955",
+      "2956",
+      "2957",
+      "2958",
+      "2959",
+      "2960",
+      "2961",
+      "2962",
+      "2963",
+      "2964",
+      "2965",
+      "2966",
+      "2967",
+      "2968"
+    ],
+    "publisher_heading_sha256": "cda93528a026ed61890871558dc073d56f0ae863470f5759556152fd62577b20",
+    "english": "Ekadussadāyaka",
+    "match": "individually-reviewed-whole-poem"
+  }
+}
