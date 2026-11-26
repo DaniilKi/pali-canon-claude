@@ -1,0 +1,7 @@
+{
+  "reason": "MacOS20 diagnostic job remains queued without runner more than10minutes, otherfive real-host cases success. Start full independent exact-candidate CI in parallel to avoid serial queue plus20minute Windows delay.",
+  "original_sequence": "all6targeted before fullCI",
+  "current_sequence": "targeted and full independent CI overlap; all6targeted plus all required full exactcommit CI before dev remains mandatory",
+  "no_gate_removed": true,
+  "no_retry_or_cancellation": true
+}

@@ -1,0 +1,427 @@
+{
+  "commit": "a719cb4594d0e863b5164f95fa2ac7fba49b995b",
+  "run": 45858558058,
+  "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058",
+  "status": "completed",
+  "conclusion": "failure",
+  "counts": {
+    "success": 58,
+    "failure": 1
+  },
+  "jobs": [
+    {
+      "id": 140043249630,
+      "name": "Hosted memory budget",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043249630"
+    },
+    {
+      "id": 140043250134,
+      "name": "Study compatibility / webkit",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043250134"
+    },
+    {
+      "id": 140043250252,
+      "name": "Node 22 / ubuntu-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043250252"
+    },
+    {
+      "id": 140043250271,
+      "name": "Study compatibility / firefox",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043250271"
+    },
+    {
+      "id": 140043250339,
+      "name": "Node 22 / macos-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043250339"
+    },
+    {
+      "id": 140043250433,
+      "name": "Node 22 / windows-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043250433"
+    },
+    {
+      "id": 140043250522,
+      "name": "Node 20 / windows-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043250522"
+    },
+    {
+      "id": 140043250620,
+      "name": "Node 20 / macos-latest",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043250620"
+    },
+    {
+      "id": 140043250683,
+      "name": "Node 20 / ubuntu-latest",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043250683"
+    },
+    {
+      "id": 140043251118,
+      "name": "Chromium reader / milinda",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251118"
+    },
+    {
+      "id": 140043251130,
+      "name": "Chromium reader / apadanatherascaled61",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251130"
+    },
+    {
+      "id": 140043251135,
+      "name": "Chromium reader / postsearch",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251135"
+    },
+    {
+      "id": 140043251137,
+      "name": "Chromium reader / backup",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251137"
+    },
+    {
+      "id": 140043251155,
+      "name": "Chromium reader / apadanathera201",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251155"
+    },
+    {
+      "id": 140043251183,
+      "name": "Chromium reader / vinayapartials",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251183"
+    },
+    {
+      "id": 140043251193,
+      "name": "Chromium reader / apadanatherapair121",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251193"
+    },
+    {
+      "id": 140043251200,
+      "name": "Chromium reader / apadana",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251200"
+    },
+    {
+      "id": 140043251224,
+      "name": "Chromium reader / core",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251224"
+    },
+    {
+      "id": 140043251231,
+      "name": "Chromium reader / booksearch",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251231"
+    },
+    {
+      "id": 140043251233,
+      "name": "Chromium reader / apadanaedition",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251233"
+    },
+    {
+      "id": 140043251238,
+      "name": "Chromium reader / personal",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251238"
+    },
+    {
+      "id": 140043251243,
+      "name": "Chromium reader / apadanathera181",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251243"
+    },
+    {
+      "id": 140043251262,
+      "name": "Chromium reader / apadanathera251",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251262"
+    },
+    {
+      "id": 140043251272,
+      "name": "Chromium reader / apadanathera234",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251272"
+    },
+    {
+      "id": 140043251284,
+      "name": "Chromium reader / comparison",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251284"
+    },
+    {
+      "id": 140043251285,
+      "name": "Chromium reader / conflicts",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251285"
+    },
+    {
+      "id": 140043251288,
+      "name": "Chromium reader / apadanathera231",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251288"
+    },
+    {
+      "id": 140043251294,
+      "name": "Chromium reader / textspacing",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251294"
+    },
+    {
+      "id": 140043251300,
+      "name": "Chromium reader / headings",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251300"
+    },
+    {
+      "id": 140043251303,
+      "name": "Chromium reader / apadanathera241",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251303"
+    },
+    {
+      "id": 140043251307,
+      "name": "Chromium reader / study",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251307"
+    },
+    {
+      "id": 140043251321,
+      "name": "Chromium reader / highlights",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251321"
+    },
+    {
+      "id": 140043251338,
+      "name": "Chromium reader / milindapartial",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251338"
+    },
+    {
+      "id": 140043251345,
+      "name": "Chromium reader / apadananext",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251345"
+    },
+    {
+      "id": 140043251346,
+      "name": "Chromium reader / vrieditionnote",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251346"
+    },
+    {
+      "id": 140043251350,
+      "name": "Chromium reader / citations",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251350"
+    },
+    {
+      "id": 140043251362,
+      "name": "Chromium reader / searchpins",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251362"
+    },
+    {
+      "id": 140043251366,
+      "name": "Chromium reader / provenance",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251366"
+    },
+    {
+      "id": 140043251371,
+      "name": "Chromium reader / thagsixteen",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251371"
+    },
+    {
+      "id": 140043251401,
+      "name": "Chromium reader / annumbered",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251401"
+    },
+    {
+      "id": 140043251413,
+      "name": "Chromium reader / apadanatherapair101",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251413"
+    },
+    {
+      "id": 140043251414,
+      "name": "Chromium reader / apadanathera221",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251414"
+    },
+    {
+      "id": 140043251460,
+      "name": "Chromium reader / notes",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251460"
+    },
+    {
+      "id": 140043251468,
+      "name": "Chromium reader / apadanathera161",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251468"
+    },
+    {
+      "id": 140043251469,
+      "name": "Chromium reader / commentary",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251469"
+    },
+    {
+      "id": 140043251470,
+      "name": "Chromium reader / scriptrefresh",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251470"
+    },
+    {
+      "id": 140043251477,
+      "name": "Chromium reader / navigation",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251477"
+    },
+    {
+      "id": 140043251483,
+      "name": "Chromium reader / apadanathird",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251483"
+    },
+    {
+      "id": 140043251497,
+      "name": "Chromium reader / apadanatheraexpansion",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251497"
+    },
+    {
+      "id": 140043251506,
+      "name": "Chromium reader / apadanafourth",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251506"
+    },
+    {
+      "id": 140043251521,
+      "name": "Chromium reader / apadanatheraeditorial",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251521"
+    },
+    {
+      "id": 140043251569,
+      "name": "Chromium reader / apadanathera",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251569"
+    },
+    {
+      "id": 140043251580,
+      "name": "Chromium reader / anten",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251580"
+    },
+    {
+      "id": 140043251605,
+      "name": "Chromium reader / apadanathera141",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251605"
+    },
+    {
+      "id": 140043251617,
+      "name": "Chromium reader / draftsafety",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251617"
+    },
+    {
+      "id": 140043251675,
+      "name": "Chromium reader / apadanatherascaled81",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251675"
+    },
+    {
+      "id": 140043251681,
+      "name": "Chromium reader / chapters",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251681"
+    },
+    {
+      "id": 140043251734,
+      "name": "Chromium reader / apadanatheranext",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140043251734"
+    },
+    {
+      "id": 140058310479,
+      "name": "Chromium reader",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45858558058/job/140058310479"
+    }
+  ],
+  "only_failure_explained": "MacOS Node20 two newly added probe observations were truncated at8192 bytes. Source/driver/capture correction dd7b697 independently reviewed and6realhost preflightpassed. Not a retry or claim a719 passed."
+}

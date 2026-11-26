@@ -1,0 +1,195 @@
+{
+  "status": "PASS",
+  "run": 45861570067,
+  "head": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+  "reviewed_parent": "dd7b697df2c54308084fffd934af38130d01f952",
+  "results": [
+    {
+      "id": 140053661249,
+      "name": "Driver probe Node 20 / windows-latest",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45861570067/job/140053661249",
+      "head": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+      "parent": "dd7b697df2c54308084fffd934af38130d01f952",
+      "delta": "A\t.github/workflows/pali-driver-probe-preflight.yml",
+      "node": "v20.20.2",
+      "platform": "win32",
+      "runner_os": "Windows",
+      "purpose": "Targeted helper portability preflight only; not full release CI.",
+      "argv": [
+        "C:\\hostedtoolcache\\windows\\node\\20.20.2\\x64\\node.exe",
+        "--test",
+        "--test-reporter=tap",
+        "tests/test-runner-scheduling.test.mjs"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 2003.1484999999998,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "working_tree_after": ""
+    },
+    {
+      "id": 140053661763,
+      "name": "Driver probe Node 20 / ubuntu-latest",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45861570067/job/140053661763",
+      "head": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+      "parent": "dd7b697df2c54308084fffd934af38130d01f952",
+      "delta": "A\t.github/workflows/pali-driver-probe-preflight.yml",
+      "node": "v20.20.2",
+      "platform": "linux",
+      "runner_os": "Linux",
+      "purpose": "Targeted helper portability preflight only; not full release CI.",
+      "argv": [
+        "/opt/hostedtoolcache/node/20.20.2/x64/bin/node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/test-runner-scheduling.test.mjs"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 569.417422,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "working_tree_after": ""
+    },
+    {
+      "id": 140053661804,
+      "name": "Driver probe Node 22 / ubuntu-latest",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45861570067/job/140053661804",
+      "head": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+      "parent": "dd7b697df2c54308084fffd934af38130d01f952",
+      "delta": "A\t.github/workflows/pali-driver-probe-preflight.yml",
+      "node": "v22.23.5",
+      "platform": "linux",
+      "runner_os": "Linux",
+      "purpose": "Targeted helper portability preflight only; not full release CI.",
+      "argv": [
+        "/opt/hostedtoolcache/node/22.23.5/x64/bin/node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/test-runner-scheduling.test.mjs"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 566.430908,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "working_tree_after": ""
+    },
+    {
+      "id": 140053661866,
+      "name": "Driver probe Node 22 / windows-latest",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45861570067/job/140053661866",
+      "head": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+      "parent": "dd7b697df2c54308084fffd934af38130d01f952",
+      "delta": "A\t.github/workflows/pali-driver-probe-preflight.yml",
+      "node": "v22.23.5",
+      "platform": "win32",
+      "runner_os": "Windows",
+      "purpose": "Targeted helper portability preflight only; not full release CI.",
+      "argv": [
+        "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+        "--test",
+        "--test-reporter=tap",
+        "tests/test-runner-scheduling.test.mjs"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1773.3974,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "working_tree_after": ""
+    },
+    {
+      "id": 140053661735,
+      "name": "Driver probe Node 22 / macos-latest",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45861570067/job/140053661735",
+      "head": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+      "parent": "dd7b697df2c54308084fffd934af38130d01f952",
+      "delta": "A\t.github/workflows/pali-driver-probe-preflight.yml",
+      "node": "v22.23.5",
+      "platform": "darwin",
+      "runner_os": "macOS",
+      "purpose": "Targeted helper portability preflight only; not full release CI.",
+      "argv": [
+        "/Users/runner/hostedtoolcache/node/22.23.5/arm64/bin/node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/test-runner-scheduling.test.mjs"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1591.1984159999997,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "working_tree_after": ""
+    },
+    {
+      "id": 140053661886,
+      "name": "Driver probe Node 20 / macos-latest",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45861570067/job/140053661886",
+      "head": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+      "parent": "dd7b697df2c54308084fffd934af38130d01f952",
+      "delta": "A\t.github/workflows/pali-driver-probe-preflight.yml",
+      "node": "v20.20.2",
+      "platform": "darwin",
+      "runner_os": "macOS",
+      "purpose": "Targeted helper portability preflight only; not full release CI.",
+      "argv": [
+        "/Users/runner/hostedtoolcache/node/20.20.2/arm64/bin/node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/test-runner-scheduling.test.mjs"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "elapsed_ms": 1667.35925,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "working_tree_after": ""
+    }
+  ],
+  "not_full_release_CI": true
+}

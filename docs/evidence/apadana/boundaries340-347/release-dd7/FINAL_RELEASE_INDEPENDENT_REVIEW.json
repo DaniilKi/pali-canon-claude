@@ -1,0 +1,79 @@
+{
+  "schema": "independent-finite-six-boundaries-dev-release-review-v1",
+  "status": "GO_FINITE_DEV_RELEASE_RECEIPT_AND_EVIDENCE_BRANCH_ONLY",
+  "reviewed_utc": "2026-11-26T17:25:41.777853+00:00",
+  "software_commit": "dd7b697df2c54308084fffd934af38130d01f952",
+  "release_guide": {
+    "file": "/tmp/pali-six-boundaries-final-evidence-nov26/docs/data/apadana-six-boundaries-release.md",
+    "sha256": "d93571a44d8cbfa42d32ed3044e9e81babfb7bf89f169959ee76df00bb43b3a3"
+  },
+  "release_receipt": {
+    "file": "/tmp/pali-six-boundaries-final-evidence-nov26/docs/evidence/apadana/boundaries340-347/release-dd7/FINAL_RELEASE_RECEIPT.json",
+    "sha256": "7749a5aa1860d004d73206a4caec2cf5f3d6486c56b56ccd880a3c16d27ee69c"
+  },
+  "exact_gate": {
+    "file": "/tmp/pali-boundaries340-evidence-nov26/FINAL_EXACT_DD7_CI_GATE.json",
+    "sha256": "7b77618015d422edaddcdf9f83fa442a7fac76450c57cc1e5b005c2c0a969bb1",
+    "jobs_passed": 59,
+    "companion_workflows_passed": 3,
+    "exact_same_59_names_as_prior": true,
+    "all_six_OS_Node_full_inventories": {
+      "tests_each": 2013,
+      "pass_each": 1759,
+      "optional_skips_each": 254,
+      "fail_cancel_each": 0
+    }
+  },
+  "mandatory_source_gate": {
+    "sha256": "bda96c9c41ddaa6069a95ca6fe83cbef781c35b8efee561be4bb0ce05faa3013",
+    "job": 140058859172,
+    "tests": 23,
+    "pass": 23,
+    "skip": 0,
+    "workflow_step_and_group_verified": true
+  },
+  "promotion": {
+    "sha256": "85e0d1c17b5e9b262356e5e1dc307de86976c0104938fffd85130d2c1268b52a",
+    "before": "c1b2433481399b2125f6645a75bf4105cb212440",
+    "after": "dd7b697df2c54308084fffd934af38130d01f952",
+    "normal_ancestry_verified": true,
+    "all_candidate_runs_success_before_push": true,
+    "recorded_completed_utc": "2026-11-26T17:21:45.310254+00:00",
+    "local_origin_dev_verified": "dd7b697df2c54308084fffd934af38130d01f952",
+    "local_origin_main_verified": "451a857dfb60b727af3e25bedec35d80b3fe7856"
+  },
+  "supporting_copies_byte_verified": {
+    "FINAL_EXACT_DD7_CI_GATE.json": "7b77618015d422edaddcdf9f83fa442a7fac76450c57cc1e5b005c2c0a969bb1",
+    "MANDATORY_SOURCE23_RESULT.json": "bda96c9c41ddaa6069a95ca6fe83cbef781c35b8efee561be4bb0ce05faa3013",
+    "DEV_PROMOTION_RECEIPT.json": "85e0d1c17b5e9b262356e5e1dc307de86976c0104938fffd85130d2c1268b52a",
+    "DEV_AUTOMATIC_RECHECKS.json": "bb91d104930b6e85e19ca151a46a66760e0e0d83e162ba2a6aa4664d9b1d15bd",
+    "FINAL_CORRECTION_ACCEPTANCE.json": "4aefd2d3ad892267cf3636b407553f1a331d4f8a30795d7a4bbe9de3b0c26a3f",
+    "PREFLIGHT_SIX_HOST_RESULTS.json": "60f9cc4b6f432d737c6f5cf725749e3217dcfa81d430da657becd2fb317ab901",
+    "PREFLIGHT_WORKFLOW_REVIEW.json": "90af6858f8d25ed9d14893c5076cf62b3f8a35818c225369a2c4490573ff8b7f",
+    "EXACT_DD7_MATRIX_RESULTS.json": "a04ee2994b6e9601392f2818c23897471f1f16a44744013db51ae957ee18b371",
+    "EXACT_A719_TERMINAL_RECONCILIATION.json": "617751e6e809fdb93cd81d9a253f34d5e4c61a0ed63f9d8576ed6def430f167b"
+  },
+  "source_only_research": {
+    "commit": "902bc627440c654250bf14fdc1d0ceb463315cf8",
+    "changed_paths": 78,
+    "all_docs_data_or_evidence_only": true,
+    "activation_or_coverage_gain": 0
+  },
+  "claims_review": [
+    "Finite six-record repair only, all89oldpositions require explicit current locator, all343English choices and other8538records preserved; no added translation coverage. Existing independent source/application/package/browser/correction seals remain the authority for those facts.",
+    "CI totals are actual complete inventories on6OS/Nodelegs; optional254fixture skips do not replace mandatory original-source23zero-skip gate.",
+    "59package jobs and3companion workflows completed at exactdd7 before normaldevfast-forward; no main/production/force push claim exceeds the supplied push receipt.",
+    "Preflight diagnostic source is the exact parent-only workflow delta already reviewed, with12/12realhost cases; it does not substitute for now-completed fullcandidate CI.",
+    "Automaticdevpush workflows remain recorded queued/in_progress withnullconclusion and are explicitly not claimed finished. No newmanual duplicate run is recorded.",
+    "The preflight/fullCI queue overlap is documented as an order adjustment without removing acceptance gates.",
+    "The next10root/16English sourcecandidates are researchonly; no namespace/runtime/sourceactivation or coverage is inferred.",
+    "Physical phones/tablets,humanAT,native signed-inhosts,liveprovider uptime,remaining rights/alignmentholds and broaderprojectcompletion remain separate."
+  ],
+  "scope_limits": [
+    "Read-only review of saved structuredGitHub observations and summaries; no freshCI/APIqueries,fullrawlogdownload,test,build,browser or Gitmutation by this reviewer.",
+    "The exact priorcandidate CI is completed. Automaticdevrechecks remain pending in the preserved snapshot, to be observed separately without blindmanualduplication.",
+    "Approval covers publishing the reviewed metadata/evidence branch only, leaving softwaredev atdd7 andmain/production unchanged."
+  ],
+  "blocking_findings": [],
+  "evidence_worktree_status": "?? docs/data/apadana-six-boundaries-release.md\n?? docs/evidence/apadana/boundaries340-347/release-dd7/"
+}

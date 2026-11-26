@@ -1,0 +1,21 @@
+{
+  "expected_head": "dd7b697df2c54308084fffd934af38130d01f952",
+  "before": {
+    "refs/heads/dev/pali-reliability": "c1b2433481399b2125f6645a75bf4105cb212440",
+    "refs/heads/integrate/pali-six-boundaries-nov26": "dd7b697df2c54308084fffd934af38130d01f952",
+    "refs/heads/main": "451a857dfb60b727af3e25bedec35d80b3fe7856"
+  },
+  "required_exact_CI_gate": "FINAL_EXACT_DD7_CI_GATE.json",
+  "started_utc": "2026-11-26T17:21:43.188702+00:00",
+  "main_push_requested": false,
+  "force_push_requested": false,
+  "push_exit_code": 0,
+  "stdout": "",
+  "stderr": "To https://github.com/DaniilKi/pali-canon-claude.git\n   c1b2433..dd7b697  HEAD -> dev/pali-reliability\n",
+  "after": {
+    "refs/heads/dev/pali-reliability": "dd7b697df2c54308084fffd934af38130d01f952",
+    "refs/heads/integrate/pali-six-boundaries-nov26": "dd7b697df2c54308084fffd934af38130d01f952",
+    "refs/heads/main": "451a857dfb60b727af3e25bedec35d80b3fe7856"
+  },
+  "completed_utc": "2026-11-26T17:21:45.310254+00:00"
+}

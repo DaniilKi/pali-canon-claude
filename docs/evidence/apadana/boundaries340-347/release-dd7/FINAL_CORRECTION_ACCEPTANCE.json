@@ -1,0 +1,78 @@
+{
+  "schema": "independent-probe-correction-acceptance-v1",
+  "status": "GO_TWO_NEW_PROBE_CORRECTIONS_ONLY",
+  "reviewed_utc": "2026-11-26T16:58:31.421417+00:00",
+  "candidate_commit": "dd7b697df2c54308084fffd934af38130d01f952",
+  "diagnostic_commit": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+  "diagnostic_run": 45861570067,
+  "candidate_worktree_clean_observed": true,
+  "source_pins_verified_from_both_Git_commits_and_current_files": {
+    "tests/test-runner-scheduling.test.mjs": "db5fa9b37bd3d55240762e3760b26defc425d986a52a3e4d7bb3f3f08c4206a0",
+    "scripts/test.mjs": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad",
+    "docs/evidence/apadana/boundaries340-347/SIX_BOUNDARY_SOURCE_INVERSES.json": "21c6076b7954b65f807a7ae044d61fb7f61f8a352e4acc6b28eae5ebbd87aaf7",
+    "tests/helpers/six-boundary-source-input.mjs": "73e11f44693fae80384cf9eb3dc5b723b0087067c9fadfca16ad43ad791a1572"
+  },
+  "workflow_sha256": "d6e2672d7a6e00747bd67bc7fe1e33e799663d31e1273746b39750b6afa36a0f",
+  "preflight_receipt": {
+    "file": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/capture-followup/PREFLIGHT_SIX_HOST_RESULTS.json",
+    "sha256": "60f9cc4b6f432d737c6f5cf725749e3217dcfa81d430da657becd2fb317ab901",
+    "records": 6,
+    "actual_os_node_pairs": [
+      [
+        "darwin",
+        20
+      ],
+      [
+        "darwin",
+        22
+      ],
+      [
+        "linux",
+        20
+      ],
+      [
+        "linux",
+        22
+      ],
+      [
+        "win32",
+        20
+      ],
+      [
+        "win32",
+        22
+      ]
+    ],
+    "cases_per_host": 2,
+    "total_pass": 12,
+    "total_skips": 0
+  },
+  "provenance_qualification": "Read parent-saved full parsed result records and independently verified diagnostic Git parent, only-one-workflow delta, strict workflow count/status/OS/version/clean gates and committed source hashes. No fresh GitHub/API query, raw TAP download, test or CI execution by reviewer.",
+  "findings": [
+    "Six actual OS/Node hosts passed the exact corrected two-case helper source, including macOS20/22. This supports closure of both new-probe defects: lexical-vs-physical fixture roots and asynchronous mock-stdout truncation.",
+    "Exact argv/status assertions, two test bodies and child/parent deadlines remain preserved. Prior macOS failures and local negative controls remain retained; static source reviews d428 and34b399 are unchanged historical evidence.",
+    "The diagnostic adds only its workflow over exact dd7 candidate. It is absent from the release candidate and does not replace full release tests.",
+    "All39 candidate Git/current/archive/installed members independently match the reviewed application records. The source inverse map, loader and actual driver remain sealed; no application or private-data change.",
+    "Committed guide accurately records historical failures and limitations. Its preflight-before-full sequencing sentence was adjusted in CURRENT_CHECKPOINT: full CI started while final macOS20 preflight queued. All six preflight and full exact candidate gates remain mandatory; none was removed."
+  ],
+  "prior_committed_semantic_review_sha256": "d4284565d1ab95b295887912d3baef116da3faf947e158d3c6e1adbafa360f34",
+  "prior_committed_binding_review_sha256": "f0689a7597acce008d4f885d7333192cdf9fbc4c93c1752b5c374e5c0bfb1676",
+  "archive_sha256": "d4248e1ece65495a88b76df90bfbdb692ebc8b0f250f387ce157bf9ac99d0e0a",
+  "all39_git_current_archive_installed_exact": true,
+  "old_case_file_changes_from85d_excluding_new_probe": false,
+  "full_candidate_CI_not_certified": {
+    "commit": "dd7b697df2c54308084fffd934af38130d01f952",
+    "package_run": 45863080262,
+    "evidence_run": 45863080357,
+    "corpus_run": 45863080256,
+    "npx_run": 45863080230,
+    "status": "running; no duplicate manual run started"
+  },
+  "remaining_blockers": [
+    "Full exact dd7 required CI45863080262 and companions45863080357/45863080256/45863080230 must be reconciled before dev promotion.",
+    "Physical devices, human assistive technology, native signed-in hosts, live source availability and unactivated future-source normalization/runtime approvals remain outside these helper portability results."
+  ],
+  "dev_promotion_approval": false,
+  "main_production_deployment_approval": false,
+  "reviewer_actions": "Read-only Git/hash/JSON/tar inspection plus this external receipt; no tests, builds, browser, Git mutations, network or CI calls."
+}

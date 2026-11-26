@@ -1,0 +1,161 @@
+{
+  "schema": "finite-six-boundaries-dev-release-v1",
+  "status": "COMPLETE_FINITE_DEV_RELEASE",
+  "recorded_utc": "2026-11-26T17:23:32.688412+00:00",
+  "dev_branch": "dev/pali-reliability",
+  "dev_before": "c1b2433481399b2125f6645a75bf4105cb212440",
+  "dev_after": "dd7b697df2c54308084fffd934af38130d01f952",
+  "normal_fast_forward": true,
+  "main_unchanged": "451a857dfb60b727af3e25bedec35d80b3fe7856",
+  "main_or_production_deployment": false,
+  "scope": {
+    "corrected_pairs": [
+      "340/341",
+      "343/344",
+      "346/347"
+    ],
+    "old_positions_requiring_explicit_current_pin": 89,
+    "source_notes_preserved": 17,
+    "other_records_unchanged": 8538,
+    "Apadana_English_choices_preserved": 343,
+    "new_English_coverage": 0,
+    "canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+    "locator_namespace": "apadana-thera340-341-343-344-346-347-v1"
+  },
+  "validation": {
+    "exact_candidate_workflows": [
+      {
+        "id": 45863080262,
+        "name": "Check package",
+        "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+        "head_branch": "integrate/pali-six-boundaries-nov26",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45863080262",
+        "run_attempt": 1,
+        "created_at": "2026-11-26T16:54:48Z",
+        "updated_at": "2026-11-26T17:19:50Z"
+      },
+      {
+        "id": 45863080357,
+        "name": "Evidence reading commands",
+        "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+        "head_branch": "integrate/pali-six-boundaries-nov26",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45863080357",
+        "run_attempt": 1,
+        "created_at": "2026-11-26T16:54:48Z",
+        "updated_at": "2026-11-26T17:01:39Z"
+      },
+      {
+        "id": 45863080256,
+        "name": "Read the full bundled corpus",
+        "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+        "head_branch": "integrate/pali-six-boundaries-nov26",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45863080256",
+        "run_attempt": 1,
+        "created_at": "2026-11-26T16:54:48Z",
+        "updated_at": "2026-11-26T16:55:42Z"
+      },
+      {
+        "id": 45863080230,
+        "name": "npx install",
+        "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+        "head_branch": "integrate/pali-six-boundaries-nov26",
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45863080230",
+        "run_attempt": 1,
+        "created_at": "2026-11-26T16:54:48Z",
+        "updated_at": "2026-11-26T16:55:47Z"
+      }
+    ],
+    "complete_package_jobs_passed": 59,
+    "six_OS_Node_inventories": {
+      "cases_each": 2013,
+      "pass_each": 1759,
+      "optional_fixture_skips_each": 254,
+      "failures_each": 0
+    },
+    "mandatory_source_cases": 23,
+    "mandatory_source_pass": 23,
+    "mandatory_source_skips": 0,
+    "targeted_real_host_probe_cases": 12,
+    "targeted_real_host_probe_pass": 12,
+    "installed_archive_sha256": "d4248e1ece65495a88b76df90bfbdb692ebc8b0f250f387ce157bf9ac99d0e0a",
+    "package_members_unchanged_during_test_helper_repairs": 39,
+    "installed_browser_families": 15,
+    "installed_browser_old_position_refusals": 712,
+    "installed_browser_current_segments": 89,
+    "installed_browser_external_requests": 0,
+    "independent_correction_acceptance_sha256": "4aefd2d3ad892267cf3636b407553f1a331d4f8a30795d7a4bbe9de3b0c26a3f"
+  },
+  "automatic_dev_rechecks": [
+    {
+      "id": 45867084604,
+      "name": "Read the full bundled corpus",
+      "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45867084604",
+      "created_at": "2026-11-26T17:21:46Z"
+    },
+    {
+      "id": 45867084539,
+      "name": "Evidence reading commands",
+      "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45867084539",
+      "created_at": "2026-11-26T17:21:46Z"
+    },
+    {
+      "id": 45867084555,
+      "name": "Check package",
+      "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45867084555",
+      "created_at": "2026-11-26T17:21:46Z"
+    },
+    {
+      "id": 45867084646,
+      "name": "npx install",
+      "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45867084646",
+      "created_at": "2026-11-26T17:21:46Z"
+    }
+  ],
+  "automatic_recheck_limit": "Automatically triggered by the dev push; observed separately, not manually duplicated or assumed finished. Exact same commit already passed59+3 candidate workflows before promotion.",
+  "source_only_next_work": {
+    "branch": "research/pali-next-cohort-nov26",
+    "head": "902bc627440c654250bf14fdc1d0ceb463315cf8",
+    "guide": "docs/data/apadana-next-cohort-handoff.md",
+    "scope": "Potential10rootrecordcorrections and16publisher-sourcecandidates, with independent source proofs; zero activation/coverage gain",
+    "old_research_preserved": "66746f02059ecb2c8c1a55284f035466a30969ef"
+  },
+  "limits": [
+    "This finite repair does not complete all corpus English coverage or review every remaining source-boundary lead.",
+    "Other24Book37structural flags and one lexical lead remain unreviewed.",
+    "All previous source rights/alignment holds remain.",
+    "Physical phones/tablets,human assistive use,native signed-in hosts and live provider uptime were not established by this batch.",
+    "No private notes,bookmarks,drafts or exports were automatically migrated."
+  ]
+}

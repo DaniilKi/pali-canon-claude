@@ -1,0 +1,32 @@
+{
+  "commit": "dd7b697df2c54308084fffd934af38130d01f952",
+  "job_id": 140058859172,
+  "run": 45863080262,
+  "step": "Require six-poem source and saved-citation compatibility without skips",
+  "fixtures": {
+    "repository": "VipassanaTech/tipitaka-xml",
+    "ref": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "path": ".fixtures/apadana-vri-pinned"
+  },
+  "summary": [
+    "# tests 23",
+    "# suites 0",
+    "# pass 23",
+    "# fail 0",
+    "# cancelled 0",
+    "# skipped 0",
+    "# todo 0",
+    "# duration_ms 74361.8586"
+  ],
+  "stats": {
+    "tests": 23,
+    "suites": 0,
+    "pass": 23,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 74361.8586
+  },
+  "assertion_code_unchanged": true
+}

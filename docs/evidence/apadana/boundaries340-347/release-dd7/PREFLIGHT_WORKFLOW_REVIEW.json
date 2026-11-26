@@ -1,0 +1,50 @@
+{
+  "schema": "independent-targeted-driver-probe-preflight-workflow-review-v1",
+  "status": "GO_EXACT_FINAL_WORKFLOW_TARGETED_DIAGNOSTIC_ONLY",
+  "reviewed_utc": "2026-11-26T16:46:00.894764+00:00",
+  "workflow": {
+    "path": "/tmp/pali-driver-probe-preflight-final.yml",
+    "sha256": "d6e2672d7a6e00747bd67bc7fe1e33e799663d31e1273746b39750b6afa36a0f",
+    "diagnostic_repository_path": ".github/workflows/pali-driver-probe-preflight.yml"
+  },
+  "template": {
+    "path": "/tmp/pali-driver-probe-preflight.yml",
+    "sha256": "bf1f43aacb70153ce83bb8a51179fd0e473491826c1e91d16cb46a318f5010fd"
+  },
+  "exact_parent": "dd7b697df2c54308084fffd934af38130d01f952",
+  "final_diff_from_template": "Exactly one PARENT_SHA_PLACEHOLDER replacement with the explicit reviewed parent; no other byte changed.",
+  "source_observations": {
+    "scripts/test.mjs_sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad",
+    "tests/test-runner-scheduling.test.mjs_sha256": "db5fa9b37bd3d55240762e3760b26defc425d986a52a3e4d7bb3f3f08c4206a0",
+    "driver_and_probe_match_parent_reported_semantic_review_scope": true,
+    "parent_commit_contents_not_requeried_with_Git_by_this_reviewer": true
+  },
+  "static_checks": {
+    "matrix": "Ubuntu/macOS/Windows latest x Node20/22 =six real-host jobs; fail-fast false.",
+    "expressions": "Matrix and runner expressions appear in supported job/step/env/artifact contexts; dynamic values are supplied as environment strings,not injected into JS source.",
+    "shell_portability": "Explicit Git Bash on hosted Windows and bash on other hosted hosts; quoted heredoc passes module text to actual setup-node executable. Node builtin path/process/fs APIs avoid shell quoting/glob dependencies.",
+    "provenance": "Checkout depth2 supplies HEAD and first parent. Exact parent,only added workflow delta and clean status checked before test; clean status checked after. No app/source edits permitted in diagnostic child commit.",
+    "actual_host": "Real process Node major and platform checked against matrix and runnerOS values Linux/macOS/Windows. Simulated child platform branches inside probe are not mistaken for actual host metadata.",
+    "test_scope": "Direct Node --test of only unchanged scheduling probe file; exactly2 tests,2pass,0fail/cancelled/skipped/todo required alongside status0,no signal,no spawn error. No filtered or skipped probe acceptance.",
+    "counts_portability": "CRLF normalized only for TAP footer parsing. Node20/22 use the six asserted numeric summary fields. Failed/missing counters or nonzero/null/error child outcomes cannot pass.",
+    "bounds": "Test child120seconds,SIGKILL,maxBuffer2MiB; provenance Git reads10seconds/256KiB; job10minutes. Original probe and existing release test deadlines unchanged.",
+    "artifacts": "metadata,result,TAP,stderr written under RUNNER_TEMP,upload always,missing-files error,14day retention; buffers bound logs. Early setup/provenance failures remain failed jobs even if result artifact is absent.",
+    "privilege_and_network_scope": "contentsread only,checkout persisted credentials false; no npm dependency install,build,Python or application/provider request in workflow. Standard GitHub checkout/setup-node/artifact service traffic remains implicit CI infrastructure.",
+    "probe_behavior": "The source copies actual driver into owned synthetic discovery fixture and intercepts child process APIs before driver import. This targeted run exercises its two cases; it does not run all discovered legacy application tests."
+  },
+  "blocking_findings": [],
+  "approval_limits": [
+    "Read-only static workflow/source review only; no CI,Git,app,driver,probe,test,build or network execution by reviewer.",
+    "Source semantic authorities and exact parent binding are supplied by root/peer reviews; this review verifies their stated exact current source hashes and workflow gating.",
+    "Actual six diagnostic-host results remain to be observed; no passing runtime result is inferred from workflow source.",
+    "Full normal release59+3required gates and exact-final-commit CI remain mandatory before dev promotion; preflight is not release/push/main/deploy approval."
+  ],
+  "root_reported_after_GO": {
+    "diagnostic_commit": "ee097f29698baf3bfa20d87e8c78ccb001fd4f89",
+    "branch": "diagnostic/pali-driver-probe-nov26",
+    "run": "45861570067",
+    "state_at_parent_message": "queued",
+    "queried_or_executed_by_reviewer": false
+  },
+  "tracked_files_changed_by_reviewer": false
+}

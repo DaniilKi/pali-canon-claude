@@ -1,0 +1,51 @@
+{
+  "observed_utc": "2026-11-26T17:25:04.108973+00:00",
+  "runs": [
+    {
+      "id": 45867084539,
+      "name": "Evidence reading commands",
+      "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45867084539",
+      "created_at": "2026-11-26T17:21:46Z"
+    },
+    {
+      "id": 45867084555,
+      "name": "Check package",
+      "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45867084555",
+      "created_at": "2026-11-26T17:21:46Z"
+    },
+    {
+      "id": 45867084604,
+      "name": "Read the full bundled corpus",
+      "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45867084604",
+      "created_at": "2026-11-26T17:21:46Z"
+    },
+    {
+      "id": 45867084646,
+      "name": "npx install",
+      "head_sha": "dd7b697df2c54308084fffd934af38130d01f952",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45867084646",
+      "created_at": "2026-11-26T17:21:46Z"
+    }
+  ],
+  "manual_duplicate_dispatch": false,
+  "candidate_same_SHA_validation_preceded_dev_push": true
+}
