@@ -1,0 +1,10 @@
+{
+  "schema": "independent-eight-publisher-raw-first-preseal-v1",
+  "status": "SEALED_BEFORE_A_COMPARISON",
+  "files": {
+    "SOURCE_REVIEW.json": "8392cadf5d81d34f0a25706d4785294812ce5d4fd64a2f1048d9535f2b63e6cb",
+    "INPUT_PINS.json": "cb1f98df367381ac2066e08fa998dee02d7d1925e34c892963500f1c7f561648"
+  },
+  "A_interpretation_or_goldens_read": false,
+  "no_activation": true
+}

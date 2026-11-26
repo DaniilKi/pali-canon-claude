@@ -1,0 +1,15 @@
+{
+  "schema": "sealed-joint-eight-source-future-work-only-closure-v1",
+  "status": "GO_FUTURE_SOURCE_WORK_ONLY_ACTIVATION_HELD",
+  "files": {
+    "JOINT_SOURCE_REVIEW.json": "22d7dc91cf37e183bef0a2da51b68744ce625a42e25ba97db447184f8db26a9f",
+    "COMPARISON_RECEIPT.json": "46a5f8dd3299785017df5cd32ec9e53087fa960eb00af9e55b73cf11d1376abc",
+    "B_AGGREGATE_ERRATUM.json": "20efc828891e6379f8bd25f1fe4cfce4b181a7c0c561bb8db425d8f353db9d6b",
+    "README.md": "24fa96c5ee3a21442f0d0f0e0dbc62bed86a83498bb2b91f779e76fc9e397ca6"
+  },
+  "original_A_report_sha256": "9c0b486c4f88faec01f772b949e7f9306caabbd2e5768f0e64034b3b4a80f4cc",
+  "original_B_report_sha256": "8392cadf5d81d34f0a25706d4785294812ce5d4fd64a2f1048d9535f2b63e6cb",
+  "original_B_preseal_sha256": "bd8a2cddd8e7633180b9f037195c2dbd3d93230ce28f27f217f8682ed2ad5de0",
+  "original_files_unchanged": true,
+  "coverage_gain": 0
+}

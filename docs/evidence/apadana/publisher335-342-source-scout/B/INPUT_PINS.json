@@ -1,0 +1,136 @@
+{
+  "schema": "independent-eight-source-input-pins-v1",
+  "publisher": [
+    {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/originals/src/_poems/chapter-3/poem-335.md",
+      "bytes": 6023,
+      "sha256": "d584d972d7a6009c74a9def1914607171090d3f0cf593189fdc135fd4d42d389",
+      "git_blob_sha1": "e56193acd2dea3bca64af6a14232375235a83e7f",
+      "upstream_path": "src/_poems/chapter-3/poem-335.md",
+      "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/originals/src/_poems/chapter-3/poem-336.md",
+      "bytes": 5883,
+      "sha256": "98890461bc290bd3fb455e410e6a92fec9c7ff0b03cbe401e219274847463300",
+      "git_blob_sha1": "e5c5e8e4d031e310eec31f2a10d38e52e6611a0f",
+      "upstream_path": "src/_poems/chapter-3/poem-336.md",
+      "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/originals/src/_poems/chapter-3/poem-337.md",
+      "bytes": 5263,
+      "sha256": "24c71d29205c43f6bb0a5757cd760de2dad8ecf397dc941ce916426dc5d7fb9c",
+      "git_blob_sha1": "5a1cbb516a6827c2660f4ef18e90897a26395dd8",
+      "upstream_path": "src/_poems/chapter-3/poem-337.md",
+      "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/originals/src/_poems/chapter-3/poem-338.md",
+      "bytes": 6161,
+      "sha256": "4b9be1a6694f7a8013c3b6a8a211cb7a472643f0ce393e8ed74e59a32366f56a",
+      "git_blob_sha1": "55ba4caaafa938827d3343edf7efab3532f77fca",
+      "upstream_path": "src/_poems/chapter-3/poem-338.md",
+      "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/originals/src/_poems/chapter-3/poem-339.md",
+      "bytes": 5777,
+      "sha256": "277a106e651a0c97c52ceb05c88340c1052b0ab67c3c9c90a2d92ce4f4f374f2",
+      "git_blob_sha1": "2195b3bdf593ae03b29d68849a4830140c3333f9",
+      "upstream_path": "src/_poems/chapter-3/poem-339.md",
+      "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/originals/src/_poems/chapter-3/poem-340.md",
+      "bytes": 3368,
+      "sha256": "42f279469173f83208828c9a4aa7d3dcf0f98fc1de013b2f1a769e8cdc3b5cdb",
+      "git_blob_sha1": "a64241d53eaaf07e743b8664eb9471655d23f61f",
+      "upstream_path": "src/_poems/chapter-3/poem-340.md",
+      "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/originals/src/_poems/chapter-3/poem-341.md",
+      "bytes": 2619,
+      "sha256": "d50e74153f047c2512a745fb9e5b7f215f4300c4e115190cee58e0549feb9c31",
+      "git_blob_sha1": "62d8b76bab15187a5c0408d716c4e27cf54a7e9b",
+      "upstream_path": "src/_poems/chapter-3/poem-341.md",
+      "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    },
+    {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/originals/src/_poems/chapter-3/poem-342.md",
+      "bytes": 3031,
+      "sha256": "240ca9e41dd5e29ebf479a5eebb62d998e181134da69813ea1421c79eecb1241",
+      "git_blob_sha1": "bc66ed31fef0e3cd6dd343aaa147f3e62b80ed1d",
+      "upstream_path": "src/_poems/chapter-3/poem-342.md",
+      "revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+    }
+  ],
+  "rights": [
+    {
+      "path": "/tmp/pali-next334-source-review-nov26/originals/LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "upstream_path": "LICENSE.md",
+      "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "controlling_license_evidence": true
+    },
+    {
+      "path": "/tmp/pali-next334-source-review-nov26/originals/src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "upstream_path": "src/_pages/about.md",
+      "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "controlling_license_evidence": true
+    },
+    {
+      "path": "/tmp/pali-next334-source-review-nov26/originals/src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "upstream_path": "src/_includes/site/footer.njk",
+      "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "controlling_license_evidence": true
+    },
+    {
+      "path": "/tmp/pali-next334-source-review-nov26/originals/src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "upstream_path": "src/_includes/layouts/epub-metadata.xml",
+      "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "controlling_license_evidence": true
+    },
+    {
+      "path": "/tmp/pali-next334-source-review-nov26/originals/src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "upstream_path": "src/_data/site.json",
+      "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "controlling_license_evidence": false
+    },
+    {
+      "path": "/tmp/pali-next334-source-review-nov26/originals/src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "upstream_path": "src/_poems/_poems.json",
+      "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "controlling_license_evidence": false
+    }
+  ],
+  "acquisition": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/ACQUISITION.json",
+    "bytes": 7107,
+    "sha256": "a973f44ecd3fda7f3f91e7af479dd950e3cb0d7e36e847fa8f02da0b317e69d9"
+  },
+  "VRI_XML": {
+    "path": "/tmp/pali-sariputta-release/vri-fixture/romn/s0510m1.mul.xml",
+    "bytes": 2464074,
+    "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1"
+  },
+  "book_tuple_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44"
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "bounded-eight-poem-scout-final-closure-v1",
+  "status": "EIGHT_STRONG_SOURCE_CANDIDATES_IMPLEMENTATION_AND_ACTIVATION_HELD",
+  "report_sha256": "9c0b486c4f88faec01f772b949e7f9306caabbd2e5768f0e64034b3b4a80f4cc",
+  "source_seal_sha256": "efc5f6115a765b22535b8f515e0c43da5ff80b44bde5242d097051459f38696d",
+  "readme_sha256": "26de09b1ae1b82fa1e1af343953f485ba7ced3d748acd57d3dd8e109b732c256",
+  "source_activation_count": 0,
+  "implementation_or_runtime_approval": false
+}

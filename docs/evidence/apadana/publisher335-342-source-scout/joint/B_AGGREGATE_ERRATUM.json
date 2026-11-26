@@ -1,0 +1,24 @@
+{
+  "schema": "explicit-erratum-to-preserved-independent-B-source-scout-v1",
+  "source_report": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-independent-B/SOURCE_REVIEW.json",
+    "sha256": "8392cadf5d81d34f0a25706d4785294812ce5d4fd64a2f1048d9535f2b63e6cb"
+  },
+  "original_file_unchanged": true,
+  "field": "totals.source_display_pairs",
+  "sealed_value": 14,
+  "correct_aggregate_from_same_sealed_report_per_poem_inventory": 15,
+  "per_poem_counts": {
+    "335": 1,
+    "336": 3,
+    "337": 4,
+    "338": 4,
+    "339": 1,
+    "340": 1,
+    "341": 0,
+    "342": 1
+  },
+  "cause": "Manual aggregate typo; publisher337 per-poem inventory correctly contains4pairs. No per-poem source pin,stanza,root,notes or apparatus field changes.",
+  "A_independent_total_pair_count": "NOT_RECORDED; this correction is B-only and is not promoted to two-reviewer agreement.",
+  "impact": "Future finite pair-ownership review must account for all15source pairs, with exact positions still subject to normalization review."
+}

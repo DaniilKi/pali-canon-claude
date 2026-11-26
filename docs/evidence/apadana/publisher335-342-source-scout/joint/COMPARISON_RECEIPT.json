@@ -1,0 +1,418 @@
+{
+  "schema": "explicit-schema-two-sealed-eight-source-comparison-v1",
+  "status": "NO_MATERIAL_CONFLICT_ON_SHARED_SOURCE_FACTS",
+  "reviewed_utc": "2026-11-26T15:44:13.659175+00:00",
+  "inputs": {
+    "A_report": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/SCOUT_REPORT.json",
+      "sha256": "9c0b486c4f88faec01f772b949e7f9306caabbd2e5768f0e64034b3b4a80f4cc"
+    },
+    "A_closure": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/FINAL_CLOSURE.json",
+      "sha256": "b92278ce357649a51707267e06b23fc2ff3bb18c211c8ce56a93e184aed2539a"
+    },
+    "A_seal": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-scout/SCOUT_SEAL.json",
+      "sha256": "efc5f6115a765b22535b8f515e0c43da5ff80b44bde5242d097051459f38696d"
+    },
+    "B_report": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-independent-B/SOURCE_REVIEW.json",
+      "sha256": "8392cadf5d81d34f0a25706d4785294812ce5d4fd64a2f1048d9535f2b63e6cb"
+    },
+    "B_preseal": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/next-english335-342-independent-B/PRESEALED_REVIEW.json",
+      "sha256": "bd8a2cddd8e7633180b9f037195c2dbd3d93230ce28f27f217f8682ed2ad5de0"
+    }
+  },
+  "original_files_preserved": true,
+  "independence": "B raw-first seal precedes any access to A interpretation/goldens; comparison began only after root authorization.",
+  "schema_adapters": [
+    {
+      "A": "records[].candidate_canonical_uid",
+      "B": "poems[].canonical_id",
+      "rule": "Exact string identity."
+    },
+    {
+      "A": "canonical_full_object",
+      "B": "canonical_metadata plus canonical_index_revision",
+      "rule": "Compare only B explicit subset and separately declared optional revision. A PTS/full-object fields absent in B remain A-only."
+    },
+    {
+      "A": "publisher_structure.stanza_layout_raw[].publisher_label/lines",
+      "B": "stanzas[].publisher_global_label/physical_lines",
+      "rule": "Rename keys only, retaining exact local/global label strings,physical line count,raw paragraph hash and ordering."
+    },
+    {
+      "A": "current_root_scope_sha256",
+      "B": "whole_root_tuple_sha256",
+      "rule": "Do not equate digests. A hashes compact{id,book,start,end,blocks}; B hashes compact blocks alone. Recompute each declared form from the same pinned source slice; both match. No source/span value altered."
+    },
+    {
+      "A": "publisher_structure.all_note_numbers",
+      "B": "notes.poem_owned_numbers",
+      "rule": "Exact ordered ownership lists; individual A note hashes and B aggregate note-definition hash remain distinct,noncomparable fields."
+    },
+    {
+      "A": "summary/leading_chapter_paratext",
+      "B": "paratext plus summary/preface note ownership",
+      "rule": "Exact presence,raw hash and zero-note ownership. Future root descriptors remain unapproved."
+    },
+    {
+      "A": "rights.original_rights_artifacts[].path/publisher_revision",
+      "B": "rights.artifacts[].upstream_path/source_revision",
+      "rule": "Rename metadata keys; compare six exact size/SHA/Git/revision records."
+    }
+  ],
+  "source_input_and_rights_checks": {
+    "all8publisher_raw_SHA_Git_paths_bytes_revision_match": true,
+    "same_original_XML_SHA_and_VRI_commit": true,
+    "same_current_canonical_logical_SHA": true,
+    "all6rights_artifact_pin_checks": {
+      "LICENSE.md": true,
+      "src/_pages/about.md": true,
+      "src/_includes/site/footer.njk": true,
+      "src/_includes/layouts/epub-metadata.xml": true,
+      "src/_data/site.json": true,
+      "src/_poems/_poems.json": true
+    },
+    "controlling_specific_translation_CCBY_NC_SA4_not_generic_site_CCBY": true,
+    "translator_publisher_and_conditions_match": true,
+    "no_new_commercial_media_rights_or_existing_hold_clearance": true
+  },
+  "records": [
+    {
+      "publisher_poem": 335,
+      "canonical_id": "tha-ap337",
+      "root_blocks_half_open": [
+        9890,
+        9938
+      ],
+      "root_index_revision": null,
+      "physical_entries": 14,
+      "covered_numbered_stanzas": 15,
+      "poem_notes": 20,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_sha256": true,
+        "raw_bytes": true,
+        "upstream_path": true,
+        "git_blob_sha1": true,
+        "publisher_title": true,
+        "canonical_uid": true,
+        "explicit_root_fields": true,
+        "root_index_revision": true,
+        "PTS_BJTS_heading_labels": true,
+        "all_physical_stanza_records": true,
+        "physical_entry_count": true,
+        "covered_local_label_count": true,
+        "whole_poem_raw_sha256": true,
+        "poem_owned_note_numbers": true,
+        "A_root_wrapper_hash_matches_declared_pinned_slice": true,
+        "B_bare_root_hash_matches_same_declared_pinned_slice": true,
+        "apparatus_presence": true
+      },
+      "A_root_wrapper_sha256": "6b32e93f8549749537e13ffbf798a0807303fbb1c3ffc9e5b2ee5bab3888ba9f",
+      "B_bare_block_tuple_sha256": "73a3c41a290c185fd439f40d38325ab05f60440acbfa9f1af310a0087702ee21",
+      "source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 336,
+      "canonical_id": "tha-ap338",
+      "root_blocks_half_open": [
+        9938,
+        10003
+      ],
+      "root_index_revision": null,
+      "physical_entries": 20,
+      "covered_numbered_stanzas": 21,
+      "poem_notes": 22,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_sha256": true,
+        "raw_bytes": true,
+        "upstream_path": true,
+        "git_blob_sha1": true,
+        "publisher_title": true,
+        "canonical_uid": true,
+        "explicit_root_fields": true,
+        "root_index_revision": true,
+        "PTS_BJTS_heading_labels": true,
+        "all_physical_stanza_records": true,
+        "physical_entry_count": true,
+        "covered_local_label_count": true,
+        "whole_poem_raw_sha256": true,
+        "poem_owned_note_numbers": true,
+        "A_root_wrapper_hash_matches_declared_pinned_slice": true,
+        "B_bare_root_hash_matches_same_declared_pinned_slice": true,
+        "apparatus_presence": true
+      },
+      "A_root_wrapper_sha256": "2eaf2ef7368af1908c43020798213d84f71cf5cc96ba4d591bfe183c4d79bced",
+      "B_bare_block_tuple_sha256": "3d2fad4ef4e58957cfb55e18fc4a2f0819e405c78054408acdac34a42a7f62e8",
+      "source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 337,
+      "canonical_id": "tha-ap339",
+      "root_blocks_half_open": [
+        10003,
+        10053
+      ],
+      "root_index_revision": null,
+      "physical_entries": 16,
+      "covered_numbered_stanzas": 16,
+      "poem_notes": 17,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_sha256": true,
+        "raw_bytes": true,
+        "upstream_path": true,
+        "git_blob_sha1": true,
+        "publisher_title": true,
+        "canonical_uid": true,
+        "explicit_root_fields": true,
+        "root_index_revision": true,
+        "PTS_BJTS_heading_labels": true,
+        "all_physical_stanza_records": true,
+        "physical_entry_count": true,
+        "covered_local_label_count": true,
+        "whole_poem_raw_sha256": true,
+        "poem_owned_note_numbers": true,
+        "A_root_wrapper_hash_matches_declared_pinned_slice": true,
+        "B_bare_root_hash_matches_same_declared_pinned_slice": true,
+        "apparatus_presence": true
+      },
+      "A_root_wrapper_sha256": "17dca328c07d5cfb01eb7b1c4884bf71937a413e962c56bed96376acbbacb2aa",
+      "B_bare_block_tuple_sha256": "8c5fbf4b37ac8be51d4567dac05dc3a16375cdfdf5ed2a355348ed1e29509bb3",
+      "source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 338,
+      "canonical_id": "tha-ap340",
+      "root_blocks_half_open": [
+        10053,
+        10118
+      ],
+      "root_index_revision": "apadana-thera340-341-343-344-346-347-v1",
+      "physical_entries": 21,
+      "covered_numbered_stanzas": 21,
+      "poem_notes": 26,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_sha256": true,
+        "raw_bytes": true,
+        "upstream_path": true,
+        "git_blob_sha1": true,
+        "publisher_title": true,
+        "canonical_uid": true,
+        "explicit_root_fields": true,
+        "root_index_revision": true,
+        "PTS_BJTS_heading_labels": true,
+        "all_physical_stanza_records": true,
+        "physical_entry_count": true,
+        "covered_local_label_count": true,
+        "whole_poem_raw_sha256": true,
+        "poem_owned_note_numbers": true,
+        "A_root_wrapper_hash_matches_declared_pinned_slice": true,
+        "B_bare_root_hash_matches_same_declared_pinned_slice": true,
+        "apparatus_presence": true
+      },
+      "A_root_wrapper_sha256": "b34e2300ea02eb9dd7e9bccf8de4152d6148d4e9e87f30bac18589d0d9fcbf76",
+      "B_bare_block_tuple_sha256": "7b7bf4a8328b2310f5dccd9d3f0df1e0c8109b7fde2837a0f231feeeb04c9ed2",
+      "source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 339,
+      "canonical_id": "tha-ap341",
+      "root_blocks_half_open": [
+        10118,
+        10174
+      ],
+      "root_index_revision": "apadana-thera340-341-343-344-346-347-v1",
+      "physical_entries": 18,
+      "covered_numbered_stanzas": 18,
+      "poem_notes": 23,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_sha256": true,
+        "raw_bytes": true,
+        "upstream_path": true,
+        "git_blob_sha1": true,
+        "publisher_title": true,
+        "canonical_uid": true,
+        "explicit_root_fields": true,
+        "root_index_revision": true,
+        "PTS_BJTS_heading_labels": true,
+        "all_physical_stanza_records": true,
+        "physical_entry_count": true,
+        "covered_local_label_count": true,
+        "whole_poem_raw_sha256": true,
+        "poem_owned_note_numbers": true,
+        "A_root_wrapper_hash_matches_declared_pinned_slice": true,
+        "B_bare_root_hash_matches_same_declared_pinned_slice": true,
+        "apparatus_presence": true
+      },
+      "A_root_wrapper_sha256": "6c1a8d1e4d3c7103cdcda3ba33508005d590f20be90b68bf587dc9bde3c80224",
+      "B_bare_block_tuple_sha256": "fd128288d9da3b79bb0c5bc6eb15f8481d1b2eaacd3a929f7a709df95a4aa14f",
+      "source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 340,
+      "canonical_id": "tha-ap342",
+      "root_blocks_half_open": [
+        10174,
+        10224
+      ],
+      "root_index_revision": null,
+      "physical_entries": 13,
+      "covered_numbered_stanzas": 14,
+      "poem_notes": 8,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_sha256": true,
+        "raw_bytes": true,
+        "upstream_path": true,
+        "git_blob_sha1": true,
+        "publisher_title": true,
+        "canonical_uid": true,
+        "explicit_root_fields": true,
+        "root_index_revision": true,
+        "PTS_BJTS_heading_labels": true,
+        "all_physical_stanza_records": true,
+        "physical_entry_count": true,
+        "covered_local_label_count": true,
+        "whole_poem_raw_sha256": true,
+        "poem_owned_note_numbers": true,
+        "A_root_wrapper_hash_matches_declared_pinned_slice": true,
+        "B_bare_root_hash_matches_same_declared_pinned_slice": true,
+        "apparatus_presence": true,
+        "summary_raw_hash_and_zero_notes": true
+      },
+      "A_root_wrapper_sha256": "c6651dd1739d1b7d07bf418b68562dbb89a9df352db1b28e9c66b903ceff0528",
+      "B_bare_block_tuple_sha256": "c83e0166bd6410bb3bd18bf8bcef9cc31c5705d63b5ac5f3e02f96f0ab53ea87",
+      "source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 341,
+      "canonical_id": "tha-ap343",
+      "root_blocks_half_open": [
+        10224,
+        10258
+      ],
+      "root_index_revision": "apadana-thera340-341-343-344-346-347-v1",
+      "physical_entries": 9,
+      "covered_numbered_stanzas": 10,
+      "poem_notes": 11,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_sha256": true,
+        "raw_bytes": true,
+        "upstream_path": true,
+        "git_blob_sha1": true,
+        "publisher_title": true,
+        "canonical_uid": true,
+        "explicit_root_fields": true,
+        "root_index_revision": true,
+        "PTS_BJTS_heading_labels": true,
+        "all_physical_stanza_records": true,
+        "physical_entry_count": true,
+        "covered_local_label_count": true,
+        "whole_poem_raw_sha256": true,
+        "poem_owned_note_numbers": true,
+        "A_root_wrapper_hash_matches_declared_pinned_slice": true,
+        "B_bare_root_hash_matches_same_declared_pinned_slice": true,
+        "apparatus_presence": true,
+        "preface_raw_hash_and_zero_notes": true
+      },
+      "A_root_wrapper_sha256": "ec32530b864d6e11d3c34cb061b6f2ba50f6c5999f1b377837778b269f8dcfe9",
+      "B_bare_block_tuple_sha256": "86da70fc94159c91991020d79cf86b47b3b0e398613d21f494a4f6ef808da976",
+      "source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    },
+    {
+      "publisher_poem": 342,
+      "canonical_id": "tha-ap344",
+      "root_blocks_half_open": [
+        10258,
+        10287
+      ],
+      "root_index_revision": "apadana-thera340-341-343-344-346-347-v1",
+      "physical_entries": 9,
+      "covered_numbered_stanzas": 9,
+      "poem_notes": 6,
+      "all_comparable_facts_agree": true,
+      "checks": {
+        "raw_sha256": true,
+        "raw_bytes": true,
+        "upstream_path": true,
+        "git_blob_sha1": true,
+        "publisher_title": true,
+        "canonical_uid": true,
+        "explicit_root_fields": true,
+        "root_index_revision": true,
+        "PTS_BJTS_heading_labels": true,
+        "all_physical_stanza_records": true,
+        "physical_entry_count": true,
+        "covered_local_label_count": true,
+        "whole_poem_raw_sha256": true,
+        "poem_owned_note_numbers": true,
+        "A_root_wrapper_hash_matches_declared_pinned_slice": true,
+        "B_bare_root_hash_matches_same_declared_pinned_slice": true,
+        "apparatus_presence": true
+      },
+      "A_root_wrapper_sha256": "57107bc00b720aee0c2c922801e3d675de19ba743e413d2f2447256ca51ca750",
+      "B_bare_block_tuple_sha256": "d4fee214868635c16ed8b204d0684b02a996c9d552bcf3c910d9bfe27b9a0d94",
+      "source_work": "GO",
+      "normalization_profile_runtime_activation": "HOLD"
+    }
+  ],
+  "shared_totals": {
+    "sources": 8,
+    "physical_stanza_entries": 120,
+    "printed_numbered_stanzas": 124,
+    "poem_notes": 133,
+    "separate_summaries": 1,
+    "separate_note_free_chapter_prefaces": 1,
+    "summary_notes": 0,
+    "preface_notes": 0
+  },
+  "differences": [
+    {
+      "kind": "SCHEMA_ONLY",
+      "field": "root hash envelope",
+      "result": "Different expected SHA values verified under their original schemas; no source-content disagreement."
+    },
+    {
+      "kind": "B_INTERNAL_AGGREGATE_ERRATUM",
+      "field": "display pair total",
+      "result": "Preserved B total14 differs from its own per-record sum15. A does not state a pair-total. Explicit separate erratum required; source identities unchanged."
+    },
+    {
+      "kind": "ONE_SIDED_CAVEAT_DETAIL",
+      "A_only": [
+        "335intervening bodytext block9893; do not infer VRI segmentation from English paragraphs.",
+        "342other-occurrence375 specifically Phussa/92aeons; B did not independently seal that negative occurrence detail."
+      ],
+      "B_only": [
+        "335fragrance-distance wording divergence.",
+        "338unclosed apparent quotation punctuation.",
+        "339carime/subsequent-existence chronology divergence.",
+        "340both summaries144 versus142numbered+2unnumbered root entries, and exact chapter-closing-before-summary correspondence.",
+        "Explicit15pair inventory and proposed apparatus root bounds."
+      ],
+      "result": "Compatible observations kept with per-review provenance. Missing observations are not filled or declared independently agreed."
+    }
+  ],
+  "method_scope_differences": {
+    "A": "All14645original tuples equal current book assertion; detailed per-note/page/core metadata.",
+    "B": "Raw XML type/label/main-text/variant-note projection independently compared for397target blocks, plus complete book tuple pin; no independent page-field reconstruction claimed.",
+    "rule": "Neither method is restated as the other; source-only scope retained."
+  },
+  "no_missing_fact_backfill": true,
+  "no_app_tests_parser_Git_network_or_source_activation": true
+}

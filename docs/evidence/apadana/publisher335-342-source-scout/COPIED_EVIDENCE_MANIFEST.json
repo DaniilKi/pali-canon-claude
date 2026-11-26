@@ -1,0 +1,79 @@
+{
+  "schema": "public-source-scout-copied-byte-manifest-v1",
+  "actual_coverage_gain": 0,
+  "activation": "HOLD",
+  "candidate_7b_changed": false,
+  "raw_English_or_notes_bundled": false,
+  "files": [
+    {
+      "path": "A/ACQUISITION.json",
+      "bytes": 7107,
+      "sha256": "a973f44ecd3fda7f3f91e7af479dd950e3cb0d7e36e847fa8f02da0b317e69d9"
+    },
+    {
+      "path": "A/FINAL_CLOSURE.json",
+      "bytes": 486,
+      "sha256": "b92278ce357649a51707267e06b23fc2ff3bb18c211c8ce56a93e184aed2539a"
+    },
+    {
+      "path": "A/README.md",
+      "bytes": 4234,
+      "sha256": "26de09b1ae1b82fa1e1af343953f485ba7ced3d748acd57d3dd8e109b732c256"
+    },
+    {
+      "path": "A/SCOUT_REPORT.json",
+      "bytes": 107697,
+      "sha256": "9c0b486c4f88faec01f772b949e7f9306caabbd2e5768f0e64034b3b4a80f4cc"
+    },
+    {
+      "path": "A/SCOUT_SEAL.json",
+      "bytes": 1920,
+      "sha256": "efc5f6115a765b22535b8f515e0c43da5ff80b44bde5242d097051459f38696d"
+    },
+    {
+      "path": "A/scout_sources.py",
+      "bytes": 22404,
+      "sha256": "171a01cb4c40399755364c92f701b1f717a521b1518b8cec50384059a142072c"
+    },
+    {
+      "path": "B/INPUT_PINS.json",
+      "bytes": 6663,
+      "sha256": "cb1f98df367381ac2066e08fa998dee02d7d1925e34c892963500f1c7f561648"
+    },
+    {
+      "path": "B/PRESEALED_REVIEW.json",
+      "bytes": 381,
+      "sha256": "bd8a2cddd8e7633180b9f037195c2dbd3d93230ce28f27f217f8682ed2ad5de0"
+    },
+    {
+      "path": "B/SOURCE_REVIEW.json",
+      "bytes": 70302,
+      "sha256": "8392cadf5d81d34f0a25706d4785294812ce5d4fd64a2f1048d9535f2b63e6cb"
+    },
+    {
+      "path": "joint/B_AGGREGATE_ERRATUM.json",
+      "bytes": 1037,
+      "sha256": "20efc828891e6379f8bd25f1fe4cfce4b181a7c0c561bb8db425d8f353db9d6b"
+    },
+    {
+      "path": "joint/COMPARISON_RECEIPT.json",
+      "bytes": 16656,
+      "sha256": "46a5f8dd3299785017df5cd32ec9e53087fa960eb00af9e55b73cf11d1376abc"
+    },
+    {
+      "path": "joint/JOINT_SEAL.json",
+      "bytes": 884,
+      "sha256": "f7d113f425ccb1abf5a2b22df7bc76612b8ed62df67fd97c51d520d8f1dbb8af"
+    },
+    {
+      "path": "joint/JOINT_SOURCE_REVIEW.json",
+      "bytes": 9570,
+      "sha256": "22d7dc91cf37e183bef0a2da51b68744ce625a42e25ba97db447184f8db26a9f"
+    },
+    {
+      "path": "joint/README.md",
+      "bytes": 2344,
+      "sha256": "24fa96c5ee3a21442f0d0f0e0dbc62bed86a83498bb2b91f779e76fc9e397ca6"
+    }
+  ]
+}
