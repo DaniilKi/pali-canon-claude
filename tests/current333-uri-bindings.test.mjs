@@ -1,7 +1,9 @@
 /** Five actual-current resource URI bindings; historical source inverses stay unchanged. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readCurrentFileSync} from 'node:fs';
+import {d4FileReader} from './helpers/current339-source-inverse.mjs';
+const readFileSync=d4FileReader(readCurrentFileSync);
 import {createHash} from 'node:crypto';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const bindings=[

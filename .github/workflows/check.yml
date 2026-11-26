@@ -841,6 +841,12 @@ jobs:
             src/_poems/chapter-3/poem-317.md
             src/_poems/chapter-3/poem-318.md
             src/_poems/chapter-3/poem-319.md
+            src/_poems/chapter-3/poem-321.md
+            src/_poems/chapter-3/poem-323.md
+            src/_poems/chapter-3/poem-324.md
+            src/_poems/chapter-3/poem-325.md
+            src/_poems/chapter-3/poem-326.md
+            src/_poems/chapter-3/poem-329.md
             src/_poems/chapter-3/chapter-3.json
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
@@ -875,6 +881,16 @@ jobs:
         run: |
           node --test --test-reporter=tap tests/thera312-319-source.test.mjs tests/thera312-319-client.test.mjs | tee reviewed-publisher312-319.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher312-319.tap","utf8"); for(const [key,value] of [["tests",14],["pass",14],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all reviewed publisher321-329 six-scope source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera321-329-source.test.mjs tests/thera321-329-client.test.mjs | tee reviewed-publisher321-329.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher321-329.tap","utf8"); for(const [key,value] of [["tests",12],["pass",12],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Check original and new Apadāna parser refusals against pinned source
         if: matrix.group == 'apadana'
         run: APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-parser.test.mjs tests/apadana-integration.test.mjs tests/apadana-pair-boundary.test.mjs tests/apadana-three.test.mjs
@@ -1462,6 +1478,7 @@ jobs:
             reviewed-publisher261-299.tap
             reviewed-publisher301-310.tap
             reviewed-publisher312-319.tap
+            reviewed-publisher321-329.tap
             standalone-reader.report.json
             standalone-print.report.json
             standalone-saved.report.json

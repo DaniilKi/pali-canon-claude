@@ -1,9 +1,13 @@
 /** Test-only current333→historical325 input binding; never a runtime downgrade. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readCurrentFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {APADANA_PROFILES} from '../src/apadana-profiles.mjs';
+import {APADANA_PROFILES as CURRENT_APADANA_PROFILES} from '../src/apadana-profiles.mjs';
+import {projectPublisher339To333,historical333FileReader,projectPublisher339ClientTo333} from './helpers/thera339-legacy-projection.mjs';
+const APADANA_PROFILES=projectPublisher339To333(CURRENT_APADANA_PROFILES,JSON.parse(readCurrentFileSync('server/data/apadana.json','utf8'))).profiles;
+const readHistorical333=historical333FileReader(CURRENT_APADANA_PROFILES,readCurrentFileSync);
+const readFileSync=(path,...options)=>{const raw=readHistorical333(path,...options);if(!['src/chatgpt-widget.mjs','web/translation-policy.mjs'].includes(path))return raw;const projected=projectPublisher339ClientTo333(path,raw.toString('utf8'));return typeof raw==='string'?projected:Buffer.from(projected);};
 import {publisher333Authority,requireHistorical325Maps,projectPublisher333To325,historical325FileReader,projectPublisher333ClientTo325} from './helpers/thera333-legacy-projection.mjs';
 const e=publisher333Authority(),clone=value=>structuredClone(value),sha=value=>createHash('sha256').update(value).digest('hex');
 const manifest=()=>JSON.parse(readFileSync('server/data/apadana.json','utf8'));

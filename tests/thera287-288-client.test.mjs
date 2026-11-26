@@ -25,7 +25,7 @@ function shown(host,value,pali,id){assert.ok(host.elements.english.textContent.i
 function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}
 
 test('two genuine capabilities retain all308 prior profiles and exact310 identity without audio capability or exposed-choice pin assumptions',()=>{
- assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,333);
+ assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);
  assert.equal(e.approval.expected_profile_ids.length,310);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,310),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,310),e.approval.expected_profile_ids);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(310,317),['tha-ap294','tha-ap295','tha-ap296','tha-ap297','tha-ap298','tha-ap300','tha-ap301']);

@@ -19,7 +19,7 @@ function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e
 
 test('seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities',()=>{
  const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));
- assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,333);
+ assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,339);
  assert.equal(e.approval.expected_profile_ids.length,317);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,317),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,317),e.approval.expected_profile_ids);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(317,325),['tha-ap303','tha-ap304','tha-ap305','tha-ap306','tha-ap307','tha-ap310','tha-ap311','tha-ap312']);assert.deepEqual(Object.keys(manifest.links),CURRENT_APADANA_IDS);

@@ -1,3 +1,4 @@
+import {requireProfiles339,normalize339InputTo333,publisher339Authority} from './thera339-legacy-projection.mjs';
 /** Pure sealed metadata readers; no production parser, runtime output or current catalogue is an oracle. */
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -140,12 +141,12 @@ export function thera312319Evidence() {
     assert.equal(value.publisher_paratext,'');assert.equal(digest(value.publisher_paratext),p.paratext_sha256);
     for(const field of ['publisher_preface','chapter_summary','collection_summary','publisher_divisions','editorial_gap','audio','media','reciter']) assert.equal(Object.hasOwn(value,field),false,id+' no '+field);
   }
-  function assertProfiles(observed) {
+  function historicalAssertProfiles(observed) {
     assert.deepEqual(Object.keys(observed),approval.expected_profile_ids);
     for(const id of compact.ids) assert.equal(hashObject(observed[id]),compact.profile_object_sha256[id],'Exact original325 full profile '+id);
     for(const id of IDS) assert.deepEqual(observed[id],profiles[id]);
   }
-  function assertCatalogue(manifest,observedProfiles) {
+  function historicalAssertCatalogue(manifest,observedProfiles) {
     assertProfiles(observedProfiles);assert.deepEqual(Object.keys(manifest.links),approval.expected_profile_ids);
     for(const id of compact.ids) assert.equal(hashObject(manifest.links[id]),compact.translation_object_sha256[id],'Exact original325 full translation object '+id);
     for(const id of IDS) assert.deepEqual(manifest.links[id],links[id]);
@@ -154,6 +155,18 @@ export function thera312319Evidence() {
       assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved finite count '+current);priorSource.policy=priorSource.policy.replace(current,old);
     }
     assert.equal(hashObject(priorSource),compact.manifest_source_sha256,'Full prior source/rights object with only two reviewed count changes');
+  }
+  function assertProfiles(observed) {
+    if(Object.keys(observed).length===339){
+      requireProfiles339(observed);
+      const ids=publisher339Authority().compact.ids;
+      return historicalAssertProfiles(Object.fromEntries(ids.map(id=>[id,observed[id]])));
+    }
+    return historicalAssertProfiles(observed);
+  }
+  function assertCatalogue(manifest,observedProfiles) {
+    const historical=normalize339InputTo333(observedProfiles,manifest);
+    return historicalAssertCatalogue(historical.catalogue,historical.profiles);
   }
   const heldPublishers=[...new Set([70,140,158,159,...approval.explicitly_not_activated_publishers])];
   assert.ok(heldPublishers.includes(311)&&heldPublishers.includes(320));

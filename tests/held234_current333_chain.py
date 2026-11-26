@@ -13,8 +13,8 @@ import web_reader_apadana_intake as intake
 
 CLI = ROOT / 'scripts/web-reader-thera-held234-check.py'
 READERS = ('reviewed_held234_intake', 'curated_additions', 'read_261_280',
-    'read_281_285', 'read_287_288', 'read_292_299', 'read_301_310')
-HISTORICAL = ('historical303', 'historical308', 'historical310', 'historical317', 'historical325')
+    'read_281_285', 'read_287_288', 'read_292_299', 'read_301_310', 'read_312_319')
+HISTORICAL = ('historical303', 'historical308', 'historical310', 'historical317', 'historical325', 'historical333')
 METADATA = {'approval', 'current_additions', 'current_curation', 'current_ids', *HISTORICAL}
 ASSIGNMENTS = METADATA | {'evidence_dir'}
 BRIDGES = (
@@ -23,7 +23,8 @@ BRIDGES = (
     "historical310['baseline_ids'] == historical308['expected_profile_ids']",
     "historical317['baseline_ids'] == historical310['expected_profile_ids']",
     "historical325['baseline_ids'] == historical317['expected_profile_ids']",
-    "current_curation['baseline_ids'] == historical325['expected_profile_ids']",
+    "historical333['baseline_ids'] == historical325['expected_profile_ids']",
+    "current_curation['baseline_ids'] == historical333['expected_profile_ids']",
 )
 
 
@@ -72,9 +73,9 @@ def run_actual_preflight(overrides=None):
 class Held234Current333Chain(unittest.TestCase):
     def positive(self):
         tree, selected, env = run_actual_preflight()
-        self.assertEqual(len(env['current_ids']), 333)
-        self.assertEqual(len(env['current_additions']['ids']), 48)
-        for name, count in zip(HISTORICAL, (303, 308, 310, 317, 325), strict=True):
+        self.assertEqual(len(env['current_ids']), 339)
+        self.assertEqual(len(env['current_additions']['ids']), 54)
+        for name, count in zip(HISTORICAL, (303, 308, 310, 317, 325, 333), strict=True):
             self.assertEqual(len(env[name]['expected_profile_ids']), count)
         assertions = [ast.unparse(node.test) for node in selected if isinstance(node, ast.Assert)]
         for bridge in BRIDGES:
@@ -85,6 +86,8 @@ class Held234Current333Chain(unittest.TestCase):
         self.assertIn('read_301_310', imports, 'The actual CLI must import its real325 reader')
         self.assertEqual(sum(isinstance(node, ast.Assign) and any(isinstance(target, ast.Name)
             and target.id == 'historical325' for target in node.targets) for node in selected), 1)
+        self.assertIn('read_312_319', imports, 'The actual CLI must import its real333 reader')
+        self.assertNotIn("current_curation['baseline_ids'] == historical325['expected_profile_ids']", assertions)
         return env
 
     def test_01_actual_sealed_metadata_preserves_all303_308_310_317_325_to333_bridges(self):
@@ -110,14 +113,38 @@ class Held234Current333Chain(unittest.TestCase):
 
     def test_04_same_count_held_substitution_in333_baseline_is_rejected_after_positive(self):
         env = self.positive()
-        def changed(root, anchor):
-            value = copy.deepcopy(intake.curated_additions(root, anchor))
-            ids = value['curation']['baseline_ids']
+        def changed(root):
+            value = copy.deepcopy(intake.read_312_319(root))
+            ids = value['baseline_ids']
             self.assertEqual(len(ids), 325)
             self.assertNotIn('tha-ap262', ids)
             ids[-1] = 'tha-ap262'
             self.assertEqual(len(ids), 325)
             self.assertEqual(len(set(ids)), 325)
+            self.assertEqual(value['expected_profile_ids'], env['historical333']['expected_profile_ids'])
+            return value
+        with self.assertRaises(AssertionError):
+            run_actual_preflight({'read_312_319': changed})
+
+    def test_05_only_current_curation_baseline_regressed_to325_is_rejected_after_positive(self):
+        env = self.positive()
+        def changed(root, anchor):
+            value = copy.deepcopy(intake.curated_additions(root, anchor))
+            value['curation']['baseline_ids'] = list(env['historical325']['expected_profile_ids'])
+            return value
+        with self.assertRaises(AssertionError):
+            run_actual_preflight({'curated_additions': changed})
+
+    def test_06_same_count_current333_baseline_substitution_is_rejected_after_positive(self):
+        env = self.positive()
+        def changed(root, anchor):
+            value = copy.deepcopy(intake.curated_additions(root, anchor))
+            ids = value['curation']['baseline_ids']
+            self.assertEqual(len(ids), 333)
+            self.assertNotIn('tha-ap262', ids)
+            ids[-1] = 'tha-ap262'
+            self.assertEqual(len(ids), 333)
+            self.assertEqual(len(set(ids)), 333)
             self.assertEqual(value['curation']['expected_profile_ids'], env['current_ids'])
             return value
         with self.assertRaises(AssertionError):

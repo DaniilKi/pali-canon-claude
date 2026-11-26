@@ -10,7 +10,7 @@ import json
 import subprocess
 from pathlib import Path
 
-from web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319
+from web_reader_apadana_intake import curated_303_additions, read_281_285, read_287_288, read_292_299, read_301_310, read_312_319, read_321_329, APPROVAL_339_SHA
 
 CURATION_SHA = '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7'
 FREEZE_SHA = '24e63f5fb14ec74946d20349d78ae2b405e1636ca561f757660113226d6537dc'
@@ -463,7 +463,7 @@ def assert_runtime(root, server_dir):
     return {name: item['sha256'] for name, item in observed.items()}
 
 
-def approved_catalogue(root):
+def approved333_catalogue(root):
     """Extend the exact historical catalogue with eight independently sealed objects."""
     previous = approved325_catalogue(root)
     current = read_312_319(root)
@@ -507,7 +507,7 @@ INDEPENDENT_333_INVENTORY_SHA = '2d6c97ba2ff5728324c487ee3244bd86d016b77a3761ad8
 INDEPENDENT_333_REVIEW_SHA = 'a0174f27978b598aca0b7a674b571dc731833861cdd90f9a7358004c68295b6f'
 
 
-def approved_runtime(root):
+def reviewed333_runtime(root):
     """Require the intact canonical325 chain before the independent333 authority."""
     previous = reviewed_canonical325_runtime(root)
     directory = Path(root) / 'docs/evidence/apadana/runtime333'
@@ -533,6 +533,82 @@ def approved_runtime(root):
     assert len(files) == inventory['runtime_files'] == review['runtime_files'] == 34
     assert set(files) == set(previous) and review['files'] == files
     assert inventory['allowed_changed_paths'] == review['allowed_changed_paths_from_prior_canonical325'] == delta
+    assert [name for name in sorted(files) if files[name] != previous[name]] == delta
+    assert inventory['unchanged_paths'] == review['unchanged_runtime_paths'] == 29
+    assert files['data/source-notes.json'] == previous['data/source-notes.json']
+    assert all(not Path(name).is_absolute() and '..' not in Path(name).parts for name in files)
+    return files
+
+
+def approved_catalogue(root):
+    """Extend the exact historical catalogue with six independently sealed objects."""
+    previous = approved333_catalogue(root)
+    current = read_321_329(root)
+    directory = Path(root) / 'docs/evidence/apadana'
+    compact = sealed(directory / current['baseline_freeze']['file'], current['baseline_freeze']['sha256'])
+    assert compact['ids'] == previous['ids'] == current['baseline_ids']
+    assert compact['profile_count'] == compact['translation_count'] == 333
+    object_sha = lambda value: hashlib.sha256(json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode('utf-8')).hexdigest()
+    assert list(compact['profile_object_sha256']) == list(compact['translation_object_sha256']) == previous['ids']
+    for uid in previous['ids']:
+        assert object_sha(previous['profiles'][uid]) == compact['profile_object_sha256'][uid], 'Full pinnedD4 profile changed: ' + uid
+        assert object_sha(previous['links'][uid]) == compact['translation_object_sha256'][uid], 'Full pinnedD4 link changed: ' + uid
+    assert object_sha(previous['source']) == compact['manifest_source_sha256']
+    assert compact['canonical_logical_sha256'] == current['before_canon_sha256'] == current['after_canon_sha256']
+    assert len(compact['data_file_sha256']) == 26
+    for name, expected in compact['data_file_sha256'].items():
+        assert name.startswith('server/data/') and '..' not in Path(name).parts and name != 'server/data/apadana.json'
+        assert hashlib.sha256((Path(root) / name).read_bytes()).hexdigest() == expected, 'Unrelated pinnedD4 data changed: ' + name
+    profiles, links = dict(previous['profiles']), dict(previous['links'])
+    extra_profiles = sealed(directory / current['expected_profiles']['file'], current['expected_profiles']['sha256'])
+    extra_links = sealed(directory / current['expected_links']['file'], current['expected_links']['sha256'])
+    assert list(extra_profiles) == list(extra_links) == current['approved_ids']
+    assert not set(extra_profiles) & (set(profiles) | set(current['held_ids']))
+    profiles.update(extra_profiles)
+    links.update(extra_links)
+    ids = current['expected_profile_ids']
+    assert list(profiles) == list(links) == ids == previous['ids'] + current['approved_ids']
+    assert len(ids) == len(set(ids)) == 339
+    assert sum(uid.startswith('thi-ap') for uid in ids) == 40
+    assert sum(uid.startswith('tha-ap') for uid in ids) == 299
+    assert {uid: profiles[uid] for uid in previous['ids']} == previous['profiles']
+    assert {uid: links[uid] for uid in previous['ids']} == previous['links']
+    source = dict(previous['source'])
+    policy = source['policy']
+    assert policy.count('333 finite') == policy.count('293 explicitly mapped Therā') == 1
+    source['policy'] = policy.replace('333 finite', '339 finite').replace('293 explicitly mapped Therā', '299 explicitly mapped Therā')
+    return {'ids': ids, 'links': links, 'profiles': profiles, 'source': source}
+
+
+# Deliberately unsealed: root must replace after independent runtime review.
+INDEPENDENT_339_INVENTORY_SHA = '234fe7d26de0af3777f6b67d2e812aff896218b690bdfea098d7918410346970'
+INDEPENDENT_339_REVIEW_SHA = 'ecfda89f9c3d877e6cffc151a8bdf0aa3594f8a2d9744aaed5d6d26cbbf8c653'
+CANDIDATE_339_COMMIT = '337f8d879db3aae1047d56b0e4094b59c5a409c3'
+
+
+def approved_runtime(root):
+    """Require all historical333/canonical325 proofs, then exact current33934."""
+    previous = reviewed333_runtime(root)
+    directory = Path(root) / 'docs/evidence/apadana/runtime339'
+    inventory = sealed(directory / 'INDEPENDENT339_RUNTIME_INVENTORY.json', INDEPENDENT_339_INVENTORY_SHA)
+    review = sealed(directory / 'INDEPENDENT339_RUNTIME_REVIEW.json', INDEPENDENT_339_REVIEW_SHA)
+    assert inventory['schema'] == 'independent-reviewed-current339-runtime-inventory-v1'
+    assert review['schema'] == 'reviewed-current339-runtime-approval-v1'
+    assert review['status'] == 'APPROVE_EXACT_CURRENT34_RUNTIME_INVENTORY_SOURCE_SCOPE_ONLY'
+    assert inventory['baseline_commit'] == review['baseline'] == 'd4dac33e76b449412d7e0cb7a6b93d6189549337'
+    assert inventory['candidate_commit'] == review['candidate_commit'] == CANDIDATE_339_COMMIT
+    assert inventory['prior333_inventory_sha256'] == INDEPENDENT_333_INVENTORY_SHA
+    assert review['prior333_review_sha256'] == INDEPENDENT_333_REVIEW_SHA
+    assert review['independent_inventory']['sha256'] == INDEPENDENT_339_INVENTORY_SHA
+    assert review['curation'] == {'file': 'THERA_321_329_APPROVAL.json', 'sha256': APPROVAL_339_SHA}
+    assert review['inventory_only'] is True and review['runtime_inventory_approval'] is True
+    assert review['finite_source_diff_approval'] is True and review['behavioral_harness_approval'] is False
+    assert review['release_or_push_approval'] is False and inventory['behavioral_or_release_approval'] is False
+    files = inventory['files']
+    delta = ['data/apadana.json', 'http-worker.cjs', 'http.cjs', 'index.cjs', 'web/reader.js']
+    assert len(files) == inventory['runtime_files'] == review['runtime_files'] == 34
+    assert set(files) == set(previous) and review['files'] == files
+    assert inventory['allowed_changed_paths'] == review['allowed_changed_paths_from_prior333'] == delta
     assert [name for name in sorted(files) if files[name] != previous[name]] == delta
     assert inventory['unchanged_paths'] == review['unchanged_runtime_paths'] == 29
     assert files['data/source-notes.json'] == previous['data/source-notes.json']

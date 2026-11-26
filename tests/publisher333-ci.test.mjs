@@ -1,6 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readCurrentFileSync} from 'node:fs';
+import {d4FileReader} from './helpers/current339-source-inverse.mjs';
+const readFileSync=d4FileReader(readCurrentFileSync);
 import {createHash} from 'node:crypto';
 import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';
 import {PUBLISHER317_STEP} from './helpers/publisher317-ci-baseline.mjs';

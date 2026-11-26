@@ -1,3 +1,4 @@
+import {projectPublisher339Workflow} from './publisher339-ci-baseline.mjs';
 // Exact CI333 delta only; all historical workflow bytes remain authoritative.
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -32,6 +33,7 @@ const sha=text=>createHash('sha256').update(text).digest('hex');
 // Runs BEFORE325,diagnostic-stage and317 projections. Provisioning is explicit
 // CI setup; historical tests themselves must not fetch or build their oracle.
 export function projectPublisher333Workflow(text){
+  text=projectPublisher339Workflow(text);
   const present=text.includes(PUBLISHER333_STEP_NAME)||text.includes('reviewed-publisher312-319.tap')||text.includes(HISTORICAL104_FETCH_NAME)||PUBLISHER333_SOURCE_PATHS.some(path=>text.includes(path));
   if(!present)return text;
   for(const path of PUBLISHER333_SOURCE_PATHS)assert.equal(count(text,path),1,'Each approved333 original occurs exactly once: '+path);

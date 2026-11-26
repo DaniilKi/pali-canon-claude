@@ -1,3 +1,4 @@
+import {publisher339Authority,requireHistorical333Maps} from './thera339-legacy-projection.mjs';
 /** Independent curatorial expectations; never derive this whitelist from runtime data. */
 import {readFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
@@ -183,13 +184,27 @@ assert.deepEqual(records333.map(row=>row.id),latest333.approval.expected_profile
 assert.equal(records333.length,333);assert.equal(new Set(records333.map(row=>row.id)).size,333);
 /* END finite publisher333 curatorial extension. */
 
-export const CURRENT_APADANA_IDS=Object.freeze([...latest333.approval.expected_profile_ids]);
-export const CURRENT_APADANA_RECORDS=Object.freeze(records333.map(row=>Object.freeze({...row})));
-export const CURRENT_THERA_IDS=Object.freeze(records333.filter(row=>row.publisher_chapter==='chapter-3').map(row=>row.id));
+/* BEGIN finite publisher339 extension; every prior333 assertion above stays intact. */
+const latest339=publisher339Authority();
+assert.deepEqual(latest339.approval.previous_intake,{file:'THERA_312_319_APPROVAL.json',sha256:'cc8480e22bb9a1615af86cee2e153c77695f4d20c21fd8f147e31f8658ca610d'});
+assert.deepEqual(latest339.approval.baseline_ids,latest333.approval.expected_profile_ids);
+assert.deepEqual(latest339.approval.baseline_records,records333);
+assert.deepEqual(latest339.approval.held_ids,latest333.approval.held_ids);
+requireHistorical333Maps({...eight.baseline.profile_objects,...eight.profiles,...latest333.profiles},{...eight.baseline.translation_objects,...eight.links,...latest333.links});
+const records339=[...records333,...latest339.newRecords];
+assert.deepEqual(records339.map(row=>row.id),latest339.approval.expected_profile_ids);
+assert.equal(records339.length,339);assert.equal(new Set(records339.map(row=>row.id)).size,339);
+assert.equal(records339.filter(row=>row.publisher_chapter==='chapter-4').length,40);
+assert.equal(records339.filter(row=>row.publisher_chapter==='chapter-3').length,299);
+/* END finite publisher339 extension. */
+
+export const CURRENT_APADANA_IDS=Object.freeze([...latest339.approval.expected_profile_ids]);
+export const CURRENT_APADANA_RECORDS=Object.freeze(records339.map(row=>Object.freeze({...row})));
+export const CURRENT_THERA_IDS=Object.freeze(records339.filter(row=>row.publisher_chapter==='chapter-3').map(row=>row.id));
 export const BASELINE_APADANA_IDS=Object.freeze([...historical.baseline_ids]);
 /** Select only immutable pre-D250 records, using their reviewed publisher metadata. */
 export function historicalApadanaIds(lastTheraPoem=60){
   return historical.baseline_records.filter(row=>row.publisher_chapter==='chapter-4'||row.poem<=lastTheraPoem).map(row=>row.id);
 }
 
-export const CURRENT_APADANA_URLS=Object.freeze(records333.map(row=>`https://apadanatranslation.com/text/${row.publisher_chapter}/poem-${String(row.poem).padStart(3,'0')}/`));
+export const CURRENT_APADANA_URLS=Object.freeze(records339.map(row=>`https://apadanatranslation.com/text/${row.publisher_chapter}/poem-${String(row.poem).padStart(3,'0')}/`));

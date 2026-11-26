@@ -1825,3 +1825,10 @@ client gate requiring zero skips. The earlier 49-case and 14-case gates remain
 unchanged. Strict widget equality and actual fresh-installed reader, selector,
 source-pin and private-draft flows remain required.
 [Evidence and acceptance limits](data/thera312-319-intake.md).
+
+
+## D266 — Six finite chapter33 scopes with explicit historical preservation
+
+Activate only publisher 321,323–326 and 329 under the existing pinned Walters/Whitman textual grant, independently mapped to six previously unlinked canonical units. Preserve all 333 earlier full objects, source holds, original canonical spans, notes and private study data. The measured index becomes 339 Apadāna choices and 2,922 whole links, with 1,818/2,241 CLI direct/inherited units. Publisher-edition completeness is distinct from VRI line equivalence.
+
+Keep 321 heading separate, exact paired display ownership and combined entries intact, and 329 note 2's editorial placeholder/ellipsis unchanged. Hold 322/327/328/330 and boundary 331; no inferred repair or broadened rights. Preserve historical 333/canonical 325 runtime authorities and add finite339 input inverses. Source approval, runtime inventory, installed behavior and exact-commit CI remain distinct gates. Full check, installed acceptance and remote CI are pending for this snapshot. [Finite guide](data/thera321-329-intake.md); [manual sessions, all NOT RUN](qa/manual-device-accessibility-matrix.md).
