@@ -1,0 +1,76 @@
+{
+  "schema": "independent-exact-Windows-runner-cap1-and-owned-entrypoint-probes-static-review-v1",
+  "status": "GO_EXACT_TWO_FILE_SOURCE_PATCH_AND_TEST_PROPOSAL_PENDING_SOURCE_MAP_AND_FULL_CI",
+  "base_commit": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+  "exact_source_delta": {
+    "modified": "scripts/test.mjs",
+    "new": "tests/test-runner-scheduling.test.mjs",
+    "no_other_dirty_paths_at_review": true
+  },
+  "runner": {
+    "sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad",
+    "bytes": 874,
+    "C1_original_sha256": "c0396da9b603e0d834850decf10db09720364acea48d301229826c5964d526ee",
+    "source_inverse_restores_complete_C1_bytes_by_only_comment_and_one_flag_spread_removal": true,
+    "one_spawnSync_of_actual_node_retained": true,
+    "complete_sorted_top_level_test_file_discovery_byte_identical": true,
+    "forwarded_argv_order_stdio_and_exit_status_null_coalescing_byte_identical": true,
+    "only_win32_gets_test_concurrency1": true,
+    "Linux_macOS_keep_original_default": true,
+    "original30_120_timeouts_and_assertions_not_touched": true,
+    "npm_test_package_command_and_workflow_phases_not_changed": true
+  },
+  "new_probe": {
+    "sha256": "0aee4ffdc6a2f9859710f6deec55d79aaf85c26f32c8c9538176d9ddc0a15341",
+    "bytes": 4273,
+    "Node_cases": 2,
+    "real_owned_filesystem_discovery": true,
+    "actual_driver_bytes_copied_and_equal": true,
+    "all_existing_top_level_test_files_plus_independent_extra_must_survive_once": true,
+    "ignored_extension_and_nested_input_controls": true,
+    "isolated_bootstrap_intercepts_other_child_APIs_and_verifies_ESM_spawnSync_mock_before_driver_import": true,
+    "production_driver_has_no_test_mock_environment_switch": true,
+    "three_simulated_platforms": [
+      "win32",
+      "linux",
+      "darwin"
+    ],
+    "child_status_paths": [
+      0,
+      19,
+      null,
+      "null_status_with_spawn_error"
+    ],
+    "existing_argument_forwarding_exact_expected": true,
+    "single_child_invocation_and_stdio_inherit_asserted": true,
+    "probe_child_limit_seconds": 10,
+    "each_parent_case_limit_seconds": 35,
+    "finally_owned_fixture_cleanup": true,
+    "synthetic_test_bodies_executed": false,
+    "application_or_scripture_runtime_executed": false
+  },
+  "parent_owned_targeted_execution_read_not_rerun": {
+    "file": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/ENTRYPOINT_PROBES.tap",
+    "sha256": "decfee15f94876925d96435a0469c1465452f989cf00beaa1ec85142c31b3e78",
+    "tests": 2,
+    "pass": 2,
+    "fail": 0,
+    "skipped": 0,
+    "reported_wall_seconds": 0.741,
+    "not_windows_runtime_or_full_suite_acceptance": true
+  },
+  "causal_evidence_limit": {
+    "actual_diagnostic_interpretation_sha256": "674eb9abd7169ca7b6df81afccc9638a231c9816f42bc8bb477be955de8119e1",
+    "default_cohort_failed_identity_and_category_still_unknown_without_TAP": true,
+    "no_CPU_disk_antivirus_specific_cause_claim": true,
+    "warm_cache_order_and_focused_vs_full_limit_preserved": true
+  },
+  "remaining_gates": [
+    "Independent37existing/18new source-plan and generated inverse/loader replay; no oldC1 hash weakening.",
+    "Commit only reviewed source/proof closure, then bind unchanged application/package/runtime components to exact new head.",
+    "Entire single-TAP inventory preserves original2011 cases plus these2 newcases: expected2013 under the same matched normal CI fixture environment, with existing254 optional skips and no newly skipped original test. Exact full positive counts must be checked in actualCI.",
+    "Actual exact-new-commit full Windows20 AND22 passes under all original child and30minute phase bounds, plus required remaining cross-platform/companion checks.",
+    "This staticGO does not erase either7b Windows failure, the diagnostic default failure or missing artifactTAP; no promotion or app fix completion claim before required gates."
+  ],
+  "actions": "Readonly exact source/hash/literal/source-Git-diff checks and reading parent targeted TAP. No application/test/Node execution, network/CI call, build/browser, Git mutation or tracked edit by reviewer."
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "independent-local-diagnostic-only-exact-commit-binding-v1",
+  "status": "GO_LOCAL_COMMIT_BINDS_REVIEWED_SINGLE_WORKFLOW_ONLY",
+  "commit": "20d44d88ed1a18c3a672ebd2c4c7f6110a66bf87",
+  "parent": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+  "exact_diff": "A\t.github/workflows/pali-held234-io-diagnostic.yml",
+  "workflow_file": ".github/workflows/pali-held234-io-diagnostic.yml",
+  "workflow_sha256": "be0fe63eca3aecfa4285fcb9c341ff516fbeef463522833d6b4991bcc925d8a7",
+  "static_review_sha256": "c3ba11b136145374740306eec658dfc45b1e939ba2d6377bb2045a66f1faefa6",
+  "source_application_data_test_and_proof_bytes_changed": false,
+  "remote_push_or_actual_job_result_independently_observed": false,
+  "no_cap_release_or_dev_promotion_approval": true,
+  "actions": "Readonly local Git object reads and hashes only; no tests/CI/Git writes/network."
+}

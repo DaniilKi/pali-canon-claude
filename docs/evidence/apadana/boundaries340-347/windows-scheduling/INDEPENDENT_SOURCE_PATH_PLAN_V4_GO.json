@@ -1,0 +1,127 @@
+{
+  "schema": "independent-source-path-plan-v4-runner-followup-review-v1",
+  "status": "GO_EXACT_PATH_SCOPE_FOR_ROOT_GENERATOR_ONLY",
+  "source_path_plan": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/SOURCE_PATH_PLAN_V4.json",
+    "sha256": "fef6a96c13f7e9388d01b69ece38171d6a65a5914f696d7fecafe108fdec5ac2",
+    "base_commit": "c1b2433481399b2125f6645a75bf4105cb212440",
+    "existing_count": 37,
+    "new_count": 18,
+    "changed_existing_paths": [
+      ".github/workflows/check.yml",
+      "scripts/canon/build_canon.py",
+      "scripts/test.mjs",
+      "scripts/web_reader_approved_acceptance.py",
+      "scripts/web_reader_four_boundary_history.py",
+      "src/analyse.mjs",
+      "src/chatgpt-widget.mjs",
+      "src/locator-policy.mjs",
+      "src/server.mjs",
+      "tests/apadana-disclosures.test.mjs",
+      "tests/apadana-fourth-client.test.mjs",
+      "tests/apadana-fourth.test.mjs",
+      "tests/apadana-next.test.mjs",
+      "tests/apadana-thera.test.mjs",
+      "tests/apadana-third.test.mjs",
+      "tests/apadana_four_boundary_acceptance.py",
+      "tests/approved_acceptance.py",
+      "tests/current339-source-inverses.test.mjs",
+      "tests/current343-bindings.test.mjs",
+      "tests/four-history-data.test.mjs",
+      "tests/held234-client.test.mjs",
+      "tests/helpers/canon-before-four.mjs",
+      "tests/helpers/four-history-data.mjs",
+      "tests/helpers/intake343-ci-baseline.mjs",
+      "tests/helpers/intake343-source-input.mjs",
+      "tests/helpers/thera-remaining-client.mjs",
+      "tests/intake343-source-input.test.mjs",
+      "tests/thera-commentary-locators.test.mjs",
+      "tests/thera141-180-client.test.mjs",
+      "tests/thera181-220-client.test.mjs",
+      "tests/thera221-230-client.test.mjs",
+      "tests/thera241-250-client.test.mjs",
+      "tests/thera312-319-client.test.mjs",
+      "tests/thera321-329-client.test.mjs",
+      "tests/thera331-334-source.test.mjs",
+      "tests/widget-hosted-selections.test.mjs",
+      "web/reader.js"
+    ],
+    "new_code_paths": [
+      "scripts/canon/apadana_thera340_spans.py",
+      "scripts/canon/repair_apadana_thera340_spans.py",
+      "scripts/web_reader_six_boundary_history.py",
+      "tests/apadana-six-boundary-migration.test.mjs",
+      "tests/apadana-six-cached-consumers.test.mjs",
+      "tests/apadana-six-locator-consumers.test.mjs",
+      "tests/apadana_six_boundary_acceptance.py",
+      "tests/helpers/canon-before-six.mjs",
+      "tests/helpers/six-boundary-source-input.mjs",
+      "tests/helpers/six-history-data.mjs",
+      "tests/helpers/six-regular-file.mjs",
+      "tests/six-boundary-ci.test.mjs",
+      "tests/six-boundary-history.test.mjs",
+      "tests/six-boundary-source-input.test.mjs",
+      "tests/six-operation-scope.test.mjs",
+      "tests/six_boundary_history_acceptance.py",
+      "tests/six_operation_scope_controls.py",
+      "tests/test-runner-scheduling.test.mjs"
+    ]
+  },
+  "prior_plan_review": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/source-plan-review/FINAL_SOURCE_PATH_PLAN_V3_GO.json",
+    "sha256": "d063086fedb5d4ebb90b7e756d0a0864f50514bc80cf7b5858337efb893d17f1"
+  },
+  "original_manifest": {
+    "path": "/tmp/pali-boundaries340-evidence-nov26/c1-source-originals/ORIGINAL_MANIFEST.json",
+    "sha256": "b7e5999f51bcab0e9232fcaabb909e67aa759767a036fe8a0b8a6c5e81f7cf18",
+    "source_files": 704,
+    "all704_original_blobs_freshly_verified": true
+  },
+  "actual_applied_scope": {
+    "actual_changed_original_paths_exactly_equal_ordered37plan": true,
+    "other667original_source_files_unchanged": true,
+    "prior36paths_preserved": true,
+    "only_added_existing_path": "scripts/test.mjs",
+    "prior17new_paths_preserved": true,
+    "only_added_new_path": "tests/test-runner-scheduling.test.mjs",
+    "all18new_paths_absent_C1_and_regular_current_files": true,
+    "current2files_exact_external_proposal_bytes": true,
+    "driver_source": {
+      "path": "/tmp/pali-boundaries340-nov26/scripts/test.mjs",
+      "sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad",
+      "C1_sha256": "c0396da9b603e0d834850decf10db09720364acea48d301229826c5964d526ee"
+    },
+    "new_probe_source": {
+      "path": "/tmp/pali-boundaries340-nov26/tests/test-runner-scheduling.test.mjs",
+      "sha256": "0aee4ffdc6a2f9859710f6deec55d79aaf85c26f32c8c9538176d9ddc0a15341"
+    },
+    "driver_delta_from_original": "Exactly3comment lines plus Win32-only --test-concurrency=1 inside the one existing Node --test child argv; every file discovery/order,forwarded trailing arg,child options and exit expression retained.",
+    "diagnostic_workflow_not_added_to_scope": true
+  },
+  "preserved_source_and_runtime": {
+    "all36prior_inverse_current_hashes_still_exact8109": true,
+    "prior45AST_and_two_guarded_runtime_body_proofs_carry_by_exact_unchanged3_helper_bytes": true,
+    "prior_map7440": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/generated-source-inverse-v1/SIX_BOUNDARY_SOURCE_INVERSES.json",
+      "sha256": "7440a63fed4f5317279bd671aeaf9354c8e9bb71e5ab6057c881c80e8e415a82"
+    },
+    "prior_map8109": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/generated-source-inverse-v3/SIX_BOUNDARY_SOURCE_INVERSES.json",
+      "sha256": "8109fc3557518af7c832cd6bc057a61a51408363861ffb27d216ebe4b6345c41"
+    },
+    "prior_map_review": {
+      "path": "/tmp/pali-boundaries340-evidence-nov26/source-plan-review/FINAL_SOURCE_INVERSE_V3_REVIEW.json",
+      "sha256": "d9b2e26584917e733b3646c5357102a46ab71d62e4e74f223ad06637b7e52089"
+    },
+    "current39_packaged_app_bytes_still_equal_original_appd2462_sealed_members": true,
+    "no_runtime_or_corpus_projection": true
+  },
+  "blocking_path_findings": [],
+  "separate_pending_gates": [
+    "Exact runner/probe semantic review by ci_recovery before overall patch acceptance; conceptual scheduling approval is not substituted for it.",
+    "New map must uniquely invert all37current source files to exact sealed C1 originals; preserve all36old rows and bind all18new paths.",
+    "Final loader must change only map hash and the explicit ordered path list addition; seal exact external bytes separately to avoid self-hash cycle.",
+    "Root-owned behavior/regression checks and full exact-new-commit Windows20/22 plus remaining required CI under unchanged deadlines. No Windows success or release/dev approval is inferred from diagnostic serial pass."
+  ],
+  "method": "Read-only source/JSON/hash comparison to sealed originals and prior maps. No application/test/driver execution,build,Git,network or repository edits by reviewer. Root applied proposals during this review; final receipt binds their observed exact applied bytes."
+}

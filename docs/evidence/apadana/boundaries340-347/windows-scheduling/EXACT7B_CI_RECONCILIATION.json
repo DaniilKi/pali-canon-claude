@@ -1,0 +1,396 @@
+{
+  "head": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+  "observed_utc": "2026-11-26T16:02:48.948Z",
+  "runs": [
+    {
+      "id": 45848757544,
+      "name": "Check package",
+      "head": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45848757544"
+    },
+    {
+      "id": 45848757524,
+      "name": "Evidence reading commands",
+      "head": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45848757524"
+    },
+    {
+      "id": 45848757518,
+      "name": "Read the full bundled corpus",
+      "head": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45848757518"
+    },
+    {
+      "id": 45848757483,
+      "name": "npx install",
+      "head": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45848757483"
+    }
+  ],
+  "jobs": [
+    {
+      "id": 140009247945,
+      "name": "Study compatibility / webkit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009248413,
+      "name": "Hosted memory budget",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009248429,
+      "name": "Study compatibility / firefox",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009248439,
+      "name": "Node 22 / windows-latest",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 140009248506,
+      "name": "Node 20 / windows-latest",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 140009248525,
+      "name": "Node 22 / ubuntu-latest",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009248604,
+      "name": "Node 20 / macos-latest",
+      "status": "completed",
+      "conclusion": "cancelled"
+    },
+    {
+      "id": 140009248675,
+      "name": "Node 22 / macos-latest",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009248932,
+      "name": "Node 20 / ubuntu-latest",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250105,
+      "name": "Chromium reader / apadanatherapair121",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250127,
+      "name": "Chromium reader / study",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250145,
+      "name": "Chromium reader / highlights",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250148,
+      "name": "Chromium reader / milinda",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250153,
+      "name": "Chromium reader / apadanafourth",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250165,
+      "name": "Chromium reader / milindapartial",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250171,
+      "name": "Chromium reader / apadanatherapair101",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250187,
+      "name": "Chromium reader / core",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250205,
+      "name": "Chromium reader / apadanathera",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250222,
+      "name": "Chromium reader / conflicts",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250224,
+      "name": "Chromium reader / provenance",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250225,
+      "name": "Chromium reader / apadanathera141",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250246,
+      "name": "Chromium reader / citations",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250251,
+      "name": "Chromium reader / postsearch",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250261,
+      "name": "Chromium reader / personal",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250269,
+      "name": "Chromium reader / chapters",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250274,
+      "name": "Chromium reader / apadanathera201",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250279,
+      "name": "Chromium reader / apadanathera161",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250298,
+      "name": "Chromium reader / comparison",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250312,
+      "name": "Chromium reader / apadanathera221",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250315,
+      "name": "Chromium reader / apadanaedition",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250316,
+      "name": "Chromium reader / apadanathera234",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250322,
+      "name": "Chromium reader / notes",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250336,
+      "name": "Chromium reader / apadanatheranext",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250360,
+      "name": "Chromium reader / headings",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250361,
+      "name": "Chromium reader / apadanatheraexpansion",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250371,
+      "name": "Chromium reader / apadanatherascaled61",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250380,
+      "name": "Chromium reader / apadanathera251",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250403,
+      "name": "Chromium reader / apadananext",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250410,
+      "name": "Chromium reader / apadanathera241",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250415,
+      "name": "Chromium reader / apadanathera181",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250421,
+      "name": "Chromium reader / searchpins",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250448,
+      "name": "Chromium reader / vrieditionnote",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250452,
+      "name": "Chromium reader / backup",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250471,
+      "name": "Chromium reader / textspacing",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250475,
+      "name": "Chromium reader / annumbered",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250476,
+      "name": "Chromium reader / apadanatheraeditorial",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250479,
+      "name": "Chromium reader / commentary",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250480,
+      "name": "Chromium reader / thagsixteen",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250484,
+      "name": "Chromium reader / anten",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250513,
+      "name": "Chromium reader / scriptrefresh",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250516,
+      "name": "Chromium reader / apadanathera231",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250523,
+      "name": "Chromium reader / draftsafety",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250547,
+      "name": "Chromium reader / apadana",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250563,
+      "name": "Chromium reader / apadanatherascaled81",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250579,
+      "name": "Chromium reader / vinayapartials",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250775,
+      "name": "Chromium reader / booksearch",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009250812,
+      "name": "Chromium reader / apadanathird",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140009251961,
+      "name": "Chromium reader / navigation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140025892350,
+      "name": "Chromium reader",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "rerun_submitted": false,
+  "dev_advanced": false
+}

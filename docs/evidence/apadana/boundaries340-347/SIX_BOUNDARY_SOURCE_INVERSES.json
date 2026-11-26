@@ -32,6 +32,20 @@
         }
       ]
     },
+    "scripts/test.mjs": {
+      "c1_sha256": "c0396da9b603e0d834850decf10db09720364acea48d301229826c5964d526ee",
+      "current_sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad",
+      "hunks": [
+        {
+          "before": "// Runs every tests/*.test.mjs file with node's test runner (portable: no shell globbing).\nimport { readdirSync } from 'node:fs';\nimport { resolve, dirname } from 'node:path';\nimport { fileURLToPath } from 'node:url';\n",
+          "after": "// Runs every tests/*.test.mjs file with node's test runner (portable: no shell globbing).\n// The bounded Windows contrast failed concurrently and passed serially.\n// Serialize test files there; every case,\n// in-file interaction, original timeout and complete TAP inventory is retained.\nimport { readdirSync } from 'node:fs';\nimport { resolve, dirname } from 'node:path';\nimport { fileURLToPath } from 'node:url';\n"
+        },
+        {
+          "before": "\nconst dir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'tests');\nconst files = readdirSync(dir).filter((name) => name.endsWith('.test.mjs')).sort().map((name) => resolve(dir, name));\nconst result = spawnSync(process.execPath, ['--test', ...files, ...process.argv.slice(2)], { stdio: 'inherit' });\nprocess.exit(result.status ?? 1);\n",
+          "after": "\nconst dir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'tests');\nconst files = readdirSync(dir).filter((name) => name.endsWith('.test.mjs')).sort().map((name) => resolve(dir, name));\nconst result = spawnSync(process.execPath, ['--test', ...(process.platform === 'win32' ? ['--test-concurrency=1'] : []), ...files, ...process.argv.slice(2)], { stdio: 'inherit' });\nprocess.exit(result.status ?? 1);\n"
+        }
+      ]
+    },
     "scripts/web_reader_approved_acceptance.py": {
       "c1_sha256": "26fc2315af9b3bc37c4b8aaa0647897cb81561f3b79f894874a32c311800c2c7",
       "current_sha256": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9",

@@ -1,0 +1,147 @@
+{
+  "schema": "actual-windows22-scheduling-contrast-v1",
+  "workflow_run": 45852677830,
+  "job": 140022842613,
+  "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45852677830",
+  "candidate_base": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+  "diagnostic_commit": "20d44d88ed1a18c3a672ebd2c4c7f6110a66bf87",
+  "whole_job_conclusion": "failure because the default contrast failed; diagnostic is not release approval",
+  "original_child_deadlines_unchanged": true,
+  "observations": [
+    {
+      "logged_utc": "2026-11-26T15:48:52.4327743Z",
+      "value": {
+        "base": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+        "head": "20d44d88ed1a18c3a672ebd2c4c7f6110a66bf87",
+        "parent": "7b613cedc63a2ffd80dd8257069070e6638829ef",
+        "delta": "A\t.github/workflows/pali-held234-io-diagnostic.yml",
+        "node": "v22.23.5",
+        "platform": "win32",
+        "arch": "x64",
+        "os_release": "10.0.26100",
+        "logical_cpus": 4,
+        "available_parallelism": 4,
+        "total_memory_bytes": 17174360064,
+        "free_memory_bytes": 14450221056,
+        "purpose": "Scheduling contrast only. Not release CI or permission to promote dev.",
+        "python_version": "Python 3.12.10",
+        "nominal_default_file_concurrency": 3,
+        "inherited_concurrency_option": false
+      }
+    },
+    {
+      "logged_utc": "2026-11-26T15:49:16.9749372Z",
+      "value": {
+        "name": "held-alone",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+          "--test",
+          "--test-reporter=tap",
+          "tests/held234-current333-chain.test.mjs"
+        ],
+        "started_utc": "2026-11-26T15:48:52.432Z",
+        "completed_utc": "2026-11-26T15:49:16.971Z",
+        "elapsed_ms": 24538.5743,
+        "outer_deadline_ms": 45000,
+        "original_wrapper_child_deadlines_unchanged": true,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "expected_cases": 1,
+        "observed_counts": {
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "complete_zero_skip_inventory": true,
+        "successful_expected_cases": true,
+        "cleanup_unverified": false
+      }
+    },
+    {
+      "logged_utc": "2026-11-26T15:50:10.3111891Z",
+      "value": {
+        "name": "three-default",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+          "--test",
+          "--test-reporter=tap",
+          "tests/approved-current333-authority-negatives.test.mjs",
+          "tests/approved-current339-authority-negatives.test.mjs",
+          "tests/held234-current333-chain.test.mjs"
+        ],
+        "started_utc": "2026-11-26T15:49:16.973Z",
+        "completed_utc": "2026-11-26T15:50:10.307Z",
+        "elapsed_ms": 53333.47119999999,
+        "outer_deadline_ms": 160000,
+        "original_wrapper_child_deadlines_unchanged": true,
+        "status": 1,
+        "signal": null,
+        "error": null,
+        "expected_cases": 3,
+        "observed_counts": {
+          "tests": 3,
+          "pass": 2,
+          "fail": 1,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "complete_zero_skip_inventory": true,
+        "successful_expected_cases": false,
+        "cleanup_unverified": false
+      }
+    },
+    {
+      "logged_utc": "2026-11-26T15:51:59.2177191Z",
+      "value": {
+        "name": "three-serial",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+          "--test",
+          "--test-reporter=tap",
+          "--test-concurrency=1",
+          "tests/approved-current333-authority-negatives.test.mjs",
+          "tests/approved-current339-authority-negatives.test.mjs",
+          "tests/held234-current333-chain.test.mjs"
+        ],
+        "started_utc": "2026-11-26T15:50:10.309Z",
+        "completed_utc": "2026-11-26T15:51:59.214Z",
+        "elapsed_ms": 108903.56539999999,
+        "outer_deadline_ms": 285000,
+        "original_wrapper_child_deadlines_unchanged": true,
+        "status": 0,
+        "signal": null,
+        "error": null,
+        "expected_cases": 3,
+        "observed_counts": {
+          "tests": 3,
+          "pass": 3,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        "complete_zero_skip_inventory": true,
+        "successful_expected_cases": true,
+        "cleanup_unverified": false
+      }
+    }
+  ],
+  "raw_log_sha256": "db16e763fb707ba00c8d3fd92fd26034b744bce5e31e0c847cb8309a13995893",
+  "artifact": {
+    "id": 15134259079,
+    "bytes": 5361,
+    "GitHub_digest": "sha256:c8958a677a2b9c36d875b0bcbcf1c2a1adf4aa94f50c59bcad8c9947daa609e2",
+    "local_download": "URLError; no ZIP bytes or inner TAP inspected",
+    "concurrent_failed_case_identity": "UNVERIFIED; only aggregate3tests2pass1fail observed"
+  },
+  "limits": [
+    "Fixed order/cache warming confounds timing causality.",
+    "Focused contrast omits whole-suite interactions.",
+    "Source/platform versions unchanged inside this job, but new release requires its own full Windows20/22 checks."
+  ]
+}

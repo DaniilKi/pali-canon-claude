@@ -51,7 +51,7 @@ record the finite implementation scope.
 
 ## Source-history and release evidence
 
-The updated finite source-input inverse has SHA-256
+The operation-scope-stage finite source-input inverse has SHA-256
 `8109fc3557518af7c832cd6bc057a61a51408363861ffb27d216ebe4b6345c41`.
 All 36 rows restore complete immutable C1 files; 34 row values are unchanged.
 Only the approved/four history helper rows change. The prior `7440a63f…` proof is
@@ -87,3 +87,5 @@ an external fail-closed deadline, and a fresh output path. Retain the test/helpe
 hashes, stderr case count, source state and pstats. Do not overwrite earlier
 profiles or interpret profiler time as uninstrumented runtime. Run further
 profiles only for an unresolved performance question, not as a release loop.
+
+The later [Windows scheduling repair](../qa/windows-test-file-scheduling.md) records the current37-row source inverse and preserves this36-row8109 proof in history. It changes only test-file scheduling and two added entrypoint probes.

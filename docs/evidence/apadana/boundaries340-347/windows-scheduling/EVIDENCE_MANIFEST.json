@@ -1,0 +1,93 @@
+{
+  "scope": "Windows test-file scheduling change only; current application39 members remain unchanged; final exact candidateCIpending.",
+  "all2011_prior_cases_preserved": true,
+  "new_entrypoint_probe_cases": 2,
+  "expected_normal_total": 2013,
+  "files": [
+    {
+      "file": "DIAGNOSTIC_COMMIT_BINDING.json",
+      "bytes": 862,
+      "sha256": "a4c7aa17246143f3790652824984f3aabf99b9b44c73c5ead57ab7a11115c88e"
+    },
+    {
+      "file": "DIAGNOSTIC_RESULTS.json",
+      "bytes": 5204,
+      "sha256": "10c7719d6e68492aa2070687ed4d7c0b6b6845fcc95ca6e2c39ac130417b1ee9"
+    },
+    {
+      "file": "DIAGNOSTIC_STATIC_REVIEW.json",
+      "bytes": 35208,
+      "sha256": "c3ba11b136145374740306eec658dfc45b1e939ba2d6377bb2045a66f1faefa6"
+    },
+    {
+      "file": "ENTRYPOINT_PROBES.tap",
+      "bytes": 597,
+      "sha256": "decfee15f94876925d96435a0469c1465452f989cf00beaa1ec85142c31b3e78"
+    },
+    {
+      "file": "EXACT7B_CI_RECONCILIATION.json",
+      "bytes": 9855,
+      "sha256": "7348b7d3b0a948896b65176ba9f2120e30f4e18307411f5b08cf04e61a6b0eec"
+    },
+    {
+      "file": "INDEPENDENT_SOURCE_INVERSE_V4_REVIEW.json",
+      "bytes": 24168,
+      "sha256": "10966bcecc44b4162708273c60ab238140dd7b0b1317ff46f19496e07ef6c1dc"
+    },
+    {
+      "file": "INDEPENDENT_SOURCE_PATH_PLAN_V4_GO.json",
+      "bytes": 6743,
+      "sha256": "fdb6fd455dc826f189979783fc5cf61e638aae22330be6efe47dfa62593a5c5d"
+    },
+    {
+      "file": "ISOLATED_DIAGNOSTIC_WORKFLOW.json",
+      "bytes": 6396,
+      "sha256": "f7a7822db1f81a04afc0cb6759a95d8ae26b7b2b03d47be9a6bc4c43cb2441bf"
+    },
+    {
+      "file": "NEXT_CAP_CANDIDATE.md",
+      "bytes": 2636,
+      "sha256": "5449d50959a959bf9234c06a826f289b78383e52d87e88542c70fb929b8d0b02"
+    },
+    {
+      "file": "RUNNER_AND_PROBES_STATIC_REVIEW.json",
+      "bytes": 4140,
+      "sha256": "19da067254e2aa9f9a6a59d423539d955c6409d6a317aa1d046f252070bec2f3"
+    },
+    {
+      "file": "SOURCE_GENERATION_RECEIPT_V4.json",
+      "bytes": 4015,
+      "sha256": "68bb5479965dd98ee616c79f35b0b47df46db75021efb7ee95fc22483f0a3485"
+    },
+    {
+      "file": "SOURCE_PATH_PLAN_V4.json",
+      "bytes": 2676,
+      "sha256": "fef6a96c13f7e9388d01b69ece38171d6a65a5914f696d7fecafe108fdec5ac2"
+    },
+    {
+      "file": "UPDATED_SOURCE_CLOSURE30.tap",
+      "bytes": 7358,
+      "sha256": "d6d0077ac1343c2cf995b8653807fb812d8aca6978cb662c66f3619606b623bc"
+    },
+    {
+      "file": "WINDOWS20_7B_FAILURE.json",
+      "bytes": 27252,
+      "sha256": "fd9654a9bf5600f97ba7889ebb1e442f79fe89a21f39058fc3183c87ed8e98bb"
+    },
+    {
+      "file": "WINDOWS22_7B_FAILURE.json",
+      "bytes": 14477,
+      "sha256": "4f43361110727bb337c9b0efaa3cc2953da081c4de356d772dc3a13cc50fd43a"
+    },
+    {
+      "file": "source-inverse-v4-review.md",
+      "bytes": 1426,
+      "sha256": "f31afd5a5d06de125c4fbf9fa65e568ea7ebb74a65594fc0449be1713d70c2e8"
+    },
+    {
+      "file": "UNCHANGED_APPLICATION_AND_PRIOR_TESTS.json",
+      "bytes": 56245,
+      "sha256": "45650102a2421ad8688f9b6d345519448a0654dadb1d8efce15baa425c60ca72"
+    }
+  ]
+}
