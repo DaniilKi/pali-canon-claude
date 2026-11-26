@@ -1,0 +1,867 @@
+{
+  "schema": "independent-original-derived325-source-review-v1",
+  "observed_utc": "2026-11-26T04:26:43.588523+00:00",
+  "review_scope": "All eight raw poems, complete original notes and separate310summary; stdlibonly/no productionparser or oldreplay imports",
+  "candidate": "6555a21f7290a28a893a8dfb3aa37117ff13afd6",
+  "baseline": "4c69f023c9fe1093ad8aadf0ac7f3caf766d92f0",
+  "publisher_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "agents_file_sha256": "6c8b146f01a9bb9ef45d6e64d22c7bd2184c5440007aa8a148d8ddb0f585e56e",
+  "primary_fresh_GitHub_bindings": {
+    "publisher_root_tree": "dee02e7343e559abfed5b1fb1099fb64607cbff4",
+    "vri_root_tree": "5b7f3fafaff186cfa75917fecf8377e15ff6fd6a",
+    "vri_romn_tree": "6d7aa447eac664284da25f4ce809ee5f1f7b42d9",
+    "vri_root_blob": "f37368072aece065d2668f93a74c24b423939f1f",
+    "vri_commentary_blob": "d5a3b791ac751f0a8e9c1e96c6877ea20a983917",
+    "origin": "Authorized GitHub connector GET commit and tree responses26Nov; pinnedGitobjects and localbytes independently checked"
+  },
+  "artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-301.md",
+      "bytes": 1703,
+      "sha256": "bfcec617ee5987e83bfb8f7577212a6d2ba12d8723e2d266438bde3eb750ca7c",
+      "git_blob_sha1": "6ad393fa8f0248f69fe4d3dd92c4150c3668c775",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-302.md",
+      "bytes": 999,
+      "sha256": "d917549c9e0b73e3ca1d9813f3191571cc005cf3df5391cf981ac815300581fa",
+      "git_blob_sha1": "7563f3aa13bd489abb2e35730059f59bf068e997",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-303.md",
+      "bytes": 1840,
+      "sha256": "3e14bdff87cdd14d8b5d82c6dfffb15b44db4da9c8b2f2903439407232169f75",
+      "git_blob_sha1": "315d94859fcdb0acdc8b9d230b50ac4bce3e964c",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-304.md",
+      "bytes": 2766,
+      "sha256": "42019b58ec5d47b70a11a45e35c57f766d77e1f7706eac1233425e81570c16cd",
+      "git_blob_sha1": "0c6785b0e9c6bac1fe73c811f449f71d041c86d1",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-305.md",
+      "bytes": 1070,
+      "sha256": "a5d7840990e96df7d0a0721c7801c560c8bb987eeb9d9cd4f09572e953a48a6a",
+      "git_blob_sha1": "85842539fb274f17a037f65a2588c1b364afd99b",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-308.md",
+      "bytes": 866,
+      "sha256": "a0294e61e20e01f34c013bd2f12781116ce6f469dce8a515b063b100a8d06818",
+      "git_blob_sha1": "a04cbfe89c485b24eff0c3c273b76357bac238ba",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-309.md",
+      "bytes": 880,
+      "sha256": "e24177fc5986ce7220c72731e93f07ebff8f47d1b19f3b27de0d9ce6241ec620",
+      "git_blob_sha1": "4cbb2482f9488304816b39a711c86c85152496c4",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-310.md",
+      "bytes": 2252,
+      "sha256": "f96bb36873c528c5fc05128c415978bbb2ae0f0c32b7e4dd0f49d7f3af0dffe6",
+      "git_blob_sha1": "9701757715c31547eebc14791e5b617e3524d271",
+      "pinned_commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "second_preserved_copy_matches": true
+    }
+  ],
+  "rights": {
+    "decision": "GO_NONCOMMERCIAL_TEXT_WITH_ATTRIBUTION_SHAREALIKE_NOTICES_AND_IDENTIFIED_EXTRACTION",
+    "specific_license": "CC BY-NC-SA 4.0",
+    "attribution": "Jonathan S. Walters and Whitman College",
+    "generic_site_metadata_license": "CC-BY-4.0",
+    "generic_does_not_relax_translation_specific_terms": true,
+    "bodies_notes_and_apparatus_covered_by_translation_grant": true,
+    "no_media_audio_or_commercial_approval": true,
+    "live_only_English_and_metadata_only_bundles_required": true,
+    "no_endorsement_or_warranty_claim": true
+  },
+  "xml": {
+    "raw_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "physical_elements": 14646,
+    "canonical_tuples": 14645,
+    "all_book_tuples_exact": true,
+    "omitted_existing_note_only": [
+      {
+        "physical_zero_based": 1130,
+        "notes_sha256": "5e99a3beb62c68f68af24c367da4542ea0c7ef948eee5c9bada956da5c112fec"
+      }
+    ],
+    "no_canonical_wording_or_boundary_change": true
+  },
+  "per_source": [
+    {
+      "publisher": 301,
+      "id": "tha-ap303",
+      "title": "Padumakesariya",
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SCOPE_ONLY",
+      "raw_sha256": "bfcec617ee5987e83bfb8f7577212a6d2ba12d8723e2d266438bde3eb750ca7c",
+      "body_sha256": "bea6eb98614936411f69dd89a7b2a30c32ba482e2757855f7ab4dcb645e5ef67",
+      "notes_sha256": "2734753842366be6c1c4d805e53178ee87791071b072f58c92e66d632eda5d72",
+      "root_sha256": "83d80e4db2f02d0978a722fc5a774b6cc58438124800d4c32feeb57994fac295",
+      "paragraphs": 7,
+      "physical_stanza_entries": 4,
+      "printed_labels": 4,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2717",
+          "suffix": "(1) [2717]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2718",
+          "suffix": "(2) [2718]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2719",
+          "suffix": "(3) [2719]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2720",
+          "suffix": "(4) [2720]",
+          "lines": 4
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "7b1156aa3e5376f4fcb5d34a0311bed6be496643a62b858bf86a0904b305d953",
+          "characters": 22
+        },
+        {
+          "number": 2,
+          "text_sha256": "e81dbae6e27d9018915f965ae2f87f367174f980731c968a372087f216da3fab",
+          "characters": 38
+        },
+        {
+          "number": 3,
+          "text_sha256": "8014058288ba1cf42de78c6831b4a373c1787cc728b15e133ec7be79ca64ff4a",
+          "characters": 89
+        },
+        {
+          "number": 4,
+          "text_sha256": "e539326dccadbc2849a97af58b1cf5af9b8b042903ee3aad8c26dd53ea08ccea",
+          "characters": 33
+        },
+        {
+          "number": 5,
+          "text_sha256": "66b5edc6dd4bc4bfb34f9cee4f6ede51890ce05ffdec28d4cf47fd4893a41be8",
+          "characters": 254
+        },
+        {
+          "number": 6,
+          "text_sha256": "495ddd28819758c9a8f75fb8e5c7747e014a1b5bd8845b05a5e775125c38b680",
+          "characters": 135
+        }
+      ],
+      "pali": {
+        "start": 9046,
+        "end": 9062,
+        "numbering": "1–4",
+        "title": "Padumakesariyattheraapadānaṃ",
+        "previous": "Anusaṃsāvakattheraapadānaṃ",
+        "next": "Sabbagandhiyattheraapadānaṃ",
+        "has_abbreviated_final_attainment": false
+      },
+      "no_publisher_preface": true,
+      "bundled_full_body_absent": true,
+      "independently_observed_narrative_witness_terms": [
+        "mātaṅgavāraṇo",
+        "Paccekajinaseṭṭhesu",
+        "padmakesaramokiriṃ"
+      ]
+    },
+    {
+      "publisher": 302,
+      "id": "tha-ap304",
+      "title": "Sabbagandhiya",
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SCOPE_ONLY",
+      "raw_sha256": "d917549c9e0b73e3ca1d9813f3191571cc005cf3df5391cf981ac815300581fa",
+      "body_sha256": "e7c29c3c698d949057ab774ef3d823dc85ec54fde407eb0577b362f55ad6df00",
+      "notes_sha256": "9743e3f5486a44fe66ef68d6003046ae0631303ba02191e72b99b82458f977aa",
+      "root_sha256": "47e09bec7ed84f888b8564615ea159e9b8c3ecb468c3f41ef4b31e0d4b2125dc",
+      "paragraphs": 7,
+      "physical_stanza_entries": 4,
+      "printed_labels": 4,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2721",
+          "suffix": "(1) [2721]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2722",
+          "suffix": "(2) [2722]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2723",
+          "suffix": "(3) [2723]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2724",
+          "suffix": "(4) [2724]",
+          "lines": 4
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "6a2e7699ef0ed7208a672b3da722b2be3d09718adfb1455efeb01f64ebb02f60",
+          "characters": 38
+        },
+        {
+          "number": 2,
+          "text_sha256": "de172bf6e417deabd703c82c3a290d9fc28bbe190398d6dbb51d4d5dc3ce95a6",
+          "characters": 9
+        },
+        {
+          "number": 3,
+          "text_sha256": "1dd38c1368a37182c90138c3c4321a2ae1ea7cf617af1be8e97d6d426a5a7085",
+          "characters": 21
+        }
+      ],
+      "pali": {
+        "start": 9062,
+        "end": 9076,
+        "numbering": "5–8",
+        "title": "Sabbagandhiyattheraapadānaṃ",
+        "previous": "Padumakesariyattheraapadānaṃ",
+        "next": "Paramannadāyakattheraapadānaṃ",
+        "has_abbreviated_final_attainment": true
+      },
+      "no_publisher_preface": true,
+      "bundled_full_body_absent": true,
+      "independently_observed_narrative_witness_terms": [
+        "Gandhamālaṃ",
+        "vipassissa",
+        "koseyyavatthamuttamaṃ",
+        "suceḷo"
+      ]
+    },
+    {
+      "publisher": 303,
+      "id": "tha-ap305",
+      "title": "Paramannadāyaka",
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SCOPE_ONLY",
+      "raw_sha256": "3e14bdff87cdd14d8b5d82c6dfffb15b44db4da9c8b2f2903439407232169f75",
+      "body_sha256": "59e0b93ebea531d69f318bddbcfe2574451091e2168296cbc5599c625310e5c6",
+      "notes_sha256": "9124bb58ea5848da4a1d8de43a54b84506eb0dabe07020427cc5f09860fe91cf",
+      "root_sha256": "ddccd76cedcfb6a31b7bdbecc6819d0eeb6268ab6504f9ad9c4fb191f8ddb11a",
+      "paragraphs": 7,
+      "physical_stanza_entries": 4,
+      "printed_labels": 4,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2725",
+          "suffix": "(1) [2725]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2726",
+          "suffix": "(2) [2726]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2727",
+          "suffix": "(3) [2727]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2728",
+          "suffix": "(4) [2728]",
+          "lines": 4
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "1438905c8d5c7c42029e0fee9a0f0a8762a1273b4acc37842c6eaf1db49a8944",
+          "characters": 348
+        },
+        {
+          "number": 2,
+          "text_sha256": "82b0978106c54b62518634c150f1968092b357f37ee8f10cf35846e488853d4a",
+          "characters": 241
+        },
+        {
+          "number": 3,
+          "text_sha256": "738aae62f1d25fdb237e511bbd883f56f60eecbab8073b9b468e1b0bee45c10d",
+          "characters": 318
+        }
+      ],
+      "pali": {
+        "start": 9076,
+        "end": 9090,
+        "numbering": "9–12",
+        "title": "Paramannadāyakattheraapadānaṃ",
+        "previous": "Sabbagandhiyattheraapadānaṃ",
+        "next": "Dhammasaññakattheraapadānaṃ",
+        "has_abbreviated_final_attainment": true
+      },
+      "no_publisher_preface": true,
+      "bundled_full_body_absent": true,
+      "independently_observed_narrative_witness_terms": [
+        "Kaṇikāraṃva",
+        "Vipassiṃ",
+        "sakaṃ gharaṃ",
+        "paramannamadāsahaṃ"
+      ]
+    },
+    {
+      "publisher": 304,
+      "id": "tha-ap306",
+      "title": "Dhammasaññaka",
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SCOPE_ONLY",
+      "raw_sha256": "42019b58ec5d47b70a11a45e35c57f766d77e1f7706eac1233425e81570c16cd",
+      "body_sha256": "1e8028a2b89b1576e56426af21a31e94c51dc08e0e149157238c5ef8c440e83f",
+      "notes_sha256": "5c096387c23c41a1977ed573f01dfed5c8a56a8025a815b10008ea265f1db131",
+      "root_sha256": "ffe1bd1ffdc0d7795b12b67196b8d80f9463ceaf91ab4f64edc76fdda743781c",
+      "paragraphs": 10,
+      "physical_stanza_entries": 7,
+      "printed_labels": 7,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2729",
+          "suffix": "(1) [2729]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2730",
+          "suffix": "(2) [2730]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2731",
+          "suffix": "(3) [2731]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2732",
+          "suffix": "(4) [2732]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2733",
+          "suffix": "(5) [2733]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "2734",
+          "suffix": "(6) [2734]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "2735",
+          "suffix": "(7) [2735]",
+          "lines": 4
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "c60ae18022ecad9a818669d6044bd369524d1fa4016d869b0a78a89a44dfc020",
+          "characters": 27
+        },
+        {
+          "number": 2,
+          "text_sha256": "c377fefeb9d7299010ac1547f53c1ad41a9e8c71d069d937533a7ebcd4ab4bf4",
+          "characters": 39
+        },
+        {
+          "number": 3,
+          "text_sha256": "523ee0e9134c268c0d8001ef9e7c0431316d48aecf93e11d8c57063d108d7523",
+          "characters": 182
+        },
+        {
+          "number": 4,
+          "text_sha256": "3623380b493b9358ad74fd320267a221ce5051f52bd7219739edebabf92dc362",
+          "characters": 303
+        },
+        {
+          "number": 5,
+          "text_sha256": "354c3a9cf46d7c374bc694c8d3da9eae682bc2b047982332abf7368bc0bc5069",
+          "characters": 51
+        },
+        {
+          "number": 6,
+          "text_sha256": "1ae5a8fbfde75df17734da0ecfda47a1fb4d13999d5b98888c95adb22afd5eba",
+          "characters": 243
+        },
+        {
+          "number": 7,
+          "text_sha256": "489608de8132e2be1a525fc164157eee7436cb0f26a398053d82728327e799fc",
+          "characters": 8
+        }
+      ],
+      "pali": {
+        "start": 9090,
+        "end": 9113,
+        "numbering": "13–19",
+        "title": "Dhammasaññakattheraapadānaṃ",
+        "previous": "Paramannadāyakattheraapadānaṃ",
+        "next": "Phaladāyakattheraapadānaṃ",
+        "has_abbreviated_final_attainment": true
+      },
+      "no_publisher_preface": true,
+      "bundled_full_body_absent": true,
+      "independently_observed_narrative_witness_terms": [
+        "Vipassino",
+        "Catusaccaṃ",
+        "uttarāmukho",
+        "Tettiṃsamhi",
+        "Sutavā"
+      ]
+    },
+    {
+      "publisher": 305,
+      "id": "tha-ap307",
+      "title": "Phaladāyaka",
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SCOPE_ONLY",
+      "raw_sha256": "a5d7840990e96df7d0a0721c7801c560c8bb987eeb9d9cd4f09572e953a48a6a",
+      "body_sha256": "6da026cf2d1495d3a3c53bdb027dfd259dbe833b24b0ba33f841e4bf16213147",
+      "notes_sha256": "014ce6431b4a1ac630024c7cedb73cfea26d81ac98e99697defe73b491e7abb8",
+      "root_sha256": "eb33351c39428a0d8a2555e4327610f9c4c4f1d9c39542169eb0e530429c736b",
+      "paragraphs": 7,
+      "physical_stanza_entries": 4,
+      "printed_labels": 4,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2736",
+          "suffix": "(1) [2736]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2737",
+          "suffix": "(2) [2737]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2738",
+          "suffix": "(3) [2738]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2739",
+          "suffix": "(4) [2739]",
+          "lines": 4
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "164ce51e5bb0c1925f6f055007697c82aa6ae340015f5c69364a42bc8b4a20a5",
+          "characters": 52
+        },
+        {
+          "number": 2,
+          "text_sha256": "c369031f25dec67c0907d3cc995f0853afcef0225b4d015ba970e4f3d38cfe94",
+          "characters": 46
+        },
+        {
+          "number": 3,
+          "text_sha256": "91fd31c7731297de0a2fcf2236e1f63532f9f9dcab8317a0a357868459ee62a7",
+          "characters": 9
+        }
+      ],
+      "pali": {
+        "start": 9113,
+        "end": 9127,
+        "numbering": "20–23",
+        "title": "Phaladāyakattheraapadānaṃ",
+        "previous": "Dhammasaññakattheraapadānaṃ",
+        "next": "Sampasādakattheraapadānaṃ",
+        "has_abbreviated_final_attainment": true
+      },
+      "no_publisher_preface": true,
+      "bundled_full_body_absent": true,
+      "independently_observed_narrative_witness_terms": [
+        "Bhāgīrathīnadītīre",
+        "assamo",
+        "Vipassiṃ",
+        "phalahattho"
+      ]
+    },
+    {
+      "publisher": 308,
+      "id": "tha-ap310",
+      "title": "Anulepadāyaka",
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SCOPE_ONLY",
+      "raw_sha256": "a0294e61e20e01f34c013bd2f12781116ce6f469dce8a515b063b100a8d06818",
+      "body_sha256": "dfb7c795e4598a659ce6f41b4167934fb49a6f58a4a946837e13d831d27b2459",
+      "notes_sha256": "9fc8dc7e38d793cd70c356b9e7b27b2a576ff6f7fbb319ab2a98ca0184406ab7",
+      "root_sha256": "75eb774214dc090220f6d8561aa49a39c10894d1b1ec7429474fc212ca654b69",
+      "paragraphs": 7,
+      "physical_stanza_entries": 4,
+      "printed_labels": 4,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2755",
+          "suffix": "(1) [2755]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "2756",
+          "suffix": "(2) [2756]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2757",
+          "suffix": "(3) [2757]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2758",
+          "suffix": "(4) [2758]",
+          "lines": 4
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "284d23e7b1866fc7dbe6c24ba802be9cef53df9c105ad61b8152ce83f80c3afe",
+          "characters": 16
+        }
+      ],
+      "pali": {
+        "start": 9176,
+        "end": 9190,
+        "numbering": "39–42",
+        "title": "Anulepadāyakattheraapadānaṃ",
+        "previous": "Ārāmadāyakattheraapadānaṃ",
+        "next": "Buddhasaññakattheraapadānaṃ",
+        "has_abbreviated_final_attainment": true
+      },
+      "no_publisher_preface": true,
+      "bundled_full_body_absent": true,
+      "independently_observed_narrative_witness_terms": [
+        "Atthadassissa",
+        "sāvakaṃ",
+        "Navakammaṃ",
+        "sīmāya",
+        "Aṭṭhārase kappasate"
+      ]
+    },
+    {
+      "publisher": 309,
+      "id": "tha-ap311",
+      "title": "Buddhasaññaka",
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SCOPE_ONLY",
+      "raw_sha256": "e24177fc5986ce7220c72731e93f07ebff8f47d1b19f3b27de0d9ce6241ec620",
+      "body_sha256": "ecfd162a6f756455d54de191650d2a1ae4f440a1960adc1cc0e57cde45b7e131",
+      "notes_sha256": "9ffd617b7a1e9b09cbb29eaa9d8f0df44f4530d153cf97a09025eee2b9d2460f",
+      "root_sha256": "397841568ff63816a89fbf10f02d4dcd4acf6971d5c22bf78b874b92c5b72480",
+      "paragraphs": 6,
+      "physical_stanza_entries": 3,
+      "printed_labels": 4,
+      "layout": [
+        {
+          "local_label": "1-2",
+          "publisher_label": "2759-2760",
+          "suffix": "(1-2) [2759-2760]",
+          "lines": 8
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "2761",
+          "suffix": "(3) [2761]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2762",
+          "suffix": "(4) [2762]",
+          "lines": 4
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "c68f8291fe266f3c28998a6ad33e39d439cabdc3f72a0e5aa304d8fee6e775d3",
+          "characters": 18
+        }
+      ],
+      "pali": {
+        "start": 9190,
+        "end": 9204,
+        "numbering": "43–46",
+        "title": "Buddhasaññakattheraapadānaṃ",
+        "previous": "Anulepadāyakattheraapadānaṃ",
+        "next": "Pabbhāradāyakattheraapadānaṃ",
+        "has_abbreviated_final_attainment": true
+      },
+      "no_publisher_preface": true,
+      "bundled_full_body_absent": true,
+      "independently_observed_narrative_witness_terms": [
+        "supinantena",
+        "siddhatthaṃ",
+        "pītaraṃsiṃva",
+        "sugatiṃ upapajjahaṃ",
+        "Catunnavutito"
+      ]
+    },
+    {
+      "publisher": 310,
+      "id": "tha-ap312",
+      "title": "Pabbhāradāyaka",
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SCOPE_ONLY",
+      "raw_sha256": "f96bb36873c528c5fc05128c415978bbb2ae0f0c32b7e4dd0f49d7f3af0dffe6",
+      "body_sha256": "c235f1b9e531a7cd5d88e1cc030b7f6cf7ef49d8b6cbb52d06828f97d8105c6f",
+      "notes_sha256": "b408ae73924e08928d3b6be6db2967714ad69ecb253431505068f8fb985f92c2",
+      "root_sha256": "d9c800e9da46596c2aaf886178111bcfcd43c2191be86021b52f2ecbcb74ecf2",
+      "paragraphs": 7,
+      "physical_stanza_entries": 4,
+      "printed_labels": 5,
+      "layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "2763",
+          "suffix": "(1) [2763]",
+          "lines": 4
+        },
+        {
+          "local_label": "2-3",
+          "publisher_label": "2764-2765",
+          "suffix": "(2-3) [2764-2765]",
+          "lines": 8
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "2766",
+          "suffix": "(4) [2766]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "2767",
+          "suffix": "(5) [2767]",
+          "lines": 4
+        }
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "text_sha256": "056959d5d7b7a40778957e616e6782d3397e36a47b84f27bb700929f60c00c91",
+          "characters": 26
+        },
+        {
+          "number": 2,
+          "text_sha256": "28dc2074d0fcee16724a893ddc409d1d96351d7ae934f4c3a582145923715cea",
+          "characters": 268
+        },
+        {
+          "number": 3,
+          "text_sha256": "d00c8a7d84c6faceafd964f983bbce7c363d1f195ac387fce5d7db675bb59eb3",
+          "characters": 299
+        },
+        {
+          "number": 4,
+          "text_sha256": "f3a0fbfc908dc1fa288e8e594acd5c08feb170ccc061c084f6c50c3e31117b9b",
+          "characters": 76
+        },
+        {
+          "number": 5,
+          "text_sha256": "5438d28b26811252f701ee8fb4c09644b4bb4c91bf826311c1c38ba6a767806d",
+          "characters": 41
+        },
+        {
+          "number": 6,
+          "text_sha256": "de172bf6e417deabd703c82c3a290d9fc28bbe190398d6dbb51d4d5dc3ce95a6",
+          "characters": 9
+        },
+        {
+          "number": 7,
+          "text_sha256": "f0ec9e3aaa2b4e8065b3b1d9c5031bcc95884143b45f87cb374493dc12ca6a06",
+          "characters": 16
+        }
+      ],
+      "pali": {
+        "start": 9204,
+        "end": 9226,
+        "numbering": "47–51",
+        "title": "Pabbhāradāyakattheraapadānaṃ",
+        "previous": "Buddhasaññakattheraapadānaṃ",
+        "next": "Ārakkhadāyakattheraapadānaṃ",
+        "has_abbreviated_final_attainment": true
+      },
+      "no_publisher_preface": true,
+      "bundled_full_body_absent": true,
+      "separate_chapter_summary": {
+        "paragraphs": 3,
+        "body_sha256": "f311b42b468441b52e8ee1716d056cf5be4ed0ce3813231786c970c0e8ef5b12",
+        "notes_sha256": "2091322528d76b9d5c4bbfe295858f498f0564241ca4d8075dfb3f8b90a6cd43",
+        "note_numbers": [
+          8
+        ],
+        "root_sha256": "d82a41e7af10833ef66815cbe17547b2494355ebe74f7e4f7f496aa81b9ac66f",
+        "root_blocks": [
+          9221,
+          9226
+        ],
+        "refs": [
+          "tha-ap312/9",
+          "tha-ap312/11"
+        ],
+        "publisher_stated": 49,
+        "vri_stated": 51,
+        "publisher_order": [
+          "marker",
+          "six-line verse",
+          "chapter closing"
+        ],
+        "vri_order": [
+          "chapter closing",
+          "marker",
+          "verse"
+        ],
+        "does_not_approve_held306_307": true,
+        "excluded_from_poem_body_and_quotation_material": true
+      },
+      "independently_observed_narrative_witness_terms": [
+        "Piyadassino",
+        "pabbhāro",
+        "Ghaṭakañca",
+        "Sahassakaṇḍo satabheṇḍu",
+        "yūpo",
+        "susuddho"
+      ]
+    }
+  ],
+  "holds": [
+    {
+      "publisher": 306,
+      "id": "tha-ap308",
+      "title": "Sampasādaka",
+      "decision": "HOLD_UNCHANGED_NOT_APPROVED_BY_THIS_REVIEW",
+      "raw_sha256": "49938f1b1a77371d1c57e8c634bcc4c0a11ecfde470e5f291df93fc39ea45501",
+      "git_blob_sha1": "cd65d8922c63b79583ce04f499c69353a089ff22",
+      "root_title": "Sampasādakattheraapadānaṃ",
+      "reason": "Outside approved eight;306repeatlocal4 and307abbreviatedglobal2748-49 need separate finite representation review, not a numeric hold transfer."
+    },
+    {
+      "publisher": 307,
+      "id": "tha-ap309",
+      "title": "Ārāmadāyaka",
+      "decision": "HOLD_UNCHANGED_NOT_APPROVED_BY_THIS_REVIEW",
+      "raw_sha256": "ada8b191a0d51a5820d2648c8b8ca774ce1e8c2ab02a039e903a1964e740ad64",
+      "git_blob_sha1": "62be9412d6b026ea27dbc4d1c8cd19eea1f86512",
+      "root_title": "Ārāmadāyakattheraapadānaṃ",
+      "reason": "Outside approved eight;306repeatlocal4 and307abbreviatedglobal2748-49 need separate finite representation review, not a numeric hold transfer."
+    }
+  ],
+  "coverage": {
+    "previous317objects_deep_exact": true,
+    "first_indexed_whole_publisher_poem_choices_delta": 8,
+    "first_indexed_anyEnglish_delta": 8,
+    "before317": 317,
+    "after325": 325,
+    "body_paragraphs": 58,
+    "physical_stanza_entries": 34,
+    "printed_labels": 36,
+    "poem_notes": 31,
+    "separate_summary_notes": 1,
+    "whole_chapter31": false,
+    "line_complete_VRI": false
+  },
+  "limits": [
+    "Source/normalization/rights-scope approval only; not runtimeintegration,test,CI,release,physicaldevice,humanAT,liveprovider or specialist translationaccuracy approval",
+    "PublisherPTS/BJTS recension is independentofVRI; abbreviatedVRIformulas are not reconstructed",
+    "Uncertainties and divergent wording preserved, not certified as manuscriptfacts",
+    "Held306/307 and all other held material remain inactive",
+    "No projecttest/build/Gitmutation/outreach; evidence output only in ownreviewdirectory"
+  ]
+}
