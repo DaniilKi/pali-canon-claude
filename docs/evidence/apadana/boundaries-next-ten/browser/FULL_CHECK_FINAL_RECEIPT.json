@@ -1,0 +1,15 @@
+{
+  "source": "functions.write_stdin final session32407 tool result",
+  "command": "npm run check",
+  "candidate": "2b4c9b1c7a1606dab890816657623ac26dcb4103",
+  "exit_code": 0,
+  "log_sha256": "6ff50b7cc2937d09d16cf5bb033ec1b885a53afb9b26d8095ad630f4f394a82a",
+  "test_cases": 2034,
+  "passed": 1778,
+  "failed": 0,
+  "cancelled": 0,
+  "conditional_source_skips": 256,
+  "audit_command_completed": true,
+  "test_duration_ms": 452791.834167,
+  "no_physical_or_human_acceptance_claim": true
+}

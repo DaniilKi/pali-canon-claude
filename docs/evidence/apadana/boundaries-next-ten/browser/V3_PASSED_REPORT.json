@@ -1,0 +1,179 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "family": "Installed MCP reads all ten units; old positions refuse and source-book controls stay stable",
+      "units": 10,
+      "old_positions_checked": 144,
+      "primary_namespace_refusals": 1152,
+      "additional_zero_commit_refusals": 288,
+      "get_text_continuation_segments": 144,
+      "widget_continuation_segments": 144,
+      "same_numeric_source_positions_also_refused": 65,
+      "new_segments": 144,
+      "sourcebook_pages": 16
+    },
+    {
+      "check": "initial next10-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "MCP Apps",
+      "width": 390,
+      "sources": 10,
+      "independent_source_segments": 144,
+      "fresh_copy_stale_cases": 20,
+      "same_object_stale_cases": 30,
+      "network_requests": 0
+    },
+    {
+      "check": "initial next10-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "Apps SDK",
+      "width": 390,
+      "sources": 10,
+      "independent_source_segments": 144,
+      "fresh_copy_stale_cases": 20,
+      "same_object_stale_cases": 30,
+      "network_requests": 0
+    },
+    {
+      "check": "initial next10-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "MCP Apps",
+      "width": 1280,
+      "sources": 10,
+      "independent_source_segments": 144,
+      "fresh_copy_stale_cases": 20,
+      "same_object_stale_cases": 30,
+      "network_requests": 0
+    },
+    {
+      "check": "initial next10-boundary payload current pins accepted; old/missing locator refused before P\u0101li and English",
+      "bridge": "Apps SDK",
+      "width": 1280,
+      "sources": 10,
+      "independent_source_segments": 144,
+      "fresh_copy_stale_cases": 20,
+      "same_object_stale_cases": 30,
+      "network_requests": 0
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/",
+      "width": 390,
+      "old_records": 20,
+      "export_utf8_bytes": 4697,
+      "export_sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/",
+      "width": 1280,
+      "old_records": 20,
+      "export_utf8_bytes": 4697,
+      "export_sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Ten explicit current notes use new pins; twenty old records remain unchanged",
+      "new_pins": 10,
+      "old_records_preserved": 20
+    },
+    {
+      "family": "A stopped response completes late without replacing Saved or moving draft focus",
+      "body_completed": true
+    },
+    {
+      "family": "Stale tab save refuses; draft recovery and cancelled discard preserve both versions",
+      "recovery_sha256": "bb631f41e8029c572df9fe69eb8eaca4dc4c698daae5e3b5c417bfba1c2167af",
+      "recovery_utf8_bytes": 416
+    },
+    {
+      "family": "Native word study checks full effective pin despite genuine commit and identical segment wording",
+      "entrypoint": "/",
+      "width": 390,
+      "sources": 10,
+      "controlled_stale_responses": 30,
+      "genuine_recovery": true,
+      "private_bytes_unchanged": true
+    },
+    {
+      "family": "Native word study checks full effective pin despite genuine commit and identical segment wording",
+      "entrypoint": "/",
+      "width": 1280,
+      "sources": 10,
+      "controlled_stale_responses": 30,
+      "genuine_recovery": true,
+      "private_bytes_unchanged": true
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/reader",
+      "width": 390,
+      "old_records": 20,
+      "export_utf8_bytes": 4697,
+      "export_sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Native old bookmarks refuse; explicit reopening preserves notes, exports and source-book references",
+      "entrypoint": "/reader",
+      "width": 1280,
+      "old_records": 20,
+      "export_utf8_bytes": 4697,
+      "export_sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+      "stored_data_unchanged": true
+    },
+    {
+      "family": "Ten explicit current notes use new pins; twenty old records remain unchanged",
+      "new_pins": 10,
+      "old_records_preserved": 20
+    },
+    {
+      "family": "A stopped response completes late without replacing Saved or moving draft focus",
+      "body_completed": true
+    },
+    {
+      "family": "Stale tab save refuses; draft recovery and cancelled discard preserve both versions",
+      "recovery_sha256": "bb631f41e8029c572df9fe69eb8eaca4dc4c698daae5e3b5c417bfba1c2167af",
+      "recovery_utf8_bytes": 416
+    },
+    {
+      "family": "Native word study checks full effective pin despite genuine commit and identical segment wording",
+      "entrypoint": "/reader",
+      "width": 390,
+      "sources": 10,
+      "controlled_stale_responses": 30,
+      "genuine_recovery": true,
+      "private_bytes_unchanged": true
+    },
+    {
+      "family": "Native word study checks full effective pin despite genuine commit and identical segment wording",
+      "entrypoint": "/reader",
+      "width": 1280,
+      "sources": 10,
+      "controlled_stale_responses": 30,
+      "genuine_recovery": true,
+      "private_bytes_unchanged": true
+    }
+  ],
+  "limitations": "Genuine installed HTTP/MCP and Chromium DOM with synthetic local data; two simulated host bridges. No live publisher, physical-device, human AT or signed-in host acceptance.",
+  "contract_sha256": "9fd25413dc58170585d137484a4dd7b70497bfa69dde871a0b6f87fb0bc5b2d2",
+  "candidate_commit": "6ab4a322108aec740c330e4afd974ee4da808886",
+  "stage": "/tmp/s634-31695ga6",
+  "server_argv": [
+    "node",
+    "--require",
+    "/tmp/pali-next-ten-evidence-nov26/acceptance-plan/proposal-v3/offline-pali-guard.cjs",
+    "/tmp/pali-next-ten-evidence-nov26/installed/node_modules/pali-canon-mcp/server/http.cjs"
+  ],
+  "server_pid": 124653,
+  "owned_process_group": 124653,
+  "provider_ledger_sha256": "7c38619d5876b2aa189f805153e4c178b7a64f81a66ad1d341b05e505e8aca54",
+  "upstream_requests": 0,
+  "browser_run": true,
+  "physical_device": false,
+  "human_assistive_testing": false,
+  "cleanup": {
+    "owned_process_group": 124653,
+    "leader_reaped": true,
+    "group_absent": true
+  }
+}

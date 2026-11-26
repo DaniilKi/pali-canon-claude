@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "actual_runtime_first": 34,
+  "proofs": 2,
+  "warm_negative_cases": 8,
+  "restored_positive_cases": 9,
+  "physical_root": "/tmp/pali-warm-source-proofs-XJZGWs",
+  "no_actual_fixture_mutation": true
+}

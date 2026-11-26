@@ -1,0 +1,16 @@
+{
+  "schema": "next-ten-2b4c-ci-packaging-failure-v1",
+  "commit": "2b4c9b1c7a1606dab890816657623ac26dcb4103",
+  "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45876874162",
+  "job_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45876874162/job/140106072669",
+  "job_name": "Node 22 / ubuntu-latest",
+  "conclusion": "failure",
+  "failed_case": "NextTenBoundaryData.test_06_exact343_profiles_links_rights_and_finite_derived_parallels_delta",
+  "error": "FileNotFoundError: docs/evidence/apadana/boundaries-next-ten/parallels-independent/model.stdout.log",
+  "cause": "Two original sealed model logs were present locally but ignored by Git's *.log rule.",
+  "fixed_commit": "3d614795cf95e45280603e95f68846c52eba4818",
+  "fix": "Explicitly track only model.stdout.log and model.stderr.log with their existing sealed hashes. No test/assertion/runtime/source inverse change.",
+  "new_exact_commit_CI_required": true,
+  "no_rerun_of_old_failed_commit_submitted": true,
+  "dev_unchanged": "dd7b697df2c54308084fffd934af38130d01f952"
+}

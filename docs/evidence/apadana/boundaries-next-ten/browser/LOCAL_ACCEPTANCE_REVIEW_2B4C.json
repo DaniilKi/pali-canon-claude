@@ -1,0 +1,307 @@
+{
+  "schema": "independent-next-ten-local-source-artifact-acceptance-review-v1",
+  "status": "GO_LOCAL_SOURCE_ARTIFACT_ACCEPTANCE_2B4C_KNOWN_CI_LOG_PACKAGING_FAILURE_RELEASE_PENDING",
+  "candidate_commit": "2b4c9b1c7a1606dab890816657623ac26dcb4103",
+  "application_component_commit": "6ab4a322108aec740c330e4afd974ee4da808886",
+  "review_checkout_head": "3d614795cf95e45280603e95f68846c52eba4818",
+  "review_checkout_clean": true,
+  "exact_2b4c_commit_objects_verified": true,
+  "source_artifact_local_acceptance": "GO",
+  "genuine_installed_browser_local_acceptance": "GO_WITH_DECLARED_SIMULATION_AND_PLATFORM_LIMITS",
+  "exact_candidate_CI_approval": false,
+  "release_or_dev_promotion_approval": false,
+  "final_package_rebind": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/package-independent-review/FINAL_2B4C_BINDING.json",
+    "sha256": "e7a0a1fdb06863b27004d308bdc611ca782496703a40874c2e7f1918ddf4a319"
+  },
+  "package39_and_runtime34_post_run_byte_exact": true,
+  "source_widget_HTML_sha256": "240f9f42a00a2f9d2c8b89ab2d5271eeac686b0d8c4d45b02bb965f6d624c634",
+  "browser_component_to_final_binding": "Actual browser command/contract truthfully name application component6ab. Exact final2b4c package39/runtime/source dependency byte equivalence is independently proved by FINAL_2B4C_BINDING; report is not relabelled as a browser command launched at final2b4c.",
+  "full_check": {
+    "log": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/full-check-final.log",
+      "sha256": "6ff50b7cc2937d09d16cf5bb033ec1b885a53afb9b26d8095ad630f4f394a82a"
+    },
+    "command": "npm run check",
+    "root_observed_exit_code": 0,
+    "root_execution_provenance": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/FULL_CHECK_FINAL_RECEIPT.json",
+      "sha256": "5f4585813aea9bcbb4ecbde8db357589903fe9e08dd5ecee7ee1004d2b37b861"
+    },
+    "root_checkpoint_snapshot": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/final-review/ROOT_CHECKPOINT_SNAPSHOT_AT_LOCAL_REVIEW.json",
+      "sha256": "cf3e01fff60b42373c50cfba9dbbc89b30e6ad5aa4a19871c8e8e49c7b2181b8"
+    },
+    "independent_log_build_tests_audit_complete": true,
+    "summary": {
+      "tests": 2034,
+      "suites": 0,
+      "pass": 1778,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 256,
+      "todo": 0
+    },
+    "test_duration_ms": 452791.834167,
+    "audit_texts": 8544,
+    "audit_failures": 0,
+    "conditional_skip_inventory": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/final-review/CONDITIONAL_SKIP_INVENTORY_2B4C.json",
+      "sha256": "eacc99816525f60ad9625b62a0f392f67b497c7edd27c17517fbe8391064466b"
+    },
+    "skip_scope": "254 fixture/conditional-source skips, one unavailable live-provider test, one unavailable historical baseline checkout; these are disclosed skips, never promoted to passes. Required new source/old mandatory gates pass separately without skips."
+  },
+  "zero_skip_required_local_gates": [
+    {
+      "file": "reviewed-next-ten.tap",
+      "sha256": "727bcaa4f59eb6bf28af10992eb1ae7d33d4d825ebf509cb9f3a7158dc0f34e0",
+      "summary": {
+        "tests": 16,
+        "pass": 16,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "enforced_inner_python_source_cases": 16
+    },
+    {
+      "file": "reviewed-prior-six-final.tap",
+      "sha256": "ff4b6ba03662225992cc426de7d71b13c2a77bc53544c93f32326f34cb334de0",
+      "summary": {
+        "tests": 23,
+        "pass": 23,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "file": "source-history-final.tap",
+      "sha256": "768f7acabbfc66a30c74a8d22afc65aa51a84ebb6fb62dada8f028be9dce6ffb",
+      "summary": {
+        "tests": 7,
+        "pass": 7,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "file": "approved-acceptance-repaired.tap",
+      "sha256": "4e4e964e9c9de6f23737d0930acbc4702521a4541c901715099136a6596d0be6",
+      "summary": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "enforced_python_cases": 33,
+      "child_deadline_ms": 30000,
+      "outer_duration_ms": 11922.83616
+    },
+    {
+      "file": "prior-six-source-input-repaired.tap",
+      "sha256": "d8a1c449ad11334db5df19798b46d01a579148290f474617157a7bf70fe0b77e",
+      "summary": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    }
+  ],
+  "browser": {
+    "report": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/installed-browser-v3/REPORT.json",
+      "sha256": "fc5faf995f266bd3ec5750eefdf814ec92fb43f46e5c5c1ed0570c80c3a5fed6"
+    },
+    "command": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/installed-browser-v3/next10-installed-command.json",
+      "sha256": "0f172bf14c222c855b3cd63cb84ba9c05ce22c7cdb4f030cac7d16d73e04226d"
+    },
+    "log": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/installed-browser-v3/next10-installed.log",
+      "sha256": "0dbf58eb9961e42a6ed46804bf8adc223bc8455efe4b02b26cf563ad60b9acd5"
+    },
+    "ready_contract": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/browser-independent-review/READY_COMPONENT_CONTRACT_V3.json",
+      "sha256": "9fd25413dc58170585d137484a4dd7b70497bfa69dde871a0b6f87fb0bc5b2d2"
+    },
+    "V3_static_review": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/browser-independent-review/STATIC_BINDING_REVIEW_V3.json",
+      "sha256": "181b877a5bee990bbcdde6003867c114867efeccea3aa8aafc06dcccd19bd13c"
+    },
+    "status": "passed",
+    "command_exit_code": 0,
+    "timed_out": false,
+    "elapsed_seconds": 560.606,
+    "inner_deadline_seconds": 620,
+    "outer_deadline_seconds": 700,
+    "reported_families": 19,
+    "API": {
+      "family": "Installed MCP reads all ten units; old positions refuse and source-book controls stay stable",
+      "units": 10,
+      "old_positions_checked": 144,
+      "primary_namespace_refusals": 1152,
+      "additional_zero_commit_refusals": 288,
+      "get_text_continuation_segments": 144,
+      "widget_continuation_segments": 144,
+      "same_numeric_source_positions_also_refused": 65,
+      "new_segments": 144,
+      "sourcebook_pages": 16
+    },
+    "host_cells": 4,
+    "host_bridge_width_product": [
+      [
+        "MCP Apps",
+        390
+      ],
+      [
+        "Apps SDK",
+        390
+      ],
+      [
+        "MCP Apps",
+        1280
+      ],
+      [
+        "Apps SDK",
+        1280
+      ]
+    ],
+    "host_fresh_copy_stale_cases": 80,
+    "host_same_object_stale_cases": 120,
+    "native_entrypoint_width_cells": 4,
+    "native_current_notes": 20,
+    "old_records_per_native_cell": 20,
+    "Stop_late_body_completion_cases": 2,
+    "two_tab_conflict_and_cancelled_discard_cases": 2,
+    "native_word_study_cells": 4,
+    "native_word_study_controlled_stale_responses": 120,
+    "all_144_current_and_144_old_positions_checked": true,
+    "all17_old_future_source_note_occurrences_retained": true,
+    "full_two_resource_bodies_equal_separately_reviewed_source_HTML_enforced": true,
+    "same_expected_export_bytes_all4_native_cells": [
+      {
+        "file": "synthetic-roundtrip-root-390.json",
+        "bytes": 4697,
+        "sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+        "expected_synthetic_export_byte_exact": true
+      },
+      {
+        "file": "synthetic-roundtrip-root-1280.json",
+        "bytes": 4697,
+        "sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+        "expected_synthetic_export_byte_exact": true
+      },
+      {
+        "file": "synthetic-roundtrip-reader-390.json",
+        "bytes": 4697,
+        "sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+        "expected_synthetic_export_byte_exact": true
+      },
+      {
+        "file": "synthetic-roundtrip-reader-1280.json",
+        "bytes": 4697,
+        "sha256": "f270140df8b58540d8f65b27c393ed9bf851f088d01d1780299ce835005c40e6",
+        "expected_synthetic_export_byte_exact": true
+      }
+    ],
+    "synthetic_recovery_expected_bytes": 416,
+    "synthetic_recovery_expected_sha256": "bb631f41e8029c572df9fe69eb8eaca4dc4c698daae5e3b5c417bfba1c2167af"
+  },
+  "privacy_and_network": {
+    "only_synthetic_local_records": true,
+    "real_user_data_accessed": false,
+    "canary_absent_from_network_ledger_and_reports_logs": true,
+    "network_ledger": {
+      "path": "/tmp/s634-31695ga6/network.jsonl",
+      "sha256": "7c38619d5876b2aa189f805153e4c178b7a64f81a66ad1d341b05e505e8aca54",
+      "bytes": 295,
+      "events": [
+        {
+          "sequence": 1,
+          "kind": "guard-ready",
+          "mode": "deny-all",
+          "allowlisted": 0,
+          "actual_network_forwarded": 0
+        },
+        {
+          "sequence": 2,
+          "kind": "literal-loopback-resolution",
+          "hostname": "127.0.0.1",
+          "family": 4,
+          "all": true
+        },
+        {
+          "sequence": 1,
+          "kind": "guard-ready",
+          "mode": "deny-all",
+          "allowlisted": 0,
+          "actual_network_forwarded": 0
+        }
+      ]
+    },
+    "upstream_requests": 0,
+    "browser_route_guard_private_URL_header_body_checks_succeeded": true,
+    "observed_owned_HTTP_process_group_absent_now": true,
+    "reported_leader_reaped": true,
+    "reported_owned_group_absent": true
+  },
+  "source_and_rights_preservation": {
+    "whole_343_English_manifest_unchanged": true,
+    "new_English_activations": 0,
+    "source17_note_occurrences_preserved": true,
+    "source_words_books_and_non_target_records_unchanged_from_reviewed_DD": true,
+    "held_sources_not_activated": true,
+    "rights_approval_not_expanded": true,
+    "authorities": [
+      {
+        "path": "/tmp/pali-next-ten-evidence-nov26/runtime-review/INDEPENDENT_OBSERVATIONS.json",
+        "sha256": "2a224d82b7274b3593a0a8609228d98e76919e47072cf38ab90e6f1f751931ae"
+      },
+      {
+        "path": "/tmp/pali-next-ten-evidence-nov26/runtime-review/INDEPENDENT_NEXT_TEN_RUNTIME_REVIEW.json",
+        "sha256": "b3197bdcc429700dee09446abd01ff08c6009d4fcaedc3f2f542429c4f497f55"
+      },
+      {
+        "path": "/tmp/pali-next-ten-evidence-nov26/browser-independent-review/SOURCE_ADAPTER_PEER_REVIEW.json",
+        "sha256": "15616cea41a2d1c71b86bad91d278836e6290905f9cadc5a674e33579a91e9e5"
+      }
+    ]
+  },
+  "failed_V2_preserved": {
+    "report": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/installed-browser-v2/REPORT.json",
+      "sha256": "91dc06988d1a89b9bfbb49293a8e39376bb9fd4088a5d11875c3b4d7f6c9f716"
+    },
+    "status": "failed",
+    "not_converted_to_success": true
+  },
+  "reviewer_execution": "Existing report/log/source/data/hash/Git read-only reconciliation and process-group existence probe only. No app/source imports, tests, browser, build, network, Git mutation or tracked writes.",
+  "known_2b4c_CI_failure": {
+    "root_observed_job_id": 140106072669,
+    "platform": "Ubuntu Node22",
+    "cause": "Two MODEL_SEAL manifest members model.stdout.log and model.stderr.log existed in local producer evidence but were omitted from Git2b4c by ignored *.log paths. Commit3d61479 adds the exact two original sealed bytes. Local acceptance does not make failed2b4c CI green.",
+    "independent_Git_completeness_rebind": "Separate fresh3d binding receipt required and produced in this review lane."
+  },
+  "remaining_gates": [
+    "All required exact3d61479 GitHub CI checks and independent final reconciliation after the two-file evidence-packaging correction.",
+    "Authorized dev-only fast-forward after remote ref recheck, then observe automatic exact-head rechecks."
+  ],
+  "unperformed_acceptance": [
+    "Physical phone/tablet testing",
+    "Human assistive technology/accessibility acceptance",
+    "Signed-in ChatGPT or other real host acceptance",
+    "Firefox/WebKit or other browser-engine evidence",
+    "Live publisher/provider retrieval and outage behavior"
+  ],
+  "full_project_completion_claimed": false
+}

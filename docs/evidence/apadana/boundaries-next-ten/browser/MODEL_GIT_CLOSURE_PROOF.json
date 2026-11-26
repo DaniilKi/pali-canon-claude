@@ -1,0 +1,179 @@
+{
+  "schema": "independent-sealed-model-log-git-closure-repair-v1",
+  "status": "PASS_EXACT_TWO_PRESEALED_LOG_ADDITIONS_ONLY",
+  "old_commit": "2b4c9b1c7a1606dab890816657623ac26dcb4103",
+  "new_commit": "3d614795cf95e45280603e95f68846c52eba4818",
+  "MODEL_SEAL_sha256": "4084bbdef09f0ed32476f4375efbbd7eeb1b03156ce040ef0fe2e31737624530",
+  "manifest_members": 15,
+  "old_git_members_present": 13,
+  "new_git_members_present": 15,
+  "old_missing_members": [
+    "model.stderr.log",
+    "model.stdout.log"
+  ],
+  "members": [
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/MODEL_REPORT.json",
+      "record": {
+        "sha256": "4b20c0ef40d65849ae91a9b9818bbd1d36f1304fb0cd49798fb0941906285fc6",
+        "bytes": 10261
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/PACKED_AND_PARALLELS_BINDINGS.json",
+      "record": {
+        "sha256": "01306700c035b59cfde2d856b3f62f9c9a2a2276ad711b9a288a271d39019a79",
+        "bytes": 1998
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/OLD_CANDIDATE_PAIRS.json",
+      "record": {
+        "sha256": "22d15a82bfb93c2bf8540663c2171a4f9bc308ecd66bdb27d43dcae9c6b381da",
+        "bytes": 483399
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/NEW_CANDIDATE_PAIRS.json",
+      "record": {
+        "sha256": "cc20fbe2ce05c0e74e883c42484deb20d9cb8c0ae564e5d6ddd31409d6f7c8cc",
+        "bytes": 483273
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/DD_PARALLELS_BASELINE.json.gz",
+      "record": {
+        "sha256": "40cbb52a5a2dd0d41fc49f8d8e0ba4d9090abc25ca89a6fe9426a399d9c3e701",
+        "bytes": 487201
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/DD_PARALLELS_BASELINE.json",
+      "record": {
+        "sha256": "f0df75a21e4db6d4362cc42dd2fcb070e49dc551bd0763707aaaab7c9db41a53",
+        "bytes": 3188992
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/EXPECTED_PARALLELS_TWO_FIELD_DELTA.json",
+      "record": {
+        "sha256": "e954bb116d7760538bd22121b0254018b1dbb80a17ecb00db7f147839ea4f02b",
+        "bytes": 3188992
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/derive_candidates.mjs",
+      "record": {
+        "sha256": "bbb4296a86483d2ef4a6e9cd7cd7ee2d5d63085efaacdc057be43e39b298b1f9",
+        "bytes": 11172
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/derive_packed_and_expected.py",
+      "record": {
+        "sha256": "c1ca4d0bce006ad476a904377ee53d7a82cf6fdde695ca88f90877f2889894f2",
+        "bytes": 4187
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/EXTRACTED_FROZEN_DECLARATIONS.mjs",
+      "record": {
+        "sha256": "f15cf47db3fc004822bf2869c517de802ec520f4a6f7bcc9a741800c165a4fb1",
+        "bytes": 7381
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/PURE_STAGE123_MODEL.mjs",
+      "record": {
+        "sha256": "c6a9697099bd8e4b72a5d4081bdce93aa35763888833d7759ff58ef34d410567",
+        "bytes": 3702
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/PURE_NATIVE_REPLAY.mjs",
+      "record": {
+        "sha256": "60013c639c67027038e3a06497ece4997b5316ad4f0b015c2e1fe78246a7a54e",
+        "bytes": 11123
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/model.stdout.log",
+      "record": {
+        "sha256": "d7cb82c70b75b61b54e34ddacc639d168d98567efe76fe14d9942214fad6c8cb",
+        "bytes": 3524
+      },
+      "present_in_2b4c": false,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/model.stderr.log",
+      "record": {
+        "sha256": "0acae97f357eec6fa150b1e4cea700b38df79a944219978d9930360073acb029",
+        "bytes": 344
+      },
+      "present_in_2b4c": false,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    },
+    {
+      "path": "docs/evidence/apadana/boundaries-next-ten/parallels-independent/EXPLANATION.md",
+      "record": {
+        "sha256": "d52100eb782f2b9866291d9edf23ae569bbd2646d9807f6334fa54a931f85956",
+        "bytes": 4114
+      },
+      "present_in_2b4c": true,
+      "present_in_3d614": true,
+      "new_git_bytes_match_original_sealed_producer_bytes": true
+    }
+  ],
+  "exact_git_delta": [
+    "A\tdocs/evidence/apadana/boundaries-next-ten/parallels-independent/model.stderr.log",
+    "A\tdocs/evidence/apadana/boundaries-next-ten/parallels-independent/model.stdout.log"
+  ],
+  "all_original_producer_sealed_bytes_unchanged": true,
+  "app_tests_source_inverse_CI_package_notice_bytes_unchanged": true,
+  "CI_failure_evidence": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/CI_2B4C_MISSING_LOGS_FAILURE.json",
+    "sha256": "780e110b50586e11ca02a82319ab6c2a36821342b9e92fbe9f06da6ff913cd91"
+  },
+  "old_failed_CI_not_relabelled_passed": true,
+  "fresh_exact_new_commit_CI_required": true,
+  "app_tests_build_network_Git_mutation_tracked_writes_by_reviewer": false
+}

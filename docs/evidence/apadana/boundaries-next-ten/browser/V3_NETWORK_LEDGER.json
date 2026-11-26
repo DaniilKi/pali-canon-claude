@@ -1,0 +1,23 @@
+[
+  {
+    "sequence": 1,
+    "kind": "guard-ready",
+    "mode": "deny-all",
+    "allowlisted": 0,
+    "actual_network_forwarded": 0
+  },
+  {
+    "sequence": 2,
+    "kind": "literal-loopback-resolution",
+    "hostname": "127.0.0.1",
+    "family": 4,
+    "all": true
+  },
+  {
+    "sequence": 1,
+    "kind": "guard-ready",
+    "mode": "deny-all",
+    "allowlisted": 0,
+    "actual_network_forwarded": 0
+  }
+]
