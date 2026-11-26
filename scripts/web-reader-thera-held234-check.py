@@ -7,7 +7,7 @@ or human assistive acceptance. Full English is never written to reports.
 import argparse,gzip,hashlib,importlib.util,json,os,re,signal,socket,subprocess,sys,tempfile,time,traceback,urllib.request
 from datetime import datetime,timezone
 from pathlib import Path
-from web_reader_apadana_intake import reviewed_held234_intake,read_261_280,read_281_285,read_287_288,read_292_299,curated_additions
+from web_reader_apadana_intake import reviewed_held234_intake,read_261_280,read_281_285,read_287_288,read_292_299,read_301_310,curated_additions
 from web_reader_approved_acceptance import assert_runtime
 ROOT=Path(__file__).resolve().parents[1]
 BASE='7d5ac90845402b322dabf2c5120d1485b15c0bda'
@@ -73,6 +73,7 @@ def main():
     historical308=read_281_285(ROOT)
     historical310=read_287_288(ROOT)
     historical317=read_292_299(ROOT)
+    historical325=read_301_310(ROOT)
     assert len(current_ids)==333 and len(current_additions['ids'])==48
     assert approval['base_commit']==BASE and approval['approved_ids']==[UID] and len(approval['baseline_ids'])==284
     assert approval['expected_profile_ids']==approval['baseline_ids']+[UID] and len(set(approval['expected_profile_ids']))==285
@@ -100,7 +101,8 @@ def main():
     assert historical308['baseline_ids']==historical303['expected_profile_ids']
     assert historical310['baseline_ids']==historical308['expected_profile_ids']
     assert historical317['baseline_ids']==historical310['expected_profile_ids']
-    assert current_curation['baseline_ids']==historical317['expected_profile_ids']
+    assert historical325['baseline_ids']==historical317['expected_profile_ids']
+    assert current_curation['baseline_ids']==historical325['expected_profile_ids']
     assert current_ids==approval['expected_profile_ids']+current_additions['ids']
     assert set(rows)==set(current_ids) and rows[UID]==links[UID]
     prior=sealed(evidence_dir,historical303['baseline_freeze'])
