@@ -1,0 +1,131 @@
+{
+  "schema": "independent-two-pair-presealed-source-cross-comparison-v1",
+  "reviewer": "producer-b-after-both-preseals",
+  "status": "SOURCE_ONLY_GO_EXACT_FOUR_CORE_PROPOSALS_NO_ACTIVATION",
+  "producer_a_preseal_sha256": "996c470c30f8513faa5219352fad4f55db120898286e46779520ded1fe069eaf",
+  "producer_b_preseal_sha256": "2a39ee56a56708e90df7b26111e79905697f16d0ee1ccf33731a95ea4f1aed05",
+  "current_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "original_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "exact_four_old_records_equal": true,
+  "exact_four_proposed_records_equal": true,
+  "old_records_sha256": "83d42222dcff3cfa7885ba0e74da0d8957b04c43e68b69ba758baa767506b283",
+  "proposed_core_records_sha256": "cf8f3147a0801c961688b898b28081f7422cd160bd836380316efa3efa619434",
+  "pair_comparisons": [
+    {
+      "ids": [
+        "tha-ap348",
+        "tha-ap349"
+      ],
+      "old_cut": 10371,
+      "proposed_cut": 10367,
+      "union": [
+        10350,
+        10382
+      ],
+      "union_tuple_sha256": "896c0bf28dc2e13e1086bf051576b71e84e8e83d7136e44f2e95feaea65fd694",
+      "exact_core_metadata_and_all_raw_apparatus_equal": true
+    },
+    {
+      "ids": [
+        "tha-ap374",
+        "tha-ap375"
+      ],
+      "old_cut": 10790,
+      "proposed_cut": 10786,
+      "union": [
+        10763,
+        10815
+      ],
+      "union_tuple_sha256": "77a0e15a4181139ad6c7f90e4d030f90fcdf4c1c63703739813710acae192282",
+      "exact_core_metadata_and_all_raw_apparatus_equal": true
+    }
+  ],
+  "actual_discrepancies": [],
+  "representation_reconciliation": {
+    "A_original_source_segments": 38,
+    "B_original_source_blocks": 84,
+    "all84_blocks_covered_exactly_once_in_each_frame": true,
+    "A_cross_owner_segment_moves": 4,
+    "B_cross_owner_block_moves": 8,
+    "exact_moved_segments": [
+      {
+        "source_blocks": [
+          10367,
+          10368
+        ],
+        "current_owner": "tha-ap348",
+        "proposed_owner": "tha-ap349",
+        "type": "heading"
+      },
+      {
+        "source_blocks": [
+          10368,
+          10371
+        ],
+        "current_owner": "tha-ap348",
+        "proposed_owner": "tha-ap349",
+        "type": "verse"
+      },
+      {
+        "source_blocks": [
+          10786,
+          10787
+        ],
+        "current_owner": "tha-ap374",
+        "proposed_owner": "tha-ap375",
+        "type": "heading"
+      },
+      {
+        "source_blocks": [
+          10787,
+          10790
+        ],
+        "current_owner": "tha-ap374",
+        "proposed_owner": "tha-ap375",
+        "type": "verse"
+      }
+    ],
+    "category_counts": {
+      "SAME_REF_SAME_SOURCE_NOT_MIGRATION_AUTHORITY": 18,
+      "OLD_REF_ABSENT": 4,
+      "SAME_REF_DIFFERENT_SOURCE": 16
+    },
+    "explanation": "Each moved prefix consists of one heading segment (one block) and one stanza segment (three blocks). Two pairs therefore move4rendered source segments or8source blocks; these agree exactly.",
+    "all38_original_text_notes_pages_and_owner_metadata_independently_reprojected": true,
+    "API_behavior_or_locator_migration_approval": false
+  },
+  "PTS10788": {
+    "original_inline_P_marker": {
+      "edition": "P",
+      "page": "1.291",
+      "visible_offset": 20
+    },
+    "both_proposed374_end_page": 290,
+    "both_proposed375_start_page": 290,
+    "both_proposed375_end_page": 291,
+    "inline_source_break_not_opening_page_relabel": true
+  },
+  "apparatus": {
+    "all3_original_notes_equal": true,
+    "all_original_edition_markers_equal": true,
+    "all_combined_union_tuples_equal": true,
+    "recitation10381": "Unchanged source centre block retained in existing349scope; A renders it as prose, B retains raw centre type. Both explicitly exclude it from stanza numbering and any English poem quotation."
+  },
+  "dependencies": {
+    "commentary_no_target_association_or_interval_conflict": true,
+    "no_group_dependency": true,
+    "no_existing_target_parallel_edge": true,
+    "all_four_neighbor_objects_equal": true
+  },
+  "future_implementation_constraints": [
+    "Keep the current32f six-record candidate immutable; this receipt does not authorize any implementation this turn.",
+    "The preserved six-record helper records neighbor348 as[10350,10371). Future348end10367cannot be silently accepted by changing that historical constant, its approved authority or earlier hook.",
+    "A later separately approved implementation must preserve the old authority and hook, use explicit ordered source repairs and exact historical inverses before old hash gates, and independently validate compatibility with the future348record.",
+    "No new locator namespace is assigned here. All old positional intent, including the18same-reference/same-source cases, needs separate explicit versioning/refusal review; never migrate personal data automatically.",
+    "No English source mapping, rights clearance, activated coverage, runtime, tests, package, browser, fullcheck, CI, push, merge, deploy or release approval is conveyed."
+  ],
+  "no_other_producer_output_before_preseal": true,
+  "no_namespace_or_runtime_or_English_or_private_migration_approval": true,
+  "project_files_changed": false,
+  "comparison_app_import_tests_build_network_Git_execution": false
+}

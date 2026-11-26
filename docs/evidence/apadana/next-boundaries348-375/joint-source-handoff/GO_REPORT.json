@@ -1,0 +1,172 @@
+{
+  "schema": "dual-presealed-next-two-pair-source-only-crosscomparison-v1",
+  "status": "GO_SOURCE_ONLY_NEXT_HANDOFF_NOT_IMPLEMENTATION_OR_NAMESPACE_APPROVAL",
+  "comparison_by": "producer-a comparing both independently presealed sources; no fabricated additional signature",
+  "producer_a": {
+    "preseal_sha256": "996c470c30f8513faa5219352fad4f55db120898286e46779520ded1fe069eaf",
+    "report_sha256": "24a9f87d154fc2a13d357d36de4e5a23918330daec8bfc4902807d449e8f6e7e",
+    "crosswalk_sha256": "3a67fa86ff41c1cb3886add6f76e24226cbe2df87edd37af99f2b744ef5233dc"
+  },
+  "producer_b": {
+    "preseal_sha256": "2a39ee56a56708e90df7b26111e79905697f16d0ee1ccf33731a95ea4f1aed05",
+    "report_sha256": "ebd70ccca85a299d16869b61ce3a6a96d31485f90da4fca0cf029beee2680512",
+    "raw_crosswalk_sha256": "f631bd81b5b646798b454fda25b1002b6b637bf47a476f79174e179081779344"
+  },
+  "current_installed_logical_canon_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "source_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "full_book36_tuple_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+  "core_old_and_proposed4_records_exact": true,
+  "four_full_neighbor_records_exact": true,
+  "both_pair_unions_cuts_headings_named_closings_exact": true,
+  "raw_note_and_page_differences": 0,
+  "representation_reconciliation": {
+    "producer_b_source_blocks": 84,
+    "producer_b_raw_blocks_changing_owner": 8,
+    "producer_a_grouped_source_segments": 38,
+    "producer_a_grouped_references_changing_owner": 4,
+    "these_are_different_granularities_not_a_mismatch": true,
+    "all84_raw_block_hash_note_page_and_old_future_owners_compared": true,
+    "all84_blocks_map_consistently_into38_grouped_source_segments": true,
+    "grouped_ref_categories": {
+      "SAME_REF_SAME_SOURCE_NOT_MIGRATION_AUTHORITY": 18,
+      "OLD_REF_ABSENT": 4,
+      "SAME_REF_DIFFERENT_SOURCE": 16
+    },
+    "all38_legacy_positions_require_separately_reviewed_fresh_mapping_policy": true,
+    "automatic_migration_authorized": false
+  },
+  "source_only_proposed_records": {
+    "tha-ap348": {
+      "id": "tha-ap348",
+      "book": 36,
+      "start": 10350,
+      "end": 10367,
+      "title": "Campakapupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 348",
+      "vri": "39–43",
+      "pts": {
+        "volume": 1,
+        "page": 279,
+        "end_page": 279
+      }
+    },
+    "tha-ap349": {
+      "id": "tha-ap349",
+      "book": 36,
+      "start": 10367,
+      "end": 10382,
+      "title": "Padumapūjakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 349",
+      "vri": "44–47",
+      "pts": {
+        "volume": 1,
+        "page": 279,
+        "end_page": 280
+      }
+    },
+    "tha-ap374": {
+      "id": "tha-ap374",
+      "book": 36,
+      "start": 10763,
+      "end": 10786,
+      "title": "Pāṭalipupphiyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 374",
+      "vri": "6–12",
+      "pts": {
+        "volume": 1,
+        "page": 290,
+        "end_page": 290
+      }
+    },
+    "tha-ap375": {
+      "id": "tha-ap375",
+      "book": 36,
+      "start": 10786,
+      "end": 10815,
+      "title": "Tīṇuppalamāliyattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 375",
+      "vri": "13–21",
+      "pts": {
+        "volume": 1,
+        "page": 290,
+        "end_page": 291
+      }
+    }
+  },
+  "cut_coordinates": [
+    [
+      10371,
+      10367
+    ],
+    [
+      10790,
+      10786
+    ]
+  ],
+  "source_note_count": 3,
+  "PTS_marker_proof": {
+    "source_block": 10788,
+    "physical_XML_index": 10789,
+    "original_inline_markers_independently_rederived": [
+      {
+        "edition": "T",
+        "page": "1.455",
+        "visible_offset": 20,
+        "visible_prefix_sha256": "725234fc4f638932156dc0292cb0482cdef4b3eb8a345c06ae7f5f68161a9a91"
+      },
+      {
+        "edition": "P",
+        "page": "1.291",
+        "visible_offset": 20,
+        "visible_prefix_sha256": "725234fc4f638932156dc0292cb0482cdef4b3eb8a345c06ae7f5f68161a9a91"
+      }
+    ],
+    "page291_marker_after20_visible_characters_not_at_start": true,
+    "proposed374_pts": {
+      "volume": 1,
+      "page": 290,
+      "end_page": 290
+    },
+    "proposed375_pts": {
+      "volume": 1,
+      "page": 290,
+      "end_page": 291
+    },
+    "source_words_and_marker_positions_unchanged": true
+  },
+  "recitation10381": {
+    "source_tuple_sha256": "ee69b5ca9e91987b02e435403f480f9e31aad290ff06d985298cc98b18b34e49",
+    "kind": "centre",
+    "remains_existing349_owner": true,
+    "grouped_segment_not_verse": true,
+    "no_new_poem_stanza_or_paratext_identity_assigned": true
+  },
+  "ownership_dependencies": {
+    "accepted_commentary_targets_and_moved_prefix_intersections": 0,
+    "group_dependencies": 0,
+    "existing_parallel_edges_touching_targets": 0,
+    "not_permission_to_add_a_new_association": true
+  },
+  "future_implementation_constraints": [
+    "Preserve frozen32f and its existing exact6 repaired unit objects, locator namespace and source helper1ffaf439… . Do not broaden the current candidate.",
+    "Run a separately reviewed future348/349/374/375 repair AFTER the existing apadana_thera340_spans builder hook, so its original348neighbor guard remains valid on its reviewed pre-next-repair stage.",
+    "Never silently rewrite the old six helper NEIGHBOUR_SPANS tha-ap348=(10350,10371), old constants, old hashes or old assertions to accommodate a later stage. A future explicit historical/stage inverse must validate exact new records before restoring the original input for old checks.",
+    "A direct idempotence call of the old six helper on a later corrected348record will correctly reject its changedneighbor; do not suppress that failure or fallback to a different payload.",
+    "No new namespace or final canonical digest is assigned here. Implementation needs a separately approved closed4 mapping revision and fail-closed stale/unversioned/current-position policy for all38 old refs, even18 numerically stable positions and explicitoffset0.",
+    "Preserve source books/notes/pages, all8540other unit records (including all6current repaired units), all343fullEnglishobjects, older107/108/333–336pins, current source rights and private raw notes/bookmarks/drafts/exportbytes; no automatic migration.",
+    "A later derived-index rebuild, independent runtime inventory, genuine installed/native/widget acceptance and exact-final-commit CI remain separate gates."
+  ],
+  "not_approved": [
+    "Namespace or canonical-data activation",
+    "Any English or publisher mapping/rightshold clearance",
+    "Application or repair implementation",
+    "Personal-data or export migration",
+    "Runtime/package/browser/physical-device/human-assistive acceptance",
+    "CI/dev promotion/main/deploy/outreach"
+  ],
+  "actions": "Read-only stdlib source/metadata/hash comparison and static old-helper guard check. No app imports, Builder/repair execution, tests, build, browser, network, Git mutations or tracked edits."
+}
