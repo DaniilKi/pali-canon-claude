@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
-import {readdirSync,readFileSync,mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
+import {readdirSync,readFileSync,mkdtempSync,mkdirSync,writeFileSync,rmSync,symlinkSync,unlinkSync,realpathSync} from 'node:fs';
 import {resolve,join} from 'node:path';
 import {tmpdir} from 'node:os';
 
-function ownedDriver(){
- const root=mkdtempSync(join(tmpdir(),'pali-driver-probe-'));
+function ownedDriver(tempBase=tmpdir()){
+ const root=realpathSync(mkdtempSync(join(tempBase,'pali-driver-probe-')));
  const script=join(root,'scripts/test.mjs');
  mkdirSync(join(root,'scripts'));mkdirSync(join(root,'tests'));
  const source=readFileSync(new URL('../scripts/test.mjs',import.meta.url));
@@ -65,6 +65,19 @@ test('actual driver discovers every test once and preserves trailing options on 
    assert.deepEqual(r.args,[...flags,...fixture.files,...extra]);
    assert.equal(new Set(r.args.filter(value=>value.endsWith('.test.mjs'))).size,fixture.files.length);
   }
+  const base=mkdtempSync(join(tmpdir(),'pali-driver-alias-'));
+  const real=join(base,'real'),alias=join(base,'alias');mkdirSync(real);
+  symlinkSync(real,alias,process.platform==='win32'?'junction':'dir');
+  let linked;
+  try{
+   linked=ownedDriver(alias);
+   for(const platform of ['win32','linux','darwin']){
+    const r=probe(linked,platform,0,extra);
+    assert.equal(r.status,0);
+    const flags=platform==='win32'?['--test','--test-concurrency=1']:['--test'];
+    assert.deepEqual(r.args,[...flags,...linked.files,...extra]);
+   }
+  }finally{if(linked)linked.close();unlinkSync(alias);rmSync(base,{recursive:true,force:true});}
  }finally{fixture.close();}
 });
 

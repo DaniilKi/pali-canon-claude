@@ -1,0 +1,12 @@
+{
+  "mode": "Negative regression reproduction with original lexical temporary root",
+  "code": 1,
+  "elapsed_seconds": 0.8669787910039304,
+  "expected_exact_path_alias_failure": true,
+  "source_sha256": "3b5d6464f4963923ec813931ba94ded2cfedede1d64a8337e0ed7f6f4a676980",
+  "log_sha256": "9ef7045f5ddd2e838316d698d96d6f6b6ef4c7efc7f83e3a8cc18d563b4faac7",
+  "cases": 2,
+  "pass": 1,
+  "fail": 1,
+  "skipped": 0
+}

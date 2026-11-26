@@ -1,0 +1,50 @@
+{
+  "scope": "Newly owned fixture physical-path correction and alias regression only. No application or test-driver change.",
+  "two_probe_cases_preserved": true,
+  "original2011cases_preserved": true,
+  "expected_normal_total": 2013,
+  "source_inverse_37_and_loader_unchanged": true,
+  "full_new_head_CI_pending": true,
+  "files": [
+    {
+      "file": "ALIAS_NEGATIVE_BEFORE.json",
+      "bytes": 141711,
+      "sha256": "a692100455412756fe6d5f4117b18fb55ee301079920458c81f28fcc95dcd792"
+    },
+    {
+      "file": "ALIAS_NEGATIVE_REPRO_BEFORE.json",
+      "bytes": 412,
+      "sha256": "1817713aabbf6e0d449a9a5458ad291ce309880580333cbd39a51631c2417f23"
+    },
+    {
+      "file": "ALIAS_POSITIVE_AFTER.tap",
+      "bytes": 595,
+      "sha256": "a3f10f0e449b532d38c00e99af6e240cc4b9b9ec4e82754cc82c6d5f9f9cd8ca"
+    },
+    {
+      "file": "ALIAS_POSITIVE_REPRO_AFTER.json",
+      "bytes": 465,
+      "sha256": "0e7dec0097e1149399d6ae26cdcf4c3c6979ab77f47e49bcd4025351c49b536a"
+    },
+    {
+      "file": "INDEPENDENT_ALIAS_FIX_REVIEW.json",
+      "bytes": 3791,
+      "sha256": "34b3998c0c71b7122ba4bd0eeacf9ea65bfb376b86034af9cc4ab42c84457f7e"
+    },
+    {
+      "file": "INDEPENDENT_BINDING_REVIEW.json",
+      "bytes": 1888,
+      "sha256": "953205dfa3d178507620d04c07894d9381eb22dddafa75b048cd0e9ccf0dd649"
+    },
+    {
+      "file": "MAC22_85D_FAILURE.json",
+      "bytes": 13103,
+      "sha256": "5096df7d70e458af523ce7dad6a9434149a0a589268f0256466f031c9b04fee4"
+    },
+    {
+      "file": "SOURCE_GENERATION_RECEIPT_V5.json",
+      "bytes": 4015,
+      "sha256": "e56b068c3fd11979dd0ad36fa4cf7df6828f0eec7631aeae6072d33854fbb5b8"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "independent-narrow-probe-alias-fix-binding-review-v1",
+  "status": "GO_EXACT_PROBE_AND_RECEIPT_BINDING_FOR_CORRECTIVE_CANDIDATE_CI_ONLY",
+  "reviewer": "/root/candidate317_entry",
+  "base_head": "85d512e648ceec4e6a4ff7b75649e4644063cdda",
+  "corrected_probe_sha256": "ba247c73b24cfdebc2854189188c0afcfd23229cbb95d4bbfb39fd8f2c51355a",
+  "generation_receipt_v5_sha256": "e56b068c3fd11979dd0ad36fa4cf7df6828f0eec7631aeae6072d33854fbb5b8",
+  "verified": {
+    "only_one_dirty_tracked_source_file": "tests/test-runner-scheduling.test.mjs",
+    "v5_receipt_diff_only_new_probe_hash": true,
+    "all17_new_code_hashes_match_actual_sources": true,
+    "source_plan_37existing18new_unchanged": true,
+    "all37_map_rows_hunks_byte_identical_to_reviewed21c6076": true,
+    "loader73e11_unchanged": true,
+    "actual_driver_unchanged": true,
+    "all39_current_baseGit_archive_installed_bytes_exact": true,
+    "all334_prior_Node_Python_case_files_unchanged": true,
+    "no_old_assertion_deadline_or_optional_skip_change": true
+  },
+  "retained_prior_aggregate_review_sha256": "04a955efba325212b2a79a4c12bfbe78d54c9b3bcebf0a9b6f3e4ef8e1ba00a6",
+  "not_repeated": "704-source replay,oldASTframes,app/browser/tests/build andCI execution not repeated because exact unchanged binding established.",
+  "remaining_gates": [
+    "Independent semantic review of corrected probe and parent-owned before/after alias evidence.",
+    "Normal candidate commit binding must retain this exact probe+receipt and unchanged components.",
+    "Full exact-new-SHA Windows20/22,macOS22 andall requiredCI must pass before any dev promotion."
+  ],
+  "scope": "BindingGO only; no dev/main/deploy/sourceactivation orphysicaldevice/humanAT/liveprovider approval.",
+  "actions": "Read-only Git/hash/JSON/tar inspection; no application/test import,execution,build,CI/networkcall,Git mutation ortracked edit."
+}

@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: actual driver discovers every test once and preserves trailing options on all platforms
+ok 1 - actual driver discovers every test once and preserves trailing options on all platforms
+  ---
+  duration_ms: 279.920352
+  type: 'test'
+  ...
+# Subtest: actual driver forwards failures and refuses absent status or child spawn errors
+ok 2 - actual driver forwards failures and refuses absent status or child spawn errors
+  ---
+  duration_ms: 376.521589
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 729.8808

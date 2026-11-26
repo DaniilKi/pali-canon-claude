@@ -75,3 +75,26 @@ passing suite or a synthetic probe for the required full Windows evidence. Any
 later scheduling change needs its own measured justification and exact-commit
 validation. Real devices, human accessibility, native signed-in hosts and live
 source availability remain separate acceptance work.
+
+## Owned-fixture physical identity
+
+The first Mac22 run of the scheduling candidate `85d512e` exposed a mistake in
+its new probe fixture: Node ESM resolved `/var/...` through `/private/var/...`,
+while the expected argument list used the lexical alias. The application and
+Windows scheduling driver were unchanged. Exact path comparisons correctly
+caught the mismatch; no filename or status assertion was removed.
+
+The fixture now canonicalizes only its **newly created owned temporary directory**
+with `realpathSync`. A directory-symlink/junction regression is included inside
+the existing first test case across all three simulated platforms. The original
+lexical-root version reproduces one failure and one pass; the physical-root
+version passes both, with zero skips. Full argument identity, status behavior,
+child limits and the2,013-case inventory remain preserved. This is not a rule to
+resolve untrusted source/proof roots: their existing symlink refusals stay exact.
+
+[Negative/positive evidence and independent reviews](../evidence/apadana/boundaries340-347/fixture-realpath/EVIDENCE_MANIFEST.json)
+preserve the failure. The37-row source inverse and loader are byte-identical;
+the regenerated V5 receipt changes only the new probe hash to
+`ba247c73b24cfdebc2854189188c0afcfd23229cbb95d4bbfb39fd8f2c51355a`.
+Actual macOS and Windows checks on the corrected commit remain required; a
+Linux alias reproduction and simulated platforms do not replace them.

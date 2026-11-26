@@ -1,0 +1,13 @@
+{
+  "mode": "Same original exact path assertions, physical owned-root identity plus directory-alias control",
+  "code": 0,
+  "elapsed_seconds": 0.7681973900034791,
+  "realpath_correction": true,
+  "source_sha256": "ba247c73b24cfdebc2854189188c0afcfd23229cbb95d4bbfb39fd8f2c51355a",
+  "log_sha256": "a3f10f0e449b532d38c00e99af6e240cc4b9b9ec4e82754cc82c6d5f9f9cd8ca",
+  "cases": 2,
+  "pass": 2,
+  "fail": 0,
+  "skipped": 0,
+  "application_or_runner_changed": false
+}

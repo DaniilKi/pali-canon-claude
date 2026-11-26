@@ -1,0 +1,62 @@
+{
+  "schema": "independent-test-fixture-realpath-alias-review-v1",
+  "status": "GO_STATIC_TEST_ONLY_FIX",
+  "reviewed_at_utc": "2026-11-26T16:24:24.613930+00:00",
+  "base_commit": "85d512e648ceec4e6a4ff7b75649e4644063cdda",
+  "file": "/tmp/pali-boundaries340-nov26/tests/test-runner-scheduling.test.mjs",
+  "old_sha256": "0aee4ffdc6a2f9859710f6deec55d79aaf85c26f32c8c9538176d9ddc0a15341",
+  "new_sha256": "ba247c73b24cfdebc2854189188c0afcfd23229cbb95d4bbfb39fd8f2c51355a",
+  "driver_sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad",
+  "whole_source_inverse_to_base": true,
+  "before_after_control_changes_only_realpath_import_and_owned_root": true,
+  "worktree_status_observed": "M tests/test-runner-scheduling.test.mjs",
+  "scope": "Owned test-fixture filesystem identity and additive alias regression only. No driver, application, data, package, old assertion or deadline change.",
+  "findings": [
+    "The just-created owned fixture root is canonicalized before script/cwd/expected paths. Actual argv is still compared in full, without string stripping or normalization.",
+    "The added alias really flows through ownedDriver(tempBase) into mkdtempSync. Actual-OS directory symlink or Windows junction is independent of mocked child platforms.",
+    "All original normal-path discovery, sorted full argv, trailing options, uniqueness, one-child and status/error assertions restore byte-for-byte when the finite additions are inversed.",
+    "Alias fixture additionally requires exact full argv for win32/linux/darwin. Linked fixture cleanup precedes alias unlink and owned parent removal.",
+    "Two TAP cases, child 10000ms SIGKILL and parent 35000ms bounds remain exact.",
+    "macOS log establishes /private/var versus /var mismatch. Parent-executed lexical-root control independently reproduces path-alias behavior on Linux; corrected control passes."
+  ],
+  "parent_execution_evidence_hash_verified": {
+    "before": {
+      "receipt": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/alias-followup/ALIAS_REPRO_BEFORE.json",
+      "receipt_sha256": "1817713aabbf6e0d449a9a5458ad291ce309880580333cbd39a51631c2417f23",
+      "source_sha256": "3b5d6464f4963923ec813931ba94ded2cfedede1d64a8337e0ed7f6f4a676980",
+      "tap_sha256": "9ef7045f5ddd2e838316d698d96d6f6b6ef4c7efc7f83e3a8cc18d563b4faac7",
+      "parent_observed_result": {
+        "code": 1,
+        "cases": 2,
+        "pass": 1,
+        "fail": 1,
+        "skipped": 0,
+        "elapsed_seconds": 0.8669787910039304
+      }
+    },
+    "after": {
+      "receipt": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/alias-followup/ALIAS_REPRO_AFTER.json",
+      "receipt_sha256": "0e7dec0097e1149399d6ae26cdcf4c3c6979ab77f47e49bcd4025351c49b536a",
+      "source_sha256": "ba247c73b24cfdebc2854189188c0afcfd23229cbb95d4bbfb39fd8f2c51355a",
+      "tap_sha256": "a3f10f0e449b532d38c00e99af6e240cc4b9b9ec4e82754cc82c6d5f9f9cd8ca",
+      "parent_observed_result": {
+        "code": 0,
+        "cases": 2,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 0,
+        "elapsed_seconds": 0.7681973900034791
+      }
+    }
+  },
+  "mac_failure_evidence": {
+    "file": "/tmp/pali-boundaries340-evidence-nov26/ci-windows-performance/held234-followup/MAC22_85D_FAILURE.json",
+    "sha256": "5096df7d70e458af523ce7dad6a9434149a0a589268f0256466f031c9b04fee4",
+    "job": 140032533328
+  },
+  "remaining_gates": [
+    "Bind exact reviewed file in new-code receipt and final commit. Old source inverse map/loader need no semantic change.",
+    "Exact new candidate CI including actual macOS and Windows full suites remains required. This is not CI or release approval."
+  ],
+  "reviewer_executed_tests_build_browser_network_git_mutations": false
+}
