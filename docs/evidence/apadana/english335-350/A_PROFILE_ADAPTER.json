@@ -1,0 +1,42 @@
+{
+  "schema": "source-A-explicit-production-profile-domain-adapter-v1",
+  "source_seal_sha256": "97626bbbcb3ea56f1a0a58a239c30e69afd635136cf02a31091c6495de6d57eb",
+  "independent_source_review_sha256": "61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a",
+  "independent_source_profile_addendum_sha256": "e329fccc994a839f5d1751e824efbea27d5db58f3e6e377ae77b879c3d23efde",
+  "mapping_notes": "Mandatory common and edition/numbering notices as an ordered array; verbatim per-source caveat retained. Content hashes/words never rederived from application output.",
+  "summary_adapters": [
+    {
+      "id": "tha-ap342",
+      "source_descriptor": {
+        "kind": "chapter_summary",
+        "parent_id": "tha-ap342",
+        "label": "Thirty-fourth Therā chapter summary",
+        "first_ref": "tha-ap342:18",
+        "last_ref": "tha-ap342:21",
+        "root_start": 10218,
+        "root_end": 10224,
+        "root_sha256": "3ca90e8df8127f408fb2bac1e81f3d386d28b5e3badee8b5d9234259ef8cf1e5",
+        "body_sha256": "909713a3ca74e1e7a510ef700e65c43a2c743853e8b2ea9fa4374f01ea971a21",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": []
+      },
+      "production_descriptor": {
+        "kind": "canonical_chapter_summary",
+        "parent_id": "tha-ap342",
+        "label": "Thirty-Fourth Therā Apadāna chapter summary",
+        "first_ref": "tha-ap342/18",
+        "last_ref": "tha-ap342/21",
+        "root_start": 10218,
+        "root_end": 10224,
+        "root_sha256": "1f5554a3a879afc32ca51506cc770478726447ad288f189ecc135ad7728605c9",
+        "body_sha256": "909713a3ca74e1e7a510ef700e65c43a2c743853e8b2ea9fa4374f01ea971a21",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": []
+      },
+      "reason": "Source bare-tuple/colon-ref/generic-kind domain explicitly adapted to existing canonical_chapter_summary schema with identity-wrapper root hash and slash refs; body/note hashes unchanged."
+    }
+  ],
+  "publisher_preface": "None added for343; heading remains solewording in publisher_paratext.",
+  "new_namespace": false,
+  "activation_approval": false
+}

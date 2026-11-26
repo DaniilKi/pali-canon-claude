@@ -1,5 +1,7 @@
 # Third-party content and dependencies
 
+**English16 textual intake:** publisher poems 335–350 use the specific Jonathan S. Walters / Whitman College **CC BY-NC-SA 4.0** translation grant, with complete attribution, source/revision, disclaimer and change notices. Only metadata and hashes are distributed; English bodies, notes and apparatus remain live-only. The generic site CC-BY value does not relax the controlling noncommercial and ShareAlike terms. No media/commercial permission or publisher endorsement is inferred. [Exact scope](docs/data/thera335-350-intake.md).
+
 **D266 textual intake:** only publisher 321,323–326 and 329 are added under the unchanged specific Walters/Whitman CC BY-NC-SA4.0 textual grant. Preserve complete attribution, source/revision, licence, disclaimer and extraction/change notices; English bodies, notes and apparatus remain live-only. No media or commercial rights are added. [Finite scope and pending validation](docs/data/thera321-329-intake.md).
 
 **D265 textual intake:** only publisher poems 312–319 are added under the specific Walters/Whitman CC BY-NC-SA 4.0 grant. Preserve complete attribution, source/revision, licence, disclaimer and extraction/change notices, noncommercial/share-alike terms and no endorsement. English bodies, notes and apparatus remain live-only; only metadata and hashes are bundled. No media rights or commercial permission are added. [Exact scope and evidence](docs/data/thera312-319-intake.md).

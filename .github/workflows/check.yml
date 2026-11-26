@@ -851,7 +851,39 @@ jobs:
             src/_poems/chapter-3/poem-332.md
             src/_poems/chapter-3/poem-333.md
             src/_poems/chapter-3/poem-334.md
+            src/_poems/chapter-3/poem-335.md
+            src/_poems/chapter-3/poem-336.md
+            src/_poems/chapter-3/poem-337.md
+            src/_poems/chapter-3/poem-338.md
+            src/_poems/chapter-3/poem-339.md
+            src/_poems/chapter-3/poem-340.md
+            src/_poems/chapter-3/poem-341.md
+            src/_poems/chapter-3/poem-342.md
+            src/_poems/chapter-3/poem-343.md
+            src/_poems/chapter-3/poem-344.md
+            src/_poems/chapter-3/poem-345.md
+            src/_poems/chapter-3/poem-346.md
+            src/_poems/chapter-3/poem-347.md
+            src/_poems/chapter-3/poem-348.md
+            src/_poems/chapter-3/poem-349.md
+            src/_poems/chapter-3/poem-350.md
             src/_poems/chapter-3/chapter-3.json
+      - name: Fetch exact VRI Book36 for independent English16 source replay
+        if: matrix.group == 'apadana'
+        uses: actions/checkout@v4
+        with:
+          repository: VipassanaTech/tipitaka-xml
+          ref: 2d134ff9ef60f70a1eb03c9370580228811a3070
+          path: .fixtures/vri-english335-350
+          sparse-checkout-cone-mode: false
+          sparse-checkout: romn/s0510m1.mul.xml
+      - name: Replay sixteen originals without application parser inputs
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          node scripts/shard-data.mjs --unpack server/data .fixtures/english16-canon
+          python3 scripts/apadana/thera335-350/portable_source_replay.py --publisher-checkout .fixtures/apadana-pinned --canon .fixtures/english16-canon/canon.json.gz --vri-xml .fixtures/vri-english335-350/romn/s0510m1.mul.xml --out .fixtures/english16-source-replay
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
         run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
@@ -895,6 +927,15 @@ jobs:
         run: |
           node --test --test-reporter=tap tests/thera321-329-source.test.mjs tests/thera321-329-client.test.mjs | tee reviewed-publisher321-329.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher321-329.tap","utf8"); for(const [key,value] of [["tests",12],["pass",12],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all eleven English16 source and native/widget client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera335-350-source.test.mjs tests/thera335-350-client.test.mjs | tee reviewed-publisher335-350.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher335-350.tap","utf8"); for(const [key,value] of [["tests",11],["pass",11],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Require all reviewed publisher331-334 source and preface client cases
         if: matrix.group == 'apadana'
         timeout-minutes: 10

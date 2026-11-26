@@ -1,0 +1,285 @@
+{
+  "schema": "english16-independent-parser-owner-heading-source-review-v1",
+  "status": "GO_FINITE_ORIGINAL_SOURCE_OWNER_AND_HEADING_CONTRACTS_STATIC_ONLY",
+  "manifest_sha256": "16791bd13122ad78bd7214db93c5d07ede6c889c86f308fa1981c2bc260bc0c4",
+  "source_baseline_sha256": "453495a29396f35f6bdc95985ed9ccec48fcdd1d01cd7651e8a90b02159399e0",
+  "source_page_pair_review_sha256": "ed042cb0faa30e1757641193e69a6ed84abd02dd6bea0d922814293ff80abe2e",
+  "profiles_sha256": "4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d",
+  "proposal_code_pins": {
+    "src/apadana-thera.mjs": "660b698f22e52b3daf775efc0d9982f2972592ee0e58868ee637a045831e1896",
+    "web/translation-policy.mjs": "21fa32a35cd42d89ffa337685d00e74d9ccc54d51a8c72cb8b97f17e2a7ae32a",
+    "src/chatgpt-widget.mjs": "2e9bbc3eb2c31dfdc268200946fc5eadb60aa1185124bb2ff14678f3352b88f4"
+  },
+  "all16_mixed_heading_orders_rawpins_displayheadinghashes_equal": true,
+  "all25_original_paragraph_and_note_display_pair_owner_vectors_equal": true,
+  "upper_HTML_pair_scope": "Only canonical348/publisher346;5upper+3lower allfiniteowners exact",
+  "old_BJTS_only_headings": "All3existingcases retain exact declaration and independentbranch; no mixed-heading inference by numeric offset",
+  "chapter_heading341": "Only343added to ordinary separate-paratext ownerlist; no new note-owning preface descriptor",
+  "summary_contract": "Only342+352added; exact11keys canonicalkind,zero_ownednotes plus separately approved content/root/pins; actual behavior unexecuted",
+  "native_widget": "Originalordered paratext IDs retained then append16; content-pinned summaries add2 and completebody list adds16; widget44→45",
+  "rows": [
+    {
+      "id": "tha-ap337",
+      "publisher": 335,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {
+        "6": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tha-ap338",
+      "publisher": 336,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {
+        "3": [
+          [
+            0,
+            1
+          ]
+        ],
+        "8": [
+          [
+            0,
+            1
+          ]
+        ],
+        "14": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tha-ap339",
+      "publisher": 337,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {
+        "13": [
+          [
+            0,
+            1
+          ]
+        ],
+        "15": [
+          [
+            0,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tha-ap340",
+      "publisher": 338,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {
+        "3": [
+          [
+            0,
+            1
+          ]
+        ],
+        "7": [
+          [
+            0,
+            1
+          ]
+        ],
+        "12": [
+          [
+            0,
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tha-ap341",
+      "publisher": 339,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {
+        "18": [
+          [
+            2,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tha-ap342",
+      "publisher": 340,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {
+        "6": [
+          [
+            2,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tha-ap343",
+      "publisher": 341,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {}
+    },
+    {
+      "id": "tha-ap344",
+      "publisher": 342,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {
+        "1": [
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "note_pairs": {}
+    },
+    {
+      "id": "tha-ap345",
+      "publisher": 343,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {}
+    },
+    {
+      "id": "tha-ap346",
+      "publisher": 344,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {}
+    },
+    {
+      "id": "tha-ap347",
+      "publisher": 345,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {}
+    },
+    {
+      "id": "tha-ap348",
+      "publisher": 346,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {
+        "0": [
+          [
+            4,
+            1
+          ]
+        ],
+        "1": [
+          [
+            4,
+            1
+          ]
+        ],
+        "3": [
+          [
+            3,
+            1
+          ]
+        ],
+        "6": [
+          [
+            4,
+            1
+          ]
+        ],
+        "7": [
+          [
+            4,
+            1
+          ]
+        ]
+      },
+      "note_pairs": {
+        "2": [
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            1
+          ]
+        ],
+        "3": [
+          [
+            3,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tha-ap349",
+      "publisher": 347,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {}
+    },
+    {
+      "id": "tha-ap350",
+      "publisher": 348,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {
+        "7": [
+          [
+            0,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "tha-ap351",
+      "publisher": 349,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {},
+      "note_pairs": {}
+    },
+    {
+      "id": "tha-ap352",
+      "publisher": 350,
+      "all_literal_heading_raw_paragraph_note_owner_vectors_equal_originals": true,
+      "paragraph_pairs": {
+        "7": [
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "note_pairs": {}
+    }
+  ],
+  "review_boundary": "Source-backed finite owner/heading constants and narrow static control-flow only. No JS import/parse/runtime/test/build/browser. This is not complete behavioral or release approval.",
+  "required_runtime_tests": [
+    "All16actualrawpositivecases",
+    "Eachraw/heading/owner/number/profilemutationrejection",
+    "UpperHTMLpaironly348andalloldBJTSfamilies",
+    "Summaryword/note/owner/swapping/omissioncontrols",
+    "All343oldfullobjects/parseroutputs/pinsremainexact",
+    "Nativewidgetcontent+continuation/privacy/citationsandgenuineinstalledofflinechecks"
+  ],
+  "runtime_activation_release_approval": false
+}

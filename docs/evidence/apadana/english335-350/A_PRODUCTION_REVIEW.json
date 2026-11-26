@@ -1,0 +1,85 @@
+{
+  "schema": "english16-independent-full-production-A-review-v1",
+  "status": "GO_EXACT_A_EIGHT_PROFILES_AND_LINKS_SOURCE_METADATA_ONLY",
+  "independent_core_sha256": "91bf1992de22806c356173eb9df123ecabab6575d3207d8d473140954d8db56c",
+  "source_review_sha256": "61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a",
+  "inputs": {
+    "FULL_A_PROFILES.json": "ea7e65f1db9573e8ed16258dc4ea3789ee86bd6d5e78986ef2b777d4a96635b9",
+    "FULL_A_LINKS.json": "8d48810aa0da6af6ab9d1f8ff4c6e82892672507c952598fefa9719c6608ed22",
+    "A_PROFILE_SCHEMA_ADAPTER.json": "5348d163b6bed60c90b78df1a7f4d3ab091d13f36860bd23333747bfbdf5ea5a"
+  },
+  "rows": [
+    {
+      "id": "tha-ap337",
+      "publisher": 335,
+      "full_profile_literal_GO": true,
+      "full_link_literal_GO": true,
+      "mapping_notes_array_and_edition_caveats_GO": true
+    },
+    {
+      "id": "tha-ap338",
+      "publisher": 336,
+      "full_profile_literal_GO": true,
+      "full_link_literal_GO": true,
+      "mapping_notes_array_and_edition_caveats_GO": true
+    },
+    {
+      "id": "tha-ap339",
+      "publisher": 337,
+      "full_profile_literal_GO": true,
+      "full_link_literal_GO": true,
+      "mapping_notes_array_and_edition_caveats_GO": true
+    },
+    {
+      "id": "tha-ap340",
+      "publisher": 338,
+      "full_profile_literal_GO": true,
+      "full_link_literal_GO": true,
+      "mapping_notes_array_and_edition_caveats_GO": true
+    },
+    {
+      "id": "tha-ap341",
+      "publisher": 339,
+      "full_profile_literal_GO": true,
+      "full_link_literal_GO": true,
+      "mapping_notes_array_and_edition_caveats_GO": true
+    },
+    {
+      "id": "tha-ap342",
+      "publisher": 340,
+      "full_profile_literal_GO": true,
+      "full_link_literal_GO": true,
+      "mapping_notes_array_and_edition_caveats_GO": true
+    },
+    {
+      "id": "tha-ap343",
+      "publisher": 341,
+      "full_profile_literal_GO": true,
+      "full_link_literal_GO": true,
+      "mapping_notes_array_and_edition_caveats_GO": true
+    },
+    {
+      "id": "tha-ap344",
+      "publisher": 342,
+      "full_profile_literal_GO": true,
+      "full_link_literal_GO": true,
+      "mapping_notes_array_and_edition_caveats_GO": true
+    }
+  ],
+  "summary342": {
+    "kind": "canonical_chapter_summary",
+    "slash_refs": [
+      "tha-ap342/18",
+      "tha-ap342/21"
+    ],
+    "root_wrapper_sha256": "1f5554a3a879afc32ca51506cc770478726447ad288f189ecc135ad7728605c9",
+    "body_sha256": "909713a3ca74e1e7a510ef700e65c43a2c743853e8b2ea9fa4374f01ea971a21",
+    "notes": 0,
+    "display_label": "Thirty-Fourth Therā Apadāna chapter summary",
+    "label_difference": "Editorial consistent display label approved; independent source facts/pins unchanged"
+  },
+  "all343_previous_objects_preservation": "Required separate integration gate; no old objects changed by this review",
+  "no_runtime_parser_app_import_or_execution": true,
+  "runtime_activation_release_approval": false,
+  "pending": "B eight full proposals and summary352"
+}

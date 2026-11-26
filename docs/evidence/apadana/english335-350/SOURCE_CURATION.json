@@ -1,0 +1,226 @@
+{
+  "schema": "english16-independent-source-curation-v1",
+  "status": "APPROVED_EXACT_SOURCE_AND_NORMALIZED_METADATA_SCOPES_NOT_RUNTIME",
+  "publishers": [
+    335,
+    336,
+    337,
+    338,
+    339,
+    340,
+    341,
+    342,
+    343,
+    344,
+    345,
+    346,
+    347,
+    348,
+    349,
+    350
+  ],
+  "canonical_ids": [
+    "tha-ap337",
+    "tha-ap338",
+    "tha-ap339",
+    "tha-ap340",
+    "tha-ap341",
+    "tha-ap342",
+    "tha-ap343",
+    "tha-ap344",
+    "tha-ap345",
+    "tha-ap346",
+    "tha-ap347",
+    "tha-ap348",
+    "tha-ap349",
+    "tha-ap350",
+    "tha-ap351",
+    "tha-ap352"
+  ],
+  "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "raw_source_pins": [
+    {
+      "path": "src/_poems/chapter-3/poem-335.md",
+      "bytes": 6023,
+      "sha256": "d584d972d7a6009c74a9def1914607171090d3f0cf593189fdc135fd4d42d389",
+      "git_blob_sha1": "e56193acd2dea3bca64af6a14232375235a83e7f"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-336.md",
+      "bytes": 5883,
+      "sha256": "98890461bc290bd3fb455e410e6a92fec9c7ff0b03cbe401e219274847463300",
+      "git_blob_sha1": "e5c5e8e4d031e310eec31f2a10d38e52e6611a0f"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-337.md",
+      "bytes": 5263,
+      "sha256": "24c71d29205c43f6bb0a5757cd760de2dad8ecf397dc941ce916426dc5d7fb9c",
+      "git_blob_sha1": "5a1cbb516a6827c2660f4ef18e90897a26395dd8"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-338.md",
+      "bytes": 6161,
+      "sha256": "4b9be1a6694f7a8013c3b6a8a211cb7a472643f0ce393e8ed74e59a32366f56a",
+      "git_blob_sha1": "55ba4caaafa938827d3343edf7efab3532f77fca"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-339.md",
+      "bytes": 5777,
+      "sha256": "277a106e651a0c97c52ceb05c88340c1052b0ab67c3c9c90a2d92ce4f4f374f2",
+      "git_blob_sha1": "2195b3bdf593ae03b29d68849a4830140c3333f9"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-340.md",
+      "bytes": 3368,
+      "sha256": "42f279469173f83208828c9a4aa7d3dcf0f98fc1de013b2f1a769e8cdc3b5cdb",
+      "git_blob_sha1": "a64241d53eaaf07e743b8664eb9471655d23f61f"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-341.md",
+      "bytes": 2619,
+      "sha256": "d50e74153f047c2512a745fb9e5b7f215f4300c4e115190cee58e0549feb9c31",
+      "git_blob_sha1": "62d8b76bab15187a5c0408d716c4e27cf54a7e9b"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-342.md",
+      "bytes": 3031,
+      "sha256": "240ca9e41dd5e29ebf479a5eebb62d998e181134da69813ea1421c79eecb1241",
+      "git_blob_sha1": "bc66ed31fef0e3cd6dd343aaa147f3e62b80ed1d"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-343.md",
+      "bytes": 2175,
+      "sha256": "2f8fdf0c82dcf2b93bf933e77fab59479c163043b4b9eb97bec1be29ae33c581",
+      "git_blob_sha1": "5514424956afffbb5bd4904eaafa2e3d3c47cc54"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-344.md",
+      "bytes": 2010,
+      "sha256": "e75eaf03a0a5054a032132af445ed385a9e11c61f585416001ee85bf3b9dbd41",
+      "git_blob_sha1": "42ecc7b84adab3a421e5ed67cd4545bdc955b861"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-345.md",
+      "bytes": 2278,
+      "sha256": "1c6028fa7c65f1df3bfa79a7e2594a8e46f7086b4ed704d0d250c4c43344b273",
+      "git_blob_sha1": "4c50973b485247a3cb68c332c7113927fd76e10f"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-346.md",
+      "bytes": 2629,
+      "sha256": "2c5a4fecb8f830c10f58109d0c29aac7f136e3264c8a4aea295616486a67dbf6",
+      "git_blob_sha1": "f5c2fa0773ee4db90d89987d0f9be3bb126d28e3"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-347.md",
+      "bytes": 1648,
+      "sha256": "081829ee5ff04149dcc576b3937c68151726c0ada68bf94921e3e5549ce48d4d",
+      "git_blob_sha1": "f8a942e725556a03b3b8b49d7d0727dd507a2234"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-348.md",
+      "bytes": 4003,
+      "sha256": "6db687c913c84f79fda8bd96aa15dabb95cc13ee4c8824cc03c56f09d942b262",
+      "git_blob_sha1": "d2ae42f79075ac8ceaf6f1a33e7dfce5613a58f3"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-349.md",
+      "bytes": 1875,
+      "sha256": "25a0755055dd28a6f7ed250bd644798a5c97471c4df26aa7dee4e3d4a5c9a383",
+      "git_blob_sha1": "8c2200b61e6431fa128d3aada59a8f2470a3907d"
+    },
+    {
+      "path": "src/_poems/chapter-3/poem-350.md",
+      "bytes": 2969,
+      "sha256": "df49aa382e3871129ed5626c2679c6665960ee1d1d45d53917e0923fe710e127",
+      "git_blob_sha1": "9518c26bbd574c9128397279ec7a28d993548369"
+    }
+  ],
+  "files": {
+    "FINAL_PROFILES.json": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/independent-source-review/FINAL_PROFILES.json",
+      "sha256": "4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d"
+    },
+    "FINAL_LINKS.json": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/independent-source-review/FINAL_LINKS.json",
+      "sha256": "f284bc4dcbb415a55aa025f654018448ce3578772dea010f12d8e7cfd536da0a"
+    },
+    "PROFILE_SCHEMA_REVIEW.json": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/independent-source-review/PROFILE_SCHEMA_REVIEW.json",
+      "sha256": "7af2686040b00e89730568771ff8d35e64b676b383f014981eb809d4f63203e5"
+    },
+    "FINAL_SOURCE_REVIEW.json": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/independent-source-review/FINAL_SOURCE_REVIEW.json",
+      "sha256": "61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a"
+    },
+    "BLIND_SOURCE_BASELINE.json": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/independent-source-review/BLIND_SOURCE_BASELINE.json",
+      "sha256": "453495a29396f35f6bdc95985ed9ccec48fcdd1d01cd7651e8a90b02159399e0"
+    },
+    "PAGES_AND_PAIRS_REVIEW.json": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/independent-source-review/PAGES_AND_PAIRS_REVIEW.json",
+      "sha256": "ed042cb0faa30e1757641193e69a6ed84abd02dd6bea0d922814293ff80abe2e"
+    },
+    "OFFICIAL365_FIXTURE_BINDING.json": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/independent-source-review/OFFICIAL365_FIXTURE_BINDING.json",
+      "sha256": "6c96cf191dbbcffacacabae425e5d9da79f9c0470133195e5fcdef9604e827c4"
+    }
+  },
+  "source_totals": {
+    "poems": 16,
+    "body_paragraphs": 213,
+    "physical_stanza_entries": 165,
+    "printed_global_labels": 171,
+    "notes": 191,
+    "chapter_summaries": 2,
+    "chapter_headings": 1,
+    "display_pairs": 25,
+    "body_characters_utf16": 28105
+  },
+  "all_original_note_count": 191,
+  "scope_statement": "Sixteen complete publisher-edition poems, not line-complete VRI translations; separate two summaries and one chapter heading.",
+  "preservation": "All343 old full profile/link objects, source data, prior locator namespaces, private data and unrelated source holds must remain unchanged.",
+  "independent_producer_and_crossreview_roles": true,
+  "normalization_source_approval": true,
+  "runtime_reader_package_CI_activation_release_approval": false
+}

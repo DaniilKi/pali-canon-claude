@@ -1862,3 +1862,9 @@ CI are separate gates. Book 37's raw source was recovered and tuple-verified,
 but its preliminary review queue authorizes no edits or activation. See the
 [six-record guide](data/apadana-six-boundaries.md) and
 [Book 37 source-only review](data/apadana-book37-source-screen.md).
+
+### 2026-11-26 — Sixteen individually verified Therā publisher scopes
+
+Retain the current corrected VRI corpus unchanged. Add publisher poems 335–350 only through sixteen independently verified literal profiles, exact source/body/note/paratext/root hashes, and source-owned mixed PTS/BJTS heading/display rules. Keep 191 poem notes, duplicate/combined stanza labels, two separate chapter summaries and the note-free chapter heading in their original ownership domains. Source eligibility follows the specific Walters/Whitman CC BY-NC-SA4.0 grant, not public availability or conflicting generic metadata. Bundle metadata only. See [the finite intake](data/thera335-350-intake.md) for evidence and limits.
+
+Historical QA may restore exact 343-entry test inputs only after validating complete current 359-entry metadata and physical authority/data files. Never normalize public API payloads, change frozen older authorities, accept a missing-proof error as a successful corruption test, relax child deadlines or claim physical-device/human accessibility acceptance from emulation. Promotion still requires independent review and CI on the exact candidate.

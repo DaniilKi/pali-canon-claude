@@ -1,0 +1,21 @@
+{
+  "schema": "english16-independent-blind-preseal-v1",
+  "other_producer_outputs_read": false,
+  "files": {
+    "derive_blind.py": "b6a230e99ff38fe4f8a4831274d284d54b669f0ab9ed1b917a76a575cfc3fc04",
+    "ORIGINAL_INPUTS_MANIFEST.json": "13f70e68079bd57a3bbff067f97c00c97b567cc4c18efc3c986c8a636b995cf4",
+    "BLIND_SOURCE_BASELINE.json": "453495a29396f35f6bdc95985ed9ccec48fcdd1d01cd7651e8a90b02159399e0"
+  },
+  "totals": {
+    "poems": 16,
+    "body_paragraphs": 213,
+    "physical_stanza_entries": 165,
+    "printed_global_labels": 171,
+    "notes": 191,
+    "chapter_summaries": 2,
+    "chapter_headings": 1,
+    "display_pairs": 25,
+    "body_characters_utf16": 28105
+  },
+  "status": "BLIND_PRESEALED_SOURCE_MODEL_ONLY"
+}
