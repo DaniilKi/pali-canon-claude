@@ -11,10 +11,16 @@ export const isRepairedApadanaPair = (id, revision) => isApadanaPair(id) && type
 /** Closed, reviewed citation namespaces. Never infer a revision from an ID pattern. */
 export const APADANA_FOUR_INDEX_REVISION = 'apadana-thera333-336-v1';
 export const APADANA_FOUR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_FOUR_INDEX_REVISION;
+/** Three exact newly reviewed pairs; do not infer intervening or adjacent IDs. */
+export const APADANA_SIX_INDEX_REVISION = 'apadana-thera340-341-343-344-346-347-v1';
+export const APADANA_SIX_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_SIX_INDEX_REVISION;
 export const REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   'tha-ap107': APADANA_PAIR_LOCATOR_REVISION, 'tha-ap108': APADANA_PAIR_LOCATOR_REVISION,
   'tha-ap333': APADANA_FOUR_LOCATOR_REVISION, 'tha-ap334': APADANA_FOUR_LOCATOR_REVISION,
   'tha-ap335': APADANA_FOUR_LOCATOR_REVISION, 'tha-ap336': APADANA_FOUR_LOCATOR_REVISION,
+  'tha-ap340': APADANA_SIX_LOCATOR_REVISION, 'tha-ap341': APADANA_SIX_LOCATOR_REVISION,
+  'tha-ap343': APADANA_SIX_LOCATOR_REVISION, 'tha-ap344': APADANA_SIX_LOCATOR_REVISION,
+  'tha-ap346': APADANA_SIX_LOCATOR_REVISION, 'tha-ap347': APADANA_SIX_LOCATOR_REVISION,
 });
 export const requiredCanonicalRevision = id => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id) ? REPAIRED_CANONICAL_LOCATORS[id] : null;
 export const isRepairedCanonical = (id, revision) => requiredCanonicalRevision(id) !== null && revision === requiredCanonicalRevision(id);

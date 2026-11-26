@@ -1047,7 +1047,7 @@ async function wordStudy(args, expected, token) {
   const studyToken = ++studyEpoch, target = studyTarget('Looking up the selected passage in the bundled dictionary…');
   try {
     const data = await tool('analyse_passage', args, 'study'); if (token !== epoch || studyToken !== studyEpoch) return;
-    if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error('The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.');
+    if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || (args.source_commit !== undefined && sourceRevision({ source: data.text_source }) !== args.source_commit) || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error('The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.');
     if (expected.kind === 'post' && data.canonical !== false) throw new Error('The analysis lacks its later-work source label.');
     target.replaceChildren(el('h3', 'Word study · dictionary reference'));
     target.append(el('p', data.guidance, 'notice')); notes(data, target);

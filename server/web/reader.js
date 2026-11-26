@@ -295,13 +295,21 @@
   var APADANA_PAIR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-apadana-thera105-106-v1";
   var APADANA_FOUR_INDEX_REVISION = "apadana-thera333-336-v1";
   var APADANA_FOUR_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_FOUR_INDEX_REVISION;
+  var APADANA_SIX_INDEX_REVISION = "apadana-thera340-341-343-344-346-347-v1";
+  var APADANA_SIX_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_SIX_INDEX_REVISION;
   var REPAIRED_CANONICAL_LOCATORS = Object.freeze({
     "tha-ap107": APADANA_PAIR_LOCATOR_REVISION,
     "tha-ap108": APADANA_PAIR_LOCATOR_REVISION,
     "tha-ap333": APADANA_FOUR_LOCATOR_REVISION,
     "tha-ap334": APADANA_FOUR_LOCATOR_REVISION,
     "tha-ap335": APADANA_FOUR_LOCATOR_REVISION,
-    "tha-ap336": APADANA_FOUR_LOCATOR_REVISION
+    "tha-ap336": APADANA_FOUR_LOCATOR_REVISION,
+    "tha-ap340": APADANA_SIX_LOCATOR_REVISION,
+    "tha-ap341": APADANA_SIX_LOCATOR_REVISION,
+    "tha-ap343": APADANA_SIX_LOCATOR_REVISION,
+    "tha-ap344": APADANA_SIX_LOCATOR_REVISION,
+    "tha-ap346": APADANA_SIX_LOCATOR_REVISION,
+    "tha-ap347": APADANA_SIX_LOCATOR_REVISION
   });
   var requiredCanonicalRevision = (id5) => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id5) ? REPAIRED_CANONICAL_LOCATORS[id5] : null;
   var isRepairedCanonical = (id5, revision5) => requiredCanonicalRevision(id5) !== null && revision5 === requiredCanonicalRevision(id5);
@@ -42197,7 +42205,7 @@
     try {
       const data = await tool("analyse_passage", args, "study");
       if (token !== epoch || studyToken !== studyEpoch) return;
-      if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error("The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.");
+      if (data.segment?.ref !== expected.ref || data.text_source?.commit !== expected.source || args.source_commit !== void 0 && sourceRevision({ source: data.text_source }) !== args.source_commit || localizeText({ segments: data.segment ? [data.segment] : [] }, expected.script).segments[0]?.text !== expected.text) throw new Error("The returned analysis does not match the selected source passage. Reload the passage; no other analysis was substituted.");
       if (expected.kind === "post" && data.canonical !== false) throw new Error("The analysis lacks its later-work source label.");
       target.replaceChildren(el("h3", "Word study \xB7 dictionary reference"));
       target.append(el("p", data.guidance, "notice"));

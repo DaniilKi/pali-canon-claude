@@ -31,6 +31,7 @@ from apadana_fourth_spans import apadana_fourth_spans  # noqa: E402
 from apadana_thera_spans import apadana_thera_spans  # noqa: E402
 from apadana_thera_pair_spans import apadana_thera_pair_spans  # noqa: E402
 from apadana_thera333_spans import apadana_thera333_spans  # noqa: E402
+from apadana_thera340_spans import apadana_thera340_spans  # noqa: E402
 from thag_sixteen_spans import thag_sixteen_spans  # noqa: E402
 
 BOOKS = OrderedDict([
@@ -703,6 +704,7 @@ def main():
     corrected.update(apadana_thera_spans(b.books, b.units))
     corrected.update(apadana_thera_pair_spans(b.books, b.units))
     corrected.update(apadana_thera333_spans(b.books, b.units))
+    corrected.update(apadana_thera340_spans(b.books, b.units))
     corrected.update(thag_sixteen_spans(b.books, b.units))
     for u in b.units:
         if u['collection'] in ('pv', 'vv') or u['id'] in corrected:

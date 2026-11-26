@@ -30,7 +30,7 @@ import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v42';
+export const WIDGET_VERSION = 'v43';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
@@ -303,7 +303,7 @@ export function registerChatgptWidget(server, { executeTool } = {}) {
       script: z.string().trim().min(1).max(30).optional().describe(SCRIPT_DESCRIPTION),
       translation: z.string().trim().min(1).max(200).optional().describe('At the start: "default", a translation_id from get_metadata, or an unambiguous translator name; omit for default. For non-zero english_offset, use the exact translation_id returned by the previous result.'),
       english: z.boolean().default(true).describe('Fetch an English translation (live). false shows the Pāli only.'),
-      offset: z.number().int().min(0).max(100000).optional().describe('Pāli segment offset for continuation. Repaired tha-ap107/108 and tha-ap333–336 positions, including 0, require the returned source_commit.'),
+      offset: z.number().int().min(0).max(100000).optional().describe('Pāli segment offset for continuation. Every explicit position in a registered repaired canonical unit, including 0, requires the returned current source_commit locator pin.'),
       limit: z.number().int().min(1).max(80).default(40).describe('Pāli segments to show.'),
       english_translation_revision: z.string().regex(/^[a-f0-9]{40}$/).optional().describe('Exact source revision for a pinned Apadāna selection or continuation.'),
       english_prefix_sha256: z.string().regex(/^[a-f0-9]{64}$/).optional().describe('Unchanged prefix hash from english.continue_with. Rejects continuation when preceding upstream text changed. Requires English and a positive english_offset.'),
@@ -792,13 +792,18 @@ export const WIDGET_HTML = `<!doctype html>
     }
     queueSize();
   }
+  function checkedCanonicalLocator(d) {
+    if (!d || typeof d !== 'object') return d;
+    var repairedPins = ${JSON.stringify(REPAIRED_CANONICAL_LOCATORS)};
+    return Object.prototype.hasOwnProperty.call(repairedPins, d.text_id) && (!d.source || d.source.locator_revision !== repairedPins[d.text_id])
+      ? { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' } : d;
+  }
   function render(d) {
     if (closed) return;
     if (!d || typeof d !== 'object') return;
+    d = checkedCanonicalLocator(d);
     if (d === rendered) { refreshSourceNotes(d); return; }
     if (!d.pali && typeof d.error !== 'string') return;
-    var repairedPins = ${JSON.stringify(REPAIRED_CANONICAL_LOCATORS)};
-    if (Object.prototype.hasOwnProperty.call(repairedPins, d.text_id) && (!d.source || d.source.locator_revision !== repairedPins[d.text_id])) d = { error: 'The paired Apadāna citation mapping revision changed. Reopen the whole current text explicitly; no old reference, replacement words or personal note was substituted.' };
     abandon(); generation++; awaitingSelection = false;
     if (!d.pali) {
       if (typeof d.error !== 'string') return;
@@ -982,7 +987,11 @@ export const WIDGET_HTML = `<!doctype html>
         if (freshMetadata || freshOutput) toolResult(result);
       } else if (freshOutput) render(output);
       else if (freshMetadata && result && result.structuredContent) toolResult(result);
-      if (!freshOutput && output) refreshSourceNotes(output);
+      if (!freshOutput && output) {
+        var locatorChecked = checkedCanonicalLocator(output);
+        if (locatorChecked !== output) render(locatorChecked);
+        else refreshSourceNotes(output);
+      }
     }
   }
   function requested(args) {
