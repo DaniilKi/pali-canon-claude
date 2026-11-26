@@ -1,0 +1,62 @@
+name: Bounded Dasabala recovery
+on:
+  push:
+    branches: ['diagnostic/dasabala-python-bounds-*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    name: Dasabala / ${{ matrix.os }} / Node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, node: '22'}
+          - {os: windows-latest, node: '22'}
+          - {os: macos-latest, node: '22'}
+          # Reproduce the failed job's Node patch separately from today's Node 22.
+          - {os: macos-latest, node: '22.23.4'}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Use LF line endings
+        if: runner.os == 'Windows'
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - name: Record exact revision and runtime
+        timeout-minutes: 1
+        run: |
+          git rev-parse HEAD
+          node -p 'JSON.stringify({node:process.version,platform:process.platform,arch:process.arch})'
+          npm --version
+      - name: Install development dependencies
+        timeout-minutes: 5
+        run: npm ci --no-audit --no-fund
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Exercise both bounded migration fixtures and negative controls
+        timeout-minutes: 6
+        run: node --test tests/bounded-python.test.mjs tests/dasabala-spans.test.mjs tests/dasabala-commentary.test.mjs
+      - name: Run complete test inventory under normal concurrency
+        timeout-minutes: 30
+        run: npm test
+      - name: Audit the complete bundled corpus
+        timeout-minutes: 5
+        run: npm run audit
+      - name: Check committed standalone server is current
+        timeout-minutes: 1
+        run: git diff --exit-code -- server/

@@ -1,15 +1,16 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import {findPython, runPython, fixtureStage} from './helpers/bounded-python.mjs';
 import { gunzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
 import { readBundled } from '../src/bundled-data.mjs';
 import * as canon from '../src/canon.mjs';
 import { assertPositionPin } from '../web/reading-position.mjs';
 
-const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
+const python = findPython({label: 'Dasabala root spans'});
 
 test('Dasabala repair validates full-book parity, changes only reviewed ownership and is atomic/idempotent', { skip: !python }, () => {
+  fixtureStage('Dasabala root spans', 'prepare-fixture');
   const input = {
     canon: JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))),
     commentary: JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz'))),
@@ -21,15 +22,19 @@ test('Dasabala repair validates full-book parity, changes only reviewed ownershi
   input.canon.books = input.canon.books.map((b, i) => i === bi ? b : { ...b, blocks: [] });
   input.canon.units = input.canon.units.filter(u => u.collection === 'sn' || u.id === 'mn1');
   input.commentary.books = input.commentary.books.map(b => b.root_files.includes('s0302m.mul.xml') ? b : { ...b, blocks: [] });
-  const result = spawnSync(python, ['-c', `
+  const result = runPython(python, ['-c', `
 import copy,json,sys,tempfile,os
 from unittest.mock import patch
+def stage(name):
+ print('[dasabala-python] '+name,file=sys.stderr,flush=True)
+stage('imports')
 sys.path.insert(0,'scripts/canon')
 from dasabala_spans import dasabala_spans,REVISION,FILE
 from repair_dasabala_spans import repair,digest
 # Node writes UTF-8 bytes to this pipe; do not use Windows' locale codec.
 sys.stdin.reconfigure(encoding='utf-8')
 payload=json.load(sys.stdin);c=payload['canon'];a=payload['commentary']
+stage('input-decoded')
 by={u['id']:u for u in c['units']};bi=by['sn12.21']['book']
 # Explicit historical fixture, independent of whether committed data is repaired.
 by['sn12.21'].update(start=132,end=143,title='Dasabalasutta',approximate=True,vri='20')
@@ -54,6 +59,7 @@ with tempfile.TemporaryDirectory() as root:
  os.mkdir(os.path.join(root,'romn'))
  with open(os.path.join(root,'romn',FILE),'wb') as f:f.write(b'offline parser fixture, not source evidence')
  before_c=copy.deepcopy(c);before_a=copy.deepcopy(a)
+ stage('first-repair')
  with patch('repair_dasabala_spans.vri.parse',return_value=parsed):report=repair(c,a,root)
  assert report['changed_spans']==['sn12.21','sn12.22']
  assert report['input_canon_sha256']==digest(before_c)
@@ -78,12 +84,14 @@ with tempfile.TemporaryDirectory() as root:
  assert after['sn12.21']['title']=='Dasabalasuttaṃ' and 'approximate' not in after['sn12.21']
  assert all(after[k]['index_revision']==REVISION for k in ('sn12.21','sn12.22'))
  snapshot=copy.deepcopy((c,a))
+ stage('idempotence')
  with patch('repair_dasabala_spans.vri.parse',return_value=parsed):second=repair(c,a,root)
  assert second['changed_spans']==[]
  assert second['input_canon_sha256']==second['output_canon_sha256']==report['output_canon_sha256']
  assert second['input_commentary_sha256']==second['output_commentary_sha256']==report['output_commentary_sha256']
  assert (c,a)==snapshot
  for case in ('parity','heading','number','terminal','state','revision','group','commentary','coverage','commit','both_commits'):
+  stage('atomic-refusal:'+case)
   bad_c=copy.deepcopy(before_c);bad_a=copy.deepcopy(before_a);p=copy.deepcopy(parsed)
   if case=='parity':p[-1]['notes'].append('source drift beyond reviewed span')
   if case in ('heading','number','terminal'):
@@ -105,8 +113,9 @@ with tempfile.TemporaryDirectory() as root:
    except ValueError:pass
    else:raise AssertionError(case)
   assert (bad_c,bad_a)==untouched,case
+stage('repair-idempotence-and-refusal-assertions-complete')
 print('reviewed ownership, full parity, commentary preservation, idempotence and 11 atomic refusal controls passed')
-`], { input: JSON.stringify(input), encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+`], { input: JSON.stringify(input), encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }, 'Dasabala root spans migration');
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /11 atomic refusal controls passed/);
 });
