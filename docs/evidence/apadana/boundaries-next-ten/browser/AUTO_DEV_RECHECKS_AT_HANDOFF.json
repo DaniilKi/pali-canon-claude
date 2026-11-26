@@ -1,0 +1,55 @@
+{
+  "schema": "dev-rechecks-at-next-ten-handoff-v1",
+  "observed_utc": "2026-11-26 19:28:17 UTC",
+  "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+  "source": "GitHub connector API latest run list",
+  "runs": [
+    {
+      "id": 45883456640,
+      "name": "Evidence reading commands",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45883456640",
+      "run_attempt": 1
+    },
+    {
+      "id": 45883456645,
+      "name": "Check package",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45883456645",
+      "run_attempt": 1
+    },
+    {
+      "id": 45883456718,
+      "name": "Read the full bundled corpus",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45883456718",
+      "run_attempt": 1
+    },
+    {
+      "id": 45883456644,
+      "name": "npx install",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45883456644",
+      "run_attempt": 1
+    }
+  ],
+  "manual_reruns_submitted": 0,
+  "integration_gates_already_passed_on_identical_sha": "59 package jobs plus all three companion workflows",
+  "next_action": "Observe package and Evidence reading commands automatic dev rechecks before the next dev promotion; do independent source review meanwhile."
+}

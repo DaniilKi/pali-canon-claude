@@ -1,6 +1,6 @@
 {
   "schema": "next-ten-source-correction-release-receipt-v1",
-  "updated_utc": "2026-11-26T19:26:45.435160+00:00",
+  "updated_utc": "2026-11-26T19:28:17.898858+00:00",
   "status": "PROMOTED_TO_DEV_AFTER_EXACT_CANDIDATE_CI_AND_INDEPENDENT_REVIEW",
   "dev_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "previous_dev": "dd7b697df2c54308084fffd934af38130d01f952",
@@ -72,7 +72,7 @@
   "main_unchanged": "451a857dfb60b727af3e25bedec35d80b3fe7856",
   "deployment_performed": false,
   "force_push_performed": false,
-  "automatic_dev_rechecks": "Observed started on exact sameSHA; snapshot includes actual statuses, completion still pending for package/evidence/corpus at snapshot. No manual reruns.",
+  "automatic_dev_rechecks": "Corpus and npx automatic dev rechecks now passed. Package and Evidence reading commands remain active/queued in the timestamped handoff. Identical-SHA integration gates all passed before promotion; no manual reruns.",
   "deferred": [
     "Publisher335-350 English16 candidates remain separate source-reviewed research, not activated. Re-evaluate against current verified dev; preserve191notes/twosummaries/preface and live-only/noncommercial notices.",
     "Other24 Book37 structural flags and all existing rights/alignment holds remain unapproved.",
@@ -82,5 +82,6 @@
     "research_commit": "902bc627440c654250bf14fdc1d0ceb463315cf8",
     "path": "docs/data/apadana-next-cohort-handoff.md",
     "instructions": "Start from current dev; do not restore historical runtime/data from research branch. Ten-record correction is now integrated. English16 remains separate; check new automatic dev runs before next promotion."
-  }
+  },
+  "automatic_dev_rechecks_latest_snapshot": "AUTO_DEV_RECHECKS_AT_HANDOFF.json"
 }
