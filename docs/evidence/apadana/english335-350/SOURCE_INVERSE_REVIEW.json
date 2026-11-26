@@ -3,21 +3,21 @@
   "status": "GO_EXACT_SOURCE_QA_CHECKPOINT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "snapshot_commit": null,
-  "after_domain": "physical working tree at independent recovery review",
+  "after_domain": "physical worktree held234 current359 test-only followup",
   "live_working_tree_claimed": true,
-  "map_sha256": "221799faa7c75fdb30c86026c1d417d58324d5fad48d507db3e4af792e096878",
-  "loader_sha256": "aacd4cde9c2c89dd0c1cab111f53c38f7d7cf171e34b5548fad64d77d5da00b9",
+  "map_sha256": "a710cefe1098d7403054f472698de28adf1a71440082ae8f02e6d5b5e00e0001",
+  "loader_sha256": "5d0b20295fad9cbe682b068ac2061ec42db82b8778766bd94d63b6245a12b8a0",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
-  "changed_existing_exactly_mapped": 70,
-  "unchanged_original_source_entries": 931,
-  "hunks": 186,
+  "changed_existing_exactly_mapped": 72,
+  "unchanged_original_source_entries": 929,
+  "hunks": 194,
   "hunks_with_literal_dollars": 9,
   "all_forward_and_inverse_reconstructions_exact": true,
   "rows": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "86afba12056894689a1d8ecaf64d4b79b07b69c04cd577c62c10b020d598712c",
+      "current_sha256": "b514c855c4727900d9e0704d1741f5751d29ef13c54d0dfaa4599bee98720a6f",
       "hunks": 4
     },
     "AGENTS.md": {
@@ -179,6 +179,16 @@
       "base3d_sha256": "59184090e844fb420839c71b20b8483118cb64ea8639f81cf2129398f8567d89",
       "current_sha256": "d9e8caa963afcd1a8ab886d351e4fbc3809811a8a92b7676fcc9ae9936fe1d33",
       "hunks": 1
+    },
+    "tests/held234-current333-chain.test.mjs": {
+      "base3d_sha256": "5ad609829ccabd1a3c90e7b9e9e99e382b02bf0d2dc288cdd0b02ef48186fe8e",
+      "current_sha256": "f1cc9c851bfffb4913bc71e030919e6105ac91942d9a23f1fefbd1924b59b3f5",
+      "hunks": 2
+    },
+    "tests/held234_current333_chain.py": {
+      "base3d_sha256": "5edaa72747f2c1eafbb461745ac642ac13b4aca66dca4b2c1ce9e449d612e52b",
+      "current_sha256": "b58ae929c6e91322c61e0078ea130ced71a8027c83c6e4be67222a1bc404f354",
+      "hunks": 6
     },
     "tests/helpers/apadana-intake-expectations.mjs": {
       "base3d_sha256": "112a4fb45c32837666a831966ddee0a1de841208e08b13678dca50746626845a",
@@ -4493,9 +4503,5 @@
   "stable_during_verification": true,
   "runtime_or_API_projection_authorized": false,
   "behavior_package_CI_release_approval": false,
-  "independent_companion_review": {
-    "file": "FINAL_RECOVERY_REVIEW.json",
-    "sha256": "b126eb5b91e7ff46ee4e14926899fe56f7787bc16c082d5e43a24a8a0b140a2d"
-  },
   "final_commit_rebind_required": true
 }

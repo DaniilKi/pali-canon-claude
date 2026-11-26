@@ -1909,7 +1909,9 @@ jobs:
       - name: Diagnose bounded approved acceptance on Windows Node20
         if: runner.os == 'Windows' && matrix.node == 20
         timeout-minutes: 2
-        run: node --test --test-reporter=tap tests/approved-acceptance.test.mjs
+        run: |
+          node --test --test-reporter=tap tests/approved-acceptance.test.mjs
+          node --test --test-reporter=tap tests/held234-current333-chain.test.mjs
       - name: Run complete test inventory
         timeout-minutes: 30
         run: npm test

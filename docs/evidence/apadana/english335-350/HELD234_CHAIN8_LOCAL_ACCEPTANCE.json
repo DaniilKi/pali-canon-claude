@@ -1,0 +1,33 @@
+{
+  "schema": "held234-chain-current359-test-only-followup-v1",
+  "previous_candidate": "f24d598648c0021374d485081d9bc4fb6cbe72bc",
+  "runtime_component_unchanged": "aec778d99aabccec6794a641072e463830e85542",
+  "observed_failure": {
+    "run": 45902307600,
+    "job": 140190767242,
+    "suite_tests": 2068,
+    "pass": 1800,
+    "skip": 267,
+    "failure": 1,
+    "reason": "The held234 preflight AST test still expected current343 before its negative cases; CLI now correctly returns359."
+  },
+  "change_scope": [
+    "Original seven cases retained;339-baseline corruption now targets the explicit historical343 reader.",
+    "New eighth case corrupts the current359 baseline343 at identical count.",
+    "All historical bridges including339\u2192343\u2192359 are extracted from the actual metadata-only CLI AST.",
+    "Existing Windows20 early diagnostic also invokes the held8 wrapper; both children retain30s, step2min, complete inventory30min."
+  ],
+  "actual_targeted_validation": {
+    "held8_wrapper_pass": true,
+    "elapsed_ms": 17604.977563,
+    "combined_source_history_CI_and_held8_node_cases": 3,
+    "combined_failures": 0,
+    "combined_skips": 0,
+    "log_sha256": "aa5a0f3ae784c4d5cfee8ed94524cf168b285b7a0ab2d7bc9ea95684d353531e"
+  },
+  "current_source_map_sha256": "a710cefe1098d7403054f472698de28adf1a71440082ae8f02e6d5b5e00e0001",
+  "runtime_and_all39_package_members_unchanged": true,
+  "prior_browser_source_rights_notes_acceptance_retains_its_explicit_APPaec_scope": true,
+  "new_exact_CI_and_dev_promotion": "Pending final followup commit. Do not rerun or relabel priorf24/e792.",
+  "manual_and_source_holds_unchanged": true
+}

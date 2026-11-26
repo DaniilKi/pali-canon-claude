@@ -7,7 +7,7 @@
   "files": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "86afba12056894689a1d8ecaf64d4b79b07b69c04cd577c62c10b020d598712c",
+      "current_sha256": "b514c855c4727900d9e0704d1741f5751d29ef13c54d0dfaa4599bee98720a6f",
       "hunks": [
         {
           "before": "            src/_poems/chapter-3/poem-333.md\n            src/_poems/chapter-3/poem-334.md\n            src/_poems/chapter-3/chapter-3.json\n      - name: Validate all Apadāna source and rights pins before browser retrieval\n        if: matrix.group == 'apadana'\n",
@@ -23,7 +23,7 @@
         },
         {
           "before": "        timeout-minutes: 5\n        run: npm run build\n      - name: Run complete test inventory\n        timeout-minutes: 30\n",
-          "after": "        timeout-minutes: 5\n        run: npm run build\n      - name: Diagnose bounded approved acceptance on Windows Node20\n        if: runner.os == 'Windows' && matrix.node == 20\n        timeout-minutes: 2\n        run: node --test --test-reporter=tap tests/approved-acceptance.test.mjs\n      - name: Run complete test inventory\n        timeout-minutes: 30\n"
+          "after": "        timeout-minutes: 5\n        run: npm run build\n      - name: Diagnose bounded approved acceptance on Windows Node20\n        if: runner.os == 'Windows' && matrix.node == 20\n        timeout-minutes: 2\n        run: |\n          node --test --test-reporter=tap tests/approved-acceptance.test.mjs\n          node --test --test-reporter=tap tests/held234-current333-chain.test.mjs\n      - name: Run complete test inventory\n        timeout-minutes: 30\n"
         }
       ]
     },
@@ -656,6 +656,50 @@
         {
           "before": "\ntest('new236 requires separate one-source authority while prior284 and neighbor235 source objects remain exact',()=>{\n assert.equal(WIDGET_VERSION,'v44');assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,343);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,284),e.previous.expected_profile_ids);\n for(const id of e.previous.expected_profile_ids)assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id]);\n",
           "after": "\ntest('new236 requires separate one-source authority while prior284 and neighbor235 source objects remain exact',()=>{\n assert.equal(WIDGET_VERSION,'v45');assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,359);\n assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,284),e.previous.expected_profile_ids);\n for(const id of e.previous.expected_profile_ids)assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id]);\n"
+        }
+      ]
+    },
+    "tests/held234-current333-chain.test.mjs": {
+      "base3d_sha256": "5ad609829ccabd1a3c90e7b9e9e99e382b02bf0d2dc288cdd0b02ef48186fe8e",
+      "current_sha256": "f1cc9c851bfffb4913bc71e030919e6105ac91942d9a23f1fefbd1924b59b3f5",
+      "hunks": [
+        {
+          "before": "import {fileURLToPath} from 'node:url';\n\ntest('actual held234 metadata preflight keeps the full325,333 and339 bridges into current343 and rejects baseline corruption',()=>{\n  const root=fileURLToPath(new URL('../',import.meta.url));\n  const result=spawnSync('python3',['-B','tests/held234_current333_chain.py'],{\n",
+          "after": "import {fileURLToPath} from 'node:url';\n\ntest('actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption',()=>{\n  const root=fileURLToPath(new URL('../',import.meta.url));\n  const result=spawnSync('python3',['-B','tests/held234_current333_chain.py'],{\n"
+        },
+        {
+          "before": "  assert.equal(result.error,undefined,String(result.error||''));\n  assert.equal(result.status,0,result.stdout+'\\n'+result.stderr);\n  assert.match(result.stderr,/Ran 7 tests/);\n});\n",
+          "after": "  assert.equal(result.error,undefined,String(result.error||''));\n  assert.equal(result.status,0,result.stdout+'\\n'+result.stderr);\n  assert.match(result.stderr,/Ran 8 tests/);\n});\n"
+        }
+      ]
+    },
+    "tests/held234_current333_chain.py": {
+      "base3d_sha256": "5edaa72747f2c1eafbb461745ac642ac13b4aca66dca4b2c1ce9e449d612e52b",
+      "current_sha256": "b58ae929c6e91322c61e0078ea130ced71a8027c83c6e4be67222a1bc404f354",
+      "hunks": [
+        {
+          "before": "CLI = ROOT / 'scripts/web-reader-thera-held234-check.py'\nREADERS = ('reviewed_held234_intake', 'curated_additions', 'read_261_280',\n    'read_281_285', 'read_287_288', 'read_292_299', 'read_301_310', 'read_312_319', 'read_321_329')\nHISTORICAL = ('historical303', 'historical308', 'historical310', 'historical317', 'historical325', 'historical333', 'historical339')\nMETADATA = {'approval', 'current_additions', 'current_curation', 'current_ids', *HISTORICAL}\nASSIGNMENTS = METADATA | {'evidence_dir'}\n",
+          "after": "CLI = ROOT / 'scripts/web-reader-thera-held234-check.py'\nREADERS = ('reviewed_held234_intake', 'curated_additions', 'read_261_280',\n    'read_281_285', 'read_287_288', 'read_292_299', 'read_301_310', 'read_312_319', 'read_321_329', 'read_331_334')\nHISTORICAL = ('historical303', 'historical308', 'historical310', 'historical317', 'historical325', 'historical333', 'historical339', 'historical343')\nMETADATA = {'approval', 'current_additions', 'current_curation', 'current_ids', *HISTORICAL}\nASSIGNMENTS = METADATA | {'evidence_dir'}\n"
+        },
+        {
+          "before": "    \"historical333['baseline_ids'] == historical325['expected_profile_ids']\",\n    \"historical339['baseline_ids'] == historical333['expected_profile_ids']\",\n    \"current_curation['baseline_ids'] == historical339['expected_profile_ids']\",\n)\n\n",
+          "after": "    \"historical333['baseline_ids'] == historical325['expected_profile_ids']\",\n    \"historical339['baseline_ids'] == historical333['expected_profile_ids']\",\n    \"historical343['baseline_ids'] == historical339['expected_profile_ids']\",\n    \"current_curation['baseline_ids'] == historical343['expected_profile_ids']\",\n)\n\n"
+        },
+        {
+          "before": "    def positive(self):\n        tree, selected, env = run_actual_preflight()\n        self.assertEqual(len(env['current_ids']), 343)\n        self.assertEqual(len(env['current_additions']['ids']), 58)\n        for name, count in zip(HISTORICAL, (303, 308, 310, 317, 325, 333, 339), strict=True):\n            self.assertEqual(len(env[name]['expected_profile_ids']), count)\n        assertions = [ast.unparse(node.test) for node in selected if isinstance(node, ast.Assert)]\n",
+          "after": "    def positive(self):\n        tree, selected, env = run_actual_preflight()\n        self.assertEqual(len(env['current_ids']), 359)\n        self.assertEqual(len(env['current_additions']['ids']), 74)\n        for name, count in zip(HISTORICAL, (303, 308, 310, 317, 325, 333, 339, 343), strict=True):\n            self.assertEqual(len(env[name]['expected_profile_ids']), count)\n        assertions = [ast.unparse(node.test) for node in selected if isinstance(node, ast.Assert)]\n"
+        },
+        {
+          "before": "        self.assertNotIn(\"current_curation['baseline_ids'] == historical333['expected_profile_ids']\", assertions)\n        self.assertIn('read_321_329', imports)\n        return env\n\n",
+          "after": "        self.assertNotIn(\"current_curation['baseline_ids'] == historical333['expected_profile_ids']\", assertions)\n        self.assertIn('read_321_329', imports)\n        self.assertIn('read_331_334', imports)\n        self.assertNotIn(\"current_curation['baseline_ids'] == historical339['expected_profile_ids']\", assertions)\n        return env\n\n"
+        },
+        {
+          "before": "    def test_07_same_count_current339_baseline_substitution_is_rejected_after_positive(self):\n        env = self.positive()\n        def changed(root, anchor):\n            value = copy.deepcopy(intake.curated_additions(root, anchor))\n            ids = value['curation']['baseline_ids']\n            self.assertEqual(len(ids), 339)\n            self.assertNotIn('tha-ap262', ids)\n",
+          "after": "    def test_07_same_count_current339_baseline_substitution_is_rejected_after_positive(self):\n        env = self.positive()\n        # Retain the original339-baseline negative against the now explicit\n        # historical343 reader; current359 has a separate343 baseline below.\n        def changed(root):\n            value = copy.deepcopy(intake.read_331_334(root))\n            ids = value['baseline_ids']\n            self.assertEqual(len(ids), 339)\n            self.assertNotIn('tha-ap262', ids)\n"
+        },
+        {
+          "before": "            self.assertEqual(len(ids), 339)\n            self.assertEqual(len(set(ids)), 339)\n            self.assertEqual(value['curation']['expected_profile_ids'], env['current_ids'])\n            return value\n",
+          "after": "            self.assertEqual(len(ids), 339)\n            self.assertEqual(len(set(ids)), 339)\n            self.assertEqual(value['expected_profile_ids'], env['historical343']['expected_profile_ids'])\n            return value\n        with self.assertRaises(AssertionError):\n            run_actual_preflight({'read_331_334': changed})\n\n    def test_08_same_count_current343_baseline_substitution_is_rejected_after_positive(self):\n        env = self.positive()\n        def changed(root, anchor):\n            value = copy.deepcopy(intake.curated_additions(root, anchor))\n            ids = value['curation']['baseline_ids']\n            self.assertEqual(len(ids), 343)\n            self.assertNotIn('tha-ap262', ids)\n            ids[-1] = 'tha-ap262'\n            self.assertEqual(len(ids), 343)\n            self.assertEqual(len(set(ids)), 343)\n            self.assertEqual(value['curation']['expected_profile_ids'], env['current_ids'])\n            return value\n"
         }
       ]
     },
