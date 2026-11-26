@@ -1,0 +1,57 @@
+name: Probe actual test driver on six runtime hosts
+on:
+  push:
+    branches: ['diagnostic/pali-driver-probe-*']
+permissions:
+  contents: read
+jobs:
+  driver-probe:
+    name: Driver probe Node ${{ matrix.node }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Check exact parent and two complete real-driver probe cases
+        shell: bash
+        env:
+          EXPECTED_PARENT: dd7b697df2c54308084fffd934af38130d01f952
+          EXPECTED_NODE_MAJOR: ${{ matrix.node }}
+          EXPECTED_RUNNER_OS: ${{ runner.os }}
+        run: |
+          node --input-type=module <<'JS'
+          import {spawnSync} from 'node:child_process';
+          import {mkdirSync,writeFileSync} from 'node:fs';
+          import {join} from 'node:path';
+          import {performance} from 'node:perf_hooks';
+          const out=join(process.env.RUNNER_TEMP,'pali-driver-probe');mkdirSync(out,{recursive:true});
+          function git(args){const r=spawnSync('git',args,{encoding:'utf8',timeout:10000,maxBuffer:256*1024});if(r.error||r.status!==0)throw Error('Bounded Git provenance read failed');return r.stdout.trim();}
+          const metadata={head:git(['rev-parse','HEAD']),parent:git(['rev-parse','HEAD^']),delta:git(['diff','--name-status','HEAD^','HEAD']),node:process.version,platform:process.platform,runner_os:process.env.EXPECTED_RUNNER_OS,purpose:'Targeted helper portability preflight only; not full release CI.'};
+          writeFileSync(join(out,'metadata.json'),JSON.stringify(metadata,null,2)+'\n');console.log(JSON.stringify(metadata));
+          if(metadata.parent!==process.env.EXPECTED_PARENT||metadata.delta!=='A\t.github/workflows/pali-driver-probe-preflight.yml'||git(['status','--porcelain'])!=='')throw Error('Diagnostic must contain only one new workflow over exact reviewed parent');
+          if(process.versions.node.split('.')[0]!==process.env.EXPECTED_NODE_MAJOR||({Linux:'linux',macOS:'darwin',Windows:'win32'})[metadata.runner_os]!==process.platform)throw Error('Unexpected Node or OS host');
+          const args=['--test','--test-reporter=tap','tests/test-runner-scheduling.test.mjs'];
+          const start=performance.now(),r=spawnSync(process.execPath,args,{encoding:'utf8',timeout:120000,killSignal:'SIGKILL',maxBuffer:2*1024*1024});
+          writeFileSync(join(out,'probe.tap'),r.stdout||'');writeFileSync(join(out,'probe.stderr.log'),r.stderr||'');
+          const observed=Object.fromEntries([...(r.stdout||'').replace(/\r\n/g,'\n').matchAll(/^# (tests|pass|fail|cancelled|skipped|todo) ([0-9]+)$/gm)].map(m=>[m[1],Number(m[2])]));
+          const result={...metadata,argv:[process.execPath,...args],status:r.status,signal:r.signal,error:r.error?{name:r.error.name,code:r.error.code,message:r.error.message}:null,elapsed_ms:performance.now()-start,counts:observed,working_tree_after:git(['status','--porcelain'])};
+          writeFileSync(join(out,'result.json'),JSON.stringify(result,null,2)+'\n');console.log(r.stdout||'');console.error(r.stderr||'');console.log(JSON.stringify(result));
+          if(r.error||r.signal||r.status!==0||observed.tests!==2||observed.pass!==2||observed.fail!==0||observed.cancelled!==0||observed.skipped!==0||observed.todo!==0||result.working_tree_after!=='')throw Error('Exact complete helper portability preflight failed');
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: driver-probe-${{ matrix.os }}-node${{ matrix.node }}-${{ github.sha }}
+          path: ${{ runner.temp }}/pali-driver-probe
+          if-no-files-found: error
+          retention-days: 14
