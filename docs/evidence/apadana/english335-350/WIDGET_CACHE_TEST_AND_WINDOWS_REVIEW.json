@@ -1,0 +1,27 @@
+{
+  "schema": "independent-static-widget-test-whole-open-and-Windows20-diagnostic-review-v1",
+  "status": "GO_EXACT_SINGLE_TEST_SETUP_CHANGE_AND_SINGLE_WORKFLOW_STEP",
+  "test_before_sha256": "04c7df2275d93911ecaa3c8fce103288f72f46ce237393231d79c856bd179a11",
+  "test_after_sha256": "c81d1c25003c508299270645945352b4dc89f47e78e9f2c748f01c942500dbdb",
+  "product_source_unchanged_sha256": "a57be01cdf09dab2db0286849be3c3dafa67139fc96e83a1522b9028e9154b26",
+  "whole_test_inverse_exact_one_setup_line": true,
+  "all13_test_names_assertions_and_mutations_preserved": true,
+  "test_correction_scope": "Open repairedtha-ap348 without a positional offset, obtaining its genuine current locator pin. Later same-object pin mutation/refusal/restoration assertions remain verbatim; no application locator refusal is bypassed.",
+  "workflow_current_sha256": "37b207ffb46816c6a15982df89a6653dc85606bf3bc08071d698a8c1a3a2e890",
+  "exact_inserted_step": "      - name: Diagnose bounded approved acceptance on Windows Node20\n        if: runner.os == 'Windows' && matrix.node == 20\n        timeout-minutes: 2\n        run: node --test --test-reporter=tap tests/approved-acceptance.test.mjs\n",
+  "step_equals_plan_literal": true,
+  "immediate_build_step_full_inventory_order_verified": true,
+  "existing_six_OS_Node_matrix_and_60minute_job_retained": true,
+  "existing_child_30seconds_and_full_inventory_30minutes_unchanged": true,
+  "findings": [
+    "The former canonical helper always supplies offset:0, which is intentionally positional and ambiguous for a repaired unit without a pin. The explicit whole-unit open is the correct setup for testing later pin mutation; it does not relax the refusal.",
+    "The source fixture positives and all existing validation/canary/recovery assertions remain. Only this setup expression changes;13 logical cases and source skip rules are unchanged.",
+    "The diagnostic executes the same approved33 wrapper on Windows20 only, once after build and before unchanged npm test. It remains fail-closed, with2-minute step bound and original30000ms child. No job, matrix, retry, full-inventory replacement or global Windows runtime change."
+  ],
+  "remaining_gates": [
+    "Root actual13 run and existing widget regression results are external evidence, not executed by this reviewer.",
+    "Final source-map rows/loader and exact candidate workflow binding must include the new step/test source; new application/runtime/package/HTML seals and full exact CI remain required."
+  ],
+  "review_actions": "Read-only stdlib source/hash comparisons only; no app/helper imports, test/browser execution, builds, Git/network, CI or tracked writes.",
+  "whole_workflow_review_scope": "Exact added block, location and existing matrix/full-stage bounds only. Removing the block does not restore the earlier plan-time whole workflow hash because other root configuration changes occurred; every final whole-source row remains a separate mandatory review."
+}

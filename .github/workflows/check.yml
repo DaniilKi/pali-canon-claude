@@ -937,6 +937,15 @@ jobs:
         run: |
           node --test --test-reporter=tap tests/thera335-350-source.test.mjs tests/thera335-350-client.test.mjs | tee reviewed-publisher335-350.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher335-350.tap","utf8"); for(const [key,value] of [["tests",11],["pass",11],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all thirteen source-backed widget cache cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/widget-json-output-cache.test.mjs | tee reviewed-widget-json-cache.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-widget-json-cache.tap","utf8"); for(const [key,value] of [["tests",13],["pass",13],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Require all reviewed publisher331-334 source and preface client cases
         if: matrix.group == 'apadana'
         timeout-minutes: 10
@@ -1897,6 +1906,10 @@ jobs:
       - name: Build complete check artifacts
         timeout-minutes: 5
         run: npm run build
+      - name: Diagnose bounded approved acceptance on Windows Node20
+        if: runner.os == 'Windows' && matrix.node == 20
+        timeout-minutes: 2
+        run: node --test --test-reporter=tap tests/approved-acceptance.test.mjs
       - name: Run complete test inventory
         timeout-minutes: 30
         run: npm test

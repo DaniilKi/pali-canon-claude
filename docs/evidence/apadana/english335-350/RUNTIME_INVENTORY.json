@@ -1,7 +1,7 @@
 {
   "schema": "independent-reviewed-intake359-runtime-inventory-v1",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
-  "candidate_commit": "b2280c55ccf29c778abd89f26e3165b367b5ddba",
+  "candidate_commit": "51e0b7dd98e19f8d633da266e2093b53eb436c53",
   "curation_sha256": "9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6",
   "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
   "runtime_files": 34,
@@ -120,12 +120,12 @@
       "sha256": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6"
     },
     "http-worker.cjs": {
-      "bytes": 2931868,
-      "sha256": "dfd01d2e7337f9b206eeae6e9aced03b89d31ce399649995e27b74968e4f35d7"
+      "bytes": 2936996,
+      "sha256": "acae67d98e21772f12277f86d604cc24bd86ea820ee178f30e95299360f3571c"
     },
     "http.cjs": {
-      "bytes": 2999613,
-      "sha256": "53c56286c7939271e6c6336edbc525cc3e2b50c930d1641f325d4b36cf50a136"
+      "bytes": 3004741,
+      "sha256": "f676de25513e929bf15c4139aa7ea0067576c412e504ed9b245b88b4f9a63e4a"
     },
     "index.cjs": {
       "bytes": 2807202,
@@ -152,5 +152,22 @@
     "web/reader.js"
   ],
   "unchanged_paths": 29,
-  "behavioral_or_release_approval": false
+  "behavioral_or_release_approval": false,
+  "curations_scope": "Unchanged exactEnglish16/source9232/metadata359/Pali f3;runtimecacheidentityrepaironly.",
+  "supersedes_runtime_component_only": {
+    "previous_component_commit": "b2280c55ccf29c778abd89f26e3165b367b5ddba",
+    "previous_inventory": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/runtime-review/RUNTIME_INVENTORY.json",
+      "sha256": "516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b"
+    },
+    "previous_review": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/runtime-review/RUNTIME_REVIEW.json",
+      "sha256": "646ab8d8fdcabb0130766b056c00997d9e10f6e99a640445628bdff6bb296e76"
+    },
+    "previous_claims_preserved": true
+  },
+  "new_runtime_changes_from_previous": [
+    "http-worker.cjs",
+    "http.cjs"
+  ]
 }

@@ -24,7 +24,7 @@ from web_reader_approved_acceptance import (approved_catalogue, approved_runtime
 
 D = 'docs/evidence/apadana/english335-350/'
 IDS = ['tha-ap337','tha-ap338','tha-ap339','tha-ap340','tha-ap341','tha-ap342','tha-ap343','tha-ap344','tha-ap345','tha-ap346','tha-ap347','tha-ap348','tha-ap349','tha-ap350','tha-ap351','tha-ap352']
-PINS = {'RUNTIME_INVENTORY.json':'516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b',
+PINS = {'RUNTIME_INVENTORY.json':'62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e',
         'BASELINE_RUNTIME34.json':'6becdfab6b8e948a6d2df9af1a37131c4c0c727d77db79cf4bb4b93973512f23',
         'BASELINE343_FULL_OBJECTS.json':'74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e'}
 sha = lambda raw: hashlib.sha256(raw).hexdigest()

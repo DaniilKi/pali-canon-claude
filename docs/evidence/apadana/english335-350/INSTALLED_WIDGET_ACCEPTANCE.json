@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "counts": {
+    "scripts": 8,
+    "selection_cases": 40,
+    "continued_pages": 40,
+    "replay_reads": 384,
+    "exact_segments": 32,
+    "context_reads": 32,
+    "exact_returns": 32,
+    "commentary_context_reads": 63,
+    "commentary_exact_returns": 63,
+    "postcanonical_books": 109,
+    "root_files": 61,
+    "commentary_books": 47,
+    "aligned_checked": 3,
+    "aligned_available": 2,
+    "aligned_unavailable": 1,
+    "rejected_requests": 26
+  },
+  "resources": [
+    "ui://pali-canon/reader-v45.html",
+    "ui://pali-canon/reader-v45.skybridge.html"
+  ],
+  "network_attempts": 0,
+  "scope": "Isolated installed HTTP package, retrieved widget resources and source-faithful selections/cursors; no signed-in host, LLM execution or native-reader review."
+}

@@ -20,8 +20,8 @@ before(()=>{
   manifest=json('server/data/apadana.json');requireMetadata359(APADANA_PROFILES,manifest);
   assert.equal(Object.keys(manifest.links).length,359);assert.deepEqual(Object.keys(manifest.links).slice(-16),INTAKE359_IDS);
   assert.equal(sha(read(DIR+'BASELINE343_FULL_OBJECTS.json')),'74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e');baseline=json(DIR+'BASELINE343_FULL_OBJECTS.json');
-  assert.equal(sha(read(DIR+'RUNTIME_INVENTORY.json')),'516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b');assert.equal(INTAKE359_RUNTIME_SHA,'516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b');
-  assert.equal(sha(read(DIR+'RUNTIME_REVIEW.json')),'646ab8d8fdcabb0130766b056c00997d9e10f6e99a640445628bdff6bb296e76');assert.equal(INTAKE359_RUNTIME_REVIEW_SHA,'646ab8d8fdcabb0130766b056c00997d9e10f6e99a640445628bdff6bb296e76');
+  assert.equal(sha(read(DIR+'RUNTIME_INVENTORY.json')),'62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e');assert.equal(INTAKE359_RUNTIME_SHA,'62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e');
+  assert.equal(sha(read(DIR+'RUNTIME_REVIEW.json')),'b7aa44b6d9822a4508ac4fbc392da8ae76c0ab259469e3c61dc75cac260182bc');assert.equal(INTAKE359_RUNTIME_REVIEW_SHA,'b7aa44b6d9822a4508ac4fbc392da8ae76c0ab259469e3c61dc75cac260182bc');
   current=json(DIR+'RUNTIME_INVENTORY.json').files;assert.deepEqual(assertNextTenActualData(BASE),current);
   dd=json('docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json').files;
 });

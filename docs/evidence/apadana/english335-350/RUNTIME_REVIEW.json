@@ -2,14 +2,14 @@
   "schema": "reviewed-intake359-runtime-approval-v1",
   "status": "APPROVE_EXACT_CURRENT34_RUNTIME_INVENTORY_SOURCE_SCOPE_ONLY",
   "baseline": "3d614795cf95e45280603e95f68846c52eba4818",
-  "candidate_commit": "b2280c55ccf29c778abd89f26e3165b367b5ddba",
+  "candidate_commit": "51e0b7dd98e19f8d633da266e2093b53eb436c53",
   "curation_sha256": "9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6",
   "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
   "runtime_files": 34,
   "baseline_runtime_sha256": "6becdfab6b8e948a6d2df9af1a37131c4c0c727d77db79cf4bb4b93973512f23",
   "independent_inventory": {
     "file": "RUNTIME_INVENTORY.json",
-    "sha256": "516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b"
+    "sha256": "62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e"
   },
   "files": {
     "THIRD_PARTY_LICENSES.txt": {
@@ -125,12 +125,12 @@
       "sha256": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6"
     },
     "http-worker.cjs": {
-      "bytes": 2931868,
-      "sha256": "dfd01d2e7337f9b206eeae6e9aced03b89d31ce399649995e27b74968e4f35d7"
+      "bytes": 2936996,
+      "sha256": "acae67d98e21772f12277f86d604cc24bd86ea820ee178f30e95299360f3571c"
     },
     "http.cjs": {
-      "bytes": 2999613,
-      "sha256": "53c56286c7939271e6c6336edbc525cc3e2b50c930d1641f325d4b36cf50a136"
+      "bytes": 3004741,
+      "sha256": "f676de25513e929bf15c4139aa7ea0067576c412e504ed9b245b88b4f9a63e4a"
     },
     "index.cjs": {
       "bytes": 2807202,
@@ -162,75 +162,56 @@
   "finite_source_diff_approval": true,
   "behavioral_harness_approval": false,
   "release_or_push_approval": false,
-  "application_diff_paths": [
-    "server/data/apadana.json",
+  "cache_fix_static_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/widget-cache-independent-review/V2_INDEPENDENT_REVIEW.json",
+    "sha256": "ddc668761b178edbc03a0fecc0f1901c6534a0c9e7ba9cf6d680d89c73ac2ec3"
+  },
+  "approved_actual_cache_source": {
+    "path": "src/chatgpt-widget.mjs",
+    "sha256": "a57be01cdf09dab2db0286849be3c3dafa67139fc96e83a1522b9028e9154b26"
+  },
+  "application_source_runtime_diff_from_b228": [
     "server/http-worker.cjs",
     "server/http.cjs",
-    "server/index.cjs",
-    "server/web/reader.js",
-    "src/apadana-thera-profiles.mjs",
-    "src/apadana-thera.mjs",
-    "src/apadana-thera335-350-profiles.mjs",
-    "src/chatgpt-widget.mjs",
-    "web/translation-policy.mjs"
+    "src/chatgpt-widget.mjs"
   ],
-  "source_component_pins": {
-    "src/apadana-thera.mjs": {
-      "bytes": 31606,
-      "sha256": "660b698f22e52b3daf775efc0d9982f2972592ee0e58868ee637a045831e1896"
-    },
-    "src/chatgpt-widget.mjs": {
-      "bytes": 92525,
-      "sha256": "2e9bbc3eb2c31dfdc268200946fc5eadb60aa1185124bb2ff14678f3352b88f4"
-    },
-    "web/translation-policy.mjs": {
-      "bytes": 26615,
-      "sha256": "21fa32a35cd42d89ffa337685d00e74d9ccc54d51a8c72cb8b97f17e2a7ae32a"
-    },
-    "src/apadana-thera-profiles.mjs": {
-      "bytes": 834034,
-      "sha256": "c02a8b6b9f2d8957912ae20373b839ed1083ce519a4d6c82cb3f266e6a5569c5"
-    },
-    "src/apadana-thera335-350-profiles.mjs": {
-      "bytes": 69783,
-      "sha256": "fd3eac4f1b9d4ab3898703dc0a969921dfa1255d3dc0f0663e0bc745b9224268"
-    }
+  "all34_worktree_runtime_members_equal_exact_commit": true,
+  "all34_baseline_members_reconstructed_from_exact3dGit": true,
+  "all26_nonApadana_data_bytes_unchanged": true,
+  "all343_old_full_link_objects_and16new_link_objects_unchanged": true,
+  "all359_full_profile_objects_unchanged_source_literal_reconstruction": true,
+  "source_HTML_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/WIDGET_SOURCE_REVIEW.json",
+    "sha256": "2d0f038e8aa2927a5418abcf32aa5639812567203807b1c7a575d4345156f487"
   },
-  "curation_authority_bindings": {
-    "BASELINE343.json": "4c122fff1283b3ee5904f1f6ea781572347d6e42140dcdd25d7765e8ab00e138",
-    "BASELINE343_FULL_OBJECTS.json": "74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e",
-    "BASELINE_DATA27.json": "8631b90104e01329b74d22cc7632df265e9b9072efd6ba17b5478450b026a99f",
-    "PROFILES.json": "4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d",
-    "LINKS.json": "f284bc4dcbb415a55aa025f654018448ce3578772dea010f12d8e7cfd536da0a",
-    "EXPECTED_MANIFEST.json": "57b6fd43f4b8273e9542b8a22a6bd84b2042914113d53c94fe727386c5ec0194",
-    "SOURCE_REVIEW.json": "61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a",
-    "PROFILE_SCHEMA_REVIEW.json": "7af2686040b00e89730568771ff8d35e64b676b383f014981eb809d4f63203e5",
-    "SOURCE_CURATION.json": "e777f4dc3b154a448162b8d0c274d44995722903ebef59e133172ee46ecac5da",
-    "PARSER_OWNER_REVIEW.json": "62893273722f13965dd78f72d60de994ea615f3c846589488c2a76225a49f6d7"
+  "source_HTML": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/SOURCE_WIDGET_HTML.html",
+    "sha256": "51d36309948898574ad712e49a175cb5706e31fd977158b0c9432d99f12d9b73"
   },
-  "source_scope_checks": {
-    "exact_approved_three_parser_client_widget_files": true,
-    "new16_profile_literal_objects_equal_independent_approval": true,
-    "registry_inverse_restores_exact_baseline_source": true,
-    "all343_previous_full_link_objects_equal": true,
-    "all16_new_link_objects_equal": true,
-    "all26_other_data_files_unchanged": true,
-    "all34_current_worktree_runtime_bytes_equal_candidate_Git": true,
-    "all34_baseline_runtime_records_reconstructed_from_baseline_Git": true,
-    "widget_source_version45_and_exact_approved_source_file": true,
-    "English_bodies_or_note_text_introduced_by_profile_metadata": false
-  },
+  "historical_authority_handling": "Preserve originalb2285164/646a leaves unchanged as historical siblings before replacing onlynewlyintroducedcurrent359leaf/pins. All3d andearlier historicalauthorities remainfrozen.",
+  "source_body_note_and_private_data_scope": "No corpuswords/Englishbodies/notes/rights/sourcepins/privateuserdata changed. Cache source snapshot identity only, no newtranslation orautomaticpersonaldata migration.",
+  "test_and_behavior_scope": "Rootreported13newcases/oldwidgetgates separately; thisreviewdoesnotreexecute/adoptthosepasses. Exactrebuiltbundleidentity/sourceapprovalonly, not finalbrowser/CIacceptance.",
   "limits": [
-    "Inventory/source identity only; no app imports, JS execution, parser test, build or browser run by reviewer.",
-    "Compiled output is identified by actual Git/file hashes; regeneration behavior is not independently inferred from this inventory.",
-    "Whole HTTP widget/source HTML equality, genuine archive/install39 equality, runtime/reader/privacy/offline behavior and exact candidate CI remain separate gates.",
-    "No physical device, human assistive, signed-in host or live provider availability claim.",
-    "Curation proof files were inspected as exact current metadata authorities; their eventual final-commit publication is a separate binding."
+    "Fresh39archive/Git/package/installbindingfor51componentremainsrequired; old9f18packagehasoldb228HTTPbundles.",
+    "ActualwholeHTTPHTML equality toindependentlyreconstructednewsourceHTML remainsrequired.",
+    "ActualV6browseragainstoldb228isdiagnosticandcannotcertify51cachefix; strictactualbrowserrefusalchecksrequiredfornewcomponent.",
+    "FinalexactcommitCI/review andphysical/human/signedhost/providerlimits remainseparate."
   ],
-  "external_root_normalization_receipt": {
-    "path": "/tmp/pali-english335-350-evidence-nov26/ROOT_ORIGINALS_TO_IMPLEMENTATION_CHECK.json",
-    "sha256": "056aa38c346dc9fb4e7d8f6823ec625b158de12a24bb08c3914719db329fa38e",
-    "independently_reexecuted": false
+  "curations_scope": "Unchanged exactEnglish16/source9232/metadata359/Pali f3;runtimecacheidentityrepaironly.",
+  "supersedes_runtime_component_only": {
+    "previous_component_commit": "b2280c55ccf29c778abd89f26e3165b367b5ddba",
+    "previous_inventory": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/runtime-review/RUNTIME_INVENTORY.json",
+      "sha256": "516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b"
+    },
+    "previous_review": {
+      "path": "/tmp/pali-english335-350-evidence-nov26/runtime-review/RUNTIME_REVIEW.json",
+      "sha256": "646ab8d8fdcabb0130766b056c00997d9e10f6e99a640445628bdff6bb296e76"
+    },
+    "previous_claims_preserved": true
   },
-  "scope": "APP b228 component only; current untracked documentation/evidence is outside these34runtime members and not treated as an application change."
+  "new_runtime_changes_from_previous": [
+    "http-worker.cjs",
+    "http.cjs"
+  ]
 }

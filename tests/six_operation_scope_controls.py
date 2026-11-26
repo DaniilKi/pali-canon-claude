@@ -25,9 +25,9 @@ from web_reader_approved_acceptance import (approved_catalogue, approved_runtime
 
 def independent_current34():
     raw=(ROOT/'docs/evidence/apadana/english335-350/RUNTIME_INVENTORY.json').read_bytes()
-    assert hashlib.sha256(raw).hexdigest()=='516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b'
+    assert hashlib.sha256(raw).hexdigest()=='62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e'
     value=json.loads(raw)
-    assert value['candidate_commit']=='b2280c55ccf29c778abd89f26e3165b367b5ddba'
+    assert value['candidate_commit']=='51e0b7dd98e19f8d633da266e2093b53eb436c53'
     assert len(value['files'])==34
     return value['files']
 
