@@ -1,0 +1,236 @@
+{
+  "schema": "independent-exact-next-ten-dev-release-gate-review-v1",
+  "status": "GO_NORMAL_DEV_ONLY_FAST_FORWARD_CONDITIONAL_ON_FRESH_REFS_AND_BYTES_UNCHANGED",
+  "candidate_commit": "3d614795cf95e45280603e95f68846c52eba4818",
+  "expected_remote_dev_before": "dd7b697df2c54308084fffd934af38130d01f952",
+  "expected_remote_main_unchanged": "451a857dfb60b727af3e25bedec35d80b3fe7856",
+  "expected_remote_integration": "3d614795cf95e45280603e95f68846c52eba4818",
+  "local_HEAD_exact_and_clean": true,
+  "ancestry_allows_normal_fast_forward": true,
+  "CI_source_receipt": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/CI_TERMINAL_3D.json",
+    "sha256": "14a8e732c8cca289c4f377b24304432f35cf72f52f32ab8c50f2c04d77f083c7"
+  },
+  "package_CI": {
+    "run_id": 45878516911,
+    "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911",
+    "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+    "status": "completed",
+    "conclusion": "success",
+    "attempt": 1,
+    "workflow_derived_expected_job_count": 59,
+    "actual_unique_job_ids": 59,
+    "actual_unique_job_names": 59,
+    "all_jobs_head_exact": true,
+    "all_jobs_conclusion_success": true,
+    "failed_cancelled_skipped_jobs": 0,
+    "workflow_expected_roster_exact_match": true,
+    "matrix_counts": {
+      "Chromium_reader_groups": 49,
+      "Node_OS_cells": 6,
+      "Firefox_WebKit_study_compatibility_cells": 2,
+      "hosted_memory": 1,
+      "Chromium_aggregate": 1
+    },
+    "exact_job_roster": [
+      "Chromium reader",
+      "Chromium reader / annumbered",
+      "Chromium reader / anten",
+      "Chromium reader / apadana",
+      "Chromium reader / apadanaedition",
+      "Chromium reader / apadanafourth",
+      "Chromium reader / apadananext",
+      "Chromium reader / apadanathera",
+      "Chromium reader / apadanathera141",
+      "Chromium reader / apadanathera161",
+      "Chromium reader / apadanathera181",
+      "Chromium reader / apadanathera201",
+      "Chromium reader / apadanathera221",
+      "Chromium reader / apadanathera231",
+      "Chromium reader / apadanathera234",
+      "Chromium reader / apadanathera241",
+      "Chromium reader / apadanathera251",
+      "Chromium reader / apadanatheraeditorial",
+      "Chromium reader / apadanatheraexpansion",
+      "Chromium reader / apadanatheranext",
+      "Chromium reader / apadanatherapair101",
+      "Chromium reader / apadanatherapair121",
+      "Chromium reader / apadanatherascaled61",
+      "Chromium reader / apadanatherascaled81",
+      "Chromium reader / apadanathird",
+      "Chromium reader / backup",
+      "Chromium reader / booksearch",
+      "Chromium reader / chapters",
+      "Chromium reader / citations",
+      "Chromium reader / commentary",
+      "Chromium reader / comparison",
+      "Chromium reader / conflicts",
+      "Chromium reader / core",
+      "Chromium reader / draftsafety",
+      "Chromium reader / headings",
+      "Chromium reader / highlights",
+      "Chromium reader / milinda",
+      "Chromium reader / milindapartial",
+      "Chromium reader / navigation",
+      "Chromium reader / notes",
+      "Chromium reader / personal",
+      "Chromium reader / postsearch",
+      "Chromium reader / provenance",
+      "Chromium reader / scriptrefresh",
+      "Chromium reader / searchpins",
+      "Chromium reader / study",
+      "Chromium reader / textspacing",
+      "Chromium reader / thagsixteen",
+      "Chromium reader / vinayapartials",
+      "Chromium reader / vrieditionnote",
+      "Hosted memory budget",
+      "Node 20 / macos-latest",
+      "Node 20 / ubuntu-latest",
+      "Node 20 / windows-latest",
+      "Node 22 / macos-latest",
+      "Node 22 / ubuntu-latest",
+      "Node 22 / windows-latest",
+      "Study compatibility / firefox",
+      "Study compatibility / webkit"
+    ]
+  },
+  "mandatory_original_source_gates": {
+    "job_id": 140111615283,
+    "job_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615283",
+    "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+    "steps": [
+      {
+        "name": "Require four-poem source repair and citation compatibility without skips",
+        "required_outer_cases": 13,
+        "status": "success",
+        "source": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615283",
+        "step_number": 141,
+        "strict_no_skip_no_failure_assertions_present_in_exact_workflow": true
+      },
+      {
+        "name": "Require six-poem source and saved-citation compatibility without skips",
+        "required_outer_cases": 23,
+        "status": "success",
+        "source": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615283",
+        "step_number": 142,
+        "strict_no_skip_no_failure_assertions_present_in_exact_workflow": true
+      },
+      {
+        "name": "Require next-ten original-source and saved-citation compatibility without skips",
+        "required_outer_cases": 16,
+        "status": "success",
+        "source": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615283",
+        "step_number": 143,
+        "strict_no_skip_no_failure_assertions_present_in_exact_workflow": true
+      }
+    ],
+    "required_next_inner_Python_cases": 16,
+    "no_skip_no_failure_tap_guards_enforced_by_successful_steps": true
+  },
+  "companion_workflows": [
+    {
+      "name": "Read the full bundled corpus",
+      "id": 45878516788,
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516788",
+      "workflow": ".github/workflows/corpus.yml",
+      "workflow_sha256": "d2882ae1443d7bcb371d2b75b3dc1bd0165256bb7d0e38aa8ab22300d0d350a1"
+    },
+    {
+      "name": "npx install",
+      "id": 45878516850,
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516850",
+      "workflow": ".github/workflows/npx.yml",
+      "workflow_sha256": "6537692c69f9c46a0fe3b4805cc2749e35d308da730435aeec95c9488e100bc9"
+    },
+    {
+      "name": "Evidence reading commands",
+      "id": 45878517013,
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "conclusion": "success",
+      "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878517013",
+      "workflow": ".github/workflows/evidence.yml",
+      "workflow_sha256": "15ec53e5fb36ce9d058871777a347c92ff45d37fdd0ec6559aabf34abbc9b851"
+    }
+  ],
+  "local_actual_acceptance": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/final-review/LOCAL_ACCEPTANCE_REVIEW_2B4C.json",
+    "sha256": "3578f732bcd6d70ec396c5edbba616812eeee61804a6bbced19e60d35e7ac2c4"
+  },
+  "exact_final_package_binding": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/package-independent-review/FINAL_3D614_BINDING.json",
+    "sha256": "573d24f39418f292ec71d6bc7c64f259dc8e6b786446b559538a2733ca11dad8"
+  },
+  "actual39_install_checkout_git_bytes_rechecked": true,
+  "runtime34_unchanged": true,
+  "source_HTML_and_all_finite_source_dependencies_unchanged": true,
+  "source_HTML_sha256": "240f9f42a00a2f9d2c8b89ab2d5271eeac686b0d8c4d45b02bb965f6d624c634",
+  "sealed_source_model_manifest15of15_rechecked": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/final-review/MODEL_MANIFEST_CLOSURE_2B4C_TO_3D614.json",
+    "sha256": "8b5734cf8d12de231f97f1b55ba3d0b6e4338ecaaa57c63fc974d50380fc7ba4"
+  },
+  "fresh_ref_readiness": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/final-review/INDEPENDENT_REMOTE_REFS_AT_GATE.json",
+    "sha256": "e6a043fed2ef6ceb3097b059eaa78ab6f5ffede7954cde4cba9d5606ddca66ec"
+  },
+  "permitted_next_action": {
+    "actor": "Root only",
+    "action": "Normal non-force fast-forward push of exact candidate to refs/heads/dev/pali-reliability after immediate fresh ref/clean-head check",
+    "condition": "Remote dev remains exact dd7b697; integration remains exact3d61479; main remains451a857; local HEAD/source/package bytes remain sealed candidate. Any change requires reconciliation before push.",
+    "after_push": "Verify remote dev equals exact3d614795, main remains unchanged, and observe automatically triggered dev checks on exact head; do not duplicate CI runs.",
+    "excluded": [
+      "Force push",
+      "Merge or push to main",
+      "Deployment",
+      "External outreach",
+      "Automatic retry of failed or cancelled old CI"
+    ]
+  },
+  "English16": {
+    "status": "DEFERRED_SEPARATE_RESEARCH_NOT_ACTIVATED",
+    "research_checkpoint": "902bc627",
+    "existing_choices_preserved": 343,
+    "new_English_activations": 0,
+    "coverage_gain_of_this_boundary_batch": 0,
+    "rights_holds_unchanged": true,
+    "source17_note_occurrences_preserved": true
+  },
+  "evidence_limits": {
+    "local_full_check": {
+      "tests": 2034,
+      "pass": 1778,
+      "fail": 0,
+      "conditional_skips_disclosed": 256,
+      "audit_failures": 0
+    },
+    "CI_jobs_not_skipped_is_not_a_claim_all_test_cases_run_without_conditionals": true,
+    "exact_next_original_source_mandatory_cases_have_zero_skips": true,
+    "browser_evidence": "Actual installed Chromium DOM/HTTP with synthetic local data and two simulated bridges; separate CI Firefox/WebKit general study compatibility jobs passed. Full new-ten V3-specific interaction matrix was local Chromium.",
+    "not_claimed": [
+      "Physical phone/tablet testing",
+      "Human assistive technology acceptance",
+      "Signed-in real host acceptance",
+      "Live provider/outage retrieval validation",
+      "Completion of entire corpus or application project"
+    ]
+  },
+  "failed_evidence_preserved": {
+    "old2b4c_CI": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/CI_2B4C_MISSING_LOGS_FAILURE.json",
+      "sha256": "780e110b50586e11ca02a82319ab6c2a36821342b9e92fbe9f06da6ff913cd91"
+    },
+    "old_browser_V2": {
+      "path": "/tmp/pali-next-ten-evidence-nov26/installed-browser-v2/REPORT.json",
+      "sha256": "91dc06988d1a89b9bfbb49293a8e39376bb9fd4088a5d11875c3b4d7f6c9f716"
+    },
+    "not_relabelled_success": true
+  },
+  "promotion_performed_by_reviewer": false,
+  "automatic_dev_rechecks_complete": false,
+  "main_or_production_changes": false,
+  "review_method": "Read existing terminal GitHub connector API receipt; independently derive exact59 expected job roster and strict source gate counts from frozen3d workflow; inspect companions, local acceptance seals and current39/runtime/source manifest bytes. Read-only local Git/object/ancestry/clean checks plus one exact remote-ref query. No app/test/build/CI rerun, Git mutation or tracked edit.",
+  "reviewed_utc": "2026-11-26T19:23:43.461232+00:00"
+}

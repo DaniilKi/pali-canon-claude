@@ -1,0 +1,12 @@
+{
+  "schema": "normal-next-ten-dev-promotion-v1",
+  "observed_utc": "2026-11-26T19:24:45.767710+00:00",
+  "from": "dd7b697df2c54308084fffd934af38130d01f952",
+  "dev": "3d614795cf95e45280603e95f68846c52eba4818",
+  "main": "451a857dfb60b727af3e25bedec35d80b3fe7856",
+  "integration": "3d614795cf95e45280603e95f68846c52eba4818",
+  "normal_nonforce_push_exit_code": 0,
+  "worktree_clean": true,
+  "automatic_dev_rechecks": "Awaiting observation; no manual rerun dispatched",
+  "deployment_performed": false
+}

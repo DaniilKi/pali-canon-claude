@@ -1,0 +1,86 @@
+{
+  "schema": "next-ten-source-correction-release-receipt-v1",
+  "updated_utc": "2026-11-26T19:26:45.435160+00:00",
+  "status": "PROMOTED_TO_DEV_AFTER_EXACT_CANDIDATE_CI_AND_INDEPENDENT_REVIEW",
+  "dev_commit": "3d614795cf95e45280603e95f68846c52eba4818",
+  "previous_dev": "dd7b697df2c54308084fffd934af38130d01f952",
+  "application_component": "6ab4a322108aec740c330e4afd974ee4da808886",
+  "scope": {
+    "pairs": [
+      [
+        348,
+        349
+      ],
+      [
+        374,
+        375
+      ],
+      [
+        423,
+        424
+      ],
+      [
+        426,
+        427
+      ],
+      [
+        428,
+        429
+      ]
+    ],
+    "canonical_units_corrected": 10,
+    "source_blocks_preserved": 340,
+    "affected_notes_preserved": 17,
+    "other_unit_objects_unchanged": 8534,
+    "all_source_books_unchanged": 61,
+    "existing_apadana_english_choices_unchanged": 343,
+    "new_english_activated": 0,
+    "old_position_count": 144,
+    "old_numeric_collisions": 69,
+    "vanished_old_refs": 10,
+    "same_source_positions_still_need_new_pin": 65,
+    "private_notes_bookmarks_drafts_exports": "Never automatically migrated or re-pinned"
+  },
+  "locator_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070-apadana-thera-next10-v1",
+  "source_erratum": "Book36 paragraph10788 inline marker is PTS291; record375 starts with carried PTS290. Earlier research shorthand said inline290; current source/model/tests preserve291.",
+  "validated": {
+    "full_local_check": {
+      "pass": 1778,
+      "fail": 0,
+      "conditional_source_skips": 256,
+      "audit_exit_code": 0
+    },
+    "required_source_gate": {
+      "node_wrappers_and_consumers": 16,
+      "inner_python": 16,
+      "skips": 0
+    },
+    "prior_six_source_gate": {
+      "cases": 23,
+      "skips": 0
+    },
+    "installed_browser_groups": 19,
+    "installed_archive_files": 39,
+    "runtime_files": 34,
+    "source_widget_html_bytes": 664059,
+    "upstream_requests_in_browser_acceptance": 0,
+    "all59_package_jobs_success": true,
+    "three_companion_workflows_success": true,
+    "integration_ci_receipt": "CI_TERMINAL_3D.json",
+    "independent_release_gate": "RELEASE_GATE_REVIEW_3D.json"
+  },
+  "main_unchanged": "451a857dfb60b727af3e25bedec35d80b3fe7856",
+  "deployment_performed": false,
+  "force_push_performed": false,
+  "automatic_dev_rechecks": "Observed started on exact sameSHA; snapshot includes actual statuses, completion still pending for package/evidence/corpus at snapshot. No manual reruns.",
+  "deferred": [
+    "Publisher335-350 English16 candidates remain separate source-reviewed research, not activated. Re-evaluate against current verified dev; preserve191notes/twosummaries/preface and live-only/noncommercial notices.",
+    "Other24 Book37 structural flags and all existing rights/alignment holds remain unapproved.",
+    "Physical devices, human assistive acceptance, signed-in hosts and live-provider availability were not established by this offline/emulated acceptance."
+  ],
+  "next_source_handoff": {
+    "research_commit": "902bc627440c654250bf14fdc1d0ceb463315cf8",
+    "path": "docs/data/apadana-next-cohort-handoff.md",
+    "instructions": "Start from current dev; do not restore historical runtime/data from research branch. Ten-record correction is now integrated. English16 remains separate; check new automatic dev runs before next promotion."
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "automatic-dev-recheck-observation-v1",
+  "observed_utc": "2026-11-26T19:25:40Z",
+  "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+  "source": "GitHub connector API run list",
+  "triggered_by": "normal dev fast-forward; no manual rerun submitted",
+  "all_four_automatic_runs_observed": true,
+  "runs": [
+    {
+      "id": 45883456718,
+      "name": "Read the full bundled corpus",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45883456718",
+      "run_attempt": 1,
+      "created_at": "2026-11-26T19:24:46Z",
+      "updated_at": "2026-11-26T19:24:49Z"
+    },
+    {
+      "id": 45883456640,
+      "name": "Evidence reading commands",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45883456640",
+      "run_attempt": 1,
+      "created_at": "2026-11-26T19:24:46Z",
+      "updated_at": "2026-11-26T19:24:49Z"
+    },
+    {
+      "id": 45883456644,
+      "name": "npx install",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45883456644",
+      "run_attempt": 1,
+      "created_at": "2026-11-26T19:24:46Z",
+      "updated_at": "2026-11-26T19:25:39Z"
+    },
+    {
+      "id": 45883456645,
+      "name": "Check package",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "dev/pali-reliability",
+      "event": "push",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45883456645",
+      "run_attempt": 1,
+      "created_at": "2026-11-26T19:24:46Z",
+      "updated_at": "2026-11-26T19:24:46Z"
+    }
+  ],
+  "remaining_verification": "Package, evidence and corpus automatic dev rechecks were still active/queued at this snapshot. Identical-SHA integration workflows all passed before promotion."
+}

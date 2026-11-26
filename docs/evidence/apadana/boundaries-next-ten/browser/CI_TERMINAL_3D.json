@@ -1,0 +1,684 @@
+{
+  "schema": "verified-exact-3d-terminal-integration-ci-v1",
+  "commit": "3d614795cf95e45280603e95f68846c52eba4818",
+  "source": "GitHub connector API terminal run/jobs responses; no retries submitted",
+  "package_run": {
+    "id": 45878516911,
+    "name": "Check package",
+    "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+    "head_branch": "integrate/pali-next-ten-boundaries-nov26",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911",
+    "run_attempt": 1,
+    "created_at": "2026-11-26T18:46:01Z",
+    "updated_at": "2026-11-26T19:18:36Z"
+  },
+  "all59_unique_jobs_success": true,
+  "jobs": [
+    {
+      "id": 140111613738,
+      "name": "Study compatibility / firefox",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111613738",
+      "started_at": "2026-11-26T18:48:50Z",
+      "completed_at": "2026-11-26T18:51:44Z"
+    },
+    {
+      "id": 140111614039,
+      "name": "Node 22 / windows-latest",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614039",
+      "started_at": "2026-11-26T18:46:33Z",
+      "completed_at": "2026-11-26T19:14:03Z"
+    },
+    {
+      "id": 140111614124,
+      "name": "Hosted memory budget",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614124",
+      "started_at": "2026-11-26T18:49:03Z",
+      "completed_at": "2026-11-26T18:50:57Z"
+    },
+    {
+      "id": 140111614148,
+      "name": "Node 20 / windows-latest",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614148",
+      "started_at": "2026-11-26T18:46:45Z",
+      "completed_at": "2026-11-26T19:15:41Z"
+    },
+    {
+      "id": 140111614173,
+      "name": "Node 20 / ubuntu-latest",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614173",
+      "started_at": "2026-11-26T18:49:22Z",
+      "completed_at": "2026-11-26T19:01:53Z"
+    },
+    {
+      "id": 140111614209,
+      "name": "Node 20 / macos-latest",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614209",
+      "started_at": "2026-11-26T18:48:57Z",
+      "completed_at": "2026-11-26T19:03:56Z"
+    },
+    {
+      "id": 140111614221,
+      "name": "Node 22 / ubuntu-latest",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614221",
+      "started_at": "2026-11-26T18:49:25Z",
+      "completed_at": "2026-11-26T18:57:33Z"
+    },
+    {
+      "id": 140111614345,
+      "name": "Node 22 / macos-latest",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614345",
+      "started_at": "2026-11-26T18:49:16Z",
+      "completed_at": "2026-11-26T19:02:51Z"
+    },
+    {
+      "id": 140111614352,
+      "name": "Study compatibility / webkit",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614352",
+      "started_at": "2026-11-26T18:49:41Z",
+      "completed_at": "2026-11-26T18:53:25Z"
+    },
+    {
+      "id": 140111614952,
+      "name": "Chromium reader / personal",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614952",
+      "started_at": "2026-11-26T18:49:51Z",
+      "completed_at": "2026-11-26T18:54:54Z"
+    },
+    {
+      "id": 140111614998,
+      "name": "Chromium reader / highlights",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111614998",
+      "started_at": "2026-11-26T18:54:43Z",
+      "completed_at": "2026-11-26T18:57:07Z"
+    },
+    {
+      "id": 140111615013,
+      "name": "Chromium reader / navigation",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615013",
+      "started_at": "2026-11-26T18:59:19Z",
+      "completed_at": "2026-11-26T19:02:12Z"
+    },
+    {
+      "id": 140111615025,
+      "name": "Chromium reader / conflicts",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615025",
+      "started_at": "2026-11-26T18:53:11Z",
+      "completed_at": "2026-11-26T18:56:03Z"
+    },
+    {
+      "id": 140111615029,
+      "name": "Chromium reader / apadanathera201",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615029",
+      "started_at": "2026-11-26T19:04:49Z",
+      "completed_at": "2026-11-26T19:18:29Z"
+    },
+    {
+      "id": 140111615030,
+      "name": "Chromium reader / apadanatherascaled61",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615030",
+      "started_at": "2026-11-26T18:51:45Z",
+      "completed_at": "2026-11-26T18:59:17Z"
+    },
+    {
+      "id": 140111615035,
+      "name": "Chromium reader / apadanatheraexpansion",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615035",
+      "started_at": "2026-11-26T18:54:56Z",
+      "completed_at": "2026-11-26T18:59:58Z"
+    },
+    {
+      "id": 140111615036,
+      "name": "Chromium reader / notes",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615036",
+      "started_at": "2026-11-26T18:57:35Z",
+      "completed_at": "2026-11-26T19:01:08Z"
+    },
+    {
+      "id": 140111615043,
+      "name": "Chromium reader / study",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615043",
+      "started_at": "2026-11-26T18:57:43Z",
+      "completed_at": "2026-11-26T19:01:12Z"
+    },
+    {
+      "id": 140111615044,
+      "name": "Chromium reader / backup",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615044",
+      "started_at": "2026-11-26T18:53:22Z",
+      "completed_at": "2026-11-26T19:02:58Z"
+    },
+    {
+      "id": 140111615045,
+      "name": "Chromium reader / commentary",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615045",
+      "started_at": "2026-11-26T18:53:26Z",
+      "completed_at": "2026-11-26T18:55:23Z"
+    },
+    {
+      "id": 140111615052,
+      "name": "Chromium reader / comparison",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615052",
+      "started_at": "2026-11-26T18:50:59Z",
+      "completed_at": "2026-11-26T18:53:31Z"
+    },
+    {
+      "id": 140111615065,
+      "name": "Chromium reader / booksearch",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615065",
+      "started_at": "2026-11-26T18:58:10Z",
+      "completed_at": "2026-11-26T19:00:22Z"
+    },
+    {
+      "id": 140111615076,
+      "name": "Chromium reader / scriptrefresh",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615076",
+      "started_at": "2026-11-26T18:53:32Z",
+      "completed_at": "2026-11-26T18:55:39Z"
+    },
+    {
+      "id": 140111615078,
+      "name": "Chromium reader / provenance",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615078",
+      "started_at": "2026-11-26T18:51:09Z",
+      "completed_at": "2026-11-26T18:53:09Z"
+    },
+    {
+      "id": 140111615102,
+      "name": "Chromium reader / vinayapartials",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615102",
+      "started_at": "2026-11-26T19:05:51Z",
+      "completed_at": "2026-11-26T19:09:38Z"
+    },
+    {
+      "id": 140111615104,
+      "name": "Chromium reader / thagsixteen",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615104",
+      "started_at": "2026-11-26T18:56:29Z",
+      "completed_at": "2026-11-26T18:58:07Z"
+    },
+    {
+      "id": 140111615106,
+      "name": "Chromium reader / apadanathera221",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615106",
+      "started_at": "2026-11-26T18:58:28Z",
+      "completed_at": "2026-11-26T19:10:42Z"
+    },
+    {
+      "id": 140111615117,
+      "name": "Chromium reader / milinda",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615117",
+      "started_at": "2026-11-26T18:57:09Z",
+      "completed_at": "2026-11-26T18:59:45Z"
+    },
+    {
+      "id": 140111615118,
+      "name": "Chromium reader / apadanathera241",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615118",
+      "started_at": "2026-11-26T19:00:00Z",
+      "completed_at": "2026-11-26T19:08:15Z"
+    },
+    {
+      "id": 140111615125,
+      "name": "Chromium reader / citations",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615125",
+      "started_at": "2026-11-26T19:00:13Z",
+      "completed_at": "2026-11-26T19:02:27Z"
+    },
+    {
+      "id": 140111615126,
+      "name": "Chromium reader / apadanathera161",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615126",
+      "started_at": "2026-11-26T18:58:11Z",
+      "completed_at": "2026-11-26T19:10:46Z"
+    },
+    {
+      "id": 140111615133,
+      "name": "Chromium reader / chapters",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615133",
+      "started_at": "2026-11-26T18:56:05Z",
+      "completed_at": "2026-11-26T18:58:09Z"
+    },
+    {
+      "id": 140111615141,
+      "name": "Chromium reader / searchpins",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615141",
+      "started_at": "2026-11-26T19:02:53Z",
+      "completed_at": "2026-11-26T19:06:04Z"
+    },
+    {
+      "id": 140111615153,
+      "name": "Chromium reader / apadanatheranext",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615153",
+      "started_at": "2026-11-26T19:00:04Z",
+      "completed_at": "2026-11-26T19:03:26Z"
+    },
+    {
+      "id": 140111615156,
+      "name": "Chromium reader / vrieditionnote",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615156",
+      "started_at": "2026-11-26T18:55:24Z",
+      "completed_at": "2026-11-26T19:00:08Z"
+    },
+    {
+      "id": 140111615161,
+      "name": "Chromium reader / textspacing",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615161",
+      "started_at": "2026-11-26T18:59:47Z",
+      "completed_at": "2026-11-26T19:01:21Z"
+    },
+    {
+      "id": 140111615162,
+      "name": "Chromium reader / apadanatherascaled81",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615162",
+      "started_at": "2026-11-26T19:05:11Z",
+      "completed_at": "2026-11-26T19:14:33Z"
+    },
+    {
+      "id": 140111615164,
+      "name": "Chromium reader / core",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615164",
+      "started_at": "2026-11-26T19:02:28Z",
+      "completed_at": "2026-11-26T19:06:06Z"
+    },
+    {
+      "id": 140111615166,
+      "name": "Chromium reader / apadanathera251",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615166",
+      "started_at": "2026-11-26T18:55:40Z",
+      "completed_at": "2026-11-26T19:02:45Z"
+    },
+    {
+      "id": 140111615174,
+      "name": "Chromium reader / postsearch",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615174",
+      "started_at": "2026-11-26T19:06:08Z",
+      "completed_at": "2026-11-26T19:09:25Z"
+    },
+    {
+      "id": 140111615187,
+      "name": "Chromium reader / apadanaedition",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615187",
+      "started_at": "2026-11-26T19:06:21Z",
+      "completed_at": "2026-11-26T19:16:06Z"
+    },
+    {
+      "id": 140111615195,
+      "name": "Chromium reader / apadanathera231",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615195",
+      "started_at": "2026-11-26T19:02:14Z",
+      "completed_at": "2026-11-26T19:12:52Z"
+    },
+    {
+      "id": 140111615196,
+      "name": "Chromium reader / apadana",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615196",
+      "started_at": "2026-11-26T18:58:00Z",
+      "completed_at": "2026-11-26T19:00:47Z"
+    },
+    {
+      "id": 140111615203,
+      "name": "Chromium reader / apadanathera234",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615203",
+      "started_at": "2026-11-26T18:57:32Z",
+      "completed_at": "2026-11-26T19:01:06Z"
+    },
+    {
+      "id": 140111615246,
+      "name": "Chromium reader / annumbered",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615246",
+      "started_at": "2026-11-26T19:02:47Z",
+      "completed_at": "2026-11-26T19:04:47Z"
+    },
+    {
+      "id": 140111615256,
+      "name": "Chromium reader / milindapartial",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615256",
+      "started_at": "2026-11-26T19:03:27Z",
+      "completed_at": "2026-11-26T19:05:10Z"
+    },
+    {
+      "id": 140111615283,
+      "name": "Chromium reader / apadanatherapair101",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615283",
+      "started_at": "2026-11-26T19:00:09Z",
+      "completed_at": "2026-11-26T19:12:16Z"
+    },
+    {
+      "id": 140111615304,
+      "name": "Chromium reader / apadanathird",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615304",
+      "started_at": "2026-11-26T19:01:14Z",
+      "completed_at": "2026-11-26T19:05:49Z"
+    },
+    {
+      "id": 140111615315,
+      "name": "Chromium reader / anten",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615315",
+      "started_at": "2026-11-26T19:06:05Z",
+      "completed_at": "2026-11-26T19:09:22Z"
+    },
+    {
+      "id": 140111615327,
+      "name": "Chromium reader / apadananext",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615327",
+      "started_at": "2026-11-26T19:01:55Z",
+      "completed_at": "2026-11-26T19:06:19Z"
+    },
+    {
+      "id": 140111615340,
+      "name": "Chromium reader / headings",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615340",
+      "started_at": "2026-11-26T19:03:58Z",
+      "completed_at": "2026-11-26T19:07:42Z"
+    },
+    {
+      "id": 140111615357,
+      "name": "Chromium reader / apadanatheraeditorial",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615357",
+      "started_at": "2026-11-26T19:03:00Z",
+      "completed_at": "2026-11-26T19:09:42Z"
+    },
+    {
+      "id": 140111615360,
+      "name": "Chromium reader / apadanathera181",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615360",
+      "started_at": "2026-11-26T19:00:48Z",
+      "completed_at": "2026-11-26T19:13:18Z"
+    },
+    {
+      "id": 140111615381,
+      "name": "Chromium reader / apadanathera",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615381",
+      "started_at": "2026-11-26T19:01:10Z",
+      "completed_at": "2026-11-26T19:08:01Z"
+    },
+    {
+      "id": 140111615408,
+      "name": "Chromium reader / draftsafety",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615408",
+      "started_at": "2026-11-26T19:06:16Z",
+      "completed_at": "2026-11-26T19:09:30Z"
+    },
+    {
+      "id": 140111615416,
+      "name": "Chromium reader / apadanatherapair121",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615416",
+      "started_at": "2026-11-26T19:00:24Z",
+      "completed_at": "2026-11-26T19:10:11Z"
+    },
+    {
+      "id": 140111615478,
+      "name": "Chromium reader / apadanafourth",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615478",
+      "started_at": "2026-11-26T19:01:22Z",
+      "completed_at": "2026-11-26T19:06:14Z"
+    },
+    {
+      "id": 140111615487,
+      "name": "Chromium reader / apadanathera141",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140111615487",
+      "started_at": "2026-11-26T19:01:08Z",
+      "completed_at": "2026-11-26T19:14:41Z"
+    },
+    {
+      "id": 140125560768,
+      "name": "Chromium reader",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516911/job/140125560768",
+      "started_at": "2026-11-26T19:18:32Z",
+      "completed_at": "2026-11-26T19:18:35Z"
+    }
+  ],
+  "mandatory_source_gate": {
+    "job_id": 140111615283,
+    "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+    "steps": [
+      {
+        "name": "Require four-poem source repair and citation compatibility without skips",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 141,
+        "started_at": "2026-11-26T19:00:56Z",
+        "completed_at": "2026-11-26T19:01:46Z"
+      },
+      {
+        "name": "Require six-poem source and saved-citation compatibility without skips",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 142,
+        "started_at": "2026-11-26T19:01:46Z",
+        "completed_at": "2026-11-26T19:02:49Z"
+      },
+      {
+        "name": "Require next-ten original-source and saved-citation compatibility without skips",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 143,
+        "started_at": "2026-11-26T19:02:49Z",
+        "completed_at": "2026-11-26T19:04:04Z"
+      }
+    ]
+  },
+  "companions": [
+    {
+      "id": 45878516788,
+      "name": "Read the full bundled corpus",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "integrate/pali-next-ten-boundaries-nov26",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516788",
+      "run_attempt": 1,
+      "created_at": "2026-11-26T18:46:01Z",
+      "updated_at": "2026-11-26T18:48:47Z"
+    },
+    {
+      "id": 45878516850,
+      "name": "npx install",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "integrate/pali-next-ten-boundaries-nov26",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878516850",
+      "run_attempt": 1,
+      "created_at": "2026-11-26T18:46:01Z",
+      "updated_at": "2026-11-26T18:49:40Z"
+    },
+    {
+      "id": 45878517013,
+      "name": "Evidence reading commands",
+      "head_sha": "3d614795cf95e45280603e95f68846c52eba4818",
+      "head_branch": "integrate/pali-next-ten-boundaries-nov26",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45878517013",
+      "run_attempt": 1,
+      "created_at": "2026-11-26T18:46:01Z",
+      "updated_at": "2026-11-26T18:54:43Z"
+    }
+  ],
+  "automatic_dev_rechecks_not_yet_launched": true,
+  "dev_not_yet_promoted": true
+}
