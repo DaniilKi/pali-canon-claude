@@ -3,26 +3,26 @@
   "status": "GO_EXACT_SOURCE_QA_CHECKPOINT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "snapshot_commit": null,
-  "after_domain": "physical worktree held234 current359 test-only followup",
+  "after_domain": "physical worktree Windows20 CI partitions candidate over exactC7",
   "live_working_tree_claimed": true,
-  "map_sha256": "a710cefe1098d7403054f472698de28adf1a71440082ae8f02e6d5b5e00e0001",
-  "loader_sha256": "5d0b20295fad9cbe682b068ac2061ec42db82b8778766bd94d63b6245a12b8a0",
+  "map_sha256": "2d31f7632a9f48b52ca581a5494fc79da3d15815a68bf608f6a0b067d509659c",
+  "loader_sha256": "5c408c5b5b19c112f5236fbf0a722c251ab2cd86a2c446fa067ee3ded2651460",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
   "changed_existing_exactly_mapped": 72,
   "unchanged_original_source_entries": 929,
-  "hunks": 194,
-  "hunks_with_literal_dollars": 9,
+  "hunks": 197,
+  "hunks_with_literal_dollars": 11,
   "all_forward_and_inverse_reconstructions_exact": true,
   "rows": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "b514c855c4727900d9e0704d1741f5751d29ef13c54d0dfaa4599bee98720a6f",
-      "hunks": 4
+      "current_sha256": "b07e1a9aa4bd22406c329b509caeae9da89c81a842204a7f2c7bd54d4c102f79",
+      "hunks": 7
     },
     "AGENTS.md": {
       "base3d_sha256": "06024baeedc9397364c9ced4f3f6a167d5bccfdebc9182277e491d19d756bd43",
-      "current_sha256": "c47adf302a888a80a3a153a3b62fc9e57d7a0e215f06b7aece80b4d66bdd2c9f",
+      "current_sha256": "9e6ef4b085d07d18b4b1cbb56ba5a9b7736333f05766f0d0e83e29b434e4fd04",
       "hunks": 1
     },
     "README.md": {

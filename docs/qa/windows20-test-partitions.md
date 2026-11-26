@@ -1,0 +1,21 @@
+# Windows Node20 complete-inventory partitions
+
+The reviewed359-choice candidate `c7e5939c3c479a78d3537e17deac6318162f3896` passed all other required package jobs, the evidence/corpus workflows and the six-lane installation workflow. Its native Windows Node20 full inventory exceeded its30-minute phase limit while still reporting progress at1444/2068. No assertion failure was reported before cutoff; unfinished tests remain unverified. This differs from the older30-second Python child timeout: both the33-case acceptance and repaired8-case chain passed their original bounds in the same Windows run.
+
+A bounded native Windows A/B experiment on exactc7e found that replacing duplicate filesystem checks saved only9.703seconds across265.875seconds in a fixed-order comparison, with possible cache warming. That proposal stays unapplied. A representative Linux profile found existing class-owned setup reuse and repeated validation/parsing cost, not an established Windows application defect.
+
+## Scope
+
+The public `scripts/test.mjs` and `package.json` stay byte-identical to c7e. All339 original top-level `.test.mjs` files remain byte-identical, independently hashed from that Git snapshot. Eight mandatory new harness cases make the expected complete inventory2076. The new runner validates the sealed baseline and literal additions, reproduces actual full-run discovery and flags, and places the custom reporter flag before file arguments. App sources, compiled package members, scripture, translations, licences, locators and private study data do not change.
+
+The existing Linux20 CI cell executes a full equivalent inventory and emits both TAP and a synchronous terminal receipt. Other four full OS/Node cells keep `npm test`. The Windows20 inventory is deterministically distributed across four disjoint file sets; each runs serially with every existing child timeout unchanged, inside a20-minute step and30-minute job. There is one Node test invocation per partition. No case-name filtering, retries or skip allowances are introduced.
+
+The existing required name `Node 20 / windows-latest` belongs to the aggregate/postcheck job. It depends on success of all five full matrix cells and all four native Windows partitions. It verifies same commit/run/attempt, complete exact file hashes, unique partition membership, exact terminal case multiset and skip/todo outcomes, completed child success and expected totals against the Linux20 reference. Missing, duplicated, substituted, stale, cancelled, failed or incomplete evidence fails closed. All original contract/build, exact104 provisioning,33/8 diagnostic, bundled corpus audit, smoke and desktop packaging gates remain; Linux20 retains installed-corpus and committed-build audits.
+
+## Evidence and historical source guards
+
+`docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json` is a finite repair baseline, not a permanent test-count ceiling. Its339 hashes come from immutable c7e Git blobs, with the unchanged CLI driver hash and independently reviewed hashes of the three new harness files. Future intentional test changes need a newly reviewed baseline rather than silently updating counts from the software under test.
+
+Current physical-source checks remain strict. Exact c7e source-map/review/loader evidence is archived under the new QA evidence directory before refreshing only the current workflow and AGENTS rows in the existing72-row current→immutable3d map. All other70 rows, the1001-entry original index and prior frozen authorities remain exact. Every row must reconstruct the whole original source; stale c7e workflow must fail as current. New mandatory tests inspect the raw actual topology and harness before any historical inversion. Historical workflow assertions remain unchanged.
+
+Independent implementation/source review, source-guard replay, native Windows completion and every required exact-successor workflow are separate gates. Local probes or synthetic tiny-suite comparisons do not replace native complete-inventory evidence. Dev stays at3d61479 until those gates pass; main, deployment and outreach remain outside scope. Physical devices, human assistive use, signed-in hosts, live providers and fresh-launch-offline acceptance remain separate.

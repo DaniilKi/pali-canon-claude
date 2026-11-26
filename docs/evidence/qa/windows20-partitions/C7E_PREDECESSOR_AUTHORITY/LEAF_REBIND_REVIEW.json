@@ -1,0 +1,52 @@
+{
+  "schema": "independent-held234-current359-test-only-followup-commit-ready-review-v1",
+  "status": "GO_EXACT_TEST_CI_SOURCE_MAP_FOLLOWUP_FOR_COMMIT_AND_NEW_EXACT_CANDIDATE_CI",
+  "prior_candidate": "f24d598648c0021374d485081d9bc4fb6cbe72bc",
+  "unchanged_application_component": "aec778d99aabccec6794a641072e463830e85542",
+  "source_inverse_review": {
+    "file": "SOURCE_INVERSE_REVIEW.json",
+    "sha256": "c931bbcafeae261f39101fa4c0fcbdff6cc21d5aa53a2e7f2b520fbdbc18788d"
+  },
+  "test_semantic_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/held234-current359-independent-review/STATIC_REVIEW.json",
+    "sha256": "51ed849613bb670b7a1676166c03a38568d60b638ce3a999893a90e686d482b4"
+  },
+  "old70_rows": {
+    "unchanged69_full_row_objects": true,
+    "only_existing_workflow_row_changed": true,
+    "two_added_original_test_paths": [
+      "tests/held234-current333-chain.test.mjs",
+      "tests/held234_current333_chain.py"
+    ]
+  },
+  "loader_only_map_hash_and_finite_sorted72_pathlist_changed": true,
+  "workflow_only_exact_run_scalar_to_block_adding_held8_command": true,
+  "Windows20_condition_and2min_step_limit_and_all_other_workflow_bytes_unchanged": true,
+  "inherited_explicit_bash_fail_closed_for_both_commands": true,
+  "original33_command_and_full_inventory30min_and_matrix_unchanged": true,
+  "original_test01_to06_and_negative339_plus_new343_case_preserved": true,
+  "held8_actual_parent_wrapper_receipt": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/HELD234_359_CHAIN8.tap",
+    "sha256": "788a295a7cbfb0ddcdb2be8ebb762ddb1c6a591d780ddc02ccdea91288622a27",
+    "node_cases_pass": 1,
+    "python_cases": 8,
+    "duration_ms": 17604.977563,
+    "original_child_bound_ms": 30000
+  },
+  "all39_worktree_Gitf24_GitAEC_freshinstalled_bytes_exact": true,
+  "all_src_web_server_packagejson_bytes_unchanged_fromf24": true,
+  "current_runtime34_leaf839e_2b19_unchanged": true,
+  "no_new_runtime_reseal_NPM_or_browser_repeat_needed_for_same39_bytes": true,
+  "all1001_originals72inverse186plus_replayed_and824oldauthorities_unchanged": true,
+  "source_hunks": 194,
+  "literal_dollar_hunks": 9,
+  "prior70_source_and_leaf_reviews_require_exact_historical_backup_before_current_replacement": true,
+  "remaining": [
+    "Archive prior70 source+leaf receipts without altering their claims",
+    "Root bind new immutable commit and all39 unchanged component bytes",
+    "Observe every required new exact candidate CI gate green before dev advancement"
+  ],
+  "reviewer_actions": "Read-only stdlib metadata/Gitobject/hash inspection; no SUT/test/browser/build/network/Gitmutation or tracked-file writes.",
+  "CI_passed_dev_main_deployment_or_project_completion_claim": false,
+  "blocking_findings": []
+}

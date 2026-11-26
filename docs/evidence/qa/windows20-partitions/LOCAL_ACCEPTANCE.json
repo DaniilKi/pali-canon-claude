@@ -1,0 +1,44 @@
+{
+  "schema": "windows20-partition-local-acceptance-v1",
+  "base_candidate": "c7e5939c3c479a78d3537e17deac6318162f3896",
+  "dev_before": "3d614795cf95e45280603e95f68846c52eba4818",
+  "baseline_index_sha256": "95cf44c6885b2bff6c217f3f9d575d15837af475fc08e468fb6fca4adab151bf",
+  "unchanged_legacy_test_files": 339,
+  "legacy_test_cases": 2068,
+  "new_cases": 8,
+  "expected_full_cases": 2076,
+  "root_actual_node20_QA": {
+    "tests": 8,
+    "pass": 8,
+    "skip": 0,
+    "fail": 0,
+    "duration_ms": 2180.114741,
+    "log_sha256": "cf179b7ddfe3681dfcc67af41fa138d77861e8f41fb912912a5ded94cf714dcb"
+  },
+  "original_source_CI_history": {
+    "tests": 20,
+    "pass": 20,
+    "skip": 0,
+    "fail": 0,
+    "duration_ms": 4393.732481,
+    "log_sha256": "88498ea44907d0066d8d65b88154d9b4965bf647a0b0e3c5d7f2d181230f16bb"
+  },
+  "source_map_sha256": "2d31f7632a9f48b52ca581a5494fc79da3d15815a68bf608f6a0b067d509659c",
+  "source_inverse_rows": 72,
+  "hunks": 197,
+  "literal_dollar_hunks": 11,
+  "only_changed_source_rows": [
+    ".github/workflows/check.yml",
+    "AGENTS.md"
+  ],
+  "all1001_originals_and824_frozen_checks_passed": true,
+  "all39_package_members_C7_freshinstalled_equal": true,
+  "no_app_scripture_translation_private_data_changes": true,
+  "independent_reviews": {
+    "STATIC_REVIEW.json": "15d5636719d8cfbb5d3ad7f00a6e030776444244f6e27365d5349747c5c8ba8f",
+    "SOURCE_INVERSE_REVIEW.json": "e27c7a5b619fed49aefe05d1ff03824ea2c187c4c4fce0cd389976650dfb81d4",
+    "LEAF_REBIND_REVIEW.json": "c53646501241dfd045775e816f4fabaefd81d49d1bf15953a8be55ea45042ff7"
+  },
+  "native_windows_partitions_aggregate_and_all_exact_commit_CI": "PENDING; no dev promotion or release claim",
+  "main_and_production_changed": false
+}

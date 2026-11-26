@@ -1,0 +1,23 @@
+{
+  "schema": "frozen-c7e-before-windows20-partition-QA-v1",
+  "commit": "c7e5939c3c479a78d3537e17deac6318162f3896",
+  "files": {
+    "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
+      "file": "SOURCE_INVERSES.json",
+      "sha256": "a710cefe1098d7403054f472698de28adf1a71440082ae8f02e6d5b5e00e0001"
+    },
+    "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json": {
+      "file": "SOURCE_INVERSE_REVIEW.json",
+      "sha256": "c931bbcafeae261f39101fa4c0fcbdff6cc21d5aa53a2e7f2b520fbdbc18788d"
+    },
+    "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json": {
+      "file": "LEAF_REBIND_REVIEW.json",
+      "sha256": "9d396f9d8b25f6b6f57369ca8cd7eeb1faecae1c2ae726eef5c9a31e9dd85e0b"
+    },
+    "tests/helpers/intake359-source-input.mjs": {
+      "file": "intake359-source-input.mjs.txt",
+      "sha256": "5d0b20295fad9cbe682b068ac2061ec42db82b8778766bd94d63b6245a12b8a0"
+    }
+  },
+  "historical_only": true
+}

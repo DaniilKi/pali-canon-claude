@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+env:
+  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json
+  CI_TEST_BASELINE_SHA: 95cf44c6885b2bff6c217f3f9d575d15837af475fc08e468fb6fca4adab151bf
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -1878,6 +1881,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node: [20, 22]
+        exclude:
+          - os: windows-latest
+            node: 20
     defaults:
       run:
         shell: bash
@@ -1906,15 +1912,22 @@ jobs:
       - name: Build complete check artifacts
         timeout-minutes: 5
         run: npm run build
-      - name: Diagnose bounded approved acceptance on Windows Node20
-        if: runner.os == 'Windows' && matrix.node == 20
-        timeout-minutes: 2
-        run: |
-          node --test --test-reporter=tap tests/approved-acceptance.test.mjs
-          node --test --test-reporter=tap tests/held234-current333-chain.test.mjs
       - name: Run complete test inventory
+        if: matrix.os != 'ubuntu-latest' || matrix.node != 20
         timeout-minutes: 30
         run: npm test
+      - name: Run full Linux20 inventory reference
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 20
+        timeout-minutes: 30
+        run: |
+          node scripts/ci-test-partitions.mjs run --mode full --receipt "$RUNNER_TEMP/ci-inventory/full.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA"
+      - name: Preserve full Linux20 inventory reference
+        if: always() && matrix.os == 'ubuntu-latest' && matrix.node == 20
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux20-full-inventory
+          path: ${{ runner.temp }}/ci-inventory/
+          if-no-files-found: error
       - name: Audit the complete bundled corpus
         timeout-minutes: 5
         run: npm run audit
@@ -1928,3 +1941,119 @@ jobs:
       - name: Check committed standalone server is current
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20
         run: git diff --exit-code -- server/
+  windows20-parts:
+    name: Windows20 inventory partition ${{ matrix.partition }}
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        partition: [0, 1, 2, 3]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Run bounded serial Windows20 partition
+        timeout-minutes: 20
+        run: |
+          node scripts/ci-test-partitions.mjs run --mode partition --partition ${{ matrix.partition }} --receipt "$RUNNER_TEMP/ci-inventory/partition-${{ matrix.partition }}.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA"
+      - name: Preserve Windows20 partition inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows20-partition-${{ matrix.partition }}
+          path: ${{ runner.temp }}/ci-inventory/
+          if-no-files-found: error
+  windows20:
+    name: Node 20 / windows-latest
+    needs: [check, windows20-parts]
+    if: always()
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Require successful reference and all four native partitions
+        env:
+          REFERENCE_JOBS_RESULT: ${{ needs.check.result }}
+          PARTITION_JOBS_RESULT: ${{ needs.windows20-parts.result }}
+        run: |
+          test "$REFERENCE_JOBS_RESULT" = success
+          test "$PARTITION_JOBS_RESULT" = success
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Retrieve exact full Linux20 reference
+        uses: actions/download-artifact@v4
+        with:
+          name: linux20-full-inventory
+          path: ${{ runner.temp }}/ci-reference/
+      - name: Retrieve all four native Windows20 inventories
+        uses: actions/download-artifact@v4
+        with:
+          pattern: windows20-partition-*
+          path: ${{ runner.temp }}/ci-parts/
+          merge-multiple: false
+      - name: Require identical complete test and source inventory
+        timeout-minutes: 2
+        run: |
+          node scripts/ci-test-partitions.mjs aggregate --reference "$RUNNER_TEMP/ci-reference/full.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA" --output "$RUNNER_TEMP/ci-inventory/aggregate.json" --parts "$RUNNER_TEMP/ci-parts/windows20-partition-0/partition-0.json" "$RUNNER_TEMP/ci-parts/windows20-partition-1/partition-1.json" "$RUNNER_TEMP/ci-parts/windows20-partition-2/partition-2.json" "$RUNNER_TEMP/ci-parts/windows20-partition-3/partition-3.json"
+      - name: Diagnose bounded approved acceptance on Windows Node20
+        timeout-minutes: 2
+        run: |
+          node --test --test-reporter=tap tests/approved-acceptance.test.mjs
+          node --test --test-reporter=tap tests/held234-current333-chain.test.mjs
+      - name: Audit the complete bundled corpus
+        timeout-minutes: 5
+        run: npm run audit
+      - run: npm run smoke
+      - run: npm run pack:desktop
+      - name: Preserve exact Windows20 aggregate inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows20-aggregate-inventory
+          path: ${{ runner.temp }}/ci-inventory/aggregate.json
+          if-no-files-found: error

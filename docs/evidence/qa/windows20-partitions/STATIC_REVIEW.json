@@ -1,0 +1,89 @@
+{
+  "schema": "independent-windows20-complete-inventory-partitions-static-review-v1",
+  "status": "GO_EXACT_FROZEN_THREE_FILE_IMPLEMENTATION_BASELINE_AND_CI_TOPOLOGY_FOR_CANDIDATE_VALIDATION",
+  "immutable_legacy_commit": "c7e5939c3c479a78d3537e17deac6318162f3896",
+  "frozen_implementation_sha256s": {
+    "scripts/ci-test-partitions.mjs": "42df19ec38e74b32595118ad15a9883f5e8dd53543575d25409ff35d172c4d09",
+    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+    "tests/ci-test-partitions.test.mjs": "0be7353a550d1a21b82e00675343b5e5ce2353c439d6773dc5758ac459b0a6ce"
+  },
+  "baseline_index": {
+    "path": "/tmp/pali-windows20-partitions-nov26/docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json",
+    "sha256": "95cf44c6885b2bff6c217f3f9d575d15837af475fc08e468fb6fca4adab151bf"
+  },
+  "independently_verified339_legacy_test_Git_hashes_and_worktree_bytes_exact": true,
+  "unchanged_original_public_driver_and_package_json": true,
+  "additional_top_level_test_file_only_reviewed_QA8": true,
+  "expected_inventory": {
+    "legacy_terminal_tests": 2068,
+    "new_mandatory_QA_tests": 8,
+    "total_terminal_tests": 2076,
+    "files": 340,
+    "partitions": 4,
+    "files_per_partition": [
+      85,
+      85,
+      85,
+      85
+    ]
+  },
+  "noncircular_authority": "Finite index anchors immutableC7 original test/driver hashes and three independently frozen new files. CLI receives indexpin from reviewed workflow; new runner/reporter/test do not generate their own expected current inventory or event cases.2076 derives prior observed2068 plus literal8 new cases.",
+  "execution_review": {
+    "same_sorted_direct_tests_discovery_as_original_driver": true,
+    "one_Node_invocation_per_partition_and_full_reference": true,
+    "same_Windows_serial_flag_and_no_case_filter_skip_retry_flags": true,
+    "reporter_flag_precedes_all_file_argv": true,
+    "built_in_TAP_preserved_and_complete_TestsStream_terminal_events_collected": true,
+    "source_relative_file_line_column_name_type_nesting_status_case_multiset_handles_duplicates": true,
+    "root_plan_and_all_seven_summary_fields_required_and_recounted": true,
+    "failed_cancelled_timed_out_spawn_errors_missing_or_incomplete_receipts_refused": true,
+    "hard_child_bounds_minutes": {
+      "partitions": 20,
+      "full": 30
+    },
+    "timeout_process_tree_or_group_kill_attempt_is_bounded_and_failure_not_approval": true,
+    "inventory_driver_newtool_hashes_rechecked_after_execution": true
+  },
+  "aggregate_review": {
+    "reference_Linux20_and_four_native_Windows20_receipts_required": true,
+    "same_commit_workflowrun_attempt_and_SHA_identity_required": true,
+    "exact_full_file_source_hashes_and_disjoint_partition_cover_required": true,
+    "same_complete_case_multiset_and_pass_skip_todo_counts_required": true,
+    "missing_duplicate_unknown_stale_or_replaced_evidence_refused": true,
+    "all5_otherfull_matrix_jobs_and4_parts_success_required_before_required_Windows20_name_can_pass": true
+  },
+  "workflow_review": {
+    "old_workflow_whole_bytes_restored_after_only_explicit_env_matrix_scheduling_and_new_jobs_inversion": true,
+    "four_other_full_OS_Node_npmtest_cells_retained": true,
+    "Linux20_full_equivalent_reference_plus_TAP_and_receipt": true,
+    "all_original_build_contract_104_diagnostic33_diagnostic8_audit_smoke_pack_postgates_retained": true,
+    "Linux20_installedcorpus_and_committed_build_checks_unchanged": true,
+    "artifact_paths_names_download_layout_and_same_workflow_identity_coherent": true,
+    "newQA_case8_reads_raw_workflow_before_historical_inverse": true
+  },
+  "newQA8_static_review": "Meaningful actual owned tiny full/partition children, Unicode/nesting/duplicate/skip/TODO preservation, failure/hang refusal, genuine CLI reporter activation, source inventory mutation, case/context/summary/coverage/refusal controls and rawworkflow topology mutations. Synthetic context platform overrides in unit fixtures are not native Windows execution.",
+  "actual_root_owned_QA8_receipt": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/windows20-partitions-root-node20-qa8.tap",
+    "sha256": "cf179b7ddfe3681dfcc67af41fa138d77861e8f41fb912912a5ded94cf714dcb",
+    "tests": 8,
+    "pass": 8,
+    "fail": 0,
+    "skipped": 0
+  },
+  "all39_package_members_and_all_src_web_server_fixture_bytes_unchanged": true,
+  "rights_corpus_private_data_runtime_changes_approved": false,
+  "blocking_findings": [],
+  "remaining_required": [
+    "Root finish independently reviewed finite current source-map workflow+AGENTS reseal with previousC7 authority archived",
+    "Bind exact final candidate Git/source/runtime39 closures",
+    "Actual same-commit Linux20 reference and four nativeWindows20 partitions must complete under unchangedbounds and aggregate exactly",
+    "All other required exact candidate workflows and postchecks must pass before any dev promotion"
+  ],
+  "practical_limits": [
+    "Total partition walltime and nativeWindows scheduling advantage are not established by this static review or tiny synthetic QA run.",
+    "Any platform-dependent status/case mismatch will fail closed; no automatic exception or skip allowance is authorized.",
+    "Legacy child assertions/deadlines remain original; no rerun/cancel/Gitpush/main/deploy authorized to this reviewer."
+  ],
+  "reviewer_actions": "Read-only source/Git/JSON/hash/TAP receipt inspection via own stdlib only; no app/JS/tests/build/network/Gitmutation or tracked edits.",
+  "CI_passed_dev_release_or_fullproject_completion_claim": false
+}
