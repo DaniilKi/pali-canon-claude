@@ -1,0 +1,100 @@
+{
+  "schema": "independent325-canonical-build-review-v1",
+  "status": "GO_EXACT_RESTRICTED_THREE_CJS_PATH_CANONICALIZATION_ONLY",
+  "old_commit": "6555a21f7290a28a893a8dfb3aa37117ff13afd6",
+  "current_head": "78866fe0245de46dab3c0e6151394d6fd3ab7dcd",
+  "old_runtime_authority": "/tmp/pali-301-310-package-review/CURRENT_RUNTIME_INVENTORY_APPROVAL.json",
+  "old_runtime_authority_sha256": "bae09c75ce5bb5d90e62044b60f5ac468e0c3c0569484117e28f938720aabf09",
+  "expected_inventory_derived_from_old_sealed_git_bytes": true,
+  "current_runtime_not_used_as_expectation": true,
+  "runtime_paths": 34,
+  "changed_paths": 3,
+  "unchanged_paths": 31,
+  "changes": [
+    {
+      "path": "http-worker.cjs",
+      "old": {
+        "bytes": 2785453,
+        "sha256": "851187d400f5da1f9f946d7a3ed781612ea0609173be0a579aaf1b925eb13232"
+      },
+      "derived_new": {
+        "bytes": 2779459,
+        "sha256": "f450f7c69e8e94b3cdb93acde74ee3f6ba875702b2ff588ff21aae8ca8eedb27"
+      },
+      "actual_matches_derived": true,
+      "prefix_occurrences": 222
+    },
+    {
+      "path": "http.cjs",
+      "old": {
+        "bytes": 2853414,
+        "sha256": "723357373ce541cccf9e704c1bc8c3e830ef561b731b312d533a85a3ec271d20"
+      },
+      "derived_new": {
+        "bytes": 2847204,
+        "sha256": "a113d0130c32868b0936d84a2d7689d12144aa944947d58b7d994abc3c7eb22b"
+      },
+      "actual_matches_derived": true,
+      "prefix_occurrences": 230
+    },
+    {
+      "path": "index.cjs",
+      "old": {
+        "bytes": 2662557,
+        "sha256": "1f26f5992685cd735e8aa92c189f8e16bb830aeea3443d9809ab0e4bc54686e4"
+      },
+      "derived_new": {
+        "bytes": 2656563,
+        "sha256": "94d185b913ddb9c5ffd25237df5e666ff38800e87dc214baed22c966be06f708"
+      },
+      "actual_matches_derived": true,
+      "prefix_occurrences": 222
+    }
+  ],
+  "source_equivalence": {
+    "prior_source_map_files": 107,
+    "total_with_extra_build_baseline_helpers": 111,
+    "all_current_equal_original_git6555": true
+  },
+  "semantics": "Each replacement is either a line comment or the single method-name key immediately after a var require_* = __commonJS({ declaration. Factory variable declarations, body bytes, callsites and __commonJS helper remain identical. The helper enumerates the first own property of its singleton callback object and invokes that value; it does not look up a fixed pathname. Renaming that key and its comment does not change selected callable or module export/cache behavior. Diagnostic function names/stack labels can differ; no general JavaScript observational-equivalence claim is made.",
+  "corpus_data_wording": "All approved data files, source-note sidecar, compiled web assets and every other runtime path match old325 authority exactly; no source/English wording or bundled content is added.",
+  "modes": {
+    "http-worker.cjs": {
+      "original_git_mode": "100644",
+      "current_filesystem_mode": "0o600",
+      "mode_is_separate_from_content_inventory": true
+    },
+    "http.cjs": {
+      "original_git_mode": "100755",
+      "current_filesystem_mode": "0o755",
+      "mode_is_separate_from_content_inventory": true
+    },
+    "index.cjs": {
+      "original_git_mode": "100755",
+      "current_filesystem_mode": "0o755",
+      "mode_is_separate_from_content_inventory": true
+    }
+  },
+  "mode_comment": "Original Git tracks http/index100755 and worker100644. Current filesystem permissions are reported separately; historical checkout0700 and archive metadata are not content or runtime-behavior equivalence evidence. Regenerated755 entrypoints retain Git executable identity.",
+  "contexts": {
+    "file": "EVERY_CONTEXT_PROOF.json",
+    "sha256": "ad36c3f0e628412082108233904892ecf201726b1bcd1783194afa5b80fb6e1f"
+  },
+  "source_helpers": {
+    "file": "SOURCE_HELPER_EQUIVALENCE.json",
+    "sha256": "366225937f55545bb9100c7ba6ffc6161a21c7f7b6bc22fb84c22c03b61449e6"
+  },
+  "factory_helpers": {
+    "file": "FACTORY_HELPER_EQUIVALENCE.json",
+    "sha256": "e69f50e0ee2be65eebd8d4f2fe1e8a8c9e36ba09006505761a35d096b1194dee"
+  },
+  "new_inventory": {
+    "file": "CANONICAL_RUNTIME_INVENTORY.json",
+    "sha256": "11b2d9865505b2cd09812deadb0bf77c891edde783054c4e2bd4fe34900d4b84"
+  },
+  "limits": [
+    "Static byte/context review only; no test/build/app import/server/network/Git mutation performed.",
+    "Fresh canonical archive/install, strict installed widget equality, source-required tests and exact-SHA platformCI remain required.",
+    "Review approves a new sealed proof chain preserving original325 authority; it does not authorize replacing old authority or restoring workspace-local prefixes."
+  ]
+}

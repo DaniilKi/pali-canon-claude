@@ -383,7 +383,7 @@ def reviewed_317_runtime(root):
 CURRENT_325_RUNTIME_REVIEW_SHA = 'bae09c75ce5bb5d90e62044b60f5ac468e0c3c0569484117e28f938720aabf09'
 
 
-def approved_runtime(root):
+def reviewed_325_runtime(root):
     # Preserve every historical authority and add this independently reviewed
     # exact eight-source/v38 inventory; metadata approval is not behavior proof.
     previous = reviewed_317_runtime(root)
@@ -408,6 +408,41 @@ def approved_runtime(root):
     delta = ['data/apadana.json', 'http-worker.cjs', 'http.cjs', 'index.cjs', 'web/reader.js']
     assert proof['allowed_changed_paths_from_prior317'] == delta and proof['unchanged_runtime_paths'] == 29
     assert [name for name in sorted(files) if files[name] != previous[name]] == delta
+    return files
+
+
+CANONICAL_325_INVENTORY_SHA = '11b2d9865505b2cd09812deadb0bf77c891edde783054c4e2bd4fe34900d4b84'
+CANONICAL_325_REVIEW_SHA = 'fc062462c6c6c7e98a285cc833cc1bd59e0a0c47b851b8066f257efc95b85908'
+
+
+def approved_runtime(root):
+    # Preserve every earlier sealed inventory. The new independent authority
+    # admits only the three portable dependency-label rebuilds, not new logic.
+    previous = reviewed_325_runtime(root)
+    directory = Path(root) / 'docs/evidence/apadana/canonical325'
+    proof = sealed(directory / 'CANONICAL_RUNTIME_INVENTORY.json', CANONICAL_325_INVENTORY_SHA)
+    review = sealed(directory / 'CANONICAL_BUILD_REVIEW.json', CANONICAL_325_REVIEW_SHA)
+    assert proof['schema'] == 'reviewed-current325-canonical-runtime-inventory-v1'
+    assert proof['baseline_commit'] == '6555a21f7290a28a893a8dfb3aa37117ff13afd6'
+    assert proof['old_runtime_authority_sha256'] == CURRENT_325_RUNTIME_REVIEW_SHA
+    assert review['status'] == 'GO_EXACT_RESTRICTED_THREE_CJS_PATH_CANONICALIZATION_ONLY'
+    assert review['old_commit'] == proof['baseline_commit']
+    assert review['old_runtime_authority_sha256'] == CURRENT_325_RUNTIME_REVIEW_SHA
+    assert review['expected_inventory_derived_from_old_sealed_git_bytes'] is True
+    assert review['current_runtime_not_used_as_expectation'] is True
+    assert review['new_inventory']['sha256'] == CANONICAL_325_INVENTORY_SHA
+    files = proof['files']
+    delta = ['http-worker.cjs', 'http.cjs', 'index.cjs']
+    assert len(files) == review['runtime_paths'] == 34 and set(files) == set(previous)
+    assert review['changed_paths'] == 3 and review['unchanged_paths'] == 31
+    assert [name for name in sorted(files) if files[name] != previous[name]] == delta
+    assert [change['path'] for change in review['changes']] == delta
+    for change, count in zip(review['changes'], [222, 230, 222]):
+        assert change['old'] == previous[change['path']]
+        assert change['derived_new'] == files[change['path']]
+        assert change['actual_matches_derived'] is True and change['prefix_occurrences'] == count
+    assert files['data/source-notes.json'] == previous['data/source-notes.json']
+    assert all(not Path(name).is_absolute() and '..' not in Path(name).parts for name in files)
     return files
 
 
