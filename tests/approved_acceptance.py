@@ -12,6 +12,45 @@ from web_reader_approved_acceptance import (approved_catalogue, approved_runtime
     assert_catalogue, assert_profiles, assert_runtime, assert_runtime_records)
 
 
+def provision_complete_current_runtime_fixture(destination):
+    """Complete owned current-data fixture before a targeted old-authority tamper.
+
+    The reviewed history helper copies all ACTUAL new27 data and keeps DD/six/four
+    historical bytes separate. It validates physical sources before copying.
+    Only the existing finite older runtime proof closure is added here.
+    """
+    import shutil
+    from web_reader_four_boundary_history import copy_historical_fixture
+    names = (
+        'tests/fixtures/reviewed-runtime-2449.json',
+        'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json',
+        'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/canonical325/CANONICAL_RUNTIME_INVENTORY.json',
+        'docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json',
+        'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_INVENTORY.json',
+        'docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',
+        'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',
+        'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',
+        'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json',
+        'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json',
+        'docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json',
+        'docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json',
+    )
+    for name in names:
+        target = destination / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / name, target)
+    copy_historical_fixture(ROOT, destination)
+
+
 class ApprovedAcceptance(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -95,6 +134,8 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_inventory_seal_tampering(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary);dest=root/'tests/fixtures';dest.mkdir(parents=True)
+            provision_complete_current_runtime_fixture(root)
+            self.assertEqual(approved_runtime(root), self.inventory)
             data=json.loads((ROOT/'tests/fixtures/reviewed-runtime-2449.json').read_text(encoding='utf-8'))
             data['files']['data/source-notes.json']['sha256']='0'*64
             (dest/'reviewed-runtime-2449.json').write_text(json.dumps(data),encoding='utf-8')
@@ -104,6 +145,8 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_current_runtime_review_tampering(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
+            provision_complete_current_runtime_fixture(root)
+            self.assertEqual(approved_runtime(root), self.inventory)
             for name in ('tests/fixtures/reviewed-runtime-2449.json',
                     'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json'):
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True)
@@ -137,6 +180,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_latest_runtime_inventory_seal_tampering(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
+            provision_complete_current_runtime_fixture(root)
             names=('tests/fixtures/reviewed-runtime-2449.json',
                 'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json',
                 'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',
@@ -188,6 +232,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_two_runtime_inventory_seal_tampering_after_positive(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
+            provision_complete_current_runtime_fixture(root)
             names=('tests/fixtures/reviewed-runtime-2449.json',
                 'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json',
                 'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',
@@ -238,6 +283,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_seven_runtime_inventory_seal_tampering_after_positive(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
+            provision_complete_current_runtime_fixture(root)
             names=('tests/fixtures/reviewed-runtime-2449.json',
                 'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json',
                 'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',
@@ -289,6 +335,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_eight_runtime_inventory_seal_tampering_after_positive(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)
+            provision_complete_current_runtime_fixture(root)
             names=('tests/fixtures/reviewed-runtime-2449.json',
                 'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json',
                 'docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json',

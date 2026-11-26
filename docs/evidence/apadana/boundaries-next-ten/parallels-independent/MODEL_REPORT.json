@@ -1,0 +1,386 @@
+{
+  "schema": "independent-frozen-dd-shared-stage123-model-v1",
+  "status": "DERIVED_FROM_FROZEN_OLD_CANON_AND_PRESEALED_TEN_METADATA_ONLY",
+  "baseline_commit": "dd7b697df2c54308084fffd934af38130d01f952",
+  "old_canon_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+  "new_canon_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "old_canon_packed_sha256": "271d6dd4b864c3688b175f72b7698c4f8736fa1a30525075333e09279d59d491",
+  "all61_books_sha256": "ad8c7cbfa8249d4f21eb94bd59b556e8823e5870dcf0a657bfaedee5a0fd4883",
+  "source_books_unchanged": true,
+  "metadata_pins": {
+    "old_ten_sha256": "cce5323b93fc6be3a415e9fb75146d8f1e1696ce7530d2634286d00bebff6255",
+    "new_ten_sha256": "c0a008965acd462b45dcf35eaf8e19abd6246f36a9c64fbb4cab5d4fd16962b0"
+  },
+  "frozen_sources": {
+    "src/canon.mjs": "b496860add5770a775023b28739c4821af459c96803af644a5ecd20fcc69883f",
+    "src/editions.mjs": "ab2306502a68171b474969ddd6c96d16e37891c4d451a6e78b8b17bcc505b68b",
+    "scripts/parallels/shared.mjs": "ff89df3b56ef39ef244f2848771e15ecac26e6c23c11894f5fb6eaf21304b955"
+  },
+  "extracted_declarations_sha256": "f15cf47db3fc004822bf2869c517de802ec520f4a6f7bcc9a741800c165a4fb1",
+  "pure_model_sha256": "c6a9697099bd8e4b72a5d4081bdce93aa35763888833d7759ff58ef34d410567",
+  "params": {
+    "shingle_words": 8,
+    "max_texts_per_shingle": 4,
+    "stock_words": 5,
+    "stock_texts": 10,
+    "rare_word_texts": 20,
+    "min_rare_words": 2,
+    "min_shared_words": 30,
+    "min_run_words": 20,
+    "min_short_coverage": 0.7,
+    "min_short_coverage_strict": 0.9,
+    "min_short_words": 12,
+    "max_segment_refs": 12
+  },
+  "phases": {
+    "old": {
+      "stats": {
+        "documents": 8246,
+        "shingles": 1145439,
+        "rare_shingles": 110726,
+        "stock_shingles_skipped": 25574,
+        "candidate_pairs": 12642
+      },
+      "model_details": {
+        "word_occurrences": 2749745,
+        "word_types": 138839,
+        "rare_word_types_le20": 133023,
+        "shingle_occurrences": 1817325,
+        "fivegram_types": 1072955,
+        "fivegram_occurrences": 2158845,
+        "stock_fivegram_types": 5208,
+        "accepted_rare_occurrences": 349574,
+        "stage1_ms": 6756,
+        "stage2_ms": 660,
+        "stage3_ms": 45
+      }
+    },
+    "new": {
+      "stats": {
+        "documents": 8246,
+        "shingles": 1145439,
+        "rare_shingles": 110726,
+        "stock_shingles_skipped": 25574,
+        "candidate_pairs": 12639
+      },
+      "model_details": {
+        "word_occurrences": 2749745,
+        "word_types": 138839,
+        "rare_word_types_le20": 133023,
+        "shingle_occurrences": 1817325,
+        "fivegram_types": 1072955,
+        "fivegram_occurrences": 2158845,
+        "stock_fivegram_types": 5208,
+        "accepted_rare_occurrences": 349574,
+        "stage1_ms": 6423,
+        "stage2_ms": 583,
+        "stage3_ms": 42
+      }
+    }
+  },
+  "delta": {
+    "removed_pairs": [
+      [
+        "tha-ap336",
+        "tha-ap423"
+      ],
+      [
+        "tha-ap341",
+        "tha-ap428"
+      ],
+      [
+        "tha-ap344",
+        "tha-ap374"
+      ],
+      [
+        "tha-ap348",
+        "tha-ap521"
+      ],
+      [
+        "tha-ap426",
+        "tha-ap494"
+      ]
+    ],
+    "added_pairs": [
+      [
+        "tha-ap349",
+        "tha-ap521"
+      ],
+      [
+        "tha-ap427",
+        "tha-ap494"
+      ]
+    ],
+    "per_uid": {
+      "tha-ap336": {
+        "removed": [
+          "tha-ap423"
+        ],
+        "added": []
+      },
+      "tha-ap423": {
+        "removed": [
+          "tha-ap336"
+        ],
+        "added": []
+      },
+      "tha-ap341": {
+        "removed": [
+          "tha-ap428"
+        ],
+        "added": []
+      },
+      "tha-ap428": {
+        "removed": [
+          "tha-ap341"
+        ],
+        "added": []
+      },
+      "tha-ap344": {
+        "removed": [
+          "tha-ap374"
+        ],
+        "added": []
+      },
+      "tha-ap374": {
+        "removed": [
+          "tha-ap344"
+        ],
+        "added": []
+      },
+      "tha-ap348": {
+        "removed": [
+          "tha-ap521"
+        ],
+        "added": []
+      },
+      "tha-ap521": {
+        "removed": [
+          "tha-ap348"
+        ],
+        "added": [
+          "tha-ap349"
+        ]
+      },
+      "tha-ap426": {
+        "removed": [
+          "tha-ap494"
+        ],
+        "added": []
+      },
+      "tha-ap494": {
+        "removed": [
+          "tha-ap426"
+        ],
+        "added": [
+          "tha-ap427"
+        ]
+      },
+      "tha-ap349": {
+        "removed": [],
+        "added": [
+          "tha-ap521"
+        ]
+      },
+      "tha-ap427": {
+        "removed": [],
+        "added": [
+          "tha-ap494"
+        ]
+      }
+    },
+    "changed_document_stats": [
+      {
+        "id": "tha-ap348",
+        "old": {
+          "words": 61,
+          "runs": 9,
+          "nonheading_segments": 8,
+          "shingle_occurrences": 12,
+          "fivegram_positions": 30
+        },
+        "new": {
+          "words": 51,
+          "runs": 8,
+          "nonheading_segments": 7,
+          "shingle_occurrences": 9,
+          "fivegram_positions": 24
+        }
+      },
+      {
+        "id": "tha-ap349",
+        "old": {
+          "words": 34,
+          "runs": 7,
+          "nonheading_segments": 6,
+          "shingle_occurrences": 4,
+          "fivegram_positions": 13
+        },
+        "new": {
+          "words": 44,
+          "runs": 8,
+          "nonheading_segments": 7,
+          "shingle_occurrences": 7,
+          "fivegram_positions": 19
+        }
+      },
+      {
+        "id": "tha-ap374",
+        "old": {
+          "words": 75,
+          "runs": 11,
+          "nonheading_segments": 10,
+          "shingle_occurrences": 12,
+          "fivegram_positions": 36
+        },
+        "new": {
+          "words": 66,
+          "runs": 10,
+          "nonheading_segments": 9,
+          "shingle_occurrences": 10,
+          "fivegram_positions": 31
+        }
+      },
+      {
+        "id": "tha-ap375",
+        "old": {
+          "words": 72,
+          "runs": 11,
+          "nonheading_segments": 10,
+          "shingle_occurrences": 9,
+          "fivegram_positions": 33
+        },
+        "new": {
+          "words": 81,
+          "runs": 12,
+          "nonheading_segments": 11,
+          "shingle_occurrences": 11,
+          "fivegram_positions": 38
+        }
+      },
+      {
+        "id": "tha-ap423",
+        "old": {
+          "words": 177,
+          "runs": 18,
+          "nonheading_segments": 18,
+          "shingle_occurrences": 62,
+          "fivegram_positions": 110
+        },
+        "new": {
+          "words": 168,
+          "runs": 17,
+          "nonheading_segments": 17,
+          "shingle_occurrences": 60,
+          "fivegram_positions": 105
+        }
+      },
+      {
+        "id": "tha-ap424",
+        "old": {
+          "words": 194,
+          "runs": 24,
+          "nonheading_segments": 21,
+          "shingle_occurrences": 52,
+          "fivegram_positions": 106
+        },
+        "new": {
+          "words": 203,
+          "runs": 25,
+          "nonheading_segments": 22,
+          "shingle_occurrences": 54,
+          "fivegram_positions": 111
+        }
+      },
+      {
+        "id": "tha-ap426",
+        "old": {
+          "words": 75,
+          "runs": 14,
+          "nonheading_segments": 11,
+          "shingle_occurrences": 13,
+          "fivegram_positions": 30
+        },
+        "new": {
+          "words": 65,
+          "runs": 13,
+          "nonheading_segments": 10,
+          "shingle_occurrences": 10,
+          "fivegram_positions": 24
+        }
+      },
+      {
+        "id": "tha-ap427",
+        "old": {
+          "words": 84,
+          "runs": 13,
+          "nonheading_segments": 10,
+          "shingle_occurrences": 19,
+          "fivegram_positions": 40
+        },
+        "new": {
+          "words": 94,
+          "runs": 14,
+          "nonheading_segments": 11,
+          "shingle_occurrences": 22,
+          "fivegram_positions": 46
+        }
+      },
+      {
+        "id": "tha-ap428",
+        "old": {
+          "words": 98,
+          "runs": 17,
+          "nonheading_segments": 14,
+          "shingle_occurrences": 15,
+          "fivegram_positions": 42
+        },
+        "new": {
+          "words": 88,
+          "runs": 16,
+          "nonheading_segments": 13,
+          "shingle_occurrences": 12,
+          "fivegram_positions": 36
+        }
+      },
+      {
+        "id": "tha-ap429",
+        "old": {
+          "words": 164,
+          "runs": 25,
+          "nonheading_segments": 22,
+          "shingle_occurrences": 30,
+          "fivegram_positions": 76
+        },
+        "new": {
+          "words": 174,
+          "runs": 26,
+          "nonheading_segments": 23,
+          "shingle_occurrences": 33,
+          "fivegram_positions": 82
+        }
+      }
+    ]
+  },
+  "candidate_files": {
+    "OLD_CANDIDATE_PAIRS.json": {
+      "bytes": 483399,
+      "sha256": "22d15a82bfb93c2bf8540663c2171a4f9bc308ecd66bdb27d43dcae9c6b381da",
+      "pairset_compact_sha256": "f64bc04be9855311759cff50c077055aca4c5391e1ff7022c2c34c18e7f1490e"
+    },
+    "NEW_CANDIDATE_PAIRS.json": {
+      "bytes": 483273,
+      "sha256": "cc20fbe2ce05c0e74e883c42484deb20d9cb8c0ae564e5d6ddd31409d6f7c8cc",
+      "pairset_compact_sha256": "d31859edd572f71f6fe3c4316c0e8d3a25ad568af0227c48554fa3e24fd66096"
+    }
+  },
+  "facade": "Only exact finite frozen renderer/edition/hash/fold declarations plus independent eligibility/DF/stock/pair-membership model; no load(), application imports, builder, final filtering or candidate output read.",
+  "membership_equivalence": "Frozen Pass3 adds a pair iff two distinct documents have at least one accepted rare-shingle occurrence in common. Deduplicating documentIDs within an occurrence list preserves EXACT candidate-key membership, although final position sets are intentionally not modeled.",
+  "final_edge_scope": "No final edges computed or consumed. Candidate deltas precede overlap/same-method/coverage/run/rare-word filtering and do not imply published edge changes.",
+  "bounds": {
+    "outer_seconds": 120,
+    "node_old_space_MB": 768,
+    "pure_module_no_IO_or_app_imports": true
+  },
+  "no_network_Git_tests_or_app_imports": true
+}

@@ -1,3 +1,4 @@
+import {canonBeforeNextTen,nextTenLogicalInput} from './canon-before-next-ten.mjs';
 /** Pure TEST-INPUT inverse only; never transform production/runtime responses. */
 import assert from 'node:assert/strict';
 import {readSixRegularRelative} from './six-regular-file.mjs';
@@ -18,12 +19,12 @@ export function sixAuthority({root=authorityRoot}={}){
  for(const row of value.records){assert.equal(sha(JSON.stringify(row.before)),row.before_object_sha256);assert.equal(sha(JSON.stringify(row.future)),row.future_object_sha256);assert.equal(row.future.index_revision,SIX_REVISION);}return freeze(value);
 }
 export function sixState(canon,options){
- const oracle=sixAuthority(options);assert.equal(canon.source?.commit,source);const selected={};for(const id of SIX_IDS){const rows=canon.units.filter(u=>u.id===id);assert.equal(rows.length,1,'Missing or duplicate six-poem unit');selected[id]=rows[0];}
+ canon=canonBeforeNextTen(canon,options);const oracle=sixAuthority(options);assert.equal(canon.source?.commit,source);const selected={};for(const id of SIX_IDS){const rows=canon.units.filter(u=>u.id===id);assert.equal(rows.length,1,'Missing or duplicate six-poem unit');selected[id]=rows[0];}
  const equals=expected=>{try{assert.deepEqual(selected,expected);return true;}catch{return false;}};
  for(const[state,field]of [['old','before'],['new','future']])if(equals(Object.fromEntries(oracle.records.map(r=>[r.id,r[field]]))))return state;
  assert.fail('Mixed or unreviewed six-poem metadata');
 }
-export function canonBeforeSix(canon,options){sixState(canon,options);const previous=Object.fromEntries(sixAuthority(options).records.map(r=>[r.id,r.before]));return {...canon,units:canon.units.map(u=>Object.hasOwn(previous,u.id)?structuredClone(previous[u.id]):u)};}
-export function exactC1CanonBytes(raw,options){const oracle=sixAuthority(options);assert.equal(sha(raw),oracle.future_canonical_logical_sha256,'Exact complete future canon required');const value=JSON.parse(raw);assert.equal(sixState(value,options),'new');const old=Buffer.from(JSON.stringify(canonBeforeSix(value,options)));assert.equal(sha(old),C1_CANON_SHA,'Whole immutable C1 canon restored');return old;}
+export function canonBeforeSix(canon,options){canon=canonBeforeNextTen(canon,options);sixState(canon,options);const previous=Object.fromEntries(sixAuthority(options).records.map(r=>[r.id,r.before]));return {...canon,units:canon.units.map(u=>Object.hasOwn(previous,u.id)?structuredClone(previous[u.id]):u)};}
+export function exactC1CanonBytes(raw,options){raw=nextTenLogicalInput(raw,options);const oracle=sixAuthority(options);assert.equal(sha(raw),oracle.future_canonical_logical_sha256,'Exact complete future canon required');const value=JSON.parse(raw);assert.equal(sixState(value,options),'new');const old=Buffer.from(JSON.stringify(canonBeforeSix(value,options)));assert.equal(sha(old),C1_CANON_SHA,'Whole immutable C1 canon restored');return old;}
 /** Explicit genuine C1 historical frame, otherwise strict exact future input. */
 export function c1LogicalInput(raw,options){return sha(raw)===C1_CANON_SHA?raw:exactC1CanonBytes(raw,options);}

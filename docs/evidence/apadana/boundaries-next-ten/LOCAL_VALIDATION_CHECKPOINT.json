@@ -1,0 +1,36 @@
+{
+  "application_component": "6ab4a322108aec740c330e4afd974ee4da808886",
+  "new_mandatory_source_gate": {
+    "outer_tests": 16,
+    "pass": 16,
+    "skipped": 0,
+    "inner_python_tests": 16,
+    "log_sha256": "727bcaa4f59eb6bf28af10992eb1ae7d33d4d825ebf509cb9f3a7158dc0f34e0"
+  },
+  "initial_full_check": {
+    "tests": 2034,
+    "pass": 1774,
+    "fail": 4,
+    "source_conditional_skips": 256,
+    "log_sha256": "0aa13c8a4d78bc09f9cc8c7451749bb96f19c1f991774425a72ae265b173544a",
+    "failures": "one33casePythonwrapper with6incompletefixtures; threecases inoldsourcefixturetest. Nootherfailures."
+  },
+  "targeted_repairs": {
+    "old_source_cases": 4,
+    "old_source_pass": 4,
+    "approved_python_cases": 33,
+    "approved_wrapper_pass": 1,
+    "approved_wrapper_timeout_ms": 30000,
+    "approved_wrapper_duration_ms": 11922.83616
+  },
+  "installed_browser_v2": {
+    "status": "failed",
+    "passed": "current144; old1152+288; exactcontinuationsboth144; sourcebook16; simulatedhost4cells; nativeoldbookmarks20x2widths rootentry inclUTF8exports",
+    "failure": "harness assumesunpaginatedSaved; actual25perpage and26thnotinDOM. Proposedsearch-basedV3pending.",
+    "report_sha256": "91dc06988d1a89b9bfbb49293a8e39376bb9fd4088a5d11875c3b4d7f6c9f716"
+  },
+  "full_new_candidate_ci": "pending",
+  "dev_promoted": false,
+  "new_english_activated": 0,
+  "physical_device_or_human_AT_accepted": false
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "independent-static-next-ten-history-tests-review-v1",
+  "decision": "GO_FOR_SCOPED_ROOT_INTEGRATION_AND_EXECUTION_STATIC_ONLY",
+  "execution_and_release_approval": false,
+  "reviewer": "/root/next_ten_source_tests",
+  "review_scope": "Read-only source, text, SHA-256 and length inspection of the frozen proposal and its actual helper interfaces. No application/helper/test import or execution, build, Git, CI, network or tracked write.",
+  "frozen_author_manifest": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/new-history-tests/MANIFEST.json",
+    "bytes": 1712,
+    "sha256": "7364274187fff0450b006a0684e8504b7bc4b80127ac626b9a9ec99f33dc62af",
+    "status": "FROZEN_EXTERNAL_SOURCE_ONLY_NO_EXECUTION"
+  },
+  "verified_manifest_members": {
+    "PROPOSAL_RECEIPT.json": {
+      "bytes": 2738,
+      "sha256": "44697e1c0851b3dd284f1d99e279c996571f1206e9930070db3436f6395bbf5e"
+    },
+    "README.md": {
+      "bytes": 5548,
+      "sha256": "183d5286ee7abf8c8d920d73f32798b305c2c2c9e8b2d7ba87cec55d8c5dc775"
+    },
+    "SOURCE_MAP_GATE.json": {
+      "bytes": 565,
+      "sha256": "5746f1c141b6417e7ff2dd950250c6c0ac4dfba7e84583078f8ecc8c0f371a01"
+    },
+    "next-ten-history-data.test.mjs": {
+      "bytes": 6244,
+      "sha256": "647d8b50dbc8287f913495628571cf4c877a3f4216f5f53a5ab611db370f976f"
+    },
+    "next-ten-history.test.mjs": {
+      "bytes": 990,
+      "sha256": "fc10fa448eb1840f5a0c7f7e3e3578e023a5d0e431af882e31176f9b2583495b"
+    },
+    "next-ten-source-history.test.mjs": {
+      "bytes": 2422,
+      "sha256": "38ed7e21a7c13cd7935265ae02b81e92e3b5bb0aef11dd86adb4661a6ca49668"
+    },
+    "next_ten_history_acceptance.py": {
+      "bytes": 11887,
+      "sha256": "c80edab2c44dc23e0504af6645287a146aff911f801f9f2750bee8fd9508af73"
+    }
+  },
+  "author_record_matches_actual_helper_bytes": {
+    "scripts/web_reader_next_ten_boundary_history.py": "6327f0a6ba14dc5de91aeb7c079bf6823d6ab5404620f87a1a9a7b0b302d8bbc",
+    "scripts/web_reader_six_boundary_history.py": "30d2b604761336f995bbaeb3851ebfabd13bc542e18af28757d3bf62299c7348",
+    "scripts/web_reader_approved_acceptance.py": "e2e2fa8545031e83627d4939bf4eca8e70424affd14708ced7f177e7be4cd28b",
+    "tests/helpers/next-ten-history-data.mjs": "d4177d9eb7ffa2315077bf262cb91f60c22a6e7647e5774e80b1fc9d988725f9",
+    "tests/helpers/six-history-data.mjs": "86a9093f2d926fc4970189a1a5c13c00e0da54149186b90f7a055a02f3d6144f",
+    "tests/helpers/next-ten-source-input.mjs": "2685c30a5e5cbd5d1d4799d1eba3596afa103cd2b53673bafec1ea0738be156c",
+    "tests/helpers/six-boundary-source-input.mjs": "170da4175efcc38065a829d3692f332e06dfb5f56cbf6387e6626dc3f1b82435"
+  },
+  "independent_helper_review_receipts_verified": {
+    "PYTHON_REVIEW.json": "27034e42c53c0b6280813b4c03225388aa291503a8dfe5b0ae3cc86ea0098a48",
+    "JS_REVIEW.json": "bd6a785569110b38dd92f938722468a9f81b3c2d1696ae7f1db76463aa354e91"
+  },
+  "finite_case_counts": {
+    "python_unittest_cases": 5,
+    "node_python_wrapper_cases": 1,
+    "node_data_cases": 3,
+    "node_source_cases": 1,
+    "total_node_cases": 5,
+    "python_child_timeout_ms": 120000,
+    "python_wrapper_timeout_ms": 125000,
+    "javascript_data_case_timeout_ms": 120000,
+    "javascript_source_case_timeout_ms": 30000,
+    "conditional_skips": 0
+  },
+  "confirmed_static_properties": [
+    "Each suite starts with genuine actual-current root acceptance; PENDING/missing/refused actual state aborts setup and cannot satisfy a later negative assertion.",
+    "Python and JavaScript compare complete returned current34 records to independently pinned ea2b inventory, distinguish legitimate historical DD34 using independently pinned ba913 records, and never normalize actual runtime output as an expectation.",
+    "The 343 catalogue calls are genuine smoke checks. Full profile/link preservation is a separate independently pinned source-test gate; these count assertions do not claim complete object preservation.",
+    "Python instruments real delegated reader calls and actual capture calls without replacing validation, requiring one all27 capture per public catalogue/runtime operation and physical proof rereads during private reuse.",
+    "Warm current/prior runtime/source-oracle proof deletion/corruption, new corpus corruption, authentic changed DD substitutions and frozen-DD fixture tampering exercise real physical owned files. Same-mtime Python mutations retain the original timestamp and restore bytes/timestamps in finally.",
+    "Python scope loss, immutability, foreign thread, ordinary close and exceptional close exercise the current private binding API. Fault injection restores the binding before owner cleanup.",
+    "JavaScript validates ordinary-root rejection for private historical handlers, unknown fixed operations without callback invocation, unchanged identity for unknown supplied data, historical packed input generation without actual-file replacement, and owned parent/root junction refusal.",
+    "The Python fixture copier preserves actual new27, separate old DD4 and previous C1/four fixtures; it adds the complete apadana proof tree plus the two external historical authority records. JavaScript copies literal nine-proof closure, new27 from independently pinned inventory and separate old/new-stage four-file fixture groups.",
+    "Source-reader controls dynamically import source helpers after actual-current positive, require exact actual NEXT policy source in a mandatory mapped path, preserve legitimate explicit DD stage semantics, and reject DD string/Buffer results through both strict readers for string/fileURL identities.",
+    "The source case does not treat PENDING as success or skip; it deliberately cannot pass until root binds the independent source map. No fake true branch or unreachable assertion substitutes for this gate.",
+    "Mutations after fixture provisioning use owned paths and restore in finally. Authority symlinks and aliases point only to owned directories. No negative case writes into external pinned source, repository or private study data."
+  ],
+  "blocking_test_api_or_false_pass_findings": [],
+  "scope_clarification_from_parent": "Root confirmed that these catalogue calls are current catalogue smoke checks, while full343 profile/link preservation is independently required by source V2 test06. Root will separately execute bounded external/manual warm new-map/old-map proof mutation controls after independent sealing instead of expanding the frozen source test.",
+  "separate_required_gates": [
+    "Root application and actual zero-skip execution of five Python cases and five Node cases, including platform-specific junction behavior, capture counts and complete fixture provisioning.",
+    "Independent exact whole-source-map receipt and loader/path pins. SOURCE_MAP_GATE.json remains explicitly pending at this proposal freeze; source execution and full acceptance remain held until root seals it.",
+    "Root-planned bounded external/manual source-proof controls after valid warm source acceptance: missing/corrupt/alias new and old SOURCE_INVERSES evidence must fail closed, with owned fixtures and no original-tree writes. These controls are not present or claimed as run in the frozen source case.",
+    "Actual installed runtime34 and package/widget/browser/offline equivalence, exact candidate CI and release decisions remain separate from returned inventory contracts.",
+    "Physical devices, human accessibility and live provider behavior are not tested or certified here."
+  ],
+  "nonblocking_cleanup_limit": "The JavaScript fixture factory is cleaned by callers after successful provisioning. A provisioning exception before it returns can leave only its owned temporary directory; this is a cleanup limitation, not a passing fallback or external mutation capability.",
+  "execution_claim": "None. This GO authorizes only the reviewed finite proposal scope for root integration/execution; it is not a successful test, source-map, installed-reader, CI or release receipt."
+}

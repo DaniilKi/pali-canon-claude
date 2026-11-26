@@ -1,0 +1,167 @@
+{
+  "schema": "independent-next-ten-consumer-proposal-review-v2",
+  "status": "GO_SCOPE_EXACT_V2_TWO_REFERENCE_INPUT_CORRECTION_ROOT_EXECUTION_REQUIRED",
+  "manifest": {
+    "file": "/tmp/pali-next-ten-evidence-nov26/new-consumer-tests/v2/MANIFEST.json",
+    "sha256": "636f9f1b29c2d8947b37337f2403a900c44ea57f96125db49e3bcfef7ca40447"
+  },
+  "all9_v2_manifest_member_hashes_verified": true,
+  "files": {
+    "apadana-next-ten-locator-consumers.test.mjs": {
+      "bytes": 21897,
+      "sha256": "2314164562cadde2bfd22e1f40bdc6192779bb677e953e0583e3135be26b69ed"
+    },
+    "apadana-next-ten-cached-consumers.test.mjs": {
+      "bytes": 6673,
+      "sha256": "60007d4df36c86ace6823a7db2a39f63ec1b3418981c92f79f62bcd6b5f9cf2b"
+    }
+  },
+  "delta": {
+    "file": "V2_QUERY_SELECTOR.patch",
+    "sha256": "9588fe8b3fc7d865078d10df05c6cf3d183fb917bb6ef195da661c825285ec6f",
+    "only_change": "One body selector helper: exact frozen narrative ref overrides349/2 and375/2; other8 retain previous longest-verse selection",
+    "whole_inverse_restores_V1_consumer_sha256": "ed5d9e223a4df7a56fee5d1c06070604a65481b8f27bee81673381fa8ef3b8b1",
+    "cached_consumer_entire_bytes_unchanged": true,
+    "quote_hash_guard_and_all12_test_bodies_entire_tail_byte_identical": true,
+    "query_caps_and_mandatory_owner_assertions_unchanged": true,
+    "unknown_or_missing_override_ref": "No fallback; existing quote() mandatory segment assertion fails"
+  },
+  "prior_v1_hold_preserved": {
+    "file": "INDEPENDENT_REVIEW.json",
+    "sha256": "37fa5285e6fb1a9028950b16ece7026ee2aca5da91c7e3dba31be470c096fde4",
+    "original_manifest_sha256": "315313c92b5febac2c3e8e2bcb1ffc5090f95b1c1d128f7fb89492df1537b339",
+    "preserved_v1_archive": "/tmp/pali-next-ten-evidence-nov26/new-consumer-tests/versions/v1",
+    "all7_archived_manifest_member_hashes_verified": true,
+    "path_note": "Producer replaced the current proposal root withV2; V1 bytes remain exact under versions/v1. V1 receipt originally named then-current root; its fingerprints remain bound here to the archived V1 files.",
+    "resolved": "Only identified blocking stock-phrase inputs replaced; no product behavior/validator/test assertions weakened"
+  },
+  "static_narrative_evidence": {
+    "method": "Source-only stdlib JSON/gzip/Unicode/whitespace enumeration; each selected text rebuilt from independently sealed source coordinate tuples and checked against sealed segmentSHA; no application/Node/test import or execution",
+    "canonical_raw_data_hash": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+    "all61_books_data_source_only": true,
+    "selected_queries": [
+      {
+        "owner": "tha-ap348",
+        "ref": "tha-ap348/3",
+        "whole_folded_phrase_verse_occurrences": 1,
+        "occurrences_before_target": 0
+      },
+      {
+        "owner": "tha-ap349",
+        "ref": "tha-ap349/2",
+        "whole_folded_phrase_verse_occurrences": 2,
+        "occurrences_before_target": 0
+      },
+      {
+        "owner": "tha-ap374",
+        "ref": "tha-ap374/2",
+        "whole_folded_phrase_verse_occurrences": 1,
+        "occurrences_before_target": 0
+      },
+      {
+        "owner": "tha-ap375",
+        "ref": "tha-ap375/2",
+        "whole_folded_phrase_verse_occurrences": 2,
+        "occurrences_before_target": 1
+      },
+      {
+        "owner": "tha-ap423",
+        "ref": "tha-ap423/12",
+        "whole_folded_phrase_verse_occurrences": 1,
+        "occurrences_before_target": 0
+      },
+      {
+        "owner": "tha-ap424",
+        "ref": "tha-ap424/22",
+        "whole_folded_phrase_verse_occurrences": 1,
+        "occurrences_before_target": 0
+      },
+      {
+        "owner": "tha-ap426",
+        "ref": "tha-ap426/3",
+        "whole_folded_phrase_verse_occurrences": 1,
+        "occurrences_before_target": 0
+      },
+      {
+        "owner": "tha-ap427",
+        "ref": "tha-ap427/11",
+        "whole_folded_phrase_verse_occurrences": 1,
+        "occurrences_before_target": 0
+      },
+      {
+        "owner": "tha-ap428",
+        "ref": "tha-ap428/2",
+        "whole_folded_phrase_verse_occurrences": 2,
+        "occurrences_before_target": 0
+      },
+      {
+        "owner": "tha-ap429",
+        "ref": "tha-ap429/13",
+        "whole_folded_phrase_verse_occurrences": 1,
+        "occurrences_before_target": 0
+      }
+    ],
+    "new_refs": [
+      {
+        "ref": "tha-ap349/2",
+        "text_sha256": "baa0c563b58f89bea31d8a105bedac3ab45b0baa434dde4947c9188d1fcea09b",
+        "source_positions": [
+          [
+            36,
+            10368
+          ],
+          [
+            37,
+            3440
+          ]
+        ],
+        "characters": 87,
+        "words": 10
+      },
+      {
+        "ref": "tha-ap375/2",
+        "text_sha256": "3ac1ed98af9bdf15e16e2fcc1ef2d1490d1edc76303432b1f0b0c8e88c0a4dd7",
+        "source_positions": [
+          [
+            36,
+            10259
+          ],
+          [
+            36,
+            10787
+          ]
+        ],
+        "characters": 89,
+        "words": 9
+      }
+    ],
+    "qualification": "Literal multiplicities remove the identified >=5 earlier exact-tie defect; actual fuzzy result rank/search/registeredMCP validation still requires root execution. No successful test result is inferred."
+  },
+  "retained_static_scope": {
+    "node_cases": 14,
+    "old_test_counts_or_deadlines_changed": false,
+    "new_current_ids": 10,
+    "old_exact_namespace_controls": 12,
+    "old_positions_refused": 144,
+    "stable_numeric_and_source_positions_still_require_pin": 65,
+    "new_segments_source_expectations": 144,
+    "original_notes": 17,
+    "pinned_source_oracles_not_SUT_output": true,
+    "native_and_two_embedded_cached_guards": true,
+    "raw_book36_37_namespaces_unchanged": true,
+    "synthetic_private_notes_drafts_exports_only": true,
+    "zero_provider_fetch_assertion": true,
+    "PENDING_history_helpers_imported": false
+  },
+  "remaining_gates": [
+    "Root apply exact V2 files and run14 cases zero skips against new app",
+    "Any actual absent target fails; choose further exact source input only if necessary, never skip or increase UI caps",
+    "Separate full corpus/history/installed/browser/exactCI and release approvals"
+  ],
+  "execution_performed": {
+    "test_or_app_imports": false,
+    "Node_tests_or_browser": false,
+    "build_Git_CI_network": false,
+    "tracked_edits": false
+  }
+}

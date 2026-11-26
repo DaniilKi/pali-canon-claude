@@ -1,0 +1,56 @@
+{
+  "schema": "independent-next-ten-core-proposal-static-review-v1",
+  "status": "GO_STATIC_EXACT_TWO_CORE_FILES_ONLY_NOT_EXECUTION_APPROVAL",
+  "reviewed_files": {
+    "scripts/canon/apadana_thera_next10_spans.py": {
+      "bytes": 16642,
+      "sha256": "d5e0e2d15c0c0e439d4098b9fee52eda0ee0b268e9d6be1753481ef49b98c98f"
+    },
+    "scripts/canon/repair_apadana_thera_next10_spans.py": {
+      "bytes": 8470,
+      "sha256": "031520f8316741ce7bdbbc5709b9edd92cc3ffdcdd6c4249232846b94fb6e5b3"
+    }
+  },
+  "oracle": {
+    "file": "FUTURE_ORACLE.json",
+    "sha256": "78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655",
+    "old_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+    "new_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+    "all10complete_OLD_NEW_literal_objects_equal": true
+  },
+  "blocking_findings": [],
+  "resolved_finding": {
+    "id": "C1_PHYSICAL_VRI_CONTAINMENT",
+    "original_CLI_sha256": "a38ea64ee24fe1fb61f4d0743e52172a56943d85dc56d4665d5289f2798e8c9e",
+    "problem": "Path.absolute preserves dot-dot. A root spelled /safe/placeholder/../vri and canonical output /safe/vri/new.gz names an output physically inside original VRI while lexical root-in-parents was false.",
+    "corrected_CLI_sha256": "031520f8316741ce7bdbbc5709b9edd92cc3ffdcdd6c4249232846b94fb6e5b3",
+    "fix": "Check every supplied component for symlinks and existing file/directory/new-output conditions first, then return path.resolve(strict=not new). Subsequent distinctness/containment uses physical Path objects; exclusive xb creation remains.",
+    "static_fix_verified": true,
+    "regression_required": "Valid physical-root fixture spelled through an existing placeholder/.. plus inside-output must refuse before creation; retain existing macOS symlink-alias refusal tests."
+  },
+  "reviewed_contracts": {
+    "atomic_mutation": "All two-book/source/target/state/prior/neighbor/dependency/span guards precede any unit update. CLI operates on deep-copied units and publishes canon.units only after raw/parity/commentary/PTS/futurehash/inverse checks.",
+    "exact_source": "Both original raw SHA and Git blobs, counts and entire compact tuple hashes plus equality to complete current books are mandatory in CLI. Helper independently requires exact full tuple hashes/counts for both books at36/37.",
+    "metadata_and_type_states": "All10OLD/NEW complete literals match oracle; typed JSON matching distinguishes booleans/floats. Target PTS must be uniformly present or absent. Before-annotation mode removes PTS only from expected snapshots, and prior/neighbor guards use the same uniform state.",
+    "book_omission": "Both source books omitted is a no-op only if all target records are absent; one book, duplicate/wrong source indices or dangling target records refuse.",
+    "earlier_states": "Mandatory prior pair/four/six NEW snapshots and full frozen neighbors preserve earlier namespaces. The new helper never calls or relaxes old-six neighbor348 guard.",
+    "PTS_notes_and_dependencies": "Correct annotated374/375PTS is copied from exact source literals; CLI independently reruns current Builder.annotate_pages on parsed originals. Book37fulltuple checks retain note214, original tags and page ownership. Commentary complete hash/associations and closed-union interval checks preserve all accepted data; no new grouping/overlap permitted.",
+    "idempotence_and_history": "All-new helper state returns empty only after guards. CLI accepts only exact full OLD0f9or NEWf3b input hashes, revalidates both originals and finalhash, and remains idempotent. Pure historical inverse replaces only exact10OLD/NEW states and preserves unrelated mutations; strict fullhash callers reject such mutated inputs.",
+    "paths_and_output": "Corrected supplied-component symlink refusal precedes physical resolution; actual physical paths drive distinctness and outside-VRI containment. Input files/roots must be regular; output must be new with existing regular parent. All repair checks precede exclusive output creation. Gzip metadata is deterministic and success report follows completed output write."
+  },
+  "builder_integration_constraints": [
+    "Actual current builder has old six hook before Thag. Root must add this new hook after old six, preserving original old-six neighbor348constant and all historical source authorities. No old helper edit is approved.",
+    "Before-annotation helper mode is a typed finite source-build stage; full rebuild equivalence and annotation behavior still require the proposer/root focused checks.",
+    "Root must retain explicit new-to-old historical inverse stages before old hash gates. Do not normalize unknown mutations or route runtime responses through an inverse."
+  ],
+  "review_method": "Read exact files, static AST/literal extraction and oracle comparison, inspect current Builder annotation/order and prior helper constraints. No proposed module import, helper invocation, app/test execution, build, runtime, network, Git mutation or tracked edit.",
+  "pending_validation": [
+    "Dedicated source-test owner must include dot-dot physical containment regression and exact full old/all-new CLI cases with originals.",
+    "The planned12+4spec and other helper/native checks remain unexecuted by this reviewer. This GO neither certifies their outcome nor authorizes execution.",
+    "Root integration, closed locator policy, private-position refusal, independent runtime/package/browser/fullcheck/exactCI and release/push acceptance remain separate.",
+    "No English16activation or rights/coverage approval is conveyed."
+  ],
+  "execution_approval": false,
+  "runtime_or_activation_approval": false,
+  "tracked_project_edits": false
+}

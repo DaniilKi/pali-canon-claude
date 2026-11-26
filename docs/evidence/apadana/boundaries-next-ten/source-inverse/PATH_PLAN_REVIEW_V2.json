@@ -1,0 +1,384 @@
+{
+  "schema": "independent-next-ten-source-path-plan-v2-review-v1",
+  "status": "EXACT_V2_PATH_PLAN_GO_FOR_SEALED_PRODUCER_EXECUTION",
+  "reviewer": "/root/an_numbered_browser",
+  "plan_sha256": "684bc17c6f6f7b07581ee490ceb8539b6262fec11cd493e1ae276161a95fcf0c",
+  "prior_plan_sha256": "56ca1a13932b3a23efee2b0a06d72a16ab36d89886c7b74ebc01d9d910384d71",
+  "producer_sha256": "21e8b903ea45b42359abd0ce31e4ec619b8d7b55e31f8325cbf5259046aba736",
+  "immutable_manifest_sha256": "2c111042d70c0c57315b36ce9a4eea81bad84701201bdbd991c26bf0c27c0d9d",
+  "base_commit": "dd7b697df2c54308084fffd934af38130d01f952",
+  "checks": {
+    "all961_original_bytes_lengths_and_hashes_verified": true,
+    "original_directory_exact_manifest": true,
+    "current_source_inventory": 1001,
+    "changed_existing": 32,
+    "new_code": 40,
+    "unchanged_originals": 929,
+    "no_unknown_changes_additions_deletions_or_symlinks": true,
+    "V2_plan_delta_only_two_newly_changed_existing_tests": true,
+    "previous30_source_snapshot_bytes_unchanged": true,
+    "previous39_nonholder_new_source_snapshot_bytes_unchanged": true,
+    "holder_still_exact_V1_bound_bytes": true,
+    "all32_changed_paths_fit_loader_rooted_regex": true,
+    "AGENTS_package_unchanged": true,
+    "server_runtime_data_paths_in_plan": false,
+    "old_SIX_immutable_sha256": "21c6076b7954b65f807a7ae044d61fb7f61f8a352e4acc6b28eae5ebbd87aaf7"
+  },
+  "two_additions": {
+    "tests/six-boundary-source-input.test.mjs": "d30c6c3c1cc79725dd3002cdeadb66b1853b2e3fb6dd12e884f1a621f5989c30",
+    "tests/approved_acceptance.py": "7cc1bb04dc5f15d6e7062876225186b9d8625aaef1b0dc2ca4ce003cd9949581"
+  },
+  "peer_reviews": {
+    "prior_six_source_test_review_sha256": "ed0f7195c5195e409b32fde6a8d47fd34edf120644f92fec1d618fbbc2acf5bf",
+    "approved33_fixture_review_sha256": "e07cd3eae9d41a782d5377b2009ec56ba9cd988bfdc0a21da277c33c4b4961d5",
+    "both_actual_applied_files_equal_peer_reviewed_complete_proposals": true
+  },
+  "changed_existing": {
+    ".github/workflows/check.yml": {
+      "dd7_sha256": "91874910d8169c41f0e15000a22ed416d29c4ca3ad2779623c2864e909f9b587",
+      "current_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
+      "current_bytes": 168694
+    },
+    "scripts/canon/build_canon.py": {
+      "dd7_sha256": "ab07b1a0d30f2c8608068c0563ec44fa85be58016034cfca64b567678a6afde2",
+      "current_sha256": "80f9855247ff17e7a8b529bb29591fd220cac1a5d19dfe980112cd5d4f48c4ee",
+      "current_bytes": 39676
+    },
+    "scripts/web_reader_approved_acceptance.py": {
+      "dd7_sha256": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9",
+      "current_sha256": "e2e2fa8545031e83627d4939bf4eca8e70424affd14708ced7f177e7be4cd28b",
+      "current_bytes": 52161
+    },
+    "scripts/web_reader_six_boundary_history.py": {
+      "dd7_sha256": "10c9300cc03fd9299ba3e510c74af1e859d758eda08e1c878fd6364fc4fba330",
+      "current_sha256": "30d2b604761336f995bbaeb3851ebfabd13bc542e18af28757d3bf62299c7348",
+      "current_bytes": 21925
+    },
+    "src/chatgpt-widget.mjs": {
+      "dd7_sha256": "c205b72c355e1ad064e886cd85f79c48c2f3af21ec478beb8ae8f440ab50b55b",
+      "current_sha256": "32d83409b18c3e1fe07f09796392b1cbff3d27cf5b6d1c72c5170d73aa5efe99",
+      "current_bytes": 92117
+    },
+    "src/locator-policy.mjs": {
+      "dd7_sha256": "fe987a89d4c540bc5b1f78706869dbff9823cac5b8a78d5104dca56695cba149",
+      "current_sha256": "0ddae64e676ea7adf688e880cb00f0358212343c5c1bc83f40f377ffa5b5178e",
+      "current_bytes": 4777
+    },
+    "tests/apadana-disclosures.test.mjs": {
+      "dd7_sha256": "26f8090564aa436e9475f7054df43d6b72d4bb9b919836dc3dc2ebe4796828ab",
+      "current_sha256": "5b954a2f82874b5f73033d6b70079e125154a334fecec1d519337b475b705253",
+      "current_bytes": 9882
+    },
+    "tests/apadana-fourth-client.test.mjs": {
+      "dd7_sha256": "4c217719991afd06a7e3825695483d5065b484d3fc1fbc344d16b12ff10d6375",
+      "current_sha256": "b61fdcd526a35c452519742fa3b4945a7b970afeaf14100355cde169e319bd3c",
+      "current_bytes": 27793
+    },
+    "tests/apadana-fourth.test.mjs": {
+      "dd7_sha256": "c557e9ec4b374acf6c649316fe5cf37c62127b4ad9faa008753e6d4e5c16a2ef",
+      "current_sha256": "1e54c57174dbe76c76dd17f07f36fd1f5100959576c1e652ab93b0f512e32787",
+      "current_bytes": 18125
+    },
+    "tests/apadana-next.test.mjs": {
+      "dd7_sha256": "07b50abad3064a2d25c93649a41000b1cf5939f86ad7860562bce2d5c03f6782",
+      "current_sha256": "a30221e777e2de57fbcd80f26ff8fee6f227d7032eb1daaa1af69ba05c7779a4",
+      "current_bytes": 9288
+    },
+    "tests/apadana-six-locator-consumers.test.mjs": {
+      "dd7_sha256": "2a6ddd4d1c4e954bd19c4e0e8799594209810c9bc63cffff8c83ea5dd00d3764",
+      "current_sha256": "29b1bc5e0c5657303160040cc085527a294fa0bba814be8535ee5b0e1c835b70",
+      "current_bytes": 16650
+    },
+    "tests/apadana-thera.test.mjs": {
+      "dd7_sha256": "17b5d3c718c419cffbab625e0a404357dafc4a9671f81e6931e651db693fc5bd",
+      "current_sha256": "e0541fd39185aea07a4d8fdd3eb5eef8b631cbc19f14552240c3c0ba220f1920",
+      "current_bytes": 20548
+    },
+    "tests/apadana-third.test.mjs": {
+      "dd7_sha256": "05c68f75897240b227f21307c5712c30712614f72afd1e3e6aae174442e4fde5",
+      "current_sha256": "82c90d065397bcea125c05d119d968e07004fd01faca68c19ca0936eb11ee95d",
+      "current_bytes": 23148
+    },
+    "tests/apadana_six_boundary_acceptance.py": {
+      "dd7_sha256": "52f6897d2bb3e153a5e1d72129db559f779fd144d229d8c14953dd72953fcb56",
+      "current_sha256": "f8e68d283b11b045d4ced137144e2ee79abd7a488f4b0cbdbe450d398ee5bee9",
+      "current_bytes": 24643
+    },
+    "tests/approved_acceptance.py": {
+      "dd7_sha256": "6730178f0d41ccdcca74ef543b2a6186df509b387b964c0dc9764c150e9b0875",
+      "current_sha256": "7cc1bb04dc5f15d6e7062876225186b9d8625aaef1b0dc2ca4ce003cd9949581",
+      "current_bytes": 22723
+    },
+    "tests/current339-source-inverses.test.mjs": {
+      "dd7_sha256": "6cc03a61b85cea7fc5a921921f141973c90654bf1b8769375a8ea0b0400c6fdc",
+      "current_sha256": "369b9169a90533579f31bee02eeba301b918910d23183cd2e92abb7a51a38b63",
+      "current_bytes": 1541
+    },
+    "tests/current343-bindings.test.mjs": {
+      "dd7_sha256": "3bc42296f6e4e5abe573d4ab328ab85f37c051d50dc01abc07703f1b66809363",
+      "current_sha256": "487eac39425cae787b82cdf2c23076bd4ec0fe7c9eb50fa7692e41997fe5c841",
+      "current_bytes": 1998
+    },
+    "tests/held234-client.test.mjs": {
+      "dd7_sha256": "5aba4947bbdae8b2abc0ac1835edc87026729c1a863cca987103c859c493c263",
+      "current_sha256": "59184090e844fb420839c71b20b8483118cb64ea8639f81cf2129398f8567d89",
+      "current_bytes": 10138
+    },
+    "tests/helpers/canon-before-six.mjs": {
+      "dd7_sha256": "83d1472a1d05fe40a961e8e00aa5c1df3c895fa4c331ebe42f64657bd0ee85d4",
+      "current_sha256": "426629a327d06b364f6f59413ee1d3841badd78088853258e5642f4fd37aa6e0",
+      "current_bytes": 3857
+    },
+    "tests/helpers/six-boundary-source-input.mjs": {
+      "dd7_sha256": "73e11f44693fae80384cf9eb3dc5b723b0087067c9fadfca16ad43ad791a1572",
+      "current_sha256": "170da4175efcc38065a829d3692f332e06dfb5f56cbf6387e6626dc3f1b82435",
+      "current_bytes": 5814
+    },
+    "tests/helpers/six-history-data.mjs": {
+      "dd7_sha256": "4ca6826427cb3d6e112565f64065105882c5a5fe3d42f0dbe031d90f0ee2772d",
+      "current_sha256": "86a9093f2d926fc4970189a1a5c13c00e0da54149186b90f7a055a02f3d6144f",
+      "current_bytes": 9862
+    },
+    "tests/helpers/thera-remaining-client.mjs": {
+      "dd7_sha256": "45009afc6e61e4f8c82501737c54f3564386192689d992b8984eba7157bdd305",
+      "current_sha256": "375fe78b9734b92fbcd11bf2891f5ced0b60dd21e3496a2c58ee6fc573782e15",
+      "current_bytes": 17148
+    },
+    "tests/six-boundary-source-input.test.mjs": {
+      "dd7_sha256": "2f3bf8e7a9c51fb341b71130030af0becc29b939fd5f22c790f702068fda9e07",
+      "current_sha256": "d30c6c3c1cc79725dd3002cdeadb66b1853b2e3fb6dd12e884f1a621f5989c30",
+      "current_bytes": 8742
+    },
+    "tests/six_boundary_history_acceptance.py": {
+      "dd7_sha256": "d74777bcf8f6d0ab02a5c51a96fe48a08b03483057511a01f755f6bbf04e0ee2",
+      "current_sha256": "98a3b5272d3d97e75b456615c17006e8a741f1360e61080c4e848dba6e952cc0",
+      "current_bytes": 8926
+    },
+    "tests/thera-commentary-locators.test.mjs": {
+      "dd7_sha256": "c5a4e3ee0f0e7688b8650e973abf467c7f5672cf0ccef820c0d594978f629b35",
+      "current_sha256": "afaa815caab9a0aa87221c6fa0e8ca19386aa3854c7d4016ca7153bad078901e",
+      "current_bytes": 23301
+    },
+    "tests/thera141-180-client.test.mjs": {
+      "dd7_sha256": "8b378d2bce59b65d3b9b747929cc93baaafa4d87f097a26946d758686a7e9d28",
+      "current_sha256": "25b18d1adbdba02d29d0bf83bc9be2714841b420df1b74abb9b412ac101a9ff3",
+      "current_bytes": 9888
+    },
+    "tests/thera181-220-client.test.mjs": {
+      "dd7_sha256": "0077c58a961eccd86a5236e4b76d382309e251cde40555a9d307c89b5822e11d",
+      "current_sha256": "63172b6003463efbd99f880341ef4ca978d4a33f46bac86b71cc29f38b805525",
+      "current_bytes": 16356
+    },
+    "tests/thera221-230-client.test.mjs": {
+      "dd7_sha256": "e202244d5bd4fd311f834457f80accabef44cdb8054506a40e667145eb867676",
+      "current_sha256": "91f5f48ad319dc0bc4c5a04b97b4617187a90c6687a2314570a75d46a7694422",
+      "current_bytes": 17095
+    },
+    "tests/thera241-250-client.test.mjs": {
+      "dd7_sha256": "0bc6cbb252e5c182b7b19abb1ff0b722dd514859a354b08f2f7c85d1e1b84baf",
+      "current_sha256": "5d86878cb1d89871d7ee8a9a9f160f02252bf382281bb14152dbf6ef051af9e5",
+      "current_bytes": 17095
+    },
+    "tests/thera312-319-client.test.mjs": {
+      "dd7_sha256": "3230ef5f2b812effe5c5ad7f3d16bcc8543f68b310ade4c5984ccb7c541f29b7",
+      "current_sha256": "e91d74a120072c56acee478f7497283ea3c47ed4a47163996153ae19dc9d6923",
+      "current_bytes": 22617
+    },
+    "tests/thera321-329-client.test.mjs": {
+      "dd7_sha256": "4b3cc7100f364e2386190e5ade68fd23e7743b2e6cc3c0ee72c856f596fa4e14",
+      "current_sha256": "c28fdde2283c4d850b50f39c568290764ecdf4c48484e630dae4d1a01dc70077",
+      "current_bytes": 20895
+    },
+    "tests/widget-hosted-selections.test.mjs": {
+      "dd7_sha256": "54aab0be8ea13ac68e5f06b9b119474a83f35f5d7bbe36b81f3930aaee0ed012",
+      "current_sha256": "afd221a7e5c575b329455af54ca3687cf54a5b5412c1eaf8b287c60a42030bca",
+      "current_bytes": 3138
+    }
+  },
+  "new_code_snapshot": {
+    "docs/data/apadana-next-ten-boundaries.md": {
+      "bytes": 5254,
+      "sha256": "c5ecb585b5f26fc19424d251788f058fa1974b6ab314dcb94ea0f6de98276f3f"
+    },
+    "docs/evidence/apadana/book37-source-screen/screen_book37.py": {
+      "bytes": 14804,
+      "sha256": "40c4724e7832c69e6098c9c62028cc77539c9661f34d6649f7f077efa0b1a83e"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/derive_oracle.py": {
+      "bytes": 17570,
+      "sha256": "c242e8f7d7912ea0417e8e77606c09c3e9d5d28ddfa9883323ea60a90f540744"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/finish_oracle.py": {
+      "bytes": 9256,
+      "sha256": "ab6e485b9cb83ece4d1d9c88df55605e3a7f0a49996377c6a524a0b538090a00"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/EXPLANATION.md": {
+      "bytes": 4114,
+      "sha256": "d52100eb782f2b9866291d9edf23ae569bbd2646d9807f6334fa54a931f85956"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/EXTRACTED_FROZEN_DECLARATIONS.mjs": {
+      "bytes": 7381,
+      "sha256": "f15cf47db3fc004822bf2869c517de802ec520f4a6f7bcc9a741800c165a4fb1"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/PURE_NATIVE_REPLAY.mjs": {
+      "bytes": 11123,
+      "sha256": "60013c639c67027038e3a06497ece4997b5316ad4f0b015c2e1fe78246a7a54e"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/PURE_STAGE123_MODEL.mjs": {
+      "bytes": 3702,
+      "sha256": "c6a9697099bd8e4b72a5d4081bdce93aa35763888833d7759ff58ef34d410567"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/derive_candidates.mjs": {
+      "bytes": 11172,
+      "sha256": "bbb4296a86483d2ef4a6e9cd7cd7ee2d5d63085efaacdc057be43e39b298b1f9"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/derive_packed_and_expected.py": {
+      "bytes": 4187,
+      "sha256": "c1ca4d0bce006ad476a904377ee53d7a82cf6fdde695ca88f90877f2889894f2"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/render_isolated.mjs": {
+      "bytes": 4099,
+      "sha256": "2fc2d89856d7989a3d3fa1e8ddd492d7dfeb930eb3408d2770e5e00250e514de"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/source-inverse/produce_next_ten_source_inverse.py": {
+      "bytes": 9517,
+      "sha256": "21e8b903ea45b42359abd0ce31e4ec619b8d7b55e31f8325cbf5259046aba736"
+    },
+    "docs/evidence/apadana/boundaries340-347/derive_six_oracles.py": {
+      "bytes": 23054,
+      "sha256": "c68ecaeffd7e2e5d328ff57ddc18599b19515c8dc8083b2a1aed4a3d966a159b"
+    },
+    "docs/evidence/apadana/boundaries340-347/installed-browser/check-boundary-reader.py": {
+      "bytes": 44893,
+      "sha256": "901c9ae71694d43a9ffb6776e3616eeeae8a716dc49c8d37a594af1dce84b49c"
+    },
+    "docs/evidence/apadana/boundaries340-347/installed-browser/offline-pali-guard.cjs": {
+      "bytes": 4942,
+      "sha256": "6f5b1415dd1838c06a0125fcc9639d2a142c8dc73306724077b49322a41067ad"
+    },
+    "docs/evidence/apadana/boundaries340-347/installed-browser/run-bounded.py": {
+      "bytes": 2213,
+      "sha256": "9e5b56f4adadf1c689adc848dbe70cc5e4a57f4cc42560eaa684fc05fe01ddf5"
+    },
+    "docs/evidence/apadana/canonical325/review.py": {
+      "bytes": 8596,
+      "sha256": "b7a33d9109d22f8b054632dedd862fe1c9bce2d11d7f4c38c076fdb83d60200b"
+    },
+    "docs/evidence/apadana/normalization343/compare_presealed_producer-v1-empty-array-assumption.py": {
+      "bytes": 13616,
+      "sha256": "577858de30fe58f2c3c9512317c779a528970eb50252304bf694acf24094cf12"
+    },
+    "docs/evidence/apadana/normalization343/compare_presealed_producer.py": {
+      "bytes": 15372,
+      "sha256": "2093584a97c17cbb80d55abb9a99203964746781aa63333d31b855ac12b56180"
+    },
+    "docs/evidence/apadana/normalization343/derive_independent_originals.py": {
+      "bytes": 13588,
+      "sha256": "23a95aa8ee68de5a82db85d58d326aacb5c1683625941d983980972206a43c7a"
+    },
+    "docs/evidence/apadana/reconciliation325/replay.py": {
+      "bytes": 14433,
+      "sha256": "ba527a94182bf0dd8729e727fae8104231b200f3bf81489223dc96ff7f707866"
+    },
+    "scripts/canon/apadana_thera_next10_spans.py": {
+      "bytes": 16642,
+      "sha256": "d5e0e2d15c0c0e439d4098b9fee52eda0ee0b268e9d6be1753481ef49b98c98f"
+    },
+    "scripts/canon/repair_apadana_thera_next10_spans.py": {
+      "bytes": 8470,
+      "sha256": "031520f8316741ce7bdbbc5709b9edd92cc3ffdcdd6c4249232846b94fb6e5b3"
+    },
+    "scripts/web_reader_next_ten_boundary_history.py": {
+      "bytes": 16898,
+      "sha256": "6327f0a6ba14dc5de91aeb7c079bf6823d6ab5404620f87a1a9a7b0b302d8bbc"
+    },
+    "skills/compare/agents/openai.yaml": {
+      "bytes": 478,
+      "sha256": "c93e8de0f7b9faa0717819e42d09756203fb661a25d3a6bc0abde2417b54b7f0"
+    },
+    "skills/memorise/agents/openai.yaml": {
+      "bytes": 516,
+      "sha256": "a979e463ee7384f06f528b6605b1d696661c772f343b4ea79ebd54cd5bfcdd4f"
+    },
+    "skills/method/agents/openai.yaml": {
+      "bytes": 481,
+      "sha256": "c7498f59cce287354b5c9e8d06a821c9baba0fa0f5f1833d4bc5ceda1bd56680"
+    },
+    "skills/pali-word/agents/openai.yaml": {
+      "bytes": 467,
+      "sha256": "6ac1bc4fdf2a93a6bc678401d6b5a1aa613dccaf229bcbb14059cdb6e452d925"
+    },
+    "skills/study/agents/openai.yaml": {
+      "bytes": 484,
+      "sha256": "e26805823199566d3f3ef344ce838ac8627cc6bf0010bbc90e6ac14bc85ff438"
+    },
+    "tests/apadana-next-ten-cached-consumers.test.mjs": {
+      "bytes": 6673,
+      "sha256": "60007d4df36c86ace6823a7db2a39f63ec1b3418981c92f79f62bcd6b5f9cf2b"
+    },
+    "tests/apadana-next-ten-locator-consumers.test.mjs": {
+      "bytes": 21897,
+      "sha256": "2314164562cadde2bfd22e1f40bdc6192779bb677e953e0583e3135be26b69ed"
+    },
+    "tests/apadana-next-ten-migration.test.mjs": {
+      "bytes": 1307,
+      "sha256": "4283d5cd761aea599e97d84b77f7c18499abc184eb74858b3623429fa27f5c73"
+    },
+    "tests/apadana_next_ten_boundary_acceptance.py": {
+      "bytes": 45194,
+      "sha256": "28557e471b247f1abbd288c1d04418dcde5f7f65f2eca4a9208452d891825f37"
+    },
+    "tests/helpers/canon-before-next-ten.mjs": {
+      "bytes": 4093,
+      "sha256": "9d0c2d222e51bfe995f06b0993147bf8ab638d4784e345296b7eaaa38212285b"
+    },
+    "tests/helpers/next-ten-history-data.mjs": {
+      "bytes": 11022,
+      "sha256": "d4177d9eb7ffa2315077bf262cb91f60c22a6e7647e5774e80b1fc9d988725f9"
+    },
+    "tests/helpers/next-ten-source-input.mjs": {
+      "bytes": 5738,
+      "sha256": "1bb34845fb899129217a6cc0ffb0056b626bb22555b5143f4a9a344f3f33c142"
+    },
+    "tests/next-ten-history-data.test.mjs": {
+      "bytes": 6244,
+      "sha256": "647d8b50dbc8287f913495628571cf4c877a3f4216f5f53a5ab611db370f976f"
+    },
+    "tests/next-ten-history.test.mjs": {
+      "bytes": 990,
+      "sha256": "fc10fa448eb1840f5a0c7f7e3e3578e023a5d0e431af882e31176f9b2583495b"
+    },
+    "tests/next-ten-source-history.test.mjs": {
+      "bytes": 2422,
+      "sha256": "38ed7e21a7c13cd7935265ae02b81e92e3b5bb0aef11dd86adb4661a6ca49668"
+    },
+    "tests/next_ten_history_acceptance.py": {
+      "bytes": 11887,
+      "sha256": "c80edab2c44dc23e0504af6645287a146aff911f801f9f2750bee8fd9508af73"
+    }
+  },
+  "scope": "V2 adds only two peer-reviewed test-fixture adaptations to the prior source plan. No production/source repair/runtime delta is newly introduced. Existing V1 inverse/checkpoint artifacts remain preserved.",
+  "root_reported_targeted_execution_not_rerun_by_reviewer": {
+    "old_source": "4/4 zero skips 10.79s",
+    "approved33_wrapper": "1/1 zero skips 11.92s under unchanged30000ms"
+  },
+  "execution_scope": {
+    "root_may_execute_exact_producer_with_exact_V2_plan": true,
+    "output": "/tmp/pali-next-ten-evidence-nov26/source-inverse-v2",
+    "new_external_output_required": true,
+    "holder_binding": "Currently remains V1 map30-path binding. Root may bind V2 map/32-path literals only after generating the new map; independent replay and exact final-holder byte review required."
+  },
+  "remaining_gates": [
+    "Independently replay all32 new inverse rows to complete immutable DD7 originals and verify929 unchanged originals, receipt39 new nonholder pins and complete source inventory.",
+    "Independently reverse only holder map-SHA and exact32-path literal changes to its sealed V1 holder bytes and bind final holder source hash.",
+    "Root-owned full test/CI and other peer/runtime gates remain distinct; targeted parent-reported passes are not final promotion evidence."
+  ],
+  "blocking_findings": [],
+  "performed": {
+    "stdlib_filesystem_json_hashes_and_static_reads_only": true,
+    "application_producer_or_tests_imported_or_executed": false,
+    "builds_git_network_ci_actions": false,
+    "tracked_writes": false,
+    "release_promotion_approval": false
+  }
+}

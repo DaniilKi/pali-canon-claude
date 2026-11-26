@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+import web_reader_next_ten_boundary_history as _next_ten
 
 BASELINE_COMMIT = 'c1b2433481399b2125f6645a75bf4105cb212440'
 SOURCE_COMMIT = '2d134ff9ef60f70a1eb03c9370580228811a3070'
@@ -104,7 +105,7 @@ def six_state(canon, root=None):
     raise ValueError('Mixed or unreviewed six-poem metadata')
 
 
-def canon_before_six(canon, root=None):
+def _historical_dd_canon_before_six(canon, root=None):
     """Pure inverse retains unrelated mutations; never migrates saved locators."""
     root = Path(root) if root is not None else Path(__file__).resolve().parents[1]
     six_state(canon, root)
@@ -113,7 +114,7 @@ def canon_before_six(canon, root=None):
                              for u in canon['units']]}
 
 
-def exact_c1_canon_bytes(raw, root=None):
+def _historical_dd_exact_c1_canon_bytes(raw, root=None):
     root = Path(root) if root is not None else Path(__file__).resolve().parents[1]
     expected = oracle(root)
     if digest(raw) != expected['future_canonical_logical_sha256']:
@@ -188,7 +189,7 @@ def six_runtime_records(root, previous):
     return proof_records(root)
 
 
-def _capture_actual_data(root):
+def _historical_dd_capture_actual_data(root):
     global _VALIDATED_CONTENT
     _reject_c1_scope(root)
     records = proof_records(root)
@@ -219,7 +220,7 @@ def _capture_actual_data(root):
     return records, actual
 
 
-def assert_six_current_canonical_data(root):
+def _historical_dd_assert_six_current_canonical_data(root):
     """Every genuine public call validates fresh proofs and all27 actual data."""
     _reject_c1_scope(root)
     return _capture_actual_data(root)[0]
@@ -256,9 +257,11 @@ def _historical_c1_data_bytes(root, name):
 
 
 class _C1OperationScope:
-    __slots__ = ('_root','_records','_actual','_fixtures','_active','_owner')
+    __slots__ = ('_root','_records','_actual','_fixtures','_active','_owner','_next_ten_binding')
 
     def __init__(self, root, records, actual, fixtures):
+        # Preserve the explicit binding BEFORE lexical Path conversion.
+        object.__setattr__(self,'_next_ten_binding',_next_ten._capture_binding(actual,root))
         object.__setattr__(self,'_root',Path(root).absolute())  # lexical, never resolve symlinks
         object.__setattr__(self,'_records',MappingProxyType({k:MappingProxyType(dict(v)) for k,v in records.items()}))
         object.__setattr__(self,'_actual',MappingProxyType(dict(actual)))
@@ -280,6 +283,9 @@ class _C1OperationScope:
         return str(self._root)
 
     def _close(self):
+        if self._next_ten_binding is not None:
+            _next_ten._release_binding(self._next_ten_binding)
+            object.__setattr__(self,'_next_ten_binding',None)
         object.__setattr__(self,'_active',False)
         object.__setattr__(self,'_records',MappingProxyType({}))
         object.__setattr__(self,'_actual',MappingProxyType({}))
@@ -291,7 +297,7 @@ def _reject_c1_scope(root):
         raise ValueError('Public entry requires a root, never a carried operation scope')
 
 
-def _scope_records(scoped):
+def _historical_dd_scope_records(scoped):
     if type(scoped) is not _C1OperationScope:
         raise ValueError('Exact private operation scope required')
     scoped._check()
@@ -348,7 +354,7 @@ def safe_destination(root, relative):
     return target
 
 
-def copy_six_historical_fixture(source_root, destination_root):
+def _historical_dd_copy_six_historical_fixture(source_root, destination_root):
     _reject_c1_scope(source_root)
     _reject_c1_scope(destination_root)
     names = [PROOF_DIRECTORY+'/'+ORACLE_NAME,
@@ -381,3 +387,70 @@ def assert_preserved_c1_catalogue(root, approved):
     for uid in approved['ids']:
         assert digest(compact(approved['profiles'][uid])) == authority['whole343_profile_object_sha256'][uid]
         assert digest(compact(approved['links'][uid])) == authority['whole343_link_object_sha256'][uid]
+
+
+# Outer NEXT-TEN -> exact DD TEST INPUT only. The historical bodies above and
+# all their original seals remain unchanged; production/runtime is not projected.
+def canon_before_six(canon, root=None):
+    physical = Path(root) if root is not None else Path(__file__).resolve().parents[1]
+    return _historical_dd_canon_before_six(
+        _next_ten.canon_before_next_ten(canon,physical),physical)
+
+
+def exact_c1_canon_bytes(raw, root=None):
+    physical = Path(root) if root is not None else Path(__file__).resolve().parents[1]
+    return _historical_dd_exact_c1_canon_bytes(
+        _next_ten.dd_logical_input(raw,physical),physical)
+
+
+def _capture_actual_data(root):
+    _reject_c1_scope(root)
+    return _next_ten._capture_six_test_input(root)
+
+
+def _scope_records(scoped):
+    records = _historical_dd_scope_records(scoped)
+    # The current proof/root binding cannot be dropped through __fspath__.
+    _next_ten._binding_records(scoped._next_ten_binding,scoped._root)
+    return records
+
+
+def copy_six_historical_fixture(source_root, destination_root):
+    _reject_c1_scope(source_root)
+    _reject_c1_scope(destination_root)
+    names = [PROOF_DIRECTORY+'/'+ORACLE_NAME,
+             PROOF_DIRECTORY+'/C1_IMMUTABLE_EXPECTATIONS.json',
+             PROOF_DIRECTORY+'/runtime/'+INVENTORY_NAME,PROOF_DIRECTORY+'/runtime/'+REVIEW_NAME,
+             'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',
+             'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json',
+             *['tests/fixtures/canon-before-six/'+Path(p).name for p in C1_DATA_PATHS],
+             *_next_ten._fixture_names(source_root)]
+    # One capture for this entire public copy operation, not five public getters.
+    # Historical fixtures AND new actual data are separately checked before copy.
+    with _c1_operation_scope(source_root) as scoped:
+        records = _scope_records(scoped)
+        names += ['server/'+name for name in sorted(records) if name.startswith('data/')]
+        for p in C1_DATA_PATHS:
+            _historical_c1_data_bytes(scoped,p)
+        for name in names:
+            if name.startswith('server/data/'):
+                raw = _next_ten._actual_copy_input(scoped._next_ten_binding,scoped._root,name)
+            else:
+                _scope_records(scoped)  # reread both generations of proof files
+                raw = regular(source_root,name)
+            target = safe_destination(destination_root,name)
+            if target.exists():
+                if target.is_symlink() or target.read_bytes() != raw:
+                    raise ValueError('Existing owned fixture differs: '+name)
+            else:
+                with target.open('xb') as stream:
+                    stream.write(raw)
+
+
+def assert_six_current_canonical_data(root):
+    _reject_c1_scope(root)
+    records, actual = _capture_actual_data(root)
+    try:
+        return records  # historical DD records, never final current-runtime output
+    finally:
+        _next_ten._release_binding(actual._binding)

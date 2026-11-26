@@ -1,0 +1,123 @@
+{
+  "schema": "independent-approved33-fixture-repair-review-v1",
+  "status": "STATIC_GO_EXACT_PROPOSAL_ROOT_TARGETED_EXECUTION_REQUIRED",
+  "reviewer": "/root/an_numbered_browser",
+  "manifest_sha256": "bb283f711cd6385d73dadddb13d805a622b8620752d4716c5ecc87d3099bc10a",
+  "target": "tests/approved_acceptance.py",
+  "before_sha256": "6730178f0d41ccdcca74ef543b2a6186df509b387b964c0dc9764c150e9b0875",
+  "proposed_sha256": "7cc1bb04dc5f15d6e7062876225186b9d8625aaef1b0dc2ca4ce003cd9949581",
+  "patch_sha256": "780db9fe2ceffa115611e60a466108700c80a7aebb8c5966bb612c9078743fec",
+  "reviewed_files": {
+    "README.md": {
+      "bytes": 3053,
+      "sha256": "9ef511e7ed4f522847710ba067528034ea30c354a3aa00e96157ee401b978045"
+    },
+    "STATIC_PRESERVATION_RECEIPT.json": {
+      "bytes": 8434,
+      "sha256": "5db452ee1e2af89c96bcfec20a6869b60b347567dc2bb8e7afc88cb7a05a1057"
+    },
+    "approved_acceptance.before.py": {
+      "bytes": 19866,
+      "sha256": "6730178f0d41ccdcca74ef543b2a6186df509b387b964c0dc9764c150e9b0875"
+    },
+    "approved_acceptance.patch": {
+      "bytes": 5812,
+      "sha256": "780db9fe2ceffa115611e60a466108700c80a7aebb8c5966bb612c9078743fec"
+    },
+    "approved_acceptance.proposed.py": {
+      "bytes": 22723,
+      "sha256": "7cc1bb04dc5f15d6e7062876225186b9d8625aaef1b0dc2ca4ce003cd9949581"
+    },
+    "prepare_proposal.py": {
+      "bytes": 8139,
+      "sha256": "4994f7d726599f9b3cff0c805f66a2085b34cecdf4aa4c2b7005778f31255750"
+    }
+  },
+  "failure_evidence": {
+    "file": "approved-acceptance-v1.tap",
+    "sha256": "087018ff2fdfdf32ae774a86a8b444b567750e4461e5e5172232f7653ffedc38",
+    "observed_cases": 33,
+    "errors": 6,
+    "reason": "Missing next-ten FUTURE_ORACLE causes ValueError before intended old-runtime tamper; not an expected AssertionError proof."
+  },
+  "static_findings": [
+    "Verified the saved root TAP matches its hash and contains exactly the same six proposed methods failing on missing next-ten FUTURE_ORACLE before intended old-proof tampering. No application/source-integrity failure is inferred from those fixture errors.",
+    "Verified original input equals current unapplied project file and final proposal/patch/all manifest-file hashes. Python AST parses without any module import or execution.",
+    "All33 test method names retained. Exactly six methods changed, and their full original method bytes are recovered by removing only their new fixture call plus the two explicit equality-positive statements. Other27 test methods and setUpClass/rejects_catalogue remain byte-identical. Every original assertion AST, mutation and AssertionError expectation remains.",
+    "The helper21 literal older proof paths exactly equal the existing longest fixture tuple, with no broad copytree/ambient dependency search. All21 actual source files are present regular files with no ancestor symlinks. Helper three-file closure pins match actual source bytes.",
+    "copy_historical_fixture composes the preserved four fixture provisioner with current six/next-ten copy. Current proof graph is validated, then the private operation captures and physically hashes all27 actual current data files. Separate DD4, six4 and four3 byte fixtures remain in their fixture directories; actual server/data is copied from captured actual27, never historical substitutes.",
+    "All six owned temporary roots receive finite21 old authorities, new3 proofs, actual current27 and separate frozen fixtures before approved_runtime(root). First two gain full returned34-inventory equality to class current inventory; other four retain their existing34-count positive before the intended target mutation. These are proof-chain/all27-data positives, not claims of physical rehashing all seven nondatabundles in the temp root.",
+    "Missing-proof errors are not caught, no fallback root or callback is added, no ValueError is accepted as expected AssertionError, and no production helper/runtime changes are proposed.",
+    "The unchanged Node wrapper hash30c19361b29b4d35a6193e526fce17111c16a34d65b0479b03ebff7f416b7394 retains child timeout30000 and exact Ran33 check. Added fixture provisioning cost has not been measured by this review."
+  ],
+  "changed_methods": [
+    "test_current_runtime_review_tampering",
+    "test_eight_runtime_inventory_seal_tampering_after_positive",
+    "test_inventory_seal_tampering",
+    "test_latest_runtime_inventory_seal_tampering",
+    "test_seven_runtime_inventory_seal_tampering_after_positive",
+    "test_two_runtime_inventory_seal_tampering_after_positive"
+  ],
+  "positive_additions": [
+    "test_current_runtime_review_tampering",
+    "test_inventory_seal_tampering"
+  ],
+  "positive_preserved": [
+    "test_eight_runtime_inventory_seal_tampering_after_positive",
+    "test_latest_runtime_inventory_seal_tampering",
+    "test_seven_runtime_inventory_seal_tampering_after_positive",
+    "test_two_runtime_inventory_seal_tampering_after_positive"
+  ],
+  "finite_older_proof_paths": [
+    "tests/fixtures/reviewed-runtime-2449.json",
+    "docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json",
+    "docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/canonical325/CANONICAL_RUNTIME_INVENTORY.json",
+    "docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json",
+    "docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_INVENTORY.json",
+    "docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json",
+    "docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json",
+    "docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json",
+    "docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json",
+    "docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json",
+    "docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json",
+    "docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json"
+  ],
+  "helper_source_bindings": {
+    "scripts/web_reader_four_boundary_history.py": "1944ccb445fd6e63e4facaa1f5fb5957006f0b113997298971fd15eac5debf18",
+    "scripts/web_reader_six_boundary_history.py": "30d2b604761336f995bbaeb3851ebfabd13bc542e18af28757d3bf62299c7348",
+    "scripts/web_reader_next_ten_boundary_history.py": "6327f0a6ba14dc5de91aeb7c079bf6823d6ab5404620f87a1a9a7b0b302d8bbc"
+  },
+  "counts": {
+    "existing_cases": 33,
+    "changed_methods": 6,
+    "other_test_methods_byte_unchanged": 27,
+    "new_cases": 0,
+    "added_positive_assertions": 2,
+    "older_proof_paths": 21,
+    "current_data_files_physically_validated_by_existing_helper": 27,
+    "new_proof_files": 3,
+    "separate_DD_fixtures": 4,
+    "separate_six_fixtures": 4,
+    "separate_four_fixtures": 3
+  },
+  "blocking_findings": [],
+  "mandatory_execution_gate": "Root may apply only exact reviewed tests/approved_acceptance.py bytes and run the existing33-case Node wrapper with unchanged30000ms child bound. Require all33 pass, no missing-proof/setup exception and no skipped or widened-exception control. Measure elapsed cost; a timeout is a new blocker requiring diagnosis, not automatic deadline expansion.",
+  "scope_limits": {
+    "source_or_translation_activation": false,
+    "runtime_or_production_changes": false,
+    "tests_or_application_imported_or_executed": false,
+    "builds_git_network_ci_actions": false,
+    "tracked_writes": false,
+    "performance_pass_claimed": false,
+    "release_promotion_approval": false
+  }
+}

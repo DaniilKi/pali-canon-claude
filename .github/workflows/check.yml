@@ -1031,6 +1031,7 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             romn/s0510m1.mul.xml
+            romn/s0510m2.mul.xml
             romn/s0510a.att.xml
       - name: Require four-poem source repair and citation compatibility without skips
         if: matrix.group == 'apadanatherapair101'
@@ -1050,6 +1051,18 @@ jobs:
         run: |
           node --test --test-reporter=tap tests/apadana-six-boundary-migration.test.mjs tests/apadana-six-locator-consumers.test.mjs tests/apadana-six-cached-consumers.test.mjs tests/six-boundary-history.test.mjs tests/six-boundary-source-input.test.mjs tests/six-boundary-ci.test.mjs | tee reviewed-six-boundary.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-six-boundary.tap","utf8"); for(const [key,value] of [["tests",23],["pass",23],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require next-ten original-source and saved-citation compatibility without skips
+        if: matrix.group == 'apadanatherapair101'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          VRI_SOURCE_CHECKOUT: .fixtures/apadana-vri-pinned
+        run: |
+          test -f "$VRI_SOURCE_CHECKOUT/romn/s0510m1.mul.xml"
+          test -f "$VRI_SOURCE_CHECKOUT/romn/s0510m2.mul.xml"
+          # Two bounded wrappers require 12+4 Python source cases; consumer files add 12+2 Node cases.
+          node --test --test-reporter=tap tests/apadana-next-ten-migration.test.mjs tests/apadana-next-ten-locator-consumers.test.mjs tests/apadana-next-ten-cached-consumers.test.mjs | tee reviewed-next-ten.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-next-ten.tap","utf8"); for(const [key,value] of [["tests",16],["pass",16],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Validate independently reviewed Therā expansion and held-source refusals
         if: matrix.group == 'apadanatheraexpansion'
         run: |
@@ -1529,6 +1542,7 @@ jobs:
             reviewed-publisher321-329.tap
             reviewed-publisher331-334.tap
             reviewed-six-boundary.tap
+            reviewed-next-ten.tap
             standalone-reader.report.json
             standalone-print.report.json
             standalone-saved.report.json

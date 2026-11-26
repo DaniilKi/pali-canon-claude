@@ -1,0 +1,208 @@
+{
+  "schema": "next-ten-source-inverse-generation-receipt-v1",
+  "base_commit": "dd7b697df2c54308084fffd934af38130d01f952",
+  "original_manifest_sha256": "2c111042d70c0c57315b36ce9a4eea81bad84701201bdbd991c26bf0c27c0d9d",
+  "reviewed_plan_sha256": "684bc17c6f6f7b07581ee490ceb8539b6262fec11cd493e1ae276161a95fcf0c",
+  "producer_sha256": "21e8b903ea45b42359abd0ce31e4ec619b8d7b55e31f8325cbf5259046aba736",
+  "originals_verified": 961,
+  "all_whole_originals_restored": true,
+  "inverse_sha256": "bb3ccb0b57a4f746d1a05c65a2d837ab555e6770589cbaf67e448b6d9d27a932",
+  "ordered_paths": [
+    ".github/workflows/check.yml",
+    "scripts/canon/build_canon.py",
+    "scripts/web_reader_approved_acceptance.py",
+    "scripts/web_reader_six_boundary_history.py",
+    "src/chatgpt-widget.mjs",
+    "src/locator-policy.mjs",
+    "tests/apadana-disclosures.test.mjs",
+    "tests/apadana-fourth-client.test.mjs",
+    "tests/apadana-fourth.test.mjs",
+    "tests/apadana-next.test.mjs",
+    "tests/apadana-six-locator-consumers.test.mjs",
+    "tests/apadana-thera.test.mjs",
+    "tests/apadana-third.test.mjs",
+    "tests/apadana_six_boundary_acceptance.py",
+    "tests/approved_acceptance.py",
+    "tests/current339-source-inverses.test.mjs",
+    "tests/current343-bindings.test.mjs",
+    "tests/held234-client.test.mjs",
+    "tests/helpers/canon-before-six.mjs",
+    "tests/helpers/six-boundary-source-input.mjs",
+    "tests/helpers/six-history-data.mjs",
+    "tests/helpers/thera-remaining-client.mjs",
+    "tests/six-boundary-source-input.test.mjs",
+    "tests/six_boundary_history_acceptance.py",
+    "tests/thera-commentary-locators.test.mjs",
+    "tests/thera141-180-client.test.mjs",
+    "tests/thera181-220-client.test.mjs",
+    "tests/thera221-230-client.test.mjs",
+    "tests/thera241-250-client.test.mjs",
+    "tests/thera312-319-client.test.mjs",
+    "tests/thera321-329-client.test.mjs",
+    "tests/widget-hosted-selections.test.mjs"
+  ],
+  "changed_existing_count": 32,
+  "hunk_count": 59,
+  "new_code": {
+    "docs/data/apadana-next-ten-boundaries.md": {
+      "bytes": 5254,
+      "sha256": "c5ecb585b5f26fc19424d251788f058fa1974b6ab314dcb94ea0f6de98276f3f"
+    },
+    "docs/evidence/apadana/book37-source-screen/screen_book37.py": {
+      "bytes": 14804,
+      "sha256": "40c4724e7832c69e6098c9c62028cc77539c9661f34d6649f7f077efa0b1a83e"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/derive_oracle.py": {
+      "bytes": 17570,
+      "sha256": "c242e8f7d7912ea0417e8e77606c09c3e9d5d28ddfa9883323ea60a90f540744"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/finish_oracle.py": {
+      "bytes": 9256,
+      "sha256": "ab6e485b9cb83ece4d1d9c88df55605e3a7f0a49996377c6a524a0b538090a00"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/EXPLANATION.md": {
+      "bytes": 4114,
+      "sha256": "d52100eb782f2b9866291d9edf23ae569bbd2646d9807f6334fa54a931f85956"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/EXTRACTED_FROZEN_DECLARATIONS.mjs": {
+      "bytes": 7381,
+      "sha256": "f15cf47db3fc004822bf2869c517de802ec520f4a6f7bcc9a741800c165a4fb1"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/PURE_NATIVE_REPLAY.mjs": {
+      "bytes": 11123,
+      "sha256": "60013c639c67027038e3a06497ece4997b5316ad4f0b015c2e1fe78246a7a54e"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/PURE_STAGE123_MODEL.mjs": {
+      "bytes": 3702,
+      "sha256": "c6a9697099bd8e4b72a5d4081bdce93aa35763888833d7759ff58ef34d410567"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/derive_candidates.mjs": {
+      "bytes": 11172,
+      "sha256": "bbb4296a86483d2ef4a6e9cd7cd7ee2d5d63085efaacdc057be43e39b298b1f9"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/parallels-independent/derive_packed_and_expected.py": {
+      "bytes": 4187,
+      "sha256": "c1ca4d0bce006ad476a904377ee53d7a82cf6fdde695ca88f90877f2889894f2"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/render_isolated.mjs": {
+      "bytes": 4099,
+      "sha256": "2fc2d89856d7989a3d3fa1e8ddd492d7dfeb930eb3408d2770e5e00250e514de"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/source-inverse/produce_next_ten_source_inverse.py": {
+      "bytes": 9517,
+      "sha256": "21e8b903ea45b42359abd0ce31e4ec619b8d7b55e31f8325cbf5259046aba736"
+    },
+    "docs/evidence/apadana/boundaries340-347/derive_six_oracles.py": {
+      "bytes": 23054,
+      "sha256": "c68ecaeffd7e2e5d328ff57ddc18599b19515c8dc8083b2a1aed4a3d966a159b"
+    },
+    "docs/evidence/apadana/boundaries340-347/installed-browser/check-boundary-reader.py": {
+      "bytes": 44893,
+      "sha256": "901c9ae71694d43a9ffb6776e3616eeeae8a716dc49c8d37a594af1dce84b49c"
+    },
+    "docs/evidence/apadana/boundaries340-347/installed-browser/offline-pali-guard.cjs": {
+      "bytes": 4942,
+      "sha256": "6f5b1415dd1838c06a0125fcc9639d2a142c8dc73306724077b49322a41067ad"
+    },
+    "docs/evidence/apadana/boundaries340-347/installed-browser/run-bounded.py": {
+      "bytes": 2213,
+      "sha256": "9e5b56f4adadf1c689adc848dbe70cc5e4a57f4cc42560eaa684fc05fe01ddf5"
+    },
+    "docs/evidence/apadana/canonical325/review.py": {
+      "bytes": 8596,
+      "sha256": "b7a33d9109d22f8b054632dedd862fe1c9bce2d11d7f4c38c076fdb83d60200b"
+    },
+    "docs/evidence/apadana/normalization343/compare_presealed_producer-v1-empty-array-assumption.py": {
+      "bytes": 13616,
+      "sha256": "577858de30fe58f2c3c9512317c779a528970eb50252304bf694acf24094cf12"
+    },
+    "docs/evidence/apadana/normalization343/compare_presealed_producer.py": {
+      "bytes": 15372,
+      "sha256": "2093584a97c17cbb80d55abb9a99203964746781aa63333d31b855ac12b56180"
+    },
+    "docs/evidence/apadana/normalization343/derive_independent_originals.py": {
+      "bytes": 13588,
+      "sha256": "23a95aa8ee68de5a82db85d58d326aacb5c1683625941d983980972206a43c7a"
+    },
+    "docs/evidence/apadana/reconciliation325/replay.py": {
+      "bytes": 14433,
+      "sha256": "ba527a94182bf0dd8729e727fae8104231b200f3bf81489223dc96ff7f707866"
+    },
+    "scripts/canon/apadana_thera_next10_spans.py": {
+      "bytes": 16642,
+      "sha256": "d5e0e2d15c0c0e439d4098b9fee52eda0ee0b268e9d6be1753481ef49b98c98f"
+    },
+    "scripts/canon/repair_apadana_thera_next10_spans.py": {
+      "bytes": 8470,
+      "sha256": "031520f8316741ce7bdbbc5709b9edd92cc3ffdcdd6c4249232846b94fb6e5b3"
+    },
+    "scripts/web_reader_next_ten_boundary_history.py": {
+      "bytes": 16898,
+      "sha256": "6327f0a6ba14dc5de91aeb7c079bf6823d6ab5404620f87a1a9a7b0b302d8bbc"
+    },
+    "skills/compare/agents/openai.yaml": {
+      "bytes": 478,
+      "sha256": "c93e8de0f7b9faa0717819e42d09756203fb661a25d3a6bc0abde2417b54b7f0"
+    },
+    "skills/memorise/agents/openai.yaml": {
+      "bytes": 516,
+      "sha256": "a979e463ee7384f06f528b6605b1d696661c772f343b4ea79ebd54cd5bfcdd4f"
+    },
+    "skills/method/agents/openai.yaml": {
+      "bytes": 481,
+      "sha256": "c7498f59cce287354b5c9e8d06a821c9baba0fa0f5f1833d4bc5ceda1bd56680"
+    },
+    "skills/pali-word/agents/openai.yaml": {
+      "bytes": 467,
+      "sha256": "6ac1bc4fdf2a93a6bc678401d6b5a1aa613dccaf229bcbb14059cdb6e452d925"
+    },
+    "skills/study/agents/openai.yaml": {
+      "bytes": 484,
+      "sha256": "e26805823199566d3f3ef344ce838ac8627cc6bf0010bbc90e6ac14bc85ff438"
+    },
+    "tests/apadana-next-ten-cached-consumers.test.mjs": {
+      "bytes": 6673,
+      "sha256": "60007d4df36c86ace6823a7db2a39f63ec1b3418981c92f79f62bcd6b5f9cf2b"
+    },
+    "tests/apadana-next-ten-locator-consumers.test.mjs": {
+      "bytes": 21897,
+      "sha256": "2314164562cadde2bfd22e1f40bdc6192779bb677e953e0583e3135be26b69ed"
+    },
+    "tests/apadana-next-ten-migration.test.mjs": {
+      "bytes": 1307,
+      "sha256": "4283d5cd761aea599e97d84b77f7c18499abc184eb74858b3623429fa27f5c73"
+    },
+    "tests/apadana_next_ten_boundary_acceptance.py": {
+      "bytes": 45194,
+      "sha256": "28557e471b247f1abbd288c1d04418dcde5f7f65f2eca4a9208452d891825f37"
+    },
+    "tests/helpers/canon-before-next-ten.mjs": {
+      "bytes": 4093,
+      "sha256": "9d0c2d222e51bfe995f06b0993147bf8ab638d4784e345296b7eaaa38212285b"
+    },
+    "tests/helpers/next-ten-history-data.mjs": {
+      "bytes": 11022,
+      "sha256": "d4177d9eb7ffa2315077bf262cb91f60c22a6e7647e5774e80b1fc9d988725f9"
+    },
+    "tests/next-ten-history-data.test.mjs": {
+      "bytes": 6244,
+      "sha256": "647d8b50dbc8287f913495628571cf4c877a3f4216f5f53a5ab611db370f976f"
+    },
+    "tests/next-ten-history.test.mjs": {
+      "bytes": 990,
+      "sha256": "fc10fa448eb1840f5a0c7f7e3e3578e023a5d0e431af882e31176f9b2583495b"
+    },
+    "tests/next-ten-source-history.test.mjs": {
+      "bytes": 2422,
+      "sha256": "38ed7e21a7c13cd7935265ae02b81e92e3b5bb0aef11dd86adb4661a6ca49668"
+    },
+    "tests/next_ten_history_acceptance.py": {
+      "bytes": 11887,
+      "sha256": "c80edab2c44dc23e0504af6645287a146aff911f801f9f2750bee8fd9508af73"
+    }
+  },
+  "sealholder_sha256_pending_final_literal_binding": "tests/helpers/next-ten-source-input.mjs",
+  "immutable_old_six_inverse_sha256": "21c6076b7954b65f807a7ae044d61fb7f61f8a352e4acc6b28eae5ebbd87aaf7",
+  "source_inputs_only": true,
+  "runtime_or_corpus_projection": false
+}

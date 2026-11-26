@@ -1,0 +1,14 @@
+{
+  "schema": "external-next-ten-source-inverse-producer-proposal-v1",
+  "execution_status": "NOT_EXECUTED",
+  "files": {
+    "produce_next_ten_source_inverse.py": {
+      "bytes": 9517,
+      "sha256": "21e8b903ea45b42359abd0ce31e4ec619b8d7b55e31f8325cbf5259046aba736"
+    },
+    "REVIEW_NOTES.md": {
+      "bytes": 3931,
+      "sha256": "2a02df650c46c7114ffea9c4932ebabc1ca0e3516a8f394551222e231ce89ba1"
+    }
+  }
+}

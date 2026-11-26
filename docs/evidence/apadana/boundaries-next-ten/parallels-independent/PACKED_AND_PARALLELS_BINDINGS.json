@@ -1,0 +1,58 @@
+{
+  "schema": "source-only-canonical-packed-and-parallels-two-field-binding-v1",
+  "status": "INDEPENDENT_DERIVED_EXPECTATION_NOT_CANDIDATE_OUTPUT",
+  "old_canon": {
+    "packed_bytes": 5562005,
+    "packed_sha256": "271d6dd4b864c3688b175f72b7698c4f8736fa1a30525075333e09279d59d491",
+    "logical_bytes": 38391407,
+    "logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b"
+  },
+  "new_canon": {
+    "packed_bytes": 5561996,
+    "packed_sha256": "641c6f510431c3c681c74c24d36eef43af87b7ffe135d14fc0c19560f196e793",
+    "logical_bytes": 38391852,
+    "logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de"
+  },
+  "deterministic_writer": {
+    "type": "stdlib gzip.GzipFile",
+    "filename": "",
+    "mtime": 0,
+    "compresslevel": 9,
+    "zlib_runtime_version": "1.3.2",
+    "entire_old_repacked_bytes_equal_input": true
+  },
+  "old_parallels": {
+    "file": "DD_PARALLELS_BASELINE.json.gz",
+    "bytes": 487201,
+    "sha256": "40cbb52a5a2dd0d41fc49f8d8e0ba4d9090abc25ca89a6fe9426a399d9c3e701",
+    "logical_file": "DD_PARALLELS_BASELINE.json",
+    "logical_bytes": 3188992,
+    "logical_sha256": "f0df75a21e4db6d4362cc42dd2fcb070e49dc551bd0763707aaaab7c9db41a53"
+  },
+  "expected_new_parallels": {
+    "file": "EXPECTED_PARALLELS_TWO_FIELD_DELTA.json",
+    "logical_bytes": 3188992,
+    "logical_sha256": "e954bb116d7760538bd22121b0254018b1dbb80a17ecb00db7f147839ea4f02b"
+  },
+  "candidate_pairs": {
+    "old": 12642,
+    "new": 12639
+  },
+  "only_allowed_changes": [
+    [
+      "source",
+      "inputs",
+      "canon.json.gz",
+      "sha256"
+    ],
+    [
+      "counts",
+      "shared_stats",
+      "candidate_pairs"
+    ]
+  ],
+  "old_all_shared_stats_exact_model_parity": true,
+  "canonical_unit_ids_unique": true,
+  "all_other_parallels_fields_and_final_edges": "Expected byte-value exact frozenDD object; no final-stage algorithm executed and no actual candidate object read",
+  "no_app_imports_builder_network_Git_or_tests": true
+}

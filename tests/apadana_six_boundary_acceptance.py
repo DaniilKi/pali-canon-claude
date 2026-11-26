@@ -20,6 +20,8 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts/canon'))
 import apadana_thera340_spans as six
+sys.path.insert(0, str(ROOT / 'scripts'))
+from web_reader_next_ten_boundary_history import dd_logical_input
 
 OLD_SHA = '46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8'
 NEW_SHA = '0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b'
@@ -107,7 +109,10 @@ class Fixture(unittest.TestCase):
         assert cls.ids == ('tha-ap340', 'tha-ap341', 'tha-ap343', 'tha-ap344', 'tha-ap346', 'tha-ap347')
         cls.old_records = {r['id']: r['before'] for r in cls.proof['records']}
         cls.new_records = {r['id']: r['future'] for r in cls.proof['records']}
-        raw = bundled('canon.json.gz')
+        # This preserved six-repair suite owns the exact DD stage. The outer
+        # gate first verifies the complete new snapshot before returning DD
+        # test-input bytes; current ten-reader tests use the actual new data.
+        raw = dd_logical_input(bundled('canon.json.gz'), ROOT)
         assert sha(raw) == NEW_SHA, 'Exact actual six-record current canon required'
         cls.current = json.loads(raw)
         assert typed(records(cls.current, cls.ids)) == typed(cls.new_records)

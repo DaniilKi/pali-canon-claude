@@ -53,7 +53,7 @@ test('six newly repaired owners registry rejects missing/bad current metadata an
   assert.doesNotThrow(()=>assertCanonicalLocator(id,current,{expected:current,positional:true}));
   for(const expected of [ORIGINAL,'bad',ORIGINAL+'-apadana-thera333-336-v2'])assert.throws(()=>assertCanonicalLocator(id,current,{expected}),e=>e.code==='READING_SOURCE_CHANGED');
  }
- for(const id of ['tha-ap339','tha-ap342','tha-ap345','tha-ap348','tha-ap3400','thi-ap340','mn10'])assert.equal(requiredCanonicalRevision(id),null);
+ for(const id of ['tha-ap339','tha-ap342','tha-ap345','tha-ap350','tha-ap3400','thi-ap340','mn10'])assert.equal(requiredCanonicalRevision(id),null);
 });
 
 test('registered native whole reads stay fresh while every explicit zero/later position requires its exact current pin',async()=>{

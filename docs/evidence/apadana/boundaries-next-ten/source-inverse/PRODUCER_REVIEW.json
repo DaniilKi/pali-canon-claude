@@ -1,0 +1,51 @@
+{
+  "schema": "independent-next-ten-source-inverse-producer-review-v1",
+  "status": "PRODUCER_ALGORITHM_STATIC_GO_FINAL_PATH_PLAN_PENDING",
+  "reviewer": "/root/an_numbered_browser",
+  "producer": {
+    "path": "source-inverse-producer/produce_next_ten_source_inverse.py",
+    "bytes": 9517,
+    "sha256": "21e8b903ea45b42359abd0ce31e4ec619b8d7b55e31f8325cbf5259046aba736"
+  },
+  "proposal_seal_sha256": "9fcbc69a30c7ef7bf9b21bd7e7c3b4677cfca8febdd360d99637919c7dd15b6a",
+  "review_notes_sha256": "2a02df650c46c7114ffea9c4932ebabc1ca0e3516a8f394551222e231ce89ba1",
+  "authority": {
+    "base_commit": "dd7b697df2c54308084fffd934af38130d01f952",
+    "manifest_schema": "immutable-dd7-original-source-inputs-v1",
+    "manifest_sha256": "2c111042d70c0c57315b36ce9a4eea81bad84701201bdbd991c26bf0c27c0d9d",
+    "manifest_rows": 961,
+    "immutable_old_six_inverse_sha256": "21c6076b7954b65f807a7ae044d61fb7f61f8a352e4acc6b28eae5ebbd87aaf7"
+  },
+  "reviewed_algorithm": [
+    "Only Python standard-library imports; no application, builder, repair, test, subprocess, runtime projection, server/data or network imports/calls.",
+    "Manifest bytes are required to match the immutable embedded SHA before schema/base and all961 sorted original source rows are accepted; every old file bytes/length/hash is verified before inverse creation.",
+    "An independently hash-bound plan must carry the exact base/source-only/no-runtime schema; actual changed-existing and all newly inventoried source paths must exactly equal its sorted unique declared lists. Original deletion, omitted/extra changes and undeclared new source paths refuse.",
+    "Source path keys reject absolute paths, empty/dot/dot-dot components and unsafe characters; all supplied ancestors and recursively visited entries reject symlinks before physical normalization. No output may lie inside either physical source root.",
+    "Each changed file is decoded strictly as UTF8. Sequential inverse hunks expand context until after-text is unique and replay restores the complete original string; finite whole-file fallback is also verified for unique after-text and exact original bytes. Ambiguity or failed whole restoration refuses.",
+    "Rows bind immutable old/current whole-file SHA256 and ordered before/after hunks. Generation receipt binds manifest, explicit reviewed-plan pin, producer bytes, exact inverse bytes, ordered paths and all nonholder new source bytes.",
+    "The new sealholder must be a new declared file and cannot enter inverse rows; its final literal binding is explicitly deferred rather than recursively hashing itself. Other new code is byte/size bound. Existing SIX map is forbidden from path lists and separately checked against its unchanged21c6076b pin before and after generation.",
+    "Full current source inventory and every observed old/new source file are reread before output creation, refusing source drift during generation. Exclusive output-directory mkdir occurs only after all validations; existing outputs, symlink outputs/parents and inside-source physical output paths refuse.",
+    "Output map schema/row names agree with the statically read current test-only loader (finite-next-ten-to-dd7-source-inverses-v1, dd7_sha256/current_sha256/hunks). The loader additionally requires exact current-source hashes and complete old-source hashes when replaying."
+  ],
+  "scope_notes": [
+    "Source inventory covers the seven explicit roots and source/documentation extensions plus14 explicit root files; JSON evidence/compressed fixtures/server bundles and corpus data are excluded, except the separately pinned immutable SIX JSON proof. Unknown runtime/data mutations are outside this producer and must remain independently governed.",
+    "The producer permits root package and AGENTS authority paths at inventory level, but no such changes are approved here. Final reviewed plan must confirm the parent stated rooted code/docs changes only and exclude package/AGENTS mutations.",
+    "The producer has no expected final candidate path-set literals or final mutable-byte pins beyond the reviewed path-plan hash; independent final-path and generated-map review is therefore a mandatory next gate, not implied by algorithm approval."
+  ],
+  "blocking_algorithm_findings": [],
+  "mandatory_next_gates": [
+    "Parent freezes the exact sorted changed_existing_paths/new_code_paths plan; independent review must verify actual paths against all961 immutable originals and confirm loader path regex compatibility and no runtime/server/data or oldSIX changes.",
+    "Only after final-plan review should root execute this exact sealed producer with the reviewed plan hash into a new external output directory.",
+    "After root generation, independently replay every changed row against exact current bytes, verify each restored whole old file against the immutable manifest and all unchanged original hashes, and check receipt/new-code bindings before the holder literal is finalized.",
+    "Final holder literal binding, adversarial acceptance and root-owned tests/CI remain distinct gates."
+  ],
+  "limitations": {
+    "producer_imported_or_executed": false,
+    "application_imported": false,
+    "tests_builds_servers_browser_network_git_actions": false,
+    "tracked_files_written": false,
+    "final_changed_new_path_sets_reviewed": false,
+    "generated_output_restoration_executed": false,
+    "runtime_or_release_approval": false
+  }
+}

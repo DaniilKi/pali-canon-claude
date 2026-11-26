@@ -1,0 +1,500 @@
+{
+  "schema": "independent-static-next-ten-python-history-review-v1",
+  "decision": "GO_FOR_ROOT_INTEGRATION_STATIC_ONLY; EXECUTION_AND_RELEASE_HELD",
+  "scope": "Static source/AST/hash inspection only. No proposal/app import or execution, tests, builds, Git, CI, network, or tracked edit.",
+  "proposal_manifest": {
+    "bytes": 2067,
+    "sha256": "6810c8db3eea18dcfd70f6359248c91250560e6cf8bd546b2bfda3ced8c3f6fa"
+  },
+  "files": {
+    "BASE_FILES.json": {
+      "actual": {
+        "bytes": 461,
+        "sha256": "f29a336043839ecb6eea602ed593ae6215bd97550bbc5b886dafb388a083634d"
+      },
+      "matches_manifest": true
+    },
+    "CONTROLLED_FIXTURE_CLOSURE.json": {
+      "actual": {
+        "bytes": 4291,
+        "sha256": "45b07ff7afd5c481dcd2349222e716d0def4da528717e02c151541f61c48b02f"
+      },
+      "matches_manifest": true
+    },
+    "README.md": {
+      "actual": {
+        "bytes": 9234,
+        "sha256": "360c01e0ea07a58185563957fb4b51a7699945d77e9ac7b8e6f82157fcbd6b47"
+      },
+      "matches_manifest": true
+    },
+    "STATIC_BODY_PRESERVATION.json": {
+      "actual": {
+        "bytes": 15972,
+        "sha256": "ec1453be4c6cf0cd2ecb655d1570955663f4e78dc02b7bd653291d171ad553c5"
+      },
+      "matches_manifest": true
+    },
+    "seam.patch": {
+      "actual": {
+        "bytes": 8587,
+        "sha256": "3049a923420f9528a0287768e7ec7e6290caf1b66e82a2fccf67b3a8bf8b31ac"
+      },
+      "matches_manifest": true
+    },
+    "web_reader_approved_acceptance.proposed.py": {
+      "actual": {
+        "bytes": 52161,
+        "sha256": "e2e2fa8545031e83627d4939bf4eca8e70424affd14708ced7f177e7be4cd28b"
+      },
+      "matches_manifest": true
+    },
+    "web_reader_next_ten_boundary_history.py": {
+      "actual": {
+        "bytes": 16855,
+        "sha256": "1baf5d005c045b134de2093e4262bd65f0af8f5d260c790d3cb9080c10b391f8"
+      },
+      "matches_manifest": true
+    },
+    "web_reader_six_boundary_history.proposed.py": {
+      "actual": {
+        "bytes": 21925,
+        "sha256": "30d2b604761336f995bbaeb3851ebfabd13bc542e18af28757d3bf62299c7348"
+      },
+      "matches_manifest": true
+    }
+  },
+  "baseline_files": {
+    "scripts/web_reader_six_boundary_history.py": {
+      "actual": {
+        "bytes": 18398,
+        "sha256": "10c9300cc03fd9299ba3e510c74af1e859d758eda08e1c878fd6364fc4fba330"
+      },
+      "matches_proposal_baseline": true
+    },
+    "scripts/web_reader_approved_acceptance.py": {
+      "actual": {
+        "bytes": 51476,
+        "sha256": "d85fadd995e5ab89c57180f4a8d8f9ef1597c4d1cad7f29821e1a8eb1c0b55b9"
+      },
+      "matches_proposal_baseline": true
+    }
+  },
+  "source_oracle": {
+    "bytes": 32025,
+    "sha256": "78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655"
+  },
+  "independent_ast": {
+    "preserved": 57,
+    "intentional_changed": 4,
+    "rows": [
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "digest",
+        "proposal": "digest",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "compact",
+        "proposal": "compact",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "regular",
+        "proposal": "regular",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "sealed",
+        "proposal": "sealed",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "oracle",
+        "proposal": "oracle",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "six_state",
+        "proposal": "six_state",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "canon_before_six",
+        "proposal": "_historical_dd_canon_before_six",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "exact_c1_canon_bytes",
+        "proposal": "_historical_dd_exact_c1_canon_bytes",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "c1_logical_input",
+        "proposal": "c1_logical_input",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "parent343_records",
+        "proposal": "parent343_records",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "proof_records",
+        "proposal": "proof_records",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "six_runtime_records",
+        "proposal": "six_runtime_records",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_capture_actual_data",
+        "proposal": "_historical_dd_capture_actual_data",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "assert_six_current_canonical_data",
+        "proposal": "_historical_dd_assert_six_current_canonical_data",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_assert_six_current_canonical_data",
+        "proposal": "_assert_six_current_canonical_data",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "historical_c1_data_bytes",
+        "proposal": "historical_c1_data_bytes",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_historical_c1_data_bytes",
+        "proposal": "_historical_c1_data_bytes",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_C1OperationScope.__init__",
+        "proposal": "_C1OperationScope.__init__",
+        "equal_except_name": false
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_C1OperationScope.__setattr__",
+        "proposal": "_C1OperationScope.__setattr__",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_C1OperationScope._check",
+        "proposal": "_C1OperationScope._check",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_C1OperationScope.__fspath__",
+        "proposal": "_C1OperationScope.__fspath__",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_C1OperationScope._close",
+        "proposal": "_C1OperationScope._close",
+        "equal_except_name": false
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_reject_c1_scope",
+        "proposal": "_reject_c1_scope",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_scope_records",
+        "proposal": "_historical_dd_scope_records",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "_c1_operation_scope",
+        "proposal": "_c1_operation_scope",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "safe_destination",
+        "proposal": "safe_destination",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "copy_six_historical_fixture",
+        "proposal": "_historical_dd_copy_six_historical_fixture",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_six_boundary_history.py",
+        "original": "assert_preserved_c1_catalogue",
+        "proposal": "assert_preserved_c1_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "sealed",
+        "proposal": "sealed",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved303_catalogue",
+        "proposal": "approved303_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved308_catalogue",
+        "proposal": "approved308_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved310_catalogue",
+        "proposal": "approved310_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved317_catalogue",
+        "proposal": "approved317_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved325_catalogue",
+        "proposal": "approved325_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "assert_catalogue",
+        "proposal": "assert_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "assert_profiles",
+        "proposal": "assert_profiles",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_2449_runtime",
+        "proposal": "reviewed_2449_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_303_runtime",
+        "proposal": "reviewed_303_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_308_runtime",
+        "proposal": "reviewed_308_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_310_runtime",
+        "proposal": "reviewed_310_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_317_runtime",
+        "proposal": "reviewed_317_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_325_runtime",
+        "proposal": "reviewed_325_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_canonical325_runtime",
+        "proposal": "reviewed_canonical325_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "assert_runtime_records",
+        "proposal": "assert_runtime_records",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "assert_runtime",
+        "proposal": "assert_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved333_catalogue",
+        "proposal": "approved333_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed333_runtime",
+        "proposal": "reviewed333_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed339_catalogue",
+        "proposal": "reviewed339_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed339_runtime",
+        "proposal": "reviewed339_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_four_catalogue",
+        "proposal": "reviewed_four_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "reviewed_four_runtime",
+        "proposal": "reviewed_four_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved343_catalogue",
+        "proposal": "approved343_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved343_runtime",
+        "proposal": "approved343_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "_historical_c1_approved_catalogue_body",
+        "proposal": "_historical_c1_approved_catalogue_body",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "historical_c1_approved_runtime",
+        "proposal": "historical_c1_approved_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "_approved_six_catalogue_body",
+        "proposal": "_approved_six_catalogue_body",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved_six_runtime",
+        "proposal": "approved_six_runtime",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved_catalogue",
+        "proposal": "approved_catalogue",
+        "equal_except_name": false
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved_runtime",
+        "proposal": "approved_runtime",
+        "equal_except_name": false
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "historical_c1_approved_catalogue",
+        "proposal": "historical_c1_approved_catalogue",
+        "equal_except_name": true
+      },
+      {
+        "file": "scripts/web_reader_approved_acceptance.py",
+        "original": "approved_six_catalogue",
+        "proposal": "approved_six_catalogue",
+        "equal_except_name": true
+      }
+    ]
+  },
+  "confirmed_static": [
+    "Finite NEXT to DD to C1 to earlier inversion has no observed call cycle or recursive actual27 scan on current catalogue/runtime paths.",
+    "Current runtime returns independent NEW34 while explicit six runtime remains DD34.",
+    "New binding is retained before Path(root) conversion and rereads new and six/parent343 proofs on each private data access.",
+    "Actual27 hashes and DD4 hashes are read before cache lookup on every capture; cache stores only complete-frame validation key.",
+    "No runtime/HTTP/widget/API output projection is introduced by this Python patch.",
+    "Original30/120-second subprocess deadlines are outside patch and unchanged."
+  ],
+  "integration_blockers": [
+    {
+      "file": "tests/six_boundary_history_acceptance.py",
+      "lines": [
+        28,
+        129
+      ],
+      "issue": "Historical six_runtime_records expected value is current approved_runtime result. With new dispatch these are intentionally DD34 and NEW34, so equality is false.",
+      "minimal_fix": "Keep immutable DD34 expectation for explicit historical six runtime assertion; separately assert approved_runtime is NEW34. Do not normalize current output or relax full equality."
+    },
+    {
+      "file": "web_reader_next_ten_boundary_history.py",
+      "lines": [
+        26,
+        27,
+        28,
+        175,
+        176,
+        180
+      ],
+      "issue": "Independent runtime inventory, review and application commit seals are PENDING by design.",
+      "minimal_fix": "Root independently inventories/reviews actual new34 then pins exact records and runs required positive/negative controls."
+    }
+  ],
+  "remaining_unexecuted": [
+    "All warm positive/negative proof/data/fixture/symlink/mtime controls",
+    "One capture/all27 once instrumentation",
+    "Actual controlled copy completeness under root application",
+    "Actual NEW34 installed/native/widget/browser/offline evidence",
+    "Exact candidate CI and final release review",
+    "New whole-source inverse and own-source seals are outside this Python proposal review"
+  ],
+  "fixture_closure": "Static helper includes17 seam authority/fixture inputs and27 actual NEW buffers; existing SixOperationScopeControls setup copies full apadana evidence tree plus two external authority fixtures. The narrower copy helper does not replace that original evidence tree setup."
+}

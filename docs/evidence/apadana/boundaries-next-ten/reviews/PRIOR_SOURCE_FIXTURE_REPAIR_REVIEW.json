@@ -1,0 +1,90 @@
+{
+  "schema": "independent-static-prior-six-source-repair-review-v1",
+  "decision": "GO_FOR_NARROW_ROOT_INTEGRATION_AFTER_ACTIVE_CHECK_TERMINATES_STATIC_ONLY",
+  "reviewer": "/root/next_ten_source_tests",
+  "scope": "Read-only text/diff/length/SHA-256 inspection; no app/helper/test import or execution, build, Git, CI, network or tracked write.",
+  "frozen_author_manifest": {
+    "bytes": 1035,
+    "sha256": "de8d28b2b59bd4623714fb81d967b171ea47986d693ab6a3c1e1406b1e23b24b",
+    "status": "FROZEN_EXTERNAL_SOURCE_ONLY_REQUIRES_PEER_REVIEW_ROOT_APPLY_AND_TEST"
+  },
+  "verified_manifest_members": {
+    "BASE_FILE.json": {
+      "bytes": 286,
+      "sha256": "d7504e3e1ede8108455e07b5fc50a5429a74c1120f098a2d30e76dda507725c8"
+    },
+    "PROPOSAL_RECEIPT.json": {
+      "bytes": 2244,
+      "sha256": "edaac59efb415a96af8ca98a796a6a9a64a4d5ec9d1804a782e97893f618b6d3"
+    },
+    "README.md": {
+      "bytes": 2989,
+      "sha256": "328a196920fc94b46efaab9c8f987d46bd4351002965a9d80af65eef98e3810c"
+    },
+    "repair.patch": {
+      "bytes": 14183,
+      "sha256": "01c40209fcc344cd91558dbed7eba2b23726a1ffb07922362627f7b7cd8be15d"
+    },
+    "six-boundary-source-input.test.mjs": {
+      "bytes": 8742,
+      "sha256": "d30c6c3c1cc79725dd3002cdeadb66b1853b2e3fb6dd12e884f1a621f5989c30"
+    }
+  },
+  "unmodified_tracked_base_verified": {
+    "path": "tests/six-boundary-source-input.test.mjs",
+    "bytes": 7378,
+    "sha256": "2f3bf8e7a9c51fb341b71130030af0becc29b939fd5f22c790f702068fda9e07"
+  },
+  "independent_static_patch_reconstruction": {
+    "operation": "Read-only unified diff of exact tracked base and proposed complete file with the patch's a/b labels; no patch application",
+    "diff_sha256": "01c40209fcc344cd91558dbed7eba2b23726a1ffb07922362627f7b7cd8be15d",
+    "equals_frozen_patch": true
+  },
+  "actual_failure_evidence_read": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/prior-six-source-input-v1.tap",
+    "bytes": 4404,
+    "sha256": "3c6ff9059ceb6183b2c1c2a8a17a462d032ab037a50190e66221ab3f345272d0",
+    "tests": 4,
+    "pass": 1,
+    "fail": 3,
+    "skipped": 0,
+    "verified_failures": [
+      "Case1 compares actual physical NEXT source SHA against an old DD current_sha256.",
+      "Case2 composed scoped source projection lacks the newly required next-ten source-map companion.",
+      "Case4 owned physical-data fixture lacks next-ten proof directory/closure."
+    ],
+    "interpretation_limit": "These are observed failures matched to narrow source changes; no repaired-case pass or full-check outcome is inferred."
+  },
+  "preservation_checks": {
+    "test_cases_before_and_after": 4,
+    "case_names_unchanged": true,
+    "whole_C1_expected_hashes_remain_old_row_c1_sha256": true,
+    "strict_string_Buffer_fileURL_coverage_retained": true,
+    "third_case_whole_line_sha256_before_and_after": "83596c707b50d5fcf2e9da28af5b39a9835a26bcd8b72f0c56162a5792301e94",
+    "fourth_case_bundled_and_unlisted_tail_sha256_before_and_after": "e190af18e1ee5e19d37cef9ac7b005b77c028da59940aa366b42fafea60e3517",
+    "all27_actual_corruption_refusal_restore_cycles_retained": true,
+    "proof_missing_corrupt_directory_symlink_parent_and_alias_sequences_retained": true,
+    "existing_Windows_file_symlink_condition_unchanged": true,
+    "timeouts_and_scheduler_unchanged": true,
+    "application_or_runtime_changes": false
+  },
+  "confirmed_static_reasoning": [
+    "Actual raw source SHA expectations select only independently sealed NEXT current_sha256 for a declared new-map path; unchanged old-map paths retain the old DD current_sha256. An omitted changed path fails the SHA check rather than obtaining a looser fallback.",
+    "Whole projected C1 hashes, strict readers and explicit historical C1 acceptance/refusal assertions remain unchanged; actual raw bytes are not source-projected before the raw SHA assertions.",
+    "Unknown-source negatives use the actual-current hunk, require that hunk once, and require every negative to change physical bytes. This avoids a removal of an absent old hunk being misreported as a meaningful mutation.",
+    "The companion argument is supplied only to the existing composed old-map proof control. Its owned root holds both independently sealed map files before positive validation; removal/corruption of the old map then fails for the tested authority while the new-map prerequisite stays present.",
+    "The owned data closure contains original six/parent proofs, three required next-ten proofs, separate four frozen DD fixtures and all27 actual NEW data files. It directly proves current NEW34 on that owned root before any negative and then compares historical assertSixActualData return to the legitimate DD34 records.",
+    "There is no new actual-root fallback inside owned fixture validation. Supplied proofRoot/base is retained by source projection and fixed data dispatch; missing owned prerequisites fail closed.",
+    "Per-file negative mutations and all source proof aliases target only owned temporary fixtures. Existing finally cleanup remains; no negative writes to the tracked root or external pinned originals.",
+    "Source map load remains a strict independent seal requirement, with no skip, count-minimum substitution or fake positive branch. Adding the changed existing test to a newly reviewed source plan is necessary; no old map or old source hash is relaxed."
+  ],
+  "blocking_false_pass_or_API_findings": [],
+  "remaining_required_gates": [
+    "Keep tracked files unchanged until the running root full check terminates and its actual failure evidence is captured.",
+    "Apply only against exact base2f3bf8e7; regenerate and independently review the next-to-DD whole-source map/loader path plan including this existing test, expanding the current30-path scope to the reviewed31-path scope. Preserve old21c map and old C1 expectations.",
+    "Run the exact four cases with zero skips against the final sealed plan and new physical data. A static GO is not a passing repaired-test receipt.",
+    "Reconcile the broader check, installed/browser/widget evidence and exact candidate CI separately. No push, main, production, deployment or private data change is approved by this review."
+  ],
+  "execution_performed": false,
+  "tracked_edits": false
+}

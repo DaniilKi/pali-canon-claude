@@ -126,7 +126,13 @@ class SixHistoryControls(unittest.TestCase):
 
     def test_07_runtime_parent_and_full343_objects_are_mandatory(self):
         parent=h.parent343_records(self.root)
-        self.assertEqual(h.six_runtime_records(self.root,parent),self.inventory)
+        # This explicit historical function retains the independently sealed DD
+        # runtime. Current approved_runtime now returns the separate NEXT34.
+        prior_raw=(self.root/h.PROOF_DIRECTORY/'runtime'/h.INVENTORY_NAME).read_bytes()
+        self.assertEqual(h.digest(prior_raw),h.INDEPENDENT_SIX_INVENTORY_SHA)
+        prior_inventory=json.loads(prior_raw)['files']
+        self.assertEqual(h.six_runtime_records(self.root,parent),prior_inventory)
+        self.assertNotEqual(self.inventory,prior_inventory)
         changed=copy.deepcopy(parent);changed['data/apadana.json']['sha256']='0'*64
         with self.assertRaises((AssertionError,ValueError)):h.six_runtime_records(self.root,changed)
         for id in (self.approved['ids'][0],self.approved['ids'][-1]):

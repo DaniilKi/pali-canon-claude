@@ -1,0 +1,93 @@
+{
+  "schema": "independent-next-ten-source-tests-static-review-v1",
+  "status": "SOURCE_TEST_PROPOSAL_STATIC_GO",
+  "reviewer": "/root/an_numbered_browser",
+  "proposal_directory": "/tmp/pali-next-ten-evidence-nov26/new-source-tests",
+  "reviewed_manifest_sha256": "abf44ee2c049fe15eed92e38b8b66158c4a74d0af22309ce439623445c2e84e1",
+  "reviewed_files": {
+    "tests/apadana_next_ten_boundary_acceptance.py": "28557e471b247f1abbd288c1d04418dcde5f7f65f2eca4a9208452d891825f37",
+    "tests/apadana-next-ten-migration.test.mjs": "4283d5cd761aea599e97d84b77f7c18499abc184eb74858b3623429fa27f5c73",
+    "TEST_SCOPE.md": "322cdfb3565367c12816946b4fd851fe99401ce807a636453d0a2cb24aa08e4b",
+    "V2_STATUS.json": "a0d42221fadb1bd4f005a8c2dd8e8e89663153b6de3704431a940f48320690cb"
+  },
+  "scope": {
+    "targets": [
+      "tha-ap348",
+      "tha-ap349",
+      "tha-ap374",
+      "tha-ap375",
+      "tha-ap423",
+      "tha-ap424",
+      "tha-ap426",
+      "tha-ap427",
+      "tha-ap428",
+      "tha-ap429"
+    ],
+    "data_methods": 12,
+    "original_source_methods": 4,
+    "old_canonical_logical_sha256": "0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b",
+    "new_canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de"
+  },
+  "independent_evidence": {
+    "source_proof_file_sha256": {
+      "FUTURE_ORACLE.json": "78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655",
+      "OLD_TEN_RECORDS.json": "cce5323b93fc6be3a415e9fb75146d8f1e1696ce7530d2634286d00bebff6255",
+      "NEW_TEN_RECORDS.json": "c0a008965acd462b45dcf35eaf8e19abd6246f36a9c64fbb4cab5d4fd16962b0",
+      "POSITION_CROSSWALK144.json": "223bc745f40774b50f41df41073f1b7f8c67b8eb4067ef28556dd4bb22ac439f",
+      "SOURCE340_BLOCKS.json": "74900c763c50311ce6a6c9d1b9fbfca46c19b2c1bd42bfbe3f9624db7ed874f0",
+      "ORACLE_COMPLETION.json": "180d5f87e280ef773a5043d85b00c4f94fe89a02bbe3f040dde0658b7ae30648",
+      "FINAL_ORACLE_SEAL.json": "fb1e29730c4208ea866ab23cd1eb35d5c85d1658a33037933be756bfdef841d9"
+    },
+    "parallels_model_seal_sha256": "4084bbdef09f0ed32476f4375efbbd7eeb1b03156ce040ef0fe2e31737624530",
+    "packed_and_parallels_binding_sha256": "01306700c035b59cfde2d856b3f62f9c9a2a2276ad711b9a288a271d39019a79",
+    "model_sealed_artifacts_bytes_and_sha256_verified": 15,
+    "expected_new_parallels_logical_sha256": "e954bb116d7760538bd22121b0254018b1dbb80a17ecb00db7f147839ea4f02b",
+    "independently_derived_candidate_pairs": [
+      12642,
+      12639
+    ]
+  },
+  "resolved_findings": [
+    {
+      "id": "R1",
+      "former_issue": "Old noncanonical byte-equality incorrectly required unchanged derived parallels input hash and candidate-pair counter.",
+      "resolution": "Finite model and packed binding pins checked before candidate index read; old gzip/logical fixture identities, new canonical packed/logical identities, exact two permitted paths, independently derived count, complete expected logical bytes and complete object equality now required. All final edges, citations and other fields remain exact."
+    },
+    {
+      "id": "R2",
+      "former_issue": "Inside-source negative could write into external original checkout if containment regressed.",
+      "resolution": "Both ordinary and dot-dot containment negatives now use an owned exact-original two-file VRI tree; they assert specific containment failure and absence of output. Existing symlink/no-overwrite controls retained."
+    },
+    {
+      "id": "R3",
+      "former_issue": "Report pair zip could accept a truncated report.",
+      "resolution": "Both independent pair-proof length equality and explicit five-entry length precede report zip."
+    }
+  ],
+  "static_checks": [
+    "Full original V1 test proposal reviewed; final V2 diff is confined to finite parallels binding, packed-byte accessor extraction, owned-fixture relocation, and report length guards. V1 preserved byte-for-byte; Node wrapper unchanged.",
+    "AST parses final Python proposal without import or execution; exactly 12 data and 4 original-source test methods retained.",
+    "Seven independently sealed source proof bytes and all 15 independent model artifact bytes and lengths verified. Model seal and packed binding exact schemas/status/linkages verified.",
+    "Exact source-derived OLD/NEW records and whole-snapshot hashes gate expected data; implementation inverse is not used to generate expectations.",
+    "All 144 source positions, 340 source tuples, 17 note occurrences, 61 books, 8534 other full records, original 343 profile/link objects, commentary and earlier namespaces covered by pinned independent proofs or exact preservation assertions.",
+    "PTS10788 inline carry, Book37 note214, prose recitation10381, Book37 speaker/unlabelled-stanza rendering and uniform preannotation states retained.",
+    "Actual reviewed CLI interfaces match test calls; physical resolved macOS paths, strict supplied symlink refusal, new/distinct outputs, owned dot-dot containment and atomic late-source failures have finite positive/negative controls.",
+    "Wrapper retains bounded subprocesses, expected class counts and zero-skip checks. No case-count inflation."
+  ],
+  "remaining_execution_gates": [
+    "Root must integrate unchanged exact reviewed test files and pinned evidence/old parallels fixture, syntax-check and execute both classes against the candidate.",
+    "Mandatory original-source CI must set and validate VRI_SOURCE_CHECKOUT and report all four original-source cases with zero skips.",
+    "Installed native/browser/widget consumer behavior, packaged byte inventory, exact-commit CI and release promotion remain separate gates."
+  ],
+  "approval_limits": {
+    "static_exact_proposal_only": true,
+    "tests_executed": false,
+    "application_or_builder_imported": false,
+    "builds_servers_browser_network_git_actions": false,
+    "tracked_files_written": false,
+    "runtime_or_release_approval": false,
+    "english_activation_approval": false,
+    "private_data_access_or_migration": false
+  },
+  "blocking_findings": []
+}

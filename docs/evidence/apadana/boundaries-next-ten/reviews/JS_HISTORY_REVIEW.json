@@ -1,0 +1,211 @@
+{
+  "schema": "independent-static-next-ten-js-history-review-v1",
+  "revision": "V2_ROOT_COHERENCE",
+  "decision": "GO_FOR_ROOT_INTEGRATION_STATIC_ONLY; EXECUTION_AND_RELEASE_HELD",
+  "scope": "Static source/text/hash inspection only. No proposal/app import or execution, tests, builds, Git, CI, network or tracked edit.",
+  "manifest": {
+    "bytes": 2654,
+    "sha256": "fe50d1d69068946f9b0bf0babde7dbd2671e3d9602f54bd77f522539e43cd30c"
+  },
+  "files": {
+    "README.md": {
+      "actual": {
+        "bytes": 7490,
+        "sha256": "b23491211678fd65b266a9bc6fe40e75fa108f9e15b2d25859dd2e751f097653"
+      },
+      "matches_manifest": true
+    },
+    "SEAM_SOURCE_RECORDS.json": {
+      "actual": {
+        "bytes": 831,
+        "sha256": "d899f6501132e65113a27ac31f46e308f0b75bf684a9f68eb622242b055a30be"
+      },
+      "matches_manifest": true
+    },
+    "STATIC_PROTOCOL_CONTRACT.json": {
+      "actual": {
+        "bytes": 2727,
+        "sha256": "52636aff2190972035fda43e92ca3de2ad41d21b52c320b8e534cace1742d832"
+      },
+      "matches_manifest": true
+    },
+    "frozen-dd7/tests/helpers/canon-before-six.mjs": {
+      "actual": {
+        "bytes": 3656,
+        "sha256": "83d1472a1d05fe40a961e8e00aa5c1df3c895fa4c331ebe42f64657bd0ee85d4"
+      },
+      "matches_manifest": true
+    },
+    "frozen-dd7/tests/helpers/six-boundary-source-input.mjs": {
+      "actual": {
+        "bytes": 5521,
+        "sha256": "73e11f44693fae80384cf9eb3dc5b723b0087067c9fadfca16ad43ad791a1572"
+      },
+      "matches_manifest": true
+    },
+    "frozen-dd7/tests/helpers/six-history-data.mjs": {
+      "actual": {
+        "bytes": 8570,
+        "sha256": "4ca6826427cb3d6e112565f64065105882c5a5fe3d42f0dbe031d90f0ee2772d"
+      },
+      "matches_manifest": true
+    },
+    "prepare_proposal.py": {
+      "actual": {
+        "bytes": 9538,
+        "sha256": "58e9deb80b50020295f9c3583e4e01a59e3edd9bd93b21d2d1a0f510ffd207fd"
+      },
+      "matches_manifest": true
+    },
+    "seam.patch": {
+      "actual": {
+        "bytes": 18926,
+        "sha256": "9c2a74dd46fc000bc683c4ac1b70f3fe7d57e1d0c56e3e7c327d3168e42a31aa"
+      },
+      "matches_manifest": true
+    },
+    "tests/helpers/canon-before-next-ten.mjs": {
+      "actual": {
+        "bytes": 4093,
+        "sha256": "9d0c2d222e51bfe995f06b0993147bf8ab638d4784e345296b7eaaa38212285b"
+      },
+      "matches_manifest": true
+    },
+    "tests/helpers/canon-before-six.mjs": {
+      "actual": {
+        "bytes": 3857,
+        "sha256": "426629a327d06b364f6f59413ee1d3841badd78088853258e5642f4fd37aa6e0"
+      },
+      "matches_manifest": true
+    },
+    "tests/helpers/next-ten-history-data.mjs": {
+      "actual": {
+        "bytes": 10907,
+        "sha256": "40abdbd5d1425e4676ff3e01d41def2229bd6405e110442e2dc83b3cbae8e19e"
+      },
+      "matches_manifest": true
+    },
+    "tests/helpers/next-ten-source-input.mjs": {
+      "actual": {
+        "bytes": 4655,
+        "sha256": "2685c30a5e5cbd5d1d4799d1eba3596afa103cd2b53673bafec1ea0738be156c"
+      },
+      "matches_manifest": true
+    },
+    "tests/helpers/six-boundary-source-input.mjs": {
+      "actual": {
+        "bytes": 5814,
+        "sha256": "170da4175efcc38065a829d3692f332e06dfb5f56cbf6387e6626dc3f1b82435"
+      },
+      "matches_manifest": true
+    },
+    "tests/helpers/six-history-data.mjs": {
+      "actual": {
+        "bytes": 9862,
+        "sha256": "86a9093f2d926fc4970189a1a5c13c00e0da54149186b90f7a055a02f3d6144f"
+      },
+      "matches_manifest": true
+    }
+  },
+  "baseline_files": {
+    "tests/helpers/canon-before-six.mjs": {
+      "bytes": 3656,
+      "sha256": "83d1472a1d05fe40a961e8e00aa5c1df3c895fa4c331ebe42f64657bd0ee85d4",
+      "frozen_copy_equals_baseline": true
+    },
+    "tests/helpers/six-history-data.mjs": {
+      "bytes": 8570,
+      "sha256": "4ca6826427cb3d6e112565f64065105882c5a5fe3d42f0dbe031d90f0ee2772d",
+      "frozen_copy_equals_baseline": true
+    },
+    "tests/helpers/six-boundary-source-input.mjs": {
+      "bytes": 5521,
+      "sha256": "73e11f44693fae80384cf9eb3dc5b723b0087067c9fadfca16ad43ad791a1572",
+      "frozen_copy_equals_baseline": true
+    }
+  },
+  "static_import_graph": {
+    "canon-before-next-ten.mjs": [
+      "node:assert/strict",
+      "node:crypto",
+      "./six-regular-file.mjs"
+    ],
+    "canon-before-six.mjs": [
+      "./canon-before-next-ten.mjs",
+      "node:assert/strict",
+      "./six-regular-file.mjs",
+      "node:crypto"
+    ],
+    "next-ten-history-data.mjs": [
+      "node:assert/strict",
+      "node:crypto",
+      "node:zlib",
+      "node:url",
+      "node:path",
+      "./six-regular-file.mjs",
+      "./canon-before-next-ten.mjs",
+      "./six-history-data.mjs"
+    ],
+    "next-ten-source-input.mjs": [
+      "node:assert/strict",
+      "node:crypto",
+      "node:url",
+      "node:path",
+      "./six-regular-file.mjs"
+    ],
+    "six-boundary-source-input.mjs": [
+      "./next-ten-source-input.mjs",
+      "node:assert/strict",
+      "./six-regular-file.mjs",
+      "node:crypto",
+      "node:url",
+      "node:path"
+    ],
+    "six-history-data.mjs": [
+      "./next-ten-history-data.mjs",
+      "node:assert/strict",
+      "./six-regular-file.mjs",
+      "node:crypto",
+      "node:zlib",
+      "node:url",
+      "node:path",
+      "./canon-before-six.mjs"
+    ]
+  },
+  "confirmed_static": [
+    "The next-ten-history-data <-> six-history-data ESM cycle has function-declaration handlers and no eager handler invocation or eager access to the opposite module const bindings. Actual ESM initialization remains unexecuted.",
+    "Closed six-operation dispatcher owns carrier lifetime, marks it inactive in finally, and does not return the carrier. Copied/foreign/ordinary URL objects fail private WeakMap identity checks; ordinary public roots rescan current27.",
+    "readNextTenSixInput verifies physical current bytes against NEW inventory before returning a pinned DD fixture for exactly the four allowed test input paths.",
+    "V2 threads carrier base into c1Fixture, parents, packedC1FromFixtures, finite normalizer, and bundled return sites; supplied-root missing fixtures cannot statically fall back to module-root C1 fixture lookup on those paths.",
+    "assertNextTenActualData returns frozen current NEW34 records. Existing sixDataRecords/assertSixActualData deliberately retain DD34 historical expectation meaning.",
+    "Logical complete new input requires NEXT_TEN_CANON_SHA then exact inverse DD7_CANON_SHA; pure inverse preserves unrelated mutations, while unknown supplied buffers remain unknown through the finite data/source normalizers.",
+    "Source map uses a separately pinned exact ordered path list; excludes server paths and its own loader, avoiding a source-map-loader hash self-cycle. Actual map has not been provided/pinned for review.",
+    "Original 30/120-second wrappers, Windows scheduling, runtime CJS/HTTP/widget/API outputs and private saved data are not changed by this JS seam."
+  ],
+  "blocking_implementation_findings": [],
+  "contract_distinctions_to_test": [
+    {
+      "file": "tests/helpers/six-boundary-source-input.mjs",
+      "line": 16,
+      "issue": "Direct projectC1Source(path, DD7Source, {requireCurrent:true}) can accept exact DD7 source for a next-ten-changed old-map path. It calls normalizeDD7SourceInput, which intentionally passes DD7 unchanged; then the preserved six current_sha256 check accepts DD7.",
+      "interpretation": "Confirmed root-approved stage distinction: projectC1Source(requireCurrent:true) retains historical DD7-to-C1 meaning, and must never be reported as strict NEXT physical acceptance. New projectDD7Source(requireCurrent:true) and composed strictC1SourceReader enforce exact NEXT bytes for new-map paths.",
+      "required_control": "For a next-ten-changed path present in both new and old maps, warm valid source/proof acceptance; direct historical projectC1Source may accept exact DD7 by its declared stage semantics. Direct projectDD7Source(requireCurrent:true), strictDD7SourceReader and composed strictC1SourceReader MUST reject the same old DD7 actual source, accept exact NEXT source, reject unknown mutations, and still reject missing/tampered/symlink new or old proofs after a positive. Keep source-only normalization out of actual runtime/API/widget outputs."
+    }
+  ],
+  "known_integration_holds": [
+    "Runtime inventory/review/application and exact delta pins are PENDING intentionally.",
+    "Source map SHA and exact path list are PENDING intentionally; the map and independent own-source binding require separate root review.",
+    "Python existing SixHistoryControls DD34-versus-NEW34 expectation mismatch recorded separately remains to be fixed without runtime normalization."
+  ],
+  "remaining_unexecuted": [
+    "Actual ESM module initialization/cycle and all handler calls",
+    "Warm all27/current27 mutations and each old/new proof missing/tamper/symlink/mtime control",
+    "Old4 and C1 fixture loss/tampering using supplied-root vs intact module-root copies",
+    "Private URL href/closed/copied/foreign identity and lifetime controls",
+    "Reader Buffer/string identity, encoding/options, file URL and supplied reader error propagation",
+    "Capture-count instrumentation and assurance that physical per-access rereads do not trigger capture recursively",
+    "Actual new source map hunks, unique inverse occurrences, old37 row preservation and self-source binding",
+    "Actual installed/native/widget/browser/offline evidence and exact candidate CI"
+  ],
+  "root_stage_semantics_confirmation": "Parent explicitly confirmed the DD-stage meaning of the historical projector; no artificial rejection of immutable historical DD inputs is required."
+}

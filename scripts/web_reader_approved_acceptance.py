@@ -9,6 +9,7 @@ import hashlib
 import json
 import subprocess
 from pathlib import Path
+import web_reader_next_ten_boundary_history as _next_ten
 from web_reader_four_boundary_history import historical_data_bytes, assert_current_canonical_data, boundary_runtime_records
 
 from web_reader_six_boundary_history import (_assert_six_current_canonical_data as assert_six_current_canonical_data, _historical_c1_data_bytes as historical_c1_data_bytes, six_runtime_records, assert_preserved_c1_catalogue, _c1_operation_scope, _reject_c1_scope)
@@ -716,10 +717,10 @@ def approved_six_runtime(root):
     return six_runtime_records(root, approved343_runtime(root))
 
 def approved_catalogue(root):
-    return approved_six_catalogue(root)
+    return approved_next_ten_catalogue(root)
 
 def approved_runtime(root):
-    return approved_six_runtime(root)
+    return approved_next_ten_runtime(root)
 
 
 def historical_c1_approved_catalogue(root):
@@ -730,3 +731,18 @@ def historical_c1_approved_catalogue(root):
 def approved_six_catalogue(root):
     with _c1_operation_scope(root) as scoped:
         return _approved_six_catalogue_body(scoped)
+
+
+def approved_next_ten_catalogue(root):
+    # approved_six_catalogue owns one private capture, now fed exact DD inputs.
+    # Source catalogue remains the same343 complete profile/link objects.
+    _reject_c1_scope(root)
+    return approved_six_catalogue(root)
+
+
+def approved_next_ten_runtime(root):
+    _reject_c1_scope(root)
+    with _c1_operation_scope(root) as scoped:
+        # Retain every old authority before accepting the new inventory graph.
+        previous = six_runtime_records(scoped,approved343_runtime(scoped))
+        return _next_ten._runtime_records(scoped._next_ten_binding,scoped._root,previous)
