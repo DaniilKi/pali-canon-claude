@@ -793,10 +793,52 @@ jobs:
             src/_poems/chapter-3/poem-257.md
             src/_poems/chapter-3/poem-258.md
             src/_poems/chapter-3/poem-259.md
+            src/_poems/chapter-3/poem-261.md
+            src/_poems/chapter-3/poem-262.md
+            src/_poems/chapter-3/poem-263.md
+            src/_poems/chapter-3/poem-264.md
+            src/_poems/chapter-3/poem-265.md
+            src/_poems/chapter-3/poem-267.md
+            src/_poems/chapter-3/poem-268.md
+            src/_poems/chapter-3/poem-269.md
+            src/_poems/chapter-3/poem-270.md
+            src/_poems/chapter-3/poem-271.md
+            src/_poems/chapter-3/poem-272.md
+            src/_poems/chapter-3/poem-273.md
+            src/_poems/chapter-3/poem-274.md
+            src/_poems/chapter-3/poem-275.md
+            src/_poems/chapter-3/poem-276.md
+            src/_poems/chapter-3/poem-277.md
+            src/_poems/chapter-3/poem-278.md
+            src/_poems/chapter-3/poem-279.md
+            src/_poems/chapter-3/poem-281.md
+            src/_poems/chapter-3/poem-282.md
+            src/_poems/chapter-3/poem-283.md
+            src/_poems/chapter-3/poem-284.md
+            src/_poems/chapter-3/poem-285.md
+            src/_poems/chapter-3/poem-287.md
+            src/_poems/chapter-3/poem-288.md
+            src/_poems/chapter-3/poem-292.md
+            src/_poems/chapter-3/poem-293.md
+            src/_poems/chapter-3/poem-294.md
+            src/_poems/chapter-3/poem-295.md
+            src/_poems/chapter-3/poem-296.md
+            src/_poems/chapter-3/poem-298.md
+            src/_poems/chapter-3/poem-299.md
             src/_poems/chapter-3/chapter-3.json
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
         run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+      - name: Require all reviewed publisher261-299 source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera261-280-source.test.mjs tests/thera261-280-client.test.mjs tests/thera281-285-source.test.mjs tests/thera281-285-client.test.mjs tests/thera287-288-source.test.mjs tests/thera287-288-client.test.mjs tests/thera292-299-source.test.mjs tests/thera292-299-client.test.mjs | tee reviewed-publisher261-299.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher261-299.tap","utf8"); for(const [key,value] of [["tests",49],["pass",49],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Check original and new Apadāna parser refusals against pinned source
         if: matrix.group == 'apadana'
         run: APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-parser.test.mjs tests/apadana-integration.test.mjs tests/apadana-pair-boundary.test.mjs tests/apadana-three.test.mjs
@@ -1381,6 +1423,7 @@ jobs:
           name: widget-browser-report-${{ matrix.group }}
           path: |
             widget-browser.report.json
+            reviewed-publisher261-299.tap
             standalone-reader.report.json
             standalone-print.report.json
             standalone-saved.report.json

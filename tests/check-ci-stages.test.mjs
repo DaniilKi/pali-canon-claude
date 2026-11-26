@@ -6,7 +6,7 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {verifyCheckContract} from '../scripts/ci-check-contract.mjs';
-import {CHECK_STAGE_STEPS,PROPOSED_CHECK_NODE_SHA,projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';
+import {CHECK_STAGE_STEPS,PROPOSED_CHECK_NODE_SHA,projectCheckStageWorkflow,projectCheckStageWorkflowOnly} from './helpers/check-stage-baseline.mjs';
 
 const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
 const current=read('.github/workflows/check.yml');
@@ -60,7 +60,8 @@ test('finite stage projection rejects omitted audit, success bypass and altered 
 test('finite stage projection preserves matrix, setup, smoke, pack and installed audits',()=>{
   const original=projectCheckStageWorkflow(current);
   assert.equal(projectCheckStageWorkflow(original),original);
-  assert.equal(current.slice(0,current.indexOf('\n  check:\n')),original.slice(0,original.indexOf('\n  check:\n')));
+  const stagesOnly=projectCheckStageWorkflowOnly(current);
+  assert.equal(current.slice(0,current.indexOf('\n  check:\n')),stagesOnly.slice(0,stagesOnly.indexOf('\n  check:\n')));
   for(const changed of [current.replace('node: [20, 22]','node: [22]'),current.replace('      - run: npm run smoke\n',''),current.replace('      - run: npm run pack:desktop\n',''),current.replace('        run: git diff --exit-code -- server/\n','')])assert.throws(()=>projectCheckStageWorkflow(changed));
 });
 
