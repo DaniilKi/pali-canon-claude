@@ -784,7 +784,26 @@ try:
             for uid, first, last in [('pli-tv-kd1', 'pli-tv-kd1/190', 'pli-tv-kd1/201'),
                                      ('pli-tv-kd6', 'pli-tv-kd6/195', 'pli-tv-kd6/195'),
                                      ('pli-tv-kd8', 'pli-tv-kd8/174', 'pli-tv-kd8/178')]:
-                page.goto(base + '/#read?uid=' + uid)
+                expected_source = tool('get_text', {'uid': uid, 'limit': 30, 'script': 'sinhala'})
+                old_heading = page.locator('#view > h2').element_handle()
+                assert old_heading is not None
+                destination = base + '/#read?uid=' + uid
+                with page.expect_response(lambda response: response.request.method == 'POST'
+                    and response.url == base + '/mcp'
+                    and response.request.post_data_json.get('params', {}).get('name') == 'get_text'
+                    and response.request.post_data_json['params']['arguments'].get('uid') == uid) as completed:
+                    page.goto(destination)
+                actual_result = completed.value.json()['result']
+                assert not actual_result.get('isError')
+                assert actual_result['structuredContent'] == expected_source
+                expect(page).to_have_url(destination)
+                page.wait_for_function('(node)=>!node.isConnected', arg=old_heading)
+                expect(page.locator('#view > h2')).to_have_text(expected_source['citation'] + ' · ' + expected_source['title'])
+                expect(page.locator('section[aria-label="Pāli passage"] .passage')).to_have_text([s['text'] for s in expected_source['segments']])
+                expect(page.locator('.segment-label a').first).to_have_text(expected_source['segments'][0]['ref'])
+                assert page.locator('.segment-label a').all_text_contents() == [s['ref'] for s in expected_source['segments']]
+                source_roles(page.locator('section[aria-label="Pāli passage"]'), expected_source, 3)
+                expect(page.locator('#status').filter(has_text='Opening')).to_have_count(0)
                 read_tool(page, 'English sources').click()
                 expect(page.locator('#study .translation-choice')).to_have_count(1)
                 page.get_by_role('button', name='Review partial-unit source', exact=True).focus()
