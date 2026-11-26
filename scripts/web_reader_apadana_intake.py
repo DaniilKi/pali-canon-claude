@@ -695,7 +695,7 @@ def read_301_310(root):
 
 
 def reviewed_intake(root):
-    return read_321_329(root)
+    return read_331_334(root)
 
 
 def curated_303_additions(root,anchor_filename):
@@ -999,7 +999,7 @@ def read_321_329(root):
     return current
 
 
-def curated_additions(root, anchor_filename):
+def curated339_additions(root, anchor_filename):
     current = read_321_329(root)
     if anchor_filename == 'THERA_312_319_APPROVAL.json':
         anchor = read_312_319(root)
@@ -1011,6 +1011,131 @@ def curated_additions(root, anchor_filename):
         assert historical['curation'] == read_312_319(root)
     extra_profiles = _sealed(root, current['expected_profiles'])
     extra_links = _sealed(root, current['expected_links'])
+    assert list(extra_profiles) == list(extra_links) == current['approved_ids']
+    assert not set(extra_profiles) & (set(anchor['expected_profile_ids']) | set(ids))
+    ids.extend(current['approved_ids']); profiles.update(extra_profiles); links.update(extra_links)
+    assert current['expected_profile_ids'] == anchor['expected_profile_ids'] + ids
+    return {'curation': current, 'anchor': anchor, 'ids': ids, 'profiles': profiles, 'links': links}
+
+
+# D267 four source-normalization scopes over the preserved corrected ac baseline.
+APPROVAL343_SHA = 'e68927dcca72d79196786d46ba19290bf0903396993c2fb62dbf2b02150793c8'
+INDEPENDENT343_REVIEW_SHA = 'bd1891106e99c3dacc5748618a87be913df20949a83f62a40d320d95c71d004d'
+BASELINE339_SHA = '038e2565ee0b7803e4a2d3a33bd0d8e4d832deea89962b2686a72d77d3d10b8a'
+NEW_CANON343 = '46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8'
+HISTORICAL_CANON339 = '1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32'
+IDS343_NEW = ['tha-ap333', 'tha-ap334', 'tha-ap335', 'tha-ap336']
+
+def read_331_334(root):
+    previous = read_321_329(root)  # existing historical source reader, body retained
+    current = _sealed(root, {'file': 'THERA_331_334_APPROVAL.json', 'sha256': APPROVAL343_SHA})
+    assert current['schema'] == 'reviewed-apadana-intake-v1' and current['status'] == 'approved'
+    assert current['base_commit'] == 'ac620911e349b089eedeb93906675c62c9523b24'
+    assert current['previous_intake'] == {'file': 'THERA_321_329_APPROVAL.json',
+        'sha256': '39a344a026373f8a902ecb5857414daf12fc4a8ae942132050529844aa602810'}
+    assert _sealed(root, current['previous_intake']) == previous
+    assert current['baseline_ids'] == previous['expected_profile_ids'] and len(current['baseline_ids']) == 339
+    assert current['baseline_records'] == previous['baseline_records'] + previous['approved_records']
+    assert current['approved_ids'] == IDS343_NEW
+    assert current['approved_records'] == [{'id': uid, 'publisher_chapter': 'chapter-3', 'poem': pub}
+        for uid, pub in zip(IDS343_NEW, (331, 332, 333, 334), strict=True)]
+    assert current['expected_profile_ids'] == current['baseline_ids'] + IDS343_NEW
+    assert len(current['expected_profile_ids']) == len(set(current['expected_profile_ids'])) == 343
+    assert not set(IDS343_NEW) & (set(current['baseline_ids']) | set(previous['held_ids']))
+    assert current['held_ids'] == previous['held_ids']
+    assert current['explicitly_not_activated_publishers'] == sorted((set(previous['explicitly_not_activated_publishers']) - {331}) | {335})
+    assert current['publisher_revision'] == previous['publisher_revision'] and current['vri_revision'] == previous['vri_revision']
+    # The historical source intake predates the now-preserved four-unit repair.
+    assert previous['after_canon_sha256'] == HISTORICAL_CANON339
+    assert current['before_canon_sha256'] == current['after_canon_sha256'] == NEW_CANON343
+    assert current['historical_canonical_bridge'] == {
+        'previous_intake_after_canon_sha256': HISTORICAL_CANON339, 'current_canon_sha256': NEW_CANON343,
+        'prior_four_runtime_inventory_sha256': 'c8fc751e3f00c986c315400f229561659268ee21f5e8d161be8e4edd9c3a75d7',
+        'prior_four_runtime_review_sha256': '6006126f8de46b565a9e194ed0fa4426ce512c9f27e67ee4ce4fcd4bc14d3056'}
+    assert current['source_and_normalization_only'] is True
+    for key in ('runtime_approval', 'release_approval', 'media_approval'):
+        assert current[key] is False
+    assert current['external_activations'] == 0
+    assert current['baseline_freeze']['sha256'] == BASELINE339_SHA
+    baseline = _sealed(root, current['baseline_freeze'])
+    assert baseline['base_commit'] == current['base_commit'] and baseline['ids'] == current['baseline_ids']
+    assert baseline['profile_count'] == baseline['translation_count'] == 339
+    assert baseline['canonical_logical_sha256'] == NEW_CANON343
+    assert current['baseline_reconstruction_review']['sha256'] == '1bbbc653da24cb1caf0cb92f05b56bd950505f81a0c398819095b0fc0bc7f5e2'
+    parity = _sealed(root, current['baseline_reconstruction_review'])
+    assert parity['source_authority_compact_sha256'] == BASELINE339_SHA
+    for key in ('all339_profile_objects_exact', 'all339_translation_objects_exact', 'all26_non_apadana_data_pins_exact'):
+        assert parity[key] is True
+    profiles, links, golden = (_sealed(root, current[key]) for key in ('expected_profiles', 'expected_links', 'goldens'))
+    assert list(profiles) == list(links) == [g['id'] for g in golden['poems']] == IDS343_NEW
+    assert golden['canonical_logical_sha256'] == NEW_CANON343
+    assert current['source_approval']['sha256'] == 'dace9bc63059c211f0ae090dc69a2bd4487b2fbeaee9fdce0579eae40c0c65a2'
+    original = _sealed(root, current['source_approval'])
+    assert original['status'] == 'GO_FOUR_EXACT_ORIGINAL_PUBLISHER_SCOPES_IMPLEMENTATION_HELD'
+    assert original['scope']['candidates'] == [331, 332, 333, 334] and original['scope']['boundary_only'] == [335]
+    assert original['scope']['canonical_metadata_sha256'] == NEW_CANON343
+    assert current['independent_notice_review']['sha256'] == INDEPENDENT343_REVIEW_SHA
+    peer = _sealed(root, current['independent_notice_review'])
+    # Proposed interface. Root replaces this invalid status only after reading
+    # actual independent review; it must bind all four exact profile/link/golden
+    # artifacts and explicitly approve normalization, not infer it from producer.
+    assert peer['schema'] == 'independent-four-english-normalization-approval-v1'
+    assert peer['status'] == 'GO_EXACT_FOUR_PUBLISHER_EDITION_NORMALIZATIONS_ONLY'
+    assert peer['normalization_approval'] is True
+    assert peer['approved_ids'] == IDS343_NEW and peer['approved_publishers'] == [331, 332, 333, 334]
+    for key in ('runtime_inventory_approval', 'implementation_activation_approval', 'behavioral_acceptance_approval', 'CI_or_release_approval'):
+        assert peer[key] is False
+    assert peer['source_only_review']['sha256'] == current['source_approval']['sha256']
+    assert peer['required_schema_adapter'] == {'file': 'NORMALIZATION_SCHEMA_ADAPTER.json',
+        'sha256': 'a3ac33cf868c3ecd7f6480457f6eb905013d88556787d30950472cd479f3af4a'}
+    _sealed(root, {'file': 'THERA_331_334_NORMALIZATION_SCHEMA_ADAPTER.json',
+        'sha256': peer['required_schema_adapter']['sha256']})
+    for filename, key in [('EXPECTED_PROFILES.json', 'expected_profiles'), ('EXPECTED_LINKS.json', 'expected_links'),
+            ('GOLDENS.json', 'goldens'), ('SOURCE_SCOPES.json', 'source_scopes'), ('DERIVATION_RECEIPT.json', 'normalization_derivation')]:
+        assert peer['approved_producer_files'][filename] == current[key]['sha256']
+        _sealed(root, current[key])
+    assert peer['canonical_logical_sha256'] == NEW_CANON343
+    assert current['source_totals'] == golden['totals']
+    total_keys = {'poems': 'complete_publisher_edition_choices', 'body_paragraphs': 'body_paragraphs',
+        'physical_stanza_entries': 'physical_stanza_entries', 'printed_global_labels': 'printed_global_labels',
+        'printed_local_labels': 'printed_local_labels', 'entries_with_absent_local_label': 'absent_local_label_entries',
+        'combined_eight_line_entries': 'combined_eight_line_entries', 'poem_notes': 'poem_notes',
+        'preface_notes': 'separate_preface_notes', 'preface_scopes': 'preface_scopes', 'pages500': 'pages500',
+        'body_characters_utf16': 'body_characters_utf16', 'poem_note_characters_utf16': 'poem_note_characters_utf16',
+        'preface_note_characters_utf16': 'preface_note_characters_utf16'}
+    for original_key, independent_key in total_keys.items():
+        assert golden['totals'][original_key] == peer['totals'][independent_key]
+    assert golden['totals']['original_notes'] == peer['totals']['poem_notes'] + peer['totals']['separate_preface_notes']
+    assert peer['totals']['stanza_quotation_entries'] == golden['totals']['physical_stanza_entries']
+    peer_rows = {row['id']: row for row in peer['per_source']}
+    assert list(peer_rows) == IDS343_NEW
+    object_sha = lambda value: hashlib.sha256(json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+    for uid in IDS343_NEW:
+        assert object_sha(profiles[uid]) == peer_rows[uid]['whole_profile_object_sha256']
+        assert object_sha(links[uid]) == peer_rows[uid]['whole_link_object_sha256']
+    for uid, g in zip(IDS343_NEW, golden['poems'], strict=True):
+        profile = profiles[uid]
+        assert profile['index_revision'] == 'apadana-thera333-336-v1'
+        assert links[uid] == dict(profile, english=profile['title'], match='individually-reviewed-whole-poem')
+        assert profile['body_sha256'] == g['body_sha256'] and profile['notes_sha256'] == g['notes_sha256']
+        assert profile['note_numbers'] == g['note_numbers'] and profile['stanza_layout'] == g['stanza_layout']
+    assert profiles['tha-ap333']['publisher_preface'] == golden['poems'][0]['publisher_preface']
+    assert profiles['tha-ap333']['publisher_preface']['note_numbers'] == [1]
+    assert profiles['tha-ap333']['note_numbers'] == [2, 3, 4]
+    return current
+
+
+def curated_additions(root, anchor_filename):
+    current = read_331_334(root)
+    if anchor_filename == 'THERA_321_329_APPROVAL.json':
+        anchor = read_321_329(root)
+        ids, profiles, links = [], {}, {}
+    else:
+        historical = curated339_additions(root, anchor_filename)
+        assert historical['curation'] == read_321_329(root)
+        anchor = historical['anchor']
+        ids, profiles, links = list(historical['ids']), dict(historical['profiles']), dict(historical['links'])
+    extra_profiles, extra_links = (_sealed(root, current[key]) for key in ('expected_profiles', 'expected_links'))
     assert list(extra_profiles) == list(extra_links) == current['approved_ids']
     assert not set(extra_profiles) & (set(anchor['expected_profile_ids']) | set(ids))
     ids.extend(current['approved_ids']); profiles.update(extra_profiles); links.update(extra_links)

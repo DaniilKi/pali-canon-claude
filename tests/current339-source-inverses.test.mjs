@@ -5,10 +5,10 @@ import {WIDGET_VERSION,WIDGET_URI} from '../src/chatgpt-widget.mjs';
 import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 const readFileSync=frozen440FileReader(readCurrentFileSync);
 const sha=x=>createHash('sha256').update(x).digest('hex');
-test('actual current339 and v41 bindings retain every exact D4 assertion through finite source inputs',()=>{
- assert.equal(CURRENT_APADANA_IDS.length,339);assert.equal(WIDGET_VERSION,'v41');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v41.html');
+test('actual current343 and v42 bindings retain every exact D4 assertion through finite source inputs',()=>{
+ assert.equal(CURRENT_APADANA_IDS.length,343);assert.equal(WIDGET_VERSION,'v42');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v42.html');
  assert.ok(Object.keys(sourceInverses.files).length>=20);
- const reader=d4FileReader(readFileSync);
+ const reader=d4FileReader(readCurrentFileSync);
  for(const [path,row]of Object.entries(sourceInverses.files)){
   const current=readFileSync(path,'utf8');assert.equal(sha(current),row.current_sha256);assert.equal(sha(projectD4Source(path,current)),row.d4_sha256);
   assert.equal(sha(reader(path)),row.d4_sha256);assert.equal(sha(reader(path,'utf8')),row.d4_sha256);

@@ -1,0 +1,382 @@
+{
+  "schema": "independent-intake343-finite-source-map-review-v2",
+  "status": "GO_BIND_EXACT_V2_MAP_AND_43_ORDERED_PATHS",
+  "base_commit": "ac620911e349b089eedeb93906675c62c9523b24",
+  "map_file": "/tmp/pali-four-english-evidence-nov26/source-inverse-v2/INTAKE343_SOURCE_INVERSES.json",
+  "map_sha256": "2d74683f5597aaac3e72d754bf539daebd0f1c84a1cf74aaa92f39ddf0a3aba7",
+  "path_plan_sha256": "7247a0d6d8ed8a02fee8e050cf127f6feead9b07a4e92b32a33541f7a4a098d6",
+  "original_manifest_sha256": "c5f15fbf5058c390fc03f7bb31eebc9fa0a221c41dab3db7b65f156e63e4a39c",
+  "mapped_paths": 43,
+  "unique_inverse_hunks": 92,
+  "whole_original_files_verified": 692,
+  "unchanged_original_files": 649,
+  "actual_new_code_paths": 12,
+  "all11_nonsealholder_new_hashes_match_receipt": true,
+  "full_preservation_closure_modules_present": 26,
+  "both_applied_frame_followup_hashes_exact": true,
+  "complete_scope_parity": true,
+  "runtime_or_corpus_projection": false,
+  "production_imports_test_projection": false,
+  "old_maps_unchanged": {
+    "CURRENT339_SOURCE_INVERSES.json": "23ad6da6cb733e1419be305541565518fc115d1215e6d66764c2f767e153d9b3",
+    "BOUNDARY333_336_SOURCE_INVERSES.json": "7e85c6139b174572cca133360c278f930e9d74c568691759202b7ba8692107f6"
+  },
+  "self_reference_excluded": "tests/helpers/intake343-source-input.mjs",
+  "all692_path_hashes_sha256": "ca0c1b84e86f16cbcb7f3d6906553c307681da0e91fa496db32e26987e0467ee",
+  "per_path_review": [
+    {
+      "path": ".github/workflows/check.yml",
+      "hunks": 3,
+      "current_sha256": "468738198fef11555154be77ecf7c2e36a286c4019586e70dadc7155bf0a4160",
+      "restored_ac_sha256": "645ad6c605b5ebd15e35051b8b3107616c6b3ed56848bfdeb2af7fc8219fb2be",
+      "whole_original_exact": true
+    },
+    {
+      "path": "scripts/web-reader-thera-held234-check.py",
+      "hunks": 5,
+      "current_sha256": "577b1f45c3482dd547b47a1e8e512ec699ac1c197f6c227aef66800e21b314de",
+      "restored_ac_sha256": "92b14e6677d9ebae8d606ab179617496fa5f5544e9f897d4f5501ed188bb0713",
+      "whole_original_exact": true
+    },
+    {
+      "path": "scripts/web-reader-thera-remaining-check.py",
+      "hunks": 2,
+      "current_sha256": "f5aac0a06b46e52c04dbefffc3f67a9fee615aa4f900e5e9ae831661c8497cb5",
+      "restored_ac_sha256": "f2018b1d74864ff3b8b717a84628996ab2a8fe8f428fde123b782ed25458a016",
+      "whole_original_exact": true
+    },
+    {
+      "path": "scripts/web_reader_apadana_intake.py",
+      "hunks": 3,
+      "current_sha256": "75fc772cde076fe64176108725c3cdbde8cc66d7db2e449384de52a54d71e730",
+      "restored_ac_sha256": "df3efc8809639c0b7daecc5c307b508006455550218e89d0617b0c982b78d11f",
+      "whole_original_exact": true
+    },
+    {
+      "path": "scripts/web_reader_approved_acceptance.py",
+      "hunks": 2,
+      "current_sha256": "26fc2315af9b3bc37c4b8aaa0647897cb81561f3b79f894874a32c311800c2c7",
+      "restored_ac_sha256": "7c31ba78bc8214a6d0240deff5abff5fae814f2cc7fc7c3f2d7eab4a79cffd7e",
+      "whole_original_exact": true
+    },
+    {
+      "path": "src/apadana-thera-profiles.mjs",
+      "hunks": 2,
+      "current_sha256": "aab6f170adf2592ccbcc5ed3a708dabf6a9ae0c14090558ecb36550579edecd7",
+      "restored_ac_sha256": "4db181a19038a46fa408e1afc7cf06bdf95ce136f84107028515521044990fee",
+      "whole_original_exact": true
+    },
+    {
+      "path": "src/apadana-thera.mjs",
+      "hunks": 3,
+      "current_sha256": "13a0c5226e0955b347f9a68b25a61399f50f6ec31c172a609dc9f567ec533720",
+      "restored_ac_sha256": "7a1fd5df277477768e345cf3506ceec3153dcb010ba3e7fe0fe0e0831ba16129",
+      "whole_original_exact": true
+    },
+    {
+      "path": "src/apadana.mjs",
+      "hunks": 2,
+      "current_sha256": "31e594dfc685cff794ff3fbf2a556b191befa001ea61775c7c69c89c2b314466",
+      "restored_ac_sha256": "1b88b0067caa2d655fda0ee2433d0f3683fe3ef35b9b2108ea8dfbab7e6f6217",
+      "whole_original_exact": true
+    },
+    {
+      "path": "src/chatgpt-widget.mjs",
+      "hunks": 4,
+      "current_sha256": "c36422b6aab199fdf27909c3f190c01c34e65f3ba1bf97e1e0ac837ecea579ee",
+      "restored_ac_sha256": "b5dde8ed69b58240df9b8662b764e0f5459a6002e4034225da7788cefbe95847",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/apadana-disclosures.test.mjs",
+      "hunks": 1,
+      "current_sha256": "e9cce61e66dd0d13eb59aea92a3b315973116ab365f260b3cc09cf44acef24ef",
+      "restored_ac_sha256": "eb06e3172498c842d9d8ce3c5398a24731a5f7c29ed25835735030bb2ed02db1",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/apadana-fourth-client.test.mjs",
+      "hunks": 2,
+      "current_sha256": "71a09536ad257b315a00e4521cccb4fe97d8e078bd7fc0a4c1bf4a906c34242e",
+      "restored_ac_sha256": "f98933e52b0652115f24d616e1c157724a0043c873016365114dd72716a27697",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/apadana-fourth.test.mjs",
+      "hunks": 1,
+      "current_sha256": "8d1465cddf7d2af8d57176432fff42f54f5bfb21294b4aa70f7adcda1bd31765",
+      "restored_ac_sha256": "e241d077feffd1c6fb37d55edf0d4dcd26613df948a897697c3f548eeb79a40a",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/apadana-next.test.mjs",
+      "hunks": 1,
+      "current_sha256": "463880f8849a554042f2fef195b280066b1fd13dfdd94e1167ed473c3360aca6",
+      "restored_ac_sha256": "0b4ff86be2d9eb6d00afbd8765fd4b7516289309547b1fe12ae587fbd5682183",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/apadana-thera.test.mjs",
+      "hunks": 1,
+      "current_sha256": "e87746d4ee6a902740aeed4060294e724a0c732ff773bce983b643db1603917a",
+      "restored_ac_sha256": "99d0ba0eeafff9ed5d198b954dec657967e21ab66a10ebd5b86e8f431bb84ae9",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/apadana-third.test.mjs",
+      "hunks": 1,
+      "current_sha256": "f22d871384f3a3bc91b2c487857b996236a963261b31f89dce02e15c48a28125",
+      "restored_ac_sha256": "3de4aab7caec1c7a9dd3015f1c4fa6d9bff9f0c207bf04b4cf0e4eb3d33624a4",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/approved_acceptance.py",
+      "hunks": 6,
+      "current_sha256": "e883431b3a92a5e186eae17890429127fe4319dee179fbb9221433582f78ae3d",
+      "restored_ac_sha256": "b662cbb26a22e0c695c62714c3d5cf743903dd9af7b5920cb16e8f7976e747f5",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/approved_current333_authority_negatives.py",
+      "hunks": 4,
+      "current_sha256": "f8fb368777231010d2c69a8f7edbc9aea20e8d4caf35ff9f34f2191e425fd815",
+      "restored_ac_sha256": "683946324de8b8d51c2c3094ef48fa8a36e0f00bd253326b6d505eb83bef32fa",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/approved_current339_authority_negatives.py",
+      "hunks": 4,
+      "current_sha256": "d3b631acd04efecc97b7b3a34a5eec6c3ba97576425a82e9b5d83ba3d3ba8a5a",
+      "restored_ac_sha256": "3e8e92bc42f4f8f46861c395cba99c6c5c54e93399ab7b4f2349c3a246e0f263",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/boundary333-336-source-input.test.mjs",
+      "hunks": 1,
+      "current_sha256": "125e8144ba6c65793d968cd54e309308c70a8bc334cb33b15646683b568b85de",
+      "restored_ac_sha256": "0ca3728d69a375b1b2629452c7b49d6390856e909c7197ad7a58d29f58ca513e",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/current339-source-inverses.test.mjs",
+      "hunks": 1,
+      "current_sha256": "acd26c785247c7975fe7f735c059815e1b9f6ac44a69b36f594577d1a1d565c7",
+      "restored_ac_sha256": "fd975179b5bf55e429629044267f2fc86091b4c04c06e86c25200558ee608a28",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/held234-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "ac695ab58a75b6a2a8532c9b66dbfe8491e8412cc32c87089e298f379a20c2cc",
+      "restored_ac_sha256": "ed3c849d7f9d5451b967903a340ec224f96f28ff26ad1c87d8ec32386494b137",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/held234-current333-chain.test.mjs",
+      "hunks": 1,
+      "current_sha256": "5ad609829ccabd1a3c90e7b9e9e99e382b02bf0d2dc288cdd0b02ef48186fe8e",
+      "restored_ac_sha256": "8116408e9060a8e76f9dbce313ad7ac1219193c6bff8d51802a257ef4dea27a9",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/held234_current333_chain.py",
+      "hunks": 5,
+      "current_sha256": "5edaa72747f2c1eafbb461745ac642ac13b4aca66dca4b2c1ce9e449d612e52b",
+      "restored_ac_sha256": "7fae1be475ca7aca3f728db76cb453ccebca113f8c41c1312a690576b36fe1d9",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/helpers/apadana-intake-expectations.mjs",
+      "hunks": 2,
+      "current_sha256": "112a4fb45c32837666a831966ddee0a1de841208e08b13678dca50746626845a",
+      "restored_ac_sha256": "7989a1eafc5a270948108a3602b493c1d5b8da9e8169b8f1b5ec5481e39e1ec5",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/helpers/boundary333-336-source-input.mjs",
+      "hunks": 4,
+      "current_sha256": "5f7aaa3fbef9c38d6521070909b95e1760a3376cb0068f26b77c3477f3bb22ea",
+      "restored_ac_sha256": "d2b446f8c5da8d6d7d1f2fccc29dede906f70257ab05a36a085c0f688080ef04",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/helpers/thera-remaining-client.mjs",
+      "hunks": 1,
+      "current_sha256": "8d44a70b7781e9644a27e68c4a3facb5b851649eecde9cb1f8c7b167573f7748",
+      "restored_ac_sha256": "7719435cc98f70d379a400a7df6c962458ba49d278d6e182f092c59a4f623642",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/helpers/thera312-319-evidence.mjs",
+      "hunks": 2,
+      "current_sha256": "ef09742f97001b0b39e6bbd584a76ebcbaf0af2d53af30dbe9de30707ab9f717",
+      "restored_ac_sha256": "878b2c597430b85307f6e3ea4bcaf7e97c797963c6826d51d90aa74cb4ca6680",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/helpers/thera321-329-evidence.mjs",
+      "hunks": 2,
+      "current_sha256": "222c05ced221a324efb2a56e98a7926240da7c88d7ca43acda6da598ace20783",
+      "restored_ac_sha256": "016fc65ea742ee56b71dd2c8e685952773d830df0edc902b8ff272a5fa29279b",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/helpers/thera339-legacy-projection.mjs",
+      "hunks": 4,
+      "current_sha256": "007d9cc6ad3125bf0e36a40f57d1ab94a35c50cf94083243ef26869a68ea61bc",
+      "restored_ac_sha256": "64cc3d19f2848398dd91912582396fcc2a41a6d0bf83899ea09431e2562f6275",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/source-notes-baseline-projection.test.mjs",
+      "hunks": 1,
+      "current_sha256": "47fb66193af5db2a26d2750977e1a5c234a081702776bfd6689250c75ec3933c",
+      "restored_ac_sha256": "a5cfdbd95594414ea37fab3c6c834586fac2a05a673de9062144b394d18cf1bf",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/source-notes-compatibility.test.mjs",
+      "hunks": 1,
+      "current_sha256": "a41b96f9b01952fd3909724ee0df07c44cb377b80077714e36ebeffd35e4e6d4",
+      "restored_ac_sha256": "5b2512a07ba0283a8eacb4cc175ebc81fca56ee72725c6fd70345948a5c8c659",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera-commentary-locators.test.mjs",
+      "hunks": 1,
+      "current_sha256": "f65483dd88b32d065bde38ac2edbaa8af74858fda72fcfc7245ff56fcf94fdf2",
+      "restored_ac_sha256": "ce2a7a66f451a5acf5fa1903344372b1c15cccaddfe6a4cf2b02ec73cd7a6e57",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera141-180-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "e3d76c966fbe5a469b7f85fe3b3453353e0f4ed374a022f1054d6064bf223918",
+      "restored_ac_sha256": "4a0f6fb4c35f9e0026efb14c3537cbb6670e24d478eb300d793ce2bd9bd50544",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera181-220-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "0d3faf9d27f9312bebf1b13e856f0f1959568959a4adf726cd485140cdce00c7",
+      "restored_ac_sha256": "dc5f9b879b4d8b64e8c4479897e9f224584d938a34ed615ab139a2ac9392dac8",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera221-230-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "c621a37fcff8a78044b1fa1ab2243a0f1c6fea6d6aaf0e64238527f1178aa0ec",
+      "restored_ac_sha256": "6b343e57e6fb738f922a244191a73022b94f5f5bc59472ac12e622ca76d82dba",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera241-250-client.test.mjs",
+      "hunks": 1,
+      "current_sha256": "75054d5abb83b7511dc68dfbc293eddccb1a7c206a592b4ce42cc646d63f9557",
+      "restored_ac_sha256": "e95fbe7f59218bdc935df74757f19f8729b3c1a6f5fd50b2ee603a071382cadc",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera312-319-client.test.mjs",
+      "hunks": 2,
+      "current_sha256": "99a15843e09e9f8fd6548f55752b3f91cf1a7d1d85e2919e5958083afd798946",
+      "restored_ac_sha256": "2301d7e414280505c6929b390e944d2be4fb4d6a6b868eacdda71d1f80451c7b",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera312-319-source.test.mjs",
+      "hunks": 1,
+      "current_sha256": "d10db6930495a76ebb19ebd3e026d746dc7c4e627986e6039078a1b44b851da1",
+      "restored_ac_sha256": "9394a99195c6094f1e17b16ec757f943d660e2d00049ba5581a5487648a40ded",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera321-329-client.test.mjs",
+      "hunks": 3,
+      "current_sha256": "0414ab07a1a6fc4c54a8c644792d5c053be44043b365f83ebfac5f39bc49de97",
+      "restored_ac_sha256": "de5324a959ba0143d2202b4136f060feb531906578173beee65751d9dd636152",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera321-329-source.test.mjs",
+      "hunks": 3,
+      "current_sha256": "53ff8e8a2c0052798b077e6f08b755b177b16b9a0eca208fd7c84762102e8e3e",
+      "restored_ac_sha256": "c6479bff02fa4d030434338e74a12996811fd76bb18d99a271b02644b2b3bba9",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/thera339-legacy-projection.test.mjs",
+      "hunks": 1,
+      "current_sha256": "bc0770aae600a3293a3e260ba1b4bdfaf9e731a797600b9a20449aa0ab3dc1a7",
+      "restored_ac_sha256": "90bd53a03cf8a72c562c49bd8f2d095da7c5d22dbc541f108b506fc8bab12941",
+      "whole_original_exact": true
+    },
+    {
+      "path": "tests/widget-hosted-selections.test.mjs",
+      "hunks": 1,
+      "current_sha256": "0596dec4027a248a581cb7f608666deeaa8e196285a81c0389e78ae4faf9ff38",
+      "restored_ac_sha256": "c2c1b923d5d59def4b74f0fb478ee212d6d7a483e1cc7d6a44b6fa0bff354c7c",
+      "whole_original_exact": true
+    },
+    {
+      "path": "web/translation-policy.mjs",
+      "hunks": 3,
+      "current_sha256": "d9c68600adb510594a6d280fb619677d5d3efbb2c75ee3c255e9a75bd25ce9e6",
+      "restored_ac_sha256": "f4db512704c2ef7604e1d1b01c2db68430b6bc994b9d1d8d1022b2cbe635b840",
+      "whole_original_exact": true
+    }
+  ],
+  "ordered_paths_for_literal_binding": [
+    ".github/workflows/check.yml",
+    "scripts/web-reader-thera-held234-check.py",
+    "scripts/web-reader-thera-remaining-check.py",
+    "scripts/web_reader_apadana_intake.py",
+    "scripts/web_reader_approved_acceptance.py",
+    "src/apadana-thera-profiles.mjs",
+    "src/apadana-thera.mjs",
+    "src/apadana.mjs",
+    "src/chatgpt-widget.mjs",
+    "tests/apadana-disclosures.test.mjs",
+    "tests/apadana-fourth-client.test.mjs",
+    "tests/apadana-fourth.test.mjs",
+    "tests/apadana-next.test.mjs",
+    "tests/apadana-thera.test.mjs",
+    "tests/apadana-third.test.mjs",
+    "tests/approved_acceptance.py",
+    "tests/approved_current333_authority_negatives.py",
+    "tests/approved_current339_authority_negatives.py",
+    "tests/boundary333-336-source-input.test.mjs",
+    "tests/current339-source-inverses.test.mjs",
+    "tests/held234-client.test.mjs",
+    "tests/held234-current333-chain.test.mjs",
+    "tests/held234_current333_chain.py",
+    "tests/helpers/apadana-intake-expectations.mjs",
+    "tests/helpers/boundary333-336-source-input.mjs",
+    "tests/helpers/thera-remaining-client.mjs",
+    "tests/helpers/thera312-319-evidence.mjs",
+    "tests/helpers/thera321-329-evidence.mjs",
+    "tests/helpers/thera339-legacy-projection.mjs",
+    "tests/source-notes-baseline-projection.test.mjs",
+    "tests/source-notes-compatibility.test.mjs",
+    "tests/thera-commentary-locators.test.mjs",
+    "tests/thera141-180-client.test.mjs",
+    "tests/thera181-220-client.test.mjs",
+    "tests/thera221-230-client.test.mjs",
+    "tests/thera241-250-client.test.mjs",
+    "tests/thera312-319-client.test.mjs",
+    "tests/thera312-319-source.test.mjs",
+    "tests/thera321-329-client.test.mjs",
+    "tests/thera321-329-source.test.mjs",
+    "tests/thera339-legacy-projection.test.mjs",
+    "tests/widget-hosted-selections.test.mjs",
+    "web/translation-policy.mjs"
+  ],
+  "historical_v1_review_preserved": "SOURCE_INVERSE_INDEPENDENT_REVIEW.json/fa4a2a9d\u2026 remains immutable historical receipt",
+  "allowed_next_action": "Bind exact2d746 map SHA and43orderedpaths only, then root26-module preservation closure and fullcheck; original ac/440/D4 hashes and strictunknown-mutation behavior stay intact.",
+  "limitations": [
+    "Static stdlib independent byte replay only",
+    "No generator/app imports/tests/build/Git/network execution",
+    "No runtime/source wording/provenance gate replacement",
+    "Final helper literal binding changes its new selfexcluded file only and needs root final review"
+  ]
+}

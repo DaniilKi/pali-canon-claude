@@ -28,7 +28,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_current_full_objects_and_profiles(self):
         assert_catalogue(self.manifest, self.approved)
         assert_profiles(ROOT, self.approved)
-        self.assertEqual(len(self.approved['links']), 339)
+        self.assertEqual(len(self.approved['links']), 343)
         for uid in ('tha-ap262', 'tha-ap268', 'tha-ap282'):
             self.assertNotIn(uid, self.approved['links'])
 
@@ -66,7 +66,7 @@ class ApprovedAcceptance(unittest.TestCase):
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True)
                 shutil.copyfile(ROOT/name,target)
             copy_historical_fixture(ROOT,root)
-            self.assertEqual(len(approved_catalogue(root)['ids']),339)
+            self.assertEqual(len(approved_catalogue(root)['ids']),343)
             data=json.loads((ROOT/'docs/evidence/apadana/THERA_HELD234_APPROVAL.json').read_text(encoding='utf-8'))
             data['approved_ids']=['tha-ap262']
             (dest/'THERA_HELD234_APPROVAL.json').write_text(json.dumps(data),encoding='utf-8')
@@ -151,7 +151,9 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',
                 'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',
-                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json')
+                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',
+                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
@@ -196,7 +198,9 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',
                 'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',
-                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json')
+                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',
+                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
@@ -240,7 +244,9 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',
                 'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',
-                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json')
+                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',
+                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)
@@ -285,7 +291,9 @@ class ApprovedAcceptance(unittest.TestCase):
                 'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json',
                 'docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json',
                 'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json',
-                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json')
+                'docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json',
+                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json',
+                'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json')
             for name in names:
                 target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
             self.assertEqual(len(approved_runtime(root)),34)

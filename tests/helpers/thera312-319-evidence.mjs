@@ -1,3 +1,4 @@
+import {profilesForHistorical339} from './intake343-metadata.mjs';
 import {requireProfiles339,normalize339InputTo333,publisher339Authority} from './thera339-legacy-projection.mjs';
 /** Pure sealed metadata readers; no production parser, runtime output or current catalogue is an oracle. */
 import assert from 'node:assert/strict';
@@ -157,6 +158,7 @@ export function thera312319Evidence() {
     assert.equal(hashObject(priorSource),compact.manifest_source_sha256,'Full prior source/rights object with only two reviewed count changes');
   }
   function assertProfiles(observed) {
+    if(Object.keys(observed).length===343)observed=profilesForHistorical339(observed);
     if(Object.keys(observed).length===339){
       requireProfiles339(observed);
       const ids=publisher339Authority().compact.ids;

@@ -8,7 +8,7 @@ import argparse,gzip,hashlib,importlib.util,json,os,re,signal,socket,subprocess,
 from datetime import datetime,timezone
 from web_reader_four_boundary_history import historical_canon_bytes
 from pathlib import Path
-from web_reader_apadana_intake import reviewed_held234_intake,read_261_280,read_281_285,read_287_288,read_292_299,read_301_310,read_312_319,curated_additions
+from web_reader_apadana_intake import reviewed_held234_intake,read_261_280,read_281_285,read_287_288,read_292_299,read_301_310,read_312_319,read_321_329,curated_additions
 from web_reader_approved_acceptance import assert_runtime
 ROOT=Path(__file__).resolve().parents[1]
 BASE='7d5ac90845402b322dabf2c5120d1485b15c0bda'
@@ -76,7 +76,8 @@ def main():
     historical317=read_292_299(ROOT)
     historical325=read_301_310(ROOT)
     historical333=read_312_319(ROOT)
-    assert len(current_ids)==339 and len(current_additions['ids'])==54
+    historical339=read_321_329(ROOT)
+    assert len(current_ids)==343 and len(current_additions['ids'])==58
     assert approval['base_commit']==BASE and approval['approved_ids']==[UID] and len(approval['baseline_ids'])==284
     assert approval['expected_profile_ids']==approval['baseline_ids']+[UID] and len(set(approval['expected_profile_ids']))==285
     assert approval['before_canon_sha256']==approval['after_canon_sha256']
@@ -105,7 +106,8 @@ def main():
     assert historical317['baseline_ids']==historical310['expected_profile_ids']
     assert historical325['baseline_ids']==historical317['expected_profile_ids']
     assert historical333['baseline_ids']==historical325['expected_profile_ids']
-    assert current_curation['baseline_ids']==historical333['expected_profile_ids']
+    assert historical339['baseline_ids']==historical333['expected_profile_ids']
+    assert current_curation['baseline_ids']==historical339['expected_profile_ids']
     assert current_ids==approval['expected_profile_ids']+current_additions['ids']
     assert set(rows)==set(current_ids) and rows[UID]==links[UID]
     prior=sealed(evidence_dir,historical303['baseline_freeze'])
@@ -115,7 +117,7 @@ def main():
     for new_id,new_row in current_additions['links'].items():assert rows[new_id]==new_row, 'Current addition differs from independent pins: '+new_id
     old_source=prior['manifest_source']
     assert {key:value for key,value in manifest['source'].items() if key!='policy'}=={key:value for key,value in old_source.items() if key!='policy'}
-    assert manifest['source']['policy']==old_source['policy'].replace('285 finite','339 finite').replace('245 explicitly mapped Therā','299 explicitly mapped Therā')
+    assert manifest['source']['policy']==old_source['policy'].replace('285 finite','343 finite').replace('245 explicitly mapped Therā','303 explicitly mapped Therā')
     assert rows[NEIGHBOR]['poem']==235 and rows[NEIGHBOR]['path']=='/text/chapter-3/poem-235/' and rows[NEIGHBOR]['title']=='Vediyadāyaka'
     assert rows[UID]['poem']==234 and rows[UID]['path']=='/text/chapter-3/poem-234/' and rows[UID]['title']=='Kilañjadāyaka'
     assert rows[UID]['raw_sha256']!=rows[NEIGHBOR]['raw_sha256'] and rows[UID]['body_sha256']!=rows[NEIGHBOR]['body_sha256']
@@ -153,7 +155,7 @@ def main():
             'harness_pid':os.getpid(),'harness_argv':[sys.executable,*sys.argv],'harness_cwd':str(Path.cwd()),'server_argv':server_argv,
             'server_cwd':str(stage),'source_fixture':str(checkout),'official_checkout_provenance':str(args.official_checkout.resolve()) if args.official_checkout else None,'timeout_seconds':args.timeout_seconds,'server_directory':str(server_dir),'outside_source_tree':bool(args.server_dir),'runtime_origin':'isolated-npm-install' if args.server_dir else 'repository-compiled',
             'server_file_sha256':launch_hashes,'harness_sha256':launch_harness,'helper_sha256':launch_helpers,
-            'approval_sha256':digest(args.approval.read_bytes()),'current_curation_sha256':digest((ROOT/'docs/evidence/apadana/THERA_321_329_APPROVAL.json').read_bytes()),'current_additions_ids':current_additions['ids'],
+            'approval_sha256':digest(args.approval.read_bytes()),'current_curation_sha256':digest((ROOT/'docs/evidence/apadana/THERA_331_334_APPROVAL.json').read_bytes()),'current_additions_ids':current_additions['ids'],
             'package_archive':str(args.package_archive.resolve()) if args.package_archive else None,
             'package_sha256':digest(args.package_archive.read_bytes()) if args.package_archive else None}
         def write_launch():

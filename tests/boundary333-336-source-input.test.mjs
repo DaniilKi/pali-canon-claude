@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
+import {acFileReader} from './helpers/intake343-source-input.mjs';
+// Every unchanged historical assertion below consumes the explicit ac source frame.
+// New343 physical source bytes are asserted separately by intake343-source-input.test.mjs.
+const readFileSync=acFileReader(readActualFileSync);
 import {createHash} from 'node:crypto';
 import {boundarySourceInverses,boundarySourceProofBytes,decodeBoundarySourceInverses,projectFrozen440Source,frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
 import {d4FileReader} from './helpers/current339-source-inverse.mjs';

@@ -87,7 +87,7 @@ class Current333AuthorityNegatives(unittest.TestCase):
         assert_catalogue(cls.manifest, cls.approved)
         actual = assert_runtime(ROOT, ROOT / 'server')
         assert actual == {name: row['sha256'] for name, row in cls.inventory.items()}
-        assert len(cls.approved['ids']) == len(cls.approved['links']) == len(cls.approved['profiles']) == 339
+        assert len(cls.approved['ids']) == len(cls.approved['links']) == len(cls.approved['profiles']) == 343
         assert tuple(cls.approved['ids'][:333][-8:]) == NEW_IDS
         assert len(cls.inventory) == 34
 
@@ -119,7 +119,7 @@ class Current333AuthorityNegatives(unittest.TestCase):
     def test_01_exact_current333_catalogue_and_actual_runtime_positive(self):
         approved, inventory = self.current_positive()
         self.assertEqual(tuple(approved['ids'][:333][-8:]), NEW_IDS)
-        self.assertEqual(len(approved['ids']), 339)
+        self.assertEqual(len(approved['ids']), 343)
         self.assertEqual(len(inventory), 34)
         self.assertTrue(set(NEW_IDS).issubset(approved['profiles']))
         self.assertFalse({'tha-ap313', 'tha-ap322'} & set(approved['links']))
@@ -149,7 +149,7 @@ class Current333AuthorityNegatives(unittest.TestCase):
                 with self.subTest(owner=uid, replacement=replacement):
                     observed = copy.deepcopy(self.manifest)
                     observed['links'][replacement] = observed['links'].pop(uid)
-                    self.assertEqual(len(observed['links']), 339)
+                    self.assertEqual(len(observed['links']), 343)
                     with self.assertRaises(AssertionError):
                         assert_catalogue(observed, self.approved)
 
@@ -161,7 +161,7 @@ class Current333AuthorityNegatives(unittest.TestCase):
                     observed = copy.deepcopy(self.manifest)
                     prior = observed['links'][uid][field]
                     observed['links'][uid][field] = flipped(prior)
-                    self.assertEqual(len(observed['links']), 339)
+                    self.assertEqual(len(observed['links']), 343)
                     self.assertEqual(len(observed['links'][uid][field]), len(prior))
                     self.assertEqual(observed['links'][uid]['note_count'], self.manifest['links'][uid]['note_count'])
                     with self.assertRaises(AssertionError):

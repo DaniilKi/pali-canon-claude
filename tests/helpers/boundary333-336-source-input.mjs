@@ -1,3 +1,4 @@
+import {normalizeACSourceInput,acFileReader} from './intake343-source-input.mjs';
 /** Historical SOURCE INPUTS only: never canonical/runtime response projection. */
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -31,7 +32,7 @@ export function decodeBoundarySourceInverses(bytes){
 export const boundarySourceInverses=decodeBoundarySourceInverses(raw);
 export const boundarySourceProofBytes=()=>Buffer.from(raw);
 /** Exact prior440 is admitted for historical tests; strictcurrent forbids that path. */
-export function projectFrozen440Source(path,source,{requireCurrent=false}={}){
+function historicalProjectFrozen440Source(path,source,{requireCurrent=false}={}){
  const row=boundarySourceInverses.files[path];if(!row){assert.equal(requireCurrent,false,'Strictcurrent requires a declared changed source');return source;}
  assert.equal(typeof source,'string');const actual=sha(source);
  if(!requireCurrent&&actual===row.frozen440_sha256)return source;
@@ -40,7 +41,7 @@ export function projectFrozen440Source(path,source,{requireCurrent=false}={}){
  for(const hunk of row.hunks){assert.equal(count(old,hunk.after),1,'Each exact current source hunk occurs once: '+path);old=old.replace(hunk.after,hunk.before);}
  assert.equal(sha(old),row.frozen440_sha256,'Full frozen440 source/assertion bytes restored: '+path);return old;
 }
-export function frozen440FileReader(reader){
+function historicalFrozen440FileReader(reader){
  assert.equal(typeof reader,'function');return (path,...options)=>{
   const raw=reader(path,...options);
   const key=typeof path==='string'?path:path instanceof URL&&path.protocol==='file:'?relative(sourceRoot,fileURLToPath(path)).split(sep).join('/'):null;
@@ -54,7 +55,11 @@ export function frozen440FileReader(reader){
  * This is not validation: only the exact new source can normalize here; the
  * caller's immutable old hash assertion must still decide every other input.
  */
-export function normalizeFrozen440SourceInput(path,source){
+function historicalNormalizeFrozen440SourceInput(path,source){
  const row=boundarySourceInverses.files[path];
  return row&&typeof source==='string'&&sha(source)===row.current_sha256?projectFrozen440Source(path,source,{requireCurrent:true}):source;
 }
+
+export function projectFrozen440Source(path,source,options){return historicalProjectFrozen440Source(path,normalizeACSourceInput(path,source),options);}
+export function frozen440FileReader(reader){return historicalFrozen440FileReader(acFileReader(reader));}
+export function normalizeFrozen440SourceInput(path,source){return historicalNormalizeFrozen440SourceInput(path,normalizeACSourceInput(path,source));}
