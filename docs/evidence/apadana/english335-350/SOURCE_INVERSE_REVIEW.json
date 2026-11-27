@@ -2,18 +2,18 @@
   "schema": "independent-current368-source-inverse-review-v1",
   "status": "GO_EXACT_CURRENT368_SOURCE_INVERSES_FOR_ROOT_APPLICATION_AND_PREFLIGHT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
-  "prior_current_source_commit": "e08277f2154632962afd0ae37633282a4eb56237",
-  "after_domain": "Frozen b02e6b094614140560e44d67114a113efe962bbe physical source plus exact external three generated outputs; not applied, not final Git/CI.",
+  "prior_current_source_commit": "640cce50759c8737fb73609c721adb2877e7100a",
+  "after_domain": "Frozen5e2a8bc587b21d090f8180e3015ea8411125875a source plus exact external three generated outputs; not applied, not final Git/CI.",
   "live_working_tree_claimed": true,
-  "map_sha256": "1d464cee7ab3de1873c01e43e859d682308fa50139d1829e2c0cbe7a1a221c12",
-  "loader_sha256": "23a85075236220249c056dd8fbb397d8ebae1ab3cdf12fd60e92892f93e655b0",
-  "code_sha256": "805ede8cae2beb49811d6b330ee4211bbe077406681ca5937deb76d9e1a4f076",
+  "map_sha256": "cd9b51364b89209191eb66e199d815536e15a0be802b6bcc4a6c611b57b25462",
+  "loader_sha256": "dab661bc40561249e42350e3be18558de1698352e6b69fd19129f8f3b4871663",
+  "code_sha256": "883a1a14e1b9ba2a65382aff4fe27ba536ced6d3eb51439898bbd430d2a9a75d",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
-  "original_identity_verification_method": "Independent read-only Git cat-file batches verify all1001 original3d, baseline3ced and priore082 blobs; every73 current literal forward/inverse equals exact Git3d bytes.824 frozen authorities equal originalGit3d,345JS equale082; no generator/project imports.",
+  "original_identity_verification_method": "Independent read-only Git cat-file batches verify all1001 original3d, baseline3ced and prior640 blobs; every73 current literal forward/inverse equals exact Git3d bytes.824 frozen authorities equal originalGit3d,345JS equal640; no generator/project imports.",
   "changed_existing_exactly_mapped": 73,
-  "changed_since_prior_current_source_commit": 3,
-  "unchanged_prior_ordered_row_objects": 70,
+  "changed_since_prior_current_source_commit": 1,
+  "unchanged_prior_ordered_row_objects": 72,
   "new_inverse_rows": 0,
   "unchanged_original_source_entries": 928,
   "hunks": 228,
@@ -316,7 +316,7 @@
     },
     "tests/six_operation_scope_controls.py": {
       "base3d_sha256": "ae4265fd6bfd60c3c1c0d734b0b38e580c8d32a193ab438d7d4ef39ad7f5ea48",
-      "current_sha256": "d4450bc19a1a5739af6f47fe5d5478be3f6687a1e0af33c66e6599513ce4855f",
+      "current_sha256": "59dc5f2b89761be7bf08aabf3077629b96bf0aec44a140a4dc036703d844ce3c",
       "hunks": 5,
       "literal_dollar_hunks": 1
     },
@@ -4591,46 +4591,46 @@
   "behavior_package_CI_release_approval": false,
   "final_commit_rebind_required": true,
   "frozen_plan": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_GUARDS_SOURCE_PLAN.json",
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NATIVE_COUNTER_SOURCE_PLAN.json",
     "bytes": 24544,
-    "sha256": "98127f5d836b0f918a9af9b00a7bc4ec802a39841c0c1f232611bf164c98c250"
+    "sha256": "f46123680614d6e7f48a49446979fd6e2819a483d59ba2c254caf12d5528e31b"
   },
   "prior_independent_plan_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-guards-input-independent-review/INPUT_REVIEW.json",
-    "bytes": 542,
-    "sha256": "ef9d28f374efe2e67ab29564b9cfb40db06deab01f1839f2283fb715c1b3a418"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-counter-source-input-independent-review/INPUT_REVIEW.json",
+    "bytes": 541,
+    "sha256": "50adde4f55a09a016c1c9a37aad7e4db316ae9013adb20d352f5563de92443a1"
   },
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/guards-source-output-independent-review/verify_output.py",
-    "bytes": 17565,
-    "sha256": "3196ebdf943e51b3ea1ac7ce4981e6b4439ccf47230cb575f5fc334befe3fce7"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-counter-source-output-independent-review/verify_output.py",
+    "bytes": 17602,
+    "sha256": "2007051fbbd1c429f3240fe6ed8d948f5ec5b0afe6b6f9786e377e63903def40"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/guards-source-output-independent-review/RECONCILIATION.json",
-    "bytes": 4193,
-    "sha256": "c10030ede66b1e156cc53e72d3608229451722df46ec272e723d0f0b48e9c10a"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-counter-source-output-independent-review/RECONCILIATION.json",
+    "bytes": 4093,
+    "sha256": "6a3ca933f4ad3d6f1f6ea113201a74c48166e5b2d9a319ca925efc7790ad3145"
   },
   "generation_result": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/GUARDS_SOURCE_GENERATED/GENERATION_RESULT.json",
-    "bytes": 1545,
-    "sha256": "c866a963de20e19fd427c51d74d19015d5f1b5da0c6a98860ea2b4be36f2e26e"
+    "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_COUNTER_SOURCE_GENERATED/GENERATION_RESULT.json",
+    "bytes": 1421,
+    "sha256": "f63bde3ce58dfd95ec32a66e212d9601f598ccfa9321321f02c7a01d28f979a9"
   },
   "review_limits": [
-    "Apply only3exactgenerated SOURCE payloads and2fresh source-only aliases; prioraliases remain inGite082 and archive65 remains unchanged.",
-    "All70 prior row objects and60 direct objects remain exact;3mapped source/doc deltas and1direct delta are finite reviewed QA repairs.",
+    "Apply only3exactgenerated SOURCE payloads and2fresh source-only aliases; prioraliases remain inGit640 and archive65 remains unchanged.",
+    "All72 prior row objects andall61 direct objects remain exact;one mapped test-only counter correction are finite reviewed QA repairs.",
     "No application/corpus/runtime/API projection, rights activation, nativeCI/behavior/package/release or dev-promotion approval."
   ],
   "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
   "changed_since_source_baseline_commit": 70,
   "preserved_prior_source_review": {
-    "commit": "e08277f2154632962afd0ae37633282a4eb56237",
+    "commit": "640cce50759c8737fb73609c721adb2877e7100a",
     "file": "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
-    "sha256": "a591924538728b52ba8325d5bcf2addab1bd8ebf08eb0c8a9663bafbe21d5ff5"
+    "sha256": "42a74fac0e067950425243784365b29f1f0d02bc99bd76b5d26fc5c034e1305b"
   },
   "delta_policy": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_GUARDS_SOURCE_POLICY.json",
-    "bytes": 902,
-    "sha256": "a2526722ee02083ce5d6b5a609371a620ef58a9811908a82af01c679631988c4"
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NATIVE_COUNTER_SOURCE_POLICY.json",
+    "bytes": 455,
+    "sha256": "8d8f91110c80e4b2954866d8a07ab98cc77b6461bbdf97b15c699be64b621006"
   },
   "four_unsealed_JSON_receipts": [
     "docs/evidence/apadana/english351-360-nine/LOCAL_ACCEPTANCE.json",
