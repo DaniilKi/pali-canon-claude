@@ -1,0 +1,58 @@
+name: Focused proof-budget diagnostic
+on:
+  push:
+    branches: ['diagnostic/pali-proof-budget-nov27-*']
+permissions:
+  contents: read
+jobs:
+  native-fixtures:
+    name: Native fixture budgets / Windows / Node ${{ matrix.node }}
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    steps:
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixture Python
+        timeout-minutes: 1
+        run: python3 -c 'import sys; assert sys.version_info[:2] == (3, 12); print("fixture-python",sys.executable,sys.version)'
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Build the exact source candidate
+        timeout-minutes: 5
+        run: npm run build
+      - name: Verify bounded Python partition protocol
+        timeout-minutes: 3
+        run: node scripts/check-python-partitions.mjs
+      - name: Five original wrappers with their unchanged child deadlines
+        timeout-minutes: 8
+        shell: pwsh
+        run: |
+          node --test --test-concurrency=1 tests/approved-acceptance.test.mjs tests/approved-current339-authority-negatives.test.mjs tests/four-boundary-history.test.mjs tests/six-boundary-history.test.mjs tests/six-operation-scope.test.mjs 2>&1 | Tee-Object -FilePath proof-budget-node${{ matrix.node }}.tap
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Preserve exact diagnostic output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-budget-windows-node${{ matrix.node }}
+          path: proof-budget-node${{ matrix.node }}.tap
+          if-no-files-found: warn
+          retention-days: 7
