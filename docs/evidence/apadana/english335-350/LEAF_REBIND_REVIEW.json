@@ -1,49 +1,49 @@
 {
   "schema": "independent-current368-source-leaf-rebind-review-v1",
   "status": "GO_EXACT_THREE_GENERATED_SOURCE_FILES_FOR_ROOT_APPLICATION_AND_PREFLIGHT_ONLY",
-  "prior_current_source_commit": "c1e171bdc81cc520100ad6e4653c27ee746cb519",
+  "prior_current_source_commit": "e08277f2154632962afd0ae37633282a4eb56237",
   "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
   "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
   "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
   "source_review": {
     "file": "SOURCE_INVERSE_REVIEW.json",
-    "sha256": "a591924538728b52ba8325d5bcf2addab1bd8ebf08eb0c8a9663bafbe21d5ff5"
+    "sha256": "42a74fac0e067950425243784365b29f1f0d02bc99bd76b5d26fc5c034e1305b"
   },
   "frozen_plan": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_PROOF_BUDGET_SOURCE_PLAN.json",
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_GUARDS_SOURCE_PLAN.json",
     "bytes": 24544,
-    "sha256": "5c90b4af41394b2399c9abbb4966b9640c732f37bf398d113e447b6c45284ab4"
+    "sha256": "98127f5d836b0f918a9af9b00a7bc4ec802a39841c0c1f232611bf164c98c250"
   },
   "delta_policy": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_PROOF_BUDGET_SOURCE_DELTA_POLICY.json",
-    "bytes": 1754,
-    "sha256": "2e415f5d785966ce018a602baeaa252a2ad5a12f78e0dc2e58bc8307e8f2dc1a"
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_GUARDS_SOURCE_POLICY.json",
+    "bytes": 902,
+    "sha256": "a2526722ee02083ce5d6b5a609371a620ef58a9811908a82af01c679631988c4"
   },
   "independent_input_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-source-input-independent-review/INPUT_REVIEW.json",
-    "bytes": 558,
-    "sha256": "0816145c1fb614a5dcd38c6441428c0b3214f41084920438f4dc869989fa6cc1"
+    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-guards-input-independent-review/INPUT_REVIEW.json",
+    "bytes": 542,
+    "sha256": "ef9d28f374efe2e67ab29564b9cfb40db06deab01f1839f2283fb715c1b3a418"
   },
   "producer_static_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-source-producer-independent-review/INDEPENDENT_PRODUCER_REVIEW.json",
-    "bytes": 4150,
-    "sha256": "99ed554583afa6f380be883bc211e51027d4e970a5ab417751e952ef64f3c3be"
+    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-e082-producer-independent-review/INDEPENDENT_PRODUCER_REVIEW.json",
+    "bytes": 4889,
+    "sha256": "cd51bdec8d983941821a5b9d56d3db6fd2308a71510233a5256b8e5c2b21f4cf"
   },
   "generated_files": {
     "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/PROOF_BUDGET_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
-      "bytes": 442800,
-      "sha256": "c9d193a318035b233493eb747e05133bc3a90ce49d00e0b2774fcf5d9f18beaa"
+      "path": "/tmp/pali-english351-360-evidence-nov27/GUARDS_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "bytes": 465320,
+      "sha256": "1d464cee7ab3de1873c01e43e859d682308fa50139d1829e2c0cbe7a1a221c12"
     },
     "docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/PROOF_BUDGET_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/GUARDS_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
       "bytes": 16248,
-      "sha256": "d89190cb884523d4b704ecbb84cc6d0a3e9c4a699ce1535e8cd970e9beb1efff"
+      "sha256": "805ede8cae2beb49811d6b330ee4211bbe077406681ca5937deb76d9e1a4f076"
     },
     "tests/helpers/intake359-source-input.mjs": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/PROOF_BUDGET_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
+      "path": "/tmp/pali-english351-360-evidence-nov27/GUARDS_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
       "bytes": 11872,
-      "sha256": "32380706969b50284cdc24ef21337a513d7c9b649cd656e510afe04772f23860"
+      "sha256": "23a85075236220249c056dd8fbb397d8ebae1ab3cdf12fd60e92892f93e655b0"
     }
   },
   "source_packet14": {
@@ -75,8 +75,8 @@
     "original_map_review_leaf_and_loader_preserved": true
   },
   "loader_reconstruction": {
-    "whole_prior_c1_loader_sha256": "da618d1df84ec032a7be60b7731c14a84a8e92a0d992b634f60da349f1cdb816",
-    "only_FOUR_literal_array_insert_and_twoSHA_substitutions_equal_whole_generated_loader": true,
+    "whole_prior_e082_loader_sha256": "32380706969b50284cdc24ef21337a513d7c9b649cd656e510afe04772f23860",
+    "only_twoSHA_substitutions_equal_whole_generated_loader_path_array_unchanged": true,
     "all_other_source_bytes_unchanged": true,
     "literal_dollar_replacement_callback_preserved": true,
     "fresh_guarded_physical_reads_and_deep_freeze_no_ambient_cache": true,
@@ -91,9 +91,9 @@
     "docs/evidence/apadana/english351-360-nine/SOURCE_INVERSE_CURRENT368_REVIEW.json"
   ],
   "preserved_prior_leaf_review": {
-    "commit": "c1e171bdc81cc520100ad6e4653c27ee746cb519",
+    "commit": "e08277f2154632962afd0ae37633282a4eb56237",
     "file": "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
-    "sha256": "f4d51859647274ee99082e14b9350985b76f51b3ffba1a5e3ea0888bc5cfe04c"
+    "sha256": "22a6510be4efbfbe6c5632b41f57a90c49cf9bd834a7650c10b1051982c0b23c"
   },
   "remaining_gates": [
     "Root application of3exactpayloads and2source-only aliases",
@@ -105,16 +105,16 @@
   "CI_or_release_approval": false,
   "reviewer_executed_project_code": false,
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-source-output-independent-review/verify_output.py",
-    "bytes": 17686,
-    "sha256": "e257aac37f5d10f1feeb4d6131811c0560bacecfd024e7d3ac904d6c33b8c6d4"
+    "path": "/tmp/pali-english351-360-evidence-nov27/guards-source-output-independent-review/verify_output.py",
+    "bytes": 17565,
+    "sha256": "3196ebdf943e51b3ea1ac7ce4981e6b4439ccf47230cb575f5fc334befe3fce7"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-source-output-independent-review/RECONCILIATION.json",
-    "bytes": 4346,
-    "sha256": "e38a2fe0baa2d9dba49dca75576a7640d94ece140873e8b6199c757d07f9bfaa"
+    "path": "/tmp/pali-english351-360-evidence-nov27/guards-source-output-independent-review/RECONCILIATION.json",
+    "bytes": 4193,
+    "sha256": "c10030ede66b1e156cc53e72d3608229451722df46ec272e723d0f0b48e9c10a"
   },
-  "unchanged_direct_bindings_from_c1": 59,
   "all1001_original_bytes_824_frozen_authorities_73_rows_reconciled": true,
-  "all131_plan_input_hashes_and_sources_stable": true
+  "all131_plan_input_hashes_and_sources_stable": true,
+  "unchanged_direct_bindings_from_e082": 60
 }

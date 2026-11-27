@@ -2,22 +2,22 @@
   "schema": "independent-current368-source-inverse-review-v1",
   "status": "GO_EXACT_CURRENT368_SOURCE_INVERSES_FOR_ROOT_APPLICATION_AND_PREFLIGHT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
-  "prior_current_source_commit": "c1e171bdc81cc520100ad6e4653c27ee746cb519",
-  "after_domain": "Frozen c807 physical source files plus exact external three generated outputs; payload not yet applied, not final Git/CI.",
+  "prior_current_source_commit": "e08277f2154632962afd0ae37633282a4eb56237",
+  "after_domain": "Frozen b02e6b094614140560e44d67114a113efe962bbe physical source plus exact external three generated outputs; not applied, not final Git/CI.",
   "live_working_tree_claimed": true,
-  "map_sha256": "c9d193a318035b233493eb747e05133bc3a90ce49d00e0b2774fcf5d9f18beaa",
-  "loader_sha256": "32380706969b50284cdc24ef21337a513d7c9b649cd656e510afe04772f23860",
-  "code_sha256": "d89190cb884523d4b704ecbb84cc6d0a3e9c4a699ce1535e8cd970e9beb1efff",
+  "map_sha256": "1d464cee7ab3de1873c01e43e859d682308fa50139d1829e2c0cbe7a1a221c12",
+  "loader_sha256": "23a85075236220249c056dd8fbb397d8ebae1ab3cdf12fd60e92892f93e655b0",
+  "code_sha256": "805ede8cae2beb49811d6b330ee4211bbe077406681ca5937deb76d9e1a4f076",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
-  "original_identity_verification_method": "Independent read-only Git cat-file batches verify all1001 original3d, baseline3ced and priorc1 blobs; every73 current literal forward/inverse equals exact Git3d bytes.824 frozen authorities equal originalGit3d,345JS equalc1; no generator/project imports.",
+  "original_identity_verification_method": "Independent read-only Git cat-file batches verify all1001 original3d, baseline3ced and priore082 blobs; every73 current literal forward/inverse equals exact Git3d bytes.824 frozen authorities equal originalGit3d,345JS equale082; no generator/project imports.",
   "changed_existing_exactly_mapped": 73,
-  "changed_since_prior_current_source_commit": 6,
-  "unchanged_prior_ordered_row_objects": 67,
-  "new_inverse_rows": 1,
+  "changed_since_prior_current_source_commit": 3,
+  "unchanged_prior_ordered_row_objects": 70,
+  "new_inverse_rows": 0,
   "unchanged_original_source_entries": 928,
-  "hunks": 226,
-  "hunks_with_literal_dollars": 14,
+  "hunks": 228,
+  "hunks_with_literal_dollars": 15,
   "all_forward_and_inverse_reconstructions_exact": true,
   "rows": {
     ".github/workflows/check.yml": {
@@ -28,7 +28,7 @@
     },
     "AGENTS.md": {
       "base3d_sha256": "06024baeedc9397364c9ced4f3f6a167d5bccfdebc9182277e491d19d756bd43",
-      "current_sha256": "2ed1d9652bf643a0c7f8b82f26114b1865edd658aea1c7b8f64ea8db5c688497",
+      "current_sha256": "2fe99a5fed52c9f0a21b77581d2f485f607164216d532613cd8936fc737e1947",
       "hunks": 1,
       "literal_dollar_hunks": 0
     },
@@ -94,8 +94,8 @@
     },
     "scripts/web_reader_next_ten_boundary_history.py": {
       "base3d_sha256": "6327f0a6ba14dc5de91aeb7c079bf6823d6ab5404620f87a1a9a7b0b302d8bbc",
-      "current_sha256": "0100d817109d733154ece0b305f9672dff4e7ab324186626736a50031c85187d",
-      "hunks": 7,
+      "current_sha256": "3e923a5f3a2c6db8c78ecd1aab958ec320468c1c388ce408936634e9bd3f35a9",
+      "hunks": 9,
       "literal_dollar_hunks": 0
     },
     "scripts/web_reader_six_boundary_history.py": {
@@ -316,9 +316,9 @@
     },
     "tests/six_operation_scope_controls.py": {
       "base3d_sha256": "ae4265fd6bfd60c3c1c0d734b0b38e580c8d32a193ab438d7d4ef39ad7f5ea48",
-      "current_sha256": "2d3aeaebed60532553ead2f7bc54824182fe96c91cfafdef6a4ffc5226aaf0c7",
+      "current_sha256": "d4450bc19a1a5739af6f47fe5d5478be3f6687a1e0af33c66e6599513ce4855f",
       "hunks": 5,
-      "literal_dollar_hunks": 0
+      "literal_dollar_hunks": 1
     },
     "tests/source-notes-baseline-projection.test.mjs": {
       "base3d_sha256": "47fb66193af5db2a26d2750977e1a5c234a081702776bfd6689250c75ec3933c",
@@ -4591,46 +4591,46 @@
   "behavior_package_CI_release_approval": false,
   "final_commit_rebind_required": true,
   "frozen_plan": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_PROOF_BUDGET_SOURCE_PLAN.json",
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_GUARDS_SOURCE_PLAN.json",
     "bytes": 24544,
-    "sha256": "5c90b4af41394b2399c9abbb4966b9640c732f37bf398d113e447b6c45284ab4"
+    "sha256": "98127f5d836b0f918a9af9b00a7bc4ec802a39841c0c1f232611bf164c98c250"
   },
   "prior_independent_plan_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-source-input-independent-review/INPUT_REVIEW.json",
-    "bytes": 558,
-    "sha256": "0816145c1fb614a5dcd38c6441428c0b3214f41084920438f4dc869989fa6cc1"
+    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-guards-input-independent-review/INPUT_REVIEW.json",
+    "bytes": 542,
+    "sha256": "ef9d28f374efe2e67ab29564b9cfb40db06deab01f1839f2283fb715c1b3a418"
   },
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-source-output-independent-review/verify_output.py",
-    "bytes": 17686,
-    "sha256": "e257aac37f5d10f1feeb4d6131811c0560bacecfd024e7d3ac904d6c33b8c6d4"
+    "path": "/tmp/pali-english351-360-evidence-nov27/guards-source-output-independent-review/verify_output.py",
+    "bytes": 17565,
+    "sha256": "3196ebdf943e51b3ea1ac7ce4981e6b4439ccf47230cb575f5fc334befe3fce7"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-source-output-independent-review/RECONCILIATION.json",
-    "bytes": 4346,
-    "sha256": "e38a2fe0baa2d9dba49dca75576a7640d94ece140873e8b6199c757d07f9bfaa"
+    "path": "/tmp/pali-english351-360-evidence-nov27/guards-source-output-independent-review/RECONCILIATION.json",
+    "bytes": 4193,
+    "sha256": "c10030ede66b1e156cc53e72d3608229451722df46ec272e723d0f0b48e9c10a"
   },
   "generation_result": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/PROOF_BUDGET_SOURCE_GENERATED/GENERATION_RESULT.json",
-    "bytes": 1691,
-    "sha256": "ff4f929d6a57708afcc13593b2188db7a95518f4b99332e30df5030d3ba30be5"
+    "path": "/tmp/pali-english351-360-evidence-nov27/GUARDS_SOURCE_GENERATED/GENERATION_RESULT.json",
+    "bytes": 1545,
+    "sha256": "c866a963de20e19fd427c51d74d19015d5f1b5da0c6a98860ea2b4be36f2e26e"
   },
   "review_limits": [
-    "Apply only3exactgenerated SOURCE payloads and2fresh source-only aliases; prioraliases remain inGitc1 and archive65 remains unchanged.",
-    "All67 prior row objects and59 direct objects remain exact;6mapped source/doc deltas and2direct deltas are finite reviewed QA repairs.",
+    "Apply only3exactgenerated SOURCE payloads and2fresh source-only aliases; prioraliases remain inGite082 and archive65 remains unchanged.",
+    "All70 prior row objects and60 direct objects remain exact;3mapped source/doc deltas and1direct delta are finite reviewed QA repairs.",
     "No application/corpus/runtime/API projection, rights activation, nativeCI/behavior/package/release or dev-promotion approval."
   ],
   "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
   "changed_since_source_baseline_commit": 70,
   "preserved_prior_source_review": {
-    "commit": "c1e171bdc81cc520100ad6e4653c27ee746cb519",
+    "commit": "e08277f2154632962afd0ae37633282a4eb56237",
     "file": "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
-    "sha256": "cd98ac13eb6798512ee25850df0f7212abb3597a229a86f198c17b31be6cf307"
+    "sha256": "a591924538728b52ba8325d5bcf2addab1bd8ebf08eb0c8a9663bafbe21d5ff5"
   },
   "delta_policy": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_PROOF_BUDGET_SOURCE_DELTA_POLICY.json",
-    "bytes": 1754,
-    "sha256": "2e415f5d785966ce018a602baeaa252a2ad5a12f78e0dc2e58bc8307e8f2dc1a"
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_GUARDS_SOURCE_POLICY.json",
+    "bytes": 902,
+    "sha256": "a2526722ee02083ce5d6b5a609371a620ef58a9811908a82af01c679631988c4"
   },
   "four_unsealed_JSON_receipts": [
     "docs/evidence/apadana/english351-360-nine/LOCAL_ACCEPTANCE.json",
