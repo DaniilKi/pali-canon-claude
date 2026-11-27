@@ -1,6 +1,6 @@
 {
   "schema": "english9-local-component-acceptance-v1",
-  "status": "PASS_REVIEWED_SOURCE_AND_INSTALLED_COMPONENT_NOT_FINAL_GIT_OR_RELEASE",
+  "status": "PASS_SOURCE_INSTALLED_COMPONENT_AND_EXACT_CORE_LOCAL_FULL_CHECK_NOT_FINAL_CI",
   "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
   "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
   "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
@@ -258,7 +258,7 @@
     "publisher358_canonical360_held": true,
     "Apadana_units_without_indexed_whole_English_source": 235,
     "final_source_seal_and_bounded_legacy_gates_pending": false,
-    "actual_full_2092_native_inventory_pending": true,
+    "actual_full_2092_native_inventory_pending": false,
     "exact_final_CI_and_dev_promotion_pending": true,
     "physical_device_testing": false,
     "human_assistive_testing": false,
@@ -362,5 +362,27 @@
     "skip_scope": "existing optional NextTen OriginalSource wrapper without VRI_SOURCE_CHECKOUT; not a new runtime skip",
     "log_sha256": "6258034712d5b34621b8de671513b8f5a6617d1a1711d1a459307ac257516a7e",
     "migration_child12_passed_with_original120s_bound": true
+  },
+  "full_native_V2_on_immutable_core": {
+    "schema": "exact-core-full-native-check-v1",
+    "status": "PASS",
+    "commit": "9f49a31dec194d2df7fef563c3ded39ca8cc4b9f",
+    "command": "PATH=/tmp/pali-english335-350-evidence-nov26/node20-linux:$PATH timeout 1800s npm run check",
+    "node": "20.20.2",
+    "platform": "Linux x64",
+    "exit_code": 0,
+    "tests": 2092,
+    "pass": 1813,
+    "fail": 0,
+    "skipped": 279,
+    "cancelled": 0,
+    "todo": 0,
+    "test_duration_ms": 592150.753567,
+    "outer_bound_seconds": 1800,
+    "audit_texts": 8544,
+    "audit_failures": 0,
+    "log_sha256": "865e18f0a82d5b187b3182d180320b2f9611546dc4794360f4a84d088aece70d",
+    "optional_skip_scope": "267 preserved source-only +11 new source/client optional +1 existing conditional live HEAD preflight; no new fixed skip exemption",
+    "original_failed_run_preserved": true
   }
 }
