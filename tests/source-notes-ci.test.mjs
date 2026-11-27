@@ -1,3 +1,24 @@
+import {after} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {join as hJoin,relative as hRelative} from 'node:path';
+import {fileURLToPath as hFileURLToPath} from 'node:url';
+import {lstatSync as hLstatSync} from 'node:fs';
+const historicalH=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+after(()=>historicalH.close());
+const actualHSourceRoot=hFileURLToPath(new URL('../',import.meta.url));
+const HISTORY_SOURCE_PATHS=Object.freeze([".github/workflows/check.yml","package.json","scripts/audit-widget.mjs","scripts/build.mjs","scripts/web-reader-source-notes-check.py","tests/web-reader-ci-artifacts.test.mjs"]);
+function readHistoricalHSource(file,...options){
+ const name=typeof file==='string'?file:hRelative(actualHSourceRoot,hFileURLToPath(file)).replaceAll('\\','/');
+ if(name==='.github/workflows/npx.yml'){
+  // Explicit unchanged-H source witness outside the finiteH fixture; no fallback.
+  for(const part of ['.github','.github/workflows']){const stat=hLstatSync(hJoin(actualHSourceRoot,part));assert.ok(stat.isDirectory()&&!stat.isSymbolicLink());}
+  const actual=hJoin(actualHSourceRoot,name),stat=hLstatSync(actual);assert.ok(stat.isFile()&&!stat.isSymbolicLink());
+  const raw=readFileSync(actual);assert.equal(raw.length,1779);assert.equal(createHash('sha256').update(raw).digest('hex'),'6537692c69f9c46a0fe3b4805cc2749e35d308da730435aeec95c9488e100bc9');
+  assert.deepEqual(options,['utf8']);return raw.toString('utf8');
+ }
+ assert.ok(HISTORY_SOURCE_PATHS.includes(name),'Closed named H source input only: '+name);
+ return readFileSync(hJoin(historicalH.root,name),...options);
+}
 import {normalizeFrozen440SourceInput} from './helpers/boundary333-336-source-input.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
@@ -9,7 +30,7 @@ import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';
 const GROUP='vrieditionnote',BASE='ff798f681147e12160167fbeb9ef1927bb54c45c';
 const BASE_WORKFLOW_SHA='caba90b591b0b8855513730d4a4252afdcab467e710baf8d65ae00d0f981c8e9';
 const REPORTS=['standalone-source-notes.report.json','standalone-source-notes-launch.report.json','standalone-source-notes-a11y.report.json','standalone-source-notes-a11y-launch.report.json','standalone-source-notes-independent.report.json','installed-source-notes.report.json','installed-source-notes-launch.report.json'];
-const read=name=>{const raw=normalizeFrozen440SourceInput(name,readFileSync(new URL('../'+name,import.meta.url),'utf8'));return name==='.github/workflows/check.yml'?projectCheckStageWorkflow(raw):raw;};
+const read=name=>{const raw=normalizeFrozen440SourceInput(name,readHistoricalHSource(name,'utf8'));return name==='.github/workflows/check.yml'?projectCheckStageWorkflow(raw):raw;};
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const steps=text=>text.match(/^      - [^]*?(?=^      - |^  [a-z][\w-]*:|(?![^]))/gm)||[];
 const named=(text,name)=>{const found=steps(text).filter(step=>step.startsWith('      - name: '+name+'\n'));assert.equal(found.length,1,name);return found[0];};

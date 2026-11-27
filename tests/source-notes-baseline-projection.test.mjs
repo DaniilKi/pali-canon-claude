@@ -1,3 +1,24 @@
+// Two immutable historical freeze descriptors are exact actual-R H witnesses,
+// not extra H980 output or current375 application/runtime data.
+import {lstatSync as fixedHFreezeStat} from 'node:fs';
+import {fileURLToPath as fixedHFreezeFilePath} from 'node:url';
+import {relative as fixedHFreezeRelative} from 'node:path';
+const FIXED_H_METADATA_FREEZE_WITNESSES=Object.freeze(Object.fromEntries(Object.entries({"docs/evidence/apadana/THERA_221_230_BASELINE_FREEZE.json":{"bytes":2318834,"sha256":"2ebfb8bb16a72589b74f11ac8adde8bb8cfdf68caa7e817d27a2bc2b269f849a","git_blob":"ffdf17e5ac335a1188cedf6462452adfe4da1fb8","mode":"100644"},"docs/evidence/apadana/THERA_REMAINING_BASELINE_FREEZE.json":{"bytes":2392407,"sha256":"d09125df513f09169272000c1110307bb3ac3d200d79a11266a063a384ae0009","git_blob":"c4eed1551e15389758025e11b6b2c09b861bcfa3","mode":"100644"}}).map(([path,row])=>[path,Object.freeze(row)])));
+function fixedHMetadataFreezeKey(path){
+ if(typeof path==='string')return Object.hasOwn(FIXED_H_METADATA_FREEZE_WITNESSES,path)?path:null;
+ if(path instanceof URL&&path.protocol==='file:'){
+  const name=fixedHFreezeRelative(ownedHistoricalHInputs.root,fixedHFreezeFilePath(path)).replaceAll('\\','/');
+  return Object.hasOwn(FIXED_H_METADATA_FREEZE_WITNESSES,name)?name:null;
+ }
+ return null;
+}
+function readFixedHMetadataFreeze(path,...options){
+ assert.equal(typeof path,'string');assert.ok(Object.hasOwn(FIXED_H_METADATA_FREEZE_WITNESSES,path),'Only the two declared unchanged H freezes read actual R');
+ assert.ok(options.length===0||options.length===1&&options[0]==='utf8');const row=FIXED_H_METADATA_FREEZE_WITNESSES[path];assert.equal(row.mode,'100644');
+ let target=new URL('../',import.meta.url);const parts=path.split('/');for(let i=0;i<parts.length;i++){target=new URL(parts[i]+(i===parts.length-1?'':'/'),target);const stat=fixedHFreezeStat(target);assert.equal(stat.isSymbolicLink(),false);assert.equal(i===parts.length-1?stat.isFile():stat.isDirectory(),true);}
+ const raw=readOwnedHOrActualMetadataFile(target);assert.equal(raw.length,row.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),row.sha256,'Exact unchanged H freeze SHA');assert.equal(createHash('sha1').update(Buffer.concat([Buffer.from('blob '+raw.length+'\0'),raw])).digest('hex'),row.git_blob,'Exact H freeze Gitblob');
+ return options.length?raw.toString('utf8'):raw;
+}
 // Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
 import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
 assertCurrent375SourceClosure(new URL('../',import.meta.url));
@@ -12,7 +33,7 @@ import {pathToFileURL as historicalHFileURL} from 'node:url';
 const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
 const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
 closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
-function readActualFileSync(path,...options){if(path==='server/data/apadana.json')return readOwnedHOrActualMetadataFile(path,...options);return readOwnedHOrActualMetadataFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
+function readActualFileSync(path,...options){const witness=fixedHMetadataFreezeKey(path);if(witness!==null)return readFixedHMetadataFreeze(witness,...options);if(path==='server/data/apadana.json')return readOwnedHOrActualMetadataFile(path,...options);return readOwnedHOrActualMetadataFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 const {frozen440FileReader}=await import(new URL('tests/helpers/boundary333-336-source-input.mjs',HistoricalHBase).href);
 const {canonBeforeFour}=await import(new URL('tests/helpers/canon-before-four.mjs',HistoricalHBase).href);
 import test from 'node:test';

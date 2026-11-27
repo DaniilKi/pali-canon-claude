@@ -1,6 +1,28 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readActualFileSync} from 'node:fs';import {normalizeC1SourceReader} from './helpers/six-boundary-source-input.mjs';const readFileSync=normalizeC1SourceReader(readActualFileSync);import {createHash} from 'node:crypto';
-import {intake343SourceInverses,decodeIntake343SourceInverses,intake343SourceProofBytes,projectACSource,normalizeACSourceInput,acFileReader} from './helpers/intake343-source-input.mjs';
-import {boundarySourceInverses,frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';import {sourceInverses,d4FileReader} from './helpers/current339-source-inverse.mjs';
+// Explicit immutable H pure-source inputs after the genuine CURRENT375 source guard.
+// Registration stays in actual R; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readOwnedHPhysicalFile} from 'node:fs';const {normalizeC1SourceReader}=await import(new URL('tests/helpers/six-boundary-source-input.mjs',HistoricalHBase).href);const readFileSync=normalizeC1SourceReader(readActualFileSync);import {createHash} from 'node:crypto';
+const {intake343SourceInverses,decodeIntake343SourceInverses,intake343SourceProofBytes,projectACSource,normalizeACSourceInput,acFileReader:ownedHAcFileReader}=await import(new URL('tests/helpers/intake343-source-input.mjs',HistoricalHBase).href);
+const {boundarySourceInverses,frozen440FileReader}=await import(new URL('tests/helpers/boundary333-336-source-input.mjs',HistoricalHBase).href);const {sourceInverses,d4FileReader:ownedHD4FileReader}=await import(new URL('tests/helpers/current339-source-inverse.mjs',HistoricalHBase).href);
+import {fileURLToPath as historicalInputFilePath} from 'node:url';
+import {relative as historicalInputRelative,sep as historicalInputSeparator} from 'node:path';
+// Only the literal intake343 source-map keys may change physical input roots.
+function historicalSourcePath(path){
+ if(!(path instanceof URL)||path.protocol!=='file:')return path;
+ const name=historicalInputRelative(historicalInputFilePath(new URL('../',import.meta.url)),historicalInputFilePath(path)).split(historicalInputSeparator).join('/');
+ return Object.hasOwn(intake343SourceInverses.files,name)?new URL(name,HistoricalHBase):path;
+}
+function readActualFileSync(path,...options){
+ const target=historicalSourcePath(path);
+ return readOwnedHPhysicalFile(typeof target==='string'&&Object.hasOwn(intake343SourceInverses.files,target)?new URL(target,HistoricalHBase):target,...options);
+}
+function acFileReader(reader){const owned=ownedHAcFileReader(reader);return(path,...options)=>owned(historicalSourcePath(path),...options);}
+function d4FileReader(reader){const owned=ownedHD4FileReader(reader);return(path,...options)=>owned(historicalSourcePath(path),...options);}
 const sha=x=>createHash('sha256').update(x).digest('hex');
 test('every declared current source restores its complete immutable ac input',()=>{for(const[path,row]of Object.entries(intake343SourceInverses.files)){const actual=readFileSync(path,'utf8');assert.equal(sha(actual),row.current_sha256);const old=projectACSource(path,actual,{requireCurrent:true});assert.equal(sha(old),row.ac_sha256);assert.equal(projectACSource(path,old),old);assert.throws(()=>projectACSource(path,old,{requireCurrent:true}));}});
 test('source omissions substitutions duplicates and unrelated mutations cannot project',()=>{for(const[path,row]of Object.entries(intake343SourceInverses.files)){const actual=readFileSync(path,'utf8');for(const bad of [actual+'\n// unrelated\n',actual.replace(row.hunks[0].after,''),actual+row.hunks[0].after,actual.replace(row.hunks[0].after,row.hunks[0].before)])assert.throws(()=>projectACSource(path,bad,{requireCurrent:true}));}});

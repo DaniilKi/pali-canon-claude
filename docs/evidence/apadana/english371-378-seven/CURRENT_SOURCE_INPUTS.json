@@ -131,6 +131,10 @@
       "bytes": 20602,
       "sha256": "d6bfe4d29580417ca7b18aef6a23785dee383d43111b52e6023cbf165ed9edb0"
     },
+    "tests/apadana-thera221-230.test.mjs": {
+      "bytes": 35664,
+      "sha256": "77008d527a51ca71b89b634ebac7a69c6870a88bbbabb5c50511cdc1b38c700f"
+    },
     "tests/apadana-third.test.mjs": {
       "bytes": 23202,
       "sha256": "1b4539b31ef466c15c8db4184489d73428a96623eb1c4d1174a4cd5eec2554bf"
@@ -147,6 +151,10 @@
       "bytes": 1336,
       "sha256": "42597b96127e9429d58109e141c618782790d0ff4a247652635c2181d238bd1c"
     },
+    "tests/boundary333-336-source-input.test.mjs": {
+      "bytes": 6598,
+      "sha256": "529a6c60433b7ca817a45b951d1468294e322e17fab2187c08e225bb0b7a8562"
+    },
     "tests/browser-current359-routing.test.mjs": {
       "bytes": 1352,
       "sha256": "72a86b423eb9af085fc555dfc5a3d49d8cb5c34c94aeffcda12eee0320eb4838"
@@ -154,6 +162,14 @@
     "tests/browser-current368-routing.test.mjs": {
       "bytes": 1321,
       "sha256": "0166c40038b76c64d11f5b5378277e9c209165a4629128e07055ab00c70bde18"
+    },
+    "tests/check-ci-stages.test.mjs": {
+      "bytes": 7618,
+      "sha256": "216f7e198e5272bb16a2d6b841ca1bc9674033e9a9bfc965d7a6403b3f9f58c0"
+    },
+    "tests/current333-uri-bindings.test.mjs": {
+      "bytes": 4813,
+      "sha256": "630ee6d57bfc86c2edec3d344c674d271b3ef35f6ffb8aefca9ff0b4b36624d4"
     },
     "tests/current333-version-bindings.test.mjs": {
       "bytes": 6524,
@@ -174,6 +190,10 @@
     "tests/four-boundary-history.test.mjs": {
       "bytes": 1008,
       "sha256": "a9eafc3842c158124577656c0346bac19c5cce1adc51d9daebf8fa5a56672bdb"
+    },
+    "tests/four-history-data.test.mjs": {
+      "bytes": 2918,
+      "sha256": "1cce313a66bb0308466dd258c3cf18dca47b1ec3a3e197d816de5b4ede3277df"
     },
     "tests/held234-client.test.mjs": {
       "bytes": 10967,
@@ -199,6 +219,10 @@
       "bytes": 17230,
       "sha256": "0915d449b2fa7975bc9faf73584ee2c560ca92431edc74404d540b8cc678ca10"
     },
+    "tests/helpers/thera-remaining-source.mjs": {
+      "bytes": 30608,
+      "sha256": "db305267c80454bab81d11f53219ffee59ca8c57d656564e6839b8f151cc3ca8"
+    },
     "tests/helpers/thera301-310-evidence.mjs": {
       "bytes": 15584,
       "sha256": "80f81c51ed929d07337841b30ff3d1693c9ce656c0e62c5b3454d609d2d1bc05"
@@ -207,9 +231,17 @@
       "bytes": 9797,
       "sha256": "c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f"
     },
+    "tests/intake343-ci.test.mjs": {
+      "bytes": 4152,
+      "sha256": "814161c87a8a634ce93685720e723a2ba7c1dd809ada2741cb521356e051a058"
+    },
     "tests/intake343-metadata.test.mjs": {
       "bytes": 5293,
       "sha256": "a055d267fb605c0fa04135f08c1d4500d6adf2d88ac66b99431396330958ad1f"
+    },
+    "tests/intake343-source-input.test.mjs": {
+      "bytes": 6134,
+      "sha256": "3e1c256d4fce9c329994187b2993f34bcad70bf296bb2d0d11af512e63280ab9"
     },
     "tests/intake359-history.test.mjs": {
       "bytes": 1353,
@@ -240,16 +272,44 @@
       "sha256": "774b352e40ed0247e148a9aa6ab9c7d3bb5857c6405de3d00d7eae0ff30acedc"
     },
     "tests/materialize_h_history.py": {
-      "bytes": 9381,
-      "sha256": "9210fd54016b18a65253a6a87eb985a24d8d445ae2a7dc4b655ec31581a40eed"
+      "bytes": 11940,
+      "sha256": "244c73d63bbfd06fb4044d1621a50953ef25416c0a3cee1072402cff19dd5e48"
     },
     "tests/next-ten-history-data.test.mjs": {
       "bytes": 10272,
       "sha256": "ee6ee7cf99e969d55bf935d0218fca378b49afd9047fa5a1b0bf330dd9d3ceec"
     },
+    "tests/next-ten-history.test.mjs": {
+      "bytes": 1132,
+      "sha256": "1819f45f2153bf5c877f0eddd287823f580837d020ce3352ea0cf0e00bc4bbb5"
+    },
+    "tests/next-ten-source-history.test.mjs": {
+      "bytes": 3374,
+      "sha256": "75f83cc060f692038a2f2ec9efa985623cb004a3ae0910b3a0a5910aab82d962"
+    },
     "tests/owned_intake375_proofs.py": {
       "bytes": 4082,
       "sha256": "ee1d6cab53f98b029588c2f0f06dee8dcf89db25ef2a14ee2c6595d1c14ab768"
+    },
+    "tests/publisher317-ci.test.mjs": {
+      "bytes": 7039,
+      "sha256": "520aca111b6b5fef6d6ef134ec07677983411f599c010f068e9a6da63da8eb59"
+    },
+    "tests/publisher325-ci.test.mjs": {
+      "bytes": 7542,
+      "sha256": "33a76a7bc2966d82bba1486aa887b707245a06a8e3fedf8f4130402eefab65a7"
+    },
+    "tests/publisher333-ci.test.mjs": {
+      "bytes": 12239,
+      "sha256": "4178bc8b3b038ef437ed08803631c7f71dc6adbb2fb063f0dcc63f6d65156fe8"
+    },
+    "tests/publisher339-ci.test.mjs": {
+      "bytes": 3831,
+      "sha256": "416fb77f31124663fb1edb11d0a44ac2d0d91d3c3b859f35e89594f574987e1b"
+    },
+    "tests/six-boundary-ci.test.mjs": {
+      "bytes": 4044,
+      "sha256": "253fc563b81eed27a32c41f46410fa78d8a8fb8b7b43275a2b7a86053ffe7d36"
     },
     "tests/six-boundary-history.test.mjs": {
       "bytes": 1482,
@@ -264,8 +324,12 @@
       "sha256": "c31e0a2ef5f01df90352cf40117e3be08675adab59066cca2e4a91df5807d0fb"
     },
     "tests/source-notes-baseline-projection.test.mjs": {
-      "bytes": 8914,
-      "sha256": "3ee8c3abf17d3a3f3e372fab9d8532c1e308edd77b7ff5e61c7524e312f1d45d"
+      "bytes": 11405,
+      "sha256": "8e99b5b2b3528112c356d1b2eace25cd709c2c6c9f3d56f03f341bb341ecff1d"
+    },
+    "tests/source-notes-ci.test.mjs": {
+      "bytes": 15337,
+      "sha256": "a6a91a295246af98e9f52b3e1c0c6d92443717b6104444811b78964df89e6f47"
     },
     "tests/source-notes-compatibility.test.mjs": {
       "bytes": 6749,
@@ -304,24 +368,24 @@
       "sha256": "96a54e9e19bb27308e22b373651e103144a4886bd69f81a89638c67e24ebe184"
     },
     "tests/thera281-285-source.test.mjs": {
-      "bytes": 15940,
-      "sha256": "05f60118d8fd498be8ec27a61192c880b18ea3bd5ca538c5defb7cbbaf63b221"
+      "bytes": 16303,
+      "sha256": "bc47e69f7489ea8f59a7b3e6f2716a58168d292f4872f9a5630156f207715686"
     },
     "tests/thera287-288-client.test.mjs": {
       "bytes": 13600,
       "sha256": "2b13de0ec5218ae9babc7ec1e1c2e86c4a5acddbf8cf4e6260cb0da624d8b8a1"
     },
     "tests/thera287-288-source.test.mjs": {
-      "bytes": 15375,
-      "sha256": "e1b65e84151d8be45e474830cefc9bd19c968006a8af26b33707b2843a94ab94"
+      "bytes": 15738,
+      "sha256": "bc1632103d16f5a35da4f563371c723b69a7381c86a0a7c0282e1bd4152e56a2"
     },
     "tests/thera292-299-client.test.mjs": {
       "bytes": 14110,
       "sha256": "a8eb2a4f4b9bb6525f0bfb15693618eeeb9b7d12b24c97ba49256eaf79e00bfd"
     },
     "tests/thera292-299-source.test.mjs": {
-      "bytes": 16843,
-      "sha256": "975110750b84169b55283c292b8873083915e92763317e85756c7bd9d687745e"
+      "bytes": 17206,
+      "sha256": "f9ff35bfca027ac4647806a8a3bbdefb70df2caddea703e13ab5765b7662f7e2"
     },
     "tests/thera301-310-client.test.mjs": {
       "bytes": 16961,
@@ -332,16 +396,16 @@
       "sha256": "fc4ddaf3171b69cf32551242730e682b1310d9eb414f8d11dd595e1160e4abfd"
     },
     "tests/thera312-319-client.test.mjs": {
-      "bytes": 23397,
-      "sha256": "e2ef1b16069a69aca3c51aa9944fc803fc16ba805062279eb47b46795ea84fd7"
+      "bytes": 23673,
+      "sha256": "945439a4c506f50368440376e0f7dec9588788f9c1f6d1e08f17adc393970dc8"
     },
     "tests/thera312-319-source.test.mjs": {
       "bytes": 15855,
       "sha256": "8282d747a150b3593f39f789057dd786be26fcf2583f54a1512dc304356fac3f"
     },
     "tests/thera321-329-client.test.mjs": {
-      "bytes": 21675,
-      "sha256": "c825f75b532ec8d4b62e3f9cc97e8b756fcd1447e27aa1fc19c972a5dbd163c5"
+      "bytes": 21951,
+      "sha256": "30b56a5f6d781ad63f2cdfae008686bacf799f24af26c14ef216136d163535d5"
     },
     "tests/thera321-329-source.test.mjs": {
       "bytes": 10925,
@@ -388,8 +452,8 @@
       "sha256": "695b2e51de464f1565fdd03233bbffe0b899ab7e65e068a084fdccae1e9ae2bb"
     },
     "tests/web-reader-ci-artifacts.test.mjs": {
-      "bytes": 131842,
-      "sha256": "36ab63509b47736f650169e019f5eab9f222232c97a5f5b77f233865188f1941"
+      "bytes": 144159,
+      "sha256": "969c2440da25ccd9b23a6a302f050c43f8b23f4a6955f03a72cd5f5b34d89bf8"
     },
     "tests/widget-hosted-selections.test.mjs": {
       "bytes": 3192,

@@ -1,3 +1,16 @@
+import {after} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {join as hJoin,relative as hRelative} from 'node:path';
+import {fileURLToPath as hFileURLToPath} from 'node:url';
+const historicalH=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+after(()=>historicalH.close());
+const actualHSourceRoot=hFileURLToPath(new URL('../',import.meta.url));
+const HISTORY_SOURCE_PATHS=Object.freeze([".github/workflows/check.yml","package.json","scripts/ci-check-contract.mjs","tests/source-notes-ci.test.mjs"]);
+function readHistoricalHSource(file,...options){
+ const name=typeof file==='string'?file:hRelative(actualHSourceRoot,hFileURLToPath(file)).replaceAll('\\','/');
+ assert.ok(HISTORY_SOURCE_PATHS.includes(name),'Closed named H source input only: '+name);
+ return readFileSync(hJoin(historicalH.root,name),...options);
+}
 import {normalizeFrozen440SourceInput} from './helpers/boundary333-336-source-input.mjs';
 import {projectPublisher333Workflow} from './helpers/publisher333-ci-baseline.mjs';
 import {test} from 'node:test';
@@ -10,7 +23,7 @@ import {spawnSync} from 'node:child_process';
 import {verifyCheckContract} from '../scripts/ci-check-contract.mjs';
 import {CHECK_STAGE_STEPS,PROPOSED_CHECK_NODE_SHA,projectCheckStageWorkflow,projectCheckStageWorkflowOnly} from './helpers/check-stage-baseline.mjs';
 
-const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
+const read=name=>readHistoricalHSource(name,'utf8');
 const current=projectPublisher333Workflow(read('.github/workflows/check.yml'));
 const pkg=JSON.parse(read('package.json'));
 const sha=text=>createHash('sha256').update(text).digest('hex');

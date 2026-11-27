@@ -1,4 +1,18 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {after} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {join as hJoin,relative as hRelative} from 'node:path';
+import {fileURLToPath as hFileURLToPath} from 'node:url';
+const historicalH=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+after(()=>historicalH.close());
+const actualHSourceRoot=hFileURLToPath(new URL('../',import.meta.url));
+const HISTORY_SOURCE_PATHS=Object.freeze([".github/workflows/check.yml","tests/thera321-329-client.test.mjs","tests/thera321-329-source.test.mjs"]);
+function readHistoricalHSource(file,...options){
+ const name=typeof file==='string'?file:hRelative(actualHSourceRoot,hFileURLToPath(file)).replaceAll('\\','/');
+ assert.ok(HISTORY_SOURCE_PATHS.includes(name),'Closed named H source input only: '+name);
+ return readActualFileSync(hJoin(historicalH.root,name),...options);
+}
+const readFileSync=readHistoricalHSource;
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readActualFileSync} from 'node:fs';import {createHash} from 'node:crypto';
 import {SOURCE_PATHS,SOURCE_BLOCK,STEP,REPORT,D4_WORKFLOW_SHA,projectPublisher339Workflow} from './helpers/publisher339-ci-baseline.mjs';
 const current=readFileSync('.github/workflows/check.yml','utf8'),sha=x=>createHash('sha256').update(x).digest('hex'),required=x=>projectPublisher339Workflow(x,{requireCurrent:true});
 test('new339 CI retains all D4 jobs, bounds and old source gates after exact six-path twelve-case extension',()=>{

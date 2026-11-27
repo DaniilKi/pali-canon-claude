@@ -1,6 +1,20 @@
+import {after} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {join as hJoin,relative as hRelative} from 'node:path';
+import {fileURLToPath as hFileURLToPath} from 'node:url';
+const historicalH=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+after(()=>historicalH.close());
+const actualHSourceRoot=hFileURLToPath(new URL('../',import.meta.url));
+const HISTORY_SOURCE_PATHS=Object.freeze([".github/workflows/check.yml","tests/apadana-six-boundary-migration.test.mjs","tests/apadana-six-cached-consumers.test.mjs","tests/apadana-six-locator-consumers.test.mjs","tests/six-boundary-ci.test.mjs","tests/six-boundary-history.test.mjs","tests/six-boundary-source-input.test.mjs"]);
+function readHistoricalHSource(file,...options){
+ const name=typeof file==='string'?file:hRelative(actualHSourceRoot,hFileURLToPath(file)).replaceAll('\\','/');
+ assert.ok(HISTORY_SOURCE_PATHS.includes(name),'Closed named H source input only: '+name);
+ return readActualFileSync(hJoin(historicalH.root,name),...options);
+}
+const readFileSync=readHistoricalHSource;
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
 import {projectC1Source} from './helpers/six-boundary-source-input.mjs';
 
 const path='.github/workflows/check.yml';

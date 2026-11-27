@@ -54,6 +54,10 @@
       "before_sha256": "2e6e0e08268838ab5f5ebcfa438ceaecd552a554e387f8cdae30d9249228072e",
       "after_sha256": "d6bfe4d29580417ca7b18aef6a23785dee383d43111b52e6023cbf165ed9edb0"
     },
+    "tests/apadana-thera221-230.test.mjs": {
+      "before_sha256": "de6d9f1aae7098a1f1119dd5f40fd2a6eee27c63473b05540397cb8798746ac5",
+      "after_sha256": "77008d527a51ca71b89b634ebac7a69c6870a88bbbabb5c50511cdc1b38c700f"
+    },
     "tests/apadana-third.test.mjs": {
       "before_sha256": "92e72fe456b1a056b6e4052f4a017853cce4c9d6466b9f99f0ca3f821b9b58a0",
       "after_sha256": "1b4539b31ef466c15c8db4184489d73428a96623eb1c4d1174a4cd5eec2554bf"
@@ -70,6 +74,10 @@
       "before_sha256": "4808d2365fb486467b256ca7abcf42de4296d1cb8fed4c2e8d209cf630e7316e",
       "after_sha256": "42597b96127e9429d58109e141c618782790d0ff4a247652635c2181d238bd1c"
     },
+    "tests/boundary333-336-source-input.test.mjs": {
+      "before_sha256": "125e8144ba6c65793d968cd54e309308c70a8bc334cb33b15646683b568b85de",
+      "after_sha256": "529a6c60433b7ca817a45b951d1468294e322e17fab2187c08e225bb0b7a8562"
+    },
     "tests/browser-current359-routing.test.mjs": {
       "before_sha256": "c1f7ac4f6f2a22718fe8c37b6eb9b304cd981feef5ff4906e92454d87ca86450",
       "after_sha256": "72a86b423eb9af085fc555dfc5a3d49d8cb5c34c94aeffcda12eee0320eb4838"
@@ -78,9 +86,17 @@
       "before_sha256": "9661ffee215e631803e52c44996c4c8119724601279e92df21a55e09588a44d6",
       "after_sha256": "0166c40038b76c64d11f5b5378277e9c209165a4629128e07055ab00c70bde18"
     },
+    "tests/check-ci-stages.test.mjs": {
+      "before_sha256": "488bfa1964e27cf5e23c349ea20146ad63eedcaa9bbfc5fadeaa42785127cef0",
+      "after_sha256": "216f7e198e5272bb16a2d6b841ca1bc9674033e9a9bfc965d7a6403b3f9f58c0"
+    },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "e060e3706aed5a72dff7fcc0c51453639bb5e61de197449350a68dc0318fe73f"
+      "after_sha256": "d794873bb6ccb3ef6f8884277e47f82f0046cb3a59093f16a88e9d8fc0ad8d06"
+    },
+    "tests/current333-uri-bindings.test.mjs": {
+      "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
+      "after_sha256": "630ee6d57bfc86c2edec3d344c674d271b3ef35f6ffb8aefca9ff0b4b36624d4"
     },
     "tests/current333-version-bindings.test.mjs": {
       "before_sha256": "fa26127fc98b344168f9e2885533cefef67e75e5e34bd1e2a247c12ab9f59168",
@@ -98,6 +114,10 @@
       "before_sha256": "04766af34b9833a0208efb611bb00734c847849958cb93d996fd20c8b50bf664",
       "after_sha256": "a9eafc3842c158124577656c0346bac19c5cce1adc51d9daebf8fa5a56672bdb"
     },
+    "tests/four-history-data.test.mjs": {
+      "before_sha256": "234276661885dba30a370f503ec3fdb8ad392cb72b74878556de5b4d5c5dd951",
+      "after_sha256": "1cce313a66bb0308466dd258c3cf18dca47b1ec3a3e197d816de5b4ede3277df"
+    },
     "tests/held234-client.test.mjs": {
       "before_sha256": "0b5969a079d50ce005f35e508f54dcb8ed343f08aa1e99ba826a13f2d8821cef",
       "after_sha256": "2e71e79b359a3aac7e37761d08b7d0b3a80defe245e1d7b6578c19440d9b7c90"
@@ -106,9 +126,17 @@
       "before_sha256": "51655bcfc60b9d3707caf863eab909ff681a2d66d4c65685ecdc7c41eec2418e",
       "after_sha256": "e252a07ac8339ba40ad83dcfca2caa747a1100621987f3d01f0b171d523c7fbd"
     },
+    "tests/intake343-ci.test.mjs": {
+      "before_sha256": "284f89789badb1f05877e993dd5e454547f7f27be7b52e67b01f76978dbcec99",
+      "after_sha256": "814161c87a8a634ce93685720e723a2ba7c1dd809ada2741cb521356e051a058"
+    },
     "tests/intake343-metadata.test.mjs": {
       "before_sha256": "a94c49b2b03ed564b2323449813e16a75b25a5ed92e3e5a967176c0307e14180",
       "after_sha256": "a055d267fb605c0fa04135f08c1d4500d6adf2d88ac66b99431396330958ad1f"
+    },
+    "tests/intake343-source-input.test.mjs": {
+      "before_sha256": "83dce7a5616758fd40ca81e7f6dbb2ee8f24b2a2665e6b4d5c6d829600d2b6de",
+      "after_sha256": "3e1c256d4fce9c329994187b2993f34bcad70bf296bb2d0d11af512e63280ab9"
     },
     "tests/intake359-history.test.mjs": {
       "before_sha256": "7188494737eb07ef8e8644c73640648686e55daf2b37cde25363f5d6a5462edd",
@@ -134,6 +162,34 @@
       "before_sha256": "69f74a5c5f13cf0f7fdccb7eb85cf22affdbc50ed27bfb1aed929db2fd20e55c",
       "after_sha256": "ee6ee7cf99e969d55bf935d0218fca378b49afd9047fa5a1b0bf330dd9d3ceec"
     },
+    "tests/next-ten-history.test.mjs": {
+      "before_sha256": "fc10fa448eb1840f5a0c7f7e3e3578e023a5d0e431af882e31176f9b2583495b",
+      "after_sha256": "1819f45f2153bf5c877f0eddd287823f580837d020ce3352ea0cf0e00bc4bbb5"
+    },
+    "tests/next-ten-source-history.test.mjs": {
+      "before_sha256": "38ed7e21a7c13cd7935265ae02b81e92e3b5bb0aef11dd86adb4661a6ca49668",
+      "after_sha256": "75f83cc060f692038a2f2ec9efa985623cb004a3ae0910b3a0a5910aab82d962"
+    },
+    "tests/publisher317-ci.test.mjs": {
+      "before_sha256": "03a0b769d49665f08db87b7cdc1bb8677e5039b53bf9f66e3ec269325ec64bbc",
+      "after_sha256": "520aca111b6b5fef6d6ef134ec07677983411f599c010f068e9a6da63da8eb59"
+    },
+    "tests/publisher325-ci.test.mjs": {
+      "before_sha256": "50209dec8ac085516f2a6385e259b3dfd29b57a237271ed689f180bb7723f7e0",
+      "after_sha256": "33a76a7bc2966d82bba1486aa887b707245a06a8e3fedf8f4130402eefab65a7"
+    },
+    "tests/publisher333-ci.test.mjs": {
+      "before_sha256": "87abde0ead2066cc25ce13e2ef61031fc6b91e0b27e6cf1e7abbc127aeef7f83",
+      "after_sha256": "4178bc8b3b038ef437ed08803631c7f71dc6adbb2fb063f0dcc63f6d65156fe8"
+    },
+    "tests/publisher339-ci.test.mjs": {
+      "before_sha256": "5461415deaf6995229187f3e279ba219fbd0b928d5867396bdd2f5924c09a9ef",
+      "after_sha256": "416fb77f31124663fb1edb11d0a44ac2d0d91d3c3b859f35e89594f574987e1b"
+    },
+    "tests/six-boundary-ci.test.mjs": {
+      "before_sha256": "0e895fee1f58528f8ee22729b60604864a6c4fed3c4c84946c050596e056ce48",
+      "after_sha256": "253fc563b81eed27a32c41f46410fa78d8a8fb8b7b43275a2b7a86053ffe7d36"
+    },
     "tests/six-boundary-history.test.mjs": {
       "before_sha256": "c70b703d55f8f4f0874a857bfc214f686bb7faae1b3c3dbf54f8c124ba86b938",
       "after_sha256": "c29bd4a45b3e1905057cf4fff30c2be2b979ee373a846091416d384c78230668"
@@ -148,7 +204,11 @@
     },
     "tests/source-notes-baseline-projection.test.mjs": {
       "before_sha256": "631ec6f793d7ce518e21a5eece52aeac7c50138be50e8d5cfd684a88ccef1afa",
-      "after_sha256": "3ee8c3abf17d3a3f3e372fab9d8532c1e308edd77b7ff5e61c7524e312f1d45d"
+      "after_sha256": "8e99b5b2b3528112c356d1b2eace25cd709c2c6c9f3d56f03f341bb341ecff1d"
+    },
+    "tests/source-notes-ci.test.mjs": {
+      "before_sha256": "c8c3f5dd938c10e8d9e999a7d32e5634ba524ba342b8836c65fdd05460961e98",
+      "after_sha256": "a6a91a295246af98e9f52b3e1c0c6d92443717b6104444811b78964df89e6f47"
     },
     "tests/source-notes-compatibility.test.mjs": {
       "before_sha256": "b0eab70a46893957a1433181081f3ef5a6fac3fd66ea328ea191d1000b1dfd80",
@@ -188,7 +248,7 @@
     },
     "tests/thera281-285-source.test.mjs": {
       "before_sha256": "3fe3081c55681611c396d2a845be497ec2e7611bca0ac2e4e02a706c65d0fcad",
-      "after_sha256": "05f60118d8fd498be8ec27a61192c880b18ea3bd5ca538c5defb7cbbaf63b221"
+      "after_sha256": "bc47e69f7489ea8f59a7b3e6f2716a58168d292f4872f9a5630156f207715686"
     },
     "tests/thera287-288-client.test.mjs": {
       "before_sha256": "83606202405989c9d0b5a034adffed3b92145e800093b255ae2264261f69e5f9",
@@ -196,7 +256,7 @@
     },
     "tests/thera287-288-source.test.mjs": {
       "before_sha256": "2928fc8f939fffc6c0cdf07e2b16f755c6851492a61f8e1681fdb25aa7f38d18",
-      "after_sha256": "e1b65e84151d8be45e474830cefc9bd19c968006a8af26b33707b2843a94ab94"
+      "after_sha256": "bc1632103d16f5a35da4f563371c723b69a7381c86a0a7c0282e1bd4152e56a2"
     },
     "tests/thera292-299-client.test.mjs": {
       "before_sha256": "37460c107c048d4601619f8c2f6bd86b3bf3d4338df588bffb27c169ac728e24",
@@ -204,7 +264,7 @@
     },
     "tests/thera292-299-source.test.mjs": {
       "before_sha256": "056416b7144f531ed36eb5d8b8e7eaa4e0b61f6d70f37064a30860117749e8d4",
-      "after_sha256": "975110750b84169b55283c292b8873083915e92763317e85756c7bd9d687745e"
+      "after_sha256": "f9ff35bfca027ac4647806a8a3bbdefb70df2caddea703e13ab5765b7662f7e2"
     },
     "tests/thera301-310-client.test.mjs": {
       "before_sha256": "796352f3d8d1d8769979e6b29225281e2a20f138ac86aa313fcfd6f4a7ccb08f",
@@ -216,7 +276,7 @@
     },
     "tests/thera312-319-client.test.mjs": {
       "before_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953",
-      "after_sha256": "e2ef1b16069a69aca3c51aa9944fc803fc16ba805062279eb47b46795ea84fd7"
+      "after_sha256": "945439a4c506f50368440376e0f7dec9588788f9c1f6d1e08f17adc393970dc8"
     },
     "tests/thera312-319-source.test.mjs": {
       "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
@@ -224,7 +284,7 @@
     },
     "tests/thera321-329-client.test.mjs": {
       "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
-      "after_sha256": "c825f75b532ec8d4b62e3f9cc97e8b756fcd1447e27aa1fc19c972a5dbd163c5"
+      "after_sha256": "30b56a5f6d781ad63f2cdfae008686bacf799f24af26c14ef216136d163535d5"
     },
     "tests/thera321-329-source.test.mjs": {
       "before_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499",
@@ -264,7 +324,7 @@
     },
     "tests/web-reader-ci-artifacts.test.mjs": {
       "before_sha256": "0af32b645a7214fdcf2d1de45a45030b8a2dafc7c83e7e28b23d8b6dc542f371",
-      "after_sha256": "36ab63509b47736f650169e019f5eab9f222232c97a5f5b77f233865188f1941"
+      "after_sha256": "969c2440da25ccd9b23a6a302f050c43f8b23f4a6955f03a72cd5f5b34d89bf8"
     },
     "tests/widget-hosted-selections.test.mjs": {
       "before_sha256": "4ad932ef76cb23c279926ccd2848a8c8007627d17b8eedb513b25e04a92d8264",
@@ -279,24 +339,24 @@
     "tests/verse-scope-python.test.mjs": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "5456fd5ea4dc02362152e6d7d3ed05b7f74b703ba33a12c16aa2c9efe96a329b",
+    "scripts/ci-test-partitions.mjs": "26afa6021526b09ada898e0d75d0026dcd07e4c91e4c326a9bcff3e683e51a53",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
-    "docs/evidence/apadana/english371-378-seven/CURRENT_SOURCE_INPUTS.json": "2b31ac0b44dd660cb084eadf3fe850407388343169dd92dd87ea366238158bf5",
+    "docs/evidence/apadana/english371-378-seven/CURRENT_SOURCE_INPUTS.json": "519d36252f4ad94296ccfb5f718b867c82668f3bdd430a0d5db7c7a3ec37bd9f",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
-    "tests/helpers/historical-h-inputs.mjs": "a999f1479728aaf964eece9fe382fe1278857a14dc9335503911082537a660b8",
-    "tests/helpers/intake375-metadata.mjs": "dd9b2a5bdc98c88bea247a2a74f26a35a6d08bf8ff84a1ce3f1423232555ca96",
+    "tests/helpers/historical-h-inputs.mjs": "4ee112c7c5eb79aba81495e5f31974c0335be38235e639bacd2797bb6e92bacf",
+    "tests/helpers/intake375-metadata.mjs": "e2b4458d460c42aa6f88e3bf8834d4e8dcbc2e3eb1f3e011a8e1a2f8e3456af5",
     "tests/helpers/partitioned-python.mjs": "31b57009d667c0d88dfd73b849f0e9506e39ae9e26ab11b27b01cf0a3f9066f3",
     "tests/helpers/verse-scope-python.mjs": "c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f",
-    "tests/materialize_h_history.py": "9210fd54016b18a65253a6a87eb985a24d8d445ae2a7dc4b655ec31581a40eed"
+    "tests/materialize_h_history.py": "244c73d63bbfd06fb4044d1621a50953ef25416c0a3cee1072402cff19dd5e48"
   },
   "python_sources": {
     "tests/six_boundary_history_acceptance.py": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
     "tests/six_operation_scope_controls.py": "e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570"
   },
-  "inventory_sha256": "49db8a3368d9243e6b5ab0d24aa06df56dadde0c954d3a994d3eba0f357f772a",
+  "inventory_sha256": "4f2e96510be93780257522a94273ff5c8fd4881eb3576bc55a239ae9fcb0e72c",
   "counts": {
     "baseline_files": 345,
     "preserved_cases": 2092,
@@ -1121,6 +1181,140 @@
           }
         ]
       },
+      "tests/apadana-thera221-230.test.mjs": {
+        "before_sha256": "de6d9f1aae7098a1f1119dd5f40fd2a6eee27c63473b05540397cb8798746ac5",
+        "after_sha256": "77008d527a51ca71b89b634ebac7a69c6870a88bbbabb5c50511cdc1b38c700f",
+        "before": [
+          {
+            "name": "221–230 intake is exactly independently approved10 and preserves all256 prior profiles and links",
+            "name_expression": "'221–230 intake is exactly independently approved10 and preserves all256 prior profiles and links'",
+            "line": 79,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source-enabled 221–230 intake verifies all10raw Gitblobs,78paragraphs,48entries,51labels and separate note owners",
+            "name_expression": "'source-enabled 221–230 intake verifies all10raw Gitblobs,78paragraphs,48entries,51labels and separate note owners'",
+            "line": 160,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          },
+          {
+            "name": "source-enabled finite combined entries, note-only pairs and original two-paragraph summary remain exact",
+            "name_expression": "'source-enabled finite combined entries, note-only pairs and original two-paragraph summary remain exact'",
+            "line": 200,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          },
+          {
+            "name": "all266 reviewed source links bind optional citation and joined-colophon fields by presence as well as value",
+            "name_expression": "'all266 reviewed source links bind optional citation and joined-colophon fields by presence as well as value'",
+            "line": 252,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source-enabled finite labels and physical paragraphs remain intact while quotations exclude every apparatus owner",
+            "name_expression": "'source-enabled finite labels and physical paragraphs remain intact while quotations exclude every apparatus owner'",
+            "line": 267,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          },
+          {
+            "name": "source-enabled unreviewed wording, profile fields, layout shapes and held transport refuse",
+            "name_expression": "'source-enabled unreviewed wording, profile fields, layout shapes and held transport refuse'",
+            "line": 288,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          },
+          {
+            "name": "source-enabled all10API pages retain rights, scopes, exact continuation and refuse stale cached metadata",
+            "name_expression": "'source-enabled all10API pages retain rights, scopes, exact continuation and refuse stale cached metadata'",
+            "line": 302,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          }
+        ],
+        "after": [
+          {
+            "name": "221–230 intake is exactly independently approved10 and preserves all256 prior profiles and links",
+            "name_expression": "'221–230 intake is exactly independently approved10 and preserves all256 prior profiles and links'",
+            "line": 198,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source-enabled 221–230 intake verifies all10raw Gitblobs,78paragraphs,48entries,51labels and separate note owners",
+            "name_expression": "'source-enabled 221–230 intake verifies all10raw Gitblobs,78paragraphs,48entries,51labels and separate note owners'",
+            "line": 279,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          },
+          {
+            "name": "source-enabled finite combined entries, note-only pairs and original two-paragraph summary remain exact",
+            "name_expression": "'source-enabled finite combined entries, note-only pairs and original two-paragraph summary remain exact'",
+            "line": 319,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          },
+          {
+            "name": "all266 reviewed source links bind optional citation and joined-colophon fields by presence as well as value",
+            "name_expression": "'all266 reviewed source links bind optional citation and joined-colophon fields by presence as well as value'",
+            "line": 371,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source-enabled finite labels and physical paragraphs remain intact while quotations exclude every apparatus owner",
+            "name_expression": "'source-enabled finite labels and physical paragraphs remain intact while quotations exclude every apparatus owner'",
+            "line": 386,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          },
+          {
+            "name": "source-enabled unreviewed wording, profile fields, layout shapes and held transport refuse",
+            "name_expression": "'source-enabled unreviewed wording, profile fields, layout shapes and held transport refuse'",
+            "line": 407,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          },
+          {
+            "name": "source-enabled all10API pages retain rights, scopes, exact continuation and refuse stale cached metadata",
+            "name_expression": "'source-enabled all10API pages retain rights, scopes, exact continuation and refuse stale cached metadata'",
+            "line": 421,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{ skip: !checkout }"
+          }
+        ]
+      },
       "tests/apadana-third.test.mjs": {
         "before_sha256": "92e72fe456b1a056b6e4052f4a017853cce4c9d6466b9f99f0ca3f821b9b58a0",
         "after_sha256": "1b4539b31ef466c15c8db4184489d73428a96623eb1c4d1174a4cd5eec2554bf",
@@ -1369,6 +1563,122 @@
           }
         ]
       },
+      "tests/boundary333-336-source-input.test.mjs": {
+        "before_sha256": "125e8144ba6c65793d968cd54e309308c70a8bc334cb33b15646683b568b85de",
+        "after_sha256": "529a6c60433b7ca817a45b951d1468294e322e17fab2187c08e225bb0b7a8562",
+        "before": [
+          {
+            "name": "separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads",
+            "name_expression": "'separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads'",
+            "line": 12,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "omitted duplicate substituted reordered or unrelated current source edits refuse after each exact positive",
+            "name_expression": "'omitted duplicate substituted reordered or unrelated current source edits refuse after each exact positive'",
+            "line": 22,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "whole proof bytes are immutable even for semantically equal JSON and altered baseline hashes paths or hunks",
+            "name_expression": "'whole proof bytes are immutable even for semantically equal JSON and altered baseline hashes paths or hunks'",
+            "line": 30,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "unlisted data runtime and ordinary strings never undergo source-input projection",
+            "name_expression": "'unlisted data runtime and ordinary strings never undergo source-input projection'",
+            "line": 37,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "explicit file URL source reads retain the same finite frozen440 boundary",
+            "name_expression": "'explicit file URL source reads retain the same finite frozen440 boundary'",
+            "line": 44,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "nested D4 file URL reads normalize declared current source before retained historical assertions",
+            "name_expression": "'nested D4 file URL reads normalize declared current source before retained historical assertions'",
+            "line": 51,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads",
+            "name_expression": "'separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads'",
+            "line": 35,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "omitted duplicate substituted reordered or unrelated current source edits refuse after each exact positive",
+            "name_expression": "'omitted duplicate substituted reordered or unrelated current source edits refuse after each exact positive'",
+            "line": 45,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "whole proof bytes are immutable even for semantically equal JSON and altered baseline hashes paths or hunks",
+            "name_expression": "'whole proof bytes are immutable even for semantically equal JSON and altered baseline hashes paths or hunks'",
+            "line": 53,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "unlisted data runtime and ordinary strings never undergo source-input projection",
+            "name_expression": "'unlisted data runtime and ordinary strings never undergo source-input projection'",
+            "line": 60,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "explicit file URL source reads retain the same finite frozen440 boundary",
+            "name_expression": "'explicit file URL source reads retain the same finite frozen440 boundary'",
+            "line": 67,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "nested D4 file URL reads normalize declared current source before retained historical assertions",
+            "name_expression": "'nested D4 file URL reads normalize declared current source before retained historical assertions'",
+            "line": 74,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
       "tests/browser-current359-routing.test.mjs": {
         "before_sha256": "c1f7ac4f6f2a22718fe8c37b6eb9b304cd981feef5ff4906e92454d87ca86450",
         "after_sha256": "72a86b423eb9af085fc555dfc5a3d49d8cb5c34c94aeffcda12eee0320eb4838",
@@ -1421,9 +1731,179 @@
           }
         ]
       },
+      "tests/check-ci-stages.test.mjs": {
+        "before_sha256": "488bfa1964e27cf5e23c349ea20146ad63eedcaa9bbfc5fadeaa42785127cef0",
+        "after_sha256": "216f7e198e5272bb16a2d6b841ca1bc9674033e9a9bfc965d7a6403b3f9f58c0",
+        "before": [
+          {
+            "name": "raw CI exposes every full-check phase in order with fail-closed bounds",
+            "name_expression": "'raw CI exposes every full-check phase in order with fail-closed bounds'",
+            "line": 18,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "contract rejects a newly added full-check component",
+            "name_expression": "'contract rejects a newly added full-check component'",
+            "line": 29,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "contract rejects either check-only npm lifecycle hook before any phase",
+            "name_expression": "'contract rejects either check-only npm lifecycle hook before any phase'",
+            "line": 33,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "executable contract fails without a success receipt when a lifecycle hook is introduced",
+            "name_expression": "'executable contract fails without a success receipt when a lifecycle hook is introduced'",
+            "line": 37,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "a directory alias cannot bypass CLI success receipts or lifecycle refusal",
+            "name_expression": "'a directory alias cannot bypass CLI success receipts or lifecycle refusal'",
+            "line": 47,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "contract refuses filtered or substituted build, test and audit commands",
+            "name_expression": "'contract refuses filtered or substituted build, test and audit commands'",
+            "line": 70,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite stage projection rejects omitted audit, success bypass and altered budgets",
+            "name_expression": "'finite stage projection rejects omitted audit, success bypass and altered budgets'",
+            "line": 74,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite stage projection preserves matrix, setup, smoke, pack and installed audits",
+            "name_expression": "'finite stage projection preserves matrix, setup, smoke, pack and installed audits'",
+            "line": 85,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "every previous source-note CI assertion is retained byte for byte",
+            "name_expression": "'every previous source-note CI assertion is retained byte for byte'",
+            "line": 93,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "raw CI exposes every full-check phase in order with fail-closed bounds",
+            "name_expression": "'raw CI exposes every full-check phase in order with fail-closed bounds'",
+            "line": 31,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "contract rejects a newly added full-check component",
+            "name_expression": "'contract rejects a newly added full-check component'",
+            "line": 42,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "contract rejects either check-only npm lifecycle hook before any phase",
+            "name_expression": "'contract rejects either check-only npm lifecycle hook before any phase'",
+            "line": 46,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "executable contract fails without a success receipt when a lifecycle hook is introduced",
+            "name_expression": "'executable contract fails without a success receipt when a lifecycle hook is introduced'",
+            "line": 50,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "a directory alias cannot bypass CLI success receipts or lifecycle refusal",
+            "name_expression": "'a directory alias cannot bypass CLI success receipts or lifecycle refusal'",
+            "line": 60,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "contract refuses filtered or substituted build, test and audit commands",
+            "name_expression": "'contract refuses filtered or substituted build, test and audit commands'",
+            "line": 83,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite stage projection rejects omitted audit, success bypass and altered budgets",
+            "name_expression": "'finite stage projection rejects omitted audit, success bypass and altered budgets'",
+            "line": 87,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite stage projection preserves matrix, setup, smoke, pack and installed audits",
+            "name_expression": "'finite stage projection preserves matrix, setup, smoke, pack and installed audits'",
+            "line": 98,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "every previous source-note CI assertion is retained byte for byte",
+            "name_expression": "'every previous source-note CI assertion is retained byte for byte'",
+            "line": 106,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
       "tests/ci-test-partitions.test.mjs": {
         "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-        "after_sha256": "e060e3706aed5a72dff7fcc0c51453639bb5e61de197449350a68dc0318fe73f",
+        "after_sha256": "d794873bb6ccb3ef6f8884277e47f82f0046cb3a59093f16a88e9d8fc0ad8d06",
         "before": [
           {
             "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
@@ -1573,6 +2053,36 @@
           }
         ]
       },
+      "tests/current333-uri-bindings.test.mjs": {
+        "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
+        "after_sha256": "630ee6d57bfc86c2edec3d344c674d271b3ef35f6ffb8aefca9ff0b4b36624d4",
+        "before": [
+          {
+            "name": null,
+            "name_expression": "'exact current URI and full104 inverse '+row.path",
+            "line": 62,
+            "column": 27,
+            "registration_ancestors": [
+              "ForOfStatement"
+            ],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": null,
+            "name_expression": "'exact current URI and full104 inverse '+row.path",
+            "line": 71,
+            "column": 27,
+            "registration_ancestors": [
+              "ForOfStatement"
+            ],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
       "tests/current333-version-bindings.test.mjs": {
         "before_sha256": "fa26127fc98b344168f9e2885533cefef67e75e5e34bd1e2a247c12ab9f59168",
         "after_sha256": "86a38bed1e279b916888d96465df823c5f31f1db0d5883b6939f024ec42c877f",
@@ -1717,6 +2227,68 @@
           }
         ]
       },
+      "tests/four-history-data.test.mjs": {
+        "before_sha256": "234276661885dba30a370f503ec3fdb8ad392cb72b74878556de5b4d5c5dd951",
+        "after_sha256": "1cce313a66bb0308466dd258c3cf18dca47b1ec3a3e197d816de5b4ede3277df",
+        "before": [
+          {
+            "name": "explicit historical data inputs preserve exact old byte pins while real loading stays current",
+            "name_expression": "'explicit historical data inputs preserve exact old byte pins while real loading stays current'",
+            "line": 15,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "historical data byte substitutions cannot hide tampered supplied current input after a cached positive",
+            "name_expression": "'historical data byte substitutions cannot hide tampered supplied current input after a cached positive'",
+            "line": 21,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "unlisted runtime files and metadata retain byte identity and are never projected",
+            "name_expression": "'unlisted runtime files and metadata retain byte identity and are never projected'",
+            "line": 24,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "explicit historical data inputs preserve exact old byte pins while real loading stays current",
+            "name_expression": "'explicit historical data inputs preserve exact old byte pins while real loading stays current'",
+            "line": 23,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "historical data byte substitutions cannot hide tampered supplied current input after a cached positive",
+            "name_expression": "'historical data byte substitutions cannot hide tampered supplied current input after a cached positive'",
+            "line": 29,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "unlisted runtime files and metadata retain byte identity and are never projected",
+            "name_expression": "'unlisted runtime files and metadata retain byte identity and are never projected'",
+            "line": 32,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
       "tests/held234-client.test.mjs": {
         "before_sha256": "0b5969a079d50ce005f35e508f54dcb8ed343f08aa1e99ba826a13f2d8821cef",
         "after_sha256": "2e71e79b359a3aac7e37761d08b7d0b3a80defe245e1d7b6578c19440d9b7c90",
@@ -1816,6 +2388,104 @@
             "name": "actual held234 metadata preflight keeps the full325,333,339,343 and359 bridges into current368 and rejects baseline corruption",
             "name_expression": "'actual held234 metadata preflight keeps the full325,333,339,343 and359 bridges into current368 and rejects baseline corruption'",
             "line": 11,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
+      "tests/intake343-ci.test.mjs": {
+        "before_sha256": "284f89789badb1f05877e993dd5e454547f7f27be7b52e67b01f76978dbcec99",
+        "after_sha256": "814161c87a8a634ce93685720e723a2ba7c1dd809ada2741cb521356e051a058",
+        "before": [
+          {
+            "name": "current343 gate restores the complete ac workflow before all historical CI inverses",
+            "name_expression": "'current343 gate restores the complete ac workflow before all historical CI inverses'",
+            "line": 5,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "required source/client inventory is exactly eight plus five runnable cases",
+            "name_expression": "'required source/client inventory is exactly eight plus five runnable cases'",
+            "line": 6,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source paths cannot be omitted substituted duplicated reordered or broadened",
+            "name_expression": "'source paths cannot be omitted substituted duplicated reordered or broadened'",
+            "line": 7,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "mandatory13 gate refuses changed suites counts skips guards shell env bounds or report",
+            "name_expression": "'mandatory13 gate refuses changed suites counts skips guards shell env bounds or report'",
+            "line": 8,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "unrelated earlier gate historical object fetch budget or matrix changes fail whole ac identity",
+            "name_expression": "'unrelated earlier gate historical object fetch budget or matrix changes fail whole ac identity'",
+            "line": 9,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "current343 gate restores the complete ac workflow before all historical CI inverses",
+            "name_expression": "'current343 gate restores the complete ac workflow before all historical CI inverses'",
+            "line": 19,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "required source/client inventory is exactly eight plus five runnable cases",
+            "name_expression": "'required source/client inventory is exactly eight plus five runnable cases'",
+            "line": 20,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source paths cannot be omitted substituted duplicated reordered or broadened",
+            "name_expression": "'source paths cannot be omitted substituted duplicated reordered or broadened'",
+            "line": 21,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "mandatory13 gate refuses changed suites counts skips guards shell env bounds or report",
+            "name_expression": "'mandatory13 gate refuses changed suites counts skips guards shell env bounds or report'",
+            "line": 22,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "unrelated earlier gate historical object fetch budget or matrix changes fail whole ac identity",
+            "name_expression": "'unrelated earlier gate historical object fetch budget or matrix changes fail whole ac identity'",
+            "line": 23,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -1932,6 +2602,122 @@
             "name": "eligibility reclassifies only approved publisher331 and preserves every other hold",
             "name_expression": "'eligibility reclassifies only approved publisher331 and preserves every other hold'",
             "line": 19,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
+      "tests/intake343-source-input.test.mjs": {
+        "before_sha256": "83dce7a5616758fd40ca81e7f6dbb2ee8f24b2a2665e6b4d5c6d829600d2b6de",
+        "after_sha256": "3e1c256d4fce9c329994187b2993f34bcad70bf296bb2d0d11af512e63280ab9",
+        "before": [
+          {
+            "name": "every declared current source restores its complete immutable ac input",
+            "name_expression": "'every declared current source restores its complete immutable ac input'",
+            "line": 5,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source omissions substitutions duplicates and unrelated mutations cannot project",
+            "name_expression": "'source omissions substitutions duplicates and unrelated mutations cannot project'",
+            "line": 6,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "proof omission reorder substitution hash hunk and byte tampering fail the mandatory seal",
+            "name_expression": "'proof omission reorder substitution hash hunk and byte tampering fail the mandatory seal'",
+            "line": 7,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "string Buffer fileURL and nested historical readers retain exact declared source identities",
+            "name_expression": "'string Buffer fileURL and nested historical readers retain exact declared source identities'",
+            "line": 8,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "exact-current normalization never converts unknown supplied mutations",
+            "name_expression": "'exact-current normalization never converts unknown supplied mutations'",
+            "line": 9,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "unlisted runtime corpus and URLs are not projected",
+            "name_expression": "'unlisted runtime corpus and URLs are not projected'",
+            "line": 10,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "every declared current source restores its complete immutable ac input",
+            "name_expression": "'every declared current source restores its complete immutable ac input'",
+            "line": 27,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source omissions substitutions duplicates and unrelated mutations cannot project",
+            "name_expression": "'source omissions substitutions duplicates and unrelated mutations cannot project'",
+            "line": 28,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "proof omission reorder substitution hash hunk and byte tampering fail the mandatory seal",
+            "name_expression": "'proof omission reorder substitution hash hunk and byte tampering fail the mandatory seal'",
+            "line": 29,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "string Buffer fileURL and nested historical readers retain exact declared source identities",
+            "name_expression": "'string Buffer fileURL and nested historical readers retain exact declared source identities'",
+            "line": 30,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "exact-current normalization never converts unknown supplied mutations",
+            "name_expression": "'exact-current normalization never converts unknown supplied mutations'",
+            "line": 31,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "unlisted runtime corpus and URLs are not projected",
+            "name_expression": "'unlisted runtime corpus and URLs are not projected'",
+            "line": 32,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -2167,6 +2953,656 @@
           }
         ]
       },
+      "tests/next-ten-history.test.mjs": {
+        "before_sha256": "fc10fa448eb1840f5a0c7f7e3e3578e023a5d0e431af882e31176f9b2583495b",
+        "after_sha256": "1819f45f2153bf5c877f0eddd287823f580837d020ce3352ea0cf0e00bc4bbb5",
+        "before": [
+          {
+            "name": "next-ten Python history refuses stale actual data and escaped proof bindings after genuine positives",
+            "name_expression": "'next-ten Python history refuses stale actual data and escaped proof bindings after genuine positives'",
+            "line": 6,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{timeout:125000}"
+          }
+        ],
+        "after": [
+          {
+            "name": "next-ten Python history refuses stale actual data and escaped proof bindings after genuine positives",
+            "name_expression": "'next-ten Python history refuses stale actual data and escaped proof bindings after genuine positives'",
+            "line": 6,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{timeout:125000}"
+          }
+        ]
+      },
+      "tests/next-ten-source-history.test.mjs": {
+        "before_sha256": "38ed7e21a7c13cd7935265ae02b81e92e3b5bb0aef11dd86adb4661a6ca49668",
+        "after_sha256": "75f83cc060f692038a2f2ec9efa985623cb004a3ae0910b3a0a5910aab82d962",
+        "before": [
+          {
+            "name": "strict source readers require physical NEXT while explicit DD source-stage input remains legitimate",
+            "name_expression": "'strict source readers require physical NEXT while explicit DD source-stage input remains legitimate'",
+            "line": 9,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{timeout:30000}"
+          }
+        ],
+        "after": [
+          {
+            "name": "strict source readers require physical NEXT while explicit DD source-stage input remains legitimate",
+            "name_expression": "'strict source readers require physical NEXT while explicit DD source-stage input remains legitimate'",
+            "line": 19,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{timeout:30000}"
+          }
+        ]
+      },
+      "tests/publisher317-ci.test.mjs": {
+        "before_sha256": "03a0b769d49665f08db87b7cdc1bb8677e5039b53bf9f66e3ec269325ec64bbc",
+        "after_sha256": "520aca111b6b5fef6d6ef134ec07677983411f599c010f068e9a6da63da8eb59",
+        "before": [
+          {
+            "name": "publisher317 CI adds exactly the approved32 originals and mandatory49 zero-skip cases",
+            "name_expression": "'publisher317 CI adds exactly the approved32 originals and mandatory49 zero-skip cases'",
+            "line": 20,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite publisher317 projection restores the exact complete historical workflow and is idempotent",
+            "name_expression": "'finite publisher317 projection restores the exact complete historical workflow and is idempotent'",
+            "line": 38,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection rejects each omitted substituted or duplicated approved original",
+            "name_expression": "'publisher317 projection rejects each omitted substituted or duplicated approved original'",
+            "line": 48,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection rejects missing altered or duplicated source and client gates",
+            "name_expression": "'publisher317 projection rejects missing altered or duplicated source and client gates'",
+            "line": 59,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection refuses weakened counts skip gates conditions environment or time bounds",
+            "name_expression": "'publisher317 projection refuses weakened counts skip gates conditions environment or time bounds'",
+            "line": 70,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection requires retained evidence and rejects partial intake remnants",
+            "name_expression": "'publisher317 projection requires retained evidence and rejects partial intake remnants'",
+            "line": 82,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection cannot hide source revision old commands or budget changes",
+            "name_expression": "'publisher317 projection cannot hide source revision old commands or budget changes'",
+            "line": 89,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "publisher317 CI adds exactly the approved32 originals and mandatory49 zero-skip cases",
+            "name_expression": "'publisher317 CI adds exactly the approved32 originals and mandatory49 zero-skip cases'",
+            "line": 24,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite publisher317 projection restores the exact complete historical workflow and is idempotent",
+            "name_expression": "'finite publisher317 projection restores the exact complete historical workflow and is idempotent'",
+            "line": 42,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection rejects each omitted substituted or duplicated approved original",
+            "name_expression": "'publisher317 projection rejects each omitted substituted or duplicated approved original'",
+            "line": 52,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection rejects missing altered or duplicated source and client gates",
+            "name_expression": "'publisher317 projection rejects missing altered or duplicated source and client gates'",
+            "line": 63,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection refuses weakened counts skip gates conditions environment or time bounds",
+            "name_expression": "'publisher317 projection refuses weakened counts skip gates conditions environment or time bounds'",
+            "line": 74,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection requires retained evidence and rejects partial intake remnants",
+            "name_expression": "'publisher317 projection requires retained evidence and rejects partial intake remnants'",
+            "line": 86,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "publisher317 projection cannot hide source revision old commands or budget changes",
+            "name_expression": "'publisher317 projection cannot hide source revision old commands or budget changes'",
+            "line": 93,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
+      "tests/publisher325-ci.test.mjs": {
+        "before_sha256": "50209dec8ac085516f2a6385e259b3dfd29b57a237271ed689f180bb7723f7e0",
+        "after_sha256": "33a76a7bc2966d82bba1486aa887b707245a06a8e3fedf8f4130402eefab65a7",
+        "before": [
+          {
+            "name": "CI325 adds only eight approved originals and a separate bounded14-pass zero-skip gate",
+            "name_expression": "'CI325 adds only eight approved originals and a separate bounded14-pass zero-skip gate'",
+            "line": 17,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 inverse restores every byte of final317 before the unchanged historical projections",
+            "name_expression": "'CI325 inverse restores every byte of final317 before the unchanged historical projections'",
+            "line": 34,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "all original317 CI assertions remain byte-exact after removing only the325 input adapter",
+            "name_expression": "'all original317 CI assertions remain byte-exact after removing only the325 input adapter'",
+            "line": 45,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 rejects every omitted substituted duplicated or reordered fixture and held306/307",
+            "name_expression": "'CI325 rejects every omitted substituted duplicated or reordered fixture and held306/307'",
+            "line": 55,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 rejects omitted substituted or duplicated gate and individual suites",
+            "name_expression": "'CI325 rejects omitted substituted or duplicated gate and individual suites'",
+            "line": 66,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 refuses count skip suite environment condition timeout shell and pipeline weakening",
+            "name_expression": "'CI325 refuses count skip suite environment condition timeout shell and pipeline weakening'",
+            "line": 77,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 requires retained TAP evidence and refuses partial intake remnants",
+            "name_expression": "'CI325 requires retained TAP evidence and refuses partial intake remnants'",
+            "line": 89,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 cannot mask any old49-case gate source revision budget or diagnostic change",
+            "name_expression": "'CI325 cannot mask any old49-case gate source revision budget or diagnostic change'",
+            "line": 96,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "CI325 adds only eight approved originals and a separate bounded14-pass zero-skip gate",
+            "name_expression": "'CI325 adds only eight approved originals and a separate bounded14-pass zero-skip gate'",
+            "line": 22,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 inverse restores every byte of final317 before the unchanged historical projections",
+            "name_expression": "'CI325 inverse restores every byte of final317 before the unchanged historical projections'",
+            "line": 39,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "all original317 CI assertions remain byte-exact after removing only the325 input adapter",
+            "name_expression": "'all original317 CI assertions remain byte-exact after removing only the325 input adapter'",
+            "line": 50,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 rejects every omitted substituted duplicated or reordered fixture and held306/307",
+            "name_expression": "'CI325 rejects every omitted substituted duplicated or reordered fixture and held306/307'",
+            "line": 60,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 rejects omitted substituted or duplicated gate and individual suites",
+            "name_expression": "'CI325 rejects omitted substituted or duplicated gate and individual suites'",
+            "line": 71,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 refuses count skip suite environment condition timeout shell and pipeline weakening",
+            "name_expression": "'CI325 refuses count skip suite environment condition timeout shell and pipeline weakening'",
+            "line": 82,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 requires retained TAP evidence and refuses partial intake remnants",
+            "name_expression": "'CI325 requires retained TAP evidence and refuses partial intake remnants'",
+            "line": 94,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "CI325 cannot mask any old49-case gate source revision budget or diagnostic change",
+            "name_expression": "'CI325 cannot mask any old49-case gate source revision budget or diagnostic change'",
+            "line": 101,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
+      "tests/publisher333-ci.test.mjs": {
+        "before_sha256": "87abde0ead2066cc25ce13e2ef61031fc6b91e0b27e6cf1e7abbc127aeef7f83",
+        "after_sha256": "4178bc8b3b038ef437ed08803631c7f71dc6adbb2fb063f0dcc63f6d65156fe8",
+        "before": [
+          {
+            "name": "CI333 provisions exactly8 approved originals and a distinct bounded14-case zero-skip gate",
+            "name_expression": "'CI333 provisions exactly8 approved originals and a distinct bounded14-case zero-skip gate'",
+            "line": 18,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "the actual333 source and client files contain the independently specified8plus6 cases",
+            "name_expression": "'the actual333 source and client files contain the independently specified8plus6 cases'",
+            "line": 32,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "only Node fullcheck jobs provision exact104 artifacts before unchanged build/test gates",
+            "name_expression": "'only Node fullcheck jobs provision exact104 artifacts before unchanged build/test gates'",
+            "line": 36,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite333 inverse restores whole104 before325,stage and317 projections",
+            "name_expression": "'finite333 inverse restores whole104 before325,stage and317 projections'",
+            "line": 48,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "all old stage,317 and325 assertions survive byte-exact after removing only333 input adapters",
+            "name_expression": "'all old stage,317 and325 assertions survive byte-exact after removing only333 input adapters'",
+            "line": 57,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "333 inverse refuses each missing substituted duplicate or reordered path and unapproved311/320",
+            "name_expression": "'333 inverse refuses each missing substituted duplicate or reordered path and unapproved311/320'",
+            "line": 90,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "333 inverse refuses omitted duplicate altered gates and individual source/client suites",
+            "name_expression": "'333 inverse refuses omitted duplicate altered gates and individual source/client suites'",
+            "line": 96,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "333 inverse refuses missing altered broadened or duplicated historical104 provision",
+            "name_expression": "'333 inverse refuses missing altered broadened or duplicated historical104 provision'",
+            "line": 110,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "333 inverse preserves TAP retention and refuses unrelated old49/old14/sourcepin/budget bytes",
+            "name_expression": "'333 inverse preserves TAP retention and refuses unrelated old49/old14/sourcepin/budget bytes'",
+            "line": 121,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "exact333 source-input inverse preserves the old325 nested317 source assertions",
+            "name_expression": "'exact333 source-input inverse preserves the old325 nested317 source assertions'",
+            "line": 134,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "CI333 provisions exactly8 approved originals and a distinct bounded14-case zero-skip gate",
+            "name_expression": "'CI333 provisions exactly8 approved originals and a distinct bounded14-case zero-skip gate'",
+            "line": 32,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "the actual333 source and client files contain the independently specified8plus6 cases",
+            "name_expression": "'the actual333 source and client files contain the independently specified8plus6 cases'",
+            "line": 46,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "only Node fullcheck jobs provision exact104 artifacts before unchanged build/test gates",
+            "name_expression": "'only Node fullcheck jobs provision exact104 artifacts before unchanged build/test gates'",
+            "line": 50,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite333 inverse restores whole104 before325,stage and317 projections",
+            "name_expression": "'finite333 inverse restores whole104 before325,stage and317 projections'",
+            "line": 62,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "all old stage,317 and325 assertions survive byte-exact after removing only333 input adapters",
+            "name_expression": "'all old stage,317 and325 assertions survive byte-exact after removing only333 input adapters'",
+            "line": 71,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "333 inverse refuses each missing substituted duplicate or reordered path and unapproved311/320",
+            "name_expression": "'333 inverse refuses each missing substituted duplicate or reordered path and unapproved311/320'",
+            "line": 104,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "333 inverse refuses omitted duplicate altered gates and individual source/client suites",
+            "name_expression": "'333 inverse refuses omitted duplicate altered gates and individual source/client suites'",
+            "line": 110,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "333 inverse refuses missing altered broadened or duplicated historical104 provision",
+            "name_expression": "'333 inverse refuses missing altered broadened or duplicated historical104 provision'",
+            "line": 124,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "333 inverse preserves TAP retention and refuses unrelated old49/old14/sourcepin/budget bytes",
+            "name_expression": "'333 inverse preserves TAP retention and refuses unrelated old49/old14/sourcepin/budget bytes'",
+            "line": 135,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "exact333 source-input inverse preserves the old325 nested317 source assertions",
+            "name_expression": "'exact333 source-input inverse preserves the old325 nested317 source assertions'",
+            "line": 148,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
+      "tests/publisher339-ci.test.mjs": {
+        "before_sha256": "5461415deaf6995229187f3e279ba219fbd0b928d5867396bdd2f5924c09a9ef",
+        "after_sha256": "416fb77f31124663fb1edb11d0a44ac2d0d91d3c3b859f35e89594f574987e1b",
+        "before": [
+          {
+            "name": "new339 CI retains all D4 jobs, bounds and old source gates after exact six-path twelve-case extension",
+            "name_expression": "'new339 CI retains all D4 jobs, bounds and old source gates after exact six-path twelve-case extension'",
+            "line": 4,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "omitted substituted reordered duplicated or held source paths cannot pass a matching count",
+            "name_expression": "'omitted substituted reordered duplicated or held source paths cannot pass a matching count'",
+            "line": 10,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "all twelve exact cases, zero skips and full Bash failure propagation remain required",
+            "name_expression": "'all twelve exact cases, zero skips and full Bash failure propagation remain required'",
+            "line": 14,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "no earlier source gate, old workflow byte, dependency or baseline provisioning can be hidden",
+            "name_expression": "'no earlier source gate, old workflow byte, dependency or baseline provisioning can be hidden'",
+            "line": 18,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "new339 CI retains all D4 jobs, bounds and old source gates after exact six-path twelve-case extension",
+            "name_expression": "'new339 CI retains all D4 jobs, bounds and old source gates after exact six-path twelve-case extension'",
+            "line": 18,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "omitted substituted reordered duplicated or held source paths cannot pass a matching count",
+            "name_expression": "'omitted substituted reordered duplicated or held source paths cannot pass a matching count'",
+            "line": 24,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "all twelve exact cases, zero skips and full Bash failure propagation remain required",
+            "name_expression": "'all twelve exact cases, zero skips and full Bash failure propagation remain required'",
+            "line": 28,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "no earlier source gate, old workflow byte, dependency or baseline provisioning can be hidden",
+            "name_expression": "'no earlier source gate, old workflow byte, dependency or baseline provisioning can be hidden'",
+            "line": 32,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
+      "tests/six-boundary-ci.test.mjs": {
+        "before_sha256": "0e895fee1f58528f8ee22729b60604864a6c4fed3c4c84946c050596e056ce48",
+        "after_sha256": "253fc563b81eed27a32c41f46410fa78d8a8fb8b7b43275a2b7a86053ffe7d36",
+        "before": [
+          {
+            "name": "actual six-boundary CI has the exact mandatory23 zero-skip source and consumer cases",
+            "name_expression": "'actual six-boundary CI has the exact mandatory23 zero-skip source and consumer cases'",
+            "line": 13,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "six-boundary gate cannot lose a suite source fixture count bound shell or artifact",
+            "name_expression": "'six-boundary gate cannot lose a suite source fixture count bound shell or artifact'",
+            "line": 30,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "actual six-boundary CI has the exact mandatory23 zero-skip source and consumer cases",
+            "name_expression": "'actual six-boundary CI has the exact mandatory23 zero-skip source and consumer cases'",
+            "line": 27,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "six-boundary gate cannot lose a suite source fixture count bound shell or artifact",
+            "name_expression": "'six-boundary gate cannot lose a suite source fixture count bound shell or artifact'",
+            "line": 44,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
       "tests/six-boundary-history.test.mjs": {
         "before_sha256": "c70b703d55f8f4f0874a857bfc214f686bb7faae1b3c3dbf54f8c124ba86b938",
         "after_sha256": "c29bd4a45b3e1905057cf4fff30c2be2b979ee373a846091416d384c78230668",
@@ -2301,7 +3737,7 @@
       },
       "tests/source-notes-baseline-projection.test.mjs": {
         "before_sha256": "631ec6f793d7ce518e21a5eece52aeac7c50138be50e8d5cfd684a88ccef1afa",
-        "after_sha256": "3ee8c3abf17d3a3f3e372fab9d8532c1e308edd77b7ff5e61c7524e312f1d45d",
+        "after_sha256": "8e99b5b2b3528112c356d1b2eace25cd709c2c6c9f3d56f03f341bb341ecff1d",
         "before": [
           {
             "name": "only three exact approved additive files project back to both unchanged historical seals",
@@ -2353,7 +3789,7 @@
           {
             "name": "only three exact approved additive files project back to both unchanged historical seals",
             "name_expression": "'only three exact approved additive files project back to both unchanged historical seals'",
-            "line": 42,
+            "line": 63,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -2362,7 +3798,7 @@
           {
             "name": "arbitrary old root/private/builder code changes cannot disappear in the projection",
             "name_expression": "'arbitrary old root/private/builder code changes cannot disappear in the projection'",
-            "line": 56,
+            "line": 77,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -2371,7 +3807,7 @@
           {
             "name": "missing, duplicate, relocated or changed approved additions and alternate old hashes refuse",
             "name_expression": "'missing, duplicate, relocated or changed approved additions and alternate old hashes refuse'",
-            "line": 68,
+            "line": 89,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -2380,7 +3816,7 @@
           {
             "name": "every private-data/storage helper retains its original bytes outside the exact reader addition",
             "name_expression": "'every private-data/storage helper retains its original bytes outside the exact reader addition'",
-            "line": 80,
+            "line": 101,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -2389,7 +3825,87 @@
           {
             "name": "the projection cannot mask canonical or all285 profile/link changes",
             "name_expression": "'the projection cannot mask canonical or all285 profile/link changes'",
-            "line": 92,
+            "line": 113,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
+      "tests/source-notes-ci.test.mjs": {
+        "before_sha256": "c8c3f5dd938c10e8d9e999a7d32e5634ba524ba342b8836c65fdd05460961e98",
+        "after_sha256": "a6a91a295246af98e9f52b3e1c0c6d92443717b6104444811b78964df89e6f47",
+        "before": [
+          {
+            "name": "source-note CI preserves every byte and budget of the prior66-job workflow",
+            "name_expression": "'source-note CI preserves every byte and budget of the prior66-job workflow'",
+            "line": 29,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source-note lane runs exact original replay and focused compatibility before three mandatory browser modes",
+            "name_expression": "'source-note lane runs exact original replay and focused compatibility before three mandatory browser modes'",
+            "line": 51,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite source-note projection leaves all34 historical artifact tests byte-for-byte intact",
+            "name_expression": "'finite source-note projection leaves all34 historical artifact tests byte-for-byte intact'",
+            "line": 67,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source-note package gate retains strict widget equality and binds the original sidecar and policy before launch",
+            "name_expression": "'source-note package gate retains strict widget equality and binds the original sidecar and policy before launch'",
+            "line": 74,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": "source-note CI preserves every byte and budget of the prior66-job workflow",
+            "name_expression": "'source-note CI preserves every byte and budget of the prior66-job workflow'",
+            "line": 50,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source-note lane runs exact original replay and focused compatibility before three mandatory browser modes",
+            "name_expression": "'source-note lane runs exact original replay and focused compatibility before three mandatory browser modes'",
+            "line": 72,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "finite source-note projection leaves all34 historical artifact tests byte-for-byte intact",
+            "name_expression": "'finite source-note projection leaves all34 historical artifact tests byte-for-byte intact'",
+            "line": 88,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "source-note package gate retains strict widget equality and binds the original sidecar and policy before launch",
+            "name_expression": "'source-note package gate retains strict widget equality and binds the original sidecar and policy before launch'",
+            "line": 95,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3335,7 +4851,7 @@
       },
       "tests/thera281-285-source.test.mjs": {
         "before_sha256": "3fe3081c55681611c396d2a845be497ec2e7611bca0ac2e4e02a706c65d0fcad",
-        "after_sha256": "05f60118d8fd498be8ec27a61192c880b18ea3bd5ca538c5defb7cbbaf63b221",
+        "after_sha256": "bc47e69f7489ea8f59a7b3e6f2716a58168d292f4872f9a5630156f207715686",
         "before": [
           {
             "name": "exact five independently reviewed profiles extend all preserved303 objects and links to308 without prior catalogue or canonical identity changes",
@@ -3405,7 +4921,7 @@
           {
             "name": "exact five independently reviewed profiles extend all preserved303 objects and links to308 without prior catalogue or canonical identity changes",
             "name_expression": "'exact five independently reviewed profiles extend all preserved303 objects and links to308 without prior catalogue or canonical identity changes'",
-            "line": 40,
+            "line": 42,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3414,7 +4930,7 @@
           {
             "name": "all five genuine originals and six rights/routing artifacts match independent body notes paragraph and source pins before mutations",
             "name_expression": "'all five genuine originals and six rights/routing artifacts match independent body notes paragraph and source pins before mutations'",
-            "line": 73,
+            "line": 75,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3423,7 +4939,7 @@
           {
             "name": "three authentic combined entries retain eight lines and verse quotations exclude title colophons notes and chapter heading",
             "name_expression": "'three authentic combined entries retain eight lines and verse quotations exclude title colophons notes and chapter heading'",
-            "line": 80,
+            "line": 82,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3432,7 +4948,7 @@
           {
             "name": "bare chapter29 heading is note-free apparatus; xxx Suddhattha ŋ 27/37 variant epithets and unnamed Buddha remain literal",
             "name_expression": "'bare chapter29 heading is note-free apparatus; xxx Suddhattha ŋ 27/37 variant epithets and unnamed Buddha remain literal'",
-            "line": 89,
+            "line": 91,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3441,7 +4957,7 @@
           {
             "name": "changed actual raw identity notes pair members ordering and forged hashes refuse after authentic five positives",
             "name_expression": "'changed actual raw identity notes pair members ordering and forged hashes refuse after authentic five positives'",
-            "line": 98,
+            "line": 100,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3450,7 +4966,7 @@
           {
             "name": "held260/266/280 and foreign ownership refuse before transport while authentic Pāli remains readable",
             "name_expression": "'held260/266/280 and foreign ownership refuse before transport while authentic Pāli remains readable'",
-            "line": 108,
+            "line": 110,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3459,7 +4975,7 @@
           {
             "name": "cold and warmed real source metadata continuations refuse drift without extra source requests or fallback",
             "name_expression": "'cold and warmed real source metadata continuations refuse drift without extra source requests or fallback'",
-            "line": 114,
+            "line": 116,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3567,7 +5083,7 @@
       },
       "tests/thera287-288-source.test.mjs": {
         "before_sha256": "2928fc8f939fffc6c0cdf07e2b16f755c6851492a61f8e1681fdb25aa7f38d18",
-        "after_sha256": "e1b65e84151d8be45e474830cefc9bd19c968006a8af26b33707b2843a94ab94",
+        "after_sha256": "bc1632103d16f5a35da4f563371c723b69a7381c86a0a7c0282e1bd4152e56a2",
         "before": [
           {
             "name": "exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities",
@@ -3637,7 +5153,7 @@
           {
             "name": "exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities",
             "name_expression": "'exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities'",
-            "line": 40,
+            "line": 42,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3646,7 +5162,7 @@
           {
             "name": "both complete original poems and all six rights/routing artifacts match independently sealed source body notes and paragraph pins before corruptions",
             "name_expression": "'both complete original poems and all six rights/routing artifacts match independently sealed source body notes and paragraph pins before corruptions'",
-            "line": 65,
+            "line": 67,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3655,7 +5171,7 @@
           {
             "name": "all eight four-line quotation entries preserve boundaries and exclude title notes colophons empty paratext and audio frontmatter",
             "name_expression": "'all eight four-line quotation entries preserve boundaries and exclude title notes colophons empty paratext and audio frontmatter'",
-            "line": 72,
+            "line": 74,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3664,7 +5180,7 @@
           {
             "name": "audio metadata grants no media capability and all seven288 notes retain family-reference ambiguity and original source spellings",
             "name_expression": "'audio metadata grants no media capability and all seven288 notes retain family-reference ambiguity and original source spellings'",
-            "line": 76,
+            "line": 78,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3673,7 +5189,7 @@
           {
             "name": "actual changed raw identity order notes ownership empty paratext and forged raw hashes refuse after both authentic positives",
             "name_expression": "'actual changed raw identity order notes ownership empty paratext and forged raw hashes refuse after both authentic positives'",
-            "line": 83,
+            "line": 85,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3682,7 +5198,7 @@
           {
             "name": "held260/266/280 and unapproved media refuse before transport while authentic Pāli remains readable",
             "name_expression": "'held260/266/280 and unapproved media refuse before transport while authentic Pāli remains readable'",
-            "line": 92,
+            "line": 94,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3691,7 +5207,7 @@
           {
             "name": "cold and warmed source metadata and genuine continuations refuse drift without extra fetches or fallback",
             "name_expression": "'cold and warmed source metadata and genuine continuations refuse drift without extra fetches or fallback'",
-            "line": 98,
+            "line": 100,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3799,7 +5315,7 @@
       },
       "tests/thera292-299-source.test.mjs": {
         "before_sha256": "056416b7144f531ed36eb5d8b8e7eaa4e0b61f6d70f37064a30860117749e8d4",
-        "after_sha256": "975110750b84169b55283c292b8873083915e92763317e85756c7bd9d687745e",
+        "after_sha256": "f9ff35bfca027ac4647806a8a3bbdefb70df2caddea703e13ab5765b7662f7e2",
         "before": [
           {
             "name": "seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities",
@@ -3869,7 +5385,7 @@
           {
             "name": "seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities",
             "name_expression": "'seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities'",
-            "line": 40,
+            "line": 42,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3878,7 +5394,7 @@
           {
             "name": "all seven complete originals and six rights/routing artifacts match independent source body notes paragraphs and UTF16 lengths before corruptions",
             "name_expression": "'all seven complete originals and six rights/routing artifacts match independent source body notes paragraphs and UTF16 lengths before corruptions'",
-            "line": 61,
+            "line": 63,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3887,7 +5403,7 @@
           {
             "name": "all31 genuine quotation entries preserve compound296 and source punctuation while excluding headings notes colophons and chapter apparatus",
             "name_expression": "'all31 genuine quotation entries preserve compound296 and source punctuation while excluding headings notes colophons and chapter apparatus'",
-            "line": 68,
+            "line": 70,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3896,7 +5412,7 @@
           {
             "name": "294inline colon and anchored note coexist; original names punctuation display pair botanical caveats repeated identity and299body-note owners remain exact",
             "name_expression": "'294inline colon and anchored note coexist; original names punctuation display pair botanical caveats repeated identity and299body-note owners remain exact'",
-            "line": 74,
+            "line": 76,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3905,7 +5421,7 @@
           {
             "name": "actual raw identity note-colon ownership punctuation compound boundary and forged source-hash corruptions refuse after genuine seven positives",
             "name_expression": "'actual raw identity note-colon ownership punctuation compound boundary and forged source-hash corruptions refuse after genuine seven positives'",
-            "line": 84,
+            "line": 86,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3914,7 +5430,7 @@
           {
             "name": "held291/297/300 and earlier260/266/280 plus media refuse before transport while authentic Pāli remains readable",
             "name_expression": "'held291/297/300 and earlier260/266/280 plus media refuse before transport while authentic Pāli remains readable'",
-            "line": 97,
+            "line": 99,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3923,7 +5439,7 @@
           {
             "name": "cold and warmed metadata and genuine source-bound continuations refuse drift without extra source requests or fallback",
             "name_expression": "'cold and warmed metadata and genuine source-bound continuations refuse drift without extra source requests or fallback'",
-            "line": 103,
+            "line": 105,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4201,7 +5717,7 @@
       },
       "tests/thera312-319-client.test.mjs": {
         "before_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953",
-        "after_sha256": "e2ef1b16069a69aca3c51aa9944fc803fc16ba805062279eb47b46795ea84fd7",
+        "after_sha256": "945439a4c506f50368440376e0f7dec9588788f9c1f6d1e08f17adc393970dc8",
         "before": [
           {
             "name": "exact333 client capabilities retain every325 old object and40+293 identities with no automatic English or held311/320 transport",
@@ -4271,7 +5787,7 @@
           {
             "name": "all8 genuine bodies73paragraphs34notes and source-derived500character pages pass actual MCP/native validators and both widget bridges",
             "name_expression": "'all8 genuine bodies73paragraphs34notes and source-derived500character pages pass actual MCP/native validators and both widget bridges'",
-            "line": 103,
+            "line": 106,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4280,7 +5796,7 @@
           {
             "name": "cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges",
             "name_expression": "'cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges'",
-            "line": 150,
+            "line": 153,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4289,7 +5805,7 @@
           {
             "name": "312 note3 state pairs, literal title glyphs and319 combined4-5/unclosed quote retain exact owned note text across both bridges",
             "name_expression": "'312 note3 state pairs, literal title glyphs and319 combined4-5/unclosed quote retain exact owned note text across both bridges'",
-            "line": 172,
+            "line": 175,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4298,7 +5814,7 @@
           {
             "name": "genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads",
             "name_expression": "'genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads'",
-            "line": 201,
+            "line": 204,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4307,7 +5823,7 @@
           {
             "name": "preserved325 summary note8 stays separate and outside actual MCP quote scope while private drafts and pinned citations keep exact saved bases",
             "name_expression": "'preserved325 summary note8 stays separate and outside actual MCP quote scope while private drafts and pinned citations keep exact saved bases'",
-            "line": 223,
+            "line": 226,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4469,7 +5985,7 @@
       },
       "tests/thera321-329-client.test.mjs": {
         "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
-        "after_sha256": "c825f75b532ec8d4b62e3f9cc97e8b756fcd1447e27aa1fc19c972a5dbd163c5",
+        "after_sha256": "30b56a5f6d781ad63f2cdfae008686bacf799f24af26c14ef216136d163535d5",
         "before": [
           {
             "name": "current359 clients retain the reviewed339 cohort and40+319 identities with no automatic English or remaining held-source transport",
@@ -4539,7 +6055,7 @@
           {
             "name": "all6 genuine bodies56paragraphs28notes and source-derived500character pages pass actual MCP/native validators and both widget bridges",
             "name_expression": "'all6 genuine bodies56paragraphs28notes and source-derived500character pages pass actual MCP/native validators and both widget bridges'",
-            "line": 99,
+            "line": 102,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4548,7 +6064,7 @@
           {
             "name": "cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges",
             "name_expression": "'cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges'",
-            "line": 146,
+            "line": 149,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4557,7 +6073,7 @@
           {
             "name": "six owned displaypairs one nonempty321heading three eightline entries and329literalxxxellipsis render without scope invention",
             "name_expression": "'six owned displaypairs one nonempty321heading three eightline entries and329literalxxxellipsis render without scope invention'",
-            "line": 168,
+            "line": 171,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4566,7 +6082,7 @@
           {
             "name": "genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads",
             "name_expression": "'genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads'",
-            "line": 181,
+            "line": 184,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -4575,7 +6091,7 @@
           {
             "name": "synthetic private drafts remain local unsaved and exact pinned citations survive cancel changedbase and stalejournal guards",
             "name_expression": "'synthetic private drafts remain local unsaved and exact pinned citations survive cancel changedbase and stalejournal guards'",
-            "line": 203,
+            "line": 206,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5633,7 +7149,7 @@
       },
       "tests/web-reader-ci-artifacts.test.mjs": {
         "before_sha256": "0af32b645a7214fdcf2d1de45a45030b8a2dafc7c83e7e28b23d8b6dc542f371",
-        "after_sha256": "36ab63509b47736f650169e019f5eab9f222232c97a5f5b77f233865188f1941",
+        "after_sha256": "969c2440da25ccd9b23a6a302f050c43f8b23f4a6955f03a72cd5f5b34d89bf8",
         "before": [
           {
             "name": "every browser-group JSON report is retained as a CI artifact",
@@ -5946,7 +7462,7 @@
           {
             "name": "every browser-group JSON report is retained as a CI artifact",
             "name_expression": "'every browser-group JSON report is retained as a CI artifact'",
-            "line": 110,
+            "line": 122,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5955,7 +7471,7 @@
           {
             "name": "installed Firefox and WebKit evidence is retained and required by reader acceptance",
             "name_expression": "'installed Firefox and WebKit evidence is retained and required by reader acceptance'",
-            "line": 136,
+            "line": 148,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5964,7 +7480,7 @@
           {
             "name": "the existing draft-safety gate runs quotation and commentary focus in all three modes",
             "name_expression": "'the existing draft-safety gate runs quotation and commentary focus in all three modes'",
-            "line": 154,
+            "line": 166,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5973,7 +7489,7 @@
           {
             "name": "Apadāna browser CI uses a pinned public fixture without persisted credentials or publisher network",
             "name_expression": "'Apadāna browser CI uses a pinned public fixture without persisted credentials or publisher network'",
-            "line": 166,
+            "line": 178,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5982,7 +7498,7 @@
           {
             "name": "next Apadāna chapter has independent bounded source acceptance and retained reports",
             "name_expression": "'next Apadāna chapter has independent bounded source acceptance and retained reports'",
-            "line": 188,
+            "line": 200,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5991,7 +7507,7 @@
           {
             "name": "third Apadāna chapter has its own bounded pinned-source and three-mode browser gate",
             "name_expression": "'third Apadāna chapter has its own bounded pinned-source and three-mode browser gate'",
-            "line": 198,
+            "line": 210,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6000,7 +7516,7 @@
           {
             "name": "fourth Apadāna chapter has its own bounded pinned-source and three-mode browser gate",
             "name_expression": "'fourth Apadāna chapter has its own bounded pinned-source and three-mode browser gate'",
-            "line": 220,
+            "line": 232,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6009,7 +7525,7 @@
           {
             "name": "Therā publisher selections has its own bounded pinned-source and three-mode browser gate",
             "name_expression": "'Therā publisher selections has its own bounded pinned-source and three-mode browser gate'",
-            "line": 243,
+            "line": 255,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6018,7 +7534,7 @@
           {
             "name": "publisher-edition navigation has an independent bounded three-mode gate without English retrieval",
             "name_expression": "'publisher-edition navigation has an independent bounded three-mode gate without English retrieval'",
-            "line": 266,
+            "line": 278,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6027,7 +7543,7 @@
           {
             "name": "Next Therā publisher chapter has its own bounded pinned-source and three-mode browser gate",
             "name_expression": "'Next Therā publisher chapter has its own bounded pinned-source and three-mode browser gate'",
-            "line": 285,
+            "line": 297,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6036,7 +7552,7 @@
           {
             "name": "Theragāthā sixteen has bounded source, native, three-mode browser and metadata-only artifact gates",
             "name_expression": "'Theragāthā sixteen has bounded source, native, three-mode browser and metadata-only artifact gates'",
-            "line": 310,
+            "line": 322,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6045,7 +7561,7 @@
           {
             "name": "supplementary Therā acceptance retains independent source checks, three modes and held-source fixtures",
             "name_expression": "'supplementary Therā acceptance retains independent source checks, three modes and held-source fixtures'",
-            "line": 336,
+            "line": 348,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6054,7 +7570,7 @@
           {
             "name": "scaled Therā CI retains all fifty-two earlier jobs and adds exactly three bounded Chromium groups",
             "name_expression": "'scaled Therā CI retains all fifty-two earlier jobs and adds exactly three bounded Chromium groups'",
-            "line": 358,
+            "line": 370,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6063,7 +7579,7 @@
           {
             "name": "scaled Therā groups require five sealed independent source inputs and all focused, browser and package evidence",
             "name_expression": "'scaled Therā groups require five sealed independent source inputs and all focused, browser and package evidence'",
-            "line": 388,
+            "line": 400,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6072,7 +7588,7 @@
           {
             "name": "paired Therā gates add two bounded source-pinned groups while retaining historical fixtures and named evidence gates",
             "name_expression": "'paired Therā gates add two bounded source-pinned groups while retaining historical fixtures and named evidence gates'",
-            "line": 434,
+            "line": 446,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6081,7 +7597,7 @@
           {
             "name": "isolated mixed-load reader source imports include only the shared integrity helper as a read-only input",
             "name_expression": "'isolated mixed-load reader source imports include only the shared integrity helper as a read-only input'",
-            "line": 493,
+            "line": 505,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6090,7 +7606,7 @@
           {
             "name": "scaled preservation jobs fetch only their exact historical baseline before source checks",
             "name_expression": "'scaled preservation jobs fetch only their exact historical baseline before source checks'",
-            "line": 504,
+            "line": 516,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6099,7 +7615,7 @@
           {
             "name": "Therā 141–180 adds exactly two bounded source and reader groups while preserving all 57 prior jobs",
             "name_expression": "'Therā 141–180 adds exactly two bounded source and reader groups while preserving all 57 prior jobs'",
-            "line": 514,
+            "line": 526,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6108,7 +7624,7 @@
           {
             "name": "Therā 141–180 CI consumes four independently sealed chapters with explicit held scopes and current canonical identity",
             "name_expression": "'Therā 141–180 CI consumes four independently sealed chapters with explicit held scopes and current canonical identity'",
-            "line": 578,
+            "line": 590,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6117,7 +7633,7 @@
           {
             "name": "Therā 181–220 adds two receipt-bound groups while preserving all 59 jobs and 68 source-reader steps",
             "name_expression": "'Therā 181–220 adds two receipt-bound groups while preserving all 59 jobs and 68 source-reader steps'",
-            "line": 611,
+            "line": 623,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6126,7 +7642,7 @@
           {
             "name": "Therā 181–220 CI requires four independent chapter seals and preserves all 206 preceding choices and canonical data",
             "name_expression": "'Therā 181–220 CI requires four independent chapter seals and preserves all 206 preceding choices and canonical data'",
-            "line": 682,
+            "line": 694,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6135,7 +7651,7 @@
           {
             "name": "only the two new source groups receive a bounded thirty-minute budget; previous group budgets stay unchanged",
             "name_expression": "'only the two new source groups receive a bounded thirty-minute budget; previous group budgets stay unchanged'",
-            "line": 715,
+            "line": 727,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6144,7 +7660,7 @@
           {
             "name": "Therā 241–250 adds exactly one twenty-minute group and preserves the entire a9755d2 workflow projection",
             "name_expression": "'Therā 241–250 adds exactly one twenty-minute group and preserves the entire a9755d2 workflow projection'",
-            "line": 730,
+            "line": 742,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6153,7 +7669,7 @@
           {
             "name": "Therā 241–250 CI requires portable independent normalization and source-enabled core/client refusals before three full reader modes",
             "name_expression": "'Therā 241–250 CI requires portable independent normalization and source-enabled core/client refusals before three full reader modes'",
-            "line": 782,
+            "line": 794,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6162,7 +7678,7 @@
           {
             "name": "Therā 241–250 CI binds the reviewed ten-poem normalization, separate pure profiles/links and unchanged canon",
             "name_expression": "'Therā 241–250 CI binds the reviewed ten-poem normalization, separate pure profiles/links and unchanged canon'",
-            "line": 813,
+            "line": 825,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6171,7 +7687,7 @@
           {
             "name": "Therā 221–230 adds one twenty-minute group while restoring the exact 9ceed785 workflow under historical projection",
             "name_expression": "'Therā 221–230 adds one twenty-minute group while restoring the exact 9ceed785 workflow under historical projection'",
-            "line": 840,
+            "line": 852,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6180,7 +7696,7 @@
           {
             "name": "Therā 221–230 CI binds independent replay and all six new and legacy source tests before full browser acceptance",
             "name_expression": "'Therā 221–230 CI binds independent replay and all six new and legacy source tests before full browser acceptance'",
-            "line": 888,
+            "line": 900,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6189,7 +7705,7 @@
           {
             "name": "Therā 221–230 CI consumes the independent ten-poem seals with note-only226 pairs and separate two-paragraph230 apparatus",
             "name_expression": "'Therā 221–230 CI consumes the independent ten-poem seals with note-only226 pairs and separate two-paragraph230 apparatus'",
-            "line": 918,
+            "line": 930,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6198,7 +7714,7 @@
           {
             "name": "remaining Therā CI adds two twenty-minute lanes while restoring every byte of the cdbefd266 workflow",
             "name_expression": "'remaining Therā CI adds two twenty-minute lanes while restoring every byte of the cdbefd266 workflow'",
-            "line": 961,
+            "line": 973,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6207,7 +7723,7 @@
           {
             "name": "remaining Therā CI runs each separate nine-source replay and wrapper pair before its selected browser triplet",
             "name_expression": "'remaining Therā CI runs each separate nine-source replay and wrapper pair before its selected browser triplet'",
-            "line": 992,
+            "line": 1004,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6216,7 +7732,7 @@
           {
             "name": "remaining curation binds two independently approved nine-poem packets without inventing a combined source derivation",
             "name_expression": "'remaining curation binds two independently approved nine-poem packets without inventing a combined source derivation'",
-            "line": 1017,
+            "line": 1029,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6225,7 +7741,7 @@
           {
             "name": "held234 CI adds one finite lane and restores the exact immutable284 workflow",
             "name_expression": "'held234 CI adds one finite lane and restores the exact immutable284 workflow'",
-            "line": 1042,
+            "line": 1054,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6234,7 +7750,7 @@
           {
             "name": "held234 lane executes independent one-source replay, exact wrappers and three genuine browser modes",
             "name_expression": "'held234 lane executes independent one-source replay, exact wrappers and three genuine browser modes'",
-            "line": 1069,
+            "line": 1081,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6243,7 +7759,7 @@
           {
             "name": "held234 curation admits exactly one separately sealed source while frozen remaining284 stays historical",
             "name_expression": "'held234 curation admits exactly one separately sealed source while frozen remaining284 stays historical'",
-            "line": 1086,
+            "line": 1098,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -6424,7 +7940,7 @@
   "evidence": [
     {
       "path": "docs/evidence/qa/english371-378/CASE_SOURCE_AUDIT.json",
-      "sha256": "cb664ce076c5f5022b6b8f0f7e9b3a395d5cf41cc102d5d3bba67e54ed69ebfd"
+      "sha256": "f9e834f8284efc893a4bfb1262f7026faba8f091d3fdf505e6032f12cdf36f9d"
     }
   ],
   "partition_suites": [

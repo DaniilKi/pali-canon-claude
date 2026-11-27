@@ -1,3 +1,5 @@
+import {after} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
 import {projectPublisher333Workflow} from './helpers/publisher333-ci-baseline.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
@@ -8,7 +10,9 @@ import {PUBLISHER317_ORIGINAL_WORKFLOW_SHA,PUBLISHER317_SOURCE_PATHS,PUBLISHER31
 import {projectPublisher325Workflow} from './helpers/publisher325-ci-baseline.mjs';
 
 const read=name=>readFileSync(new URL('../'+name,import.meta.url),'utf8');
-const current=projectPublisher325Workflow(projectPublisher333Workflow(read('.github/workflows/check.yml')));
+const historical=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+after(()=>historical.close());
+const current=projectPublisher325Workflow(projectPublisher333Workflow(historical.workflow.raw));
 const sha=text=>createHash('sha256').update(text).digest('hex');
 const stagesOnly=projectCheckStageWorkflowOnly(current);
 const reject=changed=>assert.throws(()=>projectCheckStageWorkflow(changed));

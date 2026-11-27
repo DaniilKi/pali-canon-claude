@@ -1,10 +1,125 @@
-import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
-import {canonBeforeFour} from './helpers/canon-before-four.mjs';
+/** Current375 app/API stays actual R; historical baseline inputs are explicit owned H. */
+import {after as closeThera221HistoricalInputs} from 'node:test';
+import {lstatSync as thera221InputStat} from 'node:fs';
+import {resolve as thera221Resolve,isAbsolute as thera221IsAbsolute} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {assertCurrent375SourceClosure,intake375Authority,requireProfiles375,requireMetadata375} from './helpers/intake375-metadata.mjs';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+const actualThera221Root=new URL('../',import.meta.url);
+function readThera221RegularBytes(root,path){
+ assert.equal(typeof path,'string');assert.ok(path&&!path.startsWith('/')&&!path.includes('\\')&&path.split('/').every(part=>part&&part!=='.'&&part!=='..'));
+ let target=root;const parts=path.split('/');for(let i=0;i<parts.length;i++){target=new URL(parts[i]+(i===parts.length-1?'':'/'),target);const stat=thera221InputStat(target);assert.equal(stat.isSymbolicLink(),false,'Declared221 input has no alias component');assert.equal(i===parts.length-1?stat.isFile():stat.isDirectory(),true);}
+ return readActualFileSync(target);
+}
+function thera221ReadMode(raw,options){assert.ok(options.length===0||options.length===1&&options[0]==='utf8','Existing explicit Buffer or utf8 mode only');return options.length?raw.toString('utf8'):raw;}
+assertCurrent375SourceClosure(actualThera221Root);
+requireProfiles375(APADANA_PROFILES,actualThera221Root);
+requireMetadata375(APADANA_PROFILES,JSON.parse(readThera221RegularBytes(actualThera221Root,'server/data/apadana.json')),actualThera221Root);
+const thera221Source=intake375Authority(actualThera221Root),thera221Manifest=thera221Source.documents['H_HISTORY_FIXTURE_INPUTS.json'];
+const thera221HRows=Object.freeze({...thera221Manifest.source_files,...thera221Manifest.runtime_extension});
+const ownedThera221H=prepareHistoricalHRuntimeInputs(actualThera221Root),thera221HRoot=pathToFileURL(ownedThera221H.root+'/');
+let thera221HistoricalModules;
+try{
+ thera221HistoricalModules=await Promise.all(['boundary333-336-source-input.mjs','four-history-data.mjs','canon-before-four.mjs','source-note-baseline.mjs'].map(name=>import(new URL('tests/helpers/'+name,thera221HRoot).href)));
+}catch(error){try{ownedThera221H.close();}catch(cleanup){throw new AggregateError([error,cleanup],'H221 helper import and cleanup both failed');}throw error;}
+closeThera221HistoricalInputs(()=>ownedThera221H.close());
+const [{frozen440FileReader},{historical440DataReader},{canonBeforeFour},{sourceNoteBaselineProjection}]=thera221HistoricalModules;
+function readThera221HBytes(path){const row=thera221HRows[path];assert.ok(row,'Explicit H221 input row');const raw=readThera221RegularBytes(thera221HRoot,path);assert.equal(raw.length,row.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),row.sha256,'Exact owned H221 input');return raw;}
+const thera221MetadataWitnesses=Object.freeze({
+  "docs/evidence/apadana/THERA_221_230_GOLDENS.json": {
+    "path": "docs/evidence/apadana/THERA_221_230_GOLDENS.json",
+    "bytes": 282596,
+    "sha256": "c9c5f3f99e0aac62884a222ccaa89d13f07523da10e5cd044e8e40391cf76600",
+    "git_blob": "e7045dd9c6932d07a1fadede3a77f986087befea",
+    "mode": "100644"
+  },
+  "docs/evidence/apadana/THERA_221_230_NORMALIZATION_REVIEW.json": {
+    "path": "docs/evidence/apadana/THERA_221_230_NORMALIZATION_REVIEW.json",
+    "bytes": 28650,
+    "sha256": "92bae7dd7df6e06fef8055772d46dfebfb835ea4007bc5055ca4b67e9eab940e",
+    "git_blob": "31fc5084fa43d3d1f0c958ad7cce3e88069e2c11",
+    "mode": "100644"
+  },
+  "docs/evidence/apadana/THERA_221_230_RIGHTS.json": {
+    "path": "docs/evidence/apadana/THERA_221_230_RIGHTS.json",
+    "bytes": 8120,
+    "sha256": "aa9eb535a9f2495910bfa3145efd03dc4fceadc7f348293b853fe4a8250afc5b",
+    "git_blob": "1131be6fbc8161441e825aa43f60db75fce9ecfb",
+    "mode": "100644"
+  },
+  "docs/evidence/apadana/THERA_221_230_INDEPENDENT_SOURCE_APPROVAL.json": {
+    "path": "docs/evidence/apadana/THERA_221_230_INDEPENDENT_SOURCE_APPROVAL.json",
+    "bytes": 78590,
+    "sha256": "8957644d3c28c367d6e46b014c2679a00b59ec78c1e2d8f5c0133a20d11b9ac0",
+    "git_blob": "6046f17827552fc560204ff71254f2b498325e67",
+    "mode": "100644"
+  },
+  "docs/evidence/apadana/THERA_221_230_BASELINE_FREEZE.json": {
+    "path": "docs/evidence/apadana/THERA_221_230_BASELINE_FREEZE.json",
+    "bytes": 2318834,
+    "sha256": "2ebfb8bb16a72589b74f11ac8adde8bb8cfdf68caa7e817d27a2bc2b269f849a",
+    "git_blob": "ffdf17e5ac335a1188cedf6462452adfe4da1fb8",
+    "mode": "100644"
+  },
+  "docs/evidence/apadana/THERA_221_230_SOURCE_APPROVAL.json": {
+    "path": "docs/evidence/apadana/THERA_221_230_SOURCE_APPROVAL.json",
+    "bytes": 27806,
+    "sha256": "1bdfc072457986e81b5edeaa3e235a0bd9dfa37b2b1085e367315eecfe19f9e2",
+    "git_blob": "6867d0bb1aeb551f629349758ec5b88aec165618",
+    "mode": "100644"
+  },
+  "docs/evidence/apadana/THERA_221_230_INDEPENDENT_NORMALIZATION.json": {
+    "path": "docs/evidence/apadana/THERA_221_230_INDEPENDENT_NORMALIZATION.json",
+    "bytes": 35973,
+    "sha256": "bdf28fb52df084b8b31afdc358b5cb83a23a7f9c7810c8f94d86b0707ba59082",
+    "git_blob": "ffa55901c3ae5b648381ab1a7f6cdbf027b5df06",
+    "mode": "100644"
+  }
+});
+function readThera221MetadataBytes(path,expected){
+ assert.equal(typeof expected,'string');assert.match(expected,/^[a-f0-9]{64}$/,'Original221 metadata descriptor SHA required');
+ let raw;
+ if(thera221HRows[path])raw=readThera221HBytes(path);
+ else{
+  const row=thera221MetadataWitnesses[path];assert.ok(row,'Only seven independently authenticated missing H221 metadata witnesses');
+  assert.equal(row.path,path);assert.equal(row.mode,'100644');
+  raw=readThera221RegularBytes(actualThera221Root,path);
+  assert.equal(raw.length,row.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),row.sha256,'Exact actual-R immutable H221 metadata witness');
+  assert.equal(createHash('sha1').update(Buffer.concat([Buffer.from('blob '+raw.length+'\0'),raw])).digest('hex'),row.git_blob,'Original GitH metadata identity');
+  const parsed=JSON.parse(raw);assert.ok(parsed&&typeof parsed==='object'&&!Array.isArray(parsed),'Exact221 object metadata witness, never application/runtime input');
+ }
+ assert.equal(createHash('sha256').update(raw).digest('hex'),expected,'Original221 descriptor verified before metadata bytes return');
+ return raw;
+}
+const thera221ApprovalPath='docs/evidence/apadana/THERA_221_230_APPROVAL.json';
+const thera221PinnedApproval=JSON.parse(readThera221MetadataBytes(thera221ApprovalPath,thera221HRows[thera221ApprovalPath].sha256));
+const thera221MetadataPaths=new Set([thera221ApprovalPath]);
+const thera221MetadataPins=new Map([[thera221ApprovalPath,thera221HRows[thera221ApprovalPath].sha256]]);
+for(const descriptor of [...thera221PinnedApproval.goldens,...thera221PinnedApproval.source_reviews,...thera221PinnedApproval.rights,...['independent_source_approval','baseline_freeze','source_approval','previous_intake','independent_normalization','expected_profiles','expected_links'].map(key=>thera221PinnedApproval[key])]){
+ assert.equal(typeof descriptor.file,'string');const path='docs/evidence/apadana/'+descriptor.file,raw=readThera221MetadataBytes(path,descriptor.sha256);assert.equal(createHash('sha256').update(raw).digest('hex'),descriptor.sha256,'Original221 descriptor seal');thera221MetadataPaths.add(path);thera221MetadataPins.set(path,descriptor.sha256);
+}
+const thera221PinnedBaseline=JSON.parse(readThera221MetadataBytes('docs/evidence/apadana/'+thera221PinnedApproval.baseline_freeze.file,thera221PinnedApproval.baseline_freeze.sha256));
+const thera221HistoricalPaths=new Map();
+for(const entries of [thera221PinnedBaseline.canonical_and_source_data,thera221PinnedBaseline.privacy_storage_files,thera221PinnedBaseline.helper_builder_auditor_files,thera221PinnedBaseline.historical_evidence_files])for(const[path,expected]of Object.entries(entries)){
+ if(path==='server/data/apadana.json'||path==='tests/helpers/apadana-intake-expectations.mjs')continue;
+ if(thera221HistoricalPaths.has(path))assert.equal(thera221HistoricalPaths.get(path),expected,'Repeated221 baseline seal agrees');thera221HistoricalPaths.set(path,expected);
+}
+function readDeclaredThera221Historical(path,...options){
+ assert.equal(typeof path,'string');assert.ok(thera221MetadataPaths.has(path)||thera221HistoricalPaths.has(path),'Only explicit221 metadata/baseline paths enter old adapters');
+ let raw;if(thera221MetadataPaths.has(path))raw=readThera221MetadataBytes(path,thera221MetadataPins.get(path));else if(thera221HRows[path])raw=readThera221HBytes(path);else{assert.ok(thera221HistoricalPaths.has(path));raw=readThera221RegularBytes(actualThera221Root,path);assert.equal(createHash('sha256').update(raw).digest('hex'),thera221HistoricalPaths.get(path),'Exact original-baseline witness at actual R');}
+ return thera221ReadMode(raw,options);
+}
+const readThera221Historical=frozen440FileReader(historical440DataReader(readDeclaredThera221Historical));
+function readFileSync(path,...options){
+ assert.equal(typeof path,'string');
+ if(path==='server/data/apadana.json')return thera221ReadMode(readThera221RegularBytes(actualThera221Root,path),options);
+ if(thera221IsAbsolute(path)){assert.ok(externalThera221Paths.has(path),'Only exact declared publisher originals/rights');const stat=thera221InputStat(path);assert.ok(stat.isFile()&&!stat.isSymbolicLink());return thera221ReadMode(readActualFileSync(path),options);}
+ return readThera221Historical(path,...options);
+}
 /** Exact source-scope curation, separate from production profile derivation. */
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync as readActualFileSync} from 'node:fs';
-const readFileSync=frozen440FileReader(readActualFileSync);
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import * as canon from '../src/canon.mjs';
@@ -17,7 +132,6 @@ import { fetchPublic } from '../src/http.mjs';
 import { CURRENT_APADANA_IDS } from './helpers/apadana-intake-expectations.mjs';
 import { readPassage } from '../src/chatgpt-widget.mjs';
 import { validateApadanaChoice, validateEnglishPage } from '../web/translation-policy.mjs';
-import {sourceNoteBaselineProjection} from './helpers/source-note-baseline.mjs';
 
 const approval = JSON.parse(readFileSync('docs/evidence/apadana/THERA_221_230_APPROVAL.json', 'utf8'));
 const sealed = descriptor => {
@@ -42,7 +156,12 @@ const golden = uid => {
   assert.equal(rows.length, 1, `One independently sealed source record for ${uid}`);
   return rows[0];
 };
-const checkout = process.env.APADANA_SOURCE_CHECKOUT;
+const originalThera221Checkout=process.env.APADANA_SOURCE_CHECKOUT;
+const checkout=originalThera221Checkout?thera221Resolve(fileURLToPath(actualThera221Root),originalThera221Checkout):originalThera221Checkout;
+const externalThera221Paths=new Set(checkout?[
+ ...approved.map(uid=>thera221Resolve(checkout,golden(uid).path)),
+ ...inputs.flatMap(input=>[...input.rights,input.publisher_routing].map(row=>thera221Resolve(checkout,row.path))),
+]:[]);
 const source = p => readFileSync(join(checkout, golden(p.id).path), 'utf8');
 const tid = p => canon.translationId(p);
 const blob = raw => createHash('sha1').update('blob ' + raw.length + '\0').update(raw).digest('hex');

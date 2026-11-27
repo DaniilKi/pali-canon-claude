@@ -18,7 +18,7 @@ export const INTAKE375_PINS=Object.freeze({"APPROVAL.json":"3112dff5eb6a26dcd357
 export const CURRENT_WIDGET_VERSION='v47';
 export const CURRENT_WIDGET_URI='ui://pali-canon/reader-v47.html';
 export const CURRENT375_SOURCE_FILE=INTAKE375_DIRECTORY+'CURRENT_SOURCE_INPUTS.json';
-export const CURRENT375_SOURCE_SHA='2b31ac0b44dd660cb084eadf3fe850407388343169dd92dd87ea366238158bf5';
+export const CURRENT375_SOURCE_SHA='519d36252f4ad94296ccfb5f718b867c82668f3bdd430a0d5db7c7a3ec37bd9f';
 export const sha=value=>createHash('sha256').update(value).digest('hex');
 export const objectSha=value=>sha(JSON.stringify(value));
 const HEX64=/^[a-f0-9]{64}$/,HEX40=/^[a-f0-9]{40}$/;

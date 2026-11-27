@@ -2,13 +2,14 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
+import {performance} from 'node:perf_hooks';
 import {lstatSync,readFileSync,readdirSync,mkdtempSync,mkdirSync,realpathSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {dirname,join,resolve,relative as relativePath} from 'node:path';
 import {URL,fileURLToPath} from 'node:url';
 import {intake375Authority,assertCurrent375SourceClosure,INTAKE375_BASE} from './intake375-metadata.mjs';
 const MATERIALIZER='tests/materialize_h_history.py';
-const MATERIALIZER_SHA='9210fd54016b18a65253a6a87eb985a24d8d445ae2a7dc4b655ec31581a40eed';
+const MATERIALIZER_SHA='244c73d63bbfd06fb4044d1621a50953ef25416c0a3cee1072402cff19dd5e48';
 const H_INDEX='docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json';
 const H_WORKFLOW='.github/workflows/check.yml';
 const PREPARE_TIMEOUT_MS=20000;
@@ -42,7 +43,13 @@ function prepare(currentRoot,kind){
  const close=()=>{if(!active)return;const stat=lstatSync(owner);assert.ok(stat.isDirectory()&&!stat.isSymbolicLink());assert.equal(realpathSync(owner),owner);rmSync(owner,{recursive:true});active=false;};
  try{
   const argv=['-B',join(current,MATERIALIZER),kind,'--source-root',current,'--destination',destination];
+  const prepStarted=performance.now();
   const result=spawnSync('python3',argv,{cwd:current,encoding:'utf8',timeout:PREPARE_TIMEOUT_MS,killSignal:'SIGKILL',maxBuffer:1024*1024});
+  if(result.error!==undefined||result.signal!==null||result.status!==0){
+   // Captured UTF8 representation only, not a claim about unobserved/truncated emitted bytes.
+   const summary={schema:'owned-H-preparation-result-v1',kind,elapsed_ms:Math.round((performance.now()-prepStarted)*1000)/1000,pid:Number.isSafeInteger(result.pid)&&result.pid>0?result.pid:null,error_code:typeof result.error?.code==='string'?result.error.code.slice(0,64):null,status:Number.isSafeInteger(result.status)?result.status:null,signal:typeof result.signal==='string'?result.signal.slice(0,32):null,captured_stdout_present:typeof result.stdout==='string',captured_stdout_utf8_bytes:Buffer.byteLength(result.stdout??'','utf8'),captured_stderr_present:typeof result.stderr==='string',captured_stderr_utf8_bytes:Buffer.byteLength(result.stderr??'','utf8')};
+   process.stderr.write('H_PREP_RESULT:'+JSON.stringify(summary)+'\n');
+  }
   assert.equal(result.error,undefined,String(result.error??'')+'\n'+(result.stderr??''));assert.equal(result.signal,null,result.stderr);assert.equal(result.status,0,result.stderr);
   const receipt=JSON.parse(result.stdout);assert.deepEqual(Object.keys(receipt).sort(),['schema','kind','commit','root','files','index','workflow','current375_checked'].sort());assert.equal(receipt.schema,'owned-H-history-fixture-v1');assert.equal(receipt.kind,kind);assert.equal(receipt.commit,INTAKE375_BASE);assert.equal(receipt.root,destination);assert.equal(receipt.current375_checked,true);assert.deepEqual(receipt.index,manifest.index);assert.deepEqual(receipt.workflow,manifest.workflow);
   assert.ok(!Object.keys(dependencies).some(name=>Object.hasOwn(expected,name)));const selected=[...Object.keys(expected),...Object.keys(dependencies)].sort();assert.deepEqual(receipt.files,selected);assert.deepEqual(files(destination),selected,'Exactly the declared H domain, no extra source or runtime files');

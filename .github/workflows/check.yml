@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/english371-378/BASELINE_375_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: e38df2fc2426215199c0df62f599383247f1e5dac17b6976989c6a74610a1614
+  CI_TEST_BASELINE_SHA: 091605e84ddcededebfd64a7751d668b77035c1f1ad867db7f2c9bd2c00ed247
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -89,7 +89,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch exact accepted H for Apadāna owned historical source fixtures
-        if: matrix.group == 'apadana'
+        if: matrix.group == 'apadana' || matrix.group == 'apadanatherapair101'
         timeout-minutes: 2
         shell: bash
         run: |

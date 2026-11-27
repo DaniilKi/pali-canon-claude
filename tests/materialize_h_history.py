@@ -12,11 +12,45 @@ import re
 import stat
 import subprocess
 import sys
+import time
+
+# Closed CLI-only preparation diagnostics. Imported helper behavior is unchanged.
+# Stderr carries metadata only; stdout remains the original success receipt.
+_PREP_PHASES=frozenset(('bootstrap', 'qa-imports-ready', 'materialize-start', 'actual375-start', 'actual375-complete', 'source-authority-start', 'source-authority-complete', 'git-mode-start', 'git-mode-returned', 'git-mode-verified', 'git-blobs-start', 'git-blobs-returned', 'git-objects-verified', 'dependency-start', 'dependency-complete', 'write-start', 'write-complete', 'final-descriptors-start', 'final-descriptors-complete', 'terminal-receipt-ready'))
+_PREP_DIAGNOSTICS=(__name__=='__main__')
+_PREP_STARTED=time.monotonic()
+_PREP_SEQUENCE=0
+_PREP_BYTES=0
+
+
+def _prep_phase(phase,count=None):
+    global _PREP_SEQUENCE,_PREP_BYTES
+    if not _PREP_DIAGNOSTICS:return
+    if phase not in _PREP_PHASES or _PREP_SEQUENCE>=24:
+        raise RuntimeError('Closed H preparation diagnostic bound exceeded')
+    if count is not None and (type(count) is not int or not 0<=count<=1100):
+        raise RuntimeError('Closed H preparation diagnostic count required')
+    _PREP_SEQUENCE+=1
+    record={'schema':'owned-H-preparation-phase-v1','sequence':_PREP_SEQUENCE,
+            'phase':phase,'elapsed_ms':round((time.monotonic()-_PREP_STARTED)*1000,3),
+            'pid':os.getpid()}
+    if count is not None:record['count']=count
+    line='H_PREP_PHASE:'+json.dumps(record,separators=(',',':'))+'\n'
+    size=len(line.encode('utf-8'))
+    if size>512 or _PREP_BYTES+size>8192:
+        raise RuntimeError('Closed H preparation diagnostic byte bound exceeded')
+    _PREP_BYTES+=size
+    sys.stderr.write(line);sys.stderr.flush()
+
+
+_prep_phase('bootstrap')
 
 sys.path.insert(0,str(Path(__file__).absolute().parents[1]/'scripts'))
 from web_reader_intake375 import (DIRECTORY,H_COMMIT,_physical_root,_require,
     _relative,_regular,_row,_sha,_source,_capture375_current)
 from owned_intake375_proofs import _empty,_exclusive
+
+_prep_phase('qa-imports-ready')
 
 
 def _git_objects(root,rows):
@@ -36,9 +70,11 @@ def _git_objects(root,rows):
     environment={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_ALLOW_PROTOCOL':'',
                  'GIT_TERMINAL_PROMPT':'0','GIT_CONFIG_NOSYSTEM':'1'}
     common=['git','--no-optional-locks','-c','core.fsmonitor=false','-C',str(root)]
+    _prep_phase('git-mode-start',len(rows))
     mode_process=subprocess.run(common+['ls-tree','-rz','--full-tree',H_COMMIT],
                                 env=environment,stdout=subprocess.PIPE,stderr=subprocess.PIPE,
                                 timeout=20,check=False)
+    _prep_phase('git-mode-returned',len(rows))
     _require(mode_process.returncode==0 and len(mode_process.stdout)<=1024*1024,
              'Fixed cached H mode query failed; no fallback')
     modes={}
@@ -53,9 +89,12 @@ def _git_objects(root,rows):
     _require(set(modes)==set(names),'Missing cached H tree member')
     for name,row in rows.items():
         _require(modes[name]==(row['mode'],row['git_blob']),'H mode/blob mismatch: '+name)
+    _prep_phase('git-mode-verified',len(rows))
     requested=''.join(H_COMMIT+':'+name+'\n' for name in names).encode('utf-8')
+    _prep_phase('git-blobs-start',len(rows))
     blobs=subprocess.run(common+['cat-file','--batch'],input=requested,env=environment,
                          stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=30,check=False)
+    _prep_phase('git-blobs-returned',len(rows))
     _require(blobs.returncode==0,'Fixed cached H blob batch failed; no fallback')
     payload=blobs.stdout
     _require(len(payload)<=sum(row['bytes'] for row in rows.values())+100*len(rows),
@@ -75,18 +114,24 @@ def _git_objects(root,rows):
                  'Unverified H object bytes: '+name)
         output[name]=raw
     _require(offset==len(payload),'Unexpected trailing H batch bytes')
+    _prep_phase('git-objects-verified',len(rows))
     return output
 
 
 def _materialize(source_root,destination,kind):
+    _prep_phase('materialize-start')
     _require(type(source_root) in (str,type(Path('.'))) and type(destination) in (str,type(Path('.'))),
              'Exact physical source/destination roots required before IO')
     source_root=_physical_root(source_root);destination=_empty(destination)
     _require(source_root!=destination and not destination.is_relative_to(source_root) and
              not source_root.is_relative_to(destination),'Separate owned H fixture required')
     if kind=='runtime':
+        _prep_phase('actual375-start')
         _capture375_current(source_root)  # actual CURRENT375 positive before H
+        _prep_phase('actual375-complete')
+    _prep_phase('source-authority-start')
     _,documents,_=_source(source_root)
+    _prep_phase('source-authority-complete')
     manifest=documents['H_HISTORY_FIXTURE_INPUTS.json']
     _require(manifest.get('schema')=='H-history-fixture-inputs-v1' and
              manifest.get('commit')==H_COMMIT and manifest.get('status')=='approved',
@@ -114,6 +159,7 @@ def _materialize(source_root,destination,kind):
         _require(all(lock[k]==rows[lock['path']][k] for k in ('bytes','sha256','git_blob','mode')),
                  'Conflicting H dependency lock descriptor')
     raw=_git_objects(source_root,object_rows)
+    _prep_phase('dependency-start')
     actual_lock=_regular(source_root,lock['path'])
     _require(actual_lock==raw[lock['path']], 'Actual dependency lock changed from H')
     locked=json.loads(actual_lock)['packages']['node_modules/axe-core']
@@ -122,9 +168,11 @@ def _materialize(source_root,destination,kind):
     dependency_raw=_regular(source_root,'node_modules/axe-core/axe.min.js')
     _require(len(dependency_raw)==dependency['bytes'] and _sha(dependency_raw)==dependency['sha256'],
              'Only exact individually reviewed installed dependency bytes allowed')
+    _prep_phase('dependency-complete')
     # Exclusive writes and source hash are checked again after all cached Git
     # objects are available; no alias to actual375 bytes or generated oracle.
     written=[]
+    _prep_phase('write-start',len(rows)+1)
     try:
         for name in sorted(rows):
             _exclusive(destination,name,raw[name]);os.chmod(destination/name,int(rows[name]['mode'],8)&0o777)
@@ -140,10 +188,13 @@ def _materialize(source_root,destination,kind):
             path=destination/name
             if path.is_file() and not path.is_symlink():path.unlink()
         raise
+    _prep_phase('write-complete',len(written))
+    _prep_phase('final-descriptors-start')
     index=manifest['index'];workflow=manifest['workflow']
     for item in (index,workflow):
         _require(item['path'] in rows and all(item[k]==rows[item['path']][k] for k in ('bytes','sha256')),
                  'H index/workflow descriptor differs from copied object')
+    _prep_phase('final-descriptors-complete')
     return {'schema':'owned-H-history-fixture-v1','kind':kind,'commit':H_COMMIT,
             'root':str(destination),'files':sorted(written),'current375_checked':True,
             'index':index,'workflow':workflow}
@@ -165,6 +216,7 @@ def main():
     args=parser.parse_args()
     function=materialize_h_source_fixture if args.kind=='source' else materialize_h_runtime_fixture
     receipt=function(args.source_root,args.destination)
+    _prep_phase('terminal-receipt-ready',len(receipt['files']))
     sys.stdout.write(json.dumps(receipt,ensure_ascii=False,separators=(',',':'))+'\n')
 
 

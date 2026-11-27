@@ -1,11 +1,19 @@
+// Explicit H historical helper inputs after a fresh actual375 source/data positive.
+// Test registrations and all unprojected canonical/manifest reads stay in actual R.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import{readFileSync}from'node:fs';
 import{createHash}from'node:crypto';
 import{readBundled as readActualBundled}from'../src/bundled-data.mjs';
-import{c1BundledReader}from'./helpers/six-history-data.mjs';
+const {c1BundledReader}=await import(new URL('tests/helpers/six-history-data.mjs',HistoricalHBase).href);
 const readBundled=c1BundledReader(readActualBundled);
-import{projectHistorical440Data,historical440DataReader}from'./helpers/four-history-data.mjs';
+const {projectHistorical440Data,historical440DataReader}=await import(new URL('tests/helpers/four-history-data.mjs',HistoricalHBase).href);
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const pins={
  'server/data/canon.json.gz.part-0002':'24169740dd71b5ee86767ef72daea44759201987ffb72975afaca5d31b4c0832',

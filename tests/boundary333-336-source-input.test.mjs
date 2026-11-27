@@ -1,13 +1,36 @@
+// Explicit immutable H source inputs after the genuine CURRENT375 positive.
+// Registration remains in actual R; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync as readActualFileSync} from 'node:fs';
-import {acFileReader} from './helpers/intake343-source-input.mjs';
+import {readFileSync as readOwnedHPhysicalFile} from 'node:fs';
+const {acFileReader:ownedHAcFileReader}=await import(new URL('tests/helpers/intake343-source-input.mjs',HistoricalHBase).href);
 // Every unchanged historical assertion below consumes the explicit ac source frame.
 // New343 physical source bytes are asserted separately by intake343-source-input.test.mjs.
 const readFileSync=acFileReader(readActualFileSync);
 import {createHash} from 'node:crypto';
-import {boundarySourceInverses,boundarySourceProofBytes,decodeBoundarySourceInverses,projectFrozen440Source,frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
-import {d4FileReader} from './helpers/current339-source-inverse.mjs';
+const {boundarySourceInverses,boundarySourceProofBytes,decodeBoundarySourceInverses,projectFrozen440Source,frozen440FileReader:ownedHFrozen440FileReader}=await import(new URL('tests/helpers/boundary333-336-source-input.mjs',HistoricalHBase).href);
+const {d4FileReader:ownedHD4FileReader}=await import(new URL('tests/helpers/current339-source-inverse.mjs',HistoricalHBase).href);
+import {fileURLToPath as historicalInputFilePath} from 'node:url';
+import {relative as historicalInputRelative,sep as historicalInputSeparator} from 'node:path';
+// The declared boundary source-map is the whole and only rebased source domain.
+function historicalSourcePath(path){
+ if(!(path instanceof URL)||path.protocol!=='file:')return path;
+ const name=historicalInputRelative(historicalInputFilePath(new URL('../',import.meta.url)),historicalInputFilePath(path)).split(historicalInputSeparator).join('/');
+ return Object.hasOwn(boundarySourceInverses.files,name)?new URL(name,HistoricalHBase):path;
+}
+function readActualFileSync(path,...options){
+ const target=historicalSourcePath(path);
+ return readOwnedHPhysicalFile(typeof target==='string'&&Object.hasOwn(boundarySourceInverses.files,target)?new URL(target,HistoricalHBase):target,...options);
+}
+function acFileReader(reader){const owned=ownedHAcFileReader(reader);return(path,...options)=>owned(historicalSourcePath(path),...options);}
+function frozen440FileReader(reader){const owned=ownedHFrozen440FileReader(reader);return(path,...options)=>owned(historicalSourcePath(path),...options);}
+function d4FileReader(reader){const owned=ownedHD4FileReader(reader);return(path,...options)=>owned(historicalSourcePath(path),...options);}
 const sha=value=>createHash('sha256').update(value).digest('hex');
 test('separately sealed current boundary source delta restores full frozen440 bytes in string and Buffer reads',()=>{
  const reader=frozen440FileReader(readFileSync);

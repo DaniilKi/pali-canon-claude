@@ -1,11 +1,37 @@
-import {frozen440FileReader} from './boundary333-336-source-input.mjs';
-import {canonBeforeFour} from './canon-before-four.mjs';
+/** Current375 app/API inputs and explicit immutable historical read domains. */
+import {after as closeRemainingHistoricalInputs} from 'node:test';
+import {lstatSync as remainingInputStat} from 'node:fs';
+import {resolve as remainingResolve,isAbsolute as remainingIsAbsolute} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {assertCurrent375SourceClosure,intake375Authority,requireProfiles375,requireMetadata375} from './intake375-metadata.mjs';
+import {prepareHistoricalHRuntimeInputs} from './historical-h-inputs.mjs';
+const actualRemainingRoot=new URL('../../',import.meta.url);
+function readRemainingRegularBytes(root,path){
+ assert.equal(typeof path,'string');assert.ok(path&&!path.startsWith('/')&&!path.includes('\\')&&path.split('/').every(part=>part&&part!=='.'&&part!=='..'));
+ let target=root;const parts=path.split('/');for(let i=0;i<parts.length;i++){target=new URL(parts[i]+(i===parts.length-1?'':'/'),target);const stat=remainingInputStat(target);assert.equal(stat.isSymbolicLink(),false,'Declared remaining input has no alias component');assert.equal(i===parts.length-1?stat.isFile():stat.isDirectory(),true);}
+ return readActualFileSync(target);
+}
+function remainingReadMode(raw,options){assert.ok(options.length===0||options.length===1&&options[0]==='utf8','Existing explicit Buffer or utf8 mode only');return options.length?raw.toString('utf8'):raw;}
+// Current source/profile/complete AP375 positives precede ALL historical setup.
+assertCurrent375SourceClosure(actualRemainingRoot);
+requireProfiles375(APADANA_PROFILES,actualRemainingRoot);
+requireMetadata375(APADANA_PROFILES,JSON.parse(readRemainingRegularBytes(actualRemainingRoot,'server/data/apadana.json')),actualRemainingRoot);
+const remaining375Source=intake375Authority(actualRemainingRoot),remainingHManifest=remaining375Source.documents['H_HISTORY_FIXTURE_INPUTS.json'];
+const remainingHRows=Object.freeze({...remainingHManifest.source_files,...remainingHManifest.runtime_extension});
+assert.equal(remainingResolve(process.cwd()),remainingResolve(fileURLToPath(actualRemainingRoot)),'Unchanged sealed metadata readers have the fixed actual-R cwd');
+for(const path of ['tests/helpers/thera-remaining-evidence.mjs','tests/helpers/thera-held234-evidence.mjs']){
+ const row=remainingHRows[path];assert.ok(row,'Explicit pure H metadata helper identity');const raw=readRemainingRegularBytes(actualRemainingRoot,path);assert.equal(raw.length,row.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),row.sha256);
+}
+const ownedRemainingH=prepareHistoricalHRuntimeInputs(actualRemainingRoot),remainingHRoot=pathToFileURL(ownedRemainingH.root+'/');
+closeRemainingHistoricalInputs(()=>ownedRemainingH.close());
+const {frozen440FileReader}=await import(new URL('tests/helpers/boundary333-336-source-input.mjs',remainingHRoot).href);
+const {historical440DataReader}=await import(new URL('tests/helpers/four-history-data.mjs',remainingHRoot).href);
+const {canonBeforeFour}=await import(new URL('tests/helpers/canon-before-four.mjs',remainingHRoot).href);
+const {sourceNoteBaselineProjection}=await import(new URL('tests/helpers/source-note-baseline.mjs',remainingHRoot).href);
 /** Exact source-scope curation, separate from production profile derivation. */
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync as readActualFileSync} from 'node:fs';
-import {historical440DataReader} from './four-history-data.mjs';
-const readFileSync=frozen440FileReader(historical440DataReader(readActualFileSync));
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import * as canon from '../../src/canon.mjs';
@@ -18,14 +44,41 @@ import { fetchPublic } from '../../src/http.mjs';
 import { CURRENT_APADANA_IDS } from './apadana-intake-expectations.mjs';
 import { readPassage } from '../../src/chatgpt-widget.mjs';
 import { validateApadanaChoice, validateEnglishPage } from '../../web/translation-policy.mjs';
-import {sourceNoteBaselineProjection} from './source-note-baseline.mjs';
 
 import {remainingEvidence} from './thera-remaining-evidence.mjs';
 import {held234Evidence} from './thera-held234-evidence.mjs';
 
 export function registerRemainingSourceTests(batch){
 const {approval,group,combined,independent,baseline,inputs,reviews,rights,sourceApproval,previous,expectedProfiles,expectedLinks,independentlyNormalized,approved,golden,peerGolden}=remainingEvidence(batch);
-const checkout = process.env.APADANA_SOURCE_CHECKOUT;
+// These immutable metadata authorities remain actual-R sealed H witnesses.
+// Bare-cwd readers above are explicit and authenticated; no module-location assumption.
+const historicalRemainingPaths=new Map();
+for(const entries of [baseline.canonical_and_source_data,baseline.privacy_storage_files,baseline.helper_builder_auditor_files,baseline.historical_evidence_files])for(const[path,expected]of Object.entries(entries)){
+ if(path==='server/data/apadana.json'||path==='tests/helpers/apadana-intake-expectations.mjs')continue;
+ if(historicalRemainingPaths.has(path))assert.equal(historicalRemainingPaths.get(path),expected,'Repeated original source witness agrees');
+ historicalRemainingPaths.set(path,expected);
+}
+const originalCheckout=process.env.APADANA_SOURCE_CHECKOUT;
+const checkout=originalCheckout?remainingResolve(fileURLToPath(actualRemainingRoot),originalCheckout):originalCheckout;
+const externalRemainingPaths=new Set(checkout?[
+ ...approved.map(uid=>remainingResolve(checkout,golden(uid).path)),
+ ...inputs.flatMap(input=>[...input.rights,input.publisher_routing].map(row=>remainingResolve(checkout,row.path))),
+]:[]);
+function readDeclaredRemainingHistorical(path,...options){
+ assert.equal(typeof path,'string');assert.ok(historicalRemainingPaths.has(path),'Only explicit immutable remaining-intake baseline paths enter historical readers');
+ const row=remainingHRows[path];let raw;
+ if(row){raw=readRemainingRegularBytes(remainingHRoot,path);assert.equal(raw.length,row.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),row.sha256,'Exact owned H physical remaining input');}
+ else{raw=readRemainingRegularBytes(actualRemainingRoot,path);assert.equal(createHash('sha256').update(raw).digest('hex'),historicalRemainingPaths.get(path),'Exact unchanged original-baseline witness at actual R');}
+ return remainingReadMode(raw,options);
+}
+const readHistoricalRemaining=frozen440FileReader(historical440DataReader(readDeclaredRemainingHistorical));
+function readFileSync(path,...options){
+ assert.equal(typeof path,'string');
+ // The actual app catalogue NEVER enters any historical normalizer or projection.
+ if(path==='server/data/apadana.json')return remainingReadMode(readRemainingRegularBytes(actualRemainingRoot,path),options);
+ if(remainingIsAbsolute(path)){assert.ok(externalRemainingPaths.has(path),'Only exact declared publisher originals/rights files');const stat=remainingInputStat(path);assert.ok(stat.isFile()&&!stat.isSymbolicLink());return remainingReadMode(readActualFileSync(path),options);}
+ return readHistoricalRemaining(path,...options);
+}
 const source = p => readFileSync(join(checkout, golden(p.id).path), 'utf8');
 const tid = p => canon.translationId(p);
 const blob = raw => createHash('sha1').update('blob ' + raw.length + '\0').update(raw).digest('hex');

@@ -1,6 +1,20 @@
+import {after} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {join as hJoin,relative as hRelative} from 'node:path';
+import {fileURLToPath as hFileURLToPath} from 'node:url';
+const historicalH=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+after(()=>historicalH.close());
+const actualHSourceRoot=hFileURLToPath(new URL('../',import.meta.url));
+const HISTORY_SOURCE_PATHS=Object.freeze([".github/workflows/check.yml","tests/check-ci-stages.test.mjs","tests/publisher317-ci.test.mjs","tests/publisher325-ci.test.mjs","tests/thera312-319-client.test.mjs","tests/thera312-319-source.test.mjs"]);
+function readHistoricalHSource(file,...options){
+ const name=typeof file==='string'?file:hRelative(actualHSourceRoot,hFileURLToPath(file)).replaceAll('\\','/');
+ assert.ok(HISTORY_SOURCE_PATHS.includes(name),'Closed named H source input only: '+name);
+ return readActualFileSync(hJoin(historicalH.root,name),...options);
+}
+const readCurrentFileSync=readHistoricalHSource;
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync as readCurrentFileSync} from 'node:fs';
+import {readFileSync as readActualFileSync} from 'node:fs';
 import {d4FileReader} from './helpers/current339-source-inverse.mjs';
 const readFileSync=d4FileReader(readCurrentFileSync);
 import {createHash} from 'node:crypto';

@@ -1,3 +1,6 @@
+import {after} from 'node:test';
+import {join} from 'node:path';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
 import {projectPublisher333Workflow,projectPublisher333TestSource} from './helpers/publisher333-ci-baseline.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
@@ -7,7 +10,9 @@ import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';
 import {PUBLISHER317_STEP} from './helpers/publisher317-ci-baseline.mjs';
 import {PUBLISHER325_ORIGINAL_WORKFLOW_SHA,PUBLISHER325_SOURCE_PATHS,PUBLISHER325_SOURCE_BLOCK,PUBLISHER325_STEP_NAME,PUBLISHER325_STEP,PUBLISHER325_REPORT_LINE,projectPublisher325Workflow} from './helpers/publisher325-ci-baseline.mjs';
 
-const read=name=>projectPublisher333TestSource(name,readFileSync(new URL('../'+name,import.meta.url),'utf8'));
+const historical=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+after(()=>historical.close());
+const read=name=>projectPublisher333TestSource(name,readFileSync(join(historical.root,name),'utf8'));
 const current=projectPublisher333Workflow(read('.github/workflows/check.yml'));
 const sha=text=>createHash('sha256').update(text).digest('hex');
 const reject=changed=>assert.throws(()=>projectCheckStageWorkflow(changed));
