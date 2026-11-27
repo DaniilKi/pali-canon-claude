@@ -76,8 +76,8 @@ const SUMMARY=['tests_run','started_ids','stopped_ids','terminal_results','failu
 const EVENTS={phase:['phase'],discovery:['script','script_sha256','class_name','module_name','full_inventory','selected_ids','python_version','platform'],test_start:['test_id'],test_terminal:['test_id','outcome'],test_stop:['test_id'],summary:SUMMARY};
 const OUTCOMES=new Set(['success','failure','error','skip','expected_failure','unexpected_success','subtest_failure']);
 const CONFORMANCE_FILE='ci-python-partition-conformance.py';
-const CONFORMANCE_SHA='53b5d0f42e081ff4e1804ef7cf9c97e0ea5d9e01a03759776327f8806d49ee51';
-const CONFORMANCE_CASES=Object.freeze(["success","success-subtests","discovery-missing","discovery-extra","selected-missing","selected-duplicate","wrong-script","wrong-sha","wrong-class","wrong-module","wrong-pid","wrong-schema","wrong-sequence","unknown-event","missing-terminal","duplicate-terminal","wrong-terminal","invalid-outcome","missing-stop","early-summary","failure","subtest-failure","setup-error","cleanup-error","skip","expected-failure","unexpected-success","nonzero","signal","early-exit","malformed-json","unframed","truncated","stdout-overflow","stderr-overflow","child-timeout","peer-failure","parent-abort","spawn-error","cleanup-tool-failure"]);
+const CONFORMANCE_SHA='497a0a682c563c0152667be174ee6c9959e64a7ee6a3bd478b3ed258c27df4da';
+const CONFORMANCE_CASES=Object.freeze(["success","success-crlf","success-subtests","discovery-missing","discovery-extra","selected-missing","selected-duplicate","wrong-script","wrong-sha","wrong-class","wrong-module","wrong-pid","wrong-schema","wrong-sequence","unknown-event","missing-terminal","duplicate-terminal","wrong-terminal","invalid-outcome","missing-stop","early-summary","failure","subtest-failure","setup-error","cleanup-error","skip","expected-failure","unexpected-success","nonzero","signal","early-exit","malformed-json","unframed","truncated","stdout-overflow","stderr-overflow","child-timeout","peer-failure","parent-abort","spawn-error","cleanup-tool-failure"]);
 const hash=raw=>createHash('sha256').update(raw).digest('hex');
 const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const integer=value=>Number.isSafeInteger(value)&&value>=0;
@@ -252,7 +252,8 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
     pending+=text;
     let end;
     while((end=pending.indexOf('\n'))!==-1){
-     const line=pending.slice(0,end);pending=pending.slice(end+1);
+     const framedLine=pending.slice(0,end);pending=pending.slice(end+1);
+     const line=framedLine.endsWith('\r')?framedLine.slice(0,-1):framedLine;
      try{child.parser.take(line);}catch(error){child.protocolError=error.message;fail(error);return;}
     }
     if(pending.length>65536||(final&&pending)){child.protocolError='Truncated/oversized JSONL';fail(new Error(child.protocolError));}
