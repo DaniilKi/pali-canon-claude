@@ -17,6 +17,11 @@ export const APADANA_SIX_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + A
 /** Five reviewed pairs only; neither an ordinal range nor a personal-data migration. */
 export const APADANA_TEN_INDEX_REVISION = 'apadana-thera-next10-v1';
 export const APADANA_TEN_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_TEN_INDEX_REVISION;
+/** Reserved future intent only. Bind the same reviewed namespace in the Python helper.
+ * This invalid marker cannot authorize a repaired read while reservation remains.
+ */
+export const APADANA_FRUIT_INDEX_REVISION = 'apadana-thera389-390-v1';
+export const APADANA_FRUIT_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + '-' + APADANA_FRUIT_INDEX_REVISION;
 export const REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   'tha-ap107': APADANA_PAIR_LOCATOR_REVISION, 'tha-ap108': APADANA_PAIR_LOCATOR_REVISION,
   'tha-ap333': APADANA_FOUR_LOCATOR_REVISION, 'tha-ap334': APADANA_FOUR_LOCATOR_REVISION,
@@ -29,6 +34,7 @@ export const REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   'tha-ap423': APADANA_TEN_LOCATOR_REVISION, 'tha-ap424': APADANA_TEN_LOCATOR_REVISION,
   'tha-ap426': APADANA_TEN_LOCATOR_REVISION, 'tha-ap427': APADANA_TEN_LOCATOR_REVISION,
   'tha-ap428': APADANA_TEN_LOCATOR_REVISION, 'tha-ap429': APADANA_TEN_LOCATOR_REVISION,
+  'tha-ap389': APADANA_FRUIT_LOCATOR_REVISION, 'tha-ap390': APADANA_FRUIT_LOCATOR_REVISION,
 });
 export const requiredCanonicalRevision = id => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id) ? REPAIRED_CANONICAL_LOCATORS[id] : null;
 export const isRepairedCanonical = (id, revision) => requiredCanonicalRevision(id) !== null && revision === requiredCanonicalRevision(id);
@@ -38,6 +44,10 @@ export function canonicalReopenRoute(args, id) {
 }
 
 export function assertCanonicalLocator(id, revision, { expected, positional = false } = {}) {
+  if ((id === 'tha-ap389' || id === 'tha-ap390') && APADANA_FRUIT_INDEX_REVISION.startsWith('PENDING_')) {
+    const error = Error('This boundary proposal has no independently assigned locator namespace.');
+    error.code = 'READING_SOURCE_CHANGED'; throw error;
+  }
   if (requiredCanonicalRevision(id) && !isRepairedCanonical(id, revision)) {
     const error = Error('The reviewed citation mapping is unavailable or changed. Reopen the whole current text explicitly; no saved position or note was moved.');
     error.code = 'READING_SOURCE_CHANGED'; error.reopen = canonicalReopenRoute(null, id); throw error;

@@ -13400,6 +13400,8 @@ var APADANA_SIX_INDEX_REVISION = "apadana-thera340-341-343-344-346-347-v1";
 var APADANA_SIX_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_SIX_INDEX_REVISION;
 var APADANA_TEN_INDEX_REVISION = "apadana-thera-next10-v1";
 var APADANA_TEN_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_TEN_INDEX_REVISION;
+var APADANA_FRUIT_INDEX_REVISION = "apadana-thera389-390-v1";
+var APADANA_FRUIT_LOCATOR_REVISION = APADANA_PAIR_SOURCE_COMMIT + "-" + APADANA_FRUIT_INDEX_REVISION;
 var REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   "tha-ap107": APADANA_PAIR_LOCATOR_REVISION,
   "tha-ap108": APADANA_PAIR_LOCATOR_REVISION,
@@ -13422,7 +13424,9 @@ var REPAIRED_CANONICAL_LOCATORS = Object.freeze({
   "tha-ap426": APADANA_TEN_LOCATOR_REVISION,
   "tha-ap427": APADANA_TEN_LOCATOR_REVISION,
   "tha-ap428": APADANA_TEN_LOCATOR_REVISION,
-  "tha-ap429": APADANA_TEN_LOCATOR_REVISION
+  "tha-ap429": APADANA_TEN_LOCATOR_REVISION,
+  "tha-ap389": APADANA_FRUIT_LOCATOR_REVISION,
+  "tha-ap390": APADANA_FRUIT_LOCATOR_REVISION
 });
 var requiredCanonicalRevision = (id) => Object.hasOwn(REPAIRED_CANONICAL_LOCATORS, id) ? REPAIRED_CANONICAL_LOCATORS[id] : null;
 var isRepairedCanonical = (id, revision) => requiredCanonicalRevision(id) !== null && revision === requiredCanonicalRevision(id);
@@ -13431,6 +13435,11 @@ function canonicalReopenRoute(args, id) {
   return requiredCanonicalRevision(id) ? "#read?" + new URLSearchParams({ uid: id }) : null;
 }
 function assertCanonicalLocator(id, revision, { expected, positional = false } = {}) {
+  if ((id === "tha-ap389" || id === "tha-ap390") && APADANA_FRUIT_INDEX_REVISION.startsWith("PENDING_")) {
+    const error2 = Error("This boundary proposal has no independently assigned locator namespace.");
+    error2.code = "READING_SOURCE_CHANGED";
+    throw error2;
+  }
   if (requiredCanonicalRevision(id) && !isRepairedCanonical(id, revision)) {
     const error2 = Error("The reviewed citation mapping is unavailable or changed. Reopen the whole current text explicitly; no saved position or note was moved.");
     error2.code = "READING_SOURCE_CHANGED";
