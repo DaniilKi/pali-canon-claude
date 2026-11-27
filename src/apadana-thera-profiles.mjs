@@ -1,3 +1,4 @@
+import { THERA_351_360_NINE_PROFILES } from './apadana-thera351-360-profiles.mjs';
 import { THERA_331_334_PROFILES } from './apadana-thera331-334-profiles.mjs';
 import { THERA_335_350_PROFILES } from './apadana-thera335-350-profiles.mjs';
 import { THERA_321_329_PROFILES } from './apadana-thera321-329-profiles.mjs';
@@ -22071,5 +22072,6 @@ export const THERA_APADANA_PROFILES = deepFreeze({
   ...THERA_312_319_PROFILES,
   ...THERA_321_329_PROFILES,
   ...THERA_331_334_PROFILES,
-  ...THERA_335_350_PROFILES
+  ...THERA_335_350_PROFILES,
+  ...THERA_351_360_NINE_PROFILES
 });
