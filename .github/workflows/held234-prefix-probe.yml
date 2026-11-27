@@ -1,0 +1,49 @@
+name: Native held234 prefix cost contrast
+on:
+  push:
+    branches: ['diagnostic/pali-held234-prefix-*']
+permissions:
+  contents: read
+env:
+  HELD234_CANDIDATE_SHA: 05ee6fc2dd72c04b66e488a4528252c2742a43ae
+jobs:
+  contrast:
+    name: Original held8 deadline / Windows22 ABBA
+    runs-on: windows-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+        with:
+          path: probe
+      - uses: actions/checkout@v4
+        with:
+          ref: d97e3c0ebc8261c6bec6ec8b3b1c65acd85e7dd4
+          path: baseline
+      - uses: actions/checkout@v4
+        with:
+          ref: 05ee6fc2dd72c04b66e488a4528252c2742a43ae
+          path: candidate
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compare the unchanged original held8 assertions
+        timeout-minutes: 10
+        run: |
+          node probe/scripts/ci-held234-prefix-probe.mjs --baseline "$GITHUB_WORKSPACE/baseline" --candidate "$GITHUB_WORKSPACE/candidate" --expected-candidate "$HELD234_CANDIDATE_SHA" --output "$RUNNER_TEMP/held234-prefix"
+      - name: Preserve every diagnostic outcome including failed baselines
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-held234-prefix-abba
+          path: ${{ runner.temp }}/held234-prefix/
+          if-no-files-found: error
