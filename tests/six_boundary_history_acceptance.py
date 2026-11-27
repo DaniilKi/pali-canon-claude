@@ -158,16 +158,31 @@ class SixHistoryControls(unittest.TestCase):
     def test_06_pure_inverse_preserves_unrelated_mutations_but_complete_gate_refuses_them(self):
         current=json.loads(self.future);prior=json.loads(self.c1)
         self.assertEqual(h.six_state(current,self.root),'new');self.assertEqual(h.six_state(prior,self.root),'old')
-        bad=copy.deepcopy(current);other=next(u for u in bad['units'] if u['id'] not in h.IDS);other['title']+=' UNREVIEWED'
+        baseline=h.compact(current)
+        bad=json.loads(self.future)
+        self.assertTrue(bad==current)
+        self.assertIsNot(bad,current)
+        self.assertIsNot(bad['units'],current['units'])
+        self.assertIsNot(bad['books'],current['books'])
+        self.assertTrue(all(a is not b for a,b in zip(bad['units'],current['units'])))
+        other=next(u for u in bad['units'] if u['id'] not in h.IDS);other['title']+=' UNREVIEWED'
         inverse=h.canon_before_six(bad,self.root)
         self.assertEqual(next(u for u in inverse['units'] if u['id']==other['id']),other)
         with self.assertRaises((AssertionError,ValueError)):h.exact_c1_canon_bytes(h.compact(bad),self.root)
+        self.assertEqual(h.compact(current),baseline)
         for mutate in (lambda c:c['units'].append(copy.deepcopy(next(u for u in c['units'] if u['id']==h.IDS[0]))),
                        lambda c:c.__setitem__('units',[u for u in c['units'] if u['id']!=h.IDS[0]]),
                        lambda c:next(u for u in c['units'] if u['id']==h.IDS[0]).__setitem__('start',True),
                        lambda c:next(u for u in c['units'] if u['id']==h.IDS[0]).__setitem__('index_revision','foreign')):
-            changed=copy.deepcopy(current);mutate(changed)
+            changed=json.loads(self.future)
+            self.assertTrue(changed==current)
+            self.assertIsNot(changed,current)
+            self.assertIsNot(changed['units'],current['units'])
+            self.assertIsNot(changed['books'],current['books'])
+            self.assertTrue(all(a is not b for a,b in zip(changed['units'],current['units'])))
+            mutate(changed)
             with self.assertRaises((AssertionError,ValueError)):h.canon_before_six(changed,self.root)
+            self.assertEqual(h.compact(current),baseline)
 
     def test_07_runtime_parent_and_full343_objects_are_mandatory(self):
         parent=h.parent343_records(self.root)

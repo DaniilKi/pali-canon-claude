@@ -151,7 +151,7 @@ def _runtime(root, previous, proof):
     return files
 
 
-def capture_authority(root, previous):
+def _capture_authority_with_manifest(root, previous):
     """One parsed immutable source graph per operation; no current corpus read here."""
     proof = _authority(root)
     files = _runtime(root, previous, proof)
@@ -165,7 +165,13 @@ def capture_authority(root, previous):
     manifest = proof['EXPECTED_MANIFEST.json']
     profiles = {**old['profiles'], **proof['PROFILES.json']}
     current_catalogue = {'ids':list(profiles), 'profiles':profiles, 'links':manifest['links'], 'source':manifest['source']}
-    return files, raw, compact({'previous':previous_catalogue, 'current':current_catalogue, 'manifest':manifest})
+    return files, raw, compact({'previous':previous_catalogue, 'current':current_catalogue, 'manifest':manifest}), manifest
+
+
+def capture_authority(root, previous):
+    # Preserve the public three-value QA interface; the manifest is local only.
+    files, raw, catalogue, _manifest = _capture_authority_with_manifest(root, previous)
+    return files, raw, catalogue
 
 
 def fixture_names():

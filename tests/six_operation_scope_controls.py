@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
+from owned_apadana_proofs import copy_owned_apadana_proof_inputs
 import web_reader_six_boundary_history as h
 import web_reader_intake359 as intake359
 from web_reader_next_ten_boundary_history import assert_next_ten_current_canonical_data as assert_actual_next
@@ -69,7 +70,7 @@ class SixOperationScopeControls(unittest.TestCase):
         cls.temp = tempfile.TemporaryDirectory(prefix='pali-six-operation-')
         cls.addClassCleanup(cls.temp.cleanup)
         cls.root = Path(cls.temp.name)
-        shutil.copytree(ROOT / 'docs/evidence/apadana', cls.root / 'docs/evidence/apadana')
+        copy_owned_apadana_proof_inputs(ROOT, cls.root)
         copy_historical_fixture(ROOT, cls.root)
         for name in ('tests/fixtures/reviewed-runtime-2449.json',
                 'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json'):

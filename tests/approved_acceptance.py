@@ -12,6 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
+from owned_apadana_proofs import copy_owned_apadana_proof_inputs
 from web_reader_approved_acceptance import (approved_catalogue, approved_runtime,
     assert_catalogue, assert_profiles, assert_runtime, assert_runtime_records)
 
@@ -83,7 +84,9 @@ class ApprovedAcceptance(unittest.TestCase):
         cls._owned_temporary = tempfile.TemporaryDirectory(prefix='pali-approved33-owned-')
         cls.addClassCleanup(cls._owned_temporary.cleanup)
         cls._owned_root = Path(cls._owned_temporary.name).resolve()
-        shutil.copytree(ROOT / 'docs/evidence/apadana', cls._owned_root / 'docs/evidence/apadana')
+        copied = copy_owned_apadana_proof_inputs(ROOT, cls._owned_root)
+        assert all(name in copied for name in OWNED_TAMPER_TARGETS.values()
+                   if name.startswith('docs/evidence/apadana/'))
         provision_complete_current_runtime_fixture(cls._owned_root)
         assert approved_runtime(cls._owned_root) == cls.inventory
         cls._owned_originals = MappingProxyType({name: (cls._owned_root / name).read_bytes()

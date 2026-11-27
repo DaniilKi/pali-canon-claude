@@ -300,7 +300,7 @@ def _capture_six_test_input(root):
     global _VALIDATED_FRAME
     root = _physical_root(root)
     current = proof_records(root)
-    current359, ap343, catalogue359 = _intake359.capture_authority(root, current)
+    current359, ap343, catalogue359, manifest359 = _intake359._capture_authority_with_manifest(root, current)
     previous = prior_dd_records(root)
     actual = {}
     identity = []
@@ -312,7 +312,7 @@ def _capture_six_test_input(root):
         actual['server/' + name] = raw
     assert len(actual) == 27 and all(type(raw) is bytes for raw in actual.values())
     # No old-actual fallback: every actual data byte must match the new inventory.
-    assert json.loads(actual[_intake359.AP_PATH]) == json.loads(catalogue359)['manifest']
+    assert json.loads(actual[_intake359.AP_PATH]) == manifest359
     dd = dict(actual)
     dd[_intake359.AP_PATH] = ap343
     for name in DD_DATA_PATHS:

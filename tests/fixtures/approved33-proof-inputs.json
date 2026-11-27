@@ -1,0 +1,841 @@
+{
+  "schema": "approved33-required-physical-proof-inputs-v1",
+  "source_commit": "1e1c7b13ba4f02ede75e87fca66032e6e8966f8a",
+  "scope": "Only owned proof-copy setup for existing33 acceptance and7 operation-scope cases; not catalogue truth, generic repository closure or runtime output.",
+  "file_count": 208,
+  "bytes": 15636542,
+  "files": {
+    "docs/evidence/apadana/THERA_181_220_APPROVAL.json": {
+      "bytes": 37405,
+      "sha256": "25bf82a592840d1ed95ee07fa1fc7b80f57a1e5a5b7f701b7caf9c308d7931ad"
+    },
+    "docs/evidence/apadana/THERA_221_230_APPROVAL.json": {
+      "bytes": 39319,
+      "sha256": "4ae2cd3fea1c64e323dfa41c15403c33215e90f8834c7ee0a4db708f77f68bed"
+    },
+    "docs/evidence/apadana/THERA_221_230_EXPECTED_LINKS.json": {
+      "bytes": 30790,
+      "sha256": "b87cb20b9840e95af3154250293985c3bb70c76109d4dd2887a02456297e1d0f"
+    },
+    "docs/evidence/apadana/THERA_221_230_EXPECTED_PROFILES.json": {
+      "bytes": 29971,
+      "sha256": "637d8d8f523a3e5d33c1c33e36133d2535a8e7f4007e3bb5d1e51b20f07820ea"
+    },
+    "docs/evidence/apadana/THERA_231_240_COPY_POLICY.json": {
+      "bytes": 742,
+      "sha256": "ef5e8defc405850e785271ec4f5ad1efd8d0b5eb98d928ff69f921c8645fc1c6"
+    },
+    "docs/evidence/apadana/THERA_231_240_EXPECTED_LINKS.json": {
+      "bytes": 26382,
+      "sha256": "89f92dfe67413162bbf7296a5e6abe174d08cd9510f7cf384968ea21568033d6"
+    },
+    "docs/evidence/apadana/THERA_231_240_EXPECTED_PROFILES.json": {
+      "bytes": 25640,
+      "sha256": "a070166743beb7ba7842fe65848a152b29db3c34817c341c82ddad5908ab6b66"
+    },
+    "docs/evidence/apadana/THERA_231_240_GOLDENS.json": {
+      "bytes": 225641,
+      "sha256": "8e0347d0acf961463e05fb456f0584c3a4bcb438ef6985dbe47c581ed1e95867"
+    },
+    "docs/evidence/apadana/THERA_231_240_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 32845,
+      "sha256": "062fad9567cfc2569e9138ea0d1900183602fd18a49c243378c09b76d009ae6e"
+    },
+    "docs/evidence/apadana/THERA_231_240_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "bytes": 69542,
+      "sha256": "6049ff90fc2b45fe0be400ee6c05aff1e498854aebee3fa06337ec60680f23e6"
+    },
+    "docs/evidence/apadana/THERA_231_240_NORMALIZATION_REPLAY.json": {
+      "bytes": 1414,
+      "sha256": "8f92fd937771f91d4b60a0b8089b6d90263335ea181155d41837a21aae393ff6"
+    },
+    "docs/evidence/apadana/THERA_231_240_NORMALIZATION_REVIEW.json": {
+      "bytes": 24275,
+      "sha256": "ab79c6c990a0027dba5dcc9b20248ccc1dffe53b911ba2725fdb22d92084ade7"
+    },
+    "docs/evidence/apadana/THERA_231_240_NORMALIZATION_SEALS.json": {
+      "bytes": 1031,
+      "sha256": "5d358a6f1a78d4b74238b6c5747e3678797c368a22ab6a3c0b05be577e6edc20"
+    },
+    "docs/evidence/apadana/THERA_231_240_RIGHTS.json": {
+      "bytes": 8153,
+      "sha256": "ebfdc84aca3af48076da7e8ef10b8fc4074307271e122eecf88318e98c9fbd4d"
+    },
+    "docs/evidence/apadana/THERA_231_240_SOURCE_APPROVAL.json": {
+      "bytes": 27974,
+      "sha256": "c8c2a000d84725f8231a20e044498a30f12bc827418bb3638efba790f89820ca"
+    },
+    "docs/evidence/apadana/THERA_241_250_APPROVAL.json": {
+      "bytes": 36895,
+      "sha256": "4d11c069b21e87ba7b58ea9a55c6b39d0a1beef0c9cd9f824e7c3f6146736df2"
+    },
+    "docs/evidence/apadana/THERA_241_250_BASELINE_FREEZE.json": {
+      "bytes": 2230360,
+      "sha256": "24e63f5fb14ec74946d20349d78ae2b405e1636ca561f757660113226d6537dc"
+    },
+    "docs/evidence/apadana/THERA_241_250_EXPECTED_LINKS.json": {
+      "bytes": 29043,
+      "sha256": "4c1e466abe86985073358436160ee71189d942c792efc306f81b104f40df57a1"
+    },
+    "docs/evidence/apadana/THERA_241_250_EXPECTED_PROFILES.json": {
+      "bytes": 28226,
+      "sha256": "356bb1b3aa144389d69d6f7446eaa84065af2bcaad3ca40522dcfbb39cd150c0"
+    },
+    "docs/evidence/apadana/THERA_251_259_COPY_POLICY.json": {
+      "bytes": 958,
+      "sha256": "5f1506cf9ee18a4234cd0e453a7d59baa65ef639288fa42c317022874500993d"
+    },
+    "docs/evidence/apadana/THERA_251_259_EXPECTED_LINKS.json": {
+      "bytes": 26312,
+      "sha256": "e81b97b665cdec6157eb91a31d7c3857e4f03d38d53523f70ab33d927856a227"
+    },
+    "docs/evidence/apadana/THERA_251_259_EXPECTED_PROFILES.json": {
+      "bytes": 25568,
+      "sha256": "dcb7eb11ee17006331bcbc6333e689feb8f01f44666cbb858896ad0cd3ba7332"
+    },
+    "docs/evidence/apadana/THERA_251_259_GOLDENS.json": {
+      "bytes": 236772,
+      "sha256": "6f217a19e96a6d171a4c3a171778f50bc1e973c8c74948b7751a2b9ab5cc6a2a"
+    },
+    "docs/evidence/apadana/THERA_251_259_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 29134,
+      "sha256": "7986d346426dafd578715a66bdc96d2a91538f9f718936a54eebd0c8460b8502"
+    },
+    "docs/evidence/apadana/THERA_251_259_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "bytes": 5109,
+      "sha256": "3626c99eeb7cdd9ee12f76417159d4d0c974bf97fffdd5b29bb60218df38697d"
+    },
+    "docs/evidence/apadana/THERA_251_259_NORMALIZATION_REPLAY.json": {
+      "bytes": 1031,
+      "sha256": "27762fbd4521ead265ecc38d3502f4404c9668be61edcf5cb6e2fcf12b93cac2"
+    },
+    "docs/evidence/apadana/THERA_251_259_NORMALIZATION_REVIEW.json": {
+      "bytes": 67472,
+      "sha256": "1782e4618a577b0c3f58b0d97c0555cddfd52ba1807ee9ba91507bde460d059f"
+    },
+    "docs/evidence/apadana/THERA_251_259_NORMALIZATION_SEALS.json": {
+      "bytes": 1131,
+      "sha256": "a491430b4003880956f5d725255d46b51bb82f9eb8126044d73b32686ad10877"
+    },
+    "docs/evidence/apadana/THERA_251_259_RIGHTS.json": {
+      "bytes": 7540,
+      "sha256": "e28690d11e59f5718f4afbb6472263b2a8b67ce1fa702d4db889099efca89a25"
+    },
+    "docs/evidence/apadana/THERA_251_259_SOURCE_APPROVAL.json": {
+      "bytes": 21420,
+      "sha256": "97996843f7b422dbaf844f9558152a3a92e0749ca18ab5b8fa82106ac78b22f7"
+    },
+    "docs/evidence/apadana/THERA_261_280_APPROVAL.json": {
+      "bytes": 43330,
+      "sha256": "e25da6522df6f88bfcbf5fade43c6a8972d050425f5a6af1e6043d60440f896b"
+    },
+    "docs/evidence/apadana/THERA_261_280_BASELINE_FREEZE.json": {
+      "bytes": 2479912,
+      "sha256": "dabf5d711fa8be38196e5de7b3b1c7b24462407ef4f50769a447e3c3c609ef44"
+    },
+    "docs/evidence/apadana/THERA_261_280_COPY_POLICY.json": {
+      "bytes": 847,
+      "sha256": "ff99af2233a33396874a0030df50ae3867e7c67ea9634046a12c7cb29718a04f"
+    },
+    "docs/evidence/apadana/THERA_261_280_EXPECTED_LINKS.json": {
+      "bytes": 52754,
+      "sha256": "b57b1fe248115bf18bfacad21d2ea9e17dc0b1bf7fdd9e1b049d7cbaf8ddf371"
+    },
+    "docs/evidence/apadana/THERA_261_280_EXPECTED_PROFILES.json": {
+      "bytes": 51258,
+      "sha256": "12a23c45ce992184376342ec8aa62b6a8018b1bfd83b83f653f4c46efe4e0046"
+    },
+    "docs/evidence/apadana/THERA_261_280_FINAL_IMPLEMENTATION_REVIEW.json": {
+      "bytes": 22857,
+      "sha256": "90ac684ae49fe72d4e25313bfed06a2a605d83a42c95c6bb21112061ba7148ca"
+    },
+    "docs/evidence/apadana/THERA_261_280_GOLDENS.json": {
+      "bytes": 373111,
+      "sha256": "c92b06cc14d73b6e2cb2ce053b5997d4786d4191c5ae54abb66d6711ded54ca1"
+    },
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_COMPARISON.json": {
+      "bytes": 6934,
+      "sha256": "769c0fbec36933c489b1fd83bb423a8414226cc9f81901ee660b93bb16d46e2e"
+    },
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 138212,
+      "sha256": "e1c5d8d61de785a15b912269840c79793a259c39fa89ddcdba5bc30528df497c"
+    },
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_RIGHTS_REVIEW.json": {
+      "bytes": 2675,
+      "sha256": "f8e816b077679fce9cba49487e014d1926fce1e19f77a9c79868530e1d607f14"
+    },
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_RIGHTS_SCOPE_ADDENDUM.json": {
+      "bytes": 1170,
+      "sha256": "3190b70a46e109c75d983a24d83d12b30c63ec6603d911406303b1808c2d0209"
+    },
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "bytes": 113391,
+      "sha256": "8ce46b4cca025f55c61e10b8cd8c81fd154dbe7b811f433e7f33e2b29d95dae6"
+    },
+    "docs/evidence/apadana/THERA_261_280_INDEPENDENT_XML_CONTEXT.json": {
+      "bytes": 1793,
+      "sha256": "23c751a6a2d8a1ecbd73428d9f8d3d159149afaaf6225be36e7f1fb442d6b160"
+    },
+    "docs/evidence/apadana/THERA_261_280_NORMALIZATION_SEALS.json": {
+      "bytes": 1563,
+      "sha256": "e9f2e235ab04a3be59ebf745a6111ccbcc7613eeb62cf99251b5526b69e4ae06"
+    },
+    "docs/evidence/apadana/THERA_261_280_RIGHTS_REVIEW.json": {
+      "bytes": 5095,
+      "sha256": "2eae724eebc6ceab2d9acea65894eb383106fc98bbdd74c805c18964ce279edc"
+    },
+    "docs/evidence/apadana/THERA_261_280_RUNTIME_REVIEW.json": {
+      "bytes": 9979,
+      "sha256": "42ccdcd9bfa168df83cfa13b4d0a4c7b121f726a117b31e1a15d7fba952b230c"
+    },
+    "docs/evidence/apadana/THERA_261_280_SOURCE_APPROVAL.json": {
+      "bytes": 135106,
+      "sha256": "dee7e7fa8e55cb539fbb7f4c9d09413eef931ad323f674ec8fd8ac8d31fd6ae5"
+    },
+    "docs/evidence/apadana/THERA_261_280_SOURCE_APPROVAL_ADDENDUM.json": {
+      "bytes": 929,
+      "sha256": "e8d8ea5f08b339936c2ddfc9f7981925699590ede8cb914eccb5796297facf22"
+    },
+    "docs/evidence/apadana/THERA_261_280_SOURCE_REVIEW.json": {
+      "bytes": 15650,
+      "sha256": "9d302203f245d11b83d3fcdf4f65d3877af76552a984158ccd798dfc8ef2c98c"
+    },
+    "docs/evidence/apadana/THERA_281_285_APPROVAL.json": {
+      "bytes": 44132,
+      "sha256": "52c1813c72685a7a78f4f29ed860035c06e61f1b209f601ed0b2e9a36de3206f"
+    },
+    "docs/evidence/apadana/THERA_281_285_BASELINE_COMPACT.json": {
+      "bytes": 60648,
+      "sha256": "58a3af1a6a9f817c57c9087551f901993fc47850f1b88a66c2c8b4c0d04e83d2"
+    },
+    "docs/evidence/apadana/THERA_281_285_COMPACT_RECONSTRUCTION_REVIEW.json": {
+      "bytes": 68300,
+      "sha256": "c957ee9a7eea33439c1c55abe46780a3c804a2a92b1c906dee85b513b2831f01"
+    },
+    "docs/evidence/apadana/THERA_281_285_COPY_POLICY.json": {
+      "bytes": 1753,
+      "sha256": "4a38a74f2a48f820f7698d172ef88da68c74e6d32445d01f39dcefcc63ec99f9"
+    },
+    "docs/evidence/apadana/THERA_281_285_EXPECTED_LINKS.json": {
+      "bytes": 15337,
+      "sha256": "c4db039b0fb86065b4d9cae28c708d3cd0292a1477b1e41edcbce9310308859b"
+    },
+    "docs/evidence/apadana/THERA_281_285_EXPECTED_PROFILES.json": {
+      "bytes": 14929,
+      "sha256": "50390be204501c1a82efb1f4b67c1a685ad702c2d60c39a6f88120b4c480ed30"
+    },
+    "docs/evidence/apadana/THERA_281_285_GOLDENS.json": {
+      "bytes": 121935,
+      "sha256": "7c2083449977ac2de7cedb9df34dea6f5eee02449ec029dd6d6bb3cbca26f9ad"
+    },
+    "docs/evidence/apadana/THERA_281_285_INDEPENDENT_COMPARISON.json": {
+      "bytes": 3235,
+      "sha256": "d46731d6c04380f5186f9aa399ea47b2e712298fe351628be6ed28859916d54e"
+    },
+    "docs/evidence/apadana/THERA_281_285_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 58358,
+      "sha256": "cc41346f1d6d09aebadc52dcb2e28b47032b3df2ed06ccc11eaafe7116cb0360"
+    },
+    "docs/evidence/apadana/THERA_281_285_INDEPENDENT_RIGHTS_REVIEW.json": {
+      "bytes": 2259,
+      "sha256": "d2df7050f9dffea912d8ed3e5062c16195e234754fd0cdc5fe9f5817eef7916c"
+    },
+    "docs/evidence/apadana/THERA_281_285_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "bytes": 35001,
+      "sha256": "bd0be2b38de251ad499d2237715790a1b14595493e233f1af9e144a266ed4640"
+    },
+    "docs/evidence/apadana/THERA_281_285_INDEPENDENT_XML_CONTEXT.json": {
+      "bytes": 2258,
+      "sha256": "4b4f1c6c5f4ce9f74b9838442582d890e26044236d5d166fa593a8a12e22ab04"
+    },
+    "docs/evidence/apadana/THERA_281_285_NORMALIZATION_REPLAY.json": {
+      "bytes": 669,
+      "sha256": "5b398b2ff078626bee3cef8ca6cbd1d5998f80c5723d224d5c2b56f347da4709"
+    },
+    "docs/evidence/apadana/THERA_281_285_NORMALIZATION_SEALS.json": {
+      "bytes": 1555,
+      "sha256": "5644055c6c7b32ba69ae42f456c1cc786ab267d90eed069cb0aaec0840a71fd5"
+    },
+    "docs/evidence/apadana/THERA_281_285_ORIGINAL_FACTS.json": {
+      "bytes": 56719,
+      "sha256": "c3398f22d2f9c38a25334b2ef4ec69369f175764361e71af3c50419be600b047"
+    },
+    "docs/evidence/apadana/THERA_281_285_RIGHTS_REVIEW.json": {
+      "bytes": 3139,
+      "sha256": "3a74cd523e5d402f45cc4543c4dc3b04fc2869ed5c122fe8639885f97abd60df"
+    },
+    "docs/evidence/apadana/THERA_281_285_ROOT_A_B_COMPARISON.json": {
+      "bytes": 1367,
+      "sha256": "fe0921e6b56ff28d34fae60b6d7d31465714d5ddfeb74f461597b6d05c958201"
+    },
+    "docs/evidence/apadana/THERA_281_285_RUNTIME_REVIEW.json": {
+      "bytes": 10141,
+      "sha256": "809efc477aec7bd16c6d5077114ba5932663ecf110076899f9dc5ef85917519f"
+    },
+    "docs/evidence/apadana/THERA_281_285_SOURCE_APPROVAL.json": {
+      "bytes": 45628,
+      "sha256": "17f3c9b149c35c728c5668399dc0a599085b8e747d2ba650f9405dc00ae24e6d"
+    },
+    "docs/evidence/apadana/THERA_287_288_APPROVAL.json": {
+      "bytes": 44122,
+      "sha256": "e159aefc7ad0f2a36a10dffa95fd5cf97650b95969820344f70aee0dd2c7e95e"
+    },
+    "docs/evidence/apadana/THERA_287_288_BASELINE_COMPACT.json": {
+      "bytes": 61316,
+      "sha256": "ab925be47a5bbfe8a021443c4e779b7ec56a68ef802fdb2e752f759aa9858c9e"
+    },
+    "docs/evidence/apadana/THERA_287_288_COMPACT_RECONSTRUCTION_REVIEW.json": {
+      "bytes": 853,
+      "sha256": "1933ae03cb8a548e952b9e58ea73260202b77b13febbcebcb94b329f8b12b7a7"
+    },
+    "docs/evidence/apadana/THERA_287_288_COPY_POLICY.json": {
+      "bytes": 1344,
+      "sha256": "968e8386b8728318f5ab28a58ebab0914fa83171844cc38bfe33b74b608bd430"
+    },
+    "docs/evidence/apadana/THERA_287_288_EXPECTED_LINKS.json": {
+      "bytes": 6346,
+      "sha256": "f56c00dc91c62cad541a57181ca035524939bdcfbff4b89b5263128a3a522848"
+    },
+    "docs/evidence/apadana/THERA_287_288_EXPECTED_PROFILES.json": {
+      "bytes": 6183,
+      "sha256": "469448bac323d2e64f12ed16b5ce8e72439ee2a5471ee58106d3a4e47416df7a"
+    },
+    "docs/evidence/apadana/THERA_287_288_GOLDENS.json": {
+      "bytes": 45849,
+      "sha256": "b42235084b629146e898c03ca3c3623899fdb52aa0212492d65d315f1bfd330d"
+    },
+    "docs/evidence/apadana/THERA_287_288_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 21945,
+      "sha256": "7265761964af7b6495eda228129d54074ca789cf76574ad34410c53f6e605936"
+    },
+    "docs/evidence/apadana/THERA_287_288_INDEPENDENT_RIGHTS_REVIEW.json": {
+      "bytes": 2258,
+      "sha256": "026491aa445f36a7992f6d4ce71b918f013f4623e33dea7a58862cbdf735fded"
+    },
+    "docs/evidence/apadana/THERA_287_288_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "bytes": 16055,
+      "sha256": "4563f12df0490ae0b35b16c90c835ecce4fa8ee979857a3a9fadeb84f0a23fce"
+    },
+    "docs/evidence/apadana/THERA_287_288_INDEPENDENT_XML_CONTEXT.json": {
+      "bytes": 685,
+      "sha256": "9f8f2688694547c41eda4ada83faa1915651065ca673f90548aa30f001e8456c"
+    },
+    "docs/evidence/apadana/THERA_287_288_NORMALIZATION_REPLAY.json": {
+      "bytes": 668,
+      "sha256": "fc5190208ee10aa2f597bb68fcc84911246e4519676c67cd2decb49c733328ee"
+    },
+    "docs/evidence/apadana/THERA_287_288_NORMALIZATION_SEALS.json": {
+      "bytes": 1728,
+      "sha256": "aac384b761948df430241c7372071e6ed0458e31d4390760821358a89d29552d"
+    },
+    "docs/evidence/apadana/THERA_287_288_ORIGINAL_FACTS.json": {
+      "bytes": 23354,
+      "sha256": "1f178d9e6c346459651a972020d08e46934890a4fdf47a33d78ab8e18a3960aa"
+    },
+    "docs/evidence/apadana/THERA_287_288_RIGHTS_REVIEW.json": {
+      "bytes": 2897,
+      "sha256": "bffe7dfe963dadc7cc3dd06335dec38501b7669d5248b19ed5343cbb3c7ae0b4"
+    },
+    "docs/evidence/apadana/THERA_287_288_RUNTIME_REVIEW.json": {
+      "bytes": 10075,
+      "sha256": "57c3b1c4efdc5b75b9718f77259c5ef4ee25a85e15b257f6f64b8235f3a71daf"
+    },
+    "docs/evidence/apadana/THERA_287_288_SOURCE_APPROVAL.json": {
+      "bytes": 20978,
+      "sha256": "8789f82ac660ecdb838f38d6cd5d7e7b44c9042a0fbe248119ba086f2cc41be9"
+    },
+    "docs/evidence/apadana/THERA_292_299_APPROVAL.json": {
+      "bytes": 46167,
+      "sha256": "a39e811b09749e399b7faea74a4559c159de9a6180867aaa94977c3daba0ba3e"
+    },
+    "docs/evidence/apadana/THERA_292_299_BASELINE_COMPACT.json": {
+      "bytes": 61703,
+      "sha256": "88c87437c64f70da86d107053d956f8a30a83a0f8f0d3e3e2cd0653014da0f50"
+    },
+    "docs/evidence/apadana/THERA_292_299_COMPACT_RECONSTRUCTION_REVIEW.json": {
+      "bytes": 920,
+      "sha256": "07e79c0a3af2f86209c88a28b679d2f7267226ea221b9adb4f70d3b145ad0d34"
+    },
+    "docs/evidence/apadana/THERA_292_299_COPY_POLICY.json": {
+      "bytes": 2612,
+      "sha256": "63ad3444c19b078c06306f1cb319e7dcb905ba685e5c2df0d82613da042e05d2"
+    },
+    "docs/evidence/apadana/THERA_292_299_EXPECTED_LINKS.json": {
+      "bytes": 23964,
+      "sha256": "01889f99c347ba4be1ca32c97f53997f13d8cbbea1a8f31c92271be71da6a736"
+    },
+    "docs/evidence/apadana/THERA_292_299_EXPECTED_PROFILES.json": {
+      "bytes": 23390,
+      "sha256": "8942f873599882e63ff182e80fd82ccb89be8a25b04e502dfd1a6f3b0083b340"
+    },
+    "docs/evidence/apadana/THERA_292_299_GOLDENS.json": {
+      "bytes": 163124,
+      "sha256": "1363c5c612a34d36495b8a39fbeafc7ff3de6bb7703018fdd83937b6f40212ee"
+    },
+    "docs/evidence/apadana/THERA_292_299_INDEPENDENT_FORMAL_BINDING.json": {
+      "bytes": 489,
+      "sha256": "4d2ede712e0a7ccc3a8c5e7b14a71a10cc2113db1cc0b05807b12e40ba84fb9e"
+    },
+    "docs/evidence/apadana/THERA_292_299_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 77321,
+      "sha256": "3286d45f3beca57d48d2859863cef1fd6c290d3852d2bfb2ac026894340d809f"
+    },
+    "docs/evidence/apadana/THERA_292_299_INDEPENDENT_NOTICE_COMPARISON.json": {
+      "bytes": 2692,
+      "sha256": "87511b4819cba7930d13852f7f4773361575a3c1296098268e13eecc37b8c9c2"
+    },
+    "docs/evidence/apadana/THERA_292_299_INDEPENDENT_RIGHTS_REVIEW.json": {
+      "bytes": 2260,
+      "sha256": "9498ba0004a53e17504b1563e3555d2e5c48668f2e87cf331c61817867dff8fd"
+    },
+    "docs/evidence/apadana/THERA_292_299_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "bytes": 53247,
+      "sha256": "e6443b9944f23fd6cf8c2ace5709ba0c32c534312fd245a55f6a22a6a016c130"
+    },
+    "docs/evidence/apadana/THERA_292_299_INDEPENDENT_XML_CONTEXT.json": {
+      "bytes": 2174,
+      "sha256": "b3fe1bbf69fe7f07f85f82cd96eac5321e2067debed66db0a0cdafad9b0f0dc1"
+    },
+    "docs/evidence/apadana/THERA_292_299_INITIAL_NORMALIZATION_SEALS.json": {
+      "bytes": 1635,
+      "sha256": "12093668750b5b3b8cb42b919a2963c620cc6997520db0334da4364a021b41bc"
+    },
+    "docs/evidence/apadana/THERA_292_299_INITIAL_SOURCE_APPROVAL.json": {
+      "bytes": 64369,
+      "sha256": "370b9ab0fdfdaf07a66735125be93cdb9c91deada0b144212ab023a175237d8c"
+    },
+    "docs/evidence/apadana/THERA_292_299_NORMALIZATION_REPLAY.json": {
+      "bytes": 726,
+      "sha256": "3366949c3de32473a2ceab55e3c25bc83ce1b1254e2e583e78ed9002d523837f"
+    },
+    "docs/evidence/apadana/THERA_292_299_NORMALIZATION_SEALS.json": {
+      "bytes": 1794,
+      "sha256": "d1110673b784a77e55dc2eae149ead622aa701da94618a818dc09770454cd753"
+    },
+    "docs/evidence/apadana/THERA_292_299_NOTICE_ADDITIONS.json": {
+      "bytes": 545,
+      "sha256": "5ffaa3202cc81f80388bfd4db26c3b5796b91efc8f29b80cd9c5e162b1d979e3"
+    },
+    "docs/evidence/apadana/THERA_292_299_NOTICE_AMENDMENT.json": {
+      "bytes": 2064,
+      "sha256": "80e4914d3a3c874fa8e1aea207df335f2227727394ff4c045854b95aed5852db"
+    },
+    "docs/evidence/apadana/THERA_292_299_NOTICE_INVERSE_PROOF.json": {
+      "bytes": 3961,
+      "sha256": "2ad18e7e29bb78037f10e619424618e6820efc3d7745e14cc8c6448ea2ba4bb1"
+    },
+    "docs/evidence/apadana/THERA_292_299_ORIGINAL_FACTS.json": {
+      "bytes": 74415,
+      "sha256": "33ac7c0101b0fd0497e16449e41d55de25d94eed0ffa82d1446fea18651e34ca"
+    },
+    "docs/evidence/apadana/THERA_292_299_RIGHTS_REVIEW.json": {
+      "bytes": 2987,
+      "sha256": "9a2d26dd1bd26594fec32eb4423588343598718acffd2c93b5331107c25d58cd"
+    },
+    "docs/evidence/apadana/THERA_292_299_RUNTIME_REVIEW.json": {
+      "bytes": 12645,
+      "sha256": "3d2a7460cf2a94f1acaa8fbdc49fc359139f574da04510fa6e460e8c1dab3765"
+    },
+    "docs/evidence/apadana/THERA_292_299_SOURCE_APPROVAL.json": {
+      "bytes": 66703,
+      "sha256": "3bfff0ce8cbeb541cc3b30b4aa949b13bda33da7a2a20afed42b25aebce08570"
+    },
+    "docs/evidence/apadana/THERA_301_310_APPROVAL.json": {
+      "bytes": 47207,
+      "sha256": "5b6ee312e81f422e464922a53354800f492c571ec98f837fa119ba01de6c7042"
+    },
+    "docs/evidence/apadana/THERA_301_310_BASELINE_COMPACT.json": {
+      "bytes": 63089,
+      "sha256": "411a72c6ebc991bc2e2cb9038e415666749954bdad9dc2b14f4b41f5f8f11d43"
+    },
+    "docs/evidence/apadana/THERA_301_310_COMPACT_RECONSTRUCTION_REVIEW.json": {
+      "bytes": 14360,
+      "sha256": "15e82325ca927032e72e6ecabc1a77c8aa01beed522b384fa9200c0ca9453125"
+    },
+    "docs/evidence/apadana/THERA_301_310_COPY_POLICY.json": {
+      "bytes": 1871,
+      "sha256": "d5cee3bdc61e461256b0ab5e31b6d2773129db35545ebf162386269276e267fc"
+    },
+    "docs/evidence/apadana/THERA_301_310_EXPECTED_LINKS.json": {
+      "bytes": 28617,
+      "sha256": "422f6790a7b3866704091d2c70814b600458e61918035966a4746c5ac345f034"
+    },
+    "docs/evidence/apadana/THERA_301_310_EXPECTED_PROFILES.json": {
+      "bytes": 27958,
+      "sha256": "e2c5c83e4a9062bd68bb56728e0e536c8a549810fff1071aaa087b7d32bcbaf7"
+    },
+    "docs/evidence/apadana/THERA_301_310_GOLDENS.json": {
+      "bytes": 195008,
+      "sha256": "7b72f06b87db9e5c2d192cc0194f6602782d3ec29f29ecb5333ad665ebdd799f"
+    },
+    "docs/evidence/apadana/THERA_301_310_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 89862,
+      "sha256": "e676ddea79a40ef1d6b6c9ed035159ce6f7bff8df317c058c4f77804b0a1f4c3"
+    },
+    "docs/evidence/apadana/THERA_301_310_INDEPENDENT_NOTICE_COMPARISON.json": {
+      "bytes": 1882,
+      "sha256": "e2ec4738ec437c3756940cc6b63df38eebfa0cad65c0a540dacb68394d030385"
+    },
+    "docs/evidence/apadana/THERA_301_310_INDEPENDENT_ROOT_SEGMENTS.json": {
+      "bytes": 22379,
+      "sha256": "0249f3cd1b7da1e4249df5086f7caff8e1772a5c455b30607242e5d4885bbf5a"
+    },
+    "docs/evidence/apadana/THERA_301_310_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "bytes": 64234,
+      "sha256": "dc85d778b6d8569cb4231b7e493ff60338de0fc0013744ea37909135f1a253da"
+    },
+    "docs/evidence/apadana/THERA_301_310_INDEPENDENT_XML_CONTEXT.json": {
+      "bytes": 10480,
+      "sha256": "c50cd1c9c80148fa5241f3ca3cf6af6debf4a1b078752d715a7f088cadc4a274"
+    },
+    "docs/evidence/apadana/THERA_301_310_INITIAL_NORMALIZATION_SEALS.json": {
+      "bytes": 2480,
+      "sha256": "a68d6c47ed5dabf54dbd56ac21f30d00318eaf9739be61591ef62ca9d334d45a"
+    },
+    "docs/evidence/apadana/THERA_301_310_INITIAL_PRECOMPARE_SEALS.json": {
+      "bytes": 1611,
+      "sha256": "2bd3a9d4cbe733c6983f82a17a5803afdc347a8e19d3b1db561ec34cee89915a"
+    },
+    "docs/evidence/apadana/THERA_301_310_INITIAL_SOURCE_APPROVAL.json": {
+      "bytes": 81583,
+      "sha256": "5f1acb6ca7bc97c68593d39a7079f6485b82d60aa28854a69b7c6e1c461980c4"
+    },
+    "docs/evidence/apadana/THERA_301_310_NORMALIZATION_REPLAY.json": {
+      "bytes": 670,
+      "sha256": "776733515742443ac9b337bc1680e9b0ed4b642b5efd4c704b72509ff21b3d9a"
+    },
+    "docs/evidence/apadana/THERA_301_310_NORMALIZATION_SEALS.json": {
+      "bytes": 1810,
+      "sha256": "9df6ff1773b2ec398df50182a63c6ff09504541e15571ac87738ec852be725a5"
+    },
+    "docs/evidence/apadana/THERA_301_310_NOTICE_ADDITIONS.json": {
+      "bytes": 283,
+      "sha256": "b562dec4084945a18136763e40cb2f7ee78d27c4c738cf83c4f2f1cbd39f58ac"
+    },
+    "docs/evidence/apadana/THERA_301_310_NOTICE_AMENDMENT.json": {
+      "bytes": 610,
+      "sha256": "557fdc3bfd1d6deb8e1d270a1dc267820635ad5720b73341ab6d2e5199013459"
+    },
+    "docs/evidence/apadana/THERA_301_310_NOTICE_INVERSE_PROOF.json": {
+      "bytes": 1745,
+      "sha256": "c905aae2887c6e6e76320afd4be01241da9231550208b62885df71c60178afa8"
+    },
+    "docs/evidence/apadana/THERA_301_310_ORIGINAL_FACTS.json": {
+      "bytes": 98267,
+      "sha256": "f7a8355557cecb81877a59d88812b91964807435790a07b4ca84dd448368b089"
+    },
+    "docs/evidence/apadana/THERA_301_310_RIGHTS_REVIEW.json": {
+      "bytes": 4945,
+      "sha256": "9a0f91c6e107c4d1e5ee60094185f2b174004f17f56c2295d10f9dabd9716a47"
+    },
+    "docs/evidence/apadana/THERA_301_310_RUNTIME_REVIEW.json": {
+      "bytes": 15403,
+      "sha256": "bae09c75ce5bb5d90e62044b60f5ac468e0c3c0569484117e28f938720aabf09"
+    },
+    "docs/evidence/apadana/THERA_301_310_SOURCE_APPROVAL.json": {
+      "bytes": 82765,
+      "sha256": "276fcc2b31713b8e1553f7a6b05ff6a0d5089d9d71f3f23d2efb6bd00bf598a3"
+    },
+    "docs/evidence/apadana/THERA_312_319_APPROVAL.json": {
+      "bytes": 45841,
+      "sha256": "cc8480e22bb9a1615af86cee2e153c77695f4d20c21fd8f147e31f8658ca610d"
+    },
+    "docs/evidence/apadana/THERA_312_319_BASELINE325_COMPACT.json": {
+      "bytes": 63932,
+      "sha256": "918dd529acab9d88e88812f7eb9841181eaa534e19705e4ce5f66c9fe52ecf3f"
+    },
+    "docs/evidence/apadana/THERA_312_319_BASELINE325_REVIEW.json": {
+      "bytes": 2025,
+      "sha256": "4b2d8755785ebbbfe5678ad9546ec7507b9a0c3306b8d5c659fbbb9ed7de7328"
+    },
+    "docs/evidence/apadana/THERA_312_319_EXPECTED_LINKS.json": {
+      "bytes": 26624,
+      "sha256": "fbfd6695444f1849e970b2e15aead5c73c11836afa45c4d9fa7cac411822be09"
+    },
+    "docs/evidence/apadana/THERA_312_319_EXPECTED_PROFILES.json": {
+      "bytes": 25973,
+      "sha256": "6cea3367548b0cb04462e4f3edbeb6cb54f2baa5e9ea3f7f65b2abbd6f69f5a2"
+    },
+    "docs/evidence/apadana/THERA_312_319_GOLDENS.json": {
+      "bytes": 60883,
+      "sha256": "0d8b3a8352ed5c2d23c888367c08bcdb3db4d704c1b224fec482344141a83774"
+    },
+    "docs/evidence/apadana/THERA_312_319_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 67960,
+      "sha256": "c241db766b26468bffb9154eb502981b9974f07edf39b26c7a4536b69e6c8bc7"
+    },
+    "docs/evidence/apadana/THERA_312_319_INDEPENDENT_NOTICE_REVIEW.json": {
+      "bytes": 60283,
+      "sha256": "1fb1f8f4a5402034bddb21652a5d0a4a5594000d0b16eb739ebaa638874f91ba"
+    },
+    "docs/evidence/apadana/THERA_312_319_NOTICE_INVERSE.json": {
+      "bytes": 1761,
+      "sha256": "2efb08f14d9bbc36b2b6b1904d43bb906ec5ae4d269677bc41403659ebbee929"
+    },
+    "docs/evidence/apadana/THERA_312_319_SOURCE_REVIEW.json": {
+      "bytes": 115030,
+      "sha256": "4f027e9e56e787c63806d6b85bd2710dac0af14eeca43459975ef251b8fc591e"
+    },
+    "docs/evidence/apadana/THERA_312_319_SOURCE_SCOPES_V2.json": {
+      "bytes": 18672,
+      "sha256": "29eb74b6f831840adddbc215727fd35002d7909e6fc6a7e35d891667df4a25ae"
+    },
+    "docs/evidence/apadana/THERA_321_329_APPROVAL.json": {
+      "bytes": 47343,
+      "sha256": "39a344a026373f8a902ecb5857414daf12fc4a8ae942132050529844aa602810"
+    },
+    "docs/evidence/apadana/THERA_321_329_BASELINE333_COMPACT.json": {
+      "bytes": 65517,
+      "sha256": "084180e7967985cf375a71554234405de977f6f6945c41c202a9b467dcb3ba8e"
+    },
+    "docs/evidence/apadana/THERA_321_329_BASELINE333_REVIEW.json": {
+      "bytes": 5791,
+      "sha256": "ca8d20dd715f281bbe25ade77bd3baed1312e674d920b83237ea26d7946d89d0"
+    },
+    "docs/evidence/apadana/THERA_321_329_EXPECTED_LINKS.json": {
+      "bytes": 21031,
+      "sha256": "52131947ea7b90b3f54d4ddde4b00f02652ce9c4b260c18a59e92f3063fc6971"
+    },
+    "docs/evidence/apadana/THERA_321_329_EXPECTED_PROFILES.json": {
+      "bytes": 20539,
+      "sha256": "d7815f6413f1201a9d1dc2be92feb94f3cee00f526d4ab4f68a061b1505304b8"
+    },
+    "docs/evidence/apadana/THERA_321_329_GOLDENS.json": {
+      "bytes": 56109,
+      "sha256": "6a8cd732bc9bac5b910b404b30664b800be11f6e183c00ebc6c6a2b44d4073e7"
+    },
+    "docs/evidence/apadana/THERA_321_329_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 50771,
+      "sha256": "0e0a929ff81f66dd2e6f86ae31953ca5451163c6581f260d4e4af6daa5b1b28f"
+    },
+    "docs/evidence/apadana/THERA_321_329_INDEPENDENT_NOTICE_REVIEW.json": {
+      "bytes": 53173,
+      "sha256": "1b6f9cbbfb73855bdbee35e589530aaa69c0e2e0caebc61b3ace353ee02a0943"
+    },
+    "docs/evidence/apadana/THERA_321_329_SOURCE_APPROVAL.json": {
+      "bytes": 53671,
+      "sha256": "f3834365e2fdecdb2bbb48a7d2b064fc5ff6b69ea64c3c473f60e283cddafb00"
+    },
+    "docs/evidence/apadana/THERA_321_329_SOURCE_SCOPES.json": {
+      "bytes": 26615,
+      "sha256": "1312b094e9b7457c075c8cd082e3d69d53c5bf768be2052c93da77dc5211c4a3"
+    },
+    "docs/evidence/apadana/THERA_331_334_APPROVAL.json": {
+      "bytes": 47938,
+      "sha256": "e68927dcca72d79196786d46ba19290bf0903396993c2fb62dbf2b02150793c8"
+    },
+    "docs/evidence/apadana/THERA_331_334_BASELINE339_COMPACT.json": {
+      "bytes": 70715,
+      "sha256": "038e2565ee0b7803e4a2d3a33bd0d8e4d832deea89962b2686a72d77d3d10b8a"
+    },
+    "docs/evidence/apadana/THERA_331_334_BASELINE339_ROOT_PARITY.json": {
+      "bytes": 594,
+      "sha256": "1bbbc653da24cb1caf0cb92f05b56bd950505f81a0c398819095b0fc0bc7f5e2"
+    },
+    "docs/evidence/apadana/THERA_331_334_DERIVATION_RECEIPT.json": {
+      "bytes": 1720,
+      "sha256": "69da091f1cc00ee7c1cda8ab8b43d8e995f7b6d95a24f8b43e044b0a49b2dd98"
+    },
+    "docs/evidence/apadana/THERA_331_334_EXPECTED_LINKS.json": {
+      "bytes": 18632,
+      "sha256": "0562f11a03d6f137ed68b968f3d416809ef7760af9f4760c99a3a034e757863e"
+    },
+    "docs/evidence/apadana/THERA_331_334_EXPECTED_PROFILES.json": {
+      "bytes": 18303,
+      "sha256": "966b29f832f48ca292051acea4c001c72a20e8dfb5d495486ba1f5b373888fcb"
+    },
+    "docs/evidence/apadana/THERA_331_334_GOLDENS.json": {
+      "bytes": 97650,
+      "sha256": "b4a70845d190e0ec300b63a8022f263fa444eecbefe47e3a884681d532f40696"
+    },
+    "docs/evidence/apadana/THERA_331_334_INDEPENDENT_NORMALIZATION_REVIEW.json": {
+      "bytes": 14598,
+      "sha256": "bd1891106e99c3dacc5748618a87be913df20949a83f62a40d320d95c71d004d"
+    },
+    "docs/evidence/apadana/THERA_331_334_NORMALIZATION_SCHEMA_ADAPTER.json": {
+      "bytes": 1580,
+      "sha256": "a3ac33cf868c3ecd7f6480457f6eb905013d88556787d30950472cd479f3af4a"
+    },
+    "docs/evidence/apadana/THERA_331_334_ORIGINAL_SOURCE_REVIEW.json": {
+      "bytes": 79133,
+      "sha256": "dace9bc63059c211f0ae090dc69a2bd4487b2fbeaee9fdce0579eae40c0c65a2"
+    },
+    "docs/evidence/apadana/THERA_331_334_SOURCE_SCOPES.json": {
+      "bytes": 15107,
+      "sha256": "a439afd330ac28f16547ff5b433eb8622014ead9fa9682370da5471fad5f353e"
+    },
+    "docs/evidence/apadana/THERA_HELD234_APPROVAL.json": {
+      "bytes": 40285,
+      "sha256": "14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7"
+    },
+    "docs/evidence/apadana/THERA_HELD234_COPY_POLICY.json": {
+      "bytes": 687,
+      "sha256": "6970a7eeeed5a1ec2093756aa9e577e8856871518705bfb7f1f5ffde707ece46"
+    },
+    "docs/evidence/apadana/THERA_HELD234_EXPECTED_LINKS.json": {
+      "bytes": 4255,
+      "sha256": "279a6106888c4978da6abe40207cba84f4f994e5aad5014bf3023da27f095d77"
+    },
+    "docs/evidence/apadana/THERA_HELD234_EXPECTED_PROFILES.json": {
+      "bytes": 4172,
+      "sha256": "af6d434558dc690935a4cc12672999de9114afaeed259c4039492f8e6bd32efc"
+    },
+    "docs/evidence/apadana/THERA_HELD234_FILE_SHA256S.json": {
+      "bytes": 1517,
+      "sha256": "12d074da090c78e99e36675675409849565001b7f3139856c4096e33a4bb8e21"
+    },
+    "docs/evidence/apadana/THERA_HELD234_GOLDENS.json": {
+      "bytes": 35667,
+      "sha256": "f431e9c1e69ef7bcafe6a511a3bbddc87e64739a5df5910ed6ee65f31a642ce9"
+    },
+    "docs/evidence/apadana/THERA_HELD234_INDEPENDENT_NORMALIZATION.json": {
+      "bytes": 6976,
+      "sha256": "bdc46f96753c743b0d099beb1334719f9cd061f6e3a1ece275de29d1c6d8ebf7"
+    },
+    "docs/evidence/apadana/THERA_HELD234_INDEPENDENT_SOURCE_APPROVAL.json": {
+      "bytes": 22370,
+      "sha256": "9b7b6cf1d4efe45ee06330551651e1baaf76f20226a35c47a07224592d1cfb8d"
+    },
+    "docs/evidence/apadana/THERA_HELD234_NORMALIZATION_COMPARISON.json": {
+      "bytes": 3817,
+      "sha256": "eb9fdf52675ef0f98c31df8089bc8adb1f663ea9e1935ae99a6286c7108ffc04"
+    },
+    "docs/evidence/apadana/THERA_HELD234_REPLAY_VALIDATION.json": {
+      "bytes": 1271,
+      "sha256": "d62b59434642193c88bf819e636059ac8e692811c44f2edd669a03c3a2909626"
+    },
+    "docs/evidence/apadana/THERA_HELD234_RIGHTS_REVIEW.json": {
+      "bytes": 7473,
+      "sha256": "adbff4f08816f74432dc72c5bd5c462fba5904692b33b4893d3e4cfb0ace3d98"
+    },
+    "docs/evidence/apadana/THERA_HELD234_SOURCE_APPROVAL.json": {
+      "bytes": 9512,
+      "sha256": "79077c74bca9da96b34d29fb496db0eca44c4ce83572f482c72ea01e3b78ad6c"
+    },
+    "docs/evidence/apadana/THERA_REMAINING_APPROVAL.json": {
+      "bytes": 47362,
+      "sha256": "20d72ee82ce1a0e07c9b5f5b87c68266637462a91ab1a0d4ba38152ee7396d40"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/FUTURE_ORACLE.json": {
+      "bytes": 32025,
+      "sha256": "78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/runtime/INDEPENDENT_NEXT_TEN_RUNTIME_INVENTORY.json": {
+      "bytes": 86267,
+      "sha256": "ea2b5cfb7c7a6c9216e2f33a5d1950c128b1ef50cb6c32cf929cf555b942408f"
+    },
+    "docs/evidence/apadana/boundaries-next-ten/runtime/INDEPENDENT_NEXT_TEN_RUNTIME_REVIEW.json": {
+      "bytes": 7269,
+      "sha256": "b3197bdcc429700dee09446abd01ff08c6009d4fcaedc3f2f542429c4f497f55"
+    },
+    "docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_INVENTORY.json": {
+      "bytes": 5823,
+      "sha256": "c8fc751e3f00c986c315400f229561659268ee21f5e8d161be8e4edd9c3a75d7"
+    },
+    "docs/evidence/apadana/boundaries333-336/runtime/INDEPENDENT_FOUR_RUNTIME_REVIEW.json": {
+      "bytes": 10900,
+      "sha256": "6006126f8de46b565a9e194ed0fa4426ce512c9f27e67ee4ce4fcd4bc14d3056"
+    },
+    "docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json": {
+      "bytes": 71211,
+      "sha256": "ff3f60a460fe1648558e095adf0ceab5865dd6d1c2e1b00f1515aa80ed5bf076"
+    },
+    "docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json": {
+      "bytes": 241918,
+      "sha256": "01bc011f958165274ce1a09850dd5cbe4f495a14242c7b96e3fd4ab0e152c397"
+    },
+    "docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json": {
+      "bytes": 5916,
+      "sha256": "ba913149e9d704e1b145d1a6a195f95ad20e0d2dbc73fa6da22f16f43f492c08"
+    },
+    "docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json": {
+      "bytes": 9486,
+      "sha256": "b9b5c3761f65defd45103b3c70cbcac37a8dce4133d9991b18063bceefaa0be9"
+    },
+    "docs/evidence/apadana/canonical325/CANONICAL_BUILD_REVIEW.json": {
+      "bytes": 4633,
+      "sha256": "fc062462c6c6c7e98a285cc833cc1bd59e0a0c47b851b8066f257efc95b85908"
+    },
+    "docs/evidence/apadana/canonical325/CANONICAL_RUNTIME_INVENTORY.json": {
+      "bytes": 5524,
+      "sha256": "11b2d9865505b2cd09812deadb0bf77c891edde783054c4e2bd4fe34900d4b84"
+    },
+    "docs/evidence/apadana/english335-350/APPROVAL.json": {
+      "bytes": 16650,
+      "sha256": "9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6"
+    },
+    "docs/evidence/apadana/english335-350/BASELINE343.json": {
+      "bytes": 66336,
+      "sha256": "4c122fff1283b3ee5904f1f6ea781572347d6e42140dcdd25d7765e8ab00e138"
+    },
+    "docs/evidence/apadana/english335-350/BASELINE343_FULL_OBJECTS.json": {
+      "bytes": 2732922,
+      "sha256": "74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e"
+    },
+    "docs/evidence/apadana/english335-350/BASELINE_DATA27.json": {
+      "bytes": 4309,
+      "sha256": "8631b90104e01329b74d22cc7632df265e9b9072efd6ba17b5478450b026a99f"
+    },
+    "docs/evidence/apadana/english335-350/BASELINE_RUNTIME34.json": {
+      "bytes": 5078,
+      "sha256": "6becdfab6b8e948a6d2df9af1a37131c4c0c727d77db79cf4bb4b93973512f23"
+    },
+    "docs/evidence/apadana/english335-350/EXPECTED_MANIFEST.json": {
+      "bytes": 1457596,
+      "sha256": "57b6fd43f4b8273e9542b8a22a6bd84b2042914113d53c94fe727386c5ec0194"
+    },
+    "docs/evidence/apadana/english335-350/LINKS.json": {
+      "bytes": 70985,
+      "sha256": "f284bc4dcbb415a55aa025f654018448ce3578772dea010f12d8e7cfd536da0a"
+    },
+    "docs/evidence/apadana/english335-350/PROFILES.json": {
+      "bytes": 69638,
+      "sha256": "4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d"
+    },
+    "docs/evidence/apadana/english335-350/PROFILE_SCHEMA_REVIEW.json": {
+      "bytes": 6134,
+      "sha256": "7af2686040b00e89730568771ff8d35e64b676b383f014981eb809d4f63203e5"
+    },
+    "docs/evidence/apadana/english335-350/RUNTIME_INVENTORY.json": {
+      "bytes": 6546,
+      "sha256": "839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186"
+    },
+    "docs/evidence/apadana/english335-350/RUNTIME_REVIEW.json": {
+      "bytes": 9622,
+      "sha256": "2b19d690992a3289958a9e944be36484cf4257fa34a9b580e04704206e829b16"
+    },
+    "docs/evidence/apadana/english335-350/SOURCE_CURATION.json": {
+      "bytes": 8402,
+      "sha256": "e777f4dc3b154a448162b8d0c274d44995722903ebef59e133172ee46ecac5da"
+    },
+    "docs/evidence/apadana/english335-350/SOURCE_REVIEW.json": {
+      "bytes": 53077,
+      "sha256": "61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a"
+    },
+    "docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_INVENTORY.json": {
+      "bytes": 5594,
+      "sha256": "2d6c97ba2ff5728324c487ee3244bd86d016b77a3761ad89c61a0a9ac4a2b8a7"
+    },
+    "docs/evidence/apadana/runtime333/INDEPENDENT333_RUNTIME_REVIEW.json": {
+      "bytes": 18565,
+      "sha256": "a0174f27978b598aca0b7a674b571dc731833861cdd90f9a7358004c68295b6f"
+    },
+    "docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_INVENTORY.json": {
+      "bytes": 5584,
+      "sha256": "234fe7d26de0af3777f6b67d2e812aff896218b690bdfea098d7918410346970"
+    },
+    "docs/evidence/apadana/runtime339/INDEPENDENT339_RUNTIME_REVIEW.json": {
+      "bytes": 15080,
+      "sha256": "ecfda89f9c3d877e6cffc151a8bdf0aa3594f8a2d9744aaed5d6d26cbbf8c653"
+    },
+    "docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json": {
+      "bytes": 5548,
+      "sha256": "5ca203134b2a4b553f84fe0c97487698f687eaa4ac3cd839c2378ab35d9b2405"
+    },
+    "docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json": {
+      "bytes": 7320,
+      "sha256": "d6bb630dd6939f5688f041695d6ef61d15ea694c95c27198ac6881f17e02539e"
+    }
+  }
+}
