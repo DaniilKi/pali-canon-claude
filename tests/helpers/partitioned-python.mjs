@@ -186,7 +186,7 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
  function directFallback(child,code){
   // Own process HANDLE only; no delayed PID lookup or new cleanup grace.
   child.cleanupVerified=false;child.cleanupError??=code;
-  child.cleanupBasis='unverified';child.cleanupProof=null;child.exitRaceEligible=false;
+  child.cleanupBasis='unverified';child.cleanupProof=null;child.exitRaceEligible=false;child.posixErrorEligible=false;child.posixAbsenceWitness=null;
   if(live(child)){
    try{child.process.kill('SIGKILL');}
    catch(error){child.cleanupError=error.code||error.name;}
@@ -221,6 +221,56 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
    tool_signal:null,tool_error:null,tool_deadline:false,within_deadline:true,
    pid_probe:probe,descendants_verified:false};
   child.cleanupVerified=true;child.cleanupBasis='owned-exit-pid-absence';child.cleanupError=null;
+ }
+ function readonlyAbsent(target){
+  try{process.kill(target,0);return {probe:null,error:'PRESENT'};}
+  catch(error){return error.code==='ESRCH'
+   ?{probe:Object.freeze({signal:0,outcome:'absent',error_code:'ESRCH'}),error:null}
+   :{probe:null,error:error.code||error.name};}
+ }
+ function verifyPosixGroupError(child){
+  if(!child.posixErrorEligible)return;
+  const witness=child.posixAbsenceWitness;
+  if(done||process.platform==='win32'||syntheticCleanupFailure||!ownedProcess(child)||
+     !witness||witness.process!==child.ownedProcess||witness.pid!==child.pid||
+     witness.group_error!=='EPERM'||child.cleanupGroupError!=='EPERM'||remaining()<=0){
+   directFallback(child,'POSIX_EP_ERROR_WITNESS_UNVERIFIED');return;
+  }
+  // The kernel absence witness predates these authentic queued callbacks.
+  if(!child.exitObserved||!child.closeObserved)return;
+  if(child.exit!==child.observedExit||child.signal!==child.observedSignal||
+     !((Number.isInteger(child.observedExit)&&child.observedSignal===null)||
+       (child.observedExit===null&&typeof child.observedSignal==='string'))){
+   directFallback(child,'POSIX_EP_TERMINAL_DRIFT');return;
+  }
+  const pid=readonlyAbsent(child.pid);
+  if(!pid.probe){directFallback(child,'POSIX_EP_FINAL_PID_'+pid.error);return;}
+  const group=readonlyAbsent(-child.pid);
+  if(!group.probe){directFallback(child,'POSIX_EP_FINAL_GROUP_'+group.error);return;}
+  if(done||remaining()<=0){directFallback(child,'POSIX_EP_FINAL_DEADLINE');return;}
+  child.cleanupProof={schema:'owned-child-exit-pid-group-absence-proof-v1',kind:'owned-exit-pid-group-absence',
+   pid:child.pid,pgid:child.pid,owned_process_identity:true,group_signal_attempt:'SIGKILL',
+   group_signal_error:child.cleanupGroupError,absence_observed_at_group_error:true,
+   at_error_pid_probe:witness.pid_probe,at_error_group_probe:witness.group_probe,
+   terminal_observed:true,close_observed:true,exit:child.exit,signal:child.signal,
+   within_deadline:true,pid_probe:pid.probe,group_probe:group.probe,descendants_verified:false};
+  child.cleanupVerified=true;child.cleanupBasis='owned-exit-pid-group-absence';child.cleanupError=null;
+ }
+ function capturePosixErrorAbsence(child){
+  // Only EPERM on this original owned group signal can enter this path.
+  if(done||process.platform==='win32'||syntheticCleanupFailure||!ownedProcess(child)||
+     child.cleanupGroupError!=='EPERM'||remaining()<=0){
+   directFallback(child,child.cleanupGroupError||'POSIX_EP_UNVERIFIED');return;
+  }
+  const pid=readonlyAbsent(child.pid);
+  if(!pid.probe){directFallback(child,'POSIX_EP_INITIAL_PID_'+pid.error);return;}
+  const group=readonlyAbsent(-child.pid);
+  if(!group.probe){directFallback(child,'POSIX_EP_INITIAL_GROUP_'+group.error);return;}
+  if(done||remaining()<=0){directFallback(child,'POSIX_EP_INITIAL_DEADLINE');return;}
+  child.posixAbsenceWitness=Object.freeze({process:child.ownedProcess,pid:child.pid,
+   group_error:child.cleanupGroupError,pid_probe:pid.probe,group_probe:group.probe});
+  child.posixErrorEligible=true;
+  verifyPosixGroupError(child); // otherwise wait only for original exit/close
  }
  function cleanup(){
   if(cleanupStarted)return;
@@ -264,7 +314,13 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
     });
    }else{
     try{process.kill(-child.process.pid,'SIGKILL');child.cleanupVerified=true;child.cleanupBasis='posix-group-absent';}
-    catch(error){child.cleanupVerified=error.code==='ESRCH';if(child.cleanupVerified)child.cleanupBasis='posix-group-absent';else directFallback(child,error.code||error.name);}
+    catch(error){
+     child.cleanupGroupError=error.code||error.name;
+     child.cleanupVerified=error.code==='ESRCH';
+     if(child.cleanupVerified)child.cleanupBasis='posix-group-absent';
+     else if(error.code==='EPERM')capturePosixErrorAbsence(child);
+     else directFallback(child,error.code||error.name);
+    }
    }
   }
  }
@@ -279,7 +335,7 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
  try{
   if(remaining()<=0)fail(new Error('Partition preflight exhausted the global envelope'));
   for(const part of ['heavy','remaining']){
-   const child={part,process:null,ownedProcess:null,pid:null,closed:false,closeObserved:false,exitObserved:false,observedExit:null,observedSignal:null,exit:null,signal:null,error:null,timedOut:false,overflow:false,protocolError:null,stdoutBytes:0,stderrBytes:0,stdout:[],stderr:[],cleanupRequested:false,cleanupVerified:null,cleanupBasis:null,cleanupProof:null,cleanupError:null,cleanupTool:null,cleanupToolClosed:false,cleanupToolDeadline:false,exitRaceEligible:false,start:performance.now(),parser:null,timer:null};
+   const child={part,process:null,ownedProcess:null,pid:null,closed:false,closeObserved:false,exitObserved:false,observedExit:null,observedSignal:null,exit:null,signal:null,error:null,timedOut:false,overflow:false,protocolError:null,stdoutBytes:0,stderrBytes:0,stdout:[],stderr:[],cleanupRequested:false,cleanupVerified:null,cleanupBasis:null,cleanupProof:null,cleanupError:null,cleanupGroupError:null,cleanupTool:null,cleanupToolClosed:false,cleanupToolDeadline:false,exitRaceEligible:false,posixErrorEligible:false,posixAbsenceWitness:null,start:performance.now(),parser:null,timer:null};
    children.push(child);
    if(signal.aborted||reason){child.closed=true;child.error='NOT_STARTED_AFTER_FAILURE';continue;}
    const command=commands(part);
@@ -324,7 +380,8 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
     if(code!==0||signalCode!==null||child.error)fail(new Error(`Python ${part} did not complete successfully`));
     else if(!child.protocolError){try{child.parser.finish();}catch(error){child.protocolError=error.message;fail(error);}}
     verifyExitedTaskkillRace(child);
-    if(process.platform!=='win32'&&child.pid&&child.cleanupRequested&&!groupAbsent(child.pid)){child.cleanupVerified=false;child.cleanupBasis='unverified';child.cleanupProof=null;fail(new Error('Owned POSIX group remains after close'));}
+    verifyPosixGroupError(child);
+    if(process.platform!=='win32'&&child.pid&&child.cleanupRequested&&!groupAbsent(child.pid)){directFallback(child,'POSIX_GROUP_REMAINS');fail(new Error('Owned POSIX group remains after close'));}
     maybeDone();
    });
   }
@@ -335,7 +392,7 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
   clearTimeout(globalTimer);signal.removeEventListener('abort',onAbort);
   for(const child of children)clearTimeout(child.timer);
  }
- const diagnostics={schema:'ci-python-partitions-result-v1',suite:suiteKey,platform:process.platform,node:process.versions.node,production,cleanup_strategy:syntheticCleanupFailure?'synthetic-missing-tool':process.platform==='win32'?'owned-windows-taskkill':'owned-posix-group',seconds:(performance.now()-start)/1000,child_timeout_ms:childMs,global_outer_ms:globalMs,effective_cleanup_deadline_ms:globalMs-250,source_script:plan.script,source_sha256:plan.source_sha256,children:children.map(c=>({part:c.part,pid:c.pid,argv:c.argv??null,seconds:c.seconds??null,spawned:c.pid!==null,terminal_observed:c.exitObserved,closed:c.closeObserved,exit:c.exit,signal:c.signal,error:c.error,timed_out:c.timedOut,overflow:c.overflow,protocol_error:c.protocolError,stdout_bytes:c.stdoutBytes,stderr_bytes:c.stderrBytes,last_phase:c.parser?.state.phase??null,started_ids:c.parser?.state.started??[],stopped_ids:c.parser?.state.stopped??[],terminal_results:c.parser?.state.terminals??[],summary:c.parser?.state.summary??null,cleanup_requested:c.cleanupRequested,cleanup_verified:c.cleanupVerified,cleanup_basis:c.cleanupBasis,cleanup_proof:c.cleanupProof,cleanup_error:c.cleanupError,cleanup_tool:c.cleanupTool}))};
+ const diagnostics={schema:'ci-python-partitions-result-v1',suite:suiteKey,platform:process.platform,node:process.versions.node,production,cleanup_strategy:syntheticCleanupFailure?'synthetic-missing-tool':process.platform==='win32'?'owned-windows-taskkill':'owned-posix-group',seconds:(performance.now()-start)/1000,child_timeout_ms:childMs,global_outer_ms:globalMs,effective_cleanup_deadline_ms:globalMs-250,source_script:plan.script,source_sha256:plan.source_sha256,children:children.map(c=>({part:c.part,pid:c.pid,argv:c.argv??null,seconds:c.seconds??null,spawned:c.pid!==null,terminal_observed:c.exitObserved,closed:c.closeObserved,exit:c.exit,signal:c.signal,error:c.error,timed_out:c.timedOut,overflow:c.overflow,protocol_error:c.protocolError,stdout_bytes:c.stdoutBytes,stderr_bytes:c.stderrBytes,last_phase:c.parser?.state.phase??null,started_ids:c.parser?.state.started??[],stopped_ids:c.parser?.state.stopped??[],terminal_results:c.parser?.state.terminals??[],summary:c.parser?.state.summary??null,cleanup_requested:c.cleanupRequested,cleanup_verified:c.cleanupVerified,cleanup_basis:c.cleanupBasis,cleanup_proof:c.cleanupProof,cleanup_error:c.cleanupError,cleanup_group_error:c.cleanupGroupError,cleanup_tool:c.cleanupTool}))};
  if(!reason){
   const [a,b]=children.map(c=>c.parser?.state.discovery);
   if(!a||!b||!equal(a.full_inventory,b.full_inventory)||new Set([...a.selected_ids,...b.selected_ids]).size!==7||!equal([...a.selected_ids,...b.selected_ids].sort(),plan.full_inventory.map(n=>`${plan.module_name}.${plan.class_name}.${n}`).sort()))reason=new Error('Both partitions do not exactly cover the discovered seven');

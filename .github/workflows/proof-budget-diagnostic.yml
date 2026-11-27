@@ -1,4 +1,4 @@
-name: Focused proof-budget diagnostic
+name: Focused macOS proof-budget diagnostic
 on:
   push:
     branches: ['diagnostic/pali-proof-budget-nov27-*']
@@ -6,8 +6,8 @@ permissions:
   contents: read
 jobs:
   native-fixtures:
-    name: Native fixture budgets / Windows / Node ${{ matrix.node }}
-    runs-on: windows-latest
+    name: Native fixture budgets / macOS / Node ${{ matrix.node }}
+    runs-on: macos-latest
     timeout-minutes: 15
     strategy:
       fail-fast: false
@@ -46,15 +46,15 @@ jobs:
       - name: Five original wrappers with their unchanged child deadlines
         if: ${{ always() && !cancelled() && steps.build.outcome == 'success' }}
         timeout-minutes: 8
-        shell: pwsh
+        shell: bash
         run: |
-          node --test --test-concurrency=1 tests/approved-acceptance.test.mjs tests/approved-current339-authority-negatives.test.mjs tests/four-boundary-history.test.mjs tests/six-boundary-history.test.mjs tests/six-operation-scope.test.mjs 2>&1 | Tee-Object -FilePath proof-budget-node${{ matrix.node }}.tap
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          set -euo pipefail
+          node --test --test-concurrency=1 tests/approved-acceptance.test.mjs tests/approved-current339-authority-negatives.test.mjs tests/four-boundary-history.test.mjs tests/six-boundary-history.test.mjs tests/six-operation-scope.test.mjs 2>&1 | tee proof-budget-node${{ matrix.node }}.tap
       - name: Preserve exact diagnostic output
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: proof-budget-windows-node${{ matrix.node }}
+          name: proof-budget-macos-node${{ matrix.node }}
           path: proof-budget-node${{ matrix.node }}.tap
           if-no-files-found: warn
           retention-days: 7

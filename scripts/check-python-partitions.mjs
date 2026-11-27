@@ -128,6 +128,7 @@ function checkVerifiedCleanupBasis(child,result){
  if(child.cleanup_basis==='owned-exit-pid-absence'){
   assert.equal(result.platform,'win32');
   assert.equal(result.cleanup_strategy,'owned-windows-taskkill');
+  assert.equal(child.cleanup_group_error,null);
   same(child.cleanup_tool,{exit:128,signal:null,error:null},'actual not-found tool result must be retained');
   const proof=child.cleanup_proof;
   assert.ok(proof,'direct-child absence requires a complete composite proof');
@@ -143,15 +144,40 @@ function checkVerifiedCleanupBasis(child,result){
    tool_exit:128,tool_signal:null,tool_error:null,tool_deadline:false,
    within_deadline:true,pid_probe:{signal:0,outcome:'absent',error_code:'ESRCH'},
    descendants_verified:false},'tool128 is not success without the exact already-exited proof');
+ }else if(child.cleanup_basis==='owned-exit-pid-group-absence'){
+  assert.notEqual(result.platform,'win32');
+  assert.equal(result.cleanup_strategy,'owned-posix-group');
+  assert.equal(child.cleanup_tool,null);assert.equal(child.cleanup_group_error,'EPERM');
+  assert.ok((Number.isInteger(child.exit)&&child.signal===null)||
+   (child.exit===null&&typeof child.signal==='string'),'actual terminal exit/signal pair required');
+  const proof=child.cleanup_proof;
+  assert.ok(proof,'EPERM requires initial and post-close kernel absence evidence');
+  same(Object.keys(proof),['schema','kind','pid','pgid','owned_process_identity',
+   'group_signal_attempt','group_signal_error','absence_observed_at_group_error',
+   'at_error_pid_probe','at_error_group_probe','terminal_observed','close_observed',
+   'exit','signal','within_deadline','pid_probe','group_probe','descendants_verified']);
+  same(proof,{schema:'owned-child-exit-pid-group-absence-proof-v1',
+   kind:'owned-exit-pid-group-absence',pid:child.pid,pgid:child.pid,
+   owned_process_identity:true,group_signal_attempt:'SIGKILL',group_signal_error:'EPERM',
+   absence_observed_at_group_error:true,
+   at_error_pid_probe:{signal:0,outcome:'absent',error_code:'ESRCH'},
+   at_error_group_probe:{signal:0,outcome:'absent',error_code:'ESRCH'},
+   terminal_observed:true,close_observed:true,exit:child.exit,signal:child.signal,
+   within_deadline:true,pid_probe:{signal:0,outcome:'absent',error_code:'ESRCH'},
+   group_probe:{signal:0,outcome:'absent',error_code:'ESRCH'},descendants_verified:false},
+  'raw EPERM is not success without both stages of the exact owned PID/group proof');
  }else if(child.cleanup_basis==='windows-taskkill-complete'){
   assert.equal(result.platform,'win32');
   assert.equal(result.cleanup_strategy,'owned-windows-taskkill');
+  assert.equal(child.cleanup_group_error,null);
   same(child.cleanup_tool,{exit:0,signal:null,error:null});
   assert.equal(child.cleanup_proof,null);
  }else{
   assert.equal(child.cleanup_basis,'posix-group-absent','unknown cleanup evidence cannot pass');
   assert.notEqual(result.platform,'win32');
   assert.equal(result.cleanup_strategy,'owned-posix-group');
+  assert.ok(child.cleanup_group_error===null||child.cleanup_group_error==='ESRCH',
+   'ordinary group absence cannot silently absorb EPERM or an unknown error');
   assert.equal(child.cleanup_tool,null);assert.equal(child.cleanup_proof,null);
  }
 }
@@ -198,10 +224,12 @@ async function checkClosed(root,suiteKey,caseKey,result){
    if(caseKey==='cleanup-tool-failure'){
     assert.equal(child.cleanup_verified,false,'synthetic cleanup failure must stay fatal');
     assert.equal(child.cleanup_basis,'unverified');assert.equal(child.cleanup_proof,null);
+    assert.equal(child.cleanup_group_error,null);
     assert.ok(child.cleanup_error,'cleanup failure diagnostic required');
    }else checkVerifiedCleanupBasis(child,result);
   }else{
    assert.equal(child.cleanup_basis,null);assert.equal(child.cleanup_proof,null);
+   assert.equal(child.cleanup_group_error,null);
   }
  }
  assert.equal(new Set(pids).size,pids.length,'owned child PIDs are distinct');
@@ -364,7 +392,8 @@ async function runtimeCase(suiteKey,caseKey){
   cleanup_strategy:result.cleanup_strategy??'actual-platform',
   cleanup_evidence:result.children.map(child=>({part:child.part,basis:child.cleanup_basis,
    verified:child.cleanup_verified,tool_exit:child.cleanup_tool?.exit??null,
-   direct_absence_proof_checked:child.cleanup_basis==='owned-exit-pid-absence',
+   group_signal_error:child.cleanup_group_error,
+   direct_absence_proof_checked:['owned-exit-pid-absence','owned-exit-pid-group-absence'].includes(child.cleanup_basis),
    descendants_verified:child.cleanup_proof?.descendants_verified??null})),
   cleanup_failure_remained_fatal:caseKey==='cleanup-tool-failure'?true:null};
  // Remove only our exact fresh tree, after both closes and measured PID absence.
