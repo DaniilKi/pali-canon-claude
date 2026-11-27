@@ -6,52 +6,52 @@
   "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
   "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
   "source_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/SOURCE_INVERSE_REVIEW.json",
-    "bytes": 205304,
-    "sha256": "9c7a62b471c80b69a24674af7ac90a669e246136b1f9d3c35e278b4320f6c6f6"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/SOURCE_INVERSE_REVIEW.json",
+    "bytes": 206113,
+    "sha256": "92087237fe94a99b17b82d369c505d540180a03464378d27e537769e55d1451a"
   },
   "inputs": {
     "plan": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_WINDOWS_PARTITION_SOURCE_PLAN.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NATIVE_PLATFORM_SOURCE_PLAN.json",
       "bytes": 25924,
-      "sha256": "f58bc8ad2a9755024e29878c365146fbed2a2b2bd029c7f10cd232e89c4aad13"
+      "sha256": "1204f567a4cae5daf8df53f42f6e26a52e4e1db25177a68a0c0a1659b01dec0f"
     },
     "delta_policy": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_WINDOWS_PARTITION_SOURCE_POLICY.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NATIVE_PLATFORM_SOURCE_POLICY.json",
       "bytes": 2744,
-      "sha256": "57b9b17c177992f288822c4ee011d6a34509cfbf575cd2461e3639aac4181bb3"
+      "sha256": "b32a6a91d4397bca0aa84e18b12d846c26ab05ca3509b84162055a3198905a21"
     },
     "independent_input_review": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-final-input-review/INPUT_REVIEW.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-final-input-review/INPUT_REVIEW.json",
       "bytes": 579,
-      "sha256": "af85dba7ec28a2ea4d68eed3f79ab88da76d208598e2914b8c44bb1220a4e75a"
+      "sha256": "fc4ba142871acfd4f1a75a282d70dada50f3e6ac9765bd7c3a736fd3c5d0685f"
     },
     "generation_command": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATION_COMMAND.json",
-      "bytes": 1465,
-      "sha256": "074031b5cb2c83af1509d29ce438452f3ca44282b5f47259e0d2cf9c5c35a4f1"
+      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATION_COMMAND.json",
+      "bytes": 1487,
+      "sha256": "c95375d0adfc8f36d7dd8c5e258d5ea36925766d65470a61a5c6395b922722da"
     },
     "generation_result": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATED/GENERATION_RESULT.json",
-      "bytes": 3118,
-      "sha256": "659132c84b48b5ace42ae2bd375e2e4e0a10bef961f7b98f2cc51d28b3ba5d8d"
+      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/GENERATION_RESULT.json",
+      "bytes": 3420,
+      "sha256": "795337c21b6fecc05c5d3943042212e9ec4c6c39be84d91382aa3e7ac3b647b5"
     }
   },
   "generated_files": {
     "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
-      "bytes": 508362,
-      "sha256": "42b490f0755ec0b0735c6989556319b501cd487aa3fa2076f504e69f8cfa5fea"
+      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "bytes": 514999,
+      "sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85"
     },
     "docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
-      "bytes": 17219,
-      "sha256": "bc88a126184d2798a1bbed6fd4ee8ffa69cb789cadfa9e453a9d346e5c604a9c"
+      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
+      "bytes": 17220,
+      "sha256": "4e310da8341bbe68e7c8bcfedc76aaf910e134b09782e520f85148cdfbf2119e"
     },
     "tests/helpers/intake359-source-input.mjs": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
+      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
       "bytes": 11947,
-      "sha256": "72b1c2e643dc7dbb8038f1ddd34b6bd100c1061c8aedb970c6d689e1131241f2"
+      "sha256": "bbfd36dc66944f09f9c420cda5c46ff245a7e3883913b50552b255410baf4aa0"
     }
   },
   "source_packet14": {
@@ -103,19 +103,19 @@
     "docs/evidence/apadana/english351-360-nine/SOURCE_INVERSE_CURRENT368_REVIEW.json"
   ],
   "preserved_prior_leaf_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/before/docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/before/docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
     "bytes": 6772,
     "sha256": "c832bdccf88b1e4749e7b76b7090ad3eb7bee76d7a898c565051cf629dce55ba"
   },
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/verify_outputs.py",
-    "bytes": 9324,
-    "sha256": "364ee2ad0e01e2fb69e94eb83f0a355ec51938e45898f2f57d9ec5c8d55f84d5"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/verify_outputs.py",
+    "bytes": 11210,
+    "sha256": "dc80a3a80c0bb8d9c9f950c07e5eecdd36c051866b7cdb4e1515bdd53c2b426c"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/CHECKS.json",
-    "bytes": 28251,
-    "sha256": "3e9c93e1a9da22639fbe56bfa25ad2623f78f03aed28efe3a9fad176d486c9b1"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/CHECKS.json",
+    "bytes": 28383,
+    "sha256": "6c519926a5c862ae22ccf7a554637c413b18bd310e649291ddbe48989d620d98"
   },
   "remaining_gates": [
     "Root application of exactly3payloads+2source-only aliases",

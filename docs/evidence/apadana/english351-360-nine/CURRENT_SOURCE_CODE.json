@@ -6,7 +6,7 @@
   "historical_archive_sha256": "f82ac88f6b6cbc2410d03d76989cf105bf5a6fa039a4ad24043e39e529a43b4d",
   "historical_archive_root": "docs/evidence/apadana/english351-360-nine/BEFORE_CURRENT368_SOURCE/",
   "original_manifest_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
-  "current_source_map_sha256": "42b490f0755ec0b0735c6989556319b501cd487aa3fa2076f504e69f8cfa5fea",
+  "current_source_map_sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85",
   "changed_original_paths": [
     ".github/workflows/check.yml",
     "AGENTS.md",
@@ -180,7 +180,7 @@
     },
     "docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json": {
       "bytes": 40286,
-      "sha256": "6e270a07dd0850cf9e649d60b16a8c1a120b9a62e7535a6b596187792ef39f14"
+      "sha256": "9c1a10c0b74f8663a300d9edc0f864397f51c76cdc0cbf4697f5e0df68e42d39"
     },
     "docs/evidence/qa/windows20-partitions/BASELINE_3CED_TEST_FILES.json": {
       "bytes": 38515,
@@ -215,16 +215,16 @@
       "sha256": "5b8e3bd22cfc3a7d2f9968f464a9e2c1b31ce63cda658d22b31c3a84867b086a"
     },
     "docs/evidence/qa/windows20-partitions/WINDOWS_PYTHON_PARTITION_CASE_SOURCE_REVIEW.json": {
-      "bytes": 16778,
-      "sha256": "12f25d5f641901a77bfccbdacc5cba8a0ef96e9f8fcfaaaf9671c4722b2b1984"
+      "bytes": 227310,
+      "sha256": "195f07b99da42183b005077a5453aae51b5a87a112055e260d6fbdd9c3986fdb"
     },
     "docs/qa/english351-360-nine-bindings.md": {
       "bytes": 4346,
       "sha256": "c1d5cca957938e81d2813e845e735497145ea89b9d03c6cfa6f86ebb75bb41c6"
     },
     "docs/qa/english351-360-nine-installed.md": {
-      "bytes": 14030,
-      "sha256": "c7f3c668c88cdbdfbab2464845d721aa931245f91429963b5032491805a000ac"
+      "bytes": 18046,
+      "sha256": "32e335f6fadf37715ff0b6a51d5c50905b44aac6133b8e061b46a847deb015cb"
     },
     "scripts/apadana/thera351-360-nine/SOURCE_NINE_INPUT_CONTRACT.json": {
       "bytes": 190753,
@@ -239,16 +239,16 @@
       "sha256": "11a2858afa9a302f4cf27f2c54d24a77024bec8c5a73f3f08c7e3f863c9a6feb"
     },
     "scripts/check-python-partitions.mjs": {
-      "bytes": 42389,
-      "sha256": "47821bb1967ee8aa91d249632c8a767e1deb729f412f00ea2ea777bfc0eef276"
+      "bytes": 46218,
+      "sha256": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0"
     },
     "scripts/ci-python-partition-driver.py": {
       "bytes": 11424,
       "sha256": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3"
     },
     "scripts/ci-test-partitions.mjs": {
-      "bytes": 41115,
-      "sha256": "30e4290196fd97178e2bf9f1d769e37199cc71a4ba954e4851d3344eff4f20fa"
+      "bytes": 49226,
+      "sha256": "906c340d30d8616def5ca7cdbf72d7a901c1af8a19f97e3bf002cfc0e9fb3448"
     },
     "scripts/web-reader-thera351-360-nine-check.py": {
       "bytes": 86224,
@@ -283,8 +283,8 @@
       "sha256": "964397cde968c11ff47a9181ddd6e2623868fa7b1399125d56435a43edd922f3"
     },
     "tests/ci-test-partitions.test.mjs": {
-      "bytes": 35255,
-      "sha256": "3a2408895e3678a1fae04a5aa34750c66eceab065fa9dc991d29a432a26eab47"
+      "bytes": 42320,
+      "sha256": "ebd3356725cf0270fcd6104b20d04de77b9c2a35966a6d4023043ce5e2e69639"
     },
     "tests/fixtures/canon-before-intake368/apadana.json": {
       "bytes": 1457596,
@@ -299,8 +299,8 @@
       "sha256": "9a4103e3c215b9229eeb54e8c7538a93db71452ad1645842de93f9ae0ea706d3"
     },
     "tests/helpers/partitioned-python.mjs": {
-      "bytes": 25278,
-      "sha256": "9f3ad23d4a3044878d0f816621b67c21d0f94256bda0dac0ae2ce1da76cc20e8"
+      "bytes": 30137,
+      "sha256": "31b57009d667c0d88dfd73b849f0e9506e39ae9e26ab11b27b01cf0a3f9066f3"
     },
     "tests/helpers/thera335-350-evidence.mjs": {
       "bytes": 14286,

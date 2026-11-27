@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json
-  CI_TEST_BASELINE_SHA: 6e270a07dd0850cf9e649d60b16a8c1a120b9a62e7535a6b596187792ef39f14
+  CI_TEST_BASELINE_SHA: 9c1a10c0b74f8663a300d9edc0f864397f51c76cdc0cbf4697f5e0df68e42d39
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -142,7 +142,28 @@ jobs:
           python-version: '3.12'
       - run: npm ci --no-audit --no-fund
       - run: python -m pip install playwright==1.62.0
-      - run: python -m playwright install --with-deps chromium
+      - name: Install the official Chromium browser with Ubuntu dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          pali_python="$(python -c 'import sys; print(sys.executable)')"
+          test "$(python -c 'from importlib.metadata import version; print(version("playwright"))')" = '1.62.0'
+          pali_apt_dir="$(mktemp -d "$RUNNER_TEMP/playwright-ubuntu-apt.XXXXXX")"
+          trap 'rm -rf "$pali_apt_dir"' EXIT
+          chmod 700 "$pali_apt_dir"
+          test -f /etc/apt/sources.list.d/ubuntu.sources
+          test -s /usr/share/keyrings/ubuntu-archive-keyring.gpg
+          cp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          cmp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          test "$(grep '^Signed-By:' "$pali_apt_dir/ubuntu.sources" | sort -u)" = 'Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg'
+          mkdir "$pali_apt_dir/empty-sourceparts"
+          printf 'Dir::Etc::sourcelist "%s";\nDir::Etc::sourceparts "%s";\n' "$pali_apt_dir/ubuntu.sources" "$pali_apt_dir/empty-sourceparts" > "$pali_apt_dir/apt.conf"
+          test "$(sudo env APT_CONFIG="$pali_apt_dir/apt.conf" apt-config shell SelectedList Dir::Etc::sourcelist SelectedParts Dir::Etc::sourceparts)" = "SelectedList='$pali_apt_dir/ubuntu.sources'
+          SelectedParts='$pali_apt_dir/empty-sourceparts'"
+          sha256sum /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          sudo env APT_CONFIG="$pali_apt_dir/apt.conf" "$pali_python" -m playwright install-deps chromium
+          cmp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          python -m playwright install chromium
       - name: Build standalone server and reader assets
         run: npm run build
       - name: Check reader layout, continuation and accessibility semantics offline
@@ -1890,7 +1911,27 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: python -m pip install playwright==1.62.0
       - name: Install the official selected Playwright engine and dependencies
-        run: python -m playwright install --with-deps ${{ matrix.engine }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pali_python="$(python -c 'import sys; print(sys.executable)')"
+          test "$(python -c 'from importlib.metadata import version; print(version("playwright"))')" = '1.62.0'
+          pali_apt_dir="$(mktemp -d "$RUNNER_TEMP/playwright-ubuntu-apt.XXXXXX")"
+          trap 'rm -rf "$pali_apt_dir"' EXIT
+          chmod 700 "$pali_apt_dir"
+          test -f /etc/apt/sources.list.d/ubuntu.sources
+          test -s /usr/share/keyrings/ubuntu-archive-keyring.gpg
+          cp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          cmp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          test "$(grep '^Signed-By:' "$pali_apt_dir/ubuntu.sources" | sort -u)" = 'Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg'
+          mkdir "$pali_apt_dir/empty-sourceparts"
+          printf 'Dir::Etc::sourcelist "%s";\nDir::Etc::sourceparts "%s";\n' "$pali_apt_dir/ubuntu.sources" "$pali_apt_dir/empty-sourceparts" > "$pali_apt_dir/apt.conf"
+          test "$(sudo env APT_CONFIG="$pali_apt_dir/apt.conf" apt-config shell SelectedList Dir::Etc::sourcelist SelectedParts Dir::Etc::sourceparts)" = "SelectedList='$pali_apt_dir/ubuntu.sources'
+          SelectedParts='$pali_apt_dir/empty-sourceparts'"
+          sha256sum /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          sudo env APT_CONFIG="$pali_apt_dir/apt.conf" "$pali_python" -m playwright install-deps ${{ matrix.engine }}
+          cmp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          python -m playwright install ${{ matrix.engine }}
       - name: Build and pack the standalone reader
         run: |
           npm run build
