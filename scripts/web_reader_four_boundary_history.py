@@ -3,7 +3,7 @@
 No production loader imports this helper. No ambient switch or current fallback.
 The pure logical inverse is separate from exact complete-input acceptance.
 """
-from web_reader_six_boundary_history import (canon_before_six, c1_logical_input, _historical_c1_data_bytes as historical_c1_data_bytes, copy_six_historical_fixture, C1_DATA_PATHS)
+from web_reader_six_boundary_history import (canon_before_six, c1_logical_input, _historical_c1_data_bytes as historical_c1_data_bytes, copy_six_historical_fixture, C1_DATA_PATHS, _C1OperationScope, _c1_operation_scope, _reject_c1_scope)
 
 import copy
 import gzip
@@ -11,6 +11,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from web_reader_next_ten_boundary_history import _NextTenBinding
 
 OLD_CANON_SHA = '1c40c69f6d1efb7f4407260cfba24c905c959ae21cf678665816772d37a53b32'
 NEW_CANON_SHA = '46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8'
@@ -160,7 +161,7 @@ def boundary_runtime_records(root, previous):
     return files
 
 
-def assert_current_canonical_data(root):
+def _historical_four_assert_current_canonical_data_body(root):
     """Validate current changed data BEFORE allowing historical byte substitution.
 
     Unchanged paths are intentionally checked by the preserved historical assertions,
@@ -193,7 +194,7 @@ def assert_current_canonical_data(root):
         _VALIDATED_CANON_CONTENT = key
 
 
-def historical_data_bytes(root, name):
+def _historical_four_data_bytes_body(root, name):
     """Only three historical byte-read callsites may substitute sealed old bytes.
 
     Other paths, including apadana.json, always return actual current bytes.
@@ -202,7 +203,7 @@ def historical_data_bytes(root, name):
         raise ValueError('Path outside the exact historical26-data set')
     if name not in CHANGED_DATA:
         return regular(root, name)
-    assert_current_canonical_data(root)
+    _assert_four_current_canonical_data(root)
     raw = regular(root, 'tests/fixtures/canon-before333/' + Path(name).name)
     assert {'bytes': len(raw), 'sha256': digest(raw)} == OLD_DATA[name]
     return raw
@@ -235,3 +236,55 @@ def historical_canon_bytes(raw):
 def copy_historical_fixture(source_root, destination_root):
     copy_six_historical_fixture(source_root, destination_root)
     return historical_c1_copy_historical_fixture(source_root, destination_root)
+
+
+# Own one existing private capture for each genuine public FOUR operation.
+# Already-owned approved-chain scopes use only the explicit private entries.
+def _physical_four_root(root):
+    _reject_c1_scope(root)
+    if not isinstance(root, (str, Path)):
+        raise ValueError('Public four-history entry requires a physical root, never a scope')
+    return root
+
+
+def _check_four_scope(root):
+    if type(root) is not _C1OperationScope:
+        raise ValueError('Exact private four-history operation scope required')
+    root._check()
+    binding = root._next_ten_binding
+    if type(binding) is not _NextTenBinding:
+        raise ValueError('Exact private next-ten binding required')
+    binding._check()
+    if binding._root != root._root:
+        raise ValueError('Four-history operation root identity changed')
+
+
+def _assert_four_current_canonical_data(root):
+    if isinstance(root, _C1OperationScope):
+        _check_four_scope(root)  # no extra reads; old data accessors reread proofs
+        return _historical_four_assert_current_canonical_data_body(root)
+    return assert_current_canonical_data(root)
+
+
+def assert_current_canonical_data(root):
+    root = _physical_four_root(root)
+    with _c1_operation_scope(root) as scoped:
+        return _assert_four_current_canonical_data(scoped)
+
+
+def _historical_four_data_bytes(root, name):
+    if isinstance(root, _C1OperationScope):
+        _check_four_scope(root)
+        return _historical_four_data_bytes_body(root, name)
+    return historical_data_bytes(root, name)
+
+
+def historical_data_bytes(root, name):
+    root = _physical_four_root(root)
+    if name not in OLD_DATA:
+        raise ValueError('Path outside the exact historical26-data set')
+    if name in CHANGED_DATA or name in C1_DATA_PATHS:
+        with _c1_operation_scope(root) as scoped:
+            return _historical_four_data_bytes(scoped, name)
+    # Unchanged paths preserve their ordinary guarded physical read semantics.
+    return _historical_four_data_bytes_body(root, name)
