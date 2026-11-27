@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/english381-386/BASELINE_380_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: bbb17fdc6437d2f9b4f05fdf75db6cfc9c23b8a4b51ac5a05bc50dac20442ae3
+  CI_TEST_BASELINE_SHA: d6d38f95b43c4f2cb67687e23e664ce2a1b09d24ff786dd834e9b303500e6c55
 jobs:
   hosted-memory:
     name: Hosted memory budget

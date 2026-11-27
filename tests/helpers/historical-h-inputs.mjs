@@ -10,7 +10,7 @@ import {URL,fileURLToPath} from 'node:url';
 import {INTAKE375_BASE} from './intake375-metadata.mjs';
 import {intake380Authority,assertCurrent380SourceClosure} from './intake380-metadata.mjs';
 const MATERIALIZER='tests/materialize_h_history.py';
-const MATERIALIZER_SHA='d00f6568ca2c0e8245093b48e7ef7d8bfb247c37beab3ecd40c6a4f0c9c68f14';
+const MATERIALIZER_SHA='9fc43f7cba929bf8868ffdbc606ac53c780d248f7e381e27b2bc415ce7b9c2ec';
 const H_INDEX='docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json';
 const H_WORKFLOW='.github/workflows/check.yml';
 const PREPARE_TIMEOUT_MS=20000;

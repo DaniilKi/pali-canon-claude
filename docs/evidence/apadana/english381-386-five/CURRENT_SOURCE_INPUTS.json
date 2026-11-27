@@ -340,8 +340,8 @@
       "sha256": "bc8fac1e7cb39c2f046db58c0a3a3ba9109161aff001315934970351b70c3819"
     },
     "tests/materialize_h_history.py": {
-      "bytes": 12109,
-      "sha256": "d00f6568ca2c0e8245093b48e7ef7d8bfb247c37beab3ecd40c6a4f0c9c68f14"
+      "bytes": 12417,
+      "sha256": "9fc43f7cba929bf8868ffdbc606ac53c780d248f7e381e27b2bc415ce7b9c2ec"
     },
     "tests/next-ten-history-data.test.mjs": {
       "bytes": 10272,

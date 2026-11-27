@@ -178,8 +178,15 @@ def _materialize(source_root,destination,kind):
     _prep_phase('write-start',len(rows)+1)
     try:
         for name in sorted(rows):
-            _exclusive(destination,name,raw[name]);os.chmod(destination/name,int(rows[name]['mode'],8)&0o777)
-            status=(destination/name).lstat()
+            _exclusive(destination,name,raw[name])
+            if os.name=='nt':
+                status=(destination/name).lstat()
+                if not (status.st_mode & stat.S_IWRITE):
+                    os.chmod(destination/name,int(rows[name]['mode'],8)&0o777)
+                    status=(destination/name).lstat()
+            else:
+                os.chmod(destination/name,int(rows[name]['mode'],8)&0o777)
+                status=(destination/name).lstat()
             _require(stat.S_ISREG(status.st_mode) and not stat.S_ISLNK(status.st_mode) and
                      (os.name=='nt' or bool(status.st_mode&0o111)==(rows[name]['mode']=='100755')) and
                      _regular(destination,name)==raw[name],'H copy/mode/readback mismatch')
