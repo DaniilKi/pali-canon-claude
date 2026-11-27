@@ -11,7 +11,7 @@ assert.equal(Object.keys(HistoricalH368Profiles).filter(id=>id.startsWith('tha-a
 import {after as closeOwnedHistoricalHInputs} from 'node:test';
 import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
 import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
-import {pathToFileURL as historicalHFileURL} from 'node:url';
+import {pathToFileURL as historicalHFileURL,fileURLToPath as actualRFilePath} from 'node:url';
 const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
 const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
 closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
@@ -33,7 +33,9 @@ import {readPassage} from '../src/chatgpt-widget.mjs';
 import {liveCache} from '../src/cache.mjs';
 import {thera312319Evidence,digest,blob,REV,VRI} from './helpers/thera312-319-evidence.mjs';
 
-const e=thera312319Evidence(),originalFetch=globalThis.fetch;
+// Anchor only the declared publisher checkout at actual R before rights paths enter the owned-H reader.
+function publisherEvidenceAtActualR(value){return {...value,checkout:value.checkout?resolveHistoricalHInput(actualRFilePath(new URL('../',import.meta.url)),value.checkout):value.checkout};}
+const e=publisherEvidenceAtActualR(thera312319Evidence()),originalFetch=globalThis.fetch;
 const clone=value=>JSON.parse(JSON.stringify(value)),profile=id=>APADANA_PROFILES[id],tid=p=>canon.translationId(p);
 const parsed=id=>parseApadana(e.artifact(id),profile(id));
 const labelCount=label=>{const [first,last=first]=label.split('-').map(Number);return last-first+1;};

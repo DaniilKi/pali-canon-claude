@@ -281,7 +281,7 @@
     },
     "tests/thera312-319-source.test.mjs": {
       "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
-      "after_sha256": "8282d747a150b3593f39f789057dd786be26fcf2583f54a1512dc304356fac3f"
+      "after_sha256": "7ca1439adea59947d393274811f71e06b0c397b5afaa8a6571e64e20d8057c53"
     },
     "tests/thera321-329-client.test.mjs": {
       "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
@@ -344,11 +344,11 @@
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
-    "docs/evidence/apadana/english371-378-seven/CURRENT_SOURCE_INPUTS.json": "7a06693d98352e16c80be2138d003c92ac843f81c93480a7cf76435d9d5e9932",
+    "docs/evidence/apadana/english371-378-seven/CURRENT_SOURCE_INPUTS.json": "065aa92916f5d2db279c8c35bc43d19027153ae805faabc461bdfedc507f3e48",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
     "tests/helpers/historical-h-inputs.mjs": "4ee112c7c5eb79aba81495e5f31974c0335be38235e639bacd2797bb6e92bacf",
-    "tests/helpers/intake375-metadata.mjs": "336b8dc83c8272a1ca044b1dd9fbb240ba6cdec3521c89c902591527ebfae9fa",
+    "tests/helpers/intake375-metadata.mjs": "ee77c32767be7713ef383c835b44ce942e510008da2c057bcd42380368edbf3d",
     "tests/helpers/partitioned-python.mjs": "31b57009d667c0d88dfd73b849f0e9506e39ae9e26ab11b27b01cf0a3f9066f3",
     "tests/helpers/verse-scope-python.mjs": "c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f",
     "tests/materialize_h_history.py": "244c73d63bbfd06fb4044d1621a50953ef25416c0a3cee1072402cff19dd5e48"
@@ -617,7 +617,7 @@
     "tests/thera301-310-client.test.mjs": "148c911bce465cc026001bba1b77efcd593433f4e125259582fcc68d9fd56b51",
     "tests/thera301-310-source.test.mjs": "cbf3d6c46417364a5484139e952539c5cd6f5e3652c5401baccd12a08ae86efe",
     "tests/thera312-319-client.test.mjs": "945439a4c506f50368440376e0f7dec9588788f9c1f6d1e08f17adc393970dc8",
-    "tests/thera312-319-source.test.mjs": "8282d747a150b3593f39f789057dd786be26fcf2583f54a1512dc304356fac3f",
+    "tests/thera312-319-source.test.mjs": "7ca1439adea59947d393274811f71e06b0c397b5afaa8a6571e64e20d8057c53",
     "tests/thera321-329-client.test.mjs": "30b56a5f6d781ad63f2cdfae008686bacf799f24af26c14ef216136d163535d5",
     "tests/thera321-329-source.test.mjs": "dfd57e07223ef5863cf7c8c2d1a532bec797250aebd5644677243629438736ac",
     "tests/thera331-334-preface-client.test.mjs": "2f77e0f5f22b111d5cb0d0b9b163bddcfaff2a05eb7fec2d709159130f7698d5",
@@ -711,6 +711,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/english371-378/CASE_SOURCE_REVIEW.json",
-    "sha256": "5a7ed5bf9f5dfdc40aba97715a5f8e30f307eeefd8ba53f8459035d40e4af548"
+    "sha256": "eceb16a13834cd26f9215810ef394c9e393be24bf27cff09cccb0746184d3c18"
   }
 }

@@ -400,8 +400,8 @@
       "sha256": "945439a4c506f50368440376e0f7dec9588788f9c1f6d1e08f17adc393970dc8"
     },
     "tests/thera312-319-source.test.mjs": {
-      "bytes": 15855,
-      "sha256": "8282d747a150b3593f39f789057dd786be26fcf2583f54a1512dc304356fac3f"
+      "bytes": 16211,
+      "sha256": "7ca1439adea59947d393274811f71e06b0c397b5afaa8a6571e64e20d8057c53"
     },
     "tests/thera321-329-client.test.mjs": {
       "bytes": 21951,

@@ -265,7 +265,7 @@
     },
     "tests/thera312-319-source.test.mjs": {
       "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
-      "after_sha256": "8282d747a150b3593f39f789057dd786be26fcf2583f54a1512dc304356fac3f"
+      "after_sha256": "7ca1439adea59947d393274811f71e06b0c397b5afaa8a6571e64e20d8057c53"
     },
     "tests/thera321-329-client.test.mjs": {
       "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
@@ -5791,7 +5791,7 @@
       },
       "tests/thera312-319-source.test.mjs": {
         "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
-        "after_sha256": "8282d747a150b3593f39f789057dd786be26fcf2583f54a1512dc304356fac3f",
+        "after_sha256": "7ca1439adea59947d393274811f71e06b0c397b5afaa8a6571e64e20d8057c53",
         "before": [
           {
             "name": "exact333 identities preserve all325 full ordered profile and link objects, rights policy and all canonical/non-Apadana data",
@@ -5870,7 +5870,7 @@
           {
             "name": "exact333 identities preserve all325 full ordered profile and link objects, rights policy and all canonical/non-Apadana data",
             "name_expression": "'exact333 identities preserve all325 full ordered profile and link objects, rights policy and all canonical/non-Apadana data'",
-            "line": 53,
+            "line": 55,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5879,7 +5879,7 @@
           {
             "name": "all eight original raw/blob pins and six rights artifacts yield73 paragraphs34 complete notes with independent UTF16/layout hashes",
             "name_expression": "'all eight original raw/blob pins and six rights artifacts yield73 paragraphs34 complete notes with independent UTF16/layout hashes'",
-            "line": 71,
+            "line": 73,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5888,7 +5888,7 @@
           {
             "name": "all49 whole-verse quotation entries match independent pins, including the single319 eight-line4-5 entry and excluded title/colophons/notes",
             "name_expression": "'all49 whole-verse quotation entries match independent pins, including the single319 eight-line4-5 entry and excluded title/colophons/notes'",
-            "line": 85,
+            "line": 87,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5897,7 +5897,7 @@
           {
             "name": "all approved edition caveats and exact publisher titles remain literal beside unchanged independent VRI titles",
             "name_expression": "'all approved edition caveats and exact publisher titles remain literal beside unchanged independent VRI titles'",
-            "line": 103,
+            "line": 105,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5906,7 +5906,7 @@
           {
             "name": "all34 numbered notes keep independently recorded owners;312 two c/ch displays stay solely in note3 and no chapter apparatus is invented",
             "name_expression": "'all34 numbered notes keep independently recorded owners;312 two c/ch displays stay solely in note3 and no chapter apparatus is invented'",
-            "line": 116,
+            "line": 118,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5915,7 +5915,7 @@
           {
             "name": "authentic positives precede raw/title/order/rights/note/layout/HTML corruption and forged-profile refusal controls",
             "name_expression": "'authentic positives precede raw/title/order/rights/note/layout/HTML corruption and forged-profile refusal controls'",
-            "line": 136,
+            "line": 138,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5924,7 +5924,7 @@
           {
             "name": "all existing held publishers plus311/320 and media refuse before transport while genuine canonical Pali remains available",
             "name_expression": "'all existing held publishers plus311/320 and media refuse before transport while genuine canonical Pali remains available'",
-            "line": 158,
+            "line": 160,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5933,7 +5933,7 @@
           {
             "name": "cold and warm link-rights guards and authentic source-bound continuations reject revision/prefix/owner drift without fallback",
             "name_expression": "'cold and warm link-rights guards and authentic source-bound continuations reject revision/prefix/owner drift without fallback'",
-            "line": 171,
+            "line": 173,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
