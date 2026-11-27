@@ -1,0 +1,145 @@
+{
+  "schema": "final-current368-source-inverse-application-v1",
+  "status": "PASS_REVIEWED_SOURCE_APPLICATION_AND_FOCUSED_PREFLIGHT_ONLY",
+  "core_commit": "ae19c2c7c0e72f1bad30aa2d9256e2765b03c2d4",
+  "independent_output_review": {
+    "schema": "independent-windows-python-partition-generated-output-review-v1",
+    "status": "GO_EXACT_THREE_PAYLOADS_AND_TWO_ALIASES_SOURCE_PREFLIGHT_ONLY",
+    "prior_commit": "fb15396db578c78f838829668e36f32b65376806",
+    "generated_files": {
+      "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+        "bytes": 508362,
+        "sha256": "42b490f0755ec0b0735c6989556319b501cd487aa3fa2076f504e69f8cfa5fea"
+      },
+      "docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
+        "bytes": 17219,
+        "sha256": "bc88a126184d2798a1bbed6fd4ee8ffa69cb789cadfa9e453a9d346e5c604a9c"
+      },
+      "tests/helpers/intake359-source-input.mjs": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
+        "bytes": 11947,
+        "sha256": "72b1c2e643dc7dbb8038f1ddd34b6bd100c1061c8aedb970c6d689e1131241f2"
+      }
+    },
+    "source_inverse_review": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/SOURCE_INVERSE_REVIEW.json",
+      "bytes": 205304,
+      "sha256": "9c7a62b471c80b69a24674af7ac90a669e246136b1f9d3c35e278b4320f6c6f6"
+    },
+    "leaf_rebind_review": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/LEAF_REBIND_REVIEW.json",
+      "bytes": 7231,
+      "sha256": "19350d6a4ea0b0db30f901d7ff5e6bff7a3140fee433a2f702172ca90b95b2f0"
+    },
+    "verification": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/CHECKS.json",
+      "bytes": 28251,
+      "sha256": "3e9c93e1a9da22639fbe56bfa25ad2623f78f03aed28efe3a9fad176d486c9b1"
+    },
+    "repeatable_verifier": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/verify_outputs.py",
+      "bytes": 9324,
+      "sha256": "364ee2ad0e01e2fb69e94eb83f0a355ec51938e45898f2f57d9ec5c8d55f84d5"
+    },
+    "input_review": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-final-input-review/INPUT_REVIEW.json",
+      "bytes": 579,
+      "sha256": "af85dba7ec28a2ea4d68eed3f79ab88da76d208598e2914b8c44bb1220a4e75a"
+    },
+    "verified_counts": {
+      "literal_forward_inverse_rows": 75,
+      "original3d_sha256_and_git_blob_identities": 1001,
+      "hunks": 231,
+      "literal_dollar_hunks": 15,
+      "unchanged_old_row_objects": 71,
+      "unchanged_old_direct_objects": 58,
+      "frozen_authorities": 824,
+      "archive_members_plus_manifest": 65,
+      "changed_from3ced": 72,
+      "direct_paths": 66,
+      "source_pins": 138,
+      "source_packet": 14,
+      "runtime_leaf": 2,
+      "runtime_package_files": 39
+    },
+    "primary_unmodified_by_reviewer": true,
+    "no_proposal_project_test_or_Git_execution": true,
+    "runtime_package_CI_release_dev_approval": false,
+    "blocking_findings": []
+  },
+  "independent_output_review_sha256": "3e76934f4a1c94ec33e170cf07d82480ea9de6b6b9fe539a530d9482171ad71c",
+  "applied_source_envelope": {
+    "map_sha256": "42b490f0755ec0b0735c6989556319b501cd487aa3fa2076f504e69f8cfa5fea",
+    "code_sha256": "bc88a126184d2798a1bbed6fd4ee8ffa69cb789cadfa9e453a9d346e5c604a9c",
+    "loader_sha256": "72b1c2e643dc7dbb8038f1ddd34b6bd100c1061c8aedb970c6d689e1131241f2",
+    "inverse_rows": 75,
+    "changed_originals": 72,
+    "direct_sources": 66,
+    "physical_pins": 138,
+    "independent_output_review_sha256": "3e76934f4a1c94ec33e170cf07d82480ea9de6b6b9fe539a530d9482171ad71c"
+  },
+  "source_preflight_11": {
+    "schema": "root-targeted-final-source-and-CI-QA-execution-v1",
+    "argv": [
+      "/tmp/pali-english335-350-evidence-nov26/node20-linux/node",
+      "--test",
+      "--test-concurrency=1",
+      "tests/current343-bindings.test.mjs",
+      "tests/intake343-metadata.test.mjs",
+      "tests/intake359-source-history.test.mjs",
+      "tests/intake368-source-seal.test.mjs"
+    ],
+    "cwd": "/tmp/pali-proof-budget-repair-nov27",
+    "seconds": 9.677672530000564,
+    "exit_code": 0,
+    "outer_bound_seconds": 120,
+    "outer_timeout": false,
+    "emergency_owned_descendants": [],
+    "owned_group_absent": true,
+    "metrics": {
+      "tests": 11,
+      "pass": 11,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "stdout_sha256": "d1bfe65c6fa53b87da4a042653540ff62f16e476954d412209a9adbc9d34e538",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_map_sha256": "42b490f0755ec0b0735c6989556319b501cd487aa3fa2076f504e69f8cfa5fea",
+    "code_sha256": "bc88a126184d2798a1bbed6fd4ee8ffa69cb789cadfa9e453a9d346e5c604a9c",
+    "not_full_CI_or_dev_approval": true
+  },
+  "CI_QA8": {
+    "schema": "root-targeted-final-source-and-CI-QA-execution-v1",
+    "argv": [
+      "/tmp/pali-english335-350-evidence-nov26/node20-linux/node",
+      "--test",
+      "--test-concurrency=1",
+      "tests/ci-test-partitions.test.mjs"
+    ],
+    "cwd": "/tmp/pali-proof-budget-repair-nov27",
+    "seconds": 3.130896581002162,
+    "exit_code": 0,
+    "outer_bound_seconds": 90,
+    "outer_timeout": false,
+    "emergency_owned_descendants": [],
+    "owned_group_absent": true,
+    "metrics": {
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "stdout_sha256": "111a5a82239e2f898e8b5202d68c97405877bb50e0965b63fd86ceea3f3d41e7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_map_sha256": "42b490f0755ec0b0735c6989556319b501cd487aa3fa2076f504e69f8cfa5fea",
+    "code_sha256": "bc88a126184d2798a1bbed6fd4ee8ffa69cb789cadfa9e453a9d346e5c604a9c",
+    "not_full_CI_or_dev_approval": true
+  },
+  "full_CI_or_dev_promotion_claim": false
+}

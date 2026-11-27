@@ -319,5 +319,13 @@
     }
   ],
   "browser_run": true,
-  "upstream_provider_requests_forwarded": 0
+  "upstream_provider_requests_forwarded": 0,
+  "final_source_core_binding": {
+    "core_commit": "ae19c2c7c0e72f1bad30aa2d9256e2765b03c2d4",
+    "component_binding_sha256": "f2075831648bf56ac583c399fcb69795a532a603a2367cab02520ab6774daa8d",
+    "package39_unchanged": true,
+    "browser_executed_on_final_core": false,
+    "evidence_scope": "Existing independently reviewed APP/package browser journey reused only through exact byte equality; no new device or fresh-offline acceptance.",
+    "independent_component_review_sha256": "90e30829df456f6fbabdf9382bb44f2aae6e1892ccc674a33958d6691eabf741"
+  }
 }
