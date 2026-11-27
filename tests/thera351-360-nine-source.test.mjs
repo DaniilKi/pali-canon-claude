@@ -1,3 +1,12 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(APADANA_PROFILES);
+import {readFileSync as readCurrent375MetadataFile} from 'node:fs';
+requireMetadata375(APADANA_PROFILES,JSON.parse(readCurrent375MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
 /** Nine source-reviewed whole publisher-edition poems; expected words are independent hashes. */
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -23,7 +32,7 @@ function transport(calls,change){liveCache.clear();globalThis.fetch=async(input,
 const source={skip:!e.checkout,timeout:30000};
 
 test('nine-source current368 preserves all359 complete objects and unchanged8544 records61books and locator pins',{timeout:30000},()=>{
- requireMetadata368(APADANA_PROFILES,JSON.parse(readFileSync('server/data/apadana.json')));const corpus=e.assertUnchangedSourceData();assert.equal(corpus.units.length,8544);assert.equal(corpus.books.length,61);
+ requireMetadata368(HistoricalH368Profiles,HistoricalH368Catalogue);const corpus=e.assertUnchangedSourceData();assert.equal(corpus.units.length,8544);assert.equal(corpus.books.length,61);
  for(const id of IDS){assert.equal(requiredCanonicalRevision(id),null);assert.equal(Object.hasOwn(APADANA_PROFILES[id],'index_revision'),false);}
  for(const[id,suffix]of[['tha-ap107','apadana-thera105-106-v1'],['tha-ap333','apadana-thera333-336-v1'],['tha-ap340','apadana-thera340-341-343-344-346-347-v1'],['tha-ap348','apadana-thera-next10-v1']])assert.equal(requiredCanonicalRevision(id),VRI+'-'+suffix);
  assert.equal(Object.hasOwn(e.old.manifest.links,'tha-ap353'),false,'Named359 stage still excludes publisher351');assert.equal(Object.hasOwn(e.old.previous.profiles,'tha-ap353'),false);assert.equal(e.old.ids.length,359);assert.equal(e.ids.length,368);assert.equal(Object.hasOwn(APADANA_PROFILES,'tha-ap360'),false);assert.deepEqual(e.approval.source_holds_within_publisher351_360,['tha-ap360']);

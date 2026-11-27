@@ -1,3 +1,8 @@
+// Explicit immutable H input lane. The provider validates CURRENT375 first; registrations stay in actual R.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
@@ -5,7 +10,7 @@ import {fileURLToPath} from 'node:url';
 
 test('Python359 history keeps current values separate from stale historical input and escaped private bindings',{timeout:125000},()=>{
   const result=spawnSync(process.env.PYTHON||'python3',['-B','tests/intake359_history_acceptance.py'],{
-    cwd:fileURLToPath(new URL('../',import.meta.url)),encoding:'utf8',timeout:120000,killSignal:'SIGKILL',maxBuffer:1024*1024,
+    cwd:ownedHistoricalHInputs.root,encoding:'utf8',timeout:120000,killSignal:'SIGKILL',maxBuffer:1024*1024,
     env:{...process.env,PYTHONDONTWRITEBYTECODE:'1',PYTHONUNBUFFERED:'1'},
   });
   const output=(result.stdout||'')+'\n'+(result.stderr||'');

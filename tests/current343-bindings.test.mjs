@@ -1,7 +1,16 @@
-import {intake368Authority,requireProfiles368,INTAKE368_IDS} from './helpers/intake368-metadata.mjs';
-import {intake359Authority,requireProfiles359,INTAKE359_IDS} from './helpers/intake359-metadata.mjs';
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+const {intake368Authority,requireProfiles368,INTAKE368_IDS}=await import(new URL('tests/helpers/intake368-metadata.mjs',HistoricalHBase).href);
+const {intake359Authority,requireProfiles359,INTAKE359_IDS}=await import(new URL('tests/helpers/intake359-metadata.mjs',HistoricalHBase).href);
 import test from 'node:test';import assert from 'node:assert/strict';
-import {APADANA_PROFILES} from '../src/apadana-profiles.mjs';import {WIDGET_VERSION,WIDGET_URI} from '../src/chatgpt-widget.mjs';import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';import {publisher343Authority,requireProfiles343} from './helpers/intake343-metadata.mjs';
+const {APADANA_PROFILES}=await import(new URL('src/apadana-profiles.mjs',HistoricalHBase).href);const {CURRENT_WIDGET_VERSION:WIDGET_VERSION,CURRENT_WIDGET_URI:WIDGET_URI}=await import(new URL('tests/helpers/intake368-metadata.mjs',HistoricalHBase).href);const {CURRENT_APADANA_IDS}=await import(new URL('tests/helpers/apadana-intake-expectations.mjs',HistoricalHBase).href);const {publisher343Authority,requireProfiles343}=await import(new URL('tests/helpers/intake343-metadata.mjs',HistoricalHBase).href);
 const a=publisher343Authority(),current=intake368Authority();function bindings(x){assert.deepEqual(Object.keys(x),['ids','version','uri']);assert.deepEqual(x.ids,current.approval.expected_profile_ids);assert.equal(x.ids.length,368);assert.equal(new Set(x.ids).size,368);assert.equal(x.version,'v46');assert.equal(x.uri,'ui://pali-canon/reader-v46.html');}
 test('actual current imports bind exact368 identities to widget v46',()=>{bindings({ids:CURRENT_APADANA_IDS,version:WIDGET_VERSION,uri:WIDGET_URI});requireProfiles368(APADANA_PROFILES);requireProfiles343(APADANA_PROFILES);assert.deepEqual(CURRENT_APADANA_IDS.slice(339,343),['tha-ap333','tha-ap334','tha-ap335','tha-ap336']);assert.deepEqual(CURRENT_APADANA_IDS.slice(343,359),INTAKE359_IDS);assert.deepEqual(CURRENT_APADANA_IDS.slice(359),INTAKE368_IDS);});
 test('binding refuses omitted substituted duplicated reordered IDs and stale widget namespaces',()=>{const good={ids:CURRENT_APADANA_IDS,version:WIDGET_VERSION,uri:WIDGET_URI};for(const ids of [good.ids.slice(1),good.ids.map((x,i)=>i===342?'tha-ap353':x),[...good.ids.slice(0,-1),good.ids[0]],good.ids.slice().reverse()])assert.throws(()=>bindings({...good,ids}));for(const bad of [{...good,version:'v44'},{...good,uri:'ui://pali-canon/reader-v44.html'},{...good,version:'v42'},{...good,uri:'ui://pali-canon/reader-v42.html'},{ids:good.ids,version:good.version}])assert.throws(()=>bindings(bad));});

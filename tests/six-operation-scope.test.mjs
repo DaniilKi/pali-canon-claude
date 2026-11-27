@@ -1,3 +1,8 @@
+// Explicit immutable H input lane. The provider validates CURRENT375 first; registrations stay in actual R.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
 import {runPythonPartitions} from './helpers/partitioned-python.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -6,11 +11,11 @@ import {fileURLToPath} from 'node:url';
 
 test('private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes',{timeout:65000},async(t)=>{
  if(process.platform==='win32'||process.platform==='darwin'||process.platform==='linux'){
-  const partitionRoot=fileURLToPath(new URL('../',import.meta.url));
+  const partitionRoot=ownedHistoricalHInputs.root;
   await runPythonPartitions({root:partitionRoot,suiteKey:'six-operation-scope',signal:t.signal});
   return;
  }
- const root=fileURLToPath(new URL('../',import.meta.url));
+ const root=ownedHistoricalHInputs.root;
  const r=spawnSync(process.env.PYTHON||'python3',['-B','tests/six_operation_scope_controls.py'],{
   cwd:root,encoding:'utf8',timeout:60000,killSignal:'SIGKILL',maxBuffer:256*1024,
  });

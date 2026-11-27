@@ -1,8 +1,32 @@
+// Exact unchanged H witnesses physically read at actual R. This finite map is
+// independently Git-H authenticated; it is not current375 source truth or fallback.
+import {lstatSync as statFixedHCurrentWitness} from 'node:fs';
+const FIXED_H_UNCHANGED_CURRENT_WITNESSES=Object.freeze(Object.fromEntries(Object.entries({".github/workflows/npx.yml":{"bytes":1779,"sha256":"6537692c69f9c46a0fe3b4805cc2749e35d308da730435aeec95c9488e100bc9","git_blob":"f1d18733de99afce020f7e1f7b311daae33d1b75","mode":"100644"},".github/workflows/corpus.yml":{"bytes":815,"sha256":"d2882ae1443d7bcb371d2b75b3dc1bd0165256bb7d0e38aa8ab22300d0d350a1","git_blob":"55a50d5d72b1a662eadc6913624bff5459d1d737","mode":"100644"},".github/workflows/evidence.yml":{"bytes":6533,"sha256":"15ec53e5fb36ce9d058871777a347c92ff45d37fdd0ec6559aabf34abbc9b851","git_blob":"bc39fb8ab9d703b3ecf52ffe1bcdf570fd5a3880","mode":"100644"},"docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json":{"bytes":80348,"sha256":"7071e9ceaa4475a974b30ee7afa43cd8f5186c30e198e8290752b340972fca68","git_blob":"92398316656a3654cd90c0c77e4ac49523d4d700","mode":"100644"},"docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json":{"bytes":85569,"sha256":"4297ca598c8f0b78176f5e74cf158a581ce173a022f9c070ce3d8f9cce044d8b","git_blob":"b13bd3211ec07a16bef2e3b5c5ba64f67529adb6","mode":"100644"},"docs/evidence/apadana/THERA_NINTH_GOLDENS.json":{"bytes":123430,"sha256":"070286aa013457d7bd387121945b8b720b83f1aeb1f6a788409594535de712f5","git_blob":"54425b85baeb0fbf55c1e407f8ee078a29f48a48","mode":"100644"},"docs/evidence/apadana/THERA_TENTH_GOLDENS.json":{"bytes":138401,"sha256":"2bbc739ecb97d198ecc0e4f6d599569bc846c74e03744367c649d3e87309db89","git_blob":"16e40ca4af70f3cc9a0849dce0921528d95b9c7d","mode":"100644"},"docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json":{"bytes":26654,"sha256":"1aa8fadf962964ddf1ee2faefa86bcf3914944337ba61b7e2214600170210ac8","git_blob":"db0b8d04ae881ae69fdd03523c704886fc4971d4","mode":"100644"},"docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json":{"bytes":143916,"sha256":"d53ff2d5f4abc6c78d6b5bed3b2b096def1ac35f665fe82263605a440a46284d","git_blob":"d9d918e68622c0f4eaf1738d20d15287b395fb0c","mode":"100644"},"docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json":{"bytes":163777,"sha256":"75148adcdafab5931e527400e2e97129d1a04df58c0ad91142c5dac1564a9d5b","git_blob":"75cf95c7faec462d222e315922fbb4ccf0031e8b","mode":"100644"},"docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json":{"bytes":188638,"sha256":"bd2ef2c127a6e67b63aa78552845556d1490445c35ca12809859deddf5ea6e97","git_blob":"1220382357a03b14f34b77a8664eef9964073e92","mode":"100644"},"docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json":{"bytes":159872,"sha256":"f3106f279d9e41cc3ebf72ff574a7f1d968e5f5b6555a1dad7f18cc0cd3f8e07","git_blob":"1178095c711eac7535f7df571e772becbedd2b6e","mode":"100644"}}).map(([path,row])=>[path,Object.freeze(row)])));
+function readFixedHUnchangedCurrentWitness(path,...options){
+ assert.equal(typeof path,'string');assert.ok(Object.hasOwn(FIXED_H_UNCHANGED_CURRENT_WITNESSES,path),'Only the literal twelve H witnesses may read actual R');
+ assert.ok(options.length===0||options.length===1&&options[0]==='utf8','Exact original Buffer or utf8 read mode');
+ const row=FIXED_H_UNCHANGED_CURRENT_WITNESSES[path];assert.equal(row.mode,'100644');
+ let target=new URL('../',import.meta.url);const parts=path.split('/');
+ for(let i=0;i<parts.length;i++){target=new URL(parts[i]+(i===parts.length-1?'':'/'),target);const stat=statFixedHCurrentWitness(target);assert.equal(stat.isSymbolicLink(),false);assert.equal(i===parts.length-1?stat.isFile():stat.isDirectory(),true);}
+ const raw=readOwnedHPhysicalFile(target);assert.equal(raw.length,row.bytes,'Fixed H unchanged witness byte count '+path);assert.equal(createHash('sha256').update(raw).digest('hex'),row.sha256,'Fixed H unchanged witness SHA '+path);
+ assert.equal(createHash('sha1').update(Buffer.concat([Buffer.from('blob '+raw.length+'\0'),raw])).digest('hex'),row.git_blob,'Fixed H Git blob identity '+path);
+ return options.length?raw.toString('utf8'):raw;
+}
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readCurrentFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 import {runInNewContext} from 'node:vm';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync as readCurrentFileSync} from 'node:fs';
-import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
+import {readFileSync as readOwnedHPhysicalFile} from 'node:fs';
+const {frozen440FileReader}=await import(new URL('tests/helpers/boundary333-336-source-input.mjs',HistoricalHBase).href);
 const readFileSync=frozen440FileReader(readCurrentFileSync);
 import {createHash} from 'node:crypto';
 
@@ -70,7 +94,7 @@ function beforeHeld234Workflow(source){
 }
 
 // Source-note-only projection: retain every original historical assertion below unchanged.
-import {projectCheckStageWorkflow} from './helpers/check-stage-baseline.mjs';
+const {projectCheckStageWorkflow}=await import(new URL('tests/helpers/check-stage-baseline.mjs',HistoricalHBase).href);
 function beforeSourceNotesWorkflow(source){
  if(!source.includes("matrix.group == 'vrieditionnote'"))return source;
  const additions=conditionalSteps(source,'vrieditionnote');assert.equal(additions.length,5,'only one source-note baseline fetch and four mandatory gates are projected out');
@@ -80,7 +104,7 @@ function beforeSourceNotesWorkflow(source){
  for(const report of ['standalone-source-notes.report.json','standalone-source-notes-launch.report.json','standalone-source-notes-a11y.report.json','standalone-source-notes-a11y-launch.report.json','standalone-source-notes-independent.report.json','installed-source-notes.report.json','installed-source-notes-launch.report.json'])projected=projected.replace('            '+report+'\n','');
  return projected;
 }
-function sourceNotesHistoricalWorkflow(){return beforeSourceNotesWorkflow(projectCheckStageWorkflow(readFileSync(new URL('../.github/workflows/check.yml',import.meta.url),'utf8')));}
+function sourceNotesHistoricalWorkflow(){return beforeSourceNotesWorkflow(projectCheckStageWorkflow(readFileSync(new URL('.github/workflows/check.yml',HistoricalHBase),'utf8')));}
 // End source-note-only projection.
 
 test('every browser-group JSON report is retained as a CI artifact',()=>{
@@ -345,10 +369,10 @@ test('scaled Therā CI retains all fifty-two earlier jobs and adds exactly three
  const node=jobs.split('  check:')[1],compat=jobs.split('  reader-compat:')[1].split('  check:')[0];
  assert.deepEqual(matrix(node,'os'),['ubuntu-latest','macos-latest','windows-latest']);assert.deepEqual(matrix(node,'node'),['20','22']);
  assert.deepEqual(matrix(compat,'engine'),['firefox','webkit']);
- const install=readFileSync(new URL('../.github/workflows/npx.yml',import.meta.url),'utf8');
+ const install=readFixedHUnchangedCurrentWitness('.github/workflows/npx.yml','utf8');
  assert.deepEqual(matrix(install,'os'),['ubuntu-latest','macos-latest','windows-latest']);assert.deepEqual(matrix(install,'node'),['20','24']);
  for(const [file,name]of [['npx.yml','npx'],['corpus.yml','corpus'],['evidence.yml','evidence']]){
-  const workflow=readFileSync(new URL('../.github/workflows/'+file,import.meta.url),'utf8');
+  const workflow=readFixedHUnchangedCurrentWitness('.github/workflows/'+file,'utf8');
   assert.deepEqual([...workflow.split('\njobs:\n')[1].matchAll(/^  ([a-z][\w-]*):$/gm)].map(match=>match[1]),[name]);
   assert.match(workflow,/branches:[^\n]*'dev\/\*\*'/,'the earlier gate still runs on dev pushes');
  }
@@ -371,12 +395,12 @@ test('scaled Therā groups require five sealed independent source inputs and all
  assert.match(xml,/persist-credentials: false/);assert.match(xml,/sparse-checkout-cone-mode: false/);
  assert.deepEqual([...xml.matchAll(/^            (.+)$/gm)].map(match=>match[1]).filter(path=>path!=='romn/s0510a.att.xml'),['romn/s0510m1.mul.xml']);
  const goldenFiles=['THERA_SEVENTH_GOLDENS.json','THERA_EIGHTH_GOLDENS.json','THERA_NINTH_GOLDENS.json','THERA_TENTH_GOLDENS.json','THERA_EDITORIAL_GAP_GOLDENS.json'];
- const approval=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_SCALED_APPROVAL.json',import.meta.url),'utf8'));
+ const approval=JSON.parse(readFileSync(new URL('docs/evidence/apadana/THERA_SCALED_APPROVAL.json',HistoricalHBase),'utf8'));
  assert.equal(approval.status,'approved');assert.equal(approval.publisher_revision,'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4');
  assert.deepEqual(approval.goldens.map(input=>input.file),goldenFiles);
  for(const input of approval.goldens){
   assert.match(input.sha256,/^[a-f0-9]{64}$/);
-  const bytes=readFileSync(new URL('../docs/evidence/apadana/'+input.file,import.meta.url));
+  const bytes=readFixedHUnchangedCurrentWitness('docs/evidence/apadana/'+input.file);
   assert.equal(createHash('sha256').update(bytes).digest('hex'),input.sha256,input.file+' remains sealed to the independent approval');
  }
  const retained=group.split('          path: |')[1].split('          if-no-files-found:')[0].trim().split(/\s+/);
@@ -436,10 +460,10 @@ test('paired Therā gates add two bounded source-pinned groups while retaining h
  assert.match(baseline,/git cat-file -e b5669a334add97ebc0c3c32f9b3fb45ed90d9780\^\{commit\}/);
  assert.doesNotMatch(baseline,/--unshallow|fetch-depth: 0|git reset|git checkout/);
  const goldenFiles=['THERA_ELEVENTH_GOLDENS.json','THERA_TWELFTH_GOLDENS.json','THERA_THIRTEENTH_GOLDENS.json','THERA_FOURTEENTH_GOLDENS.json'];
- const approval=JSON.parse(readFileSync(new URL('../docs/evidence/apadana/THERA_PAIR_INTAKE_APPROVAL.json',import.meta.url),'utf8'));
+ const approval=JSON.parse(readFileSync(new URL('docs/evidence/apadana/THERA_PAIR_INTAKE_APPROVAL.json',HistoricalHBase),'utf8'));
  assert.equal(approval.status,'approved');assert.equal(approval.base_commit,'b5669a334add97ebc0c3c32f9b3fb45ed90d9780');
  assert.deepEqual(approval.goldens.map(input=>input.file),goldenFiles);
- for(const input of approval.goldens){const bytes=readFileSync(new URL('../docs/evidence/apadana/'+input.file,import.meta.url));assert.equal(createHash('sha256').update(bytes).digest('hex'),input.sha256);}
+ for(const input of approval.goldens){const bytes=readFixedHUnchangedCurrentWitness('docs/evidence/apadana/'+input.file);assert.equal(createHash('sha256').update(bytes).digest('hex'),input.sha256);}
  const retained=group.split('          path: |')[1].split('          if-no-files-found:')[0].trim().split(/\s+/);
  for(const [name,batch]of [['apadanatherapair101','101-120'],['apadanatherapair121','121-140']]){
   const steps=conditionalSteps(group,name);assert.equal(steps.length,4);
@@ -472,7 +496,7 @@ test('isolated mixed-load reader source imports include only the shared integrit
  assert.match(step,/--mount "type=bind,src=\$GITHUB_WORKSPACE\/web\/content-sha256\.mjs,dst=\/app\/web\/content-sha256\.mjs,readonly"/);
  assert.match(step,/--network none/);assert.match(step,/--cap-drop ALL/);assert.match(step,/--security-opt no-new-privileges/);
  assert.match(step,/--full-cache --reader-caches --reader-ui/);
- const widget=readFileSync(new URL('../src/chatgpt-widget.mjs',import.meta.url),'utf8');
+ const widget=readFileSync(new URL('src/chatgpt-widget.mjs',HistoricalHBase),'utf8');
  assert.match(widget,/from ['"]\.\.\/web\/content-sha256\.mjs['"]/);
 });
 
@@ -498,7 +522,7 @@ test('Therā 141–180 adds exactly two bounded source and reader groups while p
  assert.deepEqual(selected.slice(insertion,insertion+2),INTAKE_141_180_GROUPS);
  const matrix=(text,key)=>text.match(new RegExp('^        '+key+': \\[([^\\]]+)\\]','m'))?.[1].split(',').map(value=>value.trim());
  const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0];
- const install=readFileSync(new URL('../.github/workflows/npx.yml',import.meta.url),'utf8');
+ const install=readFixedHUnchangedCurrentWitness('.github/workflows/npx.yml','utf8');
  const otherJobs=1+1+matrix(compat,'engine').length+matrix(node,'os').length*matrix(node,'node').length+matrix(install,'os').length*matrix(install,'node').length+1+1;
  assert.equal(before141180Groups(selected).length+otherJobs,57,'every prior expanded job remains required');
  assert.equal(selected.length+otherJobs,59,'only the two new bounded intake groups are added');
@@ -552,7 +576,7 @@ test('Therā 141–180 adds exactly two bounded source and reader groups while p
 });
 
 test('Therā 141–180 CI consumes four independently sealed chapters with explicit held scopes and current canonical identity',()=>{
- const base=new URL('../docs/evidence/apadana/',import.meta.url);
+ const base=new URL('docs/evidence/apadana/',HistoricalHBase);
  const approval=JSON.parse(readFileSync(new URL('THERA_141_180_APPROVAL.json',base),'utf8'));
  assert.equal(approval.schema,'reviewed-apadana-intake-v1');assert.equal(approval.status,'approved');
  assert.equal(approval.base_commit,'05fc4e29540fc0799145dc28838bedb7d964b2c7');
@@ -595,7 +619,7 @@ test('Therā 181–220 adds two receipt-bound groups while preserving all 59 job
  assert.deepEqual(selected.slice(insertion,insertion+2),INTAKE_181_220_GROUPS);
  const matrix=(text,key)=>text.match(new RegExp('^        '+key+': \\[([^\\]]+)\\]','m'))?.[1].split(',').map(value=>value.trim());
  const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0];
- const install=readFileSync(new URL('../.github/workflows/npx.yml',import.meta.url),'utf8');
+ const install=readFixedHUnchangedCurrentWitness('.github/workflows/npx.yml','utf8');
  const otherJobs=1+1+matrix(compat,'engine').length+matrix(node,'os').length*matrix(node,'node').length+matrix(install,'os').length*matrix(install,'node').length+1+1;
  assert.equal(before181220Groups(selected).length+otherJobs,59);assert.equal(selected.length+otherJobs,61);
  const historicalSourceGroups=['apadana','apadananext','apadanathird','apadanafourth','apadanathera','apadanatheranext','apadanatheraexpansion','apadanatherascaled61','apadanatherascaled81','apadanatheraeditorial','apadanatherapair101','apadanatherapair121','apadanathera141','apadanathera161','apadanaedition','thagsixteen'];
@@ -656,7 +680,7 @@ test('Therā 181–220 adds two receipt-bound groups while preserving all 59 job
 });
 
 test('Therā 181–220 CI requires four independent chapter seals and preserves all 206 preceding choices and canonical data',()=>{
- const base=new URL('../docs/evidence/apadana/',import.meta.url);
+ const base=new URL('docs/evidence/apadana/',HistoricalHBase);
  const approval=JSON.parse(readFileSync(new URL('THERA_181_220_APPROVAL.json',base),'utf8'));
  assert.equal(approval.schema,'reviewed-apadana-intake-v1');assert.equal(approval.status,'approved');
  assert.equal(approval.base_commit,'94c607310845b84dc3cd51ba3a19ce6fecd28683');
@@ -726,7 +750,7 @@ test('Therā 241–250 adds exactly one twenty-minute group and preserves the en
  assert.equal(historicalSteps.length,76);assert.equal(historicalSteps.length+steps.length,80);
  const matrix=(text,key)=>text.match(new RegExp('^        '+key+': \\[([^\\]]+)\\]','m'))[1].split(',').map(value=>value.trim());
  const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0];
- const install=readFileSync(new URL('../.github/workflows/npx.yml',import.meta.url),'utf8');
+ const install=readFixedHUnchangedCurrentWitness('.github/workflows/npx.yml','utf8');
  const otherJobs=1+1+matrix(compat,'engine').length+matrix(node,'os').length*matrix(node,'node').length+matrix(install,'os').length*matrix(install,'node').length+1+1;
  assert.equal(before241250Groups(selected).length+otherJobs,61);assert.equal(selected.length+otherJobs,62);
  assert.doesNotMatch(node,/timeout-minutes:/,'this intake does not change the separately pending Node matrix');
@@ -776,7 +800,7 @@ test('Therā 241–250 CI requires portable independent normalization and source
  assert.match(steps[3],/npm install --prefix "\$RUNNER_TEMP\/apadanathera241-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "\$1"/);
  assert.doesNotMatch(steps[3],/tar -x|cp -R|package\/server/,'installed acceptance executes a genuine isolated npm install');
  assert.doesNotMatch(commands,/--pilot|--mcp-only|--live|curl |wget |https:\/\/apadanatranslation\.com|continue-on-error|\|\| true/,'all source, refusal and real browser assertions remain mandatory');
- const harness=readFileSync(new URL('../scripts/web-reader-thera241-250-check.py',import.meta.url),'utf8');
+ const harness=readFileSync(new URL('scripts/web-reader-thera241-250-check.py',HistoricalHBase),'utf8');
  const write=harness.indexOf('write_launch()  # Contemporaneous record exists BEFORE the server subprocess.'),popen=harness.indexOf('server = subprocess.Popen('),launch=harness.indexOf("launch={'status':'launching'");
  assert.ok(launch>=0&&write>launch&&popen>write,'archive/runtime launch binding is written before the actual server subprocess');
  const receipt=harness.slice(launch,write);
@@ -787,7 +811,7 @@ test('Therā 241–250 CI requires portable independent normalization and source
 });
 
 test('Therā 241–250 CI binds the reviewed ten-poem normalization, separate pure profiles/links and unchanged canon',()=>{
- const base=new URL('../docs/evidence/apadana/',import.meta.url);
+ const base=new URL('docs/evidence/apadana/',HistoricalHBase);
  const approval=JSON.parse(readFileSync(new URL('THERA_241_250_APPROVAL.json',base),'utf8'));
  assert.equal(approval.schema,'reviewed-apadana-intake-v1');assert.equal(approval.status,'approved');
  assert.equal(approval.base_commit,'a9755d267c309ad930df0ef154e6c8a03f1f371e');
@@ -833,7 +857,7 @@ test('Therā 221–230 adds one twenty-minute group while restoring the exact 9c
  assert.equal(historicalSteps.length,80);assert.equal(historicalSteps.length+steps.length,84);
  const matrix=(text,key)=>text.match(new RegExp('^        '+key+': \\[([^\\]]+)\\]','m'))[1].split(',').map(value=>value.trim());
  const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0];
- const install=readFileSync(new URL('../.github/workflows/npx.yml',import.meta.url),'utf8');
+ const install=readFixedHUnchangedCurrentWitness('.github/workflows/npx.yml','utf8');
  const otherJobs=1+1+matrix(compat,'engine').length+matrix(node,'os').length*matrix(node,'node').length+matrix(install,'os').length*matrix(install,'node').length+1+1;
  assert.equal(before221230Groups(selected).length+otherJobs,62);assert.equal(selected.length+otherJobs,63);
  assert.doesNotMatch(node,/timeout-minutes:/,'new source work does not change the separately pending Node matrix');
@@ -882,7 +906,7 @@ test('Therā 221–230 CI binds independent replay and all six new and legacy so
  assert.match(steps[3],/npm install --prefix "\$RUNNER_TEMP\/apadanathera221-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "\$1"/);
  assert.doesNotMatch(steps[3],/tar -x|cp -R|package\/server/,'future installed gate executes a genuine external npm install');
  assert.doesNotMatch(commands,/--pilot|--mcp-only|--live|curl |wget |https:\/\/apadanatranslation\.com|continue-on-error|\|\| true/);
- const harness=readFileSync(new URL('../scripts/web-reader-thera221-230-check.py',import.meta.url),'utf8');
+ const harness=readFileSync(new URL('scripts/web-reader-thera221-230-check.py',HistoricalHBase),'utf8');
  const write=harness.indexOf('write_launch()  # Contemporaneous record exists BEFORE the server subprocess.'),popen=harness.indexOf('server = subprocess.Popen('),launch=harness.indexOf("launch={'status':'launching'");
  assert.ok(launch>=0&&write>launch&&popen>write,'actual new server launch follows its contemporaneous archive/runtime receipt');
  const receipt=harness.slice(launch,write);
@@ -892,7 +916,7 @@ test('Therā 221–230 CI binds independent replay and all six new and legacy so
 });
 
 test('Therā 221–230 CI consumes the independent ten-poem seals with note-only226 pairs and separate two-paragraph230 apparatus',()=>{
- const base=new URL('../docs/evidence/apadana/',import.meta.url);
+ const base=new URL('docs/evidence/apadana/',HistoricalHBase);
  const approval=JSON.parse(readFileSync(new URL('THERA_221_230_APPROVAL.json',base),'utf8'));
  assert.equal(approval.schema,'reviewed-apadana-intake-v1');assert.equal(approval.status,'approved');
  assert.equal(approval.base_commit,'9ceed785d30afdcdc1f09021d6098b5bb85f02fb');assert.equal(approval.publisher_revision,'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4');
@@ -949,7 +973,7 @@ test('remaining Therā CI adds two twenty-minute lanes while restoring every byt
  const historical=historicalSourceGroups.flatMap(name=>conditionalSteps(group,name).filter(step=>/^        run:/m.test(step)&&!step.startsWith('      - name: Fetch exact ')));
  assert.equal(historical.length,84);assert.equal(historical.length+REMAINING_GROUPS.flatMap(name=>conditionalSteps(group,name)).length,92);
  const matrix=(text,key)=>text.match(new RegExp('^        '+key+': \\[([^\\]]+)\\]','m'))[1].split(',').map(value=>value.trim());
- const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0],install=readFileSync(new URL('../.github/workflows/npx.yml',import.meta.url),'utf8');
+ const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0],install=readFixedHUnchangedCurrentWitness('.github/workflows/npx.yml','utf8');
  const otherJobs=1+1+matrix(compat,'engine').length+matrix(node,'os').length*matrix(node,'node').length+matrix(install,'os').length*matrix(install,'node').length+1+1;
  assert.equal(beforeRemainingGroups(selected).length+otherJobs,63);assert.equal(selected.length+otherJobs,65);assert.doesNotMatch(node,/timeout-minutes:/);
  const expression=group.match(/^    timeout-minutes: \$\{\{ (.+) \}\}$/m)[1];
@@ -983,7 +1007,7 @@ test('remaining Therā CI runs each separate nine-source replay and wrapper pair
   assert.ok(steps[3].includes('npm install --prefix "$RUNNER_TEMP/'+name+'-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"'));assert.doesNotMatch(steps[3],/tar -x|cp -R|package\/server/);
   assert.doesNotMatch(commands,/--batch all|--pilot|--mcp-only|--live|curl |wget |continue-on-error|\|\| true/,'each lane executes full selected9 acceptance without duplicating all18');
  }
- const harness=readFileSync(new URL('../scripts/web-reader-thera-remaining-check.py',import.meta.url),'utf8');
+ const harness=readFileSync(new URL('scripts/web-reader-thera-remaining-check.py',HistoricalHBase),'utf8');
  const write=harness.indexOf('write_launch()  # Contemporaneous record exists BEFORE the server subprocess.'),popen=harness.indexOf('server = subprocess.Popen('),launch=harness.indexOf("launch={'status':'launching'");assert.ok(launch>=0&&write>launch&&popen>write);
  const receipt=harness.slice(launch,write);for(const field of ['server_file_sha256','harness_sha256','helper_sha256','package_sha256','approval_sha256','started_utc','server_argv','server_cwd','package_archive','selected_groups','selected_source_count','source_group_seals'])assert.ok(receipt.includes(field),'before-Popen receipt binds '+field);
  assert.match(harness,/server_dir\.parent\.parent\.name == 'node_modules'/);assert.match(harness,/runtime_origin[^\n]+isolated-npm-install/);assert.match(harness,/full_batch_acceptance[^\n]+not args\.pilot and not args\.mcp_only/);
@@ -991,7 +1015,7 @@ test('remaining Therā CI runs each separate nine-source replay and wrapper pair
 });
 
 test('remaining curation binds two independently approved nine-poem packets without inventing a combined source derivation',()=>{
- const base=new URL('../docs/evidence/apadana/',import.meta.url),approval=JSON.parse(readFileSync(new URL('THERA_REMAINING_APPROVAL.json',base),'utf8'));
+ const base=new URL('docs/evidence/apadana/',HistoricalHBase),approval=JSON.parse(readFileSync(new URL('THERA_REMAINING_APPROVAL.json',base),'utf8'));
  assert.equal(approval.schema,'reviewed-apadana-intake-v1');assert.equal(approval.status,'approved');assert.equal(approval.base_commit,'cdbefd514164a559bc5aaab631c267f3084e31a6');assert.equal(approval.publisher_revision,'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4');
  assert.equal(approval.baseline_ids.length,266);assert.equal(new Set(approval.baseline_ids).size,266);assert.equal(approval.source_groups.length,2);assert.deepEqual(approval.source_groups.map(group=>group.batch),['A','B']);
  assert.equal(Object.hasOwn(approval,'goldens'),false);assert.equal(Object.hasOwn(approval,'independent_normalization'),false,'no fabricated global18 derivation descriptor');
@@ -1034,7 +1058,7 @@ test('held234 CI adds one finite lane and restores the exact immutable284 workfl
  function conditionGroupsSafe(step){return /^        if: matrix\.group == '[a-z0-9]+'(?: \|\| matrix\.group == '[a-z0-9]+')*$/m.test(step)?conditionGroups(step):[];}
  assert.equal(required(oldGroup).length,92);assert.equal(required(group).length,96);
  const matrix=(text,key)=>text.match(new RegExp('^        '+key+': \\[([^\\]]+)\\]','m'))[1].split(',').map(value=>value.trim());
- const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0],install=readFileSync(new URL('../.github/workflows/npx.yml',import.meta.url),'utf8');
+ const node=source.split('  check:')[1],compat=source.split('  reader-compat:')[1].split('  check:')[0],install=readFixedHUnchangedCurrentWitness('.github/workflows/npx.yml','utf8');
  const otherJobs=1+1+matrix(compat,'engine').length+matrix(node,'os').length*matrix(node,'node').length+matrix(install,'os').length*matrix(install,'node').length+1+1;assert.equal(old.length+otherJobs,65);assert.equal(current.length+otherJobs,66);assert.doesNotMatch(node,/timeout-minutes:/);
  const fixture=namedStep(group,'Check out exact public Apadāna source fixtures without credentials'),oldFixture=namedStep(oldGroup,'Check out exact public Apadāna source fixtures without credentials');
  const paths=text=>[...text.matchAll(/^            (.+)$/gm)].map(match=>match[1]);const files=paths(fixture);assert.equal(files.length,296);assert.equal(new Set(files).size,296);assert.deepEqual(files.filter(path=>path!=='src/_poems/chapter-3/poem-234.md'),paths(oldFixture));assert.equal(files.filter(path=>path==='src/_poems/chapter-3/poem-234.md').length,1);assert.ok(!files.includes('src/_poems/chapter-3/poem-260.md'));
@@ -1053,19 +1077,19 @@ test('held234 lane executes independent one-source replay, exact wrappers and th
  assert.ok(browser.some(line=>line.endsWith('--launch-receipt standalone-apadanathera234-launch.report.json --report standalone-apadanathera234.report.json')&&!line.includes('--a11y')&&!line.includes('--server-dir')));assert.ok(browser.some(line=>line.endsWith('--a11y --launch-receipt standalone-apadanathera234-a11y-launch.report.json --report standalone-apadanathera234-a11y.report.json')));
  assert.ok(browser.some(line=>line.includes('--server-dir "$RUNNER_TEMP/apadanathera234-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-apadanathera234-launch.report.json --report installed-apadanathera234.report.json')));
  assert.ok(steps[3].includes('npm pack --pack-destination "$RUNNER_TEMP/apadanathera234-package"'));assert.ok(steps[3].includes('set -- "$RUNNER_TEMP/apadanathera234-package/"*.tgz\n          test "$#" -eq 1\n          test -f "$1"'));assert.ok(steps[3].includes('npm install --prefix "$RUNNER_TEMP/apadanathera234-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"'));assert.doesNotMatch(steps[3],/tar -x|cp -R|package\/server/);assert.doesNotMatch(commands,/--batch|--pilot|--mcp-only|--live|curl |wget |continue-on-error|\|\| true/);
- const harness=readFileSync(new URL('../scripts/web-reader-thera-held234-check.py',import.meta.url),'utf8');
+ const harness=readFileSync(new URL('scripts/web-reader-thera-held234-check.py',HistoricalHBase),'utf8');
  const launch=harness.indexOf("launch={'status':'launching'"),write=harness.indexOf('write_launch()  # Contemporaneous record exists BEFORE the server subprocess.'),popen=harness.indexOf('server = subprocess.Popen(');assert.ok(launch>=0&&write>launch&&popen>write);
  const receipt=harness.slice(launch,write);for(const field of ['server_file_sha256','harness_sha256','helper_sha256','package_sha256','approval_sha256','started_utc','server_argv','server_cwd','package_archive','selected_source_count','source_approval','independent_normalization'])assert.ok(receipt.includes(field),'new source before-Popen receipt binds '+field);
  assert.match(harness,/server_dir\.parent\.parent\.name\s*==\s*'node_modules'/);assert.match(harness,/not server_dir\.is_relative_to\(ROOT\)/);assert.match(harness,/isolated-npm-install/);assert.match(harness,/selected_source_count[^\n]+1/);
 });
 
 test('held234 curation admits exactly one separately sealed source while frozen remaining284 stays historical',()=>{
- const base=new URL('../docs/evidence/apadana/',import.meta.url),raw=readFileSync(new URL('THERA_HELD234_APPROVAL.json',base));assert.equal(createHash('sha256').update(raw).digest('hex'),'14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7');const current=JSON.parse(raw);
+ const base=new URL('docs/evidence/apadana/',HistoricalHBase),raw=readFileSync(new URL('THERA_HELD234_APPROVAL.json',base));assert.equal(createHash('sha256').update(raw).digest('hex'),'14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7');const current=JSON.parse(raw);
  const sealed=seal=>{assert.equal(seal.file.split('/').length,1);const bytes=readFileSync(new URL(seal.file,base));assert.equal(createHash('sha256').update(bytes).digest('hex'),seal.sha256);return JSON.parse(bytes);};
  const previous=sealed(current.previous_intake);assert.equal(current.previous_intake.file,'THERA_REMAINING_APPROVAL.json');assert.equal(current.previous_intake.sha256,'20d72ee82ce1a0e07c9b5f5b87c68266637462a91ab1a0d4ba38152ee7396d40');assert.equal(previous.expected_profile_ids.length,284);assert.ok(previous.held_ids.includes('tha-ap236'));assert.ok(!previous.approved_ids.includes('tha-ap236'));
  assert.equal(current.base_commit,'7d5ac90845402b322dabf2c5120d1485b15c0bda');assert.deepEqual(current.baseline_ids,previous.expected_profile_ids);assert.deepEqual(current.baseline_records,previous.baseline_records.concat(previous.approved_records));assert.deepEqual(current.approved_ids,['tha-ap236']);assert.deepEqual(current.approved_records,[{id:'tha-ap236',publisher_chapter:'chapter-3',poem:234}]);assert.deepEqual(current.expected_profile_ids,current.baseline_ids.concat(current.approved_ids));assert.equal(current.expected_profile_ids.length,285);assert.equal(new Set(current.expected_profile_ids).size,285);
  assert.equal(current.goldens.length,1);const golden=sealed(current.goldens[0]),profiles=sealed(current.expected_profiles),links=sealed(current.expected_links),peer=sealed(current.independent_source_approval);assert.deepEqual(golden.poems.map(row=>row.id),['tha-ap236']);assert.deepEqual(Object.keys(profiles),['tha-ap236']);assert.deepEqual(Object.keys(links),['tha-ap236']);assert.equal(current.independent_source_approval.sha256,'9b7b6cf1d4efe45ee06330551651e1baaf76f20226a35c47a07224592d1cfb8d');assert.equal(peer.status,'APPROVE_ONE_EXACT_PUBLISHER234_SOURCE_AND_FINITE_NORMALIZATION_IDENTITY_SCOPE_ONLY');assert.deepEqual(peer.approved_profile_objects,profiles);assert.deepEqual(peer.approved_link_objects,links);assert.equal(peer.runtime_approval,false);assert.equal(peer.release_approval,false);
  for(const field of ['source_approval','independent_normalization','normalization_replay','normalization_seals','copy_policy'])sealed(current[field]);for(const family of ['source_reviews','rights']){assert.ok(current[family].length);for(const seal of current[family])sealed(seal);}
  assert.equal(current.before_canon_sha256,current.after_canon_sha256);assert.equal(current.after_canon_sha256,previous.after_canon_sha256);assert.ok(!current.held_ids.includes('tha-ap236'));assert.ok(current.held_ids.includes('tha-ap262'));assert.equal(current.runtime_approval,false);assert.equal(current.release_approval,false);assert.equal(current.external_activation_count,0);
- const helper=readFileSync(new URL('../scripts/web_reader_apadana_intake.py',import.meta.url),'utf8'),harness=readFileSync(new URL('../scripts/web-reader-thera-remaining-check.py',import.meta.url),'utf8');assert.match(helper,/def reviewed_remaining_intake\(root\):/);assert.match(helper,/len\(current\['expected_profile_ids'\]\)==284/);assert.match(helper,/len\(current\['expected_profile_ids'\]\)==285/);assert.match(harness,/approval==reviewed_remaining_intake\(ROOT\)/);assert.match(harness,/curated_additions\(ROOT,'THERA_REMAINING_APPROVAL.json'\)/);assert.match(harness,/all18_source_browser_acceptance[^\n]+args\.batch=='all' and not args\.pilot and not args\.mcp_only/);assert.match(harness,/registry_profiles[^\n]+len\(current_ids\)/);
+ const helper=readFileSync(new URL('scripts/web_reader_apadana_intake.py',HistoricalHBase),'utf8'),harness=readFileSync(new URL('scripts/web-reader-thera-remaining-check.py',HistoricalHBase),'utf8');assert.match(helper,/def reviewed_remaining_intake\(root\):/);assert.match(helper,/len\(current\['expected_profile_ids'\]\)==284/);assert.match(helper,/len\(current\['expected_profile_ids'\]\)==285/);assert.match(harness,/approval==reviewed_remaining_intake\(ROOT\)/);assert.match(harness,/curated_additions\(ROOT,'THERA_REMAINING_APPROVAL.json'\)/);assert.match(harness,/all18_source_browser_acceptance[^\n]+args\.batch=='all' and not args\.pilot and not args\.mcp_only/);assert.match(harness,/registry_profiles[^\n]+len\(current_ids\)/);
 });

@@ -1,4 +1,4 @@
-import {CURRENT_WIDGET_VERSION} from './intake368-metadata.mjs';
+import {CURRENT_WIDGET_VERSION} from './intake375-metadata.mjs';
 /** Client capabilities exercise original pinned source responses, never invented positive wording. */
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';

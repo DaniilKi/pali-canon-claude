@@ -1,8 +1,25 @@
-import {historical440DataReader} from './helpers/four-history-data.mjs';
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(CURRENT_APADANA_PROFILES);
+import {readFileSync as readCurrent375MetadataFile} from 'node:fs';
+requireMetadata375(CURRENT_APADANA_PROFILES,JSON.parse(readCurrent375MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readCurrentFileSync(path,...options){return readOwnedHOrActualMetadataFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
+const {historical440DataReader}=await import(new URL('tests/helpers/four-history-data.mjs',HistoricalHBase).href);
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync as readCurrentFileSync} from 'node:fs';
+import {readFileSync as readOwnedHOrActualMetadataFile} from 'node:fs';
 import {join} from 'node:path';
 import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
@@ -13,8 +30,8 @@ import {fetchPublic} from '../src/http.mjs';
 import {readPassage} from '../src/chatgpt-widget.mjs';
 import {thera301310Evidence,digest,blob} from './helpers/thera301-310-evidence.mjs';
 import {projectPublisher333To325,historical325FileReader} from './helpers/thera333-legacy-projection.mjs';
-const APADANA_PROFILES=projectPublisher333To325(CURRENT_APADANA_PROFILES,JSON.parse(readCurrentFileSync('server/data/apadana.json','utf8'))).profiles;
-const readFileSync=historical325FileReader(CURRENT_APADANA_PROFILES,historical440DataReader(readCurrentFileSync));
+const APADANA_PROFILES=projectPublisher333To325(HistoricalH368Profiles,HistoricalH368Catalogue).profiles;
+const readFileSync=historical325FileReader(HistoricalH368Profiles,historical440DataReader(readCurrentFileSync));
 const e=thera301310Evidence(),originalFetch=globalThis.fetch,clone=value=>JSON.parse(JSON.stringify(value));
 const tid=p=>canon.translationId(p),profile=id=>APADANA_PROFILES[id],parsed=id=>parseApadana(e.artifact(id),profile(id));
 afterEach(()=>{globalThis.fetch=originalFetch;});
@@ -29,7 +46,7 @@ test('eight V2 approved profiles extend every preserved317 object and link to325
  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
  for(const id of e.ids){const p=profile(id),b=e.independent(id),u=data.byId.get(id);assert.deepEqual(p,e.profiles[id]);assert.deepEqual(manifest.links[id],e.links[id]);assert.equal(rootDigest(u,data.canon.books[u.book]),b.root_sha256);assert.deepEqual({start:u.start,end:u.end,book:u.book},{start:b.canonical.start,end:b.canonical.end,book:b.canonical.book});assert.ok(Object.isFrozen(p));}
  for(const id of ['tha-ap262','tha-ap268','tha-ap282','tha-ap293','tha-ap299','tha-ap302','tha-ap308','tha-ap309'])assert.equal(profile(id),undefined);
- e.assertClientProjection();assert.equal(profile('tha-ap312').mapping_notes.filter(row=>row===e.notice).length,1);
+ e.assertClientProjection(HistoricalHBase);assert.equal(profile('tha-ap312').mapping_notes.filter(row=>row===e.notice).length,1);
 });
 
 test('all eight complete originals and six rights/routing artifacts match independent source body notes paragraphs and UTF16 lengths before corruptions',{skip:!e.checkout},()=>{

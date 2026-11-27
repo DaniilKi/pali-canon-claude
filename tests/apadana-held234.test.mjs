@@ -1,3 +1,10 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(APADANA_PROFILES);
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 /** Original234 identity exception, independently sealed text and unchanged neighboring235. */
 import test,{afterEach} from 'node:test';
@@ -36,7 +43,7 @@ test('held234 curation appends only236 to exact284 objects and preserves separat
   assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,285),e.approval.expected_profile_ids);
   assert.deepEqual(CURRENT_APADANA_IDS.slice(0,285),e.approval.expected_profile_ids);
   assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);
-  assert.equal(CURRENT_APADANA_IDS.length,368);
+  assert.equal(current375Source.baseline.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,375);
   for(const id of e.previous.expected_profile_ids){assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id],id+' prior profile exact');assert.deepEqual(manifest.links[id],e.priorLinks[id],id+' prior link exact');}
   assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.profiles['tha-ap236']);assert.deepEqual(manifest.links['tha-ap236'],e.links['tha-ap236']);
   assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);

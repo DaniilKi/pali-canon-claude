@@ -1,14 +1,24 @@
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readCurrentFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 /** Test-only current333→historical325 input binding; never a runtime downgrade. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync as readCurrentFileSync} from 'node:fs';
+import {readFileSync as readOwnedHPhysicalFile} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {APADANA_PROFILES as CURRENT_APADANA_PROFILES} from '../src/apadana-profiles.mjs';
-import {projectPublisher339To333,historical333FileReader,projectPublisher339ClientTo333} from './helpers/thera339-legacy-projection.mjs';
+const {APADANA_PROFILES:CURRENT_APADANA_PROFILES}=await import(new URL('src/apadana-profiles.mjs',HistoricalHBase).href);
+const {projectPublisher339To333,historical333FileReader,projectPublisher339ClientTo333}=await import(new URL('tests/helpers/thera339-legacy-projection.mjs',HistoricalHBase).href);
 const APADANA_PROFILES=projectPublisher339To333(CURRENT_APADANA_PROFILES,JSON.parse(readCurrentFileSync('server/data/apadana.json','utf8'))).profiles;
 const readHistorical333=historical333FileReader(CURRENT_APADANA_PROFILES,readCurrentFileSync);
 const readFileSync=(path,...options)=>{const raw=readHistorical333(path,...options);if(!['src/chatgpt-widget.mjs','web/translation-policy.mjs'].includes(path))return raw;const projected=projectPublisher339ClientTo333(path,raw.toString('utf8'));return typeof raw==='string'?projected:Buffer.from(projected);};
-import {publisher333Authority,requireHistorical325Maps,projectPublisher333To325,historical325FileReader,projectPublisher333ClientTo325} from './helpers/thera333-legacy-projection.mjs';
+const {publisher333Authority,requireHistorical325Maps,projectPublisher333To325,historical325FileReader,projectPublisher333ClientTo325}=await import(new URL('tests/helpers/thera333-legacy-projection.mjs',HistoricalHBase).href);
 const e=publisher333Authority(),clone=value=>structuredClone(value),sha=value=>createHash('sha256').update(value).digest('hex');
 const manifest=()=>JSON.parse(readFileSync('server/data/apadana.json','utf8'));
 const project=(profiles=APADANA_PROFILES,catalogue=manifest())=>projectPublisher333To325(profiles,catalogue);

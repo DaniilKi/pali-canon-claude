@@ -1,3 +1,10 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(CURRENT_APADANA_PROFILES);
 /** Authentic original-source body/note positives precede every client mutation. */
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,7 +19,7 @@ import {view} from './helpers/widget-view.mjs';
 import {thera301310Evidence,digest} from './helpers/thera301-310-evidence.mjs';
 import {readFileSync} from 'node:fs';
 import {projectPublisher333To325} from './helpers/thera333-legacy-projection.mjs';
-const APADANA_PROFILES=projectPublisher333To325(CURRENT_APADANA_PROFILES,JSON.parse(readFileSync('server/data/apadana.json','utf8'))).profiles;
+const APADANA_PROFILES=projectPublisher333To325(HistoricalH368Profiles,HistoricalH368Catalogue).profiles;
 const e=thera301310Evidence(),originalFetch=globalThis.fetch,cases=new Map(),clone=value=>JSON.parse(JSON.stringify(value)),tid=p=>canon.translationId(p);
 afterEach(()=>{globalThis.fetch=originalFetch;});
 function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e.profiles[id].raw_url===url.href);assert.ok(id,'Only an exact eight-poem Markdown source URL may reach transport');assert.ok(url.href.endsWith('.md'));calls.push(id);return new Response(e.artifact(id));};}

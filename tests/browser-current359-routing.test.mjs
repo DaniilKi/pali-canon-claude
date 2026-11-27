@@ -1,3 +1,8 @@
+// Explicit immutable H input lane. The provider validates CURRENT375 first; registrations stay in actual R.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
@@ -5,7 +10,7 @@ import {fileURLToPath} from 'node:url';
 
 test('current browser source whitelist is exact359 with preserved historical cohorts and no runtime-oracle fallback',{timeout:35000},()=>{
   const result=spawnSync(process.env.PYTHON||'python3',['-B','tests/browser_current359_routing.py'],{
-    cwd:fileURLToPath(new URL('../',import.meta.url)),encoding:'utf8',timeout:30000,killSignal:'SIGKILL',maxBuffer:1024*1024,
+    cwd:ownedHistoricalHInputs.root,encoding:'utf8',timeout:30000,killSignal:'SIGKILL',maxBuffer:1024*1024,
     env:{...process.env,PYTHONDONTWRITEBYTECODE:'1',PYTHONUNBUFFERED:'1'},
   });
   const output=(result.stdout||'')+'\n'+(result.stderr||'');

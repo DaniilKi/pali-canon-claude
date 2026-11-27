@@ -1,3 +1,10 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(APADANA_PROFILES);
 import {profilesForHistorical343,requireProfiles368} from './helpers/intake368-metadata.mjs';
 /** Proposed root-owned test: run only after the four normalized profiles are independently sealed. */
 import test, {afterEach} from 'node:test';
@@ -80,7 +87,7 @@ function nativePrefaceOnce(data) {
 }
 
 test('two literal note-owning prefaces preserve all339 prior metadata contracts and refuse borrowed owners', () => {
-  requireProfiles368(APADANA_PROFILES);assert.equal(Object.keys(APADANA_PROFILES).length, 368); for (const uid of ids) assert.ok(APADANA_PROFILES[uid]);
+  requireProfiles368(HistoricalH368Profiles);assert.equal(Object.keys(HistoricalH368Profiles).length, 368); for (const uid of ids) assert.ok(APADANA_PROFILES[uid]);
   const p = APADANA_PROFILES['tha-ap333']; assert.ok(p);
   assert.deepEqual(Object.keys(p.publisher_preface).sort(), ['body_sha256','kind','label','note_numbers','notes_sha256','parent_id']);
   assert.equal(p.publisher_preface.kind, 'publisher_preface');
@@ -88,7 +95,7 @@ test('two literal note-owning prefaces preserve all339 prior metadata contracts 
   assert.equal(p.publisher_preface.label, 'Thirty-fourth Therā chapter preface');
   assert.equal(p.publisher_preface.body_sha256, p.paratext_sha256);
   assert.deepEqual(p.publisher_preface.note_numbers, [1]); assert.deepEqual(p.note_numbers, [2,3,4]);
-  const historical343=profilesForHistorical343(APADANA_PROFILES);
+  const historical343=profilesForHistorical343(HistoricalH368Profiles);
   const prior = Object.keys(historical343).filter(uid => !ids.includes(uid)); assert.equal(prior.length, 339);
   for (const uid of prior) {
     const old = APADANA_PROFILES[uid], choice = english.available(canon.resolve(uid).unit).find(row => row.translation_id === tid(old));

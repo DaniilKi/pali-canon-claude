@@ -1,3 +1,12 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(APADANA_PROFILES);
+import {readFileSync as readCurrent375MetadataFile} from 'node:fs';
+requireMetadata375(APADANA_PROFILES,JSON.parse(readCurrent375MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -18,7 +27,7 @@ afterEach(()=>{globalThis.fetch=originalFetch;});
 function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e.profiles[id].raw_url===url.href);assert.ok(id,'Only exact18 immutable fixture URLs may reach transport');calls.push(id);return new Response(e.artifact(id));};}
 
 test('exact independently approved18 extend the preserved285 to303 with unchanged canonical identities and rights',()=>{
- assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,368);
+ assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current375Source.baseline.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,375);
  assert.equal(e.approval.expected_profile_ids.length,303);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,303),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,303),e.approval.expected_profile_ids);
  const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));

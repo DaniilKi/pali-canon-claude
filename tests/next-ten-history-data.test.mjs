@@ -1,16 +1,26 @@
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 /** Adversarial owned-fixture history tests; no app/server/provider execution. */
 import test,{before} from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {readFileSync,writeFileSync,copyFileSync,mkdirSync,mkdtempSync,rmSync,unlinkSync,renameSync,symlinkSync} from 'node:fs';
+import {readFileSync as readOwnedHPhysicalFile,writeFileSync,copyFileSync,mkdirSync,mkdtempSync,rmSync,unlinkSync,renameSync,symlinkSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,dirname,sep} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {assertNextTenActualData,assertNextTenScope,runNextTenSixOperation} from './helpers/next-ten-history-data.mjs';
-import {sixDataRecords,_ddSixDataRecords} from './helpers/six-history-data.mjs';
-import {intake368Authority,fresh368Proofs,INTAKE368_DIRECTORY,INTAKE368_PINS,INTAKE368_RUNTIME_FILE,INTAKE368_REVIEW_FILE,AP359_FIXTURE} from './helpers/intake368-metadata.mjs';
-const ROOT=fileURLToPath(new URL('../',import.meta.url)),BASE=new URL('../',import.meta.url),sha=b=>createHash('sha256').update(b).digest('hex');
+const {assertNextTenActualData,assertNextTenScope,runNextTenSixOperation}=await import(new URL('tests/helpers/next-ten-history-data.mjs',HistoricalHBase).href);
+const {sixDataRecords,_ddSixDataRecords}=await import(new URL('tests/helpers/six-history-data.mjs',HistoricalHBase).href);
+const {intake368Authority,fresh368Proofs,INTAKE368_DIRECTORY,INTAKE368_PINS,INTAKE368_RUNTIME_FILE,INTAKE368_REVIEW_FILE,AP359_FIXTURE}=await import(new URL('tests/helpers/intake368-metadata.mjs',HistoricalHBase).href);
+const ROOT=fileURLToPath(HistoricalHBase),BASE=HistoricalHBase,sha=b=>createHash('sha256').update(b).digest('hex');
 const D='docs/evidence/apadana/boundaries-next-ten/',S='docs/evidence/apadana/boundaries340-347/';
 const CURRENT=D+'runtime/INDEPENDENT_NEXT_TEN_RUNTIME_INVENTORY.json',REVIEW=D+'runtime/INDEPENDENT_NEXT_TEN_RUNTIME_REVIEW.json';
 const INTAKE='docs/evidence/apadana/english335-350/',AP343='tests/fixtures/canon-before-intake359/apadana.json';

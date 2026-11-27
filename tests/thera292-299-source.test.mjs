@@ -1,8 +1,25 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(APADANA_PROFILES);
+import {readFileSync as readCurrent375MetadataFile} from 'node:fs';
+requireMetadata375(APADANA_PROFILES,JSON.parse(readCurrent375MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readActualFileSync(path,...options){if(path==='server/data/apadana.json')return readOwnedHOrActualMetadataFile(path,...options);return readOwnedHOrActualMetadataFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync as readActualFileSync} from 'node:fs';
-import {historical440DataReader} from './helpers/four-history-data.mjs';
+import {readFileSync as readOwnedHOrActualMetadataFile} from 'node:fs';
+const {historical440DataReader}=await import(new URL('tests/helpers/four-history-data.mjs',HistoricalHBase).href);
 const readFileSync=historical440DataReader(readActualFileSync);
 import {join} from 'node:path';
 import * as canon from '../src/canon.mjs';
@@ -22,13 +39,13 @@ function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e
 
 test('seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities',()=>{
  const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));
- assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,368);
+ assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current375Source.baseline.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,375);
  assert.equal(e.approval.expected_profile_ids.length,317);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,317),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,317),e.approval.expected_profile_ids);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(317,325),['tha-ap303','tha-ap304','tha-ap305','tha-ap306','tha-ap307','tha-ap310','tha-ap311','tha-ap312']);assert.deepEqual(Object.keys(manifest.links),CURRENT_APADANA_IDS);
  assert.deepEqual(Object.keys(manifest.links).slice(0,317),e.approval.expected_profile_ids);
  for(const id of e.approval.baseline_ids){assert.deepEqual(profile(id),e.baseline.profile_objects[id]);assert.deepEqual(manifest.links[id],e.baseline.translation_objects[id]);assert.equal(digest(JSON.stringify(profile(id))),e.compact.profile_object_sha256[id]);assert.equal(digest(JSON.stringify(manifest.links[id])),e.compact.translation_object_sha256[id]);}
- const priorSource=clone(projectPublisher333To325(APADANA_PROFILES,manifest).catalogue.source);
+ const priorSource=clone(projectPublisher333To325(HistoricalH368Profiles,HistoricalH368Catalogue).catalogue.source);
  for(const[current,previous]of [['325 finite complete publisher-edition poems','317 finite complete publisher-edition poems'],['285 explicitly mapped Therā','277 explicitly mapped Therā']]){
   assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved latest policy counter '+current);
   priorSource.policy=priorSource.policy.replace(current,previous);

@@ -1,13 +1,23 @@
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 /** Current physical SOURCE closure only; no runtime/body projection or guessed pins. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,writeFileSync,mkdtempSync,mkdirSync,rmSync,unlinkSync,symlinkSync,realpathSync} from 'node:fs';
+import {readFileSync as readOwnedHPhysicalFile,writeFileSync,mkdtempSync,mkdirSync,rmSync,unlinkSync,symlinkSync,realpathSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {tmpdir} from 'node:os';
 import {join,dirname,sep} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {CURRENT368_SOURCE_CODE_SHA,INTAKE359_SOURCE_MAP_SHA,assertCurrent368SourceClosure,readIntake359SourceInverses,project3dSource} from './helpers/intake359-source-input.mjs';
-const ROOT=fileURLToPath(new URL('../',import.meta.url));
+const {CURRENT368_SOURCE_CODE_SHA,INTAKE359_SOURCE_MAP_SHA,assertCurrent368SourceClosure,readIntake359SourceInverses,project3dSource}=await import(new URL('tests/helpers/intake359-source-input.mjs',HistoricalHBase).href);
+const ROOT=fileURLToPath(HistoricalHBase);
 const D='docs/evidence/apadana/english335-350/',N='docs/evidence/apadana/english351-360-nine/';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const exactIDs=['tha-ap353','tha-ap354','tha-ap355','tha-ap356','tha-ap357','tha-ap358','tha-ap359','tha-ap361','tha-ap362'];

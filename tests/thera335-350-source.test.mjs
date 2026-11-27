@@ -1,3 +1,12 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(ACTUAL_APADANA_PROFILES);
+import {readFileSync as readCurrent375MetadataFile} from 'node:fs';
+requireMetadata375(ACTUAL_APADANA_PROFILES,JSON.parse(readCurrent375MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
 /** Focused original-source/API checks. Expected content is independently sealed, never parser output. */
 import test,{afterEach}from'node:test';
 import assert from'node:assert/strict';
@@ -14,9 +23,9 @@ import{requiredCanonicalRevision}from'../src/locator-policy.mjs';
 import{sixteenEnglishEvidence,decodeApproval,IDS,REV,VRI,sha,objectSha,gitBlob}from'./helpers/thera335-350-evidence.mjs';
 import {profilesForHistorical359,project368To359} from './helpers/intake368-metadata.mjs';
 const e=sixteenEnglishEvidence(),originalFetch=globalThis.fetch,clone=structuredClone,tid=p=>canon.translationId(p);
-// Explicit TEST inputs only: actual APIs/provider guards retain the unprojected current368 data.
-const APADANA_PROFILES=profilesForHistorical359(ACTUAL_APADANA_PROFILES);
-const historical359Manifest=()=>project368To359(ACTUAL_APADANA_PROFILES,JSON.parse(readFileSync('server/data/apadana.json'))).catalogue;
+// Explicit TEST inputs only: actual APIs/provider guards retain unprojected current375 data; only sealed H metadata supplies named359 fixture inputs.
+const APADANA_PROFILES=profilesForHistorical359(HistoricalH368Profiles);
+const historical359Manifest=()=>project368To359(HistoricalH368Profiles,HistoricalH368Catalogue).catalogue;
 afterEach(()=>{globalThis.fetch=originalFetch;liveCache.clear();});
 function transport(calls,mutate){liveCache.clear();globalThis.fetch=async(input,init={})=>{const url=typeof input==='string'?input:input.href,id=IDS.find(id=>e.profiles[id].raw_url===url);assert.ok(id,'Only16 exact pinned official raw URLs reach the offline fixture transport');assert.ok(!url.includes('SYNTHETIC_PRIVATE_359')&&!JSON.stringify(init).includes('SYNTHETIC_PRIVATE_359'));calls.push(id);return new Response(mutate?mutate(e.artifact(id),id):e.artifact(id));};}
 const currentPins=Object.freeze({'tha-ap340':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap341':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap343':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap344':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap346':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap347':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap348':VRI+'-apadana-thera-next10-v1','tha-ap349':VRI+'-apadana-thera-next10-v1'});

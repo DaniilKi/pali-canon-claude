@@ -1,10 +1,15 @@
+// Explicit immutable H input lane. The provider validates CURRENT375 first; registrations stay in actual R.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 test('independent intake and runtime acceptance reject omissions, substitutions and drift',()=>{
-  const root=fileURLToPath(new URL('../',import.meta.url));
+  const root=ownedHistoricalHInputs.root;
   const started=process.hrtime.bigint();
   const result=spawnSync('python3',['tests/approved_acceptance.py','-v'],{cwd:root,encoding:'utf8',timeout:30000});
   // Record the actual subprocess outcome; elapsed time alone is not a cause.

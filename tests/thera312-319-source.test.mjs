@@ -1,8 +1,26 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(APADANA_PROFILES);
+import {readFileSync as readCurrent375MetadataFile} from 'node:fs';
+requireMetadata375(APADANA_PROFILES,JSON.parse(readCurrent375MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
+assert.equal(Object.keys(HistoricalH368Profiles).filter(id=>id.startsWith('tha-ap')).length,328);
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readActualFileSync(path,...options){if(path==='server/data/apadana.json')return readOwnedHOrActualMetadataFile(path,...options);return readOwnedHOrActualMetadataFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync as readActualFileSync} from 'node:fs';
-import {historical440DataReader} from './helpers/four-history-data.mjs';
+import {readFileSync as readOwnedHOrActualMetadataFile} from 'node:fs';
+const {historical440DataReader}=await import(new URL('tests/helpers/four-history-data.mjs',HistoricalHBase).href);
 const readFileSync=historical440DataReader(readActualFileSync);
 import {join} from 'node:path';
 import * as canon from '../src/canon.mjs';
@@ -34,10 +52,10 @@ function transport(calls) {
 
 test('exact333 identities preserve all325 full ordered profile and link objects, rights policy and all canonical/non-Apadana data',()=>{
   const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));
-  e.assertCatalogue(manifest,APADANA_PROFILES);
+  e.assertCatalogue(HistoricalH368Catalogue,HistoricalH368Profiles);
   assert.equal(APADANA_COMMIT,REV);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);
-  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,328);
+  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,335);
   assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.compact.canonical_logical_sha256);
   assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
   for(const [path,sha] of Object.entries(e.compact.data_file_sha256)) assert.equal(digest(readFileSync(path)),sha,'Preserved original325 data '+path);

@@ -1,8 +1,18 @@
-import {project343To339} from './helpers/intake343-metadata.mjs';
-import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
-import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readCurrentFileSync} from 'node:fs';import {createHash} from 'node:crypto';
-import {APADANA_PROFILES as CURRENT343_PROFILES} from '../src/apadana-profiles.mjs';
-import {publisher339Authority,requireProfiles339,requireHistorical333Maps,projectPublisher339To333,historical333FileReader,projectPublisher339ClientTo333,normalize339InputTo333} from './helpers/thera339-legacy-projection.mjs';
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readCurrentFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
+const {project343To339}=await import(new URL('tests/helpers/intake343-metadata.mjs',HistoricalHBase).href);
+const {frozen440FileReader}=await import(new URL('tests/helpers/boundary333-336-source-input.mjs',HistoricalHBase).href);
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readOwnedHPhysicalFile} from 'node:fs';import {createHash} from 'node:crypto';
+const {APADANA_PROFILES:CURRENT343_PROFILES}=await import(new URL('src/apadana-profiles.mjs',HistoricalHBase).href);
+const {publisher339Authority,requireProfiles339,requireHistorical333Maps,projectPublisher339To333,historical333FileReader,projectPublisher339ClientTo333,normalize339InputTo333}=await import(new URL('tests/helpers/thera339-legacy-projection.mjs',HistoricalHBase).href);
 const readFileSync=frozen440FileReader(readCurrentFileSync);
 const historical339=project343To339(CURRENT343_PROFILES,JSON.parse(readCurrentFileSync('server/data/apadana.json','utf8')));
 const APADANA_PROFILES=historical339.profiles;

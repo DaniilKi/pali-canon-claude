@@ -1,17 +1,27 @@
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 /** Actual368 first, then explicit named359 history; every mutation is confined to an owned temporary fixture. */
 import test,{before} from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {readFileSync,writeFileSync,copyFileSync,mkdirSync,mkdtempSync,rmSync,unlinkSync,renameSync,symlinkSync,statSync,utimesSync} from 'node:fs';
+import {readFileSync as readOwnedHPhysicalFile,writeFileSync,copyFileSync,mkdirSync,mkdtempSync,rmSync,unlinkSync,renameSync,symlinkSync,statSync,utimesSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,dirname,sep} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {APADANA_PROFILES as ACTUAL_PROFILES368} from '../src/apadana-profiles.mjs';
-import {requireMetadata359,project359To343,requireProfiles359,INTAKE359_IDS,INTAKE359_PINS,INTAKE359_RUNTIME_SHA,INTAKE359_RUNTIME_REVIEW_SHA} from './helpers/intake359-metadata.mjs';
-import {assertNextTenActualData} from './helpers/next-ten-history-data.mjs';
-import {sixDataRecords} from './helpers/six-history-data.mjs';
-import {requireMetadata368,project368To359,intake368Authority,fresh368Proofs,INTAKE368_DIRECTORY,INTAKE368_PINS,INTAKE368_RUNTIME_FILE,INTAKE368_REVIEW_FILE,AP359_FIXTURE} from './helpers/intake368-metadata.mjs';
-const ROOT=fileURLToPath(new URL('../',import.meta.url)),BASE=new URL('../',import.meta.url),DIR='docs/evidence/apadana/english335-350/';
+const {APADANA_PROFILES:ACTUAL_PROFILES368}=await import(new URL('src/apadana-profiles.mjs',HistoricalHBase).href);
+const {requireMetadata359,project359To343,requireProfiles359,INTAKE359_IDS,INTAKE359_PINS,INTAKE359_RUNTIME_SHA,INTAKE359_RUNTIME_REVIEW_SHA}=await import(new URL('tests/helpers/intake359-metadata.mjs',HistoricalHBase).href);
+const {assertNextTenActualData}=await import(new URL('tests/helpers/next-ten-history-data.mjs',HistoricalHBase).href);
+const {sixDataRecords}=await import(new URL('tests/helpers/six-history-data.mjs',HistoricalHBase).href);
+const {requireMetadata368,project368To359,intake368Authority,fresh368Proofs,INTAKE368_DIRECTORY,INTAKE368_PINS,INTAKE368_RUNTIME_FILE,INTAKE368_REVIEW_FILE,AP359_FIXTURE}=await import(new URL('tests/helpers/intake368-metadata.mjs',HistoricalHBase).href);
+const ROOT=fileURLToPath(HistoricalHBase),BASE=HistoricalHBase,DIR='docs/evidence/apadana/english335-350/';
 const sha=b=>createHash('sha256').update(b).digest('hex'),read=p=>readFileSync(join(ROOT,p)),json=p=>JSON.parse(read(p));
 const proofNames=[...Object.keys(INTAKE359_PINS),'RUNTIME_INVENTORY.json','RUNTIME_REVIEW.json'].map(p=>DIR+p);
 const oldProofs=['docs/evidence/apadana/boundaries-next-ten/FUTURE_ORACLE.json','docs/evidence/apadana/boundaries-next-ten/runtime/INDEPENDENT_NEXT_TEN_RUNTIME_INVENTORY.json','docs/evidence/apadana/boundaries-next-ten/runtime/INDEPENDENT_NEXT_TEN_RUNTIME_REVIEW.json','docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json','docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json','docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json','docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json','docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json','docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json'];

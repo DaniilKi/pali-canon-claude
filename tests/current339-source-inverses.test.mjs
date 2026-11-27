@@ -1,13 +1,23 @@
-import {CURRENT_WIDGET_URI,CURRENT_WIDGET_VERSION} from './helpers/intake368-metadata.mjs';
-import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
-import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readCurrentFileSync} from 'node:fs';import {createHash} from 'node:crypto';
-import {sourceInverses,projectD4Source,d4FileReader} from './helpers/current339-source-inverse.mjs';
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readCurrentFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
+import {CURRENT_WIDGET_URI,CURRENT_WIDGET_VERSION,intake375Authority} from './helpers/intake375-metadata.mjs';
+const {frozen440FileReader}=await import(new URL('tests/helpers/boundary333-336-source-input.mjs',HistoricalHBase).href);
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readOwnedHPhysicalFile} from 'node:fs';import {createHash} from 'node:crypto';
+const {sourceInverses,projectD4Source,d4FileReader}=await import(new URL('tests/helpers/current339-source-inverse.mjs',HistoricalHBase).href);
 import {WIDGET_VERSION,WIDGET_URI} from '../src/chatgpt-widget.mjs';
 import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 const readFileSync=frozen440FileReader(readCurrentFileSync);
 const sha=x=>createHash('sha256').update(x).digest('hex');
 test('actual current359 and v45 bindings retain every exact D4 assertion through finite source inputs',()=>{
- assert.equal(CURRENT_APADANA_IDS.length,368);assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);assert.equal(WIDGET_URI,CURRENT_WIDGET_URI);
+ assert.equal(intake375Authority().baseline.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,375);assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);assert.equal(WIDGET_URI,CURRENT_WIDGET_URI);
  assert.ok(Object.keys(sourceInverses.files).length>=20);
  const reader=d4FileReader(readCurrentFileSync);
  for(const [path,row]of Object.entries(sourceInverses.files)){

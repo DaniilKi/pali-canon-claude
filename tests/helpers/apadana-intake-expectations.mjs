@@ -1,3 +1,4 @@
+import {intake375Authority} from './intake375-metadata.mjs';
 import {intake368Authority,INTAKE368_IDS} from './intake368-metadata.mjs';
 import {intake359Authority,INTAKE359_IDS,INTAKE359_PUBLISHERS} from './intake359-metadata.mjs';
 import {publisher343Authority} from './intake343-metadata.mjs';
@@ -241,13 +242,17 @@ assert.equal(records368.filter(row=>row.publisher_chapter==='chapter-3').length,
 assert.ok(!records368.some(row=>row.id==='tha-ap360'||row.publisher_chapter==='chapter-3'&&row.poem===358));
 /* END finite368 extension. */
 
-export const CURRENT_APADANA_IDS=Object.freeze([...latest368.approval.expected_profile_ids]);
-export const CURRENT_APADANA_RECORDS=Object.freeze(records368.map(row=>Object.freeze({...row})));
-export const CURRENT_THERA_IDS=Object.freeze(records368.filter(row=>row.publisher_chapter==='chapter-3').map(row=>row.id));
+// CURRENT is the flat source-derived375 authority. Named historical368 assertions above stay exact.
+const current375=intake375Authority();
+const current375Records=[...current375.selection.baseline_records,...current375.selection.approved_records];
+assert.deepEqual(current375Records.map(row=>row.id),current375.ids);
+export const CURRENT_APADANA_IDS=Object.freeze([...current375.ids]);
+export const CURRENT_APADANA_RECORDS=Object.freeze(current375Records.map(row=>Object.freeze({...row})));
+export const CURRENT_THERA_IDS=Object.freeze(current375Records.filter(row=>row.publisher_chapter==='chapter-3').map(row=>row.id));
 export const BASELINE_APADANA_IDS=Object.freeze([...historical.baseline_ids]);
 /** Select only immutable pre-D250 records, using their reviewed publisher metadata. */
 export function historicalApadanaIds(lastTheraPoem=60){
   return historical.baseline_records.filter(row=>row.publisher_chapter==='chapter-4'||row.poem<=lastTheraPoem).map(row=>row.id);
 }
 
-export const CURRENT_APADANA_URLS=Object.freeze(records368.map(row=>`https://apadanatranslation.com/text/${row.publisher_chapter}/poem-${String(row.poem).padStart(3,'0')}/`));
+export const CURRENT_APADANA_URLS=Object.freeze(current375Records.map(row=>`https://apadanatranslation.com/text/${row.publisher_chapter}/poem-${String(row.poem).padStart(3,'0')}/`));

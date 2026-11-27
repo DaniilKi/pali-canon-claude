@@ -1,9 +1,26 @@
+// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
+import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+assertCurrent375SourceClosure(new URL('../',import.meta.url));
+const current375Source=intake375Authority();
+const HistoricalH368Profiles=current375Source.baseline.profiles;
+const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
+requireProfiles375(APADANA_PROFILES);
+import {readFileSync as readCurrent375MetadataFile} from 'node:fs';
+requireMetadata375(APADANA_PROFILES,JSON.parse(readCurrent375MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readActualFileSync(path,...options){if(path==='server/data/apadana.json')return readOwnedHOrActualMetadataFile(path,...options);return readOwnedHOrActualMetadataFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 import {requireProfiles359,INTAKE359_PUBLISHERS} from './helpers/intake359-metadata.mjs';
 import {normalize343Metadata,requireProfiles368,profilesForHistorical359,intake368Authority,INTAKE368_PUBLISHERS} from './helpers/intake368-metadata.mjs';
 import test,{afterEach}from'node:test';
 import assert from'node:assert/strict';
-import {readFileSync as readActualFileSync} from 'node:fs';
-import {c1DataFileReader} from './helpers/six-history-data.mjs';
+import {readFileSync as readOwnedHOrActualMetadataFile} from 'node:fs';
+const {c1DataFileReader}=await import(new URL('tests/helpers/six-history-data.mjs',HistoricalHBase).href);
 const readFileSync=c1DataFileReader(readActualFileSync);
 import{join}from'node:path';
 import*as canon from'../src/canon.mjs';
@@ -22,7 +39,7 @@ function transport(calls,mutate){
   liveCache.clear();globalThis.fetch=async(input,init={})=>{const url=typeof input==='string'?input:input.href,id=IDS.find(id=>e.profiles[id].raw_url===url);assert.ok(id,'Only the four exact official source URLs reach transport');assert.ok(!url.includes('SYNTHETIC_PRIVATE_343')&&!JSON.stringify(init).includes('SYNTHETIC_PRIVATE_343'));calls.push(id);return new Response(mutate?mutate(e.artifact(id),id):e.artifact(id));};
 }
 test('current359 preserves the complete343 metadata cohort and its historical339/source/locator assertions',()=>{
-  const manifest=JSON.parse(readActualFileSync('server/data/apadana.json'));e.assertCatalogue(manifest,APADANA_PROFILES);
+  const manifest=JSON.parse(readActualFileSync('server/data/apadana.json'));e.assertCatalogue(HistoricalH368Catalogue,HistoricalH368Profiles);
   for(const[path,pin]of Object.entries(e.compact.data_file_sha256))assert.equal(sha(readFileSync(path)),pin,path);
   assert.equal(Object.keys(e.compact.data_file_sha256).length,26);
   for(const id of IDS){assert.equal(APADANA_PROFILES[id].index_revision,'apadana-thera333-336-v1');assert.equal(requiredCanonicalRevision(id),VRI+'-apadana-thera333-336-v1');assert.ok(!e.approval.held_ids.includes(id));}
@@ -62,8 +79,8 @@ test('source and prefix drift never substitutes another version and altered righ
   transport([],raw=>raw+'\n');for(const id of IDS)await assert.rejects(english.translation(canon.resolve(id).unit,tid(e.profiles[id]),{translation_revision:REV,limit:500}));
 });
 test('prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16',async()=>{
-  requireProfiles368(APADANA_PROFILES);
-  const historical359Profiles=profilesForHistorical359(APADANA_PROFILES);requireProfiles359(historical359Profiles);
+  requireProfiles368(HistoricalH368Profiles);
+  const historical359Profiles=profilesForHistorical359(HistoricalH368Profiles);requireProfiles359(historical359Profiles);
   const currentNine=intake368Authority();
   for(const[id,profile]of Object.entries(currentNine.profiles)){assert.deepEqual(APADANA_PROFILES[id],profile);assert.equal(isApadanaRawUrl(profile.raw_url),true);}
   const historicalHeld=[70,140,158,159,...e.approval.explicitly_not_activated_publishers];
@@ -85,7 +102,7 @@ test('prior source holds and unreviewed witness351 remain inactive outside the e
 });
 test('immutable approval and full343 metadata reject same-count substitutions and missing previous objects',()=>{
   const bytes=readFileSync('docs/evidence/apadana/THERA_331_334_APPROVAL.json');decodeApproval(bytes);assert.throws(()=>decodeApproval(Buffer.concat([bytes,Buffer.from(' ')])));
-  const currentProfiles=clone(APADANA_PROFILES),currentManifest=JSON.parse(readActualFileSync('server/data/apadana.json'));e.assertCatalogue(currentManifest,currentProfiles);
+  const currentProfiles=clone(HistoricalH368Profiles),currentManifest=clone(HistoricalH368Catalogue);e.assertCatalogue(currentManifest,currentProfiles);
   // Only the already guarded368→359 metadata is converted into this historical343
   // mutation fixture. Actual source/API responses above retain current data.
   const {profiles,catalogue:manifest}=normalize343Metadata(currentProfiles,currentManifest);

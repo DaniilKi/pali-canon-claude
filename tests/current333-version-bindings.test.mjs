@@ -1,8 +1,18 @@
+// Historical H source/metadata inputs only. The owned provider validates CURRENT375 first.
+// Registration stays at this actual-R file; no H .test.mjs is imported or executed.
+import {after as closeOwnedHistoricalHInputs} from 'node:test';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
+import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
+import {pathToFileURL as historicalHFileURL} from 'node:url';
+const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import.meta.url));
+const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
+closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
+function readCurrentFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
 /** Finite current-release bindings; all historical104 fixture/assertion bytes remain exact. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync as readCurrentFileSync} from 'node:fs';
-import {d4FileReader} from './helpers/current339-source-inverse.mjs';
+import {readFileSync as readOwnedHPhysicalFile} from 'node:fs';
+const {d4FileReader}=await import(new URL('tests/helpers/current339-source-inverse.mjs',HistoricalHBase).href);
 const readFileSync=d4FileReader(readCurrentFileSync);
 import {createHash} from 'node:crypto';
 const sha=value=>createHash('sha256').update(value).digest('hex');
