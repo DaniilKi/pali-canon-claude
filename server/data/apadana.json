@@ -38,7 +38,7 @@
       }
     ],
     "rights_note": "Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.",
-    "policy": "Live only, 368 finite complete publisher-edition poems (40 Therī and 328 explicitly mapped Therā); original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or approval of the wider Apadāna catalogue; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI."
+    "policy": "Live only, 375 finite complete publisher-edition poems (40 Therī and 335 explicitly mapped Therā); original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or approval of the wider Apadāna catalogue; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI."
   },
   "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
   "held": {},
