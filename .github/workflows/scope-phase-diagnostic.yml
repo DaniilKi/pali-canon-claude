@@ -1,0 +1,136 @@
+name: Scope phase witness (diagnostic only)
+on:
+  push:
+    branches: ['diagnostic/pali-scope-phase-nov27-*']
+permissions:
+  contents: read
+env:
+  # Root-supplied sealed checkpoint: 5e2 source bytes plus completed aliases.
+  SOURCE_CHECKPOINT: ce2330b1fa1f4c1d5fd7be76cb13bd9d76579c0d
+jobs:
+  windows20-phase:
+    name: Original scope7 phase witness / Windows / Node20
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - name: Use exact LF bytes
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixed diagnostic-only delta and interpreter
+        timeout-minutes: 1
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:SOURCE_CHECKPOINT -notmatch '^[0-9a-f]{40}$') { throw 'Unbound source checkpoint' }
+          git cat-file -e "$($env:SOURCE_CHECKPOINT)^{commit}"
+          if ($LASTEXITCODE -ne 0) { throw 'Missing exact source' }
+          $expected = @(('A' + "`t" + '.github/diagnostics/scope-phase/sitecustomize.py'), ('A' + "`t" + '.github/workflows/scope-phase-diagnostic.yml'))
+          $actual = @(git diff --name-status --no-renames $env:SOURCE_CHECKPOINT HEAD)
+          if ($LASTEXITCODE -ne 0 -or (Compare-Object $actual $expected)) { throw 'Unexpected diagnostic source delta' }
+          $hash = (Get-FileHash tests/six-operation-scope.test.mjs -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($hash -ne 'c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6') { throw 'Original Node wrapper changed' }
+          python3 -c 'import sys,importlib.util; assert sys.version_info[:2] == (3,12); assert importlib.util.find_spec("sitecustomize") is None; print("fixture-python",sys.version.split()[0])'
+          if ($LASTEXITCODE -ne 0) { throw 'Interpreter/startup customization mismatch' }
+      - name: One original whole wrapper with diagnostic-only phase observer
+        timeout-minutes: 2
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $dir = Join-Path $env:RUNNER_TEMP "scope-phase-$($env:GITHUB_RUN_ID)-$($env:GITHUB_RUN_ATTEMPT)"
+          if (Test-Path $dir) { throw 'Trace directory must be new' }
+          New-Item -ItemType Directory -Path $dir | Out-Null
+          $observer = Join-Path $dir 'observer'
+          New-Item -ItemType Directory -Path $observer | Out-Null
+          Copy-Item .github/diagnostics/scope-phase/sitecustomize.py (Join-Path $observer 'sitecustomize.py')
+          $oldPythonPath = $env:PYTHONPATH
+          $env:PYTHONPATH = if ($oldPythonPath) { $observer + [IO.Path]::PathSeparator + $oldPythonPath } else { $observer }
+          $env:PALI_SCOPE_PHASE_ENABLED = '1'
+          $env:PALI_SCOPE_PHASE_DIRECTORY = $dir
+          $out = Join-Path $dir 'wrapper.raw.tap'
+          $err = Join-Path $dir 'wrapper.raw.stderr'
+          $clock = [Diagnostics.Stopwatch]::StartNew()
+          $outerTimeout = $false
+          $rootExited = $false
+          try {
+            $process = Start-Process -FilePath (Get-Command node).Source -ArgumentList @('--test','--test-reporter=tap','tests/six-operation-scope.test.mjs') -WorkingDirectory $env:GITHUB_WORKSPACE -RedirectStandardOutput $out -RedirectStandardError $err -PassThru
+            if (-not $process.WaitForExit(90000)) {
+              $outerTimeout = $true
+              $process.Kill($true)
+              $rootExited = $process.WaitForExit(10000)
+            } else { $rootExited = $true }
+            $exitCode = if ($rootExited) { $process.ExitCode } else { $null }
+          } finally {
+            $clock.Stop()
+            $env:PYTHONPATH = $oldPythonPath
+            Remove-Item Env:PALI_SCOPE_PHASE_ENABLED -ErrorAction SilentlyContinue
+            Remove-Item Env:PALI_SCOPE_PHASE_DIRECTORY -ErrorAction SilentlyContinue
+            $receipt = [ordered]@{schema='scope-phase-command-v1'; diagnostic_only=$true; source_sha=$env:SOURCE_CHECKPOINT; diagnostic_sha=$env:GITHUB_SHA; node_major=20; argv=@('node','--test','--test-reporter=tap','tests/six-operation-scope.test.mjs'); original_child_ms=60000; original_case_ms=65000; outer_timeout=$outerTimeout; owned_root_exited=$rootExited; descendant_cleanup_independently_verified=$false; exit_code=$exitCode; elapsed_ms=$clock.ElapsedMilliseconds}
+            $receipt | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $dir 'command.json') -Encoding utf8
+          }
+          if ($outerTimeout -or -not $rootExited -or $exitCode -ne 0) { exit 1 }
+      - name: Print and preserve only bounded whitelisted metadata
+        if: always()
+        timeout-minutes: 1
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $dir = Join-Path $env:RUNNER_TEMP "scope-phase-$($env:GITHUB_RUN_ID)-$($env:GITHUB_RUN_ATTEMPT)"
+          $raw = Join-Path $dir 'phase.raw.jsonl'
+          $valid = (Test-Path $raw) -and -not (Test-Path (Join-Path $dir 'observer-error.marker'))
+          $rows = @()
+          $keys = @('schema','seq','event','phase','elapsed_ns','duration_ns','returned','proof_calls','proof_ns')
+          $phases = @('observer','class_setup','class_teardown','helper_current368','helper_old359','test_01','test_02','test_03','test_04','test_05','test_06','test_07')
+          if ($valid) {
+            if ((Get-Item $raw).Length -gt 131072) { $valid = $false } else {
+              $lines = @(Get-Content $raw)
+              if ($lines.Count -lt 1 -or $lines.Count -gt 128) { $valid = $false }
+              foreach ($line in $lines) {
+                try {
+                  if ($line.Length -gt 1024) { throw 'Row bound' }
+                  $row = $line | ConvertFrom-Json
+                  if ((Compare-Object @($row.PSObject.Properties.Name) $keys) -or $row.schema -ne 'scope-phase-v1' -or $row.seq -ne $rows.Count -or $row.event -notin @('ready','start','end','exit') -or $row.phase -notin $phases) { throw 'Row schema' }
+                  foreach ($name in @('seq','elapsed_ns','proof_calls','proof_ns')) {
+                    if ($row.$name -isnot [long] -and $row.$name -isnot [int]) { throw 'Noninteger metadata' }
+                    if ($row.$name -lt 0) { throw 'Negative metadata' }
+                  }
+                  if ($null -ne $row.duration_ns -and ($row.duration_ns -isnot [long] -and $row.duration_ns -isnot [int] -or $row.duration_ns -lt 0)) { throw 'Duration' }
+                  if ($null -ne $row.returned -and $row.returned -isnot [bool]) { throw 'Return metadata' }
+                  $rows += $row
+                } catch { $valid = $false; break }
+              }
+            }
+          }
+          $summary = [ordered]@{schema='scope-phase-summary-v1'; diagnostic_only=$true; trace_valid=$valid; rows=$rows.Count; original_wrapper_receipt_present=(Test-Path (Join-Path $dir 'command.json'))}
+          if (Test-Path (Join-Path $dir 'wrapper.raw.tap')) {
+            $tap = Get-Content (Join-Path $dir 'wrapper.raw.tap') -Raw
+            $summary.etimedout_token_observed = $tap.Contains('ETIMEDOUT')
+          }
+          if ($valid) {
+            $clean = Join-Path $dir 'phase.validated.jsonl'
+            $rows | ForEach-Object { $_ | ConvertTo-Json -Compress } | Set-Content $clean -Encoding utf8
+            $rows | ForEach-Object { $_ | ConvertTo-Json -Compress | Write-Output }
+          }
+          if (Test-Path $dir) { $summary | ConvertTo-Json | Set-Content (Join-Path $dir 'summary.json') -Encoding utf8 }
+          $summary | ConvertTo-Json -Compress | Write-Output
+          if (-not $valid) { exit 1 }
+      - name: Preserve phase metadata even after original timeout
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scope-phase-windows-node20
+          path: |
+            ${{ runner.temp }}/scope-phase-${{ github.run_id }}-${{ github.run_attempt }}/phase.validated.jsonl
+            ${{ runner.temp }}/scope-phase-${{ github.run_id }}-${{ github.run_attempt }}/command.json
+            ${{ runner.temp }}/scope-phase-${{ github.run_id }}-${{ github.run_attempt }}/summary.json
+          if-no-files-found: warn
+          retention-days: 7
