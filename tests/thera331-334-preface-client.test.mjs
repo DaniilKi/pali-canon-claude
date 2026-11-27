@@ -1,4 +1,4 @@
-import {profilesForHistorical343,requireProfiles359} from './helpers/intake359-metadata.mjs';
+import {profilesForHistorical343,requireProfiles368} from './helpers/intake368-metadata.mjs';
 /** Proposed root-owned test: run only after the four normalized profiles are independently sealed. */
 import test, {afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -80,7 +80,7 @@ function nativePrefaceOnce(data) {
 }
 
 test('two literal note-owning prefaces preserve all339 prior metadata contracts and refuse borrowed owners', () => {
-  requireProfiles359(APADANA_PROFILES);assert.equal(Object.keys(APADANA_PROFILES).length, 359); for (const uid of ids) assert.ok(APADANA_PROFILES[uid]);
+  requireProfiles368(APADANA_PROFILES);assert.equal(Object.keys(APADANA_PROFILES).length, 368); for (const uid of ids) assert.ok(APADANA_PROFILES[uid]);
   const p = APADANA_PROFILES['tha-ap333']; assert.ok(p);
   assert.deepEqual(Object.keys(p.publisher_preface).sort(), ['body_sha256','kind','label','note_numbers','notes_sha256','parent_id']);
   assert.equal(p.publisher_preface.kind, 'publisher_preface');

@@ -1,6 +1,6 @@
 /** Current data is physically validated; historical substitutions are TEST INPUTS ONLY. */
 import assert from 'node:assert/strict';
-import {capture359Authority,fresh359Proofs,AP343_INPUT} from './intake359-metadata.mjs';
+import {capture368Authority as capture359Authority,fresh368Proofs as fresh359Proofs,AP343_INPUT} from './intake368-metadata.mjs';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath,pathToFileURL} from 'node:url';
@@ -44,7 +44,7 @@ function freshProofs(state){assert.equal(state.active,true,'Closed ten-operation
 function capture(base){
  const physical=publicBase(base),row=records(physical),intake=capture359Authority(physical,row.current),actual=new Map();const paths=Object.keys(intake.current).filter(p=>p.startsWith('data/')).sort();assert.equal(paths.length,27);
  for(const path of paths){const bytes=readSixRegularRelative(physical,'server/'+path);assert.deepEqual({bytes:bytes.length,sha256:sha(bytes)},intake.current[path]);actual.set('server/'+path,bytes);}
- assert.deepEqual(JSON.parse(actual.get(AP343_INPUT)),intake.manifest,'Physical current359 manifest matches independent expected metadata');
+ assert.deepEqual(JSON.parse(actual.get(AP343_INPUT)),intake.manifest,'Physical current368 manifest matches independent expected metadata');
  // All physical new27 and immutable old4 bytes precede this expensive logical-only memo.
  const prior=new Map(DD7_DATA_PATHS.map(path=>[path,ddFixture(physical,path,row.dd)]));
  const logicalKey=[...proofs().map(([,pin])=>pin),...actual.values()].map(x=>Buffer.isBuffer(x)?sha(x):x).concat([...prior.values()].map(sha)).join(':');

@@ -28,7 +28,7 @@ class Current359SourceRouting(unittest.TestCase):
     def setUpClass(cls):
         # Genuine actual-source metadata positive FIRST; never accept a refusal
         # due to an incomplete fixture as evidence of a working negative.
-        cls.current=intake.reviewed_intake(ROOT)
+        cls.current=intake.read_335_350(ROOT)
         assert len(cls.current['expected_profile_ids'])==359
         cls.previous=intake.read_331_334(ROOT)
         assert len(cls.previous['expected_profile_ids'])==343
@@ -37,8 +37,8 @@ class Current359SourceRouting(unittest.TestCase):
     def test_01_public_source_membership_and_families_are_exact_without_importcycle_or_runtime_capture(self):
         self.assertNotIn('web_reader_approved_acceptance',sys.modules)
         with mock.patch.object(ten,'_capture_six_test_input',side_effect=AssertionError('Source membership must not capture runtime data')):
-            current=intake.reviewed_intake(ROOT)
-            self.assertEqual(intake.current_apadana_ids(ROOT),current['expected_profile_ids'])
+            current=intake.read_335_350(ROOT)
+            self.assertEqual(intake.current_apadana_ids(ROOT)[:359],current['expected_profile_ids'])
             records=current['baseline_records']+current['approved_records']
             self.assertEqual(current['baseline_records'],self.previous['baseline_records']+self.previous['approved_records'])
             self.assertEqual(current['approved_records'],[{'id':uid,'publisher_chapter':'chapter-3','poem':p}for uid,p in PAIRS])
@@ -48,11 +48,11 @@ class Current359SourceRouting(unittest.TestCase):
             self.assertFalse(set(current['held_ids'])&set(current['expected_profile_ids']))
             for chapter,count in [('chapter-4',40),('chapter-3',319)]:
                 expected=[r['id']for r in sorted(records,key=lambda r:r['poem'])if r['publisher_chapter']==chapter]
-                self.assertEqual(intake.current_family_ids(ROOT,chapter),expected)
+                self.assertEqual(intake.current_family_ids(ROOT,chapter)[:count],expected)
                 self.assertEqual(len(expected),count)
             self.assertEqual(current['current_source_approval'],{'file':D+'APPROVAL.json','sha256':'9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6'})
             current['expected_profile_ids'].reverse();current['baseline_records'][0]['poem']=999
-            self.assertEqual(intake.reviewed_intake(ROOT),self.current)
+            self.assertEqual(intake.read_335_350(ROOT),self.current)
         self.assertNotIn('web_reader_approved_acceptance',sys.modules)
 
     def test_02_current_curated_suffixes_preserve_every_old_object_and_add_only_sixteen(self):
@@ -61,7 +61,7 @@ class Current359SourceRouting(unittest.TestCase):
                              ('THERA_321_329_APPROVAL.json',20)]:
             with self.subTest(anchor=anchor):
                 old=intake._historical343_curated_additions(ROOT,anchor)
-                current=intake.curated_additions(ROOT,anchor)
+                current=intake.historical359_curated_additions(ROOT,anchor)
                 self.assertEqual(current['anchor'],old['anchor'])
                 self.assertEqual(current['curation'],self.current)
                 self.assertEqual(current['ids'],old['ids']+[uid for uid,_ in PAIRS])
@@ -101,18 +101,18 @@ class Current359SourceRouting(unittest.TestCase):
             # Source-only metadata works without server binaries/data, private
             # notes, source bodies, environment-selected roots or API outputs.
             self.assertFalse((root/'server').exists())
-            self.assertEqual(intake.reviewed_intake(root),self.current)
+            self.assertEqual(intake.read_335_350(root),self.current)
             for name in [D+'APPROVAL.json',D+'BASELINE343_FULL_OBJECTS.json',
                          'docs/evidence/apadana/THERA_331_334_APPROVAL.json']:
                 path=root/name;original=path.read_bytes()
                 for missing in (False,True):
-                    self.assertEqual(intake.reviewed_intake(root),self.current)
+                    self.assertEqual(intake.read_335_350(root),self.current)
                     try:
                         if missing:path.unlink()
                         else:path.write_bytes(original+b'\n')
-                        with self.assertRaises((AssertionError,ValueError,FileNotFoundError)):intake.reviewed_intake(root)
+                        with self.assertRaises((AssertionError,ValueError,FileNotFoundError)):intake.read_335_350(root)
                     finally:path.write_bytes(original)
-                    self.assertEqual(intake.reviewed_intake(root),self.current)
+                    self.assertEqual(intake.read_335_350(root),self.current)
 
 
 if __name__=='__main__':unittest.main(verbosity=2)

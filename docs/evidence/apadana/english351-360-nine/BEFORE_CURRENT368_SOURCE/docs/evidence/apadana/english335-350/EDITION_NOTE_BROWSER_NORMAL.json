@@ -1,0 +1,159 @@
+{
+  "mode": "normal",
+  "passed": 14,
+  "checks": [
+    {
+      "surface": "API",
+      "selection": "uid",
+      "check": "opening/exact/before/after/context,all8scripts,3variants and exact-context-return authentic note/root separation"
+    },
+    {
+      "surface": "API",
+      "selection": "book",
+      "check": "opening/exact/before/after/context,all8scripts,3variants and exact-context-return authentic note/root separation"
+    },
+    {
+      "surface": "native",
+      "width": 390,
+      "theme": "light",
+      "check": "UID/book actual openings and exact anchors; twelve cached-note refusals each with Pali retained; following-page exclusion; print/private draft recovery",
+      "mutations": 24
+    },
+    {
+      "surface": "native",
+      "width": 390,
+      "theme": "dark",
+      "check": "UID/book actual openings and exact anchors; twelve cached-note refusals each with Pali retained; following-page exclusion; print/private draft recovery",
+      "mutations": 24
+    },
+    {
+      "surface": "native",
+      "width": 1280,
+      "theme": "light",
+      "check": "UID/book actual openings and exact anchors; twelve cached-note refusals each with Pali retained; following-page exclusion; print/private draft recovery",
+      "mutations": 24
+    },
+    {
+      "surface": "native",
+      "width": 1280,
+      "theme": "dark",
+      "check": "UID/book actual openings and exact anchors; twelve cached-note refusals each with Pali retained; following-page exclusion; print/private draft recovery",
+      "mutations": 24
+    },
+    {
+      "surface": "MCP Apps",
+      "width": 390,
+      "theme": "light",
+      "check": "actual UID/book positives before same-object valid/missing/corrupt/valid events; root DOM and unrelated focus preserved; no model-context note text/network",
+      "mutations": 30
+    },
+    {
+      "surface": "Apps SDK",
+      "width": 390,
+      "theme": "light",
+      "check": "actual UID/book positives before same-object valid/missing/corrupt/valid events; root DOM and unrelated focus preserved; no model-context note text/network",
+      "mutations": 30
+    },
+    {
+      "surface": "MCP Apps",
+      "width": 390,
+      "theme": "dark",
+      "check": "actual UID/book positives before same-object valid/missing/corrupt/valid events; root DOM and unrelated focus preserved; no model-context note text/network",
+      "mutations": 30
+    },
+    {
+      "surface": "Apps SDK",
+      "width": 390,
+      "theme": "dark",
+      "check": "actual UID/book positives before same-object valid/missing/corrupt/valid events; root DOM and unrelated focus preserved; no model-context note text/network",
+      "mutations": 30
+    },
+    {
+      "surface": "MCP Apps",
+      "width": 1280,
+      "theme": "light",
+      "check": "actual UID/book positives before same-object valid/missing/corrupt/valid events; root DOM and unrelated focus preserved; no model-context note text/network",
+      "mutations": 30
+    },
+    {
+      "surface": "Apps SDK",
+      "width": 1280,
+      "theme": "light",
+      "check": "actual UID/book positives before same-object valid/missing/corrupt/valid events; root DOM and unrelated focus preserved; no model-context note text/network",
+      "mutations": 30
+    },
+    {
+      "surface": "MCP Apps",
+      "width": 1280,
+      "theme": "dark",
+      "check": "actual UID/book positives before same-object valid/missing/corrupt/valid events; root DOM and unrelated focus preserved; no model-context note text/network",
+      "mutations": 30
+    },
+    {
+      "surface": "Apps SDK",
+      "width": 1280,
+      "theme": "dark",
+      "check": "actual UID/book positives before same-object valid/missing/corrupt/valid events; root DOM and unrelated focus preserved; no model-context note text/network",
+      "mutations": 30
+    }
+  ],
+  "browser_run": true,
+  "full_batch_acceptance": true,
+  "runtime_origin": "repository-compiled",
+  "server_directory": "/tmp/pali-english335-350-nov26/server",
+  "server_file_sha256": {
+    "THIRD_PARTY_LICENSES.txt": "378d7454a776c1ef18accaa55f817cfb429ef713a8ec75e68ad83affb70ba015",
+    "data/anandajoti.json": "7ff6df1b2d91418aef2ceacca43dc652cbf1d8363b70fccfb4106e23fd0af669",
+    "data/apadana.json": "57b6fd43f4b8273e9542b8a22a6bd84b2042914113d53c94fe727386c5ec0194",
+    "data/bmc.json": "01f68a8a0c4aa1a9c21f7743c5172beccd3cce9133037830f8ee7836c4810a63",
+    "data/canon.json.gz.part-0001": "526ba969d0fc3ce62fde7d11764313de43b91a2f71375d602cd647a43b601632",
+    "data/canon.json.gz.part-0002": "54bb0f581aff105d57b2270cdd2ca59821c722792ffae2c8a40486782c300cf4",
+    "data/canon.json.gz.parts.json": "388a5daaf3a2cf7739b96dc865dbe93455e7e7b268bc22a683c1377180bfa250",
+    "data/commentary.json.gz.part-0001": "581fb24ed95f5ba4a30f7ca02be4dced03f81315f34d3aa6e8a8601a97f2d946",
+    "data/commentary.json.gz.part-0002": "40d18b97cd9859a80eced012436e84cecad1654a78a33a98b7e3ed8f9700bf98",
+    "data/commentary.json.gz.part-0003": "905cc7de1186d860c0fd4902c11610cf38d2c3d05fe47ce987b3f22b7d68f06b",
+    "data/commentary.json.gz.parts.json": "763a8001662cb9666e549074959a023367fa56822e7293beebd45312846a7156",
+    "data/dhamma_lists.json": "6e14b77fd25d8b524da9ce9a3405220c3fbc9286c82d2096d8f0ca7cdd56b33c",
+    "data/dpd.json.gz.part-0001": "7f6790cfaca70ad2d5d9dc829420b491288a23d666b3a5ba2f9e0046cc165081",
+    "data/dpd.json.gz.part-0002": "25e831647c47c1f97b6d325cf285f2ec761ba1b2ee64f516d3c036c5b2b5af12",
+    "data/dpd.json.gz.parts.json": "5c530a5afef657ceac06a484bfea0e6ecc725c18a38a0f7e3bc687b6028b5854",
+    "data/dppn.json": "e3d1bb4af928e8cda64bfd92fe2254569043ee97d9d124583b48eca0201cf959",
+    "data/glossary.json.gz": "a47a735d7a376882609cd6cb56804403adbf10c21e136c36a4c277e09d746d64",
+    "data/parallels.json.gz": "96289c87a07dd686bbdafe823cb2b178ee2f65df3b854054f6e1f41db574ed17",
+    "data/postcanonical.json.gz.part-0001": "3b21aeb1467103dda9b7bdff1a8a06b134df11454003a623ae617d6c452efbd9",
+    "data/postcanonical.json.gz.part-0002": "7943baafd6927bdedd408058f75f5a28c7934dddef660932355692976c297147",
+    "data/postcanonical.json.gz.part-0003": "a67a0f4c851845de4d519f86f4f5aaae8a86ade22a4a0e7559160b8056073d2e",
+    "data/postcanonical.json.gz.part-0004": "13b966525a2d9b312c79c368ba43cfa9cda545124f5692097966aaf0c0d6c82b",
+    "data/postcanonical.json.gz.parts.json": "310a3db600ad23af025d6f62cfe6f37d56a7fb48f0cda7eaa55a7035bf2e0080",
+    "data/reviewed-ati-sections.json": "91fde828f07be060a616127e0920b41935a25e180757418036b145a9cfc5214a",
+    "data/reviewed-partial-pages.json": "55495a36fb429de09b3c7c07bae68da87cd76115df7342647babeeba31afbd76",
+    "data/source-notes.json": "1cf2b14b514180ae5fffafdf44c2c19bd4c0e5a70ee0f02f0c4585ca3fc7493e",
+    "data/topics.json": "b1d022643419d6b122138999eb6813db615654cb625a827ea64c256e74facbfb",
+    "data/translations.json": "5d97eaf26bd0bdd09fc08c5569da542d50a3096785142848ad3d9b73ab0748e6",
+    "http-worker.cjs": "3c28091804514ddac13a7def168ca3498d73d7972e8f335798cf025960e5655e",
+    "http.cjs": "c07416b4ede93b05fc840a395a818e181e78e998136202f0bc6bd414d670a901",
+    "index.cjs": "56889c8f98f5139106aa93a4f38d29cdd7506d6aa72f6daf42e91e195db31383",
+    "web/index.html": "084bdf021db7d6229b5f8948b5ce5758cb112f0faf5fbffe2e9dadf8fa9ed0f9",
+    "web/reader.css": "b124a83028222fa258d91c6fb53636c438e523a6934da995252568b0b69e7f1d",
+    "web/reader.js": "91be03a344c5387b0434ff75723e1668458871886f154c54653a4825547c7eea"
+  },
+  "harness_sha256": "f852fb7c6c626590d982cc7ba8f57827dc111f44b9805307a3bc5581064bebf0",
+  "helper_sha256": {
+    "web/source-notes-policy.mjs": "5897a88723b8d5ae3515db018e731d0c7bdb8bf5271d05645afb427b86d9ece5",
+    "web/content-sha256.mjs": "bc28e5561e53f10d6293b35563557e968d47a255ceba77ff04b9816a2932cc63",
+    "src/source-notes-profiles.mjs": "f83ac1be7ad1586a46569632aac37462f4e7da8a18b47050a29008cff70090e5",
+    "web/reader.js": "d2495dca01a5b5e3e3d794f58c4cea8422a61f8d002ad34fa1c6ee90812ace71",
+    "web/reader.css": "b124a83028222fa258d91c6fb53636c438e523a6934da995252568b0b69e7f1d"
+  },
+  "approval_sha256": "61121e60049a1a03976d72a6967ebef28dea08bbf9e79349d7a3aa025ec93930",
+  "record_sha256": "0d7ab15b095a5175742655a16b67fabf31ed47f73d10fe3de1c821eb1e2b11b7",
+  "package_sha256": null,
+  "upstream_provider_requests": 0,
+  "a11y": {
+    "performed": false,
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "One original VRI apparatus note, never root scripture/English coverage. Actual offline HTTP, Chromium390/1280 and two simulated bridges; no physical devices,human AT,signed-in hosts,live upstream or release claim. Arbitrary body-page authenticity is outside this finite apparatus contract. No source-note wording or private drafts included in receipts."
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "english16-local-candidate-receipt-v1",
+  "runtime_component": "51e0b7dd98e19f8d633da266e2093b53eb436c53",
+  "source_approval": "9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6",
+  "frozen_full_check": {
+    "commit": "72b1ca207c794178be09e339ba144af603e3878e",
+    "tests": 2050,
+    "passed": 1786,
+    "optional_source_skips": 264,
+    "failures": 0,
+    "cancelled": 0,
+    "whole_corpus_audit_records": 8544,
+    "scope": "Before cache fix; do not claim this full run executed51e0. Later focused cache/source/rebinding checks and exact final CI are separate."
+  },
+  "later51e0_checks": {
+    "source_client": {
+      "pass": 11,
+      "skip": 0
+    },
+    "cache": {
+      "pass": 13,
+      "skip": 0
+    },
+    "existing_widget": {
+      "pass": 105,
+      "skip": 1
+    },
+    "rebound_current": {
+      "pass": 6,
+      "skip": 0,
+      "approved_python_cases": 33,
+      "child_deadline_ms": 30000
+    },
+    "rebound_legacy": {
+      "pass": 10,
+      "skip": 0
+    },
+    "fresh_offline_install_files": 39,
+    "whole_widget_resources_equal_source": true,
+    "installed_corpus": {
+      "canonical_texts": 8544,
+      "canonical_segments": 134380,
+      "canonical_pages": 8741,
+      "shared_span_checks": 12,
+      "alignment_note_checks": 269,
+      "alignment_metadata_checks": 8,
+      "commentary_texts": 6070,
+      "commentary_unaligned_texts": 2474,
+      "commentary_segments": 85948,
+      "commentary_pages": 6137,
+      "commentary_books": 47,
+      "commentary_book_segments": 85495,
+      "commentary_book_pages": 451,
+      "commentary_search_checks": 47,
+      "postcanonical_books": 109,
+      "postcanonical_segments": 146009,
+      "postcanonical_pages": 792,
+      "lazy_data_checks": 12,
+      "search_checks": 2,
+      "search_scope_checks": 5,
+      "grouped_scope_checks": 8,
+      "title_search_pages": 22,
+      "title_search_matches": 153,
+      "title_search_checks": 4,
+      "quote_search_checks": 5,
+      "browse_scope_checks": 7,
+      "browse_group_pages": 7,
+      "quote_verification_checks": 3,
+      "edition_citation_checks": 8,
+      "citation_range_checks": 13,
+      "abt_citation_links": 276,
+      "paired_normalisation_checks": 5,
+      "proper_name_title_checks": 4,
+      "stored_title_resolution_checks": 7,
+      "approximate_canonical_texts": 265,
+      "network_attempts": 0,
+      "failures": 0
+    },
+    "browser": "BROWSER_ACCEPTANCE.json"
+  },
+  "external_execution_artifact_hashes": {
+    "FROZEN_72B1CA2_FULL_CHECK.log": {
+      "sha256": "3985486687fc78cbd9b27567c910d3c9262ca9f3a2d92040635d004ec0d0b4df",
+      "bytes": 240370
+    },
+    "WIDGET_CACHE_V2_ACTUAL13_CORRECT_WHOLE_PIN.tap": {
+      "sha256": "5380cb563d7c76bc7ac5e5a8924a2e8edf255f996db028d76cff6e535e33eceb",
+      "bytes": 3771
+    },
+    "WIDGET_CACHE_V2_EXISTING_GATES.tap": {
+      "sha256": "6f2ff64bdd836efab3e1a27c5b2d945744055461b192fd61a8ddc894f7b195f0",
+      "bytes": 26798
+    },
+    "CACHE_V2_SOURCE_CLIENT11.tap": {
+      "sha256": "f4f7fc06c1a54dd37395ef6377589e9a8695642abf76cacae1db0a8e329687be",
+      "bytes": 3254
+    },
+    "CACHE_V2_REBOUND_CURRENT_GATES.tap": {
+      "sha256": "6c431f64b57b1dea707db957186e8d69ca238f9ff8f80de28c7d0c13e6e76fd2",
+      "bytes": 1999
+    },
+    "CACHE_V2_REBOUND_LEGACY_GATES.tap": {
+      "sha256": "7344f06b5e096c148a3ca8cbfbcdfe2505d97cb9fcecdbd80cbf5cfc1cd91bbc",
+      "bytes": 2669
+    },
+    "CACHE_V2_INSTALLED_CORPUS.json": {
+      "sha256": "a423091527d90889ed117b03956b8fb742d6410f0147a187ef4625531face9fd",
+      "bytes": 1170989
+    },
+    "CACHE_V2_INSTALLED_SMOKE.log": {
+      "sha256": "8b6371779e5c694c68cd7957d6c1f1e01c2892dbbb707fe4fe7f7b5155436a83",
+      "bytes": 3542
+    }
+  },
+  "CI_status_at_receipt": "Not yet submitted for final QA commit. Exact-commit CI and dev promotion must be established separately from GitHub/ref receipts.",
+  "prior_dev_CI": "3d61479:58/59 jobs passed, Windows20 failed at30-second subprocess bound; no rerun submitted. New diagnostics preserve33 assertions and30s bound; actual new Windows evidence pending.",
+  "limits": [
+    "Pinned source fixtures and automated Chromium/simulated hosts; not live provider or signed-in host acceptance.",
+    "Phone/desktop viewport emulation is not physical-device or human assistive testing.",
+    "Already loaded local Saved workflow verified offline; fresh browser launch offline is not verified.",
+    "Complete publisher-edition poems are not line-complete VRI translations.",
+    "Main and production untouched; source and rights holds outside these16 remain."
+  ]
+}

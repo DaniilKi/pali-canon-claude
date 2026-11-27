@@ -1,0 +1,63 @@
+{
+  "schema": "english16-CI-recovery-local-validation-v1",
+  "runtime_component": "aec778d99aabccec6794a641072e463830e85542",
+  "previous_failed_candidate": "e792a1a3190b8eefdcfcacee67d8ef3191a89e74",
+  "previous_check_run": 45898353657,
+  "root_causes": [
+    "The public current browser source whitelist and curated suffixes still used343, despite independently approved359 metadata.",
+    "Generic same-object result invalidation unnecessarily replaced Pali DOM/model context on partial source-note or selector-header edits."
+  ],
+  "repairs": [
+    "Source-only current359 router verifies all343 old objects and exact16 additions, preserves all historical functions/holds, and updates held234 count/chain and current/historical checksum roles.",
+    "Finite initial note/header frames preserve the loaded view for partial edits, retaining canonical-refusal priority and full validation for complete new results."
+  ],
+  "targeted_passes": {
+    "node_cache_and_notes": 24,
+    "new_routing_python": 4,
+    "routing_wrapper_deadline_ms": 30000,
+    "edition_note_normal": 14,
+    "edition_note_installed_a11y": 14,
+    "automated_a11y_scans": 400,
+    "a11y_violations": 0,
+    "legacy_theri_browser": 16,
+    "held234_installed_browser": 16,
+    "fresh_archive_installed_files": 39,
+    "all16_installed_V6": "NOTE_FRAME_BROWSER_ACCEPTANCE.json",
+    "rebound_current_metadata_history": 6,
+    "approved_python_existing_cases": 33,
+    "approved_python_child_deadline_ms": 30000,
+    "rebound_legacy": 10
+  },
+  "artifact_hashes": {
+    "NOTE_HEADER_CACHE_TARGETED.tap": "09afa085c4d6edd4e8e64a5cce1f2a90d3a36778e96bd66d55f4b7d9671d2d2e",
+    "BROWSER_CURRENT359_ROUTING_CORRECT_ANCHORS.tap": "20e9f38b50f4e9c06fd3d28b16f342ad3b4c5a42117d0770a79fecef65cd9a27",
+    "NOTE_FRAME_INSTALLED_WIDGET.json": "8dfd66aa5fe7b587c4eb1059a3ba09d478dc17562f1cd22ecea48916258d578d",
+    "actual-browser-note-frame/REPORT.json": "baffa70ff4b2db7ee3e04051ea11b1a1b2e256ba97f1f4853d5cc2f822090e11",
+    "NOTE_FRAME_LEGACY_BROWSER_NORMAL.json": "ceaab28103fa71512111724a5498c55f8a6fafac2c32693451b3b362fff1c4d1",
+    "NOTE_FRAME_INSTALLED_BROWSER_A11Y_WITH_ARCHIVE.json": "89f892986e03486c906f9b20ab136f16768a1f43c902a15304d1014c065dd90f",
+    "ROUTING359_LEGACY_THIRD_NORMAL.json": "4fedb8fdf1a57dad833cfabd1bfa7a6d02608101785624c6cc5f5e74342537da",
+    "ROUTING359_INSTALLED_HELD234_PINNED9.json": "1fc229143ca6c71d0e2a5b3dcdf74f2584eca83979a85f98fa0630080413d396",
+    "NOTE_FRAME_FINAL_CURRENT_GATES.tap": "a2d4294df94606b88c912883c9e98940a651f39f800cf5cd8646d0cedf792632",
+    "NOTE_FRAME_FINAL_LEGACY_GATES.tap": "ee99b598c11ce66a8188e15afd4521d01d322b270b7a2f00fd8991fd525aaae6"
+  },
+  "CI_status": "Corrected final candidate not yet submitted at receipt creation. No dev advancement; old e792 remains failed and must not be retried or relabeled.",
+  "prior_evidence": "LOCAL_ACCEPTANCE.json and BROWSER_ACCEPTANCE.json retain their earlier72/51 scopes. Current new receipts identifyAEC explicitly.",
+  "limitations": [
+    "No physical-device, human assistive, signed-in host, live-provider or fresh-launch-offline acceptance.",
+    "No English wording/notes bundled and no broader source-rights hold cleared.",
+    "Complete publisher-edition coverage is not line-complete VRI translation."
+  ],
+  "previous_e792_check_final": "All six OS/Node lanes passed, including Windows20 separate33-case diagnostic22233.3204ms and full2063-case suite with zero failures. Twenty-one browser groups failed: twenty share the stale current343 oracle, one the note DOM/focus regression; aggregate browser gate also failed. No rerun/cancellation.",
+  "current_source_inverse_review": {
+    "file": "SOURCE_INVERSE_REVIEW.json",
+    "sha256": "6467b101104e7c14e2989714b9f9c8c40f4ea329feb7328a1936dde68af78bec",
+    "rows": 70,
+    "hunks": 186,
+    "originals": 1001,
+    "unchanged_prior_authorities": 824
+  },
+  "current_leaf_review": {
+    "file": "LEAF_REBIND_REVIEW.json",
+    "sha256": "b126eb5b91e7ff46ee4e14926899fe56f7787bc16c082d5e43a24a8a0b140a2d"
+  }
+}

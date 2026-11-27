@@ -1,4 +1,4 @@
-/** Actual359 first; every mutation is confined to an owned temporary fixture. */
+/** Actual368 first, then explicit named359 history; every mutation is confined to an owned temporary fixture. */
 import test,{before} from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -6,26 +6,32 @@ import {readFileSync,writeFileSync,copyFileSync,mkdirSync,mkdtempSync,rmSync,unl
 import {tmpdir} from 'node:os';
 import {join,dirname,sep} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {APADANA_PROFILES} from '../src/apadana-profiles.mjs';
+import {APADANA_PROFILES as ACTUAL_PROFILES368} from '../src/apadana-profiles.mjs';
 import {requireMetadata359,project359To343,requireProfiles359,INTAKE359_IDS,INTAKE359_PINS,INTAKE359_RUNTIME_SHA,INTAKE359_RUNTIME_REVIEW_SHA} from './helpers/intake359-metadata.mjs';
 import {assertNextTenActualData} from './helpers/next-ten-history-data.mjs';
 import {sixDataRecords} from './helpers/six-history-data.mjs';
+import {requireMetadata368,project368To359,intake368Authority,fresh368Proofs,INTAKE368_DIRECTORY,INTAKE368_PINS,INTAKE368_RUNTIME_FILE,INTAKE368_REVIEW_FILE,AP359_FIXTURE} from './helpers/intake368-metadata.mjs';
 const ROOT=fileURLToPath(new URL('../',import.meta.url)),BASE=new URL('../',import.meta.url),DIR='docs/evidence/apadana/english335-350/';
 const sha=b=>createHash('sha256').update(b).digest('hex'),read=p=>readFileSync(join(ROOT,p)),json=p=>JSON.parse(read(p));
 const proofNames=[...Object.keys(INTAKE359_PINS),'RUNTIME_INVENTORY.json','RUNTIME_REVIEW.json'].map(p=>DIR+p);
 const oldProofs=['docs/evidence/apadana/boundaries-next-ten/FUTURE_ORACLE.json','docs/evidence/apadana/boundaries-next-ten/runtime/INDEPENDENT_NEXT_TEN_RUNTIME_INVENTORY.json','docs/evidence/apadana/boundaries-next-ten/runtime/INDEPENDENT_NEXT_TEN_RUNTIME_REVIEW.json','docs/evidence/apadana/boundaries340-347/FUTURE_ORACLE.json','docs/evidence/apadana/boundaries340-347/C1_IMMUTABLE_EXPECTATIONS.json','docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json','docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_REVIEW.json','docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json','docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json'];
 const core=['canon.json.gz.part-0001','canon.json.gz.part-0002','canon.json.gz.parts.json','parallels.json.gz'];
-let manifest,baseline,current,dd;
+const current368Proofs=[...Object.keys(INTAKE368_PINS),INTAKE368_RUNTIME_FILE,INTAKE368_REVIEW_FILE].map(name=>INTAKE368_DIRECTORY+name);
+assert.equal(current368Proofs.length,16);
+let APADANA_PROFILES,manifest,baseline,current,dd;
 before(()=>{
-  manifest=json('server/data/apadana.json');requireMetadata359(APADANA_PROFILES,manifest);
+  const actualManifest=json('server/data/apadana.json');requireMetadata368(ACTUAL_PROFILES368,actualManifest);
+  ({profiles:APADANA_PROFILES,catalogue:manifest}=project368To359(ACTUAL_PROFILES368,actualManifest));
+  requireMetadata359(APADANA_PROFILES,manifest);
   assert.equal(Object.keys(manifest.links).length,359);assert.deepEqual(Object.keys(manifest.links).slice(-16),INTAKE359_IDS);
   assert.equal(sha(read(DIR+'BASELINE343_FULL_OBJECTS.json')),'74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e');baseline=json(DIR+'BASELINE343_FULL_OBJECTS.json');
   assert.equal(sha(read(DIR+'RUNTIME_INVENTORY.json')),'839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186');assert.equal(INTAKE359_RUNTIME_SHA,'839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186');
   assert.equal(sha(read(DIR+'RUNTIME_REVIEW.json')),'2b19d690992a3289958a9e944be36484cf4257fa34a9b580e04704206e829b16');assert.equal(INTAKE359_RUNTIME_REVIEW_SHA,'2b19d690992a3289958a9e944be36484cf4257fa34a9b580e04704206e829b16');
-  current=json(DIR+'RUNTIME_INVENTORY.json').files;assert.deepEqual(assertNextTenActualData(BASE),current);
+  const historical359=json(DIR+'RUNTIME_INVENTORY.json').files;assert.deepEqual(intake368Authority(BASE).priorRuntime,historical359);
+  fresh368Proofs(BASE,{runtime:true});current=json(INTAKE368_DIRECTORY+INTAKE368_RUNTIME_FILE).files;assert.deepEqual(assertNextTenActualData(BASE),current);
   dd=json('docs/evidence/apadana/boundaries340-347/runtime/INDEPENDENT_SIX_RUNTIME_INVENTORY.json').files;
 });
-function fixture(data=false){const owner=mkdtempSync(join(tmpdir(),'pali359-qa-')),base=join(owner,'fixture');try{mkdirSync(base);const paths=[...proofNames];if(data)paths.push(...oldProofs,...Object.keys(current).filter(p=>p.startsWith('data/')).map(p=>'server/'+p),...core.flatMap(p=>['tests/fixtures/canon-before-six/'+p,'tests/fixtures/canon-before-next-ten/'+p]),'tests/fixtures/canon-before-intake359/apadana.json');for(const p of new Set(paths)){mkdirSync(dirname(join(base,p)),{recursive:true});copyFileSync(join(ROOT,p),join(base,p));}return {owner,base,url:pathToFileURL(base+sep),close(){rmSync(owner,{recursive:true,force:true});}};}catch(error){rmSync(owner,{recursive:true,force:true});throw error;}}
+function fixture(data=false){const owner=mkdtempSync(join(tmpdir(),'pali359-qa-')),base=join(owner,'fixture');try{mkdirSync(base);const paths=[...proofNames];if(data)paths.push(...oldProofs,...current368Proofs,AP359_FIXTURE,...Object.keys(current).filter(p=>p.startsWith('data/')).map(p=>'server/'+p),...core.flatMap(p=>['tests/fixtures/canon-before-six/'+p,'tests/fixtures/canon-before-next-ten/'+p]),'tests/fixtures/canon-before-intake359/apadana.json');for(const p of new Set(paths)){mkdirSync(dirname(join(base,p)),{recursive:true});copyFileSync(join(ROOT,p),join(base,p));}return {owner,base,url:pathToFileURL(base+sep),close(){rmSync(owner,{recursive:true,force:true});}};}catch(error){rmSync(owner,{recursive:true,force:true});throw error;}}
 function changed(f,path,body,{missing=false,replacement}={}){const p=join(f.base,path),raw=readFileSync(p),stamp=statSync(p);try{if(missing)unlinkSync(p);else{writeFileSync(p,replacement??Buffer.concat([Buffer.from([raw[0]^1]),raw.subarray(1)]));utimesSync(p,stamp.atime,stamp.mtime);}body();}finally{writeFileSync(p,raw);utimesSync(p,stamp.atime,stamp.mtime);}}
 
 test('genuine359 retains every343 object and strict historical projection refuses identity rights and source-pin drift',{timeout:30000},()=>{

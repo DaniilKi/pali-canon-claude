@@ -1,0 +1,77 @@
+{
+  "schema": "independent-next-nine-profile-link-source-review-v1",
+  "status": "GO_EXACT_NINE_PROFILES_LINKS_AND_EXISTING_SCHEMA_SOURCE_METADATA_ONLY",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "proposal_manifest_sha256": "7dd35a4a502a5e86bd0bd0d19dbac2ed7cedcf22f635bfd9e1c26f23811a1cc5",
+  "profiles_sha256": "a9ce377c7ec5c75fff7315c45dbd0328b7164dd4120b83b3f7c8a6406df6a367",
+  "links_sha256": "49c53fa616ac61c135705e97215c381426d344af3141c217eb8c72f9a48c566d",
+  "module_sha256": "bef582559e7f02372f7283239d4dddb064178258ee60641e23c5b7f81f4e5cd2",
+  "literal_selected_pairs": [
+    [
+      351,
+      "tha-ap353"
+    ],
+    [
+      352,
+      "tha-ap354"
+    ],
+    [
+      353,
+      "tha-ap355"
+    ],
+    [
+      354,
+      "tha-ap356"
+    ],
+    [
+      355,
+      "tha-ap357"
+    ],
+    [
+      356,
+      "tha-ap358"
+    ],
+    [
+      357,
+      "tha-ap359"
+    ],
+    [
+      359,
+      "tha-ap361"
+    ],
+    [
+      360,
+      "tha-ap362"
+    ]
+  ],
+  "held_exclusion": {
+    "publisher": 358,
+    "id": "tha-ap360",
+    "remains_held": true
+  },
+  "totals": {
+    "poems": 9,
+    "body_paragraphs": 63,
+    "physical_stanzas": 36,
+    "poem_notes": 38,
+    "display_pairs": 1,
+    "pages500": 18,
+    "body_utf16": 6698
+  },
+  "blocking_source_metadata_findings": [],
+  "files": {
+    "verify_source_metadata.py": "3a7c20c783527f4bcd2488cbd5fa03c2e69073acc1f1ced45fd7b800ed8169af",
+    "RECONCILIATION.json": "e872b8a8172f23f5f6e9e3c2f2a0afa1e2d83f55428dfdd0b2a7f0eb615789f9",
+    "REVIEW.md": "a9c4a875f4dfa89d05648d424b0c0c5a33ac0ce933132549ece4792fbd95a89a"
+  },
+  "static_source_validation_performed": true,
+  "application_parser_tests_build_network_Git_or_repository_mutations": false,
+  "runtime_API_package_CI_activation_deployment_release_approval": false,
+  "remaining_gates": [
+    "Root integration and independent preservation of all359 prior objects/canon/rights holds",
+    "Finite parser/client/quote/summary/source-warning enforcement",
+    "Actual current368 public routing and complete fresh owned-proof closure without weakening original deadlines",
+    "Source-inverse every-row review/actual runtime34/package39/HTML bindings",
+    "Installed reader, provider/privacy/cleanup evidence and exact-candidate CI before dev-only promotion"
+  ]
+}

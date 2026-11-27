@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_URI} from './helpers/intake368-metadata.mjs';
 import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
@@ -295,7 +296,7 @@ test('source-enabled reader and comparison guards preserve all ten identities, z
 
 test('source-enabled current embedded reader executes third-chapter apparatus guards before rendering', {skip: !checkout}, () => {
   actualSource = true;
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v45.html');
+  assert.equal(WIDGET_URI, CURRENT_WIDGET_URI);
   const sandbox = vm.createContext({TextEncoder});
   vm.runInContext(WIDGET_HTML.slice(WIDGET_HTML.indexOf('  function checkedChapterSummary('), WIDGET_HTML.indexOf('  function render(d) {')) + ';globalThis.check=checkedApadana;', sandbox);
   for (const n of [21, 28, 30]) {

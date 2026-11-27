@@ -18,7 +18,7 @@ function node20(receipt,platform){const r=clone(receipt);r.events.context.node_m
 function fakeReceipt(context,rows){const counts={tests:rows.filter(x=>x.type==='test').length,suites:rows.filter(x=>x.type==='suite').length,pass:rows.filter(x=>x.type==='test'&&x.status==='pass').length,fail:0,cancelled:0,skipped:rows.filter(x=>x.type==='test'&&x.status==='skip').length,todo:rows.filter(x=>x.type==='test'&&x.status==='todo').length};return {schema:'complete-ci-test-receipt-v1',events:{schema:'complete-ci-test-events-v1',context,context_sha256:digest(JSON.stringify(context)),complete:true,cases:clone(rows),summary:counts},execution:{exit_code:0,signal:null,error:null,timed_out:false,cleanup_unverified:false,bound_ms:10000}};}
 function aggregateFixture(f){const contexts=[0,1,2,3].map(partition=>makeContext(f.root,f.checked,{commit:COMMIT,mode:'partition',partition,platform:'win32',node:'v20.20.2'}));const rows=f.checked.inventory.map(({path},i)=>({file:path,line:1,column:1,name:'case '+i,type:'test',nesting:0,status:'pass'}));const full=makeContext(f.root,f.checked,{commit:COMMIT,mode:'full',platform:'linux',node:'v20.20.2'});f.checked.baseline.legacy_test_count=4;f.checked.baseline.added_test_count=1;for(const c of [...contexts,full]){c.legacy_test_count=4;c.added_test_count=1;}return {reference:fakeReceipt(full,rows),parts:contexts.map(c=>fakeReceipt(c,rows.filter(r=>c.selected_files.includes(r.file))))};}
 
-test('complete sorted discovery and finite additions reject omissions substitution and nonregular files',()=>{const f=fixture();try{const all=inventory(f.root);assert.equal(all.length,5);const partitions=[0,1,2,3].map(partition=>makeContext(f.root,f.checked,{commit:COMMIT,mode:'partition',partition}).selected_files);assert.deepEqual(partitions.flat().sort(),all.map(r=>r.path));assert.equal(new Set(partitions.flat()).size,all.length);writeFileSync(join(f.root,'tests','ignored.txt'),'no test');mkdirSync(join(f.root,'tests','nested'));writeFileSync(join(f.root,'tests','nested','hidden.test.mjs'),'throw Error()');assert.deepEqual(inventory(f.root),all);writeFileSync(join(f.root,'tests','a.test.mjs'),'changed');assert.throws(()=>loadBaseline(f.root,f.index,f.pin));copyFileSync(join(f.root,'tests','b.test.mjs'),join(f.root,'tests','a.test.mjs'));assert.throws(()=>loadBaseline(f.root,f.index,f.pin));rmSync(join(f.root,'tests','a.test.mjs'));assert.throws(()=>loadBaseline(f.root,f.index,f.pin));mkdirSync(join(f.root,'tests','a.test.mjs'));assert.throws(()=>inventory(f.root));}finally{f.cleanup();}});
+test('complete sorted discovery and finite additions reject omissions substitution and nonregular files',()=>{assertSuccessorBaselineFixtures();const f=fixture();try{const all=inventory(f.root);assert.equal(all.length,5);const partitions=[0,1,2,3].map(partition=>makeContext(f.root,f.checked,{commit:COMMIT,mode:'partition',partition}).selected_files);assert.deepEqual(partitions.flat().sort(),all.map(r=>r.path));assert.equal(new Set(partitions.flat()).size,all.length);writeFileSync(join(f.root,'tests','ignored.txt'),'no test');mkdirSync(join(f.root,'tests','nested'));writeFileSync(join(f.root,'tests','nested','hidden.test.mjs'),'throw Error()');assert.deepEqual(inventory(f.root),all);writeFileSync(join(f.root,'tests','a.test.mjs'),'changed');assert.throws(()=>loadBaseline(f.root,f.index,f.pin));copyFileSync(join(f.root,'tests','b.test.mjs'),join(f.root,'tests','a.test.mjs'));assert.throws(()=>loadBaseline(f.root,f.index,f.pin));rmSync(join(f.root,'tests','a.test.mjs'));assert.throws(()=>loadBaseline(f.root,f.index,f.pin));mkdirSync(join(f.root,'tests','a.test.mjs'));assert.throws(()=>inventory(f.root));}finally{f.cleanup();}});
 
 test('real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases',{timeout:30000},async()=>{const f=fixture();try{const full=await execute(f.root,f.checked,{commit:COMMIT,mode:'full',receipt:join(f.root,'full.json'),boundMs:10000,platform:'linux'});const parts=[];for(let partition=0;partition<4;partition++)parts.push(await execute(f.root,f.checked,{commit:COMMIT,mode:'partition',partition,receipt:join(f.root,'p'+partition+'.json'),boundMs:10000,platform:'win32'}));assert.equal(full.events.summary.tests,8);assert.equal(full.events.cases.filter(r=>r.name==='duplicate λ').length,2);assert.equal(full.events.cases.filter(r=>r.name==='子'&&r.nesting===1).length,2);const approved=aggregateReceipts(node20(full,'linux'),parts.map(p=>node20(p,'win32')),f.checked,COMMIT);assert.equal(approved.summary.tests,8);assert.equal(approved.summary.skipped,1);assert.equal(approved.summary.todo,1);assert.equal(approved.disjoint_complete_file_cover,true);}finally{f.cleanup();}});
 
@@ -137,3 +137,69 @@ test('raw CI workflow keeps the full reference and four bounded Windows partitio
     assert.throws(()=>rawWorkflowContract(changed),'Workflow mutation '+index+' must refuse');
   }
 });
+
+// Owned source-only V2 loader fixtures. No alternate production loader mode.
+// The immutable340-path predecessor is real; this private fixture adds one
+// tiny source file and explicitly records only the eight known edited paths.
+function assertSuccessorBaselineFixtures(){
+  const f=fixture();
+  try{
+    const predecessorPath='docs/evidence/qa/windows20-partitions/BASELINE_3CED_TEST_FILES.json';
+    const predecessor=readFileSync(join(ROOT,predecessorPath));
+    assert.equal(digest(predecessor),'f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d');
+    const prior=JSON.parse(predecessor);
+    rmSync(join(f.root,'tests'),{recursive:true});mkdirSync(join(f.root,'tests'));
+    const allowedChanged=new Set(['tests/ci-test-partitions.test.mjs','tests/current343-bindings.test.mjs','tests/held234-current333-chain.test.mjs','tests/intake343-metadata.test.mjs','tests/intake359-metadata-history.test.mjs','tests/next-ten-history-data.test.mjs','tests/six-boundary-source-input.test.mjs','tests/thera335-350-source.test.mjs']);
+    const changes={};
+    for(const[path,before]of Object.entries(prior.files)){
+      const bytes=readFileSync(join(ROOT,path));copyFileSync(join(ROOT,path),join(f.root,path));
+      const after=digest(bytes);
+      if(after!==before){assert.ok(allowedChanged.has(path),'Unexpected changed predecessor test in owned fixture');changes[path]={before_sha256:before,after_sha256:after};}
+    }
+    const added='tests/successor-fixture-added.test.mjs';
+    const addedBody="import test from 'node:test';test('owned successor fixture case',()=>{});\n";
+    writeFileSync(join(f.root,added),addedBody);
+    const write=(path,value)=>{mkdirSync(dirname(join(f.root,path)),{recursive:true});writeFileSync(join(f.root,path),value);};
+    write(predecessorPath,predecessor);
+    write(prior.legacy_v1.path,readFileSync(join(ROOT,prior.legacy_v1.path)));
+    const reviewPath='docs/evidence/qa/windows20-partitions/INTAKE368_CASE_INVENTORY_REVIEW.json';
+    const evidencePath='docs/evidence/qa/windows20-partitions/OWNED_V2_FIXTURE_EVIDENCE.json';
+    const evidence=JSON.stringify({scope:'Owned unit fixture only, not release acceptance',added_cases:1});write(evidencePath,evidence);
+    const baseline={schema:'reviewed-ci-test-baseline-v2',commit:'3cedb7b7a71a42db1601026cb6d995dafe43c9ce',
+      legacy_test_count:2076,added_test_count:1,driver:prior.driver,
+      predecessor:{path:predecessorPath,sha256:digest(predecessor)},changed_files:changes,
+      added_files:{[added]:digest(addedBody)},
+      additions:Object.fromEntries(['scripts/ci-test-partitions.mjs','scripts/ci-test-reporter.mjs'].map(path=>[path,digest(readFileSync(join(f.root,path)))])),
+      case_inventory:{path:reviewPath,sha256:''}};
+    const review={schema:'reviewed-ci-successor-source-case-inventory-v1',status:'GO_EXACT_SOURCE_DELTA_AND_TERMINAL_CASE_INVENTORY_ONLY',
+      baseline_commit:baseline.commit,predecessor_sha256:digest(predecessor),
+      inventory_sha256:digest(JSON.stringify(inventory(f.root))),driver:baseline.driver,additions:baseline.additions,
+      changed_files:changes,added_files:baseline.added_files,preserved_original_test_count:2068,
+      preserved_QA_test_count:8,preserved_original_skipped_count:267,added_case_count:1,
+      added_cases_by_file:{[added]:1},evidence:[{path:evidencePath,sha256:digest(evidence)}]};
+    const publish=(index=baseline,audit=review)=>{const text=JSON.stringify(audit);write(reviewPath,text);index.case_inventory.sha256=digest(text);writeFileSync(f.index,JSON.stringify(index));return digest(readFileSync(f.index));};
+    const pin=publish();const loaded=loadBaseline(f.root,f.index,pin);
+    assert.equal(loaded.inventory.length,341);assert.equal(loaded.baseline.legacy_test_count+loaded.baseline.added_test_count,2077);
+    const refusal=change=>{const b=clone(baseline),r=clone(review);change(b,r);const changedPin=publish(b,r);assert.throws(()=>loadBaseline(f.root,f.index,changedPin));publish();};
+    for(const mutate of [
+      b=>b.schema='reviewed-ci-test-baseline-v3',b=>b.commit='f'.repeat(40),
+      b=>b.legacy_test_count=2068,b=>b.added_test_count=null,b=>b.added_test_count=0,
+      b=>b.predecessor.sha256='f'.repeat(64),
+      b=>b.changed_files['tests/not-in-predecessor.test.mjs']={before_sha256:'a'.repeat(64),after_sha256:'b'.repeat(64)},
+      b=>b.added_files[Object.keys(prior.files)[0]]='a'.repeat(64),
+      b=>b.added_files['tests/*.test.mjs']='a'.repeat(64),
+      b=>b.additions['scripts/test.mjs']=prior.driver.sha256,
+      (_b,r)=>r.preserved_QA_test_count=7,(_b,r)=>r.preserved_original_skipped_count=266,
+      (_b,r)=>r.added_case_count=2,(_b,r)=>r.added_cases_by_file[added]=2,
+      (_b,r)=>r.inventory_sha256='a'.repeat(64),(_b,r)=>r.status='PENDING'
+    ])refusal(mutate);
+    if(Object.keys(changes).length){const changed=Object.keys(changes)[0];refusal(b=>b.changed_files[changed].before_sha256='0'.repeat(64));refusal(b=>delete b.changed_files[changed]);}
+    for(const path of [added,Object.keys(prior.files)[0],'scripts/ci-test-reporter.mjs',reviewPath,predecessorPath,evidencePath]){
+      const file=join(f.root,path),before=readFileSync(file);writeFileSync(file,Buffer.concat([before,Buffer.from('\nchanged')]));
+      assert.throws(()=>loadBaseline(f.root,f.index,pin),'V2 physical mutation '+path);writeFileSync(file,before);
+    }
+    const unknown=join(f.root,'tests','unreviewed-added.test.mjs');writeFileSync(unknown,addedBody);assert.throws(()=>loadBaseline(f.root,f.index,pin));rmSync(unknown);
+    const required=join(f.root,added),saved=readFileSync(required);rmSync(required);assert.throws(()=>loadBaseline(f.root,f.index,pin));writeFileSync(required,saved);
+    assert.equal(loadBaseline(f.root,f.index,pin).inventory.length,341);
+  }finally{f.cleanup();}
+}

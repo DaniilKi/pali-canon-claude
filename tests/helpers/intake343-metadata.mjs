@@ -1,6 +1,6 @@
 /** Strict TEST-METADATA bridge. Never import from src/web or transform a tool payload. */
 import assert from 'node:assert/strict';
-import {normalize343Metadata,profilesForHistorical343} from './intake359-metadata.mjs';
+import {normalize343Metadata,profilesForHistorical343} from './intake368-metadata.mjs';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const sha=value=>createHash('sha256').update(value).digest('hex');

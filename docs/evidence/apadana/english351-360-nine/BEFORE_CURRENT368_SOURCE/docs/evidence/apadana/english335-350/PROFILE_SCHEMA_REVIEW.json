@@ -1,0 +1,168 @@
+{
+  "schema": "english16-independent-full-profile-schema-review-v1",
+  "status": "GO_EXACT_SIXTEEN_PROFILES_LINKS_AND_TWO_SUMMARIES_SOURCE_METADATA_ONLY",
+  "source_review_sha256": "61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a",
+  "independent_production_core_sha256": "91bf1992de22806c356173eb9df123ecabab6575d3207d8d473140954d8db56c",
+  "input_files": {
+    "production-proposal-A/FULL_A_PROFILES.json": "ea7e65f1db9573e8ed16258dc4ea3789ee86bd6d5e78986ef2b777d4a96635b9",
+    "production-proposal-A/FULL_A_LINKS.json": "8d48810aa0da6af6ab9d1f8ff4c6e82892672507c952598fefa9719c6608ed22",
+    "production-proposal-A/A_PROFILE_SCHEMA_ADAPTER.json": "5348d163b6bed60c90b78df1a7f4d3ab091d13f36860bd23333747bfbdf5ea5a",
+    "source-B/PROFILE_PROPOSAL.json": "e0bcd2efb86bf0af730b547870f74587ed2d416708b87d9cfbb7da069668e94b",
+    "source-B/PARSER_DELTAS.json": "57478f104c73962daa030f32e8ab91194513c28c3736f4a58d9be91c52f2b714",
+    "SOURCE_CHECKOUT365_MANIFEST.json": "969d76a23c6ce23d98a74908573e40b33c08d7583043400c73ed700f0d8aa93a"
+  },
+  "final_profiles_sha256": "4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d",
+  "final_links_sha256": "f284bc4dcbb415a55aa025f654018448ce3578772dea010f12d8e7cfd536da0a",
+  "all_profile_fields_exact_independent_core": true,
+  "all_link_fields_exact_profile_plus_only_english_and_match": true,
+  "mapping_notes_arrays_reviewed_literal_by_literal_against_originals": true,
+  "summary_labels_editorial_consistent_ordinal_and_collection": true,
+  "summary_root_digest_domain": "SHA256 compact{id,book,start,end,blocks} wrapper; distinct from preserved original bare-tuple source proof",
+  "summary_refs": {
+    "tha-ap342": [
+      "tha-ap342/18",
+      "tha-ap342/21"
+    ],
+    "tha-ap352": [
+      "tha-ap352/8",
+      "tha-ap352/10"
+    ]
+  },
+  "all191_original_notes_poem_owned_and_two_summaries_zero_notes": true,
+  "chapter341_heading_separate_paratext_without_preface_descriptor": true,
+  "rows": [
+    {
+      "id": "tha-ap337",
+      "publisher": 335,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 20,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap338",
+      "publisher": 336,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 22,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap339",
+      "publisher": 337,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 17,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap340",
+      "publisher": 338,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 26,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap341",
+      "publisher": 339,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 23,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap342",
+      "publisher": 340,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 8,
+      "chapter_summary": true,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap343",
+      "publisher": 341,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 11,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap344",
+      "publisher": 342,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 6,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap345",
+      "publisher": 343,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 6,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap346",
+      "publisher": 344,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 8,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap347",
+      "publisher": 345,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 7,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap348",
+      "publisher": 346,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 5,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap349",
+      "publisher": 347,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 5,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap350",
+      "publisher": 348,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 12,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap351",
+      "publisher": 349,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 6,
+      "chapter_summary": false,
+      "mapping_notes_source_and_edition_review": true
+    },
+    {
+      "id": "tha-ap352",
+      "publisher": 350,
+      "GO": "EXACT_PROFILE_AND_LINK_SOURCE_METADATA",
+      "note_count": 9,
+      "chapter_summary": true,
+      "mapping_notes_source_and_edition_review": true
+    }
+  ],
+  "existing343_objects_and_canonical_and_private_data_preservation": "Required integration gates; nothing mutated by this source review",
+  "rights": "Specific Walters/Whitman CC BY-NC-SA4.0 grant and notices apply. GenericBYsite metadata does not relaxNC/SA. No commercial/media permission or VRI line-complete claim.",
+  "English_content_policy": "Metadata/hashes bundled only; complete original English poems,notes,summaries remain live-only.",
+  "parser_API_reader_behavior_verified": false,
+  "package_CI_activation_release_approval": false
+}

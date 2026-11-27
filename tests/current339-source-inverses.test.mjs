@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_URI,CURRENT_WIDGET_VERSION} from './helpers/intake368-metadata.mjs';
 import {frozen440FileReader} from './helpers/boundary333-336-source-input.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readCurrentFileSync} from 'node:fs';import {createHash} from 'node:crypto';
 import {sourceInverses,projectD4Source,d4FileReader} from './helpers/current339-source-inverse.mjs';
@@ -6,7 +7,7 @@ import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 const readFileSync=frozen440FileReader(readCurrentFileSync);
 const sha=x=>createHash('sha256').update(x).digest('hex');
 test('actual current359 and v45 bindings retain every exact D4 assertion through finite source inputs',()=>{
- assert.equal(CURRENT_APADANA_IDS.length,359);assert.equal(WIDGET_VERSION,'v45');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v45.html');
+ assert.equal(CURRENT_APADANA_IDS.length,368);assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);assert.equal(WIDGET_URI,CURRENT_WIDGET_URI);
  assert.ok(Object.keys(sourceInverses.files).length>=20);
  const reader=d4FileReader(readCurrentFileSync);
  for(const [path,row]of Object.entries(sourceInverses.files)){

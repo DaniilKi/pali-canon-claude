@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from web_reader_four_boundary_history import historical_data_bytes, copy_historical_fixture
 import web_reader_intake359 as intake359
+import web_reader_intake368 as intake368
+from owned_intake368_proofs import copy_owned_intake368_proof_inputs
 from web_reader_approved_acceptance import (approved_catalogue, approved_runtime,
     reviewed_canonical325_runtime, reviewed339_runtime, assert_catalogue, assert_runtime,
     assert_runtime_records)
@@ -49,30 +51,25 @@ def flipped(value):
 class Current333AuthorityNegatives(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        # Current359 is genuine before an owned historical proof fixture exists.
+        # Current368 is genuine before an owned historical proof fixture exists.
         # These public gates retain fresh actual27/source/old authority checks.
-        cls.root_approved359 = approved_catalogue(ROOT)
-        cls.root_runtime359 = approved_runtime(ROOT)
-        assert len(cls.root_approved359['ids']) == len(cls.root_approved359['profiles']) == len(cls.root_approved359['links']) == 359
-        assert len(cls.root_runtime359) == 34
+        cls.root_current368 = approved_catalogue(ROOT)
+        cls.root_runtime368 = approved_runtime(ROOT)
+        assert len(cls.root_current368['ids']) == len(cls.root_current368['profiles']) == len(cls.root_current368['links']) == 368
+        assert len(cls.root_runtime368) == 34
         # Do not hardlink: every mutation must own its bytes, even on failure.
         cls.temporary = tempfile.TemporaryDirectory(prefix='pali-current333-authority-')
         cls.addClassCleanup(cls.temporary.cleanup)
         cls.fixture = Path(cls.temporary.name)
         evidence = cls.fixture / 'docs/evidence/apadana'
-        shutil.copytree(ROOT / 'docs/evidence/apadana', evidence)
-        copy_historical_fixture(ROOT, cls.fixture)
+        copy_owned_intake368_proof_inputs(ROOT, cls.fixture)
         # The additive reviewed copy retains all13 current proof members and
-        # the separate immutable AP343 input; actual server/data remains359.
+        # the separate immutable AP343 input; actual server/data remains368.
         intake359.fresh_proofs(cls.fixture)
+        intake368.fresh_proofs(cls.fixture)
         historical_ap343 = (cls.fixture / intake359.AP_FIXTURE).read_bytes()
         assert sha(historical_ap343) == '18ef986dccbc05cabf311ba44d553b0cf415893484428eecdd476bfe2e1f4bbf'
         assert len(json.loads(historical_ap343)['links']) == 343
-        for name in ('tests/fixtures/reviewed-runtime-2449.json',
-                'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json'):
-            target = cls.fixture / name
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(ROOT / name, target)
         # Independent compact paths identify public canonical data needed to
         # reconstruct the sealed catalogue; current output supplies no oracle.
         compact_raw = (cls.fixture / COMPACT).read_bytes()
@@ -94,15 +91,15 @@ class Current333AuthorityNegatives(unittest.TestCase):
             assert sha((cls.fixture / name).read_bytes()) == expected
         cls.approved = approved_catalogue(cls.fixture)
         cls.inventory = approved_runtime(cls.fixture)
-        assert cls.approved == cls.root_approved359
-        assert cls.inventory == cls.root_runtime359
+        assert cls.approved == cls.root_current368
+        assert cls.inventory == cls.root_runtime368
         cls.manifest = json.loads((ROOT / 'server/data/apadana.json').read_text(encoding='utf-8'))
         # Both the owned proof fixture and actual current output must be valid
         # before a deliberately changed proof can count as a negative result.
         assert_catalogue(cls.manifest, cls.approved)
         actual = assert_runtime(ROOT, ROOT / 'server')
         assert actual == {name: row['sha256'] for name, row in cls.inventory.items()}
-        assert len(cls.approved['ids']) == len(cls.approved['links']) == len(cls.approved['profiles']) == 359
+        assert len(cls.approved['ids']) == len(cls.approved['links']) == len(cls.approved['profiles']) == 368
         assert tuple(cls.approved['ids'][:333][-8:]) == NEW_IDS
         assert len(cls.inventory) == 34
 
@@ -134,7 +131,7 @@ class Current333AuthorityNegatives(unittest.TestCase):
     def test_01_exact_current333_catalogue_and_actual_runtime_positive(self):
         approved, inventory = self.current_positive()
         self.assertEqual(tuple(approved['ids'][:333][-8:]), NEW_IDS)
-        self.assertEqual(len(approved['ids']), 359)
+        self.assertEqual(len(approved['ids']), 368)
         self.assertEqual(len(inventory), 34)
         self.assertTrue(set(NEW_IDS).issubset(approved['profiles']))
         self.assertFalse({'tha-ap313', 'tha-ap322'} & set(approved['links']))
@@ -164,7 +161,7 @@ class Current333AuthorityNegatives(unittest.TestCase):
                 with self.subTest(owner=uid, replacement=replacement):
                     observed = copy.deepcopy(self.manifest)
                     observed['links'][replacement] = observed['links'].pop(uid)
-                    self.assertEqual(len(observed['links']), 359)
+                    self.assertEqual(len(observed['links']), 368)
                     with self.assertRaises(AssertionError):
                         assert_catalogue(observed, self.approved)
 
@@ -176,7 +173,7 @@ class Current333AuthorityNegatives(unittest.TestCase):
                     observed = copy.deepcopy(self.manifest)
                     prior = observed['links'][uid][field]
                     observed['links'][uid][field] = flipped(prior)
-                    self.assertEqual(len(observed['links']), 359)
+                    self.assertEqual(len(observed['links']), 368)
                     self.assertEqual(len(observed['links'][uid][field]), len(prior))
                     self.assertEqual(observed['links'][uid]['note_count'], self.manifest['links'][uid]['note_count'])
                     with self.assertRaises(AssertionError):

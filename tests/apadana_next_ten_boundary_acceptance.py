@@ -23,6 +23,7 @@ sys.path.insert(0, str(ROOT / 'scripts/canon'))
 import apadana_thera_next10_spans as ten
 sys.path.insert(0, str(ROOT / 'scripts'))
 import web_reader_intake359 as intake359
+import web_reader_intake368 as intake368
 
 OLD_SHA = '0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b'
 NEW_SHA = 'f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de'
@@ -343,11 +344,21 @@ class NextTenBoundaryData(Fixture):
     def test_06_exact343_profiles_links_rights_and_finite_derived_parallels_delta(self):
         profiles = profiles_from_compiled_metadata()
         raw = (ROOT / 'server/data/apadana.json').read_bytes();cat = json.loads(raw)
-        # Validate every actual359 compiled profile and the physical AP359 bytes
+        # Validate actual368, then every named359 compiled profile and AP359 input
         # before selecting the explicit immutable343 historical metadata input.
         prior_runtime = json.loads((ROOT / 'docs/evidence/apadana/english335-350/BASELINE_RUNTIME34.json').read_bytes())['files']
         current_runtime, historical343_raw, payload = intake359.capture_authority(ROOT, prior_runtime)
         approved359 = json.loads(payload)
+        current368_runtime, historical359_raw, payload368 = intake368.capture_authority(ROOT, current_runtime)
+        approved368 = json.loads(payload368)
+        self.assertEqual(len(profiles), 368)
+        self.assertEqual(profiles, approved368['current']['profiles'])
+        self.assertEqual(cat, approved368['manifest'])
+        self.assertEqual({'bytes':len(raw), 'sha256':sha(raw)}, current368_runtime['data/apadana.json'])
+        # Only after validating every actual368 object and actual AP368 byte,
+        # provide the separately pinned359 TEST INPUT to all original359 gates.
+        profiles = {uid:profiles[uid] for uid in approved359['current']['ids']}
+        raw = historical359_raw; cat = json.loads(raw)
         self.assertEqual(len(profiles), 359)
         self.assertEqual(profiles, approved359['current']['profiles'])
         self.assertEqual(cat, approved359['manifest'])

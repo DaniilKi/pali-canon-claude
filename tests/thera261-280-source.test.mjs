@@ -18,7 +18,7 @@ afterEach(()=>{globalThis.fetch=originalFetch;});
 function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e.profiles[id].raw_url===url.href);assert.ok(id,'Only exact18 immutable fixture URLs may reach transport');calls.push(id);return new Response(e.artifact(id));};}
 
 test('exact independently approved18 extend the preserved285 to303 with unchanged canonical identities and rights',()=>{
- assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,359);
+ assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,368);
  assert.equal(e.approval.expected_profile_ids.length,303);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,303),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,303),e.approval.expected_profile_ids);
  const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));

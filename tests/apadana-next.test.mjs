@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_URI} from './helpers/intake368-metadata.mjs';
 import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -65,7 +66,7 @@ test('actual API long continuations and widget preserve sparse notes and source-
     if(n===17)assert.equal(widget.english.publisher_divisions[0].translator_notes[0].number,21);
   }
   const before=fetches.length;await assert.rejects(english.translation(canon.resolve('thi-ap12').unit,id(17)),/not linked/);assert.equal(fetches.length,before);
-  assert.equal(WIDGET_URI,'ui://pali-canon/reader-v45.html');
+  assert.equal(WIDGET_URI,CURRENT_WIDGET_URI);
 });
 
 test('source-enabled embedded reader executes sparse note and publisher division ownership guards',{skip:!checkout},async()=>{

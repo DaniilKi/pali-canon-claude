@@ -1,4 +1,4 @@
-"""Three bounded controls for actual359 versus explicit historical343 QA inputs."""
+"""Named359 history remains exact over genuine current368 physical data."""
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
@@ -18,9 +18,9 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import web_reader_next_ten_boundary_history as ten
 import web_reader_six_boundary_history as six
 import web_reader_intake359 as intake
-from web_reader_four_boundary_history import copy_historical_fixture
+from owned_intake368_proofs import copy_owned_intake368_proof_inputs
 from web_reader_approved_acceptance import (approved_catalogue, approved_runtime,
-    approved_next_ten_catalogue, approved_next_ten_runtime)
+    approved_next_ten_catalogue, approved_next_ten_runtime, approved359_catalogue, approved359_runtime)
 
 D = 'docs/evidence/apadana/english335-350/'
 IDS = ['tha-ap337','tha-ap338','tha-ap339','tha-ap340','tha-ap341','tha-ap342','tha-ap343','tha-ap344','tha-ap345','tha-ap346','tha-ap347','tha-ap348','tha-ap349','tha-ap350','tha-ap351','tha-ap352']
@@ -40,27 +40,22 @@ class Intake359Controls(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # A genuine current positive precedes every owned fixture and negative.
-        cls.approved = approved_catalogue(ROOT)
+        cls.actual368 = approved_runtime(ROOT)
+        cls.approved = approved359_catalogue(ROOT)
         assert len(cls.approved['ids']) == len(cls.approved['profiles']) == len(cls.approved['links']) == 359
         assert cls.approved['ids'][-16:] == IDS
         cls.current = sealed('RUNTIME_INVENTORY.json')['files']
         cls.prior_runtime = sealed('BASELINE_RUNTIME34.json')['files']
         cls.old = sealed('BASELINE343_FULL_OBJECTS.json')
-        assert approved_runtime(ROOT) == cls.current
+        assert approved359_runtime(ROOT) == cls.current
         for uid in cls.old['profiles']:
             assert cls.approved['profiles'][uid] == cls.old['profiles'][uid]
             assert cls.approved['links'][uid] == cls.old['links'][uid]
         cls.temp = tempfile.TemporaryDirectory(prefix='pali359-history-')
         cls.addClassCleanup(cls.temp.cleanup)
         cls.root = Path(cls.temp.name)
-        shutil.copytree(ROOT / 'docs/evidence/apadana', cls.root / 'docs/evidence/apadana')
-        copy_historical_fixture(ROOT, cls.root)
-        for name in ('tests/fixtures/reviewed-runtime-2449.json',
-                     'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json'):
-            target = cls.root / name
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(ROOT / name, target)
-        assert ten.assert_next_ten_current_canonical_data(cls.root) == cls.current
+        copy_owned_intake368_proof_inputs(ROOT, cls.root)
+        assert ten.assert_next_ten_current_canonical_data(cls.root) == cls.actual368
 
     @contextmanager
     def changed(self, relative, *, missing=False, replacement=None):
@@ -83,10 +78,10 @@ class Intake359Controls(unittest.TestCase):
         self.assertEqual(historical, {'ids':list(self.old['profiles']), 'profiles':self.old['profiles'],
                                      'links':self.old['links'], 'source':self.old['manifest_source']})
         self.assertEqual(approved_next_ten_runtime(self.root), self.prior_runtime)
-        self.assertEqual(approved_runtime(self.root), self.current)
+        self.assertEqual(approved359_runtime(self.root), self.current)
         self.assertNotEqual(self.prior_runtime, self.current)
         self.assertEqual(len(json.loads((self.root / intake.AP_FIXTURE).read_bytes())['links']),343)
-        self.assertEqual(len(json.loads((self.root / intake.AP_PATH).read_bytes())['links']),359)
+        self.assertEqual(len(json.loads((self.root / intake.AP_PATH).read_bytes())['links']),368)
         # Returned metadata is a fresh ordinary object, not an alias into a seal.
         with six._c1_operation_scope(self.root) as scope:
             first = ten._current359_catalogue(scope._next_ten_binding, scope._root, historical)
@@ -100,22 +95,22 @@ class Intake359Controls(unittest.TestCase):
     def test_02_warm_new_proof_data_and_historical_fixture_controls_never_become_current_positive(self):
         for name in ('APPROVAL.json','PROFILES.json','RUNTIME_REVIEW.json'):
             for missing in (False,True):
-                self.assertEqual(ten.assert_next_ten_current_canonical_data(self.root),self.current)
+                self.assertEqual(ten.assert_next_ten_current_canonical_data(self.root),self.actual368)
                 with self.changed(D + name, missing=missing):
                     with self.assertRaises((AssertionError, ValueError, FileNotFoundError)):
                         ten.assert_next_ten_current_canonical_data(self.root)
-                self.assertEqual(ten.assert_next_ten_current_canonical_data(self.root),self.current)
+                self.assertEqual(ten.assert_next_ten_current_canonical_data(self.root),self.actual368)
         old = (self.root / intake.AP_FIXTURE).read_bytes()
         self.assertNotEqual(sha(old),self.current['data/apadana.json']['sha256'])
         for replacement in (old,None):
-            self.assertEqual(ten.assert_next_ten_current_canonical_data(self.root),self.current)
+            self.assertEqual(ten.assert_next_ten_current_canonical_data(self.root),self.actual368)
             with self.changed(intake.AP_PATH,replacement=replacement):
                 with self.assertRaises((AssertionError,ValueError)):
                     ten.assert_next_ten_current_canonical_data(self.root)
         with self.changed(intake.AP_FIXTURE):
             with self.assertRaises((AssertionError,ValueError)):
                 ten.assert_next_ten_current_canonical_data(self.root)
-        self.assertEqual(ten.assert_next_ten_current_canonical_data(self.root),self.current)
+        self.assertEqual(ten.assert_next_ten_current_canonical_data(self.root),self.actual368)
 
     def test_03_private_binding_stays_fresh_root_thread_owned_and_closed_without_recapturing27(self):
         expected = {'server/'+p for p in self.current if p.startswith('data/')}

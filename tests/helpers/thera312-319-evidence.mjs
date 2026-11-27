@@ -158,7 +158,7 @@ export function thera312319Evidence() {
     assert.equal(hashObject(priorSource),compact.manifest_source_sha256,'Full prior source/rights object with only two reviewed count changes');
   }
   function assertProfiles(observed) {
-    if(Object.keys(observed).length===343||Object.keys(observed).length===359)observed=profilesForHistorical339(observed);
+    if(Object.keys(observed).length===343||Object.keys(observed).length===359||Object.keys(observed).length===368)observed=profilesForHistorical339(observed);
     if(Object.keys(observed).length===339){
       requireProfiles339(observed);
       const ids=publisher339Authority().compact.ids;

@@ -5,20 +5,24 @@ import {readFileSync}from'node:fs';
 import {join}from'node:path';
 import*as canon from'../src/canon.mjs';
 import*as english from'../src/english.mjs';
-import{APADANA_PROFILES,isApadanaRawUrl}from'../src/apadana-profiles.mjs';
+import{APADANA_PROFILES as ACTUAL_APADANA_PROFILES,isApadanaRawUrl}from'../src/apadana-profiles.mjs';
 import{parseApadana,quotationText}from'../src/apadana.mjs';
 import{parseTheraApadana}from'../src/apadana-thera.mjs';
 import{fetchPublic}from'../src/http.mjs';
 import{liveCache}from'../src/cache.mjs';
 import{requiredCanonicalRevision}from'../src/locator-policy.mjs';
 import{sixteenEnglishEvidence,decodeApproval,IDS,REV,VRI,sha,objectSha,gitBlob}from'./helpers/thera335-350-evidence.mjs';
+import {profilesForHistorical359,project368To359} from './helpers/intake368-metadata.mjs';
 const e=sixteenEnglishEvidence(),originalFetch=globalThis.fetch,clone=structuredClone,tid=p=>canon.translationId(p);
+// Explicit TEST inputs only: actual APIs/provider guards retain the unprojected current368 data.
+const APADANA_PROFILES=profilesForHistorical359(ACTUAL_APADANA_PROFILES);
+const historical359Manifest=()=>project368To359(ACTUAL_APADANA_PROFILES,JSON.parse(readFileSync('server/data/apadana.json'))).catalogue;
 afterEach(()=>{globalThis.fetch=originalFetch;liveCache.clear();});
 function transport(calls,mutate){liveCache.clear();globalThis.fetch=async(input,init={})=>{const url=typeof input==='string'?input:input.href,id=IDS.find(id=>e.profiles[id].raw_url===url);assert.ok(id,'Only16 exact pinned official raw URLs reach the offline fixture transport');assert.ok(!url.includes('SYNTHETIC_PRIVATE_359')&&!JSON.stringify(init).includes('SYNTHETIC_PRIVATE_359'));calls.push(id);return new Response(mutate?mutate(e.artifact(id),id):e.artifact(id));};}
 const currentPins=Object.freeze({'tha-ap340':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap341':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap343':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap344':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap346':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap347':VRI+'-apadana-thera340-341-343-344-346-347-v1','tha-ap348':VRI+'-apadana-thera-next10-v1','tha-ap349':VRI+'-apadana-thera-next10-v1'});
 
 test('current359 preserves all full343 objects and actual26 data files including every8544 record and61books',()=>{
- const manifest=JSON.parse(readFileSync('server/data/apadana.json'));e.assertCatalogue(manifest,APADANA_PROFILES);const corpus=e.assertUnchangedSourceData();assert.equal(corpus.source.commit,VRI);
+ const manifest=historical359Manifest();e.assertCatalogue(manifest,APADANA_PROFILES);const corpus=e.assertUnchangedSourceData();assert.equal(corpus.source.commit,VRI);
  for(const id of IDS){assert.equal(requiredCanonicalRevision(id),currentPins[id]||null);assert.equal(APADANA_PROFILES[id].index_revision,currentPins[id]?.slice(VRI.length+1));}
  for(const id of ['tha-ap107','tha-ap108'])assert.equal(requiredCanonicalRevision(id),VRI+'-apadana-thera105-106-v1');for(const id of ['tha-ap333','tha-ap334','tha-ap335','tha-ap336'])assert.equal(requiredCanonicalRevision(id),VRI+'-apadana-thera333-336-v1');
 });
@@ -77,14 +81,14 @@ test('source revision prefix and licence drift refuse without silently changing 
 
 test('the sixteen literal approved URLs do not open neighbouring held sources media or alternate revisions',async()=>{
  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Unapproved source transport must not run');};
- for(const n of [70,140,158,159,260,266,280,306,307,311,320,351]){const url=`https://raw.githubusercontent.com/apadana-translation/apadana-site/${REV}/src/_poems/chapter-3/poem-${n}.md`;assert.equal(isApadanaRawUrl(url),false);await assert.rejects(fetchPublic(url,{json:false}));}
+ for(const n of [70,140,158,159,260,266,280,306,307,311,320,358]){const url=`https://raw.githubusercontent.com/apadana-translation/apadana-site/${REV}/src/_poems/chapter-3/poem-${n}.md`;assert.equal(isApadanaRawUrl(url),false);await assert.rejects(fetchPublic(url,{json:false}));}
  for(const id of IDS){const url=e.profiles[id].raw_url;assert.equal(isApadanaRawUrl(url),true);for(const changed of [url.replace('.md','.mp3'),url.replace(REV,'0'.repeat(40))]){assert.equal(isApadanaRawUrl(changed),false);await assert.rejects(fetchPublic(changed,{json:false}));}}
  assert.equal(calls,0);
 });
 
 test('sealed full359 metadata rejects omissions substitutions extra bodies and licence drift; package policy excludes raw sources',()=>{
  const curation=readFileSync('docs/evidence/apadana/english335-350/APPROVAL.json');decodeApproval(curation);assert.throws(()=>decodeApproval(Buffer.concat([curation,Buffer.from(' ')])));
- const profiles=clone(APADANA_PROFILES),manifest=JSON.parse(readFileSync('server/data/apadana.json'));e.assertCatalogue(manifest,profiles);
+ const profiles=clone(APADANA_PROFILES),manifest=historical359Manifest();e.assertCatalogue(manifest,profiles);
  const substituted=clone(profiles);substituted['tha-ap353']=substituted['tha-ap352'];delete substituted['tha-ap352'];assert.equal(Object.keys(substituted).length,359);assert.throws(()=>e.assertProfiles(substituted));
  const missing=clone(profiles);delete missing[e.compact.ids[0]];assert.throws(()=>e.assertProfiles(missing));const bad=clone(manifest);bad.links['tha-ap337'].license='CC0';assert.throws(()=>e.assertCatalogue(bad,profiles));
  function metadataOnly(value){if(Array.isArray(value)){for(const v of value)metadataOnly(v);}else if(value&&typeof value==='object'){for(const[k,v]of Object.entries(value)){assert.ok(!['text','translator_notes','publisher_paratext','body_paragraphs','paragraphs'].includes(k),'No bundled English body/note payload key: '+k);metadataOnly(v);}}}

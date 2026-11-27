@@ -1,0 +1,330 @@
+{
+  "schema": "source368-historical3ced-archive-v1",
+  "commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "entire_359_evidence_tree_archived": true,
+  "loader_archived": true,
+  "source1001_actual_3ced_identities": 1001,
+  "files": {
+    "docs/evidence/apadana/english335-350/3D_ORIGINAL_SOURCE_MANIFEST.json": {
+      "bytes": 217491,
+      "sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
+      "git_blob": "db90048d639b736c3fead63b39cc19e7b58d5818"
+    },
+    "docs/evidence/apadana/english335-350/APPROVAL.json": {
+      "bytes": 16650,
+      "sha256": "9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6",
+      "git_blob": "2aef436b3bc34b81cdc971b130907da62b128c55"
+    },
+    "docs/evidence/apadana/english335-350/A_LINKS.json": {
+      "bytes": 40706,
+      "sha256": "8d48810aa0da6af6ab9d1f8ff4c6e82892672507c952598fefa9719c6608ed22",
+      "git_blob": "96acdfad88be40e2c1bd49b76992c047d40dc91f"
+    },
+    "docs/evidence/apadana/english335-350/A_PRODUCTION_REVIEW.json": {
+      "bytes": 2998,
+      "sha256": "38f20b0b036ea58b6a87a62da3c4a3d004805bc2d146d6a2730c3ac05395ecb3",
+      "git_blob": "9f3fab818ce9449a5c9bb8199de435fef56f4690"
+    },
+    "docs/evidence/apadana/english335-350/A_PROFILES.json": {
+      "bytes": 40040,
+      "sha256": "ea7e65f1db9573e8ed16258dc4ea3789ee86bd6d5e78986ef2b777d4a96635b9",
+      "git_blob": "48bda7e37f10ac71a03cc4f13c8ec4e2c9668593"
+    },
+    "docs/evidence/apadana/english335-350/A_PROFILE_ADAPTER.json": {
+      "bytes": 2213,
+      "sha256": "5348d163b6bed60c90b78df1a7f4d3ab091d13f36860bd23333747bfbdf5ea5a",
+      "git_blob": "da6cb9afd99570f97a537288d0b1ea7be773d959"
+    },
+    "docs/evidence/apadana/english335-350/BASELINE343.json": {
+      "bytes": 66336,
+      "sha256": "4c122fff1283b3ee5904f1f6ea781572347d6e42140dcdd25d7765e8ab00e138",
+      "git_blob": "0ac57c9a2ed0d14166adc876717835f3a37f7c16"
+    },
+    "docs/evidence/apadana/english335-350/BASELINE343_FULL_OBJECTS.json": {
+      "bytes": 2732922,
+      "sha256": "74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e",
+      "git_blob": "391ab2529e71df16ebbea04746b9e1c3ad7c5853"
+    },
+    "docs/evidence/apadana/english335-350/BASELINE_DATA27.json": {
+      "bytes": 4309,
+      "sha256": "8631b90104e01329b74d22cc7632df265e9b9072efd6ba17b5478450b026a99f",
+      "git_blob": "807285cd4b11f587faf4c4bf44e6941b4a3f0fbc"
+    },
+    "docs/evidence/apadana/english335-350/BASELINE_RUNTIME34.json": {
+      "bytes": 5078,
+      "sha256": "6becdfab6b8e948a6d2df9af1a37131c4c0c727d77db79cf4bb4b93973512f23",
+      "git_blob": "58be63da70837c96bd3c93ee5bc4563552c2a2b9"
+    },
+    "docs/evidence/apadana/english335-350/BLIND_PRESEAL.json": {
+      "bytes": 728,
+      "sha256": "aaa4212130213cba0f9e30852ef4b9a4ef5a8ed48801a209a612844a09645f16",
+      "git_blob": "69119a3b3799fc8ac75efd7429d87e3cd7dd8a87"
+    },
+    "docs/evidence/apadana/english335-350/BROWSER_ACCEPTANCE.json": {
+      "bytes": 10969,
+      "sha256": "05d6891f16cd83ce5d093be0e56cf27b8ed0f81807489852c961013f072256ef",
+      "git_blob": "917243b5d2ad6a79b0492582d2d5a7a05b3ea79e"
+    },
+    "docs/evidence/apadana/english335-350/BROWSER_CONTRACT_REVIEW.json": {
+      "bytes": 2914,
+      "sha256": "73bd122356cc1a9b44879260d7d90fbbac964559dfb88235eb469eaa281de891",
+      "git_blob": "e9d83bdc2455a0abf8c4647f3d3443af78f0a9c1"
+    },
+    "docs/evidence/apadana/english335-350/BROWSER_DRIVER_MANIFEST.json": {
+      "bytes": 3004,
+      "sha256": "978fdd40c6f34224fbbdd28be812ca7b9651f633d6653fa68f4cd0ee04e17878",
+      "git_blob": "6c6c2a0d5e45d6d41c65668ded3ff57fb3853ff1"
+    },
+    "docs/evidence/apadana/english335-350/CI_RECOVERY_LOCAL_ACCEPTANCE.json": {
+      "bytes": 4043,
+      "sha256": "0cbe01c3587905724487389fc23c7bf7ac72190b02ac35520b97c689699d6edd",
+      "git_blob": "f301c4d23275ed0fb1f2517a814e703361bd45ba"
+    },
+    "docs/evidence/apadana/english335-350/CURRENT_BROWSER_ROUTING_REVIEW.json": {
+      "bytes": 3839,
+      "sha256": "67fdeab2cbe142436195544f85bf00470e6d9d456091e283407d6ca060a7d3ed",
+      "git_blob": "f7b83e225a299a6d0b80a46d39af55dff17e626b"
+    },
+    "docs/evidence/apadana/english335-350/CURRENT_BROWSER_SUFFIX_REVIEW.json": {
+      "bytes": 2589,
+      "sha256": "012f11dc48989580a6e5eee0666bcc85b377770d7fb9a0166280a0475c2e26ee",
+      "git_blob": "ac3fba899840b36b295a4e9c23e4f305f04eadd3"
+    },
+    "docs/evidence/apadana/english335-350/EDITION_NOTE_BROWSER_NORMAL.json": {
+      "bytes": 8706,
+      "sha256": "ceaab28103fa71512111724a5498c55f8a6fafac2c32693451b3b362fff1c4d1",
+      "git_blob": "1179931123f75b77fc8831720439e7f02cb42202"
+    },
+    "docs/evidence/apadana/english335-350/EDITION_NOTE_INSTALLED_A11Y.json": {
+      "bytes": 81346,
+      "sha256": "89f892986e03486c906f9b20ab136f16768a1f43c902a15304d1014c065dd90f",
+      "git_blob": "b459455c0bbe8522967308d4b6dc6c93af008923"
+    },
+    "docs/evidence/apadana/english335-350/EXPECTED_MANIFEST.json": {
+      "bytes": 1457596,
+      "sha256": "57b6fd43f4b8273e9542b8a22a6bd84b2042914113d53c94fe727386c5ec0194",
+      "git_blob": "56c8198d3e28177494d700150122ebef44e8b425"
+    },
+    "docs/evidence/apadana/english335-350/GOLDENS_A.json": {
+      "bytes": 304799,
+      "sha256": "46ba1993b30b5740bfe095c009cc4a8ec4653f789d91a9ff9aa4b9e66d56c76b",
+      "git_blob": "dffbfb84117814d832008fb93bf63b89f707c08e"
+    },
+    "docs/evidence/apadana/english335-350/GOLDENS_B.json": {
+      "bytes": 152643,
+      "sha256": "215605ba9a40e0a28e89dc182033f9760aa4378424ff49fd22a6d2e5deff43a7",
+      "git_blob": "3258da1b249c376ae439a2a5a7963cd5699e315b"
+    },
+    "docs/evidence/apadana/english335-350/HELD234_CHAIN8_LOCAL_ACCEPTANCE.json": {
+      "bytes": 1653,
+      "sha256": "b1e844a73fa94957d63e4dd80c3e712b48fdf18ca1c01a68ed73ef383bffed45",
+      "git_blob": "22d2c36815ad0395d8ba01072c06bb3d3d55aae0"
+    },
+    "docs/evidence/apadana/english335-350/HELD234_CHAIN8_STATIC_REVIEW.json": {
+      "bytes": 7956,
+      "sha256": "51ed849613bb670b7a1676166c03a38568d60b638ce3a999893a90e686d482b4",
+      "git_blob": "a6916ec2d41d3f740cb10b8210e57431bf190b1a"
+    },
+    "docs/evidence/apadana/english335-350/HELD234_INSTALLED_BROWSER_RECOVERY.json": {
+      "bytes": 13444,
+      "sha256": "1fc229143ca6c71d0e2a5b3dcdf74f2584eca83979a85f98fa0630080413d396",
+      "git_blob": "3dfce45dedc910774f01b29ed60f2c7435b60b82"
+    },
+    "docs/evidence/apadana/english335-350/INSTALLED_WIDGET_ACCEPTANCE.json": {
+      "bytes": 789,
+      "sha256": "8dfd66aa5fe7b587c4eb1059a3ba09d478dc17562f1cd22ecea48916258d578d",
+      "git_blob": "a249ab5c48fa909b185d749eeb83fb5df844a0fa"
+    },
+    "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json": {
+      "bytes": 5824,
+      "sha256": "512fb295fdc1a11c1fe21bf5895fb46986856fe13145f546fcac61b99e33eac7",
+      "git_blob": "41eb9cc0cd2876ef55dfae48d3a5a435962cc060"
+    },
+    "docs/evidence/apadana/english335-350/LEGACY_THERI_BROWSER_RECOVERY.json": {
+      "bytes": 10638,
+      "sha256": "4fedb8fdf1a57dad833cfabd1bfa7a6d02608101785624c6cc5f5e74342537da",
+      "git_blob": "2f7cdd9639e259842e153db8ae043296c508c621"
+    },
+    "docs/evidence/apadana/english335-350/LINKS.json": {
+      "bytes": 70985,
+      "sha256": "f284bc4dcbb415a55aa025f654018448ce3578772dea010f12d8e7cfd536da0a",
+      "git_blob": "1f4715da585bca9c6ee1239fcab92ea0b35c9fcc"
+    },
+    "docs/evidence/apadana/english335-350/LOCAL_ACCEPTANCE.json": {
+      "bytes": 4591,
+      "sha256": "9603be5a5fc634c53199752206cff677cfd09d61b5cdc7a319d0220ade442777",
+      "git_blob": "962fae55a64a4e55af52084026a9796bdce5b296"
+    },
+    "docs/evidence/apadana/english335-350/NOTE_FRAME_BROWSER_ACCEPTANCE.json": {
+      "bytes": 11070,
+      "sha256": "baffa70ff4b2db7ee3e04051ea11b1a1b2e256ba97f1f4853d5cc2f822090e11",
+      "git_blob": "21eb7fe4384671f9e2ff892e65290dbb4f62d370"
+    },
+    "docs/evidence/apadana/english335-350/NOTE_FRAME_BROWSER_CONTRACT_REVIEW.json": {
+      "bytes": 3771,
+      "sha256": "23eb0de771b2c094f6347f6c5bae1f642d4baa89942b62b979101490ffbb7505",
+      "git_blob": "93cc9eb026aafdcab0faa81450b49e77adf0a674"
+    },
+    "docs/evidence/apadana/english335-350/NOTE_FRAME_INSTALL_REVIEW.json": {
+      "bytes": 9471,
+      "sha256": "96dc211e0fe784586c261fa3fe5e2cd19b560030eed31329c3a0cc61b3096d20",
+      "git_blob": "2bfe41a1ec045c32a26520814701fb6af5109864"
+    },
+    "docs/evidence/apadana/english335-350/NOTE_FRAME_PACKAGE39_REVIEW.json": {
+      "bytes": 7931,
+      "sha256": "3cd3f25adba9e8b43ea9c531d0495f4b794f0082fd166db3c666cee46f1124fd",
+      "git_blob": "a0e763cb9d5f2a5d1fa1224eabd3353f8b891eb4"
+    },
+    "docs/evidence/apadana/english335-350/NOTE_FRAME_PRODUCTION_REVIEW.json": {
+      "bytes": 2592,
+      "sha256": "e7cbc1dd70b162b6a873587f58dddb77c9c9b05bdb1bf967cefdc8ceed984a6a",
+      "git_blob": "37ebc1cf051e314e4bdc47e08410d7b7dd630b09"
+    },
+    "docs/evidence/apadana/english335-350/NOTE_FRAME_STATIC_REVIEW.json": {
+      "bytes": 2609,
+      "sha256": "d3495b259d3bae89de63dddd0f3cd6ef27d38c4772c8e80d5612ab115aac7be1",
+      "git_blob": "c6bb66a94043eaca3561ebdf97472d60e9e0c73f"
+    },
+    "docs/evidence/apadana/english335-350/NOTE_FRAME_WIDGET_SOURCE_REVIEW.json": {
+      "bytes": 4807,
+      "sha256": "ca81bd9f762c95e3e8a29779d6f6c93cd71b7a2bb6f525563e6d0fc762696648",
+      "git_blob": "5c5308e56b9b7fa0a67647c6510dfe217d74f240"
+    },
+    "docs/evidence/apadana/english335-350/ORIGINAL_INPUTS.json": {
+      "bytes": 5468,
+      "sha256": "13f70e68079bd57a3bbff067f97c00c97b567cc4c18efc3c986c8a636b995cf4",
+      "git_blob": "5ba8d6060e6673cbaba0c6fc84607d1e5ee074c2"
+    },
+    "docs/evidence/apadana/english335-350/PACKAGE39_BINDING_REVIEW.json": {
+      "bytes": 7728,
+      "sha256": "4ddc10445bc0d686f6d29cd08781fa5efcc93b3a05c4280fdc179cb68c127734",
+      "git_blob": "dfb3fef4c4f4c2d2ddb5945d32d5b54e9fd2c7d6"
+    },
+    "docs/evidence/apadana/english335-350/PACKAGE_INSTALL_REVIEW.json": {
+      "bytes": 8913,
+      "sha256": "da7af6c9add032c5b8e01693c59562ab6ad6e5c4ceae59f82181f46aa9826590",
+      "git_blob": "9e29a00d279146f10fe68bb4bbcc7834efa4e6d6"
+    },
+    "docs/evidence/apadana/english335-350/PARSER_OWNER_REVIEW.json": {
+      "bytes": 7283,
+      "sha256": "62893273722f13965dd78f72d60de994ea615f3c846589488c2a76225a49f6d7",
+      "git_blob": "a612303163fe9f4ce0bc132c34067bb36c7bbcd4"
+    },
+    "docs/evidence/apadana/english335-350/PROFILES.json": {
+      "bytes": 69638,
+      "sha256": "4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d",
+      "git_blob": "9cf30d7f5af85f3ea5648bd50dc1f8380e6618ff"
+    },
+    "docs/evidence/apadana/english335-350/PROFILE_SCHEMA_REVIEW.json": {
+      "bytes": 6134,
+      "sha256": "7af2686040b00e89730568771ff8d35e64b676b383f014981eb809d4f63203e5",
+      "git_blob": "37298908ae53ee6eef0c52121ae6b40f05db641e"
+    },
+    "docs/evidence/apadana/english335-350/RUNTIME_INVENTORY.json": {
+      "bytes": 6546,
+      "sha256": "839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186",
+      "git_blob": "923253b7d74596590c44a8840a83425a79936cf0"
+    },
+    "docs/evidence/apadana/english335-350/RUNTIME_REVIEW.json": {
+      "bytes": 9622,
+      "sha256": "2b19d690992a3289958a9e944be36484cf4257fa34a9b580e04704206e829b16",
+      "git_blob": "280187567dddf67dd342b87c065b00a5effeca75"
+    },
+    "docs/evidence/apadana/english335-350/SOURCE_CURATION.json": {
+      "bytes": 8402,
+      "sha256": "e777f4dc3b154a448162b8d0c274d44995722903ebef59e133172ee46ecac5da",
+      "git_blob": "514bd9a1ea2d71c8b1efcb6a25a52adecb926158"
+    },
+    "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
+      "bytes": 375780,
+      "sha256": "f228e32969b80c3faeab9f2bf6aca00b0c1a3f6e4dd0ba6d2487612b8e344a30",
+      "git_blob": "cdfb7ed27f134b09af687894f82a6041239e2e59"
+    },
+    "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json": {
+      "bytes": 220157,
+      "sha256": "7ba5b2e5b66f5d5ede8b335cb7520e3e41b4e4f1269e27ee83f068100a85870c",
+      "git_blob": "6b7d4d5aa5762fa50e88e2c6c7b9fe7c825fefbc"
+    },
+    "docs/evidence/apadana/english335-350/SOURCE_REVIEW.json": {
+      "bytes": 53077,
+      "sha256": "61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a",
+      "git_blob": "0f5b825ef53d11c37b4c9e9b1c1bfa7a34e08d18"
+    },
+    "docs/evidence/apadana/english335-350/WIDGET_CACHE_STATIC_REVIEW.json": {
+      "bytes": 7818,
+      "sha256": "ddc668761b178edbc03a0fecc0f1901c6534a0c9e7ba9cf6d680d89c73ac2ec3",
+      "git_blob": "8e4271ea2f6ecae61c9b3ce980101a39488f523d"
+    },
+    "docs/evidence/apadana/english335-350/WIDGET_CACHE_TEST_AND_WINDOWS_REVIEW.json": {
+      "bytes": 2967,
+      "sha256": "1370198290a248c5f215517760b24965796006076b82303a4002b45b2647b596",
+      "git_blob": "d8ba78c46d8332201d0f868a65a3c53961244204"
+    },
+    "docs/evidence/apadana/english335-350/WIDGET_SOURCE_REVIEW.json": {
+      "bytes": 4787,
+      "sha256": "2d0f038e8aa2927a5418abcf32aa5639812567203807b1c7a575d4345156f487",
+      "git_blob": "4378b24b172c7aa961990c95c6cf54ae00e156fd"
+    },
+    "docs/evidence/apadana/english335-350/before-held234-chain8/LEAF_REBIND_REVIEW.json": {
+      "bytes": 24994,
+      "sha256": "b126eb5b91e7ff46ee4e14926899fe56f7787bc16c082d5e43a24a8a0b140a2d",
+      "git_blob": "cf7789411e14849bed8580399b8dae6dfe7194fb"
+    },
+    "docs/evidence/apadana/english335-350/before-held234-chain8/SOURCE_INVERSES.json": {
+      "bytes": 336590,
+      "sha256": "221799faa7c75fdb30c86026c1d417d58324d5fad48d507db3e4af792e096878",
+      "git_blob": "ee7cb9c21b976bd0589a8376b2a8326e64fed88e"
+    },
+    "docs/evidence/apadana/english335-350/before-held234-chain8/SOURCE_INVERSE_REVIEW.json": {
+      "bytes": 219497,
+      "sha256": "6467b101104e7c14e2989714b9f9c8c40f4ea329feb7328a1936dde68af78bec",
+      "git_blob": "9a6b523e92ff59b8e084f8e883d8a5ccde04ee3d"
+    },
+    "docs/evidence/apadana/english335-350/runtime-before-cache-v2/RUNTIME_INVENTORY.json": {
+      "bytes": 5730,
+      "sha256": "516460d8fecb86a7b2831fc445439868d0c43df1277fc02322ce1840f047069b",
+      "git_blob": "e7deb4edc16a6379feb6c8e516667b955d24e8a1"
+    },
+    "docs/evidence/apadana/english335-350/runtime-before-cache-v2/RUNTIME_REVIEW.json": {
+      "bytes": 9970,
+      "sha256": "646ab8d8fdcabb0130766b056c00997d9e10f6e99a640445628bdff6bb296e76",
+      "git_blob": "f96fa9117aabb9ae5f797bd097c436039f91cc22"
+    },
+    "docs/evidence/apadana/english335-350/runtime-before-note-preservation/LEAF_REBIND_REVIEW.json": {
+      "bytes": 25742,
+      "sha256": "bdfc3abe6d78947d8bf3b8fae2c82f7ee2b51d970c5be36a5c93444f50ae8d10",
+      "git_blob": "8d0c92fbc08b58eef946a8754671521422ddff14"
+    },
+    "docs/evidence/apadana/english335-350/runtime-before-note-preservation/RUNTIME_INVENTORY.json": {
+      "bytes": 6507,
+      "sha256": "62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e",
+      "git_blob": "e7d85331d0c15198dd02335692e6eab4f7b278ca"
+    },
+    "docs/evidence/apadana/english335-350/runtime-before-note-preservation/RUNTIME_REVIEW.json": {
+      "bytes": 9240,
+      "sha256": "b7aa44b6d9822a4508ac4fbc392da8ae76c0ab259469e3c61dc75cac260182bc",
+      "git_blob": "4cc8a1338775357a64baa1b0cf378254e0be8f07"
+    },
+    "docs/evidence/apadana/english335-350/runtime-before-note-preservation/SOURCE_INVERSES.json": {
+      "bytes": 310418,
+      "sha256": "5f94403d37ee2d45983a990e88ef313305d069b23210e2b029fa175cbb5ee67e",
+      "git_blob": "eef6190b63bf3de61d12252ea057732461fc80d4"
+    },
+    "docs/evidence/apadana/english335-350/runtime-before-note-preservation/SOURCE_INVERSE_REVIEW.json": {
+      "bytes": 233603,
+      "sha256": "689a5f64a5588e70e0d0f560cb0a46c6fcd506a9ac2b4362b6c1d8a2cda9e624",
+      "git_blob": "6c9d2d9d6a23ef0532175859c5e54f0ed372a058"
+    },
+    "tests/helpers/intake359-source-input.mjs": {
+      "bytes": 8361,
+      "sha256": "2e718959cbffc7ed05f358bced603452373993d55739bc078b240a27b8e8d8dc",
+      "git_blob": "1d89883792f929b33392a147cd36acfa94a2107f"
+    },
+    "BASELINE3CED_SOURCE1001.json": {
+      "bytes": 217590,
+      "sha256": "51ec9de3d5dcfb5555d4f620d76979b79f9b6c98c1a1a9f936a9c8981575f43c"
+    }
+  },
+  "no_current_worktree_sources_used": true,
+  "source_runtime_behavior_release_approval": false
+}

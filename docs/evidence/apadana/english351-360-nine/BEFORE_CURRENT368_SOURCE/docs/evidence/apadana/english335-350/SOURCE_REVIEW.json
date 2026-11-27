@@ -1,0 +1,1455 @@
+{
+  "schema": "english16-independent-original-first-final-source-review-v1",
+  "reviewer_role": "independent raw-first source/normalization crossreview, not source producer or runtime implementer",
+  "status": "GO_SIXTEEN_EXACT_SOURCE_AND_NORMALIZED_CONTENT_SCOPES_ONLY",
+  "blind_preseal_precedes_A_B_reads": true,
+  "canonical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "original_xml_proof": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/vri-fixture/romn/s0510m1.mul.xml",
+    "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f",
+    "source_tuple_count": 14645,
+    "source_tuple_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+    "full_tuple_equality": true,
+    "preserved_note_only_omission": 1130
+  },
+  "rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "totals": {
+    "poems": 16,
+    "body_paragraphs": 213,
+    "physical_stanza_entries": 165,
+    "printed_global_labels": 171,
+    "notes": 191,
+    "chapter_summaries": 2,
+    "chapter_headings": 1,
+    "display_pairs": 25,
+    "body_characters_utf16": 28105
+  },
+  "source_pages500": 63,
+  "per_source": [
+    {
+      "publisher": 335,
+      "id": "tha-ap337",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-335.md",
+        "bytes": 6023,
+        "sha256": "d584d972d7a6009c74a9def1914607171090d3f0cf593189fdc135fd4d42d389",
+        "git_blob_sha1": "e56193acd2dea3bca64af6a14232375235a83e7f"
+      },
+      "canonical_root": {
+        "id": "tha-ap337",
+        "title": "Phusitakampiyattheraapadānaṃ",
+        "book": 36,
+        "start": 9890,
+        "end": 9938,
+        "root_sha256": "6b32e93f8549749537e13ffbf798a0807303fbb1c3ffc9e5b2ee5bab3888ba9f",
+        "root_verses": [
+          38,
+          52
+        ],
+        "vri_numbered_labels": [
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "dee75e0ed9e7da6882b6f6bb7a0ebb717ac30e9c97bc5f1f7c72f421be735517",
+      "notes_sha256": "b737cbf2c0938e4ab54f01b2cf5a22158aa825bb08158e3c1c3702676e12a9ea",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Preserve Phussita/Phusita/Phusitakampiya naming, Vipassi/Ultimate Lotus wording, scented water/sandalwood tension, repeated-foot uncertainty and remaining-karma arithmetic; original notes attribute all these issues. Physical local6–7/global2974–2975 stays one eight-line entry.",
+        "Source Phussitakammiya versus VRI Phusitakampiya and note19/20 BJTS attribution are preserved. Safflower/scented-water and karma-drop accounting are unresolved translator edition content, not a reason to invent wording."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 336,
+      "id": "tha-ap338",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-336.md",
+        "bytes": 5883,
+        "sha256": "98890461bc290bd3fb455e410e6a92fec9c7ff0b03cbe401e219274847463300",
+        "git_blob_sha1": "e5c5e8e4d031e310eec31f2a10d38e52e6611a0f"
+      },
+      "canonical_root": {
+        "id": "tha-ap338",
+        "title": "Pabhaṅkarattheraapadānaṃ",
+        "book": 36,
+        "start": 9938,
+        "end": 10003,
+        "root_sha256": "2eaf2ef7368af1908c43020798213d84f71cf5cc96ba4d591bfe183c4d79bced",
+        "root_verses": [
+          53,
+          73
+        ],
+        "vri_numbered_labels": [
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "2c9f5f4df292e71982618fda5c7da08452727c4245bdcae19d5e641c9528415a",
+      "notes_sha256": "7acf037cb95fd2c3c737df282a3071ac9c0321a71ea8ffbd57822ae5c39f9da0",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Publisher30 divine reigns differs from VRI main300; preserve both editions without harmonizing. Local4–5/global2987–2988 stays one eight-line entry. Disease/reading uncertainties stay in original notes.",
+        "Publisher divine-reign count30 versus VRI300 must remain separate."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 337,
+      "id": "tha-ap339",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-337.md",
+        "bytes": 5263,
+        "sha256": "24c71d29205c43f6bb0a5757cd760de2dad8ecf397dc941ce916426dc5d7fb9c",
+        "git_blob_sha1": "5a1cbb516a6827c2660f4ef18e90897a26395dd8"
+      },
+      "canonical_root": {
+        "id": "tha-ap339",
+        "title": "Tiṇakuṭidāyakattheraapadānaṃ",
+        "book": 36,
+        "start": 10003,
+        "end": 10053,
+        "root_sha256": "17dca328c07d5cfb01eb7b1c4884bf71937a413e962c56bed96376acbbacb2aa",
+        "root_verses": [
+          74,
+          89
+        ],
+        "vri_numbered_labels": [
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "b210e75cc618c3ad346788d8c9009269cffde432cfd107d7ac72a3077701be19",
+      "notes_sha256": "ab5c983f9c5aa3a0ce3664d061f7a16c1ac70df6dc46f9daaebfcaaf01efac03",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Keep obscure measures, mil-kaṇḍa/cent-bheṇḍu metrical neologisms and animal/reading uncertainty attributed to translator; do not infer modern measurements.",
+        "Do not convert obscure measures or animal readings into asserted modern equivalents."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 338,
+      "id": "tha-ap340",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-338.md",
+        "bytes": 6161,
+        "sha256": "4b9be1a6694f7a8013c3b6a8a211cb7a472643f0ce393e8ed74e59a32366f56a",
+        "git_blob_sha1": "55ba4caaafa938827d3343edf7efab3532f77fca"
+      },
+      "canonical_root": {
+        "id": "tha-ap340",
+        "title": "Uttareyyadāyakattheraapadānaṃ",
+        "book": 36,
+        "start": 10053,
+        "end": 10118,
+        "root_sha256": "b34e2300ea02eb9dd7e9bccf8de4152d6148d4e9e87f30bac18589d0d9fcbf76",
+        "root_verses": [
+          90,
+          110
+        ],
+        "vri_numbered_labels": [
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "1593f9a7c05fc6c3799506f69d5f6cf7579468413f42f797984c45c50c6710a2",
+      "notes_sha256": "ae05f3de8bda3c2f2b19063ffbda2e11b44ac6ea5a8731efa9b5d676b924f2bb",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Preserve translator uncertainty about the house and alternative readings. Corrected six-repair source span and namespace are already active; no new repair or namespace.",
+        "Publisher full four-line attainment ending is an independent complete edition rendering of abbreviated VRI material."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 339,
+      "id": "tha-ap341",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-339.md",
+        "bytes": 5777,
+        "sha256": "277a106e651a0c97c52ceb05c88340c1052b0ab67c3c9c90a2d92ce4f4f374f2",
+        "git_blob_sha1": "2195b3bdf593ae03b29d68849a4830140c3333f9"
+      },
+      "canonical_root": {
+        "id": "tha-ap341",
+        "title": "Dhammasavaniyattheraapadānaṃ",
+        "book": 36,
+        "start": 10118,
+        "end": 10174,
+        "root_sha256": "6c1a8d1e4d3c7103cdcda3ba33508005d590f20be90b68bf587dc9bde3c80224",
+        "root_verses": [
+          111,
+          128
+        ],
+        "vri_numbered_labels": [
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "6643271b9cf36fd657231c6723fc756360764577e7860a196563bb1e031e98f6",
+      "notes_sha256": "e20bc5ce7d165fe6f667c8a1723dc8c1b3c16d8a79f7a75e9679292df6b92971",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Preserve quote punctuation, alternate PTS/BJTS readings and note20 after the global label. Corrected six-repair source span and namespace already active.",
+        "Note20 follows the printed global label. Marker and note ownership must survive this unusual position."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 340,
+      "id": "tha-ap342",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-340.md",
+        "bytes": 3368,
+        "sha256": "42f279469173f83208828c9a4aa7d3dcf0f98fc1de013b2f1a769e8cdc3b5cdb",
+        "git_blob_sha1": "a64241d53eaaf07e743b8664eb9471655d23f61f"
+      },
+      "canonical_root": {
+        "id": "tha-ap342",
+        "title": "Ukkhittapadumiyattheraapadānaṃ",
+        "book": 36,
+        "start": 10174,
+        "end": 10224,
+        "root_sha256": "c6651dd1739d1b7d07bf418b68562dbb89a9df352db1b28e9c66b903ceff0528",
+        "root_verses": [
+          129,
+          142
+        ],
+        "vri_numbered_labels": [
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142
+        ],
+        "chapter_summary_block": 10219
+      },
+      "body_sha256": "0f7dad4321907e5d8dd7384234cc2a8d9faa44a08db2301c5e87e543dd0364dd",
+      "notes_sha256": "620bb7ed7cede24b0a6f52b442a59b24351cca775a65d8c069b725a1ff4476a2",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": "separate note-free chapter summary",
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Local2–3/global3061–3062 remains one eight-line entry. Summary has144 stated verses, an eight-line roster and Gandhathūpiya closing versus VRI Gandhodaka; publisher places summary before chapter closing, VRI closing before uddāna. Summary is separate from poem quotes.",
+        "Summary is separately owned by tha-ap342,8verse lines and144 stated count. Summary and chapter colophon order differs from VRI; no summary word enters poem quotation."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 341,
+      "id": "tha-ap343",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-341.md",
+        "bytes": 2619,
+        "sha256": "d50e74153f047c2512a745fb9e5b7f215f4300c4e115190cee58e0549feb9c31",
+        "git_blob_sha1": "62d8b76bab15187a5c0408d716c4e27cf54a7e9b"
+      },
+      "canonical_root": {
+        "id": "tha-ap343",
+        "title": "Ekapadumiyattheraapadānaṃ",
+        "book": 36,
+        "start": 10224,
+        "end": 10258,
+        "root_sha256": "ec32530b864d6e11d3c34cb061b6f2ba50f6c5999f1b377837778b269f8dcfe9",
+        "root_verses": [
+          1,
+          10
+        ],
+        "vri_numbered_labels": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "1ccfc00222d2a1c9050a15eab13027e5185a205c97fd2e9ad493615f7590f7df",
+      "notes_sha256": "2dd2961646a919b1629816e54a21babcd2274e06794fe2c3dd33383baeb5c884",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": "separate note-free publisher_paratext",
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Local4–5/global3077–3078 remains one eight-line entry. Note-free chapter heading is separate paratext, not a new note-owning preface descriptor. Current six-repair source scope includes chapter heading.",
+        "The note-free chapter35 heading is retained as separate publisher_paratext. It supplies no note1, so no invented note-owning publisher_preface descriptor."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 342,
+      "id": "tha-ap344",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-342.md",
+        "bytes": 3031,
+        "sha256": "240ca9e41dd5e29ebf479a5eebb62d998e181134da69813ea1421c79eecb1241",
+        "git_blob_sha1": "bc66ed31fef0e3cd6dd343aaa147f3e62b80ed1d"
+      },
+      "canonical_root": {
+        "id": "tha-ap344",
+        "title": "Tīṇuppalamāliyattheraapadānaṃ",
+        "book": 36,
+        "start": 10258,
+        "end": 10287,
+        "root_sha256": "57107bc00b720aee0c2c922801e3d675de19ba743e413d2f2447256ca51ca750",
+        "root_verses": [
+          11,
+          19
+        ],
+        "vri_numbered_labels": [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "83dd3281b4568678dcca68fd61952e9c5929f8ade1898924a8c69e6250bb8b60",
+      "notes_sha256": "5bab2d0622068c39b7bf1d65f6069445bb179ca7d553a5fe7c7a38bb90b3634e",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Vipassi/91aeons and chapter35second position identify this poem, distinct from Phussa/92aeons repeated title at canonical375. Retain human-body foot in monkey narrative and original explanatory note6. No correction or inferred missing wording.",
+        "Monkey narrative and stock human-body wording remain exact. Later same-title poem is a distinct source, not activated."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 343,
+      "id": "tha-ap345",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-343.md",
+        "bytes": 2175,
+        "sha256": "2f8fdf0c82dcf2b93bf933e77fab59479c163043b4b9eb97bec1be29ae33c581",
+        "git_blob_sha1": "5514424956afffbb5bd4904eaafa2e3d3c47cc54"
+      },
+      "canonical_root": {
+        "id": "tha-ap345",
+        "title": "Dhajadāyakattheraapadānaṃ",
+        "book": 36,
+        "start": 10287,
+        "end": 10310,
+        "root_sha256": "d23850b0ccead66882a1573b056b32a211d8c02c9dd0066295c80110c296dd7a",
+        "root_verses": [
+          20,
+          26
+        ],
+        "vri_numbered_labels": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "90b8223580847961fd9a4c84b12d1f2b97a4186d7a32e7d90409accea56dce70",
+      "notes_sha256": "1780a148adba4b56f47853c848804ca04e85bb6346662ca6b988bf2db5171cc7",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Source local6 preserves no added space between note5call and following what; do not invent word spacing.",
+        "Passing-away explanation follows translator BJTS/Sinhala gloss and remains attributed; publisher/Pāli words are not harmonized.",
+        "Original of[^5]what becomes of[Note 5]what; marker-free quote retains ofwhat, with no inserted whitespace."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 344,
+      "id": "tha-ap346",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-344.md",
+        "bytes": 2010,
+        "sha256": "e75eaf03a0a5054a032132af445ed385a9e11c61f585416001ee85bf3b9dbd41",
+        "git_blob_sha1": "42ecc7b84adab3a421e5ed67cd4545bdc955b861"
+      },
+      "canonical_root": {
+        "id": "tha-ap346",
+        "title": "Tikiṅkaṇipūjakattheraapadānaṃ",
+        "book": 36,
+        "start": 10310,
+        "end": 10324,
+        "root_sha256": "a2f2a0877c15f482f5c4085aaa2e76a44a78e51ba1884e0c252645510ad720fc",
+        "root_verses": [
+          27,
+          30
+        ],
+        "vri_numbered_labels": [
+          27,
+          28,
+          29,
+          30
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "2104cf6004b9ced4dd4245d640bfe639ecb157f10777a3c6e844b90fedfea937",
+      "notes_sha256": "ee3dc611d1bdaf956607246701f734abb22a43341957d700b38ff0d0f07c2ded",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Publisher Tīṇikiṅkhaṇikapūjaka and VRI Tikiṅkaṇipūjaka spellings remain distinct.",
+        "Note5 tree-top versus bad-road analysis is translator discussion, not app commentary alignment or an editorial correction.",
+        "Tīṇikiṅkhaṇikapūjaka versus VRI Tikiṅkaṇipūjaka remains attributable."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 345,
+      "id": "tha-ap347",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-345.md",
+        "bytes": 2278,
+        "sha256": "1c6028fa7c65f1df3bfa79a7e2594a8e46f7086b4ed704d0d250c4c43344b273",
+        "git_blob_sha1": "4c50973b485247a3cb68c332c7113927fd76e10f"
+      },
+      "canonical_root": {
+        "id": "tha-ap347",
+        "title": "Naḷāgārikattheraapadānaṃ",
+        "book": 36,
+        "start": 10324,
+        "end": 10350,
+        "root_sha256": "097dd6a238447011620f920a9b2ce19a8b50e157c78a8b3a83e385a6584b350a",
+        "root_verses": [
+          31,
+          38
+        ],
+        "vri_numbered_labels": [
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "f1cd1e2e9322c3f31b960b55283370c26864950152b165c81e17b97f91d40fa4",
+      "notes_sha256": "e9b26cb2d70fc761933f43cb44cf1234053ffcfd21e94eda786920433db30764",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Publisher local4/global3107 says77wheel-turning reigns; original VRI34main at10335says74(catusattati), with Sinhala77(sattasattati) note. Preserve both and do not change the English77.",
+        "Publisher Nalāgārika and VRI Naḷāgārika plus Hārita/Bhārika possibilities remain explicit edition statements.",
+        "Global3107 says77wheel reigns while VRI34main says74 with Sinhala77variant. Do not reconcile main text or source translation."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 346,
+      "id": "tha-ap348",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-346.md",
+        "bytes": 2629,
+        "sha256": "2c5a4fecb8f830c10f58109d0c29aac7f136e3264c8a4aea295616486a67dbf6",
+        "git_blob_sha1": "f5c2fa0773ee4db90d89987d0f9be3bb126d28e3"
+      },
+      "canonical_root": {
+        "id": "tha-ap348",
+        "title": "Campakapupphiyattheraapadānaṃ",
+        "book": 36,
+        "start": 10350,
+        "end": 10367,
+        "root_sha256": "313e098c9ee6b1723484c7ec183354026b1a86275ad2797fb447f65a6a11378c",
+        "root_verses": [
+          39,
+          43
+        ],
+        "vri_numbered_labels": [
+          39,
+          40,
+          41,
+          42,
+          43
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "620acf5d5d116d6e000799eebfec7d9ccbfcb4ca657aa2c1c9a4c16645a1b0b5",
+      "notes_sha256": "776ce4de42d804fa842a4cc0d381e83021f6ce5d83ac929b53372a8b3c794bbf",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Actual current source unit348nowends10367under existingnext10revision; do not restore research-oldcut10371 or invent a new locator namespace.",
+        "Finite eight HTMLstatepairs have exactly5upperC/Ch and3lowerc/ch owners; normalize state-on only and retain each raw pair/owner fingerprint.",
+        "Publisher Cāvala versus VRI mainJāpala and Cāpala/Chāpala variants are retained without inferred correspondence beyond whole poem.",
+        "Exactly8 HTML display pairs (5upper,3lower) preserve source-on C/c, source Cāvala versus VRI Jāpala and attributed alternate readings. Existing next10 ownership applies, no new boundary repair."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 347,
+      "id": "tha-ap349",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-347.md",
+        "bytes": 1648,
+        "sha256": "081829ee5ff04149dcc576b3937c68151726c0ada68bf94921e3e5549ce48d4d",
+        "git_blob_sha1": "f8a942e725556a03b3b8b49d7d0727dd507a2234"
+      },
+      "canonical_root": {
+        "id": "tha-ap349",
+        "title": "Padumapūjakattheraapadānaṃ",
+        "book": 36,
+        "start": 10367,
+        "end": 10382,
+        "root_sha256": "21d5622baf0a013867875a196450361957ca47fe3ac70c087b28fda5081e7878",
+        "root_verses": [
+          44,
+          47
+        ],
+        "vri_numbered_labels": [
+          44,
+          45,
+          46,
+          47
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "a8a34acc9cfc939b1f1b4c713dd538aee4ab7796f231b5310fa4dfa97d5573b4",
+      "notes_sha256": "2a3a2649826996fb12669b23f3913121146cf8a13f7310932aa76f1adadb407f",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Actual current source unit349starts10367under existingnext10revision; original VRI opening44and terminalṃ preserved.",
+        "Original printed local sequence1,2,3,3 remains literal; globals3117–3120 and physical entries distinguish the two3s. Never invent local4.",
+        "VRI recitation10381(Terasamaṃ bhāṇavāraṃ) has no publisher wording; no English division or translated recitation is invented.",
+        "Later near-duplicate reference in note2 grants no extra canonical mapping or source substitution.",
+        "Local labels1,2,3,3 remain exact; globals3117–3120 distinguish both3s. VRI recitation division at10381 has no publisher English and must stay untranslated."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 348,
+      "id": "tha-ap350",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-348.md",
+        "bytes": 4003,
+        "sha256": "6db687c913c84f79fda8bd96aa15dabb95cc13ee4c8824cc03c56f09d942b262",
+        "git_blob_sha1": "d2ae42f79075ac8ceaf6f1a33e7dfce5613a58f3"
+      },
+      "canonical_root": {
+        "id": "tha-ap350",
+        "title": "Tiṇamuṭṭhidāyakattheraapadānaṃ",
+        "book": 36,
+        "start": 10382,
+        "end": 10417,
+        "root_sha256": "68a807052b9a3b92c80cc82d9755f50520cd59c7b30c754959dc37c58bdea5b8",
+        "root_verses": [
+          48,
+          58
+        ],
+        "vri_numbered_labels": [
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "517e18d175d4e1a9a35781aa49f7ddd15ca2716b28d146a563910f97984e439f",
+      "notes_sha256": "4c9d1a36ddd147d68eb9a2af78e949b7a8117c38549dcc6b1f282d0beacb5e76",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Local2–3/globals3122–3123 is one eight-line physical entry; do not split it or quote chapter material.",
+        "Mil-kaṇḍa/cent-bheṇḍu measures and note11 uncertainty are translator wording, not resolved measurements.",
+        "One note7Pandoc c/ch display selects exact state-on c while its original PTS/BJTS reading explanation remains intact.",
+        "Later duplicate reference and fuller refrain remain attributed references, never import missing VRI or English words.",
+        "Globals3122–3123 remain one8line entry; later duplicate and fuller refrain mentioned in note2 do not import any text."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 349,
+      "id": "tha-ap351",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-349.md",
+        "bytes": 1875,
+        "sha256": "25a0755055dd28a6f7ed250bd644798a5c97471c4df26aa7dee4e3d4a5c9a383",
+        "git_blob_sha1": "8c2200b61e6431fa128d3aada59a8f2470a3907d"
+      },
+      "canonical_root": {
+        "id": "tha-ap351",
+        "title": "Tindukaphaladāyakattheraapadānaṃ",
+        "book": 36,
+        "start": 10417,
+        "end": 10431,
+        "root_sha256": "c24716a937b92a6cfe9645e4a6b75143f40106306c97fd73739bad27b57920e5",
+        "root_verses": [
+          59,
+          62
+        ],
+        "vri_numbered_labels": [
+          59,
+          60,
+          61,
+          62
+        ],
+        "chapter_summary_block": null
+      },
+      "body_sha256": "98968ccff0b879fafeb169e5aa03b58e83d1a4e9749189e6c17b27705ba06b64",
+      "notes_sha256": "50cdb92069bbcfeb7740223b28ce9d0bdc6c384a1da8ff64b098043610425958",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": null,
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Publisher Vessabhu remains as printed; VRI60at10423main says unnamedSelf-Born with Sinhala vessabhussa variant. Do not rewrite either.",
+        "Publisher Tiṇḍuka versus VRI Tinduka and botanical/numerical uncertainties remain explicit.",
+        "Vessabhu is explicit publisher wording; VRI main says generic Self-Born with Sinhala vessabhussa variant. Preserve source title Tiṇḍuka versus canonical Tinduka."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    },
+    {
+      "publisher": 350,
+      "id": "tha-ap352",
+      "source_scope": "complete pinned publisher-edition poem, not line-complete VRI translation",
+      "source_eligibility": "GO",
+      "normalized_content": "GO",
+      "raw_artifact": {
+        "path": "src/_poems/chapter-3/poem-350.md",
+        "bytes": 2969,
+        "sha256": "df49aa382e3871129ed5626c2679c6665960ee1d1d45d53917e0923fe710e127",
+        "git_blob_sha1": "9518c26bbd574c9128397279ec7a28d993548369"
+      },
+      "canonical_root": {
+        "id": "tha-ap352",
+        "title": "Ekañjaliyattheraapadānaṃ",
+        "book": 36,
+        "start": 10431,
+        "end": 10450,
+        "root_sha256": "fe9e5ebc5eb1fe85e29f7e87558eb7e824fe851116220aec4b3af083462aa4d3",
+        "root_verses": [
+          63,
+          66
+        ],
+        "vri_numbered_labels": [
+          63,
+          64,
+          65,
+          66
+        ],
+        "chapter_summary_block": 10446
+      },
+      "body_sha256": "4721f75b2fc3f7ca5a4ed9ffd3b26c354c82cfed6155c80e3654a5e1e60fe242",
+      "notes_sha256": "e4a2653588d9e82c9ba2276755dce93f787ce24d9a4a347b97db2727b38a00ee",
+      "poem_note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_original_notes_poem_owned": true,
+      "summary_ownership": "separate note-free chapter summary",
+      "chapter_heading_ownership": null,
+      "rights_policy": {
+        "license": "CC BY-NC-SA 4.0",
+        "translator": "Jonathan S. Walters",
+        "publisher": "Jonathan S. Walters and Whitman College",
+        "specific_grant_artifacts": [
+          "LICENSE.md",
+          "src/_pages/about.md",
+          "src/_includes/site/footer.njk",
+          "src/_includes/layouts/epub-metadata.xml"
+        ],
+        "applicability_artifacts": [
+          "src/_poems/_poems.json",
+          "src/_data/site.json"
+        ],
+        "generic_site_BY_metadata_controls_translation": false,
+        "attribution_revision_change_identification_required": true,
+        "noncommercial_and_sharealike_required": true,
+        "commercial_media_audio_permissions": false,
+        "live_source_availability_tested": false
+      },
+      "required_edition_limits": [
+        "Publisher Revata and original note3remain attributed; VRI63main at10433namesRomasa and original Sinhala note saysrevato.",
+        "Local1–2/globals3136–3137 remain one original eight-line entry.",
+        "Separate note-free6-line chapter35summary has stated66, supplied names and chapter closing; preserve original order versus VRI chapter closing beforeuddāna.",
+        "Only352owns this summary. No summary word/note/colophon enters poem quotation evidence; it is not a shared chapter text for other poems.",
+        "Revata versus Romasa is explicit original note3 and VRI Sinhala revato variant. Separate summary belongs only to tha-ap352,6lines,66stated verses; no summary note or poem quotation invented."
+      ],
+      "profile_link_finalization": "PENDING_FINITE_SCHEMA_AND_SOURCE_ONLY_REVIEW",
+      "runtime_activation_approval": false
+    }
+  ],
+  "comparison_sha256": "4e00eabb14399690febf1a20303195783315f893cc5ba3decbbfad1c1c2a3366",
+  "pages_pairs_sha256": "ed042cb0faa30e1757641193e69a6ed84abd02dd6bea0d922814293ff80abe2e",
+  "preservation": {
+    "existing343_choices": "must remain full-object unchanged; not rewritten or activated by this review",
+    "all_existing_source_holds": "preserved; no clearance of unrelated or later duplicate sources",
+    "canonical_source": "f3b corrected current source is authority; old0f9 research leads never used as current scope",
+    "English_bodies_and_notes": "external original sources only; report bundles hashes/metadata, not bodies/notes"
+  },
+  "remaining_gates": [
+    "Final profile/link/curation strings and finite descriptors must bind these exact sources,191 notes and source edition limits.",
+    "A summary first_ref/last_ref currently provisional null. Source text/ownership GO does not approve unresolved runtime locator descriptors.",
+    "Parser/API runtime guards, all343 old full-object preservation, genuine offline installation, actual browser reader/privacy/citations, exact-commit CI and final review remain separate.",
+    "No physical-device, human assistive, signed-host or provider-uptime acceptance claim."
+  ],
+  "runtime_activation_release_approval": false,
+  "executions": "Only standard-library original-file/XML/canonical parsing, hashing and metadata comparison; no SUT imports, app/tests/build/browser/Git mutation/network.",
+  "artifact_pins": {
+    "independent-source-review/derive_blind.py": "b6a230e99ff38fe4f8a4831274d284d54b669f0ab9ed1b917a76a575cfc3fc04",
+    "independent-source-review/BLIND_SOURCE_BASELINE.json": "453495a29396f35f6bdc95985ed9ccec48fcdd1d01cd7651e8a90b02159399e0",
+    "independent-source-review/BLIND_PRESEAL.json": "aaa4212130213cba0f9e30852ef4b9a4ef5a8ed48801a209a612844a09645f16",
+    "independent-source-review/derive_marker_free_supplement.py": "7f936f5878612a749dede8cf512640d03895e8a310b213177ebc3e75d43c04f2",
+    "independent-source-review/MARKER_FREE_SOURCE_BASELINE.json": "75aee71fa50192ab99ec971a624b895d007c4c3c99f5ee54c3816c9783953e9a",
+    "independent-source-review/MARKER_FREE_SUPPLEMENT_SEAL.json": "7114058465d8c0eb28479fbe5a8134e3402e91ccdface0c51f8e0d84f58b4725",
+    "independent-source-review/compare_sealed.py": "1e4c512afac1b5b758df7cd804e18c62b6314ffe75bc394de9bf273450516c78",
+    "independent-source-review/COMPARISON_V1.json": "4e00eabb14399690febf1a20303195783315f893cc5ba3decbbfad1c1c2a3366",
+    "independent-source-review/derive_page_and_pair_review.py": "6345ea91b184f83d2594568f81b1dbdff5a3fb74913b40b809b5ae75d9effe2a",
+    "independent-source-review/PAGES_AND_PAIRS_REVIEW.json": "ed042cb0faa30e1757641193e69a6ed84abd02dd6bea0d922814293ff80abe2e",
+    "source-A/presentation-v2/PRESEAL.json": "225183602c43b9a6cbbb074520b51cd90021bfa6f9b630d1cb82b4e35d462a73",
+    "source-A/presentation-v2/GOLDENS.json": "46ba1993b30b5740bfe095c009cc4a8ec4653f789d91a9ff9aa4b9e66d56c76b",
+    "source-B/SEAL.json": "ca01165d7ec3772c3191ec39383c376a05243a84cffd9ba537511a20e9f6be51",
+    "source-B/GOLDENS.json": "215605ba9a40e0a28e89dc182033f9760aa4378424ff49fd22a6d2e5deff43a7",
+    "source-B/NORMALIZATION_DOMAINS.json": "36948e19b48537c5e92800e474893ad7ea72b6f3aadd162a02f965f366e8f477",
+    "source-B/EDITION_DOMAIN_LIMITS.json": "bc8f4a383093912ff4254720f65d59142c373a814fb1d7f12b8681f9ff723270"
+  }
+}

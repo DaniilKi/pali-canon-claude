@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from owned_apadana_proofs import copy_owned_apadana_proof_inputs
+from owned_intake368_proofs import copy_owned_intake368_source_proof_inputs
 from web_reader_approved_acceptance import (approved_catalogue, approved_runtime,
     assert_catalogue, assert_profiles, assert_runtime, assert_runtime_records)
 
@@ -84,7 +84,7 @@ class ApprovedAcceptance(unittest.TestCase):
         cls._owned_temporary = tempfile.TemporaryDirectory(prefix='pali-approved33-owned-')
         cls.addClassCleanup(cls._owned_temporary.cleanup)
         cls._owned_root = Path(cls._owned_temporary.name).resolve()
-        copied = copy_owned_apadana_proof_inputs(ROOT, cls._owned_root)
+        copied = copy_owned_intake368_source_proof_inputs(ROOT, cls._owned_root)
         assert all(name in copied for name in OWNED_TAMPER_TARGETS.values()
                    if name.startswith('docs/evidence/apadana/'))
         provision_complete_current_runtime_fixture(cls._owned_root)
@@ -141,7 +141,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_current_full_objects_and_profiles(self):
         assert_catalogue(self.manifest, self.approved)
         assert_profiles(ROOT, self.approved)
-        self.assertEqual(len(self.approved['links']), 359)
+        self.assertEqual(len(self.approved['links']), 368)
         for uid in ('tha-ap262', 'tha-ap268', 'tha-ap282'):
             self.assertNotIn(uid, self.approved['links'])
 
@@ -172,7 +172,7 @@ class ApprovedAcceptance(unittest.TestCase):
     def test_curation_seal_tampering(self):
         with self.owned_tamper_fixture() as root:
             dest=root/'docs/evidence/apadana'
-            self.assertEqual(len(approved_catalogue(root)['ids']),359)
+            self.assertEqual(len(approved_catalogue(root)['ids']),368)
             data=json.loads((ROOT/'docs/evidence/apadana/THERA_HELD234_APPROVAL.json').read_text(encoding='utf-8'))
             data['approved_ids']=['tha-ap262']
             (dest/'THERA_HELD234_APPROVAL.json').write_text(json.dumps(data),encoding='utf-8')

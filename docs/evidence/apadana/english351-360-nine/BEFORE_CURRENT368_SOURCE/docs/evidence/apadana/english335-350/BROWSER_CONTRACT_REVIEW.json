@@ -1,0 +1,50 @@
+{
+  "schema": "english16-cache-v2-ready-v6-harness-independent-binding-v1",
+  "status": "GO_SAME_STRICT_V6_HARNESS_ON_EXACT_FRESH51_COMPONENT_FOR_ONE_ROOT_BOUNDED_RUN",
+  "ready_contract": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/reader-plan/READY_CACHE_V2_RUN_CONTRACT.json",
+    "sha256": "592f2af8b5fca25b90ecee32f1869eeed42e0125c63dd5dc5c2a384de4cd7044"
+  },
+  "prior_ready_v6_sha256": "dfa1835b63ba72d51b054de375983af6d97c324e8a5fad4bf114652fb80e2684",
+  "harness_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/browser-independent-review/STATIC_REVIEW_V6.json",
+    "sha256": "7a0641232bc9b7d8b56cef5452370d80143f44342b13aee300ebc960b3b1ca4a"
+  },
+  "only_component_archive_install_runtime_HTML_scope_descriptors_changed": true,
+  "source_curations_profiles_originals_expectedmanifest_and_all_harness_guard_oracle_count_deadline_values_unchanged": true,
+  "all39_fresh_installed_bytes_rehashed_equal_approved_package_andGit_binding": true,
+  "all34_fresh_installed_runtime_bytes_rehashed_equal_newindependent_inventory": true,
+  "newsourceHTML_and39archive_andnewpeerreviews_freshhashes_verified": true,
+  "application_commit": "51e0b7dd98e19f8d633da266e2093b53eb436c53",
+  "package_snapshot_commit": "51e0b7dd98e19f8d633da266e2093b53eb436c53",
+  "fresh_server": "/tmp/pali-english335-350-evidence-nov26/final-package-51e0/installed/node_modules/pali-canon-mcp/server",
+  "runtime_inventory": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/RUNTIME_INVENTORY.json",
+    "sha256": "62ccc6bacf3e0926939cb38e9903aa23e6db491b04cb445b0f1226659c6e8e7e"
+  },
+  "runtime_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/RUNTIME_REVIEW.json",
+    "sha256": "b7aa44b6d9822a4508ac4fbc392da8ae76c0ab259469e3c61dc75cac260182bc"
+  },
+  "source_widget_HTML": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/SOURCE_WIDGET_HTML.html",
+    "sha256": "51d36309948898574ad712e49a175cb5706e31fd977158b0c9432d99f12d9b73"
+  },
+  "source_widget_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-cache-v2-review/WIDGET_SOURCE_REVIEW.json",
+    "sha256": "2d0f038e8aa2927a5418abcf32aa5639812567203807b1c7a575d4345156f487"
+  },
+  "old_b228_actual_failed_report_preserved": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/actual-browser-v6/REPORT.json",
+    "sha256": "4b2ae773d8ac222fde1e94bbacf751e16ee59ff71cbb276c9c164d73648aec9c",
+    "claimed_pass": false
+  },
+  "bounds": {
+    "inner": 300,
+    "outer": 360
+  },
+  "strict_sameobject160_refusal_private_Saved_andsourceword_predicates_retained": true,
+  "remaining": "ONErootownedactualnewcomponentrunnewdirectorymustpass exactcounts/guards/cleanup. FinalGit39rebind+CI+releasegatesseparate.",
+  "reviewer_executed_application_harness_browser_tests_network_Git": false,
+  "behavioral_pass_or_release_approval": false
+}

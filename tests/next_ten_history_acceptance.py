@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import web_reader_next_ten_boundary_history as ten
 import web_reader_six_boundary_history as six
+import web_reader_intake368 as intake368
+from owned_intake368_proofs import copy_owned_intake368_proof_inputs
 from web_reader_four_boundary_history import copy_historical_fixture
 from web_reader_approved_acceptance import approved_catalogue, approved_runtime
 
@@ -56,24 +58,20 @@ class NextTenHistoryControls(unittest.TestCase):
         # A refusal/PENDING pin aborts; it can never count as a negative success.
         first = ten.assert_next_ten_current_canonical_data(ROOT)
         cls.historical_next = sealed(CURRENT_INVENTORY)['files']
-        cls.current = sealed_intake('RUNTIME_INVENTORY.json')['files']
+        cls.historical359 = sealed_intake('RUNTIME_INVENTORY.json')['files']
+        assert intake368._sealed(ROOT,'BASELINE_RUNTIME34.json',intake368.PINS['BASELINE_RUNTIME34.json'])['files'] == cls.historical359
+        cls.current = intake368._runtime(ROOT,cls.historical359,intake368._authority(ROOT))
         assert sealed_intake('BASELINE_RUNTIME34.json')['files'] == cls.historical_next
         cls.previous = sealed(DD_INVENTORY)['files']
         assert first == cls.current and len(first) == 34
         assert approved_runtime(ROOT) == cls.current
-        assert len(approved_catalogue(ROOT)['ids']) == 359
+        assert len(approved_catalogue(ROOT)['ids']) == 368
         cls.temp = tempfile.TemporaryDirectory(prefix='pali-next-ten-history-')
         cls.addClassCleanup(cls.temp.cleanup)
         cls.root = Path(cls.temp.name)
         # Keep the existing historical catalogue authority closure, including the
         # two separately owned older proofs; the narrow copy helper is additive.
-        shutil.copytree(ROOT / 'docs/evidence/apadana', cls.root / 'docs/evidence/apadana')
-        copy_historical_fixture(ROOT, cls.root)
-        for name in ('tests/fixtures/reviewed-runtime-2449.json',
-                     'docs/evidence/source-notes/SARIPUTTA_LOCAL_IMPLEMENTATION_APPROVAL.json'):
-            target = cls.root / name
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(ROOT / name, target)
+        copy_owned_intake368_proof_inputs(ROOT, cls.root)
         assert ten.assert_next_ten_current_canonical_data(cls.root) == cls.current
         # The additive copy helper must retain the complete current359 proof
         # closure and a SEPARATE old343 AP input, never old actual corpus bytes.
@@ -105,7 +103,7 @@ class NextTenHistoryControls(unittest.TestCase):
         self.assertEqual(current, self.current)
         self.assertEqual(historical, self.previous)
         self.assertNotEqual(current, historical)
-        self.assertEqual(len(approved_catalogue(self.root)['ids']), 359)
+        self.assertEqual(len(approved_catalogue(self.root)['ids']), 368)
         # Fixture provisioning must leave actual NEW data present and keep each
         # frozen DD input separate; no historical bytes may replace the corpus.
         for name in CORE:
@@ -118,7 +116,7 @@ class NextTenHistoryControls(unittest.TestCase):
             self.assertEqual(sha((self.root / name).read_bytes()), PINS[name])
         current_ap = (self.root / 'server/data/apadana.json').read_bytes()
         self.assertEqual({'bytes':len(current_ap), 'sha256':sha(current_ap)}, self.current['data/apadana.json'])
-        self.assertEqual(len(json.loads(current_ap)['links']),359)
+        self.assertEqual(len(json.loads(current_ap)['links']),368)
         self.assertNotEqual(self.current['data/apadana.json'],self.historical_next['data/apadana.json'])
         manifest = json.loads((self.root / CORE[2]).read_bytes())
         packed = b''.join((self.root / 'server/data' / part['file']).read_bytes() for part in manifest['parts'])
@@ -160,7 +158,7 @@ class NextTenHistoryControls(unittest.TestCase):
         for name in names:
             for missing in (False, True):
                 with self.subTest(name=name, missing=missing):
-                    self.assertEqual(len(approved_catalogue(self.root)['ids']), 359)
+                    self.assertEqual(len(approved_catalogue(self.root)['ids']), 368)
                     with self.changed(name, missing=missing):
                         with self.assertRaises((AssertionError, ValueError, FileNotFoundError)):
                             approved_catalogue(self.root)

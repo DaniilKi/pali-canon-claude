@@ -1,0 +1,77 @@
+{
+  "schema": "independent-current359-browser-source-routing-static-review-v1",
+  "status": "GO_EXACT_SOURCE_ROUTING_PROPOSAL_FOR_ROOT_APPLICATION_AND_TARGETED_VALIDATION",
+  "reviewer_role": "independent source-history-browser acceptance peer",
+  "proposal_manifest_sha256": "ab1d324525f694f932de90ba267ce9d0baefe176ea38fa10eafcdfd0baed7f01",
+  "proposal_patch_sha256": "3cf23590602df462999f352c555813759690fc885649cb4fd19d99220715d882",
+  "immutable_baseline_commit": "e792a1a3190b8eefdcfcacee67d8ef3191a89e74",
+  "verified_manifest_members": 16,
+  "reviewed_files": {
+    "scripts/web_reader_apadana_intake.py": {
+      "bytes": 94349,
+      "sha256": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e"
+    },
+    "scripts/web-reader-thera-remaining-check.py": {
+      "bytes": 49277,
+      "sha256": "406a26f9772e01203d08bcac33cf9c66efd3c223ad36bf235b2324cff3eddf63"
+    },
+    "scripts/web-reader-thera-held234-check.py": {
+      "bytes": 34468,
+      "sha256": "1ef1c5f7d5b9eb1c7b34f9c035eb6ffd99d39927f7dda137868b8383e08c809d"
+    },
+    "tests/browser_current359_routing.py": {
+      "bytes": 7457,
+      "sha256": "e4062bcec92976a770d2908569e1b28ee2252f837197fac3a30ff54308345f6d"
+    },
+    "tests/browser-current359-routing.test.mjs": {
+      "bytes": 957,
+      "sha256": "c1f7ac4f6f2a22718fe8c37b6eb9b304cd981feef5ff4906e92454d87ca86450"
+    }
+  },
+  "independently_replayed": {
+    "three_before_files_equal_baseline_Git": true,
+    "all24_other_helper_functions_source_bytes_exact": true,
+    "former_generic343_body_exact_under_private_historical_name": true,
+    "three_file_unified_patch_reconstructed_exact": true,
+    "source_authority_pins_rehashed": 11,
+    "all343_record_chapter_path_rawURL_identities_exact": true,
+    "all686_old_full_object_hashes_exact": true,
+    "literal16_pairs_equal_independent_approved_metadata": true,
+    "manifest359_equal_frozen343_plus_sealed16": true,
+    "previous_holds_disjoint": true
+  },
+  "static_logic_review": {
+    "all19_observed_membership_policy_failure_classes_route_to_sealed359": true,
+    "held234_exact359_74_and_explicit339_to343_to359_bridge": true,
+    "current359_319_policy_and_remaining_suffix_union_coherent": true,
+    "source_only_authority_no_approved_catalogue_cycle_or_actual27_capture": true,
+    "new_authority_files_physical_reread_regular_symlink_guards_no_cache_fallback": true,
+    "historical343_and_current359_provenance_distinct": true,
+    "no_runtime_output_projection_or_app_change": true,
+    "all_existing_browser_modes_bounds_privacy_provider_assertions_preserved": true
+  },
+  "negative_tests": {
+    "four_python_cases": [
+      "test_01_public_source_membership_and_families_are_exact_without_importcycle_or_runtime_capture",
+      "test_02_current_curated_suffixes_preserve_every_old_object_and_add_only_sixteen",
+      "test_03_missing_substituted_reordered_or_mistyped_old_and_new_selections_fail",
+      "test_04_current_and_old_source_proof_loss_or_tampering_has_no_historical_fallback"
+    ],
+    "one_Node_wrapper": true,
+    "child_limit_seconds": 30,
+    "outer_limit_seconds": 35,
+    "genuine_positive_before_mutations": true,
+    "five_old_anchor_suffixes_preserve_old_full_objects": true,
+    "old_new_missing_substitution_reorder_type_and_warm_proof_loss_refusals": true
+  },
+  "blocking_findings": [],
+  "separate_note_DOM_focus_CI_failure_covered_here": false,
+  "required_next_gates": [
+    "Root apply exact reviewed patch and new files",
+    "Execute focused new regressions and actual mandatory browser preflights",
+    "Reseal finite whole-original source inverse and final commit closure",
+    "Require exact final candidate CI green before dev advancement"
+  ],
+  "reviewer_application_test_browser_build_network_execution": false,
+  "runtime_behavior_release_or_dev_promotion_approval": false
+}

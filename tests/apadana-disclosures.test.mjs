@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_VERSION} from './helpers/intake368-metadata.mjs';
 import {CURRENT_APADANA_IDS,BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 // Contract regressions for the reproduced loss of edition caveats in cached responses.
 // Synthetic wording exercises rendering guards; it is not source or rights evidence.
@@ -40,7 +41,7 @@ function embeddedGuard() {
 }
 
 test('all152 historical metadata and caveat contracts remain unconditional while invented poem-note content refuses', () => {
-  assert.equal(WIDGET_VERSION, 'v45');
+  assert.equal(WIDGET_VERSION, CURRENT_WIDGET_VERSION);
   const checked = embeddedGuard();
   assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
   // Preserve the exact historical metadata cohort. Content must now contain

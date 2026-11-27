@@ -1,0 +1,1244 @@
+{
+  "schema": "next-nine-exact-source-normalization-canonical-bindings-v1",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "original_XML": {
+    "file": "/tmp/pali-next-ten-evidence-nov26/vri-fixture/romn/s0510m1.mul.xml",
+    "bytes": 2464074,
+    "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1"
+  },
+  "all14645_original_XML_tuples_equal_current_book36": true,
+  "literal_selected_pairs": [
+    {
+      "publisher": 351,
+      "id": "tha-ap353"
+    },
+    {
+      "publisher": 352,
+      "id": "tha-ap354"
+    },
+    {
+      "publisher": 353,
+      "id": "tha-ap355"
+    },
+    {
+      "publisher": 354,
+      "id": "tha-ap356"
+    },
+    {
+      "publisher": 355,
+      "id": "tha-ap357"
+    },
+    {
+      "publisher": 356,
+      "id": "tha-ap358"
+    },
+    {
+      "publisher": 357,
+      "id": "tha-ap359"
+    },
+    {
+      "publisher": 359,
+      "id": "tha-ap361"
+    },
+    {
+      "publisher": 360,
+      "id": "tha-ap362"
+    }
+  ],
+  "per_poem": {
+    "tha-ap353": {
+      "publisher_poem": 351,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-351.md",
+        "bytes": 2039,
+        "sha256": "942ed1ea9f0b443d0aee952b672175ae16b489fea92093d4a77f322f587d1475"
+      },
+      "raw_git_blob_sha1": "5d4251ed03b18aff699c9fdab0e09ab36ac33d8e",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10450,
+        "end": 10469,
+        "unit_object_sha256": "e2ebd8b9c6babb5138cd6bc065eab729448a8f509a4e32dfe350782b3b552547",
+        "whole_wrapper_sha256": "1bd055aa00b7bc9f1d9401c7ea5e0781935c61892a6cf41099c827048480ba96"
+      },
+      "poem_core_blocks_half_open": [
+        10451,
+        10469
+      ],
+      "root_numbered_entries": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 3,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 4,
+          "owner": "body:2",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 5,
+          "owner": "body:2",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 6,
+          "owner": "body:2",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 7,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 8,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-351.presentation-proposal.json",
+        "bytes": 3431,
+        "sha256": "96209c8f5f969cc25ecf3ea68afc23bd4a1d4143c695e3df1a834686167d863f"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "942ed1ea9f0b443d0aee952b672175ae16b489fea92093d4a77f322f587d1475",
+        "body_sha256": "a22fd48c521bfe2e47c17eed5ca5ad879f7308be5157f4c71326b3306af87805",
+        "notes_sha256": "58ffb844f1857d8460a3bff90cd1df8dfebbd56d84e718d88f06be9e767a52ae",
+        "paratext_sha256": "9f0887fcf57768da37e1e8411dbc4885ee390b536f6f51ab10b4b51125a99bf0",
+        "root_sha256": "1bd055aa00b7bc9f1d9401c7ea5e0781935c61892a6cf41099c827048480ba96",
+        "publisher_heading_sha256": "d2c51985e06a8d2f787e856a2885e0906a2717ca92473e977c4ff3c8332c6be1"
+      },
+      "paragraph_count": 8,
+      "physical_stanza_entries": 5,
+      "body_characters_utf16": 925,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "1205284a88fa928117498f8aa79e13e206a281bb41770df8341c0843133231c5",
+          "prefix_sha256": "1205284a88fa928117498f8aa79e13e206a281bb41770df8341c0843133231c5",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 425,
+          "text_sha256": "36e15f7bcaee77088c07febdb721b88486b250986f9a3b237fffe8d4b0c6579c",
+          "prefix_sha256": "a22fd48c521bfe2e47c17eed5ca5ad879f7308be5157f4c71326b3306af87805",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "b0a56db66d7df7bdbbd7a373d9eebe7601b3ad2351b9f040f5bedfbeef4edf9f",
+          "characters_utf16": 125,
+          "lines": 4,
+          "suffix_sha256": "1c550563cd9a44fe861f07da9399c4a9468cd2b428d042235e988484422d2002",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "ebf81af56a4a17ad19a53cc4bced25db949949d5db8b979bfe0acc4a7da09fdb",
+          "characters_utf16": 137,
+          "lines": 4,
+          "suffix_sha256": "236063933161a8bb36cdae64d70f13e440ac6d44cd47bce24de90dcde7d0c1b5",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "765e22536963977a06ff6de41c49580868c0d17a5f5593ea50600414a338722b",
+          "characters_utf16": 135,
+          "lines": 4,
+          "suffix_sha256": "11c46b17c32ace2d00527f0fbb7bec8891e9f4908bc88ea4d9ad54559a7cb346",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "text_sha256": "715908f821bae0fa4c55d914170f7a6801490126080aa679547a7d0c3580602b",
+          "characters_utf16": 138,
+          "lines": 4,
+          "suffix_sha256": "ecf0957462067275a30418e9179c90ca49f39020efe6b655add32f7aab01838d",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 5,
+          "body_paragraph_index0": 5,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "d59cf7e96994a7f5924c7fcd7a4a23dad5b3b8e06ef2d2b5785f6ad492f6a8fa",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": true,
+        "note_numbers": [],
+        "body_sha256": "9f0887fcf57768da37e1e8411dbc4885ee390b536f6f51ab10b4b51125a99bf0",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": null,
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    },
+    "tha-ap354": {
+      "publisher_poem": 352,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-352.md",
+        "bytes": 1430,
+        "sha256": "66a57f11fe1e1a70e03f97d8c80796df61fa06c7bed45eb4ab894f148ef19b27"
+      },
+      "raw_git_blob_sha1": "0314bef271a01166e61b8208912c11396c467e29",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10469,
+        "end": 10486,
+        "unit_object_sha256": "0cd254ead208127e7daaa61497cc848d6fb9f77e61c464b08996760834d68578",
+        "whole_wrapper_sha256": "73c3cd7239c1ff99113d732d788474b562c7ca2c9ed082828c5a235319fc2d40"
+      },
+      "poem_core_blocks_half_open": [
+        10469,
+        10486
+      ],
+      "root_numbered_entries": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 3,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 4,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-352.presentation-proposal.json",
+        "bytes": 2629,
+        "sha256": "04d3b7c480530b66a66877841d27db54ed062ff0ee3af388e6848320cd4da541"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "66a57f11fe1e1a70e03f97d8c80796df61fa06c7bed45eb4ab894f148ef19b27",
+        "body_sha256": "afafebf6ff4da771be94cc8f80b5799af5a9fcf84dd73c06f3ec1fa0db696d2d",
+        "notes_sha256": "1b683fafbd6b7c1ffdaecca184d6e8c5b87f0770edbe0bc781cd525db8c02042",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "73c3cd7239c1ff99113d732d788474b562c7ca2c9ed082828c5a235319fc2d40",
+        "publisher_heading_sha256": "c78f9f561a8a69c7a44e3d79b4ee1c16249eece3838384fc6fb320eda8f114e7"
+      },
+      "paragraph_count": 8,
+      "physical_stanza_entries": 5,
+      "body_characters_utf16": 856,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "71f3b9bc0a7d5b013fde3e3f7672a8ab3b30824a59af908eb4ff9b0da9c6923b",
+          "prefix_sha256": "71f3b9bc0a7d5b013fde3e3f7672a8ab3b30824a59af908eb4ff9b0da9c6923b",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 356,
+          "text_sha256": "dbbc9c95f6f0c014c7987d022f24807b469e33e47986f6ba248fb0bf44a3e1fe",
+          "prefix_sha256": "afafebf6ff4da771be94cc8f80b5799af5a9fcf84dd73c06f3ec1fa0db696d2d",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "f45ce71f0b76daed24f4ca94d5fab919c0446893519493b7eeb3958094afaff6",
+          "characters_utf16": 109,
+          "lines": 4,
+          "suffix_sha256": "c402c4fe530963aadb3350f58aeaccc96ea2baf28731af9b44f4352704f77283",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "3a541033fe0b121b57d25fd391d6c955c22e9e8aa11ac470e9cd48a3c12cc10e",
+          "characters_utf16": 128,
+          "lines": 4,
+          "suffix_sha256": "0914358464a67288ebf3c5312d31f669d560d9fdd57e0677c28f7bbe1e063660",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "00bee89b82c2073380335213f9c585857f86eadf859661c9300dec0c7740ccfd",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "16045dadd1b7da98b067acf2a965636d9c4ded6a94152318af3a8b2451436694",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "text_sha256": "d5fdd228b920e9252bf0d66752a7a1969f7c0b3a36f7fff899ea2440a0c2da3a",
+          "characters_utf16": 133,
+          "lines": 4,
+          "suffix_sha256": "a5e08fe11baa37040aa3626190db6ab16efb4eeaa493d3072a7da66aec656c2f",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 5,
+          "body_paragraph_index0": 5,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "9a8f13bbdda6e9090417f68c9ae2de04dfc41949553acf44207fe9b957299747",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": false,
+        "note_numbers": [],
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": null,
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    },
+    "tha-ap355": {
+      "publisher_poem": 353,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-353.md",
+        "bytes": 1227,
+        "sha256": "58f9483eda4948652e5c9d087efd2a9ff6c771e81ec8fad59dcf9df589b92846"
+      },
+      "raw_git_blob_sha1": "9c20b547c68e0a65349dd826dbf795ee84e03de7",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10486,
+        "end": 10497,
+        "unit_object_sha256": "3c597e9de980ded099be0d179c6a25233dce2021a1b08668dce884eaa3a5cb3a",
+        "whole_wrapper_sha256": "6177f5ddb1beb37ec6565ca54d432d54881bb6fab6f8325dba53f46614ca1025"
+      },
+      "poem_core_blocks_half_open": [
+        10486,
+        10497
+      ],
+      "root_numbered_entries": [
+        11,
+        12,
+        13
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 3,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-353.presentation-proposal.json",
+        "bytes": 2113,
+        "sha256": "8815f2ab9e4a8aaa8cb03779b1494dcd484153a5e75fd3a3b80fdf0bc3ff455f"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "58f9483eda4948652e5c9d087efd2a9ff6c771e81ec8fad59dcf9df589b92846",
+        "body_sha256": "24300b9e267cc3f1def4d30c763103f0ccc5200eee4a763db31ba2308b2f36fd",
+        "notes_sha256": "34f6444a9f502ac9f1caf0c648380c307e2728ec9d40b8819d245eb19e83bda8",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "6177f5ddb1beb37ec6565ca54d432d54881bb6fab6f8325dba53f46614ca1025",
+        "publisher_heading_sha256": "e9503719fbd84e4142d9c8cb7a244f96856f18579439514d33b0f03ae48db338"
+      },
+      "paragraph_count": 6,
+      "physical_stanza_entries": 3,
+      "body_characters_utf16": 580,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "13eebb5da024e603378a335374b1c974f60735b049ad3477c475871c21380a7a",
+          "prefix_sha256": "13eebb5da024e603378a335374b1c974f60735b049ad3477c475871c21380a7a",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 80,
+          "text_sha256": "d000e1611cb02ece409728925443b56ae5ddd867c6578e0cce0593c5e603d2f8",
+          "prefix_sha256": "24300b9e267cc3f1def4d30c763103f0ccc5200eee4a763db31ba2308b2f36fd",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "59b41b1d4e506106177a8fca0cf656084de67364d5a58ab289f0e39ab4b6bc98",
+          "characters_utf16": 124,
+          "lines": 4,
+          "suffix_sha256": "fa4dd225bbcc0ba2fca8dd7220039bc88f0f746a46a40e1ca2e523b2dc170c81",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "0237a4c27a49f02e202ecd944a1f6e222daa3d9c1726da046d1095f29b7d6285",
+          "characters_utf16": 128,
+          "lines": 4,
+          "suffix_sha256": "42ea3db52cb4edeaf9b28301cec7b632c3ad8dd8d216b5d3a12a10c320b719c7",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "007170fe7153152c910a9ab95a2258fa13043c2d034b191889c6a2e521aae1d8",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": false,
+        "note_numbers": [],
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": null,
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    },
+    "tha-ap356": {
+      "publisher_poem": 354,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-354.md",
+        "bytes": 2266,
+        "sha256": "a4d1bd65e84529d5b84007c6efd154b69eeca1fe9afc51ece6f9c32d16feb68a"
+      },
+      "raw_git_blob_sha1": "d73096cfa7ecf56d80aa8a28dfdae8f301fde474",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10497,
+        "end": 10511,
+        "unit_object_sha256": "b998a1c2ba82cf099d2dae44e0a20ebb47ffa3792bf213677b6e2aa11d7c4683",
+        "whole_wrapper_sha256": "376cd4fbacc5b2cd8df9e33a740bc1a9a8992e467e2f0498020557b97f1f1d6c"
+      },
+      "poem_core_blocks_half_open": [
+        10497,
+        10511
+      ],
+      "root_numbered_entries": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 3,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 4,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 5,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 6,
+          "owner": "body:2",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 7,
+          "owner": "body:2",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 8,
+          "owner": "body:2",
+          "owner_kind": "poem_stanza"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-354.presentation-proposal.json",
+        "bytes": 3397,
+        "sha256": "e4bfc36ad6c2f646a179f2662552c2130af1ad0f85004d1bf1973b0c703b9892"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "a4d1bd65e84529d5b84007c6efd154b69eeca1fe9afc51ece6f9c32d16feb68a",
+        "body_sha256": "1e1b60100c8697e10d6cb38c009149a01efbda391835709a7b469d9f08be9027",
+        "notes_sha256": "e95c1b1587e6f36e9f73870884d575122619179fd08d8463e3182f6403f5f1f1",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "376cd4fbacc5b2cd8df9e33a740bc1a9a8992e467e2f0498020557b97f1f1d6c",
+        "publisher_heading_sha256": "237eabc1a017ea16d99f47e3884352d1035a54d0bbb47967e6ff68bc9e7c1843"
+      },
+      "paragraph_count": 7,
+      "physical_stanza_entries": 4,
+      "body_characters_utf16": 815,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "cc07d5179b68d347701f20eac9005576399a01be1153dab797533223e2dc93ae",
+          "prefix_sha256": "cc07d5179b68d347701f20eac9005576399a01be1153dab797533223e2dc93ae",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 315,
+          "text_sha256": "9ec9e641b0bc2dd9925c08d997df416114738dfafd9cbb33974742c0663eea55",
+          "prefix_sha256": "1e1b60100c8697e10d6cb38c009149a01efbda391835709a7b469d9f08be9027",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "dd3cc4f3c7c8f9c7a20af907d87ba0e374bbc8204a8cc4388001edf0348ba54b",
+          "characters_utf16": 140,
+          "lines": 4,
+          "suffix_sha256": "127b5961eb17d01176dedf70a8f83b941e580fcfa7d3226e3465cd500a8d1b48",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "7096ccddcf4f14413366a450f4509b043fadf27e318c91751a4765fd3ee41996",
+          "characters_utf16": 136,
+          "lines": 4,
+          "suffix_sha256": "8255cfa6fe5168233e90d3cce6aefefc147d58d8f9f834c2a925b7d8d7e3a6f4",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "1acfac53e7394aef5fdce231043b08062ffe033934453f5409a955d00626987b",
+          "characters_utf16": 134,
+          "lines": 4,
+          "suffix_sha256": "9efb7849897b3f1132c2deeb1a5fb34a05a943cb0926b457ba1921ed580abc60",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "287dc0ec99758925238e6858fdab9cbfdd02c71345df6e771fb0c0e9e07e851b",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": false,
+        "note_numbers": [],
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": null,
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    },
+    "tha-ap357": {
+      "publisher_poem": 355,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-355.md",
+        "bytes": 1616,
+        "sha256": "e8f764137cea90ab89b9e50a6ba56262952703337e661a11fd5a2474093174dd"
+      },
+      "raw_git_blob_sha1": "30002e9ca033914788af0daab407b0ef1dce4666",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10511,
+        "end": 10525,
+        "unit_object_sha256": "8e406b81d92615b6e3715ab43e0a22186d7fe8ad142b5b383c58a67aee9765a1",
+        "whole_wrapper_sha256": "b19ffbbbaa5d6f038169a1d385347c1783a3d7a273dfae10621656d379dde2f6"
+      },
+      "poem_core_blocks_half_open": [
+        10511,
+        10525
+      ],
+      "root_numbered_entries": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 3,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 4,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-355.presentation-proposal.json",
+        "bytes": 2707,
+        "sha256": "b22868a190af07562b547d52b43337b8acf467578340397b13759f9f47484e98"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "e8f764137cea90ab89b9e50a6ba56262952703337e661a11fd5a2474093174dd",
+        "body_sha256": "a35dc68ad808a2896a032857d8959497b0fd991ad8a68c6bd851b47f4f61b9ef",
+        "notes_sha256": "aabee749706a30a3989b2a1f70d3998dca855fc7f7e3a72a0d3581d43c3c02b7",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "b19ffbbbaa5d6f038169a1d385347c1783a3d7a273dfae10621656d379dde2f6",
+        "publisher_heading_sha256": "2e773a52f07203447fe67e7860a443ab379706aa01e1145991eda0140ff2b2ae"
+      },
+      "paragraph_count": 7,
+      "physical_stanza_entries": 4,
+      "body_characters_utf16": 744,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "3bbd92ffa2119f6ff81f0568529b57bf37cf9257342e09ca7e11abba3b42d6af",
+          "prefix_sha256": "3bbd92ffa2119f6ff81f0568529b57bf37cf9257342e09ca7e11abba3b42d6af",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 244,
+          "text_sha256": "1cad41ced9cd578ecab7198c47df1cd8fea48fb2d730a2c20fb0ffe22e0c9f01",
+          "prefix_sha256": "a35dc68ad808a2896a032857d8959497b0fd991ad8a68c6bd851b47f4f61b9ef",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "505772914c2fc96b9c79cdffe963983e975885766cbb469fc2fc2acafda1e2a8",
+          "characters_utf16": 128,
+          "lines": 4,
+          "suffix_sha256": "6283309235a552f4abbf9a6c9dc800631d150f1158538024a8ba8c05a17d6ad5",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "2108c603b3cd45964de656e8e940eea5192e99a91895867b213a65ad17dea4e4",
+          "characters_utf16": 132,
+          "lines": 4,
+          "suffix_sha256": "50aa118ff3e8f953a8aaa9e658e547403082e9d52f312243351a2e0b9427970c",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "e3e0a786b27b92bdced54719dc281a95ad4ff4ced8f3f77c8be5e07ac771ca54",
+          "characters_utf16": 141,
+          "lines": 4,
+          "suffix_sha256": "b506e7819adab587b9da37d03762f09125c0e2323970a3b99b195b0df15ba802",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "a788f2ff8d29c5eef848f675ee2cf8943e16735156b81beb9338afa70368ebc5",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": false,
+        "note_numbers": [],
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": null,
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    },
+    "tha-ap358": {
+      "publisher_poem": 356,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-356.md",
+        "bytes": 1327,
+        "sha256": "5b548b2baf80c546b2fd4292d687b68485e8fe580a4be9e13a571b63b6472181"
+      },
+      "raw_git_blob_sha1": "85345fffa16a8a660c261ab533adeb240eb7f31f",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10525,
+        "end": 10539,
+        "unit_object_sha256": "c56be002aa263733fc7572d21bd4f0eb15de58b4ac8c02b3e6b7f49ce857c58f",
+        "whole_wrapper_sha256": "e866c9ccbe3dc8591f4fbdc12a081ed5b120f3afacfd1c2d17c8635d2b0b0836"
+      },
+      "poem_core_blocks_half_open": [
+        10525,
+        10539
+      ],
+      "root_numbered_entries": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 3,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        },
+        {
+          "number": 4,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-356.presentation-proposal.json",
+        "bytes": 2348,
+        "sha256": "87dc30391fa0dc7085b3d5ad69fc397c6c083799890ce35046fa5a87ecb0494b"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "5b548b2baf80c546b2fd4292d687b68485e8fe580a4be9e13a571b63b6472181",
+        "body_sha256": "25cea48006757469c2ee67b06e31e09aa30f40daddf50ba5f8e26d96f5114260",
+        "notes_sha256": "a85d301c990123917ab8dc077320c14a8824e06669462e0386e496165bcb9988",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "e866c9ccbe3dc8591f4fbdc12a081ed5b120f3afacfd1c2d17c8635d2b0b0836",
+        "publisher_heading_sha256": "6cc33872573dc605dbee8446519767f5e748c047fd166291309d61f29c831b1b"
+      },
+      "paragraph_count": 7,
+      "physical_stanza_entries": 4,
+      "body_characters_utf16": 752,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "4f2af4ab631d4c56d1f922e3271542abe65c89513cc5c6df9bb90479828743c8",
+          "prefix_sha256": "4f2af4ab631d4c56d1f922e3271542abe65c89513cc5c6df9bb90479828743c8",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 252,
+          "text_sha256": "da16dc98ea520c0f790c0f9b9bf78332e3531998d20f0de668c359d8b99e1a68",
+          "prefix_sha256": "25cea48006757469c2ee67b06e31e09aa30f40daddf50ba5f8e26d96f5114260",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "e9739362c21994143f0374595368ffaef8bd5a6298f0b5768178c6ab69519eca",
+          "characters_utf16": 133,
+          "lines": 4,
+          "suffix_sha256": "b9f1c7f800b5a32f34e29be2fb5e7140c4c5486e3033c4aee9d8a4e4f4df7883",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "de5cd73330f59d14817580fc80fc333e631ae852e0d7aa7545a80624b863124d",
+          "characters_utf16": 126,
+          "lines": 4,
+          "suffix_sha256": "7259c1833b9ccf82f4acd87068da7ea894bf85079fb44c5183347e4158b30ab1",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "a43b3c7c66998e05c3025d297488530705978095976965be133f42b12a01554b",
+          "characters_utf16": 141,
+          "lines": 4,
+          "suffix_sha256": "9998ad06631c21810aa2e427b42c66f86532ed01d5e6b0346c662585a669964d",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "0b1dea66b3aeff384356952ec47d807c001cb78d03b19050b9f6442936d78c8a",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": false,
+        "note_numbers": [],
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": null,
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    },
+    "tha-ap359": {
+      "publisher_poem": 357,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-357.md",
+        "bytes": 1169,
+        "sha256": "42db12f6969557e8cfa71798e52af5c65d6294b988ae51f4c55b7d97e94fba77"
+      },
+      "raw_git_blob_sha1": "af81a5bc3cf123a9c8f58b23af77c78df3d00c4b",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10539,
+        "end": 10553,
+        "unit_object_sha256": "becd29f7cd906067b8181ee81fb11b31026b6c696f38d9ebbd1972fc8aefb16b",
+        "whole_wrapper_sha256": "12d131d76589bccaf82dce387e85b9b5579a7d6da37ed7b0a340c3e70c58b365"
+      },
+      "poem_core_blocks_half_open": [
+        10539,
+        10553
+      ],
+      "root_numbered_entries": [
+        26,
+        27,
+        28,
+        29
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-357.presentation-proposal.json",
+        "bytes": 2159,
+        "sha256": "1e23d58dba656f2bba498dc44067822caee42c13e68d07f39899dd79e0afcdb2"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "42db12f6969557e8cfa71798e52af5c65d6294b988ae51f4c55b7d97e94fba77",
+        "body_sha256": "39d86190202ee0f69049e5fe01f050e81ab38d0ae879dc214922f08a889e4014",
+        "notes_sha256": "f950984c76dc9f8c90a4d9a1e2d73243a137929ad865ba3b8e792160c2a9b2ae",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "12d131d76589bccaf82dce387e85b9b5579a7d6da37ed7b0a340c3e70c58b365",
+        "publisher_heading_sha256": "fc4f7d04d46fbf0c7c6d223f4d0e840ec09d88e961189216890d5ae2f0d45b1a"
+      },
+      "paragraph_count": 7,
+      "physical_stanza_entries": 4,
+      "body_characters_utf16": 723,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "3e9858e68d4932f5b8244639c0e41e6fae6a3682a4e8c2f16fc8ff78b841d77a",
+          "prefix_sha256": "3e9858e68d4932f5b8244639c0e41e6fae6a3682a4e8c2f16fc8ff78b841d77a",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 223,
+          "text_sha256": "710c1d5530d5273bdf03bbb9cec1897e000b6c284d8c16c4f2f2a394c0cb4311",
+          "prefix_sha256": "39d86190202ee0f69049e5fe01f050e81ab38d0ae879dc214922f08a889e4014",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "5241c6f3736c47e8e680b0783be083aaa4e24e75c7c7e00af81e5d77bab527a8",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "4e54aff7ac428b93a35e293653f7f2c4b57eb61998cf18fd689e245776b66918",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "dbccad98ba22299619a8f419e167b4185553091ea91c4647723338b707808c12",
+          "characters_utf16": 125,
+          "lines": 4,
+          "suffix_sha256": "c0aa8e046499284acc86270efa7529c2957835787702dae14a7f47984328776e",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "78f204a67076ae04d2bc9868a2827fe77afd774b1a4318e2f5b7986de810dd58",
+          "characters_utf16": 135,
+          "lines": 4,
+          "suffix_sha256": "d2c9e84a57037738536381b8620649a46da24310823d78715ab6541546d76ae0",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "f4222e6f5eb66734d4baa7dede3bb2922ff8882009cb21a62bf1e8be06942f1a",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": false,
+        "note_numbers": [],
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": null,
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    },
+    "tha-ap361": {
+      "publisher_poem": 359,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-359.md",
+        "bytes": 1325,
+        "sha256": "c4407a8ca54f710c4cdfa4e33cb0dd11153de1b334c81e9618022bf172e34944"
+      },
+      "raw_git_blob_sha1": "c5937d002e3ac1d5f268cfa2c079152404a1d576",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10567,
+        "end": 10578,
+        "unit_object_sha256": "22a938000a96a2a47e268e109f11e8b5fc570b63ce19f398f43381bd687e2d09",
+        "whole_wrapper_sha256": "9477a49d856de838c12c12930cbc97142c5e0a3226f118d12286c2965bb5daa1"
+      },
+      "poem_core_blocks_half_open": [
+        10567,
+        10578
+      ],
+      "root_numbered_entries": [
+        34,
+        35,
+        36
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 3,
+          "owner": "body:1",
+          "owner_kind": "poem_stanza"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-359.presentation-proposal.json",
+        "bytes": 2160,
+        "sha256": "87a43b38f497fc79bddfaf3f493ca5c30f3e6e0f029d2df848faf3815797f080"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "c4407a8ca54f710c4cdfa4e33cb0dd11153de1b334c81e9618022bf172e34944",
+        "body_sha256": "7d50a4647027131a623e91a05790b9d3f3c05e1318a55e51bd516489e658b06c",
+        "notes_sha256": "ffef765c331877b4e0071a2a847404775ae7dc00108ea8b07b768b43825b64a1",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "9477a49d856de838c12c12930cbc97142c5e0a3226f118d12286c2965bb5daa1",
+        "publisher_heading_sha256": "64d0fef0d31abfb48865bfad1339a918ba8dfef12a98ff030c112a2c7b4430a8"
+      },
+      "paragraph_count": 6,
+      "physical_stanza_entries": 3,
+      "body_characters_utf16": 585,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "7bf2c59d11d9c8eb13e3961d1b189fb60acbf11296e0ebf4b8dc10447d597523",
+          "prefix_sha256": "7bf2c59d11d9c8eb13e3961d1b189fb60acbf11296e0ebf4b8dc10447d597523",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 85,
+          "text_sha256": "8ed057b354c44cb633ee76b945a0f9daa3410b5c293f941edd8f7c6a7d2f1ef4",
+          "prefix_sha256": "7d50a4647027131a623e91a05790b9d3f3c05e1318a55e51bd516489e658b06c",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "73a1db39395c1df17de40a5f85e3ca54b459921f82069a9da44dd38e3fc0b4ec",
+          "characters_utf16": 126,
+          "lines": 4,
+          "suffix_sha256": "e308cd66a13068f8353db2a7b47ee63845556efefaa4a1d6910dc9d92b86a11c",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "becaa74a9a3d4cc17ea4d5aa75b3a9db6ab68e6c22566ce2a7e12c227d133961",
+          "characters_utf16": 128,
+          "lines": 4,
+          "suffix_sha256": "76ed005fab0c0aaa0aaa85c3028a44cb97d522126517ba695c1e79d80bd88cec",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "9872bb8a6ab552bf69d39ca0a07cdb23be230db5ab4a2e4838ab969a3de1508d",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": false,
+        "note_numbers": [],
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": null,
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    },
+    "tha-ap362": {
+      "publisher_poem": 360,
+      "source": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/chapter-3/poem-360.md",
+        "bytes": 1402,
+        "sha256": "588a0ece97c85896e42977e6e7219536af3a264288f650aef8a0516d5dab5bf9"
+      },
+      "raw_git_blob_sha1": "cfe206c53f64f0a5e1b8f169ea2a865c7f7e6d08",
+      "independent_alignment_scope": {
+        "book": 36,
+        "start": 10578,
+        "end": 10597,
+        "unit_object_sha256": "d8d24089016733a29fb438cd07959ef11923c627c762ea761327479276afa8a4",
+        "whole_wrapper_sha256": "c116c824e99499d56cbbedb9b0b5400b3289371c53a84b9aad0efeeb26da1213"
+      },
+      "poem_core_blocks_half_open": [
+        10578,
+        10592
+      ],
+      "root_numbered_entries": [
+        37,
+        38,
+        39,
+        40
+      ],
+      "original_note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading"
+        }
+      ],
+      "source_normalization_fixture": {
+        "file": "/tmp/pali-english335-350-evidence-nov26/next351-360-normalization/derived-v1/publisher-360.presentation-proposal.json",
+        "bytes": 2615,
+        "sha256": "4a4be0a8ba5b3bac8f1009ff9800bc00123c715bec3aaf977d36f457427593cb"
+      },
+      "source_normalization_profile_hashes": {
+        "raw_sha256": "588a0ece97c85896e42977e6e7219536af3a264288f650aef8a0516d5dab5bf9",
+        "body_sha256": "784df6da1987f776c04a35ee747d32f492121f787634923989bfd103646f3754",
+        "notes_sha256": "13e159647ac065cfad82ea8941bf514c5f29649166a694a2c171be9cb7f16a85",
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "root_sha256": "c116c824e99499d56cbbedb9b0b5400b3289371c53a84b9aad0efeeb26da1213",
+        "publisher_heading_sha256": "0ee7cc0be26dbbfccfae6c0777774b5227b662cdac849bc3ed85ddd44a257e14"
+      },
+      "paragraph_count": 7,
+      "physical_stanza_entries": 4,
+      "body_characters_utf16": 718,
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "d295deaf70f5ca7bcc26c5c434224ac94ab88ffbcf4f2b6ecf460949c68876b6",
+          "prefix_sha256": "d295deaf70f5ca7bcc26c5c434224ac94ab88ffbcf4f2b6ecf460949c68876b6",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 218,
+          "text_sha256": "c3ebdaa971e94fc5ceb0031d96392b5e0b498ca41f456f1e42f81c545f808339",
+          "prefix_sha256": "784df6da1987f776c04a35ee747d32f492121f787634923989bfd103646f3754",
+          "next_offset": null
+        }
+      ],
+      "quote_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "text_sha256": "84a79548e15581348eb07f4c296c51b647598071ec14b12d1e2393b13cb448c1",
+          "characters_utf16": 126,
+          "lines": 4,
+          "suffix_sha256": "ba88a03b5db93f588ced7239449894c92fb0242e3cc70ed731e495c911b68083",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "text_sha256": "27239906d35216e01e3d792d89554360634be859c6b56fdaa15ddb9f850368dd",
+          "characters_utf16": 128,
+          "lines": 4,
+          "suffix_sha256": "664fea313a3b5ebff2a8d9abdd718e9708b6e99e7ea7b00986d4d7f81bf6dda5",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "text_sha256": "2e981c45e1e23fb61461525972b43c22e4f14a7065ae9895d6b474c8fa531eae",
+          "characters_utf16": 137,
+          "lines": 4,
+          "suffix_sha256": "d1c8da6fd7ce1bd465fc6778a856437f65646969820fbbed44f96c01db27f128",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "c08ff171ef62b89941b289b991e4d9303bce01fb1807b86f7ff3f10238f7011c",
+          "domain": "Only physical stanza wording; original note calls and terminal printed numeric suffix excluded; bracketed words retained."
+        }
+      ],
+      "paratext": {
+        "present": false,
+        "note_numbers": [],
+        "body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "publisher_preface_descriptor": false
+      },
+      "chapter_summary": {
+        "kind": "canonical_chapter_summary",
+        "label": "Thirty-Sixth Therā Apadāna chapter summary",
+        "parent_id": "tha-ap362",
+        "first_ref": "tha-ap362/8",
+        "last_ref": "tha-ap362/10",
+        "root_start": 10592,
+        "root_end": 10597,
+        "root_sha256": "3bd8e940cd074e633851e98d2fba9bae4fa1bd91c0ba99230cf66696b154c937",
+        "body_sha256": "cd8ee4bca6c89db3f818d43510b41e2431b9e5e2d134cb09835fb5da23a65f1d",
+        "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "note_numbers": []
+      },
+      "normalization_hashes_are_not_runtime_API_acceptance": true
+    }
+  },
+  "totals": {
+    "profiles": 9,
+    "poem_notes": 38,
+    "physical_stanza_entries": 36,
+    "body_paragraphs": 63,
+    "body_characters_utf16": 6698,
+    "pages500": 18,
+    "display_pairs": 1,
+    "separate_paratext": 1,
+    "separate_summary": 1
+  },
+  "original_notes_poem_owned": 38,
+  "summary_notes": 0,
+  "paratext_notes": 0,
+  "chapter36_scope_policy": {
+    "publisher_poems_proposed": [
+      351,
+      352,
+      353,
+      354,
+      355,
+      356,
+      357,
+      359,
+      360
+    ],
+    "held_publishers": [
+      358
+    ],
+    "whole_chapter_translation_approved": false,
+    "original_summary_stated_count": 40,
+    "proposed_printed_stanza_labels": 36,
+    "scope_policy_is_sidecar_metadata_not_a_new_runtime_descriptor_key": true
+  },
+  "runtime_parser_API_activation_approval": false
+}

@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_VERSION} from './helpers/intake368-metadata.mjs';
 import {currentHeldPublishers} from './helpers/intake343-metadata.mjs';
 /** Source-positive comparisons use presealed metadata, not implementation output as expected data. */
 import test,{afterEach} from 'node:test';
@@ -62,9 +63,9 @@ function refuse(host,widget,bad,first,pali,id) {
 
 // 1. Metadata-only capability and no-auto-fetch behavior remains meaningful without a raw fixture.
 test('current359 clients retain the reviewed339 cohort and40+319 identities with no automatic English or remaining held-source transport',async()=>{
-  e.assertProfiles(APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,'v45');
+  e.assertProfiles(APADANA_PROFILES);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);
-  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,319);
+  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,328);
   let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Metadata or held request attempted provider transport');};
   await withMCP(async call=>{
     for(const id of e.ids) {
@@ -73,7 +74,7 @@ test('current359 clients retain the reviewed339 cohort and40+319 identities with
       const navigation=apadanaEditionNavigation(data),observed=navigation.groups.flatMap(group=>group.poems);
       const ordered=Object.values(APADANA_PROFILES).filter(p=>p.id.startsWith('tha-ap')).sort((a,b)=>a.poem-b.poem);
       assert.deepEqual(observed.map(row=>({uid:row.uid,label:row.label})),ordered.map(p=>({uid:p.id,label:'Publisher poem '+p.poem+' · '+p.title+' · '+p.id})));
-      assert.equal(observed.length,319);assert.equal(navigation.revision,REV);assert.equal(navigation.summary,null); // No new chapter32 summary.
+      assert.equal(observed.length,328);assert.equal(navigation.revision,REV);assert.equal(navigation.summary,null); // No new chapter32 summary.
       assert.equal(choice.translation_id,tid(p));assert.equal(choice.translation_revision,REV);assert.equal(choice.url,p.url);assert.equal(choice.note_count,p.note_count);assert.deepEqual(choice.note_numbers,p.note_numbers);
       for(const field of ['audio','media','reciter']) assert.equal(Object.hasOwn(choice,field),false);
       const widget=await call(WIDGET_TOOL,{uid:id,english:false,limit:2});assert.equal(widget.english,null);assert.ok(widget.pali.segments.length);assert.equal(widget.source.commit,VRI);

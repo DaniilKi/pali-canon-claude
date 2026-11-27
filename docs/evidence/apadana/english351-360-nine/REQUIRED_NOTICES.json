@@ -1,0 +1,77 @@
+{
+  "schema": "next-nine-required-license-formatting-and-edition-notices-v1",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "translator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "exact_rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "mode": "100644",
+      "type": "blob",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "external_raw_path": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/LICENSE.md"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "mode": "100644",
+      "type": "blob",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "external_raw_path": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_pages/about.md"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "mode": "100644",
+      "type": "blob",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "external_raw_path": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_includes/site/footer.njk"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "mode": "100644",
+      "type": "blob",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "external_raw_path": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_includes/layouts/epub-metadata.xml"
+    },
+    {
+      "path": "src/_data/site.json",
+      "mode": "100644",
+      "type": "blob",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "external_raw_path": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_data/site.json"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "mode": "100644",
+      "type": "blob",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "external_raw_path": "/tmp/pali-english335-350-evidence-nov26/next351-360-scout/raw/src/_poems/_poems.json"
+    }
+  ],
+  "required_licence_and_provenance_notice": "English translation and translator notes by Jonathan S. Walters; published by Jonathan S. Walters and Whitman College. Source edition fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4, Legends of the Buddhist Saints (Apadāna). Licensed CC BY-NC-SA4.0: https://creativecommons.org/licenses/by-nc-sa/4.0/. Retain supplied attribution, copyright/licence references, disclaimers and prior change notices. Noncommercial and ShareAlike conditions apply; no warranty or endorsement is implied.",
+  "required_change_notice": "Presentation/extraction changes only: explicit source section separation; finite publisher state-on display selection; visible [Note n] calls retain original numbers and owners; PTS/BJTS abbreviation, Markdown emphasis, heading and punctuation wrappers are rendered; hard-break trailing spaces are removed. Publisher wording, spelling, Unicode, order, numbering, uncertainty and all notes remain unchanged. Exact raw-source hashes and lossless external partitions are retained.",
+  "required_general_edition_notice": "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer a later duplicate’s refrain.",
+  "required_354_notice": "Publisher Sakoṭakakoraṇḍadāyaka and current VRI Sakosakakoraṇḍadāyaka have distinct readings. Retain the original variant notes and both spellings; no harmonized title or word-for-word equivalence is asserted.",
+  "required_360_summary_notice": "The original publisher chapter36 summary lists ten poems and states40 verses; this proposed intake covers nine poems and36 printed stanza labels. Publisher358/canonicaltha-ap360 remains held for the unresolved silver/bed edition difference. The publisher Sajjhadāyaka and VRI Mañcadāyaka roster readings and their differing chapter-closing order remain intact. Summary display does not resolve, translate or activate the held poem and does not establish whole-chapter English coverage.",
+  "chapter36_scope_policy": {
+    "held_publishers": [
+      358
+    ],
+    "whole_chapter_translation_approved": false,
+    "descriptor_schema_unchanged": true
+  },
+  "rights_policy": "Specific translation notices in About, LICENSE.md, footer and ePub metadata control; generic site.json CC-BY does not relax them. Bundle only metadata and hashes. Live English bodies, notes and apparatus stay outside Git/package. No commercial/media, blanket catalogue, physical device, human AT or source-hold clearance is granted.",
+  "rights_or_runtime_activation_approval_granted_by_this_proposal": false
+}

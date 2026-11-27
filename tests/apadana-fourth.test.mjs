@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_URI} from './helpers/intake368-metadata.mjs';
 import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
@@ -239,7 +240,7 @@ test('source-enabled API pages preserve all ten bodies and apparatus across pinn
 });
 
 test('source-enabled current reading API exposes preface notes once and separates both summaries from poem and notes', { skip: !checkout }, async () => {
-  assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v45.html'); onlyPinnedFetch([]);
+  assert.equal(WIDGET_URI, CURRENT_WIDGET_URI); onlyPinnedFetch([]);
   for (const n of [31, 33, 35, 40]) {
     const value = await readPassage({ uid: pFor(n).id, translation: idFor(n) });
     assert.ok(!value.english_error, value.english_error);

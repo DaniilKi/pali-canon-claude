@@ -18,19 +18,25 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 from owned_apadana_proofs import copy_owned_apadana_proof_inputs
 import web_reader_six_boundary_history as h
 import web_reader_intake359 as intake359
+import web_reader_intake368 as intake368
 from web_reader_next_ten_boundary_history import assert_next_ten_current_canonical_data as assert_actual_next
 from web_reader_four_boundary_history import copy_historical_fixture
 from web_reader_approved_acceptance import (approved_catalogue, approved_runtime,
     historical_c1_approved_catalogue)
 
 
-def independent_current34():
+def independent_historical359_runtime():
     raw=(ROOT/'docs/evidence/apadana/english335-350/RUNTIME_INVENTORY.json').read_bytes()
     assert hashlib.sha256(raw).hexdigest()=='839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186'
     value=json.loads(raw)
     assert value['candidate_commit']=='aec778d99aabccec6794a641072e463830e85542'
     assert len(value['files'])==34
     return value['files']
+
+
+def independent_current34():
+    previous = independent_historical359_runtime()
+    return intake368._runtime(ROOT,previous,intake368._authority(ROOT))
 
 
 def historical343_input(root):
@@ -44,20 +50,21 @@ def historical343_input(root):
             'links':value['links'], 'source':value['manifest_source']}
 
 
-def verify_current_and_historical_closure(root,current359,current34):
-    intake359.fresh_proofs(root)  # all13 physical proofs; never a real-root fallback
+def verify_current_and_historical_closure(root,current368,current34):
+    intake359.fresh_proofs(root)  # all13 physical historical proofs remain mandatory
+    intake368.fresh_proofs(root)
     assert assert_actual_next(root)==current34
     old=historical343_input(root)
-    assert len(current359['ids'])==len(current359['profiles'])==len(current359['links'])==359
+    assert len(current368['ids'])==len(current368['profiles'])==len(current368['links'])==368
     for uid in old['ids']:
-        assert current359['profiles'][uid]==old['profiles'][uid]
-        assert current359['links'][uid]==old['links'][uid]
+        assert current368['profiles'][uid]==old['profiles'][uid]
+        assert current368['links'][uid]==old['links'][uid]
     raw=(root/intake359.AP_FIXTURE).read_bytes()
     assert hashlib.sha256(raw).hexdigest()=='18ef986dccbc05cabf311ba44d553b0cf415893484428eecdd476bfe2e1f4bbf'
     assert len(json.loads(raw)['links'])==343
     actual=(root/'server/data/apadana.json').read_bytes()
     assert {'bytes':len(actual),'sha256':hashlib.sha256(actual).hexdigest()}==current34['data/apadana.json']
-    assert len(json.loads(actual)['links'])==359
+    assert len(json.loads(actual)['links'])==368
     h.assert_preserved_c1_catalogue(root,old)
     return old
 
@@ -79,7 +86,7 @@ class SixOperationScopeControls(unittest.TestCase):
             shutil.copyfile(ROOT / name, target)
         cls.parent = h.parent343_records(cls.root)
         cls.approved = approved_catalogue(cls.root)
-        assert len(cls.approved['ids']) == 359
+        assert len(cls.approved['ids']) == 368
         cls.runtime = approved_runtime(cls.root)
         assert cls.runtime == expected34
         assert len(cls.runtime) == 34

@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_URI} from './helpers/intake368-metadata.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
@@ -19,7 +20,7 @@ test('hosted MCP widget accepts labelled post-canonical/file selections and scri
     const tool = (await client.listTools()).tools.find(t => t.name === WIDGET_TOOL);
     assert.equal(tool._meta.ui.resourceUri, WIDGET_URI); assert.equal(tool._meta['openai/outputTemplate'], SKYBRIDGE_URI);
     assert.deepEqual(tool._meta.ui.visibility, ['model', 'app']); assert.equal(tool._meta['openai/widgetAccessible'], true);
-    assert.equal(WIDGET_URI, 'ui://pali-canon/reader-v45.html');
+    assert.equal(WIDGET_URI, CURRENT_WIDGET_URI);
     for (const script of SCRIPTS) {
       const post = await call({ uid: transliterate('Vism 1.1', 'roman', script), script, limit: 2 });
       assert.equal(post.canonical, false); assert.equal(post.text_id, undefined); assert.equal(post.english, null);

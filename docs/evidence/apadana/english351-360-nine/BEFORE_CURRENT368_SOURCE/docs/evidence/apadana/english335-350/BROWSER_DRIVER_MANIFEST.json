@@ -1,0 +1,30 @@
+{
+  "schema": "english16-runnable-external-driver-proposal-seal-v6",
+  "status": "UNEXECUTED_NARROW_FIX_REQUIRES_V6_PEER_GO_AND_NEW_ROOT_READY_COPY",
+  "files": {
+    "API_SOURCE_AUDIT.json": "f21f907d686b39b0828b41dec70bcf3d5e13ac5768fe4a26156bacea4973d70b",
+    "AST_CHANGE_PROOF.json": "219a0d08545548c3b42242e329417fa50d75f92058ed65174466a2a673204cfa",
+    "CALLABLE_SHADOW_AUDIT.json": "f66fd4fef5d129a1abb2b668e2dcbad002cd869931bef2fd6728afe6201ca224",
+    "CHANGES.json": "04670f8408b8034ef9d2da0f6e67d75d35c6b59bacc97c426edcca0cd0399738",
+    "CONTRACT_BLOCKED.json": "0daa852a39d903ea84e0c94cfe073ead51a8b96ae78b36fae34c1be2c2920336",
+    "FIXTURE_ADAPTATION.json": "5baefc2ede4f9bf2a9691d3e2f32c3caf4c5a8a57da403ec74d8aac1358c1557",
+    "LABEL_LOCATOR_AUDIT.json": "b88af14793dd968a9898885bc02b1ed0a1e19bf576d4e99faba1e0d8f0b5ff9e",
+    "NAVIGATION_ORACLE.json": "5bbd2c84661cf60058909e728344a847c1e1ea8bc40c89719778e42eae5ae062",
+    "REMAINING_FLOW_SOURCE_AUDIT.json": "24553b1c1e80f1ab165c7473639739423ae4966270951c5dc75751aa120a4246",
+    "SYNTHETIC_PROFILE.json": "dbf17b49f526c31e36ec4a1b4004cffa30668ae0a0cce029f0a9246214194af7",
+    "V5_TO_V6.patch": "d7f16d2fbb5a8bcd6c2141c311cb1ffd16cea25efef5ba8903ec50cf781f7523",
+    "audit_api_source_contract.py": "eed3177fb0c703c767b1036960e308763074348f1c2558c9ef21c42be50edb17",
+    "audit_callable_shadow.py": "02e5db52e9ac6da2c53d97aa20d4e2f4e2d1eec50d81606dbf775afe010172a8",
+    "audit_remaining_flow.py": "c9e838c3317f35734075d8001f6535d2e9caa45f73bd248f37c362f8e8627902",
+    "check-installed-english.py": "47baf988b41135fcbcc5bd1825f35ed3d1d3d18e1650abf12e74697693a93bd6",
+    "offline-pali-guard.cjs": "f7abe141393eef32f4d33c77b86d09d88f705774eb4d12d5e1f92b15e544cc65",
+    "run-bounded.py": "58fa0b15a2fb8aeda364533e8f880e218f1e75c78c2b5ecb10e24d57d128e0f7",
+    "source_assertions.py": "91ba72a39de70f783f5976dd4e12de09e702c5d5eeaf86b33007112178d65b32"
+  },
+  "application_component_commit": "b2280c55ccf29c778abd89f26e3165b367b5ddba",
+  "package_snapshot_commit": "9f18a165fbaf4d4d960b7dc85bb0c74a6d8f1db9",
+  "fresh_installed_server": "/tmp/pali-english335-350-evidence-nov26/installed-offline-verified/node_modules/pali-canon-mcp/server",
+  "proposed_root_command_after_peer_GO": "python3 /tmp/pali-english335-350-evidence-nov26/reader-plan/runnable-v6/run-bounded.py --output-dir /tmp/ENGLISH16_V6_FRESH_REPORT --name english16-installed -- python3 /tmp/pali-english335-350-evidence-nov26/reader-plan/runnable-v6/check-installed-english.py --contract /tmp/EXACT_NEW_READY_V6_CONTRACT.json --contract-sha EXACT_REVIEWED_SHA256 --server-dir /tmp/pali-english335-350-evidence-nov26/installed-offline-verified/node_modules/pali-canon-mcp/server --report /tmp/ENGLISH16_V6_FRESH_REPORT/REPORT.json --browser /usr/bin/chromium",
+  "only_author_execution": "Pure stdlib AST/source/static fixture metadata audits only; no app/driver/helper/browser/tests/build/Git/network execution.",
+  "prior_V5_actual_failure_remains_failed": true
+}

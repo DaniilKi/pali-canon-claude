@@ -1,0 +1,76 @@
+{
+  "schema": "independent-reviewed-nine-source-metadata-approval-v1",
+  "status": "GO_NINE_EXACT_SOURCE_AND_NORMALIZED_METADATA_SCOPES_ONLY",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "approved_ids": [
+    "tha-ap353",
+    "tha-ap354",
+    "tha-ap355",
+    "tha-ap356",
+    "tha-ap357",
+    "tha-ap358",
+    "tha-ap359",
+    "tha-ap361",
+    "tha-ap362"
+  ],
+  "approved_records": [
+    {
+      "id": "tha-ap353",
+      "publisher_chapter": "chapter-3",
+      "poem": 351
+    },
+    {
+      "id": "tha-ap354",
+      "publisher_chapter": "chapter-3",
+      "poem": 352
+    },
+    {
+      "id": "tha-ap355",
+      "publisher_chapter": "chapter-3",
+      "poem": 353
+    },
+    {
+      "id": "tha-ap356",
+      "publisher_chapter": "chapter-3",
+      "poem": 354
+    },
+    {
+      "id": "tha-ap357",
+      "publisher_chapter": "chapter-3",
+      "poem": 355
+    },
+    {
+      "id": "tha-ap358",
+      "publisher_chapter": "chapter-3",
+      "poem": 356
+    },
+    {
+      "id": "tha-ap359",
+      "publisher_chapter": "chapter-3",
+      "poem": 357
+    },
+    {
+      "id": "tha-ap361",
+      "publisher_chapter": "chapter-3",
+      "poem": 359
+    },
+    {
+      "id": "tha-ap362",
+      "publisher_chapter": "chapter-3",
+      "poem": 360
+    }
+  ],
+  "original_independent_review": {
+    "file": "ORIGINAL_INDEPENDENT_REVIEW.json",
+    "sha256": "90918b7fde8ac9939750e794154f0143fb725e6a3d98d9fcda9f73c4727c935f"
+  },
+  "transport_wrapper_only": true,
+  "wrapper_meaning": "Typed transport of the exact independent source/schema review; does not create a second independent review.",
+  "profiles_sha256": "a9ce377c7ec5c75fff7315c45dbd0328b7164dd4120b83b3f7c8a6406df6a367",
+  "links_sha256": "49c53fa616ac61c135705e97215c381426d344af3141c217eb8c72f9a48c566d",
+  "normalization_manifest_sha256": "596a8f155fa0bd7a2a7d955a02c2f5067b176b4afa23baf5d64753e0c9885d65",
+  "runtime_API_activation_release_approval": false
+}

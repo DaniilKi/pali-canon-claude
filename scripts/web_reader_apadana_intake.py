@@ -695,7 +695,7 @@ def read_301_310(root):
 
 
 def reviewed_intake(root):
-    return _reviewed_current359(root)
+    return _reviewed_current368(root)
 
 
 def curated_303_additions(root,anchor_filename):
@@ -1228,7 +1228,7 @@ def _reviewed_current359(root):
 
 
 
-def curated_additions(root,anchor_filename):
+def historical359_curated_additions(root,anchor_filename):
     # This closed current-only path avoids recursive suffix assembly. Every
     # historical reader above and every other anchor below remains unchanged.
     if type(anchor_filename) is str and anchor_filename == 'THERA_HELD234_APPROVAL.json':
@@ -1305,3 +1305,93 @@ def curated_additions(root,anchor_filename):
     assert current['expected_profile_ids']==anchor_ids+ids
     assert list(profiles)==list(links)==ids
     return {'curation':current,'anchor':historical['anchor'],'ids':ids,'profiles':profiles,'links':links}
+
+
+# Explicit named historical359 reader: source-only and byte-exact old composer.
+def read_335_350(root):
+    return _reviewed_current359(root)
+
+
+CURRENT_351_360_NINE_PAIRS = (
+    ('tha-ap353',351), ('tha-ap354',352), ('tha-ap355',353),
+    ('tha-ap356',354), ('tha-ap357',355), ('tha-ap358',356),
+    ('tha-ap359',357), ('tha-ap361',359), ('tha-ap362',360),
+)
+
+
+def _compose_reviewed_current368(previous, proof):
+    """One finite source-only append, independent of runtime/corpus capture."""
+    from copy import deepcopy
+    from web_reader_intake368 import DIRECTORY, PINS
+    approval = proof['APPROVAL.json']
+    full = proof['BASELINE359_FULL_OBJECTS.json']
+    baseline = proof['BASELINE359.json']['ids']
+    assert previous['expected_profile_ids'] == baseline == list(full['profiles']) == list(full['links'])
+    assert len(baseline) == len(set(baseline)) == 359
+    records = _selection_records(previous['baseline_records'] + previous['approved_records'])
+    assert [row['id'] for row in records] == baseline
+    for row in records:
+        p = full['profiles'][row['id']]
+        chapter = 'chapter-4' if row['id'].startswith('thi-ap') else 'chapter-3'
+        assert row == {'id':p['id'], 'publisher_chapter':chapter, 'poem':p['poem']}
+        assert p.get('publisher_chapter', chapter) == chapter
+        assert p['path'] == '/text/' + chapter + '/poem-' + str(p['poem']).zfill(3) + '/'
+    extra = [{'id':uid, 'publisher_chapter':'chapter-3', 'poem':poem}
+             for uid, poem in CURRENT_351_360_NINE_PAIRS]
+    assert _selection_records(approval['approved_records']) == extra
+    ids = [row['id'] for row in extra]
+    assert approval['approved_ids'] == ids == list(proof['PROFILES.json']) == list(proof['LINKS.json'])
+    assert approval['baseline_ids'] == baseline
+    assert approval['expected_profile_ids'] == baseline + ids
+    assert len(approval['expected_profile_ids']) == len(set(approval['expected_profile_ids'])) == 368
+    assert list(proof['EXPECTED_MANIFEST.json']['links']) == approval['expected_profile_ids']
+    for row in extra:
+        p = proof['PROFILES.json'][row['id']]
+        assert (p['id'],p['publisher_chapter'],p['poem']) == (row['id'],row['publisher_chapter'],row['poem'])
+    assert type(previous['held_ids']) is list and len(previous['held_ids']) == len(set(previous['held_ids']))
+    assert 'tha-ap360' not in previous['held_ids']
+    holds = previous['held_ids'] + ['tha-ap360']
+    assert not set(holds) & set(approval['expected_profile_ids'])
+    assert approval['previous_holds_remain_unchanged'] is True
+    assert approval['source_holds_within_publisher351_360'] == ['tha-ap360']
+    assert approval['source_and_normalization_only'] is True
+    assert approval['runtime_approval'] is approval['release_approval'] is False
+    result = deepcopy(approval)
+    result['baseline_records'] = deepcopy(records)
+    result['approved_records'] = deepcopy(extra)
+    result['held_ids'] = holds
+    result['current_source_approval'] = {'file':DIRECTORY+'/APPROVAL.json', 'sha256':PINS['APPROVAL.json']}
+    result['historical359_source_approval'] = deepcopy(previous['current_source_approval'])
+    result['historical343_source_approval'] = deepcopy(previous['historical343_source_approval'])
+    return result
+
+
+def _reviewed_current368(root):
+    previous = _reviewed_current359(root)
+    from web_reader_intake368 import _authority
+    return _compose_reviewed_current368(previous, _authority(root))
+
+
+def curated_additions(root, anchor_filename):
+    """Advance current suffixes; retain all optimized359 source checks intact."""
+    from copy import deepcopy
+    from web_reader_intake368 import _authority
+    historical = historical359_curated_additions(root, anchor_filename)
+    proof = _authority(root)
+    current = _compose_reviewed_current368(historical['curation'], proof)
+    full = proof['BASELINE359_FULL_OBJECTS.json']
+    anchor_ids = historical['anchor']['expected_profile_ids']
+    old_ids = historical['ids']
+    assert historical['curation']['expected_profile_ids'] == anchor_ids + old_ids
+    assert list(historical['profiles']) == list(historical['links']) == old_ids
+    for uid in old_ids:
+        assert historical['profiles'][uid] == full['profiles'][uid]
+        assert historical['links'][uid] == full['links'][uid]
+    extra = current['approved_ids']
+    assert not set(extra) & (set(anchor_ids) | set(old_ids))
+    ids = list(old_ids) + list(extra)
+    profiles = {**deepcopy(historical['profiles']), **deepcopy(proof['PROFILES.json'])}
+    links = {**deepcopy(historical['links']), **deepcopy(proof['LINKS.json'])}
+    assert current['expected_profile_ids'] == anchor_ids + ids
+    assert list(profiles) == list(links) == ids
+    return {'curation':current, 'anchor':historical['anchor'], 'ids':ids, 'profiles':profiles, 'links':links}

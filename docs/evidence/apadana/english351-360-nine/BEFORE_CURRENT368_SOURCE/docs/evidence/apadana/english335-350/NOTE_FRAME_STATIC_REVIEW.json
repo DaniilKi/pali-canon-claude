@@ -1,0 +1,25 @@
+{
+  "schema": "independent-static-widget-note-header-preservation-complete-proposal-review-v1",
+  "status": "GO_EXACT_PRODUCTION_AND_FOUR_FOCUSED_CASES_REQUIRES_ROOT_EXECUTION",
+  "manifest_sha256": "89fbc0cca6ded5f0be35e56944827ebac2c6f2040ce2a4f464e93e43d4d8e090",
+  "production_review_sha256": "e7cbc1dd70b162b6a873587f58dddb77c9c9b05bdb1bf967cefdc8ceed984a6a",
+  "production_sha256": "e90bdc18b77e6ff10c7b3acdaef4840bf67f15cc1b6f0bd715ca9e42d12135e3",
+  "test_sha256": "118eb074db667e6cd707da2f4980fb38fb2343c76c213743c5748d049914d299",
+  "existing13_cache_source_still_byte_unchanged": true,
+  "actual_note_approval_pin_verified": true,
+  "new_case_count": 4,
+  "new_skips": 0,
+  "findings": [
+    "Tests use genuine offline readPassage UID and direct-book anchor pages plus independently pinned Sariputta schema/record, require an actual note positive, then modify only owned host payloads. Upstream fetches are denied and final request count must stayzero.",
+    "Both bridges exercise missing/typed-invalid/changed/duplicated envelopes and missing/vri-changed/text-canary/duplicated anchor segments. Refusals remove only apparatus; original Pali nodes, unrelated focused synthetic input and model-context snapshots must remain. Restoration must recover the exact approved note.",
+    "Genuine offset/new-unit replacements must produce new root nodes/current words and model state. Partial UID/commit changes must preserve old words/context, pending Stop node/timer and ignore a late result after Stop.",
+    "The header-only repairedtha-ap348 case requires an explicit mapping refusal and zero root nodes, directly protecting the d===input canonical-check priority.",
+    "The parent-aware local DOM fixture implements removal/detachment/focus, inserts note siblings and exposes model messages/state. It executes actual unmodified WIDGET_HTML; this is a VM regression fixture, not a browser/device substitute.",
+    "Existing13 cache cases are not edited or replaced. The production delta remains exactly the independently reviewed e90bdc18 with all other note/content validators byte-identical."
+  ],
+  "pending": [
+    "Root execute17combined cache cases plus existing source-note/browser guard unchanged; record actual metadata/privacy/cleanup evidence.",
+    "Root rebuild and independently seal final runtime34, package39 and both whole resource HTMLs; final source inverse and exact CI still required."
+  ],
+  "review_actions": "Read-only source/manifest and stdlib text/JSON/hash comparisons only. No app/helper/test imports, VM/browser execution, builds, Git/network, CI or tracked writes."
+}

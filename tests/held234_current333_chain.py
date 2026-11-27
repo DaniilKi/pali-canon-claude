@@ -13,8 +13,8 @@ import web_reader_apadana_intake as intake
 
 CLI = ROOT / 'scripts/web-reader-thera-held234-check.py'
 READERS = ('reviewed_held234_intake', 'curated_additions', 'read_261_280',
-    'read_281_285', 'read_287_288', 'read_292_299', 'read_301_310', 'read_312_319', 'read_321_329', 'read_331_334')
-HISTORICAL = ('historical303', 'historical308', 'historical310', 'historical317', 'historical325', 'historical333', 'historical339', 'historical343')
+    'read_281_285', 'read_287_288', 'read_292_299', 'read_301_310', 'read_312_319', 'read_321_329', 'read_331_334', 'read_335_350')
+HISTORICAL = ('historical303', 'historical308', 'historical310', 'historical317', 'historical325', 'historical333', 'historical339', 'historical343', 'historical359')
 METADATA = {'approval', 'current_additions', 'current_curation', 'current_ids', *HISTORICAL}
 ASSIGNMENTS = METADATA | {'evidence_dir'}
 BRIDGES = (
@@ -26,7 +26,8 @@ BRIDGES = (
     "historical333['baseline_ids'] == historical325['expected_profile_ids']",
     "historical339['baseline_ids'] == historical333['expected_profile_ids']",
     "historical343['baseline_ids'] == historical339['expected_profile_ids']",
-    "current_curation['baseline_ids'] == historical343['expected_profile_ids']",
+    "historical359['baseline_ids'] == historical343['expected_profile_ids']",
+    "current_curation['baseline_ids'] == historical359['expected_profile_ids']",
 )
 
 
@@ -75,9 +76,9 @@ def run_actual_preflight(overrides=None):
 class Held234Current333Chain(unittest.TestCase):
     def positive(self):
         tree, selected, env = run_actual_preflight()
-        self.assertEqual(len(env['current_ids']), 359)
-        self.assertEqual(len(env['current_additions']['ids']), 74)
-        for name, count in zip(HISTORICAL, (303, 308, 310, 317, 325, 333, 339, 343), strict=True):
+        self.assertEqual(len(env['current_ids']), 368)
+        self.assertEqual(len(env['current_additions']['ids']), 83)
+        for name, count in zip(HISTORICAL, (303, 308, 310, 317, 325, 333, 339, 343, 359), strict=True):
             self.assertEqual(len(env[name]['expected_profile_ids']), count)
         assertions = [ast.unparse(node.test) for node in selected if isinstance(node, ast.Assert)]
         for bridge in BRIDGES:
@@ -93,6 +94,7 @@ class Held234Current333Chain(unittest.TestCase):
         self.assertNotIn("current_curation['baseline_ids'] == historical333['expected_profile_ids']", assertions)
         self.assertIn('read_321_329', imports)
         self.assertIn('read_331_334', imports)
+        self.assertIn('read_335_350', imports)
         self.assertNotIn("current_curation['baseline_ids'] == historical339['expected_profile_ids']", assertions)
         return env
 
@@ -176,18 +178,33 @@ class Held234Current333Chain(unittest.TestCase):
 
     def test_08_same_count_current343_baseline_substitution_is_rejected_after_positive(self):
         env = self.positive()
-        def changed(root, anchor):
-            value = copy.deepcopy(intake.curated_additions(root, anchor))
-            ids = value['curation']['baseline_ids']
+        def changed(root):
+            value = copy.deepcopy(intake.read_335_350(root))
+            ids = value['baseline_ids']
             self.assertEqual(len(ids), 343)
             self.assertNotIn('tha-ap262', ids)
             ids[-1] = 'tha-ap262'
             self.assertEqual(len(ids), 343)
             self.assertEqual(len(set(ids)), 343)
-            self.assertEqual(value['curation']['expected_profile_ids'], env['current_ids'])
+            self.assertEqual(value['expected_profile_ids'], env['historical359']['expected_profile_ids'])
+            return value
+        with self.assertRaises(AssertionError):
+            run_actual_preflight({'read_335_350': changed})
+
+
+    def test_09_current368_cannot_skip_the_historical359_baseline_after_positive(self):
+        env = self.positive()
+        def changed(root, anchor):
+            value = copy.deepcopy(intake.curated_additions(root, anchor))
+            value['curation']['baseline_ids'] = list(env['historical343']['expected_profile_ids'])
             return value
         with self.assertRaises(AssertionError):
             run_actual_preflight({'curated_additions': changed})
+
+    def test_10_missing359_reader_hop_is_rejected_after_positive(self):
+        self.positive()
+        with self.assertRaises(AssertionError):
+            run_actual_preflight({'read_335_350': intake.read_331_334})
 
 
 if __name__ == '__main__':

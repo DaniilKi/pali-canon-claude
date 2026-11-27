@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_VERSION} from './intake368-metadata.mjs';
 /** Client capabilities exercise original pinned source responses, never invented positive wording. */
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
@@ -89,7 +90,7 @@ test('group '+batch+' new client capabilities preserve the independently frozen2
     const profile = baseline.profile_objects[id];
     assert.deepEqual(APADANA_PROFILES[id], profile, id + ' previous source contract unchanged');
   }
-  assert.equal(WIDGET_VERSION, 'v45');
+  assert.equal(WIDGET_VERSION, CURRENT_WIDGET_VERSION);
   for (const id of approved) {
     const profile = APADANA_PROFILES[id], record = golden(id);
     assert.deepEqual(profile.mapping_notes, record.mapping_notes);

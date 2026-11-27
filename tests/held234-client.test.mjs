@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_VERSION} from './helpers/intake368-metadata.mjs';
 /** Real publisher234 and neighbor235 responses precede every cache/refusal control. */
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -41,7 +42,7 @@ function mutations(value,p){
 }
 
 test('new236 requires separate one-source authority while prior284 and neighbor235 source objects remain exact',()=>{
- assert.equal(WIDGET_VERSION,'v45');assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,359);
+ assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(CURRENT_APADANA_IDS.length,368);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,284),e.previous.expected_profile_ids);
  for(const id of e.previous.expected_profile_ids)assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id]);
  assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.peer.approved_profile_objects['tha-ap236']);

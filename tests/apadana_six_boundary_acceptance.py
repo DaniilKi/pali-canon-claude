@@ -158,14 +158,14 @@ class Fixture(unittest.TestCase):
         cls.reader = cls.proofs['READER_ORACLES.json']
         cls.preserve = cls.proofs['PRESERVATION_ORACLES.json']['preservation']
         cls.ids = tuple(cls.proof['targets'])
-        # Verify genuine current359 metadata and physical current34 first.
+        # Verify genuine current368 metadata and physical current34 first.
         # Only afterwards obtain the separate pinned historical343 QA inputs.
-        current359 = approved_catalogue(ROOT)
-        assert len(current359['ids']) == len(current359['profiles']) == len(current359['links']) == 359
-        assert_catalogue(json.loads((ROOT / 'server/data/apadana.json').read_bytes()), current359)
-        runtime359 = approved_runtime(ROOT)
-        assert len(runtime359) == 34
-        assert assert_runtime(ROOT, ROOT / 'server') == {name: row['sha256'] for name, row in runtime359.items()}
+        current368 = approved_catalogue(ROOT)
+        assert len(current368['ids']) == len(current368['profiles']) == len(current368['links']) == 368
+        assert_catalogue(json.loads((ROOT / 'server/data/apadana.json').read_bytes()), current368)
+        runtime368 = approved_runtime(ROOT)
+        assert len(runtime368) == 34
+        assert assert_runtime(ROOT, ROOT / 'server') == {name: row['sha256'] for name, row in runtime368.items()}
         cls.historical_ap343 = (ROOT / AP_FIXTURE).read_bytes()
         assert sha(cls.historical_ap343) == cls.preserve['apadana_metadata_file_sha256']
         assert tuple(cls.preserve['all10_profile_source_files_exact']) == HISTORICAL_PROFILE_SOURCE_PATHS

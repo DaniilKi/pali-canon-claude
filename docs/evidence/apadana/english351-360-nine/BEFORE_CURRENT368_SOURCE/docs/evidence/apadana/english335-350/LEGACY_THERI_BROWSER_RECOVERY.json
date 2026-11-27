@@ -1,0 +1,235 @@
+{
+  "passed": 16,
+  "checks": [
+    {
+      "check": "All30 choices explicit; original20 descriptors and P\u0101li ref/text sequences frozen; changed23/24 locator revisions; foreign owners/revisions/prefixes refuse before fetch"
+    },
+    {
+      "check": "thi-ap21: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 17
+    },
+    {
+      "check": "thi-ap22: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 13
+    },
+    {
+      "check": "thi-ap23: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 11
+    },
+    {
+      "check": "thi-ap24: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 11
+    },
+    {
+      "check": "thi-ap25: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 18
+    },
+    {
+      "check": "thi-ap26: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 8
+    },
+    {
+      "check": "thi-ap27: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 22
+    },
+    {
+      "check": "thi-ap28: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 30
+    },
+    {
+      "check": "thi-ap29: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 5
+    },
+    {
+      "check": "thi-ap30: exact independently pinned poem/notes/preface/paratext; 500-character continuation",
+      "pages": 19
+    },
+    {
+      "check": "All10 poem quote positives including every thi-ap28 missing local/global label; preface/divider/summary/summary notes excluded from poem quotes"
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "check": "All10 explicit sources; paginated long poems; exact original notes; separate preface/division/summary; 12 drift refusals; old23/24 locator refusal/current review including vanished23tail; local-only drafts/export; fresh24 bookmark"
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "check": "All10 explicit sources; paginated long poems; exact original notes; separate preface/division/summary; 12 drift refusals; old23/24 locator refusal/current review including vanished23tail; local-only drafts/export; fresh24 bookmark"
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "check": "All10 explicit sources; paginated long poems; exact original notes; separate preface/division/summary; 12 drift refusals; old23/24 locator refusal/current review including vanished23tail; local-only drafts/export; fresh24 bookmark"
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "check": "All10 explicit sources; paginated long poems; exact original notes; separate preface/division/summary; 12 drift refusals; old23/24 locator refusal/current review including vanished23tail; local-only drafts/export; fresh24 bookmark"
+    }
+  ],
+  "sources": [
+    {
+      "uid": "thi-ap21",
+      "transport": "mcp",
+      "characters": 8053,
+      "stanzas": 51,
+      "note_count": 38,
+      "raw_sha256": "66d7b2c1d28fb9c3d5208892596564ba29f8aaae64440e278c9009067487fb25",
+      "body_sha256": "b16579a5ccb4441e877a761cd07a2313f4281702ea69ebda29903df0a49ee172",
+      "notes_sha256": "678758628be857f342dd251670a181342e9f3a2256a65fabb408216730de9cc4",
+      "paratext_sha256": "4e1d279d51a71cd2be8b743cb002f12dbb7c5509713109a6161f02abf38ca7b8",
+      "root_sha256": "4f1011602b013dd2a1f2081da422e25f8d35ed65ac31d44bb111c6778a063d3a"
+    },
+    {
+      "uid": "thi-ap22",
+      "transport": "mcp",
+      "characters": 6078,
+      "stanzas": 39,
+      "note_count": 27,
+      "raw_sha256": "edc1a1d51684c6870ef2a6b1b550168930d9fcafacdedb9541fe54e913728f47",
+      "body_sha256": "e2724a27e8182b3fa61d77867beec9bff9f07bb01c2162b2a42c683745bb3230",
+      "notes_sha256": "3ec6cb1249aefc317b74de6c445589a77c095886f291c42fa95f0066eaddcc66",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "415b9713af215abe2d7a4fb17068b5f40243187674cf8060a38e66b70ef04e27"
+    },
+    {
+      "uid": "thi-ap23",
+      "transport": "mcp",
+      "characters": 5256,
+      "stanzas": 33,
+      "note_count": 17,
+      "raw_sha256": "523d4fc54448150007be581676b3c23ef99f62d836e2dc8c02e950ba3ae14c8e",
+      "body_sha256": "4abe5c7f6f228a44e42c2536eefde3a2d2bee14874b90ba81415658cc1a8076b",
+      "notes_sha256": "efe93d83fb8a098390b28101cae31fdc72ee3efaf716d6f6734d6d6c1b7b0510",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "a457920710bb058996af0ebb98f588c0ddba51421af2a3fe60cad85c17e57999"
+    },
+    {
+      "uid": "thi-ap24",
+      "transport": "mcp",
+      "characters": 5341,
+      "stanzas": 34,
+      "note_count": 32,
+      "raw_sha256": "7809a044a709f904b842a57733ad60ac854fa196aabd3c20f1e3d02530a58231",
+      "body_sha256": "b59218aaeaf9b095d1a5f27d27fdb94d3b54b8300f68ee428344fc2eaf568745",
+      "notes_sha256": "c43ca4b0c72b6b87e2c126bef239bfb7bc2b2a6c4669a7762a167541b3e49bf5",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "46abcdad17e69e6488b276c332aed0ee3c7a1aff2d613254c3f686f292fe5d67"
+    },
+    {
+      "uid": "thi-ap25",
+      "transport": "mcp",
+      "characters": 8571,
+      "stanzas": 52,
+      "note_count": 75,
+      "raw_sha256": "165826b3d092ecee426ba44ab9589f7c1cabbda4d6a52be5705ea7bc9cbd8a5a",
+      "body_sha256": "892ae9078ba8425faa03b077eaf47bfb4ebf57f9a89f5845a30eae022ad2521e",
+      "notes_sha256": "0d9ccf067ebae6ab3f2083d3eb46c81c4a88efe0dc3b9189bb512f7d065f949b",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "03ce45ffa40bcfe02a6d975cee81afaa1270c384d3e45fc383b98a88d463ba5b"
+    },
+    {
+      "uid": "thi-ap26",
+      "transport": "mcp",
+      "characters": 3655,
+      "stanzas": 24,
+      "note_count": 17,
+      "raw_sha256": "dd096cc9537c5cc376d7436070287d0b9afe36aba6d86b03e90820536269c32a",
+      "body_sha256": "92b98758f7a67a47a523381e25a17025aa71848c3faaa0d9ec88ec8d5266bf5d",
+      "notes_sha256": "9c73a38546770b3f0ead5de5f615574653244d2ff2a0ea17b9c03df199eb1a31",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "42db7cf1214d845377271d558c858e2d6f1fc11ec9aaf4fe253c56fcd2ef44fb"
+    },
+    {
+      "uid": "thi-ap27",
+      "transport": "mcp",
+      "characters": 10583,
+      "stanzas": 68,
+      "note_count": 51,
+      "raw_sha256": "e57d0ba564a95de1276bb48ff7f11b54b38f32f60d7db3ccfd3e7c563ab6ced6",
+      "body_sha256": "fa3aac1a19928b99c1f6f96b6276732a228630eb8188744a1f2592b8e172145d",
+      "notes_sha256": "146d30f6073b2036c4022ca4ffb783eb9dcef12dc92f7c06ef270f20d17cd1a3",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "84149d09812f814c93ced387f86404d5dbeda7d079ee6f99b23351b93ed68272"
+    },
+    {
+      "uid": "thi-ap28",
+      "transport": "mcp",
+      "characters": 14806,
+      "stanzas": 99,
+      "note_count": 71,
+      "raw_sha256": "8a9159f27ff2ccdb6bfa81cb1d2646268f325cc84b00ec89c8ea8d3118cd3bb3",
+      "body_sha256": "62cabcce645d8572d7a25302d59af029911058dbb0626eeb4f1d4942c3768e79",
+      "notes_sha256": "2f0e04feb23daba59db7f635e532f6293e6ddddb98bb40398ef7a55bb0458539",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d47add1fdfd913b0b11bcd0d67a14bf36dedce0e1cf5dc43d2d740bffeebd96d"
+    },
+    {
+      "uid": "thi-ap29",
+      "transport": "mcp",
+      "characters": 2474,
+      "stanzas": 15,
+      "note_count": 9,
+      "raw_sha256": "0c227726b5e8f6de70f52380b1e416898c89ab887a074dc202e0df888b0fcfe6",
+      "body_sha256": "727ee2cfd9b85b94eaeb232f9dc9f508fdf23e019d43a40cae5f2e0100a410f8",
+      "notes_sha256": "008cbade61dbaf86c71aa6ee530be0976e0c86288025d83ddd4c97eea4e8f132",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "9ecd73d2bab8c4d745b50f8c727ae9b24200c4f2badf0c00cbbcfa5f2ab0b334"
+    },
+    {
+      "uid": "thi-ap30",
+      "transport": "mcp",
+      "characters": 9460,
+      "stanzas": 60,
+      "note_count": 42,
+      "raw_sha256": "bf697c2677fb74215826ed9c8a35c14e41bc5456a459bb8d9a5c95af2e8fb4f1",
+      "body_sha256": "d14cf8c0fa3df7f44c5a5b41272f2e13c8ad3fb824113c6d307e1dbb8eb1dc54",
+      "notes_sha256": "1addb7ad0bf0d7ed1dd79648d5922cb1e6e015ad5eb2003ca661508d4a9ee043",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "ba8864b9bb6922b704d7aa0d92024311e4df69b0aad3429335dac8d48a8f2494"
+    }
+  ],
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "previous_metadata_baseline": "3854b43",
+  "previous_metadata_preserved": 20,
+  "previous_pali_roots_preserved": 20,
+  "chapter_summary": {
+    "kind": "canonical_chapter_summary",
+    "label": "Third Ther\u012b Apad\u0101na chapter summary",
+    "parent_id": "thi-ap30",
+    "first_ref": "thi-ap30/64",
+    "last_ref": "thi-ap30/67",
+    "root_start": 9943,
+    "root_end": 9949,
+    "root_sha256": "82675860bcd5eda124e7af8c94208c0acd27505f27a79c040a9d5f5ca38c90e3",
+    "body_sha256": "5eee21f78cd3eb989886f9835c372e5fb0577544e47814ce590dedc5820da6bf",
+    "notes_sha256": "f35f488a05aa5a3b076740aec60983be6dc0ab7a09a601d82523d1e853cc43a4",
+    "note_numbers": [
+      43,
+      44
+    ]
+  },
+  "publisher_divisions": [
+    {
+      "kind": "publisher_recitation",
+      "label": "Fourth recitation portion",
+      "before_local_label": "50",
+      "before_publisher_label": "1009",
+      "body_sha256": "6ab68e301afabf5df2fa7f7570f0916ccbb8f2999a4f2ec76a012560383bb028",
+      "notes_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "note_numbers": []
+    }
+  ],
+  "outside_source_tree": false,
+  "browser_mode": "chromium",
+  "csp_bypass": "none",
+  "pinned_provider_reads": 483,
+  "upstream_provider_requests": 0,
+  "a11y": {
+    "scans": 0,
+    "violations": 0,
+    "results": []
+  },
+  "limits": "Actual packaged MCP and emulated Chromium viewports with exact official local publisher bytes at provider transport. No live publisher availability, new rights or specialist approval, physical-device or human assistive acceptance. Reports contain metadata/hashes only, no publisher bodies, translator notes or private drafts."
+}

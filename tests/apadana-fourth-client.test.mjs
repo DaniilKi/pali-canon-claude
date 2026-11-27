@@ -1,3 +1,4 @@
+import {CURRENT_WIDGET_VERSION} from './helpers/intake368-metadata.mjs';
 // Synthetic transport/render fixtures use real finite profile metadata, never source wording.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
@@ -46,7 +47,7 @@ const checked = () => {
 };
 
 test('all forty finite choices preserve exact apparatus in individual, comparison and embedded validation', () => {
-  assert.equal(WIDGET_VERSION, 'v45');
+  assert.equal(WIDGET_VERSION, CURRENT_WIDGET_VERSION);
   const check = checked();
   for (let n = 1; n <= 40; n++) {
     const f = fixture(n);
@@ -205,7 +206,7 @@ test('standalone and complete embedded scripts render preface wording once and k
 // Original full-page, comparison and embedded assertions replay unchanged only
 // after parsing the exact registered raw artifact; synthetic notes never pass.
 sourceTest('all forty finite choices preserve exact apparatus in individual, comparison and embedded validation', () => {
-  assert.equal(WIDGET_VERSION, 'v45');
+  assert.equal(WIDGET_VERSION, CURRENT_WIDGET_VERSION);
   const check = checked();
   for (let n = 1; n <= 40; n++) {
     const f = fixture(n);

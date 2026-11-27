@@ -1,0 +1,118 @@
+{
+  "schema": "independent-english16-note-preservation-source-widget-html-review-v1",
+  "status": "PASS_SOURCE_ONLY_WHOLE_HTML_RECONSTRUCTION",
+  "application_commit": "aec778d99aabccec6794a641072e463830e85542",
+  "widget_version": "v45",
+  "widget_uris": [
+    "ui://pali-canon/reader-v45.html",
+    "ui://pali-canon/reader-v45.skybridge.html"
+  ],
+  "expected_source_widget_html": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/runtime-note-preservation-review/SOURCE_WIDGET_HTML.html",
+    "sha256": "87d68782491e83868793d5624c3cbebe5c51bcbdce80f71ffdbe64df0e41213e",
+    "bytes": 700043
+  },
+  "source_dependencies": {
+    "src/apadana-profiles.mjs": {
+      "bytes": 258652,
+      "sha256": "da0e3d90bcaa8eba3a23364da992888bbd55cd4e368035a880b5576e949ab054"
+    },
+    "src/apadana-thera-profiles.mjs": {
+      "bytes": 834034,
+      "sha256": "c02a8b6b9f2d8957912ae20373b839ed1083ce519a4d6c82cb3f266e6a5569c5"
+    },
+    "src/apadana-thera261-280-profiles.mjs": {
+      "bytes": 51636,
+      "sha256": "8883e4a4c21467e71d81799d37a72ff25d82d30249360d6520d64de3c9a03599"
+    },
+    "src/apadana-thera281-285-profiles.mjs": {
+      "bytes": 15056,
+      "sha256": "5fe6d7d66fc08262b612bd958f4163784a3c4fada1e8f704a354eedfc2399e15"
+    },
+    "src/apadana-thera287-288-profiles.mjs": {
+      "bytes": 6333,
+      "sha256": "a7bfe381d050e95c40e5f7889251241c29f393a487957a139cf1c1bf3cdd04fd"
+    },
+    "src/apadana-thera292-299-profiles.mjs": {
+      "bytes": 23535,
+      "sha256": "7bae858330a6fafc5765b1c9e051ab05223d655c1d1dbc743c7bd383993b1e52"
+    },
+    "src/apadana-thera301-310-profiles.mjs": {
+      "bytes": 28081,
+      "sha256": "28bc80a92b88d68242bfeb1d1ec77d343d544de712f91e974c5eb79963a015f7"
+    },
+    "src/apadana-thera312-319-profiles.mjs": {
+      "bytes": 26112,
+      "sha256": "ace057a6f48a553b0b9b297fb6162e42dce1c9b61bf88a19257615fafbd294ec"
+    },
+    "src/apadana-thera321-329-profiles.mjs": {
+      "bytes": 20680,
+      "sha256": "5b39479b430c4ed796e11c87445f14d693912de76261ccd26284751203de2981"
+    },
+    "src/apadana-thera331-334-profiles.mjs": {
+      "bytes": 18440,
+      "sha256": "3055098dd9670315a1de06e10b04c5141327102457920d37c5e63074652eda89"
+    },
+    "src/apadana-thera335-350-profiles.mjs": {
+      "bytes": 69783,
+      "sha256": "fd3eac4f1b9d4ab3898703dc0a969921dfa1255d3dc0f0663e0bc745b9224268"
+    },
+    "src/canon.mjs": {
+      "bytes": 47196,
+      "sha256": "b496860add5770a775023b28739c4821af459c96803af644a5ecd20fcc69883f"
+    },
+    "src/chatgpt-widget.mjs": {
+      "bytes": 99550,
+      "sha256": "e90bdc18b77e6ff10c7b3acdaef4840bf67f15cc1b6f0bd715ca9e42d12135e3"
+    },
+    "src/locator-policy.mjs": {
+      "bytes": 4777,
+      "sha256": "0ddae64e676ea7adf688e880cb00f0358212343c5c1bc83f40f377ffa5b5178e"
+    },
+    "src/script.mjs": {
+      "bytes": 23371,
+      "sha256": "c880803d77fe742f4b6d7b8754d348eb8aa670634e0b9aa40224b23ca1a8a565"
+    },
+    "src/source-notes-profiles.mjs": {
+      "bytes": 2995,
+      "sha256": "f83ac1be7ad1586a46569632aac37462f4e7da8a18b47050a29008cff70090e5"
+    },
+    "web/content-sha256.mjs": {
+      "bytes": 2775,
+      "sha256": "bc28e5561e53f10d6293b35563557e968d47a255ceba77ff04b9816a2932cc63"
+    },
+    "web/source-notes-policy.mjs": {
+      "bytes": 6175,
+      "sha256": "5897a88723b8d5ae3515db018e731d0c7bdb8bf5271d05645afb427b86d9ece5"
+    }
+  },
+  "all_source_dependency_bytes_equal_exact_application_commit": true,
+  "all359_source_profile_objects_equal_independent_343_and16_authorities": true,
+  "independent16_profiles_sha256": "4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d",
+  "baseline343_fullobjects_sha256": "74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e",
+  "source_template_interpolations": [
+    "JSON.stringify(SOURCE_NOTES_PROFILE)",
+    "SOURCE_NOTES_POLICY_SOURCE",
+    "WIDGET_HASH_SOURCE",
+    "WIDGET_VERSION",
+    "WIDGET_VERSION",
+    "WIDGET_TOOL",
+    "NAVIGATION_TIMEOUT_MS",
+    "WIDGET_HASH_SOURCE",
+    "APADANA_BASE",
+    "JSON.stringify(WIDGET_APADANA)",
+    "APADANA_COMMIT",
+    "APADANA_LICENSE",
+    "APADANA_LICENSE_URL",
+    "APADANA_TRANSLATOR",
+    "JSON.stringify(PINNED_NEW_PARATEXT_IDS)",
+    "JSON.stringify(APADANA_PINS)",
+    "JSON.stringify(SCRIPT_CHOICES)",
+    "JSON.stringify(REPAIRED_CANONICAL_LOCATORS)",
+    "WIDGET_VERSION"
+  ],
+  "method": "Stdlib finite JSON/source/function-literal reconstruction; cook two source-template escape pairs, substitute16 distinct explicitly enumerated expressions. No JavaScript/module/application imports or execution. WholeHTML independently reconstructed only from exactaec778source; no oldsourceexport/HTTP/installedHTMLusedasgolden.",
+  "installed_or_HTTP_HTML_used_as_golden": false,
+  "behavioral_harness_approval": false,
+  "release_or_push_approval": false
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "english9-independent-source-curation-v1",
+  "status": "APPROVED_EXACT_SOURCE_AND_NORMALIZED_METADATA_SCOPES_NOT_RUNTIME",
+  "base_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "canonical_ids": [
+    "tha-ap353",
+    "tha-ap354",
+    "tha-ap355",
+    "tha-ap356",
+    "tha-ap357",
+    "tha-ap358",
+    "tha-ap359",
+    "tha-ap361",
+    "tha-ap362"
+  ],
+  "publishers": [
+    351,
+    352,
+    353,
+    354,
+    355,
+    356,
+    357,
+    359,
+    360
+  ],
+  "literal_selected_pairs": [
+    {
+      "id": "tha-ap353",
+      "publisher_chapter": "chapter-3",
+      "poem": 351
+    },
+    {
+      "id": "tha-ap354",
+      "publisher_chapter": "chapter-3",
+      "poem": 352
+    },
+    {
+      "id": "tha-ap355",
+      "publisher_chapter": "chapter-3",
+      "poem": 353
+    },
+    {
+      "id": "tha-ap356",
+      "publisher_chapter": "chapter-3",
+      "poem": 354
+    },
+    {
+      "id": "tha-ap357",
+      "publisher_chapter": "chapter-3",
+      "poem": 355
+    },
+    {
+      "id": "tha-ap358",
+      "publisher_chapter": "chapter-3",
+      "poem": 356
+    },
+    {
+      "id": "tha-ap359",
+      "publisher_chapter": "chapter-3",
+      "poem": 357
+    },
+    {
+      "id": "tha-ap361",
+      "publisher_chapter": "chapter-3",
+      "poem": 359
+    },
+    {
+      "id": "tha-ap362",
+      "publisher_chapter": "chapter-3",
+      "poem": 360
+    }
+  ],
+  "original_independent_review": {
+    "file": "ORIGINAL_INDEPENDENT_REVIEW.json",
+    "sha256": "90918b7fde8ac9939750e794154f0143fb725e6a3d98d9fcda9f73c4727c935f"
+  },
+  "raw_input_source_bindings_sha256": "172d9cf87739745c42b9de9cd701992d0ee4f6854138f5cadfafb8d3e3ce032f",
+  "rights_source_review_sha256": "b9331433fdf854caafc4cf37b49f88853e9e10fd635e4792ea97bb4fae67c1e0",
+  "normalization_review_sha256": "5f89667ddd12a74937538578a67b6a289ef44b696125f0cefc37de4d115384d7",
+  "whole_publisher_edition_not_line_complete_VRI": true,
+  "publisher358_held": true,
+  "chapter36": {
+    "active_publishers": [
+      351,
+      352,
+      353,
+      354,
+      355,
+      356,
+      357,
+      359,
+      360
+    ],
+    "held_publishers": [
+      358
+    ],
+    "whole_chapter_english_approval": false,
+    "summary_publisher": 360,
+    "summary_notes": 0
+  },
+  "totals": {
+    "poems": 9,
+    "body_paragraphs": 63,
+    "stanza_entries": 36,
+    "poem_notes": 38,
+    "display_pairs": 1,
+    "pages500": 18,
+    "body_UTF16": 6698
+  },
+  "runtime_reader_package_CI_activation_release_approval": false,
+  "required_notices_sha256": "c46e9a1514228f854ef7c885c3a601af94f47540e6f4c7c0830787a4c2c39aa1"
+}

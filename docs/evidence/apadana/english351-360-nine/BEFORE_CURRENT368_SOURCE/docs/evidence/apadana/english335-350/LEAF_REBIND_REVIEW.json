@@ -1,0 +1,104 @@
+{
+  "schema": "independent-held234-prefix-release-source-leaf-review-v1",
+  "status": "GO_EXACT_SOURCE_AND_LEAF_BINDINGS_ONLY_NATIVE_AND_RELEASE_ACCEPTANCE_SEPARATE",
+  "feature_core_commit": "05ee6fc2dd72c04b66e488a4528252c2742a43ae",
+  "prior_source_authority_commit": "d97e3c0ebc8261c6bec6ec8b3b1c65acd85e7dd4",
+  "source_review": {
+    "file": "SOURCE_INVERSE_REVIEW.json",
+    "sha256": "7ba5b2e5b66f5d5ede8b335cb7520e3e41b4e4f1269e27ee83f068100a85870c"
+  },
+  "frozen_bindings": {
+    "prior_commit": "d97e3c0ebc8261c6bec6ec8b3b1c65acd85e7dd4",
+    "core_commit": "05ee6fc2dd72c04b66e488a4528252c2742a43ae",
+    "core_file": {
+      "scripts/web_reader_apadana_intake.py": "44c23a69c17f3f19b90df5d6ce52e88f0fe548813f9f8fbb291a6a3bb99c3117"
+    },
+    "map_sha256": "f228e32969b80c3faeab9f2bf6aca00b0c1a3f6e4dd0ba6d2487612b8e344a30",
+    "loader_sha256": "2e718959cbffc7ed05f358bced603452373993d55739bc078b240a27b8e8d8dc",
+    "changed_existing_rows": [
+      "AGENTS.md",
+      "scripts/web_reader_apadana_intake.py"
+    ],
+    "unchanged_existing_rows": 70,
+    "baseline_index_sha256": "7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad"
+  },
+  "only_two_existing_rows_refreshed_other70_ordered_objects_exactd97": true,
+  "source72_path_list_callbackliteral_andloaderbody_unchanged_onlymapSHA": true,
+  "original1001_full_byte_SHA256_blobSHA1_inverse_and_forward_exact": true,
+  "all824_frozen_authorities_preserved": true,
+  "beforeHeld234Prefix_six_archives_exact_Gitd97": {
+    "AGENTS.md.txt": {
+      "source": "AGENTS.md",
+      "sha256": "0152574306d63c054c1949665ba062d3d8c4b297c31d4280b500c7a07e62d741",
+      "bytes": 152414
+    },
+    "SOURCE_INVERSES.json": {
+      "source": "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "sha256": "aabbc569c8d4774837a468ea197743c5ed9ad4fe98890efc9d1e85d6ca4eed96",
+      "bytes": 370348
+    },
+    "SOURCE_INVERSE_REVIEW.json": {
+      "source": "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
+      "sha256": "9b6e09a56668fd742ea5390fb4443661d089c47776aa30034f7ed9aaa4ba7387",
+      "bytes": 220126
+    },
+    "LEAF_REBIND_REVIEW.json": {
+      "source": "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
+      "sha256": "a400c72c85ebd0b0f72e13701a9d80fe0381bd2149d05d10007a79e700557127",
+      "bytes": 5841
+    },
+    "loader.mjs.txt": {
+      "source": "tests/helpers/intake359-source-input.mjs",
+      "sha256": "efc224ab9d17791e0b23479cf3cab5243ba994ba60bcdb08877c752fcefe180b",
+      "bytes": 8361
+    },
+    "apadana_intake.py.txt": {
+      "source": "scripts/web_reader_apadana_intake.py",
+      "sha256": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e",
+      "bytes": 94349
+    }
+  },
+  "mapped_core_direct_leaf": {
+    "scripts/web_reader_apadana_intake.py": "44c23a69c17f3f19b90df5d6ce52e88f0fe548813f9f8fbb291a6a3bb99c3117"
+  },
+  "independent_core_semantic_diagnostic_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/held234-cost-independent-review/FINAL_DIAGNOSTIC_REVIEW.json",
+    "sha256": "00a588d073ba4a26335646a4fd2534c754bed2e501e14178889c87deb1739a4c",
+    "status": "GO_DIAGNOSTIC_CANDIDATE_EXACT_CORE05EE_ONLY"
+  },
+  "author_manifest": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/held234-cost-followup/held-only-proposal/MANIFEST.json",
+    "sha256": "90a726a4416fec346366e33ff2b91a9d8ec11db2b6efa053ba534e7f8c0e6a29"
+  },
+  "all179_physical_readset_bytes_exact_old_new_and_Gitd97": true,
+  "all_previous_f54_seven_core_files_preserved": {
+    "scripts/web_reader_intake359.py": "89630ec90b17828dc7f168bbed6050181bac422f05cd670256334d07f59cdac6",
+    "scripts/web_reader_next_ten_boundary_history.py": "390babcab8f13e5c696c57fe08c9b2b680bebcd3709a1d74f943f900ecf02496",
+    "tests/six_boundary_history_acceptance.py": "4708b6488ea18e4600421f28d943cf35c1bf2b742954c135cda70e9cffebf4bf",
+    "tests/approved_acceptance.py": "05dcd6bf555337754b3bc037b6a86b772dca5059e1769ef7c340f81b932de42a",
+    "tests/six_operation_scope_controls.py": "09e44985179af0189432821aedb5056a8c8eabee7ec0458e425cc7f41ae1492d",
+    "tests/owned_apadana_proofs.py": "b356f21ddf2ea6b42596058124b241d20f60af5623b2ce20ce1f291ab5654e4a",
+    "tests/fixtures/approved33-proof-inputs.json": "4f7c1a7936d44ba951bf3eddcc81f7faf3ea72128ed103d6c9088e5eb6152989"
+  },
+  "all208_physical_fixture_proof_inputs_preserved": true,
+  "baseline791_339_original_JS_plus_existingQA8_340files2076_publicdriver_workflow_runners_deadlines_unchanged": true,
+  "preserved_src_web_server_data_package_andheldPythonCLI_git_paths": 148,
+  "all39_current_Gitcore_archive_actualfreshinstalled_bytes_exact_priorAPPaec": true,
+  "runtime34_current839e_2b19_leaf_unchanged": true,
+  "native_probe_architecture_scope_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/held234-native-probe-review/BOUND05EE_EXECUTION_REVIEW.json",
+    "sha256": "b7e1e5eb47bd0fd67825c0972db89f5135551982781fdaa76ad8912f19f828f9",
+    "status": "GO_BOUND_BYTES_FOR_ONE_AUTHORIZED_DIAGNOSTIC_ONLY",
+    "not_a_probe_outcome": true
+  },
+  "native_probe_outcome_adopted": false,
+  "diagnostic_or_CI_release_dev_approval": false,
+  "remaining": [
+    "Reconcile bounded native Windows22 held8 ABBA including retained baseline failures and both candidate outcomes",
+    "Final immutable source/direct leaf/39 binding on release successor commit",
+    "One complete healthy exact-SHA2076/native20+22 aggregates/all required workflows before dev advancement"
+  ],
+  "reviewer_actions": "Read-only physical file/hash/literal inverse/tar and Git object inspection, external stdlib review script only. No SUT imports, app/test/browser/build/network/CI actions, tracked edits or Git mutations.",
+  "rights_coverage_corpus_private_data_main_deploy_scope_change": false,
+  "blocking_binding_findings": []
+}
