@@ -1,0 +1,56 @@
+{
+  "schema": "english9-independent-single-cli-static-review-v1",
+  "status": "PASS",
+  "scope": "GO_EXACT_FROZEN_DRIVER_AND_BOUND_BLOCKED_CONTRACT_AFTER_NARROW_READY_COPY_REVIEW",
+  "harness_sha256": "a0743d5c72a9c474d2126680001dfb00a9d11f77a2e419545b9ab9efa5cb4efc",
+  "harness_path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-proposal-v2/files/scripts/web-reader-thera351-360-nine-check.py",
+  "proposal_manifest": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-proposal-v2/MANIFEST.json",
+    "sha256": "19761276645b056638b01969368c4e37ad1357e6c49c6cc1cd86706645559f7f"
+  },
+  "contract_review_candidate": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-proposal-v2/ROOT_CONTRACT_REVIEW_CANDIDATE.json",
+    "sha256": "7520241c12fdd07cd867603ccb807ea339ee523b7c1964d7ef182b4f9a891d42"
+  },
+  "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
+  "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
+  "static_reconciliation": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-independent-review/CLI_V2_STATIC_RECONCILIATION.json",
+    "sha256": "b84c8c033741121d82a8739d6ec7deb09bcb38cc27802701d8a9c3f2b0bd227a"
+  },
+  "prior_v1_hold": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-independent-review/V1_HOLD_REVIEW.json",
+    "sha256": "c2dd39b6907418a377839438ec51f6a24de8a277dface1d8935ef00a4d3d5340",
+    "resolved_by": "Single p.get(publisher_chapter) filter; entire V1 restored by one inverse replacement."
+  },
+  "blocking_findings": [],
+  "verified_static_scope": [
+    "Actual installed server/http.cjs from sealed39 payload; no source entrypoint fallback;34runtime/39package/archive/sourceHTML/readiness roles bound before server launch.",
+    "Nine original raw SHA pins and controlling rights artifacts;63body paragraphs/36physical stanzas/38owned notes;fullbody/note hashes remain independently source-derived.",
+    "All18 original500-UTF16 page hashes/lengths/ordered cursors with explicit start-prefix and end/continuation-prefix domains;final whole hash and stale revision/prefix refusals.",
+    "Held publisher358/canonical360 refusal before fixture provider;eligible canonical358/publisher356 retained;separate note-free351 heading and360 summary without whole-chapter approval.",
+    "Standalone immutableF3 Pali model,search/source-block/quote witnesses,old locator refusal and unchanged canonical data;actual API output only becomes a mutation baseline after independent whole-source validation.",
+    "13explicit native cells across390/1280 and /reader plus /;18simulated host cells,90English integrity mutations,18valid same-identity owner transitions; no rectangular device or signed-in-host claim.",
+    "Original synthetic20Saved records,private draft bytes/export/import cancellation/reload/current-source notes,real loaded-Saved network-off work and two-tab conflict/recovery preserve local-only data.",
+    "Exact fresh AP3/VRI note-focus gate bound separately to new installed runtime/archive;English translator-note mutations never treated as that gate.",
+    "Finite raw-source guard denies upstream;browser interception rejects external/private requests;all9 original fixture reads and at least1 actual deny-all provider event required.",
+    "300sinner/360souter bounds;30sHTTP/metadata child,15sDOM;exclusive ownedstage/reports;HTTP group reaped/absent per epoch;exact final counters and unchanged39 inventory."
+  ],
+  "final_ready_copy_required": true,
+  "allowed_ready_delta_paths": [
+    "execution_status",
+    "required_authorities.harness_static",
+    "pending_roles"
+  ],
+  "required_ready_status": "READY_INDEPENDENTLY_REVIEWED_INSTALLED_NINE",
+  "required_ready_role_binding": "Bind this exact static receipt physical path/SHA; all other candidate contract values unchanged; rehash and review before one bounded root invocation.",
+  "execution_approval": false,
+  "reviewer_app_imports_tests_browser_build_Git_network_or_repository_writes": false,
+  "behavioral_acceptance_or_release_approval": false,
+  "limitations": [
+    "No dedicated nine-source CLI has been executed by this reviewer.",
+    "Separate root execution must supply actual terminal counts/provider/privacy/process cleanup evidence.",
+    "Final candidate39/package/source/CI/devpromotion rebind remains required;no main/deploy/force-push.",
+    "No physical-device,human assistive,signed-in-host,live-provider or fresh-browser-offline claim."
+  ]
+}

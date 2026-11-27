@@ -1,0 +1,323 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap353",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 8,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap354",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 4,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap355",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 3,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap356",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 8,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap357",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 4,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap358",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 4,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap359",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 2,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap361",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 3,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap362",
+      "entry": "/reader",
+      "width": 390,
+      "poem_notes": 2,
+      "physical_device": false,
+      "touch_context_emulated": true
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap353",
+      "entry": "/",
+      "width": 1280,
+      "poem_notes": 8,
+      "physical_device": false,
+      "touch_context_emulated": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap356",
+      "entry": "/",
+      "width": 1280,
+      "poem_notes": 8,
+      "physical_device": false,
+      "touch_context_emulated": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap358",
+      "entry": "/",
+      "width": 1280,
+      "poem_notes": 4,
+      "physical_device": false,
+      "touch_context_emulated": false
+    },
+    {
+      "family": "actual native source/search/Saved/citation/consent",
+      "id": "tha-ap362",
+      "entry": "/",
+      "width": 1280,
+      "poem_notes": 2,
+      "physical_device": false,
+      "touch_context_emulated": false
+    },
+    {
+      "family": "loaded Saved page truly browser-network-off edit/save/export; online reload stable",
+      "fresh_browser_offline_verified": false,
+      "export_sha256": "320d51fa9bd1a320fd1ce302422c13f813a34cdd9039554b2bdd55db588478ad"
+    }
+  ],
+  "counts": {
+    "api_metadata_sources": 9,
+    "api_catalogue": 1,
+    "compatibility_refusals": 24,
+    "api_full_sources": 9,
+    "api_search_sources": 9,
+    "api_quote_sources": 9,
+    "api_pagination_pages": 18,
+    "pagination_negative_cases": 18,
+    "held_API_refusals": 3,
+    "native_catalogue_cells": 2,
+    "native_saved": 13,
+    "native_word_study": 13,
+    "native_cells": 13,
+    "native_tamper_sources": 2,
+    "host_stale_cases": 90,
+    "host_cells": 18,
+    "host_valid_owner_transitions": 18,
+    "host_canonical_stale_cases": 2,
+    "host_held_refusals": 2,
+    "native_legacy_refusals": 2,
+    "offline_local_workflow": 1,
+    "two_tab_conflict": 1,
+    "deny_all_provider": 1
+  },
+  "limitations": "Actual isolated installed HTTP/MCP and Chromium DOM; exactly9pinned source fixtures,13native cells and18simulatedhost cells. No liveprovider/signedhost/physicaldevice/humanAT/freshbrowseroffline or originalVRIap3focus claim; the latter needs its separate gate on this new installation.",
+  "stage": "/tmp/en9-ry1ehd15",
+  "source_note_scope": {
+    "original_VRI_ap3_focus_exercised_here": false,
+    "translator_note_checks_are_distinct": true,
+    "separate_actual_gate_bound": true,
+    "review_sha256": "c9b2b7d08935ca7f5c2bf7fce2e4aaa5cf401ffe0cdef6c7b7f2f7fa7d1f0771",
+    "report_sha256": "ca04aa2dc96433c50589cff4494cea991c9c4f9c892c914acd46561b9a4d1dce",
+    "a11y_performed": false,
+    "physical_device": false,
+    "human_assistive_testing": false
+  },
+  "contract_sha256": "cd82f75e695a877a471e19cb44ffe2c7699c156c74dcd133a0ed8d28414d084c",
+  "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
+  "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
+  "acceptance_scope": "Local component/runtimeaeb + exact Git705/npm archive/fresh guarded installation39; nine publisher-edition source fixtures/13native/18simulatedhost cells. Final successor source/CI/devpromotion and physical/human acceptance are separate.",
+  "harness_sha256": "a0743d5c72a9c474d2126680001dfb00a9d11f77a2e419545b9ab9efa5cb4efc",
+  "physical_device": false,
+  "human_assistive_testing": false,
+  "fresh_browser_offline_verified": false,
+  "epochs": [
+    {
+      "mode": "pinned-fixture",
+      "pid": 214577,
+      "ledger": "/tmp/en9-ry1ehd15/pinned-fixture.jsonl",
+      "cleanup": {
+        "pid": 214577,
+        "leader_reaped": true,
+        "group_absent": true
+      },
+      "ledger_sha256": "1e8b1e699de5b6e1c11fd1a795d346a2938c25ce3b9aa167256c35af3963cecb",
+      "fixture_reads": 73,
+      "denied_reads": 0,
+      "actual_upstream_forwarded": 0
+    },
+    {
+      "mode": "deny-all",
+      "pid": 216012,
+      "ledger": "/tmp/en9-ry1ehd15/deny-all.jsonl",
+      "cleanup": {
+        "pid": 216012,
+        "leader_reaped": true,
+        "group_absent": true
+      },
+      "ledger_sha256": "80ba3b759583a7a2bba63b9e1810f1eb44e6ecf7ac52f979f597256a0f687c45",
+      "fixture_reads": 0,
+      "denied_reads": 3,
+      "actual_upstream_forwarded": 0
+    }
+  ],
+  "selector_diagnostics": [
+    {
+      "id": "tha-ap353",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap354",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap355",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap356",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap357",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap358",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap359",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap361",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap362",
+      "entry": "/reader",
+      "width": 390,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap353",
+      "entry": "/",
+      "width": 1280,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap356",
+      "entry": "/",
+      "width": 1280,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap358",
+      "entry": "/",
+      "width": 1280,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    },
+    {
+      "id": "tha-ap362",
+      "entry": "/",
+      "width": 1280,
+      "combobox_count": 1,
+      "expected_option_count": 328,
+      "option_count": 328,
+      "first_mismatch": null
+    }
+  ],
+  "browser_run": true,
+  "upstream_provider_requests_forwarded": 0
+}

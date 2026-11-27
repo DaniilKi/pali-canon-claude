@@ -1,0 +1,272 @@
+{
+  "schema": "english9-local-component-acceptance-v1",
+  "status": "PASS_REVIEWED_SOURCE_AND_INSTALLED_COMPONENT_NOT_FINAL_GIT_OR_RELEASE",
+  "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
+  "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
+  "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "source_approval_sha256": "77f0fe797f4b768e6d408d81080984b4c3ca803bd8fc7a23e776eb17a71bbb14",
+  "runtime_inventory_sha256": "a9043c14b7774d69d97e2327300cf437257cd71c12e3e39f8f5de68010941425",
+  "source_client_13_final": {
+    "passed": 13,
+    "skipped": 0,
+    "failed": 0,
+    "evidence": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/NINE_SOURCE_CLIENT_13_FINAL_HELPER.tap",
+      "sha256": "8bb5d172acce0be18d5692db0f46cc6dc0679177318031d4aa540a73596f7567"
+    }
+  },
+  "amended_CI_QA8": {
+    "passed": 8,
+    "skipped": 0,
+    "failed": 0,
+    "evidence": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/CI_V2_QA38_FINAL8.tap",
+      "sha256": "b6101ee25faa200c2e81ab82ca547b5ea0b7ab1aaa04f8afafb781ca59579ad3"
+    }
+  },
+  "independent_source_replay": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/source-nine-root-replay/SOURCE_NINE_REPORT.json",
+    "sha256": "3cee6461f58fa28375bd43a7fb1ef29c705c3823bf133c5bcf3326622e65466a"
+  },
+  "actual_guarded_install39": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/TYPED_FINAL_INSTALL_RECEIPT.json",
+    "sha256": "b40ad3604ae8b9dfde21d66742710130b8b965a86dd41524240a56e47f795af3"
+  },
+  "actual_Git_archive_install39": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/TYPED_GIT_ARCHIVE_INSTALL_BINDING.json",
+    "sha256": "25768857e728caed65edbee8c0087298c36acceb9250802b1b2db204d9e5501e"
+  },
+  "independent_whole_source_HTML": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-independent-review/WIDGET_SOURCE_REVIEW.json",
+    "sha256": "d44ee3dc2e22730875351d0eda14b9eabaf34deef4a410a8705b83ce3999fa12"
+  },
+  "browser_report": {
+    "file": "BROWSER_ACCEPTANCE.json",
+    "sha256": "f27fc10a84f6dbf75d2e4a99df74ae71de3ceb7434a2356f1c9535a17b95ec40",
+    "counts": {
+      "api_metadata_sources": 9,
+      "api_catalogue": 1,
+      "compatibility_refusals": 24,
+      "api_full_sources": 9,
+      "api_search_sources": 9,
+      "api_quote_sources": 9,
+      "api_pagination_pages": 18,
+      "pagination_negative_cases": 18,
+      "held_API_refusals": 3,
+      "native_catalogue_cells": 2,
+      "native_saved": 13,
+      "native_word_study": 13,
+      "native_cells": 13,
+      "native_tamper_sources": 2,
+      "host_stale_cases": 90,
+      "host_cells": 18,
+      "host_valid_owner_transitions": 18,
+      "host_canonical_stale_cases": 2,
+      "host_held_refusals": 2,
+      "native_legacy_refusals": 2,
+      "offline_local_workflow": 1,
+      "two_tab_conflict": 1,
+      "deny_all_provider": 1
+    },
+    "upstream_provider_requests_forwarded": 0,
+    "both_owned_HTTP_groups_reaped_and_absent": true
+  },
+  "independent_actual_browser_review": {
+    "sha256": "3d8742a63a53e09e6607dac71563250276004e655a2dd7caff14fe62a22ae2be",
+    "review_object": {
+      "schema": "independent-nine-installed-browser-actual-run-review-v1",
+      "status": "PASS_EXACT_COMPONENT_BEHAVIORAL_EVIDENCE_REVIEW",
+      "report": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/nine-installed-v2-run/REPORT.json",
+        "sha256": "f27fc10a84f6dbf75d2e4a99df74ae71de3ceb7434a2356f1c9535a17b95ec40"
+      },
+      "command_receipt": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/nine-installed-v2-run/nine-installed-command.json",
+        "sha256": "4ee4557221b5a51faa538fb1e0cd7c629f9ff0671ed05c05ad6c411c57ccb8f3"
+      },
+      "log": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/nine-installed-v2-run/nine-installed.log",
+        "sha256": "69dccb3c8f867a9b841f34ca2e28161072e936e17e0f14a3b9466d82af132959"
+      },
+      "ready_contract": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_READY_NINE_V2.json",
+        "sha256": "cd82f75e695a877a471e19cb44ffe2c7699c156c74dcd133a0ed8d28414d084c"
+      },
+      "static_review": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-independent-review/CLI_V2_STATIC_REVIEW.json",
+        "sha256": "e5366183bc71872fe57aef348789f0c3f5870b86a62a5122d176e4a11f09d506"
+      },
+      "ready_binding_review": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-independent-review/READY_CONTRACT_REVIEW.json",
+        "sha256": "3ca386b26010bdab2893128d742dd6468a5c41104cc4dcac3b446d6812b4c05c"
+      },
+      "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
+      "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
+      "elapsed_seconds": 65.009,
+      "exit_code": 0,
+      "timed_out": false,
+      "all_expected_counters_exact": {
+        "api_metadata_sources": 9,
+        "api_catalogue": 1,
+        "compatibility_refusals": 24,
+        "api_full_sources": 9,
+        "api_search_sources": 9,
+        "api_quote_sources": 9,
+        "api_pagination_pages": 18,
+        "pagination_negative_cases": 18,
+        "held_API_refusals": 3,
+        "native_catalogue_cells": 2,
+        "native_saved": 13,
+        "native_word_study": 13,
+        "native_cells": 13,
+        "native_tamper_sources": 2,
+        "host_stale_cases": 90,
+        "host_cells": 18,
+        "host_valid_owner_transitions": 18,
+        "host_canonical_stale_cases": 2,
+        "host_held_refusals": 2,
+        "native_legacy_refusals": 2,
+        "offline_local_workflow": 1,
+        "two_tab_conflict": 1,
+        "deny_all_provider": 1
+      },
+      "source_fixtures_actual_read_counts": {
+        "tha-ap353": 11,
+        "tha-ap354": 7,
+        "tha-ap355": 7,
+        "tha-ap356": 8,
+        "tha-ap357": 7,
+        "tha-ap358": 8,
+        "tha-ap359": 7,
+        "tha-ap361": 7,
+        "tha-ap362": 11
+      },
+      "source_identity_and_coverage": {
+        "profiles": 9,
+        "source_owned_notes": 38,
+        "source_pages500": 18,
+        "native_cells": 13,
+        "simulated_host_cells": 18,
+        "all_nine_raw_pins_and_URL_owner_pairs_match_independent_approved_profiles": true,
+        "eligible_canonical358_uses_publisher356": true,
+        "publisher358_canonical360_held_refusal_before_provider": true,
+        "whole_publisher_edition_only_not_whole_chapter_or_line_complete_VRI": true,
+        "separate351_heading_and360_note_free_summary": true,
+        "source_grant": "Specific Walters/Whitman CC BY-NC-SA4.0 metadata/live-source scope; no genericCC-BY or commercial/media authorization inferred.",
+        "assertion_provenance": "Exact reviewed driver validates independent fullbody/orderednotes/root/source-rights/mapping hashes before counting each source. Native/host hashes and18independent pages confirm those same scopes; API payloads are never new expected-output goldens."
+      },
+      "epochs": [
+        {
+          "mode": "pinned-fixture",
+          "pid": 214577,
+          "ledger": {
+            "path": "/tmp/en9-ry1ehd15/pinned-fixture.jsonl",
+            "sha256": "1e8b1e699de5b6e1c11fd1a795d346a2938c25ce3b9aa167256c35af3963cecb"
+          },
+          "config": {
+            "path": "/tmp/en9-ry1ehd15/pinned-fixture.json",
+            "sha256": "2fbd55942e79e6775ed3efdb247a35e175fd3207eef84aeaa6ce032315dbb530"
+          },
+          "event_counts": {
+            "guard-ready": 2,
+            "literal-loopback-resolution": 1,
+            "fixture-read": 73
+          },
+          "recorded_cleanup": {
+            "pid": 214577,
+            "leader_reaped": true,
+            "group_absent": true
+          },
+          "read_only_process_group_probe_absent": true
+        },
+        {
+          "mode": "deny-all",
+          "pid": 216012,
+          "ledger": {
+            "path": "/tmp/en9-ry1ehd15/deny-all.jsonl",
+            "sha256": "80ba3b759583a7a2bba63b9e1810f1eb44e6ecf7ac52f979f597256a0f687c45"
+          },
+          "config": {
+            "path": "/tmp/en9-ry1ehd15/deny-all.json",
+            "sha256": "4d5136b1f598d54b32a31272026885deb5588267855513a3bfea710cefe2f1e7"
+          },
+          "event_counts": {
+            "guard-ready": 2,
+            "literal-loopback-resolution": 1,
+            "fetch-denied": 3
+          },
+          "recorded_cleanup": {
+            "pid": 216012,
+            "leader_reaped": true,
+            "group_absent": true
+          },
+          "read_only_process_group_probe_absent": true
+        }
+      ],
+      "actual_upstream_provider_forwards": 0,
+      "private_markers_absent_from_ledgers_configs_terminal_report_log": true,
+      "private_workflow_assertion_provenance": "Exact approved driver intercepted browser URLs/headers/bodies for synthetic private canaries, required clean state after explicitSaved/export/import/cancel/reload/networkoff/twotab workflows. No real private user records accessed in review.",
+      "all39_installed_physical_members_unchanged_after_run": true,
+      "original_VRI_ap3_note_focus_scope": {
+        "original_VRI_ap3_focus_exercised_here": false,
+        "translator_note_checks_are_distinct": true,
+        "separate_actual_gate_bound": true,
+        "review_sha256": "c9b2b7d08935ca7f5c2bf7fce2e4aaa5cf401ffe0cdef6c7b7f2f7fa7d1f0771",
+        "report_sha256": "ca04aa2dc96433c50589cff4494cea991c9c4f9c892c914acd46561b9a4d1dce",
+        "a11y_performed": false,
+        "physical_device": false,
+        "human_assistive_testing": false
+      },
+      "log_diagnostics": {
+        "response_finished_target_closed_unretrieved_task_warnings": 98,
+        "other_prefix_diagnostic_blocks": 0,
+        "exact_terminal_report_suffix": true,
+        "classification": "Nonblocking observed Playwright library background-task diagnostics, retained unchanged; cause not inferred. No clean-log claim or suppression. Exact terminal assertions and owned HTTP cleanup passed."
+      },
+      "reviewer_reran_browser_app_tests_Git_CI": false,
+      "behavioral_evidence_scope": "APPaeb/runtime34 and Git705/package39, controlled source fixtures only.",
+      "final_CI_release_or_dev_promotion_approval": false,
+      "limits": [
+        "390touch and1280layouts are Chromium emulation, not physical devices. Both host bridges simulated, not signed-in hosts. No human assistive or live-provider acceptance.",
+        "LoadedSaved network-off validated; fresh-browser offline remains false.",
+        "AP3/VRI note-focus gate remains distinct from English translator-note controls.",
+        "Full/focused native gates, SOURCECODE sealing, final39candidate rebind, exact-commitCI and devpromotion remain parent gates."
+      ]
+    }
+  },
+  "original_VRI_ap3_separate_actual_gate": {
+    "passed": 14,
+    "a11y": false,
+    "evidence": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/INSTALLED_SOURCE_NOTES.json",
+      "sha256": "ca04aa2dc96433c50589cff4494cea991c9c4f9c892c914acd46561b9a4d1dce"
+    }
+  },
+  "automation_diagnostics": {
+    "observed_Playwright_TargetClosed_completion_warning_blocks": 98,
+    "nonblocking_by_independent_result_review": true,
+    "cause_established": false,
+    "blanket_clean_log_claim": false
+  },
+  "preservation": {
+    "all359_old_full_profile_and_link_objects": true,
+    "all26_other_data_files": true,
+    "canon8544_records_61_books": true,
+    "private_data_and_historical_citation_formats_unchanged": true
+  },
+  "remaining": {
+    "publisher358_canonical360_held": true,
+    "Apadana_units_without_indexed_whole_English_source": 235,
+    "final_source_seal_and_bounded_legacy_gates_pending": true,
+    "actual_full_2092_native_inventory_pending": true,
+    "exact_final_CI_and_dev_promotion_pending": true,
+    "physical_device_testing": false,
+    "human_assistive_testing": false,
+    "signed_in_host_acceptance": false,
+    "new_live_upstream_availability_acceptance": false,
+    "fresh_browser_offline_acceptance": false
+  },
+  "main_changed": false,
+  "production_deployed": false,
+  "final_release_or_push_approval": false
+}

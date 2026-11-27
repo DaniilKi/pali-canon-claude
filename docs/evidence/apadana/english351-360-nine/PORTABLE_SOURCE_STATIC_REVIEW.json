@@ -1,0 +1,122 @@
+{
+  "schema": "independent-portable-source-nine-producer-review-v1",
+  "status": "GO_EXACT_SOURCE_ONLY_PRODUCER_AND_GOLDENS_FOR_ROOT_INTEGRATION",
+  "manifest_sha256": "9f6cb45d1543653e678a65964736aeb22fa00decdd6dadef6d2efea9fb375e14",
+  "producer_sha256": "11a2858afa9a302f4cf27f2c54d24a77024bec8c5a73f3f08c7e3f863c9a6feb",
+  "contract_sha256": "1fc76e48616de1c8948410151f167d59eb97d31ebe8d4f7c70e80598e0d6ba44",
+  "author_report_sha256": "3cee6461f58fa28375bd43a7fb1ef29c705c3823bf133c5bcf3326622e65466a",
+  "independent_inputs": {
+    "old_raw_first_producer_sha256": "c7cd8c7ceee884cf163e7c238f5fe5224f0d09c66530e41cc47291106d81f018",
+    "blind_preseal_sha256": "ccd3880c106b28623289893ca377eb8bb1748d3497236b59351e4eaf81b6b26f",
+    "all7_source_authority_file_pins_physically_matched": true,
+    "profiles_a9ce_links49c5_exact": true
+  },
+  "whole12_prior_functions_byte_identical": [
+    "sha",
+    "compact",
+    "jsha",
+    "u16",
+    "blob",
+    "require",
+    "descriptor",
+    "write_json",
+    "pinned_file",
+    "presentation",
+    "slice_pin",
+    "derive"
+  ],
+  "stdlib_only_no_SUT_or_app_imports": true,
+  "literal9_identity_whitelist_before_English_read": true,
+  "held358_excluded_unreachable_oldbranch_not_clearance": true,
+  "all9_original_raw_byte_SHA256_Gitblob_pins_physically_verified": [
+    {
+      "publisher": 351,
+      "path": "src/_poems/chapter-3/poem-351.md",
+      "sha256": "942ed1ea9f0b443d0aee952b672175ae16b489fea92093d4a77f322f587d1475"
+    },
+    {
+      "publisher": 352,
+      "path": "src/_poems/chapter-3/poem-352.md",
+      "sha256": "66a57f11fe1e1a70e03f97d8c80796df61fa06c7bed45eb4ab894f148ef19b27"
+    },
+    {
+      "publisher": 353,
+      "path": "src/_poems/chapter-3/poem-353.md",
+      "sha256": "58f9483eda4948652e5c9d087efd2a9ff6c771e81ec8fad59dcf9df589b92846"
+    },
+    {
+      "publisher": 354,
+      "path": "src/_poems/chapter-3/poem-354.md",
+      "sha256": "a4d1bd65e84529d5b84007c6efd154b69eeca1fe9afc51ece6f9c32d16feb68a"
+    },
+    {
+      "publisher": 355,
+      "path": "src/_poems/chapter-3/poem-355.md",
+      "sha256": "e8f764137cea90ab89b9e50a6ba56262952703337e661a11fd5a2474093174dd"
+    },
+    {
+      "publisher": 356,
+      "path": "src/_poems/chapter-3/poem-356.md",
+      "sha256": "5b548b2baf80c546b2fd4292d687b68485e8fe580a4be9e13a571b63b6472181"
+    },
+    {
+      "publisher": 357,
+      "path": "src/_poems/chapter-3/poem-357.md",
+      "sha256": "42db12f6969557e8cfa71798e52af5c65d6294b988ae51f4c55b7d97e94fba77"
+    },
+    {
+      "publisher": 359,
+      "path": "src/_poems/chapter-3/poem-359.md",
+      "sha256": "c4407a8ca54f710c4cdfa4e33cb0dd11153de1b334c81e9618022bf172e34944"
+    },
+    {
+      "publisher": 360,
+      "path": "src/_poems/chapter-3/poem-360.md",
+      "sha256": "588a0ece97c85896e42977e6e7219536af3a264288f650aef8a0516d5dab5bf9"
+    }
+  ],
+  "all6_controlling_rights_pins_physically_verified": true,
+  "rights_scope_specific_Walters_Whitman_NC_SA4_not_genericBY_no_media_commercial_grant": true,
+  "source_domain_checks_reviewed": [
+    "Lossless complete original partition; whole note definitions and each exact owner;38 note texts/order/calls",
+    "No Unicode normalization; BMP-only UTF16 slicing precondition; visible note markers and same-number ownership",
+    "Source63 full paragraphs and36 physical verse/quote layouts/labels, both500-prefix domains and18pages",
+    "Only356 finite body cc/chch pair; no foreign/extra pair",
+    "351 separate unnoted38-unit heading/no invented preface",
+    "360 separate198-unit3paragraph6-line note-free summary, repeated wording/order preserved; root10592..10597 and independent slash362/8..10",
+    "Pinned physical/logicalf3 canonical source,2d134 original XML, full14645 tuple equality and61books8544IDs; complete root wrappers/labels",
+    "Old359/English16 preservation gates remain separate; no line-complete VRI/wholechapter claim"
+  ],
+  "metadata_only_payload_and_exact3_artifact_allowlist_verified": true,
+  "full_English_body_or38_note_texts_found_in_metadata_payload_or3_reports": false,
+  "actual_author_replay_receipt_reconciled_not_reexecuted": true,
+  "source_counts": {
+    "poems": 9,
+    "body_paragraphs": 63,
+    "physical_stanza_entries": 36,
+    "poem_notes": 38,
+    "display_pairs": 1,
+    "pages500": 18,
+    "body_characters_utf16": 6698,
+    "separate_note_free_paratext": 1,
+    "separate_note_free_summaries": 1
+  },
+  "bounded_notes": [
+    {
+      "kind": "Inherited historical evidence label",
+      "detail": "canonical_source_scope_only historical all16_raw_files flag means16 source ARTIFACTS:10 scouted poem originals +6 rights/routing files, independently matched to recovered verification/acquisition records. It does not mean16 poems. This verifier itself reads exactly9 selected originals +6 notices; held358 remains excluded."
+    },
+    {
+      "kind": "Output portability limit",
+      "detail": "Unchanged write_json uses default text encoding/newline. Current author evidence supports its Linux/Ubuntu source gate; WindowsPython3.12 locale/newline portability has not been demonstrated. Hash-domain derivation itself uses explicit UTF8/UTF16 and fails closed on unknown text."
+    }
+  ],
+  "blocking_source_or_payload_findings": [],
+  "remaining": [
+    "Root integration of only exact2 payload files; source-code direct pins/current-source reseal",
+    "Bounded workflow on pinned original sources with exact3 metadata artifact allowlist; never recursive/private-source-text upload",
+    "Independent runtime/package/browser/source-enabled13/fullsameSHA CI gates remain required"
+  ],
+  "runtime_API_browser_activation_CI_release_dev_approval": false,
+  "reviewer_activity": "External stdlib source/AST/JSON/hash/private-fixture leak scan only. No producer execution, app/SUT/test/build/Git/network/CI calls or rooted edits."
+}

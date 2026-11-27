@@ -7,8 +7,8 @@ on:
 permissions:
   contents: read
 env:
-  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: 7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad
+  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_368_TEST_FILES.json
+  CI_TEST_BASELINE_SHA: 3fc7bcace27d23993761f3fe8d5800373f514f460ed0a7056835be214023015e
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -870,6 +870,15 @@ jobs:
             src/_poems/chapter-3/poem-348.md
             src/_poems/chapter-3/poem-349.md
             src/_poems/chapter-3/poem-350.md
+            src/_poems/chapter-3/poem-351.md
+            src/_poems/chapter-3/poem-352.md
+            src/_poems/chapter-3/poem-353.md
+            src/_poems/chapter-3/poem-354.md
+            src/_poems/chapter-3/poem-355.md
+            src/_poems/chapter-3/poem-356.md
+            src/_poems/chapter-3/poem-357.md
+            src/_poems/chapter-3/poem-359.md
+            src/_poems/chapter-3/poem-360.md
             src/_poems/chapter-3/chapter-3.json
       - name: Fetch exact VRI Book36 for independent English16 source replay
         if: matrix.group == 'apadana'
@@ -888,6 +897,29 @@ jobs:
         run: |
           node scripts/shard-data.mjs --unpack server/data .fixtures/english16-canon
           python3 scripts/apadana/thera335-350/portable_source_replay.py --publisher-checkout .fixtures/apadana-pinned --canon .fixtures/english16-canon/canon.json.gz --vri-xml .fixtures/vri-english335-350/romn/s0510m1.mul.xml --out .fixtures/english16-source-replay
+      - name: Replay nine exact sources with independent goldens and original VRI tuples
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          python3 -X utf8 scripts/apadana/thera351-360-nine/source-nine-replay.py --publisher-root .fixtures/apadana-pinned --canon .fixtures/english16-canon/canon.json.gz --vri-xml .fixtures/vri-english335-350/romn/s0510m1.mul.xml --out .fixtures/english9-source-replay
+      - name: Require current368 physical source closure without historical substitution
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          node --test --test-reporter=tap tests/intake368-source-seal.test.mjs | tee reviewed-current368-source-seal.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-current368-source-seal.tap","utf8"); for(const [key,value] of [["tests",1],["pass",1],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all nine publisher351-360 source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera351-360-nine-source.test.mjs tests/thera351-360-nine-client.test.mjs | tee reviewed-publisher351-360-nine.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher351-360-nine.tap","utf8"); for(const [key,value] of [["tests",13],["pass",13],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
         run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
@@ -1596,6 +1628,11 @@ jobs:
             reviewed-publisher321-329.tap
             reviewed-publisher331-334.tap
             reviewed-publisher335-350.tap
+            reviewed-current368-source-seal.tap
+            reviewed-publisher351-360-nine.tap
+            .fixtures/english9-source-replay/SOURCE_NINE_REPORT.json
+            .fixtures/english9-source-replay/NORMALIZATION_MANIFEST.json
+            .fixtures/english9-source-replay/SOURCE_NINE_SEAL.json
             .fixtures/english16-source-replay/SOURCE_REPLAY_REPORT.json
             .fixtures/english16-source-replay/SOURCE_REPLAY_SEAL.json
             reviewed-six-boundary.tap

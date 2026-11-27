@@ -1,0 +1,48 @@
+{
+  "schema": "independent-nine-app-parser-client-source-review-v1",
+  "status": "GO_EXACT_FINITE_APP_PARSER_CLIENT_SOURCE_DELTA_ONLY",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "source_review_sha256": "90918b7fde8ac9939750e794154f0143fb725e6a3d98d9fcda9f73c4727c935f",
+  "reviewed_current_files": {
+    "src/apadana-thera.mjs": {
+      "bytes": 34652,
+      "sha256": "09030e06dde0aab3b014cdcf33f6830ffc865712b8c7f6b8028492c4b2cce6b7"
+    },
+    "web/translation-policy.mjs": {
+      "bytes": 26843,
+      "sha256": "9f2bf9384375400cb232663de33cc41bdd497d4ac78fe0c1f23c35a9f8f80eea"
+    },
+    "src/chatgpt-widget.mjs": {
+      "bytes": 99778,
+      "sha256": "2977a795452536f4e63c03704c7c5d3973066017c389151d24cceadc74936ced"
+    },
+    "src/apadana-thera-profiles.mjs": {
+      "bytes": 834151,
+      "sha256": "a6228de1ba21807b1ad4d09e7c7689999f16b3d0f1458a4641ec361b6076a15a"
+    },
+    "src/apadana-thera351-360-profiles.mjs": {
+      "bytes": 30927,
+      "sha256": "bef582559e7f02372f7283239d4dddb064178258ee60641e23c5b7f81f4e5cd2"
+    }
+  },
+  "parser_owner_contract_sha256": "e08b1cea95858f99341c27d7cd747e725704a4a56795e82b16bb8952c1908b97",
+  "blocking_findings": [],
+  "complete_baseline_byte_inverse_files": [
+    "src/apadana-thera.mjs",
+    "web/translation-policy.mjs",
+    "src/chatgpt-widget.mjs",
+    "src/apadana-thera-profiles.mjs"
+  ],
+  "all_nine_raw_source_owner_vectors_match": true,
+  "old359_profile_and_client_guards_preserved": true,
+  "held_publisher358_canonical360_excluded": true,
+  "eligible_canonical358_publisher356_explicit": true,
+  "widget_asset_version": 46,
+  "files": {
+    "verify_static_delta.py": "dbe09dcf841e852da9c664d8a0180063b34d8a66d6c968542bc3da749e340242",
+    "STATIC_RECONCILIATION.json": "3634c8a695af7bc89f5e2b200699107151f2a83704e6dc021ba347fb1d018131",
+    "REVIEW.md": "d6f4f08eac2136bc5b9aad51c6facbd4e1f4ded664a00967b882ea504d17506e"
+  },
+  "runtime_API_browser_package_CI_activation_release_approval": false,
+  "application_imports_tests_build_network_Git_mutations_or_repository_edits": false
+}

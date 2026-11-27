@@ -1,0 +1,2901 @@
+{
+  "schema": "finite-current368-source-case-inventory-evidence-v1",
+  "status": "SOURCE_CASE_AUDIT_CANDIDATE_PENDING_INDEPENDENT_REVIEW_NOT_FULL_TERMINAL_ACCEPTANCE",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "predecessor_sha256": "f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d",
+  "predecessor_counts": {
+    "original_test_files": 339,
+    "original_terminal_tests": 2068,
+    "preserved_QA_tests": 8,
+    "total_terminal_tests": 2076,
+    "existing_optional_source_skips": 267
+  },
+  "unchanged_old_files": [
+    "tests/abhidhamma-navigation-protocol.test.mjs",
+    "tests/abhidhamma-script-input.test.mjs",
+    "tests/abhidhamma.test.mjs",
+    "tests/alignment-certainty.test.mjs",
+    "tests/an-numbered-sections.test.mjs",
+    "tests/an-ten-link-audit.test.mjs",
+    "tests/an-ten-selections.test.mjs",
+    "tests/an247-cross-questioning-partial.test.mjs",
+    "tests/an859-prose-partial.test.mjs",
+    "tests/analyse.test.mjs",
+    "tests/analysis-reader-modes-protocol.test.mjs",
+    "tests/analysis-reader-modes.test.mjs",
+    "tests/analysis-selection.test.mjs",
+    "tests/anandajoti.test.mjs",
+    "tests/apadana-edition-navigation.test.mjs",
+    "tests/apadana-four-boundary-migration.test.mjs",
+    "tests/apadana-four-locator-consumers.test.mjs",
+    "tests/apadana-fourth-boundaries.test.mjs",
+    "tests/apadana-integration.test.mjs",
+    "tests/apadana-next-boundaries.test.mjs",
+    "tests/apadana-next-client.test.mjs",
+    "tests/apadana-next-ten-cached-consumers.test.mjs",
+    "tests/apadana-next-ten-locator-consumers.test.mjs",
+    "tests/apadana-next-ten-migration.test.mjs",
+    "tests/apadana-pair-boundary.test.mjs",
+    "tests/apadana-pair-locator-compat.test.mjs",
+    "tests/apadana-parser.test.mjs",
+    "tests/apadana-six-boundary-migration.test.mjs",
+    "tests/apadana-six-cached-consumers.test.mjs",
+    "tests/apadana-six-locator-consumers.test.mjs",
+    "tests/apadana-thera-boundaries.test.mjs",
+    "tests/apadana-thera-fifth.test.mjs",
+    "tests/apadana-thera-next.test.mjs",
+    "tests/apadana-thera-pair-boundaries.test.mjs",
+    "tests/apadana-thera-pair-intake.test.mjs",
+    "tests/apadana-thera-scaled.test.mjs",
+    "tests/apadana-thera-sixth.test.mjs",
+    "tests/apadana-thera141-180.test.mjs",
+    "tests/apadana-thera181-220.test.mjs",
+    "tests/apadana-thera221-230.test.mjs",
+    "tests/apadana-thera231-240.test.mjs",
+    "tests/apadana-thera241-250.test.mjs",
+    "tests/apadana-thera251-259.test.mjs",
+    "tests/apadana-third-boundaries.test.mjs",
+    "tests/apadana-three.test.mjs",
+    "tests/approved-acceptance.test.mjs",
+    "tests/approved-current333-authority-negatives.test.mjs",
+    "tests/approved-current339-authority-negatives.test.mjs",
+    "tests/ati-partial-pilot.test.mjs",
+    "tests/ati-review-packet.test.mjs",
+    "tests/ati-search.test.mjs",
+    "tests/ati-sections-build.test.mjs",
+    "tests/ati-stories.test.mjs",
+    "tests/backup-note-conflicts.test.mjs",
+    "tests/boundary333-336-source-input.test.mjs",
+    "tests/bounded-python.test.mjs",
+    "tests/browse-scope.test.mjs",
+    "tests/browser-current359-routing.test.mjs",
+    "tests/bundled-data.test.mjs",
+    "tests/calendar-evidence.test.mjs",
+    "tests/calendar.test.mjs",
+    "tests/canonical-build.test.mjs",
+    "tests/canonical-search-pins.test.mjs",
+    "tests/cbeta-khp-assessment.test.mjs",
+    "tests/chatgpt-widget.test.mjs",
+    "tests/check-ci-stages.test.mjs",
+    "tests/citation-id-coverage.test.mjs",
+    "tests/citation-pagination.test.mjs",
+    "tests/citation-range-validation.test.mjs",
+    "tests/citation-resolution.test.mjs",
+    "tests/commentary-cache.test.mjs",
+    "tests/commentary-scripts.test.mjs",
+    "tests/commentary-search.test.mjs",
+    "tests/commentary-segment-refs.test.mjs",
+    "tests/commentary.test.mjs",
+    "tests/condensed-source-ranges.test.mjs",
+    "tests/connector-listing.test.mjs",
+    "tests/core.test.mjs",
+    "tests/corpus-check.test.mjs",
+    "tests/current333-uri-bindings.test.mjs",
+    "tests/current333-version-bindings.test.mjs",
+    "tests/daily.test.mjs",
+    "tests/dasabala-commentary.test.mjs",
+    "tests/dasabala-spans.test.mjs",
+    "tests/data-refresh.test.mjs",
+    "tests/dictionary-response.test.mjs",
+    "tests/docs-site.test.mjs",
+    "tests/dppn.test.mjs",
+    "tests/dt-scope-and-potaliya.test.mjs",
+    "tests/early-an-shared.test.mjs",
+    "tests/edition-pages.test.mjs",
+    "tests/editorial-content-sha256.test.mjs",
+    "tests/english-catalogue-policy.test.mjs",
+    "tests/english-input.test.mjs",
+    "tests/english-source-catalogue.test.mjs",
+    "tests/evals.test.mjs",
+    "tests/evidence-commands.test.mjs",
+    "tests/evidence-daily-pool.test.mjs",
+    "tests/evidence-guide-excerpts.test.mjs",
+    "tests/family-protectors-review.test.mjs",
+    "tests/final-excerpt-binding-review.test.mjs",
+    "tests/find-abt-citations.test.mjs",
+    "tests/find-citations.test.mjs",
+    "tests/find-edition-citations.test.mjs",
+    "tests/four-boundary-ci.test.mjs",
+    "tests/four-boundary-history.test.mjs",
+    "tests/four-history-data.test.mjs",
+    "tests/grouped-scope.test.mjs",
+    "tests/guide-excerpt-subjects.test.mjs",
+    "tests/held42-editorial-gap.test.mjs",
+    "tests/historical104-auxiliary-workflow.test.mjs",
+    "tests/hosted-recovery.test.mjs",
+    "tests/hosting-memory.test.mjs",
+    "tests/http-client.test.mjs",
+    "tests/http-tool-worker.test.mjs",
+    "tests/i18n.test.mjs",
+    "tests/installed-corpus.test.mjs",
+    "tests/installed-data.test.mjs",
+    "tests/intake343-ci.test.mjs",
+    "tests/intake343-source-input.test.mjs",
+    "tests/intake359-history.test.mjs",
+    "tests/intake359-source-history.test.mjs",
+    "tests/iti-range-bindings.test.mjs",
+    "tests/link-coverage.test.mjs",
+    "tests/lookup-script-input.test.mjs",
+    "tests/mcp-contracts.test.mjs",
+    "tests/memorise.test.mjs",
+    "tests/method.test.mjs",
+    "tests/milinda-export.test.mjs",
+    "tests/milinda-medicine-partial.test.mjs",
+    "tests/milinda-screening.test.mjs",
+    "tests/milinda-sections.test.mjs",
+    "tests/nalaka-kondanna-review.test.mjs",
+    "tests/name-title-evidence.test.mjs",
+    "tests/navigation-commands.test.mjs",
+    "tests/next-ten-history.test.mjs",
+    "tests/next-ten-source-history.test.mjs",
+    "tests/normalised-search-quotes.test.mjs",
+    "tests/note-draft-recovery.test.mjs",
+    "tests/ordinary-excerpt-bindings.test.mjs",
+    "tests/ordinary-excerpt-packet.test.mjs",
+    "tests/outage-diagnostics.test.mjs",
+    "tests/parallels.test.mjs",
+    "tests/paritta-script-input.test.mjs",
+    "tests/paritta.test.mjs",
+    "tests/partial-coverage-export.test.mjs",
+    "tests/partial-page-build.test.mjs",
+    "tests/partial-translations.test.mjs",
+    "tests/passage-notes-policy.test.mjs",
+    "tests/patthana-translation-candidate.test.mjs",
+    "tests/postcanonical-ambiguous-paragraphs.test.mjs",
+    "tests/postcanonical-scope.test.mjs",
+    "tests/postcanonical-title-ambiguity.test.mjs",
+    "tests/postcanonical-title-priority.test.mjs",
+    "tests/postcanonical-work-scope.test.mjs",
+    "tests/postcanonical-zero-special.test.mjs",
+    "tests/postcanonical.test.mjs",
+    "tests/priority-prose-review.test.mjs",
+    "tests/pronunciation.test.mjs",
+    "tests/provider-scope-audit.test.mjs",
+    "tests/provider-stream.test.mjs",
+    "tests/publisher317-ci.test.mjs",
+    "tests/publisher325-ci.test.mjs",
+    "tests/publisher333-ci.test.mjs",
+    "tests/publisher339-ci.test.mjs",
+    "tests/quoted-wording.test.mjs",
+    "tests/reader-script-input.test.mjs",
+    "tests/reading-chapters.test.mjs",
+    "tests/reading-navigation.test.mjs",
+    "tests/reference-input-integrity.test.mjs",
+    "tests/rendered-source-review-memory.test.mjs",
+    "tests/resolve-translation-titles.test.mjs",
+    "tests/reviewed-exclusions.test.mjs",
+    "tests/reviewed-paired-compilations.test.mjs",
+    "tests/reviewed-shared-page.test.mjs",
+    "tests/saved-highlights.test.mjs",
+    "tests/script-refresh.test.mjs",
+    "tests/scripts.test.mjs",
+    "tests/search-input-integrity.test.mjs",
+    "tests/search-quotes.test.mjs",
+    "tests/search-reading-commands.test.mjs",
+    "tests/search-requested-span-protocol.test.mjs",
+    "tests/search-requested-span.test.mjs",
+    "tests/search-scope.test.mjs",
+    "tests/search-source-phrases.test.mjs",
+    "tests/semantic.test.mjs",
+    "tests/shared-spans.test.mjs",
+    "tests/shared-translations.test.mjs",
+    "tests/six-boundary-ci.test.mjs",
+    "tests/six-boundary-history.test.mjs",
+    "tests/six-operation-scope.test.mjs",
+    "tests/sn27-section.test.mjs",
+    "tests/sn3615-prefix-partial.test.mjs",
+    "tests/source-book-search-protocol.test.mjs",
+    "tests/source-book-search.test.mjs",
+    "tests/source-books.test.mjs",
+    "tests/source-diagnostics.test.mjs",
+    "tests/source-headings.test.mjs",
+    "tests/source-notes-ci.test.mjs",
+    "tests/source-notes-client.test.mjs",
+    "tests/source-notes.test.mjs",
+    "tests/source-passage.test.mjs",
+    "tests/story-boundaries.test.mjs",
+    "tests/study-backup-policy.test.mjs",
+    "tests/study-navigation.test.mjs",
+    "tests/study-script-contracts.test.mjs",
+    "tests/subparagraph-scope.test.mjs",
+    "tests/synthetic-fetch-ledger.test.mjs",
+    "tests/talk-cursor-scope.test.mjs",
+    "tests/talk-resolution-scope.test.mjs",
+    "tests/talk-script-input.test.mjs",
+    "tests/talks.test.mjs",
+    "tests/test-runner-scheduling.test.mjs",
+    "tests/thag-sixteen-boundaries.test.mjs",
+    "tests/thag-sixteen-consumers.test.mjs",
+    "tests/thera-cached-poem-notes.test.mjs",
+    "tests/thera-hundred-client.test.mjs",
+    "tests/thera231-240-client.test.mjs",
+    "tests/thera251-259-client.test.mjs",
+    "tests/thera301-310-client.test.mjs",
+    "tests/thera301-310-source.test.mjs",
+    "tests/thera331-334-source.test.mjs",
+    "tests/thera333-legacy-projection.test.mjs",
+    "tests/thera333-legacy-source-inverses.test.mjs",
+    "tests/thera335-350-client.test.mjs",
+    "tests/thera339-legacy-projection.test.mjs",
+    "tests/title-pagination.test.mjs",
+    "tests/tool-titles.test.mjs",
+    "tests/topic-script-input.test.mjs",
+    "tests/topic-source-links.test.mjs",
+    "tests/topics.test.mjs",
+    "tests/translation-comparison-policy.test.mjs",
+    "tests/translation-continuation.test.mjs",
+    "tests/translation-prefix.test.mjs",
+    "tests/translation-resolution-notes.test.mjs",
+    "tests/translation-selection.test.mjs",
+    "tests/upatissa-partial.test.mjs",
+    "tests/variants.test.mjs",
+    "tests/verify-boundaries.test.mjs",
+    "tests/verify-english-boundaries.test.mjs",
+    "tests/verify-english-completeness.test.mjs",
+    "tests/verify-english-scope.test.mjs",
+    "tests/verify-provenance.test.mjs",
+    "tests/verify-reading-spans.test.mjs",
+    "tests/verify-script-input.test.mjs",
+    "tests/verify-source-literal.test.mjs",
+    "tests/verify-translation-versions.test.mjs",
+    "tests/verify.test.mjs",
+    "tests/verse-scope-review.test.mjs",
+    "tests/verse-search.test.mjs",
+    "tests/vinaya-bmc.test.mjs",
+    "tests/vinaya-navigation-protocol.test.mjs",
+    "tests/vinaya-partials.test.mjs",
+    "tests/vinaya-script-input.test.mjs",
+    "tests/walshe-selections.test.mjs",
+    "tests/web-an-numbered-section-policy.test.mjs",
+    "tests/web-an-ten-selection-policy.test.mjs",
+    "tests/web-book-search.test.mjs",
+    "tests/web-bookmark-import.test.mjs",
+    "tests/web-bookmark-location.test.mjs",
+    "tests/web-canonical-search.test.mjs",
+    "tests/web-commentary-search.test.mjs",
+    "tests/web-daily-reading.test.mjs",
+    "tests/web-focus-ownership.test.mjs",
+    "tests/web-local-storage-write.test.mjs",
+    "tests/web-milinda-partial-policy.test.mjs",
+    "tests/web-milinda-policy.test.mjs",
+    "tests/web-post-search.test.mjs",
+    "tests/web-progress-import.test.mjs",
+    "tests/web-quote-check.test.mjs",
+    "tests/web-reader-ci-artifacts.test.mjs",
+    "tests/web-reader.test.mjs",
+    "tests/web-reading-plans.test.mjs",
+    "tests/web-reading-pointer-reconciliation.test.mjs",
+    "tests/web-reading-position.test.mjs",
+    "tests/web-request-lifecycle.test.mjs",
+    "tests/web-saved-passages.test.mjs",
+    "tests/web-sn27-section-policy.test.mjs",
+    "tests/web-source-headings.test.mjs",
+    "tests/web-tool-result.test.mjs",
+    "tests/web-topics-study.test.mjs",
+    "tests/web-translation-policy.test.mjs",
+    "tests/widget-cancellation.test.mjs",
+    "tests/widget-commentary.test.mjs",
+    "tests/widget-continuation.test.mjs",
+    "tests/widget-deadline.test.mjs",
+    "tests/widget-exact-segments.test.mjs",
+    "tests/widget-hash-serialization.test.mjs",
+    "tests/widget-json-output-cache.test.mjs",
+    "tests/widget-links.test.mjs",
+    "tests/widget-model-context.test.mjs",
+    "tests/widget-navigation.test.mjs",
+    "tests/widget-note-frame-cache.test.mjs",
+    "tests/widget-postcanonical.test.mjs",
+    "tests/widget-reader-errors.test.mjs",
+    "tests/widget-rendering.test.mjs",
+    "tests/widget-sizing.test.mjs",
+    "tests/widget-source-books.test.mjs",
+    "tests/widget-streamed-input.test.mjs",
+    "tests/widget-teardown.test.mjs",
+    "tests/wiring-data2.test.mjs",
+    "tests/yasoja-commentary.test.mjs"
+  ],
+  "unchanged_old_file_count": 302,
+  "all_unchanged_old_physical_hashes_exact": true,
+  "changed_old_files": {
+    "tests/apadana-disclosures.test.mjs": {
+      "before_sha256": "fcd3ff8c99fc2b6fd2b4a4872059dc60330a2340aba71dd2c84d3c10a077a989",
+      "after_sha256": "48a974214ac02352d52160d785a855c6b21bf728683d73a3a68190eb9bf23c20"
+    },
+    "tests/apadana-fourth-client.test.mjs": {
+      "before_sha256": "df4bed65dd5c955bdcaf13b4410ece7c372477a0eb6e15f961114507fc96def7",
+      "after_sha256": "e892f8ecc37b4f60419475fa7734fb0d53d4a9aabbcf2eb57f9b36d461a0f1d4"
+    },
+    "tests/apadana-fourth.test.mjs": {
+      "before_sha256": "f669f263793ec25f4b53e5f90e9a4a3ced1ada95f7a4e4cc85661a5148e2cb19",
+      "after_sha256": "e0fdac899a5cd6ce6939c78afcdcdc8da61267e8396f00d079a24fbc5b738868"
+    },
+    "tests/apadana-held234.test.mjs": {
+      "before_sha256": "0a79f8471c7de7ce43bd0d9c61a65cfc3ec1edbf9ab03e5cfd459607b7bbc774",
+      "after_sha256": "fbcff0abdc1b1a6a2d318b37528e008967cc61aabd93ae2d8b2774b2038256d4"
+    },
+    "tests/apadana-next.test.mjs": {
+      "before_sha256": "269efd0aa5b310dc1b0c2274bb07e82f0f74bf285cef43659d705bfa519ae082",
+      "after_sha256": "e2c498dd264b70d1a3ad07d90d71ac90e3b358ed549c1ebaacc963668e80bec3"
+    },
+    "tests/apadana-thera.test.mjs": {
+      "before_sha256": "dff4f38a7d0abb37def716cb93796dc3304e581110e7af705f78a35abff06067",
+      "after_sha256": "2e6e0e08268838ab5f5ebcfa438ceaecd552a554e387f8cdae30d9249228072e"
+    },
+    "tests/apadana-third.test.mjs": {
+      "before_sha256": "9c7126f1e074d77f6a167ea52124abc4c86c6bc0f80b8075b4b7a8be460a8db0",
+      "after_sha256": "92e72fe456b1a056b6e4052f4a017853cce4c9d6466b9f99f0ca3f821b9b58a0"
+    },
+    "tests/ci-test-partitions.test.mjs": {
+      "before_sha256": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae",
+      "after_sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e"
+    },
+    "tests/current339-source-inverses.test.mjs": {
+      "before_sha256": "1226b994d18fd9cc7fe470d5865f8ff616c1dd75e42b146a50c34574a005ff6f",
+      "after_sha256": "5e4e036b932a1c6e90f028295bdb45626e016f38eb8a14e186fe174d244a14a0"
+    },
+    "tests/current343-bindings.test.mjs": {
+      "before_sha256": "6051a4e330b42442e6c469d226c2c1cd0e5638fe3db1295a191b06b725de8089",
+      "after_sha256": "30801f1bc203245f8cb3ee9c0bb3ea0ce8267d19a1fe3b568817e2cd37c61b7e"
+    },
+    "tests/held234-client.test.mjs": {
+      "before_sha256": "d9e8caa963afcd1a8ab886d351e4fbc3809811a8a92b7676fcc9ae9936fe1d33",
+      "after_sha256": "0b5969a079d50ce005f35e508f54dcb8ed343f08aa1e99ba826a13f2d8821cef"
+    },
+    "tests/held234-current333-chain.test.mjs": {
+      "before_sha256": "f1cc9c851bfffb4913bc71e030919e6105ac91942d9a23f1fefbd1924b59b3f5",
+      "after_sha256": "51655bcfc60b9d3707caf863eab909ff681a2d66d4c65685ecdc7c41eec2418e"
+    },
+    "tests/intake343-metadata.test.mjs": {
+      "before_sha256": "fb86f7ba2a9fe0a61c95fd4c1e2b471f020392b1fb8796c45fcd1623f0e7cdb6",
+      "after_sha256": "a94c49b2b03ed564b2323449813e16a75b25a5ed92e3e5a967176c0307e14180"
+    },
+    "tests/intake359-metadata-history.test.mjs": {
+      "before_sha256": "e63cf976459d2ee2d63b0b6ac816122dd5a61c413bd5ce2cd701824cbd9eaf87",
+      "after_sha256": "538978d2ef38a011076a8611e4b1d2b7a7d9daf93ca89c682b2b5564c76844f4"
+    },
+    "tests/next-ten-history-data.test.mjs": {
+      "before_sha256": "3695d3eb7692ba02e061513a89125e6e9702521d8c023bcc42de4e6192454c2c",
+      "after_sha256": "69f74a5c5f13cf0f7fdccb7eb85cf22affdbc50ed27bfb1aed929db2fd20e55c"
+    },
+    "tests/six-boundary-source-input.test.mjs": {
+      "before_sha256": "13c443a8c66893939bcda5c63a744a9648e47ec86020bdd09c9a6a67036569c9",
+      "after_sha256": "5de82ea399f7602d7dd2c38c09f54cd9a9d025f7e2a2d59a3af0579b87945287"
+    },
+    "tests/source-notes-baseline-projection.test.mjs": {
+      "before_sha256": "6a6464f74ee6bc5eb81759b41bac81fa8a7f8bd4b86ff2e46ffa989142441add",
+      "after_sha256": "631ec6f793d7ce518e21a5eece52aeac7c50138be50e8d5cfd684a88ccef1afa"
+    },
+    "tests/source-notes-compatibility.test.mjs": {
+      "before_sha256": "38576f7c5b04703a3a1fe370228cfa8edacd2ad244fb19de760880b0f7239c5e",
+      "after_sha256": "b0eab70a46893957a1433181081f3ef5a6fac3fd66ea328ea191d1000b1dfd80"
+    },
+    "tests/thera-commentary-locators.test.mjs": {
+      "before_sha256": "b7111a62a188669d5c8137d64f391a918d3ce414cfa8a902abcb31db87edeeff",
+      "after_sha256": "1e5e8607d3131adecb164a4c56e91de71aae057a5a7c439103886048a9c6370b"
+    },
+    "tests/thera141-180-client.test.mjs": {
+      "before_sha256": "1a7d0fe0c294f3f113c6988524456606bacde507aae1d8797258fb0a38b89e42",
+      "after_sha256": "a7f41e07febc41acdb240f7b01f5ff0863b5700e4ca852b32d1a10867f89b3d8"
+    },
+    "tests/thera181-220-client.test.mjs": {
+      "before_sha256": "5374367f8cd1b14ef736deb3678ba0574f975ea2ceeab80ef15a5de1a5473205",
+      "after_sha256": "c8695064857fa2b7e404091aa64da167d4ec2eb6b3ad36dc1091feb17b1ba77d"
+    },
+    "tests/thera221-230-client.test.mjs": {
+      "before_sha256": "1f24fe34d11fd7883a4d2989558b17123f29c1e0f10279e0ed3d7c46a99d36de",
+      "after_sha256": "f81fb17374a5ebba7c5dedb68ce4a970b9b6d69e331be5133d6d4b60422f4a56"
+    },
+    "tests/thera241-250-client.test.mjs": {
+      "before_sha256": "9e2fed56d5320b4a0993ce78ec5aeb88087e621a75416ed27be5bc4ef55c0fab",
+      "after_sha256": "8c32c0a6867dc6d543667fbaede0d7941a0f486326b92beeba70a7b0a355a98c"
+    },
+    "tests/thera261-280-client.test.mjs": {
+      "before_sha256": "b151992c96b402bdb9a51939b947c23dac7478b71e0fa3ce7cb19bd80afc5c34",
+      "after_sha256": "b721ed69f91cb6144d70613ffc09a4c4c82a5ca2f8aa8d2a895ef07d34b22261"
+    },
+    "tests/thera261-280-source.test.mjs": {
+      "before_sha256": "2ec3e9692d085393e6a1a759c4ab909464b439a612bc14cd9deb8da71be79bac",
+      "after_sha256": "252dcc58ac2618029a171e74ec46a4b28c05bdc593bf89bd62b3e642d61bd373"
+    },
+    "tests/thera281-285-client.test.mjs": {
+      "before_sha256": "2b3782059013f276e7ff1a07cac0618bc5581b1ca074bf6dd491918f874a0f0f",
+      "after_sha256": "abe3db29a30e998152736fd9ca9c42598441c153a62ee1e7a524739391d1b3b1"
+    },
+    "tests/thera281-285-source.test.mjs": {
+      "before_sha256": "5399b275f6f72c7e8c8ecaae2ab526d5c9c409f6d4fc55978cd7492a2eaf0b7c",
+      "after_sha256": "3fe3081c55681611c396d2a845be497ec2e7611bca0ac2e4e02a706c65d0fcad"
+    },
+    "tests/thera287-288-client.test.mjs": {
+      "before_sha256": "cfd6d853a942b0aa3ac94890bd46d8a31d9fd56eec57aa5ab804dd533415af79",
+      "after_sha256": "83606202405989c9d0b5a034adffed3b92145e800093b255ae2264261f69e5f9"
+    },
+    "tests/thera287-288-source.test.mjs": {
+      "before_sha256": "e040abd687f28a16000c75b6e3eb5d9146554e7c11e3963d33c5f80b7172253f",
+      "after_sha256": "2928fc8f939fffc6c0cdf07e2b16f755c6851492a61f8e1681fdb25aa7f38d18"
+    },
+    "tests/thera292-299-client.test.mjs": {
+      "before_sha256": "17d74c6616994cbb9e4b6d458eff5ffdd5cd61b87c9dd07dda98575b3a309cb1",
+      "after_sha256": "37460c107c048d4601619f8c2f6bd86b3bf3d4338df588bffb27c169ac728e24"
+    },
+    "tests/thera292-299-source.test.mjs": {
+      "before_sha256": "f972593729f72e27292994693b53a15d14a467ec21cd271b9ad6186073cded77",
+      "after_sha256": "056416b7144f531ed36eb5d8b8e7eaa4e0b61f6d70f37064a30860117749e8d4"
+    },
+    "tests/thera312-319-client.test.mjs": {
+      "before_sha256": "021ad233910a38b5e2b4c3e31a151d312a8c2e3aa2a93b08c2b55adb6e4f4569",
+      "after_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953"
+    },
+    "tests/thera312-319-source.test.mjs": {
+      "before_sha256": "27853bbcfa8d0f26b925819eb5c0f1cfc8a31f23bcad3791347a426d4684b505",
+      "after_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6"
+    },
+    "tests/thera321-329-client.test.mjs": {
+      "before_sha256": "61613a4b97e49ffd1bc39af332903ca47aefc503f86ec368e54ea3eee560ac94",
+      "after_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab"
+    },
+    "tests/thera321-329-source.test.mjs": {
+      "before_sha256": "a128ec7c640e5d60f52c52c39c9670484c3e0922b02210279a11173075df774d",
+      "after_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499"
+    },
+    "tests/thera331-334-preface-client.test.mjs": {
+      "before_sha256": "5a34166637bc2d0c2faecd8e754bd280a3a1531da2c4ace9537249dfa9434972",
+      "after_sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f"
+    },
+    "tests/thera335-350-source.test.mjs": {
+      "before_sha256": "5e51a7bd7f55934b02fe8d6be910b3179de4918b8ff58e176df09d5abe5aae04",
+      "after_sha256": "cbe814127a9e71c9383873e91797311fda65f353577070efc1506be3bd028880"
+    },
+    "tests/widget-hosted-selections.test.mjs": {
+      "before_sha256": "07fa4aed9b6197cb37c539fbc1962d908796d8a6f133d37d17568415f16c1ce3",
+      "after_sha256": "4ad932ef76cb23c279926ccd2848a8c8007627d17b8eedb513b25e04a92d8264"
+    }
+  },
+  "current_inventory_rows": [
+    {
+      "path": "tests/abhidhamma-navigation-protocol.test.mjs",
+      "sha256": "554db294da146bc127eea61f9f4cf2d8eda7868dfd33964f8b5d4ea175909ffc"
+    },
+    {
+      "path": "tests/abhidhamma-script-input.test.mjs",
+      "sha256": "37525ff8f559b4dc1dd1acacd4c1d5809931621663dae7192d7dadf5b12d56a3"
+    },
+    {
+      "path": "tests/abhidhamma.test.mjs",
+      "sha256": "1701cc332bc8a8b61b48441fcc93d4100aa41234cb5e12a3734aaa9dc4871a72"
+    },
+    {
+      "path": "tests/alignment-certainty.test.mjs",
+      "sha256": "28b4ebdf0f25de2cd3064627515f9ecf3601356eddb099f301e5992150978a57"
+    },
+    {
+      "path": "tests/an-numbered-sections.test.mjs",
+      "sha256": "d1697bf75cd35187c0cc82a6d4438aaf9f1e1b1c50c267f9dea4de0d233732c3"
+    },
+    {
+      "path": "tests/an-ten-link-audit.test.mjs",
+      "sha256": "85872927b9cead8cb7e9f398fec5da1a0ed91a2646d701570c64b85e6bdaeca5"
+    },
+    {
+      "path": "tests/an-ten-selections.test.mjs",
+      "sha256": "d1c11a56ea1381dc1ed13e570a103ed62ff6df61f50cd3e3ed662bc8f796bfde"
+    },
+    {
+      "path": "tests/an247-cross-questioning-partial.test.mjs",
+      "sha256": "efb1caaff786669cb13321cdec40ff90f106ca8d46c8f31665af385b6c0a53dd"
+    },
+    {
+      "path": "tests/an859-prose-partial.test.mjs",
+      "sha256": "77030812471cb61c2c36f089f9c8d113fe8c8099310f2f1672b9eaa7103a7381"
+    },
+    {
+      "path": "tests/analyse.test.mjs",
+      "sha256": "4f9e14728624603b09466d0babe4d5a0a1a51186e1a2056096878ccc9a852e0e"
+    },
+    {
+      "path": "tests/analysis-reader-modes-protocol.test.mjs",
+      "sha256": "026f024b7cfdaf1398f5bcee10eb0d1ad739e2b3a11e598ed083ea765e65c06a"
+    },
+    {
+      "path": "tests/analysis-reader-modes.test.mjs",
+      "sha256": "dba711b25078abc7c03424a78c7f95ee8ae9be9d3de138bbb31a8b498110c8ec"
+    },
+    {
+      "path": "tests/analysis-selection.test.mjs",
+      "sha256": "d7ee38ed48454672b816916c1d256ea75c1081d137ed3dafa56d360403c6d247"
+    },
+    {
+      "path": "tests/anandajoti.test.mjs",
+      "sha256": "7b3e76a36c569aed38802ee1fad0d3041f34f0f101f8c1df9c4c9a44d0f6c92f"
+    },
+    {
+      "path": "tests/apadana-disclosures.test.mjs",
+      "sha256": "48a974214ac02352d52160d785a855c6b21bf728683d73a3a68190eb9bf23c20"
+    },
+    {
+      "path": "tests/apadana-edition-navigation.test.mjs",
+      "sha256": "4c6a8b0b808846da062006df24507b6cbc51593f9c7f80adb58b3ed014ee4aa7"
+    },
+    {
+      "path": "tests/apadana-four-boundary-migration.test.mjs",
+      "sha256": "d5161aae498371ef77c9001283ceb51690c87c3bc4940424f2341bbd3cafca69"
+    },
+    {
+      "path": "tests/apadana-four-locator-consumers.test.mjs",
+      "sha256": "d576f8495fc7a27f1d83f34e843d73daaa25fa06ab1638d7714bdc4940e2e2b2"
+    },
+    {
+      "path": "tests/apadana-fourth-boundaries.test.mjs",
+      "sha256": "19822eea16407628c072ad030c88b752e08c709b80de04820ebc7a5b21b3c2b3"
+    },
+    {
+      "path": "tests/apadana-fourth-client.test.mjs",
+      "sha256": "e892f8ecc37b4f60419475fa7734fb0d53d4a9aabbcf2eb57f9b36d461a0f1d4"
+    },
+    {
+      "path": "tests/apadana-fourth.test.mjs",
+      "sha256": "e0fdac899a5cd6ce6939c78afcdcdc8da61267e8396f00d079a24fbc5b738868"
+    },
+    {
+      "path": "tests/apadana-held234.test.mjs",
+      "sha256": "fbcff0abdc1b1a6a2d318b37528e008967cc61aabd93ae2d8b2774b2038256d4"
+    },
+    {
+      "path": "tests/apadana-integration.test.mjs",
+      "sha256": "84821a66f93960d0fbd2a7a1cf4f940cc9d3d78c448882d4732ac3a27d00d97e"
+    },
+    {
+      "path": "tests/apadana-next-boundaries.test.mjs",
+      "sha256": "15666e23309ca4e65f102a8703e1b4661f64531b23bad623cb00b4b3a40cda40"
+    },
+    {
+      "path": "tests/apadana-next-client.test.mjs",
+      "sha256": "f8ac1b937e5ce02850954e03ba2a1f79c44102e5a8b67a96fa60960db4e80b34"
+    },
+    {
+      "path": "tests/apadana-next-ten-cached-consumers.test.mjs",
+      "sha256": "60007d4df36c86ace6823a7db2a39f63ec1b3418981c92f79f62bcd6b5f9cf2b"
+    },
+    {
+      "path": "tests/apadana-next-ten-locator-consumers.test.mjs",
+      "sha256": "2314164562cadde2bfd22e1f40bdc6192779bb677e953e0583e3135be26b69ed"
+    },
+    {
+      "path": "tests/apadana-next-ten-migration.test.mjs",
+      "sha256": "4283d5cd761aea599e97d84b77f7c18499abc184eb74858b3623429fa27f5c73"
+    },
+    {
+      "path": "tests/apadana-next.test.mjs",
+      "sha256": "e2c498dd264b70d1a3ad07d90d71ac90e3b358ed549c1ebaacc963668e80bec3"
+    },
+    {
+      "path": "tests/apadana-pair-boundary.test.mjs",
+      "sha256": "716867682e8211badbb51906688dc60b36c967806ec37d09eacc5064924bdcc2"
+    },
+    {
+      "path": "tests/apadana-pair-locator-compat.test.mjs",
+      "sha256": "efce6a7c516a905cef1d394a9885e40a1dfc5b02546d4e702e2fb4342e5c2b6b"
+    },
+    {
+      "path": "tests/apadana-parser.test.mjs",
+      "sha256": "dba1a333253e9964801bcf04b5d4b4100063e5af2510b10f576d60ec78b723e3"
+    },
+    {
+      "path": "tests/apadana-six-boundary-migration.test.mjs",
+      "sha256": "f50a02065a9994a2493f23f61f86fe2b9ac2b4b43f2de952c1d7085ff04f1ba1"
+    },
+    {
+      "path": "tests/apadana-six-cached-consumers.test.mjs",
+      "sha256": "362f071524547f4a7356cfb0762450a1e62da12a1f835b17d2fc8eab4d88d94a"
+    },
+    {
+      "path": "tests/apadana-six-locator-consumers.test.mjs",
+      "sha256": "29b1bc5e0c5657303160040cc085527a294fa0bba814be8535ee5b0e1c835b70"
+    },
+    {
+      "path": "tests/apadana-thera-boundaries.test.mjs",
+      "sha256": "6e10b8c03ed5e59cda387bb6f49d7f8dce99a58809bea80683252bbb07183b97"
+    },
+    {
+      "path": "tests/apadana-thera-fifth.test.mjs",
+      "sha256": "5ef1527496f653330975a4dd00d59b68dba47eeaadc44b1c72e69cf3a59adc9d"
+    },
+    {
+      "path": "tests/apadana-thera-next.test.mjs",
+      "sha256": "1efc3b017980dcc127d1ab7e96488a5b4f1c4c74e7dca8e3d4edf849ba873612"
+    },
+    {
+      "path": "tests/apadana-thera-pair-boundaries.test.mjs",
+      "sha256": "648fc9de0a8e1a0cf35a43f748fde5cb586c0d1b5382595cc2c266af8f50761a"
+    },
+    {
+      "path": "tests/apadana-thera-pair-intake.test.mjs",
+      "sha256": "720f433efb6098fcd94243f3a9346e1cc50c5d9be18cf1f0a64c0d5543133443"
+    },
+    {
+      "path": "tests/apadana-thera-scaled.test.mjs",
+      "sha256": "b5a65d5d866a71a89ab4c1556486b4870be0d51b92ecd6e775e6aac20cea1986"
+    },
+    {
+      "path": "tests/apadana-thera-sixth.test.mjs",
+      "sha256": "702acbb4ba33c2b3d04dfffc77eb67b1426aa2618b9a7cc1c6b927b2beff1953"
+    },
+    {
+      "path": "tests/apadana-thera.test.mjs",
+      "sha256": "2e6e0e08268838ab5f5ebcfa438ceaecd552a554e387f8cdae30d9249228072e"
+    },
+    {
+      "path": "tests/apadana-thera141-180.test.mjs",
+      "sha256": "fee23e3e8dbdc159a3b309394fa66384456d8d9450279fe0a60f64756c5eb87a"
+    },
+    {
+      "path": "tests/apadana-thera181-220.test.mjs",
+      "sha256": "7243fe25b6e00008e4768d5eb826617002042bd373a368a59e026ec51c8d21bf"
+    },
+    {
+      "path": "tests/apadana-thera221-230.test.mjs",
+      "sha256": "de6d9f1aae7098a1f1119dd5f40fd2a6eee27c63473b05540397cb8798746ac5"
+    },
+    {
+      "path": "tests/apadana-thera231-240.test.mjs",
+      "sha256": "e4f76536603bf0fdcf0710de7a60074d048f2544df294cd524f2e70b1366aa87"
+    },
+    {
+      "path": "tests/apadana-thera241-250.test.mjs",
+      "sha256": "b15e7861b64840e353ad88c95f82a0c5400d5370b2a920d82099d3e4b982cb50"
+    },
+    {
+      "path": "tests/apadana-thera251-259.test.mjs",
+      "sha256": "bf9346c0f64d6fd7bad93a45ea0cee1123ce2c78e250bd850368686b586edbf6"
+    },
+    {
+      "path": "tests/apadana-third-boundaries.test.mjs",
+      "sha256": "69bbafd9f92ba243be90da04d76d510ebf5af86f58010f9bdf5e3304f0497f49"
+    },
+    {
+      "path": "tests/apadana-third.test.mjs",
+      "sha256": "92e72fe456b1a056b6e4052f4a017853cce4c9d6466b9f99f0ca3f821b9b58a0"
+    },
+    {
+      "path": "tests/apadana-three.test.mjs",
+      "sha256": "e8b8576958e1937afe2447eb81ff2afec817c3ce8a87416d7f36896cf52ec96b"
+    },
+    {
+      "path": "tests/approved-acceptance.test.mjs",
+      "sha256": "c52b29e6dbf8fe65a5433bb9a37ae932497138e0343506b3a88166fcdb9f6414"
+    },
+    {
+      "path": "tests/approved-current333-authority-negatives.test.mjs",
+      "sha256": "a038ccfad8b73ef758437f4f922671225660966c1fab711cab6f459ff9841237"
+    },
+    {
+      "path": "tests/approved-current339-authority-negatives.test.mjs",
+      "sha256": "4808d2365fb486467b256ca7abcf42de4296d1cb8fed4c2e8d209cf630e7316e"
+    },
+    {
+      "path": "tests/ati-partial-pilot.test.mjs",
+      "sha256": "28f80ab92d039ebb0efe3ee217e10a6c7bdd61a1296ce01c0da5c6f88b6c516e"
+    },
+    {
+      "path": "tests/ati-review-packet.test.mjs",
+      "sha256": "e949c1b51274a14a05df2007f777f82ab3f490d1dce9ba60fbab0d39924a4321"
+    },
+    {
+      "path": "tests/ati-search.test.mjs",
+      "sha256": "df6afbe1d32f2090c6b4ce8c7086000d39f4ce049060bb90edfc633a15590f88"
+    },
+    {
+      "path": "tests/ati-sections-build.test.mjs",
+      "sha256": "b9f7fe8a998276db8aa5301cd5a23177d16f9105813bace8abd505c249eea705"
+    },
+    {
+      "path": "tests/ati-stories.test.mjs",
+      "sha256": "d955cb24caaf1724aa180442ad087efca1caae6aa85dcc1bedfa1c0cd75efa61"
+    },
+    {
+      "path": "tests/backup-note-conflicts.test.mjs",
+      "sha256": "1b2e6191b90d8c58a3a0e33341568712d85759f5af44124e3a55a916cd8e1e65"
+    },
+    {
+      "path": "tests/boundary333-336-source-input.test.mjs",
+      "sha256": "125e8144ba6c65793d968cd54e309308c70a8bc334cb33b15646683b568b85de"
+    },
+    {
+      "path": "tests/bounded-python.test.mjs",
+      "sha256": "f4505a8e3544abb3bfe31296d0d899283de7f2e7ec25840276691d2ce2807470"
+    },
+    {
+      "path": "tests/browse-scope.test.mjs",
+      "sha256": "04ceedb5f27d8ee073f22ab285e932b926e3a225c757b5ff5077186bc07ede13"
+    },
+    {
+      "path": "tests/browser-current359-routing.test.mjs",
+      "sha256": "c1f7ac4f6f2a22718fe8c37b6eb9b304cd981feef5ff4906e92454d87ca86450"
+    },
+    {
+      "path": "tests/browser-current368-routing.test.mjs",
+      "sha256": "9661ffee215e631803e52c44996c4c8119724601279e92df21a55e09588a44d6"
+    },
+    {
+      "path": "tests/bundled-data.test.mjs",
+      "sha256": "653cf583c9b3baace38c6573686fee8907d4104ddcdb0f0ed2ce317442c6a116"
+    },
+    {
+      "path": "tests/calendar-evidence.test.mjs",
+      "sha256": "843a58bf2413b3d9e1d1bd8c4ad2db1fc82b01865399efe376a8d9a76094e34d"
+    },
+    {
+      "path": "tests/calendar.test.mjs",
+      "sha256": "ed2d4ed32508273a6dabf9542479908d15323d82fb2a88f6757f828e4b501112"
+    },
+    {
+      "path": "tests/canonical-build.test.mjs",
+      "sha256": "986db8d656d9206800733788bf8b2b00f6462738a09cda7942725242fcec1136"
+    },
+    {
+      "path": "tests/canonical-search-pins.test.mjs",
+      "sha256": "792cfb8392b09ad4ae47b4f1d5f95a5577901ecc8393c276a679d3cd7582237f"
+    },
+    {
+      "path": "tests/cbeta-khp-assessment.test.mjs",
+      "sha256": "032baceafe209d89d2da2edc4e07fe42b2d8e9fc99fb2d2b7a14dacc7e42023b"
+    },
+    {
+      "path": "tests/chatgpt-widget.test.mjs",
+      "sha256": "b8c20ff21c8d10f3ef9e95891298afa923997b3c949098f2b7476b85ddcd3246"
+    },
+    {
+      "path": "tests/check-ci-stages.test.mjs",
+      "sha256": "488bfa1964e27cf5e23c349ea20146ad63eedcaa9bbfc5fadeaa42785127cef0"
+    },
+    {
+      "path": "tests/ci-test-partitions.test.mjs",
+      "sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e"
+    },
+    {
+      "path": "tests/citation-id-coverage.test.mjs",
+      "sha256": "ac30a105e79ae69f8f1cf867ee713929380b153812368333d93dc45886459123"
+    },
+    {
+      "path": "tests/citation-pagination.test.mjs",
+      "sha256": "bbdbbabf73edd4ffe4aedf592f6e504c476811b652c1559129bae5454b6b4443"
+    },
+    {
+      "path": "tests/citation-range-validation.test.mjs",
+      "sha256": "65db48e84f79515b8764df6ed063fc849a6b271fecee8ef19e061117750e336d"
+    },
+    {
+      "path": "tests/citation-resolution.test.mjs",
+      "sha256": "9431cec2fcd56d6df8efef5fb72654d833025d80bb57332a794c671f29e82c2c"
+    },
+    {
+      "path": "tests/commentary-cache.test.mjs",
+      "sha256": "96c602779da4cd9184ddd05ed3901ebdcab3fc102037b62a6d6d401f2b65f17e"
+    },
+    {
+      "path": "tests/commentary-scripts.test.mjs",
+      "sha256": "8eb6e97be5d3796d34201ce7cfc2329ab4f6623ab4c7a0de191cf30c4d4428c3"
+    },
+    {
+      "path": "tests/commentary-search.test.mjs",
+      "sha256": "d04b0c7a34819b84854f710a6f0d3f954bf6c283308999313eb69911be8f33df"
+    },
+    {
+      "path": "tests/commentary-segment-refs.test.mjs",
+      "sha256": "52c7ee8e59f3bcd3ecb1b53835cdfd08c5e350a9f89788a7cb249a1eb883532f"
+    },
+    {
+      "path": "tests/commentary.test.mjs",
+      "sha256": "e29b3977021988398919945ad833195bb546604897c8a6ddab460e0a73224ff2"
+    },
+    {
+      "path": "tests/condensed-source-ranges.test.mjs",
+      "sha256": "e5f4064329a9fb86c8340293d415938ad26625887e36718630d6fca270967382"
+    },
+    {
+      "path": "tests/connector-listing.test.mjs",
+      "sha256": "23d317eff30ba4377409c392e24ab2175b67792812c368540cb1a2f323bbc80f"
+    },
+    {
+      "path": "tests/core.test.mjs",
+      "sha256": "d54e517dca169f83c79fc5249a217ad6b39ed2cc5fcfea5fcad3932245d137b7"
+    },
+    {
+      "path": "tests/corpus-check.test.mjs",
+      "sha256": "ef5190de6dcdd1cf1766a06435e3319149e148f16213cb7775f26282da5501ca"
+    },
+    {
+      "path": "tests/current333-uri-bindings.test.mjs",
+      "sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1"
+    },
+    {
+      "path": "tests/current333-version-bindings.test.mjs",
+      "sha256": "fa26127fc98b344168f9e2885533cefef67e75e5e34bd1e2a247c12ab9f59168"
+    },
+    {
+      "path": "tests/current339-source-inverses.test.mjs",
+      "sha256": "5e4e036b932a1c6e90f028295bdb45626e016f38eb8a14e186fe174d244a14a0"
+    },
+    {
+      "path": "tests/current343-bindings.test.mjs",
+      "sha256": "30801f1bc203245f8cb3ee9c0bb3ea0ce8267d19a1fe3b568817e2cd37c61b7e"
+    },
+    {
+      "path": "tests/daily.test.mjs",
+      "sha256": "6eb550c91e1a2f57d7a8ee73e16dc7de65fde0a7d5653519dbf974493bec6e65"
+    },
+    {
+      "path": "tests/dasabala-commentary.test.mjs",
+      "sha256": "de5aaf3bfb3a53165b65e5ac82167b85160e77a18f9139c6a9b05352aeccdd8b"
+    },
+    {
+      "path": "tests/dasabala-spans.test.mjs",
+      "sha256": "c092791f01657c3ff02d9f4bc4c4a2e8edae2905c52e5a7b5e7ab3ffafd11ee8"
+    },
+    {
+      "path": "tests/data-refresh.test.mjs",
+      "sha256": "a8c1a7e5968c656a10378f225d87f8a29658c0ed11b05e95261985b8d0ebaecb"
+    },
+    {
+      "path": "tests/dictionary-response.test.mjs",
+      "sha256": "fd2f38a86e9f35ad9431670a7d33f9c002ee0029cf627400f8eaba7efa820fac"
+    },
+    {
+      "path": "tests/docs-site.test.mjs",
+      "sha256": "e2d052bf78e8491f507ee8b734c75b4d93a46823b7f853e004a04f841fcd3bfb"
+    },
+    {
+      "path": "tests/dppn.test.mjs",
+      "sha256": "ea33747e684e968a0b0ba9f83de4bcbddd7bdb0ce4ffc6f2fa1e5c299c9fff85"
+    },
+    {
+      "path": "tests/dt-scope-and-potaliya.test.mjs",
+      "sha256": "f0dcb7503a1efda86fe2f68df013603772ec61a25757f04115ff7ad1ce0704e1"
+    },
+    {
+      "path": "tests/early-an-shared.test.mjs",
+      "sha256": "3b380848482e042cf24a23d7d72386a00d3a087e96954e536d7a000b6938ef17"
+    },
+    {
+      "path": "tests/edition-pages.test.mjs",
+      "sha256": "e98d0bad9521d0c2a2fa1241a4ae73384cbaeb243f44bc9d43319ef53f5ccb73"
+    },
+    {
+      "path": "tests/editorial-content-sha256.test.mjs",
+      "sha256": "03f61c416c95c45eee0e7a4335d27fe508329ead27087b7fc1be096625609aef"
+    },
+    {
+      "path": "tests/english-catalogue-policy.test.mjs",
+      "sha256": "33fd8916d13f216b01daf84b58c6528a46d79e19db5bde517df35753f82b110e"
+    },
+    {
+      "path": "tests/english-input.test.mjs",
+      "sha256": "406d7e298a7dbfb2d439b7c31f42b8052f709803b055503a99af67d40ee5c635"
+    },
+    {
+      "path": "tests/english-source-catalogue.test.mjs",
+      "sha256": "361954d615a59c3bda1f2f535934ef924e0a82b43b9abe08fa1887c91bbd8066"
+    },
+    {
+      "path": "tests/evals.test.mjs",
+      "sha256": "87e8be5aae31177b31c45a0f1a08728f26534667978c6e6f0b017131ff088d23"
+    },
+    {
+      "path": "tests/evidence-commands.test.mjs",
+      "sha256": "83d24cb46e44595bb0c3e7094e507f2e8794b113b13b7ca009875041688f5298"
+    },
+    {
+      "path": "tests/evidence-daily-pool.test.mjs",
+      "sha256": "02ae6ccdcf3b7c68fdf0b86a9c6d4867fbb772461353b0338f45cedc3fae3b20"
+    },
+    {
+      "path": "tests/evidence-guide-excerpts.test.mjs",
+      "sha256": "5374ea7b90d109fb41b77ec6bc33f821b41d5cb6687b948aa8f388389f9ae9e5"
+    },
+    {
+      "path": "tests/family-protectors-review.test.mjs",
+      "sha256": "1ab58da2b031b5298807e8063b8357022fba6b240e69b539d5a699419ad46ada"
+    },
+    {
+      "path": "tests/final-excerpt-binding-review.test.mjs",
+      "sha256": "864d452fc31510ebad2795e7495e887ad4393d987abf2ad9f1596eb97536f053"
+    },
+    {
+      "path": "tests/find-abt-citations.test.mjs",
+      "sha256": "9284184bf5a84fbb5b0bdc580ca868c8e49c0838baae0dedc0da20f8d514fe08"
+    },
+    {
+      "path": "tests/find-citations.test.mjs",
+      "sha256": "430bdcab326b0296a8843b96e4178b362391647534a311bb9f6bb9e7452c2530"
+    },
+    {
+      "path": "tests/find-edition-citations.test.mjs",
+      "sha256": "72a8a3c5f539ec44ab6bd217b1b00c59306ec41c98147c490995c4e7e745ffe3"
+    },
+    {
+      "path": "tests/four-boundary-ci.test.mjs",
+      "sha256": "d6eeafd5c99bad82802d94d3ed9b92296af9e9302e564c1f0362864dc7f47cd3"
+    },
+    {
+      "path": "tests/four-boundary-history.test.mjs",
+      "sha256": "04766af34b9833a0208efb611bb00734c847849958cb93d996fd20c8b50bf664"
+    },
+    {
+      "path": "tests/four-history-data.test.mjs",
+      "sha256": "234276661885dba30a370f503ec3fdb8ad392cb72b74878556de5b4d5c5dd951"
+    },
+    {
+      "path": "tests/grouped-scope.test.mjs",
+      "sha256": "15481867b7f9324751cd98c964ad521b48f2e49543001a7b298d4e2fb3974f99"
+    },
+    {
+      "path": "tests/guide-excerpt-subjects.test.mjs",
+      "sha256": "757f45317ee0ece21f8da88b037a20719a28518bbd0ba0e4adce368a092d9153"
+    },
+    {
+      "path": "tests/held234-client.test.mjs",
+      "sha256": "0b5969a079d50ce005f35e508f54dcb8ed343f08aa1e99ba826a13f2d8821cef"
+    },
+    {
+      "path": "tests/held234-current333-chain.test.mjs",
+      "sha256": "51655bcfc60b9d3707caf863eab909ff681a2d66d4c65685ecdc7c41eec2418e"
+    },
+    {
+      "path": "tests/held42-editorial-gap.test.mjs",
+      "sha256": "70101b75e2e9df2959de1924fad036ef258f36ee88dd257f48befa97c85931eb"
+    },
+    {
+      "path": "tests/historical104-auxiliary-workflow.test.mjs",
+      "sha256": "a1a73e5af5bbe9a44b87c7db9cd7c6d238ad85e8034a2d649f60d5434cc91aa9"
+    },
+    {
+      "path": "tests/hosted-recovery.test.mjs",
+      "sha256": "a7ee46667672663293d4c2e144c6553765256837bad2881134b170d3774ec63d"
+    },
+    {
+      "path": "tests/hosting-memory.test.mjs",
+      "sha256": "c4ef705bcec46ff8e39b886c4db8d882303014bff87c8b8bcece80d51dfb690b"
+    },
+    {
+      "path": "tests/http-client.test.mjs",
+      "sha256": "aeb0da7baafa20b7e9fd86c25e392572597b29b9ab415840b29c9a0b7b232285"
+    },
+    {
+      "path": "tests/http-tool-worker.test.mjs",
+      "sha256": "9b5d97c435f1c1fb24ccdfffcc7fcc1cb77f2c12e3887f5d8ae4ee783510d98b"
+    },
+    {
+      "path": "tests/i18n.test.mjs",
+      "sha256": "2975ecabdb6438e1d4bde2c73dd0fb9a6563b34aed18e26f45ac5cf6f1a8baf9"
+    },
+    {
+      "path": "tests/installed-corpus.test.mjs",
+      "sha256": "8a88d34039087b7d68357bf7cbf956cbf3d0c048dd706a88a5c88928c0862586"
+    },
+    {
+      "path": "tests/installed-data.test.mjs",
+      "sha256": "0582eabf371fb9c78c666cd939183dd3978ddfd723fd55d6c27597c8e6139786"
+    },
+    {
+      "path": "tests/intake343-ci.test.mjs",
+      "sha256": "284f89789badb1f05877e993dd5e454547f7f27be7b52e67b01f76978dbcec99"
+    },
+    {
+      "path": "tests/intake343-metadata.test.mjs",
+      "sha256": "a94c49b2b03ed564b2323449813e16a75b25a5ed92e3e5a967176c0307e14180"
+    },
+    {
+      "path": "tests/intake343-source-input.test.mjs",
+      "sha256": "83dce7a5616758fd40ca81e7f6dbb2ee8f24b2a2665e6b4d5c6d829600d2b6de"
+    },
+    {
+      "path": "tests/intake359-history.test.mjs",
+      "sha256": "7188494737eb07ef8e8644c73640648686e55daf2b37cde25363f5d6a5462edd"
+    },
+    {
+      "path": "tests/intake359-metadata-history.test.mjs",
+      "sha256": "538978d2ef38a011076a8611e4b1d2b7a7d9daf93ca89c682b2b5564c76844f4"
+    },
+    {
+      "path": "tests/intake359-source-history.test.mjs",
+      "sha256": "ccd479b031efb817925d6be37fe18937fa2c46ba5bc8e7559748315d4e44b2a5"
+    },
+    {
+      "path": "tests/intake368-history.test.mjs",
+      "sha256": "76cd33abb8e279037f6ecb46c084a6cb894bbd150bbf0205c75247c1b416cc04"
+    },
+    {
+      "path": "tests/intake368-source-seal.test.mjs",
+      "sha256": "b97d92ba57b5de1f442548581fb409b90e4b69baff98f13e301545ae7f5f4c5d"
+    },
+    {
+      "path": "tests/iti-range-bindings.test.mjs",
+      "sha256": "303f3d232d3cc76553071888bc421dca23275ba1b1d215f40811d1a99c2ee45a"
+    },
+    {
+      "path": "tests/link-coverage.test.mjs",
+      "sha256": "de2428dc011be88cb55b2dea6184f6a5c978d2058d0f5513dc05d8264ae35c5e"
+    },
+    {
+      "path": "tests/lookup-script-input.test.mjs",
+      "sha256": "c151b4e56b423250d2f3feb57323b6598017f948258ce344545cca70c7da72a9"
+    },
+    {
+      "path": "tests/mcp-contracts.test.mjs",
+      "sha256": "f50bd609100d0a3bc26add5f093f61e48297c7e4aea0a1483de45919f29cb684"
+    },
+    {
+      "path": "tests/memorise.test.mjs",
+      "sha256": "9007610addfe513fcd40bd34fd49ddd7e0ccf90ad503a2d7f9a3537faa715629"
+    },
+    {
+      "path": "tests/method.test.mjs",
+      "sha256": "de07a2b22fc21afce673cd291587c8b15a9421d86e9f83b89143bc2715c74d22"
+    },
+    {
+      "path": "tests/milinda-export.test.mjs",
+      "sha256": "b4d1600a481410e4739652fd2d36f97791158a5c7dddbae7371599c4b00e20c6"
+    },
+    {
+      "path": "tests/milinda-medicine-partial.test.mjs",
+      "sha256": "5e96a842da8355044a370f20361bd50fdc540eab32cd76810a2173c5d2ad3c3f"
+    },
+    {
+      "path": "tests/milinda-screening.test.mjs",
+      "sha256": "5377f4a3600e92eecd050c4aea9297ec0bcee6f92fab38ade83ee7ef529ba290"
+    },
+    {
+      "path": "tests/milinda-sections.test.mjs",
+      "sha256": "ab92d42716b010836b07644c2198ca6ab3d7ac627dfec3afa910ba509ca4e134"
+    },
+    {
+      "path": "tests/nalaka-kondanna-review.test.mjs",
+      "sha256": "120164206c152b00bcc2021dc3ea8c3b2cb8d832f122cdb6daa64f79750fef7f"
+    },
+    {
+      "path": "tests/name-title-evidence.test.mjs",
+      "sha256": "aed8909e5c62ee07bf0b18f1fdce1fe0209f4a358418b21e80d09097bf009f57"
+    },
+    {
+      "path": "tests/navigation-commands.test.mjs",
+      "sha256": "f219923ace72a7be1316d072140cae5e763689aec126e91015881cab2153d25c"
+    },
+    {
+      "path": "tests/next-ten-history-data.test.mjs",
+      "sha256": "69f74a5c5f13cf0f7fdccb7eb85cf22affdbc50ed27bfb1aed929db2fd20e55c"
+    },
+    {
+      "path": "tests/next-ten-history.test.mjs",
+      "sha256": "fc10fa448eb1840f5a0c7f7e3e3578e023a5d0e431af882e31176f9b2583495b"
+    },
+    {
+      "path": "tests/next-ten-source-history.test.mjs",
+      "sha256": "38ed7e21a7c13cd7935265ae02b81e92e3b5bb0aef11dd86adb4661a6ca49668"
+    },
+    {
+      "path": "tests/normalised-search-quotes.test.mjs",
+      "sha256": "f31cdb23fa2e68c2fedee36e8ce0115e8b4542505b66c0847adb490be9276a2b"
+    },
+    {
+      "path": "tests/note-draft-recovery.test.mjs",
+      "sha256": "b75c40bc53a618a9c3ce70a49d1c219524d857184b9596300d58ddd9c25e2108"
+    },
+    {
+      "path": "tests/ordinary-excerpt-bindings.test.mjs",
+      "sha256": "282f41ae5cca6520b1a1ca4f3827d371d952e487e390c834ce51cf0f437ec53c"
+    },
+    {
+      "path": "tests/ordinary-excerpt-packet.test.mjs",
+      "sha256": "84f951d9dbcb369e756152f49abeb7a079308324fe87778cbc2202a03843b69c"
+    },
+    {
+      "path": "tests/outage-diagnostics.test.mjs",
+      "sha256": "bdc1e1b6dc2cfb485d25da42bd950737273b789a02d2732766f81f478a1b8104"
+    },
+    {
+      "path": "tests/parallels.test.mjs",
+      "sha256": "372f9ab86f7f845c2efb652094a1ef527c0c65afe5b1abb3f815c3f146194d6f"
+    },
+    {
+      "path": "tests/paritta-script-input.test.mjs",
+      "sha256": "2c4cef496d7c11236134d8da21a2c5c8b019907a429a322545c187782a55b71d"
+    },
+    {
+      "path": "tests/paritta.test.mjs",
+      "sha256": "9e3e43dd27916d43a963bbbcf046b57f6ac589b17c7b31813fca7a98b0b9d252"
+    },
+    {
+      "path": "tests/partial-coverage-export.test.mjs",
+      "sha256": "301da325f4cbe633a27997405a360e36e0de16b22f321841560708a3ce1a9e1c"
+    },
+    {
+      "path": "tests/partial-page-build.test.mjs",
+      "sha256": "02fd95701e1047113154979577e0e7045d12f5e2c9bc8e06fc902b2866824679"
+    },
+    {
+      "path": "tests/partial-translations.test.mjs",
+      "sha256": "43e0aa4008a69569dee4364d5e0ddf5e407ed2dfa8d2c27601e6cd0350e33ec0"
+    },
+    {
+      "path": "tests/passage-notes-policy.test.mjs",
+      "sha256": "ca982c7c22ea702af86ce4a789d6d8cacda7df5da7d8e91b38bc9ace64ea238f"
+    },
+    {
+      "path": "tests/patthana-translation-candidate.test.mjs",
+      "sha256": "711a0c55fec9810e18eef81fe29ed5af95cbb316a85026ebad21c22b3ce630db"
+    },
+    {
+      "path": "tests/postcanonical-ambiguous-paragraphs.test.mjs",
+      "sha256": "7dd3017de33dd8c4f419d6f69a53236f5299e47a72a0f194068a895f5f07a56b"
+    },
+    {
+      "path": "tests/postcanonical-scope.test.mjs",
+      "sha256": "fa8d0198f63725ad5597bdbf3404566afed17b2563b1e56f568fe549761b24cf"
+    },
+    {
+      "path": "tests/postcanonical-title-ambiguity.test.mjs",
+      "sha256": "39938fc8521ba02cecedfe68bbcadbeba1804a94b46759fa30e5c2b1ce85c319"
+    },
+    {
+      "path": "tests/postcanonical-title-priority.test.mjs",
+      "sha256": "a1ddb08703aeb4ab4211e830199648dd5936973aed1cd06377c88b678d4950b0"
+    },
+    {
+      "path": "tests/postcanonical-work-scope.test.mjs",
+      "sha256": "f9a98a788c1f5adf01e2622842ac57d9c859e3fc88a96e4c32a38d3579340370"
+    },
+    {
+      "path": "tests/postcanonical-zero-special.test.mjs",
+      "sha256": "9a0b6fb19a76ddd9e778fdd336fddeae8436912c9aa56fbb3fbec08a076232b5"
+    },
+    {
+      "path": "tests/postcanonical.test.mjs",
+      "sha256": "89810f90938b265bcb9d856b1f7f2d0ec9c3d6483ef776510183c2ab3f87da78"
+    },
+    {
+      "path": "tests/priority-prose-review.test.mjs",
+      "sha256": "acef859a973e801f1b83a7b5b4f6e248a147959e15bcd6ee17aefd31603b69bc"
+    },
+    {
+      "path": "tests/pronunciation.test.mjs",
+      "sha256": "062fbde115451a14533abe539b40f481b359668731e3de0b4014f54b880a9fc7"
+    },
+    {
+      "path": "tests/provider-scope-audit.test.mjs",
+      "sha256": "222d7addd82e1290c175aab10580292b6d1a8138a23d7dda76e45cd4b9404498"
+    },
+    {
+      "path": "tests/provider-stream.test.mjs",
+      "sha256": "bf18e428b5e64f0551e44df28f9253d51f752c182ba3a1cd21225f906a2ce1bd"
+    },
+    {
+      "path": "tests/publisher317-ci.test.mjs",
+      "sha256": "03a0b769d49665f08db87b7cdc1bb8677e5039b53bf9f66e3ec269325ec64bbc"
+    },
+    {
+      "path": "tests/publisher325-ci.test.mjs",
+      "sha256": "50209dec8ac085516f2a6385e259b3dfd29b57a237271ed689f180bb7723f7e0"
+    },
+    {
+      "path": "tests/publisher333-ci.test.mjs",
+      "sha256": "87abde0ead2066cc25ce13e2ef61031fc6b91e0b27e6cf1e7abbc127aeef7f83"
+    },
+    {
+      "path": "tests/publisher339-ci.test.mjs",
+      "sha256": "5461415deaf6995229187f3e279ba219fbd0b928d5867396bdd2f5924c09a9ef"
+    },
+    {
+      "path": "tests/quoted-wording.test.mjs",
+      "sha256": "2df7d46c9d706da026d5c21fe0d65afe618fd9ab20c7c16b4e914eea4e351282"
+    },
+    {
+      "path": "tests/reader-script-input.test.mjs",
+      "sha256": "4b19971d627d8a9b91267cbeeb95f4858de60f6c472153ed579cc3117d9b7513"
+    },
+    {
+      "path": "tests/reading-chapters.test.mjs",
+      "sha256": "726c63585576ad2e142804ce3d15723cc8095ed9926d5d6368bdb1434c66462e"
+    },
+    {
+      "path": "tests/reading-navigation.test.mjs",
+      "sha256": "f8e7e8c128300b91704d77db8b0ae464a9138ac823e7a401c742453a9a2f8bb8"
+    },
+    {
+      "path": "tests/reference-input-integrity.test.mjs",
+      "sha256": "a714c42375bc837b3ea043548817db30cecb4df0f52b57ed107690a4f4ef8b31"
+    },
+    {
+      "path": "tests/rendered-source-review-memory.test.mjs",
+      "sha256": "d373fc15e14cac2151560cd22a71635d618e46067e72b4e0557658f0e624bb22"
+    },
+    {
+      "path": "tests/resolve-translation-titles.test.mjs",
+      "sha256": "51181cd70a9ff813a0feefb12287d93d090d101b7900ee8e41c494006a3d9d42"
+    },
+    {
+      "path": "tests/reviewed-exclusions.test.mjs",
+      "sha256": "6216f7d219fc65c0e30d19d910b68dd55959ab820fd42d952a019f688d43989e"
+    },
+    {
+      "path": "tests/reviewed-paired-compilations.test.mjs",
+      "sha256": "9cde9f5440f7012412c74d55ea70485cf1612362ed810821a44135c5664bf980"
+    },
+    {
+      "path": "tests/reviewed-shared-page.test.mjs",
+      "sha256": "e4048ea54b33fa564f949ac41956e7b080e7b57e9e46613ab5ae9f2db786a99d"
+    },
+    {
+      "path": "tests/saved-highlights.test.mjs",
+      "sha256": "c9c2215961f4f778bb358efb481e4581f71d457b3ba56b12aa68e9e11b52ef6b"
+    },
+    {
+      "path": "tests/script-refresh.test.mjs",
+      "sha256": "d778261f6ef59827aa06f68a2e0798d91950a29e6cdafa9d789bc1313f28928d"
+    },
+    {
+      "path": "tests/scripts.test.mjs",
+      "sha256": "31508cedcfb6d417c91573a28fc4cf662ba522cb48148b374f73a019dae2cc98"
+    },
+    {
+      "path": "tests/search-input-integrity.test.mjs",
+      "sha256": "e44f09193533e97fba0dc8f83e802db776e0516564e74e610644b74eb2907b8d"
+    },
+    {
+      "path": "tests/search-quotes.test.mjs",
+      "sha256": "4abe476a8fd80e1d4d349155a702fa4b6c17693eda7f96cfbf8d03e6a41db84b"
+    },
+    {
+      "path": "tests/search-reading-commands.test.mjs",
+      "sha256": "fc08a283b7b80057bdaac4a9bde7c6db14be1efbaf1967a962f39e287333fe5e"
+    },
+    {
+      "path": "tests/search-requested-span-protocol.test.mjs",
+      "sha256": "ca3663e467ed0a62e17eccbb76783206eda6567222273dcb145bb342ce115ec0"
+    },
+    {
+      "path": "tests/search-requested-span.test.mjs",
+      "sha256": "431f9db4c019d560b58ff77efcbecd4a1c51023b345f7c61cc3ab6f7c221a080"
+    },
+    {
+      "path": "tests/search-scope.test.mjs",
+      "sha256": "c1c9a63f18e2f30b5b98d433321cf2a0cb32657f46f3c921dbab6d19a8d62b7c"
+    },
+    {
+      "path": "tests/search-source-phrases.test.mjs",
+      "sha256": "facad66ecceb7c56684e7e4ae127a4411fdc57ef6414bc83fc67a3e5db609db8"
+    },
+    {
+      "path": "tests/semantic.test.mjs",
+      "sha256": "715493dc3f40e5413f0b3ffe022d53b977b3d5da2c391b57298c0517eb7d6ef7"
+    },
+    {
+      "path": "tests/shared-spans.test.mjs",
+      "sha256": "3e36913ed0a9d8d1f479ba98de13b972c470b22dd203a385e9f26f75c67c4c71"
+    },
+    {
+      "path": "tests/shared-translations.test.mjs",
+      "sha256": "4a07f734813b741441d9c8eb0454960e1c2f7f88135a5fdeeb0973985bf20e0c"
+    },
+    {
+      "path": "tests/six-boundary-ci.test.mjs",
+      "sha256": "0e895fee1f58528f8ee22729b60604864a6c4fed3c4c84946c050596e056ce48"
+    },
+    {
+      "path": "tests/six-boundary-history.test.mjs",
+      "sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e"
+    },
+    {
+      "path": "tests/six-boundary-source-input.test.mjs",
+      "sha256": "5de82ea399f7602d7dd2c38c09f54cd9a9d025f7e2a2d59a3af0579b87945287"
+    },
+    {
+      "path": "tests/six-operation-scope.test.mjs",
+      "sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6"
+    },
+    {
+      "path": "tests/sn27-section.test.mjs",
+      "sha256": "ec36e695802132191a99b15f5f5fa0bd93c4ee210c89883637635d328a417e99"
+    },
+    {
+      "path": "tests/sn3615-prefix-partial.test.mjs",
+      "sha256": "432d55d75bdb1afbf4d1498ae5ad71dc7d979cc728e21bd046439bebbe95646f"
+    },
+    {
+      "path": "tests/source-book-search-protocol.test.mjs",
+      "sha256": "ca32d5282a25c6dd168366992be3ce3e29a697b32409c4d1fc7512a72cda39a9"
+    },
+    {
+      "path": "tests/source-book-search.test.mjs",
+      "sha256": "7fa21116bc596675185cf61e8d858e4401549a9ac2d8f650fe5009c1faf1e471"
+    },
+    {
+      "path": "tests/source-books.test.mjs",
+      "sha256": "3809be0f1c860dfa13694e2563d47b325d1db32997482a8f39f46a7347618098"
+    },
+    {
+      "path": "tests/source-diagnostics.test.mjs",
+      "sha256": "b418825903620da3d6969689dfce13efd1561091dbaaaefb2d8488fa63cb83d4"
+    },
+    {
+      "path": "tests/source-headings.test.mjs",
+      "sha256": "44e61830867f7f95b3b14db8db3b9c92e52906ea9455cf6f3d53d235316b6c04"
+    },
+    {
+      "path": "tests/source-notes-baseline-projection.test.mjs",
+      "sha256": "631ec6f793d7ce518e21a5eece52aeac7c50138be50e8d5cfd684a88ccef1afa"
+    },
+    {
+      "path": "tests/source-notes-ci.test.mjs",
+      "sha256": "c8c3f5dd938c10e8d9e999a7d32e5634ba524ba342b8836c65fdd05460961e98"
+    },
+    {
+      "path": "tests/source-notes-client.test.mjs",
+      "sha256": "8f094250a2ddaa5c6ae7f3f1eff21b3cd7f991f5c884b53bf7191173ccf6f3c9"
+    },
+    {
+      "path": "tests/source-notes-compatibility.test.mjs",
+      "sha256": "b0eab70a46893957a1433181081f3ef5a6fac3fd66ea328ea191d1000b1dfd80"
+    },
+    {
+      "path": "tests/source-notes.test.mjs",
+      "sha256": "edd987a7ea1b269a19bd1e0450183bfaa7f78548833735be7b5add2e1b96a53a"
+    },
+    {
+      "path": "tests/source-passage.test.mjs",
+      "sha256": "e49847a6c3ef413f94f74e020fe64b40b588607da6fad08404f9326032ae8818"
+    },
+    {
+      "path": "tests/story-boundaries.test.mjs",
+      "sha256": "cff5cb3bddb67419ff49b1b9f3dcaad992bb303a0e0576235687439bf65650ab"
+    },
+    {
+      "path": "tests/study-backup-policy.test.mjs",
+      "sha256": "b13094e26b038792b8e5a998578295d67d65abd17e04d7043cc9f0bd8a8c6cd9"
+    },
+    {
+      "path": "tests/study-navigation.test.mjs",
+      "sha256": "a2e06c1d87d4ead34015bf83cc1977c91dd7b11502ad33d7e7c85a580410485a"
+    },
+    {
+      "path": "tests/study-script-contracts.test.mjs",
+      "sha256": "41353f4c13842e4a76777375e00606d12edac851d2ad41f467c6add9e6d3dcaf"
+    },
+    {
+      "path": "tests/subparagraph-scope.test.mjs",
+      "sha256": "f033aedd64eaff100dcb632cacd2866e7b18275027fb1cef692e5dcd7583dbcf"
+    },
+    {
+      "path": "tests/synthetic-fetch-ledger.test.mjs",
+      "sha256": "ed888952773336971b834113e848eefaba6f75b47b6e1a62be61ab31e5338b46"
+    },
+    {
+      "path": "tests/talk-cursor-scope.test.mjs",
+      "sha256": "ecd77f42dee0c6a0f84dff2cd45f95c67f267c8c4be37f4b135d1c013978c3fe"
+    },
+    {
+      "path": "tests/talk-resolution-scope.test.mjs",
+      "sha256": "da187bc265ae7fc7629bd19a84b5a31ec46f24e1469aa86bd44ee0c3124b59b9"
+    },
+    {
+      "path": "tests/talk-script-input.test.mjs",
+      "sha256": "09e5570152f87b968fbcd06aec5ba82e01340ffdaeafab05e4775ae2fb3eab28"
+    },
+    {
+      "path": "tests/talks.test.mjs",
+      "sha256": "775be8e49988e5dd6e6ebdb0f266176b2009b715f50761b0d1c3e14383bf7dbb"
+    },
+    {
+      "path": "tests/test-runner-scheduling.test.mjs",
+      "sha256": "db5fa9b37bd3d55240762e3760b26defc425d986a52a3e4d7bb3f3f08c4206a0"
+    },
+    {
+      "path": "tests/thag-sixteen-boundaries.test.mjs",
+      "sha256": "7b96a7cf98a79014d3ce9a55b7618f2c3ed035c2de864348eabaaa40f50fbb47"
+    },
+    {
+      "path": "tests/thag-sixteen-consumers.test.mjs",
+      "sha256": "1a128d2da64e01e6e02ae4a8a157b16424daeef8c03f8c530cdaa0c7e5f09f4d"
+    },
+    {
+      "path": "tests/thera-cached-poem-notes.test.mjs",
+      "sha256": "e1653335c3302913125b8e7623b3911676d6fc5d0079b820e45de0ed52ad40cd"
+    },
+    {
+      "path": "tests/thera-commentary-locators.test.mjs",
+      "sha256": "1e5e8607d3131adecb164a4c56e91de71aae057a5a7c439103886048a9c6370b"
+    },
+    {
+      "path": "tests/thera-hundred-client.test.mjs",
+      "sha256": "4d518f25a3a7cd844fc917dcdc35664777f56f40c6100d54867b964f1eae8ea6"
+    },
+    {
+      "path": "tests/thera141-180-client.test.mjs",
+      "sha256": "a7f41e07febc41acdb240f7b01f5ff0863b5700e4ca852b32d1a10867f89b3d8"
+    },
+    {
+      "path": "tests/thera181-220-client.test.mjs",
+      "sha256": "c8695064857fa2b7e404091aa64da167d4ec2eb6b3ad36dc1091feb17b1ba77d"
+    },
+    {
+      "path": "tests/thera221-230-client.test.mjs",
+      "sha256": "f81fb17374a5ebba7c5dedb68ce4a970b9b6d69e331be5133d6d4b60422f4a56"
+    },
+    {
+      "path": "tests/thera231-240-client.test.mjs",
+      "sha256": "54c564b8cb1dfef30424a25b7c3fd536ef3e98be935c3e0c423a569cb2ad7742"
+    },
+    {
+      "path": "tests/thera241-250-client.test.mjs",
+      "sha256": "8c32c0a6867dc6d543667fbaede0d7941a0f486326b92beeba70a7b0a355a98c"
+    },
+    {
+      "path": "tests/thera251-259-client.test.mjs",
+      "sha256": "42d318b18d7a6c539d031c8d77969f3bba4cd84050ed9094b3124e96ce0abf4d"
+    },
+    {
+      "path": "tests/thera261-280-client.test.mjs",
+      "sha256": "b721ed69f91cb6144d70613ffc09a4c4c82a5ca2f8aa8d2a895ef07d34b22261"
+    },
+    {
+      "path": "tests/thera261-280-source.test.mjs",
+      "sha256": "252dcc58ac2618029a171e74ec46a4b28c05bdc593bf89bd62b3e642d61bd373"
+    },
+    {
+      "path": "tests/thera281-285-client.test.mjs",
+      "sha256": "abe3db29a30e998152736fd9ca9c42598441c153a62ee1e7a524739391d1b3b1"
+    },
+    {
+      "path": "tests/thera281-285-source.test.mjs",
+      "sha256": "3fe3081c55681611c396d2a845be497ec2e7611bca0ac2e4e02a706c65d0fcad"
+    },
+    {
+      "path": "tests/thera287-288-client.test.mjs",
+      "sha256": "83606202405989c9d0b5a034adffed3b92145e800093b255ae2264261f69e5f9"
+    },
+    {
+      "path": "tests/thera287-288-source.test.mjs",
+      "sha256": "2928fc8f939fffc6c0cdf07e2b16f755c6851492a61f8e1681fdb25aa7f38d18"
+    },
+    {
+      "path": "tests/thera292-299-client.test.mjs",
+      "sha256": "37460c107c048d4601619f8c2f6bd86b3bf3d4338df588bffb27c169ac728e24"
+    },
+    {
+      "path": "tests/thera292-299-source.test.mjs",
+      "sha256": "056416b7144f531ed36eb5d8b8e7eaa4e0b61f6d70f37064a30860117749e8d4"
+    },
+    {
+      "path": "tests/thera301-310-client.test.mjs",
+      "sha256": "796352f3d8d1d8769979e6b29225281e2a20f138ac86aa313fcfd6f4a7ccb08f"
+    },
+    {
+      "path": "tests/thera301-310-source.test.mjs",
+      "sha256": "536d2663253dc71e37e016e1c5b59bebb55016f98e76ea8635b44c92eca6df63"
+    },
+    {
+      "path": "tests/thera312-319-client.test.mjs",
+      "sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953"
+    },
+    {
+      "path": "tests/thera312-319-source.test.mjs",
+      "sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6"
+    },
+    {
+      "path": "tests/thera321-329-client.test.mjs",
+      "sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab"
+    },
+    {
+      "path": "tests/thera321-329-source.test.mjs",
+      "sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499"
+    },
+    {
+      "path": "tests/thera331-334-preface-client.test.mjs",
+      "sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f"
+    },
+    {
+      "path": "tests/thera331-334-source.test.mjs",
+      "sha256": "5bd3a80c12a59daf8a2c9154fd00d7e97aa4616aac4e8497709965554c1dcc0e"
+    },
+    {
+      "path": "tests/thera333-legacy-projection.test.mjs",
+      "sha256": "3ae753c1926ad69b4e02ed8b2451a97767cd605e817280e4816f4712abe83fae"
+    },
+    {
+      "path": "tests/thera333-legacy-source-inverses.test.mjs",
+      "sha256": "86ecdf7bda74a61f539a141d5f5b3e531eec501e8e59541fbd85b65e42d82e34"
+    },
+    {
+      "path": "tests/thera335-350-client.test.mjs",
+      "sha256": "c17ad1147d3aa766c113db1c7318c4f8863d64ffb7e9d490f0ca27985cc12119"
+    },
+    {
+      "path": "tests/thera335-350-source.test.mjs",
+      "sha256": "cbe814127a9e71c9383873e91797311fda65f353577070efc1506be3bd028880"
+    },
+    {
+      "path": "tests/thera339-legacy-projection.test.mjs",
+      "sha256": "bc0770aae600a3293a3e260ba1b4bdfaf9e731a797600b9a20449aa0ab3dc1a7"
+    },
+    {
+      "path": "tests/thera351-360-nine-client.test.mjs",
+      "sha256": "fb359a0639995f1e6623c82d33f8eda1f1be016ff82cd9fb9da96ebebe17adaf"
+    },
+    {
+      "path": "tests/thera351-360-nine-source.test.mjs",
+      "sha256": "b386cd017c9979d48151f56265ed0ff2d4c325a960e55ffbbf5ba5b996a1b235"
+    },
+    {
+      "path": "tests/title-pagination.test.mjs",
+      "sha256": "0d4781baf210f7b37ff1bb47eb14e2ec2efa43e1e5e27217f9b92584c5e6c34d"
+    },
+    {
+      "path": "tests/tool-titles.test.mjs",
+      "sha256": "67c78bcf3eed979ab5abf7b8aa842bb06e56dacd82568f0cfe41449a692aa974"
+    },
+    {
+      "path": "tests/topic-script-input.test.mjs",
+      "sha256": "7903c5a9acc049a015abb21cbceaa9a9c605de66f71d26ea0b3dd6d135a509e0"
+    },
+    {
+      "path": "tests/topic-source-links.test.mjs",
+      "sha256": "bb2d4391d507fc8bfce9d6fa149d8ee48fd244d642ced87700fb76b696d59c16"
+    },
+    {
+      "path": "tests/topics.test.mjs",
+      "sha256": "e1f22768469b22abbebc16c94fe5e824c8f805c458f6c0053cba252a855e7bfe"
+    },
+    {
+      "path": "tests/translation-comparison-policy.test.mjs",
+      "sha256": "ce7d3218ffb2c42ee094b95f2cb5b810459b77dc47995c60267a69f4d3180a51"
+    },
+    {
+      "path": "tests/translation-continuation.test.mjs",
+      "sha256": "34596af48399249411cc8469617fb413ddbbc33727ab3d4605b43a2ead687863"
+    },
+    {
+      "path": "tests/translation-prefix.test.mjs",
+      "sha256": "0578b334f468c633517e1c12cf60a7da8cf353868c1778566b202de8a02456a1"
+    },
+    {
+      "path": "tests/translation-resolution-notes.test.mjs",
+      "sha256": "cafd261f709aa2d70d2cea6871f3ba46e1cb16ad993279c67f81d8b855d16d53"
+    },
+    {
+      "path": "tests/translation-selection.test.mjs",
+      "sha256": "03312f8945f5c75159a7c7d4624d4c887a88532438a47dfe4d3344a31ec69068"
+    },
+    {
+      "path": "tests/upatissa-partial.test.mjs",
+      "sha256": "aaf70be2debbe979df3bb897f7e2e7ba3ba6716448cc4ed91e7da9f86d74edec"
+    },
+    {
+      "path": "tests/variants.test.mjs",
+      "sha256": "12ff00b62c8e6badf9f74cefa257a204ebce8846f2a138d204eb52b9c421af90"
+    },
+    {
+      "path": "tests/verify-boundaries.test.mjs",
+      "sha256": "33d24e8d9feded80f663e42cce58d705f34f2ad520ca44041ee5262974d38bf0"
+    },
+    {
+      "path": "tests/verify-english-boundaries.test.mjs",
+      "sha256": "74b7b4911ab1e6741d63d3118801b11602a0f8dd91b759e4714eae9784deb37a"
+    },
+    {
+      "path": "tests/verify-english-completeness.test.mjs",
+      "sha256": "8799fa0b29a3544d5bbc05b524f09cabbe98d2a3e773978581ccb8beadb32e13"
+    },
+    {
+      "path": "tests/verify-english-scope.test.mjs",
+      "sha256": "76e97b6db9c624b3089a1ee711f6f3344486d8335d24be2b63cf3d264c8e6da6"
+    },
+    {
+      "path": "tests/verify-provenance.test.mjs",
+      "sha256": "a0e3af272c2e7e40de91f73798fc1c48180a058cd9116dc5929deed6740d20a4"
+    },
+    {
+      "path": "tests/verify-reading-spans.test.mjs",
+      "sha256": "3ed8cf24fa8d1913c04a4951d8c2871af4947a544bba188b03ad62e40599190f"
+    },
+    {
+      "path": "tests/verify-script-input.test.mjs",
+      "sha256": "be2afeafebfbfd6867b25d2f14773212b2f1c2136b21ebc959d88f230ef9ae53"
+    },
+    {
+      "path": "tests/verify-source-literal.test.mjs",
+      "sha256": "89d9d0a3228d4aa26a84aa0302cead36b3bbf4a6e0a05d18791d0b9f70bf1b7d"
+    },
+    {
+      "path": "tests/verify-translation-versions.test.mjs",
+      "sha256": "5dc6b378caef12f7550af48b4eb79242abe38948ffe580ba82f6dd3c3cfec544"
+    },
+    {
+      "path": "tests/verify.test.mjs",
+      "sha256": "3320826836b6708d6f8060ae08ef1a44898814c0ca56fa2b116456255ecef935"
+    },
+    {
+      "path": "tests/verse-scope-review.test.mjs",
+      "sha256": "4821500d404b852c2573b89d96f52cba79ea6706a14de577751cdabe51aa4186"
+    },
+    {
+      "path": "tests/verse-search.test.mjs",
+      "sha256": "fda98437bbf824e29d5807b10c03c9fb03701ac14b66a2ceb06c80b3a2d908fe"
+    },
+    {
+      "path": "tests/vinaya-bmc.test.mjs",
+      "sha256": "b7ea6b07cbca064a07f126a1da1ff9ddc0c8fe14e094fff0504c28367b5e1f83"
+    },
+    {
+      "path": "tests/vinaya-navigation-protocol.test.mjs",
+      "sha256": "c80c1b1d4c99d635cad640ea21ae8f7ee0ae47b3d8781c8edeb8c63e49fb58f8"
+    },
+    {
+      "path": "tests/vinaya-partials.test.mjs",
+      "sha256": "56dd82d24ef2c5177e8ea8bee859b4d5377af9308db34cf7dda6b7d4da22cdd9"
+    },
+    {
+      "path": "tests/vinaya-script-input.test.mjs",
+      "sha256": "bbbcbde2f5a10d8f73eeefff32d0c9c4821b6aaf08865c39d3e010ecd3824c12"
+    },
+    {
+      "path": "tests/walshe-selections.test.mjs",
+      "sha256": "4cd4e07cc06e80930f62d81fd6994617fe79ef761953a0013b78ae00da02aa2f"
+    },
+    {
+      "path": "tests/web-an-numbered-section-policy.test.mjs",
+      "sha256": "8e799b1c9e557704b778983293aa6f71d201fc63a6a03541b2dce8e1492d7b0f"
+    },
+    {
+      "path": "tests/web-an-ten-selection-policy.test.mjs",
+      "sha256": "50ba9bb4886df6b29d8ba15ccd7dcec04b07667100faf466a55e47dea6d69618"
+    },
+    {
+      "path": "tests/web-book-search.test.mjs",
+      "sha256": "8678e02db02b6e34ea89e205aa97d3757891425252a97a8826e9ca1a39f65c33"
+    },
+    {
+      "path": "tests/web-bookmark-import.test.mjs",
+      "sha256": "bd75e277bb23a17c064ec58e6778f2a940a75b35924a821e34f479c1ff76a68c"
+    },
+    {
+      "path": "tests/web-bookmark-location.test.mjs",
+      "sha256": "55f9643995df31cf7663efe6f6daad87d18125b269a780ead81fc58653a138cb"
+    },
+    {
+      "path": "tests/web-canonical-search.test.mjs",
+      "sha256": "edc934dbe24594580a2cde3f4a4610f8bc81cbee2529757ff45be71d06e81c1e"
+    },
+    {
+      "path": "tests/web-commentary-search.test.mjs",
+      "sha256": "0da804146ba9f227525a7f074ab3c693d9c30200d1189008d2909ff38c0737a4"
+    },
+    {
+      "path": "tests/web-daily-reading.test.mjs",
+      "sha256": "d8f6f2a4949ffee023d01c604a3c3e4ca5ad16e41f4c470b9a4677917dc286dc"
+    },
+    {
+      "path": "tests/web-focus-ownership.test.mjs",
+      "sha256": "938dd993d731fb36f058f90bd64e629712d0406a0e384adafce95e3c52a6afae"
+    },
+    {
+      "path": "tests/web-local-storage-write.test.mjs",
+      "sha256": "a6d924d7d79715f2539a99c1d52dcfd83c188924214fc349a9026d088d3c1413"
+    },
+    {
+      "path": "tests/web-milinda-partial-policy.test.mjs",
+      "sha256": "a6e2f0812432910111bbfe1ed1c4b60913845c7e832c6229e0e7e6a00e67564c"
+    },
+    {
+      "path": "tests/web-milinda-policy.test.mjs",
+      "sha256": "e1c799400fc58bf249010265da1985d7a9d7798f58bfa26da93c35c6fa1a756b"
+    },
+    {
+      "path": "tests/web-post-search.test.mjs",
+      "sha256": "402c6f7a0673b3ed060f7cce4569e30dfc569f167485064b0e9424a52cc5a2ad"
+    },
+    {
+      "path": "tests/web-progress-import.test.mjs",
+      "sha256": "6c574a91c8523baeef0c55e3a662afe31c19048b94fea2c7adb49304691296f5"
+    },
+    {
+      "path": "tests/web-quote-check.test.mjs",
+      "sha256": "0d464d9790e88dc959dfc63c11c8e781f2e84e590997b6e70c426f5c64a8cf9e"
+    },
+    {
+      "path": "tests/web-reader-ci-artifacts.test.mjs",
+      "sha256": "0af32b645a7214fdcf2d1de45a45030b8a2dafc7c83e7e28b23d8b6dc542f371"
+    },
+    {
+      "path": "tests/web-reader.test.mjs",
+      "sha256": "aa37f83d05a1cebf870d23e1bdf07d923874e92bdde2ff680c3fc976b10f7945"
+    },
+    {
+      "path": "tests/web-reading-plans.test.mjs",
+      "sha256": "0876c19f59afe5d9b332f9323f6c790dc8d4ab71b7d62be87cdf9b1054f108fc"
+    },
+    {
+      "path": "tests/web-reading-pointer-reconciliation.test.mjs",
+      "sha256": "fec4929f612a47779db4dc733ea27f7307eaa44b2ca40255fb0ab526ccf34b74"
+    },
+    {
+      "path": "tests/web-reading-position.test.mjs",
+      "sha256": "06edf9f328135d624496ff8aac8c37ecb69392afed14c47ee09d13e91e7cbcda"
+    },
+    {
+      "path": "tests/web-request-lifecycle.test.mjs",
+      "sha256": "d14403640be200d0b85da7cf915eeaa062d979301bcaa5a67dc786bc384e72c7"
+    },
+    {
+      "path": "tests/web-saved-passages.test.mjs",
+      "sha256": "c7d2f715a3b53d969a87c1efbd94e18b34b5560b55fbfedba1878a4a5824e96b"
+    },
+    {
+      "path": "tests/web-sn27-section-policy.test.mjs",
+      "sha256": "95ac22adaa6b96047618fa0bf71a034d3898c08eab460631963c3b25fa5b25bf"
+    },
+    {
+      "path": "tests/web-source-headings.test.mjs",
+      "sha256": "0f9a9799f4e9d5e61856504d686825a1ec84c9b8695f6ab2031d09764abf033c"
+    },
+    {
+      "path": "tests/web-tool-result.test.mjs",
+      "sha256": "11917d49a8d1681aa4bbaf89905e7b63c876d5df191c6193e8668dd0106671da"
+    },
+    {
+      "path": "tests/web-topics-study.test.mjs",
+      "sha256": "10a02f29941c4a110ac6001fb71a220a4c588588e71c68f8b8238d8974edb297"
+    },
+    {
+      "path": "tests/web-translation-policy.test.mjs",
+      "sha256": "c953cf1ab4e5bc6875b19300f0d2de1ace6eb9bebb74fa7087589d7117d987fc"
+    },
+    {
+      "path": "tests/widget-cancellation.test.mjs",
+      "sha256": "678b76bd4dc73607ed5d29b979c2fd2b00f285352543533d348cbbfefe080ff0"
+    },
+    {
+      "path": "tests/widget-commentary.test.mjs",
+      "sha256": "618c342308e8ed6656b56d477710ad436279840b3b8e5988a21487db9aaae7c3"
+    },
+    {
+      "path": "tests/widget-continuation.test.mjs",
+      "sha256": "515c2e5f8475f56ad77437b1424cf65e6f6896c3c7f5d19922940e8a3ec3134b"
+    },
+    {
+      "path": "tests/widget-deadline.test.mjs",
+      "sha256": "1b3ecf8b6d1d6fae0c8c6db9cfacf39cfc934eec6a705aeb6903e41b46e4f608"
+    },
+    {
+      "path": "tests/widget-exact-segments.test.mjs",
+      "sha256": "d05b40336fa39fe4f3bef2e868509ad64d68bab6e56796639578ff8962fb8fdc"
+    },
+    {
+      "path": "tests/widget-hash-serialization.test.mjs",
+      "sha256": "58e96389be08a636512b5bbec150e233442e09fc54f359b1e5fc6de96c497446"
+    },
+    {
+      "path": "tests/widget-hosted-selections.test.mjs",
+      "sha256": "4ad932ef76cb23c279926ccd2848a8c8007627d17b8eedb513b25e04a92d8264"
+    },
+    {
+      "path": "tests/widget-json-output-cache.test.mjs",
+      "sha256": "c81d1c25003c508299270645945352b4dc89f47e78e9f2c748f01c942500dbdb"
+    },
+    {
+      "path": "tests/widget-links.test.mjs",
+      "sha256": "c3287d77bee5fec675cf95250f0569a8eacf4a57cb30d43780930c40392a171d"
+    },
+    {
+      "path": "tests/widget-model-context.test.mjs",
+      "sha256": "1145363c1a89cd21e6a788b5676313d10466d04f75b2e7674b89fa6aeec953bd"
+    },
+    {
+      "path": "tests/widget-navigation.test.mjs",
+      "sha256": "6c254bef09c6bd22eef68c4c2faf90282fb8888622f4ec4765d8351ecae86ebf"
+    },
+    {
+      "path": "tests/widget-note-frame-cache.test.mjs",
+      "sha256": "118eb074db667e6cd707da2f4980fb38fb2343c76c213743c5748d049914d299"
+    },
+    {
+      "path": "tests/widget-postcanonical.test.mjs",
+      "sha256": "08fa625088ba7e109f3ed57790a152b6953eef135711b2d51084ec9ceea0375f"
+    },
+    {
+      "path": "tests/widget-reader-errors.test.mjs",
+      "sha256": "73ec10db8ff744c8b856964a5ad2820312ae4955ec7c95f9f05f4b83ff16d56f"
+    },
+    {
+      "path": "tests/widget-rendering.test.mjs",
+      "sha256": "1a9cddc9482036918bdc5c3bd3ace941545358b5facbc445f935534d98101ef9"
+    },
+    {
+      "path": "tests/widget-sizing.test.mjs",
+      "sha256": "b04b24bc749c58def9bcaf7d05f266f51ef562b249a69215356045394cd89396"
+    },
+    {
+      "path": "tests/widget-source-books.test.mjs",
+      "sha256": "98d0bc779272110fb4d1db0a42dc51b532f8157d6c364b87c6200811c536b115"
+    },
+    {
+      "path": "tests/widget-streamed-input.test.mjs",
+      "sha256": "4e2da52c7921bb1c6ab65a1e92ba3d3db14bd4073dd36ccfd4c4cfdae270882a"
+    },
+    {
+      "path": "tests/widget-teardown.test.mjs",
+      "sha256": "f8a476c7b9eada1f7e488b6a6c0936cfbff40bd2b4a9f6494fc7877d3db3bdfa"
+    },
+    {
+      "path": "tests/wiring-data2.test.mjs",
+      "sha256": "6a5c980e7ddf8e4fd721454cf0073380448eb61f999c276bb71ff7e263dd1d89"
+    },
+    {
+      "path": "tests/yasoja-commentary.test.mjs",
+      "sha256": "ea0b0c64dd83d72c0f8c58cc1d382aff75c4a6c5e4207d59c672f74729d40370"
+    }
+  ],
+  "current_inventory_sha256": "4aecfb25a453af0b3167a4a32fbfc9acae8cfbe2687e216abad8a6e9129895af",
+  "old_case_vectors": [
+    {
+      "file": "tests/apadana-disclosures.test.mjs",
+      "before_names": [
+        "all152 historical metadata and caveat contracts remain unconditional while invented poem-note content refuses",
+        "invented cached poem-note content never renders, while empty-note scopes retain caveat refusal and Pāli"
+      ],
+      "after_names": [
+        "all152 historical metadata and caveat contracts remain unconditional while invented poem-note content refuses",
+        "invented cached poem-note content never renders, while empty-note scopes retain caveat refusal and Pāli"
+      ],
+      "before_count": 2,
+      "after_count": 2,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/apadana-fourth-client.test.mjs",
+      "before_names": [
+        "all forty finite choices preserve exact apparatus in individual, comparison and embedded validation",
+        "poem31 preface is six metadata fields plus only its separately owned note1 at runtime",
+        "poem40 poem, chapter and collection notes stay three distinct finite owners",
+        "new apparatus fields reject every old/foreign owner and even empty ordinary-provider declarations",
+        "continuation owners retain unconditional pinned metadata identity",
+        "standalone and complete embedded scripts render preface wording once and keep collection/chapter notes in sibling accessible sections",
+        "source-backed all forty finite choices preserve exact apparatus in individual, comparison and embedded validation",
+        "source-backed poem31 preface is six metadata fields plus only its separately owned note1 at runtime",
+        "source-backed poem40 poem, chapter and collection notes stay three distinct finite owners",
+        "source-backed new apparatus fields reject every old/foreign owner and even empty ordinary-provider declarations",
+        "source-backed continuations revalidate separately owned apparatus and preserve the exact pinned version",
+        "source-backed standalone and complete embedded scripts render preface wording once and keep collection/chapter notes in sibling accessible sections"
+      ],
+      "after_names": [
+        "all forty finite choices preserve exact apparatus in individual, comparison and embedded validation",
+        "poem31 preface is six metadata fields plus only its separately owned note1 at runtime",
+        "poem40 poem, chapter and collection notes stay three distinct finite owners",
+        "new apparatus fields reject every old/foreign owner and even empty ordinary-provider declarations",
+        "continuation owners retain unconditional pinned metadata identity",
+        "standalone and complete embedded scripts render preface wording once and keep collection/chapter notes in sibling accessible sections",
+        "source-backed all forty finite choices preserve exact apparatus in individual, comparison and embedded validation",
+        "source-backed poem31 preface is six metadata fields plus only its separately owned note1 at runtime",
+        "source-backed poem40 poem, chapter and collection notes stay three distinct finite owners",
+        "source-backed new apparatus fields reject every old/foreign owner and even empty ordinary-provider declarations",
+        "source-backed continuations revalidate separately owned apparatus and preserve the exact pinned version",
+        "source-backed standalone and complete embedded scripts render preface wording once and keep collection/chapter notes in sibling accessible sections"
+      ],
+      "before_count": 12,
+      "after_count": 12,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": {
+        "factory": "sourceTest",
+        "unchanged_factory_whole_line_sha256": "ea69cb1035f1252d503c065896eb5b2421ad31a1e09779de938762dd60ba3bed",
+        "literal_invocations": 6,
+        "prefix": "source-backed ",
+        "before_expanded": [
+          "source-backed all forty finite choices preserve exact apparatus in individual, comparison and embedded validation",
+          "source-backed poem31 preface is six metadata fields plus only its separately owned note1 at runtime",
+          "source-backed poem40 poem, chapter and collection notes stay three distinct finite owners",
+          "source-backed new apparatus fields reject every old/foreign owner and even empty ordinary-provider declarations",
+          "source-backed continuations revalidate separately owned apparatus and preserve the exact pinned version",
+          "source-backed standalone and complete embedded scripts render preface wording once and keep collection/chapter notes in sibling accessible sections"
+        ],
+        "after_expanded": [
+          "source-backed all forty finite choices preserve exact apparatus in individual, comparison and embedded validation",
+          "source-backed poem31 preface is six metadata fields plus only its separately owned note1 at runtime",
+          "source-backed poem40 poem, chapter and collection notes stay three distinct finite owners",
+          "source-backed new apparatus fields reject every old/foreign owner and even empty ordinary-provider declarations",
+          "source-backed continuations revalidate separately owned apparatus and preserve the exact pinned version",
+          "source-backed standalone and complete embedded scripts render preface wording once and keep collection/chapter notes in sibling accessible sections"
+        ]
+      }
+    },
+    {
+      "file": "tests/apadana-fourth.test.mjs",
+      "before_names": [
+        "all thirty prior profiles and Pāli sequences remain frozen while ten new roots match independent evidence",
+        "source-enabled ten pinned artifacts reproduce 230 stanzas, 260 paragraphs and all 224 separately owned notes",
+        "source-enabled every printed stanza retains its words and irregular labels without importing apparatus into quotes",
+        "source-enabled finite extraction preserves separate preface and summary owners, literal editorial symbols and exact source failures",
+        "backend source catalogues expose exact new owners as copied metadata, never translated bodies",
+        "source-enabled API pages preserve all ten bodies and apparatus across pinned continuations and refuse changed identities",
+        "source-enabled current reading API exposes preface notes once and separates both summaries from poem and notes"
+      ],
+      "after_names": [
+        "all thirty prior profiles and Pāli sequences remain frozen while ten new roots match independent evidence",
+        "source-enabled ten pinned artifacts reproduce 230 stanzas, 260 paragraphs and all 224 separately owned notes",
+        "source-enabled every printed stanza retains its words and irregular labels without importing apparatus into quotes",
+        "source-enabled finite extraction preserves separate preface and summary owners, literal editorial symbols and exact source failures",
+        "backend source catalogues expose exact new owners as copied metadata, never translated bodies",
+        "source-enabled API pages preserve all ten bodies and apparatus across pinned continuations and refuse changed identities",
+        "source-enabled current reading API exposes preface notes once and separates both summaries from poem and notes"
+      ],
+      "before_count": 7,
+      "after_count": 7,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/apadana-held234.test.mjs",
+      "before_names": [
+        "held234 curation appends only236 to exact284 objects and preserves separate historical source groups and canon",
+        "source-enabled real234/order235 and distinct235/order235 positives precede corruption controls",
+        "source-enabled finite identity rejects corrected order, swapped235, malformed heading and forged metadata",
+        "source-enabled both complete API streams preserve identities and warmed metadata refuses before transport",
+        "same-order artifacts never authorize cross-owner selectors or unreviewed revisions/held260"
+      ],
+      "after_names": [
+        "held234 curation appends only236 to exact284 objects and preserves separate historical source groups and canon",
+        "source-enabled real234/order235 and distinct235/order235 positives precede corruption controls",
+        "source-enabled finite identity rejects corrected order, swapped235, malformed heading and forged metadata",
+        "source-enabled both complete API streams preserve identities and warmed metadata refuses before transport",
+        "same-order artifacts never authorize cross-owner selectors or unreviewed revisions/held260"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/apadana-next.test.mjs",
+      "before_names": [
+        "current registry retains the second Therī chapter identities and only reviewed root repairs",
+        "source-enabled parser reproduces all498 independent stanza entries and350 original note definitions",
+        "finite stanza labels preserve null globals, compound labels and original square-bracketed local59",
+        "actual API long continuations and widget preserve sparse notes and source-owned divisions",
+        "source-enabled embedded reader executes sparse note and publisher division ownership guards",
+        "embedded sparse poem metadata remains finite and invented poem-note content refuses offline"
+      ],
+      "after_names": [
+        "current registry retains the second Therī chapter identities and only reviewed root repairs",
+        "source-enabled parser reproduces all498 independent stanza entries and350 original note definitions",
+        "finite stanza labels preserve null globals, compound labels and original square-bracketed local59",
+        "actual API long continuations and widget preserve sparse notes and source-owned divisions",
+        "source-enabled embedded reader executes sparse note and publisher division ownership guards",
+        "embedded sparse poem metadata remains finite and invented poem-note content refuses offline"
+      ],
+      "before_count": 6,
+      "after_count": 6,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/apadana-thera.test.mjs",
+      "before_names": [
+        "current registry preserves frozen old forty and the original twenty reviewed Therā identities",
+        "source-enabled twenty exact Git artifacts reproduce 327 stanzas, 387 paragraphs, 153 notes and note-free apparatus",
+        "source-enabled quotation extraction retains every original stanza word and every irregular printed label",
+        "source-enabled family dispatch, exact profiles and raw pins refuse foreign identities and editorial repair",
+        "unsupported chapter-three artifacts and foreign metadata fail before any source request",
+        "backend catalogues publish exact copied source and apparatus descriptors",
+        "source-enabled all twenty APIs retain 500-character continuations, edition caveats and empty note arrays",
+        "source-enabled current reading API returns the new family and note-free apparatus without old-family collisions"
+      ],
+      "after_names": [
+        "current registry preserves frozen old forty and the original twenty reviewed Therā identities",
+        "source-enabled twenty exact Git artifacts reproduce 327 stanzas, 387 paragraphs, 153 notes and note-free apparatus",
+        "source-enabled quotation extraction retains every original stanza word and every irregular printed label",
+        "source-enabled family dispatch, exact profiles and raw pins refuse foreign identities and editorial repair",
+        "unsupported chapter-three artifacts and foreign metadata fail before any source request",
+        "backend catalogues publish exact copied source and apparatus descriptors",
+        "source-enabled all twenty APIs retain 500-character continuations, edition caveats and empty note arrays",
+        "source-enabled current reading API returns the new family and note-free apparatus without old-family collisions"
+      ],
+      "before_count": 8,
+      "after_count": 8,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/apadana-third.test.mjs",
+      "before_names": [
+        "current registry preserves the prior twenty and exact third-chapter source/root contracts",
+        "source-enabled extraction reproduces all ten artifacts, 505 paragraphs, 475 stanzas and 379+2 owned notes",
+        "source-enabled finite paragraph breaks and paired HTML retain every reviewed word",
+        "source-enabled quotation extraction covers every qualified label without dropping words or including apparatus",
+        "source-enabled API continuations preserve edition and apparatus while refusing changed scope before retrieval",
+        "all ten third-chapter metadata identities, apparatus mutants and invented-content refusal stay unconditional",
+        "source-enabled reader and comparison guards preserve all ten identities, zero-note division, summary ownership and pinned continuation",
+        "source-enabled current embedded reader executes third-chapter apparatus guards before rendering",
+        "source-enabled widget preserves separate third-chapter apparatus and revised canonical locators"
+      ],
+      "after_names": [
+        "current registry preserves the prior twenty and exact third-chapter source/root contracts",
+        "source-enabled extraction reproduces all ten artifacts, 505 paragraphs, 475 stanzas and 379+2 owned notes",
+        "source-enabled finite paragraph breaks and paired HTML retain every reviewed word",
+        "source-enabled quotation extraction covers every qualified label without dropping words or including apparatus",
+        "source-enabled API continuations preserve edition and apparatus while refusing changed scope before retrieval",
+        "all ten third-chapter metadata identities, apparatus mutants and invented-content refusal stay unconditional",
+        "source-enabled reader and comparison guards preserve all ten identities, zero-note division, summary ownership and pinned continuation",
+        "source-enabled current embedded reader executes third-chapter apparatus guards before rendering",
+        "source-enabled widget preserves separate third-chapter apparatus and revised canonical locators"
+      ],
+      "before_count": 9,
+      "after_count": 9,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/ci-test-partitions.test.mjs",
+      "before_names": [
+        "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
+        "real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases",
+        "terminal event accounting rejects missing summaries cancellations failures and duplicate summary events",
+        "aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases",
+        "a real failing child cannot seal an approving execution receipt",
+        "a bounded hung child fails closed without an approving complete receipt",
+        "the real CLI activates its reporter before unchanged complete-file argv",
+        "raw CI workflow keeps the full reference and four bounded Windows partitions"
+      ],
+      "after_names": [
+        "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
+        "real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases",
+        "terminal event accounting rejects missing summaries cancellations failures and duplicate summary events",
+        "aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases",
+        "a real failing child cannot seal an approving execution receipt",
+        "a bounded hung child fails closed without an approving complete receipt",
+        "the real CLI activates its reporter before unchanged complete-file argv",
+        "raw CI workflow keeps the full reference and four bounded Windows partitions"
+      ],
+      "before_count": 8,
+      "after_count": 8,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/current339-source-inverses.test.mjs",
+      "before_names": [
+        "actual current359 and v45 bindings retain every exact D4 assertion through finite source inputs"
+      ],
+      "after_names": [
+        "actual current359 and v45 bindings retain every exact D4 assertion through finite source inputs"
+      ],
+      "before_count": 1,
+      "after_count": 1,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/current343-bindings.test.mjs",
+      "before_names": [
+        "actual current imports bind exact359 identities to widget v45",
+        "binding refuses omitted substituted duplicated reordered IDs and stale widget namespaces",
+        "four source-authorized IDs retain the repaired canonical locator namespace independently of widget UI version"
+      ],
+      "after_names": [
+        "actual current imports bind exact368 identities to widget v46",
+        "binding refuses omitted substituted duplicated reordered IDs and stale widget namespaces",
+        "four source-authorized IDs retain the repaired canonical locator namespace independently of widget UI version"
+      ],
+      "before_count": 3,
+      "after_count": 3,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/held234-client.test.mjs",
+      "before_names": [
+        "new236 requires separate one-source authority while prior284 and neighbor235 source objects remain exact",
+        "ALL authentic234 and235 pages, real six notes and empty prefaces display before mutations in both hosts",
+        "same-order foreign source and corrupted actual cache refuse in individual comparison and both widgets while retaining Pāli",
+        "source-bound real continuations reject owner revision and prefix drift without substituting neighbor235"
+      ],
+      "after_names": [
+        "new236 requires separate one-source authority while prior284 and neighbor235 source objects remain exact",
+        "ALL authentic234 and235 pages, real six notes and empty prefaces display before mutations in both hosts",
+        "same-order foreign source and corrupted actual cache refuse in individual comparison and both widgets while retaining Pāli",
+        "source-bound real continuations reject owner revision and prefix drift without substituting neighbor235"
+      ],
+      "before_count": 4,
+      "after_count": 4,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/held234-current333-chain.test.mjs",
+      "before_names": [
+        "actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption"
+      ],
+      "after_names": [
+        "actual held234 metadata preflight keeps the full325,333,339,343 and359 bridges into current368 and rejects baseline corruption"
+      ],
+      "before_count": 1,
+      "after_count": 1,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/intake343-metadata.test.mjs",
+      "before_names": [
+        "all343 full objects and ordered339 baseline are verified before historical metadata projection",
+        "same-count substitutions missing reordered or changed old and new profiles fail",
+        "all links rights policy counters and envelope fields remain exact",
+        "historical339 is explicitly admitted only when every old full object is exact",
+        "shared343 authority graphs are deeply frozen and cannot be changed together with observed metadata",
+        "eligibility reclassifies only approved publisher331 and preserves every other hold"
+      ],
+      "after_names": [
+        "all343 full objects and ordered339 baseline are verified before historical metadata projection",
+        "same-count substitutions missing reordered or changed old and new profiles fail",
+        "all links rights policy counters and envelope fields remain exact",
+        "historical339 is explicitly admitted only when every old full object is exact",
+        "shared343 authority graphs are deeply frozen and cannot be changed together with observed metadata",
+        "eligibility reclassifies only approved publisher331 and preserves every other hold"
+      ],
+      "before_count": 6,
+      "after_count": 6,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/intake359-metadata-history.test.mjs",
+      "before_names": [
+        "genuine359 retains every343 object and strict historical projection refuses identity rights and source-pin drift",
+        "warm359 metadata requires physical proof bytes after missing tampered or authentic-directory symlink controls",
+        "actual359 corpus never accepts its authentic343 historical fixture or unknown AP bytes after warming"
+      ],
+      "after_names": [
+        "genuine359 retains every343 object and strict historical projection refuses identity rights and source-pin drift",
+        "warm359 metadata requires physical proof bytes after missing tampered or authentic-directory symlink controls",
+        "actual359 corpus never accepts its authentic343 historical fixture or unknown AP bytes after warming"
+      ],
+      "before_count": 3,
+      "after_count": 3,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/next-ten-history-data.test.mjs",
+      "before_names": [
+        "new current34 is distinct from legitimate historical DD34 and unknown supplied bytes stay unknown",
+        "warm current and old proof deletion or tampering cannot turn historical fallback into a positive",
+        "actual corpus corruption authentic DD substitutions and authentic authority junctions refuse after a positive"
+      ],
+      "after_names": [
+        "new current34 is distinct from legitimate historical DD34 and unknown supplied bytes stay unknown",
+        "warm current and old proof deletion or tampering cannot turn historical fallback into a positive",
+        "actual corpus corruption authentic DD substitutions and authentic authority junctions refuse after a positive"
+      ],
+      "before_count": 3,
+      "after_count": 3,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/six-boundary-source-input.test.mjs",
+      "before_names": [
+        "every physical future source restores whole C1 with strict string Buffer and fileURL identity",
+        "unknown source mutations remain unknown and proof bytes never allow fallback",
+        "all nested source frames retain literal D4 URL behavior and original old hashes",
+        "runtime data and unlisted URLs are never source-projected"
+      ],
+      "after_names": [
+        "every physical future source restores whole C1 with strict string Buffer and fileURL identity",
+        "unknown source mutations remain unknown and proof bytes never allow fallback",
+        "all nested source frames retain literal D4 URL behavior and original old hashes",
+        "runtime data and unlisted URLs are never source-projected"
+      ],
+      "before_count": 4,
+      "after_count": 4,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/source-notes-baseline-projection.test.mjs",
+      "before_names": [
+        "only three exact approved additive files project back to both unchanged historical seals",
+        "arbitrary old root/private/builder code changes cannot disappear in the projection",
+        "missing, duplicate, relocated or changed approved additions and alternate old hashes refuse",
+        "every private-data/storage helper retains its original bytes outside the exact reader addition",
+        "the projection cannot mask canonical or all285 profile/link changes"
+      ],
+      "after_names": [
+        "only three exact approved additive files project back to both unchanged historical seals",
+        "arbitrary old root/private/builder code changes cannot disappear in the projection",
+        "missing, duplicate, relocated or changed approved additions and alternate old hashes refuse",
+        "every private-data/storage helper retains its original bytes outside the exact reader addition",
+        "the projection cannot mask canonical or all285 profile/link changes"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/source-notes-compatibility.test.mjs",
+      "before_names": [
+        "separately indexed note preserves all old unit and book identities, source objects and 420 downstream spans",
+        "complete old segment objects remain unchanged in all 8544 units and 61 books under every existing variant mode",
+        "additive edition apparatus preserves the entire old API result across 342 page, script, variant and citation cases"
+      ],
+      "after_names": [
+        "separately indexed note preserves all old unit and book identities, source objects and 420 downstream spans",
+        "complete old segment objects remain unchanged in all 8544 units and 61 books under every existing variant mode",
+        "additive edition apparatus preserves the entire old API result across 342 page, script, variant and citation cases"
+      ],
+      "before_count": 3,
+      "after_count": 3,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera-commentary-locators.test.mjs",
+      "before_names": [
+        "Thera19 aligned commentary owns only its three genuine passages and pins their actual tuples",
+        "commentary preflight resolves canonical/book metadata without touching source words or exact-anchor bounds",
+        "all fresh Thera19 widget anchors/context/continuations use the mapping revision across scripts",
+        "native MCP schema accepts compact Thera19 and established SN21 locator pins for exact/context/continuation replay",
+        "stale revision refuses before vanished-tail lookup; fresh bounds and changed anchor fingerprints still refuse",
+        "SN21 keeps its exact established revision and now accepts fresh widget cursors; all unrelated sources remain unchanged",
+        "finite rendering keeps both post-poem/summary placements while widget refuses invented poem notes",
+        "finite Theri captions stay unconditional, invented notes refuse, and commentary shares only locator metadata",
+        "source-enabled original eight recitation/summary owners display in both hosts before ownership mutations"
+      ],
+      "after_names": [
+        "Thera19 aligned commentary owns only its three genuine passages and pins their actual tuples",
+        "commentary preflight resolves canonical/book metadata without touching source words or exact-anchor bounds",
+        "all fresh Thera19 widget anchors/context/continuations use the mapping revision across scripts",
+        "native MCP schema accepts compact Thera19 and established SN21 locator pins for exact/context/continuation replay",
+        "stale revision refuses before vanished-tail lookup; fresh bounds and changed anchor fingerprints still refuse",
+        "SN21 keeps its exact established revision and now accepts fresh widget cursors; all unrelated sources remain unchanged",
+        "finite rendering keeps both post-poem/summary placements while widget refuses invented poem notes",
+        "finite Theri captions stay unconditional, invented notes refuse, and commentary shares only locator metadata",
+        "source-enabled original eight recitation/summary owners display in both hosts before ownership mutations"
+      ],
+      "before_count": 9,
+      "after_count": 9,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera141-180-client.test.mjs",
+      "before_names": [
+        "new client capabilities preserve the independently frozen168 source contracts and exact approved scope",
+        "all38 actual source pages and both embedded hosts retain original bodies, rights, notes and exact source continuation",
+        "all38 warmed source choices refuse changed metadata before another source request"
+      ],
+      "after_names": [
+        "new client capabilities preserve the independently frozen168 source contracts and exact approved scope",
+        "all38 actual source pages and both embedded hosts retain original bodies, rights, notes and exact source continuation",
+        "all38 warmed source choices refuse changed metadata before another source request"
+      ],
+      "before_count": 3,
+      "after_count": 3,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera181-220-client.test.mjs",
+      "before_names": [
+        "new client capabilities preserve the independently frozen206 source contracts and exact approved scope",
+        "ALL40 actual source positives complete before mutations: original paged bodies207poemnotes4apparatusnotes and both hosts",
+        "all40 actual cached source mutations refuse individual comparison and both host English while preserving Pāli",
+        "all40 warmed source choices refuse changed metadata before another source request",
+        "second-hundred scope keeps its own notes6–7 and truthful caption while preceding collection captions remain exact"
+      ],
+      "after_names": [
+        "new client capabilities preserve the independently frozen206 source contracts and exact approved scope",
+        "ALL40 actual source positives complete before mutations: original paged bodies207poemnotes4apparatusnotes and both hosts",
+        "all40 actual cached source mutations refuse individual comparison and both host English while preserving Pāli",
+        "all40 warmed source choices refuse changed metadata before another source request",
+        "second-hundred scope keeps its own notes6–7 and truthful caption while preceding collection captions remain exact"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera221-230-client.test.mjs",
+      "before_names": [
+        "new client capabilities preserve the independently frozen256 source contracts and exact approved scope",
+        "ALL10 actual source positives complete before mutations: original paged bodies41poemnotes0apparatusnotes and both hosts",
+        "all10 actual cached source mutations refuse individual comparison and both host English while preserving Pāli",
+        "all10 warmed source choices refuse changed metadata before another source request",
+        "actual paging refuses invalid identity before transport and verifies stale prefixes only against its own pinned source"
+      ],
+      "after_names": [
+        "new client capabilities preserve the independently frozen256 source contracts and exact approved scope",
+        "ALL10 actual source positives complete before mutations: original paged bodies41poemnotes0apparatusnotes and both hosts",
+        "all10 actual cached source mutations refuse individual comparison and both host English while preserving Pāli",
+        "all10 warmed source choices refuse changed metadata before another source request",
+        "actual paging refuses invalid identity before transport and verifies stale prefixes only against its own pinned source"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera241-250-client.test.mjs",
+      "before_names": [
+        "new client capabilities preserve the independently frozen246 source contracts and exact approved scope",
+        "ALL10 actual source positives complete before mutations: original paged bodies34poemnotes0apparatusnotes and both hosts",
+        "all10 actual cached source mutations refuse individual comparison and both host English while preserving Pāli",
+        "all10 warmed source choices refuse changed metadata before another source request",
+        "actual paging refuses invalid identity before transport and verifies stale prefixes only against its own pinned source"
+      ],
+      "after_names": [
+        "new client capabilities preserve the independently frozen246 source contracts and exact approved scope",
+        "ALL10 actual source positives complete before mutations: original paged bodies34poemnotes0apparatusnotes and both hosts",
+        "all10 actual cached source mutations refuse individual comparison and both host English while preserving Pāli",
+        "all10 warmed source choices refuse changed metadata before another source request",
+        "actual paging refuses invalid identity before transport and verifies stale prefixes only against its own pinned source"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera261-280-client.test.mjs",
+      "before_names": [
+        "all18 capabilities retain exact303 identity order and immutable independently sealed metadata",
+        "ALL18 genuine complete paged bodies and59notes pass individual comparison and both widgets before mutation controls",
+        "all18 cached note content empty/nonempty headings metadata and missing edition notices refuse while preserving Pāli",
+        "real title-note1 cannot migrate into heading apparatus and270summary cannot be corrected reassigned or given notes",
+        "real continuations keep exact owner and revision;280cannot inherit270 and stale cursors preserve authentic Pāli"
+      ],
+      "after_names": [
+        "all18 capabilities retain exact303 identity order and immutable independently sealed metadata",
+        "ALL18 genuine complete paged bodies and59notes pass individual comparison and both widgets before mutation controls",
+        "all18 cached note content empty/nonempty headings metadata and missing edition notices refuse while preserving Pāli",
+        "real title-note1 cannot migrate into heading apparatus and270summary cannot be corrected reassigned or given notes",
+        "real continuations keep exact owner and revision;280cannot inherit270 and stale cursors preserve authentic Pāli"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera261-280-source.test.mjs",
+      "before_names": [
+        "exact independently approved18 extend the preserved285 to303 with unchanged canonical identities and rights",
+        "all18 actual pinned originals and notices match both independent normalization authorities before mutations",
+        "two chapter headings remain note-free paratext while title-note1 and literal edition typography remain poem-owned",
+        "combined274 local1–2 stays one eight-line entry and quotations exclude all headings colophons notes and apparatus",
+        "270 summary keeps original41 versus42 and held266 scope outside poem words and complete-chapter claims",
+        "real raw body note numbering pair and scope corruptions refuse even with forged raw hashes",
+        "held260 266 and280 refuse before transport and same-title280 never borrows270 English",
+        "cold and warmed metadata plus source-bound continuations refuse drift without extra fetch or fallback"
+      ],
+      "after_names": [
+        "exact independently approved18 extend the preserved285 to303 with unchanged canonical identities and rights",
+        "all18 actual pinned originals and notices match both independent normalization authorities before mutations",
+        "two chapter headings remain note-free paratext while title-note1 and literal edition typography remain poem-owned",
+        "combined274 local1–2 stays one eight-line entry and quotations exclude all headings colophons notes and apparatus",
+        "270 summary keeps original41 versus42 and held266 scope outside poem words and complete-chapter claims",
+        "real raw body note numbering pair and scope corruptions refuse even with forged raw hashes",
+        "held260 266 and280 refuse before transport and same-title280 never borrows270 English",
+        "cold and warmed metadata plus source-bound continuations refuse drift without extra fetch or fallback"
+      ],
+      "before_count": 8,
+      "after_count": 8,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera281-285-client.test.mjs",
+      "before_names": [
+        "all five capabilities retain exact308 identity and every original303 profile without mistaking API choices for private pins",
+        "all five genuine complete paged bodies and32notes pass individual comparison and both widget bridges before mutations",
+        "actual changed note content empty/nonempty heading forged hashes and missing caveats refuse in both native validators and bridges",
+        "title-note1 cannot migrate into bare chapter heading and all32 actual notes keep original numbering and owners",
+        "source-bound real continuations reject owner revision prefix and cursor drift while retaining authentic Pāli"
+      ],
+      "after_names": [
+        "all five capabilities retain exact308 identity and every original303 profile without mistaking API choices for private pins",
+        "all five genuine complete paged bodies and32notes pass individual comparison and both widget bridges before mutations",
+        "actual changed note content empty/nonempty heading forged hashes and missing caveats refuse in both native validators and bridges",
+        "title-note1 cannot migrate into bare chapter heading and all32 actual notes keep original numbering and owners",
+        "source-bound real continuations reject owner revision prefix and cursor drift while retaining authentic Pāli"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera281-285-source.test.mjs",
+      "before_names": [
+        "exact five independently reviewed profiles extend all preserved303 objects and links to308 without prior catalogue or canonical identity changes",
+        "all five genuine originals and six rights/routing artifacts match independent body notes paragraph and source pins before mutations",
+        "three authentic combined entries retain eight lines and verse quotations exclude title colophons notes and chapter heading",
+        "bare chapter29 heading is note-free apparatus; xxx Suddhattha ŋ 27/37 variant epithets and unnamed Buddha remain literal",
+        "changed actual raw identity notes pair members ordering and forged hashes refuse after authentic five positives",
+        "held260/266/280 and foreign ownership refuse before transport while authentic Pāli remains readable",
+        "cold and warmed real source metadata continuations refuse drift without extra source requests or fallback"
+      ],
+      "after_names": [
+        "exact five independently reviewed profiles extend all preserved303 objects and links to308 without prior catalogue or canonical identity changes",
+        "all five genuine originals and six rights/routing artifacts match independent body notes paragraph and source pins before mutations",
+        "three authentic combined entries retain eight lines and verse quotations exclude title colophons notes and chapter heading",
+        "bare chapter29 heading is note-free apparatus; xxx Suddhattha ŋ 27/37 variant epithets and unnamed Buddha remain literal",
+        "changed actual raw identity notes pair members ordering and forged hashes refuse after authentic five positives",
+        "held260/266/280 and foreign ownership refuse before transport while authentic Pāli remains readable",
+        "cold and warmed real source metadata continuations refuse drift without extra source requests or fallback"
+      ],
+      "before_count": 7,
+      "after_count": 7,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera287-288-client.test.mjs",
+      "before_names": [
+        "two genuine capabilities retain all308 prior profiles and exact310 identity without audio capability or exposed-choice pin assumptions",
+        "both genuine complete paged bodies and eight full notes pass native comparison and both widget bridges with exact source-derived offsets",
+        "actual notes empty paratext forged hashes missing provenance and source metadata drift refuse in both validators and bridges",
+        "single287 title note and seven288 notes retain owners and uncertainty without invented notes or phantom apparatus",
+        "genuine source-bound continuations reject owner revision prefix and cursor drift while preserving authentic Pāli"
+      ],
+      "after_names": [
+        "two genuine capabilities retain all308 prior profiles and exact310 identity without audio capability or exposed-choice pin assumptions",
+        "both genuine complete paged bodies and eight full notes pass native comparison and both widget bridges with exact source-derived offsets",
+        "actual notes empty paratext forged hashes missing provenance and source metadata drift refuse in both validators and bridges",
+        "single287 title note and seven288 notes retain owners and uncertainty without invented notes or phantom apparatus",
+        "genuine source-bound continuations reject owner revision prefix and cursor drift while preserving authentic Pāli"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera287-288-source.test.mjs",
+      "before_names": [
+        "exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities",
+        "both complete original poems and all six rights/routing artifacts match independently sealed source body notes and paragraph pins before corruptions",
+        "all eight four-line quotation entries preserve boundaries and exclude title notes colophons empty paratext and audio frontmatter",
+        "audio metadata grants no media capability and all seven288 notes retain family-reference ambiguity and original source spellings",
+        "actual changed raw identity order notes ownership empty paratext and forged raw hashes refuse after both authentic positives",
+        "held260/266/280 and unapproved media refuse before transport while authentic Pāli remains readable",
+        "cold and warmed source metadata and genuine continuations refuse drift without extra fetches or fallback"
+      ],
+      "after_names": [
+        "exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities",
+        "both complete original poems and all six rights/routing artifacts match independently sealed source body notes and paragraph pins before corruptions",
+        "all eight four-line quotation entries preserve boundaries and exclude title notes colophons empty paratext and audio frontmatter",
+        "audio metadata grants no media capability and all seven288 notes retain family-reference ambiguity and original source spellings",
+        "actual changed raw identity order notes ownership empty paratext and forged raw hashes refuse after both authentic positives",
+        "held260/266/280 and unapproved media refuse before transport while authentic Pāli remains readable",
+        "cold and warmed source metadata and genuine continuations refuse drift without extra fetches or fallback"
+      ],
+      "before_count": 7,
+      "after_count": 7,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera292-299-client.test.mjs",
+      "before_names": [
+        "seven genuine V2 capabilities retain all310 prior profiles and exact317 identity without audio capability or exposed-choice pin assumptions",
+        "all seven genuine complete paged bodies and22full notes pass native comparison and both widget bridges with exact source-derived offsets",
+        "actual notes empty paratext forged hashes missing provenance and source metadata drift refuse in both validators and bridges",
+        "299body-owned notes never become title apparatus; V2 spelling botanical notices and authentic note ownership stay intact",
+        "genuine source-bound continuations reject owner revision prefix and cursor drift while preserving authentic Pāli"
+      ],
+      "after_names": [
+        "seven genuine V2 capabilities retain all310 prior profiles and exact317 identity without audio capability or exposed-choice pin assumptions",
+        "all seven genuine complete paged bodies and22full notes pass native comparison and both widget bridges with exact source-derived offsets",
+        "actual notes empty paratext forged hashes missing provenance and source metadata drift refuse in both validators and bridges",
+        "299body-owned notes never become title apparatus; V2 spelling botanical notices and authentic note ownership stay intact",
+        "genuine source-bound continuations reject owner revision prefix and cursor drift while preserving authentic Pāli"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera292-299-source.test.mjs",
+      "before_names": [
+        "seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities",
+        "all seven complete originals and six rights/routing artifacts match independent source body notes paragraphs and UTF16 lengths before corruptions",
+        "all31 genuine quotation entries preserve compound296 and source punctuation while excluding headings notes colophons and chapter apparatus",
+        "294inline colon and anchored note coexist; original names punctuation display pair botanical caveats repeated identity and299body-note owners remain exact",
+        "actual raw identity note-colon ownership punctuation compound boundary and forged source-hash corruptions refuse after genuine seven positives",
+        "held291/297/300 and earlier260/266/280 plus media refuse before transport while authentic Pāli remains readable",
+        "cold and warmed metadata and genuine source-bound continuations refuse drift without extra source requests or fallback"
+      ],
+      "after_names": [
+        "seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities",
+        "all seven complete originals and six rights/routing artifacts match independent source body notes paragraphs and UTF16 lengths before corruptions",
+        "all31 genuine quotation entries preserve compound296 and source punctuation while excluding headings notes colophons and chapter apparatus",
+        "294inline colon and anchored note coexist; original names punctuation display pair botanical caveats repeated identity and299body-note owners remain exact",
+        "actual raw identity note-colon ownership punctuation compound boundary and forged source-hash corruptions refuse after genuine seven positives",
+        "held291/297/300 and earlier260/266/280 plus media refuse before transport while authentic Pāli remains readable",
+        "cold and warmed metadata and genuine source-bound continuations refuse drift without extra source requests or fallback"
+      ],
+      "before_count": 7,
+      "after_count": 7,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera312-319-client.test.mjs",
+      "before_names": [
+        "exact333 client capabilities retain every325 old object and40+293 identities with no automatic English or held311/320 transport",
+        "all8 genuine bodies73paragraphs34notes and source-derived500character pages pass actual MCP/native validators and both widget bridges",
+        "cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges",
+        "312 note3 state pairs, literal title glyphs and319 combined4-5/unclosed quote retain exact owned note text across both bridges",
+        "genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads",
+        "preserved325 summary note8 stays separate and outside actual MCP quote scope while private drafts and pinned citations keep exact saved bases"
+      ],
+      "after_names": [
+        "exact333 client capabilities retain every325 old object and40+293 identities with no automatic English or held311/320 transport",
+        "all8 genuine bodies73paragraphs34notes and source-derived500character pages pass actual MCP/native validators and both widget bridges",
+        "cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges",
+        "312 note3 state pairs, literal title glyphs and319 combined4-5/unclosed quote retain exact owned note text across both bridges",
+        "genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads",
+        "preserved325 summary note8 stays separate and outside actual MCP quote scope while private drafts and pinned citations keep exact saved bases"
+      ],
+      "before_count": 6,
+      "after_count": 6,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera312-319-source.test.mjs",
+      "before_names": [
+        "exact333 identities preserve all325 full ordered profile and link objects, rights policy and all canonical/non-Apadana data",
+        "all eight original raw/blob pins and six rights artifacts yield73 paragraphs34 complete notes with independent UTF16/layout hashes",
+        "all49 whole-verse quotation entries match independent pins, including the single319 eight-line4-5 entry and excluded title/colophons/notes",
+        "all approved edition caveats and exact publisher titles remain literal beside unchanged independent VRI titles",
+        "all34 numbered notes keep independently recorded owners;312 two c/ch displays stay solely in note3 and no chapter apparatus is invented",
+        "authentic positives precede raw/title/order/rights/note/layout/HTML corruption and forged-profile refusal controls",
+        "all existing held publishers plus311/320 and media refuse before transport while genuine canonical Pali remains available",
+        "cold and warm link-rights guards and authentic source-bound continuations reject revision/prefix/owner drift without fallback"
+      ],
+      "after_names": [
+        "exact333 identities preserve all325 full ordered profile and link objects, rights policy and all canonical/non-Apadana data",
+        "all eight original raw/blob pins and six rights artifacts yield73 paragraphs34 complete notes with independent UTF16/layout hashes",
+        "all49 whole-verse quotation entries match independent pins, including the single319 eight-line4-5 entry and excluded title/colophons/notes",
+        "all approved edition caveats and exact publisher titles remain literal beside unchanged independent VRI titles",
+        "all34 numbered notes keep independently recorded owners;312 two c/ch displays stay solely in note3 and no chapter apparatus is invented",
+        "authentic positives precede raw/title/order/rights/note/layout/HTML corruption and forged-profile refusal controls",
+        "all existing held publishers plus311/320 and media refuse before transport while genuine canonical Pali remains available",
+        "cold and warm link-rights guards and authentic source-bound continuations reject revision/prefix/owner drift without fallback"
+      ],
+      "before_count": 8,
+      "after_count": 8,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera321-329-client.test.mjs",
+      "before_names": [
+        "current359 clients retain the reviewed339 cohort and40+319 identities with no automatic English or remaining held-source transport",
+        "all6 genuine bodies56paragraphs28notes and source-derived500character pages pass actual MCP/native validators and both widget bridges",
+        "cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges",
+        "six owned displaypairs one nonempty321heading three eightline entries and329literalxxxellipsis render without scope invention",
+        "genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads",
+        "synthetic private drafts remain local unsaved and exact pinned citations survive cancel changedbase and stalejournal guards"
+      ],
+      "after_names": [
+        "current359 clients retain the reviewed339 cohort and40+319 identities with no automatic English or remaining held-source transport",
+        "all6 genuine bodies56paragraphs28notes and source-derived500character pages pass actual MCP/native validators and both widget bridges",
+        "cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges",
+        "six owned displaypairs one nonempty321heading three eightline entries and329literalxxxellipsis render without scope invention",
+        "genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads",
+        "synthetic private drafts remain local unsaved and exact pinned citations survive cancel changedbase and stalejournal guards"
+      ],
+      "before_count": 6,
+      "after_count": 6,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera321-329-source.test.mjs",
+      "before_names": [
+        "exact339 preserves all333 ordered fullobjects, canonical roots and all26 unrelated data files",
+        "all6 original raw and six rights blobs match both independent fullbody56paragraphs28notes and one separately owned heading",
+        "all38 exact wholeverse quotations preserve41printed labels and three combined eightline entries excluding title notes heading and colophons",
+        "six finite on/off pairs and all28 note owners remain exact including329 literalxxx and terminalellipsis",
+        "genuine positives precede raw note statepair boundary and forgedprofile corruption refusals",
+        "held322327328330331 and previousholds media and alteredrights refuse beforetransport while actualsource prefix checks refetch exactsameversion"
+      ],
+      "after_names": [
+        "exact339 preserves all333 ordered fullobjects, canonical roots and all26 unrelated data files",
+        "all6 original raw and six rights blobs match both independent fullbody56paragraphs28notes and one separately owned heading",
+        "all38 exact wholeverse quotations preserve41printed labels and three combined eightline entries excluding title notes heading and colophons",
+        "six finite on/off pairs and all28 note owners remain exact including329 literalxxx and terminalellipsis",
+        "genuine positives precede raw note statepair boundary and forgedprofile corruption refusals",
+        "held322327328330331 and previousholds media and alteredrights refuse beforetransport while actualsource prefix checks refetch exactsameversion"
+      ],
+      "before_count": 6,
+      "after_count": 6,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera331-334-preface-client.test.mjs",
+      "before_names": [
+        "two literal note-owning prefaces preserve all339 prior metadata contracts and refuse borrowed owners",
+        "actual oldThi31 and newTha333 body plus separately owned note1 pass native comparison and both unchanged renderers",
+        "new genuine preface cannot change or move notes even with same-count text and forged metadata hashes",
+        "BJTS-only headers, absent local labels and physical quote boundaries retain four original scopes without new UI grammar",
+        "all four genuine poem-note and complete-or-empty preface hashes reject actual content drift at their declared boundaries"
+      ],
+      "after_names": [
+        "two literal note-owning prefaces preserve all339 prior metadata contracts and refuse borrowed owners",
+        "actual oldThi31 and newTha333 body plus separately owned note1 pass native comparison and both unchanged renderers",
+        "new genuine preface cannot change or move notes even with same-count text and forged metadata hashes",
+        "BJTS-only headers, absent local labels and physical quote boundaries retain four original scopes without new UI grammar",
+        "all four genuine poem-note and complete-or-empty preface hashes reject actual content drift at their declared boundaries"
+      ],
+      "before_count": 5,
+      "after_count": 5,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/thera335-350-source.test.mjs",
+      "before_names": [
+        "current359 preserves all full343 objects and actual26 data files including every8544 record and61books",
+        "all16 exact raw artifacts and six specific rights witnesses reproduce213 paragraphs and191owned notes",
+        "all165 physical quotations preserve171 printed global labels,25 paired displays and duplicate347local3",
+        "genuine positives precede raw heading marker note order display and forged-profile integrity refusals",
+        "actual source API returns all63 exact500-character pages with full ordered notes prefix and separate apparatus",
+        "source revision prefix and licence drift refuse without silently changing versions or sending synthetic private data",
+        "the sixteen literal approved URLs do not open neighbouring held sources media or alternate revisions",
+        "sealed full359 metadata rejects omissions substitutions extra bodies and licence drift; package policy excludes raw sources"
+      ],
+      "after_names": [
+        "current359 preserves all full343 objects and actual26 data files including every8544 record and61books",
+        "all16 exact raw artifacts and six specific rights witnesses reproduce213 paragraphs and191owned notes",
+        "all165 physical quotations preserve171 printed global labels,25 paired displays and duplicate347local3",
+        "genuine positives precede raw heading marker note order display and forged-profile integrity refusals",
+        "actual source API returns all63 exact500-character pages with full ordered notes prefix and separate apparatus",
+        "source revision prefix and licence drift refuse without silently changing versions or sending synthetic private data",
+        "the sixteen literal approved URLs do not open neighbouring held sources media or alternate revisions",
+        "sealed full359 metadata rejects omissions substitutions extra bodies and licence drift; package policy excludes raw sources"
+      ],
+      "before_count": 8,
+      "after_count": 8,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
+      "file": "tests/widget-hosted-selections.test.mjs",
+      "before_names": [
+        "hosted MCP widget accepts labelled post-canonical/file selections and script-preserving cursors"
+      ],
+      "after_names": [
+        "hosted MCP widget accepts labelled post-canonical/file selections and script-preserving cursors"
+      ],
+      "before_count": 1,
+      "after_count": 1,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    }
+  ],
+  "explicit_authorized_caption_renames": [
+    {
+      "file": "tests/current343-bindings.test.mjs",
+      "before": "actual current imports bind exact359 identities to widget v45",
+      "after": "actual current imports bind exact368 identities to widget v46",
+      "source_review": "Frozen32 source/QA reconciliation5b8e3bd2; no case removed or added."
+    },
+    {
+      "file": "tests/held234-current333-chain.test.mjs",
+      "before": "actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption",
+      "after": "actual held234 metadata preflight keeps the full325,333,339,343 and359 bridges into current368 and rejects baseline corruption",
+      "source_review": "Frozen32 source/QA reconciliation5b8e3bd2; no case removed or added."
+    }
+  ],
+  "new_literal_cases": [
+    {
+      "file": "tests/browser-current368-routing.test.mjs",
+      "sha256": "9661ffee215e631803e52c44996c4c8119724601279e92df21a55e09588a44d6",
+      "names": [
+        "current368 source routing preserves every359 object and five exact suffixes without runtime capture"
+      ],
+      "options": [
+        "{timeout:125000}"
+      ],
+      "count": 1,
+      "top_level_literal_only": true,
+      "nested_loop_conditional_or_dynamic_registrations": false,
+      "member_test_calls_are_RegExp_only": true
+    },
+    {
+      "file": "tests/intake368-history.test.mjs",
+      "sha256": "76cd33abb8e279037f6ecb46c084a6cb894bbd150bbf0205c75247c1b416cc04",
+      "names": [
+        "current368 actual runtime and private history binding keep immutable359 and343 inputs distinct"
+      ],
+      "options": [
+        "{timeout:125000}"
+      ],
+      "count": 1,
+      "top_level_literal_only": true,
+      "nested_loop_conditional_or_dynamic_registrations": false,
+      "member_test_calls_are_RegExp_only": true
+    },
+    {
+      "file": "tests/intake368-source-seal.test.mjs",
+      "sha256": "b97d92ba57b5de1f442548581fb409b90e4b69baff98f13e301545ae7f5f4c5d",
+      "names": [
+        "current368 physical source seal preserves frozen3ced and refuses stale missing tampered or aliased source inputs"
+      ],
+      "options": [
+        "{timeout:120000}"
+      ],
+      "count": 1,
+      "top_level_literal_only": true,
+      "nested_loop_conditional_or_dynamic_registrations": false,
+      "member_test_calls_are_RegExp_only": true
+    },
+    {
+      "file": "tests/thera351-360-nine-client.test.mjs",
+      "sha256": "fb359a0639995f1e6623c82d33f8eda1f1be016ff82cd9fb9da96ebebe17adaf",
+      "names": [
+        "all nine complete source pages pass native choices guards before same-count body notes rights and owner corruptions",
+        "both actual widget bridge scripts render every new complete body and all38 ordered owned notes",
+        "same consumed object mutations and genuine changed-owner transitions cannot preserve stale English or Pali",
+        "351heading356bodypair and360summary render separately without inventing note ownership or whole chapter coverage",
+        "held358 English is refused before transport and old repaired canonical pin failures clear stale host words"
+      ],
+      "options": [
+        "source",
+        "source",
+        "source",
+        "source",
+        "source"
+      ],
+      "count": 5,
+      "top_level_literal_only": true,
+      "nested_loop_conditional_or_dynamic_registrations": false,
+      "member_test_calls_are_RegExp_only": true
+    },
+    {
+      "file": "tests/thera351-360-nine-source.test.mjs",
+      "sha256": "b386cd017c9979d48151f56265ed0ff2d4c325a960e55ffbbf5ba5b996a1b235",
+      "names": [
+        "nine-source current368 preserves all359 complete objects and unchanged8544 records61books and locator pins",
+        "nine pinned originals and six controlling notices reproduce63 paragraphs36 entries38 notes and one finite pair",
+        "all36 original verse-only quotations preserve printed labels and exclude chapter heading notes and summary",
+        "351 unnoted heading354 qualification356 exact pair and360 summary retain separate source owners",
+        "genuine nine sources precede meaningful raw profile rights heading note and display corruption refusals",
+        "actual nine-source translation API follows all18 hard500 pages with exact source notes revision and prefixes",
+        "source-pinned quote and search owners stay exact while held358 and raw media neighbours refuse before fetch",
+        "finite368 proofs refuse warm loss tamper symlink and same-count substitutions without a shared trust cache"
+      ],
+      "options": [
+        "{timeout:30000}",
+        "source",
+        "source",
+        "source",
+        "source",
+        "source",
+        "source",
+        "{timeout:120000}"
+      ],
+      "count": 8,
+      "top_level_literal_only": true,
+      "nested_loop_conditional_or_dynamic_registrations": false,
+      "member_test_calls_are_RegExp_only": true
+    }
+  ],
+  "new_cases_by_file": {
+    "tests/browser-current368-routing.test.mjs": 1,
+    "tests/intake368-history.test.mjs": 1,
+    "tests/intake368-source-seal.test.mjs": 1,
+    "tests/thera351-360-nine-client.test.mjs": 5,
+    "tests/thera351-360-nine-source.test.mjs": 8
+  },
+  "new_case_count": 16,
+  "derived_full_test_count": 2092,
+  "derived_current_file_count": 345,
+  "expected_normal_no_source_statuses": {
+    "existing_skips": 267,
+    "new_optional_skips": 11,
+    "total_skips": 278,
+    "total_pass": 1814,
+    "not_a_terminal_acceptance_or_skip_ceiling": true
+  },
+  "root_actual_source_enabled_13_latest": {
+    "source_log": "/tmp/pali-english351-360-evidence-nov27/NINE_SOURCE_CLIENT_13_FINAL_HELPER.tap",
+    "source_log_sha256": "8bb5d172acce0be18d5692db0f46cc6dc0679177318031d4aa540a73596f7567",
+    "summary": {
+      "tests": 13,
+      "suites": 0,
+      "pass": 13,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "duration_ms": 9751.620696,
+    "terminal_names": [
+      "all nine complete source pages pass native choices guards before same-count body notes rights and owner corruptions",
+      "both actual widget bridge scripts render every new complete body and all38 ordered owned notes",
+      "same consumed object mutations and genuine changed-owner transitions cannot preserve stale English or Pali",
+      "351heading356bodypair and360summary render separately without inventing note ownership or whole chapter coverage",
+      "held358 English is refused before transport and old repaired canonical pin failures clear stale host words",
+      "nine-source current368 preserves all359 complete objects and unchanged8544 records61books and locator pins",
+      "nine pinned originals and six controlling notices reproduce63 paragraphs36 entries38 notes and one finite pair",
+      "all36 original verse-only quotations preserve printed labels and exclude chapter heading notes and summary",
+      "351 unnoted heading354 qualification356 exact pair and360 summary retain separate source owners",
+      "genuine nine sources precede meaningful raw profile rights heading note and display corruption refusals",
+      "actual nine-source translation API follows all18 hard500 pages with exact source notes revision and prefixes",
+      "source-pinned quote and search owners stay exact while held358 and raw media neighbours refuse before fetch",
+      "finite368 proofs refuse warm loss tamper symlink and same-count substitutions without a shared trust cache"
+    ]
+  },
+  "root_actual_QA8_previous_allowed8_snapshot": {
+    "source_log": "/tmp/pali-english351-360-evidence-nov27/CI_V2_QA8.tap",
+    "source_log_sha256": "c8c8859836579ac3278b041e6bb1bc2f2d63ffd46c9fd086e3298bb8fcdc8e57",
+    "summary": {
+      "tests": 8,
+      "suites": 0,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "duration_ms": 2365.075572,
+    "terminal_names": [
+      "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
+      "real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases",
+      "terminal event accounting rejects missing summaries cancellations failures and duplicate summary events",
+      "aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases",
+      "a real failing child cannot seal an approving execution receipt",
+      "a bounded hung child fails closed without an approving complete receipt",
+      "the real CLI activates its reporter before unchanged complete-file argv",
+      "raw CI workflow keeps the full reference and four bounded Windows partitions"
+    ]
+  },
+  "amended_QA38_actual_rerun_required": true,
+  "preexisting_hard_limits_and_all8QA_assertions_retained": true,
+  "old_registered_terminal_name_count_in_changed_files": 206,
+  "all_other_existing_terminal_counts_inherited_from_validated3ced_not_recounted_from_current_output": true,
+  "review_receipts": {
+    "INTAKE368_CI_LOADER_STATIC_REVIEW.json": "14236b1fc629df8d4ddbcc78e588a0c574637a15845d04bc6d5e9544ba90f154",
+    "INTAKE368_QA32_STATIC_REVIEW.json": "5b8e3bd22cfc3a7d2f9968f464a9e2c1b31ce63cda658d22b31c3a84867b086a",
+    "INTAKE368_LEGACY5_STATIC_REVIEW.json": "e49f2e10aa4a15d309f34793efa8c72fab6f12dd729f5dd3ade6ca4af07d33b1",
+    "INTAKE368_CURRENT33_STATIC_REVIEW.json": "2b83f1f7ebad4c3283099612b0114178cfee4594645dd0af778d06b31639c184"
+  },
+  "reviewed_but_noninventory_helpers_and_Python_paths_are_owned_by_source_history_CI_not_added_Node_case_counts": true,
+  "future_source_map_or_workflow_or_index_hash_not_used_as_a_premise": true,
+  "no_app_test_build_Git_CI_or_network_execution_by_case_auditor": true,
+  "full_native_Linux_Windows_receipt_acceptance_claimed": false
+}

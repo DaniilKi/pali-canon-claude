@@ -1,0 +1,27 @@
+{
+  "schema": "independent-final-current368-frozen-Python-JS-QA-static-review-v1",
+  "status": "GO_EXACT_32_FROZEN_SOURCE_FILES_FOR_ROOT_INTEGRATION_AND_SCOPED_PREFLIGHT",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "python_manifest_sha256": "2453047177cd54fe885e8034c5b3c953865648adb30ca376553cc84d874cd12f",
+  "javascript_manifest_sha256": "11fd2caeba23c2db1452b5f469c6fb9eca08c15a319c7b069edc45f56f42bc75",
+  "source_approval_sha256": "77f0fe797f4b768e6d408d81080984b4c3ca803bd8fc7a23e776eb17a71bbb14",
+  "runtime_inventory_sha256": "a9043c14b7774d69d97e2327300cf437257cd71c12e3e39f8f5de68010941425",
+  "runtime_review_sha256": "38fbf6b7de3cb7f06f03e28a41bf03b6a5402940b6d8b2ebb09d142365f1160e",
+  "application_component": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
+  "frozen_scope_blocking_findings": [],
+  "integration_completeness": "HOLD_PENDING_SEPARATE_FIVE_PATH_LEGACY_ADDENDUM_AND_SOURCE_LEAF",
+  "open_legacy_seams": [
+    "tests/next-ten-history-data.test.mjs",
+    "tests/intake359-metadata-history.test.mjs",
+    "tests/six-boundary-source-input.test.mjs",
+    "tests/helpers/thera331-334-evidence.mjs",
+    "tests/helpers/thera312-319-evidence.mjs"
+  ],
+  "files": {
+    "verify_frozen_sources.py": "18067eaf6830a1feaed3171827924c6c9cbcfa7871619e39840920048f9bdbe1",
+    "STATIC_RECONCILIATION.json": "1f9bb79f4a25a31f0728aa474498dad073980eac6840c953604dca62aa4c92d6",
+    "REVIEW.md": "999dc5777dcff005cdff69dce2d346d8204dae75607ecd51e35e69c23ec9aa4e"
+  },
+  "runtime_API_browser_package_CI_activation_release_approval": false,
+  "app_helper_imports_tests_build_network_Git_CI_mutations_or_repository_edits_by_reviewer": false
+}

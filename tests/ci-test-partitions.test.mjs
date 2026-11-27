@@ -140,7 +140,7 @@ test('raw CI workflow keeps the full reference and four bounded Windows partitio
 
 // Owned source-only V2 loader fixtures. No alternate production loader mode.
 // The immutable340-path predecessor is real; this private fixture adds one
-// tiny source file and explicitly records only the eight known edited paths.
+// tiny source file and explicitly records only the38 reviewed edited paths.
 function assertSuccessorBaselineFixtures(){
   const f=fixture();
   try{
@@ -149,7 +149,7 @@ function assertSuccessorBaselineFixtures(){
     assert.equal(digest(predecessor),'f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d');
     const prior=JSON.parse(predecessor);
     rmSync(join(f.root,'tests'),{recursive:true});mkdirSync(join(f.root,'tests'));
-    const allowedChanged=new Set(['tests/ci-test-partitions.test.mjs','tests/current343-bindings.test.mjs','tests/held234-current333-chain.test.mjs','tests/intake343-metadata.test.mjs','tests/intake359-metadata-history.test.mjs','tests/next-ten-history-data.test.mjs','tests/six-boundary-source-input.test.mjs','tests/thera335-350-source.test.mjs']);
+    const allowedChanged=new Set(["tests/apadana-disclosures.test.mjs","tests/apadana-fourth-client.test.mjs","tests/apadana-fourth.test.mjs","tests/apadana-held234.test.mjs","tests/apadana-next.test.mjs","tests/apadana-thera.test.mjs","tests/apadana-third.test.mjs","tests/ci-test-partitions.test.mjs","tests/current339-source-inverses.test.mjs","tests/current343-bindings.test.mjs","tests/held234-client.test.mjs","tests/held234-current333-chain.test.mjs","tests/intake343-metadata.test.mjs","tests/intake359-metadata-history.test.mjs","tests/next-ten-history-data.test.mjs","tests/six-boundary-source-input.test.mjs","tests/source-notes-baseline-projection.test.mjs","tests/source-notes-compatibility.test.mjs","tests/thera-commentary-locators.test.mjs","tests/thera141-180-client.test.mjs","tests/thera181-220-client.test.mjs","tests/thera221-230-client.test.mjs","tests/thera241-250-client.test.mjs","tests/thera261-280-client.test.mjs","tests/thera261-280-source.test.mjs","tests/thera281-285-client.test.mjs","tests/thera281-285-source.test.mjs","tests/thera287-288-client.test.mjs","tests/thera287-288-source.test.mjs","tests/thera292-299-client.test.mjs","tests/thera292-299-source.test.mjs","tests/thera312-319-client.test.mjs","tests/thera312-319-source.test.mjs","tests/thera321-329-client.test.mjs","tests/thera321-329-source.test.mjs","tests/thera331-334-preface-client.test.mjs","tests/thera335-350-source.test.mjs","tests/widget-hosted-selections.test.mjs"]);
     const changes={};
     for(const[path,before]of Object.entries(prior.files)){
       const bytes=readFileSync(join(ROOT,path));copyFileSync(join(ROOT,path),join(f.root,path));

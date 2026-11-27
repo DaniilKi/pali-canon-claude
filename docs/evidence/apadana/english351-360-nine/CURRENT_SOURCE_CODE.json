@@ -1,0 +1,352 @@
+{
+  "schema": "finite-current368-source-code-v1",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "source_inputs_only": true,
+  "runtime_or_corpus_projection": false,
+  "historical_archive_sha256": "f82ac88f6b6cbc2410d03d76989cf105bf5a6fa039a4ad24043e39e529a43b4d",
+  "historical_archive_root": "docs/evidence/apadana/english351-360-nine/BEFORE_CURRENT368_SOURCE/",
+  "original_manifest_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
+  "current_source_map_sha256": "4c3a3f5ad7c3f502ce1b97a2f5877c766e90f7de688c3b3fd055cdfc35c036b8",
+  "changed_original_paths": [
+    ".github/workflows/check.yml",
+    "AGENTS.md",
+    "README.md",
+    "THIRD_PARTY.md",
+    "docs/coverage.md",
+    "docs/decisions.md",
+    "docs/sources.md",
+    "scripts/web-reader-thera-held234-check.py",
+    "scripts/web-reader-thera-remaining-check.py",
+    "scripts/web_reader_apadana_intake.py",
+    "scripts/web_reader_approved_acceptance.py",
+    "scripts/web_reader_next_ten_boundary_history.py",
+    "src/apadana-thera-profiles.mjs",
+    "src/apadana-thera.mjs",
+    "src/chatgpt-widget.mjs",
+    "tests/apadana-disclosures.test.mjs",
+    "tests/apadana-fourth-client.test.mjs",
+    "tests/apadana-fourth.test.mjs",
+    "tests/apadana-held234.test.mjs",
+    "tests/apadana-next.test.mjs",
+    "tests/apadana-thera.test.mjs",
+    "tests/apadana-third.test.mjs",
+    "tests/apadana_next_ten_boundary_acceptance.py",
+    "tests/apadana_six_boundary_acceptance.py",
+    "tests/approved_acceptance.py",
+    "tests/approved_current333_authority_negatives.py",
+    "tests/approved_current339_authority_negatives.py",
+    "tests/current339-source-inverses.test.mjs",
+    "tests/current343-bindings.test.mjs",
+    "tests/held234-client.test.mjs",
+    "tests/held234-current333-chain.test.mjs",
+    "tests/held234_current333_chain.py",
+    "tests/helpers/apadana-intake-expectations.mjs",
+    "tests/helpers/intake343-metadata.mjs",
+    "tests/helpers/next-ten-history-data.mjs",
+    "tests/helpers/thera-remaining-client.mjs",
+    "tests/helpers/thera312-319-evidence.mjs",
+    "tests/helpers/thera331-334-evidence.mjs",
+    "tests/helpers/thera339-legacy-projection.mjs",
+    "tests/intake343-metadata.test.mjs",
+    "tests/next-ten-history-data.test.mjs",
+    "tests/next_ten_history_acceptance.py",
+    "tests/six-boundary-source-input.test.mjs",
+    "tests/six_boundary_history_acceptance.py",
+    "tests/six_operation_scope_controls.py",
+    "tests/source-notes-baseline-projection.test.mjs",
+    "tests/source-notes-compatibility.test.mjs",
+    "tests/thera-commentary-locators.test.mjs",
+    "tests/thera141-180-client.test.mjs",
+    "tests/thera181-220-client.test.mjs",
+    "tests/thera221-230-client.test.mjs",
+    "tests/thera241-250-client.test.mjs",
+    "tests/thera261-280-client.test.mjs",
+    "tests/thera261-280-source.test.mjs",
+    "tests/thera281-285-client.test.mjs",
+    "tests/thera281-285-source.test.mjs",
+    "tests/thera287-288-client.test.mjs",
+    "tests/thera287-288-source.test.mjs",
+    "tests/thera292-299-client.test.mjs",
+    "tests/thera292-299-source.test.mjs",
+    "tests/thera312-319-client.test.mjs",
+    "tests/thera312-319-source.test.mjs",
+    "tests/thera321-329-client.test.mjs",
+    "tests/thera321-329-source.test.mjs",
+    "tests/thera331-334-preface-client.test.mjs",
+    "tests/widget-hosted-selections.test.mjs",
+    "web/translation-policy.mjs"
+  ],
+  "new_code": {
+    "docs/data/thera351-360-nine-intake.md": {
+      "bytes": 4241,
+      "sha256": "3d9a250ef700e00ae5135e15d8dd32e548ea453b6d5d21d4f5d325820fd66684"
+    },
+    "docs/evidence/apadana/english351-360-nine/APPROVAL.json": {
+      "bytes": 15474,
+      "sha256": "77f0fe797f4b768e6d408d81080984b4c3ca803bd8fc7a23e776eb17a71bbb14"
+    },
+    "docs/evidence/apadana/english351-360-nine/APP_PARSER_STATIC_REVIEW.json": {
+      "bytes": 2085,
+      "sha256": "1e49058235149e9c1e6241fb4833ff366c77f0d93276a745c9355e4712d1b75b"
+    },
+    "docs/evidence/apadana/english351-360-nine/BASELINE359.json": {
+      "bytes": 62783,
+      "sha256": "b7e7ffee7ef33471f129a5ad2b5b2c8a4098fc7d7ef37f71b319996fe62f858f"
+    },
+    "docs/evidence/apadana/english351-360-nine/BASELINE359_FULL_OBJECTS.json": {
+      "bytes": 2131170,
+      "sha256": "dbd15ba96431779a1f8e4951605b009ab920df7e01da9f5663a270a605fd2864"
+    },
+    "docs/evidence/apadana/english351-360-nine/BASELINE_DATA27.json": {
+      "bytes": 4309,
+      "sha256": "dd966b7c27ab362362afbb068678be795cdeb20f746c8f4bfd83d77a97dd05b5"
+    },
+    "docs/evidence/apadana/english351-360-nine/BASELINE_RUNTIME34.json": {
+      "bytes": 5078,
+      "sha256": "71657c25dcfff1c0f62dc4b25587da625affee4706fc1cf39a5258214b258388"
+    },
+    "docs/evidence/apadana/english351-360-nine/BROWSER_CLI_STATIC_REVIEW.json": {
+      "bytes": 4501,
+      "sha256": "e5366183bc71872fe57aef348789f0c3f5870b86a62a5122d176e4a11f09d506"
+    },
+    "docs/evidence/apadana/english351-360-nine/BROWSER_CONTRACT_TEMPLATE.json": {
+      "bytes": 12564,
+      "sha256": "19608adac41f2aad8339d6094c1bafcbdcaf804a29aed7cddd4b6b54044c1c2d"
+    },
+    "docs/evidence/apadana/english351-360-nine/CASE_INDEX_FINAL_SOURCE_REVIEW.json": {
+      "bytes": 2564,
+      "sha256": "4705b721fa2af28ccc115345827194476d510c19d66e15ff985864d9f4d93dc9"
+    },
+    "docs/evidence/apadana/english351-360-nine/EXPECTED_MANIFEST.json": {
+      "bytes": 1490543,
+      "sha256": "3d426b9b0e1e10a9b095bce495494c0564b25e9b4765be3277407788b8c312a3"
+    },
+    "docs/evidence/apadana/english351-360-nine/LINKS.json": {
+      "bytes": 31536,
+      "sha256": "49c53fa616ac61c135705e97215c381426d344af3141c217eb8c72f9a48c566d"
+    },
+    "docs/evidence/apadana/english351-360-nine/ORIGINAL_INDEPENDENT_REVIEW.json": {
+      "bytes": 2304,
+      "sha256": "90918b7fde8ac9939750e794154f0143fb725e6a3d98d9fcda9f73c4727c935f"
+    },
+    "docs/evidence/apadana/english351-360-nine/PORTABLE_SOURCE_STATIC_REVIEW.json": {
+      "bytes": 5834,
+      "sha256": "0c1609c702fd6cd4bdf6d03f24fe956ac4fca35a2158529d467d4259b5db762e"
+    },
+    "docs/evidence/apadana/english351-360-nine/PROFILES.json": {
+      "bytes": 30772,
+      "sha256": "a9ce377c7ec5c75fff7315c45dbd0328b7164dd4120b83b3f7c8a6406df6a367"
+    },
+    "docs/evidence/apadana/english351-360-nine/PROFILE_SCHEMA_REVIEW.json": {
+      "bytes": 2217,
+      "sha256": "547c1600b8c40e6b17a9b3d04c25ce9f7c14158e5a7553f9528db76cd9cbfb51"
+    },
+    "docs/evidence/apadana/english351-360-nine/REQUIRED_NOTICES.json": {
+      "bytes": 5395,
+      "sha256": "c46e9a1514228f854ef7c885c3a601af94f47540e6f4c7c0830787a4c2c39aa1"
+    },
+    "docs/evidence/apadana/english351-360-nine/RUNTIME_INVENTORY.json": {
+      "bytes": 6069,
+      "sha256": "a9043c14b7774d69d97e2327300cf437257cd71c12e3e39f8f5de68010941425"
+    },
+    "docs/evidence/apadana/english351-360-nine/RUNTIME_REVIEW.json": {
+      "bytes": 9101,
+      "sha256": "38fbf6b7de3cb7f06f03e28a41bf03b6a5402940b6d8b2ebb09d142365f1160e"
+    },
+    "docs/evidence/apadana/english351-360-nine/SOURCE_BINDINGS.json": {
+      "bytes": 50013,
+      "sha256": "172d9cf87739745c42b9de9cd701992d0ee4f6854138f5cadfafb8d3e3ce032f"
+    },
+    "docs/evidence/apadana/english351-360-nine/SOURCE_CURATION.json": {
+      "bytes": 2803,
+      "sha256": "e63797167324aa310a3359a257e0c459c490b0c9cb636984542b706eb9c42e18"
+    },
+    "docs/evidence/apadana/english351-360-nine/SOURCE_REVIEW.json": {
+      "bytes": 2163,
+      "sha256": "8a8d2f5f0e17d8cd409c0bc7bc8a84e162546a41a415af4e61bfe5c30566cd2a"
+    },
+    "docs/evidence/apadana/english351-360-nine/WIDGET_SOURCE_REVIEW.json": {
+      "bytes": 5952,
+      "sha256": "d44ee3dc2e22730875351d0eda14b9eabaf34deef4a410a8705b83ce3999fa12"
+    },
+    "docs/evidence/qa/windows20-partitions/BASELINE_368_TEST_FILES.json": {
+      "bytes": 10333,
+      "sha256": "3fc7bcace27d23993761f3fe8d5800373f514f460ed0a7056835be214023015e"
+    },
+    "docs/evidence/qa/windows20-partitions/BASELINE_3CED_TEST_FILES.json": {
+      "bytes": 38515,
+      "sha256": "f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d"
+    },
+    "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_INVENTORY_EVIDENCE.json": {
+      "bytes": 145187,
+      "sha256": "864d68b5098802fb180820c90ec9d804261c4f9b226b1aa4595eb940d45253fe"
+    },
+    "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_INVENTORY_REVIEW.json": {
+      "bytes": 11731,
+      "sha256": "7627401081cce26d48e64ba8b30c2c296dddabb94f57c450750fb5e625e40b24"
+    },
+    "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_SOURCE_AST.json": {
+      "bytes": 232444,
+      "sha256": "33af2b5d74bbbde8a0e201fb7b876350cd941fc586381a3ab655108c49168781"
+    },
+    "docs/evidence/qa/windows20-partitions/INTAKE368_CI_LOADER_STATIC_REVIEW.json": {
+      "bytes": 3491,
+      "sha256": "14236b1fc629df8d4ddbcc78e588a0c574637a15845d04bc6d5e9544ba90f154"
+    },
+    "docs/evidence/qa/windows20-partitions/INTAKE368_CURRENT33_STATIC_REVIEW.json": {
+      "bytes": 1579,
+      "sha256": "2b83f1f7ebad4c3283099612b0114178cfee4594645dd0af778d06b31639c184"
+    },
+    "docs/evidence/qa/windows20-partitions/INTAKE368_LEGACY5_STATIC_REVIEW.json": {
+      "bytes": 1330,
+      "sha256": "e49f2e10aa4a15d309f34793efa8c72fab6f12dd729f5dd3ade6ca4af07d33b1"
+    },
+    "docs/evidence/qa/windows20-partitions/INTAKE368_QA32_STATIC_REVIEW.json": {
+      "bytes": 1670,
+      "sha256": "5b8e3bd22cfc3a7d2f9968f464a9e2c1b31ce63cda658d22b31c3a84867b086a"
+    },
+    "docs/qa/english351-360-nine-bindings.md": {
+      "bytes": 4346,
+      "sha256": "c1d5cca957938e81d2813e845e735497145ea89b9d03c6cfa6f86ebb75bb41c6"
+    },
+    "docs/qa/english351-360-nine-installed.md": {
+      "bytes": 3240,
+      "sha256": "edcdded5135f04307a3c586db8aff8b9a2d755df336437b62316cc53ab4e5de8"
+    },
+    "scripts/apadana/thera351-360-nine/SOURCE_NINE_INPUT_CONTRACT.json": {
+      "bytes": 190753,
+      "sha256": "1fc76e48616de1c8948410151f167d59eb97d31ebe8d4f7c70e80598e0d6ba44"
+    },
+    "scripts/apadana/thera351-360-nine/run-installed-bounded.py": {
+      "bytes": 2042,
+      "sha256": "58fa0b15a2fb8aeda364533e8f880e218f1e75c78c2b5ecb10e24d57d128e0f7"
+    },
+    "scripts/apadana/thera351-360-nine/source-nine-replay.py": {
+      "bytes": 37174,
+      "sha256": "11a2858afa9a302f4cf27f2c54d24a77024bec8c5a73f3f08c7e3f863c9a6feb"
+    },
+    "scripts/ci-test-partitions.mjs": {
+      "bytes": 24359,
+      "sha256": "a217ce99f1c6e7d02401c9f41671cf48bd8a7343d471ba6bf72c0720da065f89"
+    },
+    "scripts/web-reader-thera351-360-nine-check.py": {
+      "bytes": 86224,
+      "sha256": "a0743d5c72a9c474d2126680001dfb00a9d11f77a2e419545b9ab9efa5cb4efc"
+    },
+    "scripts/web_reader_intake359.py": {
+      "bytes": 11453,
+      "sha256": "89630ec90b17828dc7f168bbed6050181bac422f05cd670256334d07f59cdac6"
+    },
+    "scripts/web_reader_intake368.py": {
+      "bytes": 16542,
+      "sha256": "5e39842a31cbe875f06140279395a210b269e5c5a202c6a7a66008b5026847c0"
+    },
+    "src/apadana-thera335-350-profiles.mjs": {
+      "bytes": 69783,
+      "sha256": "fd3eac4f1b9d4ab3898703dc0a969921dfa1255d3dc0f0663e0bc745b9224268"
+    },
+    "src/apadana-thera351-360-profiles.mjs": {
+      "bytes": 30927,
+      "sha256": "bef582559e7f02372f7283239d4dddb064178258ee60641e23c5b7f81f4e5cd2"
+    },
+    "tests/browser-current368-routing.test.mjs": {
+      "bytes": 926,
+      "sha256": "9661ffee215e631803e52c44996c4c8119724601279e92df21a55e09588a44d6"
+    },
+    "tests/browser_current359_routing.py": {
+      "bytes": 7463,
+      "sha256": "cabbe06b033d02dfc0e3162bda5a21d927989da15ab87ddeb1de32a15fdadcb1"
+    },
+    "tests/browser_current368_routing.py": {
+      "bytes": 7650,
+      "sha256": "964397cde968c11ff47a9181ddd6e2623868fa7b1399125d56435a43edd922f3"
+    },
+    "tests/ci-test-partitions.test.mjs": {
+      "bytes": 27631,
+      "sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e"
+    },
+    "tests/fixtures/canon-before-intake368/apadana.json": {
+      "bytes": 1457596,
+      "sha256": "57b6fd43f4b8273e9542b8a22a6bd84b2042914113d53c94fe727386c5ec0194"
+    },
+    "tests/helpers/intake359-metadata.mjs": {
+      "bytes": 13975,
+      "sha256": "a7b1cf9105671b7aca23a4449b46b525a3d7ee8419599543c72f5a5ba1714eec"
+    },
+    "tests/helpers/intake368-metadata.mjs": {
+      "bytes": 22114,
+      "sha256": "9a4103e3c215b9229eeb54e8c7538a93db71452ad1645842de93f9ae0ea706d3"
+    },
+    "tests/helpers/thera335-350-evidence.mjs": {
+      "bytes": 14286,
+      "sha256": "eda3e357feb6e0fbc7e033fe1f42027c666dc5e003abeec17169c9c6dec8bca3"
+    },
+    "tests/intake359-metadata-history.test.mjs": {
+      "bytes": 8407,
+      "sha256": "538978d2ef38a011076a8611e4b1d2b7a7d9daf93ca89c682b2b5564c76844f4"
+    },
+    "tests/intake359_history_acceptance.py": {
+      "bytes": 8981,
+      "sha256": "16869b6b3a13b4fb17d6eaa3746ca709514a829b00442c02a5354ec5e8504f72"
+    },
+    "tests/intake368-history.test.mjs": {
+      "bytes": 923,
+      "sha256": "76cd33abb8e279037f6ecb46c084a6cb894bbd150bbf0205c75247c1b416cc04"
+    },
+    "tests/intake368-source-seal.test.mjs": {
+      "bytes": 5214,
+      "sha256": "b97d92ba57b5de1f442548581fb409b90e4b69baff98f13e301545ae7f5f4c5d"
+    },
+    "tests/intake368_history_acceptance.py": {
+      "bytes": 8702,
+      "sha256": "6dd5efea19dbe9a615be1b849b931ac2b1c6a32f7afa29580ac0b1076cf2e20f"
+    },
+    "tests/owned_apadana_proofs.py": {
+      "bytes": 2582,
+      "sha256": "b356f21ddf2ea6b42596058124b241d20f60af5623b2ce20ce1f291ab5654e4a"
+    },
+    "tests/owned_intake368_proofs.py": {
+      "bytes": 3415,
+      "sha256": "1d56471979f19e9e5cb82499c80566ef563b6ea0cd97803a8e818eca829bb5a4"
+    },
+    "tests/thera335-350-source.test.mjs": {
+      "bytes": 13448,
+      "sha256": "cbe814127a9e71c9383873e91797311fda65f353577070efc1506be3bd028880"
+    },
+    "tests/thera351-360-nine-client.test.mjs": {
+      "bytes": 11035,
+      "sha256": "fb359a0639995f1e6623c82d33f8eda1f1be016ff82cd9fb9da96ebebe17adaf"
+    },
+    "tests/thera351-360-nine-source.test.mjs": {
+      "bytes": 15736,
+      "sha256": "b386cd017c9979d48151f56265ed0ff2d4c325a960e55ffbbf5ba5b996a1b235"
+    }
+  },
+  "source_packet14": {
+    "PROFILES.json": "a9ce377c7ec5c75fff7315c45dbd0328b7164dd4120b83b3f7c8a6406df6a367",
+    "SOURCE_REVIEW.json": "8a8d2f5f0e17d8cd409c0bc7bc8a84e162546a41a415af4e61bfe5c30566cd2a",
+    "REQUIRED_NOTICES.json": "c46e9a1514228f854ef7c885c3a601af94f47540e6f4c7c0830787a4c2c39aa1",
+    "BASELINE_RUNTIME34.json": "71657c25dcfff1c0f62dc4b25587da625affee4706fc1cf39a5258214b258388",
+    "BASELINE_DATA27.json": "dd966b7c27ab362362afbb068678be795cdeb20f746c8f4bfd83d77a97dd05b5",
+    "LINKS.json": "49c53fa616ac61c135705e97215c381426d344af3141c217eb8c72f9a48c566d",
+    "SOURCE_BINDINGS.json": "172d9cf87739745c42b9de9cd701992d0ee4f6854138f5cadfafb8d3e3ce032f",
+    "ORIGINAL_INDEPENDENT_REVIEW.json": "90918b7fde8ac9939750e794154f0143fb725e6a3d98d9fcda9f73c4727c935f",
+    "BASELINE359.json": "b7e7ffee7ef33471f129a5ad2b5b2c8a4098fc7d7ef37f71b319996fe62f858f",
+    "EXPECTED_MANIFEST.json": "3d426b9b0e1e10a9b095bce495494c0564b25e9b4765be3277407788b8c312a3",
+    "PROFILE_SCHEMA_REVIEW.json": "547c1600b8c40e6b17a9b3d04c25ce9f7c14158e5a7553f9528db76cd9cbfb51",
+    "BASELINE359_FULL_OBJECTS.json": "dbd15ba96431779a1f8e4951605b009ab920df7e01da9f5663a270a605fd2864",
+    "SOURCE_CURATION.json": "e63797167324aa310a3359a257e0c459c490b0c9cb636984542b706eb9c42e18",
+    "APPROVAL.json": "77f0fe797f4b768e6d408d81080984b4c3ca803bd8fc7a23e776eb17a71bbb14"
+  },
+  "runtime_leaf": {
+    "RUNTIME_INVENTORY.json": "a9043c14b7774d69d97e2327300cf437257cd71c12e3e39f8f5de68010941425",
+    "RUNTIME_REVIEW.json": "38fbf6b7de3cb7f06f03e28a41bf03b6a5402940b6d8b2ebb09d142365f1160e"
+  },
+  "own_loader_excluded": "tests/helpers/intake359-source-input.mjs",
+  "unsealed_receipt_paths": [
+    "docs/evidence/apadana/english351-360-nine/LOCAL_ACCEPTANCE.json",
+    "docs/evidence/apadana/english351-360-nine/BROWSER_ACCEPTANCE.json",
+    "docs/evidence/apadana/english351-360-nine/FINAL_COMPONENT_BINDING.json",
+    "docs/evidence/apadana/english351-360-nine/SOURCE_INVERSE_CURRENT368_REVIEW.json"
+  ]
+}

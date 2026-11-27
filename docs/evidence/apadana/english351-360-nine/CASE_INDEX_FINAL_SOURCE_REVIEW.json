@@ -1,0 +1,44 @@
+{
+  "schema": "independent-filled-current368-CI-case-index-and-QA38-review-v1",
+  "status": "GO_EXACT_FILLED_SOURCE_CASE_INDEX_AND_QA38_AMENDMENT_FOR_ROOT_INTEGRATION",
+  "candidate_manifest_sha256": "a797096127cef31304e7cd18de50c2bc838821f030773e9de67e786c584973ee",
+  "index_sha256": "3fc7bcace27d23993761f3fe8d5800373f514f460ed0a7056835be214023015e",
+  "case_review_sha256": "7627401081cce26d48e64ba8b30c2c296dddabb94f57c450750fb5e625e40b24",
+  "case_evidence_sha256": "864d68b5098802fb180820c90ec9d804261c4f9b226b1aa4595eb940d45253fe",
+  "case_AST_sha256": "33af2b5d74bbbde8a0e201fb7b876350cd941fc586381a3ab655108c49168781",
+  "predecessor340_sha256": "f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d",
+  "unchanged_loader_sha256": "a217ce99f1c6e7d02401c9f41671cf48bd8a7343d471ba6bf72c0720da065f89",
+  "amended_QA_sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e",
+  "blocking_source_case_metadata_findings": [],
+  "inventory": {
+    "old_files": 340,
+    "old_changed": 38,
+    "old_unchanged_exact": 302,
+    "new_files": 5,
+    "current_files": 345,
+    "preserved_baseline_cases": 2076,
+    "existing_QA8_counted_once": true,
+    "new_literal_top_level_cases": 16,
+    "expected_full_cases_not_actual_execution": 2092,
+    "old_changed_expanded_name_vectors": 206,
+    "authorized_caption_renames": 2,
+    "new_normal_optional_source_skips": 11,
+    "expected_normal_skip_total_not_actual_execution": 278
+  },
+  "all_original_current_case_options_and_registration_structure_retained": true,
+  "QA_amendment_only_finite_owned_fixture_set8_to38_and_comment": true,
+  "no_future_index_workflow_source_map_dependency_cycle": true,
+  "integration_actions_required": [
+    "Root copy exact amended QAa4f0eb32 and frozen metadata/evidence members",
+    "Root bind workflow to reviewed index3fc7bcac then rerun original8QA with zero skips",
+    "Finalize independently reviewed source/code leaf and archive completeness",
+    "Actual native full2092 references/Windows strict aggregates and all postchecks before dev promotion"
+  ],
+  "files": {
+    "verify_frozen_case_index.py": "d2191b309dbe5642f265296570e482577a4410f0c685a8dd9ab3cece7b0630c6",
+    "STATIC_RECONCILIATION.json": "0cfa37f88ca72ddf62de9f89b75e9ecb462f25941dde51f0935566859b11d25f",
+    "REVIEW.md": "dce0b699a05b1f42a909c8cbc94e66825b8df8b7e0f43e9ac0e8477ca3edc2e8"
+  },
+  "actual_full_native_CI_runtime_browser_package_release_or_push_approval": false,
+  "reviewer_app_helper_imports_tests_build_network_Git_CI_mutations_or_repository_edits": false
+}

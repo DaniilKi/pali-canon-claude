@@ -1,0 +1,29 @@
+{
+  "schema": "independent-finite-current368-widget46-expectation-review-v1",
+  "status": "GO_EXACT_33_SOURCE_EXPECTATION_CHANGES_FOR_ROOT_INTEGRATION",
+  "manifest_sha256": "7bc62d37f2393d88f2c312efd954312e8d69c9459c30f2828cc4abd0a48b6033",
+  "patch_sha256": "4b375593d978191413ddb14edfaaca3a2e01e89660e9dd5a4d1e977f92eabcd6",
+  "independent_classification_sha256": "1eed11da5d37a0a99312d3364615000510779de360accc2453f1feeeabbfc353",
+  "files_count": 33,
+  "classified_actual_rows": 36,
+  "blocking_static_findings": [],
+  "all_file_bytes_equal_closed_reviewed_transformations": true,
+  "all_existing_test_registration_lines_and_timeout_literals_preserved": true,
+  "independent_current_widget_binding": {
+    "APP": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
+    "runtime_review_sha256": "38fbf6b7de3cb7f06f03e28a41bf03b6a5402940b6d8b2ebb09d142365f1160e",
+    "version": "v46"
+  },
+  "files": {
+    "verify_static.py": "cb2e3ada551ce6b32cfa96c6ae43c89878b48bf1dfa63dca83b874769253e0d9",
+    "STATIC_RECONCILIATION.json": "e2964324d405dead4d3d7690107d10cde1f8105d0cf804fd9c05ca81df933ac2",
+    "REVIEW.md": "f497e3118204dae45b67b09d06edc72baa91275cf27d0efd288f75b04157953f"
+  },
+  "remaining_gates": [
+    "Final exact finite CI changed-file/case inventory and source-leaf seal",
+    "Root unchanged bounded legacy/current tests",
+    "Actual exact-candidate native CI and installed/browser/privacy evidence"
+  ],
+  "runtime_API_package_CI_activation_release_approval": false,
+  "reviewer_app_helper_imports_tests_build_network_Git_or_CI_mutation_or_repository_edits": false
+}

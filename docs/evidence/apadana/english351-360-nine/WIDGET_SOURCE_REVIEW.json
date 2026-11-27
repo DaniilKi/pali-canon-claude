@@ -1,0 +1,130 @@
+{
+  "schema": "english9-independent-whole-widget-source-review-v1",
+  "status": "PASS",
+  "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
+  "widget_version": "v46",
+  "html_sha256": "6cd9bdfc957b780db85bd4992158e387438069e9c174ba09071ff760800b8200",
+  "html_obtained_from_http": false,
+  "all_profile_objects_from_independent_approval": true,
+  "source_widget_HTML": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/source-widget-independent-reconstruction/SOURCE_WIDGET_HTML.html",
+    "sha256": "6cd9bdfc957b780db85bd4992158e387438069e9c174ba09071ff760800b8200",
+    "bytes": 717060
+  },
+  "root_measurement": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/source-widget-independent-reconstruction/WIDGET_SOURCE_REVIEW.json",
+    "sha256": "4b7f349f0680803113cc1dd6a56049233bc8aa264768e5e0a852152f5a796992",
+    "bytes": 5058
+  },
+  "reviewed_root_producer": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/source-widget-independent-reconstruction/RECONSTRUCT_SOURCE_HTML.py",
+    "sha256": "8c2f0bff015fdb5d1d8a72d02f7dacefa69439906e99b6226df7da6249a14e09",
+    "bytes": 8507
+  },
+  "independent_source_only_replay_HTML": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-independent-review/source-template-replay/SOURCE_WIDGET_HTML.html",
+    "sha256": "6cd9bdfc957b780db85bd4992158e387438069e9c174ba09071ff760800b8200",
+    "bytes": 717060
+  },
+  "source_dependencies": {
+    "src/apadana-profiles.mjs": {
+      "bytes": 258652,
+      "sha256": "da0e3d90bcaa8eba3a23364da992888bbd55cd4e368035a880b5576e949ab054"
+    },
+    "src/apadana-thera-profiles.mjs": {
+      "bytes": 834151,
+      "sha256": "a6228de1ba21807b1ad4d09e7c7689999f16b3d0f1458a4641ec361b6076a15a"
+    },
+    "src/apadana-thera261-280-profiles.mjs": {
+      "bytes": 51636,
+      "sha256": "8883e4a4c21467e71d81799d37a72ff25d82d30249360d6520d64de3c9a03599"
+    },
+    "src/apadana-thera281-285-profiles.mjs": {
+      "bytes": 15056,
+      "sha256": "5fe6d7d66fc08262b612bd958f4163784a3c4fada1e8f704a354eedfc2399e15"
+    },
+    "src/apadana-thera287-288-profiles.mjs": {
+      "bytes": 6333,
+      "sha256": "a7bfe381d050e95c40e5f7889251241c29f393a487957a139cf1c1bf3cdd04fd"
+    },
+    "src/apadana-thera292-299-profiles.mjs": {
+      "bytes": 23535,
+      "sha256": "7bae858330a6fafc5765b1c9e051ab05223d655c1d1dbc743c7bd383993b1e52"
+    },
+    "src/apadana-thera301-310-profiles.mjs": {
+      "bytes": 28081,
+      "sha256": "28bc80a92b88d68242bfeb1d1ec77d343d544de712f91e974c5eb79963a015f7"
+    },
+    "src/apadana-thera312-319-profiles.mjs": {
+      "bytes": 26112,
+      "sha256": "ace057a6f48a553b0b9b297fb6162e42dce1c9b61bf88a19257615fafbd294ec"
+    },
+    "src/apadana-thera321-329-profiles.mjs": {
+      "bytes": 20680,
+      "sha256": "5b39479b430c4ed796e11c87445f14d693912de76261ccd26284751203de2981"
+    },
+    "src/apadana-thera331-334-profiles.mjs": {
+      "bytes": 18440,
+      "sha256": "3055098dd9670315a1de06e10b04c5141327102457920d37c5e63074652eda89"
+    },
+    "src/apadana-thera335-350-profiles.mjs": {
+      "bytes": 69783,
+      "sha256": "fd3eac4f1b9d4ab3898703dc0a969921dfa1255d3dc0f0663e0bc745b9224268"
+    },
+    "src/apadana-thera351-360-profiles.mjs": {
+      "bytes": 30927,
+      "sha256": "bef582559e7f02372f7283239d4dddb064178258ee60641e23c5b7f81f4e5cd2"
+    },
+    "src/canon.mjs": {
+      "bytes": 47196,
+      "sha256": "b496860add5770a775023b28739c4821af459c96803af644a5ecd20fcc69883f"
+    },
+    "src/chatgpt-widget.mjs": {
+      "bytes": 99778,
+      "sha256": "2977a795452536f4e63c03704c7c5d3973066017c389151d24cceadc74936ced"
+    },
+    "src/locator-policy.mjs": {
+      "bytes": 4777,
+      "sha256": "0ddae64e676ea7adf688e880cb00f0358212343c5c1bc83f40f377ffa5b5178e"
+    },
+    "src/script.mjs": {
+      "bytes": 23371,
+      "sha256": "c880803d77fe742f4b6d7b8754d348eb8aa670634e0b9aa40224b23ca1a8a565"
+    },
+    "src/source-notes-profiles.mjs": {
+      "bytes": 2995,
+      "sha256": "f83ac1be7ad1586a46569632aac37462f4e7da8a18b47050a29008cff70090e5"
+    },
+    "web/content-sha256.mjs": {
+      "bytes": 2775,
+      "sha256": "bc28e5561e53f10d6293b35563557e968d47a255ceba77ff04b9816a2932cc63"
+    },
+    "web/source-notes-policy.mjs": {
+      "bytes": 6175,
+      "sha256": "5897a88723b8d5ae3515db018e731d0c7bdb8bf5271d05645afb427b86d9ece5"
+    }
+  },
+  "all19_physical_dependency_bytes_rechecked": true,
+  "source_dependency_exact_APP_binding_provenance": "Reviewed root producer compared every dependency byte to exact APP Git before emission; physical pins rechecked in this peer replay. No new Git invocation here.",
+  "profile_authorities": {
+    "baseline359": "dbd15ba96431779a1f8e4951605b009ab920df7e01da9f5663a270a605fd2864",
+    "new9": "a9ce377c7ec5c75fff7315c45dbd0328b7164dd4120b83b3f7c8a6406df6a367"
+  },
+  "finite_interpolation_domains": 16,
+  "template_escape_pairs": 2,
+  "all368_ordered_full_profiles_and_projections_reconstructed": true,
+  "original_VRI_note_focus_behavior_not_tested_here": true,
+  "behavioral_harness_approval": false,
+  "release_or_push_approval": false,
+  "method": "Static review of finite JSON/source/function-literal projection and replay of exact reviewed stdlib algorithm, with only Git checker replaced by sealed physical-dependency hashes and unique external output paths. JavaScript remains data; no SUT imports or execution.",
+  "typed_package_binding_static_review": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/nine-browser-independent-review/TYPED_BINDINGS_STATIC_REVIEW.json",
+    "sha256": "11c0979e9209d08ee4feb239b6a465b9ac357d81b4326a84bbbb8ce0829c0f2f",
+    "bytes": 1656
+  },
+  "limitations": [
+    "Actual source-note focus gate must run on the new installed app/HTML and bind a fresh receipt.",
+    "Runtime resource equality, native/browser behavior and final exact-commit CI remain separate parent gates.",
+    "No physical-device, human assistive, signed-in host or live-provider claim."
+  ]
+}

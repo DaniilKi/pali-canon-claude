@@ -1,0 +1,22 @@
+{
+  "schema": "independent-five-current368-legacy-seam-source-review-v1",
+  "status": "GO_EXACT_FIVE_PATH_ADDENDUM_FOR_ROOT_INTEGRATION_AND_SCOPED_PREFLIGHT",
+  "manifest_sha256": "b8e14dbfabc28d9fe8491051ac63af7d1ae074ebaa2ab7492c96c848bb56505d",
+  "patch_sha256": "6ba0d21276c80d0c1f12893821d3932faffefd45140e12d219ba6dfdb499e9d7",
+  "frozen32_prior_review_sha256": "5b8e3bd22cfc3a7d2f9968f464a9e2c1b31ce63cda658d22b31c3a84867b086a",
+  "blocking_static_findings": [],
+  "all_10_original_case_names_and_timeouts_preserved": true,
+  "five_previously_reported_static_stale_seams_resolved": true,
+  "files": {
+    "verify_static.py": "0964289dac09e43fd9374c11347071b5df4ccb914d1babe1ba042791371ddd18",
+    "STATIC_RECONCILIATION.json": "637291ca56943352196c9e405712c11cc1d8982e5dc2b3eb2d7cc0d0824a3348",
+    "REVIEW.md": "307f3413e9d6a2adfbce485a391b7931d1d0c6c1457864059a5a276328c39783"
+  },
+  "runtime_behavior_API_package_CI_activation_release_approval": false,
+  "remaining_gates": [
+    "Final source-map/current-code closure and independently reviewed complete case inventory",
+    "Root bounded legacy/current preflight with genuine positives",
+    "Actual installed/browser/privacy/provider/cleanup and exact-candidate native CI"
+  ],
+  "repository_edits_app_helper_imports_tests_build_network_Git_or_CI_execution": false
+}

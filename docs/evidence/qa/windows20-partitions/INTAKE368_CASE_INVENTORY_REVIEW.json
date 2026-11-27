@@ -1,0 +1,213 @@
+{
+  "schema": "reviewed-ci-successor-source-case-inventory-v1",
+  "status": "GO_EXACT_SOURCE_DELTA_AND_TERMINAL_CASE_INVENTORY_ONLY",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "predecessor_sha256": "f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d",
+  "inventory_sha256": "4aecfb25a453af0b3167a4a32fbfc9acae8cfbe2687e216abad8a6e9129895af",
+  "driver": {
+    "path": "scripts/test.mjs",
+    "sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad"
+  },
+  "additions": {
+    "scripts/ci-test-partitions.mjs": "a217ce99f1c6e7d02401c9f41671cf48bd8a7343d471ba6bf72c0720da065f89",
+    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
+  },
+  "changed_files": {
+    "tests/apadana-disclosures.test.mjs": {
+      "before_sha256": "fcd3ff8c99fc2b6fd2b4a4872059dc60330a2340aba71dd2c84d3c10a077a989",
+      "after_sha256": "48a974214ac02352d52160d785a855c6b21bf728683d73a3a68190eb9bf23c20"
+    },
+    "tests/apadana-fourth-client.test.mjs": {
+      "before_sha256": "df4bed65dd5c955bdcaf13b4410ece7c372477a0eb6e15f961114507fc96def7",
+      "after_sha256": "e892f8ecc37b4f60419475fa7734fb0d53d4a9aabbcf2eb57f9b36d461a0f1d4"
+    },
+    "tests/apadana-fourth.test.mjs": {
+      "before_sha256": "f669f263793ec25f4b53e5f90e9a4a3ced1ada95f7a4e4cc85661a5148e2cb19",
+      "after_sha256": "e0fdac899a5cd6ce6939c78afcdcdc8da61267e8396f00d079a24fbc5b738868"
+    },
+    "tests/apadana-held234.test.mjs": {
+      "before_sha256": "0a79f8471c7de7ce43bd0d9c61a65cfc3ec1edbf9ab03e5cfd459607b7bbc774",
+      "after_sha256": "fbcff0abdc1b1a6a2d318b37528e008967cc61aabd93ae2d8b2774b2038256d4"
+    },
+    "tests/apadana-next.test.mjs": {
+      "before_sha256": "269efd0aa5b310dc1b0c2274bb07e82f0f74bf285cef43659d705bfa519ae082",
+      "after_sha256": "e2c498dd264b70d1a3ad07d90d71ac90e3b358ed549c1ebaacc963668e80bec3"
+    },
+    "tests/apadana-thera.test.mjs": {
+      "before_sha256": "dff4f38a7d0abb37def716cb93796dc3304e581110e7af705f78a35abff06067",
+      "after_sha256": "2e6e0e08268838ab5f5ebcfa438ceaecd552a554e387f8cdae30d9249228072e"
+    },
+    "tests/apadana-third.test.mjs": {
+      "before_sha256": "9c7126f1e074d77f6a167ea52124abc4c86c6bc0f80b8075b4b7a8be460a8db0",
+      "after_sha256": "92e72fe456b1a056b6e4052f4a017853cce4c9d6466b9f99f0ca3f821b9b58a0"
+    },
+    "tests/ci-test-partitions.test.mjs": {
+      "before_sha256": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae",
+      "after_sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e"
+    },
+    "tests/current339-source-inverses.test.mjs": {
+      "before_sha256": "1226b994d18fd9cc7fe470d5865f8ff616c1dd75e42b146a50c34574a005ff6f",
+      "after_sha256": "5e4e036b932a1c6e90f028295bdb45626e016f38eb8a14e186fe174d244a14a0"
+    },
+    "tests/current343-bindings.test.mjs": {
+      "before_sha256": "6051a4e330b42442e6c469d226c2c1cd0e5638fe3db1295a191b06b725de8089",
+      "after_sha256": "30801f1bc203245f8cb3ee9c0bb3ea0ce8267d19a1fe3b568817e2cd37c61b7e"
+    },
+    "tests/held234-client.test.mjs": {
+      "before_sha256": "d9e8caa963afcd1a8ab886d351e4fbc3809811a8a92b7676fcc9ae9936fe1d33",
+      "after_sha256": "0b5969a079d50ce005f35e508f54dcb8ed343f08aa1e99ba826a13f2d8821cef"
+    },
+    "tests/held234-current333-chain.test.mjs": {
+      "before_sha256": "f1cc9c851bfffb4913bc71e030919e6105ac91942d9a23f1fefbd1924b59b3f5",
+      "after_sha256": "51655bcfc60b9d3707caf863eab909ff681a2d66d4c65685ecdc7c41eec2418e"
+    },
+    "tests/intake343-metadata.test.mjs": {
+      "before_sha256": "fb86f7ba2a9fe0a61c95fd4c1e2b471f020392b1fb8796c45fcd1623f0e7cdb6",
+      "after_sha256": "a94c49b2b03ed564b2323449813e16a75b25a5ed92e3e5a967176c0307e14180"
+    },
+    "tests/intake359-metadata-history.test.mjs": {
+      "before_sha256": "e63cf976459d2ee2d63b0b6ac816122dd5a61c413bd5ce2cd701824cbd9eaf87",
+      "after_sha256": "538978d2ef38a011076a8611e4b1d2b7a7d9daf93ca89c682b2b5564c76844f4"
+    },
+    "tests/next-ten-history-data.test.mjs": {
+      "before_sha256": "3695d3eb7692ba02e061513a89125e6e9702521d8c023bcc42de4e6192454c2c",
+      "after_sha256": "69f74a5c5f13cf0f7fdccb7eb85cf22affdbc50ed27bfb1aed929db2fd20e55c"
+    },
+    "tests/six-boundary-source-input.test.mjs": {
+      "before_sha256": "13c443a8c66893939bcda5c63a744a9648e47ec86020bdd09c9a6a67036569c9",
+      "after_sha256": "5de82ea399f7602d7dd2c38c09f54cd9a9d025f7e2a2d59a3af0579b87945287"
+    },
+    "tests/source-notes-baseline-projection.test.mjs": {
+      "before_sha256": "6a6464f74ee6bc5eb81759b41bac81fa8a7f8bd4b86ff2e46ffa989142441add",
+      "after_sha256": "631ec6f793d7ce518e21a5eece52aeac7c50138be50e8d5cfd684a88ccef1afa"
+    },
+    "tests/source-notes-compatibility.test.mjs": {
+      "before_sha256": "38576f7c5b04703a3a1fe370228cfa8edacd2ad244fb19de760880b0f7239c5e",
+      "after_sha256": "b0eab70a46893957a1433181081f3ef5a6fac3fd66ea328ea191d1000b1dfd80"
+    },
+    "tests/thera-commentary-locators.test.mjs": {
+      "before_sha256": "b7111a62a188669d5c8137d64f391a918d3ce414cfa8a902abcb31db87edeeff",
+      "after_sha256": "1e5e8607d3131adecb164a4c56e91de71aae057a5a7c439103886048a9c6370b"
+    },
+    "tests/thera141-180-client.test.mjs": {
+      "before_sha256": "1a7d0fe0c294f3f113c6988524456606bacde507aae1d8797258fb0a38b89e42",
+      "after_sha256": "a7f41e07febc41acdb240f7b01f5ff0863b5700e4ca852b32d1a10867f89b3d8"
+    },
+    "tests/thera181-220-client.test.mjs": {
+      "before_sha256": "5374367f8cd1b14ef736deb3678ba0574f975ea2ceeab80ef15a5de1a5473205",
+      "after_sha256": "c8695064857fa2b7e404091aa64da167d4ec2eb6b3ad36dc1091feb17b1ba77d"
+    },
+    "tests/thera221-230-client.test.mjs": {
+      "before_sha256": "1f24fe34d11fd7883a4d2989558b17123f29c1e0f10279e0ed3d7c46a99d36de",
+      "after_sha256": "f81fb17374a5ebba7c5dedb68ce4a970b9b6d69e331be5133d6d4b60422f4a56"
+    },
+    "tests/thera241-250-client.test.mjs": {
+      "before_sha256": "9e2fed56d5320b4a0993ce78ec5aeb88087e621a75416ed27be5bc4ef55c0fab",
+      "after_sha256": "8c32c0a6867dc6d543667fbaede0d7941a0f486326b92beeba70a7b0a355a98c"
+    },
+    "tests/thera261-280-client.test.mjs": {
+      "before_sha256": "b151992c96b402bdb9a51939b947c23dac7478b71e0fa3ce7cb19bd80afc5c34",
+      "after_sha256": "b721ed69f91cb6144d70613ffc09a4c4c82a5ca2f8aa8d2a895ef07d34b22261"
+    },
+    "tests/thera261-280-source.test.mjs": {
+      "before_sha256": "2ec3e9692d085393e6a1a759c4ab909464b439a612bc14cd9deb8da71be79bac",
+      "after_sha256": "252dcc58ac2618029a171e74ec46a4b28c05bdc593bf89bd62b3e642d61bd373"
+    },
+    "tests/thera281-285-client.test.mjs": {
+      "before_sha256": "2b3782059013f276e7ff1a07cac0618bc5581b1ca074bf6dd491918f874a0f0f",
+      "after_sha256": "abe3db29a30e998152736fd9ca9c42598441c153a62ee1e7a524739391d1b3b1"
+    },
+    "tests/thera281-285-source.test.mjs": {
+      "before_sha256": "5399b275f6f72c7e8c8ecaae2ab526d5c9c409f6d4fc55978cd7492a2eaf0b7c",
+      "after_sha256": "3fe3081c55681611c396d2a845be497ec2e7611bca0ac2e4e02a706c65d0fcad"
+    },
+    "tests/thera287-288-client.test.mjs": {
+      "before_sha256": "cfd6d853a942b0aa3ac94890bd46d8a31d9fd56eec57aa5ab804dd533415af79",
+      "after_sha256": "83606202405989c9d0b5a034adffed3b92145e800093b255ae2264261f69e5f9"
+    },
+    "tests/thera287-288-source.test.mjs": {
+      "before_sha256": "e040abd687f28a16000c75b6e3eb5d9146554e7c11e3963d33c5f80b7172253f",
+      "after_sha256": "2928fc8f939fffc6c0cdf07e2b16f755c6851492a61f8e1681fdb25aa7f38d18"
+    },
+    "tests/thera292-299-client.test.mjs": {
+      "before_sha256": "17d74c6616994cbb9e4b6d458eff5ffdd5cd61b87c9dd07dda98575b3a309cb1",
+      "after_sha256": "37460c107c048d4601619f8c2f6bd86b3bf3d4338df588bffb27c169ac728e24"
+    },
+    "tests/thera292-299-source.test.mjs": {
+      "before_sha256": "f972593729f72e27292994693b53a15d14a467ec21cd271b9ad6186073cded77",
+      "after_sha256": "056416b7144f531ed36eb5d8b8e7eaa4e0b61f6d70f37064a30860117749e8d4"
+    },
+    "tests/thera312-319-client.test.mjs": {
+      "before_sha256": "021ad233910a38b5e2b4c3e31a151d312a8c2e3aa2a93b08c2b55adb6e4f4569",
+      "after_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953"
+    },
+    "tests/thera312-319-source.test.mjs": {
+      "before_sha256": "27853bbcfa8d0f26b925819eb5c0f1cfc8a31f23bcad3791347a426d4684b505",
+      "after_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6"
+    },
+    "tests/thera321-329-client.test.mjs": {
+      "before_sha256": "61613a4b97e49ffd1bc39af332903ca47aefc503f86ec368e54ea3eee560ac94",
+      "after_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab"
+    },
+    "tests/thera321-329-source.test.mjs": {
+      "before_sha256": "a128ec7c640e5d60f52c52c39c9670484c3e0922b02210279a11173075df774d",
+      "after_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499"
+    },
+    "tests/thera331-334-preface-client.test.mjs": {
+      "before_sha256": "5a34166637bc2d0c2faecd8e754bd280a3a1531da2c4ace9537249dfa9434972",
+      "after_sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f"
+    },
+    "tests/thera335-350-source.test.mjs": {
+      "before_sha256": "5e51a7bd7f55934b02fe8d6be910b3179de4918b8ff58e176df09d5abe5aae04",
+      "after_sha256": "cbe814127a9e71c9383873e91797311fda65f353577070efc1506be3bd028880"
+    },
+    "tests/widget-hosted-selections.test.mjs": {
+      "before_sha256": "07fa4aed9b6197cb37c539fbc1962d908796d8a6f133d37d17568415f16c1ce3",
+      "after_sha256": "4ad932ef76cb23c279926ccd2848a8c8007627d17b8eedb513b25e04a92d8264"
+    }
+  },
+  "added_files": {
+    "tests/browser-current368-routing.test.mjs": "9661ffee215e631803e52c44996c4c8119724601279e92df21a55e09588a44d6",
+    "tests/intake368-history.test.mjs": "76cd33abb8e279037f6ecb46c084a6cb894bbd150bbf0205c75247c1b416cc04",
+    "tests/intake368-source-seal.test.mjs": "b97d92ba57b5de1f442548581fb409b90e4b69baff98f13e301545ae7f5f4c5d",
+    "tests/thera351-360-nine-client.test.mjs": "fb359a0639995f1e6623c82d33f8eda1f1be016ff82cd9fb9da96ebebe17adaf",
+    "tests/thera351-360-nine-source.test.mjs": "b386cd017c9979d48151f56265ed0ff2d4c325a960e55ffbbf5ba5b996a1b235"
+  },
+  "preserved_original_test_count": 2068,
+  "preserved_QA_test_count": 8,
+  "preserved_original_skipped_count": 267,
+  "added_case_count": 16,
+  "added_cases_by_file": {
+    "tests/browser-current368-routing.test.mjs": 1,
+    "tests/intake368-history.test.mjs": 1,
+    "tests/intake368-source-seal.test.mjs": 1,
+    "tests/thera351-360-nine-client.test.mjs": 5,
+    "tests/thera351-360-nine-source.test.mjs": 8
+  },
+  "evidence": [
+    {
+      "path": "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_INVENTORY_EVIDENCE.json",
+      "sha256": "864d68b5098802fb180820c90ec9d804261c4f9b226b1aa4595eb940d45253fe"
+    },
+    {
+      "path": "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_SOURCE_AST.json",
+      "sha256": "33af2b5d74bbbde8a0e201fb7b876350cd941fc586381a3ab655108c49168781"
+    },
+    {
+      "path": "docs/evidence/qa/windows20-partitions/INTAKE368_CI_LOADER_STATIC_REVIEW.json",
+      "sha256": "14236b1fc629df8d4ddbcc78e588a0c574637a15845d04bc6d5e9544ba90f154"
+    },
+    {
+      "path": "docs/evidence/qa/windows20-partitions/INTAKE368_CURRENT33_STATIC_REVIEW.json",
+      "sha256": "2b83f1f7ebad4c3283099612b0114178cfee4594645dd0af778d06b31639c184"
+    },
+    {
+      "path": "docs/evidence/qa/windows20-partitions/INTAKE368_LEGACY5_STATIC_REVIEW.json",
+      "sha256": "e49f2e10aa4a15d309f34793efa8c72fab6f12dd729f5dd3ade6ca4af07d33b1"
+    },
+    {
+      "path": "docs/evidence/qa/windows20-partitions/INTAKE368_QA32_STATIC_REVIEW.json",
+      "sha256": "5b8e3bd22cfc3a7d2f9968f464a9e2c1b31ce63cda658d22b31c3a84867b086a"
+    }
+  ]
+}

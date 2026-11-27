@@ -1,0 +1,58 @@
+{
+  "schema": "independent-ci368-baseline-v2-static-review-v1",
+  "status": "GO_FROZEN_LOADER_AND_QA_PROPOSAL_ONLY_REAL_BASELINE_REMAINS_BLOCKED",
+  "manifest_sha256": "2bd66fcb103943072dcb5e8a8a15c63f377f62c21a3e80bafc078bbf7df620eb",
+  "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "reviewed_source_hashes": {
+    "runner": "a217ce99f1c6e7d02401c9f41671cf48bd8a7343d471ba6bf72c0720da065f89",
+    "QA8": "18a8f5ecf7dce1da8df925d29448a6c4bf531cc970aacfc21a5e084708942ad6",
+    "patch": "67d00328045e6b8fd58535ebc3e4e7e0413a23a7f9f20222ebba23f11635ea7b",
+    "predecessor": "f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d"
+  },
+  "whole_old_runner_inverse_exact": true,
+  "whole_old_QA_inverse_exact_except_one_added_helper_separator": true,
+  "old_QA_case_count": 8,
+  "new_QA_case_count": 0,
+  "all_predecessor340_file_hashes_match_previously_independently_Git3ced_bound_physical_sources": true,
+  "new_real_file_delta_scope": {
+    "added_files": 5,
+    "changed_old_files": 8,
+    "prospective_added_cases_not_yet_approved": 16
+  },
+  "checks": [
+    "exact v2 schema and fixed3ced predecessor SHA/340-path map physically reread",
+    "exact legacy791 snapshot plus unchanged publicdriver/reporter; original8 counted once",
+    "finite sorted explicit changed-before/after and disjoint literal new paths; complete actual file/hash equality",
+    "case review exact SHA/status/inventory/tooling/deltas/2068+8/267 and positive added terminal counts",
+    "case-review evidence physical regular-file hashes; no caller/root fallback or mutable ambient cache",
+    "original V1 loader byte-identical after private rename, unknown schema refused",
+    "all context/event/receipt/aggregate/execute/argv/major/run/attempt/source-cover/status-multiset contracts byte-identical",
+    "negative fixtures start from a valid v2 fixture, restore metadata and finish valid; no production fixture bypass",
+    "no new top-level QA cases, old8 assertion bodies retained; only one helper call and one appended function",
+    "BLOCKED realindex cannot pass positive integer/hex checks; final5new/8changed source audit and real baseline required",
+    "no source-map/workflow hash embedded in top-level source-seal test; baseline excludes workflow; fixed predecessor breaks self-cycle"
+  ],
+  "bounded_actual_new13_observation_bound_only": {
+    "tap_sha256": "89dae803dde7e52d6a8868fa4edeafb7bda12c5837e4f90b09e2d8eaeb64613d",
+    "tests": 13,
+    "pass": 13,
+    "skip": 0,
+    "reviewer_did_not_execute": true
+  },
+  "blocking_findings_in_frozen_loader_QA": [],
+  "remaining_release_blockers": [
+    "Fill three frozen legacy-seam after hashes only after independent source review",
+    "Independently approve real full new16 terminal-case inventory and preserved2068+8/267 contracts; do not infer from live output alone",
+    "Seal actual case-review/baseline SHA; BLOCKED template is not runnable authority",
+    "Root actual8QA and source/fixture/current code closure acceptance on final hashes",
+    "Final exact same-successor full reference/native20+22/status-multiset/all required CI before dev"
+  ],
+  "not_claimed": [
+    "real v2 baseline approval",
+    "actual QA execution by reviewer",
+    "full2092/native CI acceptance",
+    "runtime/body/source rights approval",
+    "dev/main/deployment approval"
+  ],
+  "reviewer_activity": "Own external stdlib byte/hash/JSON and literal inverse inspection only; no app/test/build/Git/network/CI or rooted edits."
+}
