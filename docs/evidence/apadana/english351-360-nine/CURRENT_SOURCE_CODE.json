@@ -6,7 +6,7 @@
   "historical_archive_sha256": "f82ac88f6b6cbc2410d03d76989cf105bf5a6fa039a4ad24043e39e529a43b4d",
   "historical_archive_root": "docs/evidence/apadana/english351-360-nine/BEFORE_CURRENT368_SOURCE/",
   "original_manifest_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
-  "current_source_map_sha256": "5b34d4fa3bc916cf5a215ea6c43b59dc73eb8f9a9da821cb91aa336d2626187a",
+  "current_source_map_sha256": "c9d193a318035b233493eb747e05133bc3a90ce49d00e0b2774fcf5d9f18beaa",
   "changed_original_paths": [
     ".github/workflows/check.yml",
     "AGENTS.md",
@@ -19,7 +19,9 @@
     "scripts/web-reader-thera-remaining-check.py",
     "scripts/web_reader_apadana_intake.py",
     "scripts/web_reader_approved_acceptance.py",
+    "scripts/web_reader_four_boundary_history.py",
     "scripts/web_reader_next_ten_boundary_history.py",
+    "scripts/web_reader_six_boundary_history.py",
     "src/apadana-thera-profiles.mjs",
     "src/apadana-thera.mjs",
     "src/chatgpt-widget.mjs",
@@ -211,8 +213,8 @@
       "sha256": "c1d5cca957938e81d2813e845e735497145ea89b9d03c6cfa6f86ebb75bb41c6"
     },
     "docs/qa/english351-360-nine-installed.md": {
-      "bytes": 3240,
-      "sha256": "edcdded5135f04307a3c586db8aff8b9a2d755df336437b62316cc53ab4e5de8"
+      "bytes": 5742,
+      "sha256": "bb34cfd4dec520ee92ce382755d761c748eb5a542706673e47f6d472ccf41a36"
     },
     "scripts/apadana/thera351-360-nine/SOURCE_NINE_INPUT_CONTRACT.json": {
       "bytes": 190753,
@@ -239,8 +241,8 @@
       "sha256": "89630ec90b17828dc7f168bbed6050181bac422f05cd670256334d07f59cdac6"
     },
     "scripts/web_reader_intake368.py": {
-      "bytes": 16542,
-      "sha256": "5e39842a31cbe875f06140279395a210b269e5c5a202c6a7a66008b5026847c0"
+      "bytes": 20868,
+      "sha256": "53abbee0510b24b64d091e07d12f73a20f875ee64d15268bc213a49b6fba9ba7"
     },
     "src/apadana-thera335-350-profiles.mjs": {
       "bytes": 69783,
