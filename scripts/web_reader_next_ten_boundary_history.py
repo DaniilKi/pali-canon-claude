@@ -8,11 +8,13 @@ import web_reader_intake359 as _intake359
 import web_reader_intake368 as _intake368
 from collections.abc import Mapping
 import copy
+import errno
 import gzip
 import hashlib
 import json
 from pathlib import Path
 import re
+import stat
 from threading import get_ident
 from types import MappingProxyType
 
@@ -75,13 +77,34 @@ def regular(root, relative):
         raise ValueError('Finite next-ten relative file path required')
     if root.is_symlink() or not root.is_dir():
         raise ValueError('Next-ten authority root missing or a symlink')
+    def node_kind(path, directory):
+        # Python 3.12 Path predicates ignore these errors, then try the type stat.
+        try:
+            info = path.lstat()
+        except OSError as error:
+            if (error.errno not in (errno.ENOENT, errno.ENOTDIR, errno.EBADF, errno.ELOOP)
+                    and getattr(error, 'winerror', None) not in (21, 123, 1921)):
+                raise
+        except ValueError:
+            pass
+        else:
+            # Preserve pathlib's existing treatment of every Windows reparse kind.
+            if getattr(info, 'st_file_attributes', 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT:
+                if path.is_symlink():
+                    return True, False
+                return False, path.is_dir() if directory else path.is_file()
+            return stat.S_ISLNK(info.st_mode), (stat.S_ISDIR(info.st_mode) if directory
+                                               else stat.S_ISREG(info.st_mode))
+        return False, path.is_dir() if directory else path.is_file()
+
     path = root
     parts = relative.split('/')
     for i, part in enumerate(parts):
         path = path / part
-        if path.is_symlink():
+        link, expected_type = node_kind(path, i != len(parts) - 1)
+        if link:
             raise ValueError('Next-ten authority symlink refused')
-        if not (path.is_file() if i == len(parts) - 1 else path.is_dir()):
+        if not expected_type:
             raise ValueError('Missing regular next-ten authority: ' + relative)
     return path.read_bytes()
 
@@ -235,17 +258,111 @@ def _packed(data, records):
     return packed
 
 
+# Exact immutable359 proof domain. The historical module stays byte-exact.
+_OLD359_DIRECTORY = 'docs/evidence/apadana/english335-350'
+_OLD359_PINS = MappingProxyType({'BASELINE343.json': '4c122fff1283b3ee5904f1f6ea781572347d6e42140dcdd25d7765e8ab00e138',
+ 'BASELINE343_FULL_OBJECTS.json': '74c8c358e0bebec17f8679289f533975ee2e95270d3c7017aeb19594464d7a5e',
+ 'BASELINE_DATA27.json': '8631b90104e01329b74d22cc7632df265e9b9072efd6ba17b5478450b026a99f',
+ 'BASELINE_RUNTIME34.json': '6becdfab6b8e948a6d2df9af1a37131c4c0c727d77db79cf4bb4b93973512f23',
+ 'SOURCE_REVIEW.json': '61e8d843e61cbbab04c3dc4f1546c8725d0ad883d194d8e5b567c4e3d681385a',
+ 'SOURCE_CURATION.json': 'e777f4dc3b154a448162b8d0c274d44995722903ebef59e133172ee46ecac5da',
+ 'APPROVAL.json': '9232fdeec1b93618b5019b1aeb2c706b2a6b423a62bbb5dae86ea39b520e4bf6',
+ 'PROFILES.json': '4d1ba58af7d5918ae18d68eab63d5e4e1258925d90c46d8d889fe5a74977a59d',
+ 'LINKS.json': 'f284bc4dcbb415a55aa025f654018448ce3578772dea010f12d8e7cfd536da0a',
+ 'EXPECTED_MANIFEST.json': '57b6fd43f4b8273e9542b8a22a6bd84b2042914113d53c94fe727386c5ec0194',
+ 'PROFILE_SCHEMA_REVIEW.json': '7af2686040b00e89730568771ff8d35e64b676b383f014981eb809d4f63203e5',
+ 'RUNTIME_INVENTORY.json': '839e675a31a1eae8329f4942b1b60f453ce860d1c89d85c78300762fcb00b186',
+ 'RUNTIME_REVIEW.json': '2b19d690992a3289958a9e944be36484cf4257fa34a9b580e04704206e829b16'})
+
+
+def _old359_configuration():
+    if type(_intake359.PINS) is not dict:
+        raise ValueError('Exact old359 proof configuration required')
+    return (_intake359.DIRECTORY,
+            tuple((*_intake359.PINS.items(),
+                   (_intake359.RUNTIME_NAME, _intake359.RUNTIME_SHA),
+                   (_intake359.REVIEW_NAME, _intake359.REVIEW_SHA))))
+
+
+class _Old359OperationProofBytes:
+    """Second fixed proof domain; no public buffer/pin/reader injection."""
+    __slots__ = ('_root', '_thread', '_active', '_claimant', '_raw', '_pins', '_directory')
+
+    def __init__(self, root):
+        root = _physical_root(root)
+        pins = tuple(_OLD359_PINS.items())
+        if len(pins) != 13 or _old359_configuration() != (_OLD359_DIRECTORY, pins):
+            raise ValueError('Changed old359 proof configuration')
+        raw = {}
+        for name, pin in pins:
+            if type(pin) is not str or re.fullmatch('[a-f0-9]{64}', pin) is None:
+                raise ValueError('Pending old359 proof pin; no fallback')
+            observed = _intake359._regular(root, _OLD359_DIRECTORY + '/' + name)
+            if type(observed) is not bytes or digest(observed) != pin:
+                raise ValueError('Unverified old359 proof bytes')
+            raw[name] = observed
+        object.__setattr__(self, '_root', root)
+        object.__setattr__(self, '_thread', get_ident())
+        object.__setattr__(self, '_active', True)
+        object.__setattr__(self, '_claimant', None)
+        object.__setattr__(self, '_raw', MappingProxyType(raw))
+        object.__setattr__(self, '_pins', pins)
+        object.__setattr__(self, '_directory', _OLD359_DIRECTORY)
+
+    def __setattr__(self, name, value):
+        raise AttributeError('Old359 operation proof bytes are immutable')
+
+    def _claim(self, claimant):
+        if (type(claimant) is not _NextTenBinding or claimant._root != self._root or
+                not self._active or self._thread != get_ident() or self._claimant is not None):
+            raise ValueError('Closed, foreign or already claimed old359 proofs')
+        object.__setattr__(self, '_claimant', claimant)
+
+    def _check_owner(self, root, claimant):
+        if (not self._active or self._thread != get_ident() or self._claimant is None or
+                type(claimant) is not _NextTenBinding or self._claimant is not claimant or
+                root != self._root or claimant._proof359_identity is not self or
+                type(self._raw) is not MappingProxyType or
+                self._raw is not claimant._proof359_raw_identity):
+            raise ValueError('Foreign, closed or substituted old359 proof snapshot')
+        if (self._directory != _OLD359_DIRECTORY or
+                self._pins != tuple(_OLD359_PINS.items()) or
+                _old359_configuration() != (self._directory, self._pins) or
+                tuple(self._raw) != tuple(_OLD359_PINS) or
+                any(type(raw) is not bytes for raw in self._raw.values())):
+            raise ValueError('Changed closed old359 proof configuration')
+
+    def _fresh(self, root, claimant):
+        self._check_owner(_physical_root(root), claimant)
+        for name, expected in self._raw.items():
+            # Same thirteen guarded physical rereads, in the same old order.
+            # Exact bytes equal this operation's literal-SHA-verified buffers.
+            assert _intake359._regular(root, self._directory + '/' + name) == expected
+
+    def _close(self):
+        object.__setattr__(self, '_active', False)
+        object.__setattr__(self, '_claimant', None)
+        object.__setattr__(self, '_raw', MappingProxyType({}))
+        object.__setattr__(self, '_pins', ())
+
+
 class _NextTenBinding:
     """Owned by exactly one private operation; not a path or public root token."""
-    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359', '_current368', '_catalogue368', '_proof368', '_proof368_identity', '_proof368_raw_identity')
+    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359', '_current368', '_catalogue368', '_proof368', '_proof368_identity', '_proof368_raw_identity', '_proof359', '_proof359_identity', '_proof359_raw_identity')
 
-    def __init__(self, root, records, actual, current359, catalogue359, current368, catalogue368, proof368):
+    def __init__(self, root, records, actual, current359, catalogue359, current368, catalogue368, proof368, proof359):
         object.__setattr__(self, '_root', _physical_root(root))
         object.__setattr__(self, '_records', _freeze(records))
         object.__setattr__(self, '_actual', MappingProxyType(dict(actual)))
         object.__setattr__(self, '_current359', _freeze(current359))
         object.__setattr__(self, '_catalogue359', catalogue359)
         object.__setattr__(self, '_current368', _freeze(current368))
+        if type(proof359) is not _Old359OperationProofBytes:
+            raise ValueError('Exact owned old359 proof snapshot required')
+        proof359._claim(self)
+        object.__setattr__(self, '_proof359', proof359)
+        object.__setattr__(self, '_proof359_identity', proof359)
+        object.__setattr__(self, '_proof359_raw_identity', proof359._raw)
         if type(proof368) is not _intake368._OperationProofBytes:
             raise ValueError('Exact owned368 proof snapshot required')
         proof368._claim(self)
@@ -262,11 +379,18 @@ class _NextTenBinding:
     def _check(self):
         if not self._active or self._owner != get_ident():
             raise ValueError('Closed or foreign-thread next-ten binding')
+        if type(self._proof359) is not _Old359OperationProofBytes:
+            raise ValueError('Substituted old359 proof snapshot')
+        self._proof359._check_owner(self._root, self)
         if type(self._proof368) is not _intake368._OperationProofBytes:
             raise ValueError('Substituted368 proof snapshot')
         self._proof368._check_owner(self._root, self)
 
     def _close(self):
+        if self._proof359_identity is not None:
+            self._proof359_identity._close()
+            object.__setattr__(self, '_proof359_identity', None)
+        object.__setattr__(self, '_proof359_raw_identity', None)
         if self._proof368_identity is not None:
             self._proof368_identity._close()
             object.__setattr__(self, '_proof368_identity', None)
@@ -309,7 +433,7 @@ def _binding_records(binding, root):
         raise ValueError('Next-ten operation root identity changed')
     observed = proof_records(binding._root)  # physical proofs; NEVER rescan27
     assert observed == binding._records
-    _intake359.fresh_proofs(binding._root)
+    binding._proof359._fresh(binding._root, binding)
     if (type(binding._proof368) is not _intake368._OperationProofBytes or
             binding._proof368 is not binding._proof368_identity):
         raise ValueError("Substituted368 proof snapshot")
@@ -323,8 +447,11 @@ def _capture_six_test_input(root):
     root = _physical_root(root)
     current = proof_records(root)
     current359, ap343, catalogue359, manifest359 = _intake359._capture_authority_with_manifest(root, current)
-    current368, ap359, catalogue368, manifest368, proof368 = _intake368._capture_authority_with_proof_bytes(root, current359)
+    # The unchanged historical capture has completed every old schema/object check.
+    proof359 = _Old359OperationProofBytes(root)
+    proof368 = None
     try:
+        current368, ap359, catalogue368, manifest368, proof368 = _intake368._capture_authority_with_proof_bytes(root, current359)
         assert json.loads(ap359) == manifest359
         previous = prior_dd_records(root)
         actual = {}
@@ -358,11 +485,13 @@ def _capture_six_test_input(root):
             _VALIDATED_FRAME = key
         # Non-core records equal previous and were already physically hashed above;
         # four frozen DD fixtures were independently hashed once at their read.
-        binding = _NextTenBinding(root, current, actual, current359, catalogue359, current368, catalogue368, proof368)
+        binding = _NextTenBinding(root, current, actual, current359, catalogue359, current368, catalogue368, proof368, proof359)
         return previous, _CapturedDDData(dd, binding)
 
     except BaseException:
-        proof368._close()
+        if proof368 is not None:
+            proof368._close()
+        proof359._close()
         raise
 
 

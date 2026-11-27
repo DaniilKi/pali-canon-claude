@@ -201,11 +201,176 @@ class SixOperationScopeControls(unittest.TestCase):
 
         self._assert_current368_operation_proof_bytes()
 
+    def _assert_old359_operation_proof_bytes(self):
+        # Additive historical13 proof controls; all original seven cases remain.
+        from threading import Thread
+        from types import MappingProxyType
+        import web_reader_next_ten_boundary_history as ten
+        with h._c1_operation_scope(self.root) as scope:
+            binding = scope._next_ten_binding
+            snapshot = binding._proof359
+            names = [*intake359.PINS, intake359.RUNTIME_NAME, intake359.REVIEW_NAME]
+            self.assertEqual(list(snapshot._raw), names)
+            self.assertEqual(len(names), 13)
+            with self.assertRaises(AttributeError):
+                snapshot._active = False
+            for claimant in (None, object(), binding):
+                with self.assertRaises(ValueError):
+                    snapshot._claim(claimant)
+            for claimant in (None, object()):
+                with self.assertRaises(ValueError):
+                    snapshot._fresh(self.root, claimant)
+            with tempfile.TemporaryDirectory(prefix='pali-old359-wrong-root-') as temp:
+                with self.assertRaises(ValueError):
+                    snapshot._fresh(Path(temp), binding)
+            refused = []
+            def foreign_fresh():
+                try:
+                    snapshot._fresh(self.root, binding)
+                except ValueError:
+                    refused.append(True)
+            thread = Thread(target=foreign_fresh)
+            thread.start(); thread.join(timeout=5)
+            self.assertFalse(thread.is_alive())
+            self.assertEqual(refused, [True])
+            forged = object.__new__(ten._Old359OperationProofBytes)
+            with self.assertRaises((ValueError, AttributeError)):
+                forged._fresh(self.root, binding)
+            with self.assertRaises(TypeError):
+                ten._Old359OperationProofBytes(self.root, dict(snapshot._raw))
+            with mock.patch.object(intake359, '_regular', return_value=bytearray(b'not immutable bytes')):
+                with self.assertRaises(ValueError):
+                    ten._Old359OperationProofBytes(self.root)
+            other = ten._Old359OperationProofBytes(self.root)
+            with self.assertRaises(ValueError):
+                other._fresh(self.root, None)
+            for _ in range(2):
+                with self.assertRaises(ValueError):
+                    other._claim(None)
+            claim_refused = []
+            def foreign_claim():
+                try:
+                    other._claim(binding)
+                except ValueError:
+                    claim_refused.append(True)
+            thread = Thread(target=foreign_claim)
+            thread.start(); thread.join(timeout=5)
+            self.assertFalse(thread.is_alive())
+            self.assertEqual(claim_refused, [True])
+            with tempfile.TemporaryDirectory(prefix='pali-old359-wrong-claim-root-') as temp:
+                wrong = object.__new__(ten._NextTenBinding)
+                object.__setattr__(wrong, '_root', Path(temp))
+                with self.assertRaises(ValueError):
+                    other._claim(wrong)
+            other._claim(binding)
+            with self.assertRaises(ValueError):
+                other._claim(binding)
+            object.__setattr__(binding, '_proof359', other)
+            try:
+                with self.assertRaises(ValueError):
+                    ten._binding_records(binding, self.root)
+            finally:
+                object.__setattr__(binding, '_proof359', snapshot)
+                other._close()
+            class EqualAnything:
+                def __eq__(self, other):
+                    return True
+            original_raw = snapshot._raw
+            for raw in (dict(original_raw), MappingProxyType(dict(original_raw)),
+                    MappingProxyType({name: EqualAnything() for name in names})):
+                object.__setattr__(snapshot, '_raw', raw)
+                try:
+                    with self.assertRaises(ValueError):
+                        snapshot._fresh(self.root, binding)
+                    with self.assertRaises(ValueError):
+                        binding._check()
+                finally:
+                    object.__setattr__(snapshot, '_raw', original_raw)
+            original_pin = intake359.PINS['APPROVAL.json']
+            intake359.PINS['APPROVAL.json'] = '0' * 64
+            try:
+                with self.assertRaises(ValueError):
+                    ten._binding_records(binding, self.root)
+                with self.assertRaises(ValueError):
+                    ten._Old359OperationProofBytes(self.root)
+            finally:
+                intake359.PINS['APPROVAL.json'] = original_pin
+            directory = intake359.DIRECTORY
+            alternate = self.root / 'owned-old359-alternate'
+            alternate.mkdir()
+            try:
+                for name, raw in snapshot._raw.items():
+                    (alternate / name).write_bytes(raw)
+                intake359.DIRECTORY = alternate.name
+                with self.assertRaises(ValueError):
+                    ten._binding_records(binding, self.root)
+                with self.assertRaises(ValueError):
+                    ten._Old359OperationProofBytes(self.root)
+            finally:
+                intake359.DIRECTORY = directory
+                shutil.rmtree(alternate)
+            for name in names:
+                relative = directory + '/' + name
+                for missing in (False, True):
+                    ten._binding_records(binding, self.root)
+                    with self.change(relative, missing=missing), self.subTest(old359=name, missing=missing):
+                        with self.assertRaises((ValueError, AssertionError)):
+                            ten._binding_records(binding, self.root)
+                    ten._binding_records(binding, self.root)
+                path = self.root / relative
+                raw = path.read_bytes()
+                target = path.with_name(path.name + '.owned-old359-link')
+                target.write_bytes(raw)
+                path.unlink(); path.symlink_to(target)
+                try:
+                    with self.subTest(old359=name, authentic_symlink=True):
+                        with self.assertRaisesRegex(ValueError, 'symlink'):
+                            ten._binding_records(binding, self.root)
+                finally:
+                    path.unlink(); path.write_bytes(raw); target.unlink()
+                ten._binding_records(binding, self.root)
+        self.assertFalse(snapshot._active)
+        self.assertIsNone(snapshot._claimant)
+        self.assertEqual(dict(snapshot._raw), {})
+        for _ in range(2):
+            snapshot._close(); binding._close()
+        with self.assertRaises(ValueError):
+            snapshot._fresh(self.root, binding)
+        with self.assertRaises(ValueError):
+            snapshot._claim(binding)
+        # A current368 capture failure must release its already-created old13.
+        created = []
+        original_constructor = ten._Old359OperationProofBytes
+        def record_old(root):
+            value = original_constructor(root)
+            created.append(value)
+            return value
+        with mock.patch.object(ten, '_Old359OperationProofBytes', side_effect=record_old):
+            with mock.patch.object(intake368, '_capture_authority_with_proof_bytes',
+                    side_effect=ValueError('Owned current368 capture failure')) as failed:
+                with self.assertRaisesRegex(ValueError, 'Owned current368 capture failure'):
+                    ten._capture_six_test_input(self.root)
+                self.assertEqual(failed.call_count, 1)
+        self.assertEqual(len(created), 1)
+        self.assertFalse(created[0]._active)
+        self.assertEqual(dict(created[0]._raw), {})
+        with self.assertRaisesRegex(ValueError, 'Owned consumer old13 failure'):
+            with h._c1_operation_scope(self.root) as consumer:
+                owned = consumer._next_ten_binding
+                old_snapshot = owned._proof359
+                new_snapshot = owned._proof368
+                raise ValueError('Owned consumer old13 failure')
+        self.assertFalse(owned._active)
+        self.assertEqual(dict(old_snapshot._raw), {})
+        self.assertEqual(dict(new_snapshot._raw), {})
+        h.assert_six_current_canonical_data(self.root)
+
     def _assert_current368_operation_proof_bytes(self):
         # Additive current368 controls within the original physical-proof case.
         # The seven original method names and every original assertion remain.
         from threading import Thread
         import web_reader_next_ten_boundary_history as ten
+        self._assert_single_lstat_node_guards(ten)
         with h._c1_operation_scope(self.root) as scope:
             binding = scope._next_ten_binding
             snapshot = binding._proof368
@@ -391,6 +556,8 @@ class SixOperationScopeControls(unittest.TestCase):
         self.assertEqual(len(returned), 1)
         self.assertFalse(returned[0]._active)
         self.assertEqual(dict(returned[0]._proof368._raw), {})
+        self.assertFalse(returned[0]._proof359._active)
+        self.assertEqual(dict(returned[0]._proof359._raw), {})
         h.assert_six_current_canonical_data(self.root)
         # Combined FOUR gates borrow this same private machinery but expose no
         # public carried-scope or Pathlike token API, even for ordinary reads.
@@ -456,6 +623,70 @@ class SixOperationScopeControls(unittest.TestCase):
                 (four._assert_four_current_canonical_data, ()),
                 (four._historical_four_data_bytes, ('server/data/topics.json',))):
             four_refuses_before_io(lambda gate=gate, args=args: gate(four_scope, *args))
+
+        self._assert_old359_operation_proof_bytes()
+
+    def _assert_single_lstat_node_guards(self, ten):
+        # Called only from the existing case05 helper; no registered test is added.
+        # Portable synthetic reparse/error checks are not native Windows acceptance.
+        import errno
+        import stat
+        from types import SimpleNamespace
+        original_stat, original_read = Path.stat, Path.read_bytes
+        with tempfile.TemporaryDirectory(prefix='pali-lstat-control-') as directory:
+            root = Path(directory)
+            target = root / 'proof.json'
+            target.write_bytes(b'owned lstat control')
+            link = root / 'link.json'
+            link.symlink_to(target)
+            state = {'kind': 'ordinary', 'stats': [], 'reads': []}
+
+            def current_stat(path, *, follow_symlinks=True):
+                state['stats'].append((path, follow_symlinks))
+                if path == target and not follow_symlinks:
+                    if state['kind'] in ('ignored', 'denied'):
+                        raise OSError(state['ignored_errno'] if state['kind'] == 'ignored' else errno.EACCES,
+                                      'synthetic metadata error')
+                info = original_stat(path, follow_symlinks=follow_symlinks)
+                if path in (target, link) and not follow_symlinks and state['kind'] == 'reparse':
+                    return SimpleNamespace(st_mode=info.st_mode,
+                        st_file_attributes=stat.FILE_ATTRIBUTE_REPARSE_POINT)
+                return info
+
+            def current_read(path):
+                state['reads'].append(path)
+                return original_read(path)
+
+            with mock.patch.object(Path, 'stat', current_stat), mock.patch.object(Path, 'read_bytes', current_read):
+                for kind, code, expected_leaf_stats in (('ordinary', None, [False]),
+                        *((('ignored', code, [False, True]) for code in
+                           (errno.ENOENT, errno.ENOTDIR, errno.EBADF, errno.ELOOP))),
+                        ('reparse', None, [False, False, True])):
+                    state.update(kind=kind, ignored_errno=code, stats=[], reads=[])
+                    self.assertEqual(ten.regular(root, 'proof.json'), b'owned lstat control')
+                    self.assertEqual([follow for path, follow in state['stats'] if path == target],
+                                     expected_leaf_stats)
+                    self.assertEqual([follow for path, follow in state['stats'] if path == root],
+                                     [False, True])
+                    self.assertEqual(state['reads'], [target])
+                state.update(kind='denied', stats=[], reads=[])
+                with self.assertRaises(PermissionError):
+                    ten.regular(root, 'proof.json')
+                self.assertEqual(state['reads'], [])
+                for kind, expected_link_stats in (('ordinary', [False]),
+                                                  ('reparse', [False, False])):
+                    state.update(kind=kind, stats=[], reads=[])
+                    with self.assertRaisesRegex(ValueError, '^Next-ten authority symlink refused$'):
+                        ten.regular(root, 'link.json')
+                    self.assertEqual([follow for path, follow in state['stats'] if path == link],
+                                     expected_link_stats)
+                    self.assertEqual(state['reads'], [])
+            target.write_bytes(b'fresh replacement')
+            self.assertEqual(ten.regular(root, 'proof.json'), b'fresh replacement')
+        self.assertFalse(root.exists())
+        # One-node snapshot deliberately removes the ordinary following-stat syscall.
+        # An error injected ONLY into that removed syscall is not an equal-outcome
+        # oracle; the external failed checkpoint records this boundary explicitly.
 
     def test_06_every_original_fixture_is_verified_before_operation_use(self):
         for name in h.C1_DATA_PATHS:
