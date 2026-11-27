@@ -1,0 +1,338 @@
+{
+  "schema": "independent-five-pinned-source-normalization-comparison-v1",
+  "raw_first_not_blind": true,
+  "inputs": {
+    "src/_poems/chapter-3/poem-381.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "a42712a643ba66c283ee9fd986943854204f6708",
+      "bytes": 1819,
+      "sha256": "2f3020478e27fabb0ad40b94ce45659d4e10db7c91a509455d3f949de9e640d5"
+    },
+    "src/_poems/chapter-3/poem-383.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "67790971922c5c3df0a7c49350408884d4319099",
+      "bytes": 1758,
+      "sha256": "6a67971063c6c4dc4fd4a45c0d1b913318b1e820d26b4b9991772ad61a6cc812"
+    },
+    "src/_poems/chapter-3/poem-384.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "7d479c6ffcdb06ba616b69b90fa6a265fe9b1e96",
+      "bytes": 1583,
+      "sha256": "05d26e53292e293381d9235bf4fa4a114c0452e529f3c81197fa494827463ea1"
+    },
+    "src/_poems/chapter-3/poem-385.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "359060dd76b4e977419e596a8bfefc0dbdb0a107",
+      "bytes": 1643,
+      "sha256": "6490e8e6fb6f07cbf1f18ad7b9dfba7a07b0773830f0d2dd0057f3f935168140"
+    },
+    "src/_poems/chapter-3/poem-386.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "6639c084377f1509aa09609e46739629138d5369",
+      "bytes": 1730,
+      "sha256": "b35e1657e1f0036ebf5de1c5f82ad47b15556aa787439aebaa728d2092cfa835"
+    },
+    "LICENSE.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+    },
+    "src/_pages/about.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+    },
+    "src/_includes/site/footer.njk": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+    },
+    "src/_includes/layouts/epub-metadata.xml": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+    },
+    "src/_data/site.json": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+    },
+    "src/_poems/_poems.json": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+    }
+  },
+  "candidate_manifest": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-source-preparation/v1/MANIFEST.json",
+    "bytes": 3724,
+    "sha256": "966386705480c8a87a928d7a11baae51a973de46242994776e1ff5c07d558d9d"
+  },
+  "own_precomparison": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-independent-source-review/RAW_MODEL_PRECOMPARISON.json",
+    "bytes": 7239,
+    "sha256": "10cc1ca8a8fc1a3ee8958ab4552dd655e2e96ff49c7e80c3bf0667d9d11c89e2"
+  },
+  "source_derived_metadata": {
+    "tha-ap383": {
+      "title": "Avaṇṭaphaladāyaka",
+      "body_sha256": "e7ee77ce2e706d24b9441775862c1f6918f95103404cbded1b5697e5b3068f3c",
+      "body_utf16": 1072,
+      "notes_sha256": "42589d46522d064b342fd8af8d9435c0b9debeb0343d9f9f01a588b4dff03744",
+      "paratext_sha256": "afa7b7e95dd377dbc049aee09cf1a76e75d91c022214d040a1ff011c8203ac65",
+      "body_paragraphs": 9,
+      "stanzas": 6,
+      "notes": 4,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 1
+        },
+        {
+          "number": 4,
+          "body_paragraph_index0": 1
+        }
+      ]
+    },
+    "tha-ap385": {
+      "title": "Udumbaraphaladāyaka",
+      "body_sha256": "71a337dbcfacaee67212a3f1f38dc0fcdf32e6daf7d0bc61dfff448f6ba0f3e5",
+      "body_utf16": 1065,
+      "notes_sha256": "e67b114ccc6110074f9070027141e1fc600056ac2a834aafe846b931c253337b",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 9,
+      "stanzas": 6,
+      "notes": 6,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 1
+        },
+        {
+          "number": 4,
+          "body_paragraph_index0": 1
+        },
+        {
+          "number": 5,
+          "body_paragraph_index0": 2
+        },
+        {
+          "number": 6,
+          "body_paragraph_index0": 2
+        }
+      ]
+    },
+    "tha-ap386": {
+      "title": "Pilakkhaphaladāyaka",
+      "body_sha256": "80995d007a8a3a8ffbe94c3e2d6aa94bb6c1e68010771e315bca2916fd969d88",
+      "body_utf16": 917,
+      "notes_sha256": "a63a26b9fdf041be8366f6088b736f10929a823fcb361cfaa58e9ef085e5df77",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 8,
+      "stanzas": 5,
+      "notes": 4,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 1
+        },
+        {
+          "number": 4,
+          "body_paragraph_index0": 1
+        }
+      ]
+    },
+    "tha-ap387": {
+      "title": "Phārusaphaladāyaka",
+      "body_sha256": "0fc0b52225f355fc68987e610729aa4b43fcbeded5edf7a67699aca4222e146d",
+      "body_utf16": 887,
+      "notes_sha256": "b0b8b4c7f7867ba0ee24558f43872e9aeb70600e430e94c091c60712d7eeeadf",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 8,
+      "stanzas": 5,
+      "notes": 3,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 1
+        }
+      ]
+    },
+    "tha-ap388": {
+      "title": "Valliphaladāyaka",
+      "body_sha256": "915062bff06bcd35ea58b2a781e3cd2457956cfbc661f4755562d14ad9342690",
+      "body_utf16": 1063,
+      "notes_sha256": "5be9fda45221c20716af0a284d91262b67f7f111904396088127761f26b4ab7f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 9,
+      "stanzas": 6,
+      "notes": 3,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 2
+        }
+      ]
+    }
+  },
+  "literal_root_correspondence": {
+    "tha-ap383": {
+      "unit": {
+        "id": "tha-ap383",
+        "book": 36,
+        "start": 10933,
+        "end": 10955,
+        "title": "Avaṭaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 383",
+        "vri": "1–6",
+        "pts": {
+          "volume": 1,
+          "page": 294,
+          "end_page": 295
+        }
+      },
+      "wrapper_sha256": "a4d69060ffb79d28bc08a770c982e1a138444a85d51b4c774cbb3d42a4b84702",
+      "source_XML_span_sha256": "be4fa3d6a5fb4d2f25751474c5d55caccc296048b240bdac8dcb2d69ebf4a26f"
+    },
+    "tha-ap385": {
+      "unit": {
+        "id": "tha-ap385",
+        "book": 36,
+        "start": 10979,
+        "end": 10997,
+        "title": "Udumbaraphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 385",
+        "vri": "15–20",
+        "pts": {
+          "volume": 1,
+          "page": 295,
+          "end_page": 295
+        }
+      },
+      "wrapper_sha256": "47b449fc61bf0f76d0331d9b7d2457d573310309dbe154ce73ba143a8afe892e",
+      "source_XML_span_sha256": "c66eb6986d42e7f599de71589e5fd1fd56eac777f85d5722b44ebfdb8c0e8842"
+    },
+    "tha-ap386": {
+      "unit": {
+        "id": "tha-ap386",
+        "book": 36,
+        "start": 10997,
+        "end": 11012,
+        "title": "Pilakkhaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 386",
+        "vri": "21–25",
+        "pts": {
+          "volume": 1,
+          "page": 295,
+          "end_page": 296
+        }
+      },
+      "wrapper_sha256": "5573df6754147e333f34e973f4bdbe588303c8f2bb778406ca92d3fac6390b7f",
+      "source_XML_span_sha256": "ead079e594ab57f81687b013d1e85f329fae88a190acd3b1e366187df4c9adba"
+    },
+    "tha-ap387": {
+      "unit": {
+        "id": "tha-ap387",
+        "book": 36,
+        "start": 11012,
+        "end": 11027,
+        "title": "Phārusaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 387",
+        "vri": "26–30",
+        "pts": {
+          "volume": 1,
+          "page": 296,
+          "end_page": 296
+        }
+      },
+      "wrapper_sha256": "a15b3a5193f80812f373cac50e5932739fc7e5b6898aebd5ec3c6ef9373e2b37",
+      "source_XML_span_sha256": "c7c1e12c030dd210368113dfb8e50c07f085f94e30486ac25ace0a55193107b5"
+    },
+    "tha-ap388": {
+      "unit": {
+        "id": "tha-ap388",
+        "book": 36,
+        "start": 11027,
+        "end": 11045,
+        "title": "Valliphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 388",
+        "vri": "31–36",
+        "pts": {
+          "volume": 1,
+          "page": 296,
+          "end_page": 297
+        }
+      },
+      "wrapper_sha256": "5b2b5398d97ac4c2a3fc8717efab483f2750554762f48c587ee33fe4915ed202",
+      "source_XML_span_sha256": "a09f770ae00c73f5f7604d5bfe724d4427583f3c33f3c0e24a4487340e4435e5"
+    }
+  },
+  "all_private_body_notes_paratext_quotes_exact": true,
+  "all43paragraphs_28quotes_13hard500pages_exact": true,
+  "full_original_XML_14645_tuples_equal_current_f3": true,
+  "five_notice_sets_and_ownership_preserved": true,
+  "publisher384_note4_unclosed_parenthesis_preserved_no_completion": true,
+  "totals": {
+    "poems": 5,
+    "body_paragraphs": 43,
+    "physical_stanza_entries": 28,
+    "poem_notes": 20,
+    "body_characters_utf16": 5004,
+    "pages500": 13,
+    "note_free_paratext": 1,
+    "display_pairs": 0,
+    "summary": 0
+  },
+  "no_author_parser_app_test_Git_network_or_checkout_execution": true
+}

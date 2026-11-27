@@ -1873,3 +1873,10 @@ Historical QA may restore exact 343-entry test inputs only after validating comp
 ## Finite nine-source Apadāna extension (2026-11-27)
 
 Append only nine source- and rights-reviewed publisher-edition poems over exact3ced's359 choices; keep publisher358/canonicaltha-ap360 held and all prior mappings, Pāli boundaries and user data exact. Separate351's unnoted heading and360's summary from poem text. Preserve the entire publisher summary while explicitly declining whole-chapter approval. Extend current368 source/runtime validation through named historical359 authorities; test-input compatibility projection must never normalize live API results or relax source guards. Preserve strict same-major CI inventory reconciliation and all original assertions/deadlines; review any new test inventory explicitly. Local source/build evidence does not replace installed-reader or exact-commit CI acceptance. Main/deployment are outside this dev-only continuation.
+
+
+### Five-source Apadāna extension: preserve the 375-choice prefix
+
+The next finite intake adds publisher poems 381 and 383–386 as five complete publisher-edition English choices (380 total). It preserves all 375 previous profile and link objects, the canonical logical digest and locator namespaces. The 389/390 boundary repair is a separate scope. Source approval does not imply installed-reader or CI acceptance.
+
+Current acceptance uses a fixed 380-source authority over the unchanged, sealed pure 375-source decoder plus the five reviewed objects. It reads the actual current runtime; it does not filter the application back to an older count or introduce another historical runtime epoch. Exact existing test cases, bounds, historical expectations and required cross-platform gates remain mandatory. Published wording and notes stay in the live pinned source, outside distribution bundles. See [the intake scope](data/thera381-386-five-intake.md).

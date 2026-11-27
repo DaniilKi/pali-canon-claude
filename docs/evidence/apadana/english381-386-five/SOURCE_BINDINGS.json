@@ -1,0 +1,4212 @@
+{
+  "schema": "thera381-386-five-current380-source-bindings-v1",
+  "status": "SOURCE_CURATION_PROPOSAL_PENDING_INDEPENDENT_PEER",
+  "base_commit": "9bacd4d7b98c53ed4ae53785b5213a35c2a93096",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "canonical_counts": {
+    "books": 61,
+    "units": 8544
+  },
+  "original_XML": {
+    "file": "/tmp/pali-next-ten-evidence-nov26/vri-fixture/romn/s0510m1.mul.xml",
+    "bytes": 2464074,
+    "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1"
+  },
+  "literal_selected_pairs": [
+    [
+      381,
+      "tha-ap383"
+    ],
+    [
+      383,
+      "tha-ap385"
+    ],
+    [
+      384,
+      "tha-ap386"
+    ],
+    [
+      385,
+      "tha-ap387"
+    ],
+    [
+      386,
+      "tha-ap388"
+    ]
+  ],
+  "baseline_source": {
+    "commit": "9bacd4d7b98c53ed4ae53785b5213a35c2a93096",
+    "directory": "docs/evidence/apadana/english371-378-seven/",
+    "files": {
+      "APPROVAL.json": {
+        "bytes": 15604,
+        "sha256": "3112dff5eb6a26dcd357fc0ac02ee08019bb1e894172192a55aa4c0ef9d52ebd"
+      },
+      "BASELINE368_FULL_OBJECTS.json": {
+        "bytes": 2989112,
+        "sha256": "8a81a69513ebdc3255da7cfafe8b890a5cc3c824017dfbe6d26dc53028f2b273"
+      },
+      "BASELINE_DATA27.json": {
+        "bytes": 4352,
+        "sha256": "8bac16952c046270894a5b4f3c50ca3a00031fbaf7d9ca0cc747043e6d45ecc5"
+      },
+      "BASELINE_RUNTIME34.json": {
+        "bytes": 5124,
+        "sha256": "7eb54d2eda2dd17847400bda4a31075156e3a9b976029cc88b8ac2df5ab54e92"
+      },
+      "H_CURRENT_PROOF_INPUTS.json": {
+        "bytes": 126637,
+        "sha256": "4d5bdf79d2cae116a46a98ae72254debbfe20199c945135393d299e1a2e64b05"
+      },
+      "H_HISTORY_FIXTURE_INPUTS.json": {
+        "bytes": 478093,
+        "sha256": "0166698d9fa535b693be6b7b5462253952d67a1c105e2324a46b88dd6444be5e"
+      },
+      "LINKS.json": {
+        "bytes": 24216,
+        "sha256": "6d4f5477b2b7c4ee1cf18a5599d6bd2870ed0fb75d61edd4d649391ad73d172c"
+      },
+      "NORMALIZATION_REVIEW.json": {
+        "bytes": 35972,
+        "sha256": "836fbd3679e9b04ab4ca924069bc69653d77b18a5515e679a0cc0268105a7c13"
+      },
+      "PROFILES.json": {
+        "bytes": 23627,
+        "sha256": "8ee04009c27bd089d006b1ca66abcc8087e14cca5d895e00b51a25b9b479884c"
+      },
+      "REQUIRED_NOTICES.json": {
+        "bytes": 9967,
+        "sha256": "3116297e16cb89ac6b5a99bb83b266c177921dfc802b3444e9a7add5f1248178"
+      },
+      "SOURCE_BINDINGS.json": {
+        "bytes": 126416,
+        "sha256": "14c8a8efcb230c81e86a7ab5cb34f8ccf183257934751d741dea15484dd6a7e8"
+      },
+      "SOURCE_REVIEW.json": {
+        "bytes": 16711,
+        "sha256": "4af1bfc1c8e675efb1bcd3eee2792eac634c035888989c72410b59e9c44ca71b"
+      }
+    }
+  },
+  "historical375_composite": {
+    "ordered_ids_sha256_JSON_stringify": "a97fb718e2f19dffa4cfc7c13b2d693897a972d8194348bed6063966f053cda8",
+    "profiles_sha256_JSON_stringify": "27d635abee1553d45c6f98df5624a50a29482d554d34ba3a55db88df8ad08d61",
+    "links_sha256_JSON_stringify": "76811eaa3d2d10ec82edbeb63b25f8f07df237bea9e1e341c47b1ecbf157e977",
+    "manifest_source": {
+      "name": "Legends of the Buddhist Saints (Apadāna)",
+      "site": "https://apadanatranslation.com/",
+      "repository": "https://github.com/apadana-translation/apadana-site",
+      "commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "translator": "Jonathan S. Walters",
+      "publisher": "Jonathan S. Walters and Whitman College",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "notice_url": "https://apadanatranslation.com/about/",
+      "checked": "2026-11-19",
+      "rights_artifacts": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+        },
+        {
+          "path": "src/_pages/about.md",
+          "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+        },
+        {
+          "path": "src/_includes/site/footer.njk",
+          "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+        },
+        {
+          "path": "src/_includes/layouts/epub-metadata.xml",
+          "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+        },
+        {
+          "path": "src/_data/site.json",
+          "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+        },
+        {
+          "path": "src/_poems/_poems.json",
+          "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+        }
+      ],
+      "rights_note": "Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.",
+      "policy": "Live only, 375 finite complete publisher-edition poems (40 Therī and 335 explicitly mapped Therā); original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or approval of the wider Apadāna catalogue; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI."
+    },
+    "manifest_held": {},
+    "selection_records": [
+      {
+        "id": "thi-ap1",
+        "publisher_chapter": "chapter-4",
+        "poem": 1
+      },
+      {
+        "id": "thi-ap2",
+        "publisher_chapter": "chapter-4",
+        "poem": 2
+      },
+      {
+        "id": "thi-ap3",
+        "publisher_chapter": "chapter-4",
+        "poem": 3
+      },
+      {
+        "id": "thi-ap4",
+        "publisher_chapter": "chapter-4",
+        "poem": 4
+      },
+      {
+        "id": "thi-ap5",
+        "publisher_chapter": "chapter-4",
+        "poem": 5
+      },
+      {
+        "id": "thi-ap6",
+        "publisher_chapter": "chapter-4",
+        "poem": 6
+      },
+      {
+        "id": "thi-ap7",
+        "publisher_chapter": "chapter-4",
+        "poem": 7
+      },
+      {
+        "id": "thi-ap8",
+        "publisher_chapter": "chapter-4",
+        "poem": 8
+      },
+      {
+        "id": "thi-ap9",
+        "publisher_chapter": "chapter-4",
+        "poem": 9
+      },
+      {
+        "id": "thi-ap10",
+        "publisher_chapter": "chapter-4",
+        "poem": 10
+      },
+      {
+        "id": "thi-ap11",
+        "publisher_chapter": "chapter-4",
+        "poem": 11
+      },
+      {
+        "id": "thi-ap12",
+        "publisher_chapter": "chapter-4",
+        "poem": 12
+      },
+      {
+        "id": "thi-ap13",
+        "publisher_chapter": "chapter-4",
+        "poem": 13
+      },
+      {
+        "id": "thi-ap14",
+        "publisher_chapter": "chapter-4",
+        "poem": 14
+      },
+      {
+        "id": "thi-ap15",
+        "publisher_chapter": "chapter-4",
+        "poem": 15
+      },
+      {
+        "id": "thi-ap16",
+        "publisher_chapter": "chapter-4",
+        "poem": 16
+      },
+      {
+        "id": "thi-ap17",
+        "publisher_chapter": "chapter-4",
+        "poem": 17
+      },
+      {
+        "id": "thi-ap18",
+        "publisher_chapter": "chapter-4",
+        "poem": 18
+      },
+      {
+        "id": "thi-ap19",
+        "publisher_chapter": "chapter-4",
+        "poem": 19
+      },
+      {
+        "id": "thi-ap20",
+        "publisher_chapter": "chapter-4",
+        "poem": 20
+      },
+      {
+        "id": "thi-ap21",
+        "publisher_chapter": "chapter-4",
+        "poem": 21
+      },
+      {
+        "id": "thi-ap22",
+        "publisher_chapter": "chapter-4",
+        "poem": 22
+      },
+      {
+        "id": "thi-ap23",
+        "publisher_chapter": "chapter-4",
+        "poem": 23
+      },
+      {
+        "id": "thi-ap24",
+        "publisher_chapter": "chapter-4",
+        "poem": 24
+      },
+      {
+        "id": "thi-ap25",
+        "publisher_chapter": "chapter-4",
+        "poem": 25
+      },
+      {
+        "id": "thi-ap26",
+        "publisher_chapter": "chapter-4",
+        "poem": 26
+      },
+      {
+        "id": "thi-ap27",
+        "publisher_chapter": "chapter-4",
+        "poem": 27
+      },
+      {
+        "id": "thi-ap28",
+        "publisher_chapter": "chapter-4",
+        "poem": 28
+      },
+      {
+        "id": "thi-ap29",
+        "publisher_chapter": "chapter-4",
+        "poem": 29
+      },
+      {
+        "id": "thi-ap30",
+        "publisher_chapter": "chapter-4",
+        "poem": 30
+      },
+      {
+        "id": "thi-ap31",
+        "publisher_chapter": "chapter-4",
+        "poem": 31
+      },
+      {
+        "id": "thi-ap32",
+        "publisher_chapter": "chapter-4",
+        "poem": 32
+      },
+      {
+        "id": "thi-ap33",
+        "publisher_chapter": "chapter-4",
+        "poem": 33
+      },
+      {
+        "id": "thi-ap34",
+        "publisher_chapter": "chapter-4",
+        "poem": 34
+      },
+      {
+        "id": "thi-ap35",
+        "publisher_chapter": "chapter-4",
+        "poem": 35
+      },
+      {
+        "id": "thi-ap36",
+        "publisher_chapter": "chapter-4",
+        "poem": 36
+      },
+      {
+        "id": "thi-ap37",
+        "publisher_chapter": "chapter-4",
+        "poem": 37
+      },
+      {
+        "id": "thi-ap38",
+        "publisher_chapter": "chapter-4",
+        "poem": 38
+      },
+      {
+        "id": "thi-ap39",
+        "publisher_chapter": "chapter-4",
+        "poem": 39
+      },
+      {
+        "id": "thi-ap40",
+        "publisher_chapter": "chapter-4",
+        "poem": 40
+      },
+      {
+        "id": "tha-ap13",
+        "publisher_chapter": "chapter-3",
+        "poem": 11
+      },
+      {
+        "id": "tha-ap14",
+        "publisher_chapter": "chapter-3",
+        "poem": 12
+      },
+      {
+        "id": "tha-ap15",
+        "publisher_chapter": "chapter-3",
+        "poem": 13
+      },
+      {
+        "id": "tha-ap16",
+        "publisher_chapter": "chapter-3",
+        "poem": 14
+      },
+      {
+        "id": "tha-ap17",
+        "publisher_chapter": "chapter-3",
+        "poem": 15
+      },
+      {
+        "id": "tha-ap18",
+        "publisher_chapter": "chapter-3",
+        "poem": 16
+      },
+      {
+        "id": "tha-ap19",
+        "publisher_chapter": "chapter-3",
+        "poem": 17
+      },
+      {
+        "id": "tha-ap20",
+        "publisher_chapter": "chapter-3",
+        "poem": 18
+      },
+      {
+        "id": "tha-ap21",
+        "publisher_chapter": "chapter-3",
+        "poem": 19
+      },
+      {
+        "id": "tha-ap22",
+        "publisher_chapter": "chapter-3",
+        "poem": 20
+      },
+      {
+        "id": "tha-ap23",
+        "publisher_chapter": "chapter-3",
+        "poem": 21
+      },
+      {
+        "id": "tha-ap24",
+        "publisher_chapter": "chapter-3",
+        "poem": 22
+      },
+      {
+        "id": "tha-ap25",
+        "publisher_chapter": "chapter-3",
+        "poem": 23
+      },
+      {
+        "id": "tha-ap26",
+        "publisher_chapter": "chapter-3",
+        "poem": 24
+      },
+      {
+        "id": "tha-ap27",
+        "publisher_chapter": "chapter-3",
+        "poem": 25
+      },
+      {
+        "id": "tha-ap28",
+        "publisher_chapter": "chapter-3",
+        "poem": 26
+      },
+      {
+        "id": "tha-ap29",
+        "publisher_chapter": "chapter-3",
+        "poem": 27
+      },
+      {
+        "id": "tha-ap30",
+        "publisher_chapter": "chapter-3",
+        "poem": 28
+      },
+      {
+        "id": "tha-ap31",
+        "publisher_chapter": "chapter-3",
+        "poem": 29
+      },
+      {
+        "id": "tha-ap32",
+        "publisher_chapter": "chapter-3",
+        "poem": 30
+      },
+      {
+        "id": "tha-ap33",
+        "publisher_chapter": "chapter-3",
+        "poem": 31
+      },
+      {
+        "id": "tha-ap34",
+        "publisher_chapter": "chapter-3",
+        "poem": 32
+      },
+      {
+        "id": "tha-ap35",
+        "publisher_chapter": "chapter-3",
+        "poem": 33
+      },
+      {
+        "id": "tha-ap36",
+        "publisher_chapter": "chapter-3",
+        "poem": 34
+      },
+      {
+        "id": "tha-ap37",
+        "publisher_chapter": "chapter-3",
+        "poem": 35
+      },
+      {
+        "id": "tha-ap38",
+        "publisher_chapter": "chapter-3",
+        "poem": 36
+      },
+      {
+        "id": "tha-ap39",
+        "publisher_chapter": "chapter-3",
+        "poem": 37
+      },
+      {
+        "id": "tha-ap40",
+        "publisher_chapter": "chapter-3",
+        "poem": 38
+      },
+      {
+        "id": "tha-ap41",
+        "publisher_chapter": "chapter-3",
+        "poem": 39
+      },
+      {
+        "id": "tha-ap42",
+        "publisher_chapter": "chapter-3",
+        "poem": 40
+      },
+      {
+        "id": "tha-ap43",
+        "publisher_chapter": "chapter-3",
+        "poem": 41
+      },
+      {
+        "id": "tha-ap45",
+        "publisher_chapter": "chapter-3",
+        "poem": 43
+      },
+      {
+        "id": "tha-ap46",
+        "publisher_chapter": "chapter-3",
+        "poem": 44
+      },
+      {
+        "id": "tha-ap47",
+        "publisher_chapter": "chapter-3",
+        "poem": 45
+      },
+      {
+        "id": "tha-ap48",
+        "publisher_chapter": "chapter-3",
+        "poem": 46
+      },
+      {
+        "id": "tha-ap49",
+        "publisher_chapter": "chapter-3",
+        "poem": 47
+      },
+      {
+        "id": "tha-ap50",
+        "publisher_chapter": "chapter-3",
+        "poem": 48
+      },
+      {
+        "id": "tha-ap51",
+        "publisher_chapter": "chapter-3",
+        "poem": 49
+      },
+      {
+        "id": "tha-ap52",
+        "publisher_chapter": "chapter-3",
+        "poem": 50
+      },
+      {
+        "id": "tha-ap53",
+        "publisher_chapter": "chapter-3",
+        "poem": 51
+      },
+      {
+        "id": "tha-ap54",
+        "publisher_chapter": "chapter-3",
+        "poem": 52
+      },
+      {
+        "id": "tha-ap55",
+        "publisher_chapter": "chapter-3",
+        "poem": 53
+      },
+      {
+        "id": "tha-ap56",
+        "publisher_chapter": "chapter-3",
+        "poem": 54
+      },
+      {
+        "id": "tha-ap57",
+        "publisher_chapter": "chapter-3",
+        "poem": 55
+      },
+      {
+        "id": "tha-ap58",
+        "publisher_chapter": "chapter-3",
+        "poem": 56
+      },
+      {
+        "id": "tha-ap59",
+        "publisher_chapter": "chapter-3",
+        "poem": 57
+      },
+      {
+        "id": "tha-ap60",
+        "publisher_chapter": "chapter-3",
+        "poem": 58
+      },
+      {
+        "id": "tha-ap61",
+        "publisher_chapter": "chapter-3",
+        "poem": 59
+      },
+      {
+        "id": "tha-ap62",
+        "publisher_chapter": "chapter-3",
+        "poem": 60
+      },
+      {
+        "id": "tha-ap44",
+        "publisher_chapter": "chapter-3",
+        "poem": 42
+      },
+      {
+        "id": "tha-ap63",
+        "publisher_chapter": "chapter-3",
+        "poem": 61
+      },
+      {
+        "id": "tha-ap64",
+        "publisher_chapter": "chapter-3",
+        "poem": 62
+      },
+      {
+        "id": "tha-ap65",
+        "publisher_chapter": "chapter-3",
+        "poem": 63
+      },
+      {
+        "id": "tha-ap66",
+        "publisher_chapter": "chapter-3",
+        "poem": 64
+      },
+      {
+        "id": "tha-ap67",
+        "publisher_chapter": "chapter-3",
+        "poem": 65
+      },
+      {
+        "id": "tha-ap68",
+        "publisher_chapter": "chapter-3",
+        "poem": 66
+      },
+      {
+        "id": "tha-ap69",
+        "publisher_chapter": "chapter-3",
+        "poem": 67
+      },
+      {
+        "id": "tha-ap70",
+        "publisher_chapter": "chapter-3",
+        "poem": 68
+      },
+      {
+        "id": "tha-ap71",
+        "publisher_chapter": "chapter-3",
+        "poem": 69
+      },
+      {
+        "id": "tha-ap73",
+        "publisher_chapter": "chapter-3",
+        "poem": 71
+      },
+      {
+        "id": "tha-ap74",
+        "publisher_chapter": "chapter-3",
+        "poem": 72
+      },
+      {
+        "id": "tha-ap75",
+        "publisher_chapter": "chapter-3",
+        "poem": 73
+      },
+      {
+        "id": "tha-ap76",
+        "publisher_chapter": "chapter-3",
+        "poem": 74
+      },
+      {
+        "id": "tha-ap77",
+        "publisher_chapter": "chapter-3",
+        "poem": 75
+      },
+      {
+        "id": "tha-ap78",
+        "publisher_chapter": "chapter-3",
+        "poem": 76
+      },
+      {
+        "id": "tha-ap79",
+        "publisher_chapter": "chapter-3",
+        "poem": 77
+      },
+      {
+        "id": "tha-ap80",
+        "publisher_chapter": "chapter-3",
+        "poem": 78
+      },
+      {
+        "id": "tha-ap81",
+        "publisher_chapter": "chapter-3",
+        "poem": 79
+      },
+      {
+        "id": "tha-ap82",
+        "publisher_chapter": "chapter-3",
+        "poem": 80
+      },
+      {
+        "id": "tha-ap83",
+        "publisher_chapter": "chapter-3",
+        "poem": 81
+      },
+      {
+        "id": "tha-ap84",
+        "publisher_chapter": "chapter-3",
+        "poem": 82
+      },
+      {
+        "id": "tha-ap85",
+        "publisher_chapter": "chapter-3",
+        "poem": 83
+      },
+      {
+        "id": "tha-ap86",
+        "publisher_chapter": "chapter-3",
+        "poem": 84
+      },
+      {
+        "id": "tha-ap87",
+        "publisher_chapter": "chapter-3",
+        "poem": 85
+      },
+      {
+        "id": "tha-ap88",
+        "publisher_chapter": "chapter-3",
+        "poem": 86
+      },
+      {
+        "id": "tha-ap89",
+        "publisher_chapter": "chapter-3",
+        "poem": 87
+      },
+      {
+        "id": "tha-ap90",
+        "publisher_chapter": "chapter-3",
+        "poem": 88
+      },
+      {
+        "id": "tha-ap91",
+        "publisher_chapter": "chapter-3",
+        "poem": 89
+      },
+      {
+        "id": "tha-ap92",
+        "publisher_chapter": "chapter-3",
+        "poem": 90
+      },
+      {
+        "id": "tha-ap93",
+        "publisher_chapter": "chapter-3",
+        "poem": 91
+      },
+      {
+        "id": "tha-ap94",
+        "publisher_chapter": "chapter-3",
+        "poem": 92
+      },
+      {
+        "id": "tha-ap95",
+        "publisher_chapter": "chapter-3",
+        "poem": 93
+      },
+      {
+        "id": "tha-ap96",
+        "publisher_chapter": "chapter-3",
+        "poem": 94
+      },
+      {
+        "id": "tha-ap97",
+        "publisher_chapter": "chapter-3",
+        "poem": 95
+      },
+      {
+        "id": "tha-ap98",
+        "publisher_chapter": "chapter-3",
+        "poem": 96
+      },
+      {
+        "id": "tha-ap99",
+        "publisher_chapter": "chapter-3",
+        "poem": 97
+      },
+      {
+        "id": "tha-ap100",
+        "publisher_chapter": "chapter-3",
+        "poem": 98
+      },
+      {
+        "id": "tha-ap101",
+        "publisher_chapter": "chapter-3",
+        "poem": 99
+      },
+      {
+        "id": "tha-ap102",
+        "publisher_chapter": "chapter-3",
+        "poem": 100
+      },
+      {
+        "id": "tha-ap103",
+        "publisher_chapter": "chapter-3",
+        "poem": 101
+      },
+      {
+        "id": "tha-ap104",
+        "publisher_chapter": "chapter-3",
+        "poem": 102
+      },
+      {
+        "id": "tha-ap105",
+        "publisher_chapter": "chapter-3",
+        "poem": 103
+      },
+      {
+        "id": "tha-ap106",
+        "publisher_chapter": "chapter-3",
+        "poem": 104
+      },
+      {
+        "id": "tha-ap107",
+        "publisher_chapter": "chapter-3",
+        "poem": 105
+      },
+      {
+        "id": "tha-ap108",
+        "publisher_chapter": "chapter-3",
+        "poem": 106
+      },
+      {
+        "id": "tha-ap109",
+        "publisher_chapter": "chapter-3",
+        "poem": 107
+      },
+      {
+        "id": "tha-ap110",
+        "publisher_chapter": "chapter-3",
+        "poem": 108
+      },
+      {
+        "id": "tha-ap111",
+        "publisher_chapter": "chapter-3",
+        "poem": 109
+      },
+      {
+        "id": "tha-ap112",
+        "publisher_chapter": "chapter-3",
+        "poem": 110
+      },
+      {
+        "id": "tha-ap113",
+        "publisher_chapter": "chapter-3",
+        "poem": 111
+      },
+      {
+        "id": "tha-ap114",
+        "publisher_chapter": "chapter-3",
+        "poem": 112
+      },
+      {
+        "id": "tha-ap115",
+        "publisher_chapter": "chapter-3",
+        "poem": 113
+      },
+      {
+        "id": "tha-ap116",
+        "publisher_chapter": "chapter-3",
+        "poem": 114
+      },
+      {
+        "id": "tha-ap117",
+        "publisher_chapter": "chapter-3",
+        "poem": 115
+      },
+      {
+        "id": "tha-ap118",
+        "publisher_chapter": "chapter-3",
+        "poem": 116
+      },
+      {
+        "id": "tha-ap119",
+        "publisher_chapter": "chapter-3",
+        "poem": 117
+      },
+      {
+        "id": "tha-ap120",
+        "publisher_chapter": "chapter-3",
+        "poem": 118
+      },
+      {
+        "id": "tha-ap121",
+        "publisher_chapter": "chapter-3",
+        "poem": 119
+      },
+      {
+        "id": "tha-ap122",
+        "publisher_chapter": "chapter-3",
+        "poem": 120
+      },
+      {
+        "id": "tha-ap123",
+        "publisher_chapter": "chapter-3",
+        "poem": 121
+      },
+      {
+        "id": "tha-ap124",
+        "publisher_chapter": "chapter-3",
+        "poem": 122
+      },
+      {
+        "id": "tha-ap125",
+        "publisher_chapter": "chapter-3",
+        "poem": 123
+      },
+      {
+        "id": "tha-ap126",
+        "publisher_chapter": "chapter-3",
+        "poem": 124
+      },
+      {
+        "id": "tha-ap127",
+        "publisher_chapter": "chapter-3",
+        "poem": 125
+      },
+      {
+        "id": "tha-ap128",
+        "publisher_chapter": "chapter-3",
+        "poem": 126
+      },
+      {
+        "id": "tha-ap129",
+        "publisher_chapter": "chapter-3",
+        "poem": 127
+      },
+      {
+        "id": "tha-ap130",
+        "publisher_chapter": "chapter-3",
+        "poem": 128
+      },
+      {
+        "id": "tha-ap131",
+        "publisher_chapter": "chapter-3",
+        "poem": 129
+      },
+      {
+        "id": "tha-ap132",
+        "publisher_chapter": "chapter-3",
+        "poem": 130
+      },
+      {
+        "id": "tha-ap133",
+        "publisher_chapter": "chapter-3",
+        "poem": 131
+      },
+      {
+        "id": "tha-ap134",
+        "publisher_chapter": "chapter-3",
+        "poem": 132
+      },
+      {
+        "id": "tha-ap135",
+        "publisher_chapter": "chapter-3",
+        "poem": 133
+      },
+      {
+        "id": "tha-ap136",
+        "publisher_chapter": "chapter-3",
+        "poem": 134
+      },
+      {
+        "id": "tha-ap137",
+        "publisher_chapter": "chapter-3",
+        "poem": 135
+      },
+      {
+        "id": "tha-ap138",
+        "publisher_chapter": "chapter-3",
+        "poem": 136
+      },
+      {
+        "id": "tha-ap139",
+        "publisher_chapter": "chapter-3",
+        "poem": 137
+      },
+      {
+        "id": "tha-ap140",
+        "publisher_chapter": "chapter-3",
+        "poem": 138
+      },
+      {
+        "id": "tha-ap141",
+        "publisher_chapter": "chapter-3",
+        "poem": 139
+      },
+      {
+        "id": "tha-ap143",
+        "publisher_chapter": "chapter-3",
+        "poem": 141
+      },
+      {
+        "id": "tha-ap144",
+        "publisher_chapter": "chapter-3",
+        "poem": 142
+      },
+      {
+        "id": "tha-ap145",
+        "publisher_chapter": "chapter-3",
+        "poem": 143
+      },
+      {
+        "id": "tha-ap146",
+        "publisher_chapter": "chapter-3",
+        "poem": 144
+      },
+      {
+        "id": "tha-ap147",
+        "publisher_chapter": "chapter-3",
+        "poem": 145
+      },
+      {
+        "id": "tha-ap148",
+        "publisher_chapter": "chapter-3",
+        "poem": 146
+      },
+      {
+        "id": "tha-ap149",
+        "publisher_chapter": "chapter-3",
+        "poem": 147
+      },
+      {
+        "id": "tha-ap150",
+        "publisher_chapter": "chapter-3",
+        "poem": 148
+      },
+      {
+        "id": "tha-ap151",
+        "publisher_chapter": "chapter-3",
+        "poem": 149
+      },
+      {
+        "id": "tha-ap152",
+        "publisher_chapter": "chapter-3",
+        "poem": 150
+      },
+      {
+        "id": "tha-ap153",
+        "publisher_chapter": "chapter-3",
+        "poem": 151
+      },
+      {
+        "id": "tha-ap154",
+        "publisher_chapter": "chapter-3",
+        "poem": 152
+      },
+      {
+        "id": "tha-ap155",
+        "publisher_chapter": "chapter-3",
+        "poem": 153
+      },
+      {
+        "id": "tha-ap156",
+        "publisher_chapter": "chapter-3",
+        "poem": 154
+      },
+      {
+        "id": "tha-ap157",
+        "publisher_chapter": "chapter-3",
+        "poem": 155
+      },
+      {
+        "id": "tha-ap158",
+        "publisher_chapter": "chapter-3",
+        "poem": 156
+      },
+      {
+        "id": "tha-ap159",
+        "publisher_chapter": "chapter-3",
+        "poem": 157
+      },
+      {
+        "id": "tha-ap162",
+        "publisher_chapter": "chapter-3",
+        "poem": 160
+      },
+      {
+        "id": "tha-ap163",
+        "publisher_chapter": "chapter-3",
+        "poem": 161
+      },
+      {
+        "id": "tha-ap164",
+        "publisher_chapter": "chapter-3",
+        "poem": 162
+      },
+      {
+        "id": "tha-ap165",
+        "publisher_chapter": "chapter-3",
+        "poem": 163
+      },
+      {
+        "id": "tha-ap166",
+        "publisher_chapter": "chapter-3",
+        "poem": 164
+      },
+      {
+        "id": "tha-ap167",
+        "publisher_chapter": "chapter-3",
+        "poem": 165
+      },
+      {
+        "id": "tha-ap168",
+        "publisher_chapter": "chapter-3",
+        "poem": 166
+      },
+      {
+        "id": "tha-ap169",
+        "publisher_chapter": "chapter-3",
+        "poem": 167
+      },
+      {
+        "id": "tha-ap170",
+        "publisher_chapter": "chapter-3",
+        "poem": 168
+      },
+      {
+        "id": "tha-ap171",
+        "publisher_chapter": "chapter-3",
+        "poem": 169
+      },
+      {
+        "id": "tha-ap172",
+        "publisher_chapter": "chapter-3",
+        "poem": 170
+      },
+      {
+        "id": "tha-ap173",
+        "publisher_chapter": "chapter-3",
+        "poem": 171
+      },
+      {
+        "id": "tha-ap174",
+        "publisher_chapter": "chapter-3",
+        "poem": 172
+      },
+      {
+        "id": "tha-ap175",
+        "publisher_chapter": "chapter-3",
+        "poem": 173
+      },
+      {
+        "id": "tha-ap176",
+        "publisher_chapter": "chapter-3",
+        "poem": 174
+      },
+      {
+        "id": "tha-ap177",
+        "publisher_chapter": "chapter-3",
+        "poem": 175
+      },
+      {
+        "id": "tha-ap178",
+        "publisher_chapter": "chapter-3",
+        "poem": 176
+      },
+      {
+        "id": "tha-ap179",
+        "publisher_chapter": "chapter-3",
+        "poem": 177
+      },
+      {
+        "id": "tha-ap180",
+        "publisher_chapter": "chapter-3",
+        "poem": 178
+      },
+      {
+        "id": "tha-ap181",
+        "publisher_chapter": "chapter-3",
+        "poem": 179
+      },
+      {
+        "id": "tha-ap182",
+        "publisher_chapter": "chapter-3",
+        "poem": 180
+      },
+      {
+        "id": "tha-ap183",
+        "publisher_chapter": "chapter-3",
+        "poem": 181
+      },
+      {
+        "id": "tha-ap184",
+        "publisher_chapter": "chapter-3",
+        "poem": 182
+      },
+      {
+        "id": "tha-ap185",
+        "publisher_chapter": "chapter-3",
+        "poem": 183
+      },
+      {
+        "id": "tha-ap186",
+        "publisher_chapter": "chapter-3",
+        "poem": 184
+      },
+      {
+        "id": "tha-ap187",
+        "publisher_chapter": "chapter-3",
+        "poem": 185
+      },
+      {
+        "id": "tha-ap188",
+        "publisher_chapter": "chapter-3",
+        "poem": 186
+      },
+      {
+        "id": "tha-ap189",
+        "publisher_chapter": "chapter-3",
+        "poem": 187
+      },
+      {
+        "id": "tha-ap190",
+        "publisher_chapter": "chapter-3",
+        "poem": 188
+      },
+      {
+        "id": "tha-ap191",
+        "publisher_chapter": "chapter-3",
+        "poem": 189
+      },
+      {
+        "id": "tha-ap192",
+        "publisher_chapter": "chapter-3",
+        "poem": 190
+      },
+      {
+        "id": "tha-ap193",
+        "publisher_chapter": "chapter-3",
+        "poem": 191
+      },
+      {
+        "id": "tha-ap194",
+        "publisher_chapter": "chapter-3",
+        "poem": 192
+      },
+      {
+        "id": "tha-ap195",
+        "publisher_chapter": "chapter-3",
+        "poem": 193
+      },
+      {
+        "id": "tha-ap196",
+        "publisher_chapter": "chapter-3",
+        "poem": 194
+      },
+      {
+        "id": "tha-ap197",
+        "publisher_chapter": "chapter-3",
+        "poem": 195
+      },
+      {
+        "id": "tha-ap198",
+        "publisher_chapter": "chapter-3",
+        "poem": 196
+      },
+      {
+        "id": "tha-ap199",
+        "publisher_chapter": "chapter-3",
+        "poem": 197
+      },
+      {
+        "id": "tha-ap200",
+        "publisher_chapter": "chapter-3",
+        "poem": 198
+      },
+      {
+        "id": "tha-ap201",
+        "publisher_chapter": "chapter-3",
+        "poem": 199
+      },
+      {
+        "id": "tha-ap202",
+        "publisher_chapter": "chapter-3",
+        "poem": 200
+      },
+      {
+        "id": "tha-ap203",
+        "publisher_chapter": "chapter-3",
+        "poem": 201
+      },
+      {
+        "id": "tha-ap204",
+        "publisher_chapter": "chapter-3",
+        "poem": 202
+      },
+      {
+        "id": "tha-ap205",
+        "publisher_chapter": "chapter-3",
+        "poem": 203
+      },
+      {
+        "id": "tha-ap206",
+        "publisher_chapter": "chapter-3",
+        "poem": 204
+      },
+      {
+        "id": "tha-ap207",
+        "publisher_chapter": "chapter-3",
+        "poem": 205
+      },
+      {
+        "id": "tha-ap208",
+        "publisher_chapter": "chapter-3",
+        "poem": 206
+      },
+      {
+        "id": "tha-ap209",
+        "publisher_chapter": "chapter-3",
+        "poem": 207
+      },
+      {
+        "id": "tha-ap210",
+        "publisher_chapter": "chapter-3",
+        "poem": 208
+      },
+      {
+        "id": "tha-ap211",
+        "publisher_chapter": "chapter-3",
+        "poem": 209
+      },
+      {
+        "id": "tha-ap212",
+        "publisher_chapter": "chapter-3",
+        "poem": 210
+      },
+      {
+        "id": "tha-ap213",
+        "publisher_chapter": "chapter-3",
+        "poem": 211
+      },
+      {
+        "id": "tha-ap214",
+        "publisher_chapter": "chapter-3",
+        "poem": 212
+      },
+      {
+        "id": "tha-ap215",
+        "publisher_chapter": "chapter-3",
+        "poem": 213
+      },
+      {
+        "id": "tha-ap216",
+        "publisher_chapter": "chapter-3",
+        "poem": 214
+      },
+      {
+        "id": "tha-ap217",
+        "publisher_chapter": "chapter-3",
+        "poem": 215
+      },
+      {
+        "id": "tha-ap218",
+        "publisher_chapter": "chapter-3",
+        "poem": 216
+      },
+      {
+        "id": "tha-ap219",
+        "publisher_chapter": "chapter-3",
+        "poem": 217
+      },
+      {
+        "id": "tha-ap220",
+        "publisher_chapter": "chapter-3",
+        "poem": 218
+      },
+      {
+        "id": "tha-ap221",
+        "publisher_chapter": "chapter-3",
+        "poem": 219
+      },
+      {
+        "id": "tha-ap222",
+        "publisher_chapter": "chapter-3",
+        "poem": 220
+      },
+      {
+        "id": "tha-ap243",
+        "publisher_chapter": "chapter-3",
+        "poem": 241
+      },
+      {
+        "id": "tha-ap244",
+        "publisher_chapter": "chapter-3",
+        "poem": 242
+      },
+      {
+        "id": "tha-ap245",
+        "publisher_chapter": "chapter-3",
+        "poem": 243
+      },
+      {
+        "id": "tha-ap246",
+        "publisher_chapter": "chapter-3",
+        "poem": 244
+      },
+      {
+        "id": "tha-ap247",
+        "publisher_chapter": "chapter-3",
+        "poem": 245
+      },
+      {
+        "id": "tha-ap248",
+        "publisher_chapter": "chapter-3",
+        "poem": 246
+      },
+      {
+        "id": "tha-ap249",
+        "publisher_chapter": "chapter-3",
+        "poem": 247
+      },
+      {
+        "id": "tha-ap250",
+        "publisher_chapter": "chapter-3",
+        "poem": 248
+      },
+      {
+        "id": "tha-ap251",
+        "publisher_chapter": "chapter-3",
+        "poem": 249
+      },
+      {
+        "id": "tha-ap252",
+        "publisher_chapter": "chapter-3",
+        "poem": 250
+      },
+      {
+        "id": "tha-ap223",
+        "publisher_chapter": "chapter-3",
+        "poem": 221
+      },
+      {
+        "id": "tha-ap224",
+        "publisher_chapter": "chapter-3",
+        "poem": 222
+      },
+      {
+        "id": "tha-ap225",
+        "publisher_chapter": "chapter-3",
+        "poem": 223
+      },
+      {
+        "id": "tha-ap226",
+        "publisher_chapter": "chapter-3",
+        "poem": 224
+      },
+      {
+        "id": "tha-ap227",
+        "publisher_chapter": "chapter-3",
+        "poem": 225
+      },
+      {
+        "id": "tha-ap228",
+        "publisher_chapter": "chapter-3",
+        "poem": 226
+      },
+      {
+        "id": "tha-ap229",
+        "publisher_chapter": "chapter-3",
+        "poem": 227
+      },
+      {
+        "id": "tha-ap230",
+        "publisher_chapter": "chapter-3",
+        "poem": 228
+      },
+      {
+        "id": "tha-ap231",
+        "publisher_chapter": "chapter-3",
+        "poem": 229
+      },
+      {
+        "id": "tha-ap232",
+        "publisher_chapter": "chapter-3",
+        "poem": 230
+      },
+      {
+        "id": "tha-ap233",
+        "publisher_chapter": "chapter-3",
+        "poem": 231
+      },
+      {
+        "id": "tha-ap234",
+        "publisher_chapter": "chapter-3",
+        "poem": 232
+      },
+      {
+        "id": "tha-ap235",
+        "publisher_chapter": "chapter-3",
+        "poem": 233
+      },
+      {
+        "id": "tha-ap237",
+        "publisher_chapter": "chapter-3",
+        "poem": 235
+      },
+      {
+        "id": "tha-ap238",
+        "publisher_chapter": "chapter-3",
+        "poem": 236
+      },
+      {
+        "id": "tha-ap239",
+        "publisher_chapter": "chapter-3",
+        "poem": 237
+      },
+      {
+        "id": "tha-ap240",
+        "publisher_chapter": "chapter-3",
+        "poem": 238
+      },
+      {
+        "id": "tha-ap241",
+        "publisher_chapter": "chapter-3",
+        "poem": 239
+      },
+      {
+        "id": "tha-ap242",
+        "publisher_chapter": "chapter-3",
+        "poem": 240
+      },
+      {
+        "id": "tha-ap253",
+        "publisher_chapter": "chapter-3",
+        "poem": 251
+      },
+      {
+        "id": "tha-ap254",
+        "publisher_chapter": "chapter-3",
+        "poem": 252
+      },
+      {
+        "id": "tha-ap255",
+        "publisher_chapter": "chapter-3",
+        "poem": 253
+      },
+      {
+        "id": "tha-ap256",
+        "publisher_chapter": "chapter-3",
+        "poem": 254
+      },
+      {
+        "id": "tha-ap257",
+        "publisher_chapter": "chapter-3",
+        "poem": 255
+      },
+      {
+        "id": "tha-ap258",
+        "publisher_chapter": "chapter-3",
+        "poem": 256
+      },
+      {
+        "id": "tha-ap259",
+        "publisher_chapter": "chapter-3",
+        "poem": 257
+      },
+      {
+        "id": "tha-ap260",
+        "publisher_chapter": "chapter-3",
+        "poem": 258
+      },
+      {
+        "id": "tha-ap261",
+        "publisher_chapter": "chapter-3",
+        "poem": 259
+      },
+      {
+        "id": "tha-ap236",
+        "publisher_chapter": "chapter-3",
+        "poem": 234
+      },
+      {
+        "id": "tha-ap263",
+        "publisher_chapter": "chapter-3",
+        "poem": 261
+      },
+      {
+        "id": "tha-ap264",
+        "publisher_chapter": "chapter-3",
+        "poem": 262
+      },
+      {
+        "id": "tha-ap265",
+        "publisher_chapter": "chapter-3",
+        "poem": 263
+      },
+      {
+        "id": "tha-ap266",
+        "publisher_chapter": "chapter-3",
+        "poem": 264
+      },
+      {
+        "id": "tha-ap267",
+        "publisher_chapter": "chapter-3",
+        "poem": 265
+      },
+      {
+        "id": "tha-ap269",
+        "publisher_chapter": "chapter-3",
+        "poem": 267
+      },
+      {
+        "id": "tha-ap270",
+        "publisher_chapter": "chapter-3",
+        "poem": 268
+      },
+      {
+        "id": "tha-ap271",
+        "publisher_chapter": "chapter-3",
+        "poem": 269
+      },
+      {
+        "id": "tha-ap272",
+        "publisher_chapter": "chapter-3",
+        "poem": 270
+      },
+      {
+        "id": "tha-ap273",
+        "publisher_chapter": "chapter-3",
+        "poem": 271
+      },
+      {
+        "id": "tha-ap274",
+        "publisher_chapter": "chapter-3",
+        "poem": 272
+      },
+      {
+        "id": "tha-ap275",
+        "publisher_chapter": "chapter-3",
+        "poem": 273
+      },
+      {
+        "id": "tha-ap276",
+        "publisher_chapter": "chapter-3",
+        "poem": 274
+      },
+      {
+        "id": "tha-ap277",
+        "publisher_chapter": "chapter-3",
+        "poem": 275
+      },
+      {
+        "id": "tha-ap278",
+        "publisher_chapter": "chapter-3",
+        "poem": 276
+      },
+      {
+        "id": "tha-ap279",
+        "publisher_chapter": "chapter-3",
+        "poem": 277
+      },
+      {
+        "id": "tha-ap280",
+        "publisher_chapter": "chapter-3",
+        "poem": 278
+      },
+      {
+        "id": "tha-ap281",
+        "publisher_chapter": "chapter-3",
+        "poem": 279
+      },
+      {
+        "id": "tha-ap283",
+        "publisher_chapter": "chapter-3",
+        "poem": 281
+      },
+      {
+        "id": "tha-ap284",
+        "publisher_chapter": "chapter-3",
+        "poem": 282
+      },
+      {
+        "id": "tha-ap285",
+        "publisher_chapter": "chapter-3",
+        "poem": 283
+      },
+      {
+        "id": "tha-ap286",
+        "publisher_chapter": "chapter-3",
+        "poem": 284
+      },
+      {
+        "id": "tha-ap287",
+        "publisher_chapter": "chapter-3",
+        "poem": 285
+      },
+      {
+        "id": "tha-ap289",
+        "publisher_chapter": "chapter-3",
+        "poem": 287
+      },
+      {
+        "id": "tha-ap290",
+        "publisher_chapter": "chapter-3",
+        "poem": 288
+      },
+      {
+        "id": "tha-ap294",
+        "publisher_chapter": "chapter-3",
+        "poem": 292
+      },
+      {
+        "id": "tha-ap295",
+        "publisher_chapter": "chapter-3",
+        "poem": 293
+      },
+      {
+        "id": "tha-ap296",
+        "publisher_chapter": "chapter-3",
+        "poem": 294
+      },
+      {
+        "id": "tha-ap297",
+        "publisher_chapter": "chapter-3",
+        "poem": 295
+      },
+      {
+        "id": "tha-ap298",
+        "publisher_chapter": "chapter-3",
+        "poem": 296
+      },
+      {
+        "id": "tha-ap300",
+        "publisher_chapter": "chapter-3",
+        "poem": 298
+      },
+      {
+        "id": "tha-ap301",
+        "publisher_chapter": "chapter-3",
+        "poem": 299
+      },
+      {
+        "id": "tha-ap303",
+        "publisher_chapter": "chapter-3",
+        "poem": 301
+      },
+      {
+        "id": "tha-ap304",
+        "publisher_chapter": "chapter-3",
+        "poem": 302
+      },
+      {
+        "id": "tha-ap305",
+        "publisher_chapter": "chapter-3",
+        "poem": 303
+      },
+      {
+        "id": "tha-ap306",
+        "publisher_chapter": "chapter-3",
+        "poem": 304
+      },
+      {
+        "id": "tha-ap307",
+        "publisher_chapter": "chapter-3",
+        "poem": 305
+      },
+      {
+        "id": "tha-ap310",
+        "publisher_chapter": "chapter-3",
+        "poem": 308
+      },
+      {
+        "id": "tha-ap311",
+        "publisher_chapter": "chapter-3",
+        "poem": 309
+      },
+      {
+        "id": "tha-ap312",
+        "publisher_chapter": "chapter-3",
+        "poem": 310
+      },
+      {
+        "id": "tha-ap314",
+        "publisher_chapter": "chapter-3",
+        "poem": 312
+      },
+      {
+        "id": "tha-ap315",
+        "publisher_chapter": "chapter-3",
+        "poem": 313
+      },
+      {
+        "id": "tha-ap316",
+        "publisher_chapter": "chapter-3",
+        "poem": 314
+      },
+      {
+        "id": "tha-ap317",
+        "publisher_chapter": "chapter-3",
+        "poem": 315
+      },
+      {
+        "id": "tha-ap318",
+        "publisher_chapter": "chapter-3",
+        "poem": 316
+      },
+      {
+        "id": "tha-ap319",
+        "publisher_chapter": "chapter-3",
+        "poem": 317
+      },
+      {
+        "id": "tha-ap320",
+        "publisher_chapter": "chapter-3",
+        "poem": 318
+      },
+      {
+        "id": "tha-ap321",
+        "publisher_chapter": "chapter-3",
+        "poem": 319
+      },
+      {
+        "id": "tha-ap323",
+        "publisher_chapter": "chapter-3",
+        "poem": 321
+      },
+      {
+        "id": "tha-ap325",
+        "publisher_chapter": "chapter-3",
+        "poem": 323
+      },
+      {
+        "id": "tha-ap326",
+        "publisher_chapter": "chapter-3",
+        "poem": 324
+      },
+      {
+        "id": "tha-ap327",
+        "publisher_chapter": "chapter-3",
+        "poem": 325
+      },
+      {
+        "id": "tha-ap328",
+        "publisher_chapter": "chapter-3",
+        "poem": 326
+      },
+      {
+        "id": "tha-ap331",
+        "publisher_chapter": "chapter-3",
+        "poem": 329
+      },
+      {
+        "id": "tha-ap333",
+        "publisher_chapter": "chapter-3",
+        "poem": 331
+      },
+      {
+        "id": "tha-ap334",
+        "publisher_chapter": "chapter-3",
+        "poem": 332
+      },
+      {
+        "id": "tha-ap335",
+        "publisher_chapter": "chapter-3",
+        "poem": 333
+      },
+      {
+        "id": "tha-ap336",
+        "publisher_chapter": "chapter-3",
+        "poem": 334
+      },
+      {
+        "id": "tha-ap337",
+        "publisher_chapter": "chapter-3",
+        "poem": 335
+      },
+      {
+        "id": "tha-ap338",
+        "publisher_chapter": "chapter-3",
+        "poem": 336
+      },
+      {
+        "id": "tha-ap339",
+        "publisher_chapter": "chapter-3",
+        "poem": 337
+      },
+      {
+        "id": "tha-ap340",
+        "publisher_chapter": "chapter-3",
+        "poem": 338
+      },
+      {
+        "id": "tha-ap341",
+        "publisher_chapter": "chapter-3",
+        "poem": 339
+      },
+      {
+        "id": "tha-ap342",
+        "publisher_chapter": "chapter-3",
+        "poem": 340
+      },
+      {
+        "id": "tha-ap343",
+        "publisher_chapter": "chapter-3",
+        "poem": 341
+      },
+      {
+        "id": "tha-ap344",
+        "publisher_chapter": "chapter-3",
+        "poem": 342
+      },
+      {
+        "id": "tha-ap345",
+        "publisher_chapter": "chapter-3",
+        "poem": 343
+      },
+      {
+        "id": "tha-ap346",
+        "publisher_chapter": "chapter-3",
+        "poem": 344
+      },
+      {
+        "id": "tha-ap347",
+        "publisher_chapter": "chapter-3",
+        "poem": 345
+      },
+      {
+        "id": "tha-ap348",
+        "publisher_chapter": "chapter-3",
+        "poem": 346
+      },
+      {
+        "id": "tha-ap349",
+        "publisher_chapter": "chapter-3",
+        "poem": 347
+      },
+      {
+        "id": "tha-ap350",
+        "publisher_chapter": "chapter-3",
+        "poem": 348
+      },
+      {
+        "id": "tha-ap351",
+        "publisher_chapter": "chapter-3",
+        "poem": 349
+      },
+      {
+        "id": "tha-ap352",
+        "publisher_chapter": "chapter-3",
+        "poem": 350
+      },
+      {
+        "id": "tha-ap353",
+        "publisher_chapter": "chapter-3",
+        "poem": 351
+      },
+      {
+        "id": "tha-ap354",
+        "publisher_chapter": "chapter-3",
+        "poem": 352
+      },
+      {
+        "id": "tha-ap355",
+        "publisher_chapter": "chapter-3",
+        "poem": 353
+      },
+      {
+        "id": "tha-ap356",
+        "publisher_chapter": "chapter-3",
+        "poem": 354
+      },
+      {
+        "id": "tha-ap357",
+        "publisher_chapter": "chapter-3",
+        "poem": 355
+      },
+      {
+        "id": "tha-ap358",
+        "publisher_chapter": "chapter-3",
+        "poem": 356
+      },
+      {
+        "id": "tha-ap359",
+        "publisher_chapter": "chapter-3",
+        "poem": 357
+      },
+      {
+        "id": "tha-ap361",
+        "publisher_chapter": "chapter-3",
+        "poem": 359
+      },
+      {
+        "id": "tha-ap362",
+        "publisher_chapter": "chapter-3",
+        "poem": 360
+      },
+      {
+        "id": "tha-ap373",
+        "publisher_chapter": "chapter-3",
+        "poem": 371
+      },
+      {
+        "id": "tha-ap374",
+        "publisher_chapter": "chapter-3",
+        "poem": 372
+      },
+      {
+        "id": "tha-ap376",
+        "publisher_chapter": "chapter-3",
+        "poem": 374
+      },
+      {
+        "id": "tha-ap377",
+        "publisher_chapter": "chapter-3",
+        "poem": 375
+      },
+      {
+        "id": "tha-ap378",
+        "publisher_chapter": "chapter-3",
+        "poem": 376
+      },
+      {
+        "id": "tha-ap379",
+        "publisher_chapter": "chapter-3",
+        "poem": 377
+      },
+      {
+        "id": "tha-ap380",
+        "publisher_chapter": "chapter-3",
+        "poem": 378
+      }
+    ],
+    "held_ids": [
+      "tha-ap72",
+      "tha-ap142",
+      "tha-ap160",
+      "tha-ap161",
+      "tha-ap262",
+      "tha-ap268",
+      "tha-ap282",
+      "tha-ap308",
+      "tha-ap309",
+      "tha-ap360"
+    ],
+    "all375_full_objects_and_order_preserved": true,
+    "derivation": "Existing historical368 full source objects plus exactly the approved7 existing source profile/link records; .baseline of the375 authority still means368, never375. No old runtime capture or copied H frame."
+  },
+  "expected_current380_source": {
+    "name": "Legends of the Buddhist Saints (Apadāna)",
+    "site": "https://apadanatranslation.com/",
+    "repository": "https://github.com/apadana-translation/apadana-site",
+    "commit": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "notice_url": "https://apadanatranslation.com/about/",
+    "checked": "2026-11-19",
+    "rights_artifacts": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+      },
+      {
+        "path": "src/_pages/about.md",
+        "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+      },
+      {
+        "path": "src/_includes/site/footer.njk",
+        "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+      },
+      {
+        "path": "src/_includes/layouts/epub-metadata.xml",
+        "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+      },
+      {
+        "path": "src/_data/site.json",
+        "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+      },
+      {
+        "path": "src/_poems/_poems.json",
+        "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+      }
+    ],
+    "rights_note": "Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.",
+    "policy": "Live only, 380 finite complete publisher-edition poems (40 Therī and 340 explicitly mapped Therā); original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or approval of the wider Apadāna catalogue; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI."
+  },
+  "expected_current380_manifest_held": {},
+  "expected_current380_order_sha256_JSON_stringify": "7eda6b08627d94c3397c08fd0c2ca333df2c2f5e289270aad32d29d4cc14c980",
+  "expected_current380_full_profiles_sha256_JSON_stringify": "e813f4786e2ed80b2e172d3a9795d36c968e40070a1375326f1c9eb1a5df3b56",
+  "expected_current380_full_links_sha256_JSON_stringify": "9ae1d604d035757fe200ac2ade4ef4a2027ed370b30bd061c69d2aa3bc80c898",
+  "source_bindings": [
+    {
+      "publisher": 381,
+      "canonical_id": "tha-ap383",
+      "raw": {
+        "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-381.md",
+        "bytes": 1819,
+        "sha256": "2f3020478e27fabb0ad40b94ce45659d4e10db7c91a509455d3f949de9e640d5",
+        "git_blob": "a42712a643ba66c283ee9fd986943854204f6708",
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      "canonical_record": {
+        "id": "tha-ap383",
+        "book": 36,
+        "start": 10933,
+        "end": 10955,
+        "title": "Avaṭaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 383",
+        "vri": "1–6",
+        "pts": {
+          "volume": 1,
+          "page": 294,
+          "end_page": 295
+        }
+      },
+      "root_wrapper": {
+        "domain": "SHA256 UTF8 JSON.stringify({id,book,start,end,blocks})",
+        "sha256": "a4d69060ffb79d28bc08a770c982e1a138444a85d51b4c774cbb3d42a4b84702"
+      },
+      "normalization_manifest_entry": 0,
+      "profile_sha256_JSON_stringify": "e81276ed7d25fa5e7c6fb48c404a56847891964c1ec15bb011cb2a56d0a67862",
+      "link_sha256_JSON_stringify": "9f435fcaeae170485bd92bda32ed2d7a9434f5263e60932ba4d3424ba2cbcf7a",
+      "body_notes_paratext_domains": "Original published wording with same-number [Note n] calls and printed suffixes; finite Markdown presentation only; no runtime/API output oracle."
+    },
+    {
+      "publisher": 383,
+      "canonical_id": "tha-ap385",
+      "raw": {
+        "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-383.md",
+        "bytes": 1758,
+        "sha256": "6a67971063c6c4dc4fd4a45c0d1b913318b1e820d26b4b9991772ad61a6cc812",
+        "git_blob": "67790971922c5c3df0a7c49350408884d4319099",
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      "canonical_record": {
+        "id": "tha-ap385",
+        "book": 36,
+        "start": 10979,
+        "end": 10997,
+        "title": "Udumbaraphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 385",
+        "vri": "15–20",
+        "pts": {
+          "volume": 1,
+          "page": 295,
+          "end_page": 295
+        }
+      },
+      "root_wrapper": {
+        "domain": "SHA256 UTF8 JSON.stringify({id,book,start,end,blocks})",
+        "sha256": "47b449fc61bf0f76d0331d9b7d2457d573310309dbe154ce73ba143a8afe892e"
+      },
+      "normalization_manifest_entry": 1,
+      "profile_sha256_JSON_stringify": "cfb9511fb0901ae07a91b302ca646f3deb452b24c583d6c7dd72915319420be9",
+      "link_sha256_JSON_stringify": "f43ee270ce2a964981228875e747881c53efb39d293316326129f485174ab736",
+      "body_notes_paratext_domains": "Original published wording with same-number [Note n] calls and printed suffixes; finite Markdown presentation only; no runtime/API output oracle."
+    },
+    {
+      "publisher": 384,
+      "canonical_id": "tha-ap386",
+      "raw": {
+        "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-384.md",
+        "bytes": 1583,
+        "sha256": "05d26e53292e293381d9235bf4fa4a114c0452e529f3c81197fa494827463ea1",
+        "git_blob": "7d479c6ffcdb06ba616b69b90fa6a265fe9b1e96",
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      "canonical_record": {
+        "id": "tha-ap386",
+        "book": 36,
+        "start": 10997,
+        "end": 11012,
+        "title": "Pilakkhaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 386",
+        "vri": "21–25",
+        "pts": {
+          "volume": 1,
+          "page": 295,
+          "end_page": 296
+        }
+      },
+      "root_wrapper": {
+        "domain": "SHA256 UTF8 JSON.stringify({id,book,start,end,blocks})",
+        "sha256": "5573df6754147e333f34e973f4bdbe588303c8f2bb778406ca92d3fac6390b7f"
+      },
+      "normalization_manifest_entry": 2,
+      "profile_sha256_JSON_stringify": "6edc79b6fe1fc61f794c4c3ce2af488852b5d28e42810c882f1382c5445376ca",
+      "link_sha256_JSON_stringify": "d545fbc2465c6f769d0c5a6f99c078a2087a61b97aef10e434a35a20ef14f75a",
+      "body_notes_paratext_domains": "Original published wording with same-number [Note n] calls and printed suffixes; finite Markdown presentation only; no runtime/API output oracle."
+    },
+    {
+      "publisher": 385,
+      "canonical_id": "tha-ap387",
+      "raw": {
+        "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-385.md",
+        "bytes": 1643,
+        "sha256": "6490e8e6fb6f07cbf1f18ad7b9dfba7a07b0773830f0d2dd0057f3f935168140",
+        "git_blob": "359060dd76b4e977419e596a8bfefc0dbdb0a107",
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      "canonical_record": {
+        "id": "tha-ap387",
+        "book": 36,
+        "start": 11012,
+        "end": 11027,
+        "title": "Phārusaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 387",
+        "vri": "26–30",
+        "pts": {
+          "volume": 1,
+          "page": 296,
+          "end_page": 296
+        }
+      },
+      "root_wrapper": {
+        "domain": "SHA256 UTF8 JSON.stringify({id,book,start,end,blocks})",
+        "sha256": "a15b3a5193f80812f373cac50e5932739fc7e5b6898aebd5ec3c6ef9373e2b37"
+      },
+      "normalization_manifest_entry": 3,
+      "profile_sha256_JSON_stringify": "f7d01d0aa66e5f123e1e54bd8959b89f1faf98ea10397ca7a438b6e089b885a5",
+      "link_sha256_JSON_stringify": "a3a2e1759de3f57fcbebcf624fda81f55f5e75c1e4d57de44998d7a1fece34c4",
+      "body_notes_paratext_domains": "Original published wording with same-number [Note n] calls and printed suffixes; finite Markdown presentation only; no runtime/API output oracle."
+    },
+    {
+      "publisher": 386,
+      "canonical_id": "tha-ap388",
+      "raw": {
+        "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-386.md",
+        "bytes": 1730,
+        "sha256": "b35e1657e1f0036ebf5de1c5f82ad47b15556aa787439aebaa728d2092cfa835",
+        "git_blob": "6639c084377f1509aa09609e46739629138d5369",
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4"
+      },
+      "canonical_record": {
+        "id": "tha-ap388",
+        "book": 36,
+        "start": 11027,
+        "end": 11045,
+        "title": "Valliphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 388",
+        "vri": "31–36",
+        "pts": {
+          "volume": 1,
+          "page": 296,
+          "end_page": 297
+        }
+      },
+      "root_wrapper": {
+        "domain": "SHA256 UTF8 JSON.stringify({id,book,start,end,blocks})",
+        "sha256": "5b2b5398d97ac4c2a3fc8717efab483f2750554762f48c587ee33fe4915ed202"
+      },
+      "normalization_manifest_entry": 4,
+      "profile_sha256_JSON_stringify": "4e46b7c6aa05a8d334bb332111cdf446864597284983971dbcfc449796c4b731",
+      "link_sha256_JSON_stringify": "fc5a23eddf21ddd89e6e80dff5f3634626687c446e441e00547383176472cc0b",
+      "body_notes_paratext_domains": "Original published wording with same-number [Note n] calls and printed suffixes; finite Markdown presentation only; no runtime/API output oracle."
+    }
+  ],
+  "source_derived_API_expected_metadata": {
+    "entries": {
+      "tha-ap383": {
+        "publisher_poem": 381,
+        "translation_id": "ap:chapter-3/poem-381",
+        "profile_sha256_JSON_stringify": "e81276ed7d25fa5e7c6fb48c404a56847891964c1ec15bb011cb2a56d0a67862",
+        "link_sha256_JSON_stringify": "9f435fcaeae170485bd92bda32ed2d7a9434f5263e60932ba4d3424ba2cbcf7a",
+        "parse_result_keys": [
+          "title",
+          "text",
+          "translator_notes",
+          "publisher_paratext"
+        ],
+        "title": "Avaṇṭaphaladāyaka",
+        "body_sha256": "e7ee77ce2e706d24b9441775862c1f6918f95103404cbded1b5697e5b3068f3c",
+        "body_characters_utf16": 1072,
+        "notes_sha256_JSON_stringify": "42589d46522d064b342fd8af8d9435c0b9debeb0343d9f9f01a588b4dff03744",
+        "note_numbers": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "note_owners": [
+          {
+            "number": 1,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              45,
+              46
+            ],
+            "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+            "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+            "characters_utf16": 189
+          },
+          {
+            "number": 2,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              47,
+              48
+            ],
+            "raw_content_sha256": "e4fcd8c6336763fdafc4f1ab8dfcea8bd81b0871e6657ca13f425358df011cfc",
+            "text_sha256": "3305ff633fa9fc1bbda74abe48b7c5722bf18ace89e4bfe3f352a86c9c59cfe4",
+            "characters_utf16": 179
+          },
+          {
+            "number": 3,
+            "owner_paragraph_index0": 1,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              49,
+              50
+            ],
+            "raw_content_sha256": "c529801148ea0ae3e6be0739a1cd3b6a767d59ca3b79f5826f93bf3aa4aacfb7",
+            "text_sha256": "e7b614408fecca491952cf348c856ad4bbe32af694b998876ba31762e38743db",
+            "characters_utf16": 26
+          },
+          {
+            "number": 4,
+            "owner_paragraph_index0": 1,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              51,
+              51
+            ],
+            "raw_content_sha256": "75f3291627e3d698a975dfa467c228cb60b1e405caab70ac2ee40785d1621868",
+            "text_sha256": "bf60276ca90f7004ea0984e891aadcdaed23900435ac006bd341d8082763603c",
+            "characters_utf16": 11
+          }
+        ],
+        "paratext_sha256": "afa7b7e95dd377dbc049aee09cf1a76e75d91c022214d040a1ff011c8203ac65",
+        "paratext_characters_utf16": 37,
+        "paratext_note_numbers": [],
+        "body_paragraphs": [
+          {
+            "paragraph_index0": 0,
+            "raw_sha256": "4db3bf55183cc9f028fffd9a8cad60d4892f644e31c218520d1df29aaaa6ae1b",
+            "text_sha256": "f7edd23d7fe761a6791f9cf8474497512254aedb5c26c33c4f497e70b709914a",
+            "characters_utf16": 47,
+            "lines": 1,
+            "body_start_utf16": 0,
+            "body_end_utf16": 47,
+            "original_note_numbers": [
+              1,
+              2
+            ]
+          },
+          {
+            "paragraph_index0": 1,
+            "raw_sha256": "a9bcfa2084b5d977c4215329718ef3731852f2e29516dfc56fabecb62a99f14c",
+            "text_sha256": "95eac15d66aacb6517388b3a2479d88a48fa3b4e86106b8fa00a5210b1311c7b",
+            "characters_utf16": 158,
+            "lines": 4,
+            "body_start_utf16": 49,
+            "body_end_utf16": 207,
+            "original_note_numbers": [
+              3,
+              4
+            ]
+          },
+          {
+            "paragraph_index0": 2,
+            "raw_sha256": "ae0d69e80c487ea396c4f93af474b8fcf8e52bfb28fadc6ba42fd0c18fb834ca",
+            "text_sha256": "7787659f4b9d8b0cfe95312321f46196b3692dc0f1010b466be3804c0bd1721a",
+            "characters_utf16": 157,
+            "lines": 4,
+            "body_start_utf16": 209,
+            "body_end_utf16": 366,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 3,
+            "raw_sha256": "d7acdcc2bfa59a5756a9d1224caf0d81096a6b8f5a209707404cfcc5f4de6a27",
+            "text_sha256": "2fb417ff5d3c4f8811123d257cad52802b7c5ca53ee0c090e7275c0f0bca1f41",
+            "characters_utf16": 150,
+            "lines": 4,
+            "body_start_utf16": 368,
+            "body_end_utf16": 518,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 4,
+            "raw_sha256": "21c6a202f41022a41dfb34ad43d23061643e528a379c0280757ed708f2bacd9c",
+            "text_sha256": "163422d7f2f33f6c898538f7c7bd2ea69215510f9a6d304381e50db1a9d0e12e",
+            "characters_utf16": 145,
+            "lines": 4,
+            "body_start_utf16": 520,
+            "body_end_utf16": 665,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 5,
+            "raw_sha256": "b1bb4580b125e47058d36c244b8a773f9b4e5bbf69aba2c16a7108ed7e79fff2",
+            "text_sha256": "dc09991adf23c10d3e977a0f6aaa0882cc31f5ba252c38023190d3354c37fd7d",
+            "characters_utf16": 146,
+            "lines": 4,
+            "body_start_utf16": 667,
+            "body_end_utf16": 813,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 6,
+            "raw_sha256": "d0cfc03b7f2a405a3512691017fa72663898ef67442ca9eabb1174883dbea3b1",
+            "text_sha256": "4acb007c199b5647f7f48b172719085e917dbb1896acfaef02b0ee348bb68655",
+            "characters_utf16": 138,
+            "lines": 4,
+            "body_start_utf16": 815,
+            "body_end_utf16": 953,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 7,
+            "raw_sha256": "07b2a50d4bbee4bc9bd7948e2b11e343b309f8192478de8d011c37e19ac0e57f",
+            "text_sha256": "07b2a50d4bbee4bc9bd7948e2b11e343b309f8192478de8d011c37e19ac0e57f",
+            "characters_utf16": 65,
+            "lines": 1,
+            "body_start_utf16": 955,
+            "body_end_utf16": 1020,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 8,
+            "raw_sha256": "47e89148a1b1d62f0c6a4bc0ddf8124dc8ab69ca06b3811f9340e88d5e1796d4",
+            "text_sha256": "47e89148a1b1d62f0c6a4bc0ddf8124dc8ab69ca06b3811f9340e88d5e1796d4",
+            "characters_utf16": 50,
+            "lines": 1,
+            "body_start_utf16": 1022,
+            "body_end_utf16": 1072,
+            "original_note_numbers": []
+          }
+        ],
+        "quotation_proofs": [
+          {
+            "physical_entry1": 1,
+            "body_paragraph_index0": 1,
+            "text_sha256": "d09d28077453ab8d8087ebdecdf8d0db86266162f86c8a33b7ce265aea7606e6",
+            "characters_utf16": 131,
+            "lines": 4,
+            "suffix": "(1) [3278]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 2,
+            "body_paragraph_index0": 2,
+            "text_sha256": "f407da9f40378b427b5f0246569d5013eecbe1525dc1b25c05ac1bdbf68d5919",
+            "characters_utf16": 146,
+            "lines": 4,
+            "suffix": "(2) [3279]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 3,
+            "body_paragraph_index0": 3,
+            "text_sha256": "afbfd0b8f08a4e3c8e872b11b2d8dd784e792474ea4b2537f3c4a9f4a4a6c6ad",
+            "characters_utf16": 139,
+            "lines": 4,
+            "suffix": "(3) [3280]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 4,
+            "body_paragraph_index0": 4,
+            "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+            "characters_utf16": 134,
+            "lines": 4,
+            "suffix": "(4) [3281]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 5,
+            "body_paragraph_index0": 5,
+            "text_sha256": "88e5d8584f3af044882ad423991665f79b753fef6a79bdc12cdfc3a906e77bc6",
+            "characters_utf16": 135,
+            "lines": 4,
+            "suffix": "(5) [3282]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 6,
+            "body_paragraph_index0": 6,
+            "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+            "characters_utf16": 127,
+            "lines": 4,
+            "suffix": "(6) [3283]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          }
+        ],
+        "whole_quote_sha256": "c396411351d36fea87112cc0923a53c65cdbd16e40bc89662baedc7daf2ea01c",
+        "stanza_layout": [
+          {
+            "local_label": "1",
+            "publisher_label": "3278",
+            "suffix": "(1) [3278]",
+            "lines": 4
+          },
+          {
+            "local_label": "2",
+            "publisher_label": "3279",
+            "suffix": "(2) [3279]",
+            "lines": 4
+          },
+          {
+            "local_label": "3",
+            "publisher_label": "3280",
+            "suffix": "(3) [3280]",
+            "lines": 4
+          },
+          {
+            "local_label": "4",
+            "publisher_label": "3281",
+            "suffix": "(4) [3281]",
+            "lines": 4
+          },
+          {
+            "local_label": "5",
+            "publisher_label": "3282",
+            "suffix": "(5) [3282]",
+            "lines": 4
+          },
+          {
+            "local_label": "6",
+            "publisher_label": "3283",
+            "suffix": "(6) [3283]",
+            "lines": 4
+          }
+        ],
+        "hard500_UTF16_pages": [
+          {
+            "offset": 0,
+            "limit": 500,
+            "characters_utf16": 500,
+            "text_sha256": "1e2558f8df5988573031d51f1185864a479fbf5fd4662dccaab33d9ba60408cd",
+            "page_start_prefix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "continuation_end_prefix_sha256": "1e2558f8df5988573031d51f1185864a479fbf5fd4662dccaab33d9ba60408cd",
+            "next_offset": 500,
+            "total_characters_utf16": 1072
+          },
+          {
+            "offset": 500,
+            "limit": 500,
+            "characters_utf16": 500,
+            "text_sha256": "bdb224eea49c931e1cfb925f356e49832dfd8b0b584a9c5a446ff2199d258649",
+            "page_start_prefix_sha256": "1e2558f8df5988573031d51f1185864a479fbf5fd4662dccaab33d9ba60408cd",
+            "continuation_end_prefix_sha256": "96167cb1e18200d8d67489f09a81d416fbddf64f9f82f38d092f5ca4b57be78b",
+            "next_offset": 1000,
+            "total_characters_utf16": 1072
+          },
+          {
+            "offset": 1000,
+            "limit": 500,
+            "characters_utf16": 72,
+            "text_sha256": "add3bc5a64528a49cfc3fd98e5efedecaefc7e574ccd4bee72415643a3c0e569",
+            "page_start_prefix_sha256": "96167cb1e18200d8d67489f09a81d416fbddf64f9f82f38d092f5ca4b57be78b",
+            "continuation_end_prefix_sha256": "e7ee77ce2e706d24b9441775862c1f6918f95103404cbded1b5697e5b3068f3c",
+            "next_offset": null,
+            "total_characters_utf16": 1072
+          }
+        ],
+        "raw_display_pairs": [],
+        "root_record": {
+          "id": "tha-ap383",
+          "book": 36,
+          "start": 10933,
+          "end": 10955,
+          "title": "Avaṭaphaladāyakattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 383",
+          "vri": "1–6",
+          "pts": {
+            "volume": 1,
+            "page": 294,
+            "end_page": 295
+          }
+        },
+        "root_wrapper_sha256": "a4d69060ffb79d28bc08a770c982e1a138444a85d51b4c774cbb3d42a4b84702",
+        "absent_scopes": [
+          "publisher_preface",
+          "chapter_summary",
+          "collection_summary",
+          "publisher_divisions",
+          "editorial_gap"
+        ],
+        "independent_API_expected_object_review": "PENDING",
+        "runtime_or_activation_approval": false
+      },
+      "tha-ap385": {
+        "publisher_poem": 383,
+        "translation_id": "ap:chapter-3/poem-383",
+        "profile_sha256_JSON_stringify": "cfb9511fb0901ae07a91b302ca646f3deb452b24c583d6c7dd72915319420be9",
+        "link_sha256_JSON_stringify": "f43ee270ce2a964981228875e747881c53efb39d293316326129f485174ab736",
+        "parse_result_keys": [
+          "title",
+          "text",
+          "translator_notes",
+          "publisher_paratext"
+        ],
+        "title": "Udumbaraphaladāyaka",
+        "body_sha256": "71a337dbcfacaee67212a3f1f38dc0fcdf32e6daf7d0bc61dfff448f6ba0f3e5",
+        "body_characters_utf16": 1065,
+        "notes_sha256_JSON_stringify": "e67b114ccc6110074f9070027141e1fc600056ac2a834aafe846b931c253337b",
+        "note_numbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "note_owners": [
+          {
+            "number": 1,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              43,
+              44
+            ],
+            "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+            "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+            "characters_utf16": 189
+          },
+          {
+            "number": 2,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              45,
+              46
+            ],
+            "raw_content_sha256": "74c3118e68ec9c58d549c43104a7285490301d92c6f6b25371c4e9e871b3b554",
+            "text_sha256": "d7749b20cf1218554ff0d4580871cdb4e619b9748a0071743fd332b6025833f7",
+            "characters_utf16": 60
+          },
+          {
+            "number": 3,
+            "owner_paragraph_index0": 1,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              47,
+              48
+            ],
+            "raw_content_sha256": "e39985d945bcff4a69881021fb11c46318ac1bc266ac76d9ac09262042d21b55",
+            "text_sha256": "347e79df8d479cf914e38049e32872fb0c05aa04472ceaef87fa5e5234ca0549",
+            "characters_utf16": 7
+          },
+          {
+            "number": 4,
+            "owner_paragraph_index0": 1,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              49,
+              50
+            ],
+            "raw_content_sha256": "a8ba319c5621a5cc6dd6b04518c635f9f34a5c8cd6a71ee625a5e83c1a07d924",
+            "text_sha256": "494c077806f575adee686626b0951d7114b81483d4560eead0090314e6694b32",
+            "characters_utf16": 11
+          },
+          {
+            "number": 5,
+            "owner_paragraph_index0": 2,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              51,
+              52
+            ],
+            "raw_content_sha256": "7eae1132b2f8d362d18839fa7ee85b4704956206f4606487ea62c987721384c0",
+            "text_sha256": "5c2a8944195fa1d2e7a0b341071da74173c78c2d7b1a26402951a61546a7258c",
+            "characters_utf16": 17
+          },
+          {
+            "number": 6,
+            "owner_paragraph_index0": 2,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              53,
+              53
+            ],
+            "raw_content_sha256": "6ac724d090b8ae6504e8a155542505e9f174aac2d1d5d7b81b70e4c71429c492",
+            "text_sha256": "0adbf69bd0c55a37bdefb4e2ca90dac2a38525275c8922316015b12b9ddfbac6",
+            "characters_utf16": 65
+          }
+        ],
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paratext_characters_utf16": 0,
+        "paratext_note_numbers": [],
+        "body_paragraphs": [
+          {
+            "paragraph_index0": 0,
+            "raw_sha256": "8c0586c6875a31daae9764422cda475b593e60aa8703be16cfdacd2906d10034",
+            "text_sha256": "4113f4ce67ac274a5dd6b34334b5f7ee03a3ad415516c82e7fe83a55a1262171",
+            "characters_utf16": 49,
+            "lines": 1,
+            "body_start_utf16": 0,
+            "body_end_utf16": 49,
+            "original_note_numbers": [
+              1,
+              2
+            ]
+          },
+          {
+            "paragraph_index0": 1,
+            "raw_sha256": "cf521a3bad21493d8d9e49c6422ed68a9159c0223cb04bd31b6db34cce5cfffd",
+            "text_sha256": "37b94202c180812d6fbb64fb39da75de30a93b7759e372eb26604faf246cdb54",
+            "characters_utf16": 148,
+            "lines": 4,
+            "body_start_utf16": 51,
+            "body_end_utf16": 199,
+            "original_note_numbers": [
+              3,
+              4
+            ]
+          },
+          {
+            "paragraph_index0": 2,
+            "raw_sha256": "025e99a061a698bd1e2b116572dc2a3b1f3f01cc41f782a5522faa72e32b224e",
+            "text_sha256": "5b94fb1e77e0648a6e78cad0362a1ed2bbe0895dceaa49c0deab078ecbbc93e9",
+            "characters_utf16": 156,
+            "lines": 4,
+            "body_start_utf16": 201,
+            "body_end_utf16": 357,
+            "original_note_numbers": [
+              5,
+              6
+            ]
+          },
+          {
+            "paragraph_index0": 3,
+            "raw_sha256": "120ea29b7f3beb8871263729c3ad2bf62a36bcb99982fc1d7256f7bc947287b4",
+            "text_sha256": "955db339216474ca3f5c4948f5cd470c7b61d783d2d5926b4879b7810f84f52e",
+            "characters_utf16": 148,
+            "lines": 4,
+            "body_start_utf16": 359,
+            "body_end_utf16": 507,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 4,
+            "raw_sha256": "3786b7a98c03ccfddee81704ceceec6809bb9646838962bd14d1f892f4ea1dae",
+            "text_sha256": "5e97b834e98adeb94c9b5dfd77dc0d374adb0d0d301b9c572a469edbc78ff913",
+            "characters_utf16": 145,
+            "lines": 4,
+            "body_start_utf16": 509,
+            "body_end_utf16": 654,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 5,
+            "raw_sha256": "d446a2bd645097e5763ee37fca674698ce7d8fd75d991e3f79245737672dce68",
+            "text_sha256": "62abb6bf966b1f6cbc9a5787bab53fe9e37ff56df84b42ea56e38e2c8d79b51c",
+            "characters_utf16": 146,
+            "lines": 4,
+            "body_start_utf16": 656,
+            "body_end_utf16": 802,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 6,
+            "raw_sha256": "5ba776820fccc43d89568cb14ebfb9c7cf712e96ec69ca96471ab117bef88160",
+            "text_sha256": "3c07b1a4673cad57fee60566f19268d42da611dc73e1ebd6ce9a5af2a45479b4",
+            "characters_utf16": 138,
+            "lines": 4,
+            "body_start_utf16": 804,
+            "body_end_utf16": 942,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 7,
+            "raw_sha256": "20e6f70f0da42b77e4cd205b2ef2eec3d04668886810bf38a94af0e69b17e010",
+            "text_sha256": "20e6f70f0da42b77e4cd205b2ef2eec3d04668886810bf38a94af0e69b17e010",
+            "characters_utf16": 67,
+            "lines": 1,
+            "body_start_utf16": 944,
+            "body_end_utf16": 1011,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 8,
+            "raw_sha256": "a63392a83e879199922545168d971d0aa45ed4f93be2f130d9ec8930914522fc",
+            "text_sha256": "a63392a83e879199922545168d971d0aa45ed4f93be2f130d9ec8930914522fc",
+            "characters_utf16": 52,
+            "lines": 1,
+            "body_start_utf16": 1013,
+            "body_end_utf16": 1065,
+            "original_note_numbers": []
+          }
+        ],
+        "quotation_proofs": [
+          {
+            "physical_entry1": 1,
+            "body_paragraph_index0": 1,
+            "text_sha256": "572d123ea48b01dd5868a18148cb81f278184e8a42957cfc0030caeec1477834",
+            "characters_utf16": 121,
+            "lines": 4,
+            "suffix": "(1) [3292]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 2,
+            "body_paragraph_index0": 2,
+            "text_sha256": "ec2d8f5dd15b345eed4f92a5d03a4283ffcd62e3cfc8e66518ade7b3a76d2352",
+            "characters_utf16": 129,
+            "lines": 4,
+            "suffix": "(2) [3293]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 3,
+            "body_paragraph_index0": 3,
+            "text_sha256": "021c98c86673ec60a17d008847a159f9ce218d798641ac6192cd1dd80d73b90b",
+            "characters_utf16": 137,
+            "lines": 4,
+            "suffix": "(3) [3294]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 4,
+            "body_paragraph_index0": 4,
+            "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+            "characters_utf16": 134,
+            "lines": 4,
+            "suffix": "(4) [3295]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 5,
+            "body_paragraph_index0": 5,
+            "text_sha256": "88e5d8584f3af044882ad423991665f79b753fef6a79bdc12cdfc3a906e77bc6",
+            "characters_utf16": 135,
+            "lines": 4,
+            "suffix": "(5) [3296]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 6,
+            "body_paragraph_index0": 6,
+            "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+            "characters_utf16": 127,
+            "lines": 4,
+            "suffix": "(6) [3297]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          }
+        ],
+        "whole_quote_sha256": "653a577e2838d78b2f056e1a404fd874b019b347716a0c5cd4bf072e2cbd678c",
+        "stanza_layout": [
+          {
+            "local_label": "1",
+            "publisher_label": "3292",
+            "suffix": "(1) [3292]",
+            "lines": 4
+          },
+          {
+            "local_label": "2",
+            "publisher_label": "3293",
+            "suffix": "(2) [3293]",
+            "lines": 4
+          },
+          {
+            "local_label": "3",
+            "publisher_label": "3294",
+            "suffix": "(3) [3294]",
+            "lines": 4
+          },
+          {
+            "local_label": "4",
+            "publisher_label": "3295",
+            "suffix": "(4) [3295]",
+            "lines": 4
+          },
+          {
+            "local_label": "5",
+            "publisher_label": "3296",
+            "suffix": "(5) [3296]",
+            "lines": 4
+          },
+          {
+            "local_label": "6",
+            "publisher_label": "3297",
+            "suffix": "(6) [3297]",
+            "lines": 4
+          }
+        ],
+        "hard500_UTF16_pages": [
+          {
+            "offset": 0,
+            "limit": 500,
+            "characters_utf16": 500,
+            "text_sha256": "6d622f6b9141a73af1ab77405df3f7fbe1327adfaa67c296b16f40bd999b6f20",
+            "page_start_prefix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "continuation_end_prefix_sha256": "6d622f6b9141a73af1ab77405df3f7fbe1327adfaa67c296b16f40bd999b6f20",
+            "next_offset": 500,
+            "total_characters_utf16": 1065
+          },
+          {
+            "offset": 500,
+            "limit": 500,
+            "characters_utf16": 500,
+            "text_sha256": "1c12df723392233e87fba7cf009cf7eee91d7b74d863795d6c73549a53743d25",
+            "page_start_prefix_sha256": "6d622f6b9141a73af1ab77405df3f7fbe1327adfaa67c296b16f40bd999b6f20",
+            "continuation_end_prefix_sha256": "ac0fbee29222ac596685d65cd6a6f5c1c9cc87b05f111b26521461ad6524d5a6",
+            "next_offset": 1000,
+            "total_characters_utf16": 1065
+          },
+          {
+            "offset": 1000,
+            "limit": 500,
+            "characters_utf16": 65,
+            "text_sha256": "851bdce5c827c6b4584556b9fb78f3408fefd2ec5875f296ce78483ebf42cb73",
+            "page_start_prefix_sha256": "ac0fbee29222ac596685d65cd6a6f5c1c9cc87b05f111b26521461ad6524d5a6",
+            "continuation_end_prefix_sha256": "71a337dbcfacaee67212a3f1f38dc0fcdf32e6daf7d0bc61dfff448f6ba0f3e5",
+            "next_offset": null,
+            "total_characters_utf16": 1065
+          }
+        ],
+        "raw_display_pairs": [],
+        "root_record": {
+          "id": "tha-ap385",
+          "book": 36,
+          "start": 10979,
+          "end": 10997,
+          "title": "Udumbaraphaladāyakattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 385",
+          "vri": "15–20",
+          "pts": {
+            "volume": 1,
+            "page": 295,
+            "end_page": 295
+          }
+        },
+        "root_wrapper_sha256": "47b449fc61bf0f76d0331d9b7d2457d573310309dbe154ce73ba143a8afe892e",
+        "absent_scopes": [
+          "publisher_preface",
+          "chapter_summary",
+          "collection_summary",
+          "publisher_divisions",
+          "editorial_gap"
+        ],
+        "independent_API_expected_object_review": "PENDING",
+        "runtime_or_activation_approval": false
+      },
+      "tha-ap386": {
+        "publisher_poem": 384,
+        "translation_id": "ap:chapter-3/poem-384",
+        "profile_sha256_JSON_stringify": "6edc79b6fe1fc61f794c4c3ce2af488852b5d28e42810c882f1382c5445376ca",
+        "link_sha256_JSON_stringify": "d545fbc2465c6f769d0c5a6f99c078a2087a61b97aef10e434a35a20ef14f75a",
+        "parse_result_keys": [
+          "title",
+          "text",
+          "translator_notes",
+          "publisher_paratext"
+        ],
+        "title": "Pilakkhaphaladāyaka",
+        "body_sha256": "80995d007a8a3a8ffbe94c3e2d6aa94bb6c1e68010771e315bca2916fd969d88",
+        "body_characters_utf16": 917,
+        "notes_sha256_JSON_stringify": "a63a26b9fdf041be8366f6088b736f10929a823fcb361cfaa58e9ef085e5df77",
+        "note_numbers": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "note_owners": [
+          {
+            "number": 1,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              38,
+              39
+            ],
+            "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+            "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+            "characters_utf16": 189
+          },
+          {
+            "number": 2,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              40,
+              41
+            ],
+            "raw_content_sha256": "79fc30c37ba23f2653d424bef09e711f74dbeb80892c4b943005401017aefc3e",
+            "text_sha256": "79fc30c37ba23f2653d424bef09e711f74dbeb80892c4b943005401017aefc3e",
+            "characters_utf16": 30
+          },
+          {
+            "number": 3,
+            "owner_paragraph_index0": 1,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              42,
+              43
+            ],
+            "raw_content_sha256": "1ec8080975b3c5add5b7e590fb3a5caed66c710deff58c44856ba740de0d50df",
+            "text_sha256": "43049c945f81cfac97c360ea682e3c8a0004f33acda0d3dd04d3d16adc85339a",
+            "characters_utf16": 58
+          },
+          {
+            "number": 4,
+            "owner_paragraph_index0": 1,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              44,
+              44
+            ],
+            "raw_content_sha256": "aa15635ed98db4f8cf281b9790f71ac568ae4ef521b15f57f59a56f3d9bc33fe",
+            "text_sha256": "f05875673e20155d7db9717238d066cbb595f88618d4ac4a7672caec8854fc29",
+            "characters_utf16": 127
+          }
+        ],
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paratext_characters_utf16": 0,
+        "paratext_note_numbers": [],
+        "body_paragraphs": [
+          {
+            "paragraph_index0": 0,
+            "raw_sha256": "5f7abd185df0fb82247f0b36da12ec7df324430a51153e98dbde19540ba56788",
+            "text_sha256": "18ddbff2dba5f730b910569f2aee9027b197b8db56580e8052104db1330a26b4",
+            "characters_utf16": 49,
+            "lines": 1,
+            "body_start_utf16": 0,
+            "body_end_utf16": 49,
+            "original_note_numbers": [
+              1,
+              2
+            ]
+          },
+          {
+            "paragraph_index0": 1,
+            "raw_sha256": "e3920dd02696d6e25395c6495484257bbbb8a2c61f60da08f4f398bb0a6ed4b5",
+            "text_sha256": "7ce4ad2dd49564ee51ef0e4ef67ec15fa9007e601cd7ca330bd0e2ddfa3abe67",
+            "characters_utf16": 161,
+            "lines": 4,
+            "body_start_utf16": 51,
+            "body_end_utf16": 212,
+            "original_note_numbers": [
+              3,
+              4
+            ]
+          },
+          {
+            "paragraph_index0": 2,
+            "raw_sha256": "95e552f1debdffe2a1e3bd23cb53f823b3fd5bc8e6db63962eaa90cffb05f598",
+            "text_sha256": "6b84d2500e52be86b81d2e571c90b5055d23b9ae903621ab30cde4ff1af0c58a",
+            "characters_utf16": 145,
+            "lines": 4,
+            "body_start_utf16": 214,
+            "body_end_utf16": 359,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 3,
+            "raw_sha256": "a388f20350885acd27a99059300573e6f68b43a8042f0a48890b49fbfc6fb124",
+            "text_sha256": "bf36e2d4f8d84d7342c4e45fbc180ca5efdc57dffda93093b402739a10834e65",
+            "characters_utf16": 145,
+            "lines": 4,
+            "body_start_utf16": 361,
+            "body_end_utf16": 506,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 4,
+            "raw_sha256": "1ce2cb59a024830b8755a122c6ca8382c8e8f2c71d24483a69ae29e38f97848c",
+            "text_sha256": "dadfcf9405613046b49c693ab5e117c2d471812b2e158290e52563ba4a225e02",
+            "characters_utf16": 146,
+            "lines": 4,
+            "body_start_utf16": 508,
+            "body_end_utf16": 654,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 5,
+            "raw_sha256": "e69d1d3e2067cd78f115e098fb505022d35bc56a36d7b5eb918b6c8527631437",
+            "text_sha256": "0e348a3e09c0a79d8efa48771842051370584e143509dc8fb8d14b19207d6f33",
+            "characters_utf16": 138,
+            "lines": 4,
+            "body_start_utf16": 656,
+            "body_end_utf16": 794,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 6,
+            "raw_sha256": "5753dcdf2a0bf42c310e3e2c04aaa6ad44aa0c310aacdf8d3cd961bc51b9efec",
+            "text_sha256": "5753dcdf2a0bf42c310e3e2c04aaa6ad44aa0c310aacdf8d3cd961bc51b9efec",
+            "characters_utf16": 67,
+            "lines": 1,
+            "body_start_utf16": 796,
+            "body_end_utf16": 863,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 7,
+            "raw_sha256": "d20cccc4ef393485e76b74f077a9ecbfdca3002b37670921065c18b2280ec156",
+            "text_sha256": "d20cccc4ef393485e76b74f077a9ecbfdca3002b37670921065c18b2280ec156",
+            "characters_utf16": 52,
+            "lines": 1,
+            "body_start_utf16": 865,
+            "body_end_utf16": 917,
+            "original_note_numbers": []
+          }
+        ],
+        "quotation_proofs": [
+          {
+            "physical_entry1": 1,
+            "body_paragraph_index0": 1,
+            "text_sha256": "511fef450e27b544dd49ad2b19391c3aa1aaf72afc0124f7100aa3d22b2d11dc",
+            "characters_utf16": 134,
+            "lines": 4,
+            "suffix": "(1) [3298]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 2,
+            "body_paragraph_index0": 2,
+            "text_sha256": "5ea145017e370155236362ae1caf13db992fd3e01079c873c4cf8d0edbe3f5bf",
+            "characters_utf16": 134,
+            "lines": 4,
+            "suffix": "(2) [3299]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 3,
+            "body_paragraph_index0": 3,
+            "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+            "characters_utf16": 134,
+            "lines": 4,
+            "suffix": "(3) [3300]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 4,
+            "body_paragraph_index0": 4,
+            "text_sha256": "88e5d8584f3af044882ad423991665f79b753fef6a79bdc12cdfc3a906e77bc6",
+            "characters_utf16": 135,
+            "lines": 4,
+            "suffix": "(4) [3301]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 5,
+            "body_paragraph_index0": 5,
+            "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+            "characters_utf16": 127,
+            "lines": 4,
+            "suffix": "(5) [3302]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          }
+        ],
+        "whole_quote_sha256": "c3f1dbb3d3bfb50123d51e0822b6e8decdfcc8f79c37f7a373178441f12c00a8",
+        "stanza_layout": [
+          {
+            "local_label": "1",
+            "publisher_label": "3298",
+            "suffix": "(1) [3298]",
+            "lines": 4
+          },
+          {
+            "local_label": "2",
+            "publisher_label": "3299",
+            "suffix": "(2) [3299]",
+            "lines": 4
+          },
+          {
+            "local_label": "3",
+            "publisher_label": "3300",
+            "suffix": "(3) [3300]",
+            "lines": 4
+          },
+          {
+            "local_label": "4",
+            "publisher_label": "3301",
+            "suffix": "(4) [3301]",
+            "lines": 4
+          },
+          {
+            "local_label": "5",
+            "publisher_label": "3302",
+            "suffix": "(5) [3302]",
+            "lines": 4
+          }
+        ],
+        "hard500_UTF16_pages": [
+          {
+            "offset": 0,
+            "limit": 500,
+            "characters_utf16": 500,
+            "text_sha256": "6a35108d6a881d2b00317ff6976e93a17efb947d5012311d9a3b3727d4cb1a4c",
+            "page_start_prefix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "continuation_end_prefix_sha256": "6a35108d6a881d2b00317ff6976e93a17efb947d5012311d9a3b3727d4cb1a4c",
+            "next_offset": 500,
+            "total_characters_utf16": 917
+          },
+          {
+            "offset": 500,
+            "limit": 500,
+            "characters_utf16": 417,
+            "text_sha256": "dacd33917abe6b9dd1b5dcaa16f6930ddbd7bcaf675fb1d8a4c3d766476f78d5",
+            "page_start_prefix_sha256": "6a35108d6a881d2b00317ff6976e93a17efb947d5012311d9a3b3727d4cb1a4c",
+            "continuation_end_prefix_sha256": "80995d007a8a3a8ffbe94c3e2d6aa94bb6c1e68010771e315bca2916fd969d88",
+            "next_offset": null,
+            "total_characters_utf16": 917
+          }
+        ],
+        "raw_display_pairs": [],
+        "root_record": {
+          "id": "tha-ap386",
+          "book": 36,
+          "start": 10997,
+          "end": 11012,
+          "title": "Pilakkhaphaladāyakattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 386",
+          "vri": "21–25",
+          "pts": {
+            "volume": 1,
+            "page": 295,
+            "end_page": 296
+          }
+        },
+        "root_wrapper_sha256": "5573df6754147e333f34e973f4bdbe588303c8f2bb778406ca92d3fac6390b7f",
+        "absent_scopes": [
+          "publisher_preface",
+          "chapter_summary",
+          "collection_summary",
+          "publisher_divisions",
+          "editorial_gap"
+        ],
+        "independent_API_expected_object_review": "PENDING",
+        "runtime_or_activation_approval": false
+      },
+      "tha-ap387": {
+        "publisher_poem": 385,
+        "translation_id": "ap:chapter-3/poem-385",
+        "profile_sha256_JSON_stringify": "f7d01d0aa66e5f123e1e54bd8959b89f1faf98ea10397ca7a438b6e089b885a5",
+        "link_sha256_JSON_stringify": "a3a2e1759de3f57fcbebcf624fda81f55f5e75c1e4d57de44998d7a1fece34c4",
+        "parse_result_keys": [
+          "title",
+          "text",
+          "translator_notes",
+          "publisher_paratext"
+        ],
+        "title": "Phārusaphaladāyaka",
+        "body_sha256": "0fc0b52225f355fc68987e610729aa4b43fcbeded5edf7a67699aca4222e146d",
+        "body_characters_utf16": 887,
+        "notes_sha256_JSON_stringify": "b0b8b4c7f7867ba0ee24558f43872e9aeb70600e430e94c091c60712d7eeeadf",
+        "note_numbers": [
+          1,
+          2,
+          3
+        ],
+        "note_owners": [
+          {
+            "number": 1,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              38,
+              39
+            ],
+            "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+            "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+            "characters_utf16": 189
+          },
+          {
+            "number": 2,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              40,
+              41
+            ],
+            "raw_content_sha256": "870de0780c969a01992be25b7fe2e51ce6fedeeaec599f224d7ba4b12dec9dee",
+            "text_sha256": "2f788a7914aaa9281e0f2052076ed3f5d056f36eac197872f1e296572657ade7",
+            "characters_utf16": 22
+          },
+          {
+            "number": 3,
+            "owner_paragraph_index0": 1,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              42,
+              42
+            ],
+            "raw_content_sha256": "86a011373cffa8ce6028d11db7364e1d371f204f3d1d807775e2a08e126a672c",
+            "text_sha256": "fe6e69964ea01337763bbecaa20f25d2fa3fcecdec1f25ef008514027dfd5295",
+            "characters_utf16": 225
+          }
+        ],
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paratext_characters_utf16": 0,
+        "paratext_note_numbers": [],
+        "body_paragraphs": [
+          {
+            "paragraph_index0": 0,
+            "raw_sha256": "71d7310c016d7916d4e9d07d832b647019b1f0a9b9ff5d270be5688cf97b10ff",
+            "text_sha256": "f5d2f34c85a5d18696816b5af2899404493e05192146ba69d71bb316ac16cd22",
+            "characters_utf16": 48,
+            "lines": 1,
+            "body_start_utf16": 0,
+            "body_end_utf16": 48,
+            "original_note_numbers": [
+              1,
+              2
+            ]
+          },
+          {
+            "paragraph_index0": 1,
+            "raw_sha256": "d1ae50a9db116d104f4449dd79edc7c9059fce261f7808bb9e9da764361cd5b0",
+            "text_sha256": "56fe481474e401ee159b903facb7cc91c0e5195c21c167dc90ea6e36dcb6db92",
+            "characters_utf16": 135,
+            "lines": 4,
+            "body_start_utf16": 50,
+            "body_end_utf16": 185,
+            "original_note_numbers": [
+              3
+            ]
+          },
+          {
+            "paragraph_index0": 2,
+            "raw_sha256": "6f52bc54efa4898cc8dfe5dd61a8bca66dfec641e7f8c44c8208f524f3e0724b",
+            "text_sha256": "c692b3ab95706fdf6970e8256b740a6b0d1fd0828833b11a8cf9f9e5322be4bc",
+            "characters_utf16": 144,
+            "lines": 4,
+            "body_start_utf16": 187,
+            "body_end_utf16": 331,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 3,
+            "raw_sha256": "de77cf87547642a0b57e2dc9fe6c0f6a8f795b4b08fd8e3227a23aad45c18d2d",
+            "text_sha256": "6f18e416e62b2023224317620bb50fe96b1cff5df6fc7a4f26f9516b48d19e87",
+            "characters_utf16": 145,
+            "lines": 4,
+            "body_start_utf16": 333,
+            "body_end_utf16": 478,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 4,
+            "raw_sha256": "7c86514c12247f05d9eb7fbb66ca9420fc870b301616c94a010d949f62cf7f3e",
+            "text_sha256": "7babdbccad484c42a29986d923467bfe07e55fb123c82115ff2f75f61149f08d",
+            "characters_utf16": 146,
+            "lines": 4,
+            "body_start_utf16": 480,
+            "body_end_utf16": 626,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 5,
+            "raw_sha256": "9b6d9610eadee13a54127e670a48fba467c6a32c454f924ac800e0cb79876f28",
+            "text_sha256": "528d39aee86674e92d46cf6e2d1ca6d0a292caba9832b9bd30e67f1176df516a",
+            "characters_utf16": 138,
+            "lines": 4,
+            "body_start_utf16": 628,
+            "body_end_utf16": 766,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 6,
+            "raw_sha256": "a37c07a4fb9a267d83d317c2d51350256e9e8a8d08cc85afab5e17ac0acfb010",
+            "text_sha256": "a37c07a4fb9a267d83d317c2d51350256e9e8a8d08cc85afab5e17ac0acfb010",
+            "characters_utf16": 66,
+            "lines": 1,
+            "body_start_utf16": 768,
+            "body_end_utf16": 834,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 7,
+            "raw_sha256": "022ddeb22519a4e64c3af7ed07a3d86e252b86410bf35338b8135c8f654855c8",
+            "text_sha256": "022ddeb22519a4e64c3af7ed07a3d86e252b86410bf35338b8135c8f654855c8",
+            "characters_utf16": 51,
+            "lines": 1,
+            "body_start_utf16": 836,
+            "body_end_utf16": 887,
+            "original_note_numbers": []
+          }
+        ],
+        "quotation_proofs": [
+          {
+            "physical_entry1": 1,
+            "body_paragraph_index0": 1,
+            "text_sha256": "423f7b27e86ee6979b2b864abe0de577df6489f5c62a2059bdb026ad38c055a4",
+            "characters_utf16": 116,
+            "lines": 4,
+            "suffix": "(1) [3303]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 2,
+            "body_paragraph_index0": 2,
+            "text_sha256": "ff953fed6a18761fbd2bbc3af280ae237197486b207fda1fe88b69940c042d8c",
+            "characters_utf16": 133,
+            "lines": 4,
+            "suffix": "(2) [3304]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 3,
+            "body_paragraph_index0": 3,
+            "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+            "characters_utf16": 134,
+            "lines": 4,
+            "suffix": "(3) [3305]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 4,
+            "body_paragraph_index0": 4,
+            "text_sha256": "88e5d8584f3af044882ad423991665f79b753fef6a79bdc12cdfc3a906e77bc6",
+            "characters_utf16": 135,
+            "lines": 4,
+            "suffix": "(4) [3306]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 5,
+            "body_paragraph_index0": 5,
+            "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+            "characters_utf16": 127,
+            "lines": 4,
+            "suffix": "(5) [3307]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          }
+        ],
+        "whole_quote_sha256": "a28277c242ed4877bcde781d05dbd295e0e5777268cefdb3c0797a674eaddfdf",
+        "stanza_layout": [
+          {
+            "local_label": "1",
+            "publisher_label": "3303",
+            "suffix": "(1) [3303]",
+            "lines": 4
+          },
+          {
+            "local_label": "2",
+            "publisher_label": "3304",
+            "suffix": "(2) [3304]",
+            "lines": 4
+          },
+          {
+            "local_label": "3",
+            "publisher_label": "3305",
+            "suffix": "(3) [3305]",
+            "lines": 4
+          },
+          {
+            "local_label": "4",
+            "publisher_label": "3306",
+            "suffix": "(4) [3306]",
+            "lines": 4
+          },
+          {
+            "local_label": "5",
+            "publisher_label": "3307",
+            "suffix": "(5) [3307]",
+            "lines": 4
+          }
+        ],
+        "hard500_UTF16_pages": [
+          {
+            "offset": 0,
+            "limit": 500,
+            "characters_utf16": 500,
+            "text_sha256": "3a943b9ee8ccf4b7a5aa2eae2710d3c883e1325902c5c81374e21c0b7595c07a",
+            "page_start_prefix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "continuation_end_prefix_sha256": "3a943b9ee8ccf4b7a5aa2eae2710d3c883e1325902c5c81374e21c0b7595c07a",
+            "next_offset": 500,
+            "total_characters_utf16": 887
+          },
+          {
+            "offset": 500,
+            "limit": 500,
+            "characters_utf16": 387,
+            "text_sha256": "7b52ee44b6bcf418101f01cfa2e706385a78e443b9ff4e50d1caac7119a03ea0",
+            "page_start_prefix_sha256": "3a943b9ee8ccf4b7a5aa2eae2710d3c883e1325902c5c81374e21c0b7595c07a",
+            "continuation_end_prefix_sha256": "0fc0b52225f355fc68987e610729aa4b43fcbeded5edf7a67699aca4222e146d",
+            "next_offset": null,
+            "total_characters_utf16": 887
+          }
+        ],
+        "raw_display_pairs": [],
+        "root_record": {
+          "id": "tha-ap387",
+          "book": 36,
+          "start": 11012,
+          "end": 11027,
+          "title": "Phārusaphaladāyakattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 387",
+          "vri": "26–30",
+          "pts": {
+            "volume": 1,
+            "page": 296,
+            "end_page": 296
+          }
+        },
+        "root_wrapper_sha256": "a15b3a5193f80812f373cac50e5932739fc7e5b6898aebd5ec3c6ef9373e2b37",
+        "absent_scopes": [
+          "publisher_preface",
+          "chapter_summary",
+          "collection_summary",
+          "publisher_divisions",
+          "editorial_gap"
+        ],
+        "independent_API_expected_object_review": "PENDING",
+        "runtime_or_activation_approval": false
+      },
+      "tha-ap388": {
+        "publisher_poem": 386,
+        "translation_id": "ap:chapter-3/poem-386",
+        "profile_sha256_JSON_stringify": "4e46b7c6aa05a8d334bb332111cdf446864597284983971dbcfc449796c4b731",
+        "link_sha256_JSON_stringify": "fc5a23eddf21ddd89e6e80dff5f3634626687c446e441e00547383176472cc0b",
+        "parse_result_keys": [
+          "title",
+          "text",
+          "translator_notes",
+          "publisher_paratext"
+        ],
+        "title": "Valliphaladāyaka",
+        "body_sha256": "915062bff06bcd35ea58b2a781e3cd2457956cfbc661f4755562d14ad9342690",
+        "body_characters_utf16": 1063,
+        "notes_sha256_JSON_stringify": "5be9fda45221c20716af0a284d91262b67f7f111904396088127761f26b4ab7f",
+        "note_numbers": [
+          1,
+          2,
+          3
+        ],
+        "note_owners": [
+          {
+            "number": 1,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              43,
+              44
+            ],
+            "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+            "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+            "characters_utf16": 189
+          },
+          {
+            "number": 2,
+            "owner_paragraph_index0": 0,
+            "owner_kind": "poem_heading",
+            "raw_definition_lines": [
+              45,
+              46
+            ],
+            "raw_content_sha256": "440ac9e9d17c4db8c32cec82899b04b26f8438e8bb84e99ed8c54d6000446bf8",
+            "text_sha256": "440ac9e9d17c4db8c32cec82899b04b26f8438e8bb84e99ed8c54d6000446bf8",
+            "characters_utf16": 22
+          },
+          {
+            "number": 3,
+            "owner_paragraph_index0": 2,
+            "owner_kind": "poem_stanza",
+            "raw_definition_lines": [
+              47,
+              47
+            ],
+            "raw_content_sha256": "2fd9fc7e3da5fab94a3b8db1ef480505649c6088f66c786a80573b8e4c1af622",
+            "text_sha256": "ecb197936771f399487c2e7208e2c1b52f0cb67c613780ca77b78486bfd090dd",
+            "characters_utf16": 176
+          }
+        ],
+        "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "paratext_characters_utf16": 0,
+        "paratext_note_numbers": [],
+        "body_paragraphs": [
+          {
+            "paragraph_index0": 0,
+            "raw_sha256": "50b0cd618f08a5fd8089d12b64304cde2414af9944cf7b81bb26dcd2108c8f48",
+            "text_sha256": "f7041be003bdcd83f7566da7d355b61b4d02abcdeb7191249f78d7fec5af843b",
+            "characters_utf16": 46,
+            "lines": 1,
+            "body_start_utf16": 0,
+            "body_end_utf16": 46,
+            "original_note_numbers": [
+              1,
+              2
+            ]
+          },
+          {
+            "paragraph_index0": 1,
+            "raw_sha256": "898da01d9931e1009bd8c5709ca5000239b0e63d63d525553300148356b0eec3",
+            "text_sha256": "45eebf6ad985191120b813dc241d73f56616373fe5ec2a4252a41db138a85a1b",
+            "characters_utf16": 156,
+            "lines": 4,
+            "body_start_utf16": 48,
+            "body_end_utf16": 204,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 2,
+            "raw_sha256": "e233e56a7f1f426c2271a63558d028b185e7c5a1509c0e0f2208caeadf962254",
+            "text_sha256": "169bbb2ade3ab759ba133922aff366eef5786e712f9e296727696210b04ff468",
+            "characters_utf16": 156,
+            "lines": 4,
+            "body_start_utf16": 206,
+            "body_end_utf16": 362,
+            "original_note_numbers": [
+              3
+            ]
+          },
+          {
+            "paragraph_index0": 3,
+            "raw_sha256": "bc11f7eb5f99783d319b523648e2c784cac92aef57fe8ad4d03741fa561dc315",
+            "text_sha256": "f349d8275e1739f95f9f49479abb4a862ab49856e0ae217662d7179b7ed3cac2",
+            "characters_utf16": 147,
+            "lines": 4,
+            "body_start_utf16": 364,
+            "body_end_utf16": 511,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 4,
+            "raw_sha256": "193873481d2a6a63eb993ba279f16f21f7ca06a2ab94257726dd76393266f18e",
+            "text_sha256": "1a709465604eeeff5646af0ba0e87094257696a0d4f7624899432f80644e352e",
+            "characters_utf16": 145,
+            "lines": 4,
+            "body_start_utf16": 513,
+            "body_end_utf16": 658,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 5,
+            "raw_sha256": "6481f7b8436689c9206b4d236012d9059630a37603eb37579c3e5d952b8eda43",
+            "text_sha256": "9185ce3e9bab1b2a80e9fbd24394302db30d1bd9e48a17bdf97ddaf5ab995e8b",
+            "characters_utf16": 146,
+            "lines": 4,
+            "body_start_utf16": 660,
+            "body_end_utf16": 806,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 6,
+            "raw_sha256": "d691366e91231ec2bf5f18cd275b69c783c90136dd0bf34f964465fdf8f496a1",
+            "text_sha256": "b1ac20dd24d427c9939503cd5bcf299b8cd9b01bd44adcee8c1369321639262d",
+            "characters_utf16": 138,
+            "lines": 4,
+            "body_start_utf16": 808,
+            "body_end_utf16": 946,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 7,
+            "raw_sha256": "c82c071905e64b068b42a05aae9132a5285f9d9642055a254a8b78f3d032fcda",
+            "text_sha256": "c82c071905e64b068b42a05aae9132a5285f9d9642055a254a8b78f3d032fcda",
+            "characters_utf16": 64,
+            "lines": 1,
+            "body_start_utf16": 948,
+            "body_end_utf16": 1012,
+            "original_note_numbers": []
+          },
+          {
+            "paragraph_index0": 8,
+            "raw_sha256": "ee9f8e0b219f5f8f23aa5eee87d6bc52493b2a1f1bb5f5ece4ba18ec089a7283",
+            "text_sha256": "ee9f8e0b219f5f8f23aa5eee87d6bc52493b2a1f1bb5f5ece4ba18ec089a7283",
+            "characters_utf16": 49,
+            "lines": 1,
+            "body_start_utf16": 1014,
+            "body_end_utf16": 1063,
+            "original_note_numbers": []
+          }
+        ],
+        "quotation_proofs": [
+          {
+            "physical_entry1": 1,
+            "body_paragraph_index0": 1,
+            "text_sha256": "d76cc9fecc47329b01927a6aec0c87dc7695326b77e23478a8e3999c520dcd51",
+            "characters_utf16": 145,
+            "lines": 4,
+            "suffix": "(1) [3308]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 2,
+            "body_paragraph_index0": 2,
+            "text_sha256": "b5e23bfb14b569d845de2f102c37fcd6933575f7e154f4ec69d1429c8fb3983f",
+            "characters_utf16": 137,
+            "lines": 4,
+            "suffix": "(2) [3309]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 3,
+            "body_paragraph_index0": 3,
+            "text_sha256": "ad1e780e72e178dbd800b7d4d2cd59131f16b862569c02380a418a2a475f8530",
+            "characters_utf16": 136,
+            "lines": 4,
+            "suffix": "(3) [3310]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 4,
+            "body_paragraph_index0": 4,
+            "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+            "characters_utf16": 134,
+            "lines": 4,
+            "suffix": "(4) [3311]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 5,
+            "body_paragraph_index0": 5,
+            "text_sha256": "88e5d8584f3af044882ad423991665f79b753fef6a79bdc12cdfc3a906e77bc6",
+            "characters_utf16": 135,
+            "lines": 4,
+            "suffix": "(5) [3312]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          },
+          {
+            "physical_entry1": 6,
+            "body_paragraph_index0": 6,
+            "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+            "characters_utf16": 127,
+            "lines": 4,
+            "suffix": "(6) [3313]",
+            "domain": "Original physical stanza wording only; remove original note calls and one exact terminal suffix, retain all bracketed translator words."
+          }
+        ],
+        "whole_quote_sha256": "9f977a849f35b587460f4f1544e30a49256e1892755b639d56626f46e59d569d",
+        "stanza_layout": [
+          {
+            "local_label": "1",
+            "publisher_label": "3308",
+            "suffix": "(1) [3308]",
+            "lines": 4
+          },
+          {
+            "local_label": "2",
+            "publisher_label": "3309",
+            "suffix": "(2) [3309]",
+            "lines": 4
+          },
+          {
+            "local_label": "3",
+            "publisher_label": "3310",
+            "suffix": "(3) [3310]",
+            "lines": 4
+          },
+          {
+            "local_label": "4",
+            "publisher_label": "3311",
+            "suffix": "(4) [3311]",
+            "lines": 4
+          },
+          {
+            "local_label": "5",
+            "publisher_label": "3312",
+            "suffix": "(5) [3312]",
+            "lines": 4
+          },
+          {
+            "local_label": "6",
+            "publisher_label": "3313",
+            "suffix": "(6) [3313]",
+            "lines": 4
+          }
+        ],
+        "hard500_UTF16_pages": [
+          {
+            "offset": 0,
+            "limit": 500,
+            "characters_utf16": 500,
+            "text_sha256": "b9c26e7cdfc071618302f8c86225438f0697468cd24cdf20afe5a28de032b5b7",
+            "page_start_prefix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "continuation_end_prefix_sha256": "b9c26e7cdfc071618302f8c86225438f0697468cd24cdf20afe5a28de032b5b7",
+            "next_offset": 500,
+            "total_characters_utf16": 1063
+          },
+          {
+            "offset": 500,
+            "limit": 500,
+            "characters_utf16": 500,
+            "text_sha256": "e70179bbc0e0ec2f50d844d2c00cbd3cc953df084c4e8f458e54dbe6f7729a90",
+            "page_start_prefix_sha256": "b9c26e7cdfc071618302f8c86225438f0697468cd24cdf20afe5a28de032b5b7",
+            "continuation_end_prefix_sha256": "74ac2d6fcb75ff5177d9dd456ad161ac15f1136fc8dd4820de80d74033cffc08",
+            "next_offset": 1000,
+            "total_characters_utf16": 1063
+          },
+          {
+            "offset": 1000,
+            "limit": 500,
+            "characters_utf16": 63,
+            "text_sha256": "db4637bdfc5ca4b4190efdf890a023a6c768d14cbf60e5bc1e679222a833e48e",
+            "page_start_prefix_sha256": "74ac2d6fcb75ff5177d9dd456ad161ac15f1136fc8dd4820de80d74033cffc08",
+            "continuation_end_prefix_sha256": "915062bff06bcd35ea58b2a781e3cd2457956cfbc661f4755562d14ad9342690",
+            "next_offset": null,
+            "total_characters_utf16": 1063
+          }
+        ],
+        "raw_display_pairs": [],
+        "root_record": {
+          "id": "tha-ap388",
+          "book": 36,
+          "start": 11027,
+          "end": 11045,
+          "title": "Valliphaladāyakattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 388",
+          "vri": "31–36",
+          "pts": {
+            "volume": 1,
+            "page": 296,
+            "end_page": 297
+          }
+        },
+        "root_wrapper_sha256": "5b2b5398d97ac4c2a3fc8717efab483f2750554762f48c587ee33fe4915ed202",
+        "absent_scopes": [
+          "publisher_preface",
+          "chapter_summary",
+          "collection_summary",
+          "publisher_divisions",
+          "editorial_gap"
+        ],
+        "independent_API_expected_object_review": "PENDING",
+        "runtime_or_activation_approval": false
+      }
+    }
+  },
+  "source_expected_metadata_domains": {
+    "hash_encoding": "SHA256 UTF8. JSON_stringify fields use compact insertion-ordered literalUnicode JSON. No Unicode normalization.",
+    "page_domain": "Hard500 UTF16 slice of complete marker-preserving body. Hash start/end prefixes separately. Notes and separate chapter heading excluded.",
+    "quote_domain": "Only source physical stanza wording; remove original note calls and one exact terminal printed suffix; preserve translator brackets."
+  },
+  "immutable_original_expected_metadata": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-source-preparation/v1/API_EXPECTED_GOLDENS.candidate.json",
+    "bytes": 59858,
+    "sha256": "7ab3a70a8626fe2699c89875ae4e5cac4d11993b3993262a5eaf805a44da6bc7"
+  },
+  "original_candidate_annotations_are_historical": true,
+  "expected_metadata_values_independently_reviewed_by": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-independent-source-review/INDEPENDENT_REVIEW.json",
+    "bytes": 14790,
+    "sha256": "9abaf9f6515d97d066dbb3862cfd498b491ec96d80f4ba24b49da9da42ca7449"
+  },
+  "source_packet_manifest": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-source-preparation/v1/MANIFEST.json",
+    "bytes": 3724,
+    "sha256": "966386705480c8a87a928d7a11baae51a973de46242994776e1ff5c07d558d9d"
+  },
+  "specific_rights_artifacts": {
+    "LICENSE.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+    },
+    "src/_pages/about.md": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+    },
+    "src/_includes/site/footer.njk": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+    },
+    "src/_includes/layouts/epub-metadata.xml": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+    },
+    "src/_data/site.json": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "83f16121b162cff069e526cfc475edde1695f2cd",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+    },
+    "src/_poems/_poems.json": {
+      "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "git_blob": "da2e2f144856a7244b5c204464a596bd49af85c5",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+    }
+  },
+  "per_poem_rights": {
+    "tha-ap383": {
+      "publisher_poem": 381,
+      "path": "src/_poems/chapter-3/poem-381.md",
+      "raw_sha256": "2f3020478e27fabb0ad40b94ce45659d4e10db7c91a509455d3f949de9e640d5",
+      "translator": "Jonathan S. Walters",
+      "publisher": "Jonathan S. Walters and Whitman College",
+      "year_from_pinned_site_description": 2017,
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "rights_inputs": {
+        "LICENSE.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+          "bytes": 19093,
+          "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+        },
+        "src/_pages/about.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+          "bytes": 12404,
+          "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+        },
+        "src/_includes/site/footer.njk": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+          "bytes": 555,
+          "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+        },
+        "src/_includes/layouts/epub-metadata.xml": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+          "bytes": 603,
+          "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+        },
+        "src/_data/site.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "83f16121b162cff069e526cfc475edde1695f2cd",
+          "bytes": 659,
+          "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+        },
+        "src/_poems/_poems.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "da2e2f144856a7244b5c204464a596bd49af85c5",
+          "bytes": 135,
+          "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+        }
+      },
+      "applies_to_poem_and_notes": "About157–159 explicitly covers translation text; global poem routing/layout and footer, EPUB creator/publisher/rights and LICENSE agree; no per-poem replacement grant found. Generic site.json BY4 field must not override translation-specific NC-SA notices.",
+      "attribution": "Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints. No endorsement is implied.",
+      "no_commercial_audio_image_font_clearance": true,
+      "proposed_policy": "Metadata/hash-only bundle; full English/notes stay external/private candidate material and any later live use requires project licensing/curation approval.",
+      "conditions": [
+        "Attribution and supplied copyright/source/license notices",
+        "NC restriction; applicable ShareAlike for adaptations",
+        "Identify modifications and retain prior modification notices",
+        "No additional downstream restrictions"
+      ],
+      "status": "SOURCE_NOTICE_RECORD_PENDING_INDEPENDENT_REVIEW"
+    },
+    "tha-ap385": {
+      "publisher_poem": 383,
+      "path": "src/_poems/chapter-3/poem-383.md",
+      "raw_sha256": "6a67971063c6c4dc4fd4a45c0d1b913318b1e820d26b4b9991772ad61a6cc812",
+      "translator": "Jonathan S. Walters",
+      "publisher": "Jonathan S. Walters and Whitman College",
+      "year_from_pinned_site_description": 2017,
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "rights_inputs": {
+        "LICENSE.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+          "bytes": 19093,
+          "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+        },
+        "src/_pages/about.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+          "bytes": 12404,
+          "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+        },
+        "src/_includes/site/footer.njk": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+          "bytes": 555,
+          "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+        },
+        "src/_includes/layouts/epub-metadata.xml": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+          "bytes": 603,
+          "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+        },
+        "src/_data/site.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "83f16121b162cff069e526cfc475edde1695f2cd",
+          "bytes": 659,
+          "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+        },
+        "src/_poems/_poems.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "da2e2f144856a7244b5c204464a596bd49af85c5",
+          "bytes": 135,
+          "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+        }
+      },
+      "applies_to_poem_and_notes": "About157–159 explicitly covers translation text; global poem routing/layout and footer, EPUB creator/publisher/rights and LICENSE agree; no per-poem replacement grant found. Generic site.json BY4 field must not override translation-specific NC-SA notices.",
+      "attribution": "Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints. No endorsement is implied.",
+      "no_commercial_audio_image_font_clearance": true,
+      "proposed_policy": "Metadata/hash-only bundle; full English/notes stay external/private candidate material and any later live use requires project licensing/curation approval.",
+      "conditions": [
+        "Attribution and supplied copyright/source/license notices",
+        "NC restriction; applicable ShareAlike for adaptations",
+        "Identify modifications and retain prior modification notices",
+        "No additional downstream restrictions"
+      ],
+      "status": "SOURCE_NOTICE_RECORD_PENDING_INDEPENDENT_REVIEW"
+    },
+    "tha-ap386": {
+      "publisher_poem": 384,
+      "path": "src/_poems/chapter-3/poem-384.md",
+      "raw_sha256": "05d26e53292e293381d9235bf4fa4a114c0452e529f3c81197fa494827463ea1",
+      "translator": "Jonathan S. Walters",
+      "publisher": "Jonathan S. Walters and Whitman College",
+      "year_from_pinned_site_description": 2017,
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "rights_inputs": {
+        "LICENSE.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+          "bytes": 19093,
+          "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+        },
+        "src/_pages/about.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+          "bytes": 12404,
+          "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+        },
+        "src/_includes/site/footer.njk": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+          "bytes": 555,
+          "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+        },
+        "src/_includes/layouts/epub-metadata.xml": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+          "bytes": 603,
+          "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+        },
+        "src/_data/site.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "83f16121b162cff069e526cfc475edde1695f2cd",
+          "bytes": 659,
+          "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+        },
+        "src/_poems/_poems.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "da2e2f144856a7244b5c204464a596bd49af85c5",
+          "bytes": 135,
+          "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+        }
+      },
+      "applies_to_poem_and_notes": "About157–159 explicitly covers translation text; global poem routing/layout and footer, EPUB creator/publisher/rights and LICENSE agree; no per-poem replacement grant found. Generic site.json BY4 field must not override translation-specific NC-SA notices.",
+      "attribution": "Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints. No endorsement is implied.",
+      "no_commercial_audio_image_font_clearance": true,
+      "proposed_policy": "Metadata/hash-only bundle; full English/notes stay external/private candidate material and any later live use requires project licensing/curation approval.",
+      "conditions": [
+        "Attribution and supplied copyright/source/license notices",
+        "NC restriction; applicable ShareAlike for adaptations",
+        "Identify modifications and retain prior modification notices",
+        "No additional downstream restrictions"
+      ],
+      "status": "SOURCE_NOTICE_RECORD_PENDING_INDEPENDENT_REVIEW"
+    },
+    "tha-ap387": {
+      "publisher_poem": 385,
+      "path": "src/_poems/chapter-3/poem-385.md",
+      "raw_sha256": "6490e8e6fb6f07cbf1f18ad7b9dfba7a07b0773830f0d2dd0057f3f935168140",
+      "translator": "Jonathan S. Walters",
+      "publisher": "Jonathan S. Walters and Whitman College",
+      "year_from_pinned_site_description": 2017,
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "rights_inputs": {
+        "LICENSE.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+          "bytes": 19093,
+          "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+        },
+        "src/_pages/about.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+          "bytes": 12404,
+          "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+        },
+        "src/_includes/site/footer.njk": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+          "bytes": 555,
+          "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+        },
+        "src/_includes/layouts/epub-metadata.xml": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+          "bytes": 603,
+          "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+        },
+        "src/_data/site.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "83f16121b162cff069e526cfc475edde1695f2cd",
+          "bytes": 659,
+          "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+        },
+        "src/_poems/_poems.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "da2e2f144856a7244b5c204464a596bd49af85c5",
+          "bytes": 135,
+          "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+        }
+      },
+      "applies_to_poem_and_notes": "About157–159 explicitly covers translation text; global poem routing/layout and footer, EPUB creator/publisher/rights and LICENSE agree; no per-poem replacement grant found. Generic site.json BY4 field must not override translation-specific NC-SA notices.",
+      "attribution": "Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints. No endorsement is implied.",
+      "no_commercial_audio_image_font_clearance": true,
+      "proposed_policy": "Metadata/hash-only bundle; full English/notes stay external/private candidate material and any later live use requires project licensing/curation approval.",
+      "conditions": [
+        "Attribution and supplied copyright/source/license notices",
+        "NC restriction; applicable ShareAlike for adaptations",
+        "Identify modifications and retain prior modification notices",
+        "No additional downstream restrictions"
+      ],
+      "status": "SOURCE_NOTICE_RECORD_PENDING_INDEPENDENT_REVIEW"
+    },
+    "tha-ap388": {
+      "publisher_poem": 386,
+      "path": "src/_poems/chapter-3/poem-386.md",
+      "raw_sha256": "b35e1657e1f0036ebf5de1c5f82ad47b15556aa787439aebaa728d2092cfa835",
+      "translator": "Jonathan S. Walters",
+      "publisher": "Jonathan S. Walters and Whitman College",
+      "year_from_pinned_site_description": 2017,
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "rights_inputs": {
+        "LICENSE.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "4fd532b173b207f8bb96c861f58eaec49fd105b7",
+          "bytes": 19093,
+          "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+        },
+        "src/_pages/about.md": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "70ae05d036d0440a69c0fb8d6d79cf478468ad54",
+          "bytes": 12404,
+          "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+        },
+        "src/_includes/site/footer.njk": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c",
+          "bytes": 555,
+          "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+        },
+        "src/_includes/layouts/epub-metadata.xml": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "3d3605879c096daea5cda3c3399ca93e771e6ec5",
+          "bytes": 603,
+          "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+        },
+        "src/_data/site.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "83f16121b162cff069e526cfc475edde1695f2cd",
+          "bytes": 659,
+          "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+        },
+        "src/_poems/_poems.json": {
+          "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+          "git_blob": "da2e2f144856a7244b5c204464a596bd49af85c5",
+          "bytes": 135,
+          "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+        }
+      },
+      "applies_to_poem_and_notes": "About157–159 explicitly covers translation text; global poem routing/layout and footer, EPUB creator/publisher/rights and LICENSE agree; no per-poem replacement grant found. Generic site.json BY4 field must not override translation-specific NC-SA notices.",
+      "attribution": "Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints. No endorsement is implied.",
+      "no_commercial_audio_image_font_clearance": true,
+      "proposed_policy": "Metadata/hash-only bundle; full English/notes stay external/private candidate material and any later live use requires project licensing/curation approval.",
+      "conditions": [
+        "Attribution and supplied copyright/source/license notices",
+        "NC restriction; applicable ShareAlike for adaptations",
+        "Identify modifications and retain prior modification notices",
+        "No additional downstream restrictions"
+      ],
+      "status": "SOURCE_NOTICE_RECORD_PENDING_INDEPENDENT_REVIEW"
+    }
+  },
+  "totals": {
+    "poems": 5,
+    "body_paragraphs": 43,
+    "physical_stanza_entries": 28,
+    "poem_notes": 20,
+    "display_pairs": 0,
+    "pages500": 13,
+    "body_characters_utf16": 5004,
+    "note_free_paratext": 1,
+    "summary": 0
+  },
+  "required_visible_qualifications": [
+    {
+      "id": "tha-ap386",
+      "publisher_poem": 384,
+      "note_number": 4,
+      "source_issue": "unfinished_parenthesis_at_original_eof",
+      "verbatim_note_sha256": "f05875673e20155d7db9717238d066cbb595f88618d4ac4a7672caec8854fc29",
+      "mapping_notice": "Notes3–4 belong to stanza1; preserve the forest gloss and the original wave-leafed-fig botanical alternatives, including typography. Note4 ends with an unclosed botanical parenthesis in the pinned original; retain it exactly and require independent apparatus-curation judgment, never silently close or complete it."
+    }
+  ],
+  "qualification_note_hash_domain": "SHA256 UTF8 of the finite rendered translator_notes[number=4].text with original wording and punctuation; raw Markdown content SHA is separately retained in source goldens.",
+  "all_original_notes_remain_poem_owned": true,
+  "paratext_notes": [],
+  "publisher381_unnoted_heading_only": true,
+  "publisher_preface_or_summary_descriptors": false,
+  "previous_holds_remain_unchanged": true,
+  "retained_holds_publishers": [
+    358,
+    361,
+    365,
+    366,
+    367,
+    368,
+    373,
+    379,
+    380,
+    382,
+    387,
+    388,
+    389,
+    390
+  ],
+  "whole_chapter_English_approval": false,
+  "runtime_API_activation_or_release_approval": false
+}

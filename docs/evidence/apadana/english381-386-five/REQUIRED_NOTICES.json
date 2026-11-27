@@ -1,0 +1,111 @@
+{
+  "schema": "thera381-386-five-required-notices-v1",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "translator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "exact_rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "required_licence_and_provenance_notice": "Preserve source creator, publisher, copyright, specific CC BY-NC-SA 4.0 grant and licence URL, warranty/modification notices, public source URL and exact pinned revision. Generic site.json CC-BY does not override the translation-specific NonCommercial/ShareAlike grant. No warranty or endorsement is implied.",
+  "required_change_notice": "Finite presentation removes only reviewed Markdown escapes, emphasis syntax and abbreviation wrappers. Original words, punctuation, interpolations, order, hard line breaks, printed suffixes and same-number note ownership remain. Publisher381 chapter heading stays separate unnoted paratext. No missing words, punctuation or alternate-edition refrains are generated; retain the exact per-poem qualification selected below.",
+  "required_general_edition_notice": "Complete publisher-edition poems, not line-complete VRI or line/word equivalence, complete-chapter coverage or approval of the wider catalogue. Keep VRI peyyala, editorial notes, publisher numbering and independent edition order unchanged.",
+  "per_poem_notices": {
+    "tha-ap383": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 378; the BJTS brace heading and publisher file/order are 381. Canonical tha-ap383 is a separately reviewed literal identity, not a general numbering rule.",
+      "Publisher Avaṇṭa is an edition-specific title/fruit reading beside VRI Avaṭa; the VRI variant note records avaṇṭaṃ. Note2 identifies parallel poems elsewhere; neither their words nor identities may substitute for this poem.",
+      "The separate chapter39 heading is unnoted publisher paratext. Notes1–2 belong to the poem heading; notes3–4 belong to its first stanza. All four remain poem-owned, with no invented note-owning preface or summary.",
+      "The full publisher attainment refrains are ordered good-presence, burnt-defilements, analytical modes; the VRI witness orders burnt-defilements, good-presence, analytical modes. Preserve this difference without reordering either source."
+    ],
+    "tha-ap385": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 380; the BJTS brace heading and publisher file/order are 383. Canonical tha-ap385 is a separately reviewed literal identity, not a general numbering rule.",
+      "Publisher note2 says BJTS omits phala from the title. Preserve the published title and note rather than normalizing to a different edition. Notes3–4 belong to stanza1 and notes5–6 to stanza2.",
+      "The VRI witness abbreviates the final attainment refrains with peyyāla. The publisher prints them in full and places the good-presence stanza before the burnt-defilements stanza; preserve both editions without invented alignment."
+    ],
+    "tha-ap386": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 381; the BJTS brace heading and publisher file/order are 384. Canonical tha-ap386 is a separately reviewed literal identity, not a general numbering rule.",
+      "Notes3–4 belong to stanza1; preserve the forest gloss and the original wave-leafed-fig botanical alternatives, including typography. Note4 ends with an unclosed botanical parenthesis in the pinned original; retain it exactly and require independent apparatus-curation judgment, never silently close or complete it.",
+      "The VRI witness abbreviates the final attainment refrains with peyyāla. The publisher prints them in full and places the good-presence stanza before the burnt-defilements stanza; preserve both editions without invented alignment."
+    ],
+    "tha-ap387": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 382; the BJTS brace heading and publisher file/order are 385. Canonical tha-ap387 is a separately reviewed literal identity, not a general numbering rule.",
+      "Note3 belongs to stanza1 and retains disputed phārusa botanical identifications; do not select or silently correct one.",
+      "The VRI witness abbreviates the final attainment refrains with peyyāla. The publisher prints them in full and places the good-presence stanza before the burnt-defilements stanza; preserve both editions without invented alignment."
+    ],
+    "tha-ap388": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 383; the BJTS brace heading and publisher file/order are 386. Canonical tha-ap388 is a separately reviewed literal identity, not a general numbering rule.",
+      "Note3 belongs to stanza2 and identifies valli generically as a creeper/vine; no more specific fruit is invented.",
+      "The VRI witness abbreviates the final attainment refrains with peyyāla. The publisher prints them in full and places the good-presence stanza before the burnt-defilements stanza; preserve both editions without invented alignment."
+    ]
+  },
+  "required_visible_qualifications": [
+    {
+      "id": "tha-ap386",
+      "publisher_poem": 384,
+      "note_number": 4,
+      "source_issue": "unfinished_parenthesis_at_original_eof",
+      "verbatim_note_sha256": "f05875673e20155d7db9717238d066cbb595f88618d4ac4a7672caec8854fc29",
+      "mapping_notice": "Notes3–4 belong to stanza1; preserve the forest gloss and the original wave-leafed-fig botanical alternatives, including typography. Note4 ends with an unclosed botanical parenthesis in the pinned original; retain it exactly and require independent apparatus-curation judgment, never silently close or complete it."
+    }
+  ],
+  "rights_policy": "Metadata and hashes only in repository/runtime catalogue; English bodies, notes and lossless/presentation fixtures stay external or are fetched live from the exact official pinned source. No commercial/media/art/endorsement or wider-catalogue rights inferred from availability.",
+  "retained_holds_publishers": [
+    358,
+    361,
+    365,
+    366,
+    367,
+    368,
+    373,
+    379,
+    380,
+    382,
+    387,
+    388,
+    389,
+    390
+  ],
+  "whole_chapter_English_approval": false,
+  "source_rights_or_runtime_activation_approval_granted_by_this_document": false
+}

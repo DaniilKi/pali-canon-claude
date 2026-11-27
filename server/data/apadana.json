@@ -38,7 +38,7 @@
       }
     ],
     "rights_note": "Explicit translation grant in About, LICENSE.md, footer and ePub metadata is CC BY-NC-SA 4.0. Conflicting generic CC-BY site.json does not relax those terms. No warranty or endorsement is implied.",
-    "policy": "Live only, 375 finite complete publisher-edition poems (40 Therī and 335 explicitly mapped Therā); original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or approval of the wider Apadāna catalogue; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI."
+    "policy": "Live only, 380 finite complete publisher-edition poems (40 Therī and 340 explicitly mapped Therā); original publisher preface, chapter/collection summaries, recitation divisions and their notes separately scoped; no line-complete VRI claim or approval of the wider Apadāna catalogue; bundle metadata and hashes only, never translation bodies, notes or prefaces. Complete raw/body/notes/paratext/root pins fail closed on drift. Publisher PTS/BJTS recension is not silently substituted for VRI."
   },
   "vri_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
   "held": {},
@@ -40342,6 +40342,443 @@
       ],
       "publisher_heading_sha256": "7c6a7af6e8ffadee4f98bf26b08fe1085e9594552532eccbe66a17037074d690",
       "english": "Sumanatālavaṇṭiya",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap383": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-381.md",
+      "id": "tha-ap383",
+      "publisher_chapter": "chapter-3",
+      "poem": 381,
+      "verses": [
+        3278,
+        3283
+      ],
+      "root_verses": [
+        1,
+        6
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-381/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-381/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-381.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Avaṇṭaphaladāyaka",
+      "reference": "Therā Apadāna publisher poem 381; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "2f3020478e27fabb0ad40b94ce45659d4e10db7c91a509455d3f949de9e640d5",
+      "body_sha256": "e7ee77ce2e706d24b9441775862c1f6918f95103404cbded1b5697e5b3068f3c",
+      "notes_sha256": "42589d46522d064b342fd8af8d9435c0b9debeb0343d9f9f01a588b4dff03744",
+      "paratext_sha256": "afa7b7e95dd377dbc049aee09cf1a76e75d91c022214d040a1ff011c8203ac65",
+      "root_sha256": "a4d69060ffb79d28bc08a770c982e1a138444a85d51b4c774cbb3d42a4b84702",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3278",
+          "suffix": "(1) [3278]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3279",
+          "suffix": "(2) [3279]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3280",
+          "suffix": "(3) [3280]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "3281",
+          "suffix": "(4) [3281]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "3282",
+          "suffix": "(5) [3282]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "3283",
+          "suffix": "(6) [3283]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+        "The printed PTS main heading is 378; the BJTS brace heading and publisher file/order are 381. Canonical tha-ap383 is a separately reviewed literal identity, not a general numbering rule.",
+        "Publisher Avaṇṭa is an edition-specific title/fruit reading beside VRI Avaṭa; the VRI variant note records avaṇṭaṃ. Note2 identifies parallel poems elsewhere; neither their words nor identities may substitute for this poem.",
+        "The separate chapter39 heading is unnoted publisher paratext. Notes1–2 belong to the poem heading; notes3–4 belong to its first stanza. All four remain poem-owned, with no invented note-owning preface or summary.",
+        "The full publisher attainment refrains are ordered good-presence, burnt-defilements, analytical modes; the VRI witness orders burnt-defilements, good-presence, analytical modes. Preserve this difference without reordering either source."
+      ],
+      "publisher_verse_labels": [
+        "3278",
+        "3279",
+        "3280",
+        "3281",
+        "3282",
+        "3283"
+      ],
+      "publisher_heading_sha256": "f7edd23d7fe761a6791f9cf8474497512254aedb5c26c33c4f497e70b709914a",
+      "english": "Avaṇṭaphaladāyaka",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap385": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-383.md",
+      "id": "tha-ap385",
+      "publisher_chapter": "chapter-3",
+      "poem": 383,
+      "verses": [
+        3292,
+        3297
+      ],
+      "root_verses": [
+        15,
+        20
+      ],
+      "note_count": 6,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-383/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-383/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-383.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Udumbaraphaladāyaka",
+      "reference": "Therā Apadāna publisher poem 383; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "6a67971063c6c4dc4fd4a45c0d1b913318b1e820d26b4b9991772ad61a6cc812",
+      "body_sha256": "71a337dbcfacaee67212a3f1f38dc0fcdf32e6daf7d0bc61dfff448f6ba0f3e5",
+      "notes_sha256": "e67b114ccc6110074f9070027141e1fc600056ac2a834aafe846b931c253337b",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "47b449fc61bf0f76d0331d9b7d2457d573310309dbe154ce73ba143a8afe892e",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3292",
+          "suffix": "(1) [3292]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3293",
+          "suffix": "(2) [3293]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3294",
+          "suffix": "(3) [3294]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "3295",
+          "suffix": "(4) [3295]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "3296",
+          "suffix": "(5) [3296]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "3297",
+          "suffix": "(6) [3297]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+        "The printed PTS main heading is 380; the BJTS brace heading and publisher file/order are 383. Canonical tha-ap385 is a separately reviewed literal identity, not a general numbering rule.",
+        "Publisher note2 says BJTS omits phala from the title. Preserve the published title and note rather than normalizing to a different edition. Notes3–4 belong to stanza1 and notes5–6 to stanza2.",
+        "The VRI witness abbreviates the final attainment refrains with peyyāla. The publisher prints them in full and places the good-presence stanza before the burnt-defilements stanza; preserve both editions without invented alignment."
+      ],
+      "publisher_verse_labels": [
+        "3292",
+        "3293",
+        "3294",
+        "3295",
+        "3296",
+        "3297"
+      ],
+      "publisher_heading_sha256": "4113f4ce67ac274a5dd6b34334b5f7ee03a3ad415516c82e7fe83a55a1262171",
+      "english": "Udumbaraphaladāyaka",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap386": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-384.md",
+      "id": "tha-ap386",
+      "publisher_chapter": "chapter-3",
+      "poem": 384,
+      "verses": [
+        3298,
+        3302
+      ],
+      "root_verses": [
+        21,
+        25
+      ],
+      "note_count": 4,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-384/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-384/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-384.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Pilakkhaphaladāyaka",
+      "reference": "Therā Apadāna publisher poem 384; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "05d26e53292e293381d9235bf4fa4a114c0452e529f3c81197fa494827463ea1",
+      "body_sha256": "80995d007a8a3a8ffbe94c3e2d6aa94bb6c1e68010771e315bca2916fd969d88",
+      "notes_sha256": "a63a26b9fdf041be8366f6088b736f10929a823fcb361cfaa58e9ef085e5df77",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "5573df6754147e333f34e973f4bdbe588303c8f2bb778406ca92d3fac6390b7f",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3298",
+          "suffix": "(1) [3298]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3299",
+          "suffix": "(2) [3299]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3300",
+          "suffix": "(3) [3300]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "3301",
+          "suffix": "(4) [3301]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "3302",
+          "suffix": "(5) [3302]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+        "The printed PTS main heading is 381; the BJTS brace heading and publisher file/order are 384. Canonical tha-ap386 is a separately reviewed literal identity, not a general numbering rule.",
+        "Notes3–4 belong to stanza1; preserve the forest gloss and the original wave-leafed-fig botanical alternatives, including typography. Note4 ends with an unclosed botanical parenthesis in the pinned original; retain it exactly and require independent apparatus-curation judgment, never silently close or complete it.",
+        "The VRI witness abbreviates the final attainment refrains with peyyāla. The publisher prints them in full and places the good-presence stanza before the burnt-defilements stanza; preserve both editions without invented alignment."
+      ],
+      "publisher_verse_labels": [
+        "3298",
+        "3299",
+        "3300",
+        "3301",
+        "3302"
+      ],
+      "publisher_heading_sha256": "18ddbff2dba5f730b910569f2aee9027b197b8db56580e8052104db1330a26b4",
+      "english": "Pilakkhaphaladāyaka",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap387": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-385.md",
+      "id": "tha-ap387",
+      "publisher_chapter": "chapter-3",
+      "poem": 385,
+      "verses": [
+        3303,
+        3307
+      ],
+      "root_verses": [
+        26,
+        30
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-385/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-385/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-385.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Phārusaphaladāyaka",
+      "reference": "Therā Apadāna publisher poem 385; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "6490e8e6fb6f07cbf1f18ad7b9dfba7a07b0773830f0d2dd0057f3f935168140",
+      "body_sha256": "0fc0b52225f355fc68987e610729aa4b43fcbeded5edf7a67699aca4222e146d",
+      "notes_sha256": "b0b8b4c7f7867ba0ee24558f43872e9aeb70600e430e94c091c60712d7eeeadf",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "a15b3a5193f80812f373cac50e5932739fc7e5b6898aebd5ec3c6ef9373e2b37",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3303",
+          "suffix": "(1) [3303]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3304",
+          "suffix": "(2) [3304]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3305",
+          "suffix": "(3) [3305]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "3306",
+          "suffix": "(4) [3306]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "3307",
+          "suffix": "(5) [3307]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+        "The printed PTS main heading is 382; the BJTS brace heading and publisher file/order are 385. Canonical tha-ap387 is a separately reviewed literal identity, not a general numbering rule.",
+        "Note3 belongs to stanza1 and retains disputed phārusa botanical identifications; do not select or silently correct one.",
+        "The VRI witness abbreviates the final attainment refrains with peyyāla. The publisher prints them in full and places the good-presence stanza before the burnt-defilements stanza; preserve both editions without invented alignment."
+      ],
+      "publisher_verse_labels": [
+        "3303",
+        "3304",
+        "3305",
+        "3306",
+        "3307"
+      ],
+      "publisher_heading_sha256": "f5d2f34c85a5d18696816b5af2899404493e05192146ba69d71bb316ac16cd22",
+      "english": "Phārusaphaladāyaka",
+      "match": "individually-reviewed-whole-poem"
+    },
+    "tha-ap388": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-386.md",
+      "id": "tha-ap388",
+      "publisher_chapter": "chapter-3",
+      "poem": 386,
+      "verses": [
+        3308,
+        3313
+      ],
+      "root_verses": [
+        31,
+        36
+      ],
+      "note_count": 3,
+      "note_numbers": [
+        1,
+        2,
+        3
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-386/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-386/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-386.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Valliphaladāyaka",
+      "reference": "Therā Apadāna publisher poem 386; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "b35e1657e1f0036ebf5de1c5f82ad47b15556aa787439aebaa728d2092cfa835",
+      "body_sha256": "915062bff06bcd35ea58b2a781e3cd2457956cfbc661f4755562d14ad9342690",
+      "notes_sha256": "5be9fda45221c20716af0a284d91262b67f7f111904396088127761f26b4ab7f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "5b2b5398d97ac4c2a3fc8717efab483f2750554762f48c587ee33fe4915ed202",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3308",
+          "suffix": "(1) [3308]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3309",
+          "suffix": "(2) [3309]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3310",
+          "suffix": "(3) [3310]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "3311",
+          "suffix": "(4) [3311]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "3312",
+          "suffix": "(5) [3312]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "3313",
+          "suffix": "(6) [3313]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+        "The printed PTS main heading is 383; the BJTS brace heading and publisher file/order are 386. Canonical tha-ap388 is a separately reviewed literal identity, not a general numbering rule.",
+        "Note3 belongs to stanza2 and identifies valli generically as a creeper/vine; no more specific fruit is invented.",
+        "The VRI witness abbreviates the final attainment refrains with peyyāla. The publisher prints them in full and places the good-presence stanza before the burnt-defilements stanza; preserve both editions without invented alignment."
+      ],
+      "publisher_verse_labels": [
+        "3308",
+        "3309",
+        "3310",
+        "3311",
+        "3312",
+        "3313"
+      ],
+      "publisher_heading_sha256": "f7041be003bdcd83f7566da7d355b61b4d02abcdeb7191249f78d7fec5af843b",
+      "english": "Valliphaladāyaka",
       "match": "individually-reviewed-whole-poem"
     }
   }

@@ -1,0 +1,377 @@
+{
+  "schema": "independent-five381-383-386-source-preparation-review-v1",
+  "status": "GO_SOURCE_PREPARATION_ONLY_FIVE_LITERAL_UNITS_WITH_384_NOTE4_QUALIFICATION",
+  "candidate_manifest": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-source-preparation/v1/MANIFEST.json",
+    "bytes": 3724,
+    "sha256": "966386705480c8a87a928d7a11baae51a973de46242994776e1ff5c07d558d9d"
+  },
+  "source_review_method": {
+    "blind": false,
+    "raw_originals_read_directly": true,
+    "own_stdlib_derivation_before_private_candidate_wording_compare": true,
+    "author_derivation_module_or_application_parser_executed": false,
+    "candidate_metadata_read_before_independent_replay": true,
+    "independent_replayer": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-independent-source-review/replay_source_review.py",
+      "bytes": 14435,
+      "sha256": "093f38c88955bd3b6a04f6692015a142be7fb266660427cae93661304f9812f8"
+    },
+    "precomparison": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-independent-source-review/RAW_MODEL_PRECOMPARISON.json",
+      "bytes": 7239,
+      "sha256": "10cc1ca8a8fc1a3ee8958ab4552dd655e2e96ff49c7e80c3bf0667d9d11c89e2"
+    },
+    "comparison": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/next-five381-386-independent-source-review/INDEPENDENT_COMPARISON.json",
+      "bytes": 11142,
+      "sha256": "63b9858798ca8571ebf919cc68b06bc7459dc1a5ba90042ec4c10c81a08745ad"
+    }
+  },
+  "approved_for_future_source_preparation_literal_pairs": [
+    [
+      381,
+      "tha-ap383"
+    ],
+    [
+      383,
+      "tha-ap385"
+    ],
+    [
+      384,
+      "tha-ap386"
+    ],
+    [
+      385,
+      "tha-ap387"
+    ],
+    [
+      386,
+      "tha-ap388"
+    ]
+  ],
+  "per_poem": {
+    "tha-ap383": {
+      "publisher_poem": 381,
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SOURCE_ONLY",
+      "raw": {
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "git_blob": "a42712a643ba66c283ee9fd986943854204f6708",
+        "bytes": 1819,
+        "sha256": "2f3020478e27fabb0ad40b94ce45659d4e10db7c91a509455d3f949de9e640d5"
+      },
+      "root_record": {
+        "id": "tha-ap383",
+        "book": 36,
+        "start": 10933,
+        "end": 10955,
+        "title": "Avaṭaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 383",
+        "vri": "1–6",
+        "pts": {
+          "volume": 1,
+          "page": 294,
+          "end_page": 295
+        }
+      },
+      "root_wrapper_sha256": "a4d69060ffb79d28bc08a770c982e1a138444a85d51b4c774cbb3d42a4b84702",
+      "body_sha256": "e7ee77ce2e706d24b9441775862c1f6918f95103404cbded1b5697e5b3068f3c",
+      "notes_sha256": "42589d46522d064b342fd8af8d9435c0b9debeb0343d9f9f01a588b4dff03744",
+      "paragraphs": 9,
+      "physical_stanzas": 6,
+      "notes": 4,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 1
+        },
+        {
+          "number": 4,
+          "body_paragraph_index0": 1
+        }
+      ],
+      "canonical_correspondence_basis": "Title/fruit variant plus Hundred-Rayed/Self-Become narrative,94aeons,speaker/colophon; original VRI variant note retained."
+    },
+    "tha-ap385": {
+      "publisher_poem": 383,
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SOURCE_ONLY",
+      "raw": {
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "git_blob": "67790971922c5c3df0a7c49350408884d4319099",
+        "bytes": 1758,
+        "sha256": "6a67971063c6c4dc4fd4a45c0d1b913318b1e820d26b4b9991772ad61a6cc812"
+      },
+      "root_record": {
+        "id": "tha-ap385",
+        "book": 36,
+        "start": 10979,
+        "end": 10997,
+        "title": "Udumbaraphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 385",
+        "vri": "15–20",
+        "pts": {
+          "volume": 1,
+          "page": 295,
+          "end_page": 295
+        }
+      },
+      "root_wrapper_sha256": "47b449fc61bf0f76d0331d9b7d2457d573310309dbe154ce73ba143a8afe892e",
+      "body_sha256": "71a337dbcfacaee67212a3f1f38dc0fcdf32e6daf7d0bc61dfff448f6ba0f3e5",
+      "notes_sha256": "e67b114ccc6110074f9070027141e1fc600056ac2a834aafe846b931c253337b",
+      "paragraphs": 9,
+      "physical_stanzas": 6,
+      "notes": 6,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 1
+        },
+        {
+          "number": 4,
+          "body_paragraph_index0": 1
+        },
+        {
+          "number": 5,
+          "body_paragraph_index0": 2
+        },
+        {
+          "number": 6,
+          "body_paragraph_index0": 2
+        }
+      ],
+      "canonical_correspondence_basis": "Udumbara title plus Vinata river, fruit donation,91aeons,speaker/colophon; BJTS title omission qualified."
+    },
+    "tha-ap386": {
+      "publisher_poem": 384,
+      "decision": "QUALIFIED_SOURCE_GO_UNCLOSED_PUBLISHED_NOTE4_CAVEAT_REQUIRED",
+      "raw": {
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "git_blob": "7d479c6ffcdb06ba616b69b90fa6a265fe9b1e96",
+        "bytes": 1583,
+        "sha256": "05d26e53292e293381d9235bf4fa4a114c0452e529f3c81197fa494827463ea1"
+      },
+      "root_record": {
+        "id": "tha-ap386",
+        "book": 36,
+        "start": 10997,
+        "end": 11012,
+        "title": "Pilakkhaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 386",
+        "vri": "21–25",
+        "pts": {
+          "volume": 1,
+          "page": 295,
+          "end_page": 296
+        }
+      },
+      "root_wrapper_sha256": "5573df6754147e333f34e973f4bdbe588303c8f2bb778406ca92d3fac6390b7f",
+      "body_sha256": "80995d007a8a3a8ffbe94c3e2d6aa94bb6c1e68010771e315bca2916fd969d88",
+      "notes_sha256": "a63a26b9fdf041be8366f6088b736f10929a823fcb361cfaa58e9ef085e5df77",
+      "paragraphs": 8,
+      "physical_stanzas": 5,
+      "notes": 4,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 1
+        },
+        {
+          "number": 4,
+          "body_paragraph_index0": 1
+        }
+      ],
+      "canonical_correspondence_basis": "Pilakkha title plus Atthadassi/forest/fruit donation,1800aeons,speaker/colophon; botanical alternatives retained without resolving them."
+    },
+    "tha-ap387": {
+      "publisher_poem": 385,
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SOURCE_ONLY",
+      "raw": {
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "git_blob": "359060dd76b4e977419e596a8bfefc0dbdb0a107",
+        "bytes": 1643,
+        "sha256": "6490e8e6fb6f07cbf1f18ad7b9dfba7a07b0773830f0d2dd0057f3f935168140"
+      },
+      "root_record": {
+        "id": "tha-ap387",
+        "book": 36,
+        "start": 11012,
+        "end": 11027,
+        "title": "Phārusaphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 387",
+        "vri": "26–30",
+        "pts": {
+          "volume": 1,
+          "page": 296,
+          "end_page": 296
+        }
+      },
+      "root_wrapper_sha256": "a15b3a5193f80812f373cac50e5932739fc7e5b6898aebd5ec3c6ef9373e2b37",
+      "body_sha256": "0fc0b52225f355fc68987e610729aa4b43fcbeded5edf7a67699aca4222e146d",
+      "notes_sha256": "b0b8b4c7f7867ba0ee24558f43872e9aeb70600e430e94c091c60712d7eeeadf",
+      "paragraphs": 8,
+      "physical_stanzas": 5,
+      "notes": 3,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 1
+        }
+      ],
+      "canonical_correspondence_basis": "Pharusa title plus gold-colored recipient/road/fruit donation,91aeons,speaker/colophon; disputed botanical identifications retained."
+    },
+    "tha-ap388": {
+      "publisher_poem": 386,
+      "decision": "GO_EXACT_COMPLETE_PUBLISHER_EDITION_SOURCE_ONLY",
+      "raw": {
+        "git_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+        "git_blob": "6639c084377f1509aa09609e46739629138d5369",
+        "bytes": 1730,
+        "sha256": "b35e1657e1f0036ebf5de1c5f82ad47b15556aa787439aebaa728d2092cfa835"
+      },
+      "root_record": {
+        "id": "tha-ap388",
+        "book": 36,
+        "start": 11027,
+        "end": 11045,
+        "title": "Valliphaladāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 388",
+        "vri": "31–36",
+        "pts": {
+          "volume": 1,
+          "page": 296,
+          "end_page": 297
+        }
+      },
+      "root_wrapper_sha256": "5b2b5398d97ac4c2a3fc8717efab483f2750554762f48c587ee33fe4915ed202",
+      "body_sha256": "915062bff06bcd35ea58b2a781e3cd2457956cfbc661f4755562d14ad9342690",
+      "notes_sha256": "5be9fda45221c20716af0a284d91262b67f7f111904396088127761f26b4ab7f",
+      "paragraphs": 9,
+      "physical_stanzas": 6,
+      "notes": 3,
+      "note_owners": [
+        {
+          "number": 1,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 2,
+          "body_paragraph_index0": 0
+        },
+        {
+          "number": 3,
+          "body_paragraph_index0": 2
+        }
+      ],
+      "canonical_correspondence_basis": "Valli title plus gathered people/forest/fruit/Self-Become narrative,31aeons,speaker/colophon; generic vine identity retained."
+    }
+  },
+  "totals": {
+    "poems": 5,
+    "body_paragraphs": 43,
+    "physical_stanza_entries": 28,
+    "poem_notes": 20,
+    "body_characters_utf16": 5004,
+    "pages500": 13,
+    "note_free_paratext": 1,
+    "display_pairs": 0,
+    "summary": 0
+  },
+  "scope_and_wording_checks": [
+    "All15 candidate member hashes and11 exact raw poem/notice inputs match; five raw blob identities also match preexisting fb76 scout pins. No fresh remote/Git/source fetch was claimed.",
+    "Independently reproduced allfive complete marker-preserving source bodies,20ordered notes,43paragraphs,28four-line physical stanza quotation entries,13hard500UTF16 page slices and every start/end prefix hash; all candidate private wording strings match exactly.",
+    "Every original footnote call has one retained same-number poem owner; notes1/2 belong to each title, other notes to their original stanza. Publisher381 chapter39 heading is separately owned unnoted paratext. No summary/preface/display-pair or neighboring poem text is invented.",
+    "Full original VRI XML14645 rendition/number/text/note tuples match current f3 Book36. Each literal selected span starts at the appropriate title (381alsochapter heading), includes its narrative and speaker/colophon and stops before the next unit. Five root wrappers and source-derived profile/link fields match.",
+    "Published complete-edition scope is explicit; source good-presence and burnt-defilements refrains differ in order from VRI. Four VRI units use peyyala. Subject correspondence is not line/word equivalence; no VRI text or source refrain was inserted, expanded, reordered or silently equated."
+  ],
+  "publisher384_note4_decision": {
+    "decision": "QUALIFIED_SOURCE_GO_ONLY_IF_VISIBLE_PUBLISHED_BLEMISH_NOTICE_RETAINED",
+    "raw_file_sha256": "05d26e53292e293381d9235bf4fa4a114c0452e529f3c81197fa494827463ea1",
+    "git_blob": "7d479c6ffcdb06ba616b69b90fa6a265fe9b1e96",
+    "raw_definition_line": 44,
+    "raw_note_content_sha256": "aa15635ed98db4f8cf281b9790f71ac568ae4ef521b15f57f59a56f3d9bc33fe",
+    "normalized_note_sha256": "f05875673e20155d7db9717238d066cbb595f88618d4ac4a7672caec8854fc29",
+    "normalized_note_UTF16": 127,
+    "finding": "Poem has its full printed5stanzas/speaker/colophon and all4notes. Note4 contains the botanical-gloss wording through the published Sinhala-name ending; one opening parenthesis remains unmatched at exact pinned EOF. Every source word/punctuation mark is retained. This is sufficient complete-published-artifact scope with a visible defect qualification, not proof of an author-intended completion.",
+    "required_visible_caveat": "Publisher note4 has an unmatched parenthesis in the pinned edition; preserve its published wording without reconstructing missing words or punctuation.",
+    "existing_candidate_mapping_notice_contains_the_defect": true,
+    "invented_closing_parenthesis_or_source_words": false,
+    "specialist_botanical_identification_claimed": false
+  },
+  "rights": {
+    "basis": "Direct six pinned notice/routing artifacts: LICENSE,About,footer,EPUBmetadata,siteJSON,poem-routingJSON; explicit translation notices bind Jonathan S.Walters/Whitman College to CC BY-NC-SA4.0.",
+    "permission_inferred_from_public_availability": false,
+    "generic_site_BY4_not_used_to_override_translation_NC_SA": true,
+    "required_future_preservation": [
+      "translator/publisher attribution",
+      "pinned source and licence link",
+      "change/edition notices",
+      "noncommercial restriction and applicable ShareAlike terms"
+    ],
+    "commercial_audio_image_font_clearance": false,
+    "English_bodies_or_notes_bundled_or_written_to_checkout": false
+  },
+  "holds_retained_by_publisher_number": {
+    "382": "unfinished note remains deferred; not independently cleared here",
+    "387_388": "paired canonical title/opening boundary defect remains deferred;388aeon variant also retained",
+    "389": "BJTS-only stanza/edition variant review remains separate",
+    "390": "voiced apparatus/display/summary ownership remains separate",
+    "previous": [
+      358,
+      361,
+      365,
+      366,
+      367,
+      368,
+      373,
+      379,
+      380
+    ]
+  },
+  "private_source_fixture_policy": "PRIVATE_SOURCE_FIXTURES_DO_NOT_COMMIT stays external; review outputs contain metadata/hashes only.",
+  "selected_source_holds": [],
+  "future_required": [
+    "Independent implementation/schema/current source closure approval if these sources are ever integrated.",
+    "Actual source/API pagination/notes/quote/notice and fresh-installed/browser checks on a future exact candidate.",
+    "Current release9e4a and all its gates remain outside this source-preparation approval."
+  ],
+  "source_preparation_only": true,
+  "activation_current_sourceframe_runtime_or_release_approval": false,
+  "app_parser_tests_proposed_modules_Git_network_CI_or_checkout_writes": false
+}
