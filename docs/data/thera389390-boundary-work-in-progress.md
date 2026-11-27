@@ -8,13 +8,13 @@ The independently reviewed namespace is `apadana-thera389-390-v1`. The full logi
 
 Root execution has passed the original-XML repair CLI, independent full-output equality, compilation, and six focused Node cases including five genuine Python methods. The direct regressions cover fresh source-pinned positions, stale and unversioned citations, widget/cache guards, bookmarks, notes and exports. Old references comprise nine stable positions, seven collisions and two vanished references; stability alone does not authorize silently rebasing a saved position. Private study records are not rewritten.
 
-Generated changes so far affect only the second compressed canonical shard and its manifest, plus four compiled files. The first shard is byte-identical. These measurements must be rechecked after any later change.
+Generated changes affect the second compressed canonical shard, its manifest, the derived parallel-reference index, and four compiled files: seven runtime paths. The first shard and other 27 runtime paths are byte-identical. The offline parallel-reference rebuild preserves all 5,327 citation records and all 1,518 shared-passage links, including their order. Only its canonical-input checksum and one unretained candidate-pair count change. The initial stale-index audit failure is preserved; the complete 8,544-record data audit passes after that explicit rebuild. These measurements must be rechecked after any later change.
 
 ## Still required before integration
 
 - Declare and independently validate actual new-canon runtime bytes and UI v49 expectations. Preserve old 375/380 authorities as historical evidence; do not change their claims to imply they approved this repair.
 - Adapt current-runtime and source/CI bindings explicitly. The actual application and current-data assertions must continue to use the new canon, rather than a projected historical F3 view. A historical inverse may support only named historical fixtures.
-- Run the complete relevant corpus/parallels/metadata audit, fresh installed-reader/browser flows, current study-data compatibility cases, and required cross-platform CI on the exact candidate.
+- The generic full corpus audit and complete derived-link diff have passed locally. Still run fresh installed-reader/browser flows, the complete current study-data compatibility suite, monthly original-source rebuild acceptance, and required cross-platform CI on the exact candidate.
 - Preserve rights holds, all 380 existing translation choices, source attribution and private local study data. The separate proposed publisher 387/388 English additions remain inactive.
 
 No main merge, deployment or dev fast-forward is authorized by these focused results. This document records a local checkpoint, not a completed release.
