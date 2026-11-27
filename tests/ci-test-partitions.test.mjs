@@ -80,7 +80,24 @@ function rawWorkflowContract(raw) {
     for (const path of ['tests/approved-acceptance.test.mjs','tests/held234-current333-chain.test.mjs']) assert.ok(gate.includes(path));
     currentJobs.push(parts,gate);
   }
+  assert.equal(currentJobs.length,5);
   for (const current of currentJobs) {
+    const step=name=>{
+      const start=current.indexOf('      - name: '+name+'\n');assert.ok(start>=0,'Required fixture Python step '+name);
+      const next=current.indexOf('\n      - ',start+1);
+      return {start,body:current.slice(start,next<0?current.length:next)};
+    };
+    const setup=step('Set explicit Python for fixture validation');
+    const verification=step('Verify fixture Python version');
+    assert.match(setup.body,/^        uses: actions\/setup-python@v5\s*$/m);
+    assert.match(setup.body,/^          python-version: '3\.12'\s*$/m);
+    assert.match(verification.body,/^        timeout-minutes: 1\s*$/m);
+    const command="        run: python3 -c 'import sys; assert sys.version_info[:2] == (3, 12); print(\"fixture-python\", sys.executable, sys.version.split()[0])'";
+    assert.ok(verification.body.split('\n').includes(command),'Verify the actual python3 executable and exact3.12 minor');
+    assert.doesNotMatch(setup.body,/^\s*if:/m);
+    assert.doesNotMatch(verification.body,/^\s*if:/m);
+    const install=current.indexOf('run: npm ci --no-audit --no-fund'),build=current.indexOf('run: npm run build');
+    assert.ok(setup.start<verification.start&&verification.start<install&&verification.start<build,'Fixture Python must be verified before install and build');
     assert.match(current,/git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf/);
     assert.match(current,/node scripts\/ci-check-contract\.mjs/);
     assert.match(current,/run: npm run build/);
@@ -109,7 +126,11 @@ test('raw CI workflow keeps the full reference and four bounded Windows partitio
     text=>inJob(text,'windows22',s=>s.replace('needs: [check, windows22-parts]','needs: [check]')),
     text=>inJob(text,'windows22',s=>s.replace('merge-multiple: false','merge-multiple: true')),
     text=>inJob(text,'windows22-parts',s=>s.replace('--mode partition --partition','--mode partition --test-only --partition')),
-    text=>inJob(text,'windows22',s=>s.replace(/--output "[^"\n]+" /,''))
+    text=>inJob(text,'windows22',s=>s.replace(/--output "[^"\n]+" /,'')),
+    ...['check','windows20-parts','windows20','windows22-parts','windows22'].flatMap(job=>[
+      text=>inJob(text,job,s=>s.replace("          python-version: '3.12'\n",'')),
+      text=>inJob(text,job,s=>s.replace("python-version: '3.12'","python-version: '3.13'"))
+    ])
   ];
   for (const [index,mutate] of mutations.entries()) {
     const changed=mutate(raw);assert.notEqual(changed,raw,'Each adversarial workflow edit must change actual bytes');

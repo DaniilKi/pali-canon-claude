@@ -351,6 +351,6 @@
   "additions": {
     "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
-    "tests/ci-test-partitions.test.mjs": "8eecd46ba7b7b939f5014dd2c031123eb316e3c2804bd0bb1c5e26637fe9411a"
+    "tests/ci-test-partitions.test.mjs": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae"
   }
 }

@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: b98eccf746409217de8492b269882fc6f07265257c4f98ddb5d690d7fe7c6825
+  CI_TEST_BASELINE_SHA: 7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -1901,6 +1901,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: npm
+      - name: Set explicit Python for fixture validation
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixture Python version
+        timeout-minutes: 1
+        run: python3 -c 'import sys; assert sys.version_info[:2] == (3, 12); print("fixture-python", sys.executable, sys.version.split()[0])'
       - run: npm ci --no-audit --no-fund
       - name: Fetch exact104 canonical artifacts for historical inverse checks
         timeout-minutes: 2
@@ -1976,6 +1983,13 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Set explicit Python for fixture validation
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixture Python version
+        timeout-minutes: 1
+        run: python3 -c 'import sys; assert sys.version_info[:2] == (3, 12); print("fixture-python", sys.executable, sys.version.split()[0])'
       - run: npm ci --no-audit --no-fund
       - name: Fetch exact104 canonical artifacts for historical inverse checks
         timeout-minutes: 2
@@ -2026,6 +2040,13 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Set explicit Python for fixture validation
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixture Python version
+        timeout-minutes: 1
+        run: python3 -c 'import sys; assert sys.version_info[:2] == (3, 12); print("fixture-python", sys.executable, sys.version.split()[0])'
       - run: npm ci --no-audit --no-fund
       - name: Fetch exact104 canonical artifacts for historical inverse checks
         timeout-minutes: 2
@@ -2092,6 +2113,13 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Set explicit Python for fixture validation
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixture Python version
+        timeout-minutes: 1
+        run: python3 -c 'import sys; assert sys.version_info[:2] == (3, 12); print("fixture-python", sys.executable, sys.version.split()[0])'
       - run: npm ci --no-audit --no-fund
       - name: Fetch exact104 canonical artifacts for historical inverse checks
         timeout-minutes: 2
@@ -2142,6 +2170,13 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Set explicit Python for fixture validation
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixture Python version
+        timeout-minutes: 1
+        run: python3 -c 'import sys; assert sys.version_info[:2] == (3, 12); print("fixture-python", sys.executable, sys.version.split()[0])'
       - run: npm ci --no-audit --no-fund
       - name: Fetch exact104 canonical artifacts for historical inverse checks
         timeout-minutes: 2

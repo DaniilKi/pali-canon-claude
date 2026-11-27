@@ -1,0 +1,2189 @@
+name: Check package
+on:
+  push:
+    branches: [main, 'dev/**', 'integrate/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+env:
+  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json
+  CI_TEST_BASELINE_SHA: b98eccf746409217de8492b269882fc6f07265257c4f98ddb5d690d7fe7c6825
+jobs:
+  hosted-memory:
+    name: Hosted memory budget
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Pack the committed server
+        run: |
+          mkdir -p "$RUNNER_TEMP/memory-package" "$RUNNER_TEMP/memory-report"
+          npm pack --pack-destination "$RUNNER_TEMP/memory-package"
+          tar -xzf "$RUNNER_TEMP/memory-package/"*.tgz -C "$RUNNER_TEMP/memory-package"
+      - name: Check packaged HTTP tools resources prompts and errors
+        run: |
+          cp -R "$RUNNER_TEMP/memory-package/package/server" "$RUNNER_TEMP/memory-package/src"
+          node scripts/smoke.mjs --http --server "$RUNNER_TEMP/memory-package/src/http.cjs"
+      - name: Check packaged worker failure recovery without changing citations
+        run: node scripts/audit-hosted-recovery.mjs --server-dir "$RUNNER_TEMP/memory-package/package/server" --report "$RUNNER_TEMP/memory-report/recovery.json"
+      - name: Exercise offline tools under the Fly template's memory limit
+        run: |
+          memory=$(sed -n 's/^  memory = "\([^"]*\)"/\1/p' fly.toml)
+          test -n "$memory"
+          docker run --rm --memory "$memory" --memory-swap "$memory" --network none \
+            --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges \
+            --mount "type=bind,src=$RUNNER_TEMP/memory-package/package,dst=/package,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/scripts,dst=/app/scripts,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/node_modules,dst=/app/node_modules,readonly" \
+            --mount "type=bind,src=$RUNNER_TEMP/memory-report,dst=/report" \
+            node:20-slim node /app/scripts/profile-memory.mjs \
+            --server-dir /package/server --budget-mb 2048 --report /report/memory.json
+      - name: Check cold and warm health under one CPU and the same memory limit
+        run: |
+          memory=$(sed -n 's/^  memory = "\([^"]*\)"/\1/p' fly.toml)
+          test -n "$memory"
+          docker run --rm --cpus 1 --memory "$memory" --memory-swap "$memory" --network none \
+            --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges \
+            --mount "type=bind,src=$RUNNER_TEMP/memory-package/package,dst=/package,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/scripts,dst=/app/scripts,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/node_modules,dst=/app/node_modules,readonly" \
+            --mount "type=bind,src=$RUNNER_TEMP/memory-report,dst=/report" \
+            node:20-slim node /app/scripts/audit-hosted-load.mjs \
+            --server-dir /package/server --clients 16 --rounds 3 --report /report/concurrency.json
+      - name: Check retained reader views and the shared live cache under mixed load
+        run: |
+          memory=$(sed -n 's/^  memory = "\([^"]*\)"/\1/p' fly.toml)
+          test -n "$memory"
+          docker run --rm --cpus 1 --memory "$memory" --memory-swap "$memory" --network none \
+            --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges \
+            --mount "type=bind,src=$RUNNER_TEMP/memory-package/package,dst=/package,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/scripts,dst=/app/scripts,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/node_modules,dst=/app/node_modules,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/src,dst=/app/src,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/web/content-sha256.mjs,dst=/app/web/content-sha256.mjs,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/web/source-notes-policy.mjs,dst=/app/web/source-notes-policy.mjs,readonly" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE/tests,dst=/app/tests,readonly" \
+            --mount "type=bind,src=$RUNNER_TEMP/memory-report,dst=/report" \
+            node:20-slim node /app/scripts/audit-hosted-load.mjs \
+            --server-dir /package/server --clients 24 --rounds 3 --full-cache --reader-caches --reader-ui --report /report/full-cache.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hosted-memory-report
+          path: ${{ runner.temp }}/memory-report/*.json
+          if-no-files-found: warn
+  reader-browser-group:
+    name: Chromium reader / ${{ matrix.group }}
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, apadananext, apadanathird, apadanafourth, apadanathera, apadanatheranext, apadanatheraexpansion, apadanatherascaled61, apadanatherascaled81, apadanatheraeditorial, apadanatherapair101, apadanatherapair121, apadanathera141, apadanathera161, apadanathera181, apadanathera201, apadanathera221, apadanathera231, apadanathera234, apadanathera241, apadanathera251, apadanaedition, thagsixteen, textspacing, vrieditionnote]
+    runs-on: ubuntu-24.04
+    timeout-minutes: ${{ (matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201') && 30 || (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanaedition' || matrix.group == 'thagsixteen' || matrix.group == 'textspacing' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234' || matrix.group == 'vrieditionnote') && 20 || 10 }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch exact reviewed Apadāna baseline for independent preservation checks
+        if: matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial'
+        run: |
+          git fetch --no-tags --depth=1 origin 64a336789ab5f4f02964ff3023ea6b26b330e406
+          git cat-file -e 64a336789ab5f4f02964ff3023ea6b26b330e406^{commit}
+      - name: Fetch exact paired-intake baseline for independent preservation checks
+        if: matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121'
+        run: |
+          git fetch --no-tags --depth=1 origin b5669a334add97ebc0c3c32f9b3fb45ed90d9780
+          git cat-file -e b5669a334add97ebc0c3c32f9b3fb45ed90d9780^{commit}
+      - name: Fetch exact 141-180 intake baseline for independent preservation checks
+        if: matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161'
+        run: |
+          git fetch --no-tags --depth=1 origin 05fc4e29540fc0799145dc28838bedb7d964b2c7
+          git cat-file -e 05fc4e29540fc0799145dc28838bedb7d964b2c7^{commit}
+      - name: Fetch exact 181-220 intake baseline for independent preservation checks
+        if: matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201'
+        run: |
+          git fetch --no-tags --depth=1 origin 94c607310845b84dc3cd51ba3a19ce6fecd28683
+          git cat-file -e 94c607310845b84dc3cd51ba3a19ce6fecd28683^{commit}
+      - name: Fetch exact remaining-intake baseline for independent preservation checks
+        if: matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251'
+        run: |
+          git fetch --no-tags --depth=1 origin cdbefd514164a559bc5aaab631c267f3084e31a6
+          git cat-file -e cdbefd514164a559bc5aaab631c267f3084e31a6^{commit}
+      - name: Fetch exact held234 intake baseline for independent preservation checks
+        if: matrix.group == 'apadanathera234'
+        run: |
+          git fetch --no-tags --depth=1 origin 7d5ac90845402b322dabf2c5120d1485b15c0bda
+          git cat-file -e 7d5ac90845402b322dabf2c5120d1485b15c0bda^{commit}
+      - name: Fetch exact 221-230 intake baseline for independent preservation checks
+        if: matrix.group == 'apadanathera221'
+        run: |
+          git fetch --no-tags --depth=1 origin 9ceed785d30afdcdc1f09021d6098b5bb85f02fb
+          git cat-file -e 9ceed785d30afdcdc1f09021d6098b5bb85f02fb^{commit}
+      - name: Fetch exact 241-250 intake baseline for independent preservation checks
+        if: matrix.group == 'apadanathera241'
+        run: |
+          git fetch --no-tags --depth=1 origin a9755d267c309ad930df0ef154e6c8a03f1f371e
+          git cat-file -e a9755d267c309ad930df0ef154e6c8a03f1f371e^{commit}
+      - name: Fetch exact source-note baseline for independent compatibility checks
+        if: matrix.group == 'vrieditionnote'
+        run: |
+          git fetch --no-tags --depth=1 origin ff798f681147e12160167fbeb9ef1927bb54c45c
+          git cat-file -e ff798f681147e12160167fbeb9ef1927bb54c45c^{commit}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+      - run: python -m pip install playwright==1.62.0
+      - run: python -m playwright install --with-deps chromium
+      - name: Build standalone server and reader assets
+        run: npm run build
+      - name: Check reader layout, continuation and accessibility semantics offline
+        if: matrix.group == 'core'
+        run: python scripts/widget-browser-check.py --report widget-browser.report.json
+      - name: Check standalone web reader against real bundled text
+        if: matrix.group == 'core'
+        run: |
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-browser-check.py > standalone-reader.report.json
+      - name: Check saved source revisions before showing Pāli wording
+        if: matrix.group == 'provenance'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-bookmark-pin-check.py --report standalone-bookmark-pin.report.json
+      - name: Audit versioned bookmark refusals and legacy review
+        if: matrix.group == 'provenance'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-bookmark-pin-check.py --a11y --report standalone-bookmark-pin-a11y.report.json
+      - name: Check source-aware Pāli print and PDF privacy
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-print-check.py --report standalone-print.report.json
+      - name: Audit standalone reader accessibility in both themes
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-a11y-check.py --report standalone-a11y.report.json
+      - name: Check shared and partial translation consent with isolated synthetic sources
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-scope-check.py --report standalone-scope.report.json
+      - name: Audit scoped-source screens in both themes
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-scope-check.py --a11y --report standalone-scope-a11y.report.json
+      - name: Check sourced reading plans and local progress
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-plans-check.py --report standalone-plans.report.json
+      - name: Audit reading-plan screens in both themes
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-plans-check.py --a11y --report standalone-plans-a11y.report.json
+      - name: Check local bookmark restore and exact saved references
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-import-check.py --report standalone-import.report.json
+      - name: Check saved-library search paging and private drafts
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-saved-check.py --report standalone-saved.report.json
+      - name: Audit saved-library filters and paging in both themes
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-saved-check.py --a11y --report standalone-saved-a11y.report.json
+      - name: Audit bookmark restore screens in both themes
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-import-check.py --a11y --report standalone-import-a11y.report.json
+      - name: Check dated daily reading and source boundaries
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-daily-check.py --report standalone-daily.report.json
+      - name: Audit dated reading screens in both themes
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-daily-check.py --a11y --report standalone-daily-a11y.report.json
+      - name: Check compact phone reading and responsive focus
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-compact-check.py --report standalone-compact.report.json
+      - name: Audit compact reading disclosures in both themes
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-compact-check.py --a11y --report standalone-compact-a11y.report.json
+      - name: Check Pāli quotation matching and exact source links
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-quote-check.py --report standalone-quote.report.json
+      - name: Audit quotation checker in both themes
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-quote-check.py --a11y --report standalone-quote-a11y.report.json
+      - name: Check English-source catalogue filters and exact reading links
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-english-catalogue-check.py --report standalone-english-catalogue.report.json
+      - name: Audit English-source catalogue in both themes
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-english-catalogue-check.py --a11y --report standalone-english-catalogue-a11y.report.json
+      - name: Check the installed English-source catalogue outside the source tree
+        if: matrix.group == 'study'
+        run: |
+          mkdir -p "$RUNNER_TEMP/english-package"
+          npm pack --pack-destination "$RUNNER_TEMP/english-package"
+          tar -xzf "$RUNNER_TEMP/english-package/"*.tgz -C "$RUNNER_TEMP/english-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-english-catalogue-check.py --server-dir "$RUNNER_TEMP/english-package/package/server" --report installed-english-catalogue.report.json
+      - name: Check explicit English-source comparison and independent continuations
+        if: matrix.group == 'comparison'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-comparison-check.py --report standalone-comparison.report.json
+      - name: Audit English comparison in both themes
+        if: matrix.group == 'comparison'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-comparison-check.py --a11y --report standalone-comparison-a11y.report.json
+      - name: Check installed English comparison outside the source tree
+        if: matrix.group == 'comparison'
+        run: |
+          mkdir -p "$RUNNER_TEMP/comparison-package"
+          npm pack --pack-destination "$RUNNER_TEMP/comparison-package"
+          tar -xzf "$RUNNER_TEMP/comparison-package/"*.tgz -C "$RUNNER_TEMP/comparison-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-comparison-check.py --server-dir "$RUNNER_TEMP/comparison-package/package/server" --report installed-comparison.report.json
+      - name: Check in-context private notes and safe removal across source types
+        if: matrix.group == 'notes'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-notes-check.py --report standalone-notes.report.json
+      - name: Audit passage-note editing and removal in both themes
+        if: matrix.group == 'notes'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-notes-check.py --a11y --report standalone-notes-a11y.report.json
+      - name: Check installed passage-note workflows outside the source tree
+        if: matrix.group == 'notes'
+        run: |
+          mkdir -p "$RUNNER_TEMP/notes-package"
+          npm pack --pack-destination "$RUNNER_TEMP/notes-package"
+          tar -xzf "$RUNNER_TEMP/notes-package/"*.tgz -C "$RUNNER_TEMP/notes-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-notes-check.py --server-dir "$RUNNER_TEMP/notes-package/package/server" --report installed-notes.report.json
+      - name: Check local study-backup transfer and interrupted restore guards
+        if: matrix.group == 'backup'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-backup-check.py --report standalone-backup.report.json
+      - name: Audit study-backup controls and previews in both themes
+        if: matrix.group == 'backup'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-backup-check.py --a11y --report standalone-backup-a11y.report.json
+      - name: Check installed study-backup workflows outside the source tree
+        if: matrix.group == 'backup'
+        run: |
+          mkdir -p "$RUNNER_TEMP/backup-package"
+          npm pack --pack-destination "$RUNNER_TEMP/backup-package"
+          tar -xzf "$RUNNER_TEMP/backup-package/"*.tgz -C "$RUNNER_TEMP/backup-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-backup-check.py --server-dir "$RUNNER_TEMP/backup-package/package/server" --report installed-backup.report.json
+      - name: Check explicit personal-note conflict choices and rollback
+        if: matrix.group == 'conflicts'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-note-conflicts-check.py --report standalone-note-conflicts.report.json
+      - name: Audit personal-note conflict review in both themes
+        if: matrix.group == 'conflicts'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-note-conflicts-check.py --a11y --report standalone-note-conflicts-a11y.report.json
+      - name: Check installed personal-note conflict review outside the source tree
+        if: matrix.group == 'conflicts'
+        run: |
+          mkdir -p "$RUNNER_TEMP/conflicts-package"
+          npm pack --pack-destination "$RUNNER_TEMP/conflicts-package"
+          tar -xzf "$RUNNER_TEMP/conflicts-package/"*.tgz -C "$RUNNER_TEMP/conflicts-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-note-conflicts-check.py --server-dir "$RUNNER_TEMP/conflicts-package/package/server" --report installed-note-conflicts.report.json
+      - name: Check source-pinned saved-passage highlights and live preference safety
+        if: matrix.group == 'highlights'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-highlights-check.py --report standalone-highlights.report.json
+      - name: Audit saved-passage highlights in both themes
+        if: matrix.group == 'highlights'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-highlights-check.py --a11y --report standalone-highlights-a11y.report.json
+      - name: Check installed source-aware highlights outside the source tree
+        if: matrix.group == 'highlights'
+        run: |
+          mkdir -p "$RUNNER_TEMP/highlights-package"
+          npm pack --pack-destination "$RUNNER_TEMP/highlights-package"
+          tar -xzf "$RUNNER_TEMP/highlights-package/"*.tgz -C "$RUNNER_TEMP/highlights-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-highlights-check.py --server-dir "$RUNNER_TEMP/highlights-package/package/server" --report installed-highlights.report.json
+      - name: Check local reading-progress restore and source-signature preservation
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --report standalone-progress.report.json
+      - name: Check source-pinned page navigation and bounded source-position jumps
+        if: matrix.group == 'navigation'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-navigation-check.py --report standalone-navigation.report.json
+      - name: Audit source-position navigation in both themes
+        if: matrix.group == 'navigation'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-navigation-check.py --a11y --report standalone-navigation-a11y.report.json
+      - name: Check installed source-position navigation outside the source tree
+        if: matrix.group == 'navigation'
+        run: |
+          mkdir -p "$RUNNER_TEMP/navigation-package"
+          npm pack --pack-destination "$RUNNER_TEMP/navigation-package"
+          tar -xzf "$RUNNER_TEMP/navigation-package/"*.tgz -C "$RUNNER_TEMP/navigation-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-navigation-check.py --server-dir "$RUNNER_TEMP/navigation-package/package/server" --report installed-navigation.report.json
+      - name: Audit reading-progress restore in both themes
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-progress-check.py --a11y --report standalone-progress-a11y.report.json
+      - name: Check complete source-book search and exact source reading
+        if: matrix.group == 'booksearch'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-book-search-check.py --report standalone-booksearch.report.json
+      - name: Audit complete source-book search in both themes
+        if: matrix.group == 'booksearch'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-book-search-check.py --a11y --report standalone-booksearch-a11y.report.json
+      - name: Check installed complete source-book search outside the source tree
+        if: matrix.group == 'booksearch'
+        run: |
+          mkdir -p "$RUNNER_TEMP/booksearch-package"
+          npm pack --pack-destination "$RUNNER_TEMP/booksearch-package"
+          tar -xzf "$RUNNER_TEMP/booksearch-package/"*.tgz -C "$RUNNER_TEMP/booksearch-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-book-search-check.py --server-dir "$RUNNER_TEMP/booksearch-package/package/server" --report installed-booksearch.report.json
+      - name: Check existing chapter menus and compact source context
+        if: matrix.group == 'chapters'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-chapters-check.py --report standalone-chapters.report.json
+      - name: Audit chapter menus and source context in both themes
+        if: matrix.group == 'chapters'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-chapters-check.py --a11y --report standalone-chapters-a11y.report.json
+      - name: Check installed chapter menus outside the source tree
+        if: matrix.group == 'chapters'
+        run: |
+          mkdir -p "$RUNNER_TEMP/chapters-package"
+          npm pack --pack-destination "$RUNNER_TEMP/chapters-package"
+          tar -xzf "$RUNNER_TEMP/chapters-package/"*.tgz -C "$RUNNER_TEMP/chapters-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-chapters-check.py --server-dir "$RUNNER_TEMP/chapters-package/package/server" --report installed-chapters.report.json
+      - name: Check citation resolution and exact reading dispatch
+        if: matrix.group == 'citations'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-citation-check.py --report standalone-citations.report.json
+      - name: Audit citation resolution in both themes
+        if: matrix.group == 'citations'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-citation-check.py --a11y --report standalone-citations-a11y.report.json
+      - name: Check citation resolution from the isolated npm package
+        if: matrix.group == 'citations'
+        run: |
+          mkdir -p "$RUNNER_TEMP/citations-package"
+          npm pack --pack-destination "$RUNNER_TEMP/citations-package"
+          tar -xzf "$RUNNER_TEMP/citations-package/"*.tgz -C "$RUNNER_TEMP/citations-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-citation-check.py --server-dir "$RUNNER_TEMP/citations-package/package/server" --report installed-citations.report.json
+      - name: Check revision-pinned canonical search and independent result streams
+        if: matrix.group == 'searchpins'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-search-pins-check.py --report standalone-searchpins.report.json
+      - name: Audit source-pinned canonical search in both themes
+        if: matrix.group == 'searchpins'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-search-pins-check.py --a11y --report standalone-searchpins-a11y.report.json
+      - name: Check canonical search from the isolated npm package
+        if: matrix.group == 'searchpins'
+        run: |
+          mkdir -p "$RUNNER_TEMP/searchpins-package"
+          npm pack --pack-destination "$RUNNER_TEMP/searchpins-package"
+          tar -xzf "$RUNNER_TEMP/searchpins-package/"*.tgz -C "$RUNNER_TEMP/searchpins-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-search-pins-check.py --server-dir "$RUNNER_TEMP/searchpins-package/package/server" --report installed-searchpins.report.json
+      - name: Check printed source-heading browsing and exact reading
+        if: matrix.group == 'headings'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-headings-check.py --report standalone-headings.report.json
+      - name: Audit printed heading filters and navigation in both themes
+        if: matrix.group == 'headings'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-headings-check.py --a11y --report standalone-headings-a11y.report.json
+      - name: Check heading browsing from the isolated npm package
+        if: matrix.group == 'headings'
+        run: |
+          mkdir -p "$RUNNER_TEMP/headings-package"
+          npm pack --pack-destination "$RUNNER_TEMP/headings-package"
+          tar -xzf "$RUNNER_TEMP/headings-package/"*.tgz -C "$RUNNER_TEMP/headings-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-headings-check.py --server-dir "$RUNNER_TEMP/headings-package/package/server" --report installed-headings.report.json
+      - name: Check exact commentary matches and bounded source context
+        if: matrix.group == 'commentary'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-commentary-context-check.py --report standalone-commentary.report.json
+      - name: Audit commentary source context in both themes
+        if: matrix.group == 'commentary'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-commentary-context-check.py --a11y --report standalone-commentary-a11y.report.json
+      - name: Check commentary context from the isolated npm package
+        if: matrix.group == 'commentary'
+        run: |
+          mkdir -p "$RUNNER_TEMP/commentary-package"
+          npm pack --pack-destination "$RUNNER_TEMP/commentary-package"
+          tar -xzf "$RUNNER_TEMP/commentary-package/"*.tgz -C "$RUNNER_TEMP/commentary-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-commentary-context-check.py --server-dir "$RUNNER_TEMP/commentary-package/package/server" --report installed-commentary.report.json
+      - name: Check source-pinned later-work matches and bounded context
+        if: matrix.group == 'postsearch'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-post-search-check.py --report standalone-postsearch.report.json
+      - name: Audit later-work source context in both themes
+        if: matrix.group == 'postsearch'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-post-search-check.py --a11y --report standalone-postsearch-a11y.report.json
+      - name: Check later-work context from the isolated npm package
+        if: matrix.group == 'postsearch'
+        run: |
+          mkdir -p "$RUNNER_TEMP/postsearch-package"
+          npm pack --pack-destination "$RUNNER_TEMP/postsearch-package"
+          tar -xzf "$RUNNER_TEMP/postsearch-package/"*.tgz -C "$RUNNER_TEMP/postsearch-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-post-search-check.py --server-dir "$RUNNER_TEMP/postsearch-package/package/server" --report installed-postsearch.report.json
+      - name: Check source-script preference refresh and retained input offline
+        if: matrix.group == 'scriptrefresh'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-script-refresh-check.py --report standalone-script-refresh.report.json
+      - name: Audit script refresh focus and native output in both themes
+        if: matrix.group == 'scriptrefresh'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-script-refresh-check.py --a11y --report standalone-script-refresh-a11y.report.json
+      - name: Check script preference refresh from the isolated npm package
+        if: matrix.group == 'scriptrefresh'
+        run: |
+          mkdir -p "$RUNNER_TEMP/script-refresh-package"
+          npm pack --pack-destination "$RUNNER_TEMP/script-refresh-package"
+          tar -xzf "$RUNNER_TEMP/script-refresh-package/"*.tgz -C "$RUNNER_TEMP/script-refresh-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-script-refresh-check.py --server-dir "$RUNNER_TEMP/script-refresh-package/package/server" --report installed-script-refresh.report.json
+      - name: Check unsaved draft recovery and delayed reading focus
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-draft-focus-check.py --report standalone-draft-focus.report.json
+      - name: Audit session draft recovery and focus in both themes
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-draft-focus-check.py --a11y --report standalone-draft-focus-a11y.report.json
+      - name: Check draft recovery and delayed focus from the isolated npm package
+        if: matrix.group == 'draftsafety'
+        run: |
+          mkdir -p "$RUNNER_TEMP/draft-focus-package"
+          npm pack --pack-destination "$RUNNER_TEMP/draft-focus-package"
+          tar -xzf "$RUNNER_TEMP/draft-focus-package/"*.tgz -C "$RUNNER_TEMP/draft-focus-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-draft-focus-check.py --server-dir "$RUNNER_TEMP/draft-focus-package/package/server" --report installed-draft-focus.report.json
+      - name: Check intentional quotation and commentary focus with delayed actual responses
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-study-focus-check.py --report standalone-study-focus.report.json
+      - name: Audit quotation and commentary focus in both themes
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-study-focus-check.py --a11y --report standalone-study-focus-a11y.report.json
+      - name: Check quotation and commentary focus from the isolated npm package
+        if: matrix.group == 'draftsafety'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-study-focus-check.py --server-dir "$RUNNER_TEMP/draft-focus-package/package/server" --report installed-study-focus.report.json
+      - name: Check complete Milinda questions with pinned official ATI artifacts
+        if: matrix.group == 'milinda'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-check.py --report standalone-milinda.report.json
+      - name: Audit Milinda question identity, translator notes and licences in both themes
+        if: matrix.group == 'milinda'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-check.py --a11y --report standalone-milinda-a11y.report.json
+      - name: Check complete Milinda questions from the isolated npm package
+        if: matrix.group == 'milinda'
+        run: |
+          mkdir -p "$RUNNER_TEMP/milinda-package"
+          npm pack --pack-destination "$RUNNER_TEMP/milinda-package"
+          tar -xzf "$RUNNER_TEMP/milinda-package/"*.tgz -C "$RUNNER_TEMP/milinda-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-check.py --server-dir "$RUNNER_TEMP/milinda-package/package/server" --report installed-milinda.report.json
+      - name: Check exact SN27.5 discourse selection with pinned official ATI artifact
+        if: matrix.group == 'milinda'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-sn27-check.py --report standalone-sn27.report.json
+      - name: Audit SN27.5 source identity, rights and keyboard retrieval in both themes
+        if: matrix.group == 'milinda'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-sn27-check.py --a11y --report standalone-sn27-a11y.report.json
+      - name: Check SN27.5 from the isolated npm package
+        if: matrix.group == 'milinda'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-sn27-check.py --server-dir "$RUNNER_TEMP/milinda-package/package/server" --report installed-sn27.report.json
+      - name: Check individual AN1.21–40 numbered treatments with pinned official ATI artifacts
+        if: matrix.group == 'annumbered'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-numbered-check.py --report standalone-an-numbered.report.json
+      - name: Audit individual AN1.21–40 numbered treatments and consent in both themes
+        if: matrix.group == 'annumbered'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-numbered-check.py --a11y --report standalone-an-numbered-a11y.report.json
+      - name: Check individual AN1.21–40 numbered treatments from the isolated npm package
+        if: matrix.group == 'annumbered'
+        run: |
+          mkdir -p "$RUNNER_TEMP/an-numbered-package"
+          npm pack --pack-destination "$RUNNER_TEMP/an-numbered-package"
+          tar -xzf "$RUNNER_TEMP/an-numbered-package/"*.tgz -C "$RUNNER_TEMP/an-numbered-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-numbered-check.py --server-dir "$RUNNER_TEMP/an-numbered-package/package/server" --report installed-an-numbered.report.json
+      - name: Check exact partial Milinda two-verse selection with pinned official ATI artifacts
+        if: matrix.group == 'milindapartial'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-partial-check.py --report standalone-milinda-partial.report.json
+      - name: Audit exact partial Milinda two-verse selection and consent in both themes
+        if: matrix.group == 'milindapartial'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-partial-check.py --a11y --report standalone-milinda-partial-a11y.report.json
+      - name: Check exact partial Milinda two-verse selection from the isolated npm package
+        if: matrix.group == 'milindapartial'
+        run: |
+          mkdir -p "$RUNNER_TEMP/milinda-partial-package"
+          npm pack --pack-destination "$RUNNER_TEMP/milinda-partial-package"
+          tar -xzf "$RUNNER_TEMP/milinda-partial-package/"*.tgz -C "$RUNNER_TEMP/milinda-partial-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-milinda-partial-check.py --server-dir "$RUNNER_TEMP/milinda-partial-package/package/server" --report installed-milinda-partial.report.json
+      - name: Check individual AN selections with owned editorial notes
+        if: matrix.group == 'anten'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-ten-selection-check.py --report standalone-an-ten-selection.report.json
+      - name: Audit individual AN selections with owned editorial notes in both themes
+        if: matrix.group == 'anten'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-ten-selection-check.py --a11y --report standalone-an-ten-selection-a11y.report.json
+      - name: Check individual AN selections with owned editorial notes from the isolated npm package
+        if: matrix.group == 'anten'
+        run: |
+          mkdir -p "$RUNNER_TEMP/an-ten-selection-package"
+          npm pack --pack-destination "$RUNNER_TEMP/an-ten-selection-package"
+          tar -xzf "$RUNNER_TEMP/an-ten-selection-package/"*.tgz -C "$RUNNER_TEMP/an-ten-selection-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-an-ten-selection-check.py --server-dir "$RUNNER_TEMP/an-ten-selection-package/package/server" --report installed-an-ten-selection.report.json
+      # Public immutable source fixtures are temporary job inputs, never package content/artifacts.
+      - name: Check out exact public Apadāna source fixtures without credentials
+        if: matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanaedition' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234'
+        uses: actions/checkout@v4
+        with:
+          repository: apadana-translation/apadana-site
+          ref: fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4
+          path: .fixtures/apadana-pinned
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            LICENSE.md
+            src/_pages/about.md
+            src/_includes/site/footer.njk
+            src/_includes/layouts/epub-metadata.xml
+            src/_data/site.json
+            src/_poems/_poems.json
+            src/_poems/chapter-4/poem-001.md
+            src/_poems/chapter-4/poem-002.md
+            src/_poems/chapter-4/poem-003.md
+            src/_poems/chapter-4/poem-004.md
+            src/_poems/chapter-4/poem-005.md
+            src/_poems/chapter-4/poem-006.md
+            src/_poems/chapter-4/poem-007.md
+            src/_poems/chapter-4/poem-008.md
+            src/_poems/chapter-4/poem-009.md
+            src/_poems/chapter-4/poem-010.md
+            src/_poems/chapter-4/poem-011.md
+            src/_poems/chapter-4/poem-012.md
+            src/_poems/chapter-4/poem-013.md
+            src/_poems/chapter-4/poem-014.md
+            src/_poems/chapter-4/poem-015.md
+            src/_poems/chapter-4/poem-016.md
+            src/_poems/chapter-4/poem-017.md
+            src/_poems/chapter-4/poem-018.md
+            src/_poems/chapter-4/poem-019.md
+            src/_poems/chapter-4/poem-020.md
+            src/_poems/chapter-4/poem-021.md
+            src/_poems/chapter-4/poem-022.md
+            src/_poems/chapter-4/poem-023.md
+            src/_poems/chapter-4/poem-024.md
+            src/_poems/chapter-4/poem-025.md
+            src/_poems/chapter-4/poem-026.md
+            src/_poems/chapter-4/poem-027.md
+            src/_poems/chapter-4/poem-028.md
+            src/_poems/chapter-4/poem-029.md
+            src/_poems/chapter-4/poem-030.md
+            src/_poems/chapter-4/poem-031.md
+            src/_poems/chapter-4/poem-032.md
+            src/_poems/chapter-4/poem-033.md
+            src/_poems/chapter-4/poem-034.md
+            src/_poems/chapter-4/poem-035.md
+            src/_poems/chapter-4/poem-036.md
+            src/_poems/chapter-4/poem-037.md
+            src/_poems/chapter-4/poem-038.md
+            src/_poems/chapter-4/poem-039.md
+            src/_poems/chapter-4/poem-040.md
+            src/_poems/chapter-3/poem-011.md
+            src/_poems/chapter-3/poem-012.md
+            src/_poems/chapter-3/poem-013.md
+            src/_poems/chapter-3/poem-014.md
+            src/_poems/chapter-3/poem-015.md
+            src/_poems/chapter-3/poem-016.md
+            src/_poems/chapter-3/poem-017.md
+            src/_poems/chapter-3/poem-018.md
+            src/_poems/chapter-3/poem-019.md
+            src/_poems/chapter-3/poem-020.md
+            src/_poems/chapter-3/poem-021.md
+            src/_poems/chapter-3/poem-022.md
+            src/_poems/chapter-3/poem-023.md
+            src/_poems/chapter-3/poem-024.md
+            src/_poems/chapter-3/poem-025.md
+            src/_poems/chapter-3/poem-026.md
+            src/_poems/chapter-3/poem-027.md
+            src/_poems/chapter-3/poem-028.md
+            src/_poems/chapter-3/poem-029.md
+            src/_poems/chapter-3/poem-030.md
+            src/_poems/chapter-3/poem-031.md
+            src/_poems/chapter-3/poem-032.md
+            src/_poems/chapter-3/poem-033.md
+            src/_poems/chapter-3/poem-034.md
+            src/_poems/chapter-3/poem-035.md
+            src/_poems/chapter-3/poem-036.md
+            src/_poems/chapter-3/poem-037.md
+            src/_poems/chapter-3/poem-038.md
+            src/_poems/chapter-3/poem-039.md
+            src/_poems/chapter-3/poem-040.md
+            src/_poems/chapter-3/poem-041.md
+            src/_poems/chapter-3/poem-042.md
+            src/_poems/chapter-3/poem-043.md
+            src/_poems/chapter-3/poem-044.md
+            src/_poems/chapter-3/poem-045.md
+            src/_poems/chapter-3/poem-046.md
+            src/_poems/chapter-3/poem-047.md
+            src/_poems/chapter-3/poem-048.md
+            src/_poems/chapter-3/poem-049.md
+            src/_poems/chapter-3/poem-050.md
+            src/_poems/chapter-3/poem-051.md
+            src/_poems/chapter-3/poem-052.md
+            src/_poems/chapter-3/poem-053.md
+            src/_poems/chapter-3/poem-054.md
+            src/_poems/chapter-3/poem-055.md
+            src/_poems/chapter-3/poem-056.md
+            src/_poems/chapter-3/poem-057.md
+            src/_poems/chapter-3/poem-058.md
+            src/_poems/chapter-3/poem-059.md
+            src/_poems/chapter-3/poem-060.md
+            src/_poems/chapter-3/poem-061.md
+            src/_poems/chapter-3/poem-062.md
+            src/_poems/chapter-3/poem-063.md
+            src/_poems/chapter-3/poem-064.md
+            src/_poems/chapter-3/poem-065.md
+            src/_poems/chapter-3/poem-066.md
+            src/_poems/chapter-3/poem-067.md
+            src/_poems/chapter-3/poem-068.md
+            src/_poems/chapter-3/poem-069.md
+            src/_poems/chapter-3/poem-070.md
+            src/_poems/chapter-3/poem-071.md
+            src/_poems/chapter-3/poem-072.md
+            src/_poems/chapter-3/poem-073.md
+            src/_poems/chapter-3/poem-074.md
+            src/_poems/chapter-3/poem-075.md
+            src/_poems/chapter-3/poem-076.md
+            src/_poems/chapter-3/poem-077.md
+            src/_poems/chapter-3/poem-078.md
+            src/_poems/chapter-3/poem-079.md
+            src/_poems/chapter-3/poem-080.md
+            src/_poems/chapter-3/poem-081.md
+            src/_poems/chapter-3/poem-082.md
+            src/_poems/chapter-3/poem-083.md
+            src/_poems/chapter-3/poem-084.md
+            src/_poems/chapter-3/poem-085.md
+            src/_poems/chapter-3/poem-086.md
+            src/_poems/chapter-3/poem-087.md
+            src/_poems/chapter-3/poem-088.md
+            src/_poems/chapter-3/poem-089.md
+            src/_poems/chapter-3/poem-090.md
+            src/_poems/chapter-3/poem-091.md
+            src/_poems/chapter-3/poem-092.md
+            src/_poems/chapter-3/poem-093.md
+            src/_poems/chapter-3/poem-094.md
+            src/_poems/chapter-3/poem-095.md
+            src/_poems/chapter-3/poem-096.md
+            src/_poems/chapter-3/poem-097.md
+            src/_poems/chapter-3/poem-098.md
+            src/_poems/chapter-3/poem-099.md
+            src/_poems/chapter-3/poem-100.md
+            src/_poems/chapter-3/poem-101.md
+            src/_poems/chapter-3/poem-102.md
+            src/_poems/chapter-3/poem-103.md
+            src/_poems/chapter-3/poem-104.md
+            src/_poems/chapter-3/poem-105.md
+            src/_poems/chapter-3/poem-106.md
+            src/_poems/chapter-3/poem-107.md
+            src/_poems/chapter-3/poem-108.md
+            src/_poems/chapter-3/poem-109.md
+            src/_poems/chapter-3/poem-110.md
+            src/_poems/chapter-3/poem-111.md
+            src/_poems/chapter-3/poem-112.md
+            src/_poems/chapter-3/poem-113.md
+            src/_poems/chapter-3/poem-114.md
+            src/_poems/chapter-3/poem-115.md
+            src/_poems/chapter-3/poem-116.md
+            src/_poems/chapter-3/poem-117.md
+            src/_poems/chapter-3/poem-118.md
+            src/_poems/chapter-3/poem-119.md
+            src/_poems/chapter-3/poem-120.md
+            src/_poems/chapter-3/poem-121.md
+            src/_poems/chapter-3/poem-122.md
+            src/_poems/chapter-3/poem-123.md
+            src/_poems/chapter-3/poem-124.md
+            src/_poems/chapter-3/poem-125.md
+            src/_poems/chapter-3/poem-126.md
+            src/_poems/chapter-3/poem-127.md
+            src/_poems/chapter-3/poem-128.md
+            src/_poems/chapter-3/poem-129.md
+            src/_poems/chapter-3/poem-130.md
+            src/_poems/chapter-3/poem-131.md
+            src/_poems/chapter-3/poem-132.md
+            src/_poems/chapter-3/poem-133.md
+            src/_poems/chapter-3/poem-134.md
+            src/_poems/chapter-3/poem-135.md
+            src/_poems/chapter-3/poem-136.md
+            src/_poems/chapter-3/poem-137.md
+            src/_poems/chapter-3/poem-138.md
+            src/_poems/chapter-3/poem-139.md
+            src/_poems/chapter-3/poem-140.md
+            src/_poems/chapter-3/poem-141.md
+            src/_poems/chapter-3/poem-142.md
+            src/_poems/chapter-3/poem-143.md
+            src/_poems/chapter-3/poem-144.md
+            src/_poems/chapter-3/poem-145.md
+            src/_poems/chapter-3/poem-146.md
+            src/_poems/chapter-3/poem-147.md
+            src/_poems/chapter-3/poem-148.md
+            src/_poems/chapter-3/poem-149.md
+            src/_poems/chapter-3/poem-150.md
+            src/_poems/chapter-3/poem-151.md
+            src/_poems/chapter-3/poem-152.md
+            src/_poems/chapter-3/poem-153.md
+            src/_poems/chapter-3/poem-154.md
+            src/_poems/chapter-3/poem-155.md
+            src/_poems/chapter-3/poem-156.md
+            src/_poems/chapter-3/poem-157.md
+            src/_poems/chapter-3/poem-158.md
+            src/_poems/chapter-3/poem-159.md
+            src/_poems/chapter-3/poem-160.md
+            src/_poems/chapter-3/poem-161.md
+            src/_poems/chapter-3/poem-162.md
+            src/_poems/chapter-3/poem-163.md
+            src/_poems/chapter-3/poem-164.md
+            src/_poems/chapter-3/poem-165.md
+            src/_poems/chapter-3/poem-166.md
+            src/_poems/chapter-3/poem-167.md
+            src/_poems/chapter-3/poem-168.md
+            src/_poems/chapter-3/poem-169.md
+            src/_poems/chapter-3/poem-170.md
+            src/_poems/chapter-3/poem-171.md
+            src/_poems/chapter-3/poem-172.md
+            src/_poems/chapter-3/poem-173.md
+            src/_poems/chapter-3/poem-174.md
+            src/_poems/chapter-3/poem-175.md
+            src/_poems/chapter-3/poem-176.md
+            src/_poems/chapter-3/poem-177.md
+            src/_poems/chapter-3/poem-178.md
+            src/_poems/chapter-3/poem-179.md
+            src/_poems/chapter-3/poem-180.md
+            src/_poems/chapter-3/poem-181.md
+            src/_poems/chapter-3/poem-182.md
+            src/_poems/chapter-3/poem-183.md
+            src/_poems/chapter-3/poem-184.md
+            src/_poems/chapter-3/poem-185.md
+            src/_poems/chapter-3/poem-186.md
+            src/_poems/chapter-3/poem-187.md
+            src/_poems/chapter-3/poem-188.md
+            src/_poems/chapter-3/poem-189.md
+            src/_poems/chapter-3/poem-190.md
+            src/_poems/chapter-3/poem-191.md
+            src/_poems/chapter-3/poem-192.md
+            src/_poems/chapter-3/poem-193.md
+            src/_poems/chapter-3/poem-194.md
+            src/_poems/chapter-3/poem-195.md
+            src/_poems/chapter-3/poem-196.md
+            src/_poems/chapter-3/poem-197.md
+            src/_poems/chapter-3/poem-198.md
+            src/_poems/chapter-3/poem-199.md
+            src/_poems/chapter-3/poem-200.md
+            src/_poems/chapter-3/poem-201.md
+            src/_poems/chapter-3/poem-202.md
+            src/_poems/chapter-3/poem-203.md
+            src/_poems/chapter-3/poem-204.md
+            src/_poems/chapter-3/poem-205.md
+            src/_poems/chapter-3/poem-206.md
+            src/_poems/chapter-3/poem-207.md
+            src/_poems/chapter-3/poem-208.md
+            src/_poems/chapter-3/poem-209.md
+            src/_poems/chapter-3/poem-210.md
+            src/_poems/chapter-3/poem-211.md
+            src/_poems/chapter-3/poem-212.md
+            src/_poems/chapter-3/poem-213.md
+            src/_poems/chapter-3/poem-214.md
+            src/_poems/chapter-3/poem-215.md
+            src/_poems/chapter-3/poem-216.md
+            src/_poems/chapter-3/poem-217.md
+            src/_poems/chapter-3/poem-218.md
+            src/_poems/chapter-3/poem-219.md
+            src/_poems/chapter-3/poem-220.md
+            src/_poems/chapter-3/poem-221.md
+            src/_poems/chapter-3/poem-222.md
+            src/_poems/chapter-3/poem-223.md
+            src/_poems/chapter-3/poem-224.md
+            src/_poems/chapter-3/poem-225.md
+            src/_poems/chapter-3/poem-226.md
+            src/_poems/chapter-3/poem-227.md
+            src/_poems/chapter-3/poem-228.md
+            src/_poems/chapter-3/poem-229.md
+            src/_poems/chapter-3/poem-230.md
+            src/_poems/chapter-3/poem-231.md
+            src/_poems/chapter-3/poem-232.md
+            src/_poems/chapter-3/poem-233.md
+            src/_poems/chapter-3/poem-234.md
+            src/_poems/chapter-3/poem-235.md
+            src/_poems/chapter-3/poem-236.md
+            src/_poems/chapter-3/poem-237.md
+            src/_poems/chapter-3/poem-238.md
+            src/_poems/chapter-3/poem-239.md
+            src/_poems/chapter-3/poem-240.md
+            src/_poems/chapter-3/poem-241.md
+            src/_poems/chapter-3/poem-242.md
+            src/_poems/chapter-3/poem-243.md
+            src/_poems/chapter-3/poem-244.md
+            src/_poems/chapter-3/poem-245.md
+            src/_poems/chapter-3/poem-246.md
+            src/_poems/chapter-3/poem-247.md
+            src/_poems/chapter-3/poem-248.md
+            src/_poems/chapter-3/poem-249.md
+            src/_poems/chapter-3/poem-250.md
+            src/_poems/chapter-3/poem-251.md
+            src/_poems/chapter-3/poem-252.md
+            src/_poems/chapter-3/poem-253.md
+            src/_poems/chapter-3/poem-254.md
+            src/_poems/chapter-3/poem-255.md
+            src/_poems/chapter-3/poem-256.md
+            src/_poems/chapter-3/poem-257.md
+            src/_poems/chapter-3/poem-258.md
+            src/_poems/chapter-3/poem-259.md
+            src/_poems/chapter-3/poem-261.md
+            src/_poems/chapter-3/poem-262.md
+            src/_poems/chapter-3/poem-263.md
+            src/_poems/chapter-3/poem-264.md
+            src/_poems/chapter-3/poem-265.md
+            src/_poems/chapter-3/poem-267.md
+            src/_poems/chapter-3/poem-268.md
+            src/_poems/chapter-3/poem-269.md
+            src/_poems/chapter-3/poem-270.md
+            src/_poems/chapter-3/poem-271.md
+            src/_poems/chapter-3/poem-272.md
+            src/_poems/chapter-3/poem-273.md
+            src/_poems/chapter-3/poem-274.md
+            src/_poems/chapter-3/poem-275.md
+            src/_poems/chapter-3/poem-276.md
+            src/_poems/chapter-3/poem-277.md
+            src/_poems/chapter-3/poem-278.md
+            src/_poems/chapter-3/poem-279.md
+            src/_poems/chapter-3/poem-281.md
+            src/_poems/chapter-3/poem-282.md
+            src/_poems/chapter-3/poem-283.md
+            src/_poems/chapter-3/poem-284.md
+            src/_poems/chapter-3/poem-285.md
+            src/_poems/chapter-3/poem-287.md
+            src/_poems/chapter-3/poem-288.md
+            src/_poems/chapter-3/poem-292.md
+            src/_poems/chapter-3/poem-293.md
+            src/_poems/chapter-3/poem-294.md
+            src/_poems/chapter-3/poem-295.md
+            src/_poems/chapter-3/poem-296.md
+            src/_poems/chapter-3/poem-298.md
+            src/_poems/chapter-3/poem-299.md
+            src/_poems/chapter-3/poem-301.md
+            src/_poems/chapter-3/poem-302.md
+            src/_poems/chapter-3/poem-303.md
+            src/_poems/chapter-3/poem-304.md
+            src/_poems/chapter-3/poem-305.md
+            src/_poems/chapter-3/poem-308.md
+            src/_poems/chapter-3/poem-309.md
+            src/_poems/chapter-3/poem-310.md
+            src/_poems/chapter-3/poem-312.md
+            src/_poems/chapter-3/poem-313.md
+            src/_poems/chapter-3/poem-314.md
+            src/_poems/chapter-3/poem-315.md
+            src/_poems/chapter-3/poem-316.md
+            src/_poems/chapter-3/poem-317.md
+            src/_poems/chapter-3/poem-318.md
+            src/_poems/chapter-3/poem-319.md
+            src/_poems/chapter-3/poem-321.md
+            src/_poems/chapter-3/poem-323.md
+            src/_poems/chapter-3/poem-324.md
+            src/_poems/chapter-3/poem-325.md
+            src/_poems/chapter-3/poem-326.md
+            src/_poems/chapter-3/poem-329.md
+            src/_poems/chapter-3/poem-331.md
+            src/_poems/chapter-3/poem-332.md
+            src/_poems/chapter-3/poem-333.md
+            src/_poems/chapter-3/poem-334.md
+            src/_poems/chapter-3/poem-335.md
+            src/_poems/chapter-3/poem-336.md
+            src/_poems/chapter-3/poem-337.md
+            src/_poems/chapter-3/poem-338.md
+            src/_poems/chapter-3/poem-339.md
+            src/_poems/chapter-3/poem-340.md
+            src/_poems/chapter-3/poem-341.md
+            src/_poems/chapter-3/poem-342.md
+            src/_poems/chapter-3/poem-343.md
+            src/_poems/chapter-3/poem-344.md
+            src/_poems/chapter-3/poem-345.md
+            src/_poems/chapter-3/poem-346.md
+            src/_poems/chapter-3/poem-347.md
+            src/_poems/chapter-3/poem-348.md
+            src/_poems/chapter-3/poem-349.md
+            src/_poems/chapter-3/poem-350.md
+            src/_poems/chapter-3/chapter-3.json
+      - name: Fetch exact VRI Book36 for independent English16 source replay
+        if: matrix.group == 'apadana'
+        uses: actions/checkout@v4
+        with:
+          repository: VipassanaTech/tipitaka-xml
+          ref: 2d134ff9ef60f70a1eb03c9370580228811a3070
+          path: .fixtures/vri-english335-350
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: romn/s0510m1.mul.xml
+      - name: Replay sixteen originals without application parser inputs
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          node scripts/shard-data.mjs --unpack server/data .fixtures/english16-canon
+          python3 scripts/apadana/thera335-350/portable_source_replay.py --publisher-checkout .fixtures/apadana-pinned --canon .fixtures/english16-canon/canon.json.gz --vri-xml .fixtures/vri-english335-350/romn/s0510m1.mul.xml --out .fixtures/english16-source-replay
+      - name: Validate all Apadāna source and rights pins before browser retrieval
+        if: matrix.group == 'apadana'
+        run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+      - name: Require all reviewed publisher261-299 source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera261-280-source.test.mjs tests/thera261-280-client.test.mjs tests/thera281-285-source.test.mjs tests/thera281-285-client.test.mjs tests/thera287-288-source.test.mjs tests/thera287-288-client.test.mjs tests/thera292-299-source.test.mjs tests/thera292-299-client.test.mjs | tee reviewed-publisher261-299.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher261-299.tap","utf8"); for(const [key,value] of [["tests",49],["pass",49],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all reviewed publisher301-310 source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera301-310-source.test.mjs tests/thera301-310-client.test.mjs | tee reviewed-publisher301-310.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher301-310.tap","utf8"); for(const [key,value] of [["tests",14],["pass",14],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all reviewed publisher312-319 source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera312-319-source.test.mjs tests/thera312-319-client.test.mjs | tee reviewed-publisher312-319.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher312-319.tap","utf8"); for(const [key,value] of [["tests",14],["pass",14],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all reviewed publisher321-329 six-scope source and client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera321-329-source.test.mjs tests/thera321-329-client.test.mjs | tee reviewed-publisher321-329.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher321-329.tap","utf8"); for(const [key,value] of [["tests",12],["pass",12],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all eleven English16 source and native/widget client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera335-350-source.test.mjs tests/thera335-350-client.test.mjs | tee reviewed-publisher335-350.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher335-350.tap","utf8"); for(const [key,value] of [["tests",11],["pass",11],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all thirteen source-backed widget cache cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/widget-json-output-cache.test.mjs | tee reviewed-widget-json-cache.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-widget-json-cache.tap","utf8"); for(const [key,value] of [["tests",13],["pass",13],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all reviewed publisher331-334 source and preface client cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 10
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          node --test --test-reporter=tap tests/thera331-334-source.test.mjs tests/thera331-334-preface-client.test.mjs | tee reviewed-publisher331-334.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher331-334.tap","utf8"); for(const [key,value] of [["tests",13],["pass",13],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Check original and new Apadāna parser refusals against pinned source
+        if: matrix.group == 'apadana'
+        run: APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-parser.test.mjs tests/apadana-integration.test.mjs tests/apadana-pair-boundary.test.mjs tests/apadana-three.test.mjs
+      - name: Check seven exact Apadāna sources using deterministic fixtures
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana.report.json
+      - name: Audit Apadāna source identity and rights in both themes
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-a11y.report.json
+      - name: Check exact Apadāna sources from the isolated npm package
+        if: matrix.group == 'apadana'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-package"
+          tar -xzf "$RUNNER_TEMP/apadana-package/"*.tgz -C "$RUNNER_TEMP/apadana-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-package/package/server" --report installed-apadana.report.json
+      - name: Check repaired Apadāna 4/5 and separately scoped poem 10 summary
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-three-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-three.report.json
+      - name: Audit three new Apadāna sources and chapter-note ownership
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-three-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-three-a11y.report.json
+      - name: Check repaired Apadāna and summary from isolated npm package
+        if: matrix.group == 'apadana'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-three-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-package/package/server" --report installed-apadana-three.report.json
+      - name: Validate next Apadāna chapter source rights and refusal cases
+        if: matrix.group == 'apadananext'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-next.test.mjs tests/apadana-next-client.test.mjs tests/apadana-next-boundaries.test.mjs
+      - name: Check next Apadāna chapter with pinned publisher edition
+        if: matrix.group == 'apadananext'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-next-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-next.report.json
+      - name: Audit next Apadāna chapter notes and recitation ownership
+        if: matrix.group == 'apadananext'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-next-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-next-a11y.report.json
+      - name: Check next Apadāna chapter from isolated npm package
+        if: matrix.group == 'apadananext'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-next-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-next-package"
+          tar -xzf "$RUNNER_TEMP/apadana-next-package/"*.tgz -C "$RUNNER_TEMP/apadana-next-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-next-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-next-package/package/server" --report installed-apadana-next.report.json
+      - name: Validate third Apadāna chapter source rights and refusal cases
+        if: matrix.group == 'apadanathird'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-third.test.mjs tests/apadana-third-boundaries.test.mjs
+      - name: Check third Apadāna chapter with pinned publisher edition
+        if: matrix.group == 'apadanathird'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-third-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-third.report.json
+      - name: Audit third Apadāna chapter notes and paratext ownership
+        if: matrix.group == 'apadanathird'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-third-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-third-a11y.report.json
+      - name: Check third Apadāna chapter from isolated npm package
+        if: matrix.group == 'apadanathird'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-third-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-third-package"
+          tar -xzf "$RUNNER_TEMP/apadana-third-package/"*.tgz -C "$RUNNER_TEMP/apadana-third-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-third-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-third-package/package/server" --report installed-apadana-third.report.json
+      - name: Validate fourth Apadāna chapter source rights and refusal cases
+        if: matrix.group == 'apadanafourth'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-fourth.test.mjs tests/apadana-fourth-client.test.mjs tests/apadana-fourth-boundaries.test.mjs
+      - name: Check fourth Apadāna chapter with pinned publisher edition
+        if: matrix.group == 'apadanafourth'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-fourth-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-fourth.report.json
+      - name: Audit fourth Apadāna chapter notes and paratext ownership
+        if: matrix.group == 'apadanafourth'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-fourth-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-fourth-a11y.report.json
+      - name: Check fourth Apadāna chapter from isolated npm package
+        if: matrix.group == 'apadanafourth'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-fourth-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-fourth-package"
+          tar -xzf "$RUNNER_TEMP/apadana-fourth-package/"*.tgz -C "$RUNNER_TEMP/apadana-fourth-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-fourth-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-fourth-package/package/server" --report installed-apadana-fourth.report.json
+      - name: Validate Therā Apadāna publisher selections source rights and refusal cases
+        if: matrix.group == 'apadanathera'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera.test.mjs tests/apadana-thera-boundaries.test.mjs tests/thera-commentary-locators.test.mjs
+      - name: Check Therā Apadāna publisher selections with pinned publisher edition
+        if: matrix.group == 'apadanathera'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-thera.report.json
+      - name: Audit Therā Apadāna publisher selections notes and paratext ownership
+        if: matrix.group == 'apadanathera'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-thera-a11y.report.json
+      - name: Check Therā Apadāna publisher selections from isolated npm package
+        if: matrix.group == 'apadanathera'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-thera-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-thera-package"
+          tar -xzf "$RUNNER_TEMP/apadana-thera-package/"*.tgz -C "$RUNNER_TEMP/apadana-thera-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-thera-package/package/server" --report installed-apadana-thera.report.json
+      - name: Validate next Therā publisher chapter source rights and refusal cases
+        if: matrix.group == 'apadanatheranext'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-next.test.mjs
+      - name: Check next Therā publisher chapter with pinned publisher edition
+        if: matrix.group == 'apadanatheranext'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-next-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-thera-next.report.json
+      - name: Audit next Therā publisher chapter notes and paratext ownership
+        if: matrix.group == 'apadanatheranext'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-next-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-thera-next-a11y.report.json
+      - name: Check next Therā publisher chapter from isolated npm package
+        if: matrix.group == 'apadanatheranext'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-thera-next-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-thera-next-package"
+          tar -xzf "$RUNNER_TEMP/apadana-thera-next-package/"*.tgz -C "$RUNNER_TEMP/apadana-thera-next-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-next-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-thera-next-package/package/server" --report installed-apadana-thera-next.report.json
+      - name: Check out exact public Apadāna original XML without credentials
+        if: matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234' || matrix.group == 'vrieditionnote'
+        uses: actions/checkout@v4
+        with:
+          repository: VipassanaTech/tipitaka-xml
+          ref: 2d134ff9ef60f70a1eb03c9370580228811a3070
+          path: .fixtures/apadana-vri-pinned
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            romn/s0510m1.mul.xml
+            romn/s0510m2.mul.xml
+            romn/s0510a.att.xml
+      - name: Require four-poem source repair and citation compatibility without skips
+        if: matrix.group == 'apadanatherapair101'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          VRI_SOURCE_CHECKOUT: .fixtures/apadana-vri-pinned
+        run: |
+          node --test --test-reporter=tap tests/apadana-four-boundary-migration.test.mjs tests/apadana-four-locator-consumers.test.mjs | tee reviewed-four-boundary.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-four-boundary.tap","utf8"); for(const [key,value] of [["tests",13],["pass",13],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require six-poem source and saved-citation compatibility without skips
+        if: matrix.group == 'apadanatherapair101'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          VRI_SOURCE_CHECKOUT: .fixtures/apadana-vri-pinned
+        run: |
+          node --test --test-reporter=tap tests/apadana-six-boundary-migration.test.mjs tests/apadana-six-locator-consumers.test.mjs tests/apadana-six-cached-consumers.test.mjs tests/six-boundary-history.test.mjs tests/six-boundary-source-input.test.mjs tests/six-boundary-ci.test.mjs | tee reviewed-six-boundary.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-six-boundary.tap","utf8"); for(const [key,value] of [["tests",23],["pass",23],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require next-ten original-source and saved-citation compatibility without skips
+        if: matrix.group == 'apadanatherapair101'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          VRI_SOURCE_CHECKOUT: .fixtures/apadana-vri-pinned
+        run: |
+          test -f "$VRI_SOURCE_CHECKOUT/romn/s0510m1.mul.xml"
+          test -f "$VRI_SOURCE_CHECKOUT/romn/s0510m2.mul.xml"
+          # Two bounded wrappers require 12+4 Python source cases; consumer files add 12+2 Node cases.
+          node --test --test-reporter=tap tests/apadana-next-ten-migration.test.mjs tests/apadana-next-ten-locator-consumers.test.mjs tests/apadana-next-ten-cached-consumers.test.mjs | tee reviewed-next-ten.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-next-ten.tap","utf8"); for(const [key,value] of [["tests",16],["pass",16],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Validate independently reviewed Therā expansion and held-source refusals
+        if: matrix.group == 'apadanatheraexpansion'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-fifth.test.mjs tests/apadana-thera-sixth.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadana-independent-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadana-independent-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadana-independent-inputs/canon-before-four.json"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/apadana-independent-inputs/canon-before-four.json" --output "$RUNNER_TEMP/apadana-independent-inputs/canon-before-thera-pair.json"
+          python scripts/apadana/review_thera_fifth_sixth.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTH_GOLDENS.json --canon "$RUNNER_TEMP/apadana-independent-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadana-independent-review"
+          cp "$RUNNER_TEMP/apadana-independent-review/EXTRACTION_COMPARISON.json" standalone-apadana-independent-review.report.json
+      - name: Check supplementary Therā source and apparatus ownership
+        if: matrix.group == 'apadanatheraexpansion'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-expansion-check.py --source-root .fixtures/apadana-pinned --report standalone-apadana-thera-expansion.report.json
+      - name: Audit supplementary Therā sources in both themes
+        if: matrix.group == 'apadanatheraexpansion'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-expansion-check.py --source-root .fixtures/apadana-pinned --a11y --report standalone-apadana-thera-expansion-a11y.report.json
+      - name: Check supplementary Therā sources from isolated npm package
+        if: matrix.group == 'apadanatheraexpansion'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-thera-expansion-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-thera-expansion-package"
+          tar -xzf "$RUNNER_TEMP/apadana-thera-expansion-package/"*.tgz -C "$RUNNER_TEMP/apadana-thera-expansion-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-expansion-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-thera-expansion-package/package/server" --report installed-apadana-thera-expansion.report.json
+      - name: Validate scaled Therā 61-80 source, rights, editorial ownership and independent extraction
+        if: matrix.group == 'apadanatherascaled61'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-four.json"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon-before-four.json" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
+          cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatherascaled61-independent.report.json
+      - name: Check scaled Therā 61-80 source and apparatus ownership
+        if: matrix.group == 'apadanatherascaled61'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch 61-80 --source-root .fixtures/apadana-pinned --report standalone-apadanatherascaled61.report.json
+      - name: Audit scaled Therā 61-80 in both themes
+        if: matrix.group == 'apadanatherascaled61'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch 61-80 --source-root .fixtures/apadana-pinned --a11y --report standalone-apadanatherascaled61-a11y.report.json
+      - name: Check scaled Therā 61-80 from isolated npm package
+        if: matrix.group == 'apadanatherascaled61'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanatherascaled61-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanatherascaled61-package"
+          tar -xzf "$RUNNER_TEMP/apadanatherascaled61-package/"*.tgz -C "$RUNNER_TEMP/apadanatherascaled61-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch 61-80 --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanatherascaled61-package/package/server" --report installed-apadanatherascaled61.report.json
+      - name: Validate scaled Therā 81-100 source, rights, editorial ownership and independent extraction
+        if: matrix.group == 'apadanatherascaled81'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-four.json"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon-before-four.json" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
+          cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatherascaled81-independent.report.json
+      - name: Check scaled Therā 81-100 source and apparatus ownership
+        if: matrix.group == 'apadanatherascaled81'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch 81-100 --source-root .fixtures/apadana-pinned --report standalone-apadanatherascaled81.report.json
+      - name: Audit scaled Therā 81-100 in both themes
+        if: matrix.group == 'apadanatherascaled81'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch 81-100 --source-root .fixtures/apadana-pinned --a11y --report standalone-apadanatherascaled81-a11y.report.json
+      - name: Check scaled Therā 81-100 from isolated npm package
+        if: matrix.group == 'apadanatherascaled81'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanatherascaled81-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanatherascaled81-package"
+          tar -xzf "$RUNNER_TEMP/apadanatherascaled81-package/"*.tgz -C "$RUNNER_TEMP/apadanatherascaled81-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch 81-100 --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanatherascaled81-package/package/server" --report installed-apadanatherascaled81.report.json
+      - name: Validate scaled Therā held42 source, rights, editorial ownership and independent extraction
+        if: matrix.group == 'apadanatheraeditorial'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned node --test tests/apadana-thera-scaled.test.mjs tests/held42-editorial-gap.test.mjs tests/editorial-content-sha256.test.mjs tests/thera-hundred-client.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/scaled-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon.json.gz" --output "$RUNNER_TEMP/scaled-inputs/canon-before-four.json"
+          python scripts/canon/historical_thera_pair_snapshot.py --canon "$RUNNER_TEMP/scaled-inputs/canon-before-four.json" --output "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json"
+          python scripts/apadana/review_thera_scaled.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_SEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_NINTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EDITORIAL_GAP_GOLDENS.json --canon "$RUNNER_TEMP/scaled-inputs/canon-before-thera-pair.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/scaled-independent-review"
+          cp "$RUNNER_TEMP/scaled-independent-review/EXTRACTION_COMPARISON.json" standalone-apadanatheraeditorial-independent.report.json
+      - name: Check scaled Therā held42 source and apparatus ownership
+        if: matrix.group == 'apadanatheraeditorial'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch held42 --source-root .fixtures/apadana-pinned --report standalone-apadanatheraeditorial.report.json
+      - name: Audit scaled Therā held42 in both themes
+        if: matrix.group == 'apadanatheraeditorial'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch held42 --source-root .fixtures/apadana-pinned --a11y --report standalone-apadanatheraeditorial-a11y.report.json
+      - name: Check scaled Therā held42 from isolated npm package
+        if: matrix.group == 'apadanatheraeditorial'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanatheraeditorial-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanatheraeditorial-package"
+          tar -xzf "$RUNNER_TEMP/apadanatheraeditorial-package/"*.tgz -C "$RUNNER_TEMP/apadanatheraeditorial-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-thera-scaled-check.py --batch held42 --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanatheraeditorial-package/package/server" --report installed-apadanatheraeditorial.report.json
+      - name: Validate atomic Therā pair and reviewed intake 101-120 against exact original sources
+        if: matrix.group == 'apadanatherapair101'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-thera-pair-intake.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanatherapair101-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanatherapair101-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanatherapair101-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera_pair_intake.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanatherapair101-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanatherapair101-independent-review"
+          cp "$RUNNER_TEMP/apadanatherapair101-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanatherapair101-independent.report.json
+      - name: Check repaired Therā citations and complete publisher intake 101-120
+        if: matrix.group == 'apadanatherapair101'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 101-120 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --report standalone-apadanatherapair101.report.json
+      - name: Audit repaired Therā pair and intake 101-120 in both themes
+        if: matrix.group == 'apadanatherapair101'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 101-120 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --report standalone-apadanatherapair101-a11y.report.json
+      - name: Check repaired Therā pair and intake 101-120 from isolated npm package
+        if: matrix.group == 'apadanatherapair101'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanatherapair101-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanatherapair101-package"
+          tar -xzf "$RUNNER_TEMP/apadanatherapair101-package/"*.tgz -C "$RUNNER_TEMP/apadanatherapair101-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 101-120 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanatherapair101-package/package/server" --report installed-apadanatherapair101.report.json
+      - name: Validate atomic Therā pair and reviewed intake 121-140 against exact original sources
+        if: matrix.group == 'apadanatherapair121'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-thera-pair-intake.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanatherapair121-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanatherapair121-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanatherapair121-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera_pair_intake.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_ELEVENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWELFTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_THIRTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_FOURTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanatherapair121-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanatherapair121-independent-review"
+          cp "$RUNNER_TEMP/apadanatherapair121-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanatherapair121-independent.report.json
+      - name: Check repaired Therā citations and complete publisher intake 121-140
+        if: matrix.group == 'apadanatherapair121'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 121-140 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --report standalone-apadanatherapair121.report.json
+      - name: Audit repaired Therā pair and intake 121-140 in both themes
+        if: matrix.group == 'apadanatherapair121'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 121-140 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --report standalone-apadanatherapair121-a11y.report.json
+      - name: Check repaired Therā pair and intake 121-140 from isolated npm package
+        if: matrix.group == 'apadanatherapair121'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanatherapair121-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanatherapair121-package"
+          tar -xzf "$RUNNER_TEMP/apadanatherapair121-package/"*.tgz -C "$RUNNER_TEMP/apadanatherapair121-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-pair-intake-check.py --batch 121-140 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanatherapair121-package/package/server" --report installed-apadanatherapair121.report.json
+      - name: Validate reviewed Therā 141-160 against exact original sources
+        if: matrix.group == 'apadanathera141'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera141-180.test.mjs tests/thera141-180-client.test.mjs tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-pair-locator-compat.test.mjs tests/web-tool-result.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera141-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera141-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera141-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera141_180.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SEVENTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera141-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera141-independent-review"
+          cp "$RUNNER_TEMP/apadanathera141-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanathera141-independent.report.json
+      - name: Check reviewed Therā 141-160 source and preserved paired citations
+        if: matrix.group == 'apadanathera141'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera141-180-check.py --batch 141-160 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --report standalone-apadanathera141.report.json
+      - name: Audit reviewed Therā 141-160 in both themes
+        if: matrix.group == 'apadanathera141'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera141-180-check.py --batch 141-160 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --report standalone-apadanathera141-a11y.report.json
+      - name: Check reviewed Therā 141-160 from isolated npm package
+        if: matrix.group == 'apadanathera141'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera141-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera141-package"
+          tar -xzf "$RUNNER_TEMP/apadanathera141-package/"*.tgz -C "$RUNNER_TEMP/apadanathera141-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera141-180-check.py --batch 141-160 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera141-package/package/server" --report installed-apadanathera141.report.json
+      - name: Validate reviewed Therā 161-180 against exact original sources
+        if: matrix.group == 'apadanathera161'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera141-180.test.mjs tests/thera141-180-client.test.mjs tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-pair-locator-compat.test.mjs tests/web-tool-result.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera161-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera161-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera161-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera141_180.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_FIFTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SIXTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_SEVENTEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_EIGHTEENTH_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera161-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera161-independent-review"
+          cp "$RUNNER_TEMP/apadanathera161-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanathera161-independent.report.json
+      - name: Check reviewed Therā 161-180 source and preserved paired citations
+        if: matrix.group == 'apadanathera161'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera141-180-check.py --batch 161-180 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --report standalone-apadanathera161.report.json
+      - name: Audit reviewed Therā 161-180 in both themes
+        if: matrix.group == 'apadanathera161'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera141-180-check.py --batch 161-180 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --report standalone-apadanathera161-a11y.report.json
+      - name: Check reviewed Therā 161-180 from isolated npm package
+        if: matrix.group == 'apadanathera161'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera161-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera161-package"
+          tar -xzf "$RUNNER_TEMP/apadanathera161-package/"*.tgz -C "$RUNNER_TEMP/apadanathera161-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera141-180-check.py --batch 161-180 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera161-package/package/server" --report installed-apadanathera161.report.json
+      - name: Validate reviewed Therā 181-200 and all preceding cached-note contracts against exact sources
+        if: matrix.group == 'apadanathera181'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera181-220.test.mjs tests/thera181-220-client.test.mjs tests/thera-cached-poem-notes.test.mjs tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-pair-locator-compat.test.mjs tests/web-tool-result.test.mjs tests/apadana-next-client.test.mjs tests/apadana-next.test.mjs tests/apadana-third.test.mjs tests/apadana-fourth-client.test.mjs tests/thera-hundred-client.test.mjs tests/apadana-integration.test.mjs tests/apadana-three.test.mjs tests/thera-commentary-locators.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera181-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera181-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera181-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera181_220.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_NINETEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTIETH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_FIRST_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_SECOND_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera181-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera181-independent-review"
+          cp "$RUNNER_TEMP/apadanathera181-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanathera181-independent.report.json
+      - name: Check reviewed Therā 181-200 source and preserved paired citations
+        if: matrix.group == 'apadanathera181'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera181-220-check.py --batch 181-200 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --launch-receipt standalone-apadanathera181-launch.report.json --report standalone-apadanathera181.report.json
+      - name: Audit reviewed Therā 181-200 in both themes
+        if: matrix.group == 'apadanathera181'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera181-220-check.py --batch 181-200 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --launch-receipt standalone-apadanathera181-a11y-launch.report.json --report standalone-apadanathera181-a11y.report.json
+      - name: Check reviewed Therā 181-200 from isolated npm package with archive binding
+        if: matrix.group == 'apadanathera181'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera181-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera181-package"
+          tar -xzf "$RUNNER_TEMP/apadanathera181-package/"*.tgz -C "$RUNNER_TEMP/apadanathera181-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera181-220-check.py --batch 181-200 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera181-package/package/server" --package-archive "$RUNNER_TEMP/apadanathera181-package/"*.tgz --launch-receipt installed-apadanathera181-launch.report.json --report installed-apadanathera181.report.json
+      - name: Validate reviewed Therā 201-220 and all preceding cached-note contracts against exact sources
+        if: matrix.group == 'apadanathera201'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera181-220.test.mjs tests/thera181-220-client.test.mjs tests/thera-cached-poem-notes.test.mjs tests/apadana-thera-pair-boundaries.test.mjs tests/apadana-pair-locator-compat.test.mjs tests/web-tool-result.test.mjs tests/apadana-next-client.test.mjs tests/apadana-next.test.mjs tests/apadana-third.test.mjs tests/apadana-fourth-client.test.mjs tests/thera-hundred-client.test.mjs tests/apadana-integration.test.mjs tests/apadana-three.test.mjs tests/thera-commentary-locators.test.mjs
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera201-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera201-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera201-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera181_220.py --source-root .fixtures/apadana-pinned --goldens docs/evidence/apadana/THERA_NINETEENTH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTIETH_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_FIRST_GOLDENS.json --goldens docs/evidence/apadana/THERA_TWENTY_SECOND_GOLDENS.json --canon "$RUNNER_TEMP/apadanathera201-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --output-dir "$RUNNER_TEMP/apadanathera201-independent-review"
+          cp "$RUNNER_TEMP/apadanathera201-independent-review/INDEPENDENT_SOURCE_REPLAY.json" standalone-apadanathera201-independent.report.json
+      - name: Check reviewed Therā 201-220 source and preserved paired citations
+        if: matrix.group == 'apadanathera201'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera181-220-check.py --batch 201-220 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --launch-receipt standalone-apadanathera201-launch.report.json --report standalone-apadanathera201.report.json
+      - name: Audit reviewed Therā 201-220 in both themes
+        if: matrix.group == 'apadanathera201'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera181-220-check.py --batch 201-220 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --launch-receipt standalone-apadanathera201-a11y-launch.report.json --report standalone-apadanathera201-a11y.report.json
+      - name: Check reviewed Therā 201-220 from isolated npm package with archive binding
+        if: matrix.group == 'apadanathera201'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera201-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera201-package"
+          tar -xzf "$RUNNER_TEMP/apadanathera201-package/"*.tgz -C "$RUNNER_TEMP/apadanathera201-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera181-220-check.py --batch 201-220 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera201-package/package/server" --package-archive "$RUNNER_TEMP/apadanathera201-package/"*.tgz --launch-receipt installed-apadanathera201-launch.report.json --report installed-apadanathera201.report.json
+      - name: Validate reviewed Therā 221-230 normalization and new and historical source refusals
+        if: matrix.group == 'apadanathera221'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera221-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera221-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera221-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera221_230.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera221-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_221_230_GOLDENS.json --profiles docs/evidence/apadana/THERA_221_230_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_221_230_EXPECTED_LINKS.json --verify-only > standalone-apadanathera221-independent.report.json
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera221-230.test.mjs tests/thera221-230-client.test.mjs tests/apadana-thera181-220.test.mjs tests/thera181-220-client.test.mjs tests/apadana-thera241-250.test.mjs tests/thera241-250-client.test.mjs
+      - name: Check reviewed Therā 221-230 source and preserved paired citations
+        if: matrix.group == 'apadanathera221'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera221-230-check.py --batch 221-230 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --launch-receipt standalone-apadanathera221-launch.report.json --report standalone-apadanathera221.report.json
+      - name: Audit reviewed Therā 221-230 in both themes
+        if: matrix.group == 'apadanathera221'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera221-230-check.py --batch 221-230 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --launch-receipt standalone-apadanathera221-a11y-launch.report.json --report standalone-apadanathera221-a11y.report.json
+      - name: Check reviewed Therā 221-230 from a genuine isolated npm install with archive binding
+        if: matrix.group == 'apadanathera221'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera221-package" "$RUNNER_TEMP/apadanathera221-installed"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera221-package"
+          set -- "$RUNNER_TEMP/apadanathera221-package/"*.tgz
+          test "$#" -eq 1
+          test -f "$1"
+          npm install --prefix "$RUNNER_TEMP/apadanathera221-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera221-230-check.py --batch 221-230 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera221-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-apadanathera221-launch.report.json --report installed-apadanathera221.report.json
+      - name: Validate remaining Therā group A independent normalization and selected source refusals
+        if: matrix.group == 'apadanathera231'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera231-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera231-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera231-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera231_240.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera231-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_231_240_GOLDENS.json --profiles docs/evidence/apadana/THERA_231_240_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_231_240_EXPECTED_LINKS.json --verify-only > standalone-apadanathera231-independent.report.json
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera231-240.test.mjs tests/thera231-240-client.test.mjs
+      - name: Check remaining Therā group A source and preserved paired citations
+        if: matrix.group == 'apadanathera231'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-remaining-check.py --batch A --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --launch-receipt standalone-apadanathera231-launch.report.json --report standalone-apadanathera231.report.json
+      - name: Audit remaining Therā group A in both themes
+        if: matrix.group == 'apadanathera231'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-remaining-check.py --batch A --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --launch-receipt standalone-apadanathera231-a11y-launch.report.json --report standalone-apadanathera231-a11y.report.json
+      - name: Check remaining Therā group A from a genuine isolated npm install with archive binding
+        if: matrix.group == 'apadanathera231'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera231-package" "$RUNNER_TEMP/apadanathera231-installed"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera231-package"
+          set -- "$RUNNER_TEMP/apadanathera231-package/"*.tgz
+          test "$#" -eq 1
+          test -f "$1"
+          npm install --prefix "$RUNNER_TEMP/apadanathera231-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-remaining-check.py --batch A --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera231-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-apadanathera231-launch.report.json --report installed-apadanathera231.report.json
+      - name: Validate reviewed Therā publisher234 independent normalization and selected source refusals
+        if: matrix.group == 'apadanathera234'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera234-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera234-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera234-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera_held234.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera234-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_HELD234_GOLDENS.json --profiles docs/evidence/apadana/THERA_HELD234_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_HELD234_EXPECTED_LINKS.json --verify-only > standalone-apadanathera234-independent.report.json
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-held234.test.mjs tests/held234-client.test.mjs
+      - name: Check reviewed Therā publisher234 source and preserved paired citations
+        if: matrix.group == 'apadanathera234'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-held234-check.py --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --launch-receipt standalone-apadanathera234-launch.report.json --report standalone-apadanathera234.report.json
+      - name: Audit reviewed Therā publisher234 in both themes
+        if: matrix.group == 'apadanathera234'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-held234-check.py --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --launch-receipt standalone-apadanathera234-a11y-launch.report.json --report standalone-apadanathera234-a11y.report.json
+      - name: Check reviewed Therā publisher234 from a genuine isolated npm install with archive binding
+        if: matrix.group == 'apadanathera234'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera234-package" "$RUNNER_TEMP/apadanathera234-installed"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera234-package"
+          set -- "$RUNNER_TEMP/apadanathera234-package/"*.tgz
+          test "$#" -eq 1
+          test -f "$1"
+          npm install --prefix "$RUNNER_TEMP/apadanathera234-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-held234-check.py --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera234-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-apadanathera234-launch.report.json --report installed-apadanathera234.report.json
+      - name: Validate reviewed Therā 241-250 normalization and source refusals against exact sources
+        if: matrix.group == 'apadanathera241'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera241-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera241-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera241-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera241_250.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera241-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_TWENTY_FIFTH_GOLDENS.json --profiles docs/evidence/apadana/THERA_241_250_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_241_250_EXPECTED_LINKS.json --verify-only > standalone-apadanathera241-independent.report.json
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera241-250.test.mjs tests/thera241-250-client.test.mjs
+      - name: Check reviewed Therā 241-250 source and preserved paired citations
+        if: matrix.group == 'apadanathera241'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera241-250-check.py --batch 241-250 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --launch-receipt standalone-apadanathera241-launch.report.json --report standalone-apadanathera241.report.json
+      - name: Audit reviewed Therā 241-250 in both themes
+        if: matrix.group == 'apadanathera241'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera241-250-check.py --batch 241-250 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --launch-receipt standalone-apadanathera241-a11y-launch.report.json --report standalone-apadanathera241-a11y.report.json
+      - name: Check reviewed Therā 241-250 from a genuine isolated npm install with archive binding
+        if: matrix.group == 'apadanathera241'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera241-package" "$RUNNER_TEMP/apadanathera241-installed"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera241-package"
+          set -- "$RUNNER_TEMP/apadanathera241-package/"*.tgz
+          test "$#" -eq 1
+          test -f "$1"
+          npm install --prefix "$RUNNER_TEMP/apadanathera241-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera241-250-check.py --batch 241-250 --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera241-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-apadanathera241-launch.report.json --report installed-apadanathera241.report.json
+      - name: Validate remaining Therā group B independent normalization and selected source refusals
+        if: matrix.group == 'apadanathera251'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera251-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera251-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera251-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera251_259.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera251-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_251_259_GOLDENS.json --profiles docs/evidence/apadana/THERA_251_259_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_251_259_EXPECTED_LINKS.json --verify-only > standalone-apadanathera251-independent.report.json
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-thera251-259.test.mjs tests/thera251-259-client.test.mjs
+      - name: Check remaining Therā group B source and preserved paired citations
+        if: matrix.group == 'apadanathera251'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-remaining-check.py --batch B --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --launch-receipt standalone-apadanathera251-launch.report.json --report standalone-apadanathera251.report.json
+      - name: Audit remaining Therā group B in both themes
+        if: matrix.group == 'apadanathera251'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-remaining-check.py --batch B --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --launch-receipt standalone-apadanathera251-a11y-launch.report.json --report standalone-apadanathera251-a11y.report.json
+      - name: Check remaining Therā group B from a genuine isolated npm install with archive binding
+        if: matrix.group == 'apadanathera251'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera251-package" "$RUNNER_TEMP/apadanathera251-installed"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera251-package"
+          set -- "$RUNNER_TEMP/apadanathera251-package/"*.tgz
+          test "$#" -eq 1
+          test -f "$1"
+          npm install --prefix "$RUNNER_TEMP/apadanathera251-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-remaining-check.py --batch B --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera251-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-apadanathera251-launch.report.json --report installed-apadanathera251.report.json
+      - name: Verify exact original VRI source note and unchanged legacy segment and anchor objects
+        if: matrix.group == 'vrieditionnote'
+        run: |
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/vrieditionnote-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/vrieditionnote-inputs/canon.json.gz" --output "$RUNNER_TEMP/vrieditionnote-inputs/canon-before-four.json"
+          python scripts/canon/build_source_notes.py --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --canon "$RUNNER_TEMP/vrieditionnote-inputs/canon-before-four.json" --manifest scripts/canon/source_note_manifest.json --verify server/data/source-notes.json > standalone-source-notes-independent.report.json
+          VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/source-notes.test.mjs tests/source-notes-client.test.mjs tests/source-notes-compatibility.test.mjs
+      - name: Check separate original edition-note reading and preserved root context
+        if: matrix.group == 'vrieditionnote'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-source-notes-check.py --launch-receipt standalone-source-notes-launch.report.json --report standalone-source-notes.report.json
+      - name: Audit original edition-note scope and keyboard access in both themes
+        if: matrix.group == 'vrieditionnote'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-source-notes-check.py --a11y --launch-receipt standalone-source-notes-a11y-launch.report.json --report standalone-source-notes-a11y.report.json
+      - name: Check original edition note from a genuine isolated offline npm install
+        if: matrix.group == 'vrieditionnote'
+        run: |
+          mkdir -p "$RUNNER_TEMP/source-notes-package" "$RUNNER_TEMP/source-notes-installed"
+          npm pack --pack-destination "$RUNNER_TEMP/source-notes-package"
+          set -- "$RUNNER_TEMP/source-notes-package/"*.tgz
+          test "$#" -eq 1
+          test -f "$1"
+          npm install --prefix "$RUNNER_TEMP/source-notes-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-source-notes-check.py --server-dir "$RUNNER_TEMP/source-notes-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-source-notes-launch.report.json --report installed-source-notes.report.json
+      - name: Validate exact publisher-edition navigation
+        if: matrix.group == 'apadanaedition'
+        run: node --test tests/apadana-edition-navigation.test.mjs
+      - name: Check publisher-edition navigation
+        if: matrix.group == 'apadanaedition'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-edition-check.py --report standalone-apadana-edition.report.json
+      - name: Audit publisher-edition navigation in both themes
+        if: matrix.group == 'apadanaedition'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-edition-check.py --a11y --report standalone-apadana-edition-a11y.report.json
+      - name: Check publisher-edition navigation from isolated npm package
+        if: matrix.group == 'apadanaedition'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadana-edition-package"
+          npm pack --pack-destination "$RUNNER_TEMP/apadana-edition-package"
+          tar -xzf "$RUNNER_TEMP/apadana-edition-package/"*.tgz -C "$RUNNER_TEMP/apadana-edition-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-edition-check.py --server-dir "$RUNNER_TEMP/apadana-edition-package/package/server" --report installed-apadana-edition.report.json
+      - name: Check out exact public Theragāthā source XML without credentials
+        if: matrix.group == 'thagsixteen'
+        uses: actions/checkout@v4
+        with:
+          repository: VipassanaTech/tipitaka-xml
+          ref: 2d134ff9ef60f70a1eb03c9370580228811a3070
+          path: .fixtures/thag-pinned
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            romn/s0508m.mul.xml
+            romn/s0508a2.att.xml
+      - name: Validate Theragāthā sixteen boundaries and native consumers
+        if: matrix.group == 'thagsixteen'
+        run: VRI_SOURCE_CHECKOUT=.fixtures/thag-pinned node --test tests/thag-sixteen-boundaries.test.mjs tests/thag-sixteen-consumers.test.mjs
+      - name: Check Theragāthā sixteen stale and current reading positions
+        if: matrix.group == 'thagsixteen'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thag-sixteen-check.py --report standalone-thag-sixteen.report.json
+      - name: Audit Theragāthā sixteen private reading-position recovery
+        if: matrix.group == 'thagsixteen'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thag-sixteen-check.py --a11y --report standalone-thag-sixteen-a11y.report.json
+      - name: Check Theragāthā sixteen positions from isolated npm package
+        if: matrix.group == 'thagsixteen'
+        run: |
+          mkdir -p "$RUNNER_TEMP/thag-sixteen-package"
+          npm pack --pack-destination "$RUNNER_TEMP/thag-sixteen-package"
+          tar -xzf "$RUNNER_TEMP/thag-sixteen-package/"*.tgz -C "$RUNNER_TEMP/thag-sixteen-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thag-sixteen-check.py --server-dir "$RUNNER_TEMP/thag-sixteen-package/package/server" --report installed-thag-sixteen.report.json
+      - name: Check reader reflow with expanded user text spacing
+        if: matrix.group == 'textspacing'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-text-spacing-check.py --report standalone-text-spacing.report.json
+      - name: Audit reader reflow with expanded user text spacing in both themes
+        if: matrix.group == 'textspacing'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-text-spacing-check.py --a11y --report standalone-text-spacing-a11y.report.json
+      - name: Check reader reflow with expanded user text spacing from the isolated npm package
+        if: matrix.group == 'textspacing'
+        run: |
+          mkdir -p "$RUNNER_TEMP/text-spacing-package"
+          npm pack --pack-destination "$RUNNER_TEMP/text-spacing-package"
+          tar -xzf "$RUNNER_TEMP/text-spacing-package/"*.tgz -C "$RUNNER_TEMP/text-spacing-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-text-spacing-check.py --server-dir "$RUNNER_TEMP/text-spacing-package/package/server" --report installed-text-spacing.report.json
+      - name: Check reviewed Vinaya partial sources and consent with pinned official ATI artifacts
+        if: matrix.group == 'vinayapartials'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-vinaya-partials-check.py --report standalone-vinaya-partials.report.json
+      - name: Audit Vinaya partial source review and private drafts in both themes
+        if: matrix.group == 'vinayapartials'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-vinaya-partials-check.py --a11y --report standalone-vinaya-partials-a11y.report.json
+      - name: Check Vinaya partial access from the isolated npm package
+        if: matrix.group == 'vinayapartials'
+        run: |
+          mkdir -p "$RUNNER_TEMP/vinaya-partials-package"
+          npm pack --pack-destination "$RUNNER_TEMP/vinaya-partials-package"
+          tar -xzf "$RUNNER_TEMP/vinaya-partials-package/"*.tgz -C "$RUNNER_TEMP/vinaya-partials-package"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-vinaya-partials-check.py --server-dir "$RUNNER_TEMP/vinaya-partials-package/package/server" --report installed-vinaya-partials.report.json
+      - name: Check editorial topic and teaching-list source navigation
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-topics-check.py --report standalone-topics.report.json
+      - name: Audit topic and teaching-list screens in both themes
+        if: matrix.group == 'study'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-topics-check.py --a11y --report standalone-topics-a11y.report.json
+      - name: Check browser stop, retry, deadlines and superseded reading requests
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-recovery-check.py --report standalone-recovery.report.json
+      - name: Audit pending-request and recovery states in both themes
+        if: matrix.group == 'core'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-recovery-check.py --a11y --report standalone-recovery-a11y.report.json
+      - name: Check exact reading position, sharing and source-version refusal
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-position-check.py --report standalone-position.report.json
+      - name: Audit exact reading position and privacy controls in both themes
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-position-check.py --a11y --report standalone-position-a11y.report.json
+      - name: Check reading-only cross-tab reconciliation and stale-note protection
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-pointer-check.py --report standalone-pointer.report.json
+      - name: Audit cross-tab note, reading and import flows in both themes
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-pointer-check.py --a11y --report standalone-pointer-a11y.report.json
+      - name: Check stale-tab saves and personal-data recovery downloads
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-storage-check.py --report standalone-storage.report.json
+      - name: Audit personal-data recovery in both themes
+        if: matrix.group == 'personal'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-storage-check.py --a11y --report standalone-storage-a11y.report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: widget-browser-report-${{ matrix.group }}
+          path: |
+            widget-browser.report.json
+            reviewed-publisher261-299.tap
+            reviewed-publisher301-310.tap
+            reviewed-publisher312-319.tap
+            reviewed-publisher321-329.tap
+            reviewed-publisher331-334.tap
+            reviewed-publisher335-350.tap
+            .fixtures/english16-source-replay/SOURCE_REPLAY_REPORT.json
+            .fixtures/english16-source-replay/SOURCE_REPLAY_SEAL.json
+            reviewed-six-boundary.tap
+            reviewed-next-ten.tap
+            standalone-reader.report.json
+            standalone-print.report.json
+            standalone-saved.report.json
+            standalone-saved-a11y.report.json
+            standalone-bookmark-pin.report.json
+            standalone-bookmark-pin-a11y.report.json
+            standalone-a11y.report.json
+            standalone-scope.report.json
+            standalone-scope-a11y.report.json
+            standalone-plans.report.json
+            standalone-plans-a11y.report.json
+            standalone-import.report.json
+            standalone-import-a11y.report.json
+            standalone-daily.report.json
+            standalone-daily-a11y.report.json
+            standalone-compact.report.json
+            standalone-compact-a11y.report.json
+            installed-english-catalogue.report.json
+            standalone-english-catalogue.report.json
+            standalone-english-catalogue-a11y.report.json
+            standalone-backup.report.json
+            standalone-backup-a11y.report.json
+            installed-backup.report.json
+            standalone-note-conflicts.report.json
+            standalone-note-conflicts-a11y.report.json
+            installed-note-conflicts.report.json
+            standalone-notes.report.json
+            standalone-notes-a11y.report.json
+            installed-notes.report.json
+            standalone-highlights.report.json
+            standalone-highlights-a11y.report.json
+            installed-highlights.report.json
+            standalone-navigation.report.json
+            standalone-navigation-a11y.report.json
+            installed-navigation.report.json
+            standalone-booksearch.report.json
+            standalone-booksearch-a11y.report.json
+            installed-booksearch.report.json
+            standalone-chapters.report.json
+            standalone-chapters-a11y.report.json
+            installed-chapters.report.json
+            standalone-citations.report.json
+            standalone-citations-a11y.report.json
+            installed-citations.report.json
+            standalone-searchpins.report.json
+            standalone-searchpins-a11y.report.json
+            installed-searchpins.report.json
+            standalone-headings.report.json
+            standalone-headings-a11y.report.json
+            installed-headings.report.json
+            standalone-commentary.report.json
+            standalone-commentary-a11y.report.json
+            installed-commentary.report.json
+            standalone-postsearch.report.json
+            standalone-postsearch-a11y.report.json
+            installed-postsearch.report.json
+            standalone-vinaya-partials.report.json
+            standalone-vinaya-partials-a11y.report.json
+            installed-vinaya-partials.report.json
+            standalone-draft-focus.report.json
+            standalone-draft-focus-a11y.report.json
+            installed-draft-focus.report.json
+            standalone-study-focus.report.json
+            standalone-study-focus-a11y.report.json
+            installed-study-focus.report.json
+            standalone-milinda.report.json
+            standalone-milinda-a11y.report.json
+            installed-milinda.report.json
+            standalone-sn27.report.json
+            standalone-sn27-a11y.report.json
+            installed-sn27.report.json
+            standalone-an-numbered.report.json
+            standalone-an-numbered-a11y.report.json
+            installed-an-numbered.report.json
+            standalone-milinda-partial.report.json
+            standalone-milinda-partial-a11y.report.json
+            installed-milinda-partial.report.json
+            standalone-an-ten-selection.report.json
+            standalone-an-ten-selection-a11y.report.json
+            installed-an-ten-selection.report.json
+            standalone-apadana.report.json
+            standalone-apadana-a11y.report.json
+            installed-apadana.report.json
+            standalone-apadana-three.report.json
+            standalone-apadana-three-a11y.report.json
+            installed-apadana-three.report.json
+            standalone-apadana-next.report.json
+            standalone-apadana-next-a11y.report.json
+            installed-apadana-next.report.json
+            standalone-apadana-third.report.json
+            standalone-apadana-third-a11y.report.json
+            installed-apadana-third.report.json
+            standalone-apadana-fourth.report.json
+            standalone-apadana-fourth-a11y.report.json
+            installed-apadana-fourth.report.json
+            standalone-apadana-thera.report.json
+            standalone-apadana-thera-a11y.report.json
+            installed-apadana-thera.report.json
+            standalone-apadana-thera-next.report.json
+            standalone-apadana-thera-next-a11y.report.json
+            installed-apadana-thera-next.report.json
+            standalone-apadana-thera-expansion.report.json
+            standalone-apadana-thera-expansion-a11y.report.json
+            installed-apadana-thera-expansion.report.json
+            standalone-apadana-independent-review.report.json
+            standalone-apadanatherascaled61.report.json
+            standalone-apadanatherascaled61-a11y.report.json
+            standalone-apadanatherascaled61-independent.report.json
+            installed-apadanatherascaled61.report.json
+            standalone-apadanatherascaled81.report.json
+            standalone-apadanatherascaled81-a11y.report.json
+            standalone-apadanatherascaled81-independent.report.json
+            installed-apadanatherascaled81.report.json
+            standalone-apadanatheraeditorial.report.json
+            standalone-apadanatheraeditorial-a11y.report.json
+            standalone-apadanatheraeditorial-independent.report.json
+            installed-apadanatheraeditorial.report.json
+            standalone-apadanatherapair101.report.json
+            standalone-apadanatherapair101-a11y.report.json
+            standalone-apadanatherapair101-independent.report.json
+            installed-apadanatherapair101.report.json
+            standalone-apadanatherapair121.report.json
+            standalone-apadanatherapair121-a11y.report.json
+            standalone-apadanatherapair121-independent.report.json
+            installed-apadanatherapair121.report.json
+            standalone-apadanathera141.report.json
+            standalone-apadanathera141-a11y.report.json
+            standalone-apadanathera141-independent.report.json
+            installed-apadanathera141.report.json
+            standalone-apadanathera161.report.json
+            standalone-apadanathera161-a11y.report.json
+            standalone-apadanathera161-independent.report.json
+            installed-apadanathera161.report.json
+            standalone-apadanathera181.report.json
+            standalone-apadanathera181-launch.report.json
+            standalone-apadanathera181-a11y.report.json
+            standalone-apadanathera181-a11y-launch.report.json
+            standalone-apadanathera181-independent.report.json
+            installed-apadanathera181.report.json
+            installed-apadanathera181-launch.report.json
+            standalone-apadanathera201.report.json
+            standalone-apadanathera201-launch.report.json
+            standalone-apadanathera201-a11y.report.json
+            standalone-apadanathera201-a11y-launch.report.json
+            standalone-apadanathera201-independent.report.json
+            installed-apadanathera201.report.json
+            installed-apadanathera201-launch.report.json
+            standalone-apadanathera221.report.json
+            standalone-apadanathera221-launch.report.json
+            standalone-apadanathera221-a11y.report.json
+            standalone-apadanathera221-a11y-launch.report.json
+            standalone-apadanathera221-independent.report.json
+            installed-apadanathera221.report.json
+            installed-apadanathera221-launch.report.json
+            standalone-apadanathera234.report.json
+            standalone-apadanathera234-launch.report.json
+            standalone-apadanathera234-a11y.report.json
+            standalone-apadanathera234-a11y-launch.report.json
+            standalone-apadanathera234-independent.report.json
+            installed-apadanathera234.report.json
+            installed-apadanathera234-launch.report.json
+            standalone-apadanathera241.report.json
+            standalone-apadanathera241-launch.report.json
+            standalone-apadanathera241-a11y.report.json
+            standalone-apadanathera241-a11y-launch.report.json
+            standalone-apadanathera241-independent.report.json
+            installed-apadanathera241.report.json
+            installed-apadanathera241-launch.report.json
+            standalone-apadanathera231.report.json
+            standalone-apadanathera231-launch.report.json
+            standalone-apadanathera231-a11y.report.json
+            standalone-apadanathera231-a11y-launch.report.json
+            standalone-apadanathera231-independent.report.json
+            installed-apadanathera231.report.json
+            installed-apadanathera231-launch.report.json
+            standalone-apadanathera251.report.json
+            standalone-apadanathera251-launch.report.json
+            standalone-apadanathera251-a11y.report.json
+            standalone-apadanathera251-a11y-launch.report.json
+            standalone-apadanathera251-independent.report.json
+            installed-apadanathera251.report.json
+            installed-apadanathera251-launch.report.json
+            standalone-source-notes.report.json
+            standalone-source-notes-launch.report.json
+            standalone-source-notes-a11y.report.json
+            standalone-source-notes-a11y-launch.report.json
+            standalone-source-notes-independent.report.json
+            installed-source-notes.report.json
+            installed-source-notes-launch.report.json
+            standalone-apadana-edition.report.json
+            standalone-apadana-edition-a11y.report.json
+            installed-apadana-edition.report.json
+            standalone-thag-sixteen.report.json
+            standalone-thag-sixteen-a11y.report.json
+            installed-thag-sixteen.report.json
+            standalone-text-spacing.report.json
+            standalone-text-spacing-a11y.report.json
+            installed-text-spacing.report.json
+            standalone-script-refresh.report.json
+            standalone-script-refresh-a11y.report.json
+            installed-script-refresh.report.json
+            standalone-comparison.report.json
+            standalone-comparison-a11y.report.json
+            installed-comparison.report.json
+            standalone-quote.report.json
+            standalone-quote-a11y.report.json
+            standalone-progress.report.json
+            standalone-progress-a11y.report.json
+            standalone-topics.report.json
+            standalone-topics-a11y.report.json
+            standalone-recovery.report.json
+            standalone-recovery-a11y.report.json
+            standalone-position.report.json
+            standalone-position-a11y.report.json
+            standalone-pointer.report.json
+            standalone-pointer-a11y.report.json
+            standalone-storage.report.json
+            standalone-storage-a11y.report.json
+          if-no-files-found: warn
+  reader-browser:
+    name: Chromium reader
+    needs: [reader-browser-group, reader-compat]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Require every browser group to succeed
+        env:
+          BROWSER_RESULT: ${{ needs['reader-browser-group'].result }}
+          COMPAT_RESULT: ${{ needs['reader-compat'].result }}
+        run: |
+          test "$BROWSER_RESULT" = success
+          test "$COMPAT_RESULT" = success
+  reader-compat:
+    name: Study compatibility / ${{ matrix.engine }}
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [firefox, webkit]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+      - run: python -m pip install playwright==1.62.0
+      - name: Install the official selected Playwright engine and dependencies
+        run: python -m playwright install --with-deps ${{ matrix.engine }}
+      - name: Build and pack the standalone reader
+        run: |
+          npm run build
+          mkdir -p "$RUNNER_TEMP/compat-package"
+          npm pack --pack-destination "$RUNNER_TEMP/compat-package"
+          tar -xzf "$RUNNER_TEMP/compat-package/"*.tgz -C "$RUNNER_TEMP/compat-package"
+      - name: Check installed study workflows in the selected browser engine
+        run: python scripts/web-reader-compat-check.py --engine ${{ matrix.engine }} --server-dir "$RUNNER_TEMP/compat-package/package/server" --report installed-compat.report.json
+      - name: Audit installed study semantics in both themes
+        run: python scripts/web-reader-compat-check.py --engine ${{ matrix.engine }} --server-dir "$RUNNER_TEMP/compat-package/package/server" --a11y --report installed-compat-a11y.report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reader-compat-${{ matrix.engine }}
+          path: |
+            installed-compat.report.json
+            installed-compat-a11y.report.json
+          if-no-files-found: warn
+  check:
+    name: Node ${{ matrix.node }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [20, 22]
+        exclude:
+          - os: windows-latest
+            node: 20
+          - os: windows-latest
+            node: 22
+    defaults:
+      run:
+        shell: bash
+    steps:
+      # Keep LF line endings on Windows too, so the build and the committed server/ compare byte for byte.
+      - name: Use LF line endings
+        if: runner.os == 'Windows'
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Run complete test inventory
+        if: matrix.os != 'ubuntu-latest'
+        timeout-minutes: 30
+        run: npm test
+      - name: Run full Linux20 inventory reference
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 20
+        timeout-minutes: 30
+        run: |
+          node scripts/ci-test-partitions.mjs run --mode full --receipt "$RUNNER_TEMP/ci-inventory/full.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA"
+      - name: Preserve full Linux20 inventory reference
+        if: always() && matrix.os == 'ubuntu-latest' && matrix.node == 20
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux20-full-inventory
+          path: ${{ runner.temp }}/ci-inventory/
+          if-no-files-found: error
+      - name: Run full Linux22 inventory reference
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 22
+        timeout-minutes: 30
+        run: |
+          node scripts/ci-test-partitions.mjs run --mode full --receipt "$RUNNER_TEMP/ci-inventory/full.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA"
+      - name: Preserve full Linux22 inventory reference
+        if: always() && matrix.os == 'ubuntu-latest' && matrix.node == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux22-full-inventory
+          path: ${{ runner.temp }}/ci-inventory/
+          if-no-files-found: error
+      - name: Audit the complete bundled corpus
+        timeout-minutes: 5
+        run: npm run audit
+      - run: npm run smoke
+      - run: npm run pack:desktop
+      # Exhaust every shipped text once; npx.yml checks all lazy datasets on each OS.
+      - name: Audit the isolated installed corpus offline
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 20
+        run: npm run audit:installed
+      # One leg is enough for the staleness check; the build is the same on every platform.
+      - name: Check committed standalone server is current
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 20
+        run: git diff --exit-code -- server/
+  windows20-parts:
+    name: Windows20 inventory partition ${{ matrix.partition }}
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        partition: [0, 1, 2, 3]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Run bounded serial Windows20 partition
+        timeout-minutes: 20
+        run: |
+          node scripts/ci-test-partitions.mjs run --mode partition --partition ${{ matrix.partition }} --receipt "$RUNNER_TEMP/ci-inventory/partition-${{ matrix.partition }}.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA"
+      - name: Preserve Windows20 partition inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows20-partition-${{ matrix.partition }}
+          path: ${{ runner.temp }}/ci-inventory/
+          if-no-files-found: error
+  windows20:
+    name: Node 20 / windows-latest
+    needs: [check, windows20-parts]
+    if: always()
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Require successful reference and all four native partitions
+        env:
+          REFERENCE_JOBS_RESULT: ${{ needs.check.result }}
+          PARTITION_JOBS_RESULT: ${{ needs.windows20-parts.result }}
+        run: |
+          test "$REFERENCE_JOBS_RESULT" = success
+          test "$PARTITION_JOBS_RESULT" = success
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Retrieve exact full Linux20 reference
+        uses: actions/download-artifact@v4
+        with:
+          name: linux20-full-inventory
+          path: ${{ runner.temp }}/ci-reference/
+      - name: Retrieve all four native Windows20 inventories
+        uses: actions/download-artifact@v4
+        with:
+          pattern: windows20-partition-*
+          path: ${{ runner.temp }}/ci-parts/
+          merge-multiple: false
+      - name: Require identical complete test and source inventory
+        timeout-minutes: 2
+        run: |
+          node scripts/ci-test-partitions.mjs aggregate --reference "$RUNNER_TEMP/ci-reference/full.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA" --output "$RUNNER_TEMP/ci-inventory/aggregate.json" --parts "$RUNNER_TEMP/ci-parts/windows20-partition-0/partition-0.json" "$RUNNER_TEMP/ci-parts/windows20-partition-1/partition-1.json" "$RUNNER_TEMP/ci-parts/windows20-partition-2/partition-2.json" "$RUNNER_TEMP/ci-parts/windows20-partition-3/partition-3.json"
+      - name: Diagnose bounded approved acceptance on Windows Node20
+        timeout-minutes: 2
+        run: |
+          node --test --test-reporter=tap tests/approved-acceptance.test.mjs
+          node --test --test-reporter=tap tests/held234-current333-chain.test.mjs
+      - name: Audit the complete bundled corpus
+        timeout-minutes: 5
+        run: npm run audit
+      - run: npm run smoke
+      - run: npm run pack:desktop
+      - name: Preserve exact Windows20 aggregate inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows20-aggregate-inventory
+          path: ${{ runner.temp }}/ci-inventory/aggregate.json
+          if-no-files-found: error
+  windows22-parts:
+    name: Windows22 inventory partition ${{ matrix.partition }}
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        partition: [0, 1, 2, 3]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Run bounded serial Windows22 partition
+        timeout-minutes: 20
+        run: |
+          node scripts/ci-test-partitions.mjs run --mode partition --partition ${{ matrix.partition }} --receipt "$RUNNER_TEMP/ci-inventory/partition-${{ matrix.partition }}.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA"
+      - name: Preserve Windows22 partition inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows22-partition-${{ matrix.partition }}
+          path: ${{ runner.temp }}/ci-inventory/
+          if-no-files-found: error
+  windows22:
+    name: Node 22 / windows-latest
+    needs: [check, windows22-parts]
+    if: always()
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Require successful reference and all four native partitions
+        env:
+          REFERENCE_JOBS_RESULT: ${{ needs.check.result }}
+          PARTITION_JOBS_RESULT: ${{ needs.windows22-parts.result }}
+        run: |
+          test "$REFERENCE_JOBS_RESULT" = success
+          test "$PARTITION_JOBS_RESULT" = success
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Retrieve exact full Linux22 reference
+        uses: actions/download-artifact@v4
+        with:
+          name: linux22-full-inventory
+          path: ${{ runner.temp }}/ci-reference/
+      - name: Retrieve all four native Windows22 inventories
+        uses: actions/download-artifact@v4
+        with:
+          pattern: windows22-partition-*
+          path: ${{ runner.temp }}/ci-parts/
+          merge-multiple: false
+      - name: Require identical complete test and source inventory
+        timeout-minutes: 2
+        run: |
+          node scripts/ci-test-partitions.mjs aggregate --reference "$RUNNER_TEMP/ci-reference/full.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA" --output "$RUNNER_TEMP/ci-inventory/aggregate.json" --parts "$RUNNER_TEMP/ci-parts/windows22-partition-0/partition-0.json" "$RUNNER_TEMP/ci-parts/windows22-partition-1/partition-1.json" "$RUNNER_TEMP/ci-parts/windows22-partition-2/partition-2.json" "$RUNNER_TEMP/ci-parts/windows22-partition-3/partition-3.json"
+      - name: Diagnose bounded approved acceptance on Windows Node22
+        timeout-minutes: 2
+        run: |
+          node --test --test-reporter=tap tests/approved-acceptance.test.mjs
+          node --test --test-reporter=tap tests/held234-current333-chain.test.mjs
+      - name: Audit the complete bundled corpus
+        timeout-minutes: 5
+        run: npm run audit
+      - run: npm run smoke
+      - run: npm run pack:desktop
+      - name: Preserve exact Windows22 aggregate inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows22-aggregate-inventory
+          path: ${{ runner.temp }}/ci-inventory/aggregate.json
+          if-no-files-found: error

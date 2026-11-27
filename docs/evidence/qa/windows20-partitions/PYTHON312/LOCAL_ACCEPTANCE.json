@@ -1,0 +1,55 @@
+{
+  "schema": "explicit-test-python312-focused-acceptance-v1",
+  "bindings": {
+    "baseline_index_sha256": "7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad",
+    "addition_hashes": {
+      "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
+      "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+      "tests/ci-test-partitions.test.mjs": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae"
+    },
+    "map_sha256": "d900545cf48aead842a1bd444330f0b76f9ffadd2591413304227aa5fc59fcc3",
+    "loader_sha256": "077144b257675fb72691b103419739290aa383ebfe3870b850a8b014b8fc7bd3",
+    "rows": {
+      ".github/workflows/check.yml": 10,
+      "AGENTS.md": 1
+    }
+  },
+  "focused_actual_node_runs": [
+    {
+      "actual_node_major": 20,
+      "log_sha256": "090f7dbfa73be157947c24ed548fe8f48713643ad89e0cd6e3606688f5de2b0d",
+      "summary": {
+        "tests": "8",
+        "pass": "8",
+        "fail": "0",
+        "cancelled": "0",
+        "skipped": "0",
+        "todo": "0",
+        "duration_ms": "2296.516848"
+      }
+    },
+    {
+      "actual_node_major": 22,
+      "log_sha256": "00e5ae54b888df4a4d45e83d68ff602a01d681c542d6ee0fc4b4714f442310aa",
+      "summary": {
+        "tests": "8",
+        "pass": "8",
+        "fail": "0",
+        "cancelled": "0",
+        "skipped": "0",
+        "todo": "0",
+        "duration_ms": "1833.585642"
+      }
+    }
+  ],
+  "unchanged_original_source_history_guard": {
+    "tests": 1,
+    "pass": 1,
+    "fail": 0,
+    "skip": 0,
+    "duration_ms": 3361.742848
+  },
+  "original_339_test_bodies_deadlines_and_assertions_changed": false,
+  "native_or_full_CI_success_inferred": false,
+  "python315_cause_or_windows60_recovery_claimed": false
+}

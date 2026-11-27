@@ -1,0 +1,27 @@
+{
+  "schema": "preserved-844-native-blockers-v1",
+  "candidate": "8444b0daf51e0cbc64bfdfd7bd96f66c482fbced",
+  "first_run": {
+    "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45918231963",
+    "windows20_partition2_job": 140242488945,
+    "failure": "Original six-operation-scope Python child reached60000ms; completed partition had543tests/480pass/62skip/1fail.",
+    "elapsed_ms": 60020.4935,
+    "whole_partition_ms": 604710.9812,
+    "windows22_same_case_pass_ms": 54645.5847,
+    "all4_windows22_parts_passed": true,
+    "largest_windows22_phase_ms": 531387.3322,
+    "exact_aggregate_acceptance": "Pending at time of capture, never inferred from numeric total."
+  },
+  "second_run": {
+    "url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45918233946",
+    "mac20_job": 140242495136,
+    "failure": "Dasabala commentary child reached120000ms; last markerimports precedes both project imports and input decoding.",
+    "elapsed_ms": 120033,
+    "interpreter_observed": "Python3.15.2",
+    "root_spans_same_interpreter_pass_ms": 1591,
+    "specific_blocking_call_or_cause": "Not established."
+  },
+  "required_evidence_corpus_and_npx_workflows": "Passed for both separate844cohorts; no receipt mixing authorized.",
+  "explicit312_change_scope": "Align known test dependency with existing browser/data-refresh3.12; no Windows60s cure or Python3.15 causal claim.",
+  "dev_still": "3d614795cf95e45280603e95f68846c52eba4818"
+}

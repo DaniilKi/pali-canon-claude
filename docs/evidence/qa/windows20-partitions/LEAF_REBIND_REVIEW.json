@@ -1,44 +1,46 @@
 {
-  "schema": "independent-windows20-22-partitions-final-source-leaf-review-v1",
-  "status": "GO_EXACT_NODE22_EXTENSION_SOURCE_LEAF_FOR_COMMIT_AND_REQUIRED_NATIVE_CI",
-  "predecessor": "8c7596297960cc9949918ba87b5573917ebd7001",
+  "schema": "independent-python312-dependency-pin-final-source-leaf-review-v1",
+  "status": "GO_EXACT_PYTHON312_SOURCE_LEAF_FOR_SUCCESSOR_COMMIT_AND_WHOLE_COHORT_CI",
+  "predecessor": "8444b0daf51e0cbc64bfdfd7bd96f66c482fbced",
   "unchanged_application_component": "aec778d99aabccec6794a641072e463830e85542",
   "source_review": {
     "file": "SOURCE_INVERSE_REVIEW.json",
-    "sha256": "a337711d30cb2f38d4166dd21067792f0b21da4aba84f9de268d05caa75879ae"
+    "sha256": "8b2f327fa646676533853097b31ca0d60797f7b42f045b017a5154cbbfda98f0"
   },
-  "implementation_workflow_review": {
+  "static_review": {
     "file": "STATIC_REVIEW.json",
-    "sha256": "cf05c27c6eec2b7c831e2c467bb5e2f36d15664e3cb88c0560878a18febdc2a6"
+    "sha256": "e3e2931a0fec2e6014b6774d8f2ddc952669d4968f568242e428c6d314f75820"
   },
   "frozen_bindings": {
-    "baseline_index_sha256": "b98eccf746409217de8492b269882fc6f07265257c4f98ddb5d690d7fe7c6825",
+    "baseline_index_sha256": "7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad",
     "addition_hashes": {
       "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
       "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
-      "tests/ci-test-partitions.test.mjs": "8eecd46ba7b7b939f5014dd2c031123eb316e3c2804bd0bb1c5e26637fe9411a"
+      "tests/ci-test-partitions.test.mjs": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae"
     },
-    "map_sha256": "030ffeccafeb97c0487f4cdfcd62cbce447eede683cfa9ff327d336963d9dc8f",
-    "loader_sha256": "75de40206a5100af0fe43ced92bc75c944013ed549b10941600fbdf19ddb076e",
+    "map_sha256": "d900545cf48aead842a1bd444330f0b76f9ffadd2591413304227aa5fc59fcc3",
+    "loader_sha256": "077144b257675fb72691b103419739290aa383ebfe3870b850a8b014b8fc7bd3",
     "rows": {
-      ".github/workflows/check.yml": 9,
+      ".github/workflows/check.yml": 10,
       "AGENTS.md": 1
     }
   },
-  "only_workflow_and_AGENTS_original_maprow_updates_other70ordered_byteobjects_exact8c": true,
-  "only_loader_map_hash_literal_updated": true,
-  "all72_199hunks12literal_dollars_forward_inverse_Git3d_exact": true,
-  "all1001_originals929unchanged824frozen_authorities_exact": true,
-  "beforeNode22_all10_archive_members_equal_Git8c_and_manifest_pins": true,
-  "baseline339old_objects_driver_counts_unchanged_only2newhashes_updated": true,
-  "all39_application_package_members_src_web_server_pkg_fixtures_unchanged8c": true,
-  "runtime839e_2b19_leaf_and_source_rights_translation_private_data_unchanged": true,
-  "older_firstimplementation_and_fileURL_review_claims_remain_historical_no_newnative_success_inferred": true,
+  "only_workflow_AGENTS_maprows_updated_other70ordereddeepobjects_exact844": true,
+  "loader_only_mapSHA_literal_updated": true,
+  "baseline_onlyexistingQA8newsourcehash_updated_original339_driver_2068plus8_unchanged": true,
+  "all72_fullforward_inverse_replays_exact": true,
+  "source_hunks": 200,
+  "literal_dollar_hunks": 13,
+  "original1001index929unchanged824frozenexact": true,
+  "beforePython312_all10_archivemembers_exactGit844_andmanifest": true,
+  "all39_package_members_src_web_server_pkg_lock_fixtures_unchanged844": true,
+  "runtime839e_2b19leaf_no_newsource_or_rights_or_private_data_change": true,
   "remaining": [
-    "Root commit currentreviewcopies and independent immutableexactGit closure",
-    "Mandatory sameSHA Node20and22 fullLinuxrefs/eightnativeparts/twoexactaggregates/allothergates green before dev promotion"
+    "RootcommitreviewcopiesandimmutableexactGit39closure",
+    "ActualPython312version/executablelogsandall2076sameSHAdualmajorreferences/eightnativeparts/twoaggregates/allrequiredgateshealthyinasinglecompletecohort",
+    "No devpromotionfrompartialcross-cohortpasses"
   ],
-  "reviewer_actions": "Own stdlib source/Git/hash/JSON/TAP readback only; no app/tests/browser/build/network/CIactions/Gitmutation or tracked edits.",
-  "blocking_findings": [],
-  "CI_passed_dev_main_deploy_or_release_claim": false
+  "reviewer_actions": "Read-only ownstdlib/Git/hash/source/metadata only; no app/tests/build/browser/network/CIactions/Gitmutation ortracked edits.",
+  "causation_fix_CI_passed_dev_main_deploy_or_release_claim": false,
+  "blocking_findings": []
 }

@@ -3,26 +3,26 @@
   "status": "GO_EXACT_SOURCE_QA_CHECKPOINT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "snapshot_commit": null,
-  "after_domain": "physical dualNode20and22 partitions and finiteUbuntu24browser-image candidate over8c",
+  "after_domain": "physical explicitPython312 packagejob candidate over8444",
   "live_working_tree_claimed": true,
-  "map_sha256": "030ffeccafeb97c0487f4cdfcd62cbce447eede683cfa9ff327d336963d9dc8f",
-  "loader_sha256": "75de40206a5100af0fe43ced92bc75c944013ed549b10941600fbdf19ddb076e",
+  "map_sha256": "d900545cf48aead842a1bd444330f0b76f9ffadd2591413304227aa5fc59fcc3",
+  "loader_sha256": "077144b257675fb72691b103419739290aa383ebfe3870b850a8b014b8fc7bd3",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
   "changed_existing_exactly_mapped": 72,
   "unchanged_original_source_entries": 929,
-  "hunks": 199,
-  "hunks_with_literal_dollars": 12,
+  "hunks": 200,
+  "hunks_with_literal_dollars": 13,
   "all_forward_and_inverse_reconstructions_exact": true,
   "rows": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "5d2baa5061e669e475868288e0894f5ef541d8426d770489a3a0ee4b63e770f8",
-      "hunks": 9
+      "current_sha256": "7be25653634d3167f0beb0b594d01db59fb574f093ffd602208829cecdbdaa96",
+      "hunks": 10
     },
     "AGENTS.md": {
       "base3d_sha256": "06024baeedc9397364c9ced4f3f6a167d5bccfdebc9182277e491d19d756bd43",
-      "current_sha256": "5bbdb1e1ab0a5633b096092836f311aaea9a9f005221c5d10033c4d7e28eef44",
+      "current_sha256": "1f7949ac5bae23f0b63871a61520572cf5b34de7d306cc264c76c5e3f61768ea",
       "hunks": 1
     },
     "README.md": {

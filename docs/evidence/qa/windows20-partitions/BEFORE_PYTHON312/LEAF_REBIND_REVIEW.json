@@ -1,0 +1,44 @@
+{
+  "schema": "independent-windows20-22-partitions-final-source-leaf-review-v1",
+  "status": "GO_EXACT_NODE22_EXTENSION_SOURCE_LEAF_FOR_COMMIT_AND_REQUIRED_NATIVE_CI",
+  "predecessor": "8c7596297960cc9949918ba87b5573917ebd7001",
+  "unchanged_application_component": "aec778d99aabccec6794a641072e463830e85542",
+  "source_review": {
+    "file": "SOURCE_INVERSE_REVIEW.json",
+    "sha256": "a337711d30cb2f38d4166dd21067792f0b21da4aba84f9de268d05caa75879ae"
+  },
+  "implementation_workflow_review": {
+    "file": "STATIC_REVIEW.json",
+    "sha256": "cf05c27c6eec2b7c831e2c467bb5e2f36d15664e3cb88c0560878a18febdc2a6"
+  },
+  "frozen_bindings": {
+    "baseline_index_sha256": "b98eccf746409217de8492b269882fc6f07265257c4f98ddb5d690d7fe7c6825",
+    "addition_hashes": {
+      "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
+      "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+      "tests/ci-test-partitions.test.mjs": "8eecd46ba7b7b939f5014dd2c031123eb316e3c2804bd0bb1c5e26637fe9411a"
+    },
+    "map_sha256": "030ffeccafeb97c0487f4cdfcd62cbce447eede683cfa9ff327d336963d9dc8f",
+    "loader_sha256": "75de40206a5100af0fe43ced92bc75c944013ed549b10941600fbdf19ddb076e",
+    "rows": {
+      ".github/workflows/check.yml": 9,
+      "AGENTS.md": 1
+    }
+  },
+  "only_workflow_and_AGENTS_original_maprow_updates_other70ordered_byteobjects_exact8c": true,
+  "only_loader_map_hash_literal_updated": true,
+  "all72_199hunks12literal_dollars_forward_inverse_Git3d_exact": true,
+  "all1001_originals929unchanged824frozen_authorities_exact": true,
+  "beforeNode22_all10_archive_members_equal_Git8c_and_manifest_pins": true,
+  "baseline339old_objects_driver_counts_unchanged_only2newhashes_updated": true,
+  "all39_application_package_members_src_web_server_pkg_fixtures_unchanged8c": true,
+  "runtime839e_2b19_leaf_and_source_rights_translation_private_data_unchanged": true,
+  "older_firstimplementation_and_fileURL_review_claims_remain_historical_no_newnative_success_inferred": true,
+  "remaining": [
+    "Root commit currentreviewcopies and independent immutableexactGit closure",
+    "Mandatory sameSHA Node20and22 fullLinuxrefs/eightnativeparts/twoexactaggregates/allothergates green before dev promotion"
+  ],
+  "reviewer_actions": "Own stdlib source/Git/hash/JSON/TAP readback only; no app/tests/browser/build/network/CIactions/Gitmutation or tracked edits.",
+  "blocking_findings": [],
+  "CI_passed_dev_main_deploy_or_release_claim": false
+}

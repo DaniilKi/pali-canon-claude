@@ -1,0 +1,48 @@
+{
+  "schema": "independent-explicit-Python312-package-CI-final-static-review-v1",
+  "status": "GO_FROZEN_FIVE_PACKAGE_PYTHON312_STEPS_AND_QA8_GUARDS_FOR_EXACT_SUCCESSOR_CI",
+  "predecessor": "8444b0daf51e0cbc64bfdfd7bd96f66c482fbced",
+  "frozen_bindings": {
+    "baseline_index_sha256": "7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad",
+    "addition_hashes": {
+      "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
+      "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+      "tests/ci-test-partitions.test.mjs": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae"
+    },
+    "map_sha256": "d900545cf48aead842a1bd444330f0b76f9ffadd2591413304227aa5fc59fcc3",
+    "loader_sha256": "077144b257675fb72691b103419739290aa383ebfe3870b850a8b014b8fc7bd3",
+    "rows": {
+      ".github/workflows/check.yml": 10,
+      "AGENTS.md": 1
+    }
+  },
+  "initial_workflow_review": {
+    "file": "WORKFLOW_PRESEAL_REVIEW.json",
+    "sha256": "90159fb08dddd2fff805543dcb410a2959f893a2c8b436340d30edc0bed7598b"
+  },
+  "exact5jobs": [
+    "check",
+    "windows20-parts",
+    "windows20",
+    "windows22-parts",
+    "windows22"
+  ],
+  "setup_verify_before_npmci_andbuild_unconditional_and_explicitbash_failclosed": true,
+  "actual_python3_strict312_minor_and_executable_fullversion_log_no_private_env_dump": true,
+  "one_minute_new_probe_bound_no_old60_120s_child_deadline_change": true,
+  "remove5setupblocks_and_onlybaselineSHA_update_restores_whole844workflow": true,
+  "all_original_dualmajor_references_partitions_aggregates_artifacts_andpostgates_unchanged": true,
+  "QAimports_fixtures_first7cases_exact844bytes": true,
+  "existing_case8_only_adds_setup_order_presence_andall5missing_wrongversion_refusals": true,
+  "all_prior_case8major_andinventory_topology_privacy_refusal_guards_retained": true,
+  "top_level_cases8_andfull2076_inventory_unchanged": true,
+  "339original_testbodies_anddriver_unchanged": true,
+  "no_app_runtime_fixture_English_rights_private_changes": true,
+  "blocking_findings": [],
+  "causation_and_acceptance_limits": [
+    "NoPython3.15causationorWindows60sfixestablished.",
+    "Actualpython3PATH/versionreceiptandcompletehealthywholeexactcohortremainrequired; distinctpriorcohortpassesarenotcombined."
+  ],
+  "reviewer_actions": "Own stdlibread-onlyGit/source/hash/metadata only; no app/JS/tests/build/browser/network/CI/Gitmutation ortracked edits.",
+  "CI_passed_dev_main_deploy_or_release_claim": false
+}

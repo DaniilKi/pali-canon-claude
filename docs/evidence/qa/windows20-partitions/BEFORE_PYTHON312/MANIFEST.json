@@ -1,0 +1,46 @@
+{
+  "schema": "preserved-pre-explicit-python312-v1",
+  "commit": "8444b0daf51e0cbc64bfdfd7bd96f66c482fbced",
+  "files": {
+    "SOURCE_INVERSES.json": {
+      "path": "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "sha256": "030ffeccafeb97c0487f4cdfcd62cbce447eede683cfa9ff327d336963d9dc8f"
+    },
+    "SOURCE_INVERSE_REVIEW.json": {
+      "path": "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
+      "sha256": "a337711d30cb2f38d4166dd21067792f0b21da4aba84f9de268d05caa75879ae"
+    },
+    "LEAF_REBIND_REVIEW.json": {
+      "path": "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
+      "sha256": "523674506875731201f36d4b0a177f09809d132cc42a123eb7de7315ff342a4f"
+    },
+    "loader.mjs.txt": {
+      "path": "tests/helpers/intake359-source-input.mjs",
+      "sha256": "75de40206a5100af0fe43ced92bc75c944013ed549b10941600fbdf19ddb076e"
+    },
+    "BASELINE_C7E_TEST_FILES.json": {
+      "path": "docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json",
+      "sha256": "b98eccf746409217de8492b269882fc6f07265257c4f98ddb5d690d7fe7c6825"
+    },
+    "runner.mjs.txt": {
+      "path": "scripts/ci-test-partitions.mjs",
+      "sha256": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38"
+    },
+    "reporter.mjs.txt": {
+      "path": "scripts/ci-test-reporter.mjs",
+      "sha256": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
+    },
+    "qa.test.mjs.txt": {
+      "path": "tests/ci-test-partitions.test.mjs",
+      "sha256": "8eecd46ba7b7b939f5014dd2c031123eb316e3c2804bd0bb1c5e26637fe9411a"
+    },
+    "workflow.yml.txt": {
+      "path": ".github/workflows/check.yml",
+      "sha256": "5d2baa5061e669e475868288e0894f5ef541d8426d770489a3a0ee4b63e770f8"
+    },
+    "AGENTS.md.txt": {
+      "path": "AGENTS.md",
+      "sha256": "5bbdb1e1ab0a5633b096092836f311aaea9a9f005221c5d10033c4d7e28eef44"
+    }
+  }
+}
