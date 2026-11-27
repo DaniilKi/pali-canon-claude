@@ -37,12 +37,14 @@ jobs:
           git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
           git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
       - name: Build the exact source candidate
+        id: build
         timeout-minutes: 5
         run: npm run build
       - name: Verify bounded Python partition protocol
         timeout-minutes: 3
         run: node scripts/check-python-partitions.mjs
       - name: Five original wrappers with their unchanged child deadlines
+        if: ${{ always() && !cancelled() && steps.build.outcome == 'success' }}
         timeout-minutes: 8
         shell: pwsh
         run: |

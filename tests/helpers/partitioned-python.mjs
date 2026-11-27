@@ -1,5 +1,5 @@
 // Windows wrappers call this explicitly. No platform or environment mode switch.
-import {spawn} from 'node:child_process';
+import {spawn, ChildProcess} from 'node:child_process';
 import {lstatSync, readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {isAbsolute, join} from 'node:path';
@@ -157,7 +157,8 @@ function parser(plan,suite,part,pid){
  }};
 }
 
-function live(child){return child.process&&!child.closed&&child.process.exitCode===null&&child.process.signalCode===null&&Number.isSafeInteger(child.process.pid)&&child.process.pid>0;}
+function ownedProcess(child){return child.process instanceof ChildProcess&&child.process===child.ownedProcess&&child.pid===child.process.pid&&Number.isSafeInteger(child.pid)&&child.pid>0;}
+function live(child){return ownedProcess(child)&&!child.closed&&child.process.exitCode===null&&child.process.signalCode===null;}
 function groupAbsent(pid){
  try{process.kill(-pid,0);return false;}catch(error){return error.code==='ESRCH';}
 }
@@ -185,10 +186,41 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
  function directFallback(child,code){
   // Own process HANDLE only; no delayed PID lookup or new cleanup grace.
   child.cleanupVerified=false;child.cleanupError??=code;
+  child.cleanupBasis='unverified';child.cleanupProof=null;child.exitRaceEligible=false;
   if(live(child)){
    try{child.process.kill('SIGKILL');}
    catch(error){child.cleanupError=error.code||error.name;}
   }
+ }
+ function verifyExitedTaskkillRace(child){
+  if(!child.exitRaceEligible)return;
+  // Eligibility was captured at tool close. Never promote a still-live fallback.
+  if(done||!ownedProcess(child)||!child.exitObserved||child.cleanupToolDeadline||
+     child.cleanupTool?.exit!==128||child.cleanupTool.signal!==null||child.cleanupTool.error!==null||
+     !child.cleanupToolClosed||remaining()<=0){
+   directFallback(child,'TASKKILL_EXIT_RACE_UNVERIFIED');return;
+  }
+  if(!child.closeObserved)return; // only within the existing global deadline
+  if(child.exit!==child.observedExit||child.signal!==child.observedSignal){
+   directFallback(child,'TASKKILL_EXIT_RACE_TERMINAL_DRIFT');return;
+  }
+  let probe;
+  try{
+   process.kill(child.pid,0); // read-only; a reused/present PID is NOT absence
+   directFallback(child,'TASKKILL_EXIT_RACE_PID_PRESENT');return;
+  }catch(error){
+   if(error.code!=='ESRCH'){
+    directFallback(child,'TASKKILL_EXIT_RACE_PID_'+(error.code||error.name));return;
+   }
+   probe={signal:0,outcome:'absent',error_code:'ESRCH'};
+  }
+  if(remaining()<=0){directFallback(child,'TASKKILL_EXIT_RACE_DEADLINE');return;}
+  child.cleanupProof={schema:'owned-child-exit-pid-absence-proof-v1',kind:'owned-exit-pid-absence',pid:child.pid,
+   owned_process_identity:true,terminal_observed_at_tool_close:true,close_observed:true,
+   exit:child.exit,signal:child.signal,tool_close_observed:true,tool_exit:128,
+   tool_signal:null,tool_error:null,tool_deadline:false,within_deadline:true,
+   pid_probe:probe,descendants_verified:false};
+  child.cleanupVerified=true;child.cleanupBasis='owned-exit-pid-absence';child.cleanupError=null;
  }
  function cleanup(){
   if(cleanupStarted)return;
@@ -207,6 +239,7 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
     const entry={process:tool,closed:false};tools.add(entry);
     let toolError=null;
     const timer=setTimeout(()=>{
+     child.cleanupToolDeadline=true;
      child.cleanupError='TASKKILL_DEADLINE';
      directFallback(child,'TASKKILL_DEADLINE');
      if(tool.exitCode===null&&tool.signalCode===null)tool.kill('SIGKILL');
@@ -214,14 +247,24 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
     tool.on('error',error=>{toolError=error.code||error.name;directFallback(child,toolError);});
     tool.once('close',(code,signalCode)=>{
      clearTimeout(timer);entry.closed=true;tools.delete(entry);
+     child.cleanupToolClosed=true;
      child.cleanupTool={exit:code,signal:signalCode,error:toolError};
-     child.cleanupVerified=!toolError&&code===0&&signalCode===null;
-     if(!child.cleanupVerified)directFallback(child,'TASKKILL_FAILED');
+     child.cleanupVerified=!done&&!toolError&&code===0&&signalCode===null&&!child.cleanupToolDeadline&&remaining()>0;
+     if(child.cleanupVerified){child.cleanupBasis='windows-taskkill-complete';}
+     else if(!done&&process.platform==='win32'&&!syntheticCleanupFailure&&code===128&&
+             signalCode===null&&!toolError&&!child.cleanupToolDeadline&&remaining()>0&&
+             ownedProcess(child)&&child.exitObserved&&
+             ((Number.isInteger(child.observedExit)&&child.observedSignal===null)||
+              (child.observedExit===null&&typeof child.observedSignal==='string'))&&
+             child.process.exitCode===child.observedExit&&child.process.signalCode===child.observedSignal){
+      // A distinct DIRECT-child proof, never a claim taskkill killed a tree.
+      child.exitRaceEligible=true;verifyExitedTaskkillRace(child);
+     }else directFallback(child,'TASKKILL_FAILED');
      maybeDone();
     });
    }else{
-    try{process.kill(-child.process.pid,'SIGKILL');child.cleanupVerified=true;}
-    catch(error){child.cleanupVerified=error.code==='ESRCH';if(!child.cleanupVerified)directFallback(child,error.code||error.name);}
+    try{process.kill(-child.process.pid,'SIGKILL');child.cleanupVerified=true;child.cleanupBasis='posix-group-absent';}
+    catch(error){child.cleanupVerified=error.code==='ESRCH';if(child.cleanupVerified)child.cleanupBasis='posix-group-absent';else directFallback(child,error.code||error.name);}
    }
   }
  }
@@ -236,13 +279,14 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
  try{
   if(remaining()<=0)fail(new Error('Partition preflight exhausted the global envelope'));
   for(const part of ['heavy','remaining']){
-   const child={part,process:null,pid:null,closed:false,closeObserved:false,exit:null,signal:null,error:null,timedOut:false,overflow:false,protocolError:null,stdoutBytes:0,stderrBytes:0,stdout:[],stderr:[],cleanupRequested:false,cleanupVerified:null,cleanupError:null,cleanupTool:null,start:performance.now(),parser:null,timer:null};
+   const child={part,process:null,ownedProcess:null,pid:null,closed:false,closeObserved:false,exitObserved:false,observedExit:null,observedSignal:null,exit:null,signal:null,error:null,timedOut:false,overflow:false,protocolError:null,stdoutBytes:0,stderrBytes:0,stdout:[],stderr:[],cleanupRequested:false,cleanupVerified:null,cleanupBasis:null,cleanupProof:null,cleanupError:null,cleanupTool:null,cleanupToolClosed:false,cleanupToolDeadline:false,exitRaceEligible:false,start:performance.now(),parser:null,timer:null};
    children.push(child);
    if(signal.aborted||reason){child.closed=true;child.error='NOT_STARTED_AFTER_FAILURE';continue;}
    const command=commands(part);
    child.argv=[command.executable,...command.args];
    try{
     child.process=spawn(command.executable,command.args,{cwd:root,env:process.env,shell:false,windowsHide:true,detached:process.platform!=='win32',stdio:['ignore','pipe','pipe']});
+    child.ownedProcess=child.process;
     child.pid=child.process.pid??null;
    }catch(error){child.closed=true;child.error=error.code||error.name;fail(error);continue;}
    const proc=child.process;
@@ -272,13 +316,15 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
    proc.stdout.on('error',error=>{child.error=error.code||error.name;fail(error);});
    proc.stderr.on('error',error=>{child.error=error.code||error.name;fail(error);});
    proc.on('error',error=>{child.error=error.code||error.name;fail(error);});
+   proc.once('exit',(code,signalCode)=>{child.exitObserved=true;child.observedExit=code;child.observedSignal=signalCode;});
    child.timer=setTimeout(()=>{child.timedOut=true;fail(new Error(`Python ${part} exceeded ${childMs}ms`));},Math.max(1,childMs-(performance.now()-child.start)));
    proc.once('close',(code,signalCode)=>{
     clearTimeout(child.timer);child.closed=true;child.closeObserved=true;child.exit=code;child.signal=signalCode;child.seconds=(performance.now()-child.start)/1000;
     if(!child.protocolError)lines(decoder.end(),true);
     if(code!==0||signalCode!==null||child.error)fail(new Error(`Python ${part} did not complete successfully`));
     else if(!child.protocolError){try{child.parser.finish();}catch(error){child.protocolError=error.message;fail(error);}}
-    if(process.platform!=='win32'&&child.pid&&child.cleanupRequested&&!groupAbsent(child.pid)){child.cleanupVerified=false;fail(new Error('Owned POSIX group remains after close'));}
+    verifyExitedTaskkillRace(child);
+    if(process.platform!=='win32'&&child.pid&&child.cleanupRequested&&!groupAbsent(child.pid)){child.cleanupVerified=false;child.cleanupBasis='unverified';child.cleanupProof=null;fail(new Error('Owned POSIX group remains after close'));}
     maybeDone();
    });
   }
@@ -289,7 +335,7 @@ async function engine({root,suiteKey,signal,commands,childMs,globalMs,production
   clearTimeout(globalTimer);signal.removeEventListener('abort',onAbort);
   for(const child of children)clearTimeout(child.timer);
  }
- const diagnostics={schema:'ci-python-partitions-result-v1',suite:suiteKey,platform:process.platform,node:process.versions.node,production,cleanup_strategy:syntheticCleanupFailure?'synthetic-missing-tool':process.platform==='win32'?'owned-windows-taskkill':'owned-posix-group',seconds:(performance.now()-start)/1000,child_timeout_ms:childMs,global_outer_ms:globalMs,effective_cleanup_deadline_ms:globalMs-250,source_script:plan.script,source_sha256:plan.source_sha256,children:children.map(c=>({part:c.part,pid:c.pid,argv:c.argv??null,seconds:c.seconds??null,spawned:c.pid!==null,closed:c.closeObserved,exit:c.exit,signal:c.signal,error:c.error,timed_out:c.timedOut,overflow:c.overflow,protocol_error:c.protocolError,stdout_bytes:c.stdoutBytes,stderr_bytes:c.stderrBytes,last_phase:c.parser?.state.phase??null,started_ids:c.parser?.state.started??[],stopped_ids:c.parser?.state.stopped??[],terminal_results:c.parser?.state.terminals??[],summary:c.parser?.state.summary??null,cleanup_requested:c.cleanupRequested,cleanup_verified:c.cleanupVerified,cleanup_error:c.cleanupError,cleanup_tool:c.cleanupTool}))};
+ const diagnostics={schema:'ci-python-partitions-result-v1',suite:suiteKey,platform:process.platform,node:process.versions.node,production,cleanup_strategy:syntheticCleanupFailure?'synthetic-missing-tool':process.platform==='win32'?'owned-windows-taskkill':'owned-posix-group',seconds:(performance.now()-start)/1000,child_timeout_ms:childMs,global_outer_ms:globalMs,effective_cleanup_deadline_ms:globalMs-250,source_script:plan.script,source_sha256:plan.source_sha256,children:children.map(c=>({part:c.part,pid:c.pid,argv:c.argv??null,seconds:c.seconds??null,spawned:c.pid!==null,terminal_observed:c.exitObserved,closed:c.closeObserved,exit:c.exit,signal:c.signal,error:c.error,timed_out:c.timedOut,overflow:c.overflow,protocol_error:c.protocolError,stdout_bytes:c.stdoutBytes,stderr_bytes:c.stderrBytes,last_phase:c.parser?.state.phase??null,started_ids:c.parser?.state.started??[],stopped_ids:c.parser?.state.stopped??[],terminal_results:c.parser?.state.terminals??[],summary:c.parser?.state.summary??null,cleanup_requested:c.cleanupRequested,cleanup_verified:c.cleanupVerified,cleanup_basis:c.cleanupBasis,cleanup_proof:c.cleanupProof,cleanup_error:c.cleanupError,cleanup_tool:c.cleanupTool}))};
  if(!reason){
   const [a,b]=children.map(c=>c.parser?.state.discovery);
   if(!a||!b||!equal(a.full_inventory,b.full_inventory)||new Set([...a.selected_ids,...b.selected_ids]).size!==7||!equal([...a.selected_ids,...b.selected_ids].sort(),plan.full_inventory.map(n=>`${plan.module_name}.${plan.class_name}.${n}`).sort()))reason=new Error('Both partitions do not exactly cover the discovered seven');

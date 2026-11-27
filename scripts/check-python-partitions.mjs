@@ -121,6 +121,40 @@ function pidAbsent(pid,group=false){
  try{process.kill(group?-pid:pid,0);return false;}
  catch(error){if(error.code==='ESRCH')return true;throw error;}
 }
+function checkVerifiedCleanupBasis(child,result){
+ assert.equal(child.cleanup_verified,true,'close alone does not verify requested cleanup');
+ assert.equal(child.cleanup_error,null,'verified cleanup cannot retain an unresolved tool error');
+ assert.equal(child.terminal_observed,true,'actual owned ChildProcess exit event is required');
+ if(child.cleanup_basis==='owned-exit-pid-absence'){
+  assert.equal(result.platform,'win32');
+  assert.equal(result.cleanup_strategy,'owned-windows-taskkill');
+  same(child.cleanup_tool,{exit:128,signal:null,error:null},'actual not-found tool result must be retained');
+  const proof=child.cleanup_proof;
+  assert.ok(proof,'direct-child absence requires a complete composite proof');
+  same(Object.keys(proof),['schema','kind','pid','owned_process_identity',
+   'terminal_observed_at_tool_close','close_observed','exit','signal',
+   'tool_close_observed','tool_exit','tool_signal','tool_error','tool_deadline',
+   'within_deadline','pid_probe','descendants_verified']);
+  assert.ok(Number.isInteger(child.exit)||typeof child.signal==='string',
+   'already-terminal evidence cannot be inferred from close alone');
+  same(proof,{schema:'owned-child-exit-pid-absence-proof-v1',kind:'owned-exit-pid-absence',
+   pid:child.pid,owned_process_identity:true,terminal_observed_at_tool_close:true,
+   close_observed:true,exit:child.exit,signal:child.signal,tool_close_observed:true,
+   tool_exit:128,tool_signal:null,tool_error:null,tool_deadline:false,
+   within_deadline:true,pid_probe:{signal:0,outcome:'absent',error_code:'ESRCH'},
+   descendants_verified:false},'tool128 is not success without the exact already-exited proof');
+ }else if(child.cleanup_basis==='windows-taskkill-complete'){
+  assert.equal(result.platform,'win32');
+  assert.equal(result.cleanup_strategy,'owned-windows-taskkill');
+  same(child.cleanup_tool,{exit:0,signal:null,error:null});
+  assert.equal(child.cleanup_proof,null);
+ }else{
+  assert.equal(child.cleanup_basis,'posix-group-absent','unknown cleanup evidence cannot pass');
+  assert.notEqual(result.platform,'win32');
+  assert.equal(result.cleanup_strategy,'owned-posix-group');
+  assert.equal(child.cleanup_tool,null);assert.equal(child.cleanup_proof,null);
+ }
+}
 async function checkClosed(root,suiteKey,caseKey,result){
  const plan=PLANS[suiteKey];
  assert.equal(result.schema,'ci-python-partitions-result-v1');
@@ -163,8 +197,11 @@ async function checkClosed(root,suiteKey,caseKey,result){
   if(child.cleanup_requested){
    if(caseKey==='cleanup-tool-failure'){
     assert.equal(child.cleanup_verified,false,'synthetic cleanup failure must stay fatal');
+    assert.equal(child.cleanup_basis,'unverified');assert.equal(child.cleanup_proof,null);
     assert.ok(child.cleanup_error,'cleanup failure diagnostic required');
-   }else assert.equal(child.cleanup_verified,true,'close alone does not verify requested cleanup');
+   }else checkVerifiedCleanupBasis(child,result);
+  }else{
+   assert.equal(child.cleanup_basis,null);assert.equal(child.cleanup_proof,null);
   }
  }
  assert.equal(new Set(pids).size,pids.length,'owned child PIDs are distinct');
@@ -325,6 +362,10 @@ async function runtimeCase(suiteKey,caseKey){
   child_timeout_observed:result.children.some(child=>child.timed_out),
   protocol_or_output_refusal_observed:result.children.some(child=>child.overflow||child.protocol_error),
   cleanup_strategy:result.cleanup_strategy??'actual-platform',
+  cleanup_evidence:result.children.map(child=>({part:child.part,basis:child.cleanup_basis,
+   verified:child.cleanup_verified,tool_exit:child.cleanup_tool?.exit??null,
+   direct_absence_proof_checked:child.cleanup_basis==='owned-exit-pid-absence',
+   descendants_verified:child.cleanup_proof?.descendants_verified??null})),
   cleanup_failure_remained_fatal:caseKey==='cleanup-tool-failure'?true:null};
  // Remove only our exact fresh tree, after both closes and measured PID absence.
  assert.ok(ownedRoots.has(root));
