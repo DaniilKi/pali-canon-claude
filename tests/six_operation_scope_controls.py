@@ -199,6 +199,200 @@ class SixOperationScopeControls(unittest.TestCase):
                             h._historical_c1_data_bytes(scope, h.C1_DATA_PATHS[0])
                     h._historical_c1_data_bytes(scope, h.C1_DATA_PATHS[0])
 
+        self._assert_current368_operation_proof_bytes()
+
+    def _assert_current368_operation_proof_bytes(self):
+        # Additive current368 controls within the original physical-proof case.
+        # The seven original method names and every original assertion remain.
+        from threading import Thread
+        import web_reader_next_ten_boundary_history as ten
+        with h._c1_operation_scope(self.root) as scope:
+            binding = scope._next_ten_binding
+            snapshot = binding._proof368
+            self.assertEqual(list(snapshot._raw),
+                [*intake368.PINS, intake368.RUNTIME_NAME, intake368.REVIEW_NAME])
+            self.assertEqual(len(snapshot._raw), 16)
+            with self.assertRaises(AttributeError):
+                snapshot._active = False
+            with self.assertRaises(ValueError):
+                snapshot._claim(object())
+            with self.assertRaises(ValueError):
+                snapshot._claim(binding)  # second valid claimant still refuses
+            with self.assertRaises(ValueError):
+                snapshot._fresh(self.root, object())
+            with tempfile.TemporaryDirectory(prefix='pali-proof-wrong-root-') as temp:
+                with self.assertRaises(ValueError):
+                    snapshot._fresh(Path(temp), binding)
+            refused = []
+            def foreign_thread():
+                try:
+                    snapshot._fresh(self.root, binding)
+                except ValueError:
+                    refused.append(True)
+            thread = Thread(target=foreign_thread)
+            thread.start(); thread.join(timeout=5)
+            self.assertFalse(thread.is_alive())
+            self.assertEqual(refused, [True])
+            forged = object.__new__(intake368._OperationProofBytes)
+            with self.assertRaises((AttributeError, ValueError)):
+                forged._fresh(self.root, binding)
+            from types import MappingProxyType
+            original_raw = snapshot._raw
+            class EqualAnything:
+                def __eq__(self, other):
+                    return True
+            for forged_raw in (dict(original_raw), MappingProxyType(dict(original_raw)),
+                    MappingProxyType({name: EqualAnything() for name in original_raw})):
+                object.__setattr__(snapshot, '_raw', forged_raw)
+                try:
+                    with self.assertRaises(ValueError):
+                        snapshot._fresh(self.root, binding)
+                    with self.assertRaises(ValueError):
+                        binding._check()
+                finally:
+                    object.__setattr__(snapshot, '_raw', original_raw)
+            invalid = dict(snapshot._raw)
+            invalid['APPROVAL.json'] += b' '
+            with self.assertRaises(ValueError):
+                intake368._OperationProofBytes(self.root, invalid)
+            # Even another authentically sealed snapshot cannot replace this
+            # binding's original one; identity is not a caller-selectable scope.
+            other = intake368._OperationProofBytes(self.root, dict(snapshot._raw))
+            with self.assertRaises(ValueError):
+                other._fresh(self.root, None)
+            for _ in range(2):
+                with self.assertRaises(ValueError):
+                    other._claim(None)
+            claim_refused = []
+            def foreign_claim():
+                try:
+                    other._claim(binding)
+                except ValueError:
+                    claim_refused.append(True)
+            claim_thread = Thread(target=foreign_claim)
+            claim_thread.start(); claim_thread.join(timeout=5)
+            self.assertFalse(claim_thread.is_alive())
+            self.assertEqual(claim_refused, [True])
+            with tempfile.TemporaryDirectory(prefix='pali-proof-wrong-claim-root-') as temp:
+                wrong_root_binding = object.__new__(ten._NextTenBinding)
+                object.__setattr__(wrong_root_binding, '_root', Path(temp))
+                with self.assertRaises(ValueError):
+                    other._claim(wrong_root_binding)
+            other._claim(binding)
+            with self.assertRaises(ValueError):
+                other._claim(binding)
+            object.__setattr__(binding, '_proof368', other)
+            try:
+                with self.assertRaises(ValueError):
+                    ten._binding_records(binding, self.root)
+            finally:
+                object.__setattr__(binding, '_proof368', snapshot)
+                other._close()
+            original_pin = intake368.PINS['APPROVAL.json']
+            intake368.PINS['APPROVAL.json'] = '0' * 64
+            try:
+                with self.assertRaises(ValueError):
+                    ten._binding_records(binding, self.root)
+            finally:
+                intake368.PINS['APPROVAL.json'] = original_pin
+            original_directory = intake368.DIRECTORY
+            with tempfile.TemporaryDirectory(prefix="pali-proof-authentic-directory-") as temp:
+                alternate = self.root / ("owned-alternate-" + Path(temp).name)
+                alternate.mkdir()
+                try:
+                    for name, raw in snapshot._raw.items():
+                        (alternate / name).write_bytes(raw)
+                    intake368.DIRECTORY = alternate.name
+                    with self.assertRaises(ValueError):
+                        ten._binding_records(binding, self.root)
+                finally:
+                    intake368.DIRECTORY = original_directory
+                    shutil.rmtree(alternate)
+            for name in (*intake368.PINS, intake368.RUNTIME_NAME, intake368.REVIEW_NAME):
+                relative = intake368.DIRECTORY + '/' + name
+                for missing in (False, True):
+                    ten._binding_records(binding, self.root)
+                    with self.change(relative, missing=missing), self.subTest(current368=name, missing=missing):
+                        with self.assertRaises((ValueError, AssertionError)):
+                            ten._binding_records(binding, self.root)
+                    ten._binding_records(binding, self.root)
+                path = self.root / relative
+                raw = path.read_bytes()
+                target = path.with_name(path.name + '.owned-snapshot-target')
+                target.write_bytes(raw)
+                path.unlink(); path.symlink_to(target)
+                try:
+                    with self.subTest(current368=name, authentic_symlink=True):
+                        with self.assertRaisesRegex(ValueError, 'symlink'):
+                            ten._binding_records(binding, self.root)
+                finally:
+                    path.unlink(); path.write_bytes(raw); target.unlink()
+                ten._binding_records(binding, self.root)
+        binding._close()  # normal cleanup remains idempotent
+        self.assertFalse(snapshot._active)
+        self.assertEqual(dict(snapshot._raw), {})
+        self.assertIsNone(snapshot._claimant)
+        with self.assertRaises(ValueError):
+            snapshot._fresh(self.root, binding)
+        with self.assertRaises(ValueError):
+            snapshot._claim(object())
+        with self.assertRaises(ValueError):
+            ten._binding_records(binding, self.root)
+        # A consumer failure immediately after construction/yield clears both
+        # existing scope state and the new immutable proof buffers.
+        with self.assertRaisesRegex(ValueError, 'Owned consumer failure'):
+            with h._c1_operation_scope(self.root) as consumer_scope:
+                consumer_binding = consumer_scope._next_ten_binding
+                consumer_snapshot = consumer_binding._proof368
+                raise ValueError('Owned consumer failure')
+        self.assertFalse(consumer_scope._active)
+        self.assertFalse(consumer_binding._active)
+        self.assertFalse(consumer_snapshot._active)
+        self.assertEqual(dict(consumer_snapshot._raw), {})
+        consumer_scope._close()
+        consumer_binding._close()
+        consumer_snapshot._close()
+        # A failure after capture but before binding claim also clears ownership.
+        created = []
+        original_capture = intake368._capture_authority_with_proof_bytes
+        def capture_then_fail(*args):
+            values = original_capture(*args)
+            created.append(values[4])
+            failer.start()
+            return values
+        failer = mock.patch.object(ten, 'prior_dd_records',
+            side_effect=ValueError('Owned failure before binding claim'))
+        try:
+            with mock.patch.object(intake368, '_capture_authority_with_proof_bytes', capture_then_fail):
+                with self.assertRaisesRegex(ValueError, 'Owned failure before binding claim'):
+                    ten._capture_six_test_input(self.root)
+        finally:
+            failer.stop()
+        self.assertEqual(len(created), 1)
+        self.assertFalse(created[0]._active)
+        self.assertEqual(dict(created[0]._raw), {})
+        # The outer context can fail after a valid capture but before yield.
+        returned = []
+        original_actual = h._capture_actual_data
+        def actual_then_fail(*args):
+            values = original_actual(*args)
+            returned.append(values[1]._binding)
+            parent_failer.start()
+            return values
+        parent_failer = mock.patch.object(h, 'parent343_records',
+            side_effect=ValueError('Owned failure before scope yield'))
+        try:
+            with mock.patch.object(h, '_capture_actual_data', actual_then_fail):
+                with self.assertRaisesRegex(ValueError, 'Owned failure before scope yield'):
+                    with h._c1_operation_scope(self.root):
+                        self.fail('Failed pre-yield validation cannot expose a scope')
+        finally:
+            parent_failer.stop()
+        self.assertEqual(len(returned), 1)
+        self.assertFalse(returned[0]._active)
+        self.assertEqual(dict(returned[0]._proof368._raw), {})
+        h.assert_six_current_canonical_data(self.root)
+
     def test_06_every_original_fixture_is_verified_before_operation_use(self):
         for name in h.C1_DATA_PATHS:
             fixture = 'tests/fixtures/canon-before-six/' + Path(name).name

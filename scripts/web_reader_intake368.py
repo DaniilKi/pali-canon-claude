@@ -7,6 +7,8 @@ import hashlib
 import json
 from pathlib import Path
 import re
+from threading import get_ident
+from types import MappingProxyType
 
 BASE = '3cedb7b7a71a42db1601026cb6d995dafe43c9ce'
 CANON = 'f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de'
@@ -51,12 +53,16 @@ def _regular(root, name):
     return regular(root, name)
 
 
-def _sealed(root, name, pin):
+def _sealed_bytes(root, name, pin):
     if type(pin) is not str or re.fullmatch('[a-f0-9]{64}', pin) is None:
         raise ValueError('Pending independent368 authority; no fallback')
     raw = _regular(root, DIRECTORY + '/' + name)
     assert digest(raw) == pin, 'Changed independent368 authority: ' + name
-    return json.loads(raw)
+    return raw
+
+
+def _sealed(root, name, pin):
+    return json.loads(_sealed_bytes(root, name, pin))
 
 
 def fresh_proofs(root):
@@ -67,8 +73,9 @@ def fresh_proofs(root):
         assert digest(_regular(root, DIRECTORY + '/' + name)) == pin
 
 
-def _authority(root):
-    proof = {name: _sealed(root, name, pin) for name, pin in PINS.items()}
+def _authority_with_bytes(root):
+    raw_proofs = {name: _sealed_bytes(root, name, pin) for name, pin in PINS.items()}
+    proof = {name: json.loads(raw) for name, raw in raw_proofs.items()}
     a, old, compact_old = proof['APPROVAL.json'], proof['BASELINE359_FULL_OBJECTS.json'], proof['BASELINE359.json']
     assert a['schema'] == 'reviewed-thera351-360-nine-approval-v1' and a['status'] == 'approved'
     assert a['base_commit'] == old['commit'] == compact_old['commit'] == BASE
@@ -173,12 +180,19 @@ def _authority(root):
     assert len(baseline_data['files']) == 27 and len(baseline_runtime['files']) == 34
     for name, row in baseline_data['files'].items():
         assert name.startswith('server/data/') and baseline_runtime['files'][name.removeprefix('server/')] == row
+    return proof, raw_proofs
+
+
+def _authority(root):
+    proof, _raw_proofs = _authority_with_bytes(root)
     return proof
 
 
-def _runtime(root, previous, proof):
+def _runtime_with_bytes(root, previous, proof):
     assert previous == proof['BASELINE_RUNTIME34.json']['files']
-    inv, review = _sealed(root, RUNTIME_NAME, RUNTIME_SHA), _sealed(root, REVIEW_NAME, REVIEW_SHA)
+    raw_proofs = {RUNTIME_NAME: _sealed_bytes(root, RUNTIME_NAME, RUNTIME_SHA),
+                  REVIEW_NAME: _sealed_bytes(root, REVIEW_NAME, REVIEW_SHA)}
+    inv, review = (json.loads(raw_proofs[name]) for name in (RUNTIME_NAME, REVIEW_NAME))
     assert re.fullmatch('[a-f0-9]{40}', APPLICATION_COMMIT)
     assert inv['schema'] == 'independent-reviewed-intake368-runtime-inventory-v1'
     assert review['schema'] == 'reviewed-intake368-runtime-approval-v1'
@@ -205,13 +219,77 @@ def _runtime(root, previous, proof):
         assert type(row['sha256']) is str and re.fullmatch('[a-f0-9]{64}', row['sha256'])
         if name.startswith('data/') and name != 'data/apadana.json':
             assert row == previous[name]
+    return files, raw_proofs
+
+
+def _runtime(root, previous, proof):
+    files, _raw_proofs = _runtime_with_bytes(root, previous, proof)
     return files
 
 
-def _capture_authority_with_manifest(root, previous):
+class _OperationProofBytes:
+    """Immutable verified bytes, owned by exactly one live private operation."""
+    __slots__ = ("_root", "_thread", "_active", "_claimant", "_raw", "_pins", "_directory")
+
+    def __init__(self, root, raw):
+        from web_reader_next_ten_boundary_history import _physical_root
+        pins = {**PINS, RUNTIME_NAME: RUNTIME_SHA, REVIEW_NAME: REVIEW_SHA}
+        if type(raw) is not dict or list(raw) != list(pins):
+            raise ValueError("Exact closed368 proof bytes required")
+        for name, pin in pins.items():
+            if type(raw[name]) is not bytes or digest(raw[name]) != pin:
+                raise ValueError("Unverified368 proof snapshot")
+        object.__setattr__(self, "_directory", DIRECTORY)
+        object.__setattr__(self, "_pins", tuple(pins.items()))
+        object.__setattr__(self, "_root", _physical_root(root))
+        object.__setattr__(self, "_thread", get_ident())
+        object.__setattr__(self, "_active", True)
+        object.__setattr__(self, "_claimant", None)
+        object.__setattr__(self, "_raw", MappingProxyType(dict(raw)))
+
+    def __setattr__(self, name, value):
+        raise AttributeError("Operation proof bytes are immutable")
+
+    def _claim(self, claimant):
+        from web_reader_next_ten_boundary_history import _NextTenBinding
+        if (type(claimant) is not _NextTenBinding or claimant._root != self._root or
+                not self._active or self._thread != get_ident() or self._claimant is not None):
+            raise ValueError("Closed, foreign-thread or already claimed368 proofs")
+        object.__setattr__(self, "_claimant", claimant)
+
+    def _check_owner(self, root, claimant):
+        from web_reader_next_ten_boundary_history import _NextTenBinding
+        if (not self._active or self._thread != get_ident() or self._claimant is None or
+                type(claimant) is not _NextTenBinding or self._claimant is not claimant or
+                root != self._root or claimant._proof368_identity is not self or
+                type(self._raw) is not MappingProxyType or
+                self._raw is not claimant._proof368_raw_identity):
+            raise ValueError("Foreign, closed or substituted368 proof snapshot")
+        pins = {**PINS, RUNTIME_NAME: RUNTIME_SHA, REVIEW_NAME: REVIEW_SHA}
+        if (DIRECTORY != self._directory or self._pins != tuple(pins.items()) or
+                tuple(self._raw) != tuple(pins) or
+                any(type(raw) is not bytes for raw in self._raw.values())):
+            raise ValueError("Changed closed368 proof configuration")
+
+    def _fresh(self, root, claimant):
+        from web_reader_next_ten_boundary_history import _physical_root
+        self._check_owner(_physical_root(root), claimant)
+        for name, expected in self._raw.items():
+            # Every access still performs the same guarded physical read. Exact
+            # bytes equal the SHA-verified immutable bytes from THIS operation.
+            assert _regular(root, DIRECTORY + "/" + name) == expected
+
+    def _close(self):
+        object.__setattr__(self, "_active", False)
+        object.__setattr__(self, "_claimant", None)
+        object.__setattr__(self, "_raw", MappingProxyType({}))
+        object.__setattr__(self, "_pins", ())
+
+
+def _capture_authority_with_proof_bytes(root, previous):
     """One parsed immutable source graph per operation; no current corpus read here."""
-    proof = _authority(root)
-    files = _runtime(root, previous, proof)
+    proof, source_bytes = _authority_with_bytes(root)
+    files, runtime_bytes = _runtime_with_bytes(root, previous, proof)
     raw = _regular(root, AP_FIXTURE)
     assert {'bytes':len(raw), 'sha256':digest(raw)} == proof['BASELINE_DATA27.json']['files'][AP_PATH]
     frozen = json.loads(raw)
@@ -222,7 +300,17 @@ def _capture_authority_with_manifest(root, previous):
     manifest = proof['EXPECTED_MANIFEST.json']
     profiles = {**old['profiles'], **proof['PROFILES.json']}
     current_catalogue = {'ids':list(profiles), 'profiles':profiles, 'links':manifest['links'], 'source':manifest['source']}
-    return files, raw, compact({'previous':previous_catalogue, 'current':current_catalogue, 'manifest':manifest}), manifest
+    catalogue = compact({'previous':previous_catalogue, 'current':current_catalogue, 'manifest':manifest})
+    snapshot = _OperationProofBytes(root, {**source_bytes, **runtime_bytes})
+    return files, raw, catalogue, manifest, snapshot
+
+
+def _capture_authority_with_manifest(root, previous):
+    files, raw, catalogue, manifest, snapshot = _capture_authority_with_proof_bytes(root, previous)
+    try:
+        return files, raw, catalogue, manifest
+    finally:
+        snapshot._close()
 
 
 def capture_authority(root, previous):

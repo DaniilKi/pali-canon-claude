@@ -311,17 +311,21 @@ def _c1_operation_scope(root):
     """One synchronous private operation. No scope survives return or exception."""
     _reject_c1_scope(root)
     records, actual = _capture_actual_data(root)
-    assert len(actual) == 27 and all(type(raw) is bytes for raw in actual.values())
-    previous = parent343_records(root)
-    fixtures = {}
-    for name in C1_DATA_PATHS:
-        raw = regular(root,'tests/fixtures/canon-before-six/'+Path(name).name)
-        assert {'bytes':len(raw),'sha256':digest(raw)} == previous[name.removeprefix('server/')]
-        fixtures[name] = raw
-    # The metadata-only AP343 input is already checked by the new capture.
-    # Ordinary public physical reads and actual copy inputs remain current359.
-    fixtures['server/data/apadana.json'] = actual['server/data/apadana.json']
-    scoped = _C1OperationScope(root,records,actual,fixtures)
+    try:
+        assert len(actual) == 27 and all(type(raw) is bytes for raw in actual.values())
+        previous = parent343_records(root)
+        fixtures = {}
+        for name in C1_DATA_PATHS:
+            raw = regular(root,'tests/fixtures/canon-before-six/'+Path(name).name)
+            assert {'bytes':len(raw),'sha256':digest(raw)} == previous[name.removeprefix('server/')]
+            fixtures[name] = raw
+        # The metadata-only AP343 input is already checked by the new capture.
+        # Ordinary public physical reads and actual copy inputs remain current359.
+        fixtures['server/data/apadana.json'] = actual['server/data/apadana.json']
+        scoped = _C1OperationScope(root,records,actual,fixtures)
+    except BaseException:
+        _next_ten._release_binding(actual._binding)
+        raise
     del records, actual, fixtures
     try:
         yield scoped

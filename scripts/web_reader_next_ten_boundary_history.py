@@ -237,15 +237,21 @@ def _packed(data, records):
 
 class _NextTenBinding:
     """Owned by exactly one private operation; not a path or public root token."""
-    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359', '_current368', '_catalogue368')
+    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359', '_current368', '_catalogue368', '_proof368', '_proof368_identity', '_proof368_raw_identity')
 
-    def __init__(self, root, records, actual, current359, catalogue359, current368, catalogue368):
+    def __init__(self, root, records, actual, current359, catalogue359, current368, catalogue368, proof368):
         object.__setattr__(self, '_root', _physical_root(root))
         object.__setattr__(self, '_records', _freeze(records))
         object.__setattr__(self, '_actual', MappingProxyType(dict(actual)))
         object.__setattr__(self, '_current359', _freeze(current359))
         object.__setattr__(self, '_catalogue359', catalogue359)
         object.__setattr__(self, '_current368', _freeze(current368))
+        if type(proof368) is not _intake368._OperationProofBytes:
+            raise ValueError('Exact owned368 proof snapshot required')
+        proof368._claim(self)
+        object.__setattr__(self, '_proof368', proof368)
+        object.__setattr__(self, '_proof368_identity', proof368)
+        object.__setattr__(self, '_proof368_raw_identity', proof368._raw)
         object.__setattr__(self, '_catalogue368', catalogue368)
         object.__setattr__(self, '_owner', get_ident())
         object.__setattr__(self, '_active', True)
@@ -256,8 +262,15 @@ class _NextTenBinding:
     def _check(self):
         if not self._active or self._owner != get_ident():
             raise ValueError('Closed or foreign-thread next-ten binding')
+        if type(self._proof368) is not _intake368._OperationProofBytes:
+            raise ValueError('Substituted368 proof snapshot')
+        self._proof368._check_owner(self._root, self)
 
     def _close(self):
+        if self._proof368_identity is not None:
+            self._proof368_identity._close()
+            object.__setattr__(self, '_proof368_identity', None)
+        object.__setattr__(self, '_proof368_raw_identity', None)
         object.__setattr__(self, '_active', False)
         object.__setattr__(self, '_records', MappingProxyType({}))
         object.__setattr__(self, '_actual', MappingProxyType({}))
@@ -297,7 +310,10 @@ def _binding_records(binding, root):
     observed = proof_records(binding._root)  # physical proofs; NEVER rescan27
     assert observed == binding._records
     _intake359.fresh_proofs(binding._root)
-    _intake368.fresh_proofs(binding._root)
+    if (type(binding._proof368) is not _intake368._OperationProofBytes or
+            binding._proof368 is not binding._proof368_identity):
+        raise ValueError("Substituted368 proof snapshot")
+    binding._proof368._fresh(binding._root, binding)
     return observed
 
 
@@ -307,42 +323,47 @@ def _capture_six_test_input(root):
     root = _physical_root(root)
     current = proof_records(root)
     current359, ap343, catalogue359, manifest359 = _intake359._capture_authority_with_manifest(root, current)
-    current368, ap359, catalogue368, manifest368 = _intake368._capture_authority_with_manifest(root, current359)
-    assert json.loads(ap359) == manifest359
-    previous = prior_dd_records(root)
-    actual = {}
-    identity = []
-    for name in sorted(n for n in current368 if n.startswith('data/')):
-        raw = regular(root, 'server/' + name)
-        checksum = digest(raw)
-        assert {'bytes': len(raw), 'sha256': checksum} == current368[name]
-        identity.append(checksum)
-        actual['server/' + name] = raw
-    assert len(actual) == 27 and all(type(raw) is bytes for raw in actual.values())
-    # No old-actual fallback: every actual data byte must match the new inventory.
-    assert json.loads(actual[_intake368.AP_PATH]) == manifest368
-    dd = dict(actual)
-    dd[_intake359.AP_PATH] = ap343
-    for name in DD_DATA_PATHS:
-        raw = regular(root, FIXTURE_DIRECTORY + '/' + Path(name).name)
-        checksum = digest(raw)
-        assert {'bytes': len(raw), 'sha256': checksum} == previous[name.removeprefix('server/')]
-        identity.append(checksum)
-        dd[name] = raw
-    key = (SOURCE_ORACLE_SHA, INVENTORY_SHA, REVIEW_SHA, *identity)
-    if key != _VALIDATED_FRAME:
-        exact_dd_canon_bytes(gzip.decompress(_packed(actual, current)), root)
-        dd_logical = gzip.decompress(_packed(dd, previous))
-        assert digest(dd_logical) == DD_CANON_SHA
-        # Run the preserved exact DD -> C1 logical authority, never its old
-        # physical capture (which would read actual next files against DD pins).
-        from web_reader_six_boundary_history import _historical_dd_exact_c1_canon_bytes
-        _historical_dd_exact_c1_canon_bytes(dd_logical, root)
-        _VALIDATED_FRAME = key
-    # Non-core records equal previous and were already physically hashed above;
-    # four frozen DD fixtures were independently hashed once at their read.
-    binding = _NextTenBinding(root, current, actual, current359, catalogue359, current368, catalogue368)
-    return previous, _CapturedDDData(dd, binding)
+    current368, ap359, catalogue368, manifest368, proof368 = _intake368._capture_authority_with_proof_bytes(root, current359)
+    try:
+        assert json.loads(ap359) == manifest359
+        previous = prior_dd_records(root)
+        actual = {}
+        identity = []
+        for name in sorted(n for n in current368 if n.startswith('data/')):
+            raw = regular(root, 'server/' + name)
+            checksum = digest(raw)
+            assert {'bytes': len(raw), 'sha256': checksum} == current368[name]
+            identity.append(checksum)
+            actual['server/' + name] = raw
+        assert len(actual) == 27 and all(type(raw) is bytes for raw in actual.values())
+        # No old-actual fallback: every actual data byte must match the new inventory.
+        assert json.loads(actual[_intake368.AP_PATH]) == manifest368
+        dd = dict(actual)
+        dd[_intake359.AP_PATH] = ap343
+        for name in DD_DATA_PATHS:
+            raw = regular(root, FIXTURE_DIRECTORY + '/' + Path(name).name)
+            checksum = digest(raw)
+            assert {'bytes': len(raw), 'sha256': checksum} == previous[name.removeprefix('server/')]
+            identity.append(checksum)
+            dd[name] = raw
+        key = (SOURCE_ORACLE_SHA, INVENTORY_SHA, REVIEW_SHA, *identity)
+        if key != _VALIDATED_FRAME:
+            exact_dd_canon_bytes(gzip.decompress(_packed(actual, current)), root)
+            dd_logical = gzip.decompress(_packed(dd, previous))
+            assert digest(dd_logical) == DD_CANON_SHA
+            # Run the preserved exact DD -> C1 logical authority, never its old
+            # physical capture (which would read actual next files against DD pins).
+            from web_reader_six_boundary_history import _historical_dd_exact_c1_canon_bytes
+            _historical_dd_exact_c1_canon_bytes(dd_logical, root)
+            _VALIDATED_FRAME = key
+        # Non-core records equal previous and were already physically hashed above;
+        # four frozen DD fixtures were independently hashed once at their read.
+        binding = _NextTenBinding(root, current, actual, current359, catalogue359, current368, catalogue368, proof368)
+        return previous, _CapturedDDData(dd, binding)
+
+    except BaseException:
+        proof368._close()
+        raise
 
 
 def _capture_binding(actual, root):
