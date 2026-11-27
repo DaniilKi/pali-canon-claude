@@ -132,8 +132,8 @@
       "sha256": "d6bfe4d29580417ca7b18aef6a23785dee383d43111b52e6023cbf165ed9edb0"
     },
     "tests/apadana-thera221-230.test.mjs": {
-      "bytes": 35664,
-      "sha256": "77008d527a51ca71b89b634ebac7a69c6870a88bbbabb5c50511cdc1b38c700f"
+      "bytes": 35658,
+      "sha256": "5e391f45c91b8c47a24e09f4b74dd5176ad5c70275a6217127b509cf9fe90005"
     },
     "tests/apadana-third.test.mjs": {
       "bytes": 23202,
@@ -392,8 +392,8 @@
       "sha256": "148c911bce465cc026001bba1b77efcd593433f4e125259582fcc68d9fd56b51"
     },
     "tests/thera301-310-source.test.mjs": {
-      "bytes": 17288,
-      "sha256": "fc4ddaf3171b69cf32551242730e682b1310d9eb414f8d11dd595e1160e4abfd"
+      "bytes": 17644,
+      "sha256": "cbf3d6c46417364a5484139e952539c5cd6f5e3652c5401baccd12a08ae86efe"
     },
     "tests/thera312-319-client.test.mjs": {
       "bytes": 23673,

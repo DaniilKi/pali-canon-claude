@@ -10,7 +10,7 @@ requireMetadata375(CURRENT_APADANA_PROFILES,JSON.parse(readCurrent375MetadataFil
 import {after as closeOwnedHistoricalHInputs} from 'node:test';
 import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
 import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
-import {pathToFileURL as historicalHFileURL} from 'node:url';
+import {pathToFileURL as historicalHFileURL,fileURLToPath as actualRFilePath} from 'node:url';
 const ownedHistoricalHInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
 const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
 closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
@@ -32,7 +32,9 @@ import {thera301310Evidence,digest,blob} from './helpers/thera301-310-evidence.m
 import {projectPublisher333To325,historical325FileReader} from './helpers/thera333-legacy-projection.mjs';
 const APADANA_PROFILES=projectPublisher333To325(HistoricalH368Profiles,HistoricalH368Catalogue).profiles;
 const readFileSync=historical325FileReader(HistoricalH368Profiles,historical440DataReader(readCurrentFileSync));
-const e=thera301310Evidence(),originalFetch=globalThis.fetch,clone=value=>JSON.parse(JSON.stringify(value));
+// Anchor only the declared publisher checkout at actual R before rights paths enter the owned-H reader.
+function publisherEvidenceAtActualR(value){return {...value,checkout:value.checkout?resolveHistoricalHInput(actualRFilePath(new URL('../',import.meta.url)),value.checkout):value.checkout};}
+const e=publisherEvidenceAtActualR(thera301310Evidence()),originalFetch=globalThis.fetch,clone=value=>JSON.parse(JSON.stringify(value));
 const tid=p=>canon.translationId(p),profile=id=>APADANA_PROFILES[id],parsed=id=>parseApadana(e.artifact(id),profile(id));
 afterEach(()=>{globalThis.fetch=originalFetch;});
 function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e.profiles[id].raw_url===url.href);assert.ok(id,'Only exact eight pinned Markdown fixture URLs may reach transport');assert.ok(url.href.endsWith('.md'));calls.push(id);return new Response(e.artifact(id));};}

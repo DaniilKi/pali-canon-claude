@@ -135,7 +135,7 @@ import { validateApadanaChoice, validateEnglishPage } from '../web/translation-p
 
 const approval = JSON.parse(readFileSync('docs/evidence/apadana/THERA_221_230_APPROVAL.json', 'utf8'));
 const sealed = descriptor => {
-  const raw = readFileSync(join('docs/evidence/apadana', descriptor.file));
+  const raw = readFileSync('docs/evidence/apadana/'+descriptor.file);
   assert.equal(digest(raw), descriptor.sha256, `Independent evidence seal: ${descriptor.file}`);
   return JSON.parse(raw);
 };

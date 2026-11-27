@@ -41,7 +41,7 @@
     },
     "tests/apadana-thera221-230.test.mjs": {
       "before_sha256": "de6d9f1aae7098a1f1119dd5f40fd2a6eee27c63473b05540397cb8798746ac5",
-      "after_sha256": "77008d527a51ca71b89b634ebac7a69c6870a88bbbabb5c50511cdc1b38c700f"
+      "after_sha256": "5e391f45c91b8c47a24e09f4b74dd5176ad5c70275a6217127b509cf9fe90005"
     },
     "tests/apadana-third.test.mjs": {
       "before_sha256": "92e72fe456b1a056b6e4052f4a017853cce4c9d6466b9f99f0ca3f821b9b58a0",
@@ -77,7 +77,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "d794873bb6ccb3ef6f8884277e47f82f0046cb3a59093f16a88e9d8fc0ad8d06"
+      "after_sha256": "26f5bcb6be6880de9b0bf3128f97023f4e2733eb1ab7e7d899733ee0e325cfeb"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -257,7 +257,7 @@
     },
     "tests/thera301-310-source.test.mjs": {
       "before_sha256": "536d2663253dc71e37e016e1c5b59bebb55016f98e76ea8635b44c92eca6df63",
-      "after_sha256": "fc4ddaf3171b69cf32551242730e682b1310d9eb414f8d11dd595e1160e4abfd"
+      "after_sha256": "cbf3d6c46417364a5484139e952539c5cd6f5e3652c5401baccd12a08ae86efe"
     },
     "tests/thera312-319-client.test.mjs": {
       "before_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953",
@@ -1141,7 +1141,7 @@
       },
       "tests/apadana-thera221-230.test.mjs": {
         "before_sha256": "de6d9f1aae7098a1f1119dd5f40fd2a6eee27c63473b05540397cb8798746ac5",
-        "after_sha256": "77008d527a51ca71b89b634ebac7a69c6870a88bbbabb5c50511cdc1b38c700f",
+        "after_sha256": "5e391f45c91b8c47a24e09f4b74dd5176ad5c70275a6217127b509cf9fe90005",
         "before": [
           {
             "name": "221–230 intake is exactly independently approved10 and preserves all256 prior profiles and links",
@@ -1861,7 +1861,7 @@
       },
       "tests/ci-test-partitions.test.mjs": {
         "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-        "after_sha256": "d794873bb6ccb3ef6f8884277e47f82f0046cb3a59093f16a88e9d8fc0ad8d06",
+        "after_sha256": "26f5bcb6be6880de9b0bf3128f97023f4e2733eb1ab7e7d899733ee0e325cfeb",
         "before": [
           {
             "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
@@ -5523,7 +5523,7 @@
       },
       "tests/thera301-310-source.test.mjs": {
         "before_sha256": "536d2663253dc71e37e016e1c5b59bebb55016f98e76ea8635b44c92eca6df63",
-        "after_sha256": "fc4ddaf3171b69cf32551242730e682b1310d9eb414f8d11dd595e1160e4abfd",
+        "after_sha256": "cbf3d6c46417364a5484139e952539c5cd6f5e3652c5401baccd12a08ae86efe",
         "before": [
           {
             "name": "eight V2 approved profiles extend every preserved317 object and link to325 with finite counter projection and unchanged canonical/data identities",
@@ -5602,7 +5602,7 @@
           {
             "name": "eight V2 approved profiles extend every preserved317 object and link to325 with finite counter projection and unchanged canonical/data identities",
             "name_expression": "'eight V2 approved profiles extend every preserved317 object and link to325 with finite counter projection and unchanged canonical/data identities'",
-            "line": 40,
+            "line": 42,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5611,7 +5611,7 @@
           {
             "name": "all eight complete originals and six rights/routing artifacts match independent source body notes paragraphs and UTF16 lengths before corruptions",
             "name_expression": "'all eight complete originals and six rights/routing artifacts match independent source body notes paragraphs and UTF16 lengths before corruptions'",
-            "line": 52,
+            "line": 54,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5620,7 +5620,7 @@
           {
             "name": "all34 genuine quotation entries preserve compounds309/310 and source punctuation while excluding headings notes colophons and chapter apparatus",
             "name_expression": "'all34 genuine quotation entries preserve compounds309/310 and source punctuation while excluding headings notes colophons and chapter apparatus'",
-            "line": 59,
+            "line": 61,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5629,7 +5629,7 @@
           {
             "name": "all eight source lexical and translator uncertainties remain literal without invented chapter301 text or renamed recipients",
             "name_expression": "'all eight source lexical and translator uncertainties remain literal without invented chapter301 text or renamed recipients'",
-            "line": 65,
+            "line": 67,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5638,7 +5638,7 @@
           {
             "name": "310summary preserves note8 count49 versus VRI51 and differing original order outside poem refs body and quotations",
             "name_expression": "'310summary preserves note8 count49 versus VRI51 and differing original order outside poem refs body and quotations'",
-            "line": 76,
+            "line": 78,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5647,7 +5647,7 @@
           {
             "name": "changed actual raw notes chapter apparatus paired entry entity and forged source-hash controls refuse after authentic eight positives",
             "name_expression": "'changed actual raw notes chapter apparatus paired entry entity and forged source-hash controls refuse after authentic eight positives'",
-            "line": 81,
+            "line": 83,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -5656,7 +5656,7 @@
           {
             "name": "held306/307 and earlier291/297/300/260/266/280 plus media refuse before transport while authentic Pāli remains readable",
             "name_expression": "'held306/307 and earlier291/297/300/260/266/280 plus media refuse before transport while authentic Pāli remains readable'",
-            "line": 91,
+            "line": 93,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -5665,7 +5665,7 @@
           {
             "name": "cold and warmed metadata and genuine source-bound continuations refuse drift without extra source requests or fallback",
             "name_expression": "'cold and warmed metadata and genuine source-bound continuations refuse drift without extra source requests or fallback'",
-            "line": 97,
+            "line": 99,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
