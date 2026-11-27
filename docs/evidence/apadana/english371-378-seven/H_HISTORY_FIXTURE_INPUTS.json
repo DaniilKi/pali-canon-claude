@@ -4350,6 +4350,53 @@
         "static import or exact literal input from tests/source-notes-baseline-projection.test.mjs"
       ]
     },
+    "scripts/canon/apadana_fourth_spans.py": {
+      "path": "scripts/canon/apadana_fourth_spans.py",
+      "bytes": 5171,
+      "sha256": "0d08ec764622b2c3c6e0a27489bbd8dfcfa9ee2f44522a924683f5bc937ce157",
+      "git_blob": "a8af2c53c7fc429939b4aee832c0c33227b7caaf",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:30 local_Python_import: module=apadana_fourth_spans; sys.path=['scripts/canon']"
+      ]
+    },
+    "scripts/canon/apadana_next_spans.py": {
+      "path": "scripts/canon/apadana_next_spans.py",
+      "bytes": 6160,
+      "sha256": "b3d49b6d4c4e32aebfeef32c255bcb98b1cef5a046ffd6a717cabf3213d57517",
+      "git_blob": "0ea4f481ecb25edb1c28a3bbd4d2f39a118ba2cd",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:28 local_Python_import: module=apadana_next_spans; sys.path=['scripts/canon']"
+      ]
+    },
+    "scripts/canon/apadana_spans.py": {
+      "path": "scripts/canon/apadana_spans.py",
+      "bytes": 4017,
+      "sha256": "50082f50255b71b585dd2dd7df31d5b5d327b179cb06eea09d9511555e0be317",
+      "git_blob": "1f2db482ed1caeda52c81c856f5966158dda93f0",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:27 local_Python_import: module=apadana_spans; sys.path=['scripts/canon']"
+      ]
+    },
+    "scripts/canon/apadana_thera333_spans.py": {
+      "path": "scripts/canon/apadana_thera333_spans.py",
+      "bytes": 6558,
+      "sha256": "830f10372a7c162632024e5dd90005dbdc69a121862ec3aaf10ef0694cb54082",
+      "git_blob": "704e7c1da6ab006bbabc6b55cf26cbd000073661",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:33 local_Python_import: module=apadana_thera333_spans; sys.path=['scripts/canon']",
+        "tests/apadana_four_boundary_acceptance.py:23 local_Python_import: module=apadana_thera333_spans; sys.path=['scripts/canon', 'scripts', 'tests']",
+        "scripts/canon/apadana_thera_next10_spans.py:6 local_Python_import: module=apadana_thera333_spans; sys.path=['scripts/canon']",
+        "scripts/canon/repair_apadana_thera333_spans.py:12 local_Python_import: module=apadana_thera333_spans; sys.path=['scripts/canon']"
+      ]
+    },
     "scripts/canon/apadana_thera340_spans.py": {
       "path": "scripts/canon/apadana_thera340_spans.py",
       "bytes": 8644,
@@ -4359,6 +4406,19 @@
       "domain": "H_historical_input_only",
       "required_by": [
         "static import or exact literal input from tests/apadana_next_ten_boundary_acceptance.py"
+      ]
+    },
+    "scripts/canon/apadana_thera_next10_spans.py": {
+      "path": "scripts/canon/apadana_thera_next10_spans.py",
+      "bytes": 16642,
+      "sha256": "d5e0e2d15c0c0e439d4098b9fee52eda0ee0b268e9d6be1753481ef49b98c98f",
+      "git_blob": "7dc3015b493f1c9b24ec1cf72799466cba6d6210",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:35 local_Python_import: module=apadana_thera_next10_spans; sys.path=['scripts/canon']",
+        "scripts/canon/repair_apadana_thera_next10_spans.py:14 local_Python_import: module=apadana_thera_next10_spans; sys.path=['scripts/canon']",
+        "tests/apadana_next_ten_boundary_acceptance.py:23 local_Python_import: module=apadana_thera_next10_spans; sys.path=['scripts', 'scripts/canon', 'tests']"
       ]
     },
     "scripts/canon/apadana_thera_pair_spans.py": {
@@ -4372,6 +4432,28 @@
         "static import or exact literal input from scripts/web-reader-apadana-thera-scaled-check.py"
       ]
     },
+    "scripts/canon/apadana_thera_spans.py": {
+      "path": "scripts/canon/apadana_thera_spans.py",
+      "bytes": 5152,
+      "sha256": "de8d72c401344338f96307794b9d16b8f36d4e0e0d5e0ea619b0687f645c3af5",
+      "git_blob": "be21025821fc33920bd7fc7ba3443604d32b61c5",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:31 local_Python_import: module=apadana_thera_spans; sys.path=['scripts/canon']"
+      ]
+    },
+    "scripts/canon/apadana_third_spans.py": {
+      "path": "scripts/canon/apadana_third_spans.py",
+      "bytes": 3993,
+      "sha256": "a8149867bbe4a4246ff8d32316695bd357d9e73d63eec75cfa9e19bf661000c6",
+      "git_blob": "b93226ea7f1174521404b4458dc0b9e2a0fe4c49",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:29 local_Python_import: module=apadana_third_spans; sys.path=['scripts/canon']"
+      ]
+    },
     "scripts/canon/build_canon.py": {
       "path": "scripts/canon/build_canon.py",
       "bytes": 39676,
@@ -4381,6 +4463,28 @@
       "domain": "H_historical_input_only",
       "required_by": [
         "static import or exact literal input from tests/helpers/boundary333-336-source-input.mjs"
+      ]
+    },
+    "scripts/canon/dasabala_spans.py": {
+      "path": "scripts/canon/dasabala_spans.py",
+      "bytes": 3711,
+      "sha256": "20d29f4d7c49f2375969c397bef231fa1dec3de62989c2389059572bc957a394",
+      "git_blob": "00f12a619e78d2bb77773ff2e007ede8b518a7af",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:26 local_Python_import: module=dasabala_spans; sys.path=['scripts/canon']"
+      ]
+    },
+    "scripts/canon/repair_apadana_thera333_spans.py": {
+      "path": "scripts/canon/repair_apadana_thera333_spans.py",
+      "bytes": 4294,
+      "sha256": "54f383b277cd28277eb0c4211e40d20dee686b55a36f7e8ec7502b1ae4524f49",
+      "git_blob": "f6135e1bb162aa6ea1b849b01786ad48b7cef010",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "tests/apadana_four_boundary_acceptance.py:319 local_Python_import: module=repair_apadana_thera333_spans; sys.path=['scripts/canon', 'scripts', 'tests']"
       ]
     },
     "scripts/canon/repair_apadana_thera340_spans.py": {
@@ -4469,6 +4573,55 @@
       "domain": "H_historical_input_only",
       "required_by": [
         "static import or exact literal input from tests/an-ten-selections.test.mjs"
+      ]
+    },
+    "scripts/canon/shared_spans.py": {
+      "path": "scripts/canon/shared_spans.py",
+      "bytes": 4989,
+      "sha256": "33dbe502538be97c15aa27d174ce72f6396afdd1904794e8268e44472dc55079",
+      "git_blob": "c16981f4cf69ef29115d781c3927e8cc2d51367d",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:24 local_Python_import: module=shared_spans; sys.path=['scripts/canon']",
+        "scripts/canon/repair_apadana_thera340_spans.py:17 local_Python_import: module=shared_spans; sys.path=['scripts/canon']",
+        "scripts/canon/repair_apadana_thera333_spans.py:18 local_Python_import: module=shared_spans; sys.path=['scripts/canon']"
+      ]
+    },
+    "scripts/canon/story_spans.py": {
+      "path": "scripts/canon/story_spans.py",
+      "bytes": 5876,
+      "sha256": "b79e21650a13193fe287022c63e9156166cee548700665d3b327877249c370c8",
+      "git_blob": "6393b9af3404606d5635dc454edeb5471177369b",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:25 local_Python_import: module=story_spans; sys.path=['scripts/canon']"
+      ]
+    },
+    "scripts/canon/thag_sixteen_spans.py": {
+      "path": "scripts/canon/thag_sixteen_spans.py",
+      "bytes": 4880,
+      "sha256": "ec27517426cad43bd43ec0787d4e963e90bc476d23bb6bc4fae1e8381b91b503",
+      "git_blob": "818ad0d98e78ca2b9ea35ca83be7517ce9abefda",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:36 local_Python_import: module=thag_sixteen_spans; sys.path=['scripts/canon']"
+      ]
+    },
+    "scripts/canon/vri.py": {
+      "path": "scripts/canon/vri.py",
+      "bytes": 4508,
+      "sha256": "e0213853f17fd6869aab6a0843d9a2a859296b990d7b8a6a23af885844b79f25",
+      "git_blob": "9d10088a89267cd79f64b989da000a6620e6b63b",
+      "mode": "100644",
+      "domain": "H_historical_input_only",
+      "required_by": [
+        "scripts/canon/build_canon.py:23 local_Python_import: module=vri; sys.path=['scripts/canon']",
+        "scripts/canon/repair_apadana_thera340_spans.py:18 local_Python_import: module=vri; sys.path=['scripts/canon']",
+        "scripts/canon/repair_apadana_thera_next10_spans.py:20 local_Python_import: module=vri; sys.path=['scripts/canon']",
+        "scripts/canon/repair_apadana_thera333_spans.py:19 local_Python_import: module=vri; sys.path=['scripts/canon']"
       ]
     },
     "scripts/check-python-partitions.mjs": {
@@ -10943,7 +11096,7 @@
     "tests/fixtures/canon-before333/canon.json.gz.parts.json",
     "tests/fixtures/canon-before333/parallels.json.gz"
   ],
-  "source_file_count": 967,
+  "source_file_count": 980,
   "runtime_file_count": 34,
   "actual_data_paths": [
     "server/data/anandajoti.json",
@@ -10995,7 +11148,7 @@
       "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
     }
   ],
-  "scope_limit": "Literal source-envelope/import inputs + independent16 migration addendum + all345 fixedH CI test hash witnesses + literalCoreB descriptors. No executed completeness/minimality claim. Pending independent fixture closure authorization. External publisher rights files stay args.source_root inputs; no source fixture publisher text.",
+  "scope_limit": "Preserve the accepted967 H source rows and add only13 fixed canonical Python dependencies demonstrated by the original14 H programs, their Builder top-level imports and existing three source-repair entry programs. H Node .test files remain hash witnesses; no new dependency is inferred from their imports or literal reads. Runtime34, historical13, locked dependency and external VRI/publisher fixture contracts remain separate and unchanged. Static declared-scope closure, not an executed or universal dynamic-read claim.",
   "source_or_runtime_projection": false,
   "English_body_or_notes_in_artifact": false,
   "dependency_inputs": {

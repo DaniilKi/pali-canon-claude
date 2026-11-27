@@ -7,8 +7,8 @@ on:
 permissions:
   contents: read
 env:
-  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json
-  CI_TEST_BASELINE_SHA: 87c19eaa93596af180e91e4b5d0ca310ba1e192a141485aecdefdb7a831d0976
+  CI_TEST_BASELINE_INDEX: docs/evidence/qa/english371-378/BASELINE_375_TEST_FILES.json
+  CI_TEST_BASELINE_SHA: e38df2fc2426215199c0df62f599383247f1e5dac17b6976989c6a74610a1614
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -88,6 +88,13 @@ jobs:
     timeout-minutes: ${{ (matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201') && 30 || (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanaedition' || matrix.group == 'thagsixteen' || matrix.group == 'textspacing' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234' || matrix.group == 'vrieditionnote') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch exact accepted H for Apadāna owned historical source fixtures
+        if: matrix.group == 'apadana'
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7
+          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'
       - name: Fetch exact reviewed Apadāna baseline for independent preservation checks
         if: matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial'
         run: |
@@ -900,6 +907,13 @@ jobs:
             src/_poems/chapter-3/poem-357.md
             src/_poems/chapter-3/poem-359.md
             src/_poems/chapter-3/poem-360.md
+            src/_poems/chapter-3/poem-371.md
+            src/_poems/chapter-3/poem-372.md
+            src/_poems/chapter-3/poem-374.md
+            src/_poems/chapter-3/poem-375.md
+            src/_poems/chapter-3/poem-376.md
+            src/_poems/chapter-3/poem-377.md
+            src/_poems/chapter-3/poem-378.md
             src/_poems/chapter-3/chapter-3.json
       - name: Fetch exact VRI Book36 for independent English16 source replay
         if: matrix.group == 'apadana'
@@ -941,6 +955,17 @@ jobs:
         run: |
           node --test --test-reporter=tap tests/thera351-360-nine-source.test.mjs tests/thera351-360-nine-client.test.mjs | tee reviewed-publisher351-360-nine.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher351-360-nine.tap","utf8"); for(const [key,value] of [["tests",13],["pass",13],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all seven publisher371-378 source API and widget cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap tests/thera371-378-seven.test.mjs | tee reviewed-publisher371-378-seven.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher371-378-seven.tap","utf8"); for(const [key,value] of [["tests",2],["pass",2],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
         run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
@@ -1993,6 +2018,12 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
           git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Fetch exact accepted H for owned historical fixture inputs
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7
+          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'
       - name: Verify complete check command contract
         timeout-minutes: 1
         run: node scripts/ci-check-contract.mjs
@@ -2078,6 +2109,12 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
           git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Fetch exact accepted H for owned historical fixture inputs
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7
+          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'
       - name: Verify complete check command contract
         timeout-minutes: 1
         run: node scripts/ci-check-contract.mjs
@@ -2135,6 +2172,12 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
           git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Fetch exact accepted H for owned historical fixture inputs
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7
+          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'
       - name: Verify complete check command contract
         timeout-minutes: 1
         run: node scripts/ci-check-contract.mjs
@@ -2211,6 +2254,12 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
           git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Fetch exact accepted H for owned historical fixture inputs
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7
+          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'
       - name: Verify complete check command contract
         timeout-minutes: 1
         run: node scripts/ci-check-contract.mjs
@@ -2268,6 +2317,12 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
           git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Fetch exact accepted H for owned historical fixture inputs
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7
+          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'
       - name: Verify complete check command contract
         timeout-minutes: 1
         run: node scripts/ci-check-contract.mjs

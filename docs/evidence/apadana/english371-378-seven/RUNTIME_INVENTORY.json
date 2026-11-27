@@ -2,7 +2,7 @@
   "schema": "independent-reviewed-intake375-runtime-inventory-v1",
   "baseline_commit": "4e9287bd5ebc78aba4b185b017e63eac6547bfd7",
   "candidate_commit": "89312c3b315df974a804c3a1c9ae318eca22c90d",
-  "curation_sha256": "b8c196e2332aa7ee169c5d20f3e6906ab458cdf7d569dd235211ed76443f38fb",
+  "curation_sha256": "3112dff5eb6a26dcd357fc0ac02ee08019bb1e894172192a55aa4c0ef9d52ebd",
   "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
   "runtime_files": 34,
   "files": {

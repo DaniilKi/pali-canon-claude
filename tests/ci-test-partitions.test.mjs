@@ -5,8 +5,9 @@ import {tmpdir} from 'node:os';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
-import {digest,inventory,loadBaseline,makeContext,nodeArguments,eventCollector,aggregateReceipts,execute,MAX_CHILD_MS,ciIdentity,historicalWindowsPythonWrappers,historicalNativePythonPartitionFixture,WINDOWS_PYTHON_PARTITION_INDEX} from '../scripts/ci-test-partitions.mjs';
-import {assertCurrent368SourceClosure} from './helpers/intake359-source-input.mjs';
+import {digest,inventory,loadBaseline,makeContext,nodeArguments,eventCollector,aggregateReceipts,execute,MAX_CHILD_MS,ciIdentity,historicalWindowsPythonWrappers,historicalNativePythonPartitionFixture,WINDOWS_PYTHON_PARTITION_INDEX,CURRENT375_CI_INDEX} from '../scripts/ci-test-partitions.mjs';
+import {assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
+import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'), COMMIT='0123456789abcdef0123456789abcdef01234567';
 const clone=x=>JSON.parse(JSON.stringify(x));
 function fixture(){const root=realpathSync(mkdtempSync(join(tmpdir(),'ci-partitions-')));mkdirSync(join(root,'scripts'));mkdirSync(join(root,'tests'));for(const file of ['test.mjs','ci-test-partitions.mjs','ci-test-reporter.mjs'])copyFileSync(join(ROOT,'scripts',file),join(root,'scripts',file));const files={
@@ -150,18 +151,24 @@ test('raw CI workflow keeps the full reference and four bounded Windows partitio
 // The immutable340-path predecessor is real; this private fixture adds one
 // tiny source file and explicitly records only the39 reviewed edited paths.
 function assertSuccessorBaselineFixtures(){
-  const historicalWrappers=assertWindowsPythonBaselineFixtures();
+  const current=assertCurrent375CIBaseline();assertCurrent375CIFixtureRefusals(current);
+  const historical=prepareHistoricalHSourceInputs(ROOT);
+  try{assert.equal(Object.isFrozen(historical),true);assert.deepEqual(Object.keys(historical),['root','index','workflow','close']);assert.equal(typeof historical.root,'string');assert.notEqual(historical.root,ROOT);assert.equal(realpathSync(historical.root),historical.root);assert.equal(typeof historical.close,'function');return assertOwnedHSuccessorBaselineFixtures(historical);}
+  finally{historical.close();}
+}
+function assertOwnedHSuccessorBaselineFixtures(historical){
+  const historicalWrappers=assertOwnedHWindowsPythonBaselineFixtures(historical);
   const f=fixture();
   try{
     const predecessorPath='docs/evidence/qa/windows20-partitions/BASELINE_3CED_TEST_FILES.json';
-    const predecessor=readFileSync(join(ROOT,predecessorPath));
+    const predecessor=readFileSync(join(historical.root,predecessorPath));
     assert.equal(digest(predecessor),'f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d');
     const prior=JSON.parse(predecessor);
     rmSync(join(f.root,'tests'),{recursive:true});mkdirSync(join(f.root,'tests'));
     const allowedChanged=new Set(["tests/apadana-disclosures.test.mjs","tests/apadana-fourth-client.test.mjs","tests/apadana-fourth.test.mjs","tests/apadana-held234.test.mjs","tests/apadana-next.test.mjs","tests/apadana-thera.test.mjs","tests/apadana-third.test.mjs","tests/ci-test-partitions.test.mjs","tests/current339-source-inverses.test.mjs","tests/current343-bindings.test.mjs","tests/held234-client.test.mjs","tests/held234-current333-chain.test.mjs","tests/intake343-metadata.test.mjs","tests/intake359-metadata-history.test.mjs","tests/next-ten-history-data.test.mjs","tests/six-boundary-source-input.test.mjs","tests/source-notes-baseline-projection.test.mjs","tests/source-notes-compatibility.test.mjs","tests/thera-commentary-locators.test.mjs","tests/thera141-180-client.test.mjs","tests/thera181-220-client.test.mjs","tests/thera221-230-client.test.mjs","tests/thera241-250-client.test.mjs","tests/thera261-280-client.test.mjs","tests/thera261-280-source.test.mjs","tests/thera281-285-client.test.mjs","tests/thera281-285-source.test.mjs","tests/thera287-288-client.test.mjs","tests/thera287-288-source.test.mjs","tests/thera292-299-client.test.mjs","tests/thera292-299-source.test.mjs","tests/thera312-319-client.test.mjs","tests/thera312-319-source.test.mjs","tests/thera321-329-client.test.mjs","tests/thera321-329-source.test.mjs","tests/thera331-334-preface-client.test.mjs","tests/thera331-334-source.test.mjs","tests/thera335-350-source.test.mjs","tests/widget-hosted-selections.test.mjs"]);
     const changes={};
     for(const[path,before]of Object.entries(prior.files)){
-      const bytes=Object.hasOwn(historicalWrappers,path)?Buffer.from(historicalWrappers[path],'utf8'):readFileSync(join(ROOT,path));if(Object.hasOwn(historicalWrappers,path))writeFileSync(join(f.root,path),bytes);else copyFileSync(join(ROOT,path),join(f.root,path));
+      const bytes=Object.hasOwn(historicalWrappers,path)?Buffer.from(historicalWrappers[path],'utf8'):readFileSync(join(historical.root,path));if(Object.hasOwn(historicalWrappers,path))writeFileSync(join(f.root,path),bytes);else copyFileSync(join(historical.root,path),join(f.root,path));
       const after=digest(bytes);
       if(after!==before){assert.ok(allowedChanged.has(path),'Unexpected changed predecessor test in owned fixture');changes[path]={before_sha256:before,after_sha256:after};}
     }
@@ -170,7 +177,7 @@ function assertSuccessorBaselineFixtures(){
     writeFileSync(join(f.root,added),addedBody);
     const write=(path,value)=>{mkdirSync(dirname(join(f.root,path)),{recursive:true});writeFileSync(join(f.root,path),value);};
     write(predecessorPath,predecessor);
-    write(prior.legacy_v1.path,readFileSync(join(ROOT,prior.legacy_v1.path)));
+    write(prior.legacy_v1.path,readFileSync(join(historical.root,prior.legacy_v1.path)));
     const reviewPath='docs/evidence/qa/windows20-partitions/INTAKE368_CASE_INVENTORY_REVIEW.json';
     const evidencePath='docs/evidence/qa/windows20-partitions/OWNED_V2_FIXTURE_EVIDENCE.json';
     const evidence=JSON.stringify({scope:'Owned unit fixture only, not release acceptance',added_cases:1});write(evidencePath,evidence);
@@ -266,21 +273,81 @@ function assertHistoricalWindowsPythonBaselineFixtures(historicalRoot,indexProof
   return history;
 }
 
-// Genuine current V4 physical validation precedes all owned historical inputs.
-function assertWindowsPythonBaselineFixtures(){
-  const code=assertCurrent368SourceClosure(),indexPath=WINDOWS_PYTHON_PARTITION_INDEX;
-  const row=code.new_code[indexPath];assert.ok(row&&Number.isSafeInteger(row.bytes)&&/^[a-f0-9]{64}$/.test(row.sha256),'Independent physical SOURCE binding for current V4 index');
-  const indexBytes=readFileSync(join(ROOT,indexPath));assert.equal(indexBytes.length,row.bytes);assert.equal(digest(indexBytes),row.sha256);
-  const actual=loadBaseline(ROOT,join(ROOT,indexPath),row.sha256);assert.equal(actual.baseline.schema,'reviewed-ci-test-baseline-v4');assert.equal(actual.inventory.length,345);assert.equal(actual.baseline.legacy_test_count+actual.baseline.added_test_count,2092);
-  const history=historicalNativePythonPartitionFixture(ROOT,join(ROOT,indexPath),row.sha256);
-  const workflow=readFileSync(join(ROOT,'.github/workflows/check.yml'),'utf8');assertCurrentPartitionWorkflow(workflow,row.sha256);
+// Genuine current workflow: only independently declared finite H deltas are permitted.
+const CURRENT375_H_WORKFLOW_SHA="435b5bd244445c6f48e9593053fa7d0bb672c945ebad1ca0fa87f08b2e83788c";
+const CURRENT375_H_FETCH="      - name: Fetch exact accepted H for owned historical fixture inputs\n        timeout-minutes: 2\n        shell: bash\n        run: |\n          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7\n          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'\n";
+const CURRENT375_READER_H_FETCH="      - name: Fetch exact accepted H for Apadāna owned historical source fixtures\n        if: matrix.group == 'apadana'\n        timeout-minutes: 2\n        shell: bash\n        run: |\n          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7\n          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'\n";
+const CURRENT375_READER_ANCHOR="      - name: Fetch exact reviewed Apadāna baseline for independent preservation checks\n";
+const CURRENT375_SPARSE_BEFORE="            src/_poems/chapter-3/poem-360.md\n            src/_poems/chapter-3/chapter-3.json\n";
+const CURRENT375_SPARSE_AFTER="            src/_poems/chapter-3/poem-360.md\n            src/_poems/chapter-3/poem-371.md\n            src/_poems/chapter-3/poem-372.md\n            src/_poems/chapter-3/poem-374.md\n            src/_poems/chapter-3/poem-375.md\n            src/_poems/chapter-3/poem-376.md\n            src/_poems/chapter-3/poem-377.md\n            src/_poems/chapter-3/poem-378.md\n            src/_poems/chapter-3/chapter-3.json\n";
+const CURRENT375_SEVEN_GATE="      - name: Require all seven publisher371-378 source API and widget cases\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        shell: bash\n        env:\n          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned\n          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned\n        run: |\n          set -euo pipefail\n          node --test --test-reporter=tap tests/thera371-378-seven.test.mjs | tee reviewed-publisher371-378-seven.tap\n          node --input-type=module -e 'import assert from \"node:assert/strict\"; import {readFileSync} from \"node:fs\"; const tap=readFileSync(\"reviewed-publisher371-378-seven.tap\",\"utf8\"); for(const [key,value] of [[\"tests\",2],[\"pass\",2],[\"fail\",0],[\"cancelled\",0],[\"skipped\",0],[\"todo\",0]]) assert.match(tap,new RegExp(\"^# \"+key+\" \"+value+\"$\",\"m\"));'\n";
+const CURRENT375_SOURCE_ANCHOR="      - name: Validate all Apadāna source and rights pins before browser retrieval\n";
+
+function current375JobBlock(text,name){
+ const start=text.indexOf('  '+name+':\n');assert.ok(start>=0,'Mandatory actual workflow job '+name);const tail=text.slice(start),next=/\n  [a-zA-Z0-9_-]+:/.exec(tail),end=next?start+next.index+1:text.length;return {start,end,raw:text.slice(start,end)};
+}
+function assertCurrent375Workflow(raw,pin){
+ assert.equal(rawWorkflowContract(raw),true);assert.match(pin,/^[a-f0-9]{64}$/);let text=raw;
+ const path='  CI_TEST_BASELINE_INDEX: '+CURRENT375_CI_INDEX,sha='  CI_TEST_BASELINE_SHA: '+pin;assert.equal(text.split(path).length-1,1);assert.equal(text.split(sha).length-1,1);
+ text=text.replace(path,'  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json').replace(sha,'  CI_TEST_BASELINE_SHA: 87c19eaa93596af180e91e4b5d0ca310ba1e192a141485aecdefdb7a831d0976');
+ const original104="          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'\n";
+ for(const name of ['check','windows20-parts','windows20','windows22-parts','windows22']){const block=current375JobBlock(text,name);assert.equal(block.raw.split(CURRENT375_H_FETCH).length-1,1);assert.ok(block.raw.includes(original104+CURRENT375_H_FETCH));const replacement=block.raw.replace(original104+CURRENT375_H_FETCH,original104);text=text.slice(0,block.start)+replacement+text.slice(block.end);}
+ const reader=current375JobBlock(text,'reader-browser-group');assert.equal(reader.raw.split(CURRENT375_READER_H_FETCH).length-1,1);assert.equal(reader.raw.split(CURRENT375_SEVEN_GATE).length-1,1);assert.ok(reader.raw.includes(CURRENT375_READER_H_FETCH+CURRENT375_READER_ANCHOR));assert.ok(reader.raw.includes(CURRENT375_SEVEN_GATE+CURRENT375_SOURCE_ANCHOR));assert.equal(reader.raw.split(CURRENT375_SPARSE_AFTER).length-1,1);
+ const replacement=reader.raw.replace(CURRENT375_READER_H_FETCH+CURRENT375_READER_ANCHOR,CURRENT375_READER_ANCHOR).replace(CURRENT375_SPARSE_AFTER,CURRENT375_SPARSE_BEFORE).replace(CURRENT375_SEVEN_GATE+CURRENT375_SOURCE_ANCHOR,CURRENT375_SOURCE_ANCHOR);text=text.slice(0,reader.start)+replacement+text.slice(reader.end);
+ assert.equal(digest(text),CURRENT375_H_WORKFLOW_SHA,'Every old actual job/group/step/command/cap and exact finite new375 source gate must remain');return true;
+}
+function assertCurrent375WorkflowRefusals(raw,pin){
+ assert.equal(assertCurrent375Workflow(raw,pin),true);
+ for(const marker of ['node scripts/ci-check-contract.mjs','timeout-minutes: 30',CURRENT375_SEVEN_GATE]){assert.ok(raw.includes(marker));const changed=raw.replace(marker,marker===CURRENT375_SEVEN_GATE?'':marker+'-MUTATED');assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin));}
+}
+
+// Actual current375/source/V5 validation occurs before any named historical-H materialization.
+function assertCurrent375CIBaseline(){
+  assertCurrent375SourceClosure(ROOT);
+  const raw=readFileSync(join(ROOT,'.github/workflows/check.yml'),'utf8');assert.equal(rawWorkflowContract(raw),true);
+  const paths=[...raw.matchAll(/^  CI_TEST_BASELINE_INDEX: (.+)$/gm)],pins=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: ([a-f0-9]{64})$/gm)];
+  assert.equal(paths.length,1);assert.equal(paths[0][1],CURRENT375_CI_INDEX);assert.equal(pins.length,1);
+  const pin=pins[0][1];assertCurrent375WorkflowRefusals(raw,pin);if(process.env.CI_TEST_BASELINE_INDEX!==undefined)assert.equal(process.env.CI_TEST_BASELINE_INDEX,CURRENT375_CI_INDEX);if(process.env.CI_TEST_BASELINE_SHA!==undefined)assert.equal(process.env.CI_TEST_BASELINE_SHA,pin);
+  const actual=loadBaseline(ROOT,join(ROOT,CURRENT375_CI_INDEX),pin);assert.equal(actual.baseline.schema,'reviewed-ci-test-baseline-v5');assert.equal(actual.baseline.legacy_test_count,2092);assert.ok(actual.baseline.added_test_count>0);assert.ok(actual.inventory.length>345);
+  return actual;
+}
+// Additive current V5 refusals inside the existing complete-inventory scenario.
+function assertCurrent375CIFixtureRefusals(actual){
   const f=fixture();
   try{
     const b=clone(actual.baseline),reviewPath=b.case_inventory.path,r=JSON.parse(readFileSync(join(ROOT,reviewPath)));
-    const old=JSON.parse(readFileSync(join(ROOT,b.predecessor.path))),prior=JSON.parse(readFileSync(join(ROOT,old.predecessor.path))),oldReview=JSON.parse(readFileSync(join(ROOT,old.case_inventory.path)));
-    const paths=new Set([b.predecessor.path,old.predecessor.path,prior.legacy_v1.path,old.case_inventory.path,...oldReview.evidence.map(x=>x.path),...actual.inventory.map(x=>x.path),b.driver.path,...Object.keys(b.additions),...Object.keys(b.supporting_sources),...Object.keys(b.python_sources)]);
+    const paths=new Set([...actual.inventory.map(x=>x.path),b.driver.path,...Object.keys(b.additions),...Object.keys(b.supporting_sources),...Object.keys(b.python_sources),b.predecessor.index.path,b.predecessor.review.path,reviewPath,CURRENT375_CI_INDEX,...r.evidence.map(x=>x.path)]);
     rmSync(join(f.root,'tests'),{recursive:true});mkdirSync(join(f.root,'tests'));
     for(const path of paths){mkdirSync(dirname(join(f.root,path)),{recursive:true});copyFileSync(join(ROOT,path),join(f.root,path));}
+    const index=join(f.root,CURRENT375_CI_INDEX),write=(path,value)=>writeFileSync(join(f.root,path),JSON.stringify(value));
+    const publish=(candidate=b,proof=r)=>{write(reviewPath,proof);candidate.case_inventory.sha256=digest(readFileSync(join(f.root,reviewPath)));writeFileSync(index,JSON.stringify(candidate));return digest(readFileSync(index));};
+    const pin=publish();assert.deepEqual(loadBaseline(f.root,index,pin).inventory,actual.inventory);
+    const refusal=change=>{const candidate=clone(b),proof=clone(r);change(candidate,proof);assert.throws(()=>loadBaseline(f.root,index,publish(candidate,proof)));publish();};
+    for(const change of [b=>b.legacy_test_count--,b=>b.added_test_count++,b=>b.changed_files['tests/unreviewed.test.mjs']={before_sha256:'a'.repeat(64),after_sha256:'b'.repeat(64)},b=>b.changed_files['tests/ci-test-partitions.test.mjs'].before_sha256='0'.repeat(64),(_b,r)=>r.status='PENDING',(_b,r)=>r.behavioral_or_release_approval=true])refusal(change);
+    const added=Object.keys(b.added_files)[0],manifest='docs/evidence/apadana/english371-378-seven/CURRENT_SOURCE_INPUTS.json';
+    for(const path of [added,manifest]){
+      const file=join(f.root,path),saved=readFileSync(file);assert.deepEqual(loadBaseline(f.root,index,pin).inventory,actual.inventory);
+      try{writeFileSync(file,Buffer.concat([saved,Buffer.from('\nSYNTHETIC_CURRENT375_SOURCE_DRIFT')]));assert.throws(()=>loadBaseline(f.root,index,pin),'V5 actual current source drift '+path);}
+      finally{writeFileSync(file,saved);}
+      assert.deepEqual(loadBaseline(f.root,index,pin).inventory,actual.inventory);
+    }
+  }finally{f.cleanup();}
+}
+// Named H V4 scenario: every original historical assertion and mutation remains.
+function assertOwnedHWindowsPythonBaselineFixtures(historical){
+  const indexPath=WINDOWS_PYTHON_PARTITION_INDEX;
+  const row=historical.index;assert.equal(row.path,join(historical.root,indexPath));assert.ok(row&&Number.isSafeInteger(row.bytes)&&/^[a-f0-9]{64}$/.test(row.sha256),'Independent physical SOURCE binding for current V4 index');
+  const indexBytes=readFileSync(join(historical.root,indexPath));assert.equal(indexBytes.length,row.bytes);assert.equal(digest(indexBytes),row.sha256);
+  const actual=loadBaseline(historical.root,join(historical.root,indexPath),row.sha256);assert.equal(actual.baseline.schema,'reviewed-ci-test-baseline-v4');assert.equal(actual.inventory.length,345);assert.equal(actual.baseline.legacy_test_count+actual.baseline.added_test_count,2092);
+  const history=historicalNativePythonPartitionFixture(historical.root,join(historical.root,indexPath),row.sha256);
+  const workflow=readFileSync(join(historical.root,'.github/workflows/check.yml'),'utf8');assert.equal(workflow,historical.workflow.raw);assert.equal(historical.workflow.pin,row.sha256);assertCurrentPartitionWorkflow(workflow,row.sha256);
+  const f=fixture();
+  try{
+    const b=clone(actual.baseline),reviewPath=b.case_inventory.path,r=JSON.parse(readFileSync(join(historical.root,reviewPath)));
+    const old=JSON.parse(readFileSync(join(historical.root,b.predecessor.path))),prior=JSON.parse(readFileSync(join(historical.root,old.predecessor.path))),oldReview=JSON.parse(readFileSync(join(historical.root,old.case_inventory.path)));
+    const paths=new Set([b.predecessor.path,old.predecessor.path,prior.legacy_v1.path,old.case_inventory.path,...oldReview.evidence.map(x=>x.path),...actual.inventory.map(x=>x.path),b.driver.path,...Object.keys(b.additions),...Object.keys(b.supporting_sources),...Object.keys(b.python_sources)]);
+    rmSync(join(f.root,'tests'),{recursive:true});mkdirSync(join(f.root,'tests'));
+    for(const path of paths){mkdirSync(dirname(join(f.root,path)),{recursive:true});copyFileSync(join(historical.root,path),join(f.root,path));}
     const index=join(f.root,indexPath);mkdirSync(dirname(index),{recursive:true});
     const write=(path,value)=>{mkdirSync(dirname(join(f.root,path)),{recursive:true});writeFileSync(join(f.root,path),value);};
     const publish=(candidate=b,proof=r)=>{const text=JSON.stringify(proof);write(reviewPath,text);candidate.case_inventory.sha256=digest(text);writeFileSync(index,JSON.stringify(candidate));return digest(readFileSync(index));};

@@ -393,10 +393,94 @@ export function historicalNativePythonPartitionFixture(root,index,pin){
   return Object.freeze({historical_v3_fixture:review.historical_v3_fixture,before_wrapper_sources:Object.freeze(Object.fromEntries(V3_WRAPPERS.map(path=>[path,review.before_wrapper_sources[path].utf8])))});
 }
 
+
+// Flat current375 successor. H metadata stays a named, immutable historical input.
+const V5_BASE='4e9287bd5ebc78aba4b185b017e63eac6547bfd7';
+const V5_INDEX='docs/evidence/qa/english371-378/BASELINE_375_TEST_FILES.json';
+const V5_REVIEW='docs/evidence/qa/english371-378/CASE_SOURCE_REVIEW.json';
+const V5_AUDIT='docs/evidence/qa/english371-378/CASE_SOURCE_AUDIT.json';
+const V5_H_INDEX_SHA='87c19eaa93596af180e91e4b5d0ca310ba1e192a141485aecdefdb7a831d0976';
+const V5_H_REVIEW_SHA='f91fa9cfa922d57c44f9ce998206dfe4f704d81386ad5e9e90d223a52f57f74a';
+// Deliberately invalid until the actual authored sources and independent AST audit freeze.
+const V5_CHANGED_PATHS=Object.freeze(["tests/apadana-disclosures.test.mjs","tests/apadana-four-boundary-migration.test.mjs","tests/apadana-fourth-client.test.mjs","tests/apadana-fourth.test.mjs","tests/apadana-held234.test.mjs","tests/apadana-next-ten-migration.test.mjs","tests/apadana-next.test.mjs","tests/apadana-six-boundary-migration.test.mjs","tests/apadana-thera.test.mjs","tests/apadana-third.test.mjs","tests/approved-acceptance.test.mjs","tests/approved-current333-authority-negatives.test.mjs","tests/approved-current339-authority-negatives.test.mjs","tests/browser-current359-routing.test.mjs","tests/browser-current368-routing.test.mjs","tests/ci-test-partitions.test.mjs","tests/current333-version-bindings.test.mjs","tests/current339-source-inverses.test.mjs","tests/current343-bindings.test.mjs","tests/four-boundary-history.test.mjs","tests/held234-client.test.mjs","tests/held234-current333-chain.test.mjs","tests/intake343-metadata.test.mjs","tests/intake359-history.test.mjs","tests/intake359-metadata-history.test.mjs","tests/intake359-source-history.test.mjs","tests/intake368-history.test.mjs","tests/intake368-source-seal.test.mjs","tests/next-ten-history-data.test.mjs","tests/six-boundary-history.test.mjs","tests/six-boundary-source-input.test.mjs","tests/six-operation-scope.test.mjs","tests/source-notes-baseline-projection.test.mjs","tests/source-notes-compatibility.test.mjs","tests/thera-commentary-locators.test.mjs","tests/thera141-180-client.test.mjs","tests/thera181-220-client.test.mjs","tests/thera221-230-client.test.mjs","tests/thera241-250-client.test.mjs","tests/thera261-280-client.test.mjs","tests/thera261-280-source.test.mjs","tests/thera281-285-client.test.mjs","tests/thera281-285-source.test.mjs","tests/thera287-288-client.test.mjs","tests/thera287-288-source.test.mjs","tests/thera292-299-client.test.mjs","tests/thera292-299-source.test.mjs","tests/thera301-310-client.test.mjs","tests/thera301-310-source.test.mjs","tests/thera312-319-client.test.mjs","tests/thera312-319-source.test.mjs","tests/thera321-329-client.test.mjs","tests/thera321-329-source.test.mjs","tests/thera331-334-preface-client.test.mjs","tests/thera331-334-source.test.mjs","tests/thera333-legacy-projection.test.mjs","tests/thera333-legacy-source-inverses.test.mjs","tests/thera335-350-source.test.mjs","tests/thera339-legacy-projection.test.mjs","tests/thera351-360-nine-source.test.mjs","tests/verse-scope-review.test.mjs","tests/web-reader-ci-artifacts.test.mjs","tests/widget-hosted-selections.test.mjs"]);
+const V5_ADDED_PATHS=Object.freeze(["tests/current375-bindings.test.mjs","tests/held234-current375-chain.test.mjs","tests/intake375-current-negatives.test.mjs","tests/thera371-378-seven.test.mjs","tests/verse-scope-python.test.mjs"]);
+const V5_FILE_COUNT=350, V5_ADDED_CASE_COUNT=12;
+const V5_SUPPORT=Object.freeze([...V3_SUPPORT,
+ 'tests/helpers/intake375-metadata.mjs','tests/helpers/historical-h-inputs.mjs','tests/helpers/verse-scope-python.mjs',
+ 'tests/materialize_h_history.py','docs/evidence/apadana/english371-378-seven/CURRENT_SOURCE_INPUTS.json'
+].sort());
+export const CURRENT375_CI_INDEX=V5_INDEX;
+function v5Configuration(){
+ for(const paths of [V5_CHANGED_PATHS,V5_ADDED_PATHS]){assert.ok(paths.length>0,'Pending current375 CI file audit');assert.deepEqual([...paths],[...paths].sort());assert.equal(new Set(paths).size,paths.length);for(const path of paths)assert.match(path,/^tests\/[a-zA-Z0-9_.-]+\.test\.mjs$/,'Pending current375 CI path freeze');}
+ assert.ok(V5_CHANGED_PATHS.includes(V2_QA),'Current CI QA source must be explicitly reviewed');
+ assert.ok(Number.isSafeInteger(V5_FILE_COUNT)&&V5_FILE_COUNT===345+V5_ADDED_PATHS.length,'Pending current375 file count');
+ assert.ok(Number.isSafeInteger(V5_ADDED_CASE_COUNT)&&V5_ADDED_CASE_COUNT>0,'Pending independent current375 terminal-case audit');
+}
+function v5Predecessor(){return {commit:V5_BASE,index:{path:V3_INDEX,sha256:V5_H_INDEX_SHA},review:{path:V3_REVIEW,sha256:V5_H_REVIEW_SHA}};}
+function h375PredecessorMetadata(root){
+ const indexRaw=regular(root,V3_INDEX),reviewRaw=regular(root,V3_REVIEW);assert.equal(digest(indexRaw),V5_H_INDEX_SHA);assert.equal(digest(reviewRaw),V5_H_REVIEW_SHA);
+ const b=JSON.parse(indexRaw),r=JSON.parse(reviewRaw);
+ assert.equal(b.schema,'reviewed-ci-test-baseline-v4');assert.equal(b.commit,V4_COREB);assert.equal(b.legacy_test_count,2076);assert.equal(b.added_test_count,16);assert.equal(literalTestMap(b.files).length,345);
+ assert.deepEqual(b.case_inventory,{path:V3_REVIEW,sha256:V5_H_REVIEW_SHA});assert.equal(r.schema,'reviewed-native-python-partition-case-source-v2');assert.equal(r.status,'GO_EXACT_NATIVE_PLATFORM_SOURCE_DELTA_AND_UNCHANGED_NODE_REGISTRATIONS_ONLY');
+ assert.deepEqual(r.counts,{files:345,preserved_cases:2076,added_cases:16,total_cases:2092});assert.deepEqual(r.partition_suites,V3_SUITES);assert.deepEqual(r.partition_platforms,['win32','darwin','linux']);assert.equal(r.behavioral_or_release_approval,false);
+ // No strict V4-current loader is called against375 files, and no H beforeimage is copied here.
+ return b;
+}
+function v5RegistrationRows(rows){
+ assert.ok(Array.isArray(rows)&&rows.length>0);
+ for(const row of rows){exactKeys(row,['name','name_expression','line','column','registration_ancestors','argument_count','options_source']);assert.ok(row.name===null||typeof row.name==='string');assert.equal(typeof row.name_expression,'string');assert.ok(Array.isArray(row.registration_ancestors));assert.ok(Number.isSafeInteger(row.argument_count)&&row.argument_count>0);assert.ok(row.options_source===null||typeof row.options_source==='string');for(const key of ['line','column'])assert.ok(Number.isSafeInteger(row[key])&&row[key]>0);}
+ return rows.map(({line,column,...identity})=>identity);
+}
+// Exactly two newly bounded, formerly uncapped verse fixtures; no other options may change.
+const V5_VERSE_OPTION_CASES=Object.freeze([
+ 'partial holds are narrowly validated, global and immutable and survive ordinary linker rebuilds',
+ 'reviewed adjacent-pair repair is idempotent and refuses drift before any pending span edits'
+]);
+function v5PreservedRegistrations(path,before,after){
+ const old=v5RegistrationRows(before),current=v5RegistrationRows(after);assert.equal(current.length,old.length);const exceptions=[];
+ for(let i=0;i<old.length;i++){
+  const expected={...old[i]},actual=current[i];
+  if(expected.options_source!==actual.options_source){
+   assert.equal(path,'tests/verse-scope-review.test.mjs');assert.ok(V5_VERSE_OPTION_CASES.includes(expected.name));assert.equal(expected.options_source,'{skip:!python}');assert.equal(actual.options_source,'{skip:!python,timeout:125000}');exceptions.push(expected.name);expected.options_source=actual.options_source;
+  }
+  assert.deepEqual(actual,expected,'Every old registration/name/ancestry/arity and all other options remain exact');
+ }
+ if(path==='tests/verse-scope-review.test.mjs')assert.deepEqual(exceptions,[...V5_VERSE_OPTION_CASES],'Both reviewed finite125s ceilings must actually occur');else assert.deepEqual(exceptions,[]);
+}
+function loadBaselineV5(root,b,pin){
+ v5Configuration();
+ exactKeys(b,['schema','commit','legacy_test_count','added_test_count','driver','predecessor','changed_files','added_files','additions','supporting_sources','python_sources','files','case_inventory']);
+ assert.equal(b.schema,'reviewed-ci-test-baseline-v5');assert.equal(b.commit,V5_BASE);assert.equal(b.legacy_test_count,2092);assert.equal(b.added_test_count,V5_ADDED_CASE_COUNT);assert.deepEqual(b.predecessor,v5Predecessor());
+ const prior=h375PredecessorMetadata(root);assert.deepEqual(b.driver,prior.driver);assert.equal(digest(regular(root,b.driver.path)),b.driver.sha256);
+ exactKeys(b.changed_files,V5_CHANGED_PATHS);assert.deepEqual(Object.keys(b.changed_files),[...V5_CHANGED_PATHS]);const expected={...prior.files};
+ for(const path of V5_CHANGED_PATHS){assert.ok(Object.hasOwn(prior.files,path));const row=b.changed_files[path];exactKeys(row,['before_sha256','after_sha256']);assert.equal(row.before_sha256,prior.files[path]);assert.ok(hex(row.after_sha256,64));assert.notEqual(row.after_sha256,row.before_sha256);expected[path]=row.after_sha256;}
+ assert.deepEqual(literalTestMap(b.added_files),[...V5_ADDED_PATHS]);for(const path of V5_ADDED_PATHS){assert.ok(!Object.hasOwn(prior.files,path));expected[path]=b.added_files[path];}
+ const rows=Object.keys(expected).sort().map(path=>({path,sha256:expected[path]}));assert.equal(rows.length,V5_FILE_COUNT);assert.deepEqual(literalTestMap(b.files),rows.map(x=>x.path));assert.deepEqual(b.files,Object.fromEntries(rows.map(x=>[x.path,x.sha256])));
+ sourcePins(root,b.additions,V2_TOOLS);assert.equal(b.additions['scripts/ci-test-reporter.mjs'],prior.additions['scripts/ci-test-reporter.mjs']);sourcePins(root,b.supporting_sources,V5_SUPPORT);for(const path of V3_SUPPORT)assert.equal(b.supporting_sources[path],prior.supporting_sources[path],'Existing H Python partition protocol source stays exact');sourcePins(root,b.python_sources,Object.keys(V3_PYTHON));assert.deepEqual(b.python_sources,V3_PYTHON,'Original fourteen Python method sources remain exact H');
+ const current=inventory(root);assert.deepEqual(current,rows,'Independent flat H plus finite375 delta must match every actual source');
+ exactKeys(b.case_inventory,['path','sha256']);assert.equal(b.case_inventory.path,V5_REVIEW);assert.ok(hex(b.case_inventory.sha256,64));const raw=regular(root,V5_REVIEW);assert.equal(digest(raw),b.case_inventory.sha256);const r=JSON.parse(raw);
+ exactKeys(r,['schema','status','baseline_commit','predecessor','driver','changed_files','added_files','additions','supporting_sources','python_sources','inventory_sha256','counts','registrations','added_cases_by_file','evidence','partition_suites','partition_platforms','conformance_is_separate_gate','behavioral_or_release_approval']);
+ assert.equal(r.schema,'reviewed-next-seven-CI-source-case-review-v1');assert.equal(r.status,'GO_EXACT_CURRENT375_SOURCE_DELTA_AND_CASE_INVENTORY_ONLY');assert.equal(r.baseline_commit,V5_BASE);
+ for(const key of ['predecessor','driver','changed_files','added_files','additions','supporting_sources','python_sources'])assert.deepEqual(r[key],b[key]);assert.equal(r.inventory_sha256,objectSha(rows));
+ const counts={baseline_files:345,preserved_cases:2092,added_files:V5_ADDED_PATHS.length,added_cases:V5_ADDED_CASE_COUNT,total_files:V5_FILE_COUNT,total_cases:2092+V5_ADDED_CASE_COUNT};assert.deepEqual(r.counts,counts);
+ exactKeys(r.registrations,['changed','added']);exactKeys(r.registrations.changed,V5_CHANGED_PATHS);exactKeys(r.registrations.added,V5_ADDED_PATHS);
+ for(const path of V5_CHANGED_PATHS){const item=r.registrations.changed[path];exactKeys(item,['before_sha256','after_sha256','before','after']);assert.equal(item.before_sha256,b.changed_files[path].before_sha256);assert.equal(item.after_sha256,b.changed_files[path].after_sha256);v5PreservedRegistrations(path,item.before,item.after);}
+ for(const path of V5_ADDED_PATHS){const item=r.registrations.added[path];exactKeys(item,['sha256','after']);assert.equal(item.sha256,b.added_files[path]);v5RegistrationRows(item.after);for(const row of item.after){assert.equal(typeof row.name,'string');assert.deepEqual(row.registration_ancestors,[],'New375 cases are literal top-level registrations');}}
+ exactKeys(r.added_cases_by_file,V5_ADDED_PATHS);assert.deepEqual(Object.keys(r.added_cases_by_file),[...V5_ADDED_PATHS]);let added=0;for(const [path,n]of Object.entries(r.added_cases_by_file)){assert.ok(Number.isSafeInteger(n)&&n>0);assert.equal(n,r.registrations.added[path].after.length,'Exact literal new-case count');added+=n;}assert.equal(added,V5_ADDED_CASE_COUNT);
+ assert.deepEqual(r.partition_suites,V3_SUITES);assert.deepEqual(r.partition_platforms,['win32','darwin','linux']);assert.equal(r.conformance_is_separate_gate,true);assert.equal(r.behavioral_or_release_approval,false);
+ assert.ok(Array.isArray(r.evidence)&&r.evidence.length===1);const evidence=r.evidence[0];exactKeys(evidence,['path','sha256']);assert.equal(evidence.path,V5_AUDIT);assert.ok(hex(evidence.sha256,64));const auditRaw=regular(root,V5_AUDIT);assert.equal(digest(auditRaw),evidence.sha256);const audit=JSON.parse(auditRaw);
+ exactKeys(audit,['schema','status','baseline_commit','changed_files','added_files','registrations','counts','all_H_scenarios_preserved','source_only','runtime_or_release_approval']);assert.equal(audit.schema,'independent-current375-CI-case-source-audit-v1');assert.equal(audit.status,'GO_EXACT_CURRENT375_SOURCE_CASES_AND_H_SCENARIO_PRESERVATION_ONLY');assert.equal(audit.baseline_commit,V5_BASE);for(const key of ['changed_files','added_files','registrations','counts'])assert.deepEqual(audit[key],r[key]);assert.equal(audit.all_H_scenarios_preserved,true);assert.equal(audit.source_only,true);assert.equal(audit.runtime_or_release_approval,false);
+ return {baseline:b,baseline_sha256:pin,inventory:current};
+}
+function revalidateV5Sources(root,checked){
+ const raw=regular(root,V5_INDEX);assert.equal(digest(raw),checked.baseline_sha256);const again=loadBaselineV5(root,JSON.parse(raw),checked.baseline_sha256);assert.deepEqual(again,checked,'All current V5 source/support/authority bytes must still match after execution');
+}
+
 export function loadBaseline(root,path,pin){
   assert.ok(hex(pin,64),'Explicit independent baseline hash required');
   const raw=readFileSync(path);assert.equal(digest(raw),pin);const b=JSON.parse(raw);
   if(b.schema==='reviewed-ci-test-baseline-v1')return loadBaselineV1(root,path,pin);
+  if(b.schema==='reviewed-ci-test-baseline-v5'){assert.equal(resolve(path),resolve(root,V5_INDEX));assert.equal(digest(regular(root,V5_INDEX)),pin);return loadBaselineV5(root,b,pin);}
   if(b.schema==='reviewed-ci-test-baseline-v4'){assert.equal(resolve(path),resolve(root,V3_INDEX));assert.equal(digest(regular(root,V3_INDEX)),pin);return loadBaselineV4(root,b,pin);}
   if(b.schema==='reviewed-ci-test-baseline-v3'){assert.equal(resolve(path),resolve(root,V3_INDEX));assert.equal(digest(regular(root,V3_INDEX)),pin);return loadBaselineV3(root,b,pin);}
   assert.equal(b.schema,'reviewed-ci-test-baseline-v2');return loadBaselineV2(root,b,pin);
@@ -422,5 +506,5 @@ export function ciIdentity(env=process.env) {
   assert.ok(hex(env.GITHUB_SHA,40),'CI SHA required');
   return {run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT,sha:env.GITHUB_SHA};
 }
-export async function main(argv=process.argv.slice(2)){const command=argv.shift();assert.ok(command==='run'||command==='aggregate');const a=args(argv);const allowed=command==='run'?['mode','partition','receipt','baseline-index','baseline-sha']:['reference','output','baseline-index','baseline-sha','parts'];assert.ok(Object.keys(a).every(k=>allowed.includes(k)));const root=process.cwd(),commit=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8',timeout:5000}).trim();assert.ok(hex(commit,40));const ci=ciIdentity();if(ci)assert.equal(ci.sha,commit);const checked=loadBaseline(root,a['baseline-index'],a['baseline-sha']);if(command==='run'){assert.ok(a.mode==='full'||a.mode==='partition');assert.ok(typeof a.receipt==='string');const partition=a.partition===undefined?null:Number(a.partition);await execute(root,checked,{commit,mode:a.mode,partition,receipt:resolve(a.receipt),ci});}else{assert.equal(typeof a.output,'string');const ref=JSON.parse(readFileSync(a.reference,'utf8')),parts=a.parts.map(p=>JSON.parse(readFileSync(p,'utf8')));const expectedNodeMajor=Number(process.versions.node.split('.')[0]);assert.ok(expectedNodeMajor===20||expectedNodeMajor===22);const result=aggregateReceipts(ref,parts,checked,commit,ci,expectedNodeMajor);writeExclusive(resolve(a.output),result);console.log(JSON.stringify({commit,complete:true,files:result.inventory.length,summary:result.summary}));}}
+export async function main(argv=process.argv.slice(2)){const command=argv.shift();assert.ok(command==='run'||command==='aggregate');const a=args(argv);const allowed=command==='run'?['mode','partition','receipt','baseline-index','baseline-sha']:['reference','output','baseline-index','baseline-sha','parts'];assert.ok(Object.keys(a).every(k=>allowed.includes(k)));const root=process.cwd(),commit=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8',timeout:5000}).trim();assert.ok(hex(commit,40));const ci=ciIdentity();if(ci)assert.equal(ci.sha,commit);const checked=loadBaseline(root,a['baseline-index'],a['baseline-sha']);if(command==='run'){assert.ok(a.mode==='full'||a.mode==='partition');assert.ok(typeof a.receipt==='string');const partition=a.partition===undefined?null:Number(a.partition);await execute(root,checked,{commit,mode:a.mode,partition,receipt:resolve(a.receipt),ci});if(checked.baseline.schema==='reviewed-ci-test-baseline-v5')revalidateV5Sources(root,checked);}else{assert.equal(typeof a.output,'string');const ref=JSON.parse(readFileSync(a.reference,'utf8')),parts=a.parts.map(p=>JSON.parse(readFileSync(p,'utf8')));const expectedNodeMajor=Number(process.versions.node.split('.')[0]);assert.ok(expectedNodeMajor===20||expectedNodeMajor===22);const result=aggregateReceipts(ref,parts,checked,commit,ci,expectedNodeMajor);writeExclusive(resolve(a.output),result);console.log(JSON.stringify({commit,complete:true,files:result.inventory.length,summary:result.summary}));}}
 if(process.argv[1]&&realpathSync(process.argv[1])===realpathSync(fileURLToPath(import.meta.url)))main().catch(e=>{console.error('CI partition gate refused: '+e.message);process.exitCode=1;});

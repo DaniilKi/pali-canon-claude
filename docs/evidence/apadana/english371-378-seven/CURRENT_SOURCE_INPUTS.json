@@ -5,7 +5,7 @@
   "files": {
     "docs/evidence/apadana/english371-378-seven/APPROVAL.json": {
       "bytes": 15604,
-      "sha256": "b8c196e2332aa7ee169c5d20f3e6906ab458cdf7d569dd235211ed76443f38fb"
+      "sha256": "3112dff5eb6a26dcd357fc0ac02ee08019bb1e894172192a55aa4c0ef9d52ebd"
     },
     "docs/evidence/apadana/english371-378-seven/BASELINE368_FULL_OBJECTS.json": {
       "bytes": 2989112,
@@ -28,8 +28,8 @@
       "sha256": "4d5bdf79d2cae116a46a98ae72254debbfe20199c945135393d299e1a2e64b05"
     },
     "docs/evidence/apadana/english371-378-seven/H_HISTORY_FIXTURE_INPUTS.json": {
-      "bytes": 470196,
-      "sha256": "41487957b85db7daff4bc83e207414fe88d4be68f67f557a75d4b4c550ef5466"
+      "bytes": 478093,
+      "sha256": "0166698d9fa535b693be6b7b5462253952d67a1c105e2324a46b88dd6444be5e"
     },
     "docs/evidence/apadana/english371-378-seven/LINKS.json": {
       "bytes": 24216,
@@ -49,11 +49,11 @@
     },
     "docs/evidence/apadana/english371-378-seven/RUNTIME_INVENTORY.json": {
       "bytes": 6658,
-      "sha256": "29f78f77f1200b0988620f0f7766ceb7d090d9d5cf0fa4174c05f97b345cc840"
+      "sha256": "69e4890880ae408e293d14ec6e291472878ca8ba91fe324526db802f01d9f4b8"
     },
     "docs/evidence/apadana/english371-378-seven/RUNTIME_REVIEW.json": {
       "bytes": 1910,
-      "sha256": "a6697cbbfd6fd6b3738489cce02107927fe5e862b2b7a4487f8caf01eaf8d117"
+      "sha256": "e3c522ffe40d47b8ee8abbbd40d8206f1f767c417df859e32c5f653646edc04e"
     },
     "docs/evidence/apadana/english371-378-seven/SOURCE_BINDINGS.json": {
       "bytes": 126416,
@@ -77,7 +77,7 @@
     },
     "scripts/web_reader_intake375.py": {
       "bytes": 18999,
-      "sha256": "ecf0c0c9b0eab04bad5efb6c5c82420e1c40432d21a69c005670dfa682aeb604"
+      "sha256": "3a7d95e7a6a62b44f882c68b2a876bf0157347066af948ba56b60220cef67361"
     },
     "src/apadana-thera-profiles.mjs": {
       "bytes": 834270,
