@@ -381,7 +381,7 @@ class SixOperationScopeControls(unittest.TestCase):
                 binding = scope._next_ten_binding
                 snapshot = binding._proof368
                 graph9 = binding._graph9
-                closed_other_graph = self._assert_owned_record_graph(ten, binding)
+                closed_other_graph = self._assert_owned_record_graph(ten, binding, scope)
                 self.assertEqual(list(snapshot._raw),
                     [*intake368.PINS, intake368.RUNTIME_NAME, intake368.REVIEW_NAME])
                 self.assertEqual(len(snapshot._raw), 16)
@@ -653,6 +653,7 @@ class SixOperationScopeControls(unittest.TestCase):
         self.assertIsNone(graph._claimant)
         self.assertEqual(dict(graph._raw), {})
         self.assertEqual(dict(graph._records), {})
+        self.assertEqual(dict(graph._dd_records), {})
         self.assertEqual(graph._configuration, ())
         self.assertEqual(graph._rows, ())
         graph._close(); graph._close()
@@ -662,6 +663,7 @@ class SixOperationScopeControls(unittest.TestCase):
                 mock.patch.object(Path, 'stat', autospec=True, side_effect=original_stat) as stats:
             for operation in (lambda: graph._fresh_detached_records(self.root, None),
                               lambda: graph._initial_records(self.root),
+                              lambda: graph._initial_dd_records(self.root),
                               lambda: graph._claim(None)):
                 with self.assertRaises(ValueError):
                     operation()
@@ -723,6 +725,8 @@ class SixOperationScopeControls(unittest.TestCase):
                         original(graph, claimant)
                     with self.assertRaises(ValueError):
                         graph._initial_records(self.root)
+                    with self.assertRaises(ValueError):
+                        graph._initial_dd_records(self.root)
                     self.assertEqual((reads.call_count, stats.call_count), (0, 0))
             claimed.append((graph, claimant))
         with mock.patch.object(ten._OperationRecordGraph, '_claim', checked):
@@ -763,11 +767,12 @@ class SixOperationScopeControls(unittest.TestCase):
         self.assertEqual(len(before_old), 1)
         self._assert_record_graph_closed(before_old[0])
 
-    def _assert_owned_record_graph(self, ten, binding):
+    def _assert_owned_record_graph(self, ten, binding, scope):
         from types import MappingProxyType
         from threading import Thread
         graph = binding._graph9
         rows = graph._rows
+        self._assert_scoped_dd_records(ten, scope, binding)
         next_regular, six_regular = ten.regular, h.regular
         next_digest, six_digest = ten.digest, h.digest
         visited = []
@@ -813,7 +818,8 @@ class SixOperationScopeControls(unittest.TestCase):
         class EqualAnything:
             def __eq__(self, other):
                 return True
-        originals = (('_raw', graph._raw), ('_records', graph._records))
+        originals = (('_raw', graph._raw), ('_records', graph._records),
+                     ('_dd_records', graph._dd_records))
         for field, original in originals:
             candidates = (dict(original), MappingProxyType(dict(original)),
                           MappingProxyType({name: EqualAnything() for name in original}))
@@ -862,6 +868,7 @@ class SixOperationScopeControls(unittest.TestCase):
                     refuses_without_io(lambda: graph._fresh_detached_records(self.root, binding))
         self.assertEqual(graph._fresh_detached_records(self.root, binding), binding._records)
         for field in ('_graph9_identity', '_graph9_raw_identity', '_graph9_records_identity',
+                      '_graph9_dd_records_identity',
                       '_graph9_config_identity', '_graph9_rows_identity'):
             original = getattr(binding, field)
             object.__setattr__(binding, field, None)
@@ -936,6 +943,9 @@ class SixOperationScopeControls(unittest.TestCase):
                 with self.change(name, missing=missing):
                     with self.assertRaises((ValueError, AssertionError)):
                         graph._fresh_detached_records(self.root, binding)
+                    if _kind == 'six':
+                        with self.assertRaises((ValueError, AssertionError)):
+                            ten._scope_dd_records(scope)
                 graph._fresh_detached_records(self.root, binding)
             path = self.root / name
             raw = path.read_bytes()
@@ -946,13 +956,136 @@ class SixOperationScopeControls(unittest.TestCase):
                 path.symlink_to(authentic)
                 with self.assertRaisesRegex(ValueError, 'symlink'):
                     graph._fresh_detached_records(self.root, binding)
+                if _kind == 'six':
+                    with self.assertRaisesRegex(ValueError, 'symlink'):
+                        ten._scope_dd_records(scope)
             finally:
                 if path.is_symlink() or path.exists():
                     path.unlink()
                 path.write_bytes(raw); authentic.unlink()
             graph._fresh_detached_records(self.root, binding)
         self._assert_record_graph_creation_rollback(ten)
+        self._assert_dd_constructor_parse_rollback(ten)
+        self.assertEqual(ten._scope_dd_records(scope), scope._records)
         return other  # authentic, already closed; reused for close-recipient control
+
+    def _assert_scoped_dd_records(self, ten, scope, binding):
+        # Reuse the existing active capture. No extra operation or proof-mutation loop.
+        graph = binding._graph9
+        rows = graph._rows[1:7]
+        original_regular, original_sha = h.regular, h.digest
+        original_fspath = h._C1OperationScope.__fspath__
+        original_check = h._C1OperationScope._check
+        seen, fspaths, checks = [], [], []
+        def regular(root, name):
+            self.assertIs(root, scope)
+            seen.append(name)
+            return original_regular(root, name)
+        def fspath(current):
+            if current is scope:
+                fspaths.append(current)
+            return original_fspath(current)
+        def check(current):
+            if current is scope:
+                checks.append(current)
+            return original_check(current)
+        with mock.patch.object(h, 'regular', side_effect=regular), \
+                mock.patch.object(h, 'digest', wraps=original_sha) as six_sha, \
+                mock.patch.object(ten, 'digest', wraps=ten.digest) as next_sha, \
+                mock.patch.object(h._C1OperationScope, '__fspath__', fspath), \
+                mock.patch.object(h._C1OperationScope, '_check', check):
+            observed = ten._scope_dd_records(scope)
+            self.assertEqual(seen, [name for _kind, name, _pin in rows])
+            self.assertEqual((len(fspaths), len(checks)), (6, 7))
+            self.assertEqual((six_sha.call_count, next_sha.call_count), (6, 0))
+        self.assertEqual(observed, scope._records)  # independent LIVE prior-DD capture
+        self.assertNotEqual(observed, binding._records)  # NEXT34 is a different layer
+        self.assertNotEqual(observed, binding._current368)
+        self.assertEqual(list(observed), list(scope._records))
+        self.assertIsNot(observed, scope._records)
+        self.assertIsNot(observed, graph._dd_records)
+        for name, record in observed.items():
+            self.assertIsNot(record, graph._dd_records[name])
+            self.assertEqual(list(record), list(graph._dd_records[name]))
+        first = next(iter(observed))
+        observed[first]['bytes'] += 1
+        self.assertEqual(ten._scope_dd_records(scope), scope._records)
+
+        # The independent expected-DD comparison must occur AFTER all six reads.
+        from types import MappingProxyType
+        expected = scope._records
+        forged = {name: dict(row) for name, row in expected.items()}
+        forged[first]['bytes'] += 1
+        object.__setattr__(scope, '_records', MappingProxyType(forged))
+        seen.clear()
+        try:
+            with mock.patch.object(h, 'regular', side_effect=regular):
+                with self.assertRaises(AssertionError):
+                    ten._scope_dd_records(scope)
+            self.assertEqual(seen, [name for _kind, name, _pin in rows])
+        finally:
+            object.__setattr__(scope, '_records', expected)
+
+        # The *next* original __fspath__ guard must detect drift after row1. Passing
+        # a preconverted Path could falsely pass a file-only readset comparison.
+        original_read = Path.read_bytes
+        with tempfile.TemporaryDirectory(prefix='pali-dd-midrow-') as temp:
+            linked = Path(temp) / 'linked-root'
+            linked.symlink_to(self.root, target_is_directory=True)
+            for field, replacement in (('_active', False), ('_owner', -1), ('_root', linked)):
+                original = getattr(scope, field)
+                seen.clear()
+                def drift(root, name):
+                    raw = regular(root, name)
+                    if len(seen) == 1:
+                        object.__setattr__(scope, field, replacement)
+                    return raw
+                try:
+                    with mock.patch.object(h, 'regular', side_effect=drift), \
+                            mock.patch.object(Path, 'read_bytes', autospec=True, side_effect=original_read) as reads:
+                        with self.assertRaises(ValueError):
+                            ten._scope_dd_records(scope)
+                        self.assertEqual(seen, [rows[0][1], rows[1][1]])
+                        self.assertEqual(reads.call_count, 1)
+                finally:
+                    object.__setattr__(scope, field, original)
+        self.assertEqual(ten._scope_dd_records(scope), scope._records)
+
+        # Direct private DD entry must reject invalid COMPLETE binding ownership
+        # without relying on the later full NEXT9/13/16 pass to catch it.
+        original_stat = Path.stat
+        for field, replacement in (('_active', False), ('_owner', -1)):
+            original = getattr(binding, field)
+            object.__setattr__(binding, field, replacement)
+            try:
+                with mock.patch.object(Path, 'read_bytes', autospec=True, side_effect=original_read) as reads, \
+                        mock.patch.object(Path, 'stat', autospec=True, side_effect=original_stat) as stats:
+                    with self.assertRaises(ValueError):
+                        graph._fresh_scoped_dd_records(scope, binding)
+                    self.assertEqual((reads.call_count, stats.call_count), (0, 0))
+            finally:
+                object.__setattr__(binding, field, original)
+
+    def _assert_dd_constructor_parse_rollback(self, ten):
+        # One new constructor-only failure, no operation/data capture. Delegate the
+        # original decoder except its second decode of this genuine pinned buffer:
+        # original SIX semantics first, newly introduced captured-DD parse second.
+        expected = (self.root / h.PROOF_DIRECTORY / 'runtime' / h.INVENTORY_NAME).read_bytes()
+        original_loads = ten.json.loads
+        decodes = []
+        def reject_captured_dd(raw, *args, **kwargs):
+            if type(raw) is bytes and raw == expected:
+                decodes.append(True)
+                if len(decodes) == 2:
+                    raise ValueError('Owned captured DD parse failure')
+            return original_loads(raw, *args, **kwargs)
+        with self._observe_record_graph_construction(ten) as created:
+            with mock.patch.object(ten.json, 'loads', side_effect=reject_captured_dd):
+                with self.assertRaisesRegex(ValueError, '^Owned captured DD parse failure$'):
+                    ten._OperationRecordGraph(self.root)
+        self.assertEqual(len(decodes), 2)
+        self.assertEqual(len(created), 1)
+        self._assert_record_graph_closed(created[0])
 
     def _assert_single_lstat_node_guards(self, ten):
         # Called only from the existing case05 helper; no registered test is added.

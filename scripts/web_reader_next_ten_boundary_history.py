@@ -455,7 +455,7 @@ def _record_graph_read(root, row):
 
 class _OperationRecordGraph:
     """One owned semantic result for historical NEXT34, never actual368 runtime."""
-    __slots__ = ('_root', '_thread', '_active', '_claimant', '_raw', '_records',
+    __slots__ = ('_root', '_thread', '_active', '_claimant', '_raw', '_records', '_dd_records',
                  '_configuration', '_rows')
 
     def __init__(self, root):
@@ -465,6 +465,7 @@ class _OperationRecordGraph:
         object.__setattr__(self, '_claimant', None)
         object.__setattr__(self, '_raw', MappingProxyType({}))
         object.__setattr__(self, '_records', MappingProxyType({}))
+        object.__setattr__(self, '_dd_records', MappingProxyType({}))
         object.__setattr__(self, '_configuration', ())
         object.__setattr__(self, '_rows', ())
         raw = {}
@@ -490,9 +491,24 @@ class _OperationRecordGraph:
                         type(record['sha256']) is not str or
                         re.fullmatch('[a-f0-9]{64}', record['sha256']) is None):
                     raise ValueError('Invalid historical NEXT34 record graph')
+            # Row6 is the already pinned SIX inventory. The original NEXT
+            # proof_records call above already executed its full SIX semantics.
+            dd_records = json.loads(raw[rows[5][1]])['files']
+            if (type(dd_records) is not dict or len(dd_records) != 34 or
+                    set(dd_records) != set(records)):
+                raise ValueError('Exact historical DD34 record graph required')
+            for name, record in dd_records.items():
+                if (type(name) is not str or type(record) is not dict or
+                        set(record) != {'bytes', 'sha256'} or
+                        type(record['bytes']) is not int or record['bytes'] <= 0 or
+                        type(record['sha256']) is not str or
+                        re.fullmatch('[a-f0-9]{64}', record['sha256']) is None):
+                    raise ValueError('Invalid historical DD34 record graph')
             object.__setattr__(self, '_raw', MappingProxyType(dict(raw)))
             object.__setattr__(self, '_records', MappingProxyType({
                 name: MappingProxyType(dict(record)) for name, record in records.items()}))
+            object.__setattr__(self, '_dd_records', MappingProxyType({
+                name: MappingProxyType(dict(record)) for name, record in dd_records.items()}))
             object.__setattr__(self, '_configuration', configuration)
             object.__setattr__(self, '_rows', rows)
             object.__setattr__(self, '_active', True)
@@ -515,6 +531,16 @@ class _OperationRecordGraph:
             raise ValueError('Closed, foreign or claimed initial record graph')
         return {name: dict(row) for name, row in self._records.items()}
 
+    def _initial_dd_records(self, root):
+        # Independent DD input is compared to the unchanged LIVE prior reader.
+        if (type(self) is not _OperationRecordGraph or not self._active or
+                self._thread != get_ident() or self._claimant is not None or
+                _physical_root(root) != self._root or
+                self._configuration != _record_graph_configuration() or
+                self._rows != _record_graph_layout()):
+            raise ValueError('Closed, foreign or claimed initial DD record graph')
+        return {name: dict(row) for name, row in self._dd_records.items()}
+
     def _claim(self, claimant):
         if (type(self) is not _OperationRecordGraph or not self._active or
                 self._thread != get_ident() or self._claimant is not None or
@@ -523,6 +549,7 @@ class _OperationRecordGraph:
                 getattr(claimant, '_graph9_identity', None) is not self or
                 getattr(claimant, '_graph9_raw_identity', None) is not self._raw or
                 getattr(claimant, '_graph9_records_identity', None) is not self._records or
+                getattr(claimant, '_graph9_dd_records_identity', None) is not self._dd_records or
                 getattr(claimant, '_graph9_config_identity', None) is not self._configuration or
                 getattr(claimant, '_graph9_rows_identity', None) is not self._rows or
                 self._configuration != _record_graph_configuration() or
@@ -540,6 +567,8 @@ class _OperationRecordGraph:
                 self._raw is not claimant._graph9_raw_identity or
                 type(self._records) is not MappingProxyType or
                 self._records is not claimant._graph9_records_identity or
+                type(self._dd_records) is not MappingProxyType or
+                self._dd_records is not claimant._graph9_dd_records_identity or
                 type(self._configuration) is not tuple or
                 self._configuration is not claimant._graph9_config_identity or
                 type(self._rows) is not tuple or
@@ -561,18 +590,38 @@ class _OperationRecordGraph:
                 raise ValueError('Changed operation record proof bytes: ' + row[1])
         return {name: dict(row) for name, row in self._records.items()}
 
+    def _fresh_scoped_dd_records(self, scoped, binding):
+        # Fixed SIX6 subset only. Keep the original scope as EVERY read argument;
+        # six.regular must still invoke its __fspath__/_check for each row.
+        import web_reader_six_boundary_history as six
+        if (type(scoped) is not six._C1OperationScope or
+                type(binding) is not _NextTenBinding or not binding._active or
+                binding._owner != get_ident() or
+                scoped._next_ten_binding is not binding or
+                scoped._root != binding._root):
+            raise ValueError('Foreign scoped DD record owner')
+        self._check_owner(scoped._root, binding)  # pure owner/config, not Path(scoped)
+        for row in self._rows[1:7]:
+            if row[0] != 'six':
+                raise ValueError('Exact scoped SIX6 record proofs required')
+            observed = _record_graph_read(scoped, row)
+            if observed != self._raw[row[1]]:
+                raise ValueError('Changed operation record proof bytes: ' + row[1])
+        return {name: dict(row) for name, row in self._dd_records.items()}
+
     def _close(self):
         object.__setattr__(self, '_active', False)
         object.__setattr__(self, '_claimant', None)
         object.__setattr__(self, '_raw', MappingProxyType({}))
         object.__setattr__(self, '_records', MappingProxyType({}))
+        object.__setattr__(self, '_dd_records', MappingProxyType({}))
         object.__setattr__(self, '_configuration', ())
         object.__setattr__(self, '_rows', ())
 
 
 class _NextTenBinding:
     """Owned by exactly one private operation; not a path or public root token."""
-    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359', '_current368', '_catalogue368', '_proof368', '_proof368_identity', '_proof368_raw_identity', '_proof359', '_proof359_identity', '_proof359_raw_identity', '_graph9', '_graph9_identity', '_graph9_raw_identity', '_graph9_records_identity', '_graph9_config_identity', '_graph9_rows_identity')
+    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359', '_current368', '_catalogue368', '_proof368', '_proof368_identity', '_proof368_raw_identity', '_proof359', '_proof359_identity', '_proof359_raw_identity', '_graph9', '_graph9_identity', '_graph9_raw_identity', '_graph9_records_identity', '_graph9_dd_records_identity', '_graph9_config_identity', '_graph9_rows_identity')
 
     def __init__(self, root, records, actual, current359, catalogue359, current368, catalogue368, proof368, proof359, graph9):
         object.__setattr__(self, '_root', _physical_root(root))
@@ -587,6 +636,7 @@ class _NextTenBinding:
         object.__setattr__(self, '_graph9_identity', graph9)
         object.__setattr__(self, '_graph9_raw_identity', graph9._raw)
         object.__setattr__(self, '_graph9_records_identity', graph9._records)
+        object.__setattr__(self, '_graph9_dd_records_identity', graph9._dd_records)
         object.__setattr__(self, '_graph9_config_identity', graph9._configuration)
         object.__setattr__(self, '_graph9_rows_identity', graph9._rows)
         graph9._claim(self)
@@ -628,6 +678,7 @@ class _NextTenBinding:
             object.__setattr__(self, '_graph9_identity', None)
         object.__setattr__(self, '_graph9_raw_identity', None)
         object.__setattr__(self, '_graph9_records_identity', None)
+        object.__setattr__(self, '_graph9_dd_records_identity', None)
         object.__setattr__(self, '_graph9_config_identity', None)
         object.__setattr__(self, '_graph9_rows_identity', None)
         if self._proof359_identity is not None:
@@ -668,6 +719,22 @@ class _CapturedDDData(Mapping):
         return self._data[key]
 
 
+def _scope_dd_records(scoped):
+    # Current private route only; the original historical reader stays intact.
+    import web_reader_six_boundary_history as six
+    if type(scoped) is not six._C1OperationScope:
+        raise ValueError('Exact private operation scope required')
+    scoped._check()
+    binding = scoped._next_ten_binding
+    if type(binding) is not _NextTenBinding:
+        raise ValueError('Exact private next-ten binding required')
+    if type(binding._graph9) is not _OperationRecordGraph:
+        raise ValueError('Substituted operation record graph')
+    records = binding._graph9._fresh_scoped_dd_records(scoped, binding)
+    assert records == scoped._records
+    return records
+
+
 def _binding_records(binding, root):
     if type(binding) is not _NextTenBinding:
         raise ValueError('Exact private next-ten binding required')
@@ -699,6 +766,7 @@ def _capture_six_test_input(root):
         current368, ap359, catalogue368, manifest368, proof368 = _intake368._capture_authority_with_proof_bytes(root, current359)
         assert json.loads(ap359) == manifest359
         previous = prior_dd_records(root)
+        assert previous == graph9._initial_dd_records(root)
         actual = {}
         identity = []
         for name in sorted(n for n in current368 if n.startswith('data/')):

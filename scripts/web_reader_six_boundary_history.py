@@ -416,7 +416,7 @@ def _capture_actual_data(root):
 
 
 def _scope_records(scoped):
-    records = _historical_dd_scope_records(scoped)
+    records = _next_ten._scope_dd_records(scoped)
     # The current proof/root binding cannot be dropped through __fspath__.
     _next_ten._binding_records(scoped._next_ten_binding,scoped._root)
     return records
