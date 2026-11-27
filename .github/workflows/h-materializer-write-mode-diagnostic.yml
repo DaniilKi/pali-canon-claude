@@ -1,0 +1,53 @@
+name: H materializer native Windows A-B diagnostic
+on:
+  push:
+    branches: [diagnostic/pali-h-write-mode-nov27]
+permissions:
+  contents: read
+jobs:
+  native-windows-ab:
+    name: Native H write-mode / Node ${{ matrix.node }}
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Preserve exact LF source bytes
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install only locked diagnostic prerequisites
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Record the actual native Python environment
+        run: |
+          python3 -c "import json,os,platform,sys; from pathlib import Path; assert sys.version_info[:2]==(3,13) and sys.platform=='win32' and os.name=='nt'; Path(sys.argv[1]).write_text(json.dumps({'schema':'native-H-AB-python-runtime-v1','version':list(sys.version_info[:3]),'platform':sys.platform,'os_name':os.name,'executable':sys.executable,'implementation':platform.python_implementation()}),encoding='utf-8')" "$env:RUNNER_TEMP\h-materializer-ab-python.json"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Compare exact A and B source materializers without relaxing the 20-second child limit
+        timeout-minutes: 10
+        env:
+          PALI_H_AB_NODE: ${{ matrix.node }}
+          PALI_H_AB_PYTHON_ENV: ${{ runner.temp }}\h-materializer-ab-python.json
+        run: node scripts/h-materializer-native-ab.mjs
+      - name: Preserve every A-B outcome including a genuine A failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-H-write-mode-node${{ matrix.node }}
+          path: h-materializer-native-ab.report.json
+          if-no-files-found: error
