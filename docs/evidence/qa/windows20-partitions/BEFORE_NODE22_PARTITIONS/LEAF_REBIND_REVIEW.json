@@ -1,0 +1,42 @@
+{
+  "schema": "independent-windows20-reporter-fileURL-correction-final-source-leaf-review-v1",
+  "status": "GO_EXACT_NARROW_REPORTER_FILEURL_SOURCE_LEAF_FOR_SUCCESSOR_COMMIT_AND_REQUIRED_NATIVE_CI",
+  "predecessor_commit": "1fde302ebed0dec2875a4c9935d74c36d2c38df5",
+  "unchanged_application_component": "aec778d99aabccec6794a641072e463830e85542",
+  "source_inverse_review": {
+    "file": "SOURCE_INVERSE_REVIEW.json",
+    "sha256": "c5a531134da8caeeb673e459b86ab0df8dd4db3c10ae1bd0f2e4cd39ef8bd903"
+  },
+  "narrow_implementation_static_review": {
+    "file": "STATIC_REVIEW.json",
+    "sha256": "e349a0674b979856292976fa3db7a7772af1180d46bd85536ec4d36dd1d444a5"
+  },
+  "original_first_partition_STATIC_review_scope_preserved": "First implementation review remains explicitly1fde/source42df/QA0be7. This additional narrow review covers f72e runner +3fb50 existing-case7 assertions and does not rewrite prior failure or claim nativeWindows success.",
+  "new3_implementation_hashes": {
+    "scripts/ci-test-partitions.mjs": "f72eec4f412d92b81303e790bdca221155524f2847b533276f0b9b283ee40aec",
+    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+    "tests/ci-test-partitions.test.mjs": "3fb50a86968c3a94b249e0b02c9b8afa2447418e2bb4e5c1eed7c7a443b788f9"
+  },
+  "baseline_index_sha256": "9692ebb90d7cf4d3ab18c05712c9aefd40a4f0d83f15c152128858fff89224de",
+  "baseline_only_two_new_source_hash_substitutions": true,
+  "all339_original_C7_test_hashes_driver_counts_and2068plus8_expected_inventory_unchanged": true,
+  "workflow_only_baseline_index_hash_literal_changed": true,
+  "CI_topology_bounds_flags_required_artifacts_and_all_postgates_unchanged_from1fde": true,
+  "sourceMap_only_workflow_row_changed_and_other71_ordered_objects_exact1fde": true,
+  "loader_only_map_hash_constant_changed": true,
+  "all72_197hunks11literal_dollars_forward_and_inverse_exact": true,
+  "original1001index_and929unchanged_and824oldauthorityfixture_bytes_unchanged": true,
+  "before_fileURL_manifest_and_all7_authority_code_index_archives_equal_exact_Git1fde": true,
+  "archive_manifest_sha256": "a0b75d186b1c7c55b2773b331bbdd09c103a2c56e9f1710e616177c4b7ab4865",
+  "all39_worktree_Git1fde_and_actualfreshinstalled_bytes_exact": true,
+  "all_src_web_server_packagejson_fixture_andcurrent34_runtime_leaf_unchanged": true,
+  "no_English_wording_notes_private_data_or_rights_scope_changes": true,
+  "remaining_required": [
+    "Root copy new source/leaf correction receipts retaining first implementation and exact1fde archive scopes",
+    "Strict finalimmutable commit/source/39binding",
+    "Actual sameSHA nativeWindows20 fourpartitions+Linux20fullreference exactaggregate and every required workflow gate green before dev advancement"
+  ],
+  "reviewer_actions": "Read-only stdlib source/JSON/Gitobject/hash inspection only; no JavaScript/application/test/browser/build/network/Gitmutation or tracked edits.",
+  "CI_passed_nativeWindows_success_dev_main_deploy_or_release_claim": false,
+  "blocking_findings": []
+}

@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: 9692ebb90d7cf4d3ab18c05712c9aefd40a4f0d83f15c152128858fff89224de
+  CI_TEST_BASELINE_SHA: b98eccf746409217de8492b269882fc6f07265257c4f98ddb5d690d7fe7c6825
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -84,7 +84,7 @@ jobs:
       fail-fast: false
       matrix:
         group: [core, study, personal, provenance, comparison, notes, backup, conflicts, highlights, navigation, booksearch, chapters, citations, searchpins, headings, commentary, postsearch, vinayapartials, scriptrefresh, milinda, draftsafety, annumbered, milindapartial, anten, apadana, apadananext, apadanathird, apadanafourth, apadanathera, apadanatheranext, apadanatheraexpansion, apadanatherascaled61, apadanatherascaled81, apadanatheraeditorial, apadanatherapair101, apadanatherapair121, apadanathera141, apadanathera161, apadanathera181, apadanathera201, apadanathera221, apadanathera231, apadanathera234, apadanathera241, apadanathera251, apadanaedition, thagsixteen, textspacing, vrieditionnote]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: ${{ (matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201') && 30 || (matrix.group == 'backup' || matrix.group == 'conflicts' || matrix.group == 'personal' || matrix.group == 'postsearch' || matrix.group == 'vinayapartials' || matrix.group == 'draftsafety' || matrix.group == 'milinda' || matrix.group == 'annumbered' || matrix.group == 'milindapartial' || matrix.group == 'anten' || matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanaedition' || matrix.group == 'thagsixteen' || matrix.group == 'textspacing' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234' || matrix.group == 'vrieditionnote') && 20 || 10 }}
     steps:
       - uses: actions/checkout@v4
@@ -1839,7 +1839,7 @@ jobs:
       fail-fast: false
       matrix:
         engine: [firefox, webkit]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -1884,6 +1884,8 @@ jobs:
         exclude:
           - os: windows-latest
             node: 20
+          - os: windows-latest
+            node: 22
     defaults:
       run:
         shell: bash
@@ -1913,7 +1915,7 @@ jobs:
         timeout-minutes: 5
         run: npm run build
       - name: Run complete test inventory
-        if: matrix.os != 'ubuntu-latest' || matrix.node != 20
+        if: matrix.os != 'ubuntu-latest'
         timeout-minutes: 30
         run: npm test
       - name: Run full Linux20 inventory reference
@@ -1926,6 +1928,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: linux20-full-inventory
+          path: ${{ runner.temp }}/ci-inventory/
+          if-no-files-found: error
+      - name: Run full Linux22 inventory reference
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 22
+        timeout-minutes: 30
+        run: |
+          node scripts/ci-test-partitions.mjs run --mode full --receipt "$RUNNER_TEMP/ci-inventory/full.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA"
+      - name: Preserve full Linux22 inventory reference
+        if: always() && matrix.os == 'ubuntu-latest' && matrix.node == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux22-full-inventory
           path: ${{ runner.temp }}/ci-inventory/
           if-no-files-found: error
       - name: Audit the complete bundled corpus
@@ -2055,5 +2069,121 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows20-aggregate-inventory
+          path: ${{ runner.temp }}/ci-inventory/aggregate.json
+          if-no-files-found: error
+  windows22-parts:
+    name: Windows22 inventory partition ${{ matrix.partition }}
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        partition: [0, 1, 2, 3]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Run bounded serial Windows22 partition
+        timeout-minutes: 20
+        run: |
+          node scripts/ci-test-partitions.mjs run --mode partition --partition ${{ matrix.partition }} --receipt "$RUNNER_TEMP/ci-inventory/partition-${{ matrix.partition }}.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA"
+      - name: Preserve Windows22 partition inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows22-partition-${{ matrix.partition }}
+          path: ${{ runner.temp }}/ci-inventory/
+          if-no-files-found: error
+  windows22:
+    name: Node 22 / windows-latest
+    needs: [check, windows22-parts]
+    if: always()
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Require successful reference and all four native partitions
+        env:
+          REFERENCE_JOBS_RESULT: ${{ needs.check.result }}
+          PARTITION_JOBS_RESULT: ${{ needs.windows22-parts.result }}
+        run: |
+          test "$REFERENCE_JOBS_RESULT" = success
+          test "$PARTITION_JOBS_RESULT" = success
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Retrieve exact full Linux22 reference
+        uses: actions/download-artifact@v4
+        with:
+          name: linux22-full-inventory
+          path: ${{ runner.temp }}/ci-reference/
+      - name: Retrieve all four native Windows22 inventories
+        uses: actions/download-artifact@v4
+        with:
+          pattern: windows22-partition-*
+          path: ${{ runner.temp }}/ci-parts/
+          merge-multiple: false
+      - name: Require identical complete test and source inventory
+        timeout-minutes: 2
+        run: |
+          node scripts/ci-test-partitions.mjs aggregate --reference "$RUNNER_TEMP/ci-reference/full.json" --baseline-index "$CI_TEST_BASELINE_INDEX" --baseline-sha "$CI_TEST_BASELINE_SHA" --output "$RUNNER_TEMP/ci-inventory/aggregate.json" --parts "$RUNNER_TEMP/ci-parts/windows22-partition-0/partition-0.json" "$RUNNER_TEMP/ci-parts/windows22-partition-1/partition-1.json" "$RUNNER_TEMP/ci-parts/windows22-partition-2/partition-2.json" "$RUNNER_TEMP/ci-parts/windows22-partition-3/partition-3.json"
+      - name: Diagnose bounded approved acceptance on Windows Node22
+        timeout-minutes: 2
+        run: |
+          node --test --test-reporter=tap tests/approved-acceptance.test.mjs
+          node --test --test-reporter=tap tests/held234-current333-chain.test.mjs
+      - name: Audit the complete bundled corpus
+        timeout-minutes: 5
+        run: npm run audit
+      - run: npm run smoke
+      - run: npm run pack:desktop
+      - name: Preserve exact Windows22 aggregate inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows22-aggregate-inventory
           path: ${{ runner.temp }}/ci-inventory/aggregate.json
           if-no-files-found: error

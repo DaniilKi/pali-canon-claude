@@ -1,0 +1,58 @@
+{
+  "schema": "independent-windows20-22-partitions-and-browser-image-static-review-v1",
+  "status": "GO_FROZEN_NODE22_EXTENSION_AND_TWO_BROWSER_IMAGE_PINS_FOR_REQUIRED_CANDIDATE_CI",
+  "predecessor": "8c7596297960cc9949918ba87b5573917ebd7001",
+  "frozen_new_code_hashes": {
+    "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
+    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+    "tests/ci-test-partitions.test.mjs": "8eecd46ba7b7b939f5014dd2c031123eb316e3c2804bd0bb1c5e26637fe9411a"
+  },
+  "baseline_sha256": "b98eccf746409217de8492b269882fc6f07265257c4f98ddb5d690d7fe7c6825",
+  "all339_original_C7_testfile_bodies_driver_counts2068plus8_unchanged": true,
+  "runner_only_four_function_line_changes": [
+    "function validateContext",
+    "export function verifyReceipt",
+    "export function aggregateReceipts",
+    "export async function main"
+  ],
+  "trusted_actual_CLI_NodeMajor20or22_not_receipt_or_input_inferred": true,
+  "same_expected_major_passed_to_full_reference_and_every_partition": true,
+  "mixed_major_controls_rehash_context_and_reject_unknown_string_NaN_major": true,
+  "all8_QA_cases_and_prior_refusal_guards_preserved": true,
+  "actualCLI_run_context_asserts_actual_process_major": true,
+  "reporter_fileURL_fix_and_event_source_identity_accounting_unchanged": true,
+  "all_existing_Windows20_parts_and_aggregate_jobblock_bytes_exact8c": true,
+  "Windows22_parts_and_aggregate_are_exact20_topology_copies_with_only_intended_name_Node_artifact_changes": true,
+  "distinct_major_artifact_names_paths_and_required_gate_names": true,
+  "Linux20and22_run_exactly_one_full_reference_each_no_duplicate_Linux22_npmtest": true,
+  "both_macOS_full_npmtest_and_all_original_postgates_retained": true,
+  "only_reader_browser_group_and_reader_compat_runs_on_changed_to_ubuntu24_04": true,
+  "every_browser_install_version_engine_matrix_command_assertion_artifact_deadline_unchanged": true,
+  "whole_workflow_reconstructed_exact8c_after_finite_inverse": true,
+  "child_deadlines_and_complete2076case_multiset_status_and_sameSHA_run_attempt_checks_unchanged": true,
+  "author_executed_QA_receipts_read_only": [
+    {
+      "node_major": 20,
+      "path": "/tmp/pali-english335-350-evidence-nov26/partition-runner-review/node22-extension/QA-node20.tap",
+      "sha256": "bfdabb62ea8adff2868e493046fc26f8aaf460d469b96754c59e6e7e682a0858"
+    },
+    {
+      "node_major": 22,
+      "path": "/tmp/pali-english335-350-evidence-nov26/partition-runner-review/node22-extension/QA-node22.tap",
+      "sha256": "7a19dd6e32ff73cbe986a249a6be0dcfe263a748f054c2edd51d087eb90a999e"
+    }
+  ],
+  "all39_runtime_package_source_fixture_bytes_unchanged": true,
+  "blocking_findings": [],
+  "remaining": [
+    "Final source/leaf and immutablecommit binding",
+    "Both Node20and22 nativefourpartitions and matchingLinuxfullreference aggregate must pass on exactsuccessor",
+    "Every required browser/allOS/workflow/postgate must pass before dev advancement"
+  ],
+  "scope_limits": [
+    "Static workflow/implementation assurance only; no nativeWindows22 completion or Ubuntu24browserinstallation outcome inferred.",
+    "Existing rawWorkflow QA covers dualmajor topology; imagepin correctness is independently byte-diff reviewed and strictsource-map bound, not claimed as a new image-specific QA assertion."
+  ],
+  "reviewer_execution": "Only own stdlib read-only Git/source/hash/receipt review; no app/JavaScript/tests/browser/build/network/CI/Gitmutation or tracked edits.",
+  "CI_passed_dev_main_deploy_release_or_project_completion_claim": false
+}

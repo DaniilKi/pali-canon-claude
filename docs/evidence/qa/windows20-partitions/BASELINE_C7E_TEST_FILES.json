@@ -349,8 +349,8 @@
     "tests/yasoja-commentary.test.mjs": "ea0b0c64dd83d72c0f8c58cc1d382aff75c4a6c5e4207d59c672f74729d40370"
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "f72eec4f412d92b81303e790bdca221155524f2847b533276f0b9b283ee40aec",
+    "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
-    "tests/ci-test-partitions.test.mjs": "3fb50a86968c3a94b249e0b02c9b8afa2447418e2bb4e5c1eed7c7a443b788f9"
+    "tests/ci-test-partitions.test.mjs": "8eecd46ba7b7b939f5014dd2c031123eb316e3c2804bd0bb1c5e26637fe9411a"
   }
 }

@@ -1,0 +1,75 @@
+{
+  "schema": "native-eight-c-partitions-and-successor-scope-v1",
+  "commit": "8c7596297960cc9949918ba87b5573917ebd7001",
+  "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45913611000",
+  "windows20_parts": [
+    {
+      "partition": 0,
+      "job_id": 140227484724,
+      "tests": 469,
+      "pass": 397,
+      "skip": 72,
+      "duration_ms": 349718.563
+    },
+    {
+      "partition": 1,
+      "job_id": 140227484770,
+      "tests": 520,
+      "pass": 450,
+      "skip": 70,
+      "duration_ms": 478029.8233
+    },
+    {
+      "partition": 2,
+      "job_id": 140227484665,
+      "tests": 543,
+      "pass": 481,
+      "skip": 62,
+      "duration_ms": 449579.5406
+    },
+    {
+      "partition": 3,
+      "job_id": 140227484748,
+      "tests": 544,
+      "pass": 481,
+      "skip": 63,
+      "duration_ms": 441773.9942
+    }
+  ],
+  "windows20_numeric_union": {
+    "tests": 2076,
+    "pass": 1809,
+    "skip": 267,
+    "fail": 0
+  },
+  "full_linux20_reference": {
+    "job_id": 140227484756,
+    "tests": 2076,
+    "pass": 1809,
+    "skip": 267,
+    "fail": 0,
+    "duration_ms": 805198.767245
+  },
+  "windows22_full_cutoff": {
+    "job_id": 140227484702,
+    "limit_minutes": 30,
+    "last_observed_tap": 1592,
+    "completed_summary": false,
+    "root_assertion_failure_observed": false
+  },
+  "windows20_exact_multiset_aggregate": "Not executed: prerequisite full Windows22 matrix failed. Numeric union is not equivalence acceptance.",
+  "browser_install_failures": [
+    {
+      "job_id": 140227484807,
+      "group": "milinda"
+    },
+    {
+      "job_id": 140227484896,
+      "group": "personal"
+    }
+  ],
+  "browser_failure_stage": "Before application tests: packages.microsoft.com/ubuntu/26.04/prod/dists/resolute/InRelease returned HTTP403; apt exit100.",
+  "successor_intent": "Separate Windows22 partitions and Linux22 reference, strict actual-major aggregation; pin only browser install jobs to supported Ubuntu24.04.",
+  "dev_remains": "3d614795cf95e45280603e95f68846c52eba4818",
+  "claim_of_successor_CI_or_dev_promotion": false
+}

@@ -1,42 +1,44 @@
 {
-  "schema": "independent-windows20-reporter-fileURL-correction-final-source-leaf-review-v1",
-  "status": "GO_EXACT_NARROW_REPORTER_FILEURL_SOURCE_LEAF_FOR_SUCCESSOR_COMMIT_AND_REQUIRED_NATIVE_CI",
-  "predecessor_commit": "1fde302ebed0dec2875a4c9935d74c36d2c38df5",
+  "schema": "independent-windows20-22-partitions-final-source-leaf-review-v1",
+  "status": "GO_EXACT_NODE22_EXTENSION_SOURCE_LEAF_FOR_COMMIT_AND_REQUIRED_NATIVE_CI",
+  "predecessor": "8c7596297960cc9949918ba87b5573917ebd7001",
   "unchanged_application_component": "aec778d99aabccec6794a641072e463830e85542",
-  "source_inverse_review": {
+  "source_review": {
     "file": "SOURCE_INVERSE_REVIEW.json",
-    "sha256": "c5a531134da8caeeb673e459b86ab0df8dd4db3c10ae1bd0f2e4cd39ef8bd903"
+    "sha256": "a337711d30cb2f38d4166dd21067792f0b21da4aba84f9de268d05caa75879ae"
   },
-  "narrow_implementation_static_review": {
+  "implementation_workflow_review": {
     "file": "STATIC_REVIEW.json",
-    "sha256": "e349a0674b979856292976fa3db7a7772af1180d46bd85536ec4d36dd1d444a5"
+    "sha256": "cf05c27c6eec2b7c831e2c467bb5e2f36d15664e3cb88c0560878a18febdc2a6"
   },
-  "original_first_partition_STATIC_review_scope_preserved": "First implementation review remains explicitly1fde/source42df/QA0be7. This additional narrow review covers f72e runner +3fb50 existing-case7 assertions and does not rewrite prior failure or claim nativeWindows success.",
-  "new3_implementation_hashes": {
-    "scripts/ci-test-partitions.mjs": "f72eec4f412d92b81303e790bdca221155524f2847b533276f0b9b283ee40aec",
-    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
-    "tests/ci-test-partitions.test.mjs": "3fb50a86968c3a94b249e0b02c9b8afa2447418e2bb4e5c1eed7c7a443b788f9"
+  "frozen_bindings": {
+    "baseline_index_sha256": "b98eccf746409217de8492b269882fc6f07265257c4f98ddb5d690d7fe7c6825",
+    "addition_hashes": {
+      "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
+      "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+      "tests/ci-test-partitions.test.mjs": "8eecd46ba7b7b939f5014dd2c031123eb316e3c2804bd0bb1c5e26637fe9411a"
+    },
+    "map_sha256": "030ffeccafeb97c0487f4cdfcd62cbce447eede683cfa9ff327d336963d9dc8f",
+    "loader_sha256": "75de40206a5100af0fe43ced92bc75c944013ed549b10941600fbdf19ddb076e",
+    "rows": {
+      ".github/workflows/check.yml": 9,
+      "AGENTS.md": 1
+    }
   },
-  "baseline_index_sha256": "9692ebb90d7cf4d3ab18c05712c9aefd40a4f0d83f15c152128858fff89224de",
-  "baseline_only_two_new_source_hash_substitutions": true,
-  "all339_original_C7_test_hashes_driver_counts_and2068plus8_expected_inventory_unchanged": true,
-  "workflow_only_baseline_index_hash_literal_changed": true,
-  "CI_topology_bounds_flags_required_artifacts_and_all_postgates_unchanged_from1fde": true,
-  "sourceMap_only_workflow_row_changed_and_other71_ordered_objects_exact1fde": true,
-  "loader_only_map_hash_constant_changed": true,
-  "all72_197hunks11literal_dollars_forward_and_inverse_exact": true,
-  "original1001index_and929unchanged_and824oldauthorityfixture_bytes_unchanged": true,
-  "before_fileURL_manifest_and_all7_authority_code_index_archives_equal_exact_Git1fde": true,
-  "archive_manifest_sha256": "a0b75d186b1c7c55b2773b331bbdd09c103a2c56e9f1710e616177c4b7ab4865",
-  "all39_worktree_Git1fde_and_actualfreshinstalled_bytes_exact": true,
-  "all_src_web_server_packagejson_fixture_andcurrent34_runtime_leaf_unchanged": true,
-  "no_English_wording_notes_private_data_or_rights_scope_changes": true,
-  "remaining_required": [
-    "Root copy new source/leaf correction receipts retaining first implementation and exact1fde archive scopes",
-    "Strict finalimmutable commit/source/39binding",
-    "Actual sameSHA nativeWindows20 fourpartitions+Linux20fullreference exactaggregate and every required workflow gate green before dev advancement"
+  "only_workflow_and_AGENTS_original_maprow_updates_other70ordered_byteobjects_exact8c": true,
+  "only_loader_map_hash_literal_updated": true,
+  "all72_199hunks12literal_dollars_forward_inverse_Git3d_exact": true,
+  "all1001_originals929unchanged824frozen_authorities_exact": true,
+  "beforeNode22_all10_archive_members_equal_Git8c_and_manifest_pins": true,
+  "baseline339old_objects_driver_counts_unchanged_only2newhashes_updated": true,
+  "all39_application_package_members_src_web_server_pkg_fixtures_unchanged8c": true,
+  "runtime839e_2b19_leaf_and_source_rights_translation_private_data_unchanged": true,
+  "older_firstimplementation_and_fileURL_review_claims_remain_historical_no_newnative_success_inferred": true,
+  "remaining": [
+    "Root commit currentreviewcopies and independent immutableexactGit closure",
+    "Mandatory sameSHA Node20and22 fullLinuxrefs/eightnativeparts/twoexactaggregates/allothergates green before dev promotion"
   ],
-  "reviewer_actions": "Read-only stdlib source/JSON/Gitobject/hash inspection only; no JavaScript/application/test/browser/build/network/Gitmutation or tracked edits.",
-  "CI_passed_nativeWindows_success_dev_main_deploy_or_release_claim": false,
-  "blocking_findings": []
+  "reviewer_actions": "Own stdlib source/Git/hash/JSON/TAP readback only; no app/tests/browser/build/network/CIactions/Gitmutation or tracked edits.",
+  "blocking_findings": [],
+  "CI_passed_dev_main_deploy_or_release_claim": false
 }

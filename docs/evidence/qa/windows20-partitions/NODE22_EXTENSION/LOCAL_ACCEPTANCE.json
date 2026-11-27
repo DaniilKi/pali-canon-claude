@@ -1,0 +1,65 @@
+{
+  "schema": "actual-node20-node22-focused-partition-controls-v1",
+  "source_files": {
+    "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
+    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+    "tests/ci-test-partitions.test.mjs": "8eecd46ba7b7b939f5014dd2c031123eb316e3c2804bd0bb1c5e26637fe9411a"
+  },
+  "focused_runs": [
+    {
+      "node": "20.20.2",
+      "platform": "Linux",
+      "argv": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/ci-test-partitions.test.mjs"
+      ],
+      "exit_code": 0,
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 2201.466657,
+      "tap": "QA-node20.tap",
+      "sha256": "bfdabb62ea8adff2868e493046fc26f8aaf460d469b96754c59e6e7e682a0858"
+    },
+    {
+      "node": "22.23.5",
+      "platform": "Linux",
+      "argv": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/ci-test-partitions.test.mjs"
+      ],
+      "exit_code": 0,
+      "tests": 8,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 1816.642276,
+      "tap": "QA-node22.tap",
+      "sha256": "7a19dd6e32ff73cbe986a249a6be0dcfe263a748f054c2edd51d087eb90a999e"
+    }
+  ],
+  "limits": {
+    "full_ms": 1800000,
+    "partition_ms": 1200000,
+    "original_case_child_limits_changed": false
+  },
+  "source_guard": {
+    "command": "Node20 --test tests/intake359-source-history.test.mjs",
+    "tests": 1,
+    "pass": 1,
+    "skip": 0,
+    "fail": 0,
+    "duration_ms": 3533.309292
+  },
+  "author_report_sha256": "0890c9496f0a7a1648840a028a6178d671bc65e99ead867da7fca5d19d063f70",
+  "native_acceptance_claim": false
+}

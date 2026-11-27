@@ -3,26 +3,26 @@
   "status": "GO_EXACT_SOURCE_QA_CHECKPOINT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "snapshot_commit": null,
-  "after_domain": "physical Windows20 CI partitions reporter-fileURL correction over1fde",
+  "after_domain": "physical dualNode20and22 partitions and finiteUbuntu24browser-image candidate over8c",
   "live_working_tree_claimed": true,
-  "map_sha256": "7d84a31a125251c92cda1dde20d404117f06ca7fe4dac5fc36240a4b7b317f55",
-  "loader_sha256": "63e76fb8b6a1904a127b78fb65bff8b3c422de9a76f74e7bbfc28cc80aa87088",
+  "map_sha256": "030ffeccafeb97c0487f4cdfcd62cbce447eede683cfa9ff327d336963d9dc8f",
+  "loader_sha256": "75de40206a5100af0fe43ced92bc75c944013ed549b10941600fbdf19ddb076e",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
   "changed_existing_exactly_mapped": 72,
   "unchanged_original_source_entries": 929,
-  "hunks": 197,
-  "hunks_with_literal_dollars": 11,
+  "hunks": 199,
+  "hunks_with_literal_dollars": 12,
   "all_forward_and_inverse_reconstructions_exact": true,
   "rows": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "2470a5654875db540367fa71cc1d6ab68148e76898607dbdf0ec483b4c2db019",
-      "hunks": 7
+      "current_sha256": "5d2baa5061e669e475868288e0894f5ef541d8426d770489a3a0ee4b63e770f8",
+      "hunks": 9
     },
     "AGENTS.md": {
       "base3d_sha256": "06024baeedc9397364c9ced4f3f6a167d5bccfdebc9182277e491d19d756bd43",
-      "current_sha256": "9e6ef4b085d07d18b4b1cbb56ba5a9b7736333f05766f0d0e83e29b434e4fd04",
+      "current_sha256": "5bbdb1e1ab0a5633b096092836f311aaea9a9f005221c5d10033c4d7e28eef44",
       "hunks": 1
     },
     "README.md": {
