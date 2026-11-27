@@ -1,0 +1,109 @@
+name: Bounded verse-scope Python diagnostic
+on:
+  push:
+    branches: ['diagnostic/pali-verse-scope-process-nov27-*']
+permissions:
+  contents: read
+jobs:
+  verse-scope:
+    name: Bounded verse scope / macOS Node${{ matrix.node }}
+    runs-on: macos-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    env:
+      EXPECTED_NODE_MAJOR: ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact locked test dependencies
+        timeout-minutes: 5
+        run: npm ci --no-audit --no-fund
+      - name: Authenticate H and exactly the reviewed four-path diagnostic delta
+        timeout-minutes: 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import {execFileSync} from 'node:child_process';
+          import {readFileSync,lstatSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const git=args=>execFileSync('git',args,{encoding:'utf8',timeout:15000});
+          const H='4e9287bd5ebc78aba4b185b017e63eac6547bfd7';
+          const pins={"tests/verse-scope-review.test.mjs":"695b2e51de464f1565fdd03233bbffe0b899ab7e65e068a084fdccae1e9ae2bb","tests/helpers/verse-scope-python.mjs":"c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f","tests/verse-scope-python.test.mjs":"98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"},allowed=[".github/workflows/verse-scope-process-diagnostic.yml","tests/verse-scope-python.test.mjs","tests/helpers/verse-scope-python.mjs","tests/verse-scope-review.test.mjs"];
+          assert.equal(process.platform,'darwin');assert.equal(Number(process.versions.node.split('.')[0]),Number(process.env.EXPECTED_NODE_MAJOR));
+          assert.deepEqual(git(['diff','--no-renames','--name-only',H,'HEAD']).trim().split('\n').sort(),allowed);
+          assert.equal(git(['status','--porcelain']).trim(),'');
+          for(const[path,pin]of Object.entries(pins)){const s=lstatSync(path);assert.ok(s.isFile()&&!s.isSymbolicLink());assert.equal(createHash('sha256').update(readFileSync(path)).digest('hex'),pin);}
+          const original=execFileSync('git',['show',H+':tests/verse-scope-review.test.mjs'],{timeout:15000});assert.equal(createHash('sha256').update(original).digest('hex'),'4821500d404b852c2573b89d96f52cba79ea6706a14de577751cdabe51aa4186');
+          console.log(JSON.stringify({schema:'verse-scope-diagnostic-source-v1',head:git(['rev-parse','HEAD']).trim(),baseline_H:H,platform:process.platform,node:process.version,changed_paths:allowed,source_hashes:pins,source_verified:true}));
+          JS
+      - name: Observe bounded actual Python version
+        timeout-minutes: 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import {findPython,runPythonFixture} from './tests/helpers/verse-scope-python.mjs';
+          const python=await findPython();assert.ok(python,'Setup Python must be available');
+          const r=await runPythonFixture(python,{stage:'native-version',boundMs:10000,code:'import sys;assert sys.version_info[:2]==(3,12);print(sys.version.split()[0])',input:null});assert.equal(r.status,0);console.log(JSON.stringify({fixture_python_version:r.stdout.trim(),platform:process.platform,node:process.version,closed:r.diagnostics.closed,cleanup_verified:r.diagnostics.cleanup_verified}));
+          JS
+      - name: Run three real-process controls and every original verse-scope scenario once
+        timeout-minutes: 6
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/verse-scope-process"
+          node --test --test-concurrency=1 --test-reporter=tap tests/verse-scope-python.test.mjs tests/verse-scope-review.test.mjs 2>&1 | tee "$RUNNER_TEMP/verse-scope-process.tap"
+      - name: Preserve bounded immediate stage witnesses and verify unchanged sources
+        if: always()
+        timeout-minutes: 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'JS'
+          import {existsSync,readdirSync,readFileSync,lstatSync} from 'node:fs';
+          import {resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const dir=resolve(process.env.RUNNER_TEMP,'verse-scope-process');
+          if(!existsSync(dir)){console.log(JSON.stringify({schema:'verse-scope-trace-summary-v1',trace_files:0,diagnostic:'No stage file; retain original test failure/log'}));}else{
+           const files=readdirSync(dir).filter(n=>/^process-[0-9]+-[a-f0-9-]+\.jsonl$/.test(n)).sort();if(files.length>8)throw Error('Finite trace file bound');
+           for(const name of files){const p=resolve(dir,name),s=lstatSync(p);if(!s.isFile()||s.isSymbolicLink()||s.size>262144)throw Error('Finite regular trace file required');const raw=readFileSync(p);const rows=raw.toString('utf8').trim().split('\n').filter(Boolean).map(JSON.parse);if(rows.length>128||rows.some(r=>r.schema!=='bounded-qa-python-stage-v1'))throw Error('Malformed trace');console.log(JSON.stringify({schema:'verse-scope-trace-file-v1',file:name,sha256:createHash('sha256').update(raw).digest('hex'),rows}));}
+          }
+          JS
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import {execFileSync} from 'node:child_process';
+          import {readFileSync,lstatSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const git=args=>execFileSync('git',args,{encoding:'utf8',timeout:15000});
+          const H='4e9287bd5ebc78aba4b185b017e63eac6547bfd7';
+          const pins={"tests/verse-scope-review.test.mjs":"695b2e51de464f1565fdd03233bbffe0b899ab7e65e068a084fdccae1e9ae2bb","tests/helpers/verse-scope-python.mjs":"c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f","tests/verse-scope-python.test.mjs":"98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"},allowed=[".github/workflows/verse-scope-process-diagnostic.yml","tests/verse-scope-python.test.mjs","tests/helpers/verse-scope-python.mjs","tests/verse-scope-review.test.mjs"];
+          assert.equal(process.platform,'darwin');assert.equal(Number(process.versions.node.split('.')[0]),Number(process.env.EXPECTED_NODE_MAJOR));
+          assert.deepEqual(git(['diff','--no-renames','--name-only',H,'HEAD']).trim().split('\n').sort(),allowed);
+          assert.equal(git(['status','--porcelain']).trim(),'');
+          for(const[path,pin]of Object.entries(pins)){const s=lstatSync(path);assert.ok(s.isFile()&&!s.isSymbolicLink());assert.equal(createHash('sha256').update(readFileSync(path)).digest('hex'),pin);}
+          const original=execFileSync('git',['show',H+':tests/verse-scope-review.test.mjs'],{timeout:15000});assert.equal(createHash('sha256').update(original).digest('hex'),'4821500d404b852c2573b89d96f52cba79ea6706a14de577751cdabe51aa4186');
+          console.log(JSON.stringify({schema:'verse-scope-diagnostic-source-v1',head:git(['rev-parse','HEAD']).trim(),baseline_H:H,platform:process.platform,node:process.version,changed_paths:allowed,source_hashes:pins,source_verified:true}));
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verse-scope-process-macos-node${{ matrix.node }}
+          path: |
+            ${{ runner.temp }}/verse-scope-process.tap
+            ${{ runner.temp }}/verse-scope-process/
+          if-no-files-found: warn
+          retention-days: 7
