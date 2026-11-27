@@ -20,7 +20,21 @@ from materialize_h_history import materialize_h_runtime_fixture
 from web_reader_approved_acceptance import assert_runtime
 
 
+# Closed TEST-ONLY groups. No arbitrary test-name/path or authority input.
+_FULL_METHODS = ('test_01_exact_flat375_and_source_only_domains_and_one_actual27_read', 'test_02_every_actual27_warm_mutation_and_missing_file_refuse', 'test_03_same_size_mtime_does_not_reuse_a_success', 'test_04_all_closed_proofs_missing_tamper_and_authentic_symlink_refuse', 'test_05_exact_roots_and_genuine_H_tokens_reject_before_any_path_IO', 'test_06_returns_are_detached_and_failure_restoration_is_fresh', 'test_07_full_old368_plus_literal7_and_no_history_fallback', 'test_08_actual34_runtime_guards_keep_nondata_extras_and_path_identity', 'test_09_copiers_refuse_nonempty_alias_and_changed_source')
+_PROOF_METHOD = 'test_04_all_closed_proofs_missing_tamper_and_authentic_symlink_refuse'
+_GROUPS = {
+    'behavior-a': ('test_01_exact_flat375_and_source_only_domains_and_one_actual27_read', 'test_02_every_actual27_warm_mutation_and_missing_file_refuse', 'test_03_same_size_mtime_does_not_reuse_a_success'),
+    'behavior-b': ('test_05_exact_roots_and_genuine_H_tokens_reject_before_any_path_IO', 'test_06_returns_are_detached_and_failure_restoration_is_fresh', 'test_07_full_old368_plus_literal7_and_no_history_fallback', 'test_08_actual34_runtime_guards_keep_nondata_extras_and_path_identity', 'test_09_copiers_refuse_nonempty_alias_and_changed_source'),
+    'proof-a': ('test_04_all_closed_proofs_missing_tamper_and_authentic_symlink_refuse',),
+    'proof-b': ('test_04_all_closed_proofs_missing_tamper_and_authentic_symlink_refuse',),
+    'proof-c': ('test_04_all_closed_proofs_missing_tamper_and_authentic_symlink_refuse',),
+}
+_PROOF_BATCHES = {'proof-a':0,'proof-b':1,'proof-c':2}
+
 class Current375Negatives(unittest.TestCase):
+    _proof_batch = None
+    _proof_protocol = None
     @classmethod
     def setUpClass(cls):
         # Genuine current source + actual current-data/runtime gates BEFORE
@@ -118,8 +132,31 @@ class Current375Negatives(unittest.TestCase):
                     self.refused(current.approved375_catalogue);self.refused(current.approved375_runtime)
                 self.positive()
 
+    def _closed_proof_names(self,names):
+        expected=sorted(set(self.proof_rows)|self.current_names)
+        if (type(names) is not list or names!=expected or len(names)!=241 or
+                len(self.proof_rows)!=226 or len(self.current_names)!=15):
+            raise ValueError('Exact independently sealed241 proof paths required')
+        batch=type(self)._proof_batch
+        if batch is not None and (type(batch) is not int or batch not in (0,1,2)):
+            raise ValueError('Unknown closed proof batch')
+        selected=names if batch is None else names[batch::3]
+        if len(selected)!=(241 if batch is None else (81,80,80)[batch]):
+            raise ValueError('Incomplete fixed proof batch')
+        protocol={'batch':batch,'all_paths':list(names),'selected_paths':list(selected),
+                  'completed_paths':[],'controls_per_path':['positive','missing','valid-json-tamper',
+                                                           'authentic-symlink','restored-positive']}
+        type(self)._proof_protocol=protocol
+        def completed_iterations():
+            for name in selected:
+                yield name
+                # Reached only after the unchanged original iteration returns.
+                # Any subtest failure still makes the genuine result fail below.
+                protocol['completed_paths'].append(name)
+        return completed_iterations()
+
     def test_04_all_closed_proofs_missing_tamper_and_authentic_symlink_refuse(self):
-        names=sorted(set(self.proof_rows)|self.current_names)
+        names=self._closed_proof_names(sorted(set(self.proof_rows)|self.current_names))
         for name in names:
             source_domain=(name in self.proof_rows and self.proof_rows[name]['domain']=='H_source_prerequisite') or name in {current.DIRECTORY+'/'+n for n in current.PINS}
             function=current.source_authority375 if source_domain else current.approved375_runtime
@@ -300,5 +337,43 @@ class Current375Negatives(unittest.TestCase):
         self.positive()
 
 
+def _run_closed_group():
+    import argparse
+    parser=argparse.ArgumentParser(description='Fixed CURRENT375 negative groups',allow_abbrev=False)
+    parser.add_argument('--group',required=True,choices=tuple(_GROUPS))
+    group=parser.parse_args().group
+    loader=unittest.TestLoader()
+    complete=loader.getTestCaseNames(Current375Negatives)
+    if loader.errors or tuple(complete)!=_FULL_METHODS:
+        raise ValueError('Complete genuine original9 inventory changed; no omission')
+    selected=_GROUPS[group]
+    if (len(set(selected))!=len(selected) or any(name not in complete for name in selected) or
+            (_PROOF_METHOD in selected)!=(group in _PROOF_BATCHES)):
+        raise ValueError('Unknown fixed method selection')
+    Current375Negatives._proof_batch=_PROOF_BATCHES.get(group)
+    Current375Negatives._proof_protocol=None
+    cases=[Current375Negatives(name) for name in selected]
+    if (any(type(case) is not Current375Negatives for case in cases) or
+            tuple(case._testMethodName for case in cases)!=selected):
+        raise ValueError('Foreign or substituted unittest selection')
+    # The stdlib runner emits actual method identities and terminal outcomes to
+    # stderr. Node independently checks those lines against the literal group.
+    result=unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(cases))
+    success=(result.wasSuccessful() and result.testsRun==len(selected) and
+             not result.failures and not result.errors and not result.skipped and
+             not result.expectedFailures and not result.unexpectedSuccesses)
+    receipt={'schema':'current375-closed-negative-group-v1','group':group,
+             'full_methods':list(complete),'selected_methods':list(selected),
+             'tests_run':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),
+             'skipped':len(result.skipped),'expected_failures':len(result.expectedFailures),
+             'unexpected_successes':len(result.unexpectedSuccesses),'successful':success,
+             'proof':Current375Negatives._proof_protocol}
+    sys.stdout.write(json.dumps(receipt,ensure_ascii=False,separators=(',',':'))+'\n')
+    raise SystemExit(0 if success else 1)
+
+
 if __name__=='__main__':
-    unittest.main()
+    if any(arg=='--group' or arg.startswith('--group=') for arg in sys.argv[1:]):
+        _run_closed_group()
+    else:
+        unittest.main()  # Original direct invocation and ordinary unittest CLI.
