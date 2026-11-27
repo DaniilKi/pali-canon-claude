@@ -717,10 +717,16 @@ def approved_six_runtime(root):
     return six_runtime_records(root, approved343_runtime(root))
 
 def approved_catalogue(root):
-    return approved368_catalogue(root)
+    if type(root) not in (str, type(Path("."))):
+        raise ValueError("Current375 requires an exact physical path root")
+    from web_reader_intake375 import approved375_catalogue
+    return approved375_catalogue(root)
 
 def approved_runtime(root):
-    return approved368_runtime(root)
+    if type(root) not in (str, type(Path("."))):
+        raise ValueError("Current375 requires an exact physical path root")
+    from web_reader_intake375 import approved375_runtime
+    return approved375_runtime(root)
 
 
 def historical_c1_approved_catalogue(root):

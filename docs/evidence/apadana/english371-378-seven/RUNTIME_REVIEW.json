@@ -1,0 +1,32 @@
+{
+  "schema": "reviewed-intake375-runtime-approval-v1",
+  "status": "GO_RUNTIME_INVENTORY_ONLY",
+  "inventory_sha256": "29f78f77f1200b0988620f0f7766ceb7d090d9d5cf0fa4174c05f97b345cc840",
+  "application_commit": "89312c3b315df974a804c3a1c9ae318eca22c90d",
+  "curation_sha256": "b8c196e2332aa7ee169c5d20f3e6906ab458cdf7d569dd235211ed76443f38fb",
+  "baseline_commit": "4e9287bd5ebc78aba4b185b017e63eac6547bfd7",
+  "expected_manifest_sha256": "01b21e4f6c7823c2a2be2ea916a5b970faf889401ebdb4128599329fdeeb3278",
+  "runtime_paths": 34,
+  "actual_data_paths": 27,
+  "changed_paths": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_paths": 29,
+  "independent_manifest_composition": "Pinned H368 full source metadata plus independently reviewed seven links; exact builder-format bytes independently reconstructed. No runtime output used as expected content.",
+  "physical_and_Git_blob_inventory_exact": true,
+  "canonical_data26_and_H_held_preserved": true,
+  "behavioral_installed_browser_native_CI_or_release_approval": false,
+  "operations": "Standard-library JSON/hash/physical reads and fixed cached Git blob reads only; no application or proposal imports/execution/tests/build/Git mutations.",
+  "rebind": {
+    "reason": "H_CURRENT proof rows sorted; source curation descriptor rebound. Runtime inventory changes only curationsha.",
+    "previous_runtime_review_sha256": "91c39268741014994d450fa537a2b718a5cabfe9b0870fb9ff74c0cadb15e269",
+    "order_only_review_sha256": "1696ecd05211fa19ea29d500f511275299f7828e7f16364b62454392b0de6a1b",
+    "final_source_packet_bindings_sha256": "8078c5fad9ca9063b83c2be754b788bdf5baeba7e6e5981a78da1a43d11e3395",
+    "runtime34_map_and_app_commit_and_EXPECTED_MANIFEST_unchanged": true,
+    "prior_full_inventory_checks_sha256": "0fa3ae3c1dd2f5998f1a9bd6d970e413feb60c7e6499f6a0f1d8e04c57497b34"
+  }
+}

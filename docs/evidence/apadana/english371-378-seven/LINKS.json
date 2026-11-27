@@ -1,0 +1,606 @@
+{
+  "tha-ap373": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-371.md",
+    "id": "tha-ap373",
+    "publisher_chapter": "chapter-3",
+    "poem": 371,
+    "verses": [
+      3220,
+      3224
+    ],
+    "root_verses": [
+      1,
+      5
+    ],
+    "note_count": 9,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-371/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-371/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-371.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Bodhivandaka",
+    "reference": "Therā Apadāna publisher poem 371; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "f3bebeb81616e44cd1c87c054b593618c07401f9b1866d4c9f0bbe176e6103ac",
+    "body_sha256": "f6ba8ccdf5606875fdc659f358b4e5f52e653996104778e051e8bd2345029205",
+    "notes_sha256": "dc3d0527c48279cf213a942a30a3c51d66780e88242277664b17403e0eb6c875",
+    "paratext_sha256": "b241265ec5dc5527427b409c1953f882d7f36ab246286822830d80209d4d2773",
+    "root_sha256": "1a4868b3f22e8e3f333ce8c5dfb12a68b312fb6ac46e2ab81686a02e1e95cc30",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3220",
+        "suffix": "(1) [3220]",
+        "lines": 4
+      },
+      {
+        "local_label": "2-3",
+        "publisher_label": "3221-3222",
+        "suffix": "(2-3) [3221-3222]",
+        "lines": 8
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3223",
+        "suffix": "(4) [3223]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3224",
+        "suffix": "(5) [3224]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 368; the BJTS brace heading and publisher file/order are371. Canonical tha-ap373 is a separately reviewed literal identity, not a general numbering rule.",
+      "The separate chapter 38 heading is unnoted publisher paratext. Original notes 1–2 belong to the poem heading and all original notes 1–9 stay poem-owned; no note-owning publisher_preface or chapter_summary is invented.",
+      "Combined local 2–3/global 3221–3222 remains one eight-line paragraph with its original single terminal range suffix. Note 7’s alternative grammatical interpretation remains attributed translator commentary, not a correction of the poem or VRI."
+    ],
+    "publisher_verse_labels": [
+      "3220",
+      "3221-3222",
+      "3223",
+      "3224"
+    ],
+    "publisher_heading_sha256": "f69e7c3f09f51426a36ab726919e24df983831bf1b5f2103fd210dfa2fdc8c20",
+    "english": "Bodhivandaka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap374": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-372.md",
+    "id": "tha-ap374",
+    "publisher_chapter": "chapter-3",
+    "poem": 372,
+    "verses": [
+      3225,
+      3231
+    ],
+    "root_verses": [
+      6,
+      12
+    ],
+    "note_count": 6,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-372/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-372/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-372.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Pāṭalipupphiya",
+    "reference": "Therā Apadāna publisher poem 372; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "d427dae50e37a941b5274729e956d386622563ce16bed5fb244450e9fee18638",
+    "body_sha256": "0586da5aaff39a182a2e7bdceb2cebd981535b28cd187b903294df9b374a6b4b",
+    "notes_sha256": "f83841a4eb26ca48ca3ddc2329c3d72d9a8b0960b70edf0303997de7b55c3ca2",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "814a91a847a6b961d27802320695213fdc9f46071a165a4f64b4d2397d2c46bf",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3225",
+        "suffix": "(1) [3225]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3226",
+        "suffix": "(2) [3226]",
+        "lines": 4
+      },
+      {
+        "local_label": "3-4",
+        "publisher_label": "3227-3228",
+        "suffix": "(3-4) [3227-3228]",
+        "lines": 8
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3229",
+        "suffix": "(5) [3229]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "3230",
+        "suffix": "(6) [3230]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "3231",
+        "suffix": "(7) [3231]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 369; the BJTS brace heading and publisher file/order are372. Canonical tha-ap374 is a separately reviewed literal identity, not a general numbering rule.",
+      "Vipassī, Bandhumatī, three flowers and 91 aeons identify this literal source/canonical pair, distinct from earlier tha-ap80 with Tissa, 92 aeons and its royal account; title similarity is insufficient.",
+      "Combined local 3–4/global 3227–3228 remains one eight-line paragraph with its original single terminal range suffix. Canonical tha-ap374 retains its complete existing record and apadana-thera-next10-v1 locator revision."
+    ],
+    "publisher_verse_labels": [
+      "3225",
+      "3226",
+      "3227-3228",
+      "3229",
+      "3230",
+      "3231"
+    ],
+    "publisher_heading_sha256": "4dd76ca322033da3abd1db06d1aceaf701bc239e64b5c9b55f1a6c06f068d7f0",
+    "index_revision": "apadana-thera-next10-v1",
+    "english": "Pāṭalipupphiya",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap376": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-374.md",
+    "id": "tha-ap376",
+    "publisher_chapter": "chapter-3",
+    "poem": 374,
+    "verses": [
+      3241,
+      3246
+    ],
+    "root_verses": [
+      22,
+      27
+    ],
+    "note_count": 7,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-374/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-374/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-374.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Paṭṭipupphiya",
+    "reference": "Therā Apadāna publisher poem 374; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "c4d55fb9316a07ab430aec7e59c67f52cb18a2ce0f63c7220c0b958f20b52fee",
+    "body_sha256": "dfe6d80a8a54bb3f0c25c03c569f9ec25d0214916c7dcb3eb64cd1a9900db834",
+    "notes_sha256": "22301305b4a44f3a8d9a66948c5b7ad2ccb715bd3611b49fc13ca6bfba189f15",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "cc03d072cdbe85c56192c94522f96c33f308128ee8e26952c7411e5d31d95363",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3241",
+        "suffix": "(1) [3241]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3242",
+        "suffix": "(2) [3242]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3243",
+        "suffix": "(3) [3243]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3244",
+        "suffix": "(4) [3244]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3245",
+        "suffix": "(5) [3245]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "3246",
+        "suffix": "(6) [3246]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 371; the BJTS brace heading and publisher file/order are374. Canonical tha-ap376 is a separately reviewed literal identity, not a general numbering rule.",
+      "Original note 2 preserves Paṭṭi in BJTS versus Patti in PTS; the publisher title and note are not silently regularized.",
+      "Publisher attainment stanzas 4/5 and VRI 26/25 occur in a different order. Retain each edition’s own wording, order and abbreviation without rearrangement or a line-equivalence claim."
+    ],
+    "publisher_verse_labels": [
+      "3241",
+      "3242",
+      "3243",
+      "3244",
+      "3245",
+      "3246"
+    ],
+    "publisher_heading_sha256": "1f14a5c5ac812accface4398bca707c38d6e77339685de6c189f084d7f94157b",
+    "english": "Paṭṭipupphiya",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap377": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-375.md",
+    "id": "tha-ap377",
+    "publisher_chapter": "chapter-3",
+    "poem": 375,
+    "verses": [
+      3247,
+      3251
+    ],
+    "root_verses": [
+      28,
+      32
+    ],
+    "note_count": 4,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-375/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-375/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-375.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sattapaṇṇiya",
+    "reference": "Therā Apadāna publisher poem 375; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "5fcab2c0af6a2eb7c5e8313a2aed97ddc9dee546d2b08645f64ff3fd99ed4d08",
+    "body_sha256": "c52db67c98618395c8ea7dbb1d26a7fc216737a76fdda00fabba65764e93f7a9",
+    "notes_sha256": "4e0094cd6b61fa8ff7d0a545610956eab1686af423dcc9ded0a41531ab356b4f",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "068f3d3f55ea104f9a4708426c2ab0d2aec048f26a7f15bb4003bf2f66baa0c5",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3247",
+        "suffix": "(1) [3247]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3248",
+        "suffix": "(2) [3248]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3249",
+        "suffix": "(3) [3249]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3250",
+        "suffix": "(4) [3250]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3251",
+        "suffix": "(5) [3251]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 372; the BJTS brace heading and publisher file/order are375. Canonical tha-ap377 is a separately reviewed literal identity, not a general numbering rule.",
+      "Preserve original note 2’s Sumana/ruk-attana botanical and etymological wording as attributed translator commentary; this intake does not certify specialist botanical accuracy.",
+      "Publisher attainment stanzas 3/4 and VRI 31/30 occur in a different order. Keep VRI peyyala unexpanded and retain publisher wording and order."
+    ],
+    "publisher_verse_labels": [
+      "3247",
+      "3248",
+      "3249",
+      "3250",
+      "3251"
+    ],
+    "publisher_heading_sha256": "1a38071abdf7de648692ece6374bb2317ffa652f7bb5d3b492ffeace5f531d52",
+    "english": "Sattapaṇṇiya",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap378": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-376.md",
+    "id": "tha-ap378",
+    "publisher_chapter": "chapter-3",
+    "poem": 376,
+    "verses": [
+      3252,
+      3256
+    ],
+    "root_verses": [
+      33,
+      37
+    ],
+    "note_count": 7,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-376/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-376/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-376.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Gandhamuṭṭhiya",
+    "reference": "Therā Apadāna publisher poem 376; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "8e4fb8a1753528c6f4627c38590262afc349eec992eb987b73b1feba5b992211",
+    "body_sha256": "e412ef9c322f0c2b24576e84f911b956186503eebc670c38da59dab567665dab",
+    "notes_sha256": "7c7331b52ceb5d210b5703badbbb800fe59a834f226fc4de45420fe328dc01ff",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "7087fa4cf8308542729c3f419fd74898184e6f64d8c0ffd379e363c97f9debda",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3252",
+        "suffix": "(1) [3252]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3253",
+        "suffix": "(2) [3253]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3254",
+        "suffix": "(3) [3254]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3255",
+        "suffix": "(4) [3255]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3256",
+        "suffix": "(5) [3256]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 373; the BJTS brace heading and publisher file/order are376. Canonical tha-ap378 is a separately reviewed literal identity, not a general numbering rule.",
+      "Exactly three lowercase c/ch Pandoc display pairs belong to original poem note 3 alone. Retain note 3’s BJTS/PTS opening-reading distinction and all other note ownership.",
+      "Retain the separate VRI 10852 deficiency remark in its canonical source location and original translator note 7’s expanded/reordered refrain discussion. Publisher attainment 3/4 differs in order from VRI 36/35; no note or missing wording is transferred between editions."
+    ],
+    "publisher_verse_labels": [
+      "3252",
+      "3253",
+      "3254",
+      "3255",
+      "3256"
+    ],
+    "publisher_heading_sha256": "f62c01f3b8f8ed2bc6b67815cb3167ca5984157a90eec7cc0090d3676bca4201",
+    "english": "Gandhamuṭṭhiya",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap379": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-377.md",
+    "id": "tha-ap379",
+    "publisher_chapter": "chapter-3",
+    "poem": 377,
+    "verses": [
+      3257,
+      3261
+    ],
+    "root_verses": [
+      38,
+      42
+    ],
+    "note_count": 5,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-377/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-377/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-377.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Citapūjaka",
+    "reference": "Therā Apadāna publisher poem 377; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "be18eca83cc2102178e6e0d086ed8723c9ac7795a26b1bae20a2fa7a7c774811",
+    "body_sha256": "960ab5ae082f3a6fa414dc922c31a9ea4d460ba5d912e18fb872d5585120758b",
+    "notes_sha256": "1ff9b5d5566cfd2f39adb6ae6287586d6b2aabb67cd9b110436dc21338470ab3",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "71503c7748d1d80fa6d7921656899c035ada749ebd9ec5538ce0762868db342b",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3257",
+        "suffix": "(1) [3257]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3258",
+        "suffix": "(2) [3258]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3259",
+        "suffix": "(3) [3259]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3260",
+        "suffix": "(4) [3260]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3261",
+        "suffix": "(5) [3261]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 374; the BJTS brace heading and publisher file/order are377. Canonical tha-ap379 is a separately reviewed literal identity, not a general numbering rule.",
+      "Literal canonical tha-ap379, never tha-ap279: Padumuttara (Ultimate Lotus), sal flowers and 100000 aeons identify this poem, distinct from the earlier Candabhāgā/seven māluva/94 aeons account.",
+      "Preserve publisher Citapūjaka versusVRI Citakapūjaka and exactly three uppercase C/Ch Pandoc display pairs, one each in the poem title, speaker and completion paragraphs.",
+      "Publisher attainment 3/4 differs in order from VRI 41/40; retain both editions without invented refrain wording or rearrangement."
+    ],
+    "publisher_verse_labels": [
+      "3257",
+      "3258",
+      "3259",
+      "3260",
+      "3261"
+    ],
+    "publisher_heading_sha256": "ae784dcbda196a7fdf2e11cd6ed91765435ba78049bb3cb28683bff68b85b524",
+    "english": "Citapūjaka",
+    "match": "individually-reviewed-whole-poem"
+  },
+  "tha-ap380": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-378.md",
+    "id": "tha-ap380",
+    "publisher_chapter": "chapter-3",
+    "poem": 378,
+    "verses": [
+      3262,
+      3266
+    ],
+    "root_verses": [
+      43,
+      47
+    ],
+    "note_count": 4,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-378/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-378/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-378.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sumanatālavaṇṭiya",
+    "reference": "Therā Apadāna publisher poem 378; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "898d21bf93b7a7ed5c1bbc6533c263f6766095dc35907577cde20283ebe0a186",
+    "body_sha256": "bffcee71034a2c75cc292ec62dcdbe1843de2bcc99ee7a45903ae9514ba45a2a",
+    "notes_sha256": "fbbd1d40c00259e09f79ec350ec1264c0b396b6487864c9c364aea65fb757a17",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "71f6862a38a7bb6feecad74a1b0ad2261ddf71310fa8b27fe94f1e13545bdd45",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3262",
+        "suffix": "(1) [3262]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3263",
+        "suffix": "(2) [3263]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3264",
+        "suffix": "(3) [3264]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3265",
+        "suffix": "(4) [3265]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3266",
+        "suffix": "(5) [3266]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 375; the BJTS brace heading and publisher file/order are378. Canonical tha-ap380 is a separately reviewed literal identity, not a general numbering rule.",
+      "Siddhattha, a jasmine-covered palmyra fan and 94 aeons identify this literal complete-poem correspondence, not a shared title or numeric offset.",
+      "Retain original note 4’s BJTS refrain variant and publisher attainment 3/4 versus VRI 46/45 order difference without correction or rearrangement."
+    ],
+    "publisher_verse_labels": [
+      "3262",
+      "3263",
+      "3264",
+      "3265",
+      "3266"
+    ],
+    "publisher_heading_sha256": "7c6a7af6e8ffadee4f98bf26b08fe1085e9594552532eccbe66a17037074d690",
+    "english": "Sumanatālavaṇṭiya",
+    "match": "individually-reviewed-whole-poem"
+  }
+}

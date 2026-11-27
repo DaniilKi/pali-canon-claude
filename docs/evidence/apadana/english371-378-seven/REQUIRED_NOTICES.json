@@ -1,0 +1,107 @@
+{
+  "schema": "seven371-378-specific-rights-and-edition-notices-v1",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "translator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "exact_rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "required_licence_and_provenance_notice": "Preserve source creator, publisher, copyright, specific CC BY-NC-SA 4.0 grant and licence URL, warranty/modification notices, public source URL and exact pinned revision. Generic site.json CC-BY does not override the translation-specific NonCommercial/ShareAlike grant. No warranty or endorsement is implied.",
+  "required_change_notice": "Finite presentation retains the original diacritic-on spelling and removes only reviewed paired alternatives and markup wrappers. Original words, punctuation, interpolations, order, line breaks, suffixes and same-number note ownership remain. Publisher371 chapter heading stays separate unnoted paratext. No missing words or alternate-edition refrains are generated.",
+  "required_general_edition_notice": "Complete publisher-edition poems, not line-complete VRI or line/word equivalence, complete-chapter coverage or approval of the wider catalogue. Keep VRI peyyala, editorial notes, publisher numbering and independent edition order unchanged.",
+  "per_poem_notices": {
+    "tha-ap373": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 368; the BJTS brace heading and publisher file/order are371. Canonical tha-ap373 is a separately reviewed literal identity, not a general numbering rule.",
+      "The separate chapter 38 heading is unnoted publisher paratext. Original notes 1–2 belong to the poem heading and all original notes 1–9 stay poem-owned; no note-owning publisher_preface or chapter_summary is invented.",
+      "Combined local 2–3/global 3221–3222 remains one eight-line paragraph with its original single terminal range suffix. Note 7’s alternative grammatical interpretation remains attributed translator commentary, not a correction of the poem or VRI."
+    ],
+    "tha-ap374": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 369; the BJTS brace heading and publisher file/order are372. Canonical tha-ap374 is a separately reviewed literal identity, not a general numbering rule.",
+      "Vipassī, Bandhumatī, three flowers and 91 aeons identify this literal source/canonical pair, distinct from earlier tha-ap80 with Tissa, 92 aeons and its royal account; title similarity is insufficient.",
+      "Combined local 3–4/global 3227–3228 remains one eight-line paragraph with its original single terminal range suffix. Canonical tha-ap374 retains its complete existing record and apadana-thera-next10-v1 locator revision."
+    ],
+    "tha-ap376": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 371; the BJTS brace heading and publisher file/order are374. Canonical tha-ap376 is a separately reviewed literal identity, not a general numbering rule.",
+      "Original note 2 preserves Paṭṭi in BJTS versus Patti in PTS; the publisher title and note are not silently regularized.",
+      "Publisher attainment stanzas 4/5 and VRI 26/25 occur in a different order. Retain each edition’s own wording, order and abbreviation without rearrangement or a line-equivalence claim."
+    ],
+    "tha-ap377": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 372; the BJTS brace heading and publisher file/order are375. Canonical tha-ap377 is a separately reviewed literal identity, not a general numbering rule.",
+      "Preserve original note 2’s Sumana/ruk-attana botanical and etymological wording as attributed translator commentary; this intake does not certify specialist botanical accuracy.",
+      "Publisher attainment stanzas 3/4 and VRI 31/30 occur in a different order. Keep VRI peyyala unexpanded and retain publisher wording and order."
+    ],
+    "tha-ap378": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 373; the BJTS brace heading and publisher file/order are376. Canonical tha-ap378 is a separately reviewed literal identity, not a general numbering rule.",
+      "Exactly three lowercase c/ch Pandoc display pairs belong to original poem note 3 alone. Retain note 3’s BJTS/PTS opening-reading distinction and all other note ownership.",
+      "Retain the separate VRI 10852 deficiency remark in its canonical source location and original translator note 7’s expanded/reordered refrain discussion. Publisher attainment 3/4 differs in order from VRI 36/35; no note or missing wording is transferred between editions."
+    ],
+    "tha-ap379": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 374; the BJTS brace heading and publisher file/order are377. Canonical tha-ap379 is a separately reviewed literal identity, not a general numbering rule.",
+      "Literal canonical tha-ap379, never tha-ap279: Padumuttara (Ultimate Lotus), sal flowers and 100000 aeons identify this poem, distinct from the earlier Candabhāgā/seven māluva/94 aeons account.",
+      "Preserve publisher Citapūjaka versusVRI Citakapūjaka and exactly three uppercase C/Ch Pandoc display pairs, one each in the poem title, speaker and completion paragraphs.",
+      "Publisher attainment 3/4 differs in order from VRI 41/40; retain both editions without invented refrain wording or rearrangement."
+    ],
+    "tha-ap380": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Preserve independent VRI wording and every explicit edition difference. Whole-poem correspondence does not imply segment, line or word equivalence; do not invent missing words or transfer another poem’s refrain.",
+      "The printed PTS main heading is 375; the BJTS brace heading and publisher file/order are378. Canonical tha-ap380 is a separately reviewed literal identity, not a general numbering rule.",
+      "Siddhattha, a jasmine-covered palmyra fan and 94 aeons identify this literal complete-poem correspondence, not a shared title or numeric offset.",
+      "Retain original note 4’s BJTS refrain variant and publisher attainment 3/4 versus VRI 46/45 order difference without correction or rearrangement."
+    ]
+  },
+  "rights_policy": "Metadata and hashes only in repository/runtime catalogue; English bodies, notes and lossless/presentation fixtures stay external or are fetched live from the exact official pinned source. No commercial/media/art/endorsement or wider-catalogue rights inferred from availability.",
+  "retained_holds_publishers": [
+    358,
+    361,
+    365,
+    366,
+    367,
+    368,
+    373,
+    379,
+    380
+  ],
+  "source_rights_or_runtime_activation_approval_granted_by_this_document": false
+}

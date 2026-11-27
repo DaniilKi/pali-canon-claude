@@ -695,7 +695,10 @@ def read_301_310(root):
 
 
 def reviewed_intake(root):
-    return _reviewed_current368(root)
+    if type(root) not in (str, type(Path("."))):
+        raise ValueError("Current375 requires an exact physical path root")
+    from web_reader_intake375 import reviewed_intake375
+    return reviewed_intake375(root)
 
 
 def curated_303_additions(root,anchor_filename):
@@ -1372,7 +1375,7 @@ def _reviewed_current368(root):
     return _compose_reviewed_current368(previous, _authority(root))
 
 
-def curated_additions(root, anchor_filename):
+def historical368_curated_additions(root, anchor_filename):
     """Advance current suffixes; retain all optimized359 source checks intact."""
     from copy import deepcopy
     from web_reader_intake368 import _authority
@@ -1395,3 +1398,10 @@ def curated_additions(root, anchor_filename):
     assert current['expected_profile_ids'] == anchor_ids + ids
     assert list(profiles) == list(links) == ids
     return {'curation':current, 'anchor':historical['anchor'], 'ids':ids, 'profiles':profiles, 'links':links}
+
+
+def curated_additions(root, anchor_filename):
+    if type(root) not in (str, type(Path("."))):
+        raise ValueError("Current375 requires an exact physical path root")
+    from web_reader_intake375 import curated_additions375
+    return curated_additions375(root, anchor_filename)

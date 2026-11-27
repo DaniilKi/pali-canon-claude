@@ -2,7 +2,7 @@ import {test,afterEach} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {spawnSync} from 'node:child_process';
+import {findPython,runPythonFixture} from './helpers/verse-scope-python.mjs';
 import * as canon from '../src/canon.mjs';
 import * as english from '../src/english.mjs';
 import {verifyQuote} from '../src/verify.mjs';
@@ -13,8 +13,8 @@ const stillHeld=held.filter(r=>JSON.parse(readFileSync('scripts/canon/reviewed_e
 const sha=v=>createHash('sha256').update(v).digest('hex');
 const originalFetch=globalThis.fetch;
 afterEach(()=>{globalThis.fetch=originalFetch;});
-const python=['python3','python'].find(cmd=>spawnSync(cmd,['--version']).status===0);
-const run=(code,input)=>spawnSync(python,['-c',code],{encoding:'utf8',input:JSON.stringify(input),env:{...process.env,PYTHONUTF8:'1'}});
+const python=await findPython();
+const run=(stage,code,input)=>runPythonFixture(python,{stage,code,input});
 
 test('fifteen primary reviews pin complete roots and source-specific notices without treating headers as content extent',()=>{
  assert.equal(audit.rows.length,15);assert.equal(held.length,10);assert.equal(retained.length,5);
@@ -51,9 +51,29 @@ test('screen prioritizes narrow/discontinuous leads, normalizes abbreviated bibl
  const s=scopeScreen(synthetic);assert.equal(s.rows[0].triage,'inspect discontinuous verse-reference extent');assert.deepEqual(s.rows[0].publisher_reference_extents.map(r=>[r.first,r.last]),[[537,541],[544,545]]);assert.equal(s.rows[1].triage,'inspect narrower verse-reference extent');assert.equal(s.reviewed_retained_snapshots,0);
 });
 
-test('partial holds are narrowly validated, global and immutable and survive ordinary linker rebuilds',{skip:!python},()=>{
+test('partial holds are narrowly validated, global and immutable and survive ordinary linker rebuilds',{skip:!python,timeout:125000},async()=>{
  const units=[...new Set(stillHeld.map(r=>r.owner))].map(id=>canon.resolve(id).unit);
- const r=run(`import json,sys,copy,tempfile,pathlib,gzip,subprocess
+ const r=await run('verse-exclusions',`import json,sys,copy,tempfile,pathlib,gzip,subprocess,os,time
+
+def _qa_stage(stage,event,pid=None,returncode=None,error=None):
+ print('QA_NESTED_STAGE:'+json.dumps(dict(stage=stage,event=event,pid=pid,returncode=returncode,error=error)),file=sys.stderr,flush=True)
+def _qa_run(stage,args):
+ # Same-group nested direct child; outer Node owns the containing Python group.
+ start=time.monotonic();_qa_stage(stage,'start')
+ proc=subprocess.Popen(args,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding='utf-8')
+ try:
+  out,err=proc.communicate(timeout=max(0.001,49-(time.monotonic()-start)))
+ except subprocess.TimeoutExpired:
+  _qa_stage(stage,'timeout',proc.pid,proc.returncode,'TimeoutExpired')
+  try:
+   proc.kill();out,err=proc.communicate(timeout=max(0.001,50-(time.monotonic()-start)))
+  except BaseException as exc:
+   _qa_stage(stage,'cleanup-unverified',proc.pid,proc.returncode,type(exc).__name__);os._exit(1)
+  raise
+ if time.monotonic()-start>50:
+  _qa_stage(stage,'timeout',proc.pid,proc.returncode,'NestedDeadlineExceeded');raise TimeoutError(stage)
+ _qa_stage(stage,'exit',proc.pid,proc.returncode)
+ return subprocess.CompletedProcess(args,proc.returncode,out,err)
 sys.path.insert(0,'scripts/canon')
 from reviewed_exclusions import apply_reviewed_exclusions,MANIFEST
 x=json.load(sys.stdin);held=x['held'];a={str(i):[{'source':'ati','url':row['url']+'?alternate=1','partial_scope':{}}] for i,row in enumerate(held)};a['unrelated']=[{'source':'ati','url':'https://accesstoinsight.org/tipitaka/kn/thig/thig.03.04.rhyc.html'}];before=copy.deepcopy(a);out,removed=apply_reviewed_exclusions(a);assert a==before and len(out)==1 and 'unrelated' in out;assert apply_reviewed_exclusions(out)==(out,[])
@@ -75,17 +95,17 @@ with tempfile.TemporaryDirectory() as tmp:
  with gzip.open(p/'canon.gz','wt',encoding='utf-8') as f:json.dump({'units':x['units']},f)
  pages=[dict(path=row['path'].lstrip('/')+'.html',html_title=row['link_title'],author='Fixture',license='BPS',pts=row['publisher_reference']) for row in held]
  (p/'ati.json').write_text(json.dumps(pages),encoding='utf-8');(p/'dt.json').write_text('[]')
- proc=subprocess.run([sys.executable,'scripts/canon/build_translations.py',str(p/'canon.gz'),str(p/'dt.json'),str(p/'ati.json'),str(p/'out.json')],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr;assert json.loads((p/'out.json').read_text(encoding='utf-8'))=={}
+ proc=_qa_run('linker-guard',[sys.executable,'scripts/canon/build_translations.py',str(p/'canon.gz'),str(p/'dt.json'),str(p/'ati.json'),str(p/'out.json')]);assert proc.returncode==0,proc.stderr;assert json.loads((p/'out.json').read_text(encoding='utf-8'))=={}
  # Prove these fixtures exercise the post-linker guard, not an earlier non-match.
  code="import sys;sys.path.insert(0,'scripts/canon');import reviewed_exclusions;reviewed_exclusions.apply_reviewed_exclusions=lambda out:(out,[]);from build_translations import main;main()"
- proc=subprocess.run([sys.executable,'-c',code,str(p/'canon.gz'),str(p/'dt.json'),str(p/'ati.json'),str(p/'out.json')],capture_output=True,text=True,encoding='utf-8');assert proc.returncode==0,proc.stderr
+ proc=_qa_run('linker-control',[sys.executable,'-c',code,str(p/'canon.gz'),str(p/'dt.json'),str(p/'ati.json'),str(p/'out.json')]);assert proc.returncode==0,proc.stderr
  unheld=json.loads((p/'out.json').read_text(encoding='utf-8'));assert sum(len(v) for v in unheld.values())==len(held)==6,unheld
 print('passed')`,{units,held:stillHeld.map(r=>({...r,link_title:r.owner.startsWith('snp')?'Fixture Sutta: Fixture':'Fixture'}))});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/passed/);
 });
 
-test('reviewed adjacent-pair repair is idempotent and refuses drift before any pending span edits',{skip:!python},()=>{
+test('reviewed adjacent-pair repair is idempotent and refuses drift before any pending span edits',{skip:!python,timeout:125000},async()=>{
  const d=canon.load(),book=d.canon.books[34];const input={books:[{file:book.file,blocks:book.blocks.map(b=>({rend:b[0],n:b[1],text:b[2]}))}],units:d.canon.units.filter(u=>u.book===34).map(u=>({...u,book:0}))};
- const r=run(`import json,sys,copy
+ const r=await run('verse-story-spans',`import json,sys,copy
 sys.path.insert(0,'scripts/canon')
 from story_spans import story_spans
 x=json.load(sys.stdin);assert story_spans(x['books'],x['units'])==[]

@@ -1,0 +1,390 @@
+{
+  "schema": "independent-seven371-378-source-rights-profile-parser-review-v1",
+  "status": "GO_EXACT_SEVEN_SOURCE_METADATA_AND_FINITE_PARSER_SCOPE_ONLY",
+  "baseline_commit": "4e9287bd5ebc78aba4b185b017e63eac6547bfd7",
+  "proposal_manifest": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/MANIFEST.json",
+    "bytes": 3947,
+    "sha256": "ee10cec6be92da744e0a15e08a1188fdc93f916ed5c8119a839e79d1a894e766"
+  },
+  "independent_before_proposal_raw_preseal": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/source-independent-review/INDEPENDENT_RAW_NORMALIZATION.json",
+    "bytes": 35972,
+    "sha256": "836fbd3679e9b04ab4ca924069bc69653d77b18a5515e679a0cc0268105a7c13"
+  },
+  "verification_producer": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/source-independent-review/independent_static_review.py",
+    "bytes": 20799,
+    "sha256": "f399175e6f6f2956602a12d80dcabc5e03daf10129c88047d1a26a6a61bb19ba"
+  },
+  "verification_result": {
+    "file": "/tmp/pali-seven371-378-evidence-nov27/source-independent-review/STATIC_VERIFICATION_RESULT.json",
+    "bytes": 4599,
+    "sha256": "f948eba3cb0f7d573e6681c3a32f89395e318991a895091d8b07b96eeea7f9d9"
+  },
+  "source_packet_manifest": {
+    "file": "/tmp/pali-english351-360-evidence-nov27/next-seven371-378-source-proposal/MANIFEST.json",
+    "bytes": 7874,
+    "sha256": "dea268576bb455c90890cfe36a7bec6f33246dc9cab0136f5595a8ed450daab2"
+  },
+  "prior_independent_source_review": {
+    "file": "/tmp/pali-english351-360-evidence-nov27/next-seven371-378-independent-review/INDEPENDENT_REVIEW.json",
+    "bytes": 3627,
+    "sha256": "f4060c1845964f0475e11676152daf806b2ae6c0bfc8e4d16b33f79919b9a997"
+  },
+  "approved_code": {
+    "src/apadana-thera-profiles.mjs": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/files/src/apadana-thera-profiles.mjs",
+      "bytes": 834270,
+      "sha256": "d55d793d953b62a732923f3c048007ed0eff10736e21db7f90279770332a88a4"
+    },
+    "src/apadana-thera.mjs": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/files/src/apadana-thera.mjs",
+      "bytes": 37223,
+      "sha256": "38dfee6d597acdfd78b0b82ff77a78ccc5d9ceab2fb3c74cb27481bcac8e453b"
+    },
+    "src/apadana-thera371-378-profiles.mjs": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/files/src/apadana-thera371-378-profiles.mjs",
+      "bytes": 23753,
+      "sha256": "05b2718a1939f8f28e7d3a208368d4840238250a9e3ec50263f5f9ccc17ab741"
+    }
+  },
+  "approved_expected_metadata": {
+    "PROFILES.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/PROFILES.json",
+      "bytes": 23627,
+      "sha256": "8ee04009c27bd089d006b1ca66abcc8087e14cca5d895e00b51a25b9b479884c"
+    },
+    "LINKS.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/LINKS.json",
+      "bytes": 24216,
+      "sha256": "6d4f5477b2b7c4ee1cf18a5599d6bd2870ed0fb75d61edd4d649391ad73d172c"
+    },
+    "API_EXPECTED_GOLDENS.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/API_EXPECTED_GOLDENS.json",
+      "bytes": 105531,
+      "sha256": "6fec9c45cf98b8278ef4b2735665d99e6f421ee79f08d5adcb45491d983a9abd"
+    },
+    "MIXED_OWNER_ROWS.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/MIXED_OWNER_ROWS.json",
+      "bytes": 2561,
+      "sha256": "e7f6feefae73793e9f1d33e028802a38b12f508bbe3ae85993141048a6f03a59"
+    },
+    "SOURCE_BINDINGS.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/SOURCE_BINDINGS.json",
+      "bytes": 8041,
+      "sha256": "dd746cbcf0f51e5992adc48c726ed8d97478f0e49c3b9803b507ec484a6335e8"
+    },
+    "BASELINE_368_PRESERVATION.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/source-proposal/v1/BASELINE_368_PRESERVATION.json",
+      "bytes": 95114,
+      "sha256": "b21e9d0855d999caaa5144014a62b8c9c5cc6ac9e6f217def88f5df1dbc937bb"
+    }
+  },
+  "literal_publishers": [
+    371,
+    372,
+    374,
+    375,
+    376,
+    377,
+    378
+  ],
+  "literal_canonical_ids": [
+    "tha-ap373",
+    "tha-ap374",
+    "tha-ap376",
+    "tha-ap377",
+    "tha-ap378",
+    "tha-ap379",
+    "tha-ap380"
+  ],
+  "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "original_publisher_tree_binding": {
+    "file": "/tmp/pali-english351-360-evidence-nov27/next371-380-independent-source-scout/PINNED_TREE_BINDINGS.json",
+    "bytes": 5424,
+    "sha256": "75ca115c8b9adae6cb6b008efa0fca2cca0955047081fef307dcd661b81601e3"
+  },
+  "all_seven_raw_git_blob_identities_verified": true,
+  "specific_translation_rights": {
+    "grant": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "attribution": "Jonathan S. Walters and Whitman College, Legends of the Buddhist Saints. No endorsement is implied.",
+    "physical_notices": [
+      {
+        "file": "/tmp/pali-english351-360-evidence-nov27/next371-380-independent-source-scout/raw/LICENSE.md",
+        "bytes": 19093,
+        "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+      },
+      {
+        "file": "/tmp/pali-english351-360-evidence-nov27/next371-380-independent-source-scout/raw/src/_pages/about.md",
+        "bytes": 12404,
+        "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+      },
+      {
+        "file": "/tmp/pali-english351-360-evidence-nov27/next371-380-independent-source-scout/raw/src/_includes/site/footer.njk",
+        "bytes": 555,
+        "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+      },
+      {
+        "file": "/tmp/pali-english351-360-evidence-nov27/next371-380-independent-source-scout/raw/src/_includes/layouts/epub-metadata.xml",
+        "bytes": 603,
+        "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+      },
+      {
+        "file": "/tmp/pali-english351-360-evidence-nov27/next371-380-independent-source-scout/raw/src/_data/site.json",
+        "bytes": 659,
+        "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+      },
+      {
+        "file": "/tmp/pali-english351-360-evidence-nov27/next371-380-independent-source-scout/raw/src/_poems/_poems.json",
+        "bytes": 135,
+        "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+      }
+    ],
+    "reason": "The translation-specific About, footer and EPUB rights witnesses identify Walters/Whitman and the BY-NC-SA4.0 licence; LICENSE contains that legal text. The site.json generic BY4.0 field does not override those specific translation notices.",
+    "retain": [
+      "creator/publisher/copyright and warranty notices",
+      "source URLs and exact revision",
+      "specific licence and licence URL",
+      "NonCommercial and ShareAlike conditions",
+      "presentation-change disclosure and no endorsement"
+    ],
+    "metadata_hashes_only_in_application": true,
+    "English_bodies_and_notes_external_or_live_only": true,
+    "commercial_media_art_endorsement_or_wider_catalogue_permission_inferred": false,
+    "public_availability_used_as_permission": false
+  },
+  "canonical_correspondence": {
+    "method": "Original pinned Book36 title, speaker narrative, stanza labels and colophons compared with full current canonical records and literal source boundaries. No arithmetic mapping rule or title-only match.",
+    "original_vri_xml": {
+      "file": "/tmp/pali-next-ten-evidence-nov26/vri-fixture/romn/s0510m1.mul.xml",
+      "bytes": 2464074,
+      "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1"
+    },
+    "original_vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "whole_book36_original_tuple_count": 14645,
+    "whole_book36_original_tuple_sha256": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+    "note_only_apparatus_separately_accounted": [
+      {
+        "retained_position": 1130,
+        "notes_sha256": "5e99a3beb62c68f68af24c367da4542ea0c7ef948eee5c9bada956da5c112fec"
+      }
+    ],
+    "records": [
+      {
+        "publisher": 371,
+        "record": {
+          "id": "tha-ap373",
+          "book": 36,
+          "start": 10744,
+          "end": 10763,
+          "title": "Bodhivandakattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 373",
+          "vri": "1–5",
+          "pts": {
+            "volume": 1,
+            "page": 289,
+            "end_page": 290
+          }
+        },
+        "root_wrapper_sha256": "1a4868b3f22e8e3f333ce8c5dfb12a68b312fb6ac46e2ab81686a02e1e95cc30"
+      },
+      {
+        "publisher": 372,
+        "record": {
+          "id": "tha-ap374",
+          "book": 36,
+          "start": 10763,
+          "end": 10786,
+          "title": "Pāṭalipupphiyattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 374",
+          "vri": "6–12",
+          "pts": {
+            "volume": 1,
+            "page": 290,
+            "end_page": 290
+          },
+          "index_revision": "apadana-thera-next10-v1"
+        },
+        "root_wrapper_sha256": "814a91a847a6b961d27802320695213fdc9f46071a165a4f64b4d2397d2c46bf"
+      },
+      {
+        "publisher": 374,
+        "record": {
+          "id": "tha-ap376",
+          "book": 36,
+          "start": 10815,
+          "end": 10835,
+          "title": "Paṭṭipupphiyattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 376",
+          "vri": "22–27",
+          "pts": {
+            "volume": 1,
+            "page": 291,
+            "end_page": 292
+          }
+        },
+        "root_wrapper_sha256": "cc03d072cdbe85c56192c94522f96c33f308128ee8e26952c7411e5d31d95363"
+      },
+      {
+        "publisher": 375,
+        "record": {
+          "id": "tha-ap377",
+          "book": 36,
+          "start": 10835,
+          "end": 10850,
+          "title": "Sattapaṇṇiyattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 377",
+          "vri": "28–32",
+          "pts": {
+            "volume": 1,
+            "page": 292,
+            "end_page": 292
+          }
+        },
+        "root_wrapper_sha256": "068f3d3f55ea104f9a4708426c2ab0d2aec048f26a7f15bb4003bf2f66baa0c5"
+      },
+      {
+        "publisher": 376,
+        "record": {
+          "id": "tha-ap378",
+          "book": 36,
+          "start": 10850,
+          "end": 10865,
+          "title": "Gandhamuṭṭhiyattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 378",
+          "vri": "33–37",
+          "pts": {
+            "volume": 1,
+            "page": 292,
+            "end_page": 292
+          }
+        },
+        "root_wrapper_sha256": "7087fa4cf8308542729c3f419fd74898184e6f64d8c0ffd379e363c97f9debda"
+      },
+      {
+        "publisher": 377,
+        "record": {
+          "id": "tha-ap379",
+          "book": 36,
+          "start": 10865,
+          "end": 10880,
+          "title": "Citakapūjakattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 379",
+          "vri": "38–42",
+          "pts": {
+            "volume": 1,
+            "page": 292,
+            "end_page": 293
+          }
+        },
+        "root_wrapper_sha256": "71503c7748d1d80fa6d7921656899c035ada749ebd9ec5538ce0762868db342b"
+      },
+      {
+        "publisher": 378,
+        "record": {
+          "id": "tha-ap380",
+          "book": 36,
+          "start": 10880,
+          "end": 10895,
+          "title": "Sumanatālavaṇṭiyattheraapadānaṃ",
+          "collection": "ap",
+          "acronym": "Tha Ap 380",
+          "vri": "43–47",
+          "pts": {
+            "volume": 1,
+            "page": 293,
+            "end_page": 293
+          }
+        },
+        "root_wrapper_sha256": "71f6862a38a7bb6feecad74a1b0ad2261ddf71310fa8b27fe94f1e13545bdd45"
+      }
+    ],
+    "identity_witnesses": {
+      "371": "Vipassi, green patali Bodhi tree and 91 aeons; chapter38 opening belongs to separate unnoted publisher paratext.",
+      "372": "Vipassi, Bandhumati, three patali flowers and 91 aeons; distinct from similarly titled earlier canonical80.",
+      "374": "Padumuttara procession, corpse/drums and red lodh/patti offering; original Patti/Patti-with-retroflex edition distinction retained.",
+      "375": "Sumana and sattapanni/ruk-attana offering; original attributed botanical and etymological discussion retained.",
+      "376": "Perfumed handful at a stupa under construction; preserve separate VRI10852 deficiency note and publisher note7 expanded/reordered refrain discussion.",
+      "377": "Padumuttara/Ultimate Lotus, sal flowers and 100000 aeons identify canonical379; canonical279 instead has Candabhaga, seven maluva flowers and 94 aeons.",
+      "378": "Siddhattha, jasmine-covered palmyra fan and 94 aeons."
+    },
+    "canonical374_index_revision_preserved": "apadana-thera-next10-v1",
+    "publisher_completion_not_VRI_line_completeness": true,
+    "attainment_order_differences_and_VRI_peyyala_preserved": true,
+    "VRI_inline_notes_and_page_ownership_preserved": true,
+    "canonical_data_or_namespaces_changed": false
+  },
+  "normalization_and_expected_API_objects": {
+    "totals": {
+      "poems": 7,
+      "body_paragraphs": 57,
+      "physical_stanza_entries": 36,
+      "poem_notes": 42,
+      "display_pairs": 6,
+      "pages500": 16,
+      "body_characters_utf16": 6714,
+      "separate_note_free_paratext": 1,
+      "separate_note_free_summaries": 0
+    },
+    "raw_original_derived_body_notes_paragraph_owner_quote_and_page_checks": "PASS",
+    "same_number_visible_note_markers_preserved": true,
+    "combined_eight_line_entries": {
+      "371": "local2-3/global3221-3222",
+      "372": "local3-4/global3227-3228"
+    },
+    "state_on_display_pairs": {
+      "376": "three lowercase c/ch pairs only in note3",
+      "377": "one uppercase C/Ch pair in each heading, speaker and completion paragraph"
+    },
+    "source_371_unnoted_heading_separate": true,
+    "all42_note_owners_checked": true,
+    "page_domain": "Hard500 UTF16 slices; all selected body characters are BMP. Page prefix hashes cover body[0:offset]; continuation hashes cover body[0:next_offset]. Final chunks, note markers and punctuation are not trimmed.",
+    "quotation_domain": "Only physical stanza wording, excluding original note calls and exact terminal numeric suffix; all8 lines of combined ranges and interpolated English brackets remain.",
+    "no_new_preface_summary_division_or_editorial_gap_descriptors": true,
+    "API_expected_objects_are_source_derived_not_observed_API_output": true,
+    "actual_API_or_parser_behavior_approved": false
+  },
+  "finite_source_review": {
+    "whole_registry_inverse_exact": true,
+    "whole_parser_inverse_exact": true,
+    "parser_delta": "Seven exact mixed PTS/BJTS owner rows, plus canonical373 in existing unnoted-heading allowlist. Existing display tokens, normalized functions, old owner rows, ordinary stanza loop, quotation grammar and old scopes stay byte-exact.",
+    "original368_full_profiles_and_links_exact": true,
+    "original368_order_exact": true,
+    "original368_profiles_sha256_JSON_stringify": "192e7040912eb7e5bc316104d3e808058fb0aa5a6fac659380805f800a7cefae",
+    "original368_links_sha256_JSON_stringify": "768ff88946f98f6c1d15c1b9b63f18b7c5f3adbe82ddd14a203ca0b3ec019ecb",
+    "new_profile_module_contains_only_metadata_hashes_titles_and_editorial_caveats": true,
+    "old_source_holds_unchanged": true,
+    "held_publishers_not_in_new_scope": [
+      358,
+      361,
+      365,
+      366,
+      367,
+      368,
+      373,
+      379,
+      380
+    ]
+  },
+  "remaining_gates_and_limits": [
+    "Actual parser/link/API/client execution, source-owned mutation controls and installed browser checks are root-owned and not performed here.",
+    "Package/runtime/widget source identities, current curated approval, exact-commit tests and required CI remain independent activation/release gates.",
+    "Source qualification is for complete publisher-edition poems; no line/word equivalence or missing VRI wording is supplied.",
+    "Botanical and philological commentary remains attributed, not independently specialist-certified.",
+    "No commercial/media/art permission, physical-device, signed-in-host or human assistive acceptance is certified."
+  ],
+  "blocking_findings": [],
+  "source_metadata_and_finite_code_GO": true,
+  "source_English_redistribution_or_activation_approval": false,
+  "behavioral_runtime_package_browser_CI_release_or_push_approval": false,
+  "application_imports_tests_build_network_Git_checkout_edits_or_private_data_access": false
+}
