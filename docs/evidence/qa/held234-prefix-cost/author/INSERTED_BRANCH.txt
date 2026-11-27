@@ -1,0 +1,53 @@
+    # This closed current-only path avoids recursive suffix assembly. Every
+    # historical reader above and every other anchor below remains unchanged.
+    if type(anchor_filename) is str and anchor_filename == 'THERA_HELD234_APPROVAL.json':
+        from copy import deepcopy
+        from web_reader_intake359 import _authority
+        previous = read_331_334(root)
+        anchor = reviewed_held234_intake(root)
+        proof = _authority(root)
+        current = _compose_reviewed_current359(previous, proof)
+        anchor_ids = anchor['expected_profile_ids']
+        full = proof['BASELINE343_FULL_OBJECTS.json']
+        assert len(anchor_ids) == 285
+        assert previous['expected_profile_ids'][:len(anchor_ids)] == anchor_ids
+        # Read every suffix cohort's own pinned objects, not just the full343
+        # snapshot. The reader above still validates all historical authorities.
+        backwards = (
+            ('THERA_331_334_APPROVAL.json', 343), ('THERA_321_329_APPROVAL.json', 339),
+            ('THERA_312_319_APPROVAL.json', 333), ('THERA_301_310_APPROVAL.json', 325),
+            ('THERA_292_299_APPROVAL.json', 317), ('THERA_287_288_APPROVAL.json', 310),
+            ('THERA_281_285_APPROVAL.json', 308), ('THERA_261_280_APPROVAL.json', 303),
+        )
+        packet = previous
+        pieces = []
+        for index, (filename, count) in enumerate(backwards):
+            assert len(packet['expected_profile_ids']) == count
+            profiles = _sealed(root, packet['expected_profiles'])
+            links = _sealed(root, packet['expected_links'])
+            assert list(profiles) == list(links) == packet['approved_ids']
+            pieces.append((packet, profiles, links))
+            expected_previous = backwards[index + 1][0] if index + 1 < len(backwards) else anchor_filename
+            assert packet['previous_intake']['file'] == expected_previous
+            packet = _sealed(root, packet['previous_intake'])
+        assert packet == anchor
+        ids, profiles, links = [], {}, {}
+        for packet, cohort_profiles, cohort_links in reversed(pieces):
+            assert packet['baseline_ids'] == anchor_ids + ids
+            assert not set(packet['approved_ids']) & (set(anchor_ids) | set(ids))
+            ids.extend(packet['approved_ids'])
+            profiles.update(cohort_profiles); links.update(cohort_links)
+            assert packet['expected_profile_ids'] == anchor_ids + ids
+        assert len(ids) == 58 and previous['expected_profile_ids'] == anchor_ids + ids
+        assert list(profiles) == list(links) == ids
+        for uid in ids:
+            assert profiles[uid] == full['profiles'][uid]
+            assert links[uid] == full['links'][uid]
+        extra = current['approved_ids']
+        assert not set(extra) & (set(anchor_ids) | set(ids))
+        ids = ids + list(extra)
+        profiles = {**deepcopy(profiles), **deepcopy(proof['PROFILES.json'])}
+        links = {**deepcopy(links), **deepcopy(proof['LINKS.json'])}
+        assert len(ids) == 74 and current['expected_profile_ids'] == anchor_ids + ids
+        assert list(profiles) == list(links) == ids
+        return {'curation':current, 'anchor':anchor, 'ids':ids, 'profiles':profiles, 'links':links}

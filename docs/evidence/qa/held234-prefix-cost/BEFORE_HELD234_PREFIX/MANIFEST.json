@@ -1,0 +1,35 @@
+{
+  "commit": "d97e3c0ebc8261c6bec6ec8b3b1c65acd85e7dd4",
+  "files": {
+    "AGENTS.md.txt": {
+      "source_path": "AGENTS.md",
+      "bytes": 152414,
+      "sha256": "0152574306d63c054c1949665ba062d3d8c4b297c31d4280b500c7a07e62d741"
+    },
+    "SOURCE_INVERSES.json": {
+      "source_path": "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "bytes": 370348,
+      "sha256": "aabbc569c8d4774837a468ea197743c5ed9ad4fe98890efc9d1e85d6ca4eed96"
+    },
+    "SOURCE_INVERSE_REVIEW.json": {
+      "source_path": "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
+      "bytes": 220126,
+      "sha256": "9b6e09a56668fd742ea5390fb4443661d089c47776aa30034f7ed9aaa4ba7387"
+    },
+    "LEAF_REBIND_REVIEW.json": {
+      "source_path": "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
+      "bytes": 5841,
+      "sha256": "a400c72c85ebd0b0f72e13701a9d80fe0381bd2149d05d10007a79e700557127"
+    },
+    "loader.mjs.txt": {
+      "source_path": "tests/helpers/intake359-source-input.mjs",
+      "bytes": 8361,
+      "sha256": "efc224ab9d17791e0b23479cf3cab5243ba994ba60bcdb08877c752fcefe180b"
+    },
+    "apadana_intake.py.txt": {
+      "source_path": "scripts/web_reader_apadana_intake.py",
+      "bytes": 94349,
+      "sha256": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e"
+    }
+  }
+}

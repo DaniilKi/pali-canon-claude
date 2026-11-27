@@ -1,0 +1,181 @@
+{
+  "schema": "held234-prefix-native-Windows22-ABBA-log-reconciliation-v1",
+  "probe_commit": "ac6391175f78a3ea6aa8c4601fe9cb8f32905328",
+  "baseline_commit": "d97e3c0ebc8261c6bec6ec8b3b1c65acd85e7dd4",
+  "candidate_core": "05ee6fc2dd72c04b66e488a4528252c2742a43ae",
+  "run_id": 45932064979,
+  "job_id": 140286720140,
+  "run_attempt": 1,
+  "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45932064979",
+  "conclusion": "success",
+  "log_source": "Supported GitHub exact-job decoded log; original four controller JSON lines preserved alongside receipt.",
+  "artifact_zip_downloaded_or_locally_checksum_verified": false,
+  "phases": [
+    {
+      "phase": "A1",
+      "label": "baseline",
+      "cwd": "D:\\a\\pali-canon-claude\\pali-canon-claude\\baseline",
+      "child_argv": [
+        "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/held234-current333-chain.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "timed_out": false,
+      "cleanup_error": null,
+      "outer_bound_ms": 90000,
+      "elapsed_ms": 31213,
+      "summary": {
+        "tests": 1,
+        "suites": 0,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 28629.4952
+      },
+      "cases": [
+        {
+          "name": "actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption",
+          "duration_ms": 28515.1996
+        }
+      ],
+      "tap_sha256": "6d73dbc29b38a39a0a005271a4707252147d05278e67198a2c8c07c217105ef3",
+      "original_held8_wrapper_passed": true,
+      "underlying_python_cases_if_complete": 8
+    },
+    {
+      "phase": "B1",
+      "label": "candidate",
+      "cwd": "D:\\a\\pali-canon-claude\\pali-canon-claude\\candidate",
+      "child_argv": [
+        "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/held234-current333-chain.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "timed_out": false,
+      "cleanup_error": null,
+      "outer_bound_ms": 90000,
+      "elapsed_ms": 15350,
+      "summary": {
+        "tests": 1,
+        "suites": 0,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 12901.7105
+      },
+      "cases": [
+        {
+          "name": "actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption",
+          "duration_ms": 12813.9499
+        }
+      ],
+      "tap_sha256": "70fb7de560933b1bb2e42c7038e2cf9b5ea0abd6252c9a81f53465535e68e4da",
+      "original_held8_wrapper_passed": true,
+      "underlying_python_cases_if_complete": 8
+    },
+    {
+      "phase": "B2",
+      "label": "candidate",
+      "cwd": "D:\\a\\pali-canon-claude\\pali-canon-claude\\candidate",
+      "child_argv": [
+        "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/held234-current333-chain.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "timed_out": false,
+      "cleanup_error": null,
+      "outer_bound_ms": 90000,
+      "elapsed_ms": 15405,
+      "summary": {
+        "tests": 1,
+        "suites": 0,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 12971.4142
+      },
+      "cases": [
+        {
+          "name": "actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption",
+          "duration_ms": 12885.8559
+        }
+      ],
+      "tap_sha256": "34e0e93dfc175e07b44863737c1f6608cf25f318590bee8f8c6cfedf6cd4ff94",
+      "original_held8_wrapper_passed": true,
+      "underlying_python_cases_if_complete": 8
+    },
+    {
+      "phase": "A2",
+      "label": "baseline",
+      "cwd": "D:\\a\\pali-canon-claude\\pali-canon-claude\\baseline",
+      "child_argv": [
+        "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/held234-current333-chain.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "timed_out": false,
+      "cleanup_error": null,
+      "outer_bound_ms": 90000,
+      "elapsed_ms": 30044,
+      "summary": {
+        "tests": 1,
+        "suites": 0,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 27609.4071
+      },
+      "cases": [
+        {
+          "name": "actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption",
+          "duration_ms": 27523.3637
+        }
+      ],
+      "tap_sha256": "5412cfeeef5d9ade1192f01812112a636f639a32785dd70cced7bc6467ee13c3",
+      "original_held8_wrapper_passed": true,
+      "underlying_python_cases_if_complete": 8
+    }
+  ],
+  "all_four_original8_passed_no_skips": true,
+  "outer_process_mean_ms": {
+    "baseline": 30628.5,
+    "candidate": 15377.5,
+    "reduction_percent": 49.79349298855641
+  },
+  "wrapper_mean_ms": {
+    "baseline": 28019.28165,
+    "candidate": 12849.902900000001,
+    "reduction_percent": 54.13907087086225
+  },
+  "original_child_bound_ms": 30000,
+  "interpretation": "Observed engineering comparison on one nativeWindows22/Python3.12 host. Not full-release acceptance or general stability proof. All strict exact-successor CI gates remain required before dev promotion."
+}
+

@@ -1,0 +1,110 @@
+{
+  "schema": "held234-native-Windows22-ABBA-independent-log-review-v1",
+  "status": "GO_EXACT_NATIVE_DIAGNOSTIC_LOG_RECONCILIATION_ONLY",
+  "probe_commit": "ac6391175f78a3ea6aa8c4601fe9cb8f32905328",
+  "baseline_commit": "d97e3c0ebc8261c6bec6ec8b3b1c65acd85e7dd4",
+  "candidate_core": "05ee6fc2dd72c04b66e488a4528252c2742a43ae",
+  "run_id": 45932064979,
+  "job_id": 140286720140,
+  "run_attempt": 1,
+  "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45932064979",
+  "reported_supported_GitHub_conclusion": "success",
+  "input_bindings": {
+    "controller_log_lines_sha256": "1f2487156040a5bee8f8def4a426f7bb4b8cc632b159a0e4bfa7c3c1e47cbd34",
+    "root_reconciliation_sha256": "98dd1b3553525ea8d84d9ed117b60abf728de788c2618275cb4a14fe30b1ad0f",
+    "prior_bound_execution_review_sha256": "b7e1e5eb47bd0fd67825c0972db89f5135551982781fdaa76ad8912f19f828f9",
+    "core_final_review_sha256": "00a588d073ba4a26335646a4fd2534c754bed2e501e14178889c87deb1739a4c"
+  },
+  "independent_static_git_binding": {
+    "sole_probe_parent": "05ee6fc2dd72c04b66e488a4528252c2742a43ae",
+    "only_added_files": [
+      ".github/workflows/held234-prefix-probe.yml",
+      "scripts/ci-held234-prefix-probe.mjs"
+    ],
+    "controller_sha256": "aa9a79ca629bd8e9fb4cd4ef2a88d40c5212bc86adfd4fd6e251200bbdd27b55",
+    "workflow_sha256": "6a3783be367a0cababf39ab4bdb740442ec1fc665a258184ccc7c9be6e283534",
+    "matches_frozen_approved_bytes": true
+  },
+  "phase_review": {
+    "ordered_phases": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "raw_json_rows_whole_equal_to_reconciliation": true,
+    "same_host_job_and_actual_node_executable": "C:\\hostedtoolcache\\windows\\node\\22.23.5\\x64\\node.exe",
+    "baseline_and_candidate_cwds_distinct": true,
+    "identical_actual_argv": [
+      "--test",
+      "--test-concurrency=1",
+      "--test-reporter=tap",
+      "tests/held234-current333-chain.test.mjs"
+    ],
+    "all_four_exit0_signalnull_no_spawn_timeout_cleanup_error": true,
+    "each_Node_summary": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "underlying_original_Python_cases_each": 8,
+    "original_child_ms": 30000,
+    "outer_each_ms": 90000,
+    "wrapper_case_ms": [
+      28515.1996,
+      12813.9499,
+      12885.8559,
+      27523.3637
+    ],
+    "outer_phase_ms": [
+      31213,
+      15350,
+      15405,
+      30044
+    ],
+    "distinct_reported_TAP_hashes": [
+      "6d73dbc29b38a39a0a005271a4707252147d05278e67198a2c8c07c217105ef3",
+      "70fb7de560933b1bb2e42c7038e2cf9b5ea0abd6252c9a81f53465535e68e4da",
+      "34e0e93dfc175e07b44863737c1f6608cf25f318590bee8f8c6cfedf6cd4ff94",
+      "5412cfeeef5d9ade1192f01812112a636f639a32785dd70cced7bc6467ee13c3"
+    ]
+  },
+  "recomputed": {
+    "wrapper_mean_ms": {
+      "baseline": 28019.28165,
+      "candidate": 12849.902900000001,
+      "reduction_percent": 54.13907087086225
+    },
+    "outer_process_mean_ms": {
+      "baseline": 30628.5,
+      "candidate": 15377.5,
+      "reduction_percent": 49.79349298855641
+    },
+    "agrees_with_root_values": true
+  },
+  "interpretation": [
+    "Observed lower candidate cost on this single nativeWindows22/Python3.12same-hostABBA; two samples perrevision.",
+    "Alloriginal8assertions and30sbound retained; outerA1/A2 above30s do not change the Python bound because outer includes Node/startup/physicalchecks.",
+    "Frozencontroller preflight success implies actualPython minor3.12 and source/tree/340JS/Python8/actualCLI identities; exactPython patch/executable report was not supplied in the4phase lines.",
+    "Controller awaited eachchildclose; no watchdogcleanup was needed; no independentPIDabsence measurement in these records.",
+    "Observed diagnostic supports proceeding to finalsourcebinding and complete exactsuccessorCI; no general stability/fullrelease claim."
+  ],
+  "evidence_limits": {
+    "no_review_rerun_or_network_fetch": true,
+    "artifact_zip_downloaded_or_locally_checksum_verified": false,
+    "reported_TAP_hashes_format_checked_but_raw_TAP_not_locally_hashed": true,
+    "full_controller_REPORT_artifact_not_locally_reviewed": true,
+    "job_status_and_runidentity_from_parent_supported_GitHub_receipt": true,
+    "performance_causation_or_all_hosts_stability_proven": false
+  },
+  "remaining": [
+    "finalsourceinverse/historybindingreview",
+    "completehealthyexactsuccessorCIallrequiredjobs",
+    "devpromotionunderrootownershiponlyaftergates"
+  ],
+  "fullCI_or_release_or_dev_approval": false,
+  "reviewer_activity": "StaticJSON/numerical/sourcehashreconciliation and authorizedread-onlyGitobjectqueries; no tests/SUT/build/CI/Gitmutation/network/sourceedits"
+}

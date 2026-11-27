@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/tmp/pali-english335-350-evidence-nov26/held234-cost-followup/held-only-proposal/VERIFY_EQUIVALENCE.py"
+  ],
+  "bound_seconds": 120,
+  "exit_code": 0,
+  "timeout": false,
+  "elapsed_seconds": 18.252760036994005
+}

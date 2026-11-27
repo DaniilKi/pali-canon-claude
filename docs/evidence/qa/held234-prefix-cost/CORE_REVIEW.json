@@ -1,0 +1,51 @@
+{
+  "schema": "closed-held234-fastpath-final-independent-diagnostic-review-v1",
+  "status": "GO_DIAGNOSTIC_CANDIDATE_EXACT_CORE05EE_ONLY",
+  "candidate_commit": "05ee6fc2dd72c04b66e488a4528252c2742a43ae",
+  "sole_parent": "d97e3c0ebc8261c6bec6ec8b3b1c65acd85e7dd4",
+  "only_git_changed_path": "scripts/web_reader_apadana_intake.py",
+  "source_sha256": "44c23a69c17f3f19b90df5d6ce52e88f0fe548813f9f8fbb291a6a3bb99c3117",
+  "old_source_sha256": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e",
+  "old_whole_module_inverse_exact": true,
+  "all_other_git_tree_members_unchanged": true,
+  "author_manifest_sha256": "90a726a4416fec346366e33ff2b91a9d8ec11db2b6efa053ba534e7f8c0e6a29",
+  "prior_static_review_sha256": "0bc682f21fa2f997cc8aebcbe316dbc297eeed0dea51af92af5af2986ec8520a",
+  "evidence": {
+    "VERIFY_NEGATIVES.py": "2174a2fa0d3f0415c2cde7b17b119ad8a491f0da1e51689e401951086387183b",
+    "RUN_NEGATIVES.py": "6339976c0b6497b421b6192e09037f2ce108bbe6e28770f83c91d2f1cd0485b1",
+    "NEGATIVE_CONTROLS.json": "396b68a172a7f00c1a27e5ac4c614bf9059187a31f93118376fbfd3cfab97c69",
+    "NEGATIVE_COMMAND.json": "44f601e5c08196a259d0ca3e05aa2ca8284103d437ac8324e7c8f2edc7ec5d33",
+    "VERIFY_EQUIVALENCE.py": "b69a797b7d7fad121de5343b269d2c69b3ff1be204ae97f187518b9c04960bfd",
+    "EQUIVALENCE.json": "5d203b9c44a3a9af8ccdeb015b656aae19409c31123a43e8cf42e713b9a70b62",
+    "OLD_HELD_READSET.json": "5839b9f3984ba575296e2327a16e59d1e086a2b40d7bdbf0fcea2c3507cb89fe",
+    "NEW_HELD_READSET.json": "39928d879c2df6c8f2f3b0ab42add949b17ee174c232cc39a9de9cb055d33f18",
+    "FINAL_IDENTITY.json": "c47b942c707b851885fa269773984b27665aa7fd06e55034cb19cfe3fe7eba95",
+    "RUN_ORIGINAL_ONCE.py": "69db80c4319eeaed45ba190fd90c14894a3771464a205ddc28d32873ea4671bc",
+    "ORIGINAL_COMMAND.json": "c1dc05fedff29492979ad41a0bab8fcb44f2b3c04a38b71f0d9c3164558ad17a",
+    "original-wrapper.tap": "ef1c15486da11932f5fb58d40809e2440e5143c68e7236db11abb47f4ba316b8",
+    "AUTHOR_REPORT.json": "f594814c5855cc98b40de779138a8d1fe6dfd66aae54a0d3389f6457f5aed3ab"
+  },
+  "independently_checked": [
+    "24frozenmemberSHA/bytes",
+    "wholeonebranchinverseandactualGit05eeonlypath/parent",
+    "all179oldnewpath+actualsourceSHA+bytes equal",
+    "all179negativepaths exactlyonce;2faultstates each;bothimplementations refuse all358states",
+    "validJSONmutation notparsergarbage; genuineowned positives beforetarget/candidatebeforefault; exactrestoration/finalpositives/rootremoved",
+    "all11typedorderedwholeoutput receipts and other10fallbackreadcounts",
+    "independentmutable-returngraphs/unknownanchorrefusals producer",
+    "originalNodewrapper TAP1pass0fail/skip and originalPython8/Ran8/30sguard exact",
+    "Python8andactualCLIphysicalbytes equalbaseline; allotherGitfiles unchanged"
+  ],
+  "local_evidence_limits": {
+    "author_original_wrapper_seconds": 8.379197194997687,
+    "platform": "localLinux",
+    "native_windows_speed_or_stability_approval": false
+  },
+  "remaining": [
+    "rootfinalsource-map/historybindings/fullCI beforefeature/devpromotion",
+    "exactboundnativeWindows22ABBAexecution",
+    "complete exactsuccessorhealthyCIcohort"
+  ],
+  "full_release_or_dev_approval": false,
+  "reviewer_activity": "static/stdlibmetadata verification and explicitlyrequestedread-onlyGitobjectqueries; no SUT/tests/build/CI/network/Gitmutation/sourceedits"
+}

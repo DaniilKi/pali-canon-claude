@@ -3,13 +3,13 @@
   "status": "GO_EXACT_SOURCE_QA_CHECKPOINT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "snapshot_commit": null,
-  "after_domain": "physical fixture-cost binding worktree over exactf54 core and prior1E authority",
+  "after_domain": "physical held234-prefix binding worktree over exact05ee core and prior d97 authority",
   "live_working_tree_claimed": true,
-  "map_sha256": "aabbc569c8d4774837a468ea197743c5ed9ad4fe98890efc9d1e85d6ca4eed96",
-  "loader_sha256": "efc224ab9d17791e0b23479cf3cab5243ba994ba60bcdb08877c752fcefe180b",
+  "map_sha256": "f228e32969b80c3faeab9f2bf6aca00b0c1a3f6e4dd0ba6d2487612b8e344a30",
+  "loader_sha256": "2e718959cbffc7ed05f358bced603452373993d55739bc078b240a27b8e8d8dc",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
-  "original_identity_verification_method": "No new Git command. Independently previously exactGit3d-sealed dbb017 index; each unchanged file and literal-inverse reconstructed whole original independently matches all byte/SHA256/Gitblob-SHA1 identity pins.",
+  "original_identity_verification_method": "Previously independently Git3d-sealed dbb017 index. Every unchanged file and literal-inverse reconstructed whole original matches byte/SHA256/Gitblob-SHA1 pins; current d97 archives independently compared to actual read-only Git objects.",
   "changed_existing_exactly_mapped": 72,
   "unchanged_original_source_entries": 929,
   "hunks": 202,
@@ -23,7 +23,7 @@
     },
     "AGENTS.md": {
       "base3d_sha256": "06024baeedc9397364c9ced4f3f6a167d5bccfdebc9182277e491d19d756bd43",
-      "current_sha256": "0152574306d63c054c1949665ba062d3d8c4b297c31d4280b500c7a07e62d741",
+      "current_sha256": "bf27c0b3ee5f7d7decdebd9eec03aefebd2b5f6339d598ee3203de30966f3ac8",
       "hunks": 1
     },
     "README.md": {
@@ -63,7 +63,7 @@
     },
     "scripts/web_reader_apadana_intake.py": {
       "base3d_sha256": "75fc772cde076fe64176108725c3cdbde8cc66d7db2e449384de52a54d71e730",
-      "current_sha256": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e",
+      "current_sha256": "44c23a69c17f3f19b90df5d6ce52e88f0fe548813f9f8fbb291a6a3bb99c3117",
       "hunks": 3
     },
     "scripts/web_reader_approved_acceptance.py": {

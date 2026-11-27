@@ -1,0 +1,231 @@
+{
+  "schema": "closed-held234-current-suffix-equivalence-v1",
+  "all11anchors_exact_order_types_values": true,
+  "all_original_held_proof_paths_retained": true,
+  "held_old58_plus_new16": true,
+  "results": [
+    {
+      "anchor": "THERA_241_250_APPROVAL.json",
+      "ordered_whole_output_sha256": "0200fab92995a33bf4cc7fe29a2460332c7036a3fe173d3f4774df455733d237",
+      "output_bytes": 630141,
+      "old_unique_files": 181,
+      "new_unique_files": 181,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 1971,
+      "new_read_calls": 1971,
+      "old": {
+        "elapsed_seconds": 1.142130983993411,
+        "cpu_seconds": 1.1338975359999999
+      },
+      "new": {
+        "elapsed_seconds": 0.9451982930040685,
+        "cpu_seconds": 0.9451595759999998
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_221_230_APPROVAL.json",
+      "ordered_whole_output_sha256": "ede8bc8cc28be21051082a2eb82ea480060a106b4d0b90edd83d21a2f0cd39fe",
+      "output_bytes": 581965,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 1966,
+      "new_read_calls": 1966,
+      "old": {
+        "elapsed_seconds": 0.9346870800072793,
+        "cpu_seconds": 0.93341808
+      },
+      "new": {
+        "elapsed_seconds": 0.9624154760094825,
+        "cpu_seconds": 0.9623691779999994
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_REMAINING_APPROVAL.json",
+      "ordered_whole_output_sha256": "ad5d3f99ab3c7c7e7c1dd1a88b1353f27a390de682bc003792ed584e4c37c2a8",
+      "output_bytes": 500051,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 1939,
+      "new_read_calls": 1939,
+      "old": {
+        "elapsed_seconds": 0.9469778620114084,
+        "cpu_seconds": 0.9469079850000002
+      },
+      "new": {
+        "elapsed_seconds": 0.9489384820044506,
+        "cpu_seconds": 0.9488298019999997
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_HELD234_APPROVAL.json",
+      "ordered_whole_output_sha256": "b3d20f391f5cbb578290d91ed6b8bae091fed8f6e3cae2f1c01f938fc1ffbf9f",
+      "output_bytes": 487994,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 1908,
+      "new_read_calls": 260,
+      "old": {
+        "elapsed_seconds": 0.9762605980067747,
+        "cpu_seconds": 0.9730668400000004
+      },
+      "new": {
+        "elapsed_seconds": 0.17354543598776218,
+        "cpu_seconds": 0.17354122400000005
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_261_280_APPROVAL.json",
+      "ordered_whole_output_sha256": "30e854d26af7818bef75a526750ce969ecf1c98dd801b98737e0f119ae13838a",
+      "output_bytes": 403434,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 1804,
+      "new_read_calls": 1804,
+      "old": {
+        "elapsed_seconds": 0.8694076430110727,
+        "cpu_seconds": 0.8689343339999995
+      },
+      "new": {
+        "elapsed_seconds": 0.8607628580066375,
+        "cpu_seconds": 0.8607337279999996
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_281_285_APPROVAL.json",
+      "ordered_whole_output_sha256": "8e16f7231409dbc80d6c887b6ac204dbfcee01d838a5838e270053047628ac76",
+      "output_bytes": 378630,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 1662,
+      "new_read_calls": 1662,
+      "old": {
+        "elapsed_seconds": 0.7764125039975625,
+        "cpu_seconds": 0.7763811390000015
+      },
+      "new": {
+        "elapsed_seconds": 0.7833577190031065,
+        "cpu_seconds": 0.7833372030000003
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_287_288_APPROVAL.json",
+      "ordered_whole_output_sha256": "f99ce3ce378f26c81e38d8b31e9d8cd98d9a8fa3b1fb9d41bbd7dc3d6e993eeb",
+      "output_bytes": 368013,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 1483,
+      "new_read_calls": 1483,
+      "old": {
+        "elapsed_seconds": 0.7250928639987251,
+        "cpu_seconds": 0.7241102779999995
+      },
+      "new": {
+        "elapsed_seconds": 0.6970273680053651,
+        "cpu_seconds": 0.6970049859999996
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_292_299_APPROVAL.json",
+      "ordered_whole_output_sha256": "f01ed986e05066320b55401f08cc304b56a93a729f72f815a08fc67f946d22de",
+      "output_bytes": 329460,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 1263,
+      "new_read_calls": 1263,
+      "old": {
+        "elapsed_seconds": 0.6166985589952674,
+        "cpu_seconds": 0.6166910020000014
+      },
+      "new": {
+        "elapsed_seconds": 0.6065419709921116,
+        "cpu_seconds": 0.6065233299999999
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_301_310_APPROVAL.json",
+      "ordered_whole_output_sha256": "8ef6946da1c3f98db509b1f13c9588257f606f9d24f179eb548b00ea10f18aba",
+      "output_bytes": 281959,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 995,
+      "new_read_calls": 995,
+      "old": {
+        "elapsed_seconds": 0.4920665930112591,
+        "cpu_seconds": 0.4920629440000006
+      },
+      "new": {
+        "elapsed_seconds": 0.4959564360033255,
+        "cpu_seconds": 0.49594004899999966
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_312_319_APPROVAL.json",
+      "ordered_whole_output_sha256": "a9ec5f36b3b7c63192bce99580b3df7d366cc08ed4fd8c4194d26a0c0baf70c7",
+      "output_bytes": 237512,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 691,
+      "new_read_calls": 691,
+      "old": {
+        "elapsed_seconds": 0.3549567099980777,
+        "cpu_seconds": 0.35496155500000093
+      },
+      "new": {
+        "elapsed_seconds": 0.3529129900125554,
+        "cpu_seconds": 0.3529000360000012
+      },
+      "ordered_value_and_exact_type_equality": true
+    },
+    {
+      "anchor": "THERA_321_329_APPROVAL.json",
+      "ordered_whole_output_sha256": "f0856f38d95035d9eb3efdf6c29ebf7d567bd207acbacb555ad6b553ecfa17a4",
+      "output_bytes": 204533,
+      "old_unique_files": 179,
+      "new_unique_files": 179,
+      "missing_old_paths": [],
+      "extra_new_paths": [],
+      "old_read_calls": 364,
+      "new_read_calls": 364,
+      "old": {
+        "elapsed_seconds": 0.21598104099393822,
+        "cpu_seconds": 0.21597694899999986
+      },
+      "new": {
+        "elapsed_seconds": 0.20521833500242792,
+        "cpu_seconds": 0.20522283800000096
+      },
+      "ordered_value_and_exact_type_equality": true
+    }
+  ],
+  "independent_returns_no_shared_mutable_dict_or_list": true,
+  "mutation_of_one_result_cannot_change_another_or_next_return": true,
+  "unknown_anchors_refused": true
+}

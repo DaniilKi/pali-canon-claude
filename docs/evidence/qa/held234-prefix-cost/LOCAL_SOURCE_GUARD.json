@@ -1,0 +1,22 @@
+{
+  "schema": "held234-prefix-local-source-guard-attestation-v1",
+  "scope": "Physical updated map and helper; not fullCI or installed-reader rerun",
+  "command": [
+    "/tmp/pali-english335-350-evidence-nov26/node22-linux/node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/intake359-source-history.test.mjs"
+  ],
+  "cwd": "/tmp/pali-curation-prefix-cost-nov27",
+  "tool_session": 85459,
+  "observed_exit_code": 0,
+  "tests": 1,
+  "passed": 1,
+  "failed": 0,
+  "skipped": 0,
+  "case_duration_ms": 2926.908166,
+  "total_duration_ms": 3013.217143,
+  "raw_TAP_reconstructed_or_checksum_claimed": false,
+  "map_sha256": "f228e32969b80c3faeab9f2bf6aca00b0c1a3f6e4dd0ba6d2487612b8e344a30",
+  "loader_sha256": "2e718959cbffc7ed05f358bced603452373993d55739bc078b240a27b8e8d8dc"
+}

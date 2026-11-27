@@ -1,0 +1,12 @@
+{
+  "schema": "held234-closed-prefix-source-identity-v1",
+  "before_sha256": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e",
+  "candidate_sha256": "44c23a69c17f3f19b90df5d6ce52e88f0fe548813f9f8fbb291a6a3bb99c3117",
+  "single_branch_removal_restores_entire_before_module": true,
+  "before_equals_isolated_git_head_blob": true,
+  "only_tracked_change": "scripts/web_reader_apadana_intake.py",
+  "all179_repository_proof_bytes_unchanged": true,
+  "original_held8_node_wrapper_sha256": "f1cc9c851bfffb4913bc71e030919e6105ac91942d9a23f1fefbd1924b59b3f5",
+  "original_wrapper_unchanged": true,
+  "proof_fixture_removed": true
+}

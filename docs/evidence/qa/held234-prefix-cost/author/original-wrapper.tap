@@ -1,0 +1,16 @@
+TAP version 13
+# Subtest: actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption
+ok 1 - actual held234 metadata preflight keeps the full325,333,339 and343 bridges into current359 and rejects baseline corruption
+  ---
+  duration_ms: 8193.706319
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8275.891632

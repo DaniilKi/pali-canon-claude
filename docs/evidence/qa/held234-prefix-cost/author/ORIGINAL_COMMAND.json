@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "/tmp/pali-english335-350-evidence-nov26/node22-linux/node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/held234-current333-chain.test.mjs"
+  ],
+  "cwd": "/tmp/pali-curation-prefix-cost-nov27",
+  "original_python_child_seconds": 30,
+  "outer_bound_seconds": 35,
+  "exit_code": 0,
+  "outer_timeout": false,
+  "elapsed_seconds": 8.379197194997687,
+  "child_cpu_seconds": 8.378714,
+  "owned_group_observed_absent": true,
+  "wrapper_sha256": "f1cc9c851bfffb4913bc71e030919e6105ac91942d9a23f1fefbd1924b59b3f5"
+}

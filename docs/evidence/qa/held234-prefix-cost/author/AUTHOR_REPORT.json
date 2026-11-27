@@ -1,0 +1,64 @@
+{
+  "schema": "held234-closed-prefix-author-report-v1",
+  "status": "READY_FOR_INDEPENDENT_REVIEW_LOCAL_LINUX_ONLY",
+  "candidate_source_sha256": "44c23a69c17f3f19b90df5d6ce52e88f0fe548813f9f8fbb291a6a3bb99c3117",
+  "before_source_sha256": "f14f98cfe0005d952caa75874be7aa4abfde4a805ddccd2c42a723ff77f69d1e",
+  "patch_sha256": "fe81865ae5f4f84cd19407bcc5e3eb8c1fcd77efae29895e238b40d7fe27034a",
+  "scope": "Exact THERA_HELD234_APPROVAL.json only; all ten other anchors retain original fallback and all historical function bodies remain unchanged.",
+  "semantics": {
+    "fresh_source_validation": true,
+    "no_cache_shared_state_or_runtime_projection": true,
+    "all11_typed_ordered_whole_outputs_equal": true,
+    "other10_read_counts_unchanged": true,
+    "old_and_new_unique_physical_proof_paths": 179,
+    "held_read_calls_before": 1908,
+    "held_read_calls_after": 260,
+    "whole_held_output_sha256": "b3d20f391f5cbb578290d91ed6b8bae091fed8f6e3cae2f1c01f938fc1ffbf9f",
+    "old_suffix58_plus_new16_preserved": true,
+    "independent_returns_no_aliases": true
+  },
+  "negative_controls": {
+    "proofs": 179,
+    "fault_states": 358,
+    "old_and_candidate_each_refuse_every_fault": true,
+    "genuine_positive_before_each_target_and_candidate_before_each_fault": true,
+    "exact_restore_after_each_fault": true,
+    "final_positive_both": true,
+    "owned_root_removed": true,
+    "elapsed_seconds": 229.75281507399632
+  },
+  "original_held8_wrapper": {
+    "argv": [
+      "/tmp/pali-english335-350-evidence-nov26/node22-linux/node",
+      "--test",
+      "--test-reporter=tap",
+      "tests/held234-current333-chain.test.mjs"
+    ],
+    "cwd": "/tmp/pali-curation-prefix-cost-nov27",
+    "original_python_child_seconds": 30,
+    "outer_bound_seconds": 35,
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 8.379197194997687,
+    "child_cpu_seconds": 8.378714,
+    "owned_group_observed_absent": true,
+    "wrapper_sha256": "f1cc9c851bfffb4913bc71e030919e6105ac91942d9a23f1fefbd1924b59b3f5"
+  },
+  "comparison": {
+    "prior_original_wrapper_seconds": 17.3522838,
+    "current_wrapper_seconds": 8.379197194997687,
+    "fixed_order_shared_linux_host_only": true,
+    "no_native_windows_speed_claim": true
+  },
+  "preserved_limits": {
+    "python_child_seconds": 30,
+    "outer_diagnostic_seconds": 35,
+    "all_original_8_python_cases_and_assertions": true
+  },
+  "limits": [
+    "No native Windows or macOS acceptance from this local evidence.",
+    "No release, dev promotion, CI or deployment approval.",
+    "Performance comparison is fixed-order local Linux evidence; source-proof read-count reduction is observed independently.",
+    "Independent static closure review and exact native Windows validation remain pending."
+  ]
+}

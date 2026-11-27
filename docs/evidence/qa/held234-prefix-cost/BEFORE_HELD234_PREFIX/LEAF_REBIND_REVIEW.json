@@ -1,0 +1,82 @@
+{
+  "schema": "independent-finite-fixture-cost-release-source-leaf-review-v1",
+  "status": "GO_EXACT_SOURCE_BINDINGS_ONLY_NATIVE_DIAGNOSTIC_AND_RELEASE_ACCEPTANCE_SEPARATE",
+  "feature_core_commit": "f54a6c4d9c835915ec453c1a52001061b17ea90f",
+  "prior_source_authority_commit": "1e1c7b13ba4f02ede75e87fca66032e6e8966f8a",
+  "source_review": {
+    "file": "SOURCE_INVERSE_REVIEW.json",
+    "sha256": "9b6e09a56668fd742ea5390fb4443661d089c47776aa30034f7ed9aaa4ba7387"
+  },
+  "frozen_bindings": {
+    "feature_commit": "f54a6c4d9c835915ec453c1a52001061b17ea90f",
+    "baseline_index_sha256": "7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad",
+    "map_sha256": "aabbc569c8d4774837a468ea197743c5ed9ad4fe98890efc9d1e85d6ca4eed96",
+    "loader_sha256": "efc224ab9d17791e0b23479cf3cab5243ba994ba60bcdb08877c752fcefe180b",
+    "changed_existing_rows": [
+      "AGENTS.md",
+      "scripts/web_reader_next_ten_boundary_history.py",
+      "tests/approved_acceptance.py",
+      "tests/six_boundary_history_acceptance.py",
+      "tests/six_operation_scope_controls.py"
+    ],
+    "other67_rows_exact_1e1c7": true,
+    "seven_core_files": {
+      "scripts/web_reader_intake359.py": "89630ec90b17828dc7f168bbed6050181bac422f05cd670256334d07f59cdac6",
+      "scripts/web_reader_next_ten_boundary_history.py": "390babcab8f13e5c696c57fe08c9b2b680bebcd3709a1d74f943f900ecf02496",
+      "tests/six_boundary_history_acceptance.py": "4708b6488ea18e4600421f28d943cf35c1bf2b742954c135cda70e9cffebf4bf",
+      "tests/approved_acceptance.py": "05dcd6bf555337754b3bc037b6a86b772dca5059e1769ef7c340f81b932de42a",
+      "tests/six_operation_scope_controls.py": "09e44985179af0189432821aedb5056a8c8eabee7ec0458e425cc7f41ae1492d",
+      "tests/owned_apadana_proofs.py": "b356f21ddf2ea6b42596058124b241d20f60af5623b2ce20ce1f291ab5654e4a",
+      "tests/fixtures/approved33-proof-inputs.json": "4f7c1a7936d44ba951bf3eddcc81f7faf3ea72128ed103d6c9088e5eb6152989"
+    }
+  },
+  "only_five_existing_rows_refreshed_other67ordered_objects_exact1E": true,
+  "source_path_list72_callbackliteral_andloaderbody_unchanged_onlymapSHA": true,
+  "all72_full_original_inverse_andforward_replay_exact": true,
+  "original1001_byte_SHA256_blobSHA1_pins_preserved": true,
+  "all824_authority_fixture_byte_SHA256_blobSHA1_pins_preserved": true,
+  "beforeFixtureCost_12archive_members_bound_to_prior_independent1Ehashes_andexact_inverse_intake_body": {
+    "SOURCE_INVERSES.json": "d900545cf48aead842a1bd444330f0b76f9ffadd2591413304227aa5fc59fcc3",
+    "SOURCE_INVERSE_REVIEW.json": "8b2f327fa646676533853097b31ca0d60797f7b42f045b017a5154cbbfda98f0",
+    "LEAF_REBIND_REVIEW.json": "ebf81b776a38d59b31a689d2cdb30277be4d649ebda619debb418924322f2bf2",
+    "loader.mjs.txt": "077144b257675fb72691b103419739290aa383ebfe3870b850a8b014b8fc7bd3",
+    "BASELINE_C7E_TEST_FILES.json": "7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad",
+    "AGENTS.md.txt": "1f7949ac5bae23f0b63871a61520572cf5b34de7d306cc264c76c5e3f61768ea",
+    "next_ten_history.py.txt": "ae549a7653f140cecc2f6209502d456abacf86f251def075e6559113d309f86e",
+    "approved_acceptance.py.txt": "dd58690a02e33918bbe99fdc85eaa37fd36c5a5d69cf3fd6cfec82071cdfb35f",
+    "six_history.py.txt": "d5d7ed3abc3acf4ef653119c5451af463dcd495232b82bd2ddb7b7d50a3a60f3",
+    "six_operation.py.txt": "57f491ff0d8be28d76385cd44596e24720b1b97ed1a31ccf529e0093950079c4",
+    "workflow.yml.txt": "7be25653634d3167f0beb0b594d01db59fb574f093ffd602208829cecdbdaa96",
+    "intake359.py.txt": "c5e1a1bbc889672b6a521a764db3a818a1d001498f9cce0cf5903277761ea71a"
+  },
+  "new_helper_manifest_intake_module_direct_leaf_hashes": {
+    "tests/owned_apadana_proofs.py": "b356f21ddf2ea6b42596058124b241d20f60af5623b2ce20ce1f291ab5654e4a",
+    "tests/fixtures/approved33-proof-inputs.json": "4f7c1a7936d44ba951bf3eddcc81f7faf3ea72128ed103d6c9088e5eb6152989",
+    "scripts/web_reader_intake359.py": "89630ec90b17828dc7f168bbed6050181bac422f05cd670256334d07f59cdac6"
+  },
+  "all7_core_files_equal_independently_reviewed_and_exact_f54_bound_sha256s": true,
+  "seven_core_review": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/fixture-cost-diagnostic-review/SEVEN_CORE_DIAGNOSTIC_REVIEW.json",
+    "sha256": "062a9b196b41ce30feffed451f47c1060a44e67244148ffd525fc4b1e7135761"
+  },
+  "exactf54_diagnostic_core_commit_binding": {
+    "path": "/tmp/pali-english335-350-evidence-nov26/fixture-cost-diagnostic-review/FINAL_F54A6_DIAGNOSTIC_CORE_BINDING.json",
+    "sha256": "db993c23af9370f5ae59e34fd295a783039804e062c2da8736cbdfe25ef6ab6c"
+  },
+  "all208_physicalproofrows_match_previously_independently_verified_immutable1E_manifest": true,
+  "baseline791_driver339originalJS_andexistingQA8_runners_unchanged": true,
+  "workflow_actual1E_bytes_unchanged_no_serial_Linux_policy_adopted": true,
+  "all39_current_archive_actualfreshinstalled_bytes_exact_priorAPPaec_binding": true,
+  "current34_runtime839e_2b19_leaf_unchanged": true,
+  "probe_workflow_runner_not_in_featurecore": true,
+  "current_probe_context": "Parent reports43c4717/run45925838712 running; reviewer made no CI request and adopts no outcome.",
+  "native_DIAGNOSTIC_release_CI_or_dev_acceptance_implied": false,
+  "remaining": [
+    "Reconcile all boundedABBA outcomes without ignoring failedbaselines or combiningincompletephases",
+    "Rootfinalimmutable releasecandidate source/newsource/directleaf/39 closure binding",
+    "OnecompletehealthyexactSHA2076/nativeaggregates/allrequiredworkflowcohort beforedev advancement"
+  ],
+  "reviewer_actions": "Read-only physicalfiles and ownstdlib literal strings/hash/metadata/tar inspection only; NO Git commands, tests, app/SUT/helper imports, browser/build/network/CIactions ortracked-file edits.",
+  "rights_coverage_corpus_privacy_main_deploy_release_or_fullprojectcompletion_claim": false,
+  "blocking_binding_findings": []
+}
