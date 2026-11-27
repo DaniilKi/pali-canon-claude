@@ -1,0 +1,49 @@
+name: Native fixture cost contrast
+on:
+  push:
+    branches: ['diagnostic/pali-fixture-cost-*']
+permissions:
+  contents: read
+env:
+  FIXTURE_CANDIDATE_SHA: f54a6c4d9c835915ec453c1a52001061b17ea90f
+jobs:
+  contrast:
+    name: Original fixture deadlines / Windows20 ABBA
+    runs-on: windows-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+        with:
+          path: probe
+      - uses: actions/checkout@v4
+        with:
+          ref: 1e1c7b13ba4f02ede75e87fca66032e6e8966f8a
+          path: baseline
+      - uses: actions/checkout@v4
+        with:
+          ref: f54a6c4d9c835915ec453c1a52001061b17ea90f
+          path: candidate
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compare unchanged 33 plus 7 plus 7 fixture assertions
+        timeout-minutes: 14
+        run: |
+          node probe/scripts/ci-fixture-cost-probe.mjs --baseline "$GITHUB_WORKSPACE/baseline" --candidate "$GITHUB_WORKSPACE/candidate" --expected-candidate "$FIXTURE_CANDIDATE_SHA" --output "$RUNNER_TEMP/fixture-cost"
+      - name: Preserve every diagnostic outcome including failed baselines
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-fixture-cost-abba
+          path: ${{ runner.temp }}/fixture-cost/
+          if-no-files-found: error
