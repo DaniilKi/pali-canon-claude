@@ -321,11 +321,21 @@
   "browser_run": true,
   "upstream_provider_requests_forwarded": 0,
   "final_source_core_binding": {
-    "core_commit": "ae19c2c7c0e72f1bad30aa2d9256e2765b03c2d4",
-    "component_binding_sha256": "f2075831648bf56ac583c399fcb69795a532a603a2367cab02520ab6774daa8d",
+    "core_commit": "a59e5290bd7d5a419debb965cbe964738bb0784b",
+    "component_binding_sha256": "1ba67517d9cd04176add06611f8c6a9bc3b467b3eec69a1a3fc12e23f70e3100",
+    "independent_component_review_sha256": "43e0fc6f999513303a360b4523eb73f37c23514cefaf603e8c7b577d3b70687a",
     "package39_unchanged": true,
     "browser_executed_on_final_core": false,
-    "evidence_scope": "Existing independently reviewed APP/package browser journey reused only through exact byte equality; no new device or fresh-offline acceptance.",
-    "independent_component_review_sha256": "90e30829df456f6fbabdf9382bb44f2aae6e1892ccc674a33958d6691eabf741"
-  }
+    "evidence_scope": "Existing independently reviewed installed/browser execution on identical APPaeb/package705/runtime34. This proves component identity, not new browser execution on this QA/source core or physical-device, signed-in-host or human assistive acceptance."
+  },
+  "historical_final_source_core_bindings": [
+    {
+      "core_commit": "ae19c2c7c0e72f1bad30aa2d9256e2765b03c2d4",
+      "component_binding_sha256": "f2075831648bf56ac583c399fcb69795a532a603a2367cab02520ab6774daa8d",
+      "package39_unchanged": true,
+      "browser_executed_on_final_core": false,
+      "evidence_scope": "Existing independently reviewed APP/package browser journey reused only through exact byte equality; no new device or fresh-offline acceptance.",
+      "independent_component_review_sha256": "90e30829df456f6fbabdf9382bb44f2aae6e1892ccc674a33958d6691eabf741"
+    }
+  ]
 }
