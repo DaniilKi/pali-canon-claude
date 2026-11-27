@@ -383,7 +383,7 @@ function loadBaselineV4(root,b,pin){
   assert.equal(review.inventory_sha256,objectSha(expectedRows));assert.deepEqual(review.counts,{files:345,preserved_cases:2076,added_cases:16,total_cases:2092});
   validateRegistrationReview(review.registrations,b.source_overrides);exactKeys(review.before_wrapper_sources,V3_WRAPPERS);
   for(const path of V3_WRAPPERS){const row=review.before_wrapper_sources[path];exactKeys(row,['sha256','utf8']);assert.equal(typeof row.utf8,'string');assert.equal(row.sha256,prior.expected[path]);assert.equal(digest(row.utf8),row.sha256,'Authentic complete historical wrapper source');}
-  assert.deepEqual(review.partition_suites,V3_SUITES);assert.deepEqual(review.partition_platforms,['win32','darwin']);assert.equal(review.other_platforms_original_branch_exact,true);assert.equal(review.conformance_is_separate_gate,true);assert.equal(review.behavioral_or_release_approval,false);
+  assert.deepEqual(review.partition_suites,V3_SUITES);assert.deepEqual(review.partition_platforms,['win32','darwin','linux']);assert.equal(review.other_platforms_original_branch_exact,true);assert.equal(review.conformance_is_separate_gate,true);assert.equal(review.behavioral_or_release_approval,false);
   const historical=validateV4HistoricalFixture(review.historical_v3_fixture);assert.equal(b.supporting_sources['scripts/ci-python-partition-driver.py'],historical.supporting_sources['scripts/ci-python-partition-driver.py'],'Unchanged original partition driver');
   return {baseline:b,baseline_sha256:pin,inventory:current};
 }

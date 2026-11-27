@@ -14,19 +14,19 @@
   "source_overrides": {
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
-      "after_sha256": "ebd3356725cf0270fcd6104b20d04de77b9c2a35966a6d4023043ce5e2e69639"
+      "after_sha256": "5b2f8975adf4bf3794cfa8408485de5b4c97620943ca9bfc6ed51ee7c4df2f84"
     },
     "tests/six-boundary-history.test.mjs": {
       "before_sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e",
-      "after_sha256": "ce62a98ce846014478cc849a7a6ce1461209ea56fdcaa99dede29276c806374b"
+      "after_sha256": "c70b703d55f8f4f0874a857bfc214f686bb7faae1b3c3dbf54f8c124ba86b938"
     },
     "tests/six-operation-scope.test.mjs": {
       "before_sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
-      "after_sha256": "c7d7a29c6ce7430ebb0a84c3f10fcd96ce985e0b93416396d965c98bef019dc6"
+      "after_sha256": "72b00f45acdd4fac55c5ca274bdfc34da7e383e2be8b184cb8f73afcb1dff139"
     }
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "906c340d30d8616def5ca7cdbf72d7a901c1af8a19f97e3bf002cfc0e9fb3448",
+    "scripts/ci-test-partitions.mjs": "cfd2c15e9cf8177f2c6f7a60870a3e63121bb3f019eb357b6692a6466038ce42",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
@@ -113,7 +113,7 @@
     "tests/cbeta-khp-assessment.test.mjs": "032baceafe209d89d2da2edc4e07fe42b2d8e9fc99fb2d2b7a14dacc7e42023b",
     "tests/chatgpt-widget.test.mjs": "b8c20ff21c8d10f3ef9e95891298afa923997b3c949098f2b7476b85ddcd3246",
     "tests/check-ci-stages.test.mjs": "488bfa1964e27cf5e23c349ea20146ad63eedcaa9bbfc5fadeaa42785127cef0",
-    "tests/ci-test-partitions.test.mjs": "ebd3356725cf0270fcd6104b20d04de77b9c2a35966a6d4023043ce5e2e69639",
+    "tests/ci-test-partitions.test.mjs": "5b2f8975adf4bf3794cfa8408485de5b4c97620943ca9bfc6ed51ee7c4df2f84",
     "tests/citation-id-coverage.test.mjs": "ac30a105e79ae69f8f1cf867ee713929380b153812368333d93dc45886459123",
     "tests/citation-pagination.test.mjs": "bbdbbabf73edd4ffe4aedf592f6e504c476811b652c1559129bae5454b6b4443",
     "tests/citation-range-validation.test.mjs": "65db48e84f79515b8764df6ed063fc849a6b271fecee8ef19e061117750e336d",
@@ -246,9 +246,9 @@
     "tests/shared-spans.test.mjs": "3e36913ed0a9d8d1f479ba98de13b972c470b22dd203a385e9f26f75c67c4c71",
     "tests/shared-translations.test.mjs": "4a07f734813b741441d9c8eb0454960e1c2f7f88135a5fdeeb0973985bf20e0c",
     "tests/six-boundary-ci.test.mjs": "0e895fee1f58528f8ee22729b60604864a6c4fed3c4c84946c050596e056ce48",
-    "tests/six-boundary-history.test.mjs": "ce62a98ce846014478cc849a7a6ce1461209ea56fdcaa99dede29276c806374b",
+    "tests/six-boundary-history.test.mjs": "c70b703d55f8f4f0874a857bfc214f686bb7faae1b3c3dbf54f8c124ba86b938",
     "tests/six-boundary-source-input.test.mjs": "5de82ea399f7602d7dd2c38c09f54cd9a9d025f7e2a2d59a3af0579b87945287",
-    "tests/six-operation-scope.test.mjs": "c7d7a29c6ce7430ebb0a84c3f10fcd96ce985e0b93416396d965c98bef019dc6",
+    "tests/six-operation-scope.test.mjs": "72b00f45acdd4fac55c5ca274bdfc34da7e383e2be8b184cb8f73afcb1dff139",
     "tests/sn27-section.test.mjs": "ec36e695802132191a99b15f5f5fa0bd93c4ee210c89883637635d328a417e99",
     "tests/sn3615-prefix-partial.test.mjs": "432d55d75bdb1afbf4d1498ae5ad71dc7d979cc728e21bd046439bebbe95646f",
     "tests/source-book-search-protocol.test.mjs": "ca32d5282a25c6dd168366992be3ce3e29a697b32409c4d1fc7512a72cda39a9",
@@ -387,6 +387,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/windows20-partitions/WINDOWS_PYTHON_PARTITION_CASE_SOURCE_REVIEW.json",
-    "sha256": "195f07b99da42183b005077a5453aae51b5a87a112055e260d6fbdd9c3986fdb"
+    "sha256": "8132d40b4394267a058fb4fee18575796061981c02ecf51d118355856d7a6497"
   }
 }

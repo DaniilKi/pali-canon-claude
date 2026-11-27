@@ -6,52 +6,52 @@
   "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
   "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
   "source_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/SOURCE_INVERSE_REVIEW.json",
-    "bytes": 206113,
-    "sha256": "92087237fe94a99b17b82d369c505d540180a03464378d27e537769e55d1451a"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/SOURCE_INVERSE_REVIEW.json",
+    "bytes": 206444,
+    "sha256": "f56d870177385158dc01290a67481b3251dba123b67d5a0dd8bedf7bf1201a55"
   },
   "inputs": {
     "plan": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NATIVE_PLATFORM_SOURCE_PLAN.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_LINUX_SOURCE_PLAN.json",
       "bytes": 25924,
-      "sha256": "1204f567a4cae5daf8df53f42f6e26a52e4e1db25177a68a0c0a1659b01dec0f"
+      "sha256": "2de5ce9c8f0cfe8e2b34af7a1aae7118ad676db31c5138e1976219647aeed0f0"
     },
     "delta_policy": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NATIVE_PLATFORM_SOURCE_POLICY.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_LINUX_SOURCE_POLICY.json",
       "bytes": 2744,
-      "sha256": "b32a6a91d4397bca0aa84e18b12d846c26ab05ca3509b84162055a3198905a21"
+      "sha256": "851280df4e99e842515670a3051f2adfff59b4a329ca532ac9231a6beebc257b"
     },
     "independent_input_review": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-final-input-review/INPUT_REVIEW.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-final-input-review/INPUT_REVIEW.json",
       "bytes": 579,
-      "sha256": "fc4ba142871acfd4f1a75a282d70dada50f3e6ac9765bd7c3a736fd3c5d0685f"
+      "sha256": "4a56ad36f88a8fd8d137f8380fb8ce1f5441e42b526d0c267240dc3b719c2bb2"
     },
     "generation_command": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATION_COMMAND.json",
-      "bytes": 1487,
-      "sha256": "c95375d0adfc8f36d7dd8c5e258d5ea36925766d65470a61a5c6395b922722da"
+      "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATION_COMMAND.json",
+      "bytes": 1426,
+      "sha256": "5e12423d422957baee331529fac7621df7b0f00979c3603e0f5a304e92216d2a"
     },
     "generation_result": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/GENERATION_RESULT.json",
-      "bytes": 3420,
-      "sha256": "795337c21b6fecc05c5d3943042212e9ec4c6c39be84d91382aa3e7ac3b647b5"
+      "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATED/GENERATION_RESULT.json",
+      "bytes": 3433,
+      "sha256": "18e9e8d0406725daf182428c60bda376eeb008d0ed734d0b65fd4ad2105eef36"
     }
   },
   "generated_files": {
     "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
-      "bytes": 514999,
-      "sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85"
+      "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "bytes": 517383,
+      "sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d"
     },
     "docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
       "bytes": 17220,
-      "sha256": "4e310da8341bbe68e7c8bcfedc76aaf910e134b09782e520f85148cdfbf2119e"
+      "sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a"
     },
     "tests/helpers/intake359-source-input.mjs": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
+      "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
       "bytes": 11947,
-      "sha256": "bbfd36dc66944f09f9c420cda5c46ff245a7e3883913b50552b255410baf4aa0"
+      "sha256": "38463c1af4e493bf2d5acc63eada817da74e1b868bc005128d3a10737ff215ff"
     }
   },
   "source_packet14": {
@@ -103,28 +103,48 @@
     "docs/evidence/apadana/english351-360-nine/SOURCE_INVERSE_CURRENT368_REVIEW.json"
   ],
   "preserved_prior_leaf_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/before/docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
-    "bytes": 6772,
-    "sha256": "c832bdccf88b1e4749e7b76b7090ad3eb7bee76d7a898c565051cf629dce55ba"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/prior-CoreD/LEAF_REBIND_REVIEW.json",
+    "bytes": 7208,
+    "sha256": "38f1f61fe7a9fa6109e7df803322c1b97c93f680dc28365cf1bac3b1a9b7aa97"
   },
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/verify_outputs.py",
-    "bytes": 11210,
-    "sha256": "dc80a3a80c0bb8d9c9f950c07e5eecdd36c051866b7cdb4e1515bdd53c2b426c"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/verify_outputs.py",
+    "bytes": 11172,
+    "sha256": "c596e58fcec70ce93e527dc6f6403396e62b65483747949a2b8c28b9be68f907"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/CHECKS.json",
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/CHECKS.json",
     "bytes": 28383,
-    "sha256": "6c519926a5c862ae22ccf7a554637c413b18bd310e649291ddbe48989d620d98"
+    "sha256": "19bfaf66e8f996c0100f03cb078e18e0ef672379e9f775f598c17b8829b59c03"
   },
   "remaining_gates": [
-    "Root application of exactly3payloads+2source-only aliases",
-    "Fresh11source/history preflights and8CI guards",
-    "Exact-candidate full native CI, complete case/file aggregate and final preservation review",
-    "No dev/main/deploy approval from this source review"
+    "Root application of exactly3payloads+2source-only aliases with reviewed12source changes onto immutableCoreD.",
+    "Fresh11source/history preflights and8CI guards.",
+    "Exact new core/component and4receipt-only review, then all75 required fullCI and final preservation gates.",
+    "No dev/main/deploy approval from this source review."
   ],
   "runtime_behavioral_approval": false,
   "package_execution_approval": false,
   "CI_or_release_approval": false,
-  "reviewer_executed_project_code": false
+  "reviewer_executed_project_code": false,
+  "current_partition_platforms": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "effective_Linux_amendment_sha256": "162a1eba21ebb530b729aea1dddcad9d9089b3029f17a94a35b7ece935bf7fbf",
+  "observed_native_Linux_execution_review": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-final-input-review/EXECUTION_REVIEW.json",
+    "bytes": 2115,
+    "sha256": "a2111a7252e09c44027e41b38e80e8cad65064019e4eece257c76a4d844a7ba4"
+  },
+  "prior_immutable_current_core": {
+    "commit": "d11ae70bbb7334402f23bf948944e7bab6d55241",
+    "previous_map_sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85",
+    "previous_code_sha256": "4e310da8341bbe68e7c8bcfedc76aaf910e134b09782e520f85148cdfbf2119e",
+    "previous_loader_sha256": "bbfd36dc66944f09f9c420cda5c46ff245a7e3883913b50552b255410baf4aa0",
+    "previous_source_review_sha256": "92087237fe94a99b17b82d369c505d540180a03464378d27e537769e55d1451a",
+    "previous_leaf_review_sha256": "38f1f61fe7a9fa6109e7df803322c1b97c93f680dc28365cf1bac3b1a9b7aa97"
+  },
+  "after_domain": "Owned exactfb153 staging plus12reviewed three-platform source changes and3external generated payloads; not applied to primary CoreD during review."
 }

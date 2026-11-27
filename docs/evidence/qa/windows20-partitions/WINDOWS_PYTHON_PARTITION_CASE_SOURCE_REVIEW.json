@@ -13,19 +13,19 @@
   "source_overrides": {
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
-      "after_sha256": "ebd3356725cf0270fcd6104b20d04de77b9c2a35966a6d4023043ce5e2e69639"
+      "after_sha256": "5b2f8975adf4bf3794cfa8408485de5b4c97620943ca9bfc6ed51ee7c4df2f84"
     },
     "tests/six-boundary-history.test.mjs": {
       "before_sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e",
-      "after_sha256": "ce62a98ce846014478cc849a7a6ce1461209ea56fdcaa99dede29276c806374b"
+      "after_sha256": "c70b703d55f8f4f0874a857bfc214f686bb7faae1b3c3dbf54f8c124ba86b938"
     },
     "tests/six-operation-scope.test.mjs": {
       "before_sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
-      "after_sha256": "c7d7a29c6ce7430ebb0a84c3f10fcd96ce985e0b93416396d965c98bef019dc6"
+      "after_sha256": "72b00f45acdd4fac55c5ca274bdfc34da7e383e2be8b184cb8f73afcb1dff139"
     }
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "906c340d30d8616def5ca7cdbf72d7a901c1af8a19f97e3bf002cfc0e9fb3448",
+    "scripts/ci-test-partitions.mjs": "cfd2c15e9cf8177f2c6f7a60870a3e63121bb3f019eb357b6692a6466038ce42",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
@@ -37,7 +37,7 @@
     "tests/six_boundary_history_acceptance.py": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
     "tests/six_operation_scope_controls.py": "e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570"
   },
-  "inventory_sha256": "4182d7e50f8494d06ca328075307cc67cf69e78b74d54d974cccadd2c7552d2c",
+  "inventory_sha256": "3704dfc03269b6287e190d12f8557c06aa9c7201c9b820eaa7c03a68464bb3cd",
   "counts": {
     "files": 345,
     "preserved_cases": 2076,
@@ -47,7 +47,7 @@
   "registrations": {
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
-      "after_sha256": "ebd3356725cf0270fcd6104b20d04de77b9c2a35966a6d4023043ce5e2e69639",
+      "after_sha256": "5b2f8975adf4bf3794cfa8408485de5b4c97620943ca9bfc6ed51ee7c4df2f84",
       "before": [
         {
           "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
@@ -199,7 +199,7 @@
     },
     "tests/six-boundary-history.test.mjs": {
       "before_sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e",
-      "after_sha256": "ce62a98ce846014478cc849a7a6ce1461209ea56fdcaa99dede29276c806374b",
+      "after_sha256": "c70b703d55f8f4f0874a857bfc214f686bb7faae1b3c3dbf54f8c124ba86b938",
       "before": [
         {
           "name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
@@ -225,7 +225,7 @@
     },
     "tests/six-operation-scope.test.mjs": {
       "before_sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
-      "after_sha256": "c7d7a29c6ce7430ebb0a84c3f10fcd96ce985e0b93416396d965c98bef019dc6",
+      "after_sha256": "72b00f45acdd4fac55c5ca274bdfc34da7e383e2be8b184cb8f73afcb1dff139",
       "before": [
         {
           "name": "private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes",
@@ -338,7 +338,8 @@
   ],
   "partition_platforms": [
     "win32",
-    "darwin"
+    "darwin",
+    "linux"
   ],
   "other_platforms_original_branch_exact": true,
   "conformance_is_separate_gate": true,

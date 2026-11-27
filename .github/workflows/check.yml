@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json
-  CI_TEST_BASELINE_SHA: 9c1a10c0b74f8663a300d9edc0f864397f51c76cdc0cbf4697f5e0df68e42d39
+  CI_TEST_BASELINE_SHA: e6097e39016595df5a930bb0c173bd90b441bb235c0782fa6636db3d5e05b186
 jobs:
   hosted-memory:
     name: Hosted memory budget

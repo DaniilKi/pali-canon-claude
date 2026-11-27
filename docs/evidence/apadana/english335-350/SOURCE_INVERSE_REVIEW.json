@@ -4,22 +4,22 @@
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
   "prior_current_source_commit": "fb15396db578c78f838829668e36f32b65376806",
-  "after_domain": "Owned exactfb153 staging plus12reviewed source changes and3external generated payloads; not applied to primary CoreB during review.",
+  "after_domain": "Owned exactfb153 staging plus12reviewed three-platform source changes and3external generated payloads; not applied to primary CoreD during review.",
   "live_working_tree_claimed": false,
-  "map_sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85",
-  "loader_sha256": "bbfd36dc66944f09f9c420cda5c46ff245a7e3883913b50552b255410baf4aa0",
-  "code_sha256": "4e310da8341bbe68e7c8bcfedc76aaf910e134b09782e520f85148cdfbf2119e",
+  "map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
+  "loader_sha256": "38463c1af4e493bf2d5acc63eada817da74e1b868bc005128d3a10737ff215ff",
+  "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "prior_immutable_current_core": {
-    "commit": "2bbd93a95663126be56c7c64940d0166f3947614",
-    "previous_map_sha256": "42b490f0755ec0b0735c6989556319b501cd487aa3fa2076f504e69f8cfa5fea",
-    "previous_code_sha256": "bc88a126184d2798a1bbed6fd4ee8ffa69cb789cadfa9e453a9d346e5c604a9c",
-    "previous_loader_sha256": "72b1c2e643dc7dbb8038f1ddd34b6bd100c1061c8aedb970c6d689e1131241f2",
-    "previous_source_review_sha256": "9c7a62b471c80b69a24674af7ac90a669e246136b1f9d3c35e278b4320f6c6f6",
-    "previous_leaf_review_sha256": "19350d6a4ea0b0db30f901d7ff5e6bff7a3140fee433a2f702172ca90b95b2f0"
+    "commit": "d11ae70bbb7334402f23bf948944e7bab6d55241",
+    "previous_map_sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85",
+    "previous_code_sha256": "4e310da8341bbe68e7c8bcfedc76aaf910e134b09782e520f85148cdfbf2119e",
+    "previous_loader_sha256": "bbfd36dc66944f09f9c420cda5c46ff245a7e3883913b50552b255410baf4aa0",
+    "previous_source_review_sha256": "92087237fe94a99b17b82d369c505d540180a03464378d27e537769e55d1451a",
+    "previous_leaf_review_sha256": "38f1f61fe7a9fa6109e7df803322c1b97c93f680dc28365cf1bac3b1a9b7aa97"
   },
   "original_source_entries_independently_verified": 1001,
-  "original_identity_verification_method": "All75 literal inverses and926 untouched physical files match immutable original3d whole SHA256, byte length and Git blob SHA1; all75 literal forward replays equal physical current bytes. No Git commands or proposal/project imports.",
+  "original_identity_verification_method": "All75 literal inverse+forward replays and926 untouched physical files checked against pinned original3d manifest SHA256/length/Git blob identity. CoreD prior source seals/aliases read via immutable Git objects; no project/proposal imports or execution.",
   "changed_existing_exactly_mapped": 75,
   "changed_since_source_baseline_commit": 72,
   "changed_since_prior_current_source_commit": 4,
@@ -4160,7 +4160,8 @@
   "current_V4_CI_baseline_commit": "2bbd93a95663126be56c7c64940d0166f3947614",
   "current_partition_platforms": [
     "win32",
-    "darwin"
+    "darwin",
+    "linux"
   ],
   "CoreB_exact8_historical_beforeimages_preserved": true,
   "source_inputs_only": true,
@@ -4169,50 +4170,56 @@
   "final_commit_rebind_required": true,
   "inputs": {
     "plan": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NATIVE_PLATFORM_SOURCE_PLAN.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_LINUX_SOURCE_PLAN.json",
       "bytes": 25924,
-      "sha256": "1204f567a4cae5daf8df53f42f6e26a52e4e1db25177a68a0c0a1659b01dec0f"
+      "sha256": "2de5ce9c8f0cfe8e2b34af7a1aae7118ad676db31c5138e1976219647aeed0f0"
     },
     "delta_policy": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NATIVE_PLATFORM_SOURCE_POLICY.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_LINUX_SOURCE_POLICY.json",
       "bytes": 2744,
-      "sha256": "b32a6a91d4397bca0aa84e18b12d846c26ab05ca3509b84162055a3198905a21"
+      "sha256": "851280df4e99e842515670a3051f2adfff59b4a329ca532ac9231a6beebc257b"
     },
     "independent_input_review": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-final-input-review/INPUT_REVIEW.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-final-input-review/INPUT_REVIEW.json",
       "bytes": 579,
-      "sha256": "fc4ba142871acfd4f1a75a282d70dada50f3e6ac9765bd7c3a736fd3c5d0685f"
+      "sha256": "4a56ad36f88a8fd8d137f8380fb8ce1f5441e42b526d0c267240dc3b719c2bb2"
     },
     "generation_command": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATION_COMMAND.json",
-      "bytes": 1487,
-      "sha256": "c95375d0adfc8f36d7dd8c5e258d5ea36925766d65470a61a5c6395b922722da"
+      "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATION_COMMAND.json",
+      "bytes": 1426,
+      "sha256": "5e12423d422957baee331529fac7621df7b0f00979c3603e0f5a304e92216d2a"
     },
     "generation_result": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_PLATFORM_SOURCE_GENERATED/GENERATION_RESULT.json",
-      "bytes": 3420,
-      "sha256": "795337c21b6fecc05c5d3943042212e9ec4c6c39be84d91382aa3e7ac3b647b5"
+      "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATED/GENERATION_RESULT.json",
+      "bytes": 3433,
+      "sha256": "18e9e8d0406725daf182428c60bda376eeb008d0ed734d0b65fd4ad2105eef36"
     }
   },
   "preserved_prior_source_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/before/docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
-    "bytes": 225999,
-    "sha256": "a90b460e0545dcca1ec37cce9f02f078098285fc610b2b7d3945bbad27395abd"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/prior-CoreD/SOURCE_INVERSE_REVIEW.json",
+    "bytes": 206113,
+    "sha256": "92087237fe94a99b17b82d369c505d540180a03464378d27e537769e55d1451a"
   },
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/verify_outputs.py",
-    "bytes": 11210,
-    "sha256": "dc80a3a80c0bb8d9c9f950c07e5eecdd36c051866b7cdb4e1515bdd53c2b426c"
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/verify_outputs.py",
+    "bytes": 11172,
+    "sha256": "c596e58fcec70ce93e527dc6f6403396e62b65483747949a2b8c28b9be68f907"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/CHECKS.json",
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/CHECKS.json",
     "bytes": 28383,
-    "sha256": "6c519926a5c862ae22ccf7a554637c413b18bd310e649291ddbe48989d620d98"
+    "sha256": "19bfaf66e8f996c0100f03cb078e18e0ef672379e9f775f598c17b8829b59c03"
   },
   "review_limits": [
     "Source-only permission to apply exactly three reviewed payloads and two aliases, then run mandatory preflights.",
     "Original1001 Git object identities checked via pinned manifest, not a fresh Git-object lookup.",
     "39 package/runtime bytes remain pinned; no package execution or runtime behavior approval.",
     "Full exact-candidate CI, aggregate inventories and dev promotion remain separate."
-  ]
+  ],
+  "observed_native_Linux_execution_review": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-final-input-review/EXECUTION_REVIEW.json",
+    "bytes": 2115,
+    "sha256": "a2111a7252e09c44027e41b38e80e8cad65064019e4eece257c76a4d844a7ba4"
+  },
+  "effective_Linux_amendment_sha256": "162a1eba21ebb530b729aea1dddcad9d9089b3029f17a94a35b7ece935bf7fbf"
 }
