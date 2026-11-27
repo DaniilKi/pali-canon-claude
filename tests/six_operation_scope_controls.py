@@ -639,6 +639,9 @@ class SixOperationScopeControls(unittest.TestCase):
             target.write_bytes(b'owned lstat control')
             link = root / 'link.json'
             link.symlink_to(target)
+            link_info = original_stat(link, follow_symlinks=False)
+            self.assertTrue(stat.S_ISLNK(link_info.st_mode))
+            ordinary_link_stats = [False, False] if getattr(link_info, 'st_file_attributes', 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT else [False]
             state = {'kind': 'ordinary', 'stats': [], 'reads': []}
 
             def current_stat(path, *, follow_symlinks=True):
@@ -673,7 +676,7 @@ class SixOperationScopeControls(unittest.TestCase):
                 with self.assertRaises(PermissionError):
                     ten.regular(root, 'proof.json')
                 self.assertEqual(state['reads'], [])
-                for kind, expected_link_stats in (('ordinary', [False]),
+                for kind, expected_link_stats in (('ordinary', ordinary_link_stats),
                                                   ('reparse', [False, False])):
                     state.update(kind=kind, stats=[], reads=[])
                     with self.assertRaisesRegex(ValueError, '^Next-ten authority symlink refused$'):
