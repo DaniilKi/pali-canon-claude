@@ -371,129 +371,142 @@ class SixOperationScopeControls(unittest.TestCase):
         from threading import Thread
         import web_reader_next_ten_boundary_history as ten
         self._assert_single_lstat_node_guards(ten)
-        with h._c1_operation_scope(self.root) as scope:
-            binding = scope._next_ten_binding
-            snapshot = binding._proof368
-            self.assertEqual(list(snapshot._raw),
-                [*intake368.PINS, intake368.RUNTIME_NAME, intake368.REVIEW_NAME])
-            self.assertEqual(len(snapshot._raw), 16)
-            with self.assertRaises(AttributeError):
-                snapshot._active = False
-            with self.assertRaises(ValueError):
-                snapshot._claim(object())
-            with self.assertRaises(ValueError):
-                snapshot._claim(binding)  # second valid claimant still refuses
-            with self.assertRaises(ValueError):
-                snapshot._fresh(self.root, object())
-            with tempfile.TemporaryDirectory(prefix='pali-proof-wrong-root-') as temp:
+        graph_closes = []
+        original_graph_close = ten._OperationRecordGraph._close
+        def record_graph_close(graph):
+            graph_closes.append(graph)
+            return original_graph_close(graph)
+        with mock.patch.object(ten._OperationRecordGraph, '_close', record_graph_close):
+            with h._c1_operation_scope(self.root) as scope:
+                binding = scope._next_ten_binding
+                snapshot = binding._proof368
+                graph9 = binding._graph9
+                closed_other_graph = self._assert_owned_record_graph(ten, binding)
+                self.assertEqual(list(snapshot._raw),
+                    [*intake368.PINS, intake368.RUNTIME_NAME, intake368.REVIEW_NAME])
+                self.assertEqual(len(snapshot._raw), 16)
+                with self.assertRaises(AttributeError):
+                    snapshot._active = False
                 with self.assertRaises(ValueError):
-                    snapshot._fresh(Path(temp), binding)
-            refused = []
-            def foreign_thread():
-                try:
-                    snapshot._fresh(self.root, binding)
-                except ValueError:
-                    refused.append(True)
-            thread = Thread(target=foreign_thread)
-            thread.start(); thread.join(timeout=5)
-            self.assertFalse(thread.is_alive())
-            self.assertEqual(refused, [True])
-            forged = object.__new__(intake368._OperationProofBytes)
-            with self.assertRaises((AttributeError, ValueError)):
-                forged._fresh(self.root, binding)
-            from types import MappingProxyType
-            original_raw = snapshot._raw
-            class EqualAnything:
-                def __eq__(self, other):
-                    return True
-            for forged_raw in (dict(original_raw), MappingProxyType(dict(original_raw)),
-                    MappingProxyType({name: EqualAnything() for name in original_raw})):
-                object.__setattr__(snapshot, '_raw', forged_raw)
-                try:
+                    snapshot._claim(object())
+                with self.assertRaises(ValueError):
+                    snapshot._claim(binding)  # second valid claimant still refuses
+                with self.assertRaises(ValueError):
+                    snapshot._fresh(self.root, object())
+                with tempfile.TemporaryDirectory(prefix='pali-proof-wrong-root-') as temp:
                     with self.assertRaises(ValueError):
+                        snapshot._fresh(Path(temp), binding)
+                refused = []
+                def foreign_thread():
+                    try:
                         snapshot._fresh(self.root, binding)
+                    except ValueError:
+                        refused.append(True)
+                thread = Thread(target=foreign_thread)
+                thread.start(); thread.join(timeout=5)
+                self.assertFalse(thread.is_alive())
+                self.assertEqual(refused, [True])
+                forged = object.__new__(intake368._OperationProofBytes)
+                with self.assertRaises((AttributeError, ValueError)):
+                    forged._fresh(self.root, binding)
+                from types import MappingProxyType
+                original_raw = snapshot._raw
+                class EqualAnything:
+                    def __eq__(self, other):
+                        return True
+                for forged_raw in (dict(original_raw), MappingProxyType(dict(original_raw)),
+                        MappingProxyType({name: EqualAnything() for name in original_raw})):
+                    object.__setattr__(snapshot, '_raw', forged_raw)
+                    try:
+                        with self.assertRaises(ValueError):
+                            snapshot._fresh(self.root, binding)
+                        with self.assertRaises(ValueError):
+                            binding._check()
+                    finally:
+                        object.__setattr__(snapshot, '_raw', original_raw)
+                invalid = dict(snapshot._raw)
+                invalid['APPROVAL.json'] += b' '
+                with self.assertRaises(ValueError):
+                    intake368._OperationProofBytes(self.root, invalid)
+                # Even another authentically sealed snapshot cannot replace this
+                # binding's original one; identity is not a caller-selectable scope.
+                other = intake368._OperationProofBytes(self.root, dict(snapshot._raw))
+                with self.assertRaises(ValueError):
+                    other._fresh(self.root, None)
+                for _ in range(2):
                     with self.assertRaises(ValueError):
-                        binding._check()
-                finally:
-                    object.__setattr__(snapshot, '_raw', original_raw)
-            invalid = dict(snapshot._raw)
-            invalid['APPROVAL.json'] += b' '
-            with self.assertRaises(ValueError):
-                intake368._OperationProofBytes(self.root, invalid)
-            # Even another authentically sealed snapshot cannot replace this
-            # binding's original one; identity is not a caller-selectable scope.
-            other = intake368._OperationProofBytes(self.root, dict(snapshot._raw))
-            with self.assertRaises(ValueError):
-                other._fresh(self.root, None)
-            for _ in range(2):
-                with self.assertRaises(ValueError):
-                    other._claim(None)
-            claim_refused = []
-            def foreign_claim():
-                try:
-                    other._claim(binding)
-                except ValueError:
-                    claim_refused.append(True)
-            claim_thread = Thread(target=foreign_claim)
-            claim_thread.start(); claim_thread.join(timeout=5)
-            self.assertFalse(claim_thread.is_alive())
-            self.assertEqual(claim_refused, [True])
-            with tempfile.TemporaryDirectory(prefix='pali-proof-wrong-claim-root-') as temp:
-                wrong_root_binding = object.__new__(ten._NextTenBinding)
-                object.__setattr__(wrong_root_binding, '_root', Path(temp))
-                with self.assertRaises(ValueError):
-                    other._claim(wrong_root_binding)
-            other._claim(binding)
-            with self.assertRaises(ValueError):
+                        other._claim(None)
+                claim_refused = []
+                def foreign_claim():
+                    try:
+                        other._claim(binding)
+                    except ValueError:
+                        claim_refused.append(True)
+                claim_thread = Thread(target=foreign_claim)
+                claim_thread.start(); claim_thread.join(timeout=5)
+                self.assertFalse(claim_thread.is_alive())
+                self.assertEqual(claim_refused, [True])
+                with tempfile.TemporaryDirectory(prefix='pali-proof-wrong-claim-root-') as temp:
+                    wrong_root_binding = object.__new__(ten._NextTenBinding)
+                    object.__setattr__(wrong_root_binding, '_root', Path(temp))
+                    with self.assertRaises(ValueError):
+                        other._claim(wrong_root_binding)
                 other._claim(binding)
-            object.__setattr__(binding, '_proof368', other)
-            try:
                 with self.assertRaises(ValueError):
-                    ten._binding_records(binding, self.root)
-            finally:
-                object.__setattr__(binding, '_proof368', snapshot)
-                other._close()
-            original_pin = intake368.PINS['APPROVAL.json']
-            intake368.PINS['APPROVAL.json'] = '0' * 64
-            try:
-                with self.assertRaises(ValueError):
-                    ten._binding_records(binding, self.root)
-            finally:
-                intake368.PINS['APPROVAL.json'] = original_pin
-            original_directory = intake368.DIRECTORY
-            with tempfile.TemporaryDirectory(prefix="pali-proof-authentic-directory-") as temp:
-                alternate = self.root / ("owned-alternate-" + Path(temp).name)
-                alternate.mkdir()
+                    other._claim(binding)
+                object.__setattr__(binding, '_proof368', other)
                 try:
-                    for name, raw in snapshot._raw.items():
-                        (alternate / name).write_bytes(raw)
-                    intake368.DIRECTORY = alternate.name
                     with self.assertRaises(ValueError):
                         ten._binding_records(binding, self.root)
                 finally:
-                    intake368.DIRECTORY = original_directory
-                    shutil.rmtree(alternate)
-            for name in (*intake368.PINS, intake368.RUNTIME_NAME, intake368.REVIEW_NAME):
-                relative = intake368.DIRECTORY + '/' + name
-                for missing in (False, True):
-                    ten._binding_records(binding, self.root)
-                    with self.change(relative, missing=missing), self.subTest(current368=name, missing=missing):
-                        with self.assertRaises((ValueError, AssertionError)):
-                            ten._binding_records(binding, self.root)
-                    ten._binding_records(binding, self.root)
-                path = self.root / relative
-                raw = path.read_bytes()
-                target = path.with_name(path.name + '.owned-snapshot-target')
-                target.write_bytes(raw)
-                path.unlink(); path.symlink_to(target)
+                    object.__setattr__(binding, '_proof368', snapshot)
+                    other._close()
+                original_pin = intake368.PINS['APPROVAL.json']
+                intake368.PINS['APPROVAL.json'] = '0' * 64
                 try:
-                    with self.subTest(current368=name, authentic_symlink=True):
-                        with self.assertRaisesRegex(ValueError, 'symlink'):
-                            ten._binding_records(binding, self.root)
+                    with self.assertRaises(ValueError):
+                        ten._binding_records(binding, self.root)
                 finally:
-                    path.unlink(); path.write_bytes(raw); target.unlink()
-                ten._binding_records(binding, self.root)
+                    intake368.PINS['APPROVAL.json'] = original_pin
+                original_directory = intake368.DIRECTORY
+                with tempfile.TemporaryDirectory(prefix="pali-proof-authentic-directory-") as temp:
+                    alternate = self.root / ("owned-alternate-" + Path(temp).name)
+                    alternate.mkdir()
+                    try:
+                        for name, raw in snapshot._raw.items():
+                            (alternate / name).write_bytes(raw)
+                        intake368.DIRECTORY = alternate.name
+                        with self.assertRaises(ValueError):
+                            ten._binding_records(binding, self.root)
+                    finally:
+                        intake368.DIRECTORY = original_directory
+                        shutil.rmtree(alternate)
+                for name in (*intake368.PINS, intake368.RUNTIME_NAME, intake368.REVIEW_NAME):
+                    relative = intake368.DIRECTORY + '/' + name
+                    for missing in (False, True):
+                        ten._binding_records(binding, self.root)
+                        with self.change(relative, missing=missing), self.subTest(current368=name, missing=missing):
+                            with self.assertRaises((ValueError, AssertionError)):
+                                ten._binding_records(binding, self.root)
+                        ten._binding_records(binding, self.root)
+                    path = self.root / relative
+                    raw = path.read_bytes()
+                    target = path.with_name(path.name + '.owned-snapshot-target')
+                    target.write_bytes(raw)
+                    path.unlink(); path.symlink_to(target)
+                    try:
+                        with self.subTest(current368=name, authentic_symlink=True):
+                            with self.assertRaisesRegex(ValueError, 'symlink'):
+                                ten._binding_records(binding, self.root)
+                    finally:
+                        path.unlink(); path.write_bytes(raw); target.unlink()
+                    ten._binding_records(binding, self.root)
+                graph_close_marker = len(graph_closes)
+                object.__setattr__(binding, '_graph9', closed_other_graph)
+        self.assertEqual(graph_closes[graph_close_marker:], [graph9])
+        object.__setattr__(binding, '_graph9', graph9)
         binding._close()  # normal cleanup remains idempotent
+        self._assert_record_graph_closed(graph9)
         self.assertFalse(snapshot._active)
         self.assertEqual(dict(snapshot._raw), {})
         self.assertIsNone(snapshot._claimant)
@@ -517,6 +530,7 @@ class SixOperationScopeControls(unittest.TestCase):
         consumer_scope._close()
         consumer_binding._close()
         consumer_snapshot._close()
+        self._assert_record_graph_closed(consumer_binding._graph9)
         # A failure after capture but before binding claim also clears ownership.
         created = []
         original_capture = intake368._capture_authority_with_proof_bytes
@@ -528,11 +542,14 @@ class SixOperationScopeControls(unittest.TestCase):
         failer = mock.patch.object(ten, 'prior_dd_records',
             side_effect=ValueError('Owned failure before binding claim'))
         try:
-            with mock.patch.object(intake368, '_capture_authority_with_proof_bytes', capture_then_fail):
-                with self.assertRaisesRegex(ValueError, 'Owned failure before binding claim'):
-                    ten._capture_six_test_input(self.root)
+            with self._observe_record_graph_construction(ten) as preclaim_graphs:
+                with mock.patch.object(intake368, '_capture_authority_with_proof_bytes', capture_then_fail):
+                    with self.assertRaisesRegex(ValueError, 'Owned failure before binding claim'):
+                        ten._capture_six_test_input(self.root)
         finally:
             failer.stop()
+        self.assertEqual(len(preclaim_graphs), 1)
+        self._assert_record_graph_closed(preclaim_graphs[0])
         self.assertEqual(len(created), 1)
         self.assertFalse(created[0]._active)
         self.assertEqual(dict(created[0]._raw), {})
@@ -547,13 +564,18 @@ class SixOperationScopeControls(unittest.TestCase):
         parent_failer = mock.patch.object(h, 'parent343_records',
             side_effect=ValueError('Owned failure before scope yield'))
         try:
-            with mock.patch.object(h, '_capture_actual_data', actual_then_fail):
-                with self.assertRaisesRegex(ValueError, 'Owned failure before scope yield'):
-                    with h._c1_operation_scope(self.root):
-                        self.fail('Failed pre-yield validation cannot expose a scope')
+            with self._observe_valid_record_graph_claim(ten) as claimed_graphs:
+                with mock.patch.object(h, '_capture_actual_data', actual_then_fail):
+                    with self.assertRaisesRegex(ValueError, 'Owned failure before scope yield'):
+                        with h._c1_operation_scope(self.root):
+                            self.fail('Failed pre-yield validation cannot expose a scope')
         finally:
             parent_failer.stop()
         self.assertEqual(len(returned), 1)
+        self.assertEqual(len(claimed_graphs), 1)
+        self.assertIs(claimed_graphs[0][0], returned[0]._graph9)
+        self.assertIs(claimed_graphs[0][1], returned[0])
+        self._assert_record_graph_closed(returned[0]._graph9)
         self.assertFalse(returned[0]._active)
         self.assertEqual(dict(returned[0]._proof368._raw), {})
         self.assertFalse(returned[0]._proof359._active)
@@ -625,6 +647,312 @@ class SixOperationScopeControls(unittest.TestCase):
             four_refuses_before_io(lambda gate=gate, args=args: gate(four_scope, *args))
 
         self._assert_old359_operation_proof_bytes()
+
+    def _assert_record_graph_closed(self, graph):
+        self.assertFalse(graph._active)
+        self.assertIsNone(graph._claimant)
+        self.assertEqual(dict(graph._raw), {})
+        self.assertEqual(dict(graph._records), {})
+        self.assertEqual(graph._configuration, ())
+        self.assertEqual(graph._rows, ())
+        graph._close(); graph._close()
+        self.assertFalse(graph._active)
+        original_read, original_stat = Path.read_bytes, Path.stat
+        with mock.patch.object(Path, 'read_bytes', autospec=True, side_effect=original_read) as reads, \
+                mock.patch.object(Path, 'stat', autospec=True, side_effect=original_stat) as stats:
+            for operation in (lambda: graph._fresh_detached_records(self.root, None),
+                              lambda: graph._initial_records(self.root),
+                              lambda: graph._claim(None)):
+                with self.assertRaises(ValueError):
+                    operation()
+            self.assertEqual((reads.call_count, stats.call_count), (0, 0))
+
+    @contextlib.contextmanager
+    def _observe_record_graph_construction(self, ten):
+        created = []
+        original = ten._OperationRecordGraph.__init__
+        def recorded(instance, root):
+            created.append(instance)  # includes a constructor that raises partway
+            return original(instance, root)
+        with mock.patch.object(ten._OperationRecordGraph, '__init__', recorded):
+            yield created
+
+    @contextlib.contextmanager
+    def _observe_valid_record_graph_claim(self, ten):
+        # Reuse the existing real pre-yield capture; no synthetic binding or27 pass.
+        from threading import Thread
+        claimed = []
+        original = ten._OperationRecordGraph._claim
+        original_read, original_stat = Path.read_bytes, Path.stat
+        def checked(graph, claimant):
+            self.assertIsNone(graph._claimant)
+            self.assertIs(type(claimant), ten._NextTenBinding)
+            self.assertIs(claimant._graph9, graph)
+            self.assertEqual(claimant._root, graph._root)
+            with tempfile.TemporaryDirectory(prefix='pali-unclaimed-graph-root-') as temp:
+                with mock.patch.object(Path, 'read_bytes', autospec=True, side_effect=original_read) as reads, \
+                        mock.patch.object(Path, 'stat', autospec=True, side_effect=original_stat) as stats:
+                    with self.assertRaises(ValueError):
+                        graph._fresh_detached_records(self.root, claimant)
+                    for foreign in (None, object()):
+                        with self.assertRaises(ValueError):
+                            original(graph, foreign)
+                    root = claimant._root
+                    object.__setattr__(claimant, '_root', Path(temp))
+                    try:
+                        with self.assertRaises(ValueError):
+                            original(graph, claimant)
+                    finally:
+                        object.__setattr__(claimant, '_root', root)
+                    refused, errors = [], []
+                    def foreign_thread():
+                        try:
+                            with self.assertRaises(ValueError):
+                                original(graph, claimant)
+                            refused.append(True)
+                        except BaseException as error:
+                            errors.append(type(error).__name__)
+                    thread = Thread(target=foreign_thread)
+                    thread.start(); thread.join(timeout=5)
+                    self.assertFalse(thread.is_alive())
+                    self.assertEqual((refused, errors), ([True], []))
+                    self.assertIsNone(graph._claimant)
+                    original(graph, claimant)  # exact real constructor claim succeeds
+                    self.assertIs(graph._claimant, claimant)
+                    with self.assertRaises(ValueError):
+                        original(graph, claimant)
+                    with self.assertRaises(ValueError):
+                        graph._initial_records(self.root)
+                    self.assertEqual((reads.call_count, stats.call_count), (0, 0))
+            claimed.append((graph, claimant))
+        with mock.patch.object(ten._OperationRecordGraph, '_claim', checked):
+            yield claimed
+
+    def _assert_record_graph_creation_rollback(self, ten):
+        # Failure before any graph bytes are retained.
+        with self._observe_record_graph_construction(ten) as early:
+            with mock.patch.object(ten, 'proof_records',
+                    side_effect=ValueError('Owned record semantic failure')) as semantic:
+                with self.assertRaisesRegex(ValueError, '^Owned record semantic failure$'):
+                    ten._OperationRecordGraph(self.root)
+                self.assertEqual(semantic.call_count, 1)
+        self.assertEqual(len(early), 1)
+        self._assert_record_graph_closed(early[0])
+        # Real delegated reads return genuine bytes with only the container type
+        # changed. Original JSON/SHA accepts bytearray; the new immutable boundary
+        # must refuse each original reader kind, including a partial raw capture.
+        for owner, message in ((ten, 'Immutable next-ten record proof bytes required'),
+                               (h, 'Immutable six-boundary record proof bytes required')):
+            original = owner.regular
+            def mutable_read(root, name):
+                return bytearray(original(root, name))
+            with self._observe_record_graph_construction(ten) as mutable:
+                with mock.patch.object(owner, 'regular', side_effect=mutable_read):
+                    with self.assertRaisesRegex(ValueError, '^' + message + '$'):
+                        ten._OperationRecordGraph(self.root)
+            self.assertEqual(len(mutable), 1)
+            self._assert_record_graph_closed(mutable[0])
+        # A complete graph exists, but old359 capture has not returned or made an
+        # old13/current16 owner. Reuse the real capture's unchanged failure boundary.
+        with self._observe_record_graph_construction(ten) as before_old:
+            with mock.patch.object(intake359, '_capture_authority_with_manifest',
+                    side_effect=ValueError('Owned failure before old359 capture')) as old:
+                with self.assertRaisesRegex(ValueError, '^Owned failure before old359 capture$'):
+                    ten._capture_six_test_input(self.root)
+                self.assertEqual(old.call_count, 1)
+        self.assertEqual(len(before_old), 1)
+        self._assert_record_graph_closed(before_old[0])
+
+    def _assert_owned_record_graph(self, ten, binding):
+        from types import MappingProxyType
+        from threading import Thread
+        graph = binding._graph9
+        rows = graph._rows
+        next_regular, six_regular = ten.regular, h.regular
+        next_digest, six_digest = ten.digest, h.digest
+        visited = []
+        def read_next(root, name):
+            visited.append(('next', name))
+            return next_regular(root, name)
+        def read_six(root, name):
+            visited.append(('six', name))
+            return six_regular(root, name)
+        with mock.patch.object(ten, 'regular', side_effect=read_next), \
+                mock.patch.object(h, 'regular', side_effect=read_six), \
+                mock.patch.object(ten, 'digest', wraps=next_digest) as next_sha, \
+                mock.patch.object(h, 'digest', wraps=six_digest) as six_sha, \
+                mock.patch.object(ten, 'proof_records', wraps=ten.proof_records) as semantic:
+            observed = graph._fresh_detached_records(self.root, binding)
+            self.assertEqual(visited, [(kind, name) for kind, name, _ in rows])
+            self.assertEqual((next_sha.call_count, six_sha.call_count), (3, 6))
+            self.assertEqual(semantic.call_count, 0)
+        self.assertEqual(observed, binding._records)  # historicalNEXT34, not actual368
+        self.assertEqual(list(observed), list(binding._records))
+        self.assertIsNot(observed, graph._records)
+        self.assertIsNot(observed, binding._records)
+        for name, record in observed.items():
+            self.assertIsNot(record, graph._records[name])
+            self.assertEqual(list(record), list(graph._records[name]))
+        first = next(iter(observed))
+        observed[first]['bytes'] += 1
+        self.assertEqual(graph._fresh_detached_records(self.root, binding), binding._records)
+        with self.assertRaises(AttributeError):
+            graph._active = False
+        with self.assertRaises(TypeError):
+            graph._records[first]['bytes'] += 1
+        with self.assertRaises(TypeError):
+            graph._raw[rows[0][1]] = b'foreign'
+
+        original_read, original_stat = Path.read_bytes, Path.stat
+        def refuses_without_io(operation, errors=ValueError):
+            with mock.patch.object(Path, 'read_bytes', autospec=True, side_effect=original_read) as reads, \
+                    mock.patch.object(Path, 'stat', autospec=True, side_effect=original_stat) as stats:
+                with self.assertRaises(errors):
+                    operation()
+                self.assertEqual((reads.call_count, stats.call_count), (0, 0))
+        class EqualAnything:
+            def __eq__(self, other):
+                return True
+        originals = (('_raw', graph._raw), ('_records', graph._records))
+        for field, original in originals:
+            candidates = (dict(original), MappingProxyType(dict(original)),
+                          MappingProxyType({name: EqualAnything() for name in original}))
+            for substitute in candidates:
+                object.__setattr__(graph, field, substitute)
+                try:
+                    refuses_without_io(lambda: graph._fresh_detached_records(self.root, binding))
+                    refuses_without_io(binding._check)
+                finally:
+                    object.__setattr__(graph, field, original)
+        for field in ('_configuration', '_rows'):
+            original = getattr(graph, field)
+            for substitute in ((), tuple(list(original))):
+                self.assertIsNot(substitute, original)
+                object.__setattr__(graph, field, substitute)
+                try:
+                    refuses_without_io(lambda: graph._fresh_detached_records(self.root, binding))
+                finally:
+                    object.__setattr__(graph, field, original)
+        class StringSubclass(str):
+            pass
+        for module, name, kind, expected in ten._RECORD_GRAPH_EXPECTED_CONFIGURATION:
+            owner = ten if module == 'next' else h
+            changed = (expected + ' UNREVIEWED' if kind == 'str' else
+                       tuple(reversed(expected)) if kind == 'tuple' else
+                       expected | frozenset({'data/unreviewed.json'}))
+            changed_type = (StringSubclass(expected) if kind == 'str' else
+                            list(expected) if kind == 'tuple' else set(expected))
+            for substitute in (changed, changed_type):
+                with mock.patch.object(owner, name, substitute):
+                    refuses_without_io(lambda: graph._fresh_detached_records(self.root, binding))
+        # These table labels are closed exact strings, not equality/hash callbacks.
+        # V1 lacks this guard; this control set explicitly requires the V2 addendum.
+        class ForeignLabel:
+            def __eq__(self, other):
+                raise AssertionError('A foreign record-graph label must not be compared')
+            def __hash__(self):
+                raise AssertionError('A foreign record-graph label must not be hashed')
+        original_table = ten._RECORD_GRAPH_EXPECTED_CONFIGURATION
+        for index in (0, 2):  # module and kind label, retaining all37 rows/values
+            for substitute in (StringSubclass(original_table[0][index]), ForeignLabel()):
+                first_row = list(original_table[0])
+                first_row[index] = substitute
+                changed_table = (tuple(first_row),) + original_table[1:]
+                with mock.patch.object(ten, '_RECORD_GRAPH_EXPECTED_CONFIGURATION', changed_table):
+                    refuses_without_io(lambda: graph._fresh_detached_records(self.root, binding))
+        self.assertEqual(graph._fresh_detached_records(self.root, binding), binding._records)
+        for field in ('_graph9_identity', '_graph9_raw_identity', '_graph9_records_identity',
+                      '_graph9_config_identity', '_graph9_rows_identity'):
+            original = getattr(binding, field)
+            object.__setattr__(binding, field, None)
+            try:
+                refuses_without_io(binding._check)
+            finally:
+                object.__setattr__(binding, field, original)
+        with tempfile.TemporaryDirectory(prefix='pali-graph-wrong-root-') as temp:
+            refuses_without_io(lambda: graph._fresh_detached_records(Path(temp), binding))
+        for claimant in (None, object()):
+            refuses_without_io(lambda: graph._fresh_detached_records(self.root, claimant))
+        errors = []
+        def foreign_thread():
+            try:
+                refuses_without_io(lambda: graph._fresh_detached_records(self.root, binding))
+            except BaseException as error:
+                errors.append(type(error).__name__)
+        thread = Thread(target=foreign_thread)
+        thread.start(); thread.join(timeout=5)
+        self.assertFalse(thread.is_alive())
+        self.assertEqual(errors, [])
+        with self.assertRaises(TypeError):
+            ten._OperationRecordGraph(self.root, dict(observed))
+        class ForeignPathlike:
+            def __fspath__(inner):
+                self.fail('A carried graph token must not be converted to a path')
+        refuses_without_io(lambda: ten._OperationRecordGraph(ForeignPathlike()))
+        refuses_without_io(lambda: graph._claim(binding))
+        refuses_without_io(lambda: graph._initial_records(self.root))
+        forged = object.__new__(ten._OperationRecordGraph)
+        refuses_without_io(lambda: forged._fresh_detached_records(self.root, binding),
+                           (ValueError, AttributeError))
+        class ForeignGraph(ten._OperationRecordGraph):
+            pass
+        original_graph = binding._graph9
+        object.__setattr__(binding, '_graph9', object.__new__(ForeignGraph))
+        try:
+            refuses_without_io(binding._check)
+        finally:
+            object.__setattr__(binding, '_graph9', original_graph)
+
+        # One genuine second graph reuses no caller-provided records. It validates
+        # original semantics once, cannot steal this occupied owner, and cannot
+        # replace its original graph by changing only the primary field.
+        with mock.patch.object(ten, 'proof_records', wraps=ten.proof_records) as semantic:
+            other = ten._OperationRecordGraph(self.root)
+            self.assertEqual(semantic.call_count, 1)
+        try:
+            initial = other._initial_records(self.root)
+            self.assertEqual(initial, binding._records)
+            initial[first]['bytes'] += 1
+            self.assertEqual(other._initial_records(self.root), binding._records)
+            refuses_without_io(lambda: other._fresh_detached_records(self.root, binding))
+            for claimant in (None, object(), binding):
+                refuses_without_io(lambda: other._claim(claimant))
+            object.__setattr__(binding, '_graph9', other)
+            try:
+                refuses_without_io(binding._check)
+                refuses_without_io(lambda: ten._binding_records(binding, self.root))
+            finally:
+                object.__setattr__(binding, '_graph9', original_graph)
+        finally:
+            other._close()
+        self._assert_record_graph_closed(other)
+        refuses_without_io(lambda: other._fresh_detached_records(self.root, binding))
+        refuses_without_io(lambda: other._claim(binding))
+        refuses_without_io(lambda: other._initial_records(self.root))
+
+        for _kind, name, _pin in rows:
+            for missing in (False, True):
+                graph._fresh_detached_records(self.root, binding)
+                with self.change(name, missing=missing):
+                    with self.assertRaises((ValueError, AssertionError)):
+                        graph._fresh_detached_records(self.root, binding)
+                graph._fresh_detached_records(self.root, binding)
+            path = self.root / name
+            raw = path.read_bytes()
+            authentic = path.with_name(path.name + '.owned-graph-authentic')
+            authentic.write_bytes(raw)
+            path.unlink()
+            try:
+                path.symlink_to(authentic)
+                with self.assertRaisesRegex(ValueError, 'symlink'):
+                    graph._fresh_detached_records(self.root, binding)
+            finally:
+                if path.is_symlink() or path.exists():
+                    path.unlink()
+                path.write_bytes(raw); authentic.unlink()
+            graph._fresh_detached_records(self.root, binding)
+        self._assert_record_graph_creation_rollback(ten)
+        return other  # authentic, already closed; reused for close-recipient control
 
     def _assert_single_lstat_node_guards(self, ten):
         # Called only from the existing case05 helper; no registered test is added.

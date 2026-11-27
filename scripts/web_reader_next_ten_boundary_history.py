@@ -346,17 +346,250 @@ class _Old359OperationProofBytes:
         object.__setattr__(self, '_pins', ())
 
 
+# Closed literal semantic globals consumed by this one nine-proof graph.
+_RECORD_GRAPH_EXPECTED_CONFIGURATION = (
+    ('next', 'DIRECTORY', 'str', 'docs/evidence/apadana/boundaries-next-ten'),
+    ('next', 'ORACLE_NAME', 'str', 'FUTURE_ORACLE.json'),
+    ('next', 'SOURCE_ORACLE_SHA', 'str', '78fd34efd9942bb363010123f4019cfa31df3b609fbd3736d2db7288c2036655'),
+    ('next', 'BASELINE_COMMIT', 'str', 'dd7b697df2c54308084fffd934af38130d01f952'),
+    ('next', 'IDS', 'tuple', ('tha-ap348', 'tha-ap349', 'tha-ap374', 'tha-ap375', 'tha-ap423', 'tha-ap424', 'tha-ap426', 'tha-ap427', 'tha-ap428', 'tha-ap429')),
+    ('next', 'REVISION', 'str', 'apadana-thera-next10-v1'),
+    ('next', 'SOURCE_COMMIT', 'str', '2d134ff9ef60f70a1eb03c9370580228811a3070'),
+    ('next', 'DD_CANON_SHA', 'str', '0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b'),
+    ('next', 'NEXT_CANON_SHA', 'str', 'f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de'),
+    ('next', 'INVENTORY_NAME', 'str', 'INDEPENDENT_NEXT_TEN_RUNTIME_INVENTORY.json'),
+    ('next', 'INVENTORY_SHA', 'str', 'ea2b5cfb7c7a6c9216e2f33a5d1950c128b1ef50cb6c32cf929cf555b942408f'),
+    ('next', 'REVIEW_NAME', 'str', 'INDEPENDENT_NEXT_TEN_RUNTIME_REVIEW.json'),
+    ('next', 'REVIEW_SHA', 'str', 'b3197bdcc429700dee09446abd01ff08c6009d4fcaedc3f2f542429c4f497f55'),
+    ('next', 'APPLICATION_COMMIT', 'str', '6ab4a322108aec740c330e4afd974ee4da808886'),
+    ('next', 'PRIOR_INVENTORY_SHA', 'str', 'ba913149e9d704e1b145d1a6a195f95ad20e0d2dbc73fa6da22f16f43f492c08'),
+    ('next', 'PRIOR_REVIEW_SHA', 'str', 'b9b5c3761f65defd45103b3c70cbcac37a8dce4133d9991b18063bceefaa0be9'),
+    ('next', 'DD_DATA_PATHS', 'tuple', ('server/data/canon.json.gz.part-0001', 'server/data/canon.json.gz.part-0002', 'server/data/canon.json.gz.parts.json', 'server/data/parallels.json.gz')),
+    ('next', 'ALLOWED_RUNTIME_DELTA', 'frozenset', frozenset(('data/canon.json.gz.part-0001', 'data/canon.json.gz.part-0002', 'data/canon.json.gz.parts.json', 'data/parallels.json.gz', 'http-worker.cjs', 'http.cjs', 'index.cjs', 'web/reader.js'))),
+    ('six', 'PROOF_DIRECTORY', 'str', 'docs/evidence/apadana/boundaries340-347'),
+    ('six', 'ORACLE_NAME', 'str', 'FUTURE_ORACLE.json'),
+    ('six', 'SOURCE_ORACLE_SHA', 'str', '01bc011f958165274ce1a09850dd5cbe4f495a14242c7b96e3fd4ab0e152c397'),
+    ('six', 'IDS', 'tuple', ('tha-ap340', 'tha-ap341', 'tha-ap343', 'tha-ap344', 'tha-ap346', 'tha-ap347')),
+    ('six', 'REVISION', 'str', 'apadana-thera340-341-343-344-346-347-v1'),
+    ('six', 'C1_CANON_SHA', 'str', '46698d63192a1be9dd943a877baed430b61802bb54a7046c18b7c5c518e06eb8'),
+    ('six', 'FUTURE_CANON_SHA', 'str', '0f9eedc279fbf63a93b541c27aae2f6b6e799e7bb3e5805c4da13b1692b9db7b'),
+    ('six', 'SOURCE_COMMIT', 'str', '2d134ff9ef60f70a1eb03c9370580228811a3070'),
+    ('six', 'PRIOR343_INVENTORY_SHA', 'str', '5ca203134b2a4b553f84fe0c97487698f687eaa4ac3cd839c2378ab35d9b2405'),
+    ('six', 'PRIOR343_REVIEW_SHA', 'str', 'd6bb630dd6939f5688f041695d6ef61d15ea694c95c27198ac6881f17e02539e'),
+    ('six', 'C1_METADATA_SHA', 'str', 'ff3f60a460fe1648558e095adf0ceab5865dd6d1c2e1b00f1515aa80ed5bf076'),
+    ('six', 'BASELINE_COMMIT', 'str', 'c1b2433481399b2125f6645a75bf4105cb212440'),
+    ('six', 'INVENTORY_NAME', 'str', 'INDEPENDENT_SIX_RUNTIME_INVENTORY.json'),
+    ('six', 'INDEPENDENT_SIX_INVENTORY_SHA', 'str', 'ba913149e9d704e1b145d1a6a195f95ad20e0d2dbc73fa6da22f16f43f492c08'),
+    ('six', 'REVIEW_NAME', 'str', 'INDEPENDENT_SIX_RUNTIME_REVIEW.json'),
+    ('six', 'INDEPENDENT_SIX_REVIEW_SHA', 'str', 'b9b5c3761f65defd45103b3c70cbcac37a8dce4133d9991b18063bceefaa0be9'),
+    ('six', 'APPLICATION_COMMIT', 'str', 'd2462e46b1a7b5cb2a1085d9bcffd25b7576c8b6'),
+    ('six', 'RUNTIME_DELTA', 'tuple', ('data/canon.json.gz.part-0002', 'data/canon.json.gz.parts.json', 'data/parallels.json.gz', 'http-worker.cjs', 'http.cjs', 'index.cjs', 'web/reader.js')),
+    ('six', 'C1_DATA_PATHS', 'tuple', ('server/data/canon.json.gz.part-0001', 'server/data/canon.json.gz.part-0002', 'server/data/canon.json.gz.parts.json', 'server/data/parallels.json.gz')),
+)
+
+
+def _record_graph_configuration():
+    # Fixed consumed globals only, never a supplied authority/reader/callback.
+    import web_reader_six_boundary_history as six
+    rows = _RECORD_GRAPH_EXPECTED_CONFIGURATION
+    if type(rows) is not tuple or len(rows) != 37:
+        raise ValueError('Changed closed record-graph configuration')
+    observed = []
+    types = {'str': str, 'tuple': tuple, 'frozenset': frozenset}
+    for row in rows:
+        if type(row) is not tuple or len(row) != 4:
+            raise ValueError('Changed closed record-graph configuration')
+        module, name, kind, expected = row
+        if (type(module) is not str or type(kind) is not str or
+                module not in ('next', 'six') or type(name) is not str or kind not in types):
+            raise ValueError('Changed closed record-graph configuration')
+        wanted = types[kind]
+        value = globals().get(name) if module == 'next' else getattr(six, name, None)
+        if type(expected) is not wanted or type(value) is not wanted or value != expected:
+            raise ValueError('Changed closed record-graph configuration')
+        if wanted in (tuple, frozenset) and any(type(item) is not str for item in value):
+            raise ValueError('Changed typed record-graph configuration')
+        observed.append((module, name, kind, value))
+    return tuple(observed)
+
+
+def _record_graph_layout():
+    import web_reader_six_boundary_history as six
+    return (
+        ('next', DIRECTORY + '/' + ORACLE_NAME, SOURCE_ORACLE_SHA),
+        ('six', six.PROOF_DIRECTORY + '/' + six.ORACLE_NAME, six.SOURCE_ORACLE_SHA),
+        ('six', 'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_INVENTORY.json', six.PRIOR343_INVENTORY_SHA),
+        ('six', 'docs/evidence/apadana/runtime343/INDEPENDENT343_RUNTIME_REVIEW.json', six.PRIOR343_REVIEW_SHA),
+        ('six', six.PROOF_DIRECTORY + '/C1_IMMUTABLE_EXPECTATIONS.json', six.C1_METADATA_SHA),
+        ('six', six.PROOF_DIRECTORY + '/runtime/' + six.INVENTORY_NAME, six.INDEPENDENT_SIX_INVENTORY_SHA),
+        ('six', six.PROOF_DIRECTORY + '/runtime/' + six.REVIEW_NAME, six.INDEPENDENT_SIX_REVIEW_SHA),
+        ('next', DIRECTORY + '/runtime/' + INVENTORY_NAME, INVENTORY_SHA),
+        ('next', DIRECTORY + '/runtime/' + REVIEW_NAME, REVIEW_SHA),
+    )
+
+
+def _record_graph_read(root, row):
+    # Called only with one of this operation's nine closed immutable descriptors.
+    reader, relative, pin = row
+    if reader == 'next':
+        if type(pin) is not str or re.fullmatch('[a-f0-9]{64}', pin) is None:
+            raise ValueError('Pending independent next-ten seal; no historical fallback')
+        raw = regular(root, relative)
+        if type(raw) is not bytes:
+            raise ValueError('Immutable next-ten record proof bytes required')
+        if digest(raw) != pin:
+            raise ValueError('Changed next-ten authority: ' + relative)
+    elif reader == 'six':
+        import web_reader_six_boundary_history as six
+        if not isinstance(pin, str) or re.fullmatch('[a-f0-9]{64}', pin) is None:
+            raise ValueError('Pending independent six-boundary seal; no fallback')
+        raw = six.regular(root, relative)
+        if type(raw) is not bytes:
+            raise ValueError('Immutable six-boundary record proof bytes required')
+        if six.digest(raw) != pin:
+            raise ValueError('Six-boundary authority changed: ' + relative)
+    else:
+        raise ValueError('Foreign record-graph reader')
+    return raw
+
+
+class _OperationRecordGraph:
+    """One owned semantic result for historical NEXT34, never actual368 runtime."""
+    __slots__ = ('_root', '_thread', '_active', '_claimant', '_raw', '_records',
+                 '_configuration', '_rows')
+
+    def __init__(self, root):
+        object.__setattr__(self, '_root', _physical_root(root))
+        object.__setattr__(self, '_thread', get_ident())
+        object.__setattr__(self, '_active', False)
+        object.__setattr__(self, '_claimant', None)
+        object.__setattr__(self, '_raw', MappingProxyType({}))
+        object.__setattr__(self, '_records', MappingProxyType({}))
+        object.__setattr__(self, '_configuration', ())
+        object.__setattr__(self, '_rows', ())
+        raw = {}
+        try:
+            configuration = _record_graph_configuration()
+            # All original JSON/schema/object/hash/order/delta assertions execute
+            # in their original public function, exactly once for this capture.
+            records = proof_records(self._root)
+            rows = _record_graph_layout()
+            if len(rows) != 9 or len({row[1] for row in rows}) != 9:
+                raise ValueError('Exact nine-proof record graph required')
+            for row in rows:
+                raw[row[1]] = _record_graph_read(self._root, row)
+            if (configuration != _record_graph_configuration() or
+                    rows != _record_graph_layout()):
+                raise ValueError('Record-graph configuration changed during capture')
+            if type(records) is not dict or len(records) != 34:
+                raise ValueError('Exact historical NEXT34 record graph required')
+            for name, record in records.items():
+                if (type(name) is not str or type(record) is not dict or
+                        set(record) != {'bytes', 'sha256'} or
+                        type(record['bytes']) is not int or record['bytes'] <= 0 or
+                        type(record['sha256']) is not str or
+                        re.fullmatch('[a-f0-9]{64}', record['sha256']) is None):
+                    raise ValueError('Invalid historical NEXT34 record graph')
+            object.__setattr__(self, '_raw', MappingProxyType(dict(raw)))
+            object.__setattr__(self, '_records', MappingProxyType({
+                name: MappingProxyType(dict(record)) for name, record in records.items()}))
+            object.__setattr__(self, '_configuration', configuration)
+            object.__setattr__(self, '_rows', rows)
+            object.__setattr__(self, '_active', True)
+        except BaseException:
+            self._close()
+            raise
+        finally:
+            raw.clear()
+
+    def __setattr__(self, name, value):
+        raise AttributeError('Operation record graph is immutable')
+
+    def _initial_records(self, root):
+        # Only the creating capture may obtain an unclaimed detached input.
+        if (type(self) is not _OperationRecordGraph or not self._active or
+                self._thread != get_ident() or self._claimant is not None or
+                _physical_root(root) != self._root or
+                self._configuration != _record_graph_configuration() or
+                self._rows != _record_graph_layout()):
+            raise ValueError('Closed, foreign or claimed initial record graph')
+        return {name: dict(row) for name, row in self._records.items()}
+
+    def _claim(self, claimant):
+        if (type(self) is not _OperationRecordGraph or not self._active or
+                self._thread != get_ident() or self._claimant is not None or
+                type(claimant) is not _NextTenBinding or claimant._root != self._root or
+                getattr(claimant, '_graph9', None) is not self or
+                getattr(claimant, '_graph9_identity', None) is not self or
+                getattr(claimant, '_graph9_raw_identity', None) is not self._raw or
+                getattr(claimant, '_graph9_records_identity', None) is not self._records or
+                getattr(claimant, '_graph9_config_identity', None) is not self._configuration or
+                getattr(claimant, '_graph9_rows_identity', None) is not self._rows or
+                self._configuration != _record_graph_configuration() or
+                self._rows != _record_graph_layout()):
+            raise ValueError('Closed, foreign or already claimed record graph')
+        object.__setattr__(self, '_claimant', claimant)
+
+    def _check_owner(self, root, claimant):
+        if (type(self) is not _OperationRecordGraph or not self._active or
+                self._thread != get_ident() or self._claimant is None or
+                type(claimant) is not _NextTenBinding or self._claimant is not claimant or
+                root != self._root or getattr(claimant, '_graph9', None) is not self or
+                getattr(claimant, '_graph9_identity', None) is not self or
+                type(self._raw) is not MappingProxyType or
+                self._raw is not claimant._graph9_raw_identity or
+                type(self._records) is not MappingProxyType or
+                self._records is not claimant._graph9_records_identity or
+                type(self._configuration) is not tuple or
+                self._configuration is not claimant._graph9_config_identity or
+                type(self._rows) is not tuple or
+                self._rows is not claimant._graph9_rows_identity):
+            raise ValueError('Foreign, closed or substituted operation record graph')
+        if (self._configuration != _record_graph_configuration() or
+                self._rows != _record_graph_layout() or len(self._rows) != 9 or
+                tuple(self._raw) != tuple(row[1] for row in self._rows) or
+                any(type(raw) is not bytes for raw in self._raw.values())):
+            raise ValueError('Changed closed record-graph configuration')
+
+    def _fresh_detached_records(self, root, claimant):
+        root = _physical_root(root)
+        self._check_owner(root, claimant)
+        for row in self._rows:
+            # ALL original guarded reads, original raw SHA and byte equality.
+            observed = _record_graph_read(root, row)
+            if observed != self._raw[row[1]]:
+                raise ValueError('Changed operation record proof bytes: ' + row[1])
+        return {name: dict(row) for name, row in self._records.items()}
+
+    def _close(self):
+        object.__setattr__(self, '_active', False)
+        object.__setattr__(self, '_claimant', None)
+        object.__setattr__(self, '_raw', MappingProxyType({}))
+        object.__setattr__(self, '_records', MappingProxyType({}))
+        object.__setattr__(self, '_configuration', ())
+        object.__setattr__(self, '_rows', ())
+
+
 class _NextTenBinding:
     """Owned by exactly one private operation; not a path or public root token."""
-    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359', '_current368', '_catalogue368', '_proof368', '_proof368_identity', '_proof368_raw_identity', '_proof359', '_proof359_identity', '_proof359_raw_identity')
+    __slots__ = ('_root', '_records', '_actual', '_owner', '_active', '_current359', '_catalogue359', '_current368', '_catalogue368', '_proof368', '_proof368_identity', '_proof368_raw_identity', '_proof359', '_proof359_identity', '_proof359_raw_identity', '_graph9', '_graph9_identity', '_graph9_raw_identity', '_graph9_records_identity', '_graph9_config_identity', '_graph9_rows_identity')
 
-    def __init__(self, root, records, actual, current359, catalogue359, current368, catalogue368, proof368, proof359):
+    def __init__(self, root, records, actual, current359, catalogue359, current368, catalogue368, proof368, proof359, graph9):
         object.__setattr__(self, '_root', _physical_root(root))
         object.__setattr__(self, '_records', _freeze(records))
         object.__setattr__(self, '_actual', MappingProxyType(dict(actual)))
         object.__setattr__(self, '_current359', _freeze(current359))
         object.__setattr__(self, '_catalogue359', catalogue359)
         object.__setattr__(self, '_current368', _freeze(current368))
+        if type(graph9) is not _OperationRecordGraph:
+            raise ValueError('Exact owned record graph required')
+        object.__setattr__(self, '_graph9', graph9)
+        object.__setattr__(self, '_graph9_identity', graph9)
+        object.__setattr__(self, '_graph9_raw_identity', graph9._raw)
+        object.__setattr__(self, '_graph9_records_identity', graph9._records)
+        object.__setattr__(self, '_graph9_config_identity', graph9._configuration)
+        object.__setattr__(self, '_graph9_rows_identity', graph9._rows)
+        graph9._claim(self)
         if type(proof359) is not _Old359OperationProofBytes:
             raise ValueError('Exact owned old359 proof snapshot required')
         proof359._claim(self)
@@ -379,6 +612,9 @@ class _NextTenBinding:
     def _check(self):
         if not self._active or self._owner != get_ident():
             raise ValueError('Closed or foreign-thread next-ten binding')
+        if type(self._graph9) is not _OperationRecordGraph:
+            raise ValueError('Substituted operation record graph')
+        self._graph9._check_owner(self._root, self)
         if type(self._proof359) is not _Old359OperationProofBytes:
             raise ValueError('Substituted old359 proof snapshot')
         self._proof359._check_owner(self._root, self)
@@ -387,6 +623,13 @@ class _NextTenBinding:
         self._proof368._check_owner(self._root, self)
 
     def _close(self):
+        if self._graph9_identity is not None:
+            self._graph9_identity._close()
+            object.__setattr__(self, '_graph9_identity', None)
+        object.__setattr__(self, '_graph9_raw_identity', None)
+        object.__setattr__(self, '_graph9_records_identity', None)
+        object.__setattr__(self, '_graph9_config_identity', None)
+        object.__setattr__(self, '_graph9_rows_identity', None)
         if self._proof359_identity is not None:
             self._proof359_identity._close()
             object.__setattr__(self, '_proof359_identity', None)
@@ -431,7 +674,7 @@ def _binding_records(binding, root):
     binding._check()
     if _physical_root(root) != binding._root:
         raise ValueError('Next-ten operation root identity changed')
-    observed = proof_records(binding._root)  # physical proofs; NEVER rescan27
+    observed = binding._graph9._fresh_detached_records(binding._root, binding)
     assert observed == binding._records
     binding._proof359._fresh(binding._root, binding)
     if (type(binding._proof368) is not _intake368._OperationProofBytes or
@@ -445,12 +688,14 @@ def _capture_six_test_input(root):
     """One physical all27 read/hash, then exact finite DD test-input buffers."""
     global _VALIDATED_FRAME
     root = _physical_root(root)
-    current = proof_records(root)
-    current359, ap343, catalogue359, manifest359 = _intake359._capture_authority_with_manifest(root, current)
-    # The unchanged historical capture has completed every old schema/object check.
-    proof359 = _Old359OperationProofBytes(root)
+    graph9 = _OperationRecordGraph(root)
+    proof359 = None
     proof368 = None
     try:
+        current = graph9._initial_records(root)
+        current359, ap343, catalogue359, manifest359 = _intake359._capture_authority_with_manifest(root, current)
+        # The unchanged historical capture has completed every old schema/object check.
+        proof359 = _Old359OperationProofBytes(root)
         current368, ap359, catalogue368, manifest368, proof368 = _intake368._capture_authority_with_proof_bytes(root, current359)
         assert json.loads(ap359) == manifest359
         previous = prior_dd_records(root)
@@ -485,13 +730,15 @@ def _capture_six_test_input(root):
             _VALIDATED_FRAME = key
         # Non-core records equal previous and were already physically hashed above;
         # four frozen DD fixtures were independently hashed once at their read.
-        binding = _NextTenBinding(root, current, actual, current359, catalogue359, current368, catalogue368, proof368, proof359)
+        binding = _NextTenBinding(root, current, actual, current359, catalogue359, current368, catalogue368, proof368, proof359, graph9)
         return previous, _CapturedDDData(dd, binding)
 
     except BaseException:
         if proof368 is not None:
             proof368._close()
-        proof359._close()
+        if proof359 is not None:
+            proof359._close()
+        graph9._close()
         raise
 
 
