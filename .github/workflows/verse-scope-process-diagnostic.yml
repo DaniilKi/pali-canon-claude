@@ -41,7 +41,7 @@ jobs:
           import {createHash} from 'node:crypto';
           const git=args=>execFileSync('git',args,{encoding:'utf8',timeout:15000});
           const H='4e9287bd5ebc78aba4b185b017e63eac6547bfd7';
-          const pins={"tests/verse-scope-review.test.mjs":"695b2e51de464f1565fdd03233bbffe0b899ab7e65e068a084fdccae1e9ae2bb","tests/helpers/verse-scope-python.mjs":"c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f","tests/verse-scope-python.test.mjs":"98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"},allowed=[".github/workflows/verse-scope-process-diagnostic.yml","tests/verse-scope-python.test.mjs","tests/helpers/verse-scope-python.mjs","tests/verse-scope-review.test.mjs"];
+          const pins={"tests/verse-scope-review.test.mjs":"695b2e51de464f1565fdd03233bbffe0b899ab7e65e068a084fdccae1e9ae2bb","tests/helpers/verse-scope-python.mjs":"c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f","tests/verse-scope-python.test.mjs":"98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"},allowed=[".github/workflows/verse-scope-process-diagnostic.yml","tests/verse-scope-python.test.mjs","tests/helpers/verse-scope-python.mjs","tests/verse-scope-review.test.mjs"].sort();
           assert.equal(process.platform,'darwin');assert.equal(Number(process.versions.node.split('.')[0]),Number(process.env.EXPECTED_NODE_MAJOR));
           assert.deepEqual(git(['diff','--no-renames','--name-only',H,'HEAD']).trim().split('\n').sort(),allowed);
           assert.equal(git(['status','--porcelain']).trim(),'');
@@ -90,7 +90,7 @@ jobs:
           import {createHash} from 'node:crypto';
           const git=args=>execFileSync('git',args,{encoding:'utf8',timeout:15000});
           const H='4e9287bd5ebc78aba4b185b017e63eac6547bfd7';
-          const pins={"tests/verse-scope-review.test.mjs":"695b2e51de464f1565fdd03233bbffe0b899ab7e65e068a084fdccae1e9ae2bb","tests/helpers/verse-scope-python.mjs":"c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f","tests/verse-scope-python.test.mjs":"98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"},allowed=[".github/workflows/verse-scope-process-diagnostic.yml","tests/verse-scope-python.test.mjs","tests/helpers/verse-scope-python.mjs","tests/verse-scope-review.test.mjs"];
+          const pins={"tests/verse-scope-review.test.mjs":"695b2e51de464f1565fdd03233bbffe0b899ab7e65e068a084fdccae1e9ae2bb","tests/helpers/verse-scope-python.mjs":"c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f","tests/verse-scope-python.test.mjs":"98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"},allowed=[".github/workflows/verse-scope-process-diagnostic.yml","tests/verse-scope-python.test.mjs","tests/helpers/verse-scope-python.mjs","tests/verse-scope-review.test.mjs"].sort();
           assert.equal(process.platform,'darwin');assert.equal(Number(process.versions.node.split('.')[0]),Number(process.env.EXPECTED_NODE_MAJOR));
           assert.deepEqual(git(['diff','--no-renames','--name-only',H,'HEAD']).trim().split('\n').sort(),allowed);
           assert.equal(git(['status','--porcelain']).trim(),'');
