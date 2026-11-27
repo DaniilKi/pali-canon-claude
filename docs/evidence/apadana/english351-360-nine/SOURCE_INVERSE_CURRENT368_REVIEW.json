@@ -1,62 +1,86 @@
 {
-  "schema": "final-linux-source-output-and-focused-QA-review-v1",
-  "status": "PASS_SOURCE_PREFLIGHT_ONLY_NOT_FULL_CI",
-  "core_commit": "7d2948c6678a6aa9951a568c42dfee2acdd68acd",
+  "schema": "final-Linux-file-schedule-source-output-and-focused-QA-review-v1",
+  "status": "PASS_SOURCE_PREFLIGHT_AND_DISTINCT_DIAGNOSTIC_ONLY_NOT_FULL_CI",
+  "core_commit": "b7cfb415d29fa50f82d39294d421559bb273f95a",
   "independent_output_review": {
-    "schema": "independent-three-platform-generated-source-output-review-v1",
-    "status": "GO_EXACT_THREE_SOURCE_OUTPUTS_AND_TWO_SOURCE_ONLY_ALIASES_FOR_ROOT_APPLICATION_PREFLIGHT_ONLY",
-    "plan_sha256": "2de5ce9c8f0cfe8e2b34af7a1aae7118ad676db31c5138e1976219647aeed0f0",
-    "policy_sha256": "851280df4e99e842515670a3051f2adfff59b4a329ca532ac9231a6beebc257b",
-    "producer_sha256": "5ca7b74c8831014caaf7b58962e2a1555602f7e589546eceef5cd1c9e1abd0c1",
+    "schema": "independent-CI-Linux-full2-generated-source-review-v1",
+    "status": "GO_EXACT_THREE_SOURCE_PAYLOADS_PLUS_TWO_SOURCE_ONLY_ALIASES_FOR_ROOT_APPLICATION_AND_PREFLIGHT_ONLY",
+    "current_immutable_CoreF": "7c55503d63c27fb5ca3e03d33039cc16c1a20784",
+    "generation_result": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_FILE_SCHEDULE_SOURCE_GENERATED/GENERATION_RESULT.json",
+      "bytes": 3433,
+      "sha256": "7c20242fb921d742b0f8a5c81779dfa87188afedd5efd1c97db3af033f1cfb98"
+    },
+    "corrected_final138_plan": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_LINUX_FILE_SCHEDULE_PLAN_V2.json",
+      "bytes": 25924,
+      "sha256": "ce24e5d1b1fe6f822b2de3fea748c282f44e3b7280bb26d986dbf346219fb0d1"
+    },
+    "policy": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_LINUX_FILE_SCHEDULE_POLICY.json",
+      "bytes": 2744,
+      "sha256": "79aee94ade154e11df80ffaef7915688521f55358bd514b2de8adaf024f3899d"
+    },
+    "input_peer": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/linux-file-schedule-final-input-review/INPUT_REVIEW.json",
+      "bytes": 579,
+      "sha256": "22f6a627492de977055fb80944ac39b66ff6ca9adbb4f244ce97a719558238b2"
+    },
     "generated_files": {
       "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
-        "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
-        "bytes": 517383,
-        "sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d"
+        "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_FILE_SCHEDULE_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+        "bytes": 519471,
+        "sha256": "ec779777dbe0c6075f38ec8172db692dee531bf96510b197d8d9b9d92f97c3da"
       },
       "docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json": {
-        "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
+        "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_FILE_SCHEDULE_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
         "bytes": 17220,
-        "sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a"
+        "sha256": "e2abe546aae08a59db4fa5e7ce308703f1a9ea3cfabe852c2561a29c4439e2b6"
       },
       "tests/helpers/intake359-source-input.mjs": {
-        "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
+        "path": "/tmp/pali-english351-360-evidence-nov27/LINUX_FILE_SCHEDULE_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
         "bytes": 11947,
-        "sha256": "38463c1af4e493bf2d5acc63eada817da74e1b868bc005128d3a10737ff215ff"
+        "sha256": "1411c6cd62399f907098ecc37f516ff458858758e7b0c2644b5314a0635a182a"
       }
     },
     "source_alias": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/SOURCE_INVERSE_REVIEW.json",
-      "bytes": 206444,
-      "sha256": "f56d870177385158dc01290a67481b3251dba123b67d5a0dd8bedf7bf1201a55"
+      "path": "/tmp/pali-english351-360-evidence-nov27/linux-file-schedule-generated-independent-review/SOURCE_INVERSE_REVIEW.json",
+      "bytes": 207347,
+      "sha256": "6b0b7eb29f00e638f728fd7d2a641f124baa29117a23d27eb1fe99236a6c649b"
     },
     "leaf_alias": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/LEAF_REBIND_REVIEW.json",
-      "bytes": 8368,
-      "sha256": "164b0e459291113014dac820163ea622b87e52faedb75345581d046f1c509e00"
+      "path": "/tmp/pali-english351-360-evidence-nov27/linux-file-schedule-generated-independent-review/LEAF_REBIND_REVIEW.json",
+      "bytes": 9264,
+      "sha256": "8c4f1ecb80126a3ccb23914d01b1861891681bb4162f893f8bfe0a26f82a0474"
     },
     "checks": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/CHECKS.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/linux-file-schedule-generated-independent-review/CHECKS.json",
       "bytes": 28383,
-      "sha256": "19bfaf66e8f996c0100f03cb078e18e0ef672379e9f775f598c17b8829b59c03"
+      "sha256": "0c24daa4520472116c443848b9158f62646dde6e35385737b637f365d4f14be4"
     },
-    "preserved_domains": "75literalrows/233hunks/17literal$;71priorrows/58priordirectobjects;1001original3d+1001Core3ced/824frozen/archive65/source14/runtime2/package39/CoreB8;72changed/66direct/138pins;345JS/2092expected.",
-    "loader": "Wholefb153 inverse exact: only2wrapper path inserts and2SHAconstants; ownloader excluded, literal replacement callback/freshguards preserved.",
-    "scope": "Source bytes only. Saved Linux A/B native evidence is separate, no speed/full2092-load claim. Fresh exact full75/component/receipt gates remain.",
-    "reviewer_project_proposal_Git_mutations_or_generator_execution": false
+    "current_F_delta": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/linux-file-schedule-generated-independent-review/CORE_F_DELTA_CHECKS.json",
+      "bytes": 980,
+      "sha256": "76cd3755d9db5d253b7e3bfc2880d88d5ada854369ca58a40a3ed06b5685c645"
+    },
+    "verified": "75literalforward+inverse rows/233hunks17literal$;71priorrows58priordirects;1001originalSHA/length/Gitblob/824wholeauthorities/archive65/source14/runtime2/package39/CoreB8;72changed66direct138pins/345JS2092expected. RelativeF only2maprows+5directrows and2loaderSHAconstants changed.",
+    "native_limit": "Full2092 Linux22 diagnostic stillpending. Older Linux5file evidence is historical, not relabeled as current/new/default execution.",
+    "reviewer_execution": "Stdlib guardedread/hash/literalreplay+readonlyGit beforeimages only; no proposal/app imports/test/generation/Gitmutation/primarywrite.",
+    "blocking_findings": [],
+    "runtime_behavior_or_release_adoption_approval": false
   },
-  "independent_output_review_sha256": "bb394c57a2bf03d46a072222971ed622ef2809f103e03e8b0221397f39da995b",
+  "independent_output_review_sha256": "1803de966404fec665e70a95c163d094a8d20fb0ca24a5ee7b6468d372e594ba",
   "applied_source_envelope": {
-    "map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
-    "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
-    "loader_sha256": "38463c1af4e493bf2d5acc63eada817da74e1b868bc005128d3a10737ff215ff",
+    "map_sha256": "ec779777dbe0c6075f38ec8172db692dee531bf96510b197d8d9b9d92f97c3da",
+    "code_sha256": "e2abe546aae08a59db4fa5e7ce308703f1a9ea3cfabe852c2561a29c4439e2b6",
+    "loader_sha256": "1411c6cd62399f907098ecc37f516ff458858758e7b0c2644b5314a0635a182a",
     "rows": 75,
     "changed_from3ced": 72,
     "direct_paths": 66,
     "physical_source_pins": 138,
-    "CI_current_index_sha256": "e6097e39016595df5a930bb0c173bd90b441bb235c0782fa6636db3d5e05b186",
-    "CI_independent_case_review_sha256": "8132d40b4394267a058fb4fee18575796061981c02ecf51d118355856d7a6497",
-    "CI_inventory_sha256": "3704dfc03269b6287e190d12f8557c06aa9c7201c9b820eaa7c03a68464bb3cd"
+    "CI_current_index_sha256": "87c19eaa93596af180e91e4b5d0ca310ba1e192a141485aecdefdb7a831d0976",
+    "CI_independent_case_review_sha256": "f91fa9cfa922d57c44f9ce998206dfe4f704d81386ad5e9e90d223a52f57f74a",
+    "CI_inventory_sha256": "75e035563768c7e69286e71df26d5cf285d7653b1db3581d4443ae4822b3e33a"
   },
   "source_preflight_11": {
     "schema": "root-targeted-final-source-and-CI-QA-execution-v1",
@@ -70,7 +94,7 @@
       "tests/intake368-source-seal.test.mjs"
     ],
     "cwd": "/tmp/pali-proof-budget-repair-nov27",
-    "seconds": 9.89989386900561,
+    "seconds": 9.85499918498681,
     "exit_code": 0,
     "outer_bound_seconds": 120,
     "outer_timeout": false,
@@ -84,10 +108,10 @@
       "skipped": 0,
       "todo": 0
     },
-    "stdout_sha256": "fd75a4862e9ae9f28a8f682e8b9b0ead9215847243714deaff70b7edd1de3c80",
+    "stdout_sha256": "cc15c4cdd78256a1a9be41fdd50e64b7fc490c43d01d3c7beade8f2f468cc664",
     "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "source_map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
-    "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
+    "source_map_sha256": "ec779777dbe0c6075f38ec8172db692dee531bf96510b197d8d9b9d92f97c3da",
+    "code_sha256": "e2abe546aae08a59db4fa5e7ce308703f1a9ea3cfabe852c2561a29c4439e2b6",
     "not_full_CI_or_dev_approval": true
   },
   "CI_QA8": {
@@ -99,7 +123,7 @@
       "tests/ci-test-partitions.test.mjs"
     ],
     "cwd": "/tmp/pali-proof-budget-repair-nov27",
-    "seconds": 3.952171475000796,
+    "seconds": 3.987526032986352,
     "exit_code": 0,
     "outer_bound_seconds": 90,
     "outer_timeout": false,
@@ -113,10 +137,10 @@
       "skipped": 0,
       "todo": 0
     },
-    "stdout_sha256": "f5f25dd4ac9bc7734a94ddc9fdeba7f1e9d61162fb9572acfb4c1daf565f48e5",
+    "stdout_sha256": "e2de6fd03d08dd90e4fb7d3b98446ff0b8926fac5dad4bf001f9981cc4bf8494",
     "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "source_map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
-    "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
+    "source_map_sha256": "ec779777dbe0c6075f38ec8172db692dee531bf96510b197d8d9b9d92f97c3da",
+    "code_sha256": "e2abe546aae08a59db4fa5e7ce308703f1a9ea3cfabe852c2561a29c4439e2b6",
     "not_full_CI_or_dev_approval": true
   },
   "full_CI_or_dev_promotion_claim": false
