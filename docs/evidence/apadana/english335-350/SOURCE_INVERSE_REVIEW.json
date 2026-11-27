@@ -2,463 +2,25 @@
   "schema": "independent-current368-source-inverse-review-v1",
   "status": "GO_EXACT_CURRENT368_SOURCE_INVERSES_FOR_ROOT_APPLICATION_AND_PREFLIGHT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
-  "prior_current_source_commit": "ce2330b1fa1f4c1d5fd7be76cb13bd9d76579c0d",
-  "after_domain": "Frozen6591df46600cf26920a5e026851de89791e5bb6d source plus exact external three generated outputs; not applied, not final Git/CI.",
+  "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "prior_current_source_commit": "fb15396db578c78f838829668e36f32b65376806",
+  "after_domain": "Exact approved physical 138 source pins plus three external generated payloads; not applied during review.",
   "live_working_tree_claimed": true,
-  "map_sha256": "4e09f882adac1421fadbc9a6274186196134f134577f5b7912a3fa224025aba3",
-  "loader_sha256": "437ff89bf6d9edd7de3ceaf82c6745ca0c15f62e7bd573a14858a95d6dbf27a5",
-  "code_sha256": "c146410a2994ac0686b2728532713494e51472c20ba869fb5da49523ee6a4831",
+  "map_sha256": "42b490f0755ec0b0735c6989556319b501cd487aa3fa2076f504e69f8cfa5fea",
+  "loader_sha256": "72b1c2e643dc7dbb8038f1ddd34b6bd100c1061c8aedb970c6d689e1131241f2",
+  "code_sha256": "bc88a126184d2798a1bbed6fd4ee8ffa69cb789cadfa9e453a9d346e5c604a9c",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
-  "original_source_entries_independently_verified_against_Git": 1001,
-  "original_identity_verification_method": "Independent read-only Git cat-file batches verify all1001 original3d, baseline3ced and priorce233 blobs; every73 current literal forward/inverse equals exact Git3d bytes.824 frozen authorities equal originalGit3d,345JS equalce233; no generator/project imports.",
-  "changed_existing_exactly_mapped": 73,
-  "changed_since_prior_current_source_commit": 3,
-  "unchanged_prior_ordered_row_objects": 70,
-  "new_inverse_rows": 0,
-  "unchanged_original_source_entries": 928,
-  "hunks": 228,
+  "original_source_entries_independently_verified": 1001,
+  "original_identity_verification_method": "All75 literal inverses and926 untouched physical files match immutable original3d whole SHA256, byte length and Git blob SHA1; all75 literal forward replays equal physical current bytes. No Git commands or proposal/project imports.",
+  "changed_existing_exactly_mapped": 75,
+  "changed_since_source_baseline_commit": 72,
+  "changed_since_prior_current_source_commit": 4,
+  "unchanged_prior_ordered_row_objects": 71,
+  "new_inverse_rows": 2,
+  "unchanged_original_source_entries": 926,
+  "hunks": 231,
   "hunks_with_literal_dollars": 15,
   "all_forward_and_inverse_reconstructions_exact": true,
-  "rows": {
-    ".github/workflows/check.yml": {
-      "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "29ac002daa88489cce60a4e41d98250175c3c80960e784d9c77631bc822c64f0",
-      "hunks": 10,
-      "literal_dollar_hunks": 6
-    },
-    "AGENTS.md": {
-      "base3d_sha256": "06024baeedc9397364c9ced4f3f6a167d5bccfdebc9182277e491d19d756bd43",
-      "current_sha256": "f444617b2c0f77290f375abeb4852a5cbce03c98e80b24825eba539f0e7f9fa8",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "README.md": {
-      "base3d_sha256": "332a5e35486175ddd115476ccc7acdb351f70e69dfd9a5efa9b0f8014330e42e",
-      "current_sha256": "dcb5423f6a7981b35e7da1b2aaa10852d6d7387df464f06aef058d7a72210ffe",
-      "hunks": 6,
-      "literal_dollar_hunks": 0
-    },
-    "THIRD_PARTY.md": {
-      "base3d_sha256": "31e2fa98f63990dc53a2c37de0edf021d3060ab3d40e396a6e794e87c334f4f3",
-      "current_sha256": "507045d841e5db5a8f9d2aded8f35bade5bb9f7aee678c03f8d05bf018b27f46",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "docs/coverage.md": {
-      "base3d_sha256": "032508622febdefaffd69549cc21580f8329d74906841bbed33d5ba2d94e160b",
-      "current_sha256": "52bc92c3f5fba5f9d4b217c73397eb446e9de31f816e39cbe07bbcb2b50b34d0",
-      "hunks": 5,
-      "literal_dollar_hunks": 0
-    },
-    "docs/decisions.md": {
-      "base3d_sha256": "bea9c72844206c3e816aab93d236d25844fb76c4f3db864ca0d856ed0af542af",
-      "current_sha256": "17fa38061d76640182558abab45c4b4e6e5e629ed0699712fcb5e382628346a8",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "docs/sources.md": {
-      "base3d_sha256": "bdaec5c51c770ed2b3528f2d4122cd0e4787cf1e66fcba63ef00fb50312e1753",
-      "current_sha256": "451ee727ae15a852c4101be7b4e7b6cbb7728f1848b905fc9f4432de8009a12d",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "scripts/web-reader-thera-held234-check.py": {
-      "base3d_sha256": "577b1f45c3482dd547b47a1e8e512ec699ac1c197f6c227aef66800e21b314de",
-      "current_sha256": "7c3659798089c0c45d060cd51e6a6fcf70e9ea7f0a28c749a1d3a3fe6dfadce3",
-      "hunks": 6,
-      "literal_dollar_hunks": 0
-    },
-    "scripts/web-reader-thera-remaining-check.py": {
-      "base3d_sha256": "f5aac0a06b46e52c04dbefffc3f67a9fee615aa4f900e5e9ae831661c8497cb5",
-      "current_sha256": "925da5b2b6d2c8330d20a007c7da8d1f227539a6bdc37762b8d224ff4e045220",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "scripts/web_reader_apadana_intake.py": {
-      "base3d_sha256": "75fc772cde076fe64176108725c3cdbde8cc66d7db2e449384de52a54d71e730",
-      "current_sha256": "035b72c17b52e94b62c614b96fd3bc73c46d651a427f81230815bbaa7913b665",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "scripts/web_reader_approved_acceptance.py": {
-      "base3d_sha256": "e2e2fa8545031e83627d4939bf4eca8e70424affd14708ced7f177e7be4cd28b",
-      "current_sha256": "e1ddcb28a6c688a99293fa127c2abbc8af080082c4f2f7dff7b2a4b1ace36e9d",
-      "hunks": 3,
-      "literal_dollar_hunks": 0
-    },
-    "scripts/web_reader_four_boundary_history.py": {
-      "base3d_sha256": "1944ccb445fd6e63e4facaa1f5fb5957006f0b113997298971fd15eac5debf18",
-      "current_sha256": "fc783c32f05863e774361032e7f8ea07fb3226569afe9d56dec0c73a330073b8",
-      "hunks": 6,
-      "literal_dollar_hunks": 0
-    },
-    "scripts/web_reader_next_ten_boundary_history.py": {
-      "base3d_sha256": "6327f0a6ba14dc5de91aeb7c079bf6823d6ab5404620f87a1a9a7b0b302d8bbc",
-      "current_sha256": "35a1b1dc10f06e75bb9db4fd1979d1d8f2125745c28c781eb064306b93fa0cb9",
-      "hunks": 9,
-      "literal_dollar_hunks": 0
-    },
-    "scripts/web_reader_six_boundary_history.py": {
-      "base3d_sha256": "30d2b604761336f995bbaeb3851ebfabd13bc542e18af28757d3bf62299c7348",
-      "current_sha256": "905043cc07f9d34c593d77ecad332da77f9e7fadb0f30ac84780ba1dc16ed5a2",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "src/apadana-thera-profiles.mjs": {
-      "base3d_sha256": "aab6f170adf2592ccbcc5ed3a708dabf6a9ae0c14090558ecb36550579edecd7",
-      "current_sha256": "a6228de1ba21807b1ad4d09e7c7689999f16b3d0f1458a4641ec361b6076a15a",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "src/apadana-thera.mjs": {
-      "base3d_sha256": "13a0c5226e0955b347f9a68b25a61399f50f6ec31c172a609dc9f567ec533720",
-      "current_sha256": "09030e06dde0aab3b014cdcf33f6830ffc865712b8c7f6b8028492c4b2cce6b7",
-      "hunks": 7,
-      "literal_dollar_hunks": 3
-    },
-    "src/chatgpt-widget.mjs": {
-      "base3d_sha256": "32d83409b18c3e1fe07f09796392b1cbff3d27cf5b6d1c72c5170d73aa5efe99",
-      "current_sha256": "2977a795452536f4e63c03704c7c5d3973066017c389151d24cceadc74936ced",
-      "hunks": 9,
-      "literal_dollar_hunks": 2
-    },
-    "tests/apadana-disclosures.test.mjs": {
-      "base3d_sha256": "5b954a2f82874b5f73033d6b70079e125154a334fecec1d519337b475b705253",
-      "current_sha256": "48a974214ac02352d52160d785a855c6b21bf728683d73a3a68190eb9bf23c20",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/apadana-fourth-client.test.mjs": {
-      "base3d_sha256": "b61fdcd526a35c452519742fa3b4945a7b970afeaf14100355cde169e319bd3c",
-      "current_sha256": "e892f8ecc37b4f60419475fa7734fb0d53d4a9aabbcf2eb57f9b36d461a0f1d4",
-      "hunks": 3,
-      "literal_dollar_hunks": 0
-    },
-    "tests/apadana-fourth.test.mjs": {
-      "base3d_sha256": "1e54c57174dbe76c76dd17f07f36fd1f5100959576c1e652ab93b0f512e32787",
-      "current_sha256": "e0fdac899a5cd6ce6939c78afcdcdc8da61267e8396f00d079a24fbc5b738868",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/apadana-held234.test.mjs": {
-      "base3d_sha256": "e5aa1a1aede61a543722b370aabd76ada2fab5510e05ac03540483b7ea9b0e50",
-      "current_sha256": "fbcff0abdc1b1a6a2d318b37528e008967cc61aabd93ae2d8b2774b2038256d4",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/apadana-next.test.mjs": {
-      "base3d_sha256": "a30221e777e2de57fbcd80f26ff8fee6f227d7032eb1daaa1af69ba05c7779a4",
-      "current_sha256": "e2c498dd264b70d1a3ad07d90d71ac90e3b358ed549c1ebaacc963668e80bec3",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/apadana-thera.test.mjs": {
-      "base3d_sha256": "e0541fd39185aea07a4d8fdd3eb5eef8b631cbc19f14552240c3c0ba220f1920",
-      "current_sha256": "2e6e0e08268838ab5f5ebcfa438ceaecd552a554e387f8cdae30d9249228072e",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/apadana-third.test.mjs": {
-      "base3d_sha256": "82c90d065397bcea125c05d119d968e07004fd01faca68c19ca0936eb11ee95d",
-      "current_sha256": "92e72fe456b1a056b6e4052f4a017853cce4c9d6466b9f99f0ca3f821b9b58a0",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/apadana_next_ten_boundary_acceptance.py": {
-      "base3d_sha256": "28557e471b247f1abbd288c1d04418dcde5f7f65f2eca4a9208452d891825f37",
-      "current_sha256": "6847a3e6ba78581c3f37655a8694b11e7d306e2616f71b349f584e618b1f707c",
-      "hunks": 5,
-      "literal_dollar_hunks": 0
-    },
-    "tests/apadana_six_boundary_acceptance.py": {
-      "base3d_sha256": "f8e68d283b11b045d4ced137144e2ee79abd7a488f4b0cbdbe450d398ee5bee9",
-      "current_sha256": "7a04c036a7c16ed264bf641197a22cc8123fa6e4705bbf7a441e81f51e8cbe2f",
-      "hunks": 5,
-      "literal_dollar_hunks": 0
-    },
-    "tests/approved-acceptance.test.mjs": {
-      "base3d_sha256": "30c19361b29b4d35a6193e526fce17111c16a34d65b0479b03ebff7f416b7394",
-      "current_sha256": "c52b29e6dbf8fe65a5433bb9a37ae932497138e0343506b3a88166fcdb9f6414",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/approved_acceptance.py": {
-      "base3d_sha256": "7cc1bb04dc5f15d6e7062876225186b9d8625aaef1b0dc2ca4ce003cd9949581",
-      "current_sha256": "9343fcc41b3a4a8dd17506d5e7e755b7f2ebc0c1657b0cd8fa6bb9a9c25e53d6",
-      "hunks": 16,
-      "literal_dollar_hunks": 0
-    },
-    "tests/approved_current333_authority_negatives.py": {
-      "base3d_sha256": "f8fb368777231010d2c69a8f7edbc9aea20e8d4caf35ff9f34f2191e425fd815",
-      "current_sha256": "a48c44797fe297f34d3460a31196674a2e42ce07e7c98facd5a194534974c8fa",
-      "hunks": 8,
-      "literal_dollar_hunks": 0
-    },
-    "tests/approved_current339_authority_negatives.py": {
-      "base3d_sha256": "d3b631acd04efecc97b7b3a34a5eec6c3ba97576425a82e9b5d83ba3d3ba8a5a",
-      "current_sha256": "af2798c94d0821c7d6be159a0d07f7b993bf327fe26950d0b010b2e4ce7d6869",
-      "hunks": 8,
-      "literal_dollar_hunks": 0
-    },
-    "tests/current339-source-inverses.test.mjs": {
-      "base3d_sha256": "369b9169a90533579f31bee02eeba301b918910d23183cd2e92abb7a51a38b63",
-      "current_sha256": "5e4e036b932a1c6e90f028295bdb45626e016f38eb8a14e186fe174d244a14a0",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/current343-bindings.test.mjs": {
-      "base3d_sha256": "487eac39425cae787b82cdf2c23076bd4ec0fe7c9eb50fa7692e41997fe5c841",
-      "current_sha256": "30801f1bc203245f8cb3ee9c0bb3ea0ce8267d19a1fe3b568817e2cd37c61b7e",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/four-boundary-ci.test.mjs": {
-      "base3d_sha256": "39bf4a19a3797b4957f0ef3f402c2022b6d4422a476ce3083a9605c4ae9631b5",
-      "current_sha256": "d6eeafd5c99bad82802d94d3ed9b92296af9e9302e564c1f0362864dc7f47cd3",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/held234-client.test.mjs": {
-      "base3d_sha256": "59184090e844fb420839c71b20b8483118cb64ea8639f81cf2129398f8567d89",
-      "current_sha256": "0b5969a079d50ce005f35e508f54dcb8ed343f08aa1e99ba826a13f2d8821cef",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/held234-current333-chain.test.mjs": {
-      "base3d_sha256": "5ad609829ccabd1a3c90e7b9e9e99e382b02bf0d2dc288cdd0b02ef48186fe8e",
-      "current_sha256": "51655bcfc60b9d3707caf863eab909ff681a2d66d4c65685ecdc7c41eec2418e",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/held234_current333_chain.py": {
-      "base3d_sha256": "5edaa72747f2c1eafbb461745ac642ac13b4aca66dca4b2c1ce9e449d612e52b",
-      "current_sha256": "398ce6cfc9dd7ae005d56de3de9c017e7b8abe643a904681cc6e741a41950d04",
-      "hunks": 6,
-      "literal_dollar_hunks": 0
-    },
-    "tests/helpers/apadana-intake-expectations.mjs": {
-      "base3d_sha256": "112a4fb45c32837666a831966ddee0a1de841208e08b13678dca50746626845a",
-      "current_sha256": "b146244e413f6ecffaeec8e5f5ab36fefee75fc34235ff6c159e8e16ef7d5a8e",
-      "hunks": 3,
-      "literal_dollar_hunks": 1
-    },
-    "tests/helpers/intake343-metadata.mjs": {
-      "base3d_sha256": "ff1c0ad59c8ed50c1e85334b4e463d50514963b58d446b2b82a64ff965dd67ec",
-      "current_sha256": "2248ecfb518f6e433d4d2e72ff6a21b3b286217acce614e592bb917f59999cee",
-      "hunks": 4,
-      "literal_dollar_hunks": 0
-    },
-    "tests/helpers/next-ten-history-data.mjs": {
-      "base3d_sha256": "d4177d9eb7ffa2315077bf262cb91f60c22a6e7647e5774e80b1fc9d988725f9",
-      "current_sha256": "002201ee98a1e18473490190f85e898836827ddd9f8edc4f62a095a8f680caee",
-      "hunks": 4,
-      "literal_dollar_hunks": 1
-    },
-    "tests/helpers/next-ten-source-input.mjs": {
-      "base3d_sha256": "b6f0230a64d81b1a8dc88dd6a89d34bbd631e9fd041cb14ce8f2c16a6c7f6ade",
-      "current_sha256": "03b1cdf8793e461029373f633b4dd9c6dcc9382e57d7733493c031bb3fc2b365",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/helpers/thera-remaining-client.mjs": {
-      "base3d_sha256": "375fe78b9734b92fbcd11bf2891f5ced0b60dd21e3496a2c58ee6fc573782e15",
-      "current_sha256": "e710b4aafe00453fe9ba5f43b82bddf41577cd1ac279172e11ae1fcc264a1a9e",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/helpers/thera312-319-evidence.mjs": {
-      "base3d_sha256": "ef09742f97001b0b39e6bbd584a76ebcbaf0af2d53af30dbe9de30707ab9f717",
-      "current_sha256": "bc1395d69732f4e999d4ecc956e628a483a457ecbd9dc2cc75eff0e130acda02",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/helpers/thera331-334-evidence.mjs": {
-      "base3d_sha256": "75661041468412c3ca317e4b8ef5e69e0535a7419aea13915198edf60564a261",
-      "current_sha256": "0bf90fb4e8c295fe17e1966ebfa4f718c8d9b35fcbfddda97772119f0e91cc25",
-      "hunks": 3,
-      "literal_dollar_hunks": 0
-    },
-    "tests/helpers/thera339-legacy-projection.mjs": {
-      "base3d_sha256": "007d9cc6ad3125bf0e36a40f57d1ab94a35c50cf94083243ef26869a68ea61bc",
-      "current_sha256": "9dae9fef969f100dae28d02b3b0ddc80970a1517389ed794f3eff076e60c5dcc",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/intake343-metadata.test.mjs": {
-      "base3d_sha256": "80d60c068c85541bfe82308186321740ce12e9405ff788c37d7fa285b99c842c",
-      "current_sha256": "a94c49b2b03ed564b2323449813e16a75b25a5ed92e3e5a967176c0307e14180",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/next-ten-history-data.test.mjs": {
-      "base3d_sha256": "647d8b50dbc8287f913495628571cf4c877a3f4216f5f53a5ab611db370f976f",
-      "current_sha256": "69f74a5c5f13cf0f7fdccb7eb85cf22affdbc50ed27bfb1aed929db2fd20e55c",
-      "hunks": 3,
-      "literal_dollar_hunks": 0
-    },
-    "tests/next_ten_history_acceptance.py": {
-      "base3d_sha256": "c80edab2c44dc23e0504af6645287a146aff911f801f9f2750bee8fd9508af73",
-      "current_sha256": "adadb181bddc5720a10c6631ad38e14337b4b2a2ad6898ca30dc748a7a70bb3b",
-      "hunks": 8,
-      "literal_dollar_hunks": 0
-    },
-    "tests/six-boundary-source-input.test.mjs": {
-      "base3d_sha256": "d30c6c3c1cc79725dd3002cdeadb66b1853b2e3fb6dd12e884f1a621f5989c30",
-      "current_sha256": "5de82ea399f7602d7dd2c38c09f54cd9a9d025f7e2a2d59a3af0579b87945287",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/six_boundary_history_acceptance.py": {
-      "base3d_sha256": "98a3b5272d3d97e75b456615c17006e8a741f1360e61080c4e848dba6e952cc0",
-      "current_sha256": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
-      "hunks": 6,
-      "literal_dollar_hunks": 0
-    },
-    "tests/six_operation_scope_controls.py": {
-      "base3d_sha256": "ae4265fd6bfd60c3c1c0d734b0b38e580c8d32a193ab438d7d4ef39ad7f5ea48",
-      "current_sha256": "e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570",
-      "hunks": 5,
-      "literal_dollar_hunks": 1
-    },
-    "tests/source-notes-baseline-projection.test.mjs": {
-      "base3d_sha256": "47fb66193af5db2a26d2750977e1a5c234a081702776bfd6689250c75ec3933c",
-      "current_sha256": "631ec6f793d7ce518e21a5eece52aeac7c50138be50e8d5cfd684a88ccef1afa",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/source-notes-compatibility.test.mjs": {
-      "base3d_sha256": "a41b96f9b01952fd3909724ee0df07c44cb377b80077714e36ebeffd35e4e6d4",
-      "current_sha256": "b0eab70a46893957a1433181081f3ef5a6fac3fd66ea328ea191d1000b1dfd80",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera-commentary-locators.test.mjs": {
-      "base3d_sha256": "afaa815caab9a0aa87221c6fa0e8ca19386aa3854c7d4016ca7153bad078901e",
-      "current_sha256": "1e5e8607d3131adecb164a4c56e91de71aae057a5a7c439103886048a9c6370b",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera141-180-client.test.mjs": {
-      "base3d_sha256": "25b18d1adbdba02d29d0bf83bc9be2714841b420df1b74abb9b412ac101a9ff3",
-      "current_sha256": "a7f41e07febc41acdb240f7b01f5ff0863b5700e4ca852b32d1a10867f89b3d8",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera181-220-client.test.mjs": {
-      "base3d_sha256": "63172b6003463efbd99f880341ef4ca978d4a33f46bac86b71cc29f38b805525",
-      "current_sha256": "c8695064857fa2b7e404091aa64da167d4ec2eb6b3ad36dc1091feb17b1ba77d",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera221-230-client.test.mjs": {
-      "base3d_sha256": "91f5f48ad319dc0bc4c5a04b97b4617187a90c6687a2314570a75d46a7694422",
-      "current_sha256": "f81fb17374a5ebba7c5dedb68ce4a970b9b6d69e331be5133d6d4b60422f4a56",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera241-250-client.test.mjs": {
-      "base3d_sha256": "5d86878cb1d89871d7ee8a9a9f160f02252bf382281bb14152dbf6ef051af9e5",
-      "current_sha256": "8c32c0a6867dc6d543667fbaede0d7941a0f486326b92beeba70a7b0a355a98c",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera261-280-client.test.mjs": {
-      "base3d_sha256": "18b75cc85a80d2c02c89b783f0cef928eaae32067c6ed2c9bac3356a0951cb24",
-      "current_sha256": "b721ed69f91cb6144d70613ffc09a4c4c82a5ca2f8aa8d2a895ef07d34b22261",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera261-280-source.test.mjs": {
-      "base3d_sha256": "ad5babdbb6f0789287d1f5c7a588203dbff22be645fe4f745e61076270ec34bb",
-      "current_sha256": "252dcc58ac2618029a171e74ec46a4b28c05bdc593bf89bd62b3e642d61bd373",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera281-285-client.test.mjs": {
-      "base3d_sha256": "0f0633c9eac88361e5c33f182f125a90b3fc27d3b9e70b42df96c33b492a54c6",
-      "current_sha256": "abe3db29a30e998152736fd9ca9c42598441c153a62ee1e7a524739391d1b3b1",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera281-285-source.test.mjs": {
-      "base3d_sha256": "603b0405a9d3624d0404f8c2248b5dfaae27308e846e1447f5a9f8d924918dba",
-      "current_sha256": "3fe3081c55681611c396d2a845be497ec2e7611bca0ac2e4e02a706c65d0fcad",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera287-288-client.test.mjs": {
-      "base3d_sha256": "b5dac7d98f191bb47b82177498a7b8af01288f4a23075aad4ade3a51f30ddb6f",
-      "current_sha256": "83606202405989c9d0b5a034adffed3b92145e800093b255ae2264261f69e5f9",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera287-288-source.test.mjs": {
-      "base3d_sha256": "3b8c0c17b2da4774658d01c91952471c4e772eb1f7033c78c2eafdd5f4af03b5",
-      "current_sha256": "2928fc8f939fffc6c0cdf07e2b16f755c6851492a61f8e1681fdb25aa7f38d18",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera292-299-client.test.mjs": {
-      "base3d_sha256": "e2bf3c2539617dd9fc6c29a056ab0c07cade43cf66679191b8a72921ac0927f4",
-      "current_sha256": "37460c107c048d4601619f8c2f6bd86b3bf3d4338df588bffb27c169ac728e24",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera292-299-source.test.mjs": {
-      "base3d_sha256": "9dce9181fa697df20531ff36d3589534c3a1e24a81dabc60f9b32e6ca61cbec5",
-      "current_sha256": "056416b7144f531ed36eb5d8b8e7eaa4e0b61f6d70f37064a30860117749e8d4",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera312-319-client.test.mjs": {
-      "base3d_sha256": "e91d74a120072c56acee478f7497283ea3c47ed4a47163996153ae19dc9d6923",
-      "current_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953",
-      "hunks": 3,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera312-319-source.test.mjs": {
-      "base3d_sha256": "d10db6930495a76ebb19ebd3e026d746dc7c4e627986e6039078a1b44b851da1",
-      "current_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera321-329-client.test.mjs": {
-      "base3d_sha256": "c28fdde2283c4d850b50f39c568290764ecdf4c48484e630dae4d1a01dc70077",
-      "current_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
-      "hunks": 3,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera321-329-source.test.mjs": {
-      "base3d_sha256": "53ff8e8a2c0052798b077e6f08b755b177b16b9a0eca208fd7c84762102e8e3e",
-      "current_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499",
-      "hunks": 1,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera331-334-preface-client.test.mjs": {
-      "base3d_sha256": "c74f7437f0b1db42766cf90f26d47b92ced023a07a6eba292f4b9fcd4b88188c",
-      "current_sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f",
-      "hunks": 3,
-      "literal_dollar_hunks": 0
-    },
-    "tests/thera331-334-source.test.mjs": {
-      "base3d_sha256": "05aee8096e6847f5fdbccccbaf46846cc3b7829cf5b96887d8f7505adfb624a8",
-      "current_sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3",
-      "hunks": 3,
-      "literal_dollar_hunks": 1
-    },
-    "tests/widget-hosted-selections.test.mjs": {
-      "base3d_sha256": "afd221a7e5c575b329455af54ca3687cf54a5b5412c1eaf8b287c60a42030bca",
-      "current_sha256": "4ad932ef76cb23c279926ccd2848a8c8007627d17b8eedb513b25e04a92d8264",
-      "hunks": 2,
-      "literal_dollar_hunks": 0
-    },
-    "web/translation-policy.mjs": {
-      "base3d_sha256": "d9c68600adb510594a6d280fb619677d5d3efbb2c75ee3c255e9a75bd25ce9e6",
-      "current_sha256": "9f2bf9384375400cb232663de33cc41bdd497d4ac78fe0c1f23c35a9f8f80eea",
-      "hunks": 3,
-      "literal_dollar_hunks": 0
-    }
-  },
   "old_frozen_authority_fixture_count": 824,
   "old_frozen_authority_fixture_files": {
     "docs/evidence/ATI_TRANSLATION_FAILOVER.md": {
@@ -4582,61 +4144,61 @@
       "git_blob": "ceeb65e9a72c124bd3f0c55dfe64e8044e02f5c0"
     }
   },
-  "all_old_authorities_equal_Git3d": true,
-  "historical_archive64_members_plus_manifest_equal_Git3ced": true,
-  "historical_current_source1001_equal_Git3ced": true,
-  "stable_during_verification": true,
+  "frozen_authority_verification": "Every inherited sealed824 row remains whole-byte/length/Git-blob exact; overlapping original1001 identities also agree. No new Git reads claimed.",
+  "historical_archive64_members_plus_manifest_exact": true,
+  "historical_current_source1001_index_unchanged": true,
+  "all138_plan_input_hashes_and_sources_stable": true,
+  "unchanged_prior_direct_objects": 58,
   "source_inputs_only": true,
   "runtime_or_API_projection_authorized": false,
   "behavior_package_CI_release_approval": false,
   "final_commit_rebind_required": true,
-  "frozen_plan": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NINE_GRAPH_SOURCE_PLAN.json",
-    "bytes": 24544,
-    "sha256": "a73cba1c706af5534b6e7bbcee58cb8c326fa9119a0de50fb16f6269ff13714c"
+  "inputs": {
+    "plan": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_WINDOWS_PARTITION_SOURCE_PLAN.json",
+      "bytes": 25924,
+      "sha256": "f58bc8ad2a9755024e29878c365146fbed2a2b2bd029c7f10cd232e89c4aad13"
+    },
+    "delta_policy": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_WINDOWS_PARTITION_SOURCE_POLICY.json",
+      "bytes": 2744,
+      "sha256": "57b9b17c177992f288822c4ee011d6a34509cfbf575cd2461e3639aac4181bb3"
+    },
+    "independent_input_review": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-final-input-review/INPUT_REVIEW.json",
+      "bytes": 579,
+      "sha256": "af85dba7ec28a2ea4d68eed3f79ab88da76d208598e2914b8c44bb1220a4e75a"
+    },
+    "generation_command": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATION_COMMAND.json",
+      "bytes": 1465,
+      "sha256": "074031b5cb2c83af1509d29ce438452f3ca44282b5f47259e0d2cf9c5c35a4f1"
+    },
+    "generation_result": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/WINDOWS_PARTITION_SOURCE_GENERATED/GENERATION_RESULT.json",
+      "bytes": 3118,
+      "sha256": "659132c84b48b5ace42ae2bd375e2e4e0a10bef961f7b98f2cc51d28b3ba5d8d"
+    }
   },
-  "prior_independent_plan_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/nine-graph-source-input-independent-review/INPUT_REVIEW.json",
-    "bytes": 543,
-    "sha256": "a67682c4ec6183db38d119b37619bb6930e78d93a8d4e004ed119a2c12ef62a5"
+  "preserved_prior_source_review": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/before/docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
+    "bytes": 225999,
+    "sha256": "a90b460e0545dcca1ec37cce9f02f078098285fc610b2b7d3945bbad27395abd"
   },
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/nine-graph-source-output-independent-review/verify_output.py",
-    "bytes": 17656,
-    "sha256": "46da7eea514b1ff3f14eaf00e82f9eb0a33fc4a9b0410752d7f5c95454d68ec9"
+    "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/verify_outputs.py",
+    "bytes": 9324,
+    "sha256": "364ee2ad0e01e2fb69e94eb83f0a355ec51938e45898f2f57d9ec5c8d55f84d5"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/nine-graph-source-output-independent-review/RECONCILIATION.json",
-    "bytes": 4197,
-    "sha256": "b60e0f1573a2feeff4601e7f18ebf7dfadba682f72004e774b5e8cf49a3409d3"
-  },
-  "generation_result": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/NINE_GRAPH_SOURCE_GENERATED/GENERATION_RESULT.json",
-    "bytes": 1547,
-    "sha256": "a1c1e737865cb7ad5f45c233b9db75d031d1461895adda1be5d6e730aee4f165"
+    "path": "/tmp/pali-english351-360-evidence-nov27/windows-partition-generated-independent-review/CHECKS.json",
+    "bytes": 28251,
+    "sha256": "3e9c93e1a9da22639fbe56bfa25ad2623f78f03aed28efe3a9fad176d486c9b1"
   },
   "review_limits": [
-    "Apply only3exactgenerated SOURCE payloads and2fresh source-only aliases; prioraliases remain inGitce233 and archive65 remains unchanged.",
-    "All70 prior row objects and60 direct objects remain exact;three mapped source/doc deltas andone direct guide change are finite reviewed QA repairs.",
-    "No application/corpus/runtime/API projection, rights activation, nativeCI/behavior/package/release or dev-promotion approval."
-  ],
-  "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
-  "changed_since_source_baseline_commit": 70,
-  "preserved_prior_source_review": {
-    "commit": "ce2330b1fa1f4c1d5fd7be76cb13bd9d76579c0d",
-    "file": "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
-    "sha256": "171a43b1600fca8456dfef238995afc73ee8b0b68c9017dabc45979e7cfd3616"
-  },
-  "delta_policy": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NINE_GRAPH_SOURCE_POLICY.json",
-    "bytes": 903,
-    "sha256": "6dbee0eed99a395856963595224bd03be216096bbdcedb57bbaccd52f7a2296c"
-  },
-  "four_unsealed_JSON_receipts": [
-    "docs/evidence/apadana/english351-360-nine/LOCAL_ACCEPTANCE.json",
-    "docs/evidence/apadana/english351-360-nine/BROWSER_ACCEPTANCE.json",
-    "docs/evidence/apadana/english351-360-nine/FINAL_COMPONENT_BINDING.json",
-    "docs/evidence/apadana/english351-360-nine/SOURCE_INVERSE_CURRENT368_REVIEW.json"
-  ],
-  "all131_plan_input_hashes_and_sources_stable": true
+    "Source-only permission to apply exactly three reviewed payloads and two aliases, then run mandatory preflights.",
+    "Original1001 Git object identities checked via pinned manifest, not a fresh Git-object lookup.",
+    "39 package/runtime bytes remain pinned; no package execution or runtime behavior approval.",
+    "Full exact-candidate CI, aggregate inventories and dev promotion remain separate."
+  ]
 }

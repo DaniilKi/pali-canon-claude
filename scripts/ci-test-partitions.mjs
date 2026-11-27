@@ -92,10 +92,254 @@ function loadBaselineV2(root,b,pin){
   for(const row of review.evidence){exactKeys(row,['path','sha256']);assert.ok(hex(row.sha256,64));assert.equal(digest(regular(root,row.path)),row.sha256);}
   return {baseline:b,baseline_sha256:pin,inventory:current};
 }
+const V3_PYTHON={"tests/six_boundary_history_acceptance.py":"1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55","tests/six_operation_scope_controls.py":"e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570"};
+const V3_SUITES=[
+  {
+    "key": "six-history",
+    "script": "tests/six_boundary_history_acceptance.py",
+    "class_name": "SixHistoryControls",
+    "source_sha256": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
+    "full_inventory": [
+      "test_01_exact_positive_and_explicit_historical_logical_frame",
+      "test_02_cached_positive_does_not_hide_any_current_data_mutation",
+      "test_03_every_source_runtime_and_parent_proof_refuses_loss_and_tampering",
+      "test_04_original_C1_bytes_cannot_replace_actual_future_data",
+      "test_05_C1_fixture_tampering_and_symlink_refuse_after_positive",
+      "test_06_pure_inverse_preserves_unrelated_mutations_but_complete_gate_refuses_them",
+      "test_07_runtime_parent_and_full343_objects_are_mandatory"
+    ],
+    "partitions": [
+      {
+        "id": "heavy",
+        "methods": [
+          "test_02_cached_positive_does_not_hide_any_current_data_mutation"
+        ]
+      },
+      {
+        "id": "remaining",
+        "methods": [
+          "test_01_exact_positive_and_explicit_historical_logical_frame",
+          "test_03_every_source_runtime_and_parent_proof_refuses_loss_and_tampering",
+          "test_04_original_C1_bytes_cannot_replace_actual_future_data",
+          "test_05_C1_fixture_tampering_and_symlink_refuse_after_positive",
+          "test_06_pure_inverse_preserves_unrelated_mutations_but_complete_gate_refuses_them",
+          "test_07_runtime_parent_and_full343_objects_are_mandatory"
+        ]
+      }
+    ],
+    "old_per_stream_output_cap_bytes": 1048576,
+    "child_timeout_ms": 60000,
+    "node_timeout_ms": 65000
+  },
+  {
+    "key": "six-operation-scope",
+    "script": "tests/six_operation_scope_controls.py",
+    "class_name": "SixOperationScopeControls",
+    "source_sha256": "e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570",
+    "full_inventory": [
+      "test_01_verified_immutable_original_bytes_within_one_operation",
+      "test_02_public_gates_reject_active_and_closed_internal_scopes",
+      "test_03_exception_closes_and_prevents_escaped_reuse",
+      "test_04_new_public_calls_recheck_actual_data_despite_same_size_and_mtime",
+      "test_05_mandatory_proofs_are_physical_even_inside_a_valid_operation",
+      "test_06_every_original_fixture_is_verified_before_operation_use",
+      "test_07_mutation_after_capture_never_survives_the_next_operation"
+    ],
+    "partitions": [
+      {
+        "id": "heavy",
+        "methods": [
+          "test_04_new_public_calls_recheck_actual_data_despite_same_size_and_mtime"
+        ]
+      },
+      {
+        "id": "remaining",
+        "methods": [
+          "test_01_verified_immutable_original_bytes_within_one_operation",
+          "test_02_public_gates_reject_active_and_closed_internal_scopes",
+          "test_03_exception_closes_and_prevents_escaped_reuse",
+          "test_05_mandatory_proofs_are_physical_even_inside_a_valid_operation",
+          "test_06_every_original_fixture_is_verified_before_operation_use",
+          "test_07_mutation_after_capture_never_survives_the_next_operation"
+        ]
+      }
+    ],
+    "old_per_stream_output_cap_bytes": 262144,
+    "child_timeout_ms": 60000,
+    "node_timeout_ms": 65000
+  }
+];
+const V3_REGISTRATIONS={
+  "tests/ci-test-partitions.test.mjs": [
+    {
+      "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
+      "name_expression": "'complete sorted discovery and finite additions reject omissions substitution and nonregular files'",
+      "line": 21,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 2,
+      "options_source": null
+    },
+    {
+      "name": "real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases",
+      "name_expression": "'real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases'",
+      "line": 23,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 3,
+      "options_source": "{timeout:30000}"
+    },
+    {
+      "name": "terminal event accounting rejects missing summaries cancellations failures and duplicate summary events",
+      "name_expression": "'terminal event accounting rejects missing summaries cancellations failures and duplicate summary events'",
+      "line": 25,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 2,
+      "options_source": null
+    },
+    {
+      "name": "aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases",
+      "name_expression": "'aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases'",
+      "line": 27,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 2,
+      "options_source": null
+    },
+    {
+      "name": "a real failing child cannot seal an approving execution receipt",
+      "name_expression": "'a real failing child cannot seal an approving execution receipt'",
+      "line": 29,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 3,
+      "options_source": "{timeout:15000}"
+    },
+    {
+      "name": "a bounded hung child fails closed without an approving complete receipt",
+      "name_expression": "'a bounded hung child fails closed without an approving complete receipt'",
+      "line": 31,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 3,
+      "options_source": "{timeout:15000}"
+    },
+    {
+      "name": "the real CLI activates its reporter before unchanged complete-file argv",
+      "name_expression": "'the real CLI activates its reporter before unchanged complete-file argv'",
+      "line": 33,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 3,
+      "options_source": "{timeout:15000}"
+    },
+    {
+      "name": "raw CI workflow keeps the full reference and four bounded Windows partitions",
+      "name_expression": "'raw CI workflow keeps the full reference and four bounded Windows partitions'",
+      "line": 109,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 2,
+      "options_source": null
+    }
+  ],
+  "tests/six-boundary-history.test.mjs": [
+    {
+      "name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+      "name_expression": "'six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback'",
+      "line": 2,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 3,
+      "options_source": "{timeout:65000}"
+    }
+  ],
+  "tests/six-operation-scope.test.mjs": [
+    {
+      "name": "private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes",
+      "name_expression": "'private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes'",
+      "line": 6,
+      "column": 1,
+      "registration_ancestors": [],
+      "argument_count": 3,
+      "options_source": "{timeout:65000}"
+    }
+  ]
+};
+
+// Fixed Windows-Python scheduling successor. Immutable V1/V2 remain separate.
+const V3_BASE='fb15396db578c78f838829668e36f32b65376806';
+const V3_INDEX='docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json';
+const V3_PREDECESSOR='docs/evidence/qa/windows20-partitions/BASELINE_368_TEST_FILES.json';
+const V3_PREDECESSOR_SHA='4b715398e0503381dc990a1eb2a60a7c8d777f1923372fa8101fc64403d69832';
+const V3_REVIEW='docs/evidence/qa/windows20-partitions/WINDOWS_PYTHON_PARTITION_CASE_SOURCE_REVIEW.json';
+const V3_QA='tests/ci-test-partitions.test.mjs';
+const V3_WRAPPERS=['tests/six-boundary-history.test.mjs','tests/six-operation-scope.test.mjs'];
+const V3_OVERRIDES=[V3_QA,...V3_WRAPPERS];
+const V3_SUPPORT=['scripts/check-python-partitions.mjs','scripts/ci-python-partition-driver.py','tests/helpers/partitioned-python.mjs'];
+export const WINDOWS_PYTHON_PARTITION_INDEX=V3_INDEX;
+function sourcePins(root,pins,names){exactKeys(pins,names);assert.deepEqual(Object.keys(pins),[...names].sort());for(const name of names){assert.ok(hex(pins[name],64));assert.equal(digest(regular(root,name)),pins[name],'Exact current executable source '+name);}}
+function predecessor368Metadata(root){
+  const raw=regular(root,V3_PREDECESSOR);assert.equal(digest(raw),V3_PREDECESSOR_SHA);const b=JSON.parse(raw);
+  exactKeys(b,['schema','commit','legacy_test_count','added_test_count','driver','predecessor','changed_files','added_files','additions','case_inventory']);
+  assert.equal(b.schema,'reviewed-ci-test-baseline-v2');assert.equal(b.commit,V2_BASE);assert.equal(b.legacy_test_count,2076);assert.equal(b.added_test_count,16);
+  assert.deepEqual(b.predecessor,{path:V2_PREDECESSOR,sha256:V2_PREDECESSOR_SHA});
+  const priorRaw=regular(root,V2_PREDECESSOR);assert.equal(digest(priorRaw),V2_PREDECESSOR_SHA);const prior=JSON.parse(priorRaw);assert.equal(prior.commit,V2_BASE);assert.equal(literalTestMap(prior.files).length,340);
+  const legacyRaw=regular(root,prior.legacy_v1.path);assert.equal(digest(legacyRaw),prior.legacy_v1.sha256);assert.equal(prior.legacy_v1.sha256,'7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad');
+  const expected={...prior.files};assert.equal(Object.keys(b.changed_files).length,39);assert.equal(Object.keys(b.added_files).length,5);
+  for(const[name,row]of Object.entries(b.changed_files)){exactKeys(row,['before_sha256','after_sha256']);assert.equal(row.before_sha256,prior.files[name]);assert.ok(hex(row.after_sha256,64));expected[name]=row.after_sha256;}
+  for(const name of literalTestMap(b.added_files)){assert.ok(!Object.hasOwn(prior.files,name));expected[name]=b.added_files[name];}
+  const rows=Object.keys(expected).sort().map(path=>({path,sha256:expected[path]}));assert.equal(rows.length,345);
+  assert.equal(b.case_inventory.path,V2_CASE_REVIEW);const reviewRaw=regular(root,V2_CASE_REVIEW);assert.equal(digest(reviewRaw),b.case_inventory.sha256);const review=JSON.parse(reviewRaw);
+  assert.equal(review.schema,'reviewed-ci-successor-source-case-inventory-v1');assert.equal(review.status,'GO_EXACT_SOURCE_DELTA_AND_TERMINAL_CASE_INVENTORY_ONLY');assert.equal(review.inventory_sha256,objectSha(rows));
+  assert.deepEqual(review.changed_files,b.changed_files);assert.deepEqual(review.added_files,b.added_files);assert.deepEqual(review.driver,b.driver);assert.deepEqual(review.additions,b.additions);
+  for(const row of review.evidence){exactKeys(row,['path','sha256']);assert.ok(hex(row.sha256,64));assert.equal(digest(regular(root,row.path)),row.sha256,'Preserved V2 source-case evidence');}
+  return {baseline:b,expected};
+}
+function validateRegistrationReview(review,overrides){
+  exactKeys(review,V3_OVERRIDES);
+  for(const path of V3_OVERRIDES){
+    const item=review[path];exactKeys(item,['before_sha256','after_sha256','before','after']);assert.equal(item.before_sha256,overrides[path].before_sha256);assert.equal(item.after_sha256,overrides[path].after_sha256);
+    const required=V3_REGISTRATIONS[path];assert.deepEqual(item.before,required);assert.ok(Array.isArray(item.after));assert.equal(item.after.length,required.length);
+    for(let i=0;i<required.length;i++){
+      const actual=item.after[i],prior=required[i];exactKeys(actual,['name','name_expression','line','column','registration_ancestors','argument_count','options_source']);
+      for(const key of ['name','name_expression','registration_ancestors','argument_count','options_source'])assert.deepEqual(actual[key],prior[key],'Unchanged literal registration '+path+' '+key);
+      assert.ok(Number.isSafeInteger(actual.line)&&actual.line>0&&Number.isSafeInteger(actual.column)&&actual.column>0);
+    }
+  }
+}
+function loadBaselineV3(root,b,pin){
+  exactKeys(b,['schema','commit','legacy_test_count','added_test_count','predecessor','driver','source_overrides','additions','supporting_sources','python_sources','files','case_inventory']);
+  assert.equal(b.schema,'reviewed-ci-test-baseline-v3');assert.equal(b.commit,V3_BASE);assert.equal(b.legacy_test_count,2076);assert.equal(b.added_test_count,16);
+  assert.deepEqual(b.predecessor,{path:V3_PREDECESSOR,sha256:V3_PREDECESSOR_SHA});const prior=predecessor368Metadata(root);
+  assert.deepEqual(b.driver,prior.baseline.driver);assert.equal(digest(regular(root,b.driver.path)),b.driver.sha256,'Unchanged public test driver');
+  exactKeys(b.source_overrides,V3_OVERRIDES);assert.deepEqual(Object.keys(b.source_overrides),V3_OVERRIDES);const expected={...prior.expected};
+  for(const path of V3_OVERRIDES){const row=b.source_overrides[path];exactKeys(row,['before_sha256','after_sha256']);assert.equal(row.before_sha256,prior.expected[path]);assert.ok(hex(row.after_sha256,64));assert.notEqual(row.after_sha256,row.before_sha256);expected[path]=row.after_sha256;}
+  const expectedRows=Object.keys(expected).sort().map(path=>({path,sha256:expected[path]}));assert.equal(literalTestMap(b.files).length,345);assert.deepEqual(b.files,Object.fromEntries(expectedRows.map(row=>[row.path,row.sha256])),'Exact finite predecessor plus three current overrides');
+  sourcePins(root,b.additions,V2_TOOLS);assert.equal(b.additions['scripts/ci-test-reporter.mjs'],prior.baseline.additions['scripts/ci-test-reporter.mjs'],'Reporter unchanged');
+  sourcePins(root,b.supporting_sources,V3_SUPPORT);sourcePins(root,b.python_sources,Object.keys(V3_PYTHON));assert.deepEqual(b.python_sources,V3_PYTHON,'Unchanged complete seven-method Python sources');
+  const current=inventory(root);assert.deepEqual(current,expectedRows,'All actual current345 sources, no observed-source projection');
+  exactKeys(b.case_inventory,['path','sha256']);assert.equal(b.case_inventory.path,V3_REVIEW);assert.ok(hex(b.case_inventory.sha256,64));const raw=regular(root,V3_REVIEW);assert.equal(digest(raw),b.case_inventory.sha256);const review=JSON.parse(raw);
+  exactKeys(review,['schema','status','baseline_commit','predecessor','driver','source_overrides','additions','supporting_sources','python_sources','inventory_sha256','counts','registrations','before_wrapper_sources','partition_suites','windows_only','non_windows_original_branch_exact','conformance_is_separate_gate','behavioral_or_release_approval']);
+  assert.equal(review.schema,'reviewed-windows-python-partition-case-source-v1');assert.equal(review.status,'GO_EXACT_SOURCE_DELTA_AND_UNCHANGED_NODE_REGISTRATIONS_ONLY');assert.equal(review.baseline_commit,V3_BASE);
+  for(const key of ['predecessor','driver','source_overrides','additions','supporting_sources','python_sources'])assert.deepEqual(review[key],b[key]);
+  assert.equal(review.inventory_sha256,objectSha(expectedRows));assert.deepEqual(review.counts,{files:345,preserved_cases:2076,added_cases:16,total_cases:2092});
+  validateRegistrationReview(review.registrations,b.source_overrides);exactKeys(review.before_wrapper_sources,V3_WRAPPERS);
+  for(const path of V3_WRAPPERS){const row=review.before_wrapper_sources[path];exactKeys(row,['sha256','utf8']);assert.equal(typeof row.utf8,'string');assert.equal(row.sha256,prior.expected[path]);assert.equal(digest(row.utf8),row.sha256,'Authentic complete historical wrapper source');}
+  assert.deepEqual(review.partition_suites,V3_SUITES);assert.equal(review.windows_only,true);assert.equal(review.non_windows_original_branch_exact,true);assert.equal(review.conformance_is_separate_gate,true);assert.equal(review.behavioral_or_release_approval,false);
+  return {baseline:b,baseline_sha256:pin,inventory:current};
+}
+export function historicalWindowsPythonWrappers(root,index,pin){
+  const checked=loadBaseline(root,index,pin);assert.equal(checked.baseline.schema,'reviewed-ci-test-baseline-v3');const raw=regular(root,V3_REVIEW);assert.equal(digest(raw),checked.baseline.case_inventory.sha256);const review=JSON.parse(raw);
+  return Object.freeze(Object.fromEntries(V3_WRAPPERS.map(path=>[path,review.before_wrapper_sources[path].utf8])));
+}
+
 export function loadBaseline(root,path,pin){
   assert.ok(hex(pin,64),'Explicit independent baseline hash required');
   const raw=readFileSync(path);assert.equal(digest(raw),pin);const b=JSON.parse(raw);
   if(b.schema==='reviewed-ci-test-baseline-v1')return loadBaselineV1(root,path,pin);
+  if(b.schema==='reviewed-ci-test-baseline-v3'){assert.equal(resolve(path),resolve(root,V3_INDEX));assert.equal(digest(regular(root,V3_INDEX)),pin);return loadBaselineV3(root,b,pin);}
   assert.equal(b.schema,'reviewed-ci-test-baseline-v2');return loadBaselineV2(root,b,pin);
 }
 
@@ -110,7 +354,7 @@ export function verifyReceipt(receipt,checked,commit,ci=null,expectedNodeMajor=2
 assert.ok(Array.isArray(events.cases));for(const r of events.cases){assert.deepEqual(Object.keys(r),['file','line','column','name','type','nesting','status']);assert.ok(typeof r.file==='string'&&!r.file.startsWith('/')&&!r.file.includes('\\')&&r.file.split('/').every(x=>x&&x!=='.'&&x!=='..'));assert.equal(typeof r.name,'string');assert.ok(['test','suite'].includes(r.type));assert.ok(['pass','skip','todo'].includes(r.status));assert.ok(Number.isSafeInteger(r.nesting)&&r.nesting>=0);for(const k of ['line','column'])assert.ok(r[k]===null||Number.isSafeInteger(r[k])&&r[k]>0);}const tests=events.cases.filter(x=>x.type==='test');assert.deepEqual(Object.keys(events.summary).sort(),['cancelled','fail','pass','skipped','suites','tests','todo']);for(const k of Object.keys(events.summary))assert.ok(Number.isSafeInteger(events.summary[k])&&events.summary[k]>=0);assert.equal(events.summary.tests,tests.length);assert.equal(events.summary.suites,events.cases.length-tests.length);assert.equal(events.summary.fail,0);assert.equal(events.summary.cancelled,0);for(const[s,k]of [['pass','pass'],['skip','skipped'],['todo','todo']])assert.equal(events.summary[k],tests.filter(r=>r.status===s).length);return events;}
 export function aggregateReceipts(reference,parts,checked,commit,ci=null,expectedNodeMajor=20){assert.ok(expectedNodeMajor===20||expectedNodeMajor===22);assert.ok(hex(commit,40));const ref=verifyReceipt(reference,checked,commit,ci,expectedNodeMajor);assert.equal(ref.context.mode,'full');assert.equal(ref.context.platform,'linux');assert.equal(ref.summary.tests,checked.baseline.legacy_test_count+checked.baseline.added_test_count);assert.equal(parts.length,PARTITIONS);const seen=new Set(),files=[],cases=[];const totals={tests:0,suites:0,pass:0,fail:0,cancelled:0,skipped:0,todo:0};for(const receipt of parts){const e=verifyReceipt(receipt,checked,commit,ci,expectedNodeMajor);assert.equal(e.context.mode,'partition');assert.equal(e.context.platform,'win32');assert.ok(!seen.has(e.context.partition),'Duplicate partition');seen.add(e.context.partition);files.push(...e.context.selected_files);cases.push(...e.cases);for(const k of Object.keys(totals))totals[k]+=e.summary[k];}assert.deepEqual([...seen].sort(),[0,1,2,3]);assert.equal(new Set(files).size,files.length);assert.deepEqual(files.sort(),checked.inventory.map(r=>r.path));assert.deepEqual(cases.map(rowKey).sort(),ref.cases.map(rowKey).sort(),'Exact terminal case multiset differs');assert.deepEqual(totals,ref.summary);return {schema:'complete-ci-test-aggregate-v1',commit,ci,node_major:expectedNodeMajor,baseline_sha256:checked.baseline_sha256,partition_count:PARTITIONS,inventory:checked.inventory,summary:totals,exact_case_multiset:true,disjoint_complete_file_cover:true,complete:true};}
 export async function execute(root,checked,{commit,mode,partition=null,receipt,boundMs=mode==='full'?MAX_FULL_MS:MAX_CHILD_MS,platform=process.platform,node=process.version,ci=null}){assert.ok(Number.isInteger(boundMs)&&boundMs>0&&boundMs<=(mode==='full'?MAX_FULL_MS:MAX_CHILD_MS));const context=makeContext(root,checked,{commit,mode,partition,platform,node,ci});const contextFile=receipt+'.context.json',eventsFile=receipt+'.events.json';writeExclusive(contextFile,{root:resolve(root),events_file:resolve(eventsFile),context});assert.ok(!existsSync(receipt)&&!existsSync(eventsFile));const env={...process.env,PALI_CI_TEST_CONTEXT:resolve(contextFile)};delete env.NODE_TEST_CONTEXT; // Explicit new CLI must not inherit node:test's recursive-child marker.
-let timedOut=false,error=null,cleanupUnverified=false;const execution=await new Promise(resolveResult=>{let child;try{child=spawn(process.execPath,nodeArguments(root,context),{cwd:root,stdio:'inherit',detached:process.platform!=='win32',env});}catch(e){resolveResult({exit_code:null,signal:null,error:e.code??'SPAWN_ERROR',timed_out:false,cleanup_unverified:false,bound_ms:boundMs});return;}const timer=setTimeout(()=>{timedOut=true;try{if(process.platform==='win32'){const killed=execFileSync('taskkill.exe',['/PID',String(child.pid),'/T','/F'],{timeout:5000,stdio:'ignore'});}else{process.kill(-child.pid,'SIGKILL');}}catch{cleanupUnverified=true;child.kill('SIGKILL');}},boundMs);child.once('error',e=>{error=e.code??'SPAWN_ERROR';});child.once('close',(code,signal)=>{clearTimeout(timer);resolveResult({exit_code:code,signal,error,timed_out:timedOut,cleanup_unverified:cleanupUnverified,bound_ms:boundMs});});});const events=existsSync(eventsFile)?JSON.parse(readFileSync(eventsFile,'utf8')):null;const result={schema:'complete-ci-test-receipt-v1',events,execution};writeExclusive(receipt,result);assert.equal(execution.exit_code,0,'Test process failed');assert.equal(execution.signal,null);assert.equal(execution.error,null);assert.equal(execution.timed_out,false);assert.ok(events?.complete,'Reporter must seal terminal events');assert.deepEqual(events.context,context);assert.equal(events.context_sha256,objectSha(context));assert.deepEqual(inventory(root),checked.inventory,'Test inventory changed during execution');for(const[name,pin]of Object.entries(checked.baseline.additions))assert.equal(digest(regular(root,name)),pin,'Reviewed tooling changed during execution');assert.equal(digest(regular(root,checked.baseline.driver.path)),checked.baseline.driver.sha256);return result;}
+let timedOut=false,error=null,cleanupUnverified=false;const execution=await new Promise(resolveResult=>{let child;try{child=spawn(process.execPath,nodeArguments(root,context),{cwd:root,stdio:'inherit',detached:process.platform!=='win32',env});}catch(e){resolveResult({exit_code:null,signal:null,error:e.code??'SPAWN_ERROR',timed_out:false,cleanup_unverified:false,bound_ms:boundMs});return;}const timer=setTimeout(()=>{timedOut=true;try{if(process.platform==='win32'){const killed=execFileSync('taskkill.exe',['/PID',String(child.pid),'/T','/F'],{timeout:5000,stdio:'ignore'});}else{process.kill(-child.pid,'SIGKILL');}}catch{cleanupUnverified=true;child.kill('SIGKILL');}},boundMs);child.once('error',e=>{error=e.code??'SPAWN_ERROR';});child.once('close',(code,signal)=>{clearTimeout(timer);resolveResult({exit_code:code,signal,error,timed_out:timedOut,cleanup_unverified:cleanupUnverified,bound_ms:boundMs});});});const events=existsSync(eventsFile)?JSON.parse(readFileSync(eventsFile,'utf8')):null;const result={schema:'complete-ci-test-receipt-v1',events,execution};writeExclusive(receipt,result);assert.equal(execution.exit_code,0,'Test process failed');assert.equal(execution.signal,null);assert.equal(execution.error,null);assert.equal(execution.timed_out,false);assert.ok(events?.complete,'Reporter must seal terminal events');assert.deepEqual(events.context,context);assert.equal(events.context_sha256,objectSha(context));assert.deepEqual(inventory(root),checked.inventory,'Test inventory changed during execution');for(const[name,pin]of Object.entries(checked.baseline.additions))assert.equal(digest(regular(root,name)),pin,'Reviewed tooling changed during execution');if(checked.baseline.schema==='reviewed-ci-test-baseline-v3'){sourcePins(root,checked.baseline.supporting_sources,V3_SUPPORT);sourcePins(root,checked.baseline.python_sources,Object.keys(V3_PYTHON));assert.equal(digest(regular(root,V3_INDEX)),checked.baseline_sha256);assert.equal(digest(regular(root,V3_REVIEW)),checked.baseline.case_inventory.sha256);}assert.equal(digest(regular(root,checked.baseline.driver.path)),checked.baseline.driver.sha256);return result;}
 function args(argv){const values={};for(let i=0;i<argv.length;i++){assert.ok(argv[i].startsWith('--'));const key=argv[i].slice(2);assert.ok(!Object.hasOwn(values,key));if(key==='parts'){values.parts=argv.slice(i+1);assert.equal(values.parts.length,4);break;}assert.ok(i+1<argv.length);values[key]=argv[++i];}return values;}
 export function ciIdentity(env=process.env) {
   if(env.GITHUB_ACTIONS!=='true') return null;

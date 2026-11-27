@@ -7,8 +7,8 @@ on:
 permissions:
   contents: read
 env:
-  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_368_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: 4b715398e0503381dc990a1eb2a60a7c8d777f1923372fa8101fc64403d69832
+  CI_TEST_BASELINE_INDEX: docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json
+  CI_TEST_BASELINE_SHA: 6e270a07dd0850cf9e649d60b16a8c1a120b9a62e7535a6b596187792ef39f14
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -1958,6 +1958,9 @@ jobs:
       - name: Build complete check artifacts
         timeout-minutes: 5
         run: npm run build
+      - name: Verify bounded Python partition protocol
+        timeout-minutes: 3
+        run: node scripts/check-python-partitions.mjs
       - name: Run complete test inventory
         if: matrix.os != 'ubuntu-latest'
         timeout-minutes: 30
@@ -2097,6 +2100,9 @@ jobs:
       - name: Build complete check artifacts
         timeout-minutes: 5
         run: npm run build
+      - name: Verify bounded Python partition protocol
+        timeout-minutes: 3
+        run: node scripts/check-python-partitions.mjs
       - name: Retrieve exact full Linux20 reference
         uses: actions/download-artifact@v4
         with:
@@ -2227,6 +2233,9 @@ jobs:
       - name: Build complete check artifacts
         timeout-minutes: 5
         run: npm run build
+      - name: Verify bounded Python partition protocol
+        timeout-minutes: 3
+        run: node scripts/check-python-partitions.mjs
       - name: Retrieve exact full Linux22 reference
         uses: actions/download-artifact@v4
         with:

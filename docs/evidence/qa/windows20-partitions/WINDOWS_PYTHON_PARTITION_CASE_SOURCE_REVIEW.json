@@ -1,0 +1,343 @@
+{
+  "schema": "reviewed-windows-python-partition-case-source-v1",
+  "status": "GO_EXACT_SOURCE_DELTA_AND_UNCHANGED_NODE_REGISTRATIONS_ONLY",
+  "baseline_commit": "fb15396db578c78f838829668e36f32b65376806",
+  "predecessor": {
+    "path": "docs/evidence/qa/windows20-partitions/BASELINE_368_TEST_FILES.json",
+    "sha256": "4b715398e0503381dc990a1eb2a60a7c8d777f1923372fa8101fc64403d69832"
+  },
+  "driver": {
+    "path": "scripts/test.mjs",
+    "sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad"
+  },
+  "source_overrides": {
+    "tests/ci-test-partitions.test.mjs": {
+      "before_sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
+      "after_sha256": "3a2408895e3678a1fae04a5aa34750c66eceab065fa9dc991d29a432a26eab47"
+    },
+    "tests/six-boundary-history.test.mjs": {
+      "before_sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e",
+      "after_sha256": "6735f441468293b3bb23a58b3531dfbc60f10b0391d787707ecf24c9aff80b38"
+    },
+    "tests/six-operation-scope.test.mjs": {
+      "before_sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
+      "after_sha256": "e18fdc6a2dd73190e274bf32c67c50467bae55b1ad32ca4c258de143892bda53"
+    }
+  },
+  "additions": {
+    "scripts/ci-test-partitions.mjs": "30e4290196fd97178e2bf9f1d769e37199cc71a4ba954e4851d3344eff4f20fa",
+    "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
+  },
+  "supporting_sources": {
+    "scripts/check-python-partitions.mjs": "47821bb1967ee8aa91d249632c8a767e1deb729f412f00ea2ea777bfc0eef276",
+    "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
+    "tests/helpers/partitioned-python.mjs": "9f3ad23d4a3044878d0f816621b67c21d0f94256bda0dac0ae2ce1da76cc20e8"
+  },
+  "python_sources": {
+    "tests/six_boundary_history_acceptance.py": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
+    "tests/six_operation_scope_controls.py": "e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570"
+  },
+  "inventory_sha256": "d889404593f6de963acf2102793e4545b0622746a5266bdc7452070dd0e6f3ec",
+  "counts": {
+    "files": 345,
+    "preserved_cases": 2076,
+    "added_cases": 16,
+    "total_cases": 2092
+  },
+  "registrations": {
+    "tests/ci-test-partitions.test.mjs": {
+      "before_sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
+      "after_sha256": "3a2408895e3678a1fae04a5aa34750c66eceab065fa9dc991d29a432a26eab47",
+      "before": [
+        {
+          "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
+          "name_expression": "'complete sorted discovery and finite additions reject omissions substitution and nonregular files'",
+          "line": 21,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 2,
+          "options_source": null
+        },
+        {
+          "name": "real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases",
+          "name_expression": "'real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases'",
+          "line": 23,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:30000}"
+        },
+        {
+          "name": "terminal event accounting rejects missing summaries cancellations failures and duplicate summary events",
+          "name_expression": "'terminal event accounting rejects missing summaries cancellations failures and duplicate summary events'",
+          "line": 25,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 2,
+          "options_source": null
+        },
+        {
+          "name": "aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases",
+          "name_expression": "'aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases'",
+          "line": 27,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 2,
+          "options_source": null
+        },
+        {
+          "name": "a real failing child cannot seal an approving execution receipt",
+          "name_expression": "'a real failing child cannot seal an approving execution receipt'",
+          "line": 29,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:15000}"
+        },
+        {
+          "name": "a bounded hung child fails closed without an approving complete receipt",
+          "name_expression": "'a bounded hung child fails closed without an approving complete receipt'",
+          "line": 31,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:15000}"
+        },
+        {
+          "name": "the real CLI activates its reporter before unchanged complete-file argv",
+          "name_expression": "'the real CLI activates its reporter before unchanged complete-file argv'",
+          "line": 33,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:15000}"
+        },
+        {
+          "name": "raw CI workflow keeps the full reference and four bounded Windows partitions",
+          "name_expression": "'raw CI workflow keeps the full reference and four bounded Windows partitions'",
+          "line": 109,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 2,
+          "options_source": null
+        }
+      ],
+      "after": [
+        {
+          "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
+          "name_expression": "'complete sorted discovery and finite additions reject omissions substitution and nonregular files'",
+          "line": 22,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 2,
+          "options_source": null
+        },
+        {
+          "name": "real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases",
+          "name_expression": "'real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases'",
+          "line": 24,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:30000}"
+        },
+        {
+          "name": "terminal event accounting rejects missing summaries cancellations failures and duplicate summary events",
+          "name_expression": "'terminal event accounting rejects missing summaries cancellations failures and duplicate summary events'",
+          "line": 26,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 2,
+          "options_source": null
+        },
+        {
+          "name": "aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases",
+          "name_expression": "'aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases'",
+          "line": 28,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 2,
+          "options_source": null
+        },
+        {
+          "name": "a real failing child cannot seal an approving execution receipt",
+          "name_expression": "'a real failing child cannot seal an approving execution receipt'",
+          "line": 30,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:15000}"
+        },
+        {
+          "name": "a bounded hung child fails closed without an approving complete receipt",
+          "name_expression": "'a bounded hung child fails closed without an approving complete receipt'",
+          "line": 32,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:15000}"
+        },
+        {
+          "name": "the real CLI activates its reporter before unchanged complete-file argv",
+          "name_expression": "'the real CLI activates its reporter before unchanged complete-file argv'",
+          "line": 34,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:15000}"
+        },
+        {
+          "name": "raw CI workflow keeps the full reference and four bounded Windows partitions",
+          "name_expression": "'raw CI workflow keeps the full reference and four bounded Windows partitions'",
+          "line": 117,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 2,
+          "options_source": null
+        }
+      ]
+    },
+    "tests/six-boundary-history.test.mjs": {
+      "before_sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e",
+      "after_sha256": "6735f441468293b3bb23a58b3531dfbc60f10b0391d787707ecf24c9aff80b38",
+      "before": [
+        {
+          "name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+          "name_expression": "'six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback'",
+          "line": 2,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:65000}"
+        }
+      ],
+      "after": [
+        {
+          "name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+          "name_expression": "'six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback'",
+          "line": 4,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:65000}"
+        }
+      ]
+    },
+    "tests/six-operation-scope.test.mjs": {
+      "before_sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
+      "after_sha256": "e18fdc6a2dd73190e274bf32c67c50467bae55b1ad32ca4c258de143892bda53",
+      "before": [
+        {
+          "name": "private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes",
+          "name_expression": "'private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes'",
+          "line": 6,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:65000}"
+        }
+      ],
+      "after": [
+        {
+          "name": "private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes",
+          "name_expression": "'private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes'",
+          "line": 7,
+          "column": 1,
+          "registration_ancestors": [],
+          "argument_count": 3,
+          "options_source": "{timeout:65000}"
+        }
+      ]
+    }
+  },
+  "before_wrapper_sources": {
+    "tests/six-boundary-history.test.mjs": {
+      "sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e",
+      "utf8": "import test from 'node:test';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';\ntest('six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback',{timeout:65000},()=>{const r=spawnSync(process.env.PYTHON||'python3',['-B','tests/six_boundary_history_acceptance.py'],{encoding:'utf8',timeout:60000,killSignal:'SIGKILL',maxBuffer:1024*1024});assert.equal(r.error,undefined,String(r.error||''));assert.equal(r.signal,null,(r.stdout||'')+'\\n'+(r.stderr||''));assert.equal(r.status,0,(r.stdout||'')+'\\n'+(r.stderr||''));assert.match(r.stderr,/Ran 7 tests/);assert.doesNotMatch(r.stderr,/skipped=|FAILED|ERROR|FAIL:/);});\n"
+    },
+    "tests/six-operation-scope.test.mjs": {
+      "sha256": "c4afbb85c45aaa3533e51025fdbc744ec5f710f7693412136dd8a05339145bf6",
+      "utf8": "import test from 'node:test';\nimport assert from 'node:assert/strict';\nimport {spawnSync} from 'node:child_process';\nimport {fileURLToPath} from 'node:url';\n\ntest('private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes',{timeout:65000},()=>{\n const root=fileURLToPath(new URL('../',import.meta.url));\n const r=spawnSync(process.env.PYTHON||'python3',['-B','tests/six_operation_scope_controls.py'],{\n  cwd:root,encoding:'utf8',timeout:60000,killSignal:'SIGKILL',maxBuffer:256*1024,\n });\n assert.equal(r.error,undefined,String(r.error||''));\n assert.equal(r.signal,null,(r.stdout||'')+'\\n'+(r.stderr||''));\n assert.equal(r.status,0,(r.stdout||'')+'\\n'+(r.stderr||''));\n assert.match(r.stderr,/Ran 7 tests/);\n assert.doesNotMatch(r.stderr,/skipped=|FAILED|ERROR|FAIL:/);\n});\n"
+    }
+  },
+  "partition_suites": [
+    {
+      "key": "six-history",
+      "script": "tests/six_boundary_history_acceptance.py",
+      "class_name": "SixHistoryControls",
+      "source_sha256": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
+      "full_inventory": [
+        "test_01_exact_positive_and_explicit_historical_logical_frame",
+        "test_02_cached_positive_does_not_hide_any_current_data_mutation",
+        "test_03_every_source_runtime_and_parent_proof_refuses_loss_and_tampering",
+        "test_04_original_C1_bytes_cannot_replace_actual_future_data",
+        "test_05_C1_fixture_tampering_and_symlink_refuse_after_positive",
+        "test_06_pure_inverse_preserves_unrelated_mutations_but_complete_gate_refuses_them",
+        "test_07_runtime_parent_and_full343_objects_are_mandatory"
+      ],
+      "partitions": [
+        {
+          "id": "heavy",
+          "methods": [
+            "test_02_cached_positive_does_not_hide_any_current_data_mutation"
+          ]
+        },
+        {
+          "id": "remaining",
+          "methods": [
+            "test_01_exact_positive_and_explicit_historical_logical_frame",
+            "test_03_every_source_runtime_and_parent_proof_refuses_loss_and_tampering",
+            "test_04_original_C1_bytes_cannot_replace_actual_future_data",
+            "test_05_C1_fixture_tampering_and_symlink_refuse_after_positive",
+            "test_06_pure_inverse_preserves_unrelated_mutations_but_complete_gate_refuses_them",
+            "test_07_runtime_parent_and_full343_objects_are_mandatory"
+          ]
+        }
+      ],
+      "old_per_stream_output_cap_bytes": 1048576,
+      "child_timeout_ms": 60000,
+      "node_timeout_ms": 65000
+    },
+    {
+      "key": "six-operation-scope",
+      "script": "tests/six_operation_scope_controls.py",
+      "class_name": "SixOperationScopeControls",
+      "source_sha256": "e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570",
+      "full_inventory": [
+        "test_01_verified_immutable_original_bytes_within_one_operation",
+        "test_02_public_gates_reject_active_and_closed_internal_scopes",
+        "test_03_exception_closes_and_prevents_escaped_reuse",
+        "test_04_new_public_calls_recheck_actual_data_despite_same_size_and_mtime",
+        "test_05_mandatory_proofs_are_physical_even_inside_a_valid_operation",
+        "test_06_every_original_fixture_is_verified_before_operation_use",
+        "test_07_mutation_after_capture_never_survives_the_next_operation"
+      ],
+      "partitions": [
+        {
+          "id": "heavy",
+          "methods": [
+            "test_04_new_public_calls_recheck_actual_data_despite_same_size_and_mtime"
+          ]
+        },
+        {
+          "id": "remaining",
+          "methods": [
+            "test_01_verified_immutable_original_bytes_within_one_operation",
+            "test_02_public_gates_reject_active_and_closed_internal_scopes",
+            "test_03_exception_closes_and_prevents_escaped_reuse",
+            "test_05_mandatory_proofs_are_physical_even_inside_a_valid_operation",
+            "test_06_every_original_fixture_is_verified_before_operation_use",
+            "test_07_mutation_after_capture_never_survives_the_next_operation"
+          ]
+        }
+      ],
+      "old_per_stream_output_cap_bytes": 262144,
+      "child_timeout_ms": 60000,
+      "node_timeout_ms": 65000
+    }
+  ],
+  "windows_only": true,
+  "non_windows_original_branch_exact": true,
+  "conformance_is_separate_gate": true,
+  "behavioral_or_release_approval": false
+}

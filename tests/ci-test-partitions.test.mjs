@@ -5,7 +5,8 @@ import {tmpdir} from 'node:os';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
-import {digest,inventory,loadBaseline,makeContext,nodeArguments,eventCollector,aggregateReceipts,execute,MAX_CHILD_MS,ciIdentity} from '../scripts/ci-test-partitions.mjs';
+import {digest,inventory,loadBaseline,makeContext,nodeArguments,eventCollector,aggregateReceipts,execute,MAX_CHILD_MS,ciIdentity,historicalWindowsPythonWrappers,WINDOWS_PYTHON_PARTITION_INDEX} from '../scripts/ci-test-partitions.mjs';
+import {assertCurrent368SourceClosure} from './helpers/intake359-source-input.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'), COMMIT='0123456789abcdef0123456789abcdef01234567';
 const clone=x=>JSON.parse(JSON.stringify(x));
 function fixture(){const root=realpathSync(mkdtempSync(join(tmpdir(),'ci-partitions-')));mkdirSync(join(root,'scripts'));mkdirSync(join(root,'tests'));for(const file of ['test.mjs','ci-test-partitions.mjs','ci-test-reporter.mjs'])copyFileSync(join(ROOT,'scripts',file),join(root,'scripts',file));const files={
@@ -39,7 +40,14 @@ function rawWorkflowContract(raw) {
     assert.ok(match, 'Missing actual CI job '+name);
     return match[1];
   };
-  const check=section('check');
+  const conformance=current=>{
+    const marker='      - name: Verify bounded Python partition protocol\n';assert.equal(current.split(marker).length-1,1);
+    const start=current.indexOf(marker),end=current.indexOf('\n      - ',start+1),body=current.slice(start,end<0?current.length:end).trimEnd();
+    assert.equal(body,marker+'        timeout-minutes: 3\n        run: node scripts/check-python-partitions.mjs');
+    const build='      - name: Build complete check artifacts\n';assert.equal(current.split(build).length-1,1);
+    const following=current.indexOf('\n      - ',current.indexOf(build)+1);assert.equal(following+1,start,'Conformance immediately follows complete build');
+  };
+  const check=section('check');conformance(check);
   assert.match(check,/os: \[ubuntu-latest, macos-latest, windows-latest\]/);
   assert.match(check,/node: \[20, 22\]/);
   assert.match(check,/exclude:\s*\n\s*- os: windows-latest\s*\n\s*node: 20\s*\n\s*- os: windows-latest\s*\n\s*node: 22/);
@@ -53,7 +61,7 @@ function rawWorkflowContract(raw) {
   exactPostchecks(check);
   const currentJobs=[check];
   for (const version of [20,22]) {
-    const parts=section('windows'+version+'-parts'), gate=section('windows'+version);
+    const parts=section('windows'+version+'-parts'), gate=section('windows'+version);conformance(gate);assert.doesNotMatch(parts,/Verify bounded Python partition protocol|node scripts\/check-python-partitions\.mjs/);
     assert.match(check,new RegExp("name: Run full Linux"+version+" inventory reference\\s*\\n\\s*if: matrix.os == 'ubuntu-latest' && matrix.node == "+version+"\\s*\\n\\s*timeout-minutes: 30"));
     assert.ok(check.includes('name: linux'+version+'-full-inventory'));
     assert.match(parts,/runs-on: windows-latest/);
@@ -142,6 +150,7 @@ test('raw CI workflow keeps the full reference and four bounded Windows partitio
 // The immutable340-path predecessor is real; this private fixture adds one
 // tiny source file and explicitly records only the39 reviewed edited paths.
 function assertSuccessorBaselineFixtures(){
+  const historicalWrappers=assertWindowsPythonBaselineFixtures();
   const f=fixture();
   try{
     const predecessorPath='docs/evidence/qa/windows20-partitions/BASELINE_3CED_TEST_FILES.json';
@@ -152,7 +161,7 @@ function assertSuccessorBaselineFixtures(){
     const allowedChanged=new Set(["tests/apadana-disclosures.test.mjs","tests/apadana-fourth-client.test.mjs","tests/apadana-fourth.test.mjs","tests/apadana-held234.test.mjs","tests/apadana-next.test.mjs","tests/apadana-thera.test.mjs","tests/apadana-third.test.mjs","tests/ci-test-partitions.test.mjs","tests/current339-source-inverses.test.mjs","tests/current343-bindings.test.mjs","tests/held234-client.test.mjs","tests/held234-current333-chain.test.mjs","tests/intake343-metadata.test.mjs","tests/intake359-metadata-history.test.mjs","tests/next-ten-history-data.test.mjs","tests/six-boundary-source-input.test.mjs","tests/source-notes-baseline-projection.test.mjs","tests/source-notes-compatibility.test.mjs","tests/thera-commentary-locators.test.mjs","tests/thera141-180-client.test.mjs","tests/thera181-220-client.test.mjs","tests/thera221-230-client.test.mjs","tests/thera241-250-client.test.mjs","tests/thera261-280-client.test.mjs","tests/thera261-280-source.test.mjs","tests/thera281-285-client.test.mjs","tests/thera281-285-source.test.mjs","tests/thera287-288-client.test.mjs","tests/thera287-288-source.test.mjs","tests/thera292-299-client.test.mjs","tests/thera292-299-source.test.mjs","tests/thera312-319-client.test.mjs","tests/thera312-319-source.test.mjs","tests/thera321-329-client.test.mjs","tests/thera321-329-source.test.mjs","tests/thera331-334-preface-client.test.mjs","tests/thera331-334-source.test.mjs","tests/thera335-350-source.test.mjs","tests/widget-hosted-selections.test.mjs"]);
     const changes={};
     for(const[path,before]of Object.entries(prior.files)){
-      const bytes=readFileSync(join(ROOT,path));copyFileSync(join(ROOT,path),join(f.root,path));
+      const bytes=Object.hasOwn(historicalWrappers,path)?Buffer.from(historicalWrappers[path],'utf8'):readFileSync(join(ROOT,path));if(Object.hasOwn(historicalWrappers,path))writeFileSync(join(f.root,path),bytes);else copyFileSync(join(ROOT,path),join(f.root,path));
       const after=digest(bytes);
       if(after!==before){assert.ok(allowedChanged.has(path),'Unexpected changed predecessor test in owned fixture');changes[path]={before_sha256:before,after_sha256:after};}
     }
@@ -202,4 +211,57 @@ function assertSuccessorBaselineFixtures(){
     const required=join(f.root,added),saved=readFileSync(required);rmSync(required);assert.throws(()=>loadBaseline(f.root,f.index,pin));writeFileSync(required,saved);
     assert.equal(loadBaseline(f.root,f.index,pin).inventory.length,341);
   }finally{f.cleanup();}
+}
+
+// Current V3 validation precedes this finite historical-input seam.
+function assertCurrentPartitionWorkflow(raw,pin){
+  assert.equal(rawWorkflowContract(raw),true);
+  const index='docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json';
+  const paths=[...raw.matchAll(/^  CI_TEST_BASELINE_INDEX: (.+)$/gm)];assert.equal(paths.length,1);assert.equal(paths[0][1],index);
+  const hashes=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: ([a-f0-9]{64})$/gm)];assert.equal(hashes.length,1);assert.equal(hashes[0][1],pin);
+}
+function assertWindowsPythonBaselineFixtures(){
+  const code=assertCurrent368SourceClosure(),indexPath=WINDOWS_PYTHON_PARTITION_INDEX;
+  const row=code.new_code[indexPath];assert.ok(row&&Number.isSafeInteger(row.bytes)&&/^[a-f0-9]{64}$/.test(row.sha256),'Independent physical SOURCE binding for current index');
+  const indexBytes=readFileSync(join(ROOT,indexPath));assert.equal(indexBytes.length,row.bytes);assert.equal(digest(indexBytes),row.sha256);
+  const actual=loadBaseline(ROOT,join(ROOT,indexPath),row.sha256);assert.equal(actual.inventory.length,345);assert.equal(actual.baseline.legacy_test_count+actual.baseline.added_test_count,2092);
+  const history=historicalWindowsPythonWrappers(ROOT,join(ROOT,indexPath),row.sha256);
+  assert.deepEqual(Object.keys(history),['tests/six-boundary-history.test.mjs','tests/six-operation-scope.test.mjs']);
+  const workflow=readFileSync(join(ROOT,'.github/workflows/check.yml'),'utf8');assertCurrentPartitionWorkflow(workflow,row.sha256);
+  const inJob=(text,name,change)=>{const start=text.indexOf('  '+name+':\n');assert.ok(start>=0);const tail=text.slice(start),next=/\n  [a-zA-Z0-9_-]+:/.exec(tail),end=next?start+next.index+1:text.length;return text.slice(0,start)+change(text.slice(start,end))+text.slice(end);};
+  const block='      - name: Verify bounded Python partition protocol\n        timeout-minutes: 3\n        run: node scripts/check-python-partitions.mjs';
+  for(const job of ['check','windows20','windows22'])for(const change of [s=>s.replace(block,''),s=>s.replace(block,block.replace('timeout-minutes: 3','timeout-minutes: 4')),s=>s.replace(block,block+'\n        if: false'),s=>s.replace(block,block+'\n        continue-on-error: true'),s=>s.replace(block,block.replace('node scripts/check-python-partitions.mjs','node -e ""'))]){
+    const changed=inJob(workflow,job,change);assert.notEqual(changed,workflow);assert.throws(()=>assertCurrentPartitionWorkflow(changed,row.sha256));
+  }
+  assert.throws(()=>assertCurrentPartitionWorkflow(workflow.replace(row.sha256,'0'.repeat(64)),row.sha256));
+  const f=fixture();
+  try{
+    const b=clone(actual.baseline),reviewPath=b.case_inventory.path,r=JSON.parse(readFileSync(join(ROOT,reviewPath)));
+    const old=JSON.parse(readFileSync(join(ROOT,b.predecessor.path))),prior=JSON.parse(readFileSync(join(ROOT,old.predecessor.path))),oldReview=JSON.parse(readFileSync(join(ROOT,old.case_inventory.path)));
+    const paths=new Set([b.predecessor.path,old.predecessor.path,prior.legacy_v1.path,old.case_inventory.path,...oldReview.evidence.map(x=>x.path),...actual.inventory.map(x=>x.path),b.driver.path,...Object.keys(b.additions),...Object.keys(b.supporting_sources),...Object.keys(b.python_sources)]);
+    rmSync(join(f.root,'tests'),{recursive:true});mkdirSync(join(f.root,'tests'));
+    for(const path of paths){mkdirSync(dirname(join(f.root,path)),{recursive:true});copyFileSync(join(ROOT,path),join(f.root,path));}
+    const index=join(f.root,indexPath);mkdirSync(dirname(index),{recursive:true});
+    const write=(path,value)=>{mkdirSync(dirname(join(f.root,path)),{recursive:true});writeFileSync(join(f.root,path),value);};
+    const publish=(candidate=b,proof=r)=>{const text=JSON.stringify(proof);write(reviewPath,text);candidate.case_inventory.sha256=digest(text);writeFileSync(index,JSON.stringify(candidate));return digest(readFileSync(index));};
+    const pin=publish();assert.equal(loadBaseline(f.root,index,pin).inventory.length,345);
+    const refusal=change=>{const candidate=clone(b),proof=clone(r);change(candidate,proof);const changedPin=publish(candidate,proof);assert.throws(()=>loadBaseline(f.root,index,changedPin));publish();};
+    const wrapper='tests/six-boundary-history.test.mjs';
+    for(const mutate of [
+      b=>b.schema='unknown-v3',b=>b.commit='f'.repeat(40),b=>b.legacy_test_count=2075,b=>b.added_test_count=17,b=>b.predecessor.sha256='0'.repeat(64),
+      b=>delete b.source_overrides[wrapper],b=>b.source_overrides[wrapper].after_sha256=b.source_overrides['tests/six-operation-scope.test.mjs'].after_sha256,
+      b=>b.source_overrides['tests/unknown.test.mjs']={before_sha256:'a'.repeat(64),after_sha256:'b'.repeat(64)},
+      b=>delete b.files[wrapper],b=>b.files[wrapper]='0'.repeat(64),b=>delete b.supporting_sources['tests/helpers/partitioned-python.mjs'],
+      b=>b.supporting_sources['scripts/not-approved.mjs']='a'.repeat(64),b=>b.python_sources['tests/six_boundary_history_acceptance.py']='0'.repeat(64),
+      (_b,r)=>r.status='PENDING',(_b,r)=>r.windows_only=false,(_b,r)=>r.behavioral_or_release_approval=true,
+      (_b,r)=>r.before_wrapper_sources[wrapper].utf8+='\n',(_b,r)=>r.registrations[wrapper].after[0].options_source='{timeout:65001}',
+      (_b,r)=>r.registrations[wrapper].after=[],(_b,r)=>r.partition_suites[0].partitions[0].methods=[],(_b,r)=>r.partition_suites[1].child_timeout_ms=60001
+    ])refusal(mutate);
+    const physical=[...Object.keys(b.source_overrides),...Object.keys(b.supporting_sources),...Object.keys(b.python_sources),b.predecessor.path,reviewPath];
+    for(const path of physical){const file=join(f.root,path),before=readFileSync(file);writeFileSync(file,Buffer.concat([before,Buffer.from('\nSYNTHETIC_SOURCE_DRIFT')]));assert.throws(()=>loadBaseline(f.root,index,pin),'V3 actual source mutation '+path);writeFileSync(file,before);}
+    const required=join(f.root,wrapper),before=readFileSync(required);rmSync(required);assert.throws(()=>loadBaseline(f.root,index,pin));writeFileSync(required,before);
+    const unknown=join(f.root,'tests','unknown-extra.test.mjs');writeFileSync(unknown,"import test from 'node:test';test('unreviewed',()=>{});\n");assert.throws(()=>loadBaseline(f.root,index,pin));rmSync(unknown);
+    assert.equal(loadBaseline(f.root,index,pin).inventory.length,345);
+  }finally{f.cleanup();}
+  return history;
 }
