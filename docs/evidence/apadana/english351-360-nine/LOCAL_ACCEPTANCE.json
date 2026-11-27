@@ -385,7 +385,7 @@
     "optional_skip_scope": "267 preserved source-only +11 new source/client optional +1 existing conditional live HEAD preflight; no new fixed skip exemption",
     "original_failed_run_preserved": true
   },
-  "current_status_scope": "final_native_source_QA describes core a59e5290bd7d5a419debb965cbe964738bb0784b. All older fields retain their original historical component/commit scope; actual Git refs and exact CI determine subsequent dev integration.",
+  "current_status_scope": "final_linux_source_QA describes core 7d2948c6678a6aa9951a568c42dfee2acdd68acd. All older fields retain their original historical component/commit scope; actual Git refs and exact CI determine subsequent dev integration.",
   "final_windows_source_QA": {
     "core_commit": "ae19c2c7c0e72f1bad30aa2d9256e2765b03c2d4",
     "source_envelope": {
@@ -935,5 +935,143 @@
     "exact_candidate_remote_CI_pending_at_preparation": true,
     "dev_promotion_pending_at_preparation": true,
     "full_CI_or_dev_promotion_claim": false
+  },
+  "final_linux_source_QA": {
+    "core_commit": "7d2948c6678a6aa9951a568c42dfee2acdd68acd",
+    "source_envelope": {
+      "map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
+      "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
+      "loader_sha256": "38463c1af4e493bf2d5acc63eada817da74e1b868bc005128d3a10737ff215ff",
+      "rows": 75,
+      "changed_from3ced": 72,
+      "direct_paths": 66,
+      "physical_source_pins": 138,
+      "CI_current_index_sha256": "e6097e39016595df5a930bb0c173bd90b441bb235c0782fa6636db3d5e05b186",
+      "CI_independent_case_review_sha256": "8132d40b4394267a058fb4fee18575796061981c02ecf51d118355856d7a6497",
+      "CI_inventory_sha256": "3704dfc03269b6287e190d12f8557c06aa9c7201c9b820eaa7c03a68464bb3cd"
+    },
+    "source_input_review": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-final-input-review/INPUT_REVIEW.json",
+      "sha256": "4a56ad36f88a8fd8d137f8380fb8ce1f5441e42b526d0c267240dc3b719c2bb2"
+    },
+    "independent_generated_output_review": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/OUTPUT_REVIEW.json",
+      "sha256": "bb394c57a2bf03d46a072222971ed622ef2809f103e03e8b0221397f39da995b"
+    },
+    "source_preflight11": {
+      "schema": "root-targeted-final-source-and-CI-QA-execution-v1",
+      "argv": [
+        "/tmp/pali-english335-350-evidence-nov26/node20-linux/node",
+        "--test",
+        "--test-concurrency=1",
+        "tests/current343-bindings.test.mjs",
+        "tests/intake343-metadata.test.mjs",
+        "tests/intake359-source-history.test.mjs",
+        "tests/intake368-source-seal.test.mjs"
+      ],
+      "cwd": "/tmp/pali-proof-budget-repair-nov27",
+      "seconds": 9.89989386900561,
+      "exit_code": 0,
+      "outer_bound_seconds": 120,
+      "outer_timeout": false,
+      "emergency_owned_descendants": [],
+      "owned_group_absent": true,
+      "metrics": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "stdout_sha256": "fd75a4862e9ae9f28a8f682e8b9b0ead9215847243714deaff70b7edd1de3c80",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
+      "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
+      "not_full_CI_or_dev_approval": true
+    },
+    "CI_QA8": {
+      "schema": "root-targeted-final-source-and-CI-QA-execution-v1",
+      "argv": [
+        "/tmp/pali-english335-350-evidence-nov26/node20-linux/node",
+        "--test",
+        "--test-concurrency=1",
+        "tests/ci-test-partitions.test.mjs"
+      ],
+      "cwd": "/tmp/pali-proof-budget-repair-nov27",
+      "seconds": 3.952171475000796,
+      "exit_code": 0,
+      "outer_bound_seconds": 90,
+      "outer_timeout": false,
+      "emergency_owned_descendants": [],
+      "owned_group_absent": true,
+      "metrics": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "stdout_sha256": "f5f25dd4ac9bc7734a94ddc9fdeba7f1e9d61162fb9572acfb4c1daf565f48e5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
+      "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
+      "not_full_CI_or_dev_approval": true
+    },
+    "execution_scope": "One focused run per group on exact staged sources saved unchanged as this core. These are19 focused cases, not a full2092 local rerun or exact remote CI.",
+    "browser_dependency_diagnostic": {
+      "commit": "75302cbae0f38246ec42aa6267a2483330b5e38a",
+      "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/46008325010",
+      "job_id": 140537056205,
+      "peer": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/browser-apt403-install-execution-review/EXECUTION_REVIEW.json",
+        "sha256": "51b83f3fe92ff6e77105a44b3f9f2f3c0181175bf56f0d94e5a19369d170ac6b"
+      },
+      "scope": "Narrow signed Ubuntu repository selection for Chromium, original held234 source+reader+a11y+offline-installed commands. Current Firefox/WebKit install and full-candidate CI remain separate. Three TargetClosed warnings retained; four uploaded JSON bodies not inspected after proxy403."
+    },
+    "source_only_K2_authorization": {
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-ci-adapter-independent-review/AUTHORIZATION_MANIFEST.json",
+      "sha256": "1ce005181b9af9270cee8d851681ed223f997d340da65c06ce9156fce6d2853a"
+    },
+    "full_local2092_rerun": false,
+    "partition_platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "explicit_two_process_resource_policy_not_old_single60s_equivalence": true,
+    "original14_Python_methods_driver_assertions_deadlines345files2092cases_preserved": true,
+    "runtime_package39_and_canonical_data_unchanged": true,
+    "exact_candidate_remote_CI_pending_at_preparation": true,
+    "dev_promotion_pending_at_preparation": true,
+    "full_CI_or_dev_promotion_claim": false,
+    "native_Linux_diagnostic": {
+      "commit": "950895ab558b9a71aaf51a95a459a0eb713d8063",
+      "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/46020675540",
+      "jobs": [
+        140579208214,
+        140579208613
+      ],
+      "result": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_LINUX_CONTRAST_RESULT.json",
+        "sha256": "46aafcaa10c284812ae92e4ae453390e5acc40a12dda70d25ffc2587a64f4611"
+      },
+      "independent_execution_review": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-final-input-review/EXECUTION_REVIEW.json",
+        "sha256": "a2111a7252e09c44027e41b38e80e8cad65064019e4eece257c76a4d844a7ba4"
+      },
+      "actual": "Both Node20/22 unchanged108 gates, both baselineA5 and partitionB5 passed. B strictly verified all14 original named1+6 methods, actual child terminal/close/exit0, fresh declared PID/group absence, source identities and all original limits.",
+      "scope": "Same-host fixed-order five-file context, not full2092 load reproduction or CPU-cause evidence. Node20 totalB73.804s versusA69.811s; Node22 B61.773s versusA62.795s. No overall speed-improvement claim; two cold fixtures explicitly increase aggregate resources. Raw identity and TAP artifacts are preserved on GitHub but uninspected locally; structured phase/gate results are in captured logs."
+    },
+    "prior_exact_D_full_CI": {
+      "commit": "d11ae70bbb7334402f23bf948944e7bab6d55241",
+      "package_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/46015306455",
+      "result": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/FINAL_D_RESULT.json",
+        "sha256": "116e93147c27f097ed1063ce4d447c218fc390366ac4236c1225cdb7759e5a42"
+      },
+      "scope": "71/75 jobs passed. Linux20/22 each timed out the original single-script SIX child60s; two Windows aggregate guards propagated missing Linux references. Both full Mac inventories, all8 actual Windows partitions, all browsers and companion runs passed. These are historical D outcomes, never this successor full-CI acceptance."
+    }
   }
 }

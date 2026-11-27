@@ -1,11 +1,11 @@
 {
-  "schema": "final-native-core-component-binding-v1",
+  "schema": "final-linux-core-component-binding-v1",
   "status": "PASS_COMPONENT_IDENTITY_AND_FOCUSED_SOURCE_QA_ONLY",
-  "core_commit": "a59e5290bd7d5a419debb965cbe964738bb0784b",
+  "core_commit": "7d2948c6678a6aa9951a568c42dfee2acdd68acd",
   "component_binding": {
     "schema": "independent-final-core-fixed-component-binding-v1",
     "status": "PASS_FINAL_CORE_COMPONENT_BINDING_ONLY",
-    "final_core_commit": "a59e5290bd7d5a419debb965cbe964738bb0784b",
+    "final_core_commit": "7d2948c6678a6aa9951a568c42dfee2acdd68acd",
     "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
     "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
     "source_authorities": {
@@ -250,19 +250,19 @@
       "No private study records read or changed; no live provider,physical-device,human AT,signed-in host or fresh-browser-offline claim."
     ]
   },
-  "component_binding_sha256": "1ba67517d9cd04176add06611f8c6a9bc3b467b3eec69a1a3fc12e23f70e3100",
+  "component_binding_sha256": "ea5bad0cee0999b3666f73515e04231492affbc18f0e2cbe6b93408807f5899f",
   "independent_component_review": {
-    "schema": "independent-CoreC-component-preservation-review-v1",
+    "schema": "independent-CoreE-component-preservation-review-v1",
     "status": "GO_EXACT_COMPONENT_PRESERVATION_ONLY",
-    "core_commit": "a59e5290bd7d5a419debb965cbe964738bb0784b",
+    "core_commit": "7d2948c6678a6aa9951a568c42dfee2acdd68acd",
     "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
     "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
     "root_component_receipt": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/final-component-review/FINAL_CORE_BINDING_NATIVE_a59e529.json",
-      "sha256": "1ba67517d9cd04176add06611f8c6a9bc3b467b3eec69a1a3fc12e23f70e3100"
+      "path": "/tmp/pali-english351-360-evidence-nov27/final-component-review/FINAL_CORE_BINDING_LINUX_7d2948c.json",
+      "sha256": "ea5bad0cee0999b3666f73515e04231492affbc18f0e2cbe6b93408807f5899f"
     },
     "verified": {
-      "exact16_core_paths_vs_CoreB_driver_unchanged": true,
+      "exact14_core_paths_vs_CoreD_helper_gate_driver_unchanged": true,
       "all39_Git_modes_blob_identities_payload_archive_and_physical_install_equal70556": true,
       "all34_runtime_rows_and_Git_identities_equal_APP_and_independent_inventory": true,
       "protected_production_tree_modes_blobs_and_physical_bytes_equal_APP": true,
@@ -277,38 +277,38 @@
       "canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
       "canonical_units": 8544,
       "source_books": 61,
-      "browser_execution_remains_APP_PACKAGE_not_CoreC": true
+      "browser_execution_remains_APP_PACKAGE_not_CoreE": true
     },
     "package_Git39_identity_sha256": "ad0dfe549c86ab2277a57e66dfa9475e17e6da526764d7db8367fa62ed0d6ee1",
     "scope": [
       "Read-only Git modes/blobs, stdlib declarative profile parser, archive/install byte comparison and canonical gzip metadata; no root-verifier rerun, app imports/tests/build/API/network/Git mutation/primary edits.",
-      "Existing installed browser evidence remains APPaeb/70556 execution; equality supports reuse without relabeling as CoreC execution.",
+      "Existing installed browser evidence remains APPaeb/70556 execution; equality supports reuse without relabeling as CoreE execution.",
       "Source/test/CI changes have separate source reviews; this receipt does not approve their semantics or exact final fullCI/dev/main/deploy."
     ],
     "blocking_findings": []
   },
-  "independent_component_review_sha256": "43e0fc6f999513303a360b4523eb73f37c23514cefaf603e8c7b577d3b70687a",
+  "independent_component_review_sha256": "4c9c68ff7dcf511d70673104163f2ea3b7445b5f9127db7a992ebf44e63b6306",
   "final_source_QA": {
-    "core_commit": "a59e5290bd7d5a419debb965cbe964738bb0784b",
+    "core_commit": "7d2948c6678a6aa9951a568c42dfee2acdd68acd",
     "source_envelope": {
-      "map_sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85",
-      "code_sha256": "4e310da8341bbe68e7c8bcfedc76aaf910e134b09782e520f85148cdfbf2119e",
-      "loader_sha256": "bbfd36dc66944f09f9c420cda5c46ff245a7e3883913b50552b255410baf4aa0",
+      "map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
+      "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
+      "loader_sha256": "38463c1af4e493bf2d5acc63eada817da74e1b868bc005128d3a10737ff215ff",
       "rows": 75,
       "changed_from3ced": 72,
       "direct_paths": 66,
       "physical_source_pins": 138,
-      "CI_current_index_sha256": "9c1a10c0b74f8663a300d9edc0f864397f51c76cdc0cbf4697f5e0df68e42d39",
-      "CI_independent_case_review_sha256": "195f07b99da42183b005077a5453aae51b5a87a112055e260d6fbdd9c3986fdb",
-      "CI_inventory_sha256": "4182d7e50f8494d06ca328075307cc67cf69e78b74d54d974cccadd2c7552d2c"
+      "CI_current_index_sha256": "e6097e39016595df5a930bb0c173bd90b441bb235c0782fa6636db3d5e05b186",
+      "CI_independent_case_review_sha256": "8132d40b4394267a058fb4fee18575796061981c02ecf51d118355856d7a6497",
+      "CI_inventory_sha256": "3704dfc03269b6287e190d12f8557c06aa9c7201c9b820eaa7c03a68464bb3cd"
     },
     "source_input_review": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-final-input-review/INPUT_REVIEW.json",
-      "sha256": "fc4ba142871acfd4f1a75a282d70dada50f3e6ac9765bd7c3a736fd3c5d0685f"
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-final-input-review/INPUT_REVIEW.json",
+      "sha256": "4a56ad36f88a8fd8d137f8380fb8ce1f5441e42b526d0c267240dc3b719c2bb2"
     },
     "independent_generated_output_review": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-generated-independent-review/OUTPUT_REVIEW.json",
-      "sha256": "68f84a298cee380bc588e1ee57fa81c46e3558fdccb16985757c2f2a45c03b01"
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-generated-independent-review/OUTPUT_REVIEW.json",
+      "sha256": "bb394c57a2bf03d46a072222971ed622ef2809f103e03e8b0221397f39da995b"
     },
     "source_preflight11": {
       "schema": "root-targeted-final-source-and-CI-QA-execution-v1",
@@ -322,7 +322,7 @@
         "tests/intake368-source-seal.test.mjs"
       ],
       "cwd": "/tmp/pali-proof-budget-repair-nov27",
-      "seconds": 10.166201320011169,
+      "seconds": 9.89989386900561,
       "exit_code": 0,
       "outer_bound_seconds": 120,
       "outer_timeout": false,
@@ -336,10 +336,10 @@
         "skipped": 0,
         "todo": 0
       },
-      "stdout_sha256": "f37f391ee278731802e784e646a080c88b945bae444252f249ddda0d713d0346",
+      "stdout_sha256": "fd75a4862e9ae9f28a8f682e8b9b0ead9215847243714deaff70b7edd1de3c80",
       "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "source_map_sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85",
-      "code_sha256": "4e310da8341bbe68e7c8bcfedc76aaf910e134b09782e520f85148cdfbf2119e",
+      "source_map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
+      "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
       "not_full_CI_or_dev_approval": true
     },
     "CI_QA8": {
@@ -351,7 +351,7 @@
         "tests/ci-test-partitions.test.mjs"
       ],
       "cwd": "/tmp/pali-proof-budget-repair-nov27",
-      "seconds": 3.9068038600089494,
+      "seconds": 3.952171475000796,
       "exit_code": 0,
       "outer_bound_seconds": 90,
       "outer_timeout": false,
@@ -365,39 +365,13 @@
         "skipped": 0,
         "todo": 0
       },
-      "stdout_sha256": "8f4e94bb38e623c6b17de7c7970aa0589511d6a84f4864313923348401116473",
+      "stdout_sha256": "f5f25dd4ac9bc7734a94ddc9fdeba7f1e9d61162fb9572acfb4c1daf565f48e5",
       "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "source_map_sha256": "7c317b7985ea849cfcc27257a02cbdf8705884808ba69b64cd8e95652b555d85",
-      "code_sha256": "4e310da8341bbe68e7c8bcfedc76aaf910e134b09782e520f85148cdfbf2119e",
+      "source_map_sha256": "ed4176c601d8f7da6c3cdb1a8689c3cf20eedbc81fc71e2172e2a2d0ad212c2d",
+      "code_sha256": "84d3dd658bf4a16535855b92e3624c49374938c8ad5ce4d65f7ca067706c6a1a",
       "not_full_CI_or_dev_approval": true
     },
     "execution_scope": "One focused run per group on exact staged sources saved unchanged as this core. These are19 focused cases, not a full2092 local rerun or exact remote CI.",
-    "local_protocol108": {
-      "evidence": {
-        "path": "/tmp/pali-windows-python-partition-lab-nov27/short-conformance-native-final/REPORT.json",
-        "sha256": "4da5dc5b9b928d82016daae7cda2f5a4023408fb82a55bb6209f0584880a4b64"
-      },
-      "execution_peer": {
-        "path": "/tmp/pali-english351-360-evidence-nov27/browser-apt403-install-execution-review/EXECUTION_REVIEW.json",
-        "sha256": "51b83f3fe92ff6e77105a44b3f9f2f3c0181175bf56f0d94e5a19369d170ac6b"
-      },
-      "platform": "linux",
-      "scope": "108 synthetic controls; original14 Python methods are separate."
-    },
-    "native_Mac_diagnostic": {
-      "commit": "5de9836806d5ec96fa478eda6cb9201b53eb6781",
-      "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/46011696409",
-      "job_ids": [
-        140548554828,
-        140548555262
-      ],
-      "per_major": "108 protocol controls plus5 original wrappers passed with zero failures, skips or cancellations on actual macOS Node20/22.",
-      "peer": {
-        "path": "/tmp/pali-english351-360-evidence-nov27/native-mac2-independent-execution-review/EXECUTION_REVIEW.json",
-        "sha256": "2506c597b1feb8577e19db744da23711a638c39812b2e909c31d858e1679fc69"
-      },
-      "scope": "Exact helper/gate/wrapper freeze; diagnostic source envelope is not this current V4 full matrix."
-    },
     "browser_dependency_diagnostic": {
       "commit": "75302cbae0f38246ec42aa6267a2483330b5e38a",
       "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/46008325010",
@@ -409,20 +383,48 @@
       "scope": "Narrow signed Ubuntu repository selection for Chromium, original held234 source+reader+a11y+offline-installed commands. Current Firefox/WebKit install and full-candidate CI remain separate. Three TargetClosed warnings retained; four uploaded JSON bodies not inspected after proxy403."
     },
     "source_only_K2_authorization": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/native-platform-final-K2-independent-review/AUTHORIZATION_MANIFEST.json",
-      "sha256": "3b8e5705385d60f6a82207c2e7493b1ff26f967173c86ff9afb12f1ac6051979"
+      "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-ci-adapter-independent-review/AUTHORIZATION_MANIFEST.json",
+      "sha256": "1ce005181b9af9270cee8d851681ed223f997d340da65c06ce9156fce6d2853a"
     },
     "full_local2092_rerun": false,
-    "Windows_and_Mac_partition_platforms": [
+    "partition_platforms": [
       "win32",
-      "darwin"
+      "darwin",
+      "linux"
     ],
     "explicit_two_process_resource_policy_not_old_single60s_equivalence": true,
     "original14_Python_methods_driver_assertions_deadlines345files2092cases_preserved": true,
     "runtime_package39_and_canonical_data_unchanged": true,
     "exact_candidate_remote_CI_pending_at_preparation": true,
     "dev_promotion_pending_at_preparation": true,
-    "full_CI_or_dev_promotion_claim": false
+    "full_CI_or_dev_promotion_claim": false,
+    "native_Linux_diagnostic": {
+      "commit": "950895ab558b9a71aaf51a95a459a0eb713d8063",
+      "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/46020675540",
+      "jobs": [
+        140579208214,
+        140579208613
+      ],
+      "result": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/NATIVE_LINUX_CONTRAST_RESULT.json",
+        "sha256": "46aafcaa10c284812ae92e4ae453390e5acc40a12dda70d25ffc2587a64f4611"
+      },
+      "independent_execution_review": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/native-linux-final-input-review/EXECUTION_REVIEW.json",
+        "sha256": "a2111a7252e09c44027e41b38e80e8cad65064019e4eece257c76a4d844a7ba4"
+      },
+      "actual": "Both Node20/22 unchanged108 gates, both baselineA5 and partitionB5 passed. B strictly verified all14 original named1+6 methods, actual child terminal/close/exit0, fresh declared PID/group absence, source identities and all original limits.",
+      "scope": "Same-host fixed-order five-file context, not full2092 load reproduction or CPU-cause evidence. Node20 totalB73.804s versusA69.811s; Node22 B61.773s versusA62.795s. No overall speed-improvement claim; two cold fixtures explicitly increase aggregate resources. Raw identity and TAP artifacts are preserved on GitHub but uninspected locally; structured phase/gate results are in captured logs."
+    },
+    "prior_exact_D_full_CI": {
+      "commit": "d11ae70bbb7334402f23bf948944e7bab6d55241",
+      "package_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/46015306455",
+      "result": {
+        "path": "/tmp/pali-english351-360-evidence-nov27/FINAL_D_RESULT.json",
+        "sha256": "116e93147c27f097ed1063ce4d447c218fc390366ac4236c1225cdb7759e5a42"
+      },
+      "scope": "71/75 jobs passed. Linux20/22 each timed out the original single-script SIX child60s; two Windows aggregate guards propagated missing Linux references. Both full Mac inventories, all8 actual Windows partitions, all browsers and companion runs passed. These are historical D outcomes, never this successor full-CI acceptance."
+    }
   },
   "future_receipt_only_commit_requires_exact_path_and_same_component_review": true,
   "exact_candidate_remote_CI_pending_at_preparation": true,
