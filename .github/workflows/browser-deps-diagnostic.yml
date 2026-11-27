@@ -1,0 +1,503 @@
+name: Browser dependency install diagnostic
+on:
+  push:
+    branches: ['diagnostic/pali-browser-deps-nov27-*']
+permissions:
+  contents: read
+jobs:
+  ubuntu24-held234-install-diagnostic:
+    name: Ubuntu 24 scoped APT / genuine held234 reader
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [apadanathera234]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch exact held234 intake baseline for independent preservation checks
+        if: matrix.group == 'apadanathera234'
+        run: |
+          git fetch --no-tags --depth=1 origin 7d5ac90845402b322dabf2c5120d1485b15c0bda
+          git cat-file -e 7d5ac90845402b322dabf2c5120d1485b15c0bda^{commit}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+      - run: python -m pip install playwright==1.62.0
+      - name: Record runner and browser SDK identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'ImageOS=%s\nImageVersion=%s\n' "$ImageOS" "$ImageVersion"
+          cat /etc/os-release
+          python --version
+          python -m playwright --version
+      - name: Install the official Chromium browser with Ubuntu dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          pali_python="$(python -c 'import sys; print(sys.executable)')"
+          test "$(python -c 'from importlib.metadata import version; print(version("playwright"))')" = '1.62.0'
+          pali_apt_dir="$(mktemp -d "$RUNNER_TEMP/playwright-ubuntu-apt.XXXXXX")"
+          trap 'rm -rf "$pali_apt_dir"' EXIT
+          chmod 700 "$pali_apt_dir"
+          test -f /etc/apt/sources.list.d/ubuntu.sources
+          test -s /usr/share/keyrings/ubuntu-archive-keyring.gpg
+          cp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          cmp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          test "$(grep '^Signed-By:' "$pali_apt_dir/ubuntu.sources" | sort -u)" = 'Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg'
+          mkdir "$pali_apt_dir/empty-sourceparts"
+          printf 'Dir::Etc::sourcelist "%s";\nDir::Etc::sourceparts "%s";\n' "$pali_apt_dir/ubuntu.sources" "$pali_apt_dir/empty-sourceparts" > "$pali_apt_dir/apt.conf"
+          test "$(sudo env APT_CONFIG="$pali_apt_dir/apt.conf" apt-config shell SelectedList Dir::Etc::sourcelist SelectedParts Dir::Etc::sourceparts)" = "SelectedList='$pali_apt_dir/ubuntu.sources'
+          SelectedParts='$pali_apt_dir/empty-sourceparts'"
+          sha256sum /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          sudo env APT_CONFIG="$pali_apt_dir/apt.conf" "$pali_python" -m playwright install-deps chromium
+          cmp /etc/apt/sources.list.d/ubuntu.sources "$pali_apt_dir/ubuntu.sources"
+          python -m playwright install chromium
+      - name: Build standalone server and reader assets
+        run: npm run build
+      - name: Check out exact public Apadāna source fixtures without credentials
+        if: matrix.group == 'apadana' || matrix.group == 'apadananext' || matrix.group == 'apadanathird' || matrix.group == 'apadanafourth' || matrix.group == 'apadanathera' || matrix.group == 'apadanatheranext' || matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanaedition' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234'
+        uses: actions/checkout@v4
+        with:
+          repository: apadana-translation/apadana-site
+          ref: fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4
+          path: .fixtures/apadana-pinned
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            LICENSE.md
+            src/_pages/about.md
+            src/_includes/site/footer.njk
+            src/_includes/layouts/epub-metadata.xml
+            src/_data/site.json
+            src/_poems/_poems.json
+            src/_poems/chapter-4/poem-001.md
+            src/_poems/chapter-4/poem-002.md
+            src/_poems/chapter-4/poem-003.md
+            src/_poems/chapter-4/poem-004.md
+            src/_poems/chapter-4/poem-005.md
+            src/_poems/chapter-4/poem-006.md
+            src/_poems/chapter-4/poem-007.md
+            src/_poems/chapter-4/poem-008.md
+            src/_poems/chapter-4/poem-009.md
+            src/_poems/chapter-4/poem-010.md
+            src/_poems/chapter-4/poem-011.md
+            src/_poems/chapter-4/poem-012.md
+            src/_poems/chapter-4/poem-013.md
+            src/_poems/chapter-4/poem-014.md
+            src/_poems/chapter-4/poem-015.md
+            src/_poems/chapter-4/poem-016.md
+            src/_poems/chapter-4/poem-017.md
+            src/_poems/chapter-4/poem-018.md
+            src/_poems/chapter-4/poem-019.md
+            src/_poems/chapter-4/poem-020.md
+            src/_poems/chapter-4/poem-021.md
+            src/_poems/chapter-4/poem-022.md
+            src/_poems/chapter-4/poem-023.md
+            src/_poems/chapter-4/poem-024.md
+            src/_poems/chapter-4/poem-025.md
+            src/_poems/chapter-4/poem-026.md
+            src/_poems/chapter-4/poem-027.md
+            src/_poems/chapter-4/poem-028.md
+            src/_poems/chapter-4/poem-029.md
+            src/_poems/chapter-4/poem-030.md
+            src/_poems/chapter-4/poem-031.md
+            src/_poems/chapter-4/poem-032.md
+            src/_poems/chapter-4/poem-033.md
+            src/_poems/chapter-4/poem-034.md
+            src/_poems/chapter-4/poem-035.md
+            src/_poems/chapter-4/poem-036.md
+            src/_poems/chapter-4/poem-037.md
+            src/_poems/chapter-4/poem-038.md
+            src/_poems/chapter-4/poem-039.md
+            src/_poems/chapter-4/poem-040.md
+            src/_poems/chapter-3/poem-011.md
+            src/_poems/chapter-3/poem-012.md
+            src/_poems/chapter-3/poem-013.md
+            src/_poems/chapter-3/poem-014.md
+            src/_poems/chapter-3/poem-015.md
+            src/_poems/chapter-3/poem-016.md
+            src/_poems/chapter-3/poem-017.md
+            src/_poems/chapter-3/poem-018.md
+            src/_poems/chapter-3/poem-019.md
+            src/_poems/chapter-3/poem-020.md
+            src/_poems/chapter-3/poem-021.md
+            src/_poems/chapter-3/poem-022.md
+            src/_poems/chapter-3/poem-023.md
+            src/_poems/chapter-3/poem-024.md
+            src/_poems/chapter-3/poem-025.md
+            src/_poems/chapter-3/poem-026.md
+            src/_poems/chapter-3/poem-027.md
+            src/_poems/chapter-3/poem-028.md
+            src/_poems/chapter-3/poem-029.md
+            src/_poems/chapter-3/poem-030.md
+            src/_poems/chapter-3/poem-031.md
+            src/_poems/chapter-3/poem-032.md
+            src/_poems/chapter-3/poem-033.md
+            src/_poems/chapter-3/poem-034.md
+            src/_poems/chapter-3/poem-035.md
+            src/_poems/chapter-3/poem-036.md
+            src/_poems/chapter-3/poem-037.md
+            src/_poems/chapter-3/poem-038.md
+            src/_poems/chapter-3/poem-039.md
+            src/_poems/chapter-3/poem-040.md
+            src/_poems/chapter-3/poem-041.md
+            src/_poems/chapter-3/poem-042.md
+            src/_poems/chapter-3/poem-043.md
+            src/_poems/chapter-3/poem-044.md
+            src/_poems/chapter-3/poem-045.md
+            src/_poems/chapter-3/poem-046.md
+            src/_poems/chapter-3/poem-047.md
+            src/_poems/chapter-3/poem-048.md
+            src/_poems/chapter-3/poem-049.md
+            src/_poems/chapter-3/poem-050.md
+            src/_poems/chapter-3/poem-051.md
+            src/_poems/chapter-3/poem-052.md
+            src/_poems/chapter-3/poem-053.md
+            src/_poems/chapter-3/poem-054.md
+            src/_poems/chapter-3/poem-055.md
+            src/_poems/chapter-3/poem-056.md
+            src/_poems/chapter-3/poem-057.md
+            src/_poems/chapter-3/poem-058.md
+            src/_poems/chapter-3/poem-059.md
+            src/_poems/chapter-3/poem-060.md
+            src/_poems/chapter-3/poem-061.md
+            src/_poems/chapter-3/poem-062.md
+            src/_poems/chapter-3/poem-063.md
+            src/_poems/chapter-3/poem-064.md
+            src/_poems/chapter-3/poem-065.md
+            src/_poems/chapter-3/poem-066.md
+            src/_poems/chapter-3/poem-067.md
+            src/_poems/chapter-3/poem-068.md
+            src/_poems/chapter-3/poem-069.md
+            src/_poems/chapter-3/poem-070.md
+            src/_poems/chapter-3/poem-071.md
+            src/_poems/chapter-3/poem-072.md
+            src/_poems/chapter-3/poem-073.md
+            src/_poems/chapter-3/poem-074.md
+            src/_poems/chapter-3/poem-075.md
+            src/_poems/chapter-3/poem-076.md
+            src/_poems/chapter-3/poem-077.md
+            src/_poems/chapter-3/poem-078.md
+            src/_poems/chapter-3/poem-079.md
+            src/_poems/chapter-3/poem-080.md
+            src/_poems/chapter-3/poem-081.md
+            src/_poems/chapter-3/poem-082.md
+            src/_poems/chapter-3/poem-083.md
+            src/_poems/chapter-3/poem-084.md
+            src/_poems/chapter-3/poem-085.md
+            src/_poems/chapter-3/poem-086.md
+            src/_poems/chapter-3/poem-087.md
+            src/_poems/chapter-3/poem-088.md
+            src/_poems/chapter-3/poem-089.md
+            src/_poems/chapter-3/poem-090.md
+            src/_poems/chapter-3/poem-091.md
+            src/_poems/chapter-3/poem-092.md
+            src/_poems/chapter-3/poem-093.md
+            src/_poems/chapter-3/poem-094.md
+            src/_poems/chapter-3/poem-095.md
+            src/_poems/chapter-3/poem-096.md
+            src/_poems/chapter-3/poem-097.md
+            src/_poems/chapter-3/poem-098.md
+            src/_poems/chapter-3/poem-099.md
+            src/_poems/chapter-3/poem-100.md
+            src/_poems/chapter-3/poem-101.md
+            src/_poems/chapter-3/poem-102.md
+            src/_poems/chapter-3/poem-103.md
+            src/_poems/chapter-3/poem-104.md
+            src/_poems/chapter-3/poem-105.md
+            src/_poems/chapter-3/poem-106.md
+            src/_poems/chapter-3/poem-107.md
+            src/_poems/chapter-3/poem-108.md
+            src/_poems/chapter-3/poem-109.md
+            src/_poems/chapter-3/poem-110.md
+            src/_poems/chapter-3/poem-111.md
+            src/_poems/chapter-3/poem-112.md
+            src/_poems/chapter-3/poem-113.md
+            src/_poems/chapter-3/poem-114.md
+            src/_poems/chapter-3/poem-115.md
+            src/_poems/chapter-3/poem-116.md
+            src/_poems/chapter-3/poem-117.md
+            src/_poems/chapter-3/poem-118.md
+            src/_poems/chapter-3/poem-119.md
+            src/_poems/chapter-3/poem-120.md
+            src/_poems/chapter-3/poem-121.md
+            src/_poems/chapter-3/poem-122.md
+            src/_poems/chapter-3/poem-123.md
+            src/_poems/chapter-3/poem-124.md
+            src/_poems/chapter-3/poem-125.md
+            src/_poems/chapter-3/poem-126.md
+            src/_poems/chapter-3/poem-127.md
+            src/_poems/chapter-3/poem-128.md
+            src/_poems/chapter-3/poem-129.md
+            src/_poems/chapter-3/poem-130.md
+            src/_poems/chapter-3/poem-131.md
+            src/_poems/chapter-3/poem-132.md
+            src/_poems/chapter-3/poem-133.md
+            src/_poems/chapter-3/poem-134.md
+            src/_poems/chapter-3/poem-135.md
+            src/_poems/chapter-3/poem-136.md
+            src/_poems/chapter-3/poem-137.md
+            src/_poems/chapter-3/poem-138.md
+            src/_poems/chapter-3/poem-139.md
+            src/_poems/chapter-3/poem-140.md
+            src/_poems/chapter-3/poem-141.md
+            src/_poems/chapter-3/poem-142.md
+            src/_poems/chapter-3/poem-143.md
+            src/_poems/chapter-3/poem-144.md
+            src/_poems/chapter-3/poem-145.md
+            src/_poems/chapter-3/poem-146.md
+            src/_poems/chapter-3/poem-147.md
+            src/_poems/chapter-3/poem-148.md
+            src/_poems/chapter-3/poem-149.md
+            src/_poems/chapter-3/poem-150.md
+            src/_poems/chapter-3/poem-151.md
+            src/_poems/chapter-3/poem-152.md
+            src/_poems/chapter-3/poem-153.md
+            src/_poems/chapter-3/poem-154.md
+            src/_poems/chapter-3/poem-155.md
+            src/_poems/chapter-3/poem-156.md
+            src/_poems/chapter-3/poem-157.md
+            src/_poems/chapter-3/poem-158.md
+            src/_poems/chapter-3/poem-159.md
+            src/_poems/chapter-3/poem-160.md
+            src/_poems/chapter-3/poem-161.md
+            src/_poems/chapter-3/poem-162.md
+            src/_poems/chapter-3/poem-163.md
+            src/_poems/chapter-3/poem-164.md
+            src/_poems/chapter-3/poem-165.md
+            src/_poems/chapter-3/poem-166.md
+            src/_poems/chapter-3/poem-167.md
+            src/_poems/chapter-3/poem-168.md
+            src/_poems/chapter-3/poem-169.md
+            src/_poems/chapter-3/poem-170.md
+            src/_poems/chapter-3/poem-171.md
+            src/_poems/chapter-3/poem-172.md
+            src/_poems/chapter-3/poem-173.md
+            src/_poems/chapter-3/poem-174.md
+            src/_poems/chapter-3/poem-175.md
+            src/_poems/chapter-3/poem-176.md
+            src/_poems/chapter-3/poem-177.md
+            src/_poems/chapter-3/poem-178.md
+            src/_poems/chapter-3/poem-179.md
+            src/_poems/chapter-3/poem-180.md
+            src/_poems/chapter-3/poem-181.md
+            src/_poems/chapter-3/poem-182.md
+            src/_poems/chapter-3/poem-183.md
+            src/_poems/chapter-3/poem-184.md
+            src/_poems/chapter-3/poem-185.md
+            src/_poems/chapter-3/poem-186.md
+            src/_poems/chapter-3/poem-187.md
+            src/_poems/chapter-3/poem-188.md
+            src/_poems/chapter-3/poem-189.md
+            src/_poems/chapter-3/poem-190.md
+            src/_poems/chapter-3/poem-191.md
+            src/_poems/chapter-3/poem-192.md
+            src/_poems/chapter-3/poem-193.md
+            src/_poems/chapter-3/poem-194.md
+            src/_poems/chapter-3/poem-195.md
+            src/_poems/chapter-3/poem-196.md
+            src/_poems/chapter-3/poem-197.md
+            src/_poems/chapter-3/poem-198.md
+            src/_poems/chapter-3/poem-199.md
+            src/_poems/chapter-3/poem-200.md
+            src/_poems/chapter-3/poem-201.md
+            src/_poems/chapter-3/poem-202.md
+            src/_poems/chapter-3/poem-203.md
+            src/_poems/chapter-3/poem-204.md
+            src/_poems/chapter-3/poem-205.md
+            src/_poems/chapter-3/poem-206.md
+            src/_poems/chapter-3/poem-207.md
+            src/_poems/chapter-3/poem-208.md
+            src/_poems/chapter-3/poem-209.md
+            src/_poems/chapter-3/poem-210.md
+            src/_poems/chapter-3/poem-211.md
+            src/_poems/chapter-3/poem-212.md
+            src/_poems/chapter-3/poem-213.md
+            src/_poems/chapter-3/poem-214.md
+            src/_poems/chapter-3/poem-215.md
+            src/_poems/chapter-3/poem-216.md
+            src/_poems/chapter-3/poem-217.md
+            src/_poems/chapter-3/poem-218.md
+            src/_poems/chapter-3/poem-219.md
+            src/_poems/chapter-3/poem-220.md
+            src/_poems/chapter-3/poem-221.md
+            src/_poems/chapter-3/poem-222.md
+            src/_poems/chapter-3/poem-223.md
+            src/_poems/chapter-3/poem-224.md
+            src/_poems/chapter-3/poem-225.md
+            src/_poems/chapter-3/poem-226.md
+            src/_poems/chapter-3/poem-227.md
+            src/_poems/chapter-3/poem-228.md
+            src/_poems/chapter-3/poem-229.md
+            src/_poems/chapter-3/poem-230.md
+            src/_poems/chapter-3/poem-231.md
+            src/_poems/chapter-3/poem-232.md
+            src/_poems/chapter-3/poem-233.md
+            src/_poems/chapter-3/poem-234.md
+            src/_poems/chapter-3/poem-235.md
+            src/_poems/chapter-3/poem-236.md
+            src/_poems/chapter-3/poem-237.md
+            src/_poems/chapter-3/poem-238.md
+            src/_poems/chapter-3/poem-239.md
+            src/_poems/chapter-3/poem-240.md
+            src/_poems/chapter-3/poem-241.md
+            src/_poems/chapter-3/poem-242.md
+            src/_poems/chapter-3/poem-243.md
+            src/_poems/chapter-3/poem-244.md
+            src/_poems/chapter-3/poem-245.md
+            src/_poems/chapter-3/poem-246.md
+            src/_poems/chapter-3/poem-247.md
+            src/_poems/chapter-3/poem-248.md
+            src/_poems/chapter-3/poem-249.md
+            src/_poems/chapter-3/poem-250.md
+            src/_poems/chapter-3/poem-251.md
+            src/_poems/chapter-3/poem-252.md
+            src/_poems/chapter-3/poem-253.md
+            src/_poems/chapter-3/poem-254.md
+            src/_poems/chapter-3/poem-255.md
+            src/_poems/chapter-3/poem-256.md
+            src/_poems/chapter-3/poem-257.md
+            src/_poems/chapter-3/poem-258.md
+            src/_poems/chapter-3/poem-259.md
+            src/_poems/chapter-3/poem-261.md
+            src/_poems/chapter-3/poem-262.md
+            src/_poems/chapter-3/poem-263.md
+            src/_poems/chapter-3/poem-264.md
+            src/_poems/chapter-3/poem-265.md
+            src/_poems/chapter-3/poem-267.md
+            src/_poems/chapter-3/poem-268.md
+            src/_poems/chapter-3/poem-269.md
+            src/_poems/chapter-3/poem-270.md
+            src/_poems/chapter-3/poem-271.md
+            src/_poems/chapter-3/poem-272.md
+            src/_poems/chapter-3/poem-273.md
+            src/_poems/chapter-3/poem-274.md
+            src/_poems/chapter-3/poem-275.md
+            src/_poems/chapter-3/poem-276.md
+            src/_poems/chapter-3/poem-277.md
+            src/_poems/chapter-3/poem-278.md
+            src/_poems/chapter-3/poem-279.md
+            src/_poems/chapter-3/poem-281.md
+            src/_poems/chapter-3/poem-282.md
+            src/_poems/chapter-3/poem-283.md
+            src/_poems/chapter-3/poem-284.md
+            src/_poems/chapter-3/poem-285.md
+            src/_poems/chapter-3/poem-287.md
+            src/_poems/chapter-3/poem-288.md
+            src/_poems/chapter-3/poem-292.md
+            src/_poems/chapter-3/poem-293.md
+            src/_poems/chapter-3/poem-294.md
+            src/_poems/chapter-3/poem-295.md
+            src/_poems/chapter-3/poem-296.md
+            src/_poems/chapter-3/poem-298.md
+            src/_poems/chapter-3/poem-299.md
+            src/_poems/chapter-3/poem-301.md
+            src/_poems/chapter-3/poem-302.md
+            src/_poems/chapter-3/poem-303.md
+            src/_poems/chapter-3/poem-304.md
+            src/_poems/chapter-3/poem-305.md
+            src/_poems/chapter-3/poem-308.md
+            src/_poems/chapter-3/poem-309.md
+            src/_poems/chapter-3/poem-310.md
+            src/_poems/chapter-3/poem-312.md
+            src/_poems/chapter-3/poem-313.md
+            src/_poems/chapter-3/poem-314.md
+            src/_poems/chapter-3/poem-315.md
+            src/_poems/chapter-3/poem-316.md
+            src/_poems/chapter-3/poem-317.md
+            src/_poems/chapter-3/poem-318.md
+            src/_poems/chapter-3/poem-319.md
+            src/_poems/chapter-3/poem-321.md
+            src/_poems/chapter-3/poem-323.md
+            src/_poems/chapter-3/poem-324.md
+            src/_poems/chapter-3/poem-325.md
+            src/_poems/chapter-3/poem-326.md
+            src/_poems/chapter-3/poem-329.md
+            src/_poems/chapter-3/poem-331.md
+            src/_poems/chapter-3/poem-332.md
+            src/_poems/chapter-3/poem-333.md
+            src/_poems/chapter-3/poem-334.md
+            src/_poems/chapter-3/poem-335.md
+            src/_poems/chapter-3/poem-336.md
+            src/_poems/chapter-3/poem-337.md
+            src/_poems/chapter-3/poem-338.md
+            src/_poems/chapter-3/poem-339.md
+            src/_poems/chapter-3/poem-340.md
+            src/_poems/chapter-3/poem-341.md
+            src/_poems/chapter-3/poem-342.md
+            src/_poems/chapter-3/poem-343.md
+            src/_poems/chapter-3/poem-344.md
+            src/_poems/chapter-3/poem-345.md
+            src/_poems/chapter-3/poem-346.md
+            src/_poems/chapter-3/poem-347.md
+            src/_poems/chapter-3/poem-348.md
+            src/_poems/chapter-3/poem-349.md
+            src/_poems/chapter-3/poem-350.md
+            src/_poems/chapter-3/poem-351.md
+            src/_poems/chapter-3/poem-352.md
+            src/_poems/chapter-3/poem-353.md
+            src/_poems/chapter-3/poem-354.md
+            src/_poems/chapter-3/poem-355.md
+            src/_poems/chapter-3/poem-356.md
+            src/_poems/chapter-3/poem-357.md
+            src/_poems/chapter-3/poem-359.md
+            src/_poems/chapter-3/poem-360.md
+            src/_poems/chapter-3/chapter-3.json
+      - name: Check out exact public Apadāna original XML without credentials
+        if: matrix.group == 'apadanatheraexpansion' || matrix.group == 'apadanatherascaled61' || matrix.group == 'apadanatherascaled81' || matrix.group == 'apadanatheraeditorial' || matrix.group == 'apadanatherapair101' || matrix.group == 'apadanatherapair121' || matrix.group == 'apadanathera141' || matrix.group == 'apadanathera161' || matrix.group == 'apadanathera181' || matrix.group == 'apadanathera201' || matrix.group == 'apadanathera241' || matrix.group == 'apadanathera221' || matrix.group == 'apadanathera231' || matrix.group == 'apadanathera251' || matrix.group == 'apadanathera234' || matrix.group == 'vrieditionnote'
+        uses: actions/checkout@v4
+        with:
+          repository: VipassanaTech/tipitaka-xml
+          ref: 2d134ff9ef60f70a1eb03c9370580228811a3070
+          path: .fixtures/apadana-vri-pinned
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            romn/s0510m1.mul.xml
+            romn/s0510m2.mul.xml
+            romn/s0510a.att.xml
+      - name: Validate reviewed Therā publisher234 independent normalization and selected source refusals
+        if: matrix.group == 'apadanathera234'
+        run: |
+          node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
+          node scripts/shard-data.mjs --unpack server/data "$RUNNER_TEMP/apadanathera234-inputs"
+          python scripts/historical_four_snapshot.py --canon "$RUNNER_TEMP/apadanathera234-inputs/canon.json.gz" --output "$RUNNER_TEMP/apadanathera234-inputs/canon-before-four.json"
+          python scripts/apadana/review_thera_held234.py --source-root .fixtures/apadana-pinned --canon "$RUNNER_TEMP/apadanathera234-inputs/canon-before-four.json" --xml .fixtures/apadana-vri-pinned/romn/s0510m1.mul.xml --goldens docs/evidence/apadana/THERA_HELD234_GOLDENS.json --profiles docs/evidence/apadana/THERA_HELD234_EXPECTED_PROFILES.json --links docs/evidence/apadana/THERA_HELD234_EXPECTED_LINKS.json --verify-only > standalone-apadanathera234-independent.report.json
+          APADANA_SOURCE_CHECKOUT=.fixtures/apadana-pinned APADANA_OFFICIAL_CHECKOUT=.fixtures/apadana-pinned VRI_SOURCE_CHECKOUT=.fixtures/apadana-vri-pinned node --test tests/apadana-held234.test.mjs tests/held234-client.test.mjs
+      - name: Check reviewed Therā publisher234 source and preserved paired citations
+        if: matrix.group == 'apadanathera234'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-held234-check.py --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --launch-receipt standalone-apadanathera234-launch.report.json --report standalone-apadanathera234.report.json
+      - name: Audit reviewed Therā publisher234 in both themes
+        if: matrix.group == 'apadanathera234'
+        run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-held234-check.py --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --a11y --launch-receipt standalone-apadanathera234-a11y-launch.report.json --report standalone-apadanathera234-a11y.report.json
+      - name: Check reviewed Therā publisher234 from a genuine isolated npm install with archive binding
+        if: matrix.group == 'apadanathera234'
+        run: |
+          mkdir -p "$RUNNER_TEMP/apadanathera234-package" "$RUNNER_TEMP/apadanathera234-installed"
+          npm pack --pack-destination "$RUNNER_TEMP/apadanathera234-package"
+          set -- "$RUNNER_TEMP/apadanathera234-package/"*.tgz
+          test "$#" -eq 1
+          test -f "$1"
+          npm install --prefix "$RUNNER_TEMP/apadanathera234-installed" --offline --ignore-scripts --no-audit --no-fund --package-lock=false "$1"
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-thera-held234-check.py --source-root .fixtures/apadana-pinned --official-checkout .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadanathera234-installed/node_modules/pali-canon-mcp/server" --package-archive "$1" --launch-receipt installed-apadanathera234-launch.report.json --report installed-apadanathera234.report.json
+      - name: Preserve actual reader and owned-process evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ubuntu24-held234-install-diagnostic
+          if-no-files-found: warn
+          path: |
+            standalone-apadanathera234-independent.report.json
+            standalone-apadanathera234.report.json
+            standalone-apadanathera234-launch.report.json
+            standalone-apadanathera234-a11y.report.json
+            standalone-apadanathera234-a11y-launch.report.json
+            installed-apadanathera234.report.json
+            installed-apadanathera234-launch.report.json
