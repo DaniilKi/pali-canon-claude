@@ -14,7 +14,7 @@
   "source_overrides": {
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
-      "after_sha256": "5b2f8975adf4bf3794cfa8408485de5b4c97620943ca9bfc6ed51ee7c4df2f84"
+      "after_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56"
     },
     "tests/six-boundary-history.test.mjs": {
       "before_sha256": "078e766e9fff788f96c8e6b798878b9061e7a2f70a98a4f3986037bdf77f373e",
@@ -26,7 +26,7 @@
     }
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "cfd2c15e9cf8177f2c6f7a60870a3e63121bb3f019eb357b6692a6466038ce42",
+    "scripts/ci-test-partitions.mjs": "ab7940367b8954db275ea04afbd158a664f23e0c096ad26c4970dc5ce53829bb",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
@@ -113,7 +113,7 @@
     "tests/cbeta-khp-assessment.test.mjs": "032baceafe209d89d2da2edc4e07fe42b2d8e9fc99fb2d2b7a14dacc7e42023b",
     "tests/chatgpt-widget.test.mjs": "b8c20ff21c8d10f3ef9e95891298afa923997b3c949098f2b7476b85ddcd3246",
     "tests/check-ci-stages.test.mjs": "488bfa1964e27cf5e23c349ea20146ad63eedcaa9bbfc5fadeaa42785127cef0",
-    "tests/ci-test-partitions.test.mjs": "5b2f8975adf4bf3794cfa8408485de5b4c97620943ca9bfc6ed51ee7c4df2f84",
+    "tests/ci-test-partitions.test.mjs": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
     "tests/citation-id-coverage.test.mjs": "ac30a105e79ae69f8f1cf867ee713929380b153812368333d93dc45886459123",
     "tests/citation-pagination.test.mjs": "bbdbbabf73edd4ffe4aedf592f6e504c476811b652c1559129bae5454b6b4443",
     "tests/citation-range-validation.test.mjs": "65db48e84f79515b8764df6ed063fc849a6b271fecee8ef19e061117750e336d",
@@ -387,6 +387,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/windows20-partitions/WINDOWS_PYTHON_PARTITION_CASE_SOURCE_REVIEW.json",
-    "sha256": "8132d40b4394267a058fb4fee18575796061981c02ecf51d118355856d7a6497"
+    "sha256": "f91fa9cfa922d57c44f9ce998206dfe4f704d81386ad5e9e90d223a52f57f74a"
   }
 }
