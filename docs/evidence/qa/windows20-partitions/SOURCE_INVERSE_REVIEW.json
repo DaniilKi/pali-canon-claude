@@ -3,15 +3,16 @@
   "status": "GO_EXACT_SOURCE_QA_CHECKPOINT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
   "snapshot_commit": null,
-  "after_domain": "physical explicitPython312 packagejob candidate over8444",
+  "after_domain": "physical fixture-cost binding worktree over exactf54 core and prior1E authority",
   "live_working_tree_claimed": true,
-  "map_sha256": "d900545cf48aead842a1bd444330f0b76f9ffadd2591413304227aa5fc59fcc3",
-  "loader_sha256": "077144b257675fb72691b103419739290aa383ebfe3870b850a8b014b8fc7bd3",
+  "map_sha256": "aabbc569c8d4774837a468ea197743c5ed9ad4fe98890efc9d1e85d6ca4eed96",
+  "loader_sha256": "efc224ab9d17791e0b23479cf3cab5243ba994ba60bcdb08877c752fcefe180b",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
+  "original_identity_verification_method": "No new Git command. Independently previously exactGit3d-sealed dbb017 index; each unchanged file and literal-inverse reconstructed whole original independently matches all byte/SHA256/Gitblob-SHA1 identity pins.",
   "changed_existing_exactly_mapped": 72,
   "unchanged_original_source_entries": 929,
-  "hunks": 200,
+  "hunks": 202,
   "hunks_with_literal_dollars": 13,
   "all_forward_and_inverse_reconstructions_exact": true,
   "rows": {
@@ -22,7 +23,7 @@
     },
     "AGENTS.md": {
       "base3d_sha256": "06024baeedc9397364c9ced4f3f6a167d5bccfdebc9182277e491d19d756bd43",
-      "current_sha256": "1f7949ac5bae23f0b63871a61520572cf5b34de7d306cc264c76c5e3f61768ea",
+      "current_sha256": "0152574306d63c054c1949665ba062d3d8c4b297c31d4280b500c7a07e62d741",
       "hunks": 1
     },
     "README.md": {
@@ -72,7 +73,7 @@
     },
     "scripts/web_reader_next_ten_boundary_history.py": {
       "base3d_sha256": "6327f0a6ba14dc5de91aeb7c079bf6823d6ab5404620f87a1a9a7b0b302d8bbc",
-      "current_sha256": "ae549a7653f140cecc2f6209502d456abacf86f251def075e6559113d309f86e",
+      "current_sha256": "390babcab8f13e5c696c57fe08c9b2b680bebcd3709a1d74f943f900ecf02496",
       "hunks": 8
     },
     "scripts/web_reader_six_boundary_history.py": {
@@ -147,8 +148,8 @@
     },
     "tests/approved_acceptance.py": {
       "base3d_sha256": "7cc1bb04dc5f15d6e7062876225186b9d8625aaef1b0dc2ca4ce003cd9949581",
-      "current_sha256": "dd58690a02e33918bbe99fdc85eaa37fd36c5a5d69cf3fd6cfec82071cdfb35f",
-      "hunks": 15
+      "current_sha256": "05dcd6bf555337754b3bc037b6a86b772dca5059e1769ef7c340f81b932de42a",
+      "hunks": 16
     },
     "tests/approved_current333_authority_negatives.py": {
       "base3d_sha256": "f8fb368777231010d2c69a8f7edbc9aea20e8d4caf35ff9f34f2191e425fd815",
@@ -252,12 +253,12 @@
     },
     "tests/six_boundary_history_acceptance.py": {
       "base3d_sha256": "98a3b5272d3d97e75b456615c17006e8a741f1360e61080c4e848dba6e952cc0",
-      "current_sha256": "d5d7ed3abc3acf4ef653119c5451af463dcd495232b82bd2ddb7b7d50a3a60f3",
-      "hunks": 5
+      "current_sha256": "4708b6488ea18e4600421f28d943cf35c1bf2b742954c135cda70e9cffebf4bf",
+      "hunks": 6
     },
     "tests/six_operation_scope_controls.py": {
       "base3d_sha256": "ae4265fd6bfd60c3c1c0d734b0b38e580c8d32a193ab438d7d4ef39ad7f5ea48",
-      "current_sha256": "57f491ff0d8be28d76385cd44596e24720b1b97ed1a31ccf529e0093950079c4",
+      "current_sha256": "09e44985179af0189432821aedb5056a8c8eabee7ec0458e425cc7f41ae1492d",
       "hunks": 4
     },
     "tests/source-notes-baseline-projection.test.mjs": {

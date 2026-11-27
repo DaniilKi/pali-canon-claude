@@ -1,0 +1,268 @@
+{
+  "schema": "native-fixture-cost-abba-joblog-reconciliation-v1",
+  "run_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45925838712",
+  "job_url": "https://github.com/DaniilKi/pali-canon-claude/actions/runs/45925838712/job/140266805875",
+  "probe_commit": "43c47178ca5055fcb21ea80894f98c437a9ca3a6",
+  "baseline_commit": "1e1c7b13ba4f02ede75e87fca66032e6e8966f8a",
+  "candidate_commit": "f54a6c4d9c835915ec453c1a52001061b17ea90f",
+  "native_job_conclusion": "success",
+  "both_baseline_phases_passed": true,
+  "both_candidate_phases_passed": true,
+  "all_outer_process_bounds_verified": true,
+  "phases": [
+    {
+      "phase": "A1",
+      "label": "baseline",
+      "cwd": "D:\\a\\pali-canon-claude\\pali-canon-claude\\baseline",
+      "child_argv": [
+        "C:\\hostedtoolcache\\windows\\node\\20.20.2\\x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/approved-acceptance.test.mjs",
+        "tests/six-operation-scope.test.mjs",
+        "tests/six-boundary-history.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "timed_out": false,
+      "cleanup_error": null,
+      "outer_bound_ms": 180000,
+      "elapsed_ms": 130613,
+      "summary": {
+        "tests": 3,
+        "suites": 0,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 128875.3934
+      },
+      "approved_acceptance_child": [
+        {
+          "timeout_ms": 30000,
+          "elapsed_ms": 22148.7008,
+          "status": 0,
+          "signal": null,
+          "error_name": null,
+          "error_code": null,
+          "error_message": null
+        }
+      ],
+      "cases": [
+        {
+          "name": "independent intake and runtime acceptance reject omissions, substitutions and drift",
+          "duration_ms": 22152.9896
+        },
+        {
+          "name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+          "duration_ms": 48493.6382
+        },
+        {
+          "name": "private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes",
+          "duration_ms": 57991.9753
+        }
+      ],
+      "tap_sha256": "e83d3e6ba575f3889189fc7f55eaf109857cdf3d5cc279b62a6347bc6e6de5e8",
+      "all_three_original_wrappers_passed": true,
+      "underlying_python_cases_if_complete": 47
+    },
+    {
+      "phase": "B1",
+      "label": "candidate",
+      "cwd": "D:\\a\\pali-canon-claude\\pali-canon-claude\\candidate",
+      "child_argv": [
+        "C:\\hostedtoolcache\\windows\\node\\20.20.2\\x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/approved-acceptance.test.mjs",
+        "tests/six-operation-scope.test.mjs",
+        "tests/six-boundary-history.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "timed_out": false,
+      "cleanup_error": null,
+      "outer_bound_ms": 180000,
+      "elapsed_ms": 123303,
+      "summary": {
+        "tests": 3,
+        "suites": 0,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 121683.5801
+      },
+      "approved_acceptance_child": [
+        {
+          "timeout_ms": 30000,
+          "elapsed_ms": 19407.5461,
+          "status": 0,
+          "signal": null,
+          "error_name": null,
+          "error_code": null,
+          "error_message": null
+        }
+      ],
+      "cases": [
+        {
+          "name": "independent intake and runtime acceptance reject omissions, substitutions and drift",
+          "duration_ms": 19411.7279
+        },
+        {
+          "name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+          "duration_ms": 42320.9299
+        },
+        {
+          "name": "private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes",
+          "duration_ms": 59705.8679
+        }
+      ],
+      "tap_sha256": "559ab36b16cd984bf85694a67b1736510cb83c56189850dd8e4fe9f73c3370ad",
+      "all_three_original_wrappers_passed": true,
+      "underlying_python_cases_if_complete": 47
+    },
+    {
+      "phase": "B2",
+      "label": "candidate",
+      "cwd": "D:\\a\\pali-canon-claude\\pali-canon-claude\\candidate",
+      "child_argv": [
+        "C:\\hostedtoolcache\\windows\\node\\20.20.2\\x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/approved-acceptance.test.mjs",
+        "tests/six-operation-scope.test.mjs",
+        "tests/six-boundary-history.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "timed_out": false,
+      "cleanup_error": null,
+      "outer_bound_ms": 180000,
+      "elapsed_ms": 118883,
+      "summary": {
+        "tests": 3,
+        "suites": 0,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 117250.8148
+      },
+      "approved_acceptance_child": [
+        {
+          "timeout_ms": 30000,
+          "elapsed_ms": 19493.7995,
+          "status": 0,
+          "signal": null,
+          "error_name": null,
+          "error_code": null,
+          "error_message": null
+        }
+      ],
+      "cases": [
+        {
+          "name": "independent intake and runtime acceptance reject omissions, substitutions and drift",
+          "duration_ms": 19498.0844
+        },
+        {
+          "name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+          "duration_ms": 42761.1416
+        },
+        {
+          "name": "private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes",
+          "duration_ms": 54747.0726
+        }
+      ],
+      "tap_sha256": "86c827a0f8c77c5b48946c764ebd81285c7a84e9770235485786531ac7569710",
+      "all_three_original_wrappers_passed": true,
+      "underlying_python_cases_if_complete": 47
+    },
+    {
+      "phase": "A2",
+      "label": "baseline",
+      "cwd": "D:\\a\\pali-canon-claude\\pali-canon-claude\\baseline",
+      "child_argv": [
+        "C:\\hostedtoolcache\\windows\\node\\20.20.2\\x64\\node.exe",
+        "--test",
+        "--test-concurrency=1",
+        "--test-reporter=tap",
+        "tests/approved-acceptance.test.mjs",
+        "tests/six-operation-scope.test.mjs",
+        "tests/six-boundary-history.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "spawn_error": null,
+      "timed_out": false,
+      "cleanup_error": null,
+      "outer_bound_ms": 180000,
+      "elapsed_ms": 130206,
+      "summary": {
+        "tests": 3,
+        "suites": 0,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "duration_ms": 128575.1705
+      },
+      "approved_acceptance_child": [
+        {
+          "timeout_ms": 30000,
+          "elapsed_ms": 20657.4619,
+          "status": 0,
+          "signal": null,
+          "error_name": null,
+          "error_code": null,
+          "error_message": null
+        }
+      ],
+      "cases": [
+        {
+          "name": "independent intake and runtime acceptance reject omissions, substitutions and drift",
+          "duration_ms": 20662.3641
+        },
+        {
+          "name": "six-boundary actual data and immutable C1 inputs refuse proof loss drift and historical fallback",
+          "duration_ms": 49375.9724
+        },
+        {
+          "name": "private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes",
+          "duration_ms": 58288.942
+        }
+      ],
+      "tap_sha256": "a875ae96299a0eced4aa2f6f5c2e7c93e05bc53936c827d07fffc61ff30a47b3",
+      "all_three_original_wrappers_passed": true,
+      "underlying_python_cases_if_complete": 47
+    }
+  ],
+  "phase_mean_comparison": {
+    "baseline_mean_ms": 130409.5,
+    "candidate_mean_ms": 121093,
+    "fraction_saved": 0.07144034752069439
+  },
+  "scope_limits": [
+    "Same-host four-phase diagnostic; not a release gate or population-wide stability proof.",
+    "One candidate operation-scope case took59705.8679ms against60000ms; that performance headroom remains narrow.",
+    "The held8 metadata preflight is outside this47-case probe and remains an unchanged30-second full-CI requirement."
+  ],
+  "artifact": {
+    "id": 15167120663,
+    "github_reported_sha256": "a47eb1434ada9d78f633de4e5b12c812f916b748c6c688749fcab127a24ac656",
+    "connector_download_reference_created": true,
+    "executor_transfer": "Blocked: HTTP403 Tunnel connection failed. No retry or network bypass attempted.",
+    "archive_bytes_verified_locally": false
+  },
+  "release_acceptance": false
+}

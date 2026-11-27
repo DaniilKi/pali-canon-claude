@@ -1,0 +1,46 @@
+{
+  "schema": "independent-python312-dependency-pin-final-source-leaf-review-v1",
+  "status": "GO_EXACT_PYTHON312_SOURCE_LEAF_FOR_SUCCESSOR_COMMIT_AND_WHOLE_COHORT_CI",
+  "predecessor": "8444b0daf51e0cbc64bfdfd7bd96f66c482fbced",
+  "unchanged_application_component": "aec778d99aabccec6794a641072e463830e85542",
+  "source_review": {
+    "file": "SOURCE_INVERSE_REVIEW.json",
+    "sha256": "8b2f327fa646676533853097b31ca0d60797f7b42f045b017a5154cbbfda98f0"
+  },
+  "static_review": {
+    "file": "STATIC_REVIEW.json",
+    "sha256": "e3e2931a0fec2e6014b6774d8f2ddc952669d4968f568242e428c6d314f75820"
+  },
+  "frozen_bindings": {
+    "baseline_index_sha256": "7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad",
+    "addition_hashes": {
+      "scripts/ci-test-partitions.mjs": "580a21a0120907a17b4eaee2496a5268617ec7f5cd1f602825041dcafcc4cd38",
+      "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515",
+      "tests/ci-test-partitions.test.mjs": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae"
+    },
+    "map_sha256": "d900545cf48aead842a1bd444330f0b76f9ffadd2591413304227aa5fc59fcc3",
+    "loader_sha256": "077144b257675fb72691b103419739290aa383ebfe3870b850a8b014b8fc7bd3",
+    "rows": {
+      ".github/workflows/check.yml": 10,
+      "AGENTS.md": 1
+    }
+  },
+  "only_workflow_AGENTS_maprows_updated_other70ordereddeepobjects_exact844": true,
+  "loader_only_mapSHA_literal_updated": true,
+  "baseline_onlyexistingQA8newsourcehash_updated_original339_driver_2068plus8_unchanged": true,
+  "all72_fullforward_inverse_replays_exact": true,
+  "source_hunks": 200,
+  "literal_dollar_hunks": 13,
+  "original1001index929unchanged824frozenexact": true,
+  "beforePython312_all10_archivemembers_exactGit844_andmanifest": true,
+  "all39_package_members_src_web_server_pkg_lock_fixtures_unchanged844": true,
+  "runtime839e_2b19leaf_no_newsource_or_rights_or_private_data_change": true,
+  "remaining": [
+    "RootcommitreviewcopiesandimmutableexactGit39closure",
+    "ActualPython312version/executablelogsandall2076sameSHAdualmajorreferences/eightnativeparts/twoaggregates/allrequiredgateshealthyinasinglecompletecohort",
+    "No devpromotionfrompartialcross-cohortpasses"
+  ],
+  "reviewer_actions": "Read-only ownstdlib/Git/hash/source/metadata only; no app/tests/build/browser/network/CIactions/Gitmutation ortracked edits.",
+  "causation_fix_CI_passed_dev_main_deploy_or_release_claim": false,
+  "blocking_findings": []
+}

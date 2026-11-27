@@ -1,0 +1,77 @@
+{
+  "schema": "fixture-input-cost-local-acceptance-attestation-v1",
+  "source_core": {
+    "scripts/web_reader_intake359.py": "89630ec90b17828dc7f168bbed6050181bac422f05cd670256334d07f59cdac6",
+    "scripts/web_reader_next_ten_boundary_history.py": "390babcab8f13e5c696c57fe08c9b2b680bebcd3709a1d74f943f900ecf02496",
+    "tests/six_boundary_history_acceptance.py": "4708b6488ea18e4600421f28d943cf35c1bf2b742954c135cda70e9cffebf4bf",
+    "tests/approved_acceptance.py": "05dcd6bf555337754b3bc037b6a86b772dca5059e1769ef7c340f81b932de42a",
+    "tests/six_operation_scope_controls.py": "09e44985179af0189432821aedb5056a8c8eabee7ec0458e425cc7f41ae1492d",
+    "tests/owned_apadana_proofs.py": "b356f21ddf2ea6b42596058124b241d20f60af5623b2ce20ce1f291ab5654e4a",
+    "tests/fixtures/approved33-proof-inputs.json": "4f7c1a7936d44ba951bf3eddcc81f7faf3ea72128ed103d6c9088e5eb6152989"
+  },
+  "original_wrappers": {
+    "node": "20.20.2",
+    "underlying_cases": 47,
+    "node_cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "skip": 0,
+    "durations_ms": {
+      "approved33": 12014.653784,
+      "history7": 29541.090699,
+      "operation7": 31499.853729
+    },
+    "whole_ms": 73284.885495,
+    "child_bounds_ms": [
+      30000,
+      60000,
+      60000
+    ],
+    "execution_tool_session": 46450,
+    "raw_tool_transcript_not_reconstructed": true
+  },
+  "copier_refusal_controls": {
+    "cases": 7,
+    "pass": 7,
+    "skip": 0,
+    "fail": 0,
+    "seconds": 0.009
+  },
+  "source_history_guard": {
+    "cases": 1,
+    "pass": 1,
+    "skip": 0,
+    "fail": 0,
+    "duration_ms": 3649.351156
+  },
+  "serial_baseline_diagnostic": {
+    "schema": "bounded-serial-full-linux-diagnostic-not-native-ci-v1",
+    "commit": "1e1c7b13ba4f02ede75e87fca66032e6e8966f8a",
+    "node": "v22.23.5",
+    "python": "Python 3.12.14",
+    "available_parallelism": 4,
+    "logical_cpus": 5,
+    "files": 340,
+    "argv_policy": "Unchanged full340sourcefile list plus explicit serial file concurrency; original reporter/context from1e1c7. Diagnostic controller is not release evidence.",
+    "bound_ms": 1800000,
+    "elapsed_ms": 1455573,
+    "exit_code": 0,
+    "signal": null,
+    "timed_out": false,
+    "cleanup_error": null,
+    "complete": true,
+    "summary": {
+      "tests": 2076,
+      "suites": 0,
+      "pass": 1808,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 268,
+      "todo": 0
+    },
+    "native_hosted_acceptance": false
+  },
+  "serial_extra_local_skip": "live: a genuine quote is found on dhammatalks.org (skipped offline)",
+  "serial_policy_adopted": false,
+  "release_acceptance": false
+}

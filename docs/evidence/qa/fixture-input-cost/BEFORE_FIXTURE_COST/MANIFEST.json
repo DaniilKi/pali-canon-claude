@@ -1,0 +1,54 @@
+{
+  "schema": "preserved-pre-fixture-input-cost-v1",
+  "commit": "1e1c7b13ba4f02ede75e87fca66032e6e8966f8a",
+  "files": {
+    "SOURCE_INVERSES.json": {
+      "path": "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "sha256": "d900545cf48aead842a1bd444330f0b76f9ffadd2591413304227aa5fc59fcc3"
+    },
+    "SOURCE_INVERSE_REVIEW.json": {
+      "path": "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
+      "sha256": "8b2f327fa646676533853097b31ca0d60797f7b42f045b017a5154cbbfda98f0"
+    },
+    "LEAF_REBIND_REVIEW.json": {
+      "path": "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
+      "sha256": "ebf81b776a38d59b31a689d2cdb30277be4d649ebda619debb418924322f2bf2"
+    },
+    "loader.mjs.txt": {
+      "path": "tests/helpers/intake359-source-input.mjs",
+      "sha256": "077144b257675fb72691b103419739290aa383ebfe3870b850a8b014b8fc7bd3"
+    },
+    "AGENTS.md.txt": {
+      "path": "AGENTS.md",
+      "sha256": "1f7949ac5bae23f0b63871a61520572cf5b34de7d306cc264c76c5e3f61768ea"
+    },
+    "intake359.py.txt": {
+      "path": "scripts/web_reader_intake359.py",
+      "sha256": "c5e1a1bbc889672b6a521a764db3a818a1d001498f9cce0cf5903277761ea71a"
+    },
+    "next_ten_history.py.txt": {
+      "path": "scripts/web_reader_next_ten_boundary_history.py",
+      "sha256": "ae549a7653f140cecc2f6209502d456abacf86f251def075e6559113d309f86e"
+    },
+    "approved_acceptance.py.txt": {
+      "path": "tests/approved_acceptance.py",
+      "sha256": "dd58690a02e33918bbe99fdc85eaa37fd36c5a5d69cf3fd6cfec82071cdfb35f"
+    },
+    "six_history.py.txt": {
+      "path": "tests/six_boundary_history_acceptance.py",
+      "sha256": "d5d7ed3abc3acf4ef653119c5451af463dcd495232b82bd2ddb7b7d50a3a60f3"
+    },
+    "six_operation.py.txt": {
+      "path": "tests/six_operation_scope_controls.py",
+      "sha256": "57f491ff0d8be28d76385cd44596e24720b1b97ed1a31ccf529e0093950079c4"
+    },
+    "workflow.yml.txt": {
+      "path": ".github/workflows/check.yml",
+      "sha256": "7be25653634d3167f0beb0b594d01db59fb574f093ffd602208829cecdbdaa96"
+    },
+    "BASELINE_C7E_TEST_FILES.json": {
+      "path": "docs/evidence/qa/windows20-partitions/BASELINE_C7E_TEST_FILES.json",
+      "sha256": "7916fa2261424f745c146104ee5d6aabf1a9d78132b2d834f5ad38c1f3827aad"
+    }
+  }
+}
