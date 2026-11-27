@@ -1,0 +1,45 @@
+name: Read saved H materializer diagnostic evidence
+on:
+  push:
+    branches: ['diagnostic/pali-h-report-evidence-nov27']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  read-saved-reports:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: DaniilKi/pali-canon-claude
+          run-id: 46082802888
+          pattern: native-H-write-mode-node*
+          path: h-native-reports
+          merge-multiple: false
+      - name: Print only the two fixed saved metadata reports
+        run: |
+          node --input-type=module - <<'JS'
+          import assert from 'node:assert/strict';
+          import {readdirSync,lstatSync,readFileSync} from 'node:fs';
+          import {join} from 'node:path';
+          const base='h-native-reports';
+          const names=['native-H-write-mode-node20','native-H-write-mode-node22'];
+          assert.deepEqual(readdirSync(base).sort(),names);
+          for(const name of names){
+            const dir=join(base,name);
+            assert.ok(lstatSync(dir).isDirectory()&&!lstatSync(dir).isSymbolicLink());
+            assert.deepEqual(readdirSync(dir),['h-materializer-native-ab.report.json']);
+            const file=join(dir,'h-materializer-native-ab.report.json'),st=lstatSync(file);
+            assert.ok(st.isFile()&&!st.isSymbolicLink()&&st.size<=65536);
+            const report=JSON.parse(readFileSync(file,'utf8'));
+            assert.equal(report.schema,'native-Windows-H-write-mode-AB-diagnostic-v1');
+            assert.equal(report.diagnostic_commit,'3c98c557d8d6e75768c1ee7813bf538a3c1e4704');
+            assert.equal(report.actual_platform,'win32');
+            console.log('H_SAVED_REPORT:'+JSON.stringify({artifact:name,report}));
+          }
+          JS
