@@ -6,7 +6,7 @@
   "historical_archive_sha256": "f82ac88f6b6cbc2410d03d76989cf105bf5a6fa039a4ad24043e39e529a43b4d",
   "historical_archive_root": "docs/evidence/apadana/english351-360-nine/BEFORE_CURRENT368_SOURCE/",
   "original_manifest_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
-  "current_source_map_sha256": "4e09f882adac1421fadbc9a6274186196134f134577f5b7912a3fa224025aba3",
+  "current_source_map_sha256": "bfa72a48b6eb8fedbb3e5214adaa360fa212c7d3aaad1c0badf5680cda3a13c1",
   "changed_original_paths": [
     ".github/workflows/check.yml",
     "AGENTS.md",
@@ -213,8 +213,8 @@
       "sha256": "c1d5cca957938e81d2813e845e735497145ea89b9d03c6cfa6f86ebb75bb41c6"
     },
     "docs/qa/english351-360-nine-installed.md": {
-      "bytes": 10403,
-      "sha256": "425fd54f8e4ccff0cb1ef3dfc886fc0734847e77328bf3af530ab2b0644fbcf2"
+      "bytes": 12211,
+      "sha256": "b6b7ba47b068788acb7d8d4e1431e7e2e5c133ffeb5fdfc78b7abf4edba50b4a"
     },
     "scripts/apadana/thera351-360-nine/SOURCE_NINE_INPUT_CONTRACT.json": {
       "bytes": 190753,

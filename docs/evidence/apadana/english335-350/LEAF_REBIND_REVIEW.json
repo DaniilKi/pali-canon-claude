@@ -1,49 +1,49 @@
 {
   "schema": "independent-current368-source-leaf-rebind-review-v1",
   "status": "GO_EXACT_THREE_GENERATED_SOURCE_FILES_FOR_ROOT_APPLICATION_AND_PREFLIGHT_ONLY",
-  "prior_current_source_commit": "ce2330b1fa1f4c1d5fd7be76cb13bd9d76579c0d",
+  "prior_current_source_commit": "fb15396db578c78f838829668e36f32b65376806",
   "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
   "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
   "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
   "source_review": {
     "file": "SOURCE_INVERSE_REVIEW.json",
-    "sha256": "a90b460e0545dcca1ec37cce9f02f078098285fc610b2b7d3945bbad27395abd"
+    "sha256": "257f83264305879823c43ab3b630f715f66bce72fe152f5d590d8b5b3f875ff8"
   },
   "frozen_plan": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NINE_GRAPH_SOURCE_PLAN.json",
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_DD_SIX_SOURCE_PLAN.json",
     "bytes": 24544,
-    "sha256": "a73cba1c706af5534b6e7bbcee58cb8c326fa9119a0de50fb16f6269ff13714c"
+    "sha256": "436a23d94ee1f6265b519cdbe9a035d44b84150bf2f80cf6b3474fbd852df9db"
   },
   "delta_policy": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_NINE_GRAPH_SOURCE_POLICY.json",
-    "bytes": 903,
-    "sha256": "6dbee0eed99a395856963595224bd03be216096bbdcedb57bbaccd52f7a2296c"
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_DD_SIX_SOURCE_POLICY.json",
+    "bytes": 1071,
+    "sha256": "6a7e14c37a3ef150ce3ff2b0a42f194275b933d5fa51e59854fe04714f867d58"
   },
   "independent_input_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/nine-graph-source-input-independent-review/INPUT_REVIEW.json",
+    "path": "/tmp/pali-english351-360-evidence-nov27/dd-six-source-input-independent-review/INPUT_REVIEW.json",
     "bytes": 543,
-    "sha256": "a67682c4ec6183db38d119b37619bb6930e78d93a8d4e004ed119a2c12ef62a5"
+    "sha256": "94dd1f9da26a672b6484e357638675ea639ef7674807ba4392f11213f20374c6"
   },
   "producer_static_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/proof-budget-ce233-producer-independent-review/INDEPENDENT_PRODUCER_REVIEW.json",
-    "bytes": 3912,
-    "sha256": "53aefa68ffe90157a0d408812361753143207150dd18285f1f5084a8a7008c0e"
+    "path": "/tmp/pali-english351-360-evidence-nov27/dd-six-producer-independent-review/INDEPENDENT_PRODUCER_REVIEW.json",
+    "bytes": 3445,
+    "sha256": "756e9f36c5082ada68b8c625351c12d8a9db0447e5597882f4225d2a79660a14"
   },
   "generated_files": {
     "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NINE_GRAPH_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
-      "bytes": 502484,
-      "sha256": "4e09f882adac1421fadbc9a6274186196134f134577f5b7912a3fa224025aba3"
+      "path": "/tmp/pali-english351-360-evidence-nov27/DD_SIX_SOURCE_GENERATED/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "bytes": 516042,
+      "sha256": "bfa72a48b6eb8fedbb3e5214adaa360fa212c7d3aaad1c0badf5680cda3a13c1"
     },
     "docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NINE_GRAPH_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
+      "path": "/tmp/pali-english351-360-evidence-nov27/DD_SIX_SOURCE_GENERATED/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
       "bytes": 16249,
-      "sha256": "c146410a2994ac0686b2728532713494e51472c20ba869fb5da49523ee6a4831"
+      "sha256": "9f962bb8a0f3955457258ad6c8afc6e7b957d2cf7eadf2be9765dbe835d0858c"
     },
     "tests/helpers/intake359-source-input.mjs": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/NINE_GRAPH_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
+      "path": "/tmp/pali-english351-360-evidence-nov27/DD_SIX_SOURCE_GENERATED/tests/helpers/intake359-source-input.mjs",
       "bytes": 11872,
-      "sha256": "437ff89bf6d9edd7de3ceaf82c6745ca0c15f62e7bd573a14858a95d6dbf27a5"
+      "sha256": "ffb8e60c760f092daac2d9adf19668e54dbd0b95738f6c06584df065c82c4be1"
     }
   },
   "source_packet14": {
@@ -75,7 +75,7 @@
     "original_map_review_leaf_and_loader_preserved": true
   },
   "loader_reconstruction": {
-    "whole_prior_ce233_loader_sha256": "dab661bc40561249e42350e3be18558de1698352e6b69fd19129f8f3b4871663",
+    "whole_prior_fb153_loader_sha256": "437ff89bf6d9edd7de3ceaf82c6745ca0c15f62e7bd573a14858a95d6dbf27a5",
     "only_twoSHA_substitutions_equal_whole_generated_loader_path_array_unchanged": true,
     "all_other_source_bytes_unchanged": true,
     "literal_dollar_replacement_callback_preserved": true,
@@ -91,9 +91,9 @@
     "docs/evidence/apadana/english351-360-nine/SOURCE_INVERSE_CURRENT368_REVIEW.json"
   ],
   "preserved_prior_leaf_review": {
-    "commit": "ce2330b1fa1f4c1d5fd7be76cb13bd9d76579c0d",
+    "commit": "fb15396db578c78f838829668e36f32b65376806",
     "file": "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
-    "sha256": "3e0d985a3622b214dc0c423781024b6eaea3fd65dfec08990320b297f1a99481"
+    "sha256": "c832bdccf88b1e4749e7b76b7090ad3eb7bee76d7a898c565051cf629dce55ba"
   },
   "remaining_gates": [
     "Root application of3exactpayloads and2source-only aliases",
@@ -105,16 +105,16 @@
   "CI_or_release_approval": false,
   "reviewer_executed_project_code": false,
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/nine-graph-source-output-independent-review/verify_output.py",
-    "bytes": 17656,
-    "sha256": "46da7eea514b1ff3f14eaf00e82f9eb0a33fc4a9b0410752d7f5c95454d68ec9"
+    "path": "/tmp/pali-english351-360-evidence-nov27/dd-six-source-output-independent-review/verify_output.py",
+    "bytes": 17665,
+    "sha256": "30e809506499bb40244bc41c37c6f1fd74bdae73a6ab2e258a74607dbede2d3b"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/nine-graph-source-output-independent-review/RECONCILIATION.json",
-    "bytes": 4197,
-    "sha256": "b60e0f1573a2feeff4601e7f18ebf7dfadba682f72004e774b5e8cf49a3409d3"
+    "path": "/tmp/pali-english351-360-evidence-nov27/dd-six-source-output-independent-review/RECONCILIATION.json",
+    "bytes": 4207,
+    "sha256": "aa50e52fec59b990e92e296b0bb1c6331f376c1914354f562ae6d53a833e9bb6"
   },
   "all1001_original_bytes_824_frozen_authorities_73_rows_reconciled": true,
   "all131_plan_input_hashes_and_sources_stable": true,
-  "unchanged_direct_bindings_from_ce233": 60
+  "unchanged_direct_bindings_from_fb153": 60
 }
