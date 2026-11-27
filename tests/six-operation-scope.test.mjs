@@ -5,7 +5,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 test('private per-operation history reuse preserves fresh public data/proof checks and refuses escaped scopes',{timeout:65000},async(t)=>{
- if(process.platform==='win32'){
+ if(process.platform==='win32'||process.platform==='darwin'){
   const partitionRoot=fileURLToPath(new URL('../',import.meta.url));
   await runPythonPartitions({root:partitionRoot,suiteKey:'six-operation-scope',signal:t.signal});
   return;
