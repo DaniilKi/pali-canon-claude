@@ -1,4 +1,5 @@
-import {normalize343Metadata,requireProfiles359,INTAKE359_PUBLISHERS} from './helpers/intake359-metadata.mjs';
+import {requireProfiles359,INTAKE359_PUBLISHERS} from './helpers/intake359-metadata.mjs';
+import {normalize343Metadata,requireProfiles368,profilesForHistorical359,intake368Authority,INTAKE368_PUBLISHERS} from './helpers/intake368-metadata.mjs';
 import test,{afterEach}from'node:test';
 import assert from'node:assert/strict';
 import {readFileSync as readActualFileSync} from 'node:fs';
@@ -61,20 +62,31 @@ test('source and prefix drift never substitutes another version and altered righ
   transport([],raw=>raw+'\n');for(const id of IDS)await assert.rejects(english.translation(canon.resolve(id).unit,tid(e.profiles[id]),{translation_revision:REV,limit:500}));
 });
 test('prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16',async()=>{
-  requireProfiles359(APADANA_PROFILES);
+  requireProfiles368(APADANA_PROFILES);
+  const historical359Profiles=profilesForHistorical359(APADANA_PROFILES);requireProfiles359(historical359Profiles);
+  const currentNine=intake368Authority();
+  for(const[id,profile]of Object.entries(currentNine.profiles)){assert.deepEqual(APADANA_PROFILES[id],profile);assert.equal(isApadanaRawUrl(profile.raw_url),true);}
   const historicalHeld=[70,140,158,159,...e.approval.explicitly_not_activated_publishers];
   assert.deepEqual(historicalHeld.filter(poem=>INTAKE359_PUBLISHERS.includes(poem)),[335]);
   const held=historicalHeld.map(poem=>poem===335?351:poem);
   assert.deepEqual(held.filter(poem=>poem!==351),historicalHeld.filter(poem=>poem!==335));
   assert.ok(!INTAKE359_PUBLISHERS.includes(351));
+  assert.equal(historical359Profiles['tha-ap353'],undefined,'Publisher351 remains absent from the named359 stage');
+  assert.deepEqual(held.filter(poem=>INTAKE368_PUBLISHERS.includes(poem)),[351]);
+  // The original359 witness remains historically held, while current source
+  // transport tests the independently unapproved358; all other holds persist.
+  const currentHeld=held.map(poem=>poem===351?358:poem);
+  assert.deepEqual(currentHeld.filter(poem=>poem!==358),held.filter(poem=>poem!==351));
+  assert.deepEqual(currentNine.approval.source_holds_within_publisher351_360,['tha-ap360']);
+  assert.ok(currentHeld.includes(358));assert.ok(!currentHeld.includes(351));
   let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Unapproved source must not fetch');};assert.ok(!held.includes(331));assert.ok(held.includes(351));
-  for(const n of held){const id='tha-ap'+(n+2),url=`https://raw.githubusercontent.com/apadana-translation/apadana-site/${REV}/src/_poems/chapter-3/poem-${n}.md`;assert.equal(APADANA_PROFILES[id],undefined);assert.equal(isApadanaRawUrl(url),false);await assert.rejects(fetchPublic(url,{json:false}));await assert.rejects(english.translation(canon.resolve(id).unit,`ap:chapter-3/poem-${n}`));}
+  for(const n of currentHeld){const id=n===358?'tha-ap360':'tha-ap'+(n+2),url=`https://raw.githubusercontent.com/apadana-translation/apadana-site/${REV}/src/_poems/chapter-3/poem-${n}.md`;assert.equal(APADANA_PROFILES[id],undefined);assert.equal(isApadanaRawUrl(url),false);await assert.rejects(fetchPublic(url,{json:false}));await assert.rejects(english.translation(canon.resolve(id).unit,`ap:chapter-3/poem-${n}`));}
   for(const id of IDS)assert.equal(isApadanaRawUrl(e.profiles[id].raw_url),true);const media=e.profiles[IDS[0]].raw_url.replace('.md','.mp3');assert.equal(isApadanaRawUrl(media),false);await assert.rejects(fetchPublic(media,{json:false}));assert.equal(calls,0);
 });
 test('immutable approval and full343 metadata reject same-count substitutions and missing previous objects',()=>{
   const bytes=readFileSync('docs/evidence/apadana/THERA_331_334_APPROVAL.json');decodeApproval(bytes);assert.throws(()=>decodeApproval(Buffer.concat([bytes,Buffer.from(' ')])));
   const currentProfiles=clone(APADANA_PROFILES),currentManifest=JSON.parse(readActualFileSync('server/data/apadana.json'));e.assertCatalogue(currentManifest,currentProfiles);
-  // Only the already guarded359 metadata is converted into this historical343
+  // Only the already guarded368→359 metadata is converted into this historical343
   // mutation fixture. Actual source/API responses above retain current data.
   const {profiles,catalogue:manifest}=normalize343Metadata(currentProfiles,currentManifest);
   e.assertCatalogue(manifest,profiles);

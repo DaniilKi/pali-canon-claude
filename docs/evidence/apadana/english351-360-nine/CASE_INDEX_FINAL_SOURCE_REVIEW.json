@@ -1,44 +1,52 @@
 {
-  "schema": "independent-filled-current368-CI-case-index-and-QA38-review-v1",
-  "status": "GO_EXACT_FILLED_SOURCE_CASE_INDEX_AND_QA38_AMENDMENT_FOR_ROOT_INTEGRATION",
-  "candidate_manifest_sha256": "a797096127cef31304e7cd18de50c2bc838821f030773e9de67e786c584973ee",
-  "index_sha256": "3fc7bcace27d23993761f3fe8d5800373f514f460ed0a7056835be214023015e",
-  "case_review_sha256": "7627401081cce26d48e64ba8b30c2c296dddabb94f57c450750fb5e625e40b24",
-  "case_evidence_sha256": "864d68b5098802fb180820c90ec9d804261c4f9b226b1aa4595eb940d45253fe",
-  "case_AST_sha256": "33af2b5d74bbbde8a0e201fb7b876350cd941fc586381a3ab655108c49168781",
-  "predecessor340_sha256": "f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d",
-  "unchanged_loader_sha256": "a217ce99f1c6e7d02401c9f41671cf48bd8a7343d471ba6bf72c0720da065f89",
-  "amended_QA_sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e",
-  "blocking_source_case_metadata_findings": [],
+  "schema": "independent-current368-six-file-CI-reseal-review-v1",
+  "status": "GO_EXACT_SIX_FILE_STATIC_RESEAL_ONLY",
+  "immutable_input_commit": "47ef70dfe9b4182aed3d6a207ecadbe6a4ebebb8",
+  "proposal_manifest_sha256": "cde28370330e0bc679c891120bc452515d8fd51f728200d4ab081e73325d2320",
+  "real_index_sha256": "4b715398e0503381dc990a1eb2a60a7c8d777f1923372fa8101fc64403d69832",
+  "payload_sha256": {
+    "docs/evidence/qa/windows20-partitions/BASELINE_368_TEST_FILES.json": "4b715398e0503381dc990a1eb2a60a7c8d777f1923372fa8101fc64403d69832",
+    "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_INVENTORY_EVIDENCE.json": "ed76c0ab502ee3119c0025d5d487639c33bca86d7242986919cd265aab96097f",
+    "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_INVENTORY_REVIEW.json": "57889300faa96e49a83c014f94ec5d7aa7808099f613cc799c1582de1ce6a9d0",
+    "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_SOURCE_AST.json": "974e78a976237f195771e98f262e5972628d5e617d7e56632fc631fd6414e03b",
+    "tests/ci-test-partitions.test.mjs": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
+    "tests/thera331-334-source.test.mjs": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3"
+  },
   "inventory": {
-    "old_files": 340,
-    "old_changed": 38,
-    "old_unchanged_exact": 302,
+    "files": 345,
+    "unchanged_old": 301,
+    "changed_old": 39,
     "new_files": 5,
-    "current_files": 345,
-    "preserved_baseline_cases": 2076,
-    "existing_QA8_counted_once": true,
-    "new_literal_top_level_cases": 16,
-    "expected_full_cases_not_actual_execution": 2092,
-    "old_changed_expanded_name_vectors": 206,
-    "authorized_caption_renames": 2,
-    "new_normal_optional_source_skips": 11,
-    "expected_normal_skip_total_not_actual_execution": 278
+    "preserved_cases": 2076,
+    "added_cases": 16,
+    "total_cases": 2092
   },
-  "all_original_current_case_options_and_registration_structure_retained": true,
-  "QA_amendment_only_finite_owned_fixture_set8_to38_and_comment": true,
-  "no_future_index_workflow_source_map_dependency_cycle": true,
-  "integration_actions_required": [
-    "Root copy exact amended QAa4f0eb32 and frozen metadata/evidence members",
-    "Root bind workflow to reviewed index3fc7bcac then rerun original8QA with zero skips",
-    "Finalize independently reviewed source/code leaf and archive completeness",
-    "Actual native full2092 references/Windows strict aggregates and all postchecks before dev promotion"
-  ],
-  "files": {
-    "verify_frozen_case_index.py": "d2191b309dbe5642f265296570e482577a4410f0c685a8dd9ab3cece7b0630c6",
-    "STATIC_RECONCILIATION.json": "0cfa37f88ca72ddf62de9f89b75e9ecb462f25941dde51f0935566859b11d25f",
-    "REVIEW.md": "dce0b699a05b1f42a909c8cbc94e66825b8df8b7e0f43e9ac0e8477ca3edc2e8"
+  "checks": {
+    "all340_predecessor_test_sources_rehashed_from_exact_Git3ced": true,
+    "all345_before_sources_bound_to_exact_Git47ef": true,
+    "only_two_Node_sources_differ_from47ef": true,
+    "QA39_allowset_one_path_addition_and_comment_only_whole_inverse": true,
+    "source331_equals_independently_reviewed_d1eb": true,
+    "independent_Acorn_twofiles_8plus8_registrations_options_and_deadlines_match_declared_AST": true,
+    "all_prior37_AST_vectors_and_all5_new_case_vectors_unchanged": true,
+    "two_authorized_caption_renames_unchanged": true,
+    "all_six_hashes_inventory_evidence_and_audit_links_exact": true,
+    "index_not_referencing_this_independent_review": true,
+    "runtime_runner_reporter_public_driver_unchanged": true,
+    "sameSHA_run_attempt_and_sameMajor_status_multiset_comparison_unchanged": true,
+    "conditional279_live_skip_not_fixed_or_normalized": true
   },
-  "actual_full_native_CI_runtime_browser_package_release_or_push_approval": false,
-  "reviewer_app_helper_imports_tests_build_network_Git_CI_mutations_or_repository_edits": false
+  "conditional_skip_scope": {
+    "informational_network_healthy_no_source": 278,
+    "observed_old_failed_full_run": 279,
+    "one_existing_optional_live_HEAD_preflight": "network unavailable; cause remains unverified",
+    "no_new_fixed_skip_allowance": true
+  },
+  "activity": "Read-only Git cat-file/stdlib/hash/JSON and bundled-Acorn source AST parsing only; no app/test/build/network/CI execution or root edits.",
+  "pending": [
+    "Root application of six reviewed files",
+    "Root QA39 bounded execution and source closure reseal",
+    "Final exact-SHA fullLinux/nativeWindows same-major reconciliation and all other required CI",
+    "No dev or deployment approval from this static receipt"
+  ]
 }

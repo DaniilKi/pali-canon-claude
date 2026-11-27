@@ -257,7 +257,7 @@
   "remaining": {
     "publisher358_canonical360_held": true,
     "Apadana_units_without_indexed_whole_English_source": 235,
-    "final_source_seal_and_bounded_legacy_gates_pending": true,
+    "final_source_seal_and_bounded_legacy_gates_pending": false,
     "actual_full_2092_native_inventory_pending": true,
     "exact_final_CI_and_dev_promotion_pending": true,
     "physical_device_testing": false,
@@ -268,5 +268,99 @@
   },
   "main_changed": false,
   "production_deployed": false,
-  "final_release_or_push_approval": false
+  "final_release_or_push_approval": false,
+  "first_full_native_check": {
+    "evidence": {
+      "schema": "nine-first-full-native-check-v1",
+      "command": "PATH=/tmp/pali-english335-350-evidence-nov26/node20-linux:$PATH npm run check",
+      "node": "20.20.2",
+      "platform": "Linux x64",
+      "log_sha256": "1e0bf518cae748f15845dd7ea89b7d2580e2f49b0a34df0bc88464a400639ca3",
+      "exit_code": 1,
+      "tests": 2092,
+      "pass": 1810,
+      "fail": 3,
+      "skipped": 279,
+      "cancelled": 0,
+      "duration_ms": 592608.476264,
+      "failures": [
+        [
+          "202",
+          "next ten: independent exact data, all144 source positions, full preservation and atomic gates"
+        ],
+        [
+          "1551",
+          "prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16"
+        ],
+        [
+          "1552",
+          "immutable approval and full343 metadata reject same-count substitutions and missing previous objects"
+        ]
+      ],
+      "app_defect_established": false,
+      "publication_or_dev_promotion": false,
+      "notes": [
+        "Full check stopped at failing test exit before audit; separate prior full offline audit passed but not a substitute.",
+        "Missing finite module whitelist and obsolete 331-334 current/historical expectations under correction; full native skip count under independent reconciliation."
+      ]
+    },
+    "evidence_sha256": "bd7ece1e44420cd6c82a6ee34eaf246b8b9b7b0235b851764069441d941a9181",
+    "status": "FAILED_PRESERVED_SCOPE_NOT_RELEASE",
+    "correction_pending": false
+  },
+  "conditional_live_skip": {
+    "file": "tests/verify.test.mjs",
+    "line": 231,
+    "case": "live: a genuine quote is found on dhammatalks.org (skipped offline)",
+    "reason_reported": "network unavailable",
+    "specific_transport_cause": "not established; preflight catch discards the underlying exception",
+    "total_skipped_actual": 279,
+    "new_source_client_skips": 11,
+    "historical_source_only_baseline": 267,
+    "additional_existing_conditional_live_skip": 1,
+    "aggregate_gate_policy": "retain actual same-major terminal/skip multisets; no count padding"
+  },
+  "fixture_corrections": {
+    "Python_compiled_metadata_whitelist": {
+      "after_sha256": "6847a3e6ba78581c3f37655a8694b11e7d306e2616f71b349f584e618b1f707c",
+      "independent_review_sha256": "cfab3883074fbd735f3dfd1653938569643c72dd768c75328aeda8c517e97421"
+    },
+    "current331_source_test": {
+      "after_sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3",
+      "independent_review_sha256": "b6e22944c68f8c5ce4131b8c30c6831cf16a1dbd812bfadcbbd9fd1076776001",
+      "source_enabled_actual": {
+        "tests": 8,
+        "pass": 8,
+        "skip": 0,
+        "fail": 0,
+        "duration_ms": 8641.710524,
+        "log_sha256": "ae25141edce93b3644928c24c9c41c62c4bea217d4cb924560e83ce7154d76b1"
+      }
+    }
+  },
+  "final_CI39_actual": {
+    "index_sha256": "4b715398e0503381dc990a1eb2a60a7c8d777f1923372fa8101fc64403d69832",
+    "peer_review_sha256": "240ed64564286760525bdeed0fe1cb5eb93083ee38d6b3ee5f07cc19f78c5a56",
+    "actual_345_file_load": true,
+    "QA_tests": 8,
+    "QA_pass": 8,
+    "QA_skipped": 0,
+    "QA_fail": 0,
+    "duration_ms": 2579.927259,
+    "log_sha256": "8a12ed432acb4ce36804b55edfd97e2215c8bf2dbcdceac36be71009ec5c22cb"
+  },
+  "source_seal_V2_and_actual_focused": {
+    "peer_manifest_sha256": "6594899e8040cd51101eb8601e07d8d5019929b7528a7882b1f19e736efe499f",
+    "map_sha256": "5b34d4fa3bc916cf5a215ea6c43b59dc73eb8f9a9da821cb91aa336d2626187a",
+    "code_sha256": "b3d56673073a153745fdbb2645dadafa7118ad426c87ef0e41cc52946c60565d",
+    "loader_sha256": "da618d1df84ec032a7be60b7731c14a84a8e92a0d992b634f60da349f1cdb816",
+    "tests": 13,
+    "pass": 12,
+    "skip": 1,
+    "fail": 0,
+    "duration_ms": 11910.364151,
+    "skip_scope": "existing optional NextTen OriginalSource wrapper without VRI_SOURCE_CHECKOUT; not a new runtime skip",
+    "log_sha256": "6258034712d5b34621b8de671513b8f5a6617d1a1711d1a459307ac257516a7e",
+    "migration_child12_passed_with_original120s_bound": true
+  }
 }

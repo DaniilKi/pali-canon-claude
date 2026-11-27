@@ -2,27 +2,27 @@
   "schema": "independent-current368-source-inverse-review-v1",
   "status": "GO_EXACT_CURRENT368_SOURCE_INVERSES_FOR_ROOT_APPLICATION_AND_PREFLIGHT_ONLY",
   "baseline_commit": "3d614795cf95e45280603e95f68846c52eba4818",
-  "prior_current_source_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
-  "after_domain": "Exact frozen physical source worktree and external generated proposal; not a final Git snapshot",
+  "prior_current_source_commit": "47ef70dfe9b4182aed3d6a207ecadbe6a4ebebb8",
+  "after_domain": "Exact frozen47ef successor physical source worktree plus independently verified external generated-v2 payload; not finalGit/CI",
   "live_working_tree_claimed": true,
-  "map_sha256": "4c3a3f5ad7c3f502ce1b97a2f5877c766e90f7de688c3b3fd055cdfc35c036b8",
-  "loader_sha256": "0be2a2829bb9c87402ae308c8ecd9d9461c353a45e6f7db52c8f5957fc81c15b",
-  "code_sha256": "2d3f47164f334c35ae6b25cb092b3bf764dd6d821a8f32f3c4021a9d22d854d1",
+  "map_sha256": "5b34d4fa3bc916cf5a215ea6c43b59dc73eb8f9a9da821cb91aa336d2626187a",
+  "loader_sha256": "da618d1df84ec032a7be60b7731c14a84a8e92a0d992b634f60da349f1cdb816",
+  "code_sha256": "b3d56673073a153745fdbb2645dadafa7118ad426c87ef0e41cc52946c60565d",
   "immutable_original_index_sha256": "dbb01760a111679828e80c58f325c638ebb97512688c8ff5db8ef624d7bbff6d",
   "original_source_entries_independently_verified_against_Git": 1001,
-  "original_identity_verification_method": "Read-only git cat-file batch, complete Git3d blob bytes, SHA256, size and Gitblob SHA1 for every original; all72 literal forward/inverse reconstructions match those exact bytes. Every current original is reread after validation.",
+  "original_identity_verification_method": "Independent read-only Git cat-file batch of all1001original3d blobs and all1001baseline3ced blobs; every72current literal forward/inverse reconstruction equals exactGit3d bytes; no generator or project imports.",
   "changed_existing_exactly_mapped": 72,
-  "changed_since_prior_current_source_commit": 67,
-  "unchanged_prior_ordered_row_objects": 5,
+  "changed_since_prior_current_source_commit": 3,
+  "unchanged_prior_ordered_row_objects": 69,
   "new_inverse_rows": 0,
   "unchanged_original_source_entries": 929,
-  "hunks": 220,
+  "hunks": 219,
   "hunks_with_literal_dollars": 14,
   "all_forward_and_inverse_reconstructions_exact": true,
   "rows": {
     ".github/workflows/check.yml": {
       "base3d_sha256": "b8030dda33158cccd3864064add20367952a1cb64da804ccfaf8a36f4cf5c37a",
-      "current_sha256": "7b9432f825798477f701c5cb2adb3615cbe68760110f7ab7b475f743f74560d0",
+      "current_sha256": "29ac002daa88489cce60a4e41d98250175c3c80960e784d9c77631bc822c64f0",
       "hunks": 10,
       "literal_dollar_hunks": 6
     },
@@ -160,7 +160,7 @@
     },
     "tests/apadana_next_ten_boundary_acceptance.py": {
       "base3d_sha256": "28557e471b247f1abbd288c1d04418dcde5f7f65f2eca4a9208452d891825f37",
-      "current_sha256": "452f2a2efa26ea0c2b39b69c8d084567a69658d17fa1cf42c646bed90b4a05c9",
+      "current_sha256": "6847a3e6ba78581c3f37655a8694b11e7d306e2616f71b349f584e618b1f707c",
       "hunks": 5,
       "literal_dollar_hunks": 0
     },
@@ -436,8 +436,8 @@
     },
     "tests/thera331-334-source.test.mjs": {
       "base3d_sha256": "05aee8096e6847f5fdbccccbaf46846cc3b7829cf5b96887d8f7505adfb624a8",
-      "current_sha256": "5bd3a80c12a59daf8a2c9154fd00d7e97aa4616aac4e8497709965554c1dcc0e",
-      "hunks": 4,
+      "current_sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3",
+      "hunks": 3,
       "literal_dollar_hunks": 1
     },
     "tests/widget-hosted-selections.test.mjs": {
@@ -4585,28 +4585,46 @@
   "behavior_package_CI_release_approval": false,
   "final_commit_rebind_required": true,
   "frozen_plan": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_SOURCE368_PLAN.json",
-    "sha256": "8577ad763d58f83c6efa28c526d70a237c38033b4895b4430ecfe93aafb00645"
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_SOURCE368_PLAN_V2.json",
+    "sha256": "309b3b1b721d2ed0ca5717ef8c7eceea5970279c2b6e41a4d69761031d904103"
   },
   "prior_independent_plan_review": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/source-plan-independent-review/INDEPENDENT_REVIEW.json",
-    "sha256": "1942564286e387b1243f3ef3d1d2145ac200ee8417920ace04cc057282334265"
+    "path": "/tmp/pali-english351-360-evidence-nov27/source368-v2-input-independent-review/INPUT_REVIEW.json",
+    "sha256": "30bcdbdfadab4d45608523e9b99331a275b3296f514cc0148f4010f08d35d158"
   },
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-review/verify_generated.py",
-    "sha256": "117f2c64cfb948c41c548b6ebd587e5c3f48a95d09570f80b7cf058d09e833e8"
+    "path": "/tmp/pali-english351-360-evidence-nov27/source368-v2-output-independent-verify.py",
+    "sha256": "49a37b755903c8434c8276d65c2c07e7e8ae1e07e7f38b63dd1fafde0f59e645"
   },
   "reconciliation": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-review/RECONCILIATION.json",
-    "sha256": "44d3afd7343442c9660af30cb3c9de2e1bcd3097dc36cfd51673e8e0d23dbbe1"
+    "path": "/tmp/pali-english351-360-evidence-nov27/source368-v2-generated-independent-review/RECONCILIATION.json",
+    "sha256": "3660a4650bf6c6b0215f29f88165bedd7bba958765c4b36634a8d5441da2c8e9"
   },
   "generation_result": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-v1/GENERATION_RESULT.json",
-    "sha256": "c6a98c3c57be1efa7aa6f069450a1d77bc68a70342c2d1d5d658a2979be384a0"
+    "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-v2/GENERATION_RESULT.json",
+    "sha256": "87d14fd1f586ca9424052bee9afbffa20ca4b86624324911c3f2d4dae3e4a3fe"
   },
   "review_limits": [
-    "No project imports, test/build execution, Git mutations, network or CI actions.",
-    "Current source aliases may advance only after their exact3ced originals remain in the65-member archive. All other old source/curation/runtime authorities remain byte-exact.",
-    "Root application of the three generated source files and two review aliases is authorized in this source scope. Functional preflights, final snapshot/package bindings and exact native CI remain pending."
-  ]
+    "Apply only3exactgenerated SOURCE payloads and2fresh source-only review aliases; prioraliases remain inGit47ef and archive65 remains unchanged.",
+    "All69prior row objects and55unchanged direct bindings remain exact;3map and6direct changes are finite reviewed test/CI metadata changes.",
+    "No application/corpus/runtime/API projection, rights activation, behavior/installed/CI/release approval; final exactGit package and nativeCI gates remain."
+  ],
+  "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "changed_since_source_baseline_commit": 68,
+  "preserved_prior_source_review": {
+    "commit": "47ef70dfe9b4182aed3d6a207ecadbe6a4ebebb8",
+    "file": "docs/evidence/apadana/english335-350/SOURCE_INVERSE_REVIEW.json",
+    "sha256": "c50759e3b9ad09660ec15ac092140457a4b7ca2b139a6522e6ad92b9b758e958"
+  },
+  "delta_policy": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_SOURCE368_V2_DELTA_POLICY.json",
+    "sha256": "caa44dff1f0fa22d8b45ec66d9b03210d8ecbf0a97e5bb5a9ea03dc2186fae36"
+  },
+  "four_unsealed_JSON_receipts": [
+    "docs/evidence/apadana/english351-360-nine/LOCAL_ACCEPTANCE.json",
+    "docs/evidence/apadana/english351-360-nine/BROWSER_ACCEPTANCE.json",
+    "docs/evidence/apadana/english351-360-nine/FINAL_COMPONENT_BINDING.json",
+    "docs/evidence/apadana/english351-360-nine/SOURCE_INVERSE_CURRENT368_REVIEW.json"
+  ],
+  "all129_plan_input_hashes_and_sources_stable": true
 }

@@ -1107,7 +1107,7 @@
         "member_test_calls": []
       },
       "after": {
-        "sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e",
+        "sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
         "imported_node_test_bindings": [
           "test"
         ],
@@ -4603,6 +4603,171 @@
             "registration_ancestors": [],
             "argument_count": 3,
             "options_source": "{skip: !checkout}"
+          }
+        ],
+        "member_test_calls": []
+      }
+    },
+    {
+      "file": "tests/thera331-334-source.test.mjs",
+      "before": {
+        "sha256": "5bd3a80c12a59daf8a2c9154fd00d7e97aa4616aac4e8497709965554c1dcc0e",
+        "imported_node_test_bindings": [
+          "test"
+        ],
+        "registered_calls": [
+          {
+            "name": "current359 preserves the complete343 metadata cohort and its historical339/source/locator assertions",
+            "name_expression": "'current359 preserves the complete343 metadata cohort and its historical339/source/locator assertions'",
+            "line": 23,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "all four pinned originals and six textual-rights records reproduce exact body paragraphs and note ownership",
+            "name_expression": "'all four pinned originals and six textual-rights records reproduce exact body paragraphs and note ownership'",
+            "line": 30,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "all36 physical quotations retain words and combined entries without inventing31 absent local labels",
+            "name_expression": "'all36 physical quotations retain words and combined entries without inventing31 absent local labels'",
+            "line": 36,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "genuine positives precede raw heading note boundary and forged profile corruption refusals",
+            "name_expression": "'genuine positives precede raw heading note boundary and forged profile corruption refusals'",
+            "line": 41,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "actual source API follows14 exact500-character pages including the legitimate one-character final page",
+            "name_expression": "'actual source API follows14 exact500-character pages including the legitimate one-character final page'",
+            "line": 47,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "source and prefix drift never substitutes another version and altered rights refuse before transport",
+            "name_expression": "'source and prefix drift never substitutes another version and altered rights refuse before transport'",
+            "line": 58,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16",
+            "name_expression": "'prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16'",
+            "line": 63,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "immutable approval and full343 metadata reject same-count substitutions and missing previous objects",
+            "name_expression": "'immutable approval and full343 metadata reject same-count substitutions and missing previous objects'",
+            "line": 74,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "member_test_calls": []
+      },
+      "after": {
+        "sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3",
+        "imported_node_test_bindings": [
+          "test"
+        ],
+        "registered_calls": [
+          {
+            "name": "current359 preserves the complete343 metadata cohort and its historical339/source/locator assertions",
+            "name_expression": "'current359 preserves the complete343 metadata cohort and its historical339/source/locator assertions'",
+            "line": 24,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "all four pinned originals and six textual-rights records reproduce exact body paragraphs and note ownership",
+            "name_expression": "'all four pinned originals and six textual-rights records reproduce exact body paragraphs and note ownership'",
+            "line": 31,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "all36 physical quotations retain words and combined entries without inventing31 absent local labels",
+            "name_expression": "'all36 physical quotations retain words and combined entries without inventing31 absent local labels'",
+            "line": 37,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "genuine positives precede raw heading note boundary and forged profile corruption refusals",
+            "name_expression": "'genuine positives precede raw heading note boundary and forged profile corruption refusals'",
+            "line": 42,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "actual source API follows14 exact500-character pages including the legitimate one-character final page",
+            "name_expression": "'actual source API follows14 exact500-character pages including the legitimate one-character final page'",
+            "line": 48,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "source and prefix drift never substitutes another version and altered rights refuse before transport",
+            "name_expression": "'source and prefix drift never substitutes another version and altered rights refuse before transport'",
+            "line": 59,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{skip:!e.checkout}"
+          },
+          {
+            "name": "prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16",
+            "name_expression": "'prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16'",
+            "line": 64,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "immutable approval and full343 metadata reject same-count substitutions and missing previous objects",
+            "name_expression": "'immutable approval and full343 metadata reject same-count substitutions and missing previous objects'",
+            "line": 86,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
           }
         ],
         "member_test_calls": []

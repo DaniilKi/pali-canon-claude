@@ -1,33 +1,42 @@
 {
   "schema": "independent-current368-source-leaf-rebind-review-v1",
   "status": "GO_EXACT_THREE_GENERATED_SOURCE_FILES_FOR_ROOT_APPLICATION_AND_PREFLIGHT_ONLY",
-  "prior_current_source_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
+  "prior_current_source_commit": "47ef70dfe9b4182aed3d6a207ecadbe6a4ebebb8",
+  "source_baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
   "application_component_commit": "aebbf84d8e008a2eb5d1a3cf88e0934cf84dc524",
   "package_snapshot_commit": "70556a886f8fc78a542f04052230aaeef0cf87ea",
   "source_review": {
     "file": "SOURCE_INVERSE_REVIEW.json",
-    "sha256": "c50759e3b9ad09660ec15ac092140457a4b7ca2b139a6522e6ad92b9b758e958"
+    "sha256": "cd98ac13eb6798512ee25850df0f7212abb3597a229a86f198c17b31be6cf307"
   },
   "frozen_plan": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_SOURCE368_PLAN.json",
-    "sha256": "8577ad763d58f83c6efa28c526d70a237c38033b4895b4430ecfe93aafb00645"
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_FROZEN_SOURCE368_PLAN_V2.json",
+    "sha256": "309b3b1b721d2ed0ca5717ef8c7eceea5970279c2b6e41a4d69761031d904103"
   },
-  "frozen_roles": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_SOURCE368_PLAN_ROLES.json",
-    "sha256": "f05c599c1ef55eb9d39038db701b2368b56a641fd24ee06b8ad90e6d619cd26f"
+  "delta_policy": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/ROOT_SOURCE368_V2_DELTA_POLICY.json",
+    "sha256": "caa44dff1f0fa22d8b45ec66d9b03210d8ecbf0a97e5bb5a9ea03dc2186fae36"
+  },
+  "independent_input_review": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/source368-v2-input-independent-review/INPUT_REVIEW.json",
+    "sha256": "30bcdbdfadab4d45608523e9b99331a275b3296f514cc0148f4010f08d35d158"
+  },
+  "producer_static_review": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/source368-v2-producer-independent-review/V2_STATIC_REVIEW.json",
+    "sha256": "684dec771961c82cf5778fd880d5e772c49cdb2b3966d228ae919e3e27a9304f"
   },
   "generated_files": {
     "docs/evidence/apadana/english335-350/SOURCE_INVERSES.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-v1/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
-      "sha256": "4c3a3f5ad7c3f502ce1b97a2f5877c766e90f7de688c3b3fd055cdfc35c036b8"
+      "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-v2/docs/evidence/apadana/english335-350/SOURCE_INVERSES.json",
+      "sha256": "5b34d4fa3bc916cf5a215ea6c43b59dc73eb8f9a9da821cb91aa336d2626187a"
     },
     "docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-v1/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
-      "sha256": "2d3f47164f334c35ae6b25cb092b3bf764dd6d821a8f32f3c4021a9d22d854d1"
+      "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-v2/docs/evidence/apadana/english351-360-nine/CURRENT_SOURCE_CODE.json",
+      "sha256": "b3d56673073a153745fdbb2645dadafa7118ad426c87ef0e41cc52946c60565d"
     },
     "tests/helpers/intake359-source-input.mjs": {
-      "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-v1/tests/helpers/intake359-source-input.mjs",
-      "sha256": "0be2a2829bb9c87402ae308c8ecd9d9461c353a45e6f7db52c8f5957fc81c15b"
+      "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-v2/tests/helpers/intake359-source-input.mjs",
+      "sha256": "da618d1df84ec032a7be60b7731c14a84a8e92a0d992b634f60da349f1cdb816"
     }
   },
   "source_packet14": {
@@ -51,6 +60,7 @@
     "RUNTIME_REVIEW.json": "38fbf6b7de3cb7f06f03e28a41bf03b6a5402940b6d8b2ebb09d142365f1160e"
   },
   "source_code_direct_paths": 61,
+  "unchanged_direct_bindings_from47ef": 55,
   "unchanged_legacy_source_dependencies": 5,
   "historical_archive": {
     "sha256": "f82ac88f6b6cbc2410d03d76989cf105bf5a6fa039a4ad24043e39e529a43b4d",
@@ -59,30 +69,43 @@
     "original_map_review_leaf_and_loader_preserved": true
   },
   "loader_reconstruction": {
-    "baseline_whole_loader_sha256": "2e718959cbffc7ed05f358bced603452373993d55739bc078b240a27b8e8d8dc",
-    "reviewed_extension_sha256": "9e2ed4d41ca7c3776a0e27b5d51739c25e6769b9ecc40125fc423758184eb3f9",
-    "expected_map_constant_and_ordered_path_list_then_extension_equals_whole_generated_loader": true,
-    "all_old_function_bodies_unchanged": true,
+    "whole_prior47ef_loader_sha256": "0be2a2829bb9c87402ae308c8ecd9d9461c353a45e6f7db52c8f5957fc81c15b",
+    "exacttwoSHA_substitutions_equal_whole_generated_loader": true,
+    "all_other_source_bytes_unchanged": true,
     "literal_dollar_replacement_callback_preserved": true,
     "fresh_guarded_physical_reads_and_deep_freeze_no_ambient_cache": true,
     "no_runtime_API_or_corpus_projection": true,
-    "new_code_has_no_fake_original_inverse": true,
     "own_loader_excluded_from_self_map_and_direct_code": true
   },
   "all1001_original_bytes_824_frozen_authorities_72_rows_reconciled": true,
-  "all128_plan_input_hashes_and_sources_stable": true,
+  "all129_plan_input_hashes_and_sources_stable": true,
   "four_explicit_unsealed_JSON_receipts_are_not_code_authorities": true,
+  "four_unsealed_JSON_receipts": [
+    "docs/evidence/apadana/english351-360-nine/LOCAL_ACCEPTANCE.json",
+    "docs/evidence/apadana/english351-360-nine/BROWSER_ACCEPTANCE.json",
+    "docs/evidence/apadana/english351-360-nine/FINAL_COMPONENT_BINDING.json",
+    "docs/evidence/apadana/english351-360-nine/SOURCE_INVERSE_CURRENT368_REVIEW.json"
+  ],
+  "preserved_prior_leaf_review": {
+    "commit": "47ef70dfe9b4182aed3d6a207ecadbe6a4ebebb8",
+    "file": "docs/evidence/apadana/english335-350/LEAF_REBIND_REVIEW.json",
+    "sha256": "b299fae5e067ba60c1d355be237f1c2a6482f9ae61648e08d7cc9205afca4ee3"
+  },
   "remaining_gates": [
-    "Apply only these exact generated bytes and source-only review aliases; retain archived old aliases.",
-    "Run focused physical-source/current/historical closure and mutable-proof preflights with original bounds and actual368 public values.",
-    "Bind final Git/package39 preservation and independent installed acceptance; run all2092 expected tests and mandatory exact-commit native CI before dev promotion."
+    "Root application of3exactpayloads and2source-only aliases",
+    "Focused bounded migration/source checks, full exact-SHA native CI and final Git/package preservation review",
+    "No main/deploy/dev push approval from this source-only receipt"
   ],
   "runtime_behavioral_approval": false,
   "package_execution_approval": false,
   "CI_or_release_approval": false,
   "reviewer_executed_project_code": false,
   "repeatable_static_verifier": {
-    "path": "/tmp/pali-english351-360-evidence-nov27/source368-generated-review/verify_generated.py",
-    "sha256": "117f2c64cfb948c41c548b6ebd587e5c3f48a95d09570f80b7cf058d09e833e8"
+    "path": "/tmp/pali-english351-360-evidence-nov27/source368-v2-output-independent-verify.py",
+    "sha256": "49a37b755903c8434c8276d65c2c07e7e8ae1e07e7f38b63dd1fafde0f59e645"
+  },
+  "reconciliation": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/source368-v2-generated-independent-review/RECONCILIATION.json",
+    "sha256": "3660a4650bf6c6b0215f29f88165bedd7bba958765c4b36634a8d5441da2c8e9"
   }
 }

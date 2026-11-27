@@ -1,6 +1,6 @@
 {
   "schema": "finite-current368-source-case-inventory-evidence-v1",
-  "status": "SOURCE_CASE_AUDIT_CANDIDATE_PENDING_INDEPENDENT_REVIEW_NOT_FULL_TERMINAL_ACCEPTANCE",
+  "status": "SOURCE_CASE_RESEAL_CANDIDATE_PENDING_INDEPENDENT_REVIEW_NOT_FULL_TERMINAL_ACCEPTANCE",
   "baseline_commit": "3cedb7b7a71a42db1601026cb6d995dafe43c9ce",
   "predecessor_sha256": "f5e3df6886ecbf01904b2ef657bf90944f118edb5b387ece1c4262c0cb25359d",
   "predecessor_counts": {
@@ -232,7 +232,6 @@
     "tests/thera251-259-client.test.mjs",
     "tests/thera301-310-client.test.mjs",
     "tests/thera301-310-source.test.mjs",
-    "tests/thera331-334-source.test.mjs",
     "tests/thera333-legacy-projection.test.mjs",
     "tests/thera333-legacy-source-inverses.test.mjs",
     "tests/thera335-350-client.test.mjs",
@@ -314,7 +313,7 @@
     "tests/wiring-data2.test.mjs",
     "tests/yasoja-commentary.test.mjs"
   ],
-  "unchanged_old_file_count": 302,
+  "unchanged_old_file_count": 301,
   "all_unchanged_old_physical_hashes_exact": true,
   "changed_old_files": {
     "tests/apadana-disclosures.test.mjs": {
@@ -347,7 +346,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae",
-      "after_sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e"
+      "after_sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd"
     },
     "tests/current339-source-inverses.test.mjs": {
       "before_sha256": "1226b994d18fd9cc7fe470d5865f8ff616c1dd75e42b146a50c34574a005ff6f",
@@ -460,6 +459,10 @@
     "tests/thera331-334-preface-client.test.mjs": {
       "before_sha256": "5a34166637bc2d0c2faecd8e754bd280a3a1531da2c4ace9537249dfa9434972",
       "after_sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f"
+    },
+    "tests/thera331-334-source.test.mjs": {
+      "before_sha256": "5bd3a80c12a59daf8a2c9154fd00d7e97aa4616aac4e8497709965554c1dcc0e",
+      "after_sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3"
     },
     "tests/thera335-350-source.test.mjs": {
       "before_sha256": "5e51a7bd7f55934b02fe8d6be910b3179de4918b8ff58e176df09d5abe5aae04",
@@ -769,7 +772,7 @@
     },
     {
       "path": "tests/ci-test-partitions.test.mjs",
-      "sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e"
+      "sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd"
     },
     {
       "path": "tests/citation-id-coverage.test.mjs",
@@ -1513,7 +1516,7 @@
     },
     {
       "path": "tests/thera331-334-source.test.mjs",
-      "sha256": "5bd3a80c12a59daf8a2c9154fd00d7e97aa4616aac4e8497709965554c1dcc0e"
+      "sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3"
     },
     {
       "path": "tests/thera333-legacy-projection.test.mjs",
@@ -1852,7 +1855,7 @@
       "sha256": "ea0b0c64dd83d72c0f8c58cc1d382aff75c4a6c5e4207d59c672f74729d40370"
     }
   ],
-  "current_inventory_sha256": "4aecfb25a453af0b3167a4a32fbfc9acae8cfbe2687e216abad8a6e9129895af",
+  "current_inventory_sha256": "355ac6f6f766c7882c2039894c78af96a0254cb3dc93f4fa9a320af3b0160616",
   "old_case_vectors": [
     {
       "file": "tests/apadana-disclosures.test.mjs",
@@ -2666,6 +2669,33 @@
       "preexisting_factory_expansion": null
     },
     {
+      "file": "tests/thera331-334-source.test.mjs",
+      "before_names": [
+        "current359 preserves the complete343 metadata cohort and its historical339/source/locator assertions",
+        "all four pinned originals and six textual-rights records reproduce exact body paragraphs and note ownership",
+        "all36 physical quotations retain words and combined entries without inventing31 absent local labels",
+        "genuine positives precede raw heading note boundary and forged profile corruption refusals",
+        "actual source API follows14 exact500-character pages including the legitimate one-character final page",
+        "source and prefix drift never substitutes another version and altered rights refuse before transport",
+        "prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16",
+        "immutable approval and full343 metadata reject same-count substitutions and missing previous objects"
+      ],
+      "after_names": [
+        "current359 preserves the complete343 metadata cohort and its historical339/source/locator assertions",
+        "all four pinned originals and six textual-rights records reproduce exact body paragraphs and note ownership",
+        "all36 physical quotations retain words and combined entries without inventing31 absent local labels",
+        "genuine positives precede raw heading note boundary and forged profile corruption refusals",
+        "actual source API follows14 exact500-character pages including the legitimate one-character final page",
+        "source and prefix drift never substitutes another version and altered rights refuse before transport",
+        "prior source holds and unreviewed witness351 remain inactive outside the exact newly approved16",
+        "immutable approval and full343 metadata reject same-count substitutions and missing previous objects"
+      ],
+      "before_count": 8,
+      "after_count": 8,
+      "all_options_and_registration_ancestry_preserved": true,
+      "preexisting_factory_expansion": null
+    },
+    {
       "file": "tests/thera335-350-source.test.mjs",
       "before_names": [
         "current359 preserves all full343 objects and actual26 data files including every8544 record and61books",
@@ -2829,7 +2859,16 @@
     "new_optional_skips": 11,
     "total_skips": 278,
     "total_pass": 1814,
-    "not_a_terminal_acceptance_or_skip_ceiling": true
+    "not_a_terminal_acceptance_or_skip_ceiling": true,
+    "conditional_existing_live_preflight": {
+      "case": "live: a genuine quote is found on dhammatalks.org (skipped offline)",
+      "source": "tests/verify.test.mjs:231",
+      "source_sha256": "3320826836b6708d6f8060ae08ef1a44898814c0ca56fa2b116456255ecef935",
+      "observed_root_full_skip_total": 279,
+      "reason": "network unavailable; HEAD-preflight exception not retained",
+      "source_count_adjustment_required": false,
+      "not_a_fixed_named_status_multiset_or_skip_allowance": true
+    }
   },
   "root_actual_source_enabled_13_latest": {
     "source_log": "/tmp/pali-english351-360-evidence-nov27/NINE_SOURCE_CLIENT_13_FINAL_HELPER.tap",
@@ -2884,9 +2923,8 @@
       "raw CI workflow keeps the full reference and four bounded Windows partitions"
     ]
   },
-  "amended_QA38_actual_rerun_required": true,
   "preexisting_hard_limits_and_all8QA_assertions_retained": true,
-  "old_registered_terminal_name_count_in_changed_files": 206,
+  "old_registered_terminal_name_count_in_changed_files": 214,
   "all_other_existing_terminal_counts_inherited_from_validated3ced_not_recounted_from_current_output": true,
   "review_receipts": {
     "INTAKE368_CI_LOADER_STATIC_REVIEW.json": "14236b1fc629df8d4ddbcc78e588a0c574637a15845d04bc6d5e9544ba90f154",
@@ -2897,5 +2935,42 @@
   "reviewed_but_noninventory_helpers_and_Python_paths_are_owned_by_source_history_CI_not_added_Node_case_counts": true,
   "future_source_map_or_workflow_or_index_hash_not_used_as_a_premise": true,
   "no_app_test_build_Git_CI_or_network_execution_by_case_auditor": true,
-  "full_native_Linux_Windows_receipt_acceptance_claimed": false
+  "full_native_Linux_Windows_receipt_acceptance_claimed": false,
+  "current331_fix": {
+    "manifest_sha256": "1c70770a39cbe3fa142c5f2d4e57e8eb946f04c4847b33fcb7a4e59ea72e62b4",
+    "independent_review_sha256": "222f0750c6a3a54b9b2db1cb19b58103d6fc22385bdaa1f9b6aaa1e68c0c4d25",
+    "before_sha256": "5bd3a80c12a59daf8a2c9154fd00d7e97aa4616aac4e8497709965554c1dcc0e",
+    "after_sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3",
+    "all8_names_options_and_deadlines_unchanged": true,
+    "first6_source_cases_whole_bytes_unchanged_as_reviewed": true
+  },
+  "root_actual_source_enabled3318": {
+    "path": "/tmp/pali-english351-360-evidence-nov27/CURRENT331_SOURCE_FINAL8_NODE20.tap",
+    "bytes": 2162,
+    "sha256": "ae25141edce93b3644928c24c9c41c62c4bea217d4cb924560e83ce7154d76b1",
+    "summary": {
+      "tests": 8,
+      "suites": 0,
+      "pass": 8,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "duration_ms": 8641.710524
+  },
+  "QA39_amendment": {
+    "before_SHA": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e",
+    "after_SHA": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd",
+    "only_changes": "Closed literal allowlist38→39 and count comment; no registration/assertion/deadline change."
+  },
+  "amended_QA39_actual_rerun_required": true,
+  "root_failed_full2092_count_corroboration": {
+    "log_sha256": "1e0bf518cae748f15845dd7ea89b7d2580e2f49b0a34df0bc88464a400639ca3",
+    "tests": 2092,
+    "pass": 1810,
+    "fail": 3,
+    "skipped": 279,
+    "full_or_native_acceptance": false
+  }
 }

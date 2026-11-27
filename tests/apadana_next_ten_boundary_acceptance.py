@@ -126,7 +126,7 @@ def profiles_from_compiled_metadata():
             assert names == ['THERA_261_280_PROFILES', 'THERA_281_285_PROFILES',
                 'THERA_287_288_PROFILES', 'THERA_292_299_PROFILES', 'THERA_301_310_PROFILES',
                 'THERA_312_319_PROFILES', 'THERA_321_329_PROFILES', 'THERA_331_334_PROFILES',
-                'THERA_335_350_PROFILES']
+                'THERA_335_350_PROFILES', 'THERA_351_360_NINE_PROFILES']
             for nested in names:
                 match = re.search(r'var ' + nested + r'\s*=\s*(?:deepFreeze\d*\()?\s*', code)
                 assert match

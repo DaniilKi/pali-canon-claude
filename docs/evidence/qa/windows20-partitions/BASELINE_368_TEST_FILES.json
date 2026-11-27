@@ -42,7 +42,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "3f29f3732981f87ab7b5e75950af77448a5875d16a57199e5c00e2067df825ae",
-      "after_sha256": "a4f0eb32f368f83e06ad09542af0950ef0bc4bf64bd216b9e6c1c4be1a58797e"
+      "after_sha256": "9ff32d1cc434384b7d0dc770e733cc2b87a495158c6d45d070ab642521acf9fd"
     },
     "tests/current339-source-inverses.test.mjs": {
       "before_sha256": "1226b994d18fd9cc7fe470d5865f8ff616c1dd75e42b146a50c34574a005ff6f",
@@ -156,6 +156,10 @@
       "before_sha256": "5a34166637bc2d0c2faecd8e754bd280a3a1531da2c4ace9537249dfa9434972",
       "after_sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f"
     },
+    "tests/thera331-334-source.test.mjs": {
+      "before_sha256": "5bd3a80c12a59daf8a2c9154fd00d7e97aa4616aac4e8497709965554c1dcc0e",
+      "after_sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3"
+    },
     "tests/thera335-350-source.test.mjs": {
       "before_sha256": "5e51a7bd7f55934b02fe8d6be910b3179de4918b8ff58e176df09d5abe5aae04",
       "after_sha256": "cbe814127a9e71c9383873e91797311fda65f353577070efc1506be3bd028880"
@@ -178,6 +182,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/windows20-partitions/INTAKE368_CASE_INVENTORY_REVIEW.json",
-    "sha256": "7627401081cce26d48e64ba8b30c2c296dddabb94f57c450750fb5e625e40b24"
+    "sha256": "57889300faa96e49a83c014f94ec5d7aa7808099f613cc799c1582de1ce6a9d0"
   }
 }
