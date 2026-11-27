@@ -1,12 +1,13 @@
-// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
-import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
-assertCurrent375SourceClosure(new URL('../',import.meta.url));
-const current375Source=intake375Authority();
-const HistoricalH368Profiles=current375Source.baseline.profiles;
-const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
-requireProfiles375(APADANA_PROFILES);
-import {readFileSync as readCurrent375MetadataFile} from 'node:fs';
-requireMetadata375(APADANA_PROFILES,JSON.parse(readCurrent375MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
+// Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
+import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
+assertCurrent380SourceClosure(new URL('../',import.meta.url));
+const current380Source=intake380Authority();
+assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
+const HistoricalH368Profiles=current380Source.historical368.profiles;
+const HistoricalH368Catalogue={version:1,source:current380Source.historical368.manifest_source,vri_commit:current380Source.manifest.vri_commit,held:current380Source.historical368.manifest_held,links:current380Source.historical368.links};
+requireProfiles380(APADANA_PROFILES);
+import {readFileSync as readCurrent380MetadataFile} from 'node:fs';
+requireMetadata380(APADANA_PROFILES,JSON.parse(readCurrent380MetadataFile(new URL('../server/data/apadana.json',import.meta.url))));
 import {after as closeOwnedHistoricalHInputs} from 'node:test';
 import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
 import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
@@ -41,7 +42,7 @@ function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e
 
 test('exact two approved profiles extend every preserved308 object and link to310 with finite counter projection and unchanged canonical/data identities',()=>{
  const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));
- assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current375Source.baseline.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,375);
+ assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current380Source.historical368.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,380);
  assert.equal(e.approval.expected_profile_ids.length,310);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,310),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,310),e.approval.expected_profile_ids);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(310,317),['tha-ap294','tha-ap295','tha-ap296','tha-ap297','tha-ap298','tha-ap300','tha-ap301']);

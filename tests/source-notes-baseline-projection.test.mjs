@@ -1,5 +1,5 @@
 // Two immutable historical freeze descriptors are exact actual-R H witnesses,
-// not extra H980 output or current375 application/runtime data.
+// not extra H980 output or current380 application/runtime data.
 import {lstatSync as fixedHFreezeStat} from 'node:fs';
 import {fileURLToPath as fixedHFreezeFilePath} from 'node:url';
 import {relative as fixedHFreezeRelative} from 'node:path';
@@ -19,13 +19,14 @@ function readFixedHMetadataFreeze(path,...options){
  const raw=readOwnedHOrActualMetadataFile(target);assert.equal(raw.length,row.bytes);assert.equal(createHash('sha256').update(raw).digest('hex'),row.sha256,'Exact unchanged H freeze SHA');assert.equal(createHash('sha1').update(Buffer.concat([Buffer.from('blob '+raw.length+'\0'),raw])).digest('hex'),row.git_blob,'Exact H freeze Gitblob');
  return options.length?raw.toString('utf8'):raw;
 }
-// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
-import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
-assertCurrent375SourceClosure(new URL('../',import.meta.url));
-const current375Source=intake375Authority();
-const HistoricalH368Profiles=current375Source.baseline.profiles;
-const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
-requireProfiles375(APADANA_PROFILES);
+// Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
+import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
+assertCurrent380SourceClosure(new URL('../',import.meta.url));
+const current380Source=intake380Authority();
+assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
+const HistoricalH368Profiles=current380Source.historical368.profiles;
+const HistoricalH368Catalogue={version:1,source:current380Source.historical368.manifest_source,vri_commit:current380Source.manifest.vri_commit,held:current380Source.historical368.manifest_held,links:current380Source.historical368.links};
+requireProfiles380(APADANA_PROFILES);
 import {after as closeOwnedHistoricalHInputs} from 'node:test';
 import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
 import {resolve as resolveHistoricalHInput,isAbsolute as isAbsoluteHistoricalHInput} from 'node:path';
@@ -115,7 +116,7 @@ test('the projection cannot mask canonical or all285 profile/link changes',()=>{
  const heldBytes=readFileSync(new URL('../docs/evidence/apadana/THERA_HELD234_APPROVAL.json',import.meta.url));
  assert.equal(sha(heldBytes),'14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7');
  const historicalIds=JSON.parse(heldBytes).expected_profile_ids;assert.equal(historicalIds.length,285);assert.equal(new Set(historicalIds).size,285);
- assert.equal(current375Source.baseline.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,375);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);
+ assert.equal(current380Source.historical368.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,380);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(0,285),historicalIds);
  const historicalProfiles=Object.fromEntries(historicalIds.map(id=>{assert.ok(Object.hasOwn(APADANA_PROFILES,id),id+' prior profile retained');return [id,APADANA_PROFILES[id]];}));
  assert.equal(jsonSha(historicalProfiles),before.profiles_sha256);

@@ -1,11 +1,12 @@
-// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
-import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
-assertCurrent375SourceClosure(new URL('../',import.meta.url));
-const current375Source=intake375Authority();
-const HistoricalH368Profiles=current375Source.baseline.profiles;
-const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
-requireProfiles375(APADANA_PROFILES);
-import {CURRENT_WIDGET_VERSION} from './helpers/intake375-metadata.mjs';
+// Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
+import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
+assertCurrent380SourceClosure(new URL('../',import.meta.url));
+const current380Source=intake380Authority();
+assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
+const HistoricalH368Profiles=current380Source.historical368.profiles;
+const HistoricalH368Catalogue={version:1,source:current380Source.historical368.manifest_source,vri_commit:current380Source.manifest.vri_commit,held:current380Source.historical368.manifest_held,links:current380Source.historical368.links};
+requireProfiles380(APADANA_PROFILES);
+import {CURRENT_WIDGET_VERSION} from './helpers/intake380-metadata.mjs';
 import {currentHeldPublishers} from './helpers/intake343-metadata.mjs';
 /** Source-positive comparisons use presealed metadata, not implementation output as expected data. */
 import test,{afterEach} from 'node:test';
@@ -73,8 +74,8 @@ test('current359 clients retain the reviewed339 cohort and40+319 identities with
   e.assertProfiles(HistoricalH368Profiles);assert.equal(APADANA_COMMIT,REV);assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);
   assert.equal(Object.keys(HistoricalH368Profiles).filter(id=>id.startsWith('tha-ap')).length,328);
-  const currentTheraCount=Object.keys(current375Source.profiles).filter(id=>id.startsWith('tha-ap')).length;
-  assert.equal(currentTheraCount,335);
+  const currentTheraCount=Object.keys(current380Source.profiles).filter(id=>id.startsWith('tha-ap')).length;
+  assert.equal(Object.keys(current380Source.historical375.profiles).filter(id=>id.startsWith('tha-ap')).length,335);assert.equal(currentTheraCount,340);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,currentTheraCount);
   let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Metadata or held request attempted provider transport');};
   await withMCP(async call=>{

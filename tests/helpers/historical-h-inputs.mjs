@@ -1,4 +1,4 @@
-/** Explicit owned H inputs after a genuine375 source positive; never test registration. */
+/** Explicit owned H inputs after a genuine380 source positive; never test registration. */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
@@ -7,9 +7,10 @@ import {lstatSync,readFileSync,readdirSync,mkdtempSync,mkdirSync,realpathSync,rm
 import {tmpdir} from 'node:os';
 import {dirname,join,resolve,relative as relativePath} from 'node:path';
 import {URL,fileURLToPath} from 'node:url';
-import {intake375Authority,assertCurrent375SourceClosure,INTAKE375_BASE} from './intake375-metadata.mjs';
+import {INTAKE375_BASE} from './intake375-metadata.mjs';
+import {intake380Authority,assertCurrent380SourceClosure} from './intake380-metadata.mjs';
 const MATERIALIZER='tests/materialize_h_history.py';
-const MATERIALIZER_SHA='244c73d63bbfd06fb4044d1621a50953ef25416c0a3cee1072402cff19dd5e48';
+const MATERIALIZER_SHA='d00f6568ca2c0e8245093b48e7ef7d8bfb247c37beab3ecd40c6a4f0c9c68f14';
 const H_INDEX='docs/evidence/qa/windows20-partitions/BASELINE_368_WINDOWS_PYTHON_PARTITIONS.json';
 const H_WORKFLOW='.github/workflows/check.yml';
 const PREPARE_TIMEOUT_MS=20000;
@@ -31,8 +32,8 @@ function verifyCurrentLockedDependency(current,dependency){
 function prepare(currentRoot,kind){
  const current=physical(currentRoot);assert.ok(kind==='source'||kind==='runtime');
  // Both checks are source-only; the fixed runtime builder additionally performs
- // the stateless actual375 data/runtime positive before it writes any H bytes.
- assertCurrent375SourceClosure(current);const authority=intake375Authority(current),manifest=authority.documents['H_HISTORY_FIXTURE_INPUTS.json'];
+ // the stateless actual380 data/runtime positive before it writes any H bytes.
+ assertCurrent380SourceClosure(current);const authority=intake380Authority(current),manifest=authority.historical375.documents['H_HISTORY_FIXTURE_INPUTS.json'];
  assert.equal(manifest.schema,'H-history-fixture-inputs-v1');assert.equal(manifest.status,'approved');assert.equal(manifest.commit,INTAKE375_BASE);
  assert.match(MATERIALIZER_SHA,/^[a-f0-9]{64}$/,'Pending reviewed H materializer; no invocation');assert.equal(sha(read(current,MATERIALIZER)),MATERIALIZER_SHA);
  descriptor(manifest.index,H_INDEX);descriptor(manifest.workflow,H_WORKFLOW);
@@ -51,7 +52,7 @@ function prepare(currentRoot,kind){
    process.stderr.write('H_PREP_RESULT:'+JSON.stringify(summary)+'\n');
   }
   assert.equal(result.error,undefined,String(result.error??'')+'\n'+(result.stderr??''));assert.equal(result.signal,null,result.stderr);assert.equal(result.status,0,result.stderr);
-  const receipt=JSON.parse(result.stdout);assert.deepEqual(Object.keys(receipt).sort(),['schema','kind','commit','root','files','index','workflow','current375_checked'].sort());assert.equal(receipt.schema,'owned-H-history-fixture-v1');assert.equal(receipt.kind,kind);assert.equal(receipt.commit,INTAKE375_BASE);assert.equal(receipt.root,destination);assert.equal(receipt.current375_checked,true);assert.deepEqual(receipt.index,manifest.index);assert.deepEqual(receipt.workflow,manifest.workflow);
+  const receipt=JSON.parse(result.stdout);assert.deepEqual(Object.keys(receipt).sort(),['schema','kind','commit','root','files','index','workflow','current380_checked'].sort());assert.equal(receipt.schema,'owned-H-history-fixture-v2');assert.equal(receipt.kind,kind);assert.equal(receipt.commit,INTAKE375_BASE);assert.equal(receipt.root,destination);assert.equal(receipt.current380_checked,true);assert.deepEqual(receipt.index,manifest.index);assert.deepEqual(receipt.workflow,manifest.workflow);
   assert.ok(!Object.keys(dependencies).some(name=>Object.hasOwn(expected,name)));const selected=[...Object.keys(expected),...Object.keys(dependencies)].sort();assert.deepEqual(receipt.files,selected);assert.deepEqual(files(destination),selected,'Exactly the declared H domain, no extra source or runtime files');
   for(const name of Object.keys(expected))row(destination,name,expected[name]);
   for(const[name,dependency]of Object.entries(dependencies)){
@@ -65,7 +66,7 @@ function prepare(currentRoot,kind){
   const raw=workflowRaw.toString('utf8'),hashes=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: ([a-f0-9]{64})$/gm)];assert.equal(hashes.length,1);assert.equal(hashes[0][1],manifest.index.sha256,'H workflow binds H index, never current V5');
   assert.match(raw,/^  CI_TEST_BASELINE_INDEX: docs\/evidence\/qa\/windows20-partitions\/BASELINE_368_WINDOWS_PYTHON_PARTITIONS\.json$/m);
   // Recheck the current declaration and executable, never return a cached seal.
-  assertCurrent375SourceClosure(current);assert.equal(sha(read(current,MATERIALIZER)),MATERIALIZER_SHA);
+  assertCurrent380SourceClosure(current);assert.equal(sha(read(current,MATERIALIZER)),MATERIALIZER_SHA);
   return Object.freeze({root:destination,index:Object.freeze({path:join(destination,H_INDEX),sha256:manifest.index.sha256,bytes:manifest.index.bytes}),workflow:Object.freeze({raw,pin:manifest.index.sha256}),close});
  }catch(error){try{close();}catch(cleanup){throw new AggregateError([error,cleanup],'Owned H preparation and cleanup both failed');}throw error;}
 }

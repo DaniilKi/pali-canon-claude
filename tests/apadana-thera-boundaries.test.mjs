@@ -1,7 +1,8 @@
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import {findPython,runPythonFixture} from './helpers/verse-scope-python.mjs';
+import {writeSync} from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
 import { readBundled } from '../src/bundled-data.mjs';
@@ -10,14 +11,22 @@ import * as commentary from '../src/commentary.mjs';
 import { readPassage } from '../src/chatgpt-widget.mjs';
 import { assertPositionPin } from '../web/reading-position.mjs';
 
-const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
+// Fixed source labels correlate this file with the existing helper's PID/stage
+// rows. No source/input/output text or exception messages are logged here.
+function boundaryProbeStage(phase){
+ const row={schema:'boundary-python-probe-stage-v1',fixture:'thera-boundaries',phase,node_pid:process.pid,platform:process.platform,at_ms:performance.now()};
+ writeSync(2,'BOUNDARY_PYTHON_PROBE:'+JSON.stringify(row)+'\n');
+}
+boundaryProbeStage('start');
+const python = await findPython(); // One10s total; only genuine missing commands allow the old local optional skip.
+boundaryProbeStage('end');
 const revision = 'apadana-thera11-30-v1';
 const bounds = {
   'tha-ap19': [2322, 2364, 2322, 2360], 'tha-ap20': [2364, 2408, 2360, 2408],
   'tha-ap23': [2507, 2671, 2507, 2667], 'tha-ap24': [2671, 2834, 2667, 2834],
 };
 
-test('both Therā boundary pairs and false commentary ownership change atomically with exact original source parity', { skip: !python }, () => {
+test('both Therā boundary pairs and false commentary ownership change atomically with exact original source parity', { skip: !python, timeout: 125000 }, async () => {
   const input = {
     canon: canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')))),
     commentary: JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz'))),
@@ -26,7 +35,7 @@ test('both Therā boundary pairs and false commentary ownership change atomicall
   input.canon.books = input.canon.books.map((b, i) => i === bi ? b : { ...b, blocks: [] });
   input.canon.units = input.canon.units.filter(u => u.book === bi || u.id === 'mn1');
   input.commentary.books = input.commentary.books.map((b, i) => i === 28 ? b : { ...b, blocks: [] });
-  const result = spawnSync(python, ['-c', `
+  const result = await runPythonFixture(python, {stage:'thera-boundary-offline',code:`
 import copy,hashlib,json,os,sys,tempfile
 from unittest.mock import patch
 sys.path.insert(0,'scripts/canon')
@@ -140,7 +149,7 @@ with tempfile.TemporaryDirectory() as root:
   assert (cc,aa)==untouched
  assert apadana_thera_spans([],[])==[]
 print('source conservation, one association removal, idempotence, 28 refusal controls and all14partial states passed')
-`], { input: JSON.stringify(input), encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+`,input}); // Existing helper:120s including owned cleanup,1MiB/output stream,16MiB JSON input.
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /all14partial states passed/);
 });

@@ -7,8 +7,8 @@ on:
 permissions:
   contents: read
 env:
-  CI_TEST_BASELINE_INDEX: docs/evidence/qa/english371-378/BASELINE_375_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: ea2ab1d00935f3adab4793e53df74938ec8e73ff5d7341fad5841cc5353dae8c
+  CI_TEST_BASELINE_INDEX: docs/evidence/qa/english381-386/BASELINE_380_TEST_FILES.json
+  CI_TEST_BASELINE_SHA: bbb17fdc6437d2f9b4f05fdf75db6cfc9c23b8a4b51ac5a05bc50dac20442ae3
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -914,6 +914,11 @@ jobs:
             src/_poems/chapter-3/poem-376.md
             src/_poems/chapter-3/poem-377.md
             src/_poems/chapter-3/poem-378.md
+            src/_poems/chapter-3/poem-381.md
+            src/_poems/chapter-3/poem-383.md
+            src/_poems/chapter-3/poem-384.md
+            src/_poems/chapter-3/poem-385.md
+            src/_poems/chapter-3/poem-386.md
             src/_poems/chapter-3/chapter-3.json
       - name: Fetch exact VRI Book36 for independent English16 source replay
         if: matrix.group == 'apadana'
@@ -966,6 +971,17 @@ jobs:
           set -euo pipefail
           node --test --test-reporter=tap tests/thera371-378-seven.test.mjs | tee reviewed-publisher371-378-seven.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher371-378-seven.tap","utf8"); for(const [key,value] of [["tests",2],["pass",2],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require all five publisher381/383-386 source API and widget cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap tests/thera381-386-five.test.mjs | tee reviewed-publisher381-386-five.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher381-386-five.tap","utf8"); for(const [key,value] of [["tests",2],["pass",2],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
         run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check

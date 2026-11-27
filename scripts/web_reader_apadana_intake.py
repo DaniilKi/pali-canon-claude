@@ -694,11 +694,19 @@ def read_301_310(root):
     return current
 
 
-def reviewed_intake(root):
+def _reviewed_current375(root):
+    """Named pure historical375 source selection; never a runtime fallback."""
     if type(root) not in (str, type(Path("."))):
-        raise ValueError("Current375 requires an exact physical path root")
+        raise ValueError("Historical375 requires an exact physical path root")
     from web_reader_intake375 import reviewed_intake375
     return reviewed_intake375(root)
+
+
+def reviewed_intake(root):
+    if type(root) not in (str, type(Path("."))):
+        raise ValueError("Current380 requires an exact physical path root")
+    from web_reader_intake380 import reviewed_intake380
+    return reviewed_intake380(root)
 
 
 def curated_303_additions(root,anchor_filename):
@@ -1402,6 +1410,6 @@ def historical368_curated_additions(root, anchor_filename):
 
 def curated_additions(root, anchor_filename):
     if type(root) not in (str, type(Path("."))):
-        raise ValueError("Current375 requires an exact physical path root")
-    from web_reader_intake375 import curated_additions375
-    return curated_additions375(root, anchor_filename)
+        raise ValueError("Current380 requires an exact physical path root")
+    from web_reader_intake380 import curated_additions380
+    return curated_additions380(root, anchor_filename)

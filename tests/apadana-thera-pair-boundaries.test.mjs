@@ -2,7 +2,8 @@ import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import {findPython,runPythonFixture} from './helpers/verse-scope-python.mjs';
+import {writeSync} from 'node:fs';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -10,7 +11,15 @@ import { join } from 'node:path';
 import { readBundled } from '../src/bundled-data.mjs';
 import { canonBeforeTheraPair, THERA_PAIR_REVISION, PRE_THERA_PAIR_SHA256 } from './helpers/canon-before-thera-pair.mjs';
 
-const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
+// Fixed source labels correlate this file with the existing helper's PID/stage
+// rows. No source/input/output text or exception messages are logged here.
+function boundaryProbeStage(phase){
+ const row={schema:'boundary-python-probe-stage-v1',fixture:'thera-pair-boundaries',phase,node_pid:process.pid,platform:process.platform,at_ms:performance.now()};
+ writeSync(2,'BOUNDARY_PYTHON_PROBE:'+JSON.stringify(row)+'\n');
+}
+boundaryProbeStage('start');
+const python = await findPython(); // One10s total; only genuine missing commands allow the old local optional skip.
+boundaryProbeStage('end');
 const sourceRoot = process.env.VRI_SOURCE_CHECKOUT;
 const loaded = () => canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))));
 const sha = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -55,11 +64,11 @@ test('independently pinned inverse preserves pre-pair hash and unrelated deliber
   }
 });
 
-test('finite pair gate is atomic, source-conserving, idempotent and rejects drift before mutation', { skip: !python }, () => {
+test('finite pair gate is atomic, source-conserving, idempotent and rejects drift before mutation', { skip: !python, timeout: 125000 }, async () => {
   const c = canonBeforeTheraPair(loaded());
   c.books = c.books.map((book, i) => i === 36 ? book : { ...book, blocks: [] });
   c.units = c.units.filter(u => u.book === 36 || u.id === 'mn1');
-  const result = spawnSync(python, ['-c', `
+  const result = await runPythonFixture(python, {stage:'thera-pair-offline',code:`
 import copy,json,sys
 sys.path.insert(0,'scripts/canon')
 from apadana_thera_pair_spans import *
@@ -124,7 +133,7 @@ for case in ('old','new'):
  assert next(u for u in canon_before_thera_pair(cc)['units']if u['id']=='mn1')['start']==next(u for u in cc['units']if u['id']=='mn1')['start']
 assert apadana_thera_pair_spans([],[])==[]
 print('17 refusal controls, full root conservation, build pre-annotation and idempotence passed')
-`], { input: JSON.stringify(c), encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+`,input:c}); // Existing120s helper, including owned cleanup; original fixture body unchanged.
   assert.equal(result.status, 0, result.stderr || result.stdout);
   assert.match(result.stdout, /17 refusal controls/);
 });
@@ -136,12 +145,12 @@ test('monthly source rebuild applies atomic pair after earlier repairs and befor
   assert.ok(call < text.indexOf('b.annotate_pages()', text.indexOf('def main():')));
 });
 
-test('optional complete original XML replay checks strict freshness, all source wording and idempotence', { skip: !python || !sourceRoot }, () => {
+test('optional complete original XML replay checks strict freshness, all source wording and idempotence', { skip: !python || !sourceRoot, timeout: 125000 }, async () => {
   const dir = mkdtempSync(join(tmpdir(), 'pali-thera-pair-original-'));
   try {
     writeFileSync(join(dir, 'canon.gz'), gzipSync(JSON.stringify(canonBeforeTheraPair(loaded()))));
     writeFileSync(join(dir, 'commentary.gz'), readBundled('server/data/commentary.json.gz'));
-    const result = spawnSync(python, ['-c', `
+    const result = await runPythonFixture(python, {stage:'thera-pair-xml',code:"import json,sys\nsys.argv=['-c',*json.load(sys.stdin)]\n"+`
 import copy,gzip,json,os,shutil,sys,tempfile
 sys.path.insert(0,'scripts/canon')
 from repair_apadana_thera_pair_spans import repair,digest,FILE,ATT
@@ -184,7 +193,7 @@ for filename in (FILE,ATT):
   else:raise AssertionError('raw Git blob '+filename)
   assert (cc,aa)==before
 print(json.dumps(dict(status='original XML and complete datasets verified',output_canon_sha256=report['output_canon_sha256'],associations=report['commentary_associations'])))
-`, dir, sourceRoot], { encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+`,input:[dir,sourceRoot]}); // Fixed JSON argv bridge, not code interpolation or a new helper API.
     assert.equal(result.status, 0, result.stderr || result.stdout);
     assert.match(result.stdout, /original XML and complete datasets verified/);
   } finally { rmSync(dir, { recursive: true, force: true }); }

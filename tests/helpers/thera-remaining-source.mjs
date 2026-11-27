@@ -1,9 +1,9 @@
-/** Current375 app/API inputs and explicit immutable historical read domains. */
+/** Current380 app/API inputs and explicit immutable historical read domains. */
 import {after as closeRemainingHistoricalInputs} from 'node:test';
 import {lstatSync as remainingInputStat} from 'node:fs';
 import {resolve as remainingResolve,isAbsolute as remainingIsAbsolute} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {assertCurrent375SourceClosure,intake375Authority,requireProfiles375,requireMetadata375} from './intake375-metadata.mjs';
+import {assertCurrent380SourceClosure,intake380Authority,requireProfiles380,requireMetadata380} from './intake380-metadata.mjs';
 import {prepareHistoricalHRuntimeInputs} from './historical-h-inputs.mjs';
 const actualRemainingRoot=new URL('../../',import.meta.url);
 function readRemainingRegularBytes(root,path){
@@ -12,11 +12,11 @@ function readRemainingRegularBytes(root,path){
  return readActualFileSync(target);
 }
 function remainingReadMode(raw,options){assert.ok(options.length===0||options.length===1&&options[0]==='utf8','Existing explicit Buffer or utf8 mode only');return options.length?raw.toString('utf8'):raw;}
-// Current source/profile/complete AP375 positives precede ALL historical setup.
-assertCurrent375SourceClosure(actualRemainingRoot);
-requireProfiles375(APADANA_PROFILES,actualRemainingRoot);
-requireMetadata375(APADANA_PROFILES,JSON.parse(readRemainingRegularBytes(actualRemainingRoot,'server/data/apadana.json')),actualRemainingRoot);
-const remaining375Source=intake375Authority(actualRemainingRoot),remainingHManifest=remaining375Source.documents['H_HISTORY_FIXTURE_INPUTS.json'];
+// Current source/profile/complete AP380 positives precede ALL historical setup.
+assertCurrent380SourceClosure(actualRemainingRoot);
+requireProfiles380(APADANA_PROFILES,actualRemainingRoot);
+requireMetadata380(APADANA_PROFILES,JSON.parse(readRemainingRegularBytes(actualRemainingRoot,'server/data/apadana.json')),actualRemainingRoot);
+const remaining380Source=intake380Authority(actualRemainingRoot),remainingHManifest=remaining380Source.historical375.documents['H_HISTORY_FIXTURE_INPUTS.json'];
 const remainingHRows=Object.freeze({...remainingHManifest.source_files,...remainingHManifest.runtime_extension});
 assert.equal(remainingResolve(process.cwd()),remainingResolve(fileURLToPath(actualRemainingRoot)),'Unchanged sealed metadata readers have the fixed actual-R cwd');
 for(const path of ['tests/helpers/thera-remaining-evidence.mjs','tests/helpers/thera-held234-evidence.mjs']){

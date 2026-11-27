@@ -1,0 +1,24 @@
+{
+  "schema": "reviewed-intake380-runtime-approval-v1",
+  "status": "GO_RUNTIME_INVENTORY_ONLY",
+  "inventory_sha256": "1e3d92309fbc2aa9aba54516693c5e1908a6b8d5b6c941008c8d05cf5b54374f",
+  "application_commit": "54cb7c0fca820322fc675e63d83671e3558e68ae",
+  "curation_sha256": "d98a487b97aaab17f226c5c5ba91c07648e5e81f73c95b94220b206a36cff519",
+  "baseline_commit": "9bacd4d7b98c53ed4ae53785b5213a35c2a93096",
+  "expected_manifest_sha256": "787b60c3b1bc77188f625d5975b07cc603a17b4049a8adf3a75bc7e64d9fb4b9",
+  "runtime_paths": 34,
+  "actual_data_paths": 27,
+  "changed_paths": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_paths": 29,
+  "independent_manifest_composition": "Independently reconstructed exact UTF8 builder-format380 manifest from sealed H368 links/source/held plus independently approved7 and5links, preserving all375prefix objects/order and applying only368->380/328->340 policy counters. Entire1534739bytes match EXPECTED_MANIFEST and actual APdata; no application/parser/builder output supplied expected values.",
+  "physical_and_Git_blob_inventory_exact": true,
+  "canonical_data26_and_H_held_preserved": true,
+  "behavioral_installed_browser_native_CI_or_release_approval": false,
+  "operations": "Reviewer used stdlib physical regular-file/hash/JSON/AST/gzip reads only: all34current files, old34inventory, source7, old12, H226prerequisite hashes, source5peer application files, source-composed manifest and f3/five root wrappers. Git-blob equality is bound through root supplied RUNTIME380_PHYSICAL_GIT_MEASUREMENT receipt matching exact component54cb7c0/inventory1e3d9230; reviewer performed no Git calls. No app/proposed module/test/build/network/browser execution or checkout edits. Inventory-only; actual installed/browser/native/CI/release remain separate."
+}

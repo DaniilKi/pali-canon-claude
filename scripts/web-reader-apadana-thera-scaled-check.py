@@ -110,6 +110,70 @@ def mutations(whole):
     return patches
 
 
+def _baseline_profile_probe_diagnostic(result, elapsed_ms, error):
+    """Pure bounded metadata, never captured text, messages, profiles or loop uid."""
+    run = result if type(result) is subprocess.CompletedProcess else None
+    stdout = run.stdout if run is not None else None
+    stderr = run.stderr if run is not None else None
+    def stream(value):
+        if type(value) is str:
+            value = value.encode('utf-8', errors='surrogatepass')
+        if type(value) is not bytes:
+            return None, None
+        return len(value), hashlib.sha256(value).hexdigest()
+    stdout_bytes, stdout_sha = stream(stdout)
+    stderr_bytes, stderr_sha = stream(stderr)
+    rc = run.returncode if run is not None and type(run.returncode) is int else None
+    error_name = type(error).__name__
+    allowed_python = {'AssertionError', 'JSONDecodeError', 'KeyError', 'TypeError',
+                      'ValueError', 'UnicodeDecodeError', 'FileNotFoundError',
+                      'PermissionError', 'OSError', 'CalledProcessError', 'TimeoutExpired'}
+    python_class = error_name if error_name in allowed_python else 'other'
+    if run is None:
+        kind = 'probe-no-completed-result'
+    elif rc is not None and rc != 0:
+        kind = 'node-nonzero-returncode'
+    elif python_class == 'JSONDecodeError':
+        kind = 'probe-receipt-json'
+    elif python_class in ('KeyError', 'TypeError'):
+        kind = 'probe-receipt-shape'
+    elif python_class == 'AssertionError':
+        kind = 'probe-receipt-assertion'
+    else:
+        kind = 'probe-result-unknown'
+    text = stderr if type(stderr) is str else stderr.decode('utf-8', errors='replace') if type(stderr) is bytes else ''
+    truncated = len(text) > 8192
+    scan = text[:4096] + '\n' + text[-4095:] if truncated else text
+    allowed_classes = {'Error', 'AssertionError', 'SyntaxError', 'TypeError',
+                       'ReferenceError', 'RangeError', 'URIError', 'EvalError'}
+    allowed_codes = {'ERR_ASSERTION', 'ERR_MODULE_NOT_FOUND', 'MODULE_NOT_FOUND',
+                     'ERR_PACKAGE_PATH_NOT_EXPORTED', 'ERR_REQUIRE_ESM',
+                     'ERR_UNKNOWN_FILE_EXTENSION', 'ERR_INPUT_TYPE_NOT_ALLOWED',
+                     'ERR_INVALID_ARG_TYPE', 'ERR_INVALID_MODULE_SPECIFIER',
+                     'ERR_UNSUPPORTED_DIR_IMPORT', 'ERR_UNSUPPORTED_ESM_URL_SCHEME',
+                     'ERR_WORKER_OUT_OF_MEMORY', 'ERR_BUFFER_TOO_LARGE',
+                     'ENOENT', 'EACCES', 'ENOMEM', 'EPIPE', 'ETIMEDOUT'}
+    classes, codes = set(), set()
+    for line in scan.splitlines():
+        header = re.match(r'^(Error|[A-Za-z]+Error)(?: \[([A-Z][A-Z0-9_]{0,63})\])?:', line)
+        if header:
+            if header[1] in allowed_classes: classes.add(header[1])
+            if header[2] in allowed_codes: codes.add(header[2])
+        code = re.fullmatch(r"\s{0,8}code: ['\"]([A-Z][A-Z0-9_]{0,63})['\"],?\s{0,4}", line)
+        if code and code[1] in allowed_codes: codes.add(code[1])
+    return {'schema': 'baseline-profile-probe-diagnostic-v1',
+            'phase': 'baseline-profile-probe', 'failure_kind': kind,
+            'returncode': rc, 'signal_number': -rc if rc is not None and rc < 0 else None,
+            'elapsed_ms': round(elapsed_ms, 3) if type(elapsed_ms) in (int, float) and 0 <= elapsed_ms <= 86400000 else None,
+            'stdout_utf8_bytes': stdout_bytes, 'stdout_sha256': stdout_sha,
+            'stderr_utf8_bytes': stderr_bytes, 'stderr_sha256': stderr_sha,
+            'python_exception_class': python_class,
+            'node_error_class_hint': next(iter(classes)) if len(classes) == 1 else None,
+            'node_error_code_hint': next(iter(codes)) if len(codes) == 1 else None,
+            'node_error_hint_ambiguous': len(classes) > 1 or len(codes) > 1,
+            'node_hint_scan_truncated': truncated}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source-root', required=True, type=Path)
@@ -138,8 +202,21 @@ def main():
       const old=await import(url(p.root.replace('./apadana-thera-profiles.mjs',url(p.thera))));
       assert.equal(Object.keys(old.APADANA_PROFILES).length,89);for(const[id,row]of Object.entries(old.APADANA_PROFILES))assert.deepEqual(current[id],row,id);
       console.log(JSON.stringify({preserved:89}));"""
-    profile_run = subprocess.run(['node','--input-type=module','-e',profile_probe],cwd=ROOT,input=compact({'root':git_bytes('src/apadana-profiles.mjs').decode(),'thera':git_bytes('src/apadana-thera-profiles.mjs').decode()}),text=True,capture_output=True)
-    assert profile_run.returncode == 0 and json.loads(profile_run.stdout)['preserved'] == 89, 'Baseline browser profiles changed'
+    profile_probe_started = time.monotonic()
+    profile_run = None
+    try:
+        profile_run = subprocess.run(['node','--input-type=module','-e',profile_probe],cwd=ROOT,input=compact({'root':git_bytes('src/apadana-profiles.mjs').decode(),'thera':git_bytes('src/apadana-thera-profiles.mjs').decode()}),text=True,capture_output=True)
+        assert profile_run.returncode == 0 and json.loads(profile_run.stdout)['preserved'] == 89, 'Baseline browser profiles changed'
+    except Exception as profile_probe_error:
+        try:
+            diagnostic = _baseline_profile_probe_diagnostic(profile_run, (time.monotonic() - profile_probe_started) * 1000, profile_probe_error)
+            encoded = json.dumps(diagnostic, ensure_ascii=True, separators=(',', ':'))
+            if len(encoded.encode('utf-8')) <= 2048:
+                sys.stderr.write('BASELINE_PROFILE_PROBE_DIAGNOSTIC:' + encoded + '\n')
+                sys.stderr.flush()
+        except Exception:
+            pass  # Diagnostics must never replace the original failure.
+        raise
     # Global navigation accepts only the finite independently sealed intake, in publisher order.
     intake_poems = {uid:row['poem'] for uid,row in old['links'].items()}
     for name,pin in GOLDEN_PINS.items():

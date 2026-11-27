@@ -1,10 +1,11 @@
-// Current375 app/API inputs remain actual R. Named H metadata below is source-derived, never an API projection.
-import {intake375Authority,requireProfiles375,requireMetadata375,assertCurrent375SourceClosure} from './helpers/intake375-metadata.mjs';
-assertCurrent375SourceClosure(new URL('../',import.meta.url));
-const current375Source=intake375Authority();
-const HistoricalH368Profiles=current375Source.baseline.profiles;
-const HistoricalH368Catalogue={version:1,source:current375Source.baseline.manifest_source,vri_commit:current375Source.manifest.vri_commit,held:current375Source.baseline.manifest_held,links:current375Source.baseline.links};
-requireProfiles375(APADANA_PROFILES);
+// Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
+import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
+assertCurrent380SourceClosure(new URL('../',import.meta.url));
+const current380Source=intake380Authority();
+assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
+const HistoricalH368Profiles=current380Source.historical368.profiles;
+const HistoricalH368Catalogue={version:1,source:current380Source.historical368.manifest_source,vri_commit:current380Source.manifest.vri_commit,held:current380Source.historical368.manifest_held,links:current380Source.historical368.links};
+requireProfiles380(APADANA_PROFILES);
 /** Actual original-source positives precede every client mutation. */
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -34,7 +35,7 @@ function shown(host,value,pali,id){
 function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}
 
 test('all five capabilities retain exact308 identity and every original303 profile without mistaking API choices for private pins',()=>{
- assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current375Source.baseline.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,375);
+ assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current380Source.historical368.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,380);
  assert.equal(e.approval.expected_profile_ids.length,308);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,308),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,308),e.approval.expected_profile_ids);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(308,310),['tha-ap289','tha-ap290']);
