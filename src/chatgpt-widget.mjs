@@ -30,7 +30,7 @@ import { getCommentary, commentaryReadingSource } from './commentary.mjs';
 import { HostedToolError } from './hosted-tool-error.mjs';
 
 export const WIDGET_TOOL = 'read_passage_widget';
-export const WIDGET_VERSION = 'v48';
+export const WIDGET_VERSION = 'v49';
 // Covers the reproduced 54–55 second cold queue without removing the finite UI deadline.
 export const NAVIGATION_TIMEOUT_MS = 90000;
 export const WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
