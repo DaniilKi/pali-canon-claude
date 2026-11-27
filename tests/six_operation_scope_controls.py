@@ -392,6 +392,70 @@ class SixOperationScopeControls(unittest.TestCase):
         self.assertFalse(returned[0]._active)
         self.assertEqual(dict(returned[0]._proof368._raw), {})
         h.assert_six_current_canonical_data(self.root)
+        # Combined FOUR gates borrow this same private machinery but expose no
+        # public carried-scope or Pathlike token API, even for ordinary reads.
+        import web_reader_four_boundary_history as four
+        original_read_bytes, original_stat = Path.read_bytes, Path.stat
+        def four_refuses_before_io(operation):
+            with mock.patch.object(Path, 'read_bytes', autospec=True,
+                    side_effect=original_read_bytes) as reads, \
+                    mock.patch.object(Path, 'stat', autospec=True,
+                    side_effect=original_stat) as stats:
+                with self.assertRaises(ValueError):
+                    operation()
+                self.assertEqual(reads.call_count, 0)
+                self.assertEqual(stats.call_count, 0)
+        with h._c1_operation_scope(self.root) as four_scope:
+            for gate, args in ((four.assert_current_canonical_data, ()),
+                    (four.historical_data_bytes, (four.CHANGED_DATA[0],)),
+                    (four.historical_data_bytes, ('server/data/topics.json',))):
+                four_refuses_before_io(lambda gate=gate, args=args: gate(four_scope, *args))
+            class FourPathlikeToken:
+                calls = 0
+                def __fspath__(self):
+                    self.calls += 1
+                    return str(self_root)
+            self_root = self.root
+            token = FourPathlikeToken()
+            four_refuses_before_io(lambda: four.assert_current_canonical_data(token))
+            four_refuses_before_io(lambda: four.historical_data_bytes(token, 'server/data/topics.json'))
+            self.assertEqual(token.calls, 0)
+            with mock.patch.object(ten, '_capture_six_test_input',
+                    wraps=ten._capture_six_test_input) as fresh:
+                four._assert_four_current_canonical_data(four_scope)
+                self.assertEqual(hashlib.sha256(four._historical_four_data_bytes(
+                    four_scope, four.CHANGED_DATA[0])).hexdigest(),
+                    four.OLD_DATA[four.CHANGED_DATA[0]]['sha256'])
+                self.assertEqual(fresh.call_count, 0)
+            original_root = four_scope._root
+            with tempfile.TemporaryDirectory(prefix='pali-four-wrong-owner-root-') as temp:
+                object.__setattr__(four_scope, '_root', Path(temp))
+                try:
+                    four_refuses_before_io(lambda: four._assert_four_current_canonical_data(four_scope))
+                    four_refuses_before_io(lambda: four._historical_four_data_bytes(four_scope, 'server/data/topics.json'))
+                finally:
+                    object.__setattr__(four_scope, '_root', original_root)
+            four_thread_errors = []
+            def four_foreign_thread():
+                try:
+                    four_refuses_before_io(lambda: four._assert_four_current_canonical_data(four_scope))
+                    four_refuses_before_io(lambda: four._historical_four_data_bytes(four_scope, 'server/data/topics.json'))
+                except BaseException as error:
+                    four_thread_errors.append(type(error).__name__)
+            four_thread = Thread(target=four_foreign_thread)
+            four_thread.start(); four_thread.join(timeout=5)
+            self.assertFalse(four_thread.is_alive())
+            self.assertEqual(four_thread_errors, [])
+            class ForeignFourScope(h._C1OperationScope):
+                pass
+            wrong_type = object.__new__(ForeignFourScope)
+            four_refuses_before_io(lambda: four._assert_four_current_canonical_data(wrong_type))
+            four_refuses_before_io(lambda: four._historical_four_data_bytes(wrong_type, 'server/data/topics.json'))
+        for gate, args in ((four.assert_current_canonical_data, ()),
+                (four.historical_data_bytes, ('server/data/topics.json',)),
+                (four._assert_four_current_canonical_data, ()),
+                (four._historical_four_data_bytes, ('server/data/topics.json',))):
+            four_refuses_before_io(lambda gate=gate, args=args: gate(four_scope, *args))
 
     def test_06_every_original_fixture_is_verified_before_operation_use(self):
         for name in h.C1_DATA_PATHS:

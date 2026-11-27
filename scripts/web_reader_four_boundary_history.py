@@ -250,13 +250,13 @@ def _physical_four_root(root):
 def _check_four_scope(root):
     if type(root) is not _C1OperationScope:
         raise ValueError('Exact private four-history operation scope required')
-    root._check()
     binding = root._next_ten_binding
     if type(binding) is not _NextTenBinding:
         raise ValueError('Exact private next-ten binding required')
     binding._check()
     if binding._root != root._root:
         raise ValueError('Four-history operation root identity changed')
+    root._check()
 
 
 def _assert_four_current_canonical_data(root):
