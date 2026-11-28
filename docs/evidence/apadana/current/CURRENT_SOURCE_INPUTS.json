@@ -161,11 +161,11 @@
     },
     "docs/evidence/apadana/english394-407-four/RUNTIME_INVENTORY.json": {
       "bytes": 6760,
-      "sha256": "38d90c150b2b70bd0fde1b1cc5e1a40d2ff6cc86deedec91477dad5ae58dde6b"
+      "sha256": "532d80523591416519bea6cfe0cada68db7d0e80873d89fa4696844ce06faf45"
     },
     "docs/evidence/apadana/english394-407-four/RUNTIME_REVIEW.json": {
-      "bytes": 2028,
-      "sha256": "f7afbcde9ed93c1896b9441190de27b1b8cc46922da148741fcd421b17c8c277"
+      "bytes": 2435,
+      "sha256": "6989e1ab154c515b4600f036e408ebda82aa1e5e33dcd5620e84ea3d6db51db1"
     },
     "docs/evidence/apadana/english394-407-four/SOURCE_BINDINGS.json": {
       "bytes": 626928,
@@ -357,7 +357,7 @@
     },
     "scripts/web_reader_current_apadana.py": {
       "bytes": 18823,
-      "sha256": "915d6601a56464503983c7d3eb1c2f3201292dfece219eb5b604b30720013b20"
+      "sha256": "06ee698e5902cafe2e7b0efc3d592546cb96299fcf22ef3f43810c7e2d77a41d"
     },
     "scripts/web_reader_intake375.py": {
       "bytes": 18999,
