@@ -1880,3 +1880,10 @@ Append only nine source- and rights-reviewed publisher-edition poems over exact3
 The next finite intake adds publisher poems 381 and 383–386 as five complete publisher-edition English choices (380 total). It preserves all 375 previous profile and link objects, the canonical logical digest and locator namespaces. The 389/390 boundary repair is a separate scope. Source approval does not imply installed-reader or CI acceptance.
 
 Current acceptance uses a fixed 380-source authority over the unchanged, sealed pure 375-source decoder plus the five reviewed objects. It reads the actual current runtime; it does not filter the application back to an older count or introduce another historical runtime epoch. Exact existing test cases, bounds, historical expectations and required cross-platform gates remain mandatory. Published wording and notes stay in the live pinned source, outside distribution bundles. See [the intake scope](data/thera381-386-five-intake.md).
+
+
+### Publisher401/402: two literal source choices over the unchanged380 prefix
+
+Activate only independently reviewed publisher401→`tha-ap403` and402→`tha-ap404`, using the existing hash-only profile schema and stanza parser. The ten speaker-prefix paragraphs retain their original five lines; publisher402’s local4–5/global3922–3923 entry remains one eight-line physical paragraph. Publisher401’s unnoted chapter41 heading is separate paratext. Preserve all36 notes, every edition difference and all prior380 profile/link objects. The nine publisher-number holds391,392,393,403,404,405,408,409,410 remain inactive; canonical403/404 are different identifiers.
+
+No Pāli boundary, locator namespace, private study format or licence rule changes. Translation-specific CC BY-NC-SA4.0 controls remain mandatory; English body, note and paratext wording stays live-only. Current382 validation must check actual382 data after separately decoding the immutable380 source authority; an old380 runtime result must never stand in for the current application. Focused source/API, installed-browser and exact-candidate full CI evidence have separate scopes. [Scope](data/thera401-402-pair-intake.md).
