@@ -952,6 +952,122 @@ const MIXED_PTS_BJTS_HEADINGS = Object.freeze({
     "note_count": 6,
     "paragraph_pairs": {},
     "note_pairs": {}
+  },
+  "tha-ap423": {
+    "poem": 421,
+    "pts": 418,
+    "raw_sha256": "f699168e0ba16e890f9728987e190b09be423841d04acac71d6345e948cb7d88",
+    "heading_sha256": "044bd2320ba95a6f59f3cf04090ee101ffd42f30bc5f0bf2d8479b04cc7ebf3a",
+    "paragraph_count": 18,
+    "note_count": 22,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "5": [
+        [
+          3,
+          2
+        ]
+      ],
+      "12": [
+        [
+          3,
+          1
+        ]
+      ],
+      "18": [
+        [
+          3,
+          1
+        ]
+      ]
+    }
+  },
+  "tha-ap425": {
+    "poem": 423,
+    "pts": 420,
+    "raw_sha256": "1134b932e032fc81667245f9e74ddfb6e370dc3fc5dbb6b6622e0f04a7c5518e",
+    "heading_sha256": "07fa0fdfb16edf5f7291a4508225f23c34a3d90cb314255b915ef495f7b0e36c",
+    "paragraph_count": 28,
+    "note_count": 17,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "9": [
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "tha-ap426": {
+    "poem": 424,
+    "pts": 421,
+    "raw_sha256": "4443f55565d186cda8ef114ede31af2b5c303052970b36bb46ec4ab321b88aa4",
+    "heading_sha256": "0ce29678e3597665b1672f409d4232cb83af71093ab59b438756e204b2a1d0ab",
+    "paragraph_count": 10,
+    "note_count": 5,
+    "paragraph_pairs": {},
+    "note_pairs": {}
+  },
+  "tha-ap427": {
+    "poem": 425,
+    "pts": 422,
+    "raw_sha256": "609463151f43aec5412c4434b3c4a87b9e4dc5b52be2e209fb4712858b1f5e25",
+    "heading_sha256": "6d0cccc6f1a5c8acb9e1e9de578bdc4fc05aacfc09a506853558ca4094ed6fe4",
+    "paragraph_count": 13,
+    "note_count": 12,
+    "paragraph_pairs": {},
+    "note_pairs": {}
+  },
+  "tha-ap428": {
+    "poem": 426,
+    "pts": 423,
+    "raw_sha256": "73c77b2771d3dba099503fba9f48c673dc98cd16bb52ed88b9b1876856c7f65b",
+    "heading_sha256": "59321ee0470bbc85e6584f412536c7df2d595d029da9fc50fe0b62b65ba5e9b1",
+    "paragraph_count": 12,
+    "note_count": 12,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "3": [
+        [
+          0,
+          1
+        ]
+      ],
+      "7": [
+        [
+          0,
+          2
+        ]
+      ]
+    }
+  },
+  "tha-ap429": {
+    "poem": 427,
+    "pts": 424,
+    "raw_sha256": "0125087c4852250cd0c7bff18241c0d6755d37c642d77af0e90b336c23c7df1f",
+    "heading_sha256": "8c6de1e86966a5bb670fda31ea9a0406693093b92e042deb2fe08e2b723e0b97",
+    "paragraph_count": 21,
+    "note_count": 15,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "15": [
+        [
+          2,
+          1
+        ]
+      ]
+    }
+  },
+  "tha-ap431": {
+    "poem": 429,
+    "pts": 426,
+    "raw_sha256": "b08ab6886b8a33681e6d5338466b4fb90f13536afb39343e163750a59ae284e8",
+    "heading_sha256": "94534ff58842afaa99fdd794c724caf0f7382012d67cb3b0fc19b4fff610f4ed",
+    "paragraph_count": 18,
+    "note_count": 18,
+    "paragraph_pairs": {},
+    "note_pairs": {}
   }
 });
 const MIXED_DISPLAY_TOKENS = Object.freeze([
@@ -1282,7 +1398,7 @@ export function parseTheraApadana(raw, profile) {
   if (new Set(owned).size !== owned.length || owned.length !== notes.length || notes.some(n => !owned.includes(n.number))) fail();
   // Publisher101 alone uses ## for its poem heading, beside a separate ## preface.
   const headings = [...poem.matchAll(profile.id === 'tha-ap103' ? /^## \\\[101\. /gm : /^### /gm)]; if (headings.length !== 1) fail();
-  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253', 'tha-ap263', 'tha-ap273', 'tha-ap283', 'tha-ap323', 'tha-ap333', 'tha-ap343', 'tha-ap353', 'tha-ap373', 'tha-ap383', 'tha-ap403', 'tha-ap413'].includes(profile.id) !== (split > 0)) fail();
+  const split = headings[0].index; if (['tha-ap13', 'tha-ap23', 'tha-ap33', 'tha-ap43', 'tha-ap53', 'tha-ap63', 'tha-ap73', 'tha-ap83', 'tha-ap93', 'tha-ap103', 'tha-ap113', 'tha-ap123', 'tha-ap133', 'tha-ap143', 'tha-ap153', 'tha-ap163', 'tha-ap173', 'tha-ap183', 'tha-ap193', 'tha-ap203', 'tha-ap213', 'tha-ap243', 'tha-ap223', 'tha-ap233', 'tha-ap253', 'tha-ap263', 'tha-ap273', 'tha-ap283', 'tha-ap323', 'tha-ap333', 'tha-ap343', 'tha-ap353', 'tha-ap373', 'tha-ap383', 'tha-ap403', 'tha-ap413', 'tha-ap423'].includes(profile.id) !== (split > 0)) fail();
   const preface = poem.slice(0, split), body = poem.slice(split); refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text.split(/\n\n+/);
   let publisher_preface;
