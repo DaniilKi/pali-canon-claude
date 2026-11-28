@@ -1,6 +1,6 @@
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
 import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
-import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+import {assertCurrent389390SourceClosure,CURRENT_CANONICAL_SHA} from './helpers/current389390-metadata.mjs';
 assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
@@ -28,7 +28,15 @@ import {requiredCanonicalRevision} from '../src/locator-policy.mjs';
 import {readSixRegularRelative} from './helpers/six-regular-file.mjs';
 import {INTAKE359_PINS} from './helpers/intake359-metadata.mjs';
 import {nineEnglishEvidence,intake368Authority,requireMetadata368,INTAKE368_DIRECTORY,INTAKE368_IDS as IDS,INTAKE368_PINS,INTAKE368_REV as REV,INTAKE368_VRI as VRI,sha,objectSha} from './helpers/intake368-metadata.mjs';
-const e=nineEnglishEvidence(),originalFetch=globalThis.fetch,tid=id=>canon.translationId(e.profiles[id]),PRIVATE='SYNTHETIC_PRIVATE_NINE_ā😀';
+import {after as closeNineHistoricalInputs} from 'node:test';
+import {pathToFileURL as nineHistoricalRootURL} from 'node:url';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+// Actual current canonical source is authenticated before any H preparation.
+assert.equal(sha(JSON.stringify(canon.load().canon)),CURRENT_CANONICAL_SHA,'Exact actual883d canonical source before named H368 inputs');
+const ownedNineHistoricalInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+closeNineHistoricalInputs(()=>ownedNineHistoricalInputs.close());
+// Only original source-evidence data reads use H. Actual canon/APIs stay current.
+const e=nineEnglishEvidence(nineHistoricalRootURL(ownedNineHistoricalInputs.root+'/')),originalFetch=globalThis.fetch,tid=id=>canon.translationId(e.profiles[id]),PRIVATE='SYNTHETIC_PRIVATE_NINE_ā😀';
 afterEach(()=>{globalThis.fetch=originalFetch;liveCache.clear();});
 function transport(calls,change){liveCache.clear();globalThis.fetch=async(input,init={})=>{const url=typeof input==='string'?input:input.href,id=IDS.find(id=>e.profiles[id].raw_url===url);assert.ok(id,'Exactly nine approved pinned official URLs only');assert.ok(!url.includes(PRIVATE)&&!JSON.stringify(init).includes(PRIVATE));calls.push(id);const raw=e.artifact(id);return new Response(change?change(raw,id):raw);};}
 const source={skip:!e.checkout,timeout:30000};

@@ -139,6 +139,10 @@
       "bytes": 39820,
       "sha256": "57d6717897e929c9794fb5fd01520c65b609aa8708e53c4cf3c49c53e003cc67"
     },
+    "scripts/canon/historical389390_source_fixture.py": {
+      "bytes": 8606,
+      "sha256": "247e50395456e9902357b9fa456e8c8ecb3ed9b5870a7912a11dcdd4dbee715b"
+    },
     "scripts/canon/repair_apadana_thera389390_spans.py": {
       "bytes": 5980,
       "sha256": "d8b37c845e4e662269a58101dacb885b79942dc36ffc728d143bdd449d843423"
@@ -404,8 +408,8 @@
       "sha256": "a9eafc3842c158124577656c0346bac19c5cce1adc51d9daebf8fa5a56672bdb"
     },
     "tests/four-history-data.test.mjs": {
-      "bytes": 2918,
-      "sha256": "1cce313a66bb0308466dd258c3cf18dca47b1ec3a3e197d816de5b4ede3277df"
+      "bytes": 3401,
+      "sha256": "3ed5d934143a44c4050d51c6f55d1cffa764f0cd7f3d73bcff4510fb6935fa63"
     },
     "tests/held234-client.test.mjs": {
       "bytes": 11252,
@@ -446,6 +450,10 @@
     "tests/helpers/thera301-310-evidence.mjs": {
       "bytes": 15584,
       "sha256": "80f81c51ed929d07337841b30ff3d1693c9ce656c0e62c5b3454d609d2d1bc05"
+    },
+    "tests/helpers/thera335-350-evidence.mjs": {
+      "bytes": 14919,
+      "sha256": "36631fc90a5d717c96faff2d00520ef8b794da777348bcaeda3c33f74951e441"
     },
     "tests/helpers/verse-scope-python.mjs": {
       "bytes": 9797,
@@ -668,16 +676,16 @@
       "sha256": "a5e4ae483b9ffc814e3da75b2862ea0667c645e5dc655e25056c59bc30fa1ddd"
     },
     "tests/thera335-350-source.test.mjs": {
-      "bytes": 14645,
-      "sha256": "10c428b1ec933e9328c006a0d167375e12af0d5e26ec09acf3ec23810969e2f5"
+      "bytes": 15417,
+      "sha256": "344aa29ab41f05d4796cb0a7fced5d1f1ea0bf91d7e47bff55654e647e474901"
     },
     "tests/thera339-legacy-projection.test.mjs": {
       "bytes": 5435,
       "sha256": "f8f3f72e67e22effa16d97bf32aff3994b87d4cc16004b6644c1208a2af729b7"
     },
     "tests/thera351-360-nine-source.test.mjs": {
-      "bytes": 16874,
-      "sha256": "aaa9247984b596c1e32ff8e327e6bd2c108ff66f37fd237d78fecf67c311b998"
+      "bytes": 17625,
+      "sha256": "c85aff0df3a7d52659b43c05e43aeccafbbe8ff655adaf479ce3cc7366378d53"
     },
     "tests/thera371-378-seven.test.mjs": {
       "bytes": 67681,

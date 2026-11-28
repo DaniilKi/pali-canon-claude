@@ -149,7 +149,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "990ddc5cb3424b4daefa1f54e020c0e91d4e2ca2f82de882b9b4b43edca4832f"
+      "after_sha256": "1613ca0abceca9f81c7ab392bd7361716732dd727e6ad0fe988495e8875cb45b"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -181,7 +181,7 @@
     },
     "tests/four-history-data.test.mjs": {
       "before_sha256": "234276661885dba30a370f503ec3fdb8ad392cb72b74878556de5b4d5c5dd951",
-      "after_sha256": "1cce313a66bb0308466dd258c3cf18dca47b1ec3a3e197d816de5b4ede3277df"
+      "after_sha256": "3ed5d934143a44c4050d51c6f55d1cffa764f0cd7f3d73bcff4510fb6935fa63"
     },
     "tests/held234-client.test.mjs": {
       "before_sha256": "0b5969a079d50ce005f35e508f54dcb8ed343f08aa1e99ba826a13f2d8821cef",
@@ -381,7 +381,7 @@
     },
     "tests/thera335-350-source.test.mjs": {
       "before_sha256": "cbe814127a9e71c9383873e91797311fda65f353577070efc1506be3bd028880",
-      "after_sha256": "10c428b1ec933e9328c006a0d167375e12af0d5e26ec09acf3ec23810969e2f5"
+      "after_sha256": "344aa29ab41f05d4796cb0a7fced5d1f1ea0bf91d7e47bff55654e647e474901"
     },
     "tests/thera339-legacy-projection.test.mjs": {
       "before_sha256": "bc0770aae600a3293a3e260ba1b4bdfaf9e731a797600b9a20449aa0ab3dc1a7",
@@ -389,7 +389,7 @@
     },
     "tests/thera351-360-nine-source.test.mjs": {
       "before_sha256": "b386cd017c9979d48151f56265ed0ff2d4c325a960e55ffbbf5ba5b996a1b235",
-      "after_sha256": "aaa9247984b596c1e32ff8e327e6bd2c108ff66f37fd237d78fecf67c311b998"
+      "after_sha256": "c85aff0df3a7d52659b43c05e43aeccafbbe8ff655adaf479ce3cc7366378d53"
     },
     "tests/verse-scope-review.test.mjs": {
       "before_sha256": "4821500d404b852c2573b89d96f52cba79ea6706a14de577751cdabe51aa4186",
@@ -419,10 +419,10 @@
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
-    "docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json": "c21e9a8b2edcd7bdbaabb3380d99b02388b6e892942e14bfdc226dfdb21727d2",
+    "docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json": "8408c9e1f00eb921e14667cc1c40f8a1a9335b7f2d86b1f7f2ab729c5e3531fc",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
-    "tests/helpers/current389390-metadata.mjs": "3f2c4edabab3b31c2b189405654b150f556b1a953484934490103967ccf1d6eb",
+    "tests/helpers/current389390-metadata.mjs": "325dc3fc6bf34a09028769be66515db527b2edb27a4a2fd53c68450b155f1554",
     "tests/helpers/historical-h-inputs.mjs": "dec8be94435e86094ae6b6a7496d00308b081573f6c9b8800020f8dae40fe6d6",
     "tests/helpers/intake375-metadata.mjs": "ee77c32767be7713ef383c835b44ce942e510008da2c057bcd42380368edbf3d",
     "tests/helpers/intake380-metadata.mjs": "66919b4e77dee5c2aabc44c9d2ed5ce46050a758279348d0063c429e983c5127",
@@ -510,7 +510,7 @@
     "tests/cbeta-khp-assessment.test.mjs": "032baceafe209d89d2da2edc4e07fe42b2d8e9fc99fb2d2b7a14dacc7e42023b",
     "tests/chatgpt-widget.test.mjs": "b8c20ff21c8d10f3ef9e95891298afa923997b3c949098f2b7476b85ddcd3246",
     "tests/check-ci-stages.test.mjs": "216f7e198e5272bb16a2d6b841ca1bc9674033e9a9bfc965d7a6403b3f9f58c0",
-    "tests/ci-test-partitions.test.mjs": "990ddc5cb3424b4daefa1f54e020c0e91d4e2ca2f82de882b9b4b43edca4832f",
+    "tests/ci-test-partitions.test.mjs": "1613ca0abceca9f81c7ab392bd7361716732dd727e6ad0fe988495e8875cb45b",
     "tests/citation-id-coverage.test.mjs": "ac30a105e79ae69f8f1cf867ee713929380b153812368333d93dc45886459123",
     "tests/citation-pagination.test.mjs": "bbdbbabf73edd4ffe4aedf592f6e504c476811b652c1559129bae5454b6b4443",
     "tests/citation-range-validation.test.mjs": "65db48e84f79515b8764df6ed063fc849a6b271fecee8ef19e061117750e336d",
@@ -554,7 +554,7 @@
     "tests/find-edition-citations.test.mjs": "72a8a3c5f539ec44ab6bd217b1b00c59306ec41c98147c490995c4e7e745ffe3",
     "tests/four-boundary-ci.test.mjs": "d6eeafd5c99bad82802d94d3ed9b92296af9e9302e564c1f0362864dc7f47cd3",
     "tests/four-boundary-history.test.mjs": "a9eafc3842c158124577656c0346bac19c5cce1adc51d9daebf8fa5a56672bdb",
-    "tests/four-history-data.test.mjs": "1cce313a66bb0308466dd258c3cf18dca47b1ec3a3e197d816de5b4ede3277df",
+    "tests/four-history-data.test.mjs": "3ed5d934143a44c4050d51c6f55d1cffa764f0cd7f3d73bcff4510fb6935fa63",
     "tests/grouped-scope.test.mjs": "15481867b7f9324751cd98c964ad521b48f2e49543001a7b298d4e2fb3974f99",
     "tests/guide-excerpt-subjects.test.mjs": "757f45317ee0ece21f8da88b037a20719a28518bbd0ba0e4adce368a092d9153",
     "tests/held234-client.test.mjs": "ce7f825b3dd4c788aa5cc3e8bd354c86a794db7c393ce35aa17dcc2832346b50",
@@ -704,10 +704,10 @@
     "tests/thera333-legacy-projection.test.mjs": "18b2bc8a88f7c57db2ad6659b7803a7431769db9e964350aa33bc35e3d2764f0",
     "tests/thera333-legacy-source-inverses.test.mjs": "a5e4ae483b9ffc814e3da75b2862ea0667c645e5dc655e25056c59bc30fa1ddd",
     "tests/thera335-350-client.test.mjs": "c17ad1147d3aa766c113db1c7318c4f8863d64ffb7e9d490f0ca27985cc12119",
-    "tests/thera335-350-source.test.mjs": "10c428b1ec933e9328c006a0d167375e12af0d5e26ec09acf3ec23810969e2f5",
+    "tests/thera335-350-source.test.mjs": "344aa29ab41f05d4796cb0a7fced5d1f1ea0bf91d7e47bff55654e647e474901",
     "tests/thera339-legacy-projection.test.mjs": "f8f3f72e67e22effa16d97bf32aff3994b87d4cc16004b6644c1208a2af729b7",
     "tests/thera351-360-nine-client.test.mjs": "fb359a0639995f1e6623c82d33f8eda1f1be016ff82cd9fb9da96ebebe17adaf",
-    "tests/thera351-360-nine-source.test.mjs": "aaa9247984b596c1e32ff8e327e6bd2c108ff66f37fd237d78fecf67c311b998",
+    "tests/thera351-360-nine-source.test.mjs": "c85aff0df3a7d52659b43c05e43aeccafbbe8ff655adaf479ce3cc7366378d53",
     "tests/thera371-378-seven.test.mjs": "345c458db1f44a5f9c1aee8526e553eabdca7fffe1f932f2f7eedb96b4b231a7",
     "tests/thera381-386-five.test.mjs": "787e737401175759b2c3424d40eca1d8af752e03cfd2a4db1d24e88e42613fd6",
     "tests/title-pagination.test.mjs": "0d4781baf210f7b37ff1bb47eb14e2ec2efa43e1e5e27217f9b92584c5e6c34d",
@@ -791,6 +791,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/english381-386/CASE_SOURCE_REVIEW.json",
-    "sha256": "a412fb2561fc2a0c366c90da344559835a5499c8157243b40dfd25de43ef08a5"
+    "sha256": "e8b421109bd61b8b07174cc20338ae914561443aefa4fa212a5bd71b9b24dca1"
   }
 }

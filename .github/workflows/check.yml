@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/english381-386/BASELINE_380_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: 30b580d377faf0f3cee450b806b26fce45d6f0f4c02e22452cd1cd826cfc443a
+  CI_TEST_BASELINE_SHA: 7a4977cea25879a71a68929caf5e81546fe7a31bc45f5495e56ceae14975749b
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -944,13 +944,14 @@ jobs:
         shell: bash
         run: |
           node scripts/shard-data.mjs --unpack server/data .fixtures/english16-canon
-          python3 scripts/apadana/thera335-350/portable_source_replay.py --publisher-checkout .fixtures/apadana-pinned --canon .fixtures/english16-canon/canon.json.gz --vri-xml .fixtures/vri-english335-350/romn/s0510m1.mul.xml --out .fixtures/english16-source-replay
+          python3 scripts/canon/historical389390_source_fixture.py --canon .fixtures/english16-canon/canon.json.gz --out .fixtures/english16-historical-source
+          python3 scripts/apadana/thera335-350/portable_source_replay.py --publisher-checkout .fixtures/apadana-pinned --canon .fixtures/english16-historical-source/canon.json.gz --vri-xml .fixtures/vri-english335-350/romn/s0510m1.mul.xml --out .fixtures/english16-source-replay
       - name: Replay nine exact sources with independent goldens and original VRI tuples
         if: matrix.group == 'apadana'
         timeout-minutes: 5
         shell: bash
         run: |
-          python3 -X utf8 scripts/apadana/thera351-360-nine/source-nine-replay.py --publisher-root .fixtures/apadana-pinned --canon .fixtures/english16-canon/canon.json.gz --vri-xml .fixtures/vri-english335-350/romn/s0510m1.mul.xml --out .fixtures/english9-source-replay
+          python3 -X utf8 scripts/apadana/thera351-360-nine/source-nine-replay.py --publisher-root .fixtures/apadana-pinned --canon .fixtures/english16-historical-source/canon.json.gz --vri-xml .fixtures/vri-english335-350/romn/s0510m1.mul.xml --out .fixtures/english9-source-replay
       - name: Require current368 physical source closure without historical substitution
         if: matrix.group == 'apadana'
         timeout-minutes: 5

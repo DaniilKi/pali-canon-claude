@@ -1,6 +1,6 @@
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
 import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
-import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+import {assertCurrent389390SourceClosure,CURRENT_CANONICAL_SHA} from './helpers/current389390-metadata.mjs';
 assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
@@ -24,7 +24,15 @@ import{liveCache}from'../src/cache.mjs';
 import{requiredCanonicalRevision}from'../src/locator-policy.mjs';
 import{sixteenEnglishEvidence,decodeApproval,IDS,REV,VRI,sha,objectSha,gitBlob}from'./helpers/thera335-350-evidence.mjs';
 import {profilesForHistorical359,project368To359} from './helpers/intake368-metadata.mjs';
-const e=sixteenEnglishEvidence(),originalFetch=globalThis.fetch,clone=structuredClone,tid=p=>canon.translationId(p);
+import {after as closeSixteenHistoricalInputs} from 'node:test';
+import {pathToFileURL as sixteenHistoricalRootURL} from 'node:url';
+import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
+// Actual current canonical source is authenticated before any H preparation.
+assert.equal(sha(JSON.stringify(canon.load().canon)),CURRENT_CANONICAL_SHA,'Exact actual883d canonical source before named H359 inputs');
+const ownedSixteenHistoricalInputs=prepareHistoricalHRuntimeInputs(new URL('../',import.meta.url));
+closeSixteenHistoricalInputs(()=>ownedSixteenHistoricalInputs.close());
+// Only original source-evidence data reads use H. Actual canon/APIs stay current.
+const e=sixteenEnglishEvidence(sixteenHistoricalRootURL(ownedSixteenHistoricalInputs.root+'/')),originalFetch=globalThis.fetch,clone=structuredClone,tid=p=>canon.translationId(p);
 // Explicit TEST inputs only: actual APIs/provider guards retain unprojected current375 data; only sealed H metadata supplies named359 fixture inputs.
 const APADANA_PROFILES=profilesForHistorical359(HistoricalH368Profiles);
 const historical359Manifest=()=>project368To359(HistoricalH368Profiles,HistoricalH368Catalogue).catalogue;
