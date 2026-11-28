@@ -1,0 +1,88 @@
+name: Diagnostic conformance Python selection
+on:
+  push:
+    branches: ['diagnostic/pali-python-startup-*']
+permissions:
+  contents: read
+jobs:
+  conformance-selection:
+    name: Diagnostic Windows22 / ${{ matrix.lane }}
+    runs-on: windows-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [default, setup-absolute]
+    env:
+      DIAGNOSTIC_LANE: ${{ matrix.lane }}
+      PYTHON: ''
+    steps:
+      - name: Use LF line endings
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Set explicit Python for fixture validation
+        id: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixture Python version and configure diagnostic lane
+        id: prepare
+        timeout-minutes: 1
+        env:
+          SETUP_PYTHON_PATH: ${{ steps.setup-python.outputs.python-path }}
+        run: node scripts/diagnose-conformance-python-selection.mjs prepare
+      - run: npm ci --no-audit --no-fund
+      - name: Fetch exact104 canonical artifacts for historical inverse checks
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
+          git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+      - name: Fetch exact accepted H for owned historical fixture inputs
+        timeout-minutes: 2
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7
+          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'
+      - name: Verify complete check command contract
+        timeout-minutes: 1
+        run: node scripts/ci-check-contract.mjs
+      - name: Build complete check artifacts
+        timeout-minutes: 5
+        run: npm run build
+      - name: Verify bounded Python partition protocol
+        timeout-minutes: 3
+        env:
+          PYTHON: ${{ steps.prepare.outputs.python_command }}
+        run: |
+          set +e
+          if [ "$DIAGNOSTIC_LANE" = default ]; then unset PYTHON; fi
+          node scripts/check-python-partitions.mjs 2>&1 | tee "$RUNNER_TEMP/conformance-python-selection/gate.log"
+          statuses=("${PIPESTATUS[@]}")
+          gate_exit="${statuses[0]}"
+          capture_exit="${statuses[1]}"
+          printf '{"exit_code":%s,"capture_exit_code":%s}\n' "$gate_exit" "$capture_exit" > "$RUNNER_TEMP/conformance-python-selection/gate-exit.json"
+          if [ "$gate_exit" -ne 0 ]; then exit "$gate_exit"; fi
+          exit "$capture_exit"
+      - name: Collect bounded post-gate interpreter and owned marker metadata
+        if: always()
+        timeout-minutes: 2
+        run: node scripts/diagnose-conformance-python-selection.mjs after
+      - name: Retain diagnostic-only evidence
+        if: always()
+        timeout-minutes: 1
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostic-conformance-python-${{ matrix.lane }}
+          path: ${{ runner.temp }}/conformance-python-selection/
+          if-no-files-found: error
+          retention-days: 7
