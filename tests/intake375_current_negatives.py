@@ -55,8 +55,14 @@ class Current375Negatives(unittest.TestCase):
         cls.source=cls.context['english']
         cls.current_source=successor.source_authority382(ROOT)['english']
         assert cls.current_source['historical380']==cls.source
-        assert cls.current_source['ids']==cls.source['ids']+list(successor.IDS)
-        assert len(cls.current_source['ids'])==382
+        cls.historical382=cls.current_source['historical382']
+        assert cls.historical382['ids']==cls.source['ids']+list(successor.IDS)
+        assert len(cls.historical382['ids'])==382
+        assert cls.current_source['ids']==cls.historical382['ids']+list(live_current.IDS)
+        assert cls.current_source['ids'][:382]==cls.historical382['ids'] and len(cls.current_source['ids'])==386
+        for uid in cls.historical382['ids']:
+            assert cls.current_source['profiles'][uid]==cls.historical382['profiles'][uid]
+            assert cls.current_source['links'][uid]==cls.historical382['links'][uid]
         assert cls.source==current.source_authority380(ROOT)
         assert cls.context['canonical']['new_canonical_logical_sha256']==boundary.CANON
         cls.approved=successor.approved382_catalogue(ROOT)
@@ -114,7 +120,9 @@ class Current375Negatives(unittest.TestCase):
         with patch.object(current,'_capture380_current',side_effect=AssertionError('Source-only route attempted current-data capture')):
             self.assertEqual(public_source.reviewed_intake(self.root),self.current_source['selection'])
             self.assertEqual(public_source.current_apadana_ids(self.root),self.current_source['ids'])
-            for chapter,count in (('chapter-4',40),('chapter-3',342)):
+            self.assertEqual(len([uid for uid in self.historical382['ids'] if uid.startswith('tha-ap')]),342)
+            for chapter in ('chapter-4','chapter-3'):
+                count=sum(record['publisher_chapter']==chapter for record in self.current_source['selection']['baseline_records']+self.current_source['selection']['approved_records'])
                 family=public_source.current_family_ids(self.root,chapter)
                 expected=[record['id'] for record in sorted(self.current_source['selection']['baseline_records']+self.current_source['selection']['approved_records'],key=lambda row:row['poem']) if record['publisher_chapter']==chapter]
                 self.assertEqual(family,expected);self.assertEqual(len(family),count)
@@ -150,7 +158,8 @@ class Current375Negatives(unittest.TestCase):
             self.assertEqual(list(extra['links']),extra['ids'])
             new_extra=successor.curated_additions382(self.root,anchor)
             self.assertEqual(public_source.curated_additions(self.root,anchor),new_extra)
-            self.assertEqual(new_extra['ids'],extra['ids']+list(successor.IDS))
+            self.assertEqual(new_extra['ids'][:len(extra['ids'])+len(successor.IDS)],extra['ids']+list(successor.IDS))
+            self.assertEqual(new_extra['ids'],self.current_source['ids'][size:])
             for uid in extra['ids']:
                 self.assertEqual(new_extra['profiles'][uid],extra['profiles'][uid])
                 self.assertEqual(new_extra['links'][uid],extra['links'][uid])
@@ -243,6 +252,22 @@ class Current375Negatives(unittest.TestCase):
                 altered=json.loads((self.root/name).read_bytes());altered['independent_negative_witness']=True
                 with self.change(name,raw=json.dumps(altered,ensure_ascii=False).encode()):self.refused(successor.approved382_catalogue)
                 with tempfile.TemporaryDirectory(prefix='pali382-proof-alias-') as d:
+                    target=Path(d).resolve(strict=True)/'authentic.json';target.write_bytes((self.root/name).read_bytes())
+                    with self.change(name) as path:
+                        path.unlink();path.symlink_to(target);self.refused(successor.approved382_runtime)
+                self.positive()
+        # Newfour10 are additional controls; the old254 receipt and pair10 stay separate.
+        four=sorted(live_current.DIRECTORY+'/'+leaf for leaf in (*live_current.PINS,*live_current.RUNTIME_PINS))
+        self.assertEqual(len(four),10)
+        self.assertFalse(set(four)&(set(self.proof_rows)|self.current_names|set(added)))
+        batch=type(self)._proof_batch
+        for name in four if batch is None else four[batch::3]:
+            with self.subTest(current386_source_scope_proof=name):
+                self.positive()
+                with self.change(name,missing=True):self.refused(successor.approved382_runtime)
+                altered=json.loads((self.root/name).read_bytes());altered['independent_negative_witness']=True
+                with self.change(name,raw=json.dumps(altered,ensure_ascii=False).encode()):self.refused(successor.approved382_catalogue)
+                with tempfile.TemporaryDirectory(prefix='pali-current-four-proof-alias-') as d:
                     target=Path(d).resolve(strict=True)/'authentic.json';target.write_bytes((self.root/name).read_bytes())
                     with self.change(name) as path:
                         path.unlink();path.symlink_to(target);self.refused(successor.approved382_runtime)
@@ -367,7 +392,7 @@ class Current375Negatives(unittest.TestCase):
         for bad_uid in ('tha-ap360','tha-ap999999'):
             changed=deepcopy(original);uid=current.IDS[-1]
             changed['links'][bad_uid]=changed['links'].pop(uid)
-            self.assertEqual(len(changed['links']),382)
+            self.assertEqual(len(changed['links']),len(self.current_source['ids']))
             with self.change('server/data/apadana.json',raw=json.dumps(changed,ensure_ascii=False).encode()):
                 self.refused(successor.approved382_catalogue)
         old=deepcopy(original);old['source']=baseline['manifest_source'];old['held']=baseline['manifest_held'];old['links']=baseline['links']
@@ -380,6 +405,10 @@ class Current375Negatives(unittest.TestCase):
         old380=deepcopy(self.source['manifest'])
         self.assertEqual(len(old380['links']),380)
         with self.change('server/data/apadana.json',raw=json.dumps(old380,ensure_ascii=False).encode()):
+            self.refused(successor.approved382_catalogue);self.refused(successor.approved382_runtime)
+        old382=deepcopy(self.historical382['manifest'])
+        self.assertEqual(len(old382['links']),382)
+        with self.change('server/data/apadana.json',raw=json.dumps(old382,ensure_ascii=False).encode()):
             self.refused(successor.approved382_catalogue);self.refused(successor.approved382_runtime)
         with self.change(current.DIRECTORY+'/RUNTIME_REVIEW.json',missing=True):
             self.refused(successor.approved382_runtime)

@@ -1,4 +1,4 @@
-"""Actual382 copy domains; immutable380 source proofs, no historical capture."""
+"""Actual current copy domains; immutable380 source proofs, no historical capture."""
 from pathlib import Path
 from web_reader_intake380 import (_physical_root, _regular, _sha, _require, _proof_rows)
 from web_reader_current_apadana import (source_authority as source_authority389390,
@@ -31,7 +31,7 @@ def _copy(source_root,destination,kind):
             if kind=='runtime' or name.startswith('data/'):
                 _require('server/'+name not in names,'Overlapping runtime/proof copy domains')
                 names['server/'+name]=row['sha256']
-    _require(len(names)==(225 if kind=='source' else 291 if kind=='data' else 298),
+    _require(len(names)==(232 if kind=='source' else 301 if kind=='data' else 308),
              'Exact finite source/data/runtime copy set required')
     written=[]
     try:
