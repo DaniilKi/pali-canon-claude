@@ -11,6 +11,7 @@ from pathlib import Path
 PAIRS = ((411, 'tha-ap413'), (412, 'tha-ap414'), (414, 'tha-ap416'), (415, 'tha-ap417'),
          (416, 'tha-ap418'), (417, 'tha-ap419'), (418, 'tha-ap420'), (419, 'tha-ap421'))
 FOUR_IDS = ('tha-ap396', 'tha-ap399', 'tha-ap408', 'tha-ap409')
+SEVEN_IDS = ('tha-ap423', 'tha-ap425', 'tha-ap426', 'tha-ap427', 'tha-ap428', 'tha-ap429', 'tha-ap431')
 CANON = '883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a'
 VRI = '2d134ff9ef60f70a1eb03c9370580228811a3070'
 REV = 'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4'
@@ -72,14 +73,16 @@ def validate_context(context, four, eight):
     """Pure closed source views; no IO, runtime capture or full386 snapshot."""
     require(type(context) is dict and set(context) == {'english', 'canonical', 'widget'}, 'CLOSED_CURRENT_CONTEXT')
     english, canonical = context['english'], context['canonical']
-    require(set(english['source_cohorts']) == {'four394407', 'eight411419'}, 'EXACT_TWO_FLAT_SOURCE_COHORTS')
-    for key, value in (('four394407', four), ('eight411419', eight)):
+    require(set(english['source_cohorts']) == {'four394407', 'eight411419', 'seven421429'}, 'EXACT_THREE_FLAT_SOURCE_COHORTS')
+    seven = english['source_cohorts']['seven421429']
+    for key, value in (('four394407', four), ('eight411419', eight), ('seven421429', seven)):
         require(type(value) is dict and set(value) == {'directory', 'ids', 'records', 'profiles', 'links', 'documents', 'approval'} and
                 value == english['source_cohorts'][key], 'CLOSED_PURE_SOURCE_COHORT_VIEW')
     old = english['historical382']; ids = [uid for _, uid in PAIRS]
     require(len(old['ids']) == 382 and four['ids'] == list(FOUR_IDS) and eight['ids'] == ids and
-            english['ids'] == old['ids'] + four['ids'] + ids and len(english['ids']) == 394,
-            'EXACT_CURRENT394_WITH_COMPLETE_OLD386_SOURCE_PREFIX')
+            english['ids'][:394] == old['ids'] + four['ids'] + ids and len(english['ids'][:394]) == 394 and
+            seven['ids'] == list(SEVEN_IDS) and english['ids'] == old['ids'] + four['ids'] + ids + seven['ids'] and len(english['ids']) == 401,
+            'EXACT_CURRENT401_WITH_COMPLETE_OLD394_SOURCE_PREFIX')
     require(list(english['profiles']) == list(english['links']) == english['ids'], 'ORDERED_FULL_SOURCE_OBJECTS')
     for uid in old['ids']:
         require(english['profiles'][uid] == old['profiles'][uid] and english['links'][uid] == old['links'][uid],
@@ -91,8 +94,8 @@ def validate_context(context, four, eight):
             english['selection']['held_ids'] == old['selection']['held_ids'], 'UNCHANGED_HISTORICAL_HELD_OBJECTS')
     require(canonical['new_canonical_logical_sha256'] == CANON and
             canonical['namespace'] == 'apadana-thera389-390-v1', 'UNCHANGED_CANONICAL_CONTEXT')
-    require(context['widget'] == {'version': 'v52', 'uri': 'ui://pali-canon/reader-v52.html',
-                                  'skybridge': 'ui://pali-canon/reader-v52.skybridge.html'}, 'EXACT_REVIEWED_WIDGET_BINDING')
+    require(context['widget'] == {'version': 'v53', 'uri': 'ui://pali-canon/reader-v53.html',
+                                  'skybridge': 'ui://pali-canon/reader-v53.skybridge.html'}, 'EXACT_REVIEWED_WIDGET_BINDING')
     documents = eight['documents']
     require(set(documents) == {'APPROVAL.json', 'PROFILES.json', 'LINKS.json', 'REQUIRED_NOTICES.json',
             'SOURCE_BINDINGS.json', 'SOURCE_REVIEW.json', 'NORMALIZATION_REVIEW.json'}, 'CLOSED_SEVEN_CANONICAL_SOURCE_DOCUMENTS')
@@ -124,7 +127,7 @@ def validate_context(context, four, eight):
     records = english['selection']['baseline_records'] + english['selection']['approved_records']
     require([r['id'] for r in records] == english['ids'], 'COMPLETE_ORDERED_SOURCE_RECORDS')
     navigation = sorted([r for r in records if r.get('publisher_chapter') == 'chapter-3'], key=lambda r: r['poem'])
-    require(len(navigation) == 354 and len({r['poem'] for r in navigation}) == 354, 'INDEPENDENT_CURRENT_PUBLISHER_ORDER')
+    require(len(navigation) == 361 and len({r['poem'] for r in navigation}) == 361, 'INDEPENDENT_CURRENT_PUBLISHER_ORDER')
     require(not any(r['poem'] in PUBLISHER_HOLDS + CONDITIONAL_PUBLISHERS for r in navigation), 'ALL_HOLDS_AND_CONDITIONAL_SOURCES_INACTIVE')
     require(sum(len(g['body_paragraphs']) for g in goldens.values()) == 179 and
             sum(len(g['note_owners']) for g in goldens.values()) == 183 and

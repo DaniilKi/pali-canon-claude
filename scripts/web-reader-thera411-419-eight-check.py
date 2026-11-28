@@ -18,7 +18,7 @@ CANON = '883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a'
 UTILITY = 'scripts/web-reader-thera381-386-five-check.py'
 UTILITY_SHA = '66044879d1cc3387ebc47b33fb92242eb56131e7889b69d38404a751451d3473'
 INPUTS = 'scripts/apadana/thera411-419-eight/browser-inputs.py'
-INPUTS_SHA = '72c8bc12b60b93e9e8aeb6a9f8bf6217aebff9d89ddd727f09907d77bfeff2ef'
+INPUTS_SHA = '4529324109eabcfbd585017844a40f5602b9514d14ff2628833ee6bde79a36d2'
 AXE_SHA = '20c09fe157a8a34a30e241aaa1fcdade657734f08ab379ecfbeb7d45cc46e878'
 KEY = 'pali-library-v1'
 MARKER = 'SYNTHETIC_PRIVATE_411419'
@@ -392,7 +392,7 @@ def run_cell(utilities, inputs, client, browser, root, stage, prepared, roots, u
         expected = [{'id': r['id'], 'label': 'Publisher poem ' + str(r['poem']) + ' · ' + prepared['english']['profiles'][r['id']]['title'] + ' · ' + r['id']}
                     for r in prepared['navigation']]
         require(picker.locator('option').evaluate_all('xs=>xs.map(x=>({id:x.value,label:x.textContent}))') == expected,
-                'COMPLETE354_PUBLISHER_ORDER_OPTIONS_AND_LABELS')
+                'COMPLETE361_PUBLISHER_ORDER_OPTIONS_AND_LABELS')
         return nav, picker
     def export_current():
         with page.expect_download() as pending:
@@ -568,7 +568,7 @@ def main():
     phase = 'one shared current source capture and exact target34 comparison'
     prepared = inputs.capture_inputs(root, server, publisher, args.mode)
     roots, units = roots_from_server(server, prepared, utilities)
-    report.update(mode=args.mode, canonical_sha256=CANON, current_source_count=394,
+    report.update(mode=args.mode, canonical_sha256=CANON, current_source_count=401,
                   source_goldens_sha256=inputs.GOLDEN_ENTRIES_SHA, actual_target34=prepared['runtime'],
                   fixture_mode='eight-exact-pinned-originals', a11y={'performed': args.mode == 'a11y', 'scans': 0, 'violations': 0})
     from playwright.sync_api import sync_playwright, expect
