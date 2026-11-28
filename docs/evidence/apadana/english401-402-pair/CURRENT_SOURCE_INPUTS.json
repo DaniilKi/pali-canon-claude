@@ -456,8 +456,8 @@
       "sha256": "86a38bed1e279b916888d96465df823c5f31f1db0d5883b6939f024ec42c877f"
     },
     "tests/current339-source-inverses.test.mjs": {
-      "bytes": 3044,
-      "sha256": "a93397b946580248c507344e835a3cf5cd55fafefd2a53e5b8dc5b9d8b834ed8"
+      "bytes": 3361,
+      "sha256": "33eb98f1fe216de7783f5b42308732248846671e392c095df63c52df60dda5f6"
     },
     "tests/current343-bindings.test.mjs": {
       "bytes": 3496,
@@ -577,7 +577,7 @@
     },
     "tests/materialize_h_history.py": {
       "bytes": 12937,
-      "sha256": "1a9ab71ef11e547ed660afdbadd14245ade64f5d1e20d882be44db34f37c2055"
+      "sha256": "c7f57e96508483d6ce9e967ac371f260a4197706d2564899a05a0821eff728c7"
     },
     "tests/milinda-medicine-partial.test.mjs": {
       "bytes": 18167,
@@ -720,16 +720,16 @@
       "sha256": "11d19eedccbd79b232d2d3807eed4b7f93ede6aada4f38297b4b24d8417cef55"
     },
     "tests/thera312-319-client.test.mjs": {
-      "bytes": 24186,
-      "sha256": "fac5a627fbd044e79c37d2eaffefa9f633938d265ad9011e5223691b30136aa6"
+      "bytes": 24758,
+      "sha256": "c1be48a60b17a1feae3ccdcfde3b052d07dbbde8fad7ad0c4d75baa19a6c2e4c"
     },
     "tests/thera312-319-source.test.mjs": {
       "bytes": 16875,
       "sha256": "e24b2c700b15faf38305f47b2dfc6a87d38e1014634b9fecc98816256d86a8f0"
     },
     "tests/thera321-329-client.test.mjs": {
-      "bytes": 22464,
-      "sha256": "df5ac8ba4bb0169a9d87d46aeb05da11a24bf9c3e4bbc04cf8ad768bf21e52a6"
+      "bytes": 23036,
+      "sha256": "68c10c4436b5ac037e524dd35e94840005e2712bba25d6e27d85d3218f559caa"
     },
     "tests/thera321-329-source.test.mjs": {
       "bytes": 11589,

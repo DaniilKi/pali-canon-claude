@@ -16,7 +16,7 @@ import time
 
 # Closed CLI-only preparation diagnostics. Imported helper behavior is unchanged.
 # Stderr carries metadata only; stdout remains the original success receipt.
-_PREP_PHASES=frozenset(('bootstrap', 'qa-imports-ready', 'materialize-start', 'actual380-start', 'actual380-complete', 'source-authority-start', 'source-authority-complete', 'git-mode-start', 'git-mode-returned', 'git-mode-verified', 'git-blobs-start', 'git-blobs-returned', 'git-objects-verified', 'dependency-start', 'dependency-complete', 'write-start', 'write-progress', 'write-complete', 'final-descriptors-start', 'final-descriptors-complete', 'terminal-receipt-ready'))
+_PREP_PHASES=frozenset(('bootstrap', 'qa-imports-ready', 'materialize-start', 'actual382-start', 'actual382-complete', 'source-authority-start', 'source-authority-complete', 'git-mode-start', 'git-mode-returned', 'git-mode-verified', 'git-blobs-start', 'git-blobs-returned', 'git-objects-verified', 'dependency-start', 'dependency-complete', 'write-start', 'write-progress', 'write-complete', 'final-descriptors-start', 'final-descriptors-complete', 'terminal-receipt-ready'))
 _PREP_DIAGNOSTICS=(__name__=='__main__')
 _PREP_STARTED=time.monotonic()
 _PREP_SEQUENCE=0

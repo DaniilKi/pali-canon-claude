@@ -145,7 +145,7 @@
     },
     "tests/current339-source-inverses.test.mjs": {
       "before_sha256": "5e4e036b932a1c6e90f028295bdb45626e016f38eb8a14e186fe174d244a14a0",
-      "after_sha256": "a93397b946580248c507344e835a3cf5cd55fafefd2a53e5b8dc5b9d8b834ed8"
+      "after_sha256": "33eb98f1fe216de7783f5b42308732248846671e392c095df63c52df60dda5f6"
     },
     "tests/current343-bindings.test.mjs": {
       "before_sha256": "30801f1bc203245f8cb3ee9c0bb3ea0ce8267d19a1fe3b568817e2cd37c61b7e",
@@ -333,7 +333,7 @@
     },
     "tests/thera312-319-client.test.mjs": {
       "before_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953",
-      "after_sha256": "fac5a627fbd044e79c37d2eaffefa9f633938d265ad9011e5223691b30136aa6"
+      "after_sha256": "c1be48a60b17a1feae3ccdcfde3b052d07dbbde8fad7ad0c4d75baa19a6c2e4c"
     },
     "tests/thera312-319-source.test.mjs": {
       "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
@@ -341,7 +341,7 @@
     },
     "tests/thera321-329-client.test.mjs": {
       "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
-      "after_sha256": "df5ac8ba4bb0169a9d87d46aeb05da11a24bf9c3e4bbc04cf8ad768bf21e52a6"
+      "after_sha256": "68c10c4436b5ac037e524dd35e94840005e2712bba25d6e27d85d3218f559caa"
     },
     "tests/thera321-329-source.test.mjs": {
       "before_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499",
@@ -3764,7 +3764,7 @@
       },
       "tests/current339-source-inverses.test.mjs": {
         "before_sha256": "5e4e036b932a1c6e90f028295bdb45626e016f38eb8a14e186fe174d244a14a0",
-        "after_sha256": "a93397b946580248c507344e835a3cf5cd55fafefd2a53e5b8dc5b9d8b834ed8",
+        "after_sha256": "33eb98f1fe216de7783f5b42308732248846671e392c095df63c52df60dda5f6",
         "before": [
           {
             "name": "actual current359 and v45 bindings retain every exact D4 assertion through finite source inputs",
@@ -7830,7 +7830,7 @@
       },
       "tests/thera312-319-client.test.mjs": {
         "before_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953",
-        "after_sha256": "fac5a627fbd044e79c37d2eaffefa9f633938d265ad9011e5223691b30136aa6",
+        "after_sha256": "c1be48a60b17a1feae3ccdcfde3b052d07dbbde8fad7ad0c4d75baa19a6c2e4c",
         "before": [
           {
             "name": "exact333 client capabilities retain every325 old object and40+293 identities with no automatic English or held311/320 transport",
@@ -7900,7 +7900,7 @@
           {
             "name": "all8 genuine bodies73paragraphs34notes and source-derived500character pages pass actual MCP/native validators and both widget bridges",
             "name_expression": "'all8 genuine bodies73paragraphs34notes and source-derived500character pages pass actual MCP/native validators and both widget bridges'",
-            "line": 109,
+            "line": 112,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -7909,7 +7909,7 @@
           {
             "name": "cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges",
             "name_expression": "'cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges'",
-            "line": 156,
+            "line": 159,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -7918,7 +7918,7 @@
           {
             "name": "312 note3 state pairs, literal title glyphs and319 combined4-5/unclosed quote retain exact owned note text across both bridges",
             "name_expression": "'312 note3 state pairs, literal title glyphs and319 combined4-5/unclosed quote retain exact owned note text across both bridges'",
-            "line": 178,
+            "line": 181,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -7927,7 +7927,7 @@
           {
             "name": "genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads",
             "name_expression": "'genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads'",
-            "line": 207,
+            "line": 210,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -7936,7 +7936,7 @@
           {
             "name": "preserved325 summary note8 stays separate and outside actual MCP quote scope while private drafts and pinned citations keep exact saved bases",
             "name_expression": "'preserved325 summary note8 stays separate and outside actual MCP quote scope while private drafts and pinned citations keep exact saved bases'",
-            "line": 229,
+            "line": 232,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8098,7 +8098,7 @@
       },
       "tests/thera321-329-client.test.mjs": {
         "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
-        "after_sha256": "df5ac8ba4bb0169a9d87d46aeb05da11a24bf9c3e4bbc04cf8ad768bf21e52a6",
+        "after_sha256": "68c10c4436b5ac037e524dd35e94840005e2712bba25d6e27d85d3218f559caa",
         "before": [
           {
             "name": "current359 clients retain the reviewed339 cohort and40+319 identities with no automatic English or remaining held-source transport",
@@ -8168,7 +8168,7 @@
           {
             "name": "all6 genuine bodies56paragraphs28notes and source-derived500character pages pass actual MCP/native validators and both widget bridges",
             "name_expression": "'all6 genuine bodies56paragraphs28notes and source-derived500character pages pass actual MCP/native validators and both widget bridges'",
-            "line": 105,
+            "line": 108,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8177,7 +8177,7 @@
           {
             "name": "cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges",
             "name_expression": "'cached actual note/provenance/rights/body-scope mutations refuse in both individual/comparison validators and both bridges'",
-            "line": 152,
+            "line": 155,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8186,7 +8186,7 @@
           {
             "name": "six owned displaypairs one nonempty321heading three eightline entries and329literalxxxellipsis render without scope invention",
             "name_expression": "'six owned displaypairs one nonempty321heading three eightline entries and329literalxxxellipsis render without scope invention'",
-            "line": 174,
+            "line": 177,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8195,7 +8195,7 @@
           {
             "name": "genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads",
             "name_expression": "'genuine500character continuations reject stale UID/version/prefix/offset/scope metadata and retain authentic Pali on refused widget reads'",
-            "line": 187,
+            "line": 190,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8204,7 +8204,7 @@
           {
             "name": "synthetic private drafts remain local unsaved and exact pinned citations survive cancel changedbase and stalejournal guards",
             "name_expression": "'synthetic private drafts remain local unsaved and exact pinned citations survive cancel changedbase and stalejournal guards'",
-            "line": 209,
+            "line": 212,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,

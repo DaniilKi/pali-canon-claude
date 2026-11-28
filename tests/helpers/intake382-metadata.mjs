@@ -14,7 +14,7 @@ export const INTAKE382_IDS=Object.freeze(['tha-ap403','tha-ap404']);
 export const INTAKE382_PUBLISHERS=Object.freeze([401,402]);
 export const INTAKE382_PINS=Object.freeze({"APPROVAL.json":"9d6efabf44deb7b51b65125f62dedf2cca4ec46ce7f1344c79923d42dee5ec2d","LINKS.json":"a42e583e2907cf09c7ed3e2fbe9272d856020317baa6860977d2989d52e9d7bb","NORMALIZATION_REVIEW.json":"e0ea63010169b44884cfd32e0af6b204ca003d5f1d65df3561c3f195afe6b437","PROFILES.json":"e2bc9b358af5bf952ad3f97f7bdab567e4e057a2e66437e2d88cbb2e370f9133","REQUIRED_NOTICES.json":"f6ce9f3073fe8464e7cde6e7d5f34bcc4cbdd6db84bfb576d7d8f7c6567c9aa9","SOURCE_BINDINGS.json":"5a0b036055a1aa8269db1a7db0c3efa6defe89c7d350c737aceadf38d04259e6","SOURCE_REVIEW.json":"a6400bd389b0df73c1d625cf5eddea9d5267c709f51ba120d11c4b853891a52c"});
 export const CURRENT382_SOURCE_FILE=INTAKE382_DIRECTORY+'CURRENT_SOURCE_INPUTS.json';
-export const CURRENT382_SOURCE_SHA='0de64ade735c657bfc1d92ff5fb2d57eaf9ec05893118a74fe5c8571f271b55b';
+export const CURRENT382_SOURCE_SHA='22b1b9e15ef597c86ead21c865c8bc44b5d9a3e8c748d00bddaf9c8fab42d2eb';
 export const CURRENT_WIDGET_VERSION='v50';
 export const CURRENT_WIDGET_URI='ui://pali-canon/reader-v50.html';
 const sha=value=>createHash('sha256').update(value).digest('hex');
