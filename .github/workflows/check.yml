@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/english381-386/BASELINE_380_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: 1c3aeaa1433190f3434bbce0e29d45306d6dc85cf3d4d11a41989356832b0d1d
+  CI_TEST_BASELINE_SHA: PENDING_ROOT_REVIEWED_BASELINE_SHA
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -941,6 +941,13 @@ jobs:
             src/_poems/chapter-3/poem-417.md
             src/_poems/chapter-3/poem-418.md
             src/_poems/chapter-3/poem-419.md
+            src/_poems/chapter-3/poem-421.md
+            src/_poems/chapter-3/poem-423.md
+            src/_poems/chapter-3/poem-424.md
+            src/_poems/chapter-3/poem-425.md
+            src/_poems/chapter-3/poem-426.md
+            src/_poems/chapter-3/poem-427.md
+            src/_poems/chapter-3/poem-429.md
             src/_poems/chapter-3/chapter-3.json
       - name: Fetch exact VRI Book36 for independent English16 source replay
         if: matrix.group == 'apadana'
@@ -1029,7 +1036,7 @@ jobs:
           const MAP='docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json';
           const OWNER='tests/helpers/current-apadana.mjs';
           const SUPPORTS=["docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json","docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json","docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json","scripts/check-python-partitions.mjs","scripts/ci-python-partition-driver.py","tests/helpers/current-apadana.mjs","tests/helpers/current389390-metadata.mjs","tests/helpers/historical-h-inputs.mjs","tests/helpers/intake375-metadata.mjs","tests/helpers/intake380-metadata.mjs","tests/helpers/intake382-metadata.mjs","tests/helpers/partitioned-python.mjs","tests/helpers/verse-scope-python.mjs","tests/materialize_h_history.py"];
-          const LEAVES=['scripts/check-current-source-adapters.py','scripts/web-reader-thera411-419-eight-check.py','scripts/apadana/thera411-419-eight/browser-inputs.py'];
+          const LEAVES=['scripts/check-current-source-adapters.py','scripts/web-reader-thera411-419-eight-check.py','scripts/apadana/thera411-419-eight/browser-inputs.py','scripts/web-reader-thera421-429-seven-check.py','scripts/apadana/thera421-429-seven/browser-inputs.py'];
           const digest=raw=>createHash('sha256').update(raw).digest('hex');
           const plain=value=>value!==null&&typeof value==='object'&&!Array.isArray(value)&&Object.getPrototypeOf(value)===Object.prototype;
           function need(value,code){if(!value)throw new Error('PREFLIGHT_'+code);}
@@ -1073,6 +1080,17 @@ jobs:
           }
           CURRENT_SOURCE_PREFLIGHT
           python3 -B scripts/check-current-source-adapters.py --source-root "$GITHUB_WORKSPACE"
+      - name: Require both publisher421-429 source API and widget cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap tests/thera421-429-seven.test.mjs | tee reviewed-publisher421-429-seven.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher421-429-seven.tap","utf8"); const names=[...tap.matchAll(/^ok \d+ - (.+)$/gm)].map(row=>row[1]); assert.deepEqual(names,["publisher421/423-427/429 exact sources retain394 objects,119 paragraphs,101 notes and98 physical quotes", "publisher421/423-427/429 actual API preserves37 cursors,98 quotes,complete native pages andNEXT10 source pins"]); for(const [key,value] of [["tests",2],["pass",2],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) { const rows=tap.split(/\r?\n/).filter(line=>line.startsWith("# "+key+" ")); assert.deepEqual(rows,["# "+key+" "+value]); } assert.doesNotMatch(tap,/^\s*not ok\b/m);'
       - name: Require both publisher394-407 source API and widget cases
         if: matrix.group == 'apadana'
         timeout-minutes: 5
@@ -1280,6 +1298,42 @@ jobs:
           set -euo pipefail
           pali_eight_chromium="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
           python3 -B "$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py" --output-dir "$GITHUB_WORKSPACE/.ci-eight411419/installed" --name eight394-installed -- python3 -B "$GITHUB_WORKSPACE/scripts/web-reader-thera411-419-eight-check.py" --mode installed --source-root "$GITHUB_WORKSPACE" --server-dir "$RUNNER_TEMP/eight411419-install/node_modules/pali-canon-mcp/server" --publisher-root "$GITHUB_WORKSPACE/.fixtures/apadana-pinned" --browser "$pali_eight_chromium" --report "$GITHUB_WORKSPACE/.ci-eight411419/installed/REPORT.json"
+      - name: Check all seven publisher421-429 reader sources
+        if: matrix.group == 'apadana'
+        timeout-minutes: 7
+        shell: bash
+        run: |
+          set -euo pipefail
+          pali_seven_chromium="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          python3 -B "$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py" --output-dir "$GITHUB_WORKSPACE/.ci-seven421429/normal" --name seven401-normal -- python3 -B "$GITHUB_WORKSPACE/scripts/web-reader-thera421-429-seven-check.py" --mode normal --source-root "$GITHUB_WORKSPACE" --server-dir "$GITHUB_WORKSPACE/server" --publisher-root "$GITHUB_WORKSPACE/.fixtures/apadana-pinned" --browser "$pali_seven_chromium" --report "$GITHUB_WORKSPACE/.ci-seven421429/normal/REPORT.json"
+      - name: Audit all seven publisher421-429 reader sources
+        if: matrix.group == 'apadana'
+        timeout-minutes: 7
+        shell: bash
+        run: |
+          set -euo pipefail
+          pali_seven_chromium="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          python3 -B "$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py" --output-dir "$GITHUB_WORKSPACE/.ci-seven421429/a11y" --name seven401-a11y -- python3 -B "$GITHUB_WORKSPACE/scripts/web-reader-thera421-429-seven-check.py" --mode a11y --source-root "$GITHUB_WORKSPACE" --server-dir "$GITHUB_WORKSPACE/server" --publisher-root "$GITHUB_WORKSPACE/.fixtures/apadana-pinned" --browser "$pali_seven_chromium" --report "$GITHUB_WORKSPACE/.ci-seven421429/a11y/REPORT.json"
+      - name: Prepare a fresh offline npm installation for publisher421-429
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e "$RUNNER_TEMP/seven421429-install"
+          pali_seven_archives=("$RUNNER_TEMP/apadana-package/"*.tgz)
+          test "${#pali_seven_archives[@]}" -eq 1
+          test -f "${pali_seven_archives[0]}"
+          mkdir -p "$RUNNER_TEMP/seven421429-install"
+          npm install --offline --ignore-scripts --no-audit --no-fund --prefix "$RUNNER_TEMP/seven421429-install" "${pali_seven_archives[0]}"
+      - name: Check all seven publisher421-429 sources in a fresh npm installation
+        if: matrix.group == 'apadana'
+        timeout-minutes: 7
+        shell: bash
+        run: |
+          set -euo pipefail
+          pali_seven_chromium="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          python3 -B "$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py" --output-dir "$GITHUB_WORKSPACE/.ci-seven421429/installed" --name seven401-installed -- python3 -B "$GITHUB_WORKSPACE/scripts/web-reader-thera421-429-seven-check.py" --mode installed --source-root "$GITHUB_WORKSPACE" --server-dir "$RUNNER_TEMP/seven421429-install/node_modules/pali-canon-mcp/server" --publisher-root "$GITHUB_WORKSPACE/.fixtures/apadana-pinned" --browser "$pali_seven_chromium" --report "$GITHUB_WORKSPACE/.ci-seven421429/installed/REPORT.json"
       - name: Validate next Apadāna chapter source rights and refusal cases
         if: matrix.group == 'apadananext'
         run: |
@@ -1902,6 +1956,10 @@ jobs:
             .ci-eight411419/normal/
             .ci-eight411419/a11y/
             .ci-eight411419/installed/
+            reviewed-publisher421-429-seven.tap
+            .ci-seven421429/normal/
+            .ci-seven421429/a11y/
+            .ci-seven421429/installed/
             reviewed-publisher331-334.tap
             reviewed-publisher335-350.tap
             reviewed-current368-source-seal.tap
