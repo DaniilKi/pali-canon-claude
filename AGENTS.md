@@ -16,6 +16,10 @@ Python method bodies. Current-negative scenarios keep their identities and
 refusals; current cardinality predicates use independently reviewed declarations.
 The owned-H V4 receipt and its current-role phase names keep the original bounds.
 
+Use regular dependencies inside each build worktree. Do not symlink
+`node_modules`: esbuild can embed another worktree's path in generated CJS labels.
+Require clean rebuild parity with the tracked server outputs.
+
 Publisher394/397/406/407 map to canonical tha-ap396/399/408/409. Preserve all382
 earlier full objects, all nine publisher holds and ten canonical holds; the two
 numbering systems differ. Complete publisher-edition poems do not imply
