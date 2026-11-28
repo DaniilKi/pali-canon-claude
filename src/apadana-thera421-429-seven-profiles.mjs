@@ -144,7 +144,8 @@ export const THERA_421_429_SEVEN_PROFILES = {
       "Retain all14 four-line stanzas and22 poem-owned notes, including title notes1/2. The unnoted forty-third chapter heading remains separate publisher_paratext, outside poem wording and quotation evidence. Four HTML c/ch display occurrences retain their exact owners: note5 twice, notes12/18 once each.",
       "Notes4/6 retain unmatched original punctuation through the complete published definition boundaries. Preserve every printed word and mark; no closing punctuation, missing words or author-intended continuation is supplied. Full publisher attainment refrains do not expand VRI peyyāla."
     ],
-    "publisher_heading_sha256": "044bd2320ba95a6f59f3cf04090ee101ffd42f30bc5f0bf2d8479b04cc7ebf3a"
+    "publisher_heading_sha256": "044bd2320ba95a6f59f3cf04090ee101ffd42f30bc5f0bf2d8479b04cc7ebf3a",
+    "index_revision": "apadana-thera-next10-v1"
   },
   "tha-ap425": {
     "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-423.md",
@@ -437,7 +438,8 @@ export const THERA_421_429_SEVEN_PROFILES = {
       "Publisher PTS heading421, BJTS brace/file424 and canonical tha-ap426 are separately verified by the seven Buddhas, seven kadamba-flower offerings and named colophons. Publisher Kadamba mountain differs from VRI Kukkuṭa; retain both original sources without harmonization.",
       "Retain all seven four-line stanzas, both colophons and five original poem notes. Notes3/4 retain the published mountain/tree explanation and botanical identification; note5 retains its alternate merit/heart gloss. No chapter apparatus is assigned and VRI peyyāla remains unexpanded."
     ],
-    "publisher_heading_sha256": "0ce29678e3597665b1672f409d4232cb83af71093ab59b438756e204b2a1d0ab"
+    "publisher_heading_sha256": "0ce29678e3597665b1672f409d4232cb83af71093ab59b438756e204b2a1d0ab",
+    "index_revision": "apadana-thera-next10-v1"
   },
   "tha-ap427": {
     "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-425.md",
@@ -549,7 +551,8 @@ export const THERA_421_429_SEVEN_PROFILES = {
       "Retain all ten four-line stanzas and12 original notes. Note5 preserves father/grandfathers versus parents’ consent alternatives and the translator’s attributed manuscript judgment; note6 records animal-killing versus blood-of-others readings.",
       "Note10’s irregular original quotation punctuation around the tree idiom remains untouched. A similar tree explanation in publisher426 is independently present there and is not substituted here. No chapter apparatus is assigned and VRI peyyāla remains unexpanded."
     ],
-    "publisher_heading_sha256": "6d0cccc6f1a5c8acb9e1e9de578bdc4fc05aacfc09a506853558ca4094ed6fe4"
+    "publisher_heading_sha256": "6d0cccc6f1a5c8acb9e1e9de578bdc4fc05aacfc09a506853558ca4094ed6fe4",
+    "index_revision": "apadana-thera-next10-v1"
   },
   "tha-ap428": {
     "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-426.md",
@@ -655,7 +658,8 @@ export const THERA_421_429_SEVEN_PROFILES = {
       "Preserve exactly nine publisher stanzas/global labels4539–4547 beside ten VRI numbered stanzas78–87. Publisher locals1/5 are six lines and neighboring four-line packing crosses VRI stanza cuts; notes6/12 explicitly retain the metrical qualification. No tenth publisher stanza, missing line or global label is invented.",
       "All12 notes stay poem-owned. Three Markdown c/ch pairs remain at note3 once and note7 twice. Note10’s original tree-idiom punctuation stays exact; note2’s later repeated edition at PTS493/BJTS496 is only a source cross-reference, not approval of that later poem. No chapter apparatus is assigned and VRI peyyāla remains unexpanded."
     ],
-    "publisher_heading_sha256": "59321ee0470bbc85e6584f412536c7df2d595d029da9fc50fe0b62b65ba5e9b1"
+    "publisher_heading_sha256": "59321ee0470bbc85e6584f412536c7df2d595d029da9fc50fe0b62b65ba5e9b1",
+    "index_revision": "apadana-thera-next10-v1"
   },
   "tha-ap429": {
     "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-427.md",
@@ -818,7 +822,8 @@ export const THERA_421_429_SEVEN_PROFILES = {
       "Nineteen local/global labels remain in18 physical stanza paragraphs. Original locals5–6/global4552–4553 stay one eight-line paragraph; locals8/11 remain six lines. No physical break or different label is invented.",
       "Retain all15 notes, including PTS/BJTS alternatives in notes4/7, original metrical notes10/13 and the cc/chch display pair owned by note15. No chapter apparatus is assigned and VRI peyyāla remains unexpanded."
     ],
-    "publisher_heading_sha256": "8c6de1e86966a5bb670fda31ea9a0406693093b92e042deb2fe08e2b723e0b97"
+    "publisher_heading_sha256": "8c6de1e86966a5bb670fda31ea9a0406693093b92e042deb2fe08e2b723e0b97",
+    "index_revision": "apadana-thera-next10-v1"
   },
   "tha-ap431": {
     "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-429.md",
