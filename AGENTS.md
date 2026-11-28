@@ -46,6 +46,26 @@ for physical-device, human screen-reader and signed-in-host checks. Browser
 downloads/PWA and account sync remain unsupported. Local Git preparation success
 is not a complete monthly upstream-refresh result.
 
+### Native conformance observation before the next promotion attempt
+
+Candidate `421f453` passed 74 of 75 required jobs: all eight Windows partitions and
+four full Linux/macOS references passed, but Windows22's first synthetic
+six-history/success control timed out at its unchanged three-second child limit.
+The runner had verified Python 3.12.10; no wrong-version or application defect
+was established. Preserve that failure, not merely the later successes.
+
+The isolated [two-lane diagnostic](https://github.com/DaniilKi/pali-canon-claude/actions/runs/46153997055)
+at `77ebeb7` passed all 108 unchanged controls using both default and verified
+absolute Python selection. This is non-reproduction on separate fresh runners,
+not a cause, performance comparison or software repair. Its Node-wrapped version
+probe differs from the original Bash launch; all gate limits stayed fixed.
+
+The documentation-only successor retries the unchanged executable code with
+one fresh complete 75-job run. Do not merge the diagnostic files, relax timing,
+reuse mixed-attempt artifacts, or treat this observation as release acceptance.
+All exact-candidate jobs and same-run/attempt inventories remain mandatory
+before dev advances. Main and production remain untouched.
+
 ## Historical 394-choice routing snapshot
 
 Read [the current validation guide](docs/qa/current-apadana-validation.md) and
