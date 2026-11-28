@@ -1,0 +1,9 @@
+{
+  "schema": "source421429-original-Book37-replay-v1",
+  "original_XML_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "all10672_retained_XML_tuples_equal_current_Book37": true,
+  "empty_event8858_accounted_for_separately": true,
+  "Book37_tuple_sha256_JSON_stringify": "bd0177c2025298415abd2e90e1d576d2418127e08ce339699ad725960089f8cc",
+  "no_Pali_words_notes_pages_or_unit_metadata_changed": true
+}

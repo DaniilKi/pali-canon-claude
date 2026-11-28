@@ -1,0 +1,101 @@
+{
+  "schema": "publisher421429-seven-required-notices-proposal-v1",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "translator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "specific_rights_artifacts": {
+    "LICENSE.md": {
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    "src/_pages/about.md": {
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    "src/_includes/site/footer.njk": {
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    "src/_includes/layouts/epub-metadata.xml": {
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    "src/_data/site.json": {
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    "src/_poems/_poems.json": {
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  },
+  "per_poem": {
+    "tha-ap423": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher PTS heading418, BJTS brace/file421 and canonical tha-ap423 are separately verified. Vipassi’s trumpet-flower Bodhi, sweeping/worship, python death and rebirth rewards, and both named colophons establish this whole-poem correspondence, not a number offset. Preserve literal publisher ŋ beside canonical ṃ.",
+      "Retain all14 four-line stanzas and22 poem-owned notes, including title notes1/2. The unnoted forty-third chapter heading remains separate publisher_paratext, outside poem wording and quotation evidence. Four HTML c/ch display occurrences retain their exact owners: note5 twice, notes12/18 once each.",
+      "Notes4/6 retain unmatched original punctuation through the complete published definition boundaries. Preserve every printed word and mark; no closing punctuation, missing words or author-intended continuation is supplied. Full publisher attainment refrains do not expand VRI peyyāla."
+    ],
+    "tha-ap425": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher PTS heading420, BJTS brace/file423 and canonical tha-ap425 are separately verified by the Nārada/Kassapa hermitage, Padumuttara seat/couch offering, palanquin reward and both named colophons. Preserve the literal published Ekâsanadāyaka title beside canonical Ekāsanadāyaka.",
+      "All25 four-line stanzas and17 original notes remain poem-owned. Publisher Kosika mountain and VRI Gosita are independent edition wording; neither name is harmonized. Note7 deliberately combines PTS tuvaŋ with BJTS mahā- and marks the respective absences in brackets.",
+      "Keep note9’s Markdown c/ch display owner and all original punctuation, including the published apostrophe orientation. No chapter apparatus is assigned; source-complete refrains do not expand independent VRI peyyāla."
+    ],
+    "tha-ap426": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher PTS heading421, BJTS brace/file424 and canonical tha-ap426 are separately verified by the seven Buddhas, seven kadamba-flower offerings and named colophons. Publisher Kadamba mountain differs from VRI Kukkuṭa; retain both original sources without harmonization.",
+      "Retain all seven four-line stanzas, both colophons and five original poem notes. Notes3/4 retain the published mountain/tree explanation and botanical identification; note5 retains its alternate merit/heart gloss. No chapter apparatus is assigned and VRI peyyāla remains unexpanded."
+    ],
+    "tha-ap427": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher PTS heading422, BJTS brace/file425 and canonical tha-ap427 are separately verified by the forest-worker/hunter family occupation, Tissa’s three footprints, koraṇḍa-flower offering and named colophons; no general offset establishes another mapping.",
+      "Retain all ten four-line stanzas and12 original notes. Note5 preserves father/grandfathers versus parents’ consent alternatives and the translator’s attributed manuscript judgment; note6 records animal-killing versus blood-of-others readings.",
+      "Note10’s irregular original quotation punctuation around the tree idiom remains untouched. A similar tree explanation in publisher426 is independently present there and is not substituted here. No chapter apparatus is assigned and VRI peyyāla remains unexpanded."
+    ],
+    "tha-ap428": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher PTS heading423, BJTS brace/file426 and canonical tha-ap428 are separately verified by the Buddha’s wind illness, cream-of-ghee offering, river/ocean and honey/sugar rewards, wishing trees, fifty then fifty-one reigns, and named colophons.",
+      "Preserve exactly nine publisher stanzas/global labels4539–4547 beside ten VRI numbered stanzas78–87. Publisher locals1/5 are six lines and neighboring four-line packing crosses VRI stanza cuts; notes6/12 explicitly retain the metrical qualification. No tenth publisher stanza, missing line or global label is invented.",
+      "All12 notes stay poem-owned. Three Markdown c/ch pairs remain at note3 once and note7 twice. Note10’s original tree-idiom punctuation stays exact; note2’s later repeated edition at PTS493/BJTS496 is only a source cross-reference, not approval of that later poem. No chapter apparatus is assigned and VRI peyyāla remains unexpanded."
+    ],
+    "tha-ap429": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher PTS heading424, BJTS brace/file427 and canonical tha-ap429 are separately verified by Padumuttara’s teaching, the flying ascetic unable to pass, hearing impermanence, arahantship at seven and named colophons. Keep publisher Ekadhammasavanīya, BJTS Ekadammasavaṇīya and canonical Ekadhammassavaniya spellings distinct.",
+      "Nineteen local/global labels remain in18 physical stanza paragraphs. Original locals5–6/global4552–4553 stay one eight-line paragraph; locals8/11 remain six lines. No physical break or different label is invented.",
+      "Retain all15 notes, including PTS/BJTS alternatives in notes4/7, original metrical notes10/13 and the cc/chch display pair owned by note15. No chapter apparatus is assigned and VRI peyyāla remains unexpanded."
+    ],
+    "tha-ap431": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher PTS heading426, BJTS brace/file429 and canonical tha-ap431 are separately verified by the bark-robed ascetic, Atthadassi, illness, sand stupa, golden kiṅkhani flowers and named colophons. Keep publisher kiṅkhaniya, BJTS kiṅkhaṇiya and VRI kiṅkaṇiya title forms distinct.",
+      "Seventeen local/global labels remain in15 physical stanza paragraphs. Original locals3–4/global4602–4603 and9–10/global4608–4609 remain two eight-line paragraphs. Preserve all18 original notes and both colophons without synthetic stanza splitting.",
+      "Note13’s unresolved glossary/cross-reference wording remains as published; no missing glossary is supplied. All original variant judgments and punctuation remain, no chapter apparatus is assigned and VRI peyyāla remains unexpanded."
+    ]
+  },
+  "rights_scope": "Retain attribution, exact source edition/revision, specific BY-NC-SA4 licence, original notices, change record and warranty/no-endorsement notices. Generic site BY4 metadata and public availability do not broaden the translation grant. No commercial, media or endorsement permission is inferred. English wording and notes remain live-only; metadata and hashes alone are bundled.",
+  "presentation_changes": "Only the exact reversibly recorded source formatting conversions; retain source wording/punctuation, note markers/ownership, display alternatives, all physical paragraphs/lines, packed range suffixes and colophons. Unnoted chapter43 heading separate; nine publisher426 stanzas remain distinct from ten VRI numbered stanzas. No Unicode normalization, expansion of peyyāla or invented completion.",
+  "inactive_publisher_scopes": [
+    391,
+    392,
+    393,
+    403,
+    404,
+    405,
+    408,
+    409,
+    410,
+    413,
+    420,
+    422,
+    428,
+    430
+  ]
+}

@@ -1,0 +1,660 @@
+{
+  "schema": "independent-next-seven421-429-original-source-and-rights-review-v1",
+  "status": "GO_EXACT_SEVEN_RAW_PUBLISHER_EDITION_SCOPES_AND_RIGHTS_SOURCE_ONLY",
+  "effective_author_packet": {
+    "file": "/tmp/pali-eight394-evidence-nov28/next-intake/v2/MANIFEST.json",
+    "bytes": 6243,
+    "sha256": "93c79a17e4f24b7990d866df37fea97f3eea665fbfa0d0ee93565814970490d3"
+  },
+  "original_v1_packet_preserved": {
+    "file": "/tmp/pali-eight394-evidence-nov28/next-intake/v1/MANIFEST.json",
+    "bytes": 5279,
+    "sha256": "2c8601871db6d15688aad229ae3e7b790a1e845d2a3d56105db4b378b6def0b8"
+  },
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "VRI_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "approved_source_scopes_only": {
+    "421": {
+      "publisher": 421,
+      "canonical_id": "tha-ap423",
+      "status": "GO_RAW_PUBLISHER_EDITION_SCOPE_AND_SPECIFIC_RIGHTS_ONLY",
+      "source": {
+        "bytes": 5175,
+        "sha256": "f699168e0ba16e890f9728987e190b09be423841d04acac71d6345e948cb7d88",
+        "git_blob_sha1": "a29624e66d3011b53e029e2643771cfc9bbfe1ca"
+      },
+      "route_only": "/text/chapter-3/poem-421/",
+      "canonical_record": {
+        "id": "tha-ap423",
+        "book": 37,
+        "start": 1,
+        "end": 51,
+        "title": "Sakiṃsammajjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 423",
+        "vri": "1–14",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 379
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_root_wrapper_sha256": "5c3445d23d2e244fdbdeea67294c3216cd65233c4431ba48820e655ebf8c716e",
+      "canonical_all_original_tuples_sha256": "005963069b2cd1fe611633b52669155c2c7941195a71e347826f5b6b93909512",
+      "correspondence_basis": [
+        "Vipassi/trumpet-flower Bodhi",
+        "sweeping and worship",
+        "python/death/rebirth reward",
+        "Own original title, two publisher colophons and original VRI subhead/closing formula; no arithmetic mapping rule."
+      ],
+      "primary_concept_occurrence_witness": {
+        "English": {
+          "vipass": 2,
+          "python": 2,
+          "sweep": 6,
+          "bodhi": 6
+        },
+        "Pali": {
+          "vipass": 1,
+          "ajagar": 1,
+          "sammajj": 11,
+          "bodhi": 5
+        },
+        "both_publisher_colophons_contain_exact_original_title": true,
+        "note_owning_title_calls": [
+          1,
+          2
+        ]
+      },
+      "source_domains": {
+        "poem_paragraphs": 17,
+        "physical_stanzas": 14,
+        "printed_local_labels": 14,
+        "printed_global_labels": 14,
+        "ordered_note_count": 22,
+        "separate_unnoted_chapter_heading": true
+      },
+      "mandatory_edition_and_owner_qualifications": [
+        "Literal ŋ remains distinct from VRI ṃ.",
+        "Unnoted chapter43 heading is separate from the note-owning title and poem.",
+        "Notes4/6 retain original unmatched punctuation; complete source definition byte boundaries do not authorize inventing a close.",
+        "Four HTML c/ch display pairs belong to notes5(two),12,18."
+      ],
+      "normalization_API_profile_activation_or_release_approval": false
+    },
+    "423": {
+      "publisher": 423,
+      "canonical_id": "tha-ap425",
+      "status": "GO_RAW_PUBLISHER_EDITION_SCOPE_AND_SPECIFIC_RIGHTS_ONLY",
+      "source": {
+        "bytes": 6362,
+        "sha256": "1134b932e032fc81667245f9e74ddfb6e370dc3fc5dbb6b6622e0f04a7c5518e",
+        "git_blob_sha1": "1b4966346a8341798ec4a3fb17ddb1567ebe0628"
+      },
+      "route_only": "/text/chapter-3/poem-423/",
+      "canonical_record": {
+        "id": "tha-ap425",
+        "book": 37,
+        "start": 114,
+        "end": 190,
+        "title": "Ekāsanadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 425",
+        "vri": "36–60",
+        "pts": {
+          "volume": 2,
+          "page": 380,
+          "end_page": 382
+        }
+      },
+      "canonical_root_wrapper_sha256": "208ea9e065c30ce9a9c0d808f549e822da30c1ee8fd64a4aac6277be110d5bd6",
+      "canonical_all_original_tuples_sha256": "a5469ed303fb92e5b1211f86ee8efc242c7cb5711fe2874d0f61272809ae43a9",
+      "correspondence_basis": [
+        "Nārada/Kassapa ascetic hermitage",
+        "Padumuttara and seat/couch gift",
+        "carriage/reward narrative",
+        "Own original title, two publisher colophons and original VRI subhead/closing formula; no arithmetic mapping rule."
+      ],
+      "primary_concept_occurrence_witness": {
+        "English": {
+          "padumuttar": 1,
+          "nārada": 1,
+          "kassap": 1,
+          "kosik": 2,
+          "seat": 9
+        },
+        "Pali": {
+          "padumuttar": 1,
+          "nārad": 1,
+          "kassap": 1,
+          "gosi": 2,
+          "āsan": 13
+        },
+        "both_publisher_colophons_contain_exact_original_title": true,
+        "note_owning_title_calls": [
+          1,
+          2
+        ]
+      },
+      "source_domains": {
+        "poem_paragraphs": 28,
+        "physical_stanzas": 25,
+        "printed_local_labels": 25,
+        "printed_global_labels": 25,
+        "ordered_note_count": 17,
+        "separate_unnoted_chapter_heading": false
+      },
+      "mandatory_edition_and_owner_qualifications": [
+        "Preserve published â in the title.",
+        "Publisher Kosika versus VRI Gosita remains a real mountain-name difference.",
+        "Note7 combines PTS tuvaŋ and BJTS mahā- with bracketed absences; no harmonization.",
+        "One Markdown c/ch pair belongs to note9."
+      ],
+      "normalization_API_profile_activation_or_release_approval": false
+    },
+    "424": {
+      "publisher": 424,
+      "canonical_id": "tha-ap426",
+      "status": "GO_RAW_PUBLISHER_EDITION_SCOPE_AND_SPECIFIC_RIGHTS_ONLY",
+      "source": {
+        "bytes": 1915,
+        "sha256": "4443f55565d186cda8ef114ede31af2b5c303052970b36bb46ec4ab321b88aa4",
+        "git_blob_sha1": "204c24e1d82a5d9d15deb360730e2908c2bf2ee7"
+      },
+      "route_only": "/text/chapter-3/poem-424/",
+      "canonical_record": {
+        "id": "tha-ap426",
+        "book": 37,
+        "start": 190,
+        "end": 212,
+        "title": "Sattakadambapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 426",
+        "vri": "61–67",
+        "pts": {
+          "volume": 2,
+          "page": 382,
+          "end_page": 383
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_root_wrapper_sha256": "4b682d2123cf20ad1b19d14d9575861a43e75b429c8745caf86fe6fd6358ba61",
+      "canonical_all_original_tuples_sha256": "dc5c8e42e8c62ba66889003485703194582f3074362f5c7046b42e08e374b5d0",
+      "correspondence_basis": [
+        "Seven Buddhas",
+        "mountain flower gifts",
+        "seven kadamba offerings",
+        "Own original title, two publisher colophons and original VRI subhead/closing formula; no arithmetic mapping rule."
+      ],
+      "primary_concept_occurrence_witness": {
+        "English": {
+          "kadamba": 6,
+          "seven": 3,
+          "flower": 3
+        },
+        "Pali": {
+          "kadamba": 4,
+          "kukkuṭ": 1,
+          "satta": 5,
+          "pupph": 4
+        },
+        "both_publisher_colophons_contain_exact_original_title": true,
+        "note_owning_title_calls": [
+          1,
+          2
+        ]
+      },
+      "source_domains": {
+        "poem_paragraphs": 10,
+        "physical_stanzas": 7,
+        "printed_local_labels": 7,
+        "printed_global_labels": 7,
+        "ordered_note_count": 5,
+        "separate_unnoted_chapter_heading": false
+      },
+      "mandatory_edition_and_owner_qualifications": [
+        "Publisher Kadamba mountain versus VRI Kukkuṭa remains explicit; matching bounded narrative/title/closing voice does not correct the source.",
+        "All five notes belong to this poem, including title notes1/2."
+      ],
+      "normalization_API_profile_activation_or_release_approval": false
+    },
+    "425": {
+      "publisher": 425,
+      "canonical_id": "tha-ap427",
+      "status": "GO_RAW_PUBLISHER_EDITION_SCOPE_AND_SPECIFIC_RIGHTS_ONLY",
+      "source": {
+        "bytes": 3882,
+        "sha256": "609463151f43aec5412c4434b3c4a87b9e4dc5b52be2e209fb4712858b1f5e25",
+        "git_blob_sha1": "e28d17bb7246b7ec5b31948d51efc97f2f16f572"
+      },
+      "route_only": "/text/chapter-3/poem-425/",
+      "canonical_record": {
+        "id": "tha-ap427",
+        "book": 37,
+        "start": 212,
+        "end": 242,
+        "title": "Koraṇḍapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 427",
+        "vri": "68–77",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 383
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_root_wrapper_sha256": "a0b586de43de1e25865474d3c755cfffbc6c8e7fbbc4c0851d20dac4b9989929",
+      "canonical_all_original_tuples_sha256": "9379bc159a8565b9b9509bf3e6fa5a3f33fe56c04a9865c03a5953b852c7319a",
+      "correspondence_basis": [
+        "Forest/hunter family work",
+        "Tissa and three footprints",
+        "koraṇḍa flower offering",
+        "Own original title, two publisher colophons and original VRI subhead/closing formula; no arithmetic mapping rule."
+      ],
+      "primary_concept_occurrence_witness": {
+        "English": {
+          "tissa": 2,
+          "koraṇḍ": 9,
+          "father": 3,
+          "blood": 1
+        },
+        "Pali": {
+          "tiss": 2,
+          "koraṇḍ": 5,
+          "pada": 2,
+          "pitu": 1,
+          "pasumār": 1
+        },
+        "both_publisher_colophons_contain_exact_original_title": true,
+        "note_owning_title_calls": [
+          1,
+          2
+        ]
+      },
+      "source_domains": {
+        "poem_paragraphs": 13,
+        "physical_stanzas": 10,
+        "printed_local_labels": 10,
+        "printed_global_labels": 10,
+        "ordered_note_count": 12,
+        "separate_unnoted_chapter_heading": false
+      },
+      "mandatory_edition_and_owner_qualifications": [
+        "Note5 retains father/ancestral versus parents-consent alternatives and the attributed manuscript judgment.",
+        "Note6 retains animal-killing/blood-of-others alternatives; no VRI wording substitution.",
+        "Note10 retains original irregular quotation punctuation around the tree idiom, not a demonstrated missing note."
+      ],
+      "normalization_API_profile_activation_or_release_approval": false
+    },
+    "426": {
+      "publisher": 426,
+      "canonical_id": "tha-ap428",
+      "status": "GO_RAW_PUBLISHER_EDITION_SCOPE_AND_SPECIFIC_RIGHTS_ONLY",
+      "source": {
+        "bytes": 3734,
+        "sha256": "73c77b2771d3dba099503fba9f48c673dc98cd16bb52ed88b9b1876856c7f65b",
+        "git_blob_sha1": "9a166dce0d45e70722a02e458eebed918305545b"
+      },
+      "route_only": "/text/chapter-3/poem-426/",
+      "canonical_record": {
+        "id": "tha-ap428",
+        "book": 37,
+        "start": 242,
+        "end": 273,
+        "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 428",
+        "vri": "78–87",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 384
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_root_wrapper_sha256": "934a54c5fb6fa6d477748db6c50da14c5aee5cd9b6d2b21a74ce140eaa1de529",
+      "canonical_all_original_tuples_sha256": "58316e17e50f59aff1bfd55654abb4ec53bf703d6ee862d232ca27203c91b7b2",
+      "correspondence_basis": [
+        "Buddha with wind illness",
+        "cream-of-ghee offering",
+        "Bhāgīrathī and fifty/fifty-one royal rewards",
+        "Own original title, two publisher colophons and original VRI subhead/closing formula; no arithmetic mapping rule."
+      ],
+      "primary_concept_occurrence_witness": {
+        "English": {
+          "ghee": 7,
+          "wind": 1,
+          "bhāgīrath": 1,
+          "fifty": 2
+        },
+        "Pali": {
+          "ghatamaṇḍ": 5,
+          "vātābādh": 1,
+          "bhāgīrath": 1,
+          "paññās": 2
+        },
+        "both_publisher_colophons_contain_exact_original_title": true,
+        "note_owning_title_calls": [
+          1,
+          2
+        ]
+      },
+      "source_domains": {
+        "poem_paragraphs": 12,
+        "physical_stanzas": 9,
+        "printed_local_labels": 9,
+        "printed_global_labels": 9,
+        "ordered_note_count": 12,
+        "separate_unnoted_chapter_heading": false
+      },
+      "mandatory_edition_and_owner_qualifications": [
+        "Nine publisher stanzas pack the narrative across ten VRI numbered stanzas78–87; no one-for-one stanza claim.",
+        "Exact six-line locals1/5 retain post-suffix notes6/12. Do not invent a tenth publisher/global label.",
+        "Note2 points to later PTS493/BJTS496 as an unreviewed separate repetition lead.",
+        "Three Markdown c/ch pairs belong to note3(one)/note7(two); note10 punctuation remains original."
+      ],
+      "normalization_API_profile_activation_or_release_approval": false
+    },
+    "427": {
+      "publisher": 427,
+      "canonical_id": "tha-ap429",
+      "status": "GO_RAW_PUBLISHER_EDITION_SCOPE_AND_SPECIFIC_RIGHTS_ONLY",
+      "source": {
+        "bytes": 5136,
+        "sha256": "0125087c4852250cd0c7bff18241c0d6755d37c642d77af0e90b336c23c7df1f",
+        "git_blob_sha1": "1066ca5587c42100c89009a6288a86d732c22e92"
+      },
+      "route_only": "/text/chapter-3/poem-427/",
+      "canonical_record": {
+        "id": "tha-ap429",
+        "book": 37,
+        "start": 273,
+        "end": 333,
+        "title": "Ekadhammassavaniyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 429",
+        "vri": "88–106",
+        "pts": {
+          "volume": 2,
+          "page": 384,
+          "end_page": 385
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_root_wrapper_sha256": "2c327928fddb1b7b3e31b9f05cd00c78bb16ad70232730427438f77c1f634ddb",
+      "canonical_all_original_tuples_sha256": "990d1083a5c612c63aa0f4a904ded7954cf8d6c900d632e2eaa9f63cb242192d",
+      "correspondence_basis": [
+        "Padumuttara teaching",
+        "flying ascetic cannot pass above Buddha",
+        "hearing impermanence and arahant at seven",
+        "Own original title, two publisher colophons and original VRI subhead/closing formula; no arithmetic mapping rule."
+      ],
+      "primary_concept_occurrence_witness": {
+        "English": {
+          "padumuttar": 1,
+          "imperman": 4,
+          "flying": 1,
+          "seven": 1
+        },
+        "Pali": {
+          "padumuttar": 1,
+          "anicc": 4,
+          "ambare": 2,
+          "satta": 2
+        },
+        "both_publisher_colophons_contain_exact_original_title": true,
+        "note_owning_title_calls": [
+          1,
+          2
+        ]
+      },
+      "source_domains": {
+        "poem_paragraphs": 21,
+        "physical_stanzas": 18,
+        "printed_local_labels": 19,
+        "printed_global_labels": 19,
+        "ordered_note_count": 15,
+        "separate_unnoted_chapter_heading": false
+      },
+      "mandatory_edition_and_owner_qualifications": [
+        "Combined local5–6 is one eight-line physical paragraph; locals8/11 have six lines. Physical18/local19/global19 are separate domains.",
+        "Publisher/VRI title and all PTS/BJTS readings remain as printed.",
+        "Exact doubled cc/chch display pair belongs to note15."
+      ],
+      "normalization_API_profile_activation_or_release_approval": false
+    },
+    "429": {
+      "publisher": 429,
+      "canonical_id": "tha-ap431",
+      "status": "GO_RAW_PUBLISHER_EDITION_SCOPE_AND_SPECIFIC_RIGHTS_ONLY",
+      "source": {
+        "bytes": 4975,
+        "sha256": "b08ab6886b8a33681e6d5338466b4fb90f13536afb39343e163750a59ae284e8",
+        "git_blob_sha1": "73150b209e64bb4901973399a90b4d2312533617"
+      },
+      "route_only": "/text/chapter-3/poem-429/",
+      "canonical_record": {
+        "id": "tha-ap431",
+        "book": 37,
+        "start": 437,
+        "end": 489,
+        "title": "Sovaṇṇakiṅkaṇiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 431",
+        "vri": "140–156",
+        "pts": {
+          "volume": 2,
+          "page": 387,
+          "end_page": 389
+        }
+      },
+      "canonical_root_wrapper_sha256": "a91e5ce74ab6158ca021f42ce19ad78b30ece0b2307326475cadffc48406c538",
+      "canonical_all_original_tuples_sha256": "202fccf897a9145d86d74ea4537f98b45f5e16922bb91687abbca5f9b3cb038a",
+      "correspondence_basis": [
+        "Bark-clad ascetic and Atthadassi",
+        "illness and sand stupa",
+        "golden kiṅkhani flowers",
+        "Own original title, two publisher colophons and original VRI subhead/closing formula; no arithmetic mapping rule."
+      ],
+      "primary_concept_occurrence_witness": {
+        "English": {
+          "atthadass": 2,
+          "sand": 4,
+          "ill": 4,
+          "kiṅk": 9
+        },
+        "Pali": {
+          "atthadass": 2,
+          "puline": 1,
+          "kiṅkaṇ": 5,
+          "byādhi": 1
+        },
+        "both_publisher_colophons_contain_exact_original_title": true,
+        "note_owning_title_calls": [
+          1,
+          2
+        ]
+      },
+      "source_domains": {
+        "poem_paragraphs": 18,
+        "physical_stanzas": 15,
+        "printed_local_labels": 17,
+        "printed_global_labels": 17,
+        "ordered_note_count": 18,
+        "separate_unnoted_chapter_heading": false
+      },
+      "mandatory_edition_and_owner_qualifications": [
+        "Combined locals3–4 and9–10 each form one eight-line physical paragraph; physical15/local17/global17 remain distinct.",
+        "Publisher kiṅkhaniya, BJTS kiṅkhaṇiya and VRI kiṅkaṇiya forms remain distinct; no species/name harmonization.",
+        "Note13 retains the unresolved glossary/cross-reference; this review supplies no missing glossary."
+      ],
+      "normalization_API_profile_activation_or_release_approval": false
+    }
+  },
+  "aggregate_raw_source_domains": {
+    "poems": 7,
+    "whole_poem_paragraphs_including_title_and_two_colophons": 119,
+    "physical_stanza_paragraphs": 98,
+    "printed_local_labels": 101,
+    "printed_global_labels": 101,
+    "ordered_poem_notes": 101,
+    "separate_unnoted_chapter_headings": 1,
+    "display_pair_occurrences_all_note_owned": 9,
+    "summaries_approved": 0
+  },
+  "canonical_source_boundary_review": {
+    "actual_XML_events": 10673,
+    "retained_Book37_tuples": 10672,
+    "only_excluded_empty_event": 8858,
+    "all_tuple_words_notes_pages_match_current_canon": true,
+    "new_repair_namespace_or_private_migration_proposed": false,
+    "existing_NEXT10_revisions_preserved": true
+  },
+  "rights": {
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "edition_year": 2017,
+    "specific_license": "CC BY-NC-SA 4.0",
+    "artifacts": [
+      {
+        "file": "LICENSE.md",
+        "bytes": 19093,
+        "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+        "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+      },
+      {
+        "file": "src/_pages/about.md",
+        "bytes": 12404,
+        "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+        "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+      },
+      {
+        "file": "src/_includes/site/footer.njk",
+        "bytes": 555,
+        "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+        "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+      },
+      {
+        "file": "src/_includes/layouts/epub-metadata.xml",
+        "bytes": 603,
+        "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+        "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+      },
+      {
+        "file": "src/_data/site.json",
+        "bytes": 659,
+        "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+        "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+      },
+      {
+        "file": "src/_poems/_poems.json",
+        "bytes": 135,
+        "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+        "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+      }
+    ],
+    "direct_specific_grant_rechecked": true,
+    "generic_site_BY4_does_not_relax_specific_grant": true,
+    "permission_not_inferred_from_public_availability": true,
+    "requirements": [
+      "Preserve attribution/publisher/year/source repository/file/revision and licence link.",
+      "Retain NC/SA terms, original notices and warranty/no-endorsement notices; describe finite future presentation changes.",
+      "No commercial/media/endorsement permission or authorization to package raw English/notes is established by this review."
+    ],
+    "live_host_authenticity_or_current_reachability_approval": false
+  },
+  "resolved_metadata_finding": {
+    "v1_issue": "Unsupported .org source host was hardcoded although pinned site.baseUrl is empty.",
+    "v2_resolution": "Only relative route is asserted; source identity is pinned repository/file/fb76 revision plus exact bytes/blob. No live .org/.com validation claimed.",
+    "proof": {
+      "file": "/tmp/pali-eight394-evidence-nov28/next-intake-independent/v1/SOURCE_LOCATION_REVIEW.json",
+      "bytes": 1571,
+      "sha256": "629b19651fc5d22717c238d3d516be915547623966b435f35168d829e251bb28"
+    }
+  },
+  "excluded_scopes": {
+    "422": {
+      "status": "OUTSIDE_SEVEN_NOT_APPROVED",
+      "canonical_id": "tha-ap424",
+      "reason": "Separate publisher edition of a narrative also at publisher334/currenttha-ap336; wording/packing differ. Requires duplicate-edition qualification and independent normalization; never reuse334 hashes."
+    },
+    "430": {
+      "status": "OUTSIDE_SEVEN_NOT_APPROVED",
+      "canonical_id": "tha-ap432",
+      "reason": "Poem notes1–19 and separate three-paragraph chapter-summary note20 have different owners. Scissors/stick/water-pot alternatives and summary171 versus actual counts/roster/order require separate review. No summary or whole-chapter approval."
+    },
+    "428": {
+      "status": "HOLD_CONDITIONAL_SCOPE_OWNER_WORK_REQUIRED",
+      "canonical_id": "tha-ap430",
+      "reason": "Nineteenth recitation heading is line1 of a five-line physical paragraph containing local15/global4581. Original VRI recitation is block378 between120/121. Preserve every word and position; ordinary stanza grammar cannot silently drop this heading."
+    }
+  },
+  "unchanged_inactive_holds": {
+    "publisher": [
+      391,
+      392,
+      393,
+      403,
+      404,
+      405,
+      408,
+      409,
+      410
+    ],
+    "canonical": [
+      "tha-ap72",
+      "tha-ap142",
+      "tha-ap160",
+      "tha-ap161",
+      "tha-ap262",
+      "tha-ap268",
+      "tha-ap282",
+      "tha-ap308",
+      "tha-ap309",
+      "tha-ap360"
+    ],
+    "prior_conditional_publishers": [
+      413,
+      420
+    ],
+    "new_conditional_publisher": 428,
+    "current394_source_objects_or_activation_changed": false
+  },
+  "required_next_normalization_work": [
+    "Derive complete bodies/title/two-colophon/paratext and all101 note definitions from raw bytes. Preserve every call/owner, reversible byte/UTF16 positions and explicit hash domains.",
+    "Keep421 unnoted heading separate; retain four/six/eight-line layouts and combined ranges, especially426nine-versus-ten and427/429physical-versus-label distinctions.",
+    "Use only finite display owners:421HTML5twice/12/18;423Markdown9;426Markdown3/7twice;427Markdown cc/chch15. Preserve original spelling, unfinished punctuation and attributed edition judgments.",
+    "Produce independently reviewed presentation/note/layout/quote and UTF16 continuation goldens before profiles/parser/API work. This review approves no normalization or API hash.",
+    "Complete publisher edition does not establish line-complete VRI translation, expanded peyyāla, specialist resolution of edition uncertainty or whole-chapter coverage."
+  ],
+  "evidence": {
+    "independent_raw_projection": {
+      "file": "/tmp/pali-eight394-evidence-nov28/next-intake-independent/v1/PRIMARY_READBACK.json",
+      "bytes": 107233,
+      "sha256": "6e3871e8659bdf1c8af802e5a8f004488ec2e89f6ce4b0a46221c049b7961f7f"
+    },
+    "reviewer_raw_analysis": {
+      "file": "/tmp/pali-eight394-evidence-nov28/next-intake-independent/v1/review_raw.py",
+      "bytes": 10065,
+      "sha256": "d0d731b18d5be83ed310859c4ea5d1bacc5b989e22e3ac2991c308336bda280d"
+    },
+    "scope_and_edition_ledger": {
+      "file": "/tmp/pali-eight394-evidence-nov28/next-intake/v1/public/NOTE_AND_EDITION_LEDGER.json",
+      "bytes": 91287,
+      "sha256": "94a8edd60fb374ccbdff6d0c794a68de6af1e55c49f74cfd374383a368b60d05"
+    },
+    "rights_notice": {
+      "file": "/tmp/pali-eight394-evidence-nov28/next-intake/v1/public/RIGHTS_AND_NOTICES.json",
+      "bytes": 2616,
+      "sha256": "d89cd4bb96675030ecddc2e82046b9a797f097f7cec2681960ad986991ddd353"
+    }
+  },
+  "reviewer_activity": "Stdlib-only byte/hash/JSON/XML/gzip/source analysis plus read-only pinned Git tree membership. No project/author module/test/build/provider/browser/CI/network execution or checkout edits; external metadata receipts only.",
+  "normalization_approval": false,
+  "profile_API_runtime_activation_approval": false,
+  "current_candidate_acceptance_inferred": false,
+  "release_or_push_approval": false
+}

@@ -1,0 +1,1542 @@
+{
+  "schema": "source421429-seven-normalization-input-contract-v1",
+  "status": "FROZEN_RAW_SOURCE_INPUTS_NOT_NORMALIZATION_APPROVAL",
+  "base_commit": "f1e5c8114680fabe9083bde41d57c34730fd6bcd",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "VRI_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "XML_sha256": "23e0721c8fe05a6105b56b627ac38291d10e0eab799a082c257466603f0839a1",
+  "XML_bytes": 1779576,
+  "Book37_tuple_array_sha256": "bd0177c2025298415abd2e90e1d576d2418127e08ce339699ad725960089f8cc",
+  "literal_pairs": [
+    [
+      421,
+      "tha-ap423"
+    ],
+    [
+      423,
+      "tha-ap425"
+    ],
+    [
+      424,
+      "tha-ap426"
+    ],
+    [
+      425,
+      "tha-ap427"
+    ],
+    [
+      426,
+      "tha-ap428"
+    ],
+    [
+      427,
+      "tha-ap429"
+    ],
+    [
+      429,
+      "tha-ap431"
+    ]
+  ],
+  "specific_rights_artifacts": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  ],
+  "controlling_translation_terms": {
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "edition_year": 2017,
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "generic_site_BY4_does_not_broaden_translation_terms": true
+  },
+  "raw_review": {
+    "file": "RAW_SOURCE_REVIEW.json",
+    "bytes": 25762,
+    "sha256": "d63391f3feaa135810da593b5eba0a752ec61014179cce50912d6e03c3d30a0d"
+  },
+  "prior_lossless_pipeline": {
+    "file": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-prep/v1/prepare_normalization.py",
+    "bytes": 22977,
+    "sha256": "9ad2d91ec1820bf2e48dd174bd9e279a99cb93545677f10c529aabc1daae156b"
+  },
+  "source_url_identity_authority": {
+    "file": "docs/evidence/apadana/english411-419-eight/PROFILES.json",
+    "bytes": 45538,
+    "sha256": "332c658097eec4b05cca3ab5bee1e5cb1b341923559a9ab198cecb0f6cf5b67c",
+    "approved_prior_APP_sha256": "f29b48b27895947b26a66f95841ca8514cbcaf7d3de3fc3642849cab9dbc7b8b",
+    "profile_id": "tha-ap413",
+    "exact_approved_url": "https://apadanatranslation.com/text/chapter-3/poem-411/",
+    "host": "https://apadanatranslation.com",
+    "new_paths_are_literal_source_routes": true,
+    "live_validation": false
+  },
+  "excluded_current_batch_publishers": [
+    422,
+    428,
+    430
+  ],
+  "conditional_publishers_unchanged": [
+    413,
+    420
+  ],
+  "canonical_holds_unchanged": [
+    "tha-ap72",
+    "tha-ap142",
+    "tha-ap160",
+    "tha-ap161",
+    "tha-ap262",
+    "tha-ap268",
+    "tha-ap282",
+    "tha-ap308",
+    "tha-ap309",
+    "tha-ap360"
+  ],
+  "publisher_holds_unchanged": [
+    391,
+    392,
+    393,
+    403,
+    404,
+    405,
+    408,
+    409,
+    410
+  ],
+  "entries": [
+    {
+      "publisher_poem": 421,
+      "canonical_id": "tha-ap423",
+      "title": "Sakiŋsammajjaka",
+      "raw": {
+        "path": "src/_poems/chapter-3/poem-421.md",
+        "bytes": 5175,
+        "sha256": "f699168e0ba16e890f9728987e190b09be423841d04acac71d6345e948cb7d88",
+        "git_blob_sha1": "a29624e66d3011b53e029e2643771cfc9bbfe1ca"
+      },
+      "raw_poem_paragraph_count_excluding_heading": 16,
+      "expected_full_body_paragraph_count": 17,
+      "physical_stanza_paragraphs": 14,
+      "expanded_local_stanzas": 14,
+      "notes": 22,
+      "source_local_labels_by_physical_stanza": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          9
+        ],
+        [
+          10
+        ],
+        [
+          11
+        ],
+        [
+          12
+        ],
+        [
+          13
+        ],
+        [
+          14
+        ]
+      ],
+      "source_global_labels_by_physical_stanza": [
+        [
+          4462
+        ],
+        [
+          4463
+        ],
+        [
+          4464
+        ],
+        [
+          4465
+        ],
+        [
+          4466
+        ],
+        [
+          4467
+        ],
+        [
+          4468
+        ],
+        [
+          4469
+        ],
+        [
+          4470
+        ],
+        [
+          4471
+        ],
+        [
+          4472
+        ],
+        [
+          4473
+        ],
+        [
+          4474
+        ],
+        [
+          4475
+        ]
+      ],
+      "stanza_line_counts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "note_owner_body_paragraphs": {
+        "1": [
+          0
+        ],
+        "2": [
+          0
+        ],
+        "3": [
+          1
+        ],
+        "4": [
+          3
+        ],
+        "5": [
+          4
+        ],
+        "6": [
+          4
+        ],
+        "7": [
+          4
+        ],
+        "8": [
+          5
+        ],
+        "9": [
+          5
+        ],
+        "10": [
+          5
+        ],
+        "11": [
+          6
+        ],
+        "12": [
+          7
+        ],
+        "13": [
+          7
+        ],
+        "14": [
+          7
+        ],
+        "15": [
+          7
+        ],
+        "16": [
+          7
+        ],
+        "17": [
+          7
+        ],
+        "18": [
+          7
+        ],
+        "19": [
+          8
+        ],
+        "20": [
+          8
+        ],
+        "21": [
+          9
+        ],
+        "22": [
+          9
+        ]
+      },
+      "source_display_pair_vector": [
+        {
+          "owner": "note:5",
+          "syntax": "HTML_diacritics_on",
+          "on": "c",
+          "off": "ch",
+          "raw_token_sha256": "f0a01d85865e0afcd9b0f66c0832a2a7c2b0ba2faf4467ee8c2acd6acc595547"
+        },
+        {
+          "owner": "note:5",
+          "syntax": "HTML_diacritics_on",
+          "on": "c",
+          "off": "ch",
+          "raw_token_sha256": "f0a01d85865e0afcd9b0f66c0832a2a7c2b0ba2faf4467ee8c2acd6acc595547"
+        },
+        {
+          "owner": "note:12",
+          "syntax": "HTML_diacritics_on",
+          "on": "c",
+          "off": "ch",
+          "raw_token_sha256": "f0a01d85865e0afcd9b0f66c0832a2a7c2b0ba2faf4467ee8c2acd6acc595547"
+        },
+        {
+          "owner": "note:18",
+          "syntax": "HTML_diacritics_on",
+          "on": "c",
+          "off": "ch",
+          "raw_token_sha256": "f0a01d85865e0afcd9b0f66c0832a2a7c2b0ba2faf4467ee8c2acd6acc595547"
+        }
+      ],
+      "exact_unnoted_paratext_present": true,
+      "original_note_punctuation_flags": [
+        {
+          "note": 4,
+          "parenthesis_balance": 1,
+          "double_curly_quote_balance": 0
+        },
+        {
+          "note": 6,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": 1
+        }
+      ],
+      "canonical_unit": {
+        "id": "tha-ap423",
+        "book": 37,
+        "start": 1,
+        "end": 51,
+        "title": "Sakiṃsammajjakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 423",
+        "vri": "1–14",
+        "pts": {
+          "volume": 2,
+          "page": 379,
+          "end_page": 379
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_wrapper_sha256": "5c3445d23d2e244fdbdeea67294c3216cd65233c4431ba48820e655ebf8c716e",
+      "canonical_tuple_array_sha256": "005963069b2cd1fe611633b52669155c2c7941195a71e347826f5b6b93909512"
+    },
+    {
+      "publisher_poem": 423,
+      "canonical_id": "tha-ap425",
+      "title": "Ekâsanadāyaka",
+      "raw": {
+        "path": "src/_poems/chapter-3/poem-423.md",
+        "bytes": 6362,
+        "sha256": "1134b932e032fc81667245f9e74ddfb6e370dc3fc5dbb6b6622e0f04a7c5518e",
+        "git_blob_sha1": "1b4966346a8341798ec4a3fb17ddb1567ebe0628"
+      },
+      "raw_poem_paragraph_count_excluding_heading": 27,
+      "expected_full_body_paragraph_count": 28,
+      "physical_stanza_paragraphs": 25,
+      "expanded_local_stanzas": 25,
+      "notes": 17,
+      "source_local_labels_by_physical_stanza": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          9
+        ],
+        [
+          10
+        ],
+        [
+          11
+        ],
+        [
+          12
+        ],
+        [
+          13
+        ],
+        [
+          14
+        ],
+        [
+          15
+        ],
+        [
+          16
+        ],
+        [
+          17
+        ],
+        [
+          18
+        ],
+        [
+          19
+        ],
+        [
+          20
+        ],
+        [
+          21
+        ],
+        [
+          22
+        ],
+        [
+          23
+        ],
+        [
+          24
+        ],
+        [
+          25
+        ]
+      ],
+      "source_global_labels_by_physical_stanza": [
+        [
+          4497
+        ],
+        [
+          4498
+        ],
+        [
+          4499
+        ],
+        [
+          4500
+        ],
+        [
+          4501
+        ],
+        [
+          4502
+        ],
+        [
+          4503
+        ],
+        [
+          4504
+        ],
+        [
+          4505
+        ],
+        [
+          4506
+        ],
+        [
+          4507
+        ],
+        [
+          4508
+        ],
+        [
+          4509
+        ],
+        [
+          4510
+        ],
+        [
+          4511
+        ],
+        [
+          4512
+        ],
+        [
+          4513
+        ],
+        [
+          4514
+        ],
+        [
+          4515
+        ],
+        [
+          4516
+        ],
+        [
+          4517
+        ],
+        [
+          4518
+        ],
+        [
+          4519
+        ],
+        [
+          4520
+        ],
+        [
+          4521
+        ]
+      ],
+      "stanza_line_counts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "note_owner_body_paragraphs": {
+        "1": [
+          0
+        ],
+        "2": [
+          0
+        ],
+        "3": [
+          2
+        ],
+        "4": [
+          4
+        ],
+        "5": [
+          4
+        ],
+        "6": [
+          4
+        ],
+        "7": [
+          6
+        ],
+        "8": [
+          6
+        ],
+        "9": [
+          6
+        ],
+        "10": [
+          7
+        ],
+        "11": [
+          7
+        ],
+        "12": [
+          7
+        ],
+        "13": [
+          10
+        ],
+        "14": [
+          12
+        ],
+        "15": [
+          12
+        ],
+        "16": [
+          15
+        ],
+        "17": [
+          18
+        ]
+      },
+      "source_display_pair_vector": [
+        {
+          "owner": "note:9",
+          "syntax": "Pandoc_diacritics_on",
+          "on": "c",
+          "off": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        }
+      ],
+      "exact_unnoted_paratext_present": false,
+      "original_note_punctuation_flags": [],
+      "canonical_unit": {
+        "id": "tha-ap425",
+        "book": 37,
+        "start": 114,
+        "end": 190,
+        "title": "Ekāsanadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 425",
+        "vri": "36–60",
+        "pts": {
+          "volume": 2,
+          "page": 380,
+          "end_page": 382
+        }
+      },
+      "canonical_wrapper_sha256": "208ea9e065c30ce9a9c0d808f549e822da30c1ee8fd64a4aac6277be110d5bd6",
+      "canonical_tuple_array_sha256": "a5469ed303fb92e5b1211f86ee8efc242c7cb5711fe2874d0f61272809ae43a9"
+    },
+    {
+      "publisher_poem": 424,
+      "canonical_id": "tha-ap426",
+      "title": "Sattakadambapupphiya",
+      "raw": {
+        "path": "src/_poems/chapter-3/poem-424.md",
+        "bytes": 1915,
+        "sha256": "4443f55565d186cda8ef114ede31af2b5c303052970b36bb46ec4ab321b88aa4",
+        "git_blob_sha1": "204c24e1d82a5d9d15deb360730e2908c2bf2ee7"
+      },
+      "raw_poem_paragraph_count_excluding_heading": 9,
+      "expected_full_body_paragraph_count": 10,
+      "physical_stanza_paragraphs": 7,
+      "expanded_local_stanzas": 7,
+      "notes": 5,
+      "source_local_labels_by_physical_stanza": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ]
+      ],
+      "source_global_labels_by_physical_stanza": [
+        [
+          4522
+        ],
+        [
+          4523
+        ],
+        [
+          4524
+        ],
+        [
+          4525
+        ],
+        [
+          4526
+        ],
+        [
+          4527
+        ],
+        [
+          4528
+        ]
+      ],
+      "stanza_line_counts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "note_owner_body_paragraphs": {
+        "1": [
+          0
+        ],
+        "2": [
+          0
+        ],
+        "3": [
+          1
+        ],
+        "4": [
+          2
+        ],
+        "5": [
+          2
+        ]
+      },
+      "source_display_pair_vector": [],
+      "exact_unnoted_paratext_present": false,
+      "original_note_punctuation_flags": [],
+      "canonical_unit": {
+        "id": "tha-ap426",
+        "book": 37,
+        "start": 190,
+        "end": 212,
+        "title": "Sattakadambapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 426",
+        "vri": "61–67",
+        "pts": {
+          "volume": 2,
+          "page": 382,
+          "end_page": 383
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_wrapper_sha256": "4b682d2123cf20ad1b19d14d9575861a43e75b429c8745caf86fe6fd6358ba61",
+      "canonical_tuple_array_sha256": "dc5c8e42e8c62ba66889003485703194582f3074362f5c7046b42e08e374b5d0"
+    },
+    {
+      "publisher_poem": 425,
+      "canonical_id": "tha-ap427",
+      "title": "Koraṇḍapupphiya",
+      "raw": {
+        "path": "src/_poems/chapter-3/poem-425.md",
+        "bytes": 3882,
+        "sha256": "609463151f43aec5412c4434b3c4a87b9e4dc5b52be2e209fb4712858b1f5e25",
+        "git_blob_sha1": "e28d17bb7246b7ec5b31948d51efc97f2f16f572"
+      },
+      "raw_poem_paragraph_count_excluding_heading": 12,
+      "expected_full_body_paragraph_count": 13,
+      "physical_stanza_paragraphs": 10,
+      "expanded_local_stanzas": 10,
+      "notes": 12,
+      "source_local_labels_by_physical_stanza": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          9
+        ],
+        [
+          10
+        ]
+      ],
+      "source_global_labels_by_physical_stanza": [
+        [
+          4529
+        ],
+        [
+          4530
+        ],
+        [
+          4531
+        ],
+        [
+          4532
+        ],
+        [
+          4533
+        ],
+        [
+          4534
+        ],
+        [
+          4535
+        ],
+        [
+          4536
+        ],
+        [
+          4537
+        ],
+        [
+          4538
+        ]
+      ],
+      "stanza_line_counts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "note_owner_body_paragraphs": {
+        "1": [
+          0
+        ],
+        "2": [
+          0
+        ],
+        "3": [
+          1
+        ],
+        "4": [
+          1
+        ],
+        "5": [
+          1
+        ],
+        "6": [
+          1
+        ],
+        "7": [
+          1
+        ],
+        "8": [
+          3
+        ],
+        "9": [
+          4
+        ],
+        "10": [
+          4
+        ],
+        "11": [
+          6
+        ],
+        "12": [
+          7
+        ]
+      },
+      "source_display_pair_vector": [],
+      "exact_unnoted_paratext_present": false,
+      "original_note_punctuation_flags": [
+        {
+          "note": 10,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": -2
+        }
+      ],
+      "canonical_unit": {
+        "id": "tha-ap427",
+        "book": 37,
+        "start": 212,
+        "end": 242,
+        "title": "Koraṇḍapupphiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 427",
+        "vri": "68–77",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 383
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_wrapper_sha256": "a0b586de43de1e25865474d3c755cfffbc6c8e7fbbc4c0851d20dac4b9989929",
+      "canonical_tuple_array_sha256": "9379bc159a8565b9b9509bf3e6fa5a3f33fe56c04a9865c03a5953b852c7319a"
+    },
+    {
+      "publisher_poem": 426,
+      "canonical_id": "tha-ap428",
+      "title": "Ghatamaṇḍadāyaka",
+      "raw": {
+        "path": "src/_poems/chapter-3/poem-426.md",
+        "bytes": 3734,
+        "sha256": "73c77b2771d3dba099503fba9f48c673dc98cd16bb52ed88b9b1876856c7f65b",
+        "git_blob_sha1": "9a166dce0d45e70722a02e458eebed918305545b"
+      },
+      "raw_poem_paragraph_count_excluding_heading": 11,
+      "expected_full_body_paragraph_count": 12,
+      "physical_stanza_paragraphs": 9,
+      "expanded_local_stanzas": 9,
+      "notes": 12,
+      "source_local_labels_by_physical_stanza": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          9
+        ]
+      ],
+      "source_global_labels_by_physical_stanza": [
+        [
+          4539
+        ],
+        [
+          4540
+        ],
+        [
+          4541
+        ],
+        [
+          4542
+        ],
+        [
+          4543
+        ],
+        [
+          4544
+        ],
+        [
+          4545
+        ],
+        [
+          4546
+        ],
+        [
+          4547
+        ]
+      ],
+      "stanza_line_counts": [
+        6,
+        4,
+        4,
+        4,
+        6,
+        4,
+        4,
+        4,
+        4
+      ],
+      "note_owner_body_paragraphs": {
+        "1": [
+          0
+        ],
+        "2": [
+          0
+        ],
+        "3": [
+          1
+        ],
+        "4": [
+          1
+        ],
+        "5": [
+          1
+        ],
+        "6": [
+          1
+        ],
+        "7": [
+          2
+        ],
+        "8": [
+          2
+        ],
+        "9": [
+          3
+        ],
+        "10": [
+          4
+        ],
+        "11": [
+          4
+        ],
+        "12": [
+          5
+        ]
+      },
+      "source_display_pair_vector": [
+        {
+          "owner": "note:3",
+          "syntax": "Pandoc_diacritics_on",
+          "on": "c",
+          "off": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        },
+        {
+          "owner": "note:7",
+          "syntax": "Pandoc_diacritics_on",
+          "on": "c",
+          "off": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        },
+        {
+          "owner": "note:7",
+          "syntax": "Pandoc_diacritics_on",
+          "on": "c",
+          "off": "ch",
+          "raw_token_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        }
+      ],
+      "exact_unnoted_paratext_present": false,
+      "original_note_punctuation_flags": [
+        {
+          "note": 10,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": -2
+        }
+      ],
+      "canonical_unit": {
+        "id": "tha-ap428",
+        "book": 37,
+        "start": 242,
+        "end": 273,
+        "title": "Ghatamaṇḍadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 428",
+        "vri": "78–87",
+        "pts": {
+          "volume": 2,
+          "page": 383,
+          "end_page": 384
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_wrapper_sha256": "934a54c5fb6fa6d477748db6c50da14c5aee5cd9b6d2b21a74ce140eaa1de529",
+      "canonical_tuple_array_sha256": "58316e17e50f59aff1bfd55654abb4ec53bf703d6ee862d232ca27203c91b7b2"
+    },
+    {
+      "publisher_poem": 427,
+      "canonical_id": "tha-ap429",
+      "title": "Ekadhammasavanīya",
+      "raw": {
+        "path": "src/_poems/chapter-3/poem-427.md",
+        "bytes": 5136,
+        "sha256": "0125087c4852250cd0c7bff18241c0d6755d37c642d77af0e90b336c23c7df1f",
+        "git_blob_sha1": "1066ca5587c42100c89009a6288a86d732c22e92"
+      },
+      "raw_poem_paragraph_count_excluding_heading": 20,
+      "expected_full_body_paragraph_count": 21,
+      "physical_stanza_paragraphs": 18,
+      "expanded_local_stanzas": 19,
+      "notes": 15,
+      "source_local_labels_by_physical_stanza": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          9
+        ],
+        [
+          10
+        ],
+        [
+          11
+        ],
+        [
+          12
+        ],
+        [
+          13
+        ],
+        [
+          14
+        ],
+        [
+          15
+        ],
+        [
+          16
+        ],
+        [
+          17
+        ],
+        [
+          18
+        ],
+        [
+          19
+        ]
+      ],
+      "source_global_labels_by_physical_stanza": [
+        [
+          4548
+        ],
+        [
+          4549
+        ],
+        [
+          4550
+        ],
+        [
+          4551
+        ],
+        [
+          4552,
+          4553
+        ],
+        [
+          4554
+        ],
+        [
+          4555
+        ],
+        [
+          4556
+        ],
+        [
+          4557
+        ],
+        [
+          4558
+        ],
+        [
+          4559
+        ],
+        [
+          4560
+        ],
+        [
+          4561
+        ],
+        [
+          4562
+        ],
+        [
+          4563
+        ],
+        [
+          4564
+        ],
+        [
+          4565
+        ],
+        [
+          4566
+        ]
+      ],
+      "stanza_line_counts": [
+        4,
+        4,
+        4,
+        4,
+        8,
+        4,
+        6,
+        4,
+        4,
+        6,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "note_owner_body_paragraphs": {
+        "1": [
+          0
+        ],
+        "2": [
+          0
+        ],
+        "3": [
+          2
+        ],
+        "4": [
+          2
+        ],
+        "5": [
+          3
+        ],
+        "6": [
+          3
+        ],
+        "7": [
+          4
+        ],
+        "8": [
+          6
+        ],
+        "9": [
+          7
+        ],
+        "10": [
+          7
+        ],
+        "11": [
+          10
+        ],
+        "12": [
+          10
+        ],
+        "13": [
+          10
+        ],
+        "14": [
+          11
+        ],
+        "15": [
+          11
+        ]
+      },
+      "source_display_pair_vector": [
+        {
+          "owner": "note:15",
+          "syntax": "Pandoc_diacritics_on",
+          "on": "cc",
+          "off": "chch",
+          "raw_token_sha256": "4974d71293c4c32d70cc38a57a1801cc5b7743bce2500321c456d5a279b9ec7d"
+        }
+      ],
+      "exact_unnoted_paratext_present": false,
+      "original_note_punctuation_flags": [],
+      "canonical_unit": {
+        "id": "tha-ap429",
+        "book": 37,
+        "start": 273,
+        "end": 333,
+        "title": "Ekadhammassavaniyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 429",
+        "vri": "88–106",
+        "pts": {
+          "volume": 2,
+          "page": 384,
+          "end_page": 385
+        },
+        "index_revision": "apadana-thera-next10-v1"
+      },
+      "canonical_wrapper_sha256": "2c327928fddb1b7b3e31b9f05cd00c78bb16ad70232730427438f77c1f634ddb",
+      "canonical_tuple_array_sha256": "990d1083a5c612c63aa0f4a904ded7954cf8d6c900d632e2eaa9f63cb242192d"
+    },
+    {
+      "publisher_poem": 429,
+      "canonical_id": "tha-ap431",
+      "title": "Sovaṇṇakiṅkhaniya",
+      "raw": {
+        "path": "src/_poems/chapter-3/poem-429.md",
+        "bytes": 4975,
+        "sha256": "b08ab6886b8a33681e6d5338466b4fb90f13536afb39343e163750a59ae284e8",
+        "git_blob_sha1": "73150b209e64bb4901973399a90b4d2312533617"
+      },
+      "raw_poem_paragraph_count_excluding_heading": 17,
+      "expected_full_body_paragraph_count": 18,
+      "physical_stanza_paragraphs": 15,
+      "expanded_local_stanzas": 17,
+      "notes": 18,
+      "source_local_labels_by_physical_stanza": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ],
+        [
+          7
+        ],
+        [
+          8
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          11
+        ],
+        [
+          12
+        ],
+        [
+          13
+        ],
+        [
+          14
+        ],
+        [
+          15
+        ],
+        [
+          16
+        ],
+        [
+          17
+        ]
+      ],
+      "source_global_labels_by_physical_stanza": [
+        [
+          4600
+        ],
+        [
+          4601
+        ],
+        [
+          4602,
+          4603
+        ],
+        [
+          4604
+        ],
+        [
+          4605
+        ],
+        [
+          4606
+        ],
+        [
+          4607
+        ],
+        [
+          4608,
+          4609
+        ],
+        [
+          4610
+        ],
+        [
+          4611
+        ],
+        [
+          4612
+        ],
+        [
+          4613
+        ],
+        [
+          4614
+        ],
+        [
+          4615
+        ],
+        [
+          4616
+        ]
+      ],
+      "stanza_line_counts": [
+        4,
+        4,
+        8,
+        4,
+        4,
+        4,
+        4,
+        8,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "note_owner_body_paragraphs": {
+        "1": [
+          0
+        ],
+        "2": [
+          0
+        ],
+        "3": [
+          1
+        ],
+        "4": [
+          3
+        ],
+        "5": [
+          3
+        ],
+        "6": [
+          4
+        ],
+        "7": [
+          5
+        ],
+        "8": [
+          6
+        ],
+        "9": [
+          7
+        ],
+        "10": [
+          7
+        ],
+        "11": [
+          7
+        ],
+        "12": [
+          7
+        ],
+        "13": [
+          8
+        ],
+        "14": [
+          8
+        ],
+        "15": [
+          8
+        ],
+        "16": [
+          8
+        ],
+        "17": [
+          8
+        ],
+        "18": [
+          9
+        ]
+      },
+      "source_display_pair_vector": [],
+      "exact_unnoted_paratext_present": false,
+      "original_note_punctuation_flags": [],
+      "canonical_unit": {
+        "id": "tha-ap431",
+        "book": 37,
+        "start": 437,
+        "end": 489,
+        "title": "Sovaṇṇakiṅkaṇiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 431",
+        "vri": "140–156",
+        "pts": {
+          "volume": 2,
+          "page": 387,
+          "end_page": 389
+        }
+      },
+      "canonical_wrapper_sha256": "a91e5ce74ab6158ca021f42ce19ad78b30ece0b2307326475cadffc48406c538",
+      "canonical_tuple_array_sha256": "202fccf897a9145d86d74ea4537f98b45f5e16922bb91687abbca5f9b3cb038a"
+    }
+  ],
+  "source_only": true,
+  "normalization_API_runtime_activation_or_release_approval": false
+}

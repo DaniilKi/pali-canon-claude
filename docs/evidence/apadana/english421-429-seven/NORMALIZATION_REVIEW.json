@@ -1,0 +1,159 @@
+{
+  "schema": "independent-seven421429-source-normalization-review-v1",
+  "status": "GO_EXACT_SEVEN_SOURCE_PRESENTATION_AND_LOSSLESS_NORMALIZATION_ONLY",
+  "base_commit": "f1e5c8114680fabe9083bde41d57c34730fd6bcd",
+  "author_proposal": {
+    "file": "/tmp/pali-seven401-evidence-nov28/source-normalization/v1/MANIFEST.json",
+    "bytes": 6342,
+    "sha256": "2dd331b9cd6535fe0bca03629e8e704865c13daf259920fce4ade01833a05031"
+  },
+  "independent_blind_preseal": {
+    "file": "/tmp/pali-seven401-evidence-nov28/independent-preseal/v1/PRESEAL.json",
+    "bytes": 1010,
+    "sha256": "e4a5228a403f61315f746e21f5dddd396013889b0180663aeb9079f21a5e64d3"
+  },
+  "independent_blind_expectations": {
+    "file": "/tmp/pali-seven401-evidence-nov28/independent-preseal/v1/BLIND_EXPECTATIONS.json",
+    "bytes": 193725,
+    "sha256": "9534f4ebd2b4147b2ac6ae86db4f44e13701d66d77e1401474abd46319351a04"
+  },
+  "comparison_proof": {
+    "file": "/tmp/pali-seven401-evidence-nov28/normalization-independent-review/v1/COMPARISON.json",
+    "bytes": 5553,
+    "sha256": "4fde1ea1896cb6b707f3eff12e8a101bcb69c8ce30599e65020b01ae0f7348b9"
+  },
+  "approved_public_normalization_artifacts": {
+    "public/INPUT_CONTRACT.json": {
+      "file": "/tmp/pali-seven401-evidence-nov28/source-normalization/v1/public/INPUT_CONTRACT.json",
+      "bytes": 29279,
+      "sha256": "e61951950fb80a8916e4099f8f411eeac296587d3fcac9d82754ee69ae40cd87"
+    },
+    "public/RAW_SOURCE_REVIEW.json": {
+      "file": "/tmp/pali-seven401-evidence-nov28/source-normalization/v1/public/RAW_SOURCE_REVIEW.json",
+      "bytes": 25762,
+      "sha256": "d63391f3feaa135810da593b5eba0a752ec61014179cce50912d6e03c3d30a0d"
+    },
+    "derived/public/NORMALIZED_EXPECTATIONS.json": {
+      "file": "/tmp/pali-seven401-evidence-nov28/source-normalization/v1/derived/public/NORMALIZED_EXPECTATIONS.json",
+      "bytes": 349035,
+      "sha256": "8ff6eddf60a1fc58788755ff3f97a405f55f9d7b46db872cd90eadde0f115d3b"
+    },
+    "derived/public/NORMALIZATION_BINDINGS.json": {
+      "file": "/tmp/pali-seven401-evidence-nov28/source-normalization/v1/derived/public/NORMALIZATION_BINDINGS.json",
+      "bytes": 88325,
+      "sha256": "0b0f923c8b03488677829944a1da8dd76619800a2accdebf8a01b39a57c21b9f"
+    },
+    "derived/public/ORIGINAL_XML_REPLAY.json": {
+      "file": "/tmp/pali-seven401-evidence-nov28/source-normalization/v1/derived/public/ORIGINAL_XML_REPLAY.json",
+      "bytes": 531,
+      "sha256": "e4ff130e3284ff738eba1ae05d67a728f6071485244f8584044aff46720ea714"
+    }
+  },
+  "literal_pairs": [
+    [
+      421,
+      "tha-ap423"
+    ],
+    [
+      423,
+      "tha-ap425"
+    ],
+    [
+      424,
+      "tha-ap426"
+    ],
+    [
+      425,
+      "tha-ap427"
+    ],
+    [
+      426,
+      "tha-ap428"
+    ],
+    [
+      427,
+      "tha-ap429"
+    ],
+    [
+      429,
+      "tha-ap431"
+    ]
+  ],
+  "verified_domains": {
+    "original_raw_files": 7,
+    "full_bodies_and_paratext_exact_blind": 7,
+    "presentation_paragraphs": 119,
+    "raw_paragraphs_excluding_note_owning_titles": 112,
+    "ordered_notes_and_owners": 101,
+    "physical_stanza_paragraphs_and_quotes": 98,
+    "expanded_local_labels": 101,
+    "printed_global_labels": 101,
+    "hard500_UTF16_pages": 37,
+    "source_owned_display_pairs": 9,
+    "separate_unnoted_421_heading_UTF16": 40,
+    "owner_domains_reversed": 115,
+    "unique_reversible_stages": 161,
+    "unique_reversible_changes": 1173,
+    "whole_original_sources_reconstructed": 7
+  },
+  "checked": [
+    "All31 frozen packet members rehashed; all complete private normalized values match independently presealed raw-derived values, not app/author-produced runtime oracles.",
+    "All public body/note/paragraph/quote hashes and UTF16/source byte positions, note owners, literal markers and hard500 page/start-prefix/continuation-prefix domains match raw/blind evidence. No paragraph clipping, label invention or Note-call deletion.",
+    "Every lossless owner reverses; original frontmatter/chapter/body/definition/separator slices cover and reconstruct all seven complete original files. All101 unfinished punctuation balances remain as printed.",
+    "Original8RULES/xml_tuple/present ASTs match previously reviewed pipeline; single terminal range handling preserves original8-line physical427/429 paragraphs and source ranges rather than splitting them. Nine exact note-owned c/ch orcc/chch pairs rederived from raw markup agree with contract/bindings.",
+    "Original VRI Book37 digest and immutable883d/61books/8544units rechecked; source raw review already independently established all10672 original tuples including notes/pages and exact empty-event8858 exclusion. Existing NEXT10 records/revisions remain unchanged.",
+    "Specific six rights artifacts and NC-SA4.0 attribution/notices rechecked. Exact accepted394 profile/APP provenance supports the historical.com host only; no live URL/reachability/host authentication claim. The earlier unsupported.org is absent.",
+    "Old394 expected manifest/source approval and exclusions/holds remain pinned. This proposal contains no replacement394 snapshots, current-runtime projections, profile activation or target writes. Old394 full profile/link preservation still requires the separately assigned app review."
+  ],
+  "mandatory_limits": [
+    "Complete publisher-edition wording is not line-complete VRI translation or expansion of peyyāla. Preserve all note edition judgments and unfinished punctuation.",
+    "426 remains9publisher versus10VRI stanzas;427 physical18/local19 and429 physical15/local17 remain distinct.421 unnoted chapter heading stays separate.",
+    "Publishers422/428/430 are excluded from this seven; existing413/420 conditional and nine publisher/ten canonical holds remain unchanged.",
+    "No body/notes/raw English may be copied into repository/package; private artifacts remain external0700. Only metadata/hash approval is transferable.",
+    "Profile/parser/API/widget/runtime/build/browser/installed/exact75CI/release acceptance is separate; this source-normalization receipt authorizes none of those results."
+  ],
+  "source_rights_scope": {
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "edition_year": 2017,
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "generic_site_BY4_does_not_broaden_translation_terms": true
+  },
+  "publisher_holds_unchanged": [
+    391,
+    392,
+    393,
+    403,
+    404,
+    405,
+    408,
+    409,
+    410
+  ],
+  "canonical_holds_unchanged": [
+    "tha-ap72",
+    "tha-ap142",
+    "tha-ap160",
+    "tha-ap161",
+    "tha-ap262",
+    "tha-ap268",
+    "tha-ap282",
+    "tha-ap308",
+    "tha-ap309",
+    "tha-ap360"
+  ],
+  "conditionals_unchanged": [
+    413,
+    420
+  ],
+  "excluded_publishers": [
+    422,
+    428,
+    430
+  ],
+  "generated401_AP_read": false,
+  "normalization_source_approval": true,
+  "profile_API_runtime_activation_or_release_approval": false,
+  "reviewer_activity": "Stdlib reads/hashes/AST/data comparison and external metadata writes only; no author/project imports, target edits, app/test/build/browser/provider/network/Git/CI execution."
+}

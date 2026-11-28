@@ -1,0 +1,108 @@
+{
+  "schema": "reviewed-thera421-429-seven-independent-source-approval-v1",
+  "status": "GO_EXACT_SEVEN_PUBLISHER_EDITION_SOURCE_SCOPES_AND_NORMALIZATION_ONLY",
+  "base_commit": "f1e5c8114680fabe9083bde41d57c34730fd6bcd",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "approved_pairs": [
+    [
+      421,
+      "tha-ap423"
+    ],
+    [
+      423,
+      "tha-ap425"
+    ],
+    [
+      424,
+      "tha-ap426"
+    ],
+    [
+      425,
+      "tha-ap427"
+    ],
+    [
+      426,
+      "tha-ap428"
+    ],
+    [
+      427,
+      "tha-ap429"
+    ],
+    [
+      429,
+      "tha-ap431"
+    ]
+  ],
+  "source_documents": {
+    "profiles": {
+      "file": "PROFILES.json",
+      "bytes": 33255,
+      "sha256": "693b9f2824c5f155c9e3196c3b454fa757dc62d596f420a37334d20abefdb89d"
+    },
+    "approved_links": {
+      "file": "LINKS.json",
+      "bytes": 33863,
+      "sha256": "2ff9b96c33e2c7b8fe72ae4a2958390a2974b1ff4d438cc79ee73c9eb0393c46"
+    },
+    "source_bindings": {
+      "file": "SOURCE_BINDINGS.json",
+      "bytes": 407660,
+      "sha256": "6eab76faf013ef5af45329ad88431119a69f451bb87dee0950f0444b4883aa5f"
+    },
+    "normalization_review": {
+      "file": "NORMALIZATION_REVIEW.json",
+      "bytes": 7184,
+      "sha256": "fdfeb35e1f7c60735dc517a4edb26f8d10a4a3564ff544ffb9306f4756c20ff2"
+    },
+    "required_notices": {
+      "file": "REQUIRED_NOTICES.json",
+      "bytes": 10698,
+      "sha256": "2a8170f413b1447cfa8e91322ae783577beede358cd164f2958a3528197c8496"
+    }
+  },
+  "producer_evidence": {
+    "original_raw_scope_review": {
+      "file": "/tmp/pali-eight394-evidence-nov28/next-intake-independent/v1/INDEPENDENT_REVIEW.json",
+      "bytes": 25762,
+      "sha256": "d63391f3feaa135810da593b5eba0a752ec61014179cce50912d6e03c3d30a0d"
+    },
+    "original_lossless_normalization_packet": {
+      "file": "/tmp/pali-seven401-evidence-nov28/source-normalization/v1/MANIFEST.json",
+      "bytes": 6342,
+      "sha256": "2dd331b9cd6535fe0bca03629e8e704865c13daf259920fce4ade01833a05031"
+    },
+    "normalization_source_peer": {
+      "file": "/tmp/pali-seven401-evidence-nov28/normalization-independent-review/v1/INDEPENDENT_REVIEW.json",
+      "bytes": 7184,
+      "sha256": "fdfeb35e1f7c60735dc517a4edb26f8d10a4a3564ff544ffb9306f4756c20ff2"
+    },
+    "profile_field_and_decoder_comparison": {
+      "file": "/tmp/pali-seven401-evidence-nov28/app-independent-review/v2/INDEX_REVISION_CORRECTION_REVIEW.json",
+      "bytes": 2252,
+      "sha256": "1a6eafd4ed09440a1e633822bf9e889ac77f843b4af961b6cd0aedb643e089f1"
+    },
+    "five_app_source_review": {
+      "file": "/tmp/pali-seven401-evidence-nov28/app-independent-review/v2/INDEPENDENT_REVIEW.json",
+      "bytes": 4452,
+      "sha256": "6207c7d7bd8aafcd5afb19cd6a675fce3fed399f17f24dbad2e43b85dcd94c13"
+    },
+    "immutable_source_domain_manifest": {
+      "file": "SOURCE_DOMAIN_MANIFEST.json",
+      "bytes": 1438,
+      "sha256": "70346ff97d6fd41385dbbfeb9b6fc5a449d874fdd54b12a4437f9cc223fd1c2f"
+    },
+    "accepted394_source_approval": {
+      "file": "docs/evidence/apadana/english411-419-eight/APPROVAL.json",
+      "bytes": 24471,
+      "sha256": "f29b48b27895947b26a66f95841ca8514cbcaf7d3de3fc3642849cab9dbc7b8b"
+    }
+  },
+  "all_nine_publisher_holds_unchanged": true,
+  "all_ten_historical_canonical_held_ids_unchanged": true,
+  "complete_publisher_editions_only": true,
+  "source_and_normalization_only": true,
+  "runtime_API_activation_or_release_approval": false,
+  "operations": "Independent cached-original raw/rights/Gitblob/source/XML review reused exactly; new normalization compared full values to blind source preseal9534 written before author outputs. Seven bodies/119paragraphs/101notes/98physical quotations/101local-global labels/37hard500 pages/9exact note display owners/421unnoted40UTF16 verified, all115owner domains and seven whole sources reverse. Corrected source profiles/links independently field-reviewed with all394 prior full objects/order preserved; five existing NEXT10 index_revision pins retained, no new namespace or validation relaxation. The initial LINKS English-field omission and subsequent profile locator omission were held and corrected in preserved successors before this final leaf. SOURCE_BINDINGS contract/entries/native7wholepages/historical131/provenance6 copied domains reviewed with no APP/self/runtime cycle. Specific Walters/Whitman NC-SA4.0 notices and edition limits remain mandatory;422/428/430 excluded,413/420 and all older holds inactive. Only source/hash/JSON/quoted code inspection and read-only Git blobs; no app/parser/producer/test/build/browser/network/CI execution or checkout writes. No actual generated AP read, runtime, source-enabled API behavior, installation, native CI, activation or release verdict."
+}

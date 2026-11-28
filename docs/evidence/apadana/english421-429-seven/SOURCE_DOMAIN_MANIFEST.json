@@ -1,0 +1,40 @@
+{
+  "schema": "seven421429-original-source-domain-manifest-v1",
+  "status": "SOURCE_DOMAINS_INDEPENDENTLY_REVIEWED_NOT_RUNTIME_APPROVAL",
+  "source_files": {
+    "INPUT_CONTRACT.json": {
+      "file": "INPUT_CONTRACT.json",
+      "bytes": 29279,
+      "sha256": "e61951950fb80a8916e4099f8f411eeac296587d3fcac9d82754ee69ae40cd87"
+    },
+    "NORMALIZED_EXPECTATIONS.json": {
+      "file": "NORMALIZED_EXPECTATIONS.json",
+      "bytes": 349035,
+      "sha256": "8ff6eddf60a1fc58788755ff3f97a405f55f9d7b46db872cd90eadde0f115d3b"
+    },
+    "NORMALIZATION_BINDINGS.json": {
+      "file": "NORMALIZATION_BINDINGS.json",
+      "bytes": 88325,
+      "sha256": "0b0f923c8b03488677829944a1da8dd76619800a2accdebf8a01b39a57c21b9f"
+    },
+    "ORIGINAL_XML_REPLAY.json": {
+      "file": "ORIGINAL_XML_REPLAY.json",
+      "bytes": 531,
+      "sha256": "e4ff130e3284ff738eba1ae05d67a728f6071485244f8584044aff46720ea714"
+    },
+    "RAW_SOURCE_REVIEW.json": {
+      "file": "RAW_SOURCE_REVIEW.json",
+      "bytes": 25762,
+      "sha256": "d63391f3feaa135810da593b5eba0a752ec61014179cce50912d6e03c3d30a0d"
+    }
+  },
+  "normalization_review": {
+    "file": "NORMALIZATION_REVIEW.json",
+    "bytes": 7184,
+    "sha256": "fdfeb35e1f7c60735dc517a4edb26f8d10a4a3564ff544ffb9306f4756c20ff2"
+  },
+  "immutable_input_contract": true,
+  "raw_English_and_notes_copied": false,
+  "source_rights_only": true,
+  "runtime_API_activation_or_release_approval": false
+}
