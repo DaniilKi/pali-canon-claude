@@ -477,7 +477,10 @@ def run_cell(utilities, inputs, client, browser, root, stage, prepared, roots, u
             copied = page.get_by_role('link', name='Exact reading link · open or long-press to copy', exact=True)
             expect(copied).to_be_visible()
             require(utilities.fields(copied.get_attribute('href')) == expected_link, 'COPIED_READING_LINK_EXACT_REF_OFFSET_PIN')
-            go(uid, lambda: activate(copied), chosen['offset'])
+            activate(copied); ready(page, roots[uid], chosen['offset'], expect)
+            go(uid, page.reload, chosen['offset'])
+            require(sum(c.get('name') == 'get_translation' for c in state['calls']) == before_reopen,
+                    'COPIED_LINK_RELOAD_REQUIRES_ENGLISH_CONSENT')
             count('new_saved_roundtrips')
             stored = page.evaluate('k=>localStorage.getItem(k)', KEY)
             wrong = entry + '#read?' + urllib.parse.urlencode({**expected_link, 'source': '0' * 40})
