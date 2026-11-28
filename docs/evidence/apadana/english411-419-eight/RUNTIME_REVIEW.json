@@ -1,0 +1,25 @@
+{
+  "schema": "reviewed-current-apadana-runtime-approval-v1",
+  "status": "GO_RUNTIME_INVENTORY_ONLY",
+  "inventory_sha256": "364339616b495e56c1d4973b691e0334334fc44fcfb975a653be0fd3c4cc35c4",
+  "application_commit": "89d76701727f77e7d27088b611812f809cef39b0",
+  "curation_sha256": "f29b48b27895947b26a66f95841ca8514cbcaf7d3de3fc3642849cab9dbc7b8b",
+  "baseline_commit": "68dc2aafdfe8194dd40c78c00c62616ff0b18aea",
+  "predecessor_inventory_sha256": "532d80523591416519bea6cfe0cada68db7d0e80873d89fa4696844ce06faf45",
+  "expected_manifest_sha256": "8cf5b7ca6476c90c813e47d3eafdf77a4837ae878ba1153288e71e4a6f2aa171",
+  "runtime_paths": 34,
+  "actual_data_paths": 27,
+  "changed_paths": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_paths": 29,
+  "independent_manifest_composition": true,
+  "physical_and_Git_blob_inventory_exact": true,
+  "canonical_data26_and_H_held_preserved": true,
+  "behavioral_installed_browser_native_CI_or_release_approval": false,
+  "operations": "Independent physical regular34 files and immutable Git89d767 blobs match exactly. Generic12-key inventory reconstructed; curation identity is approved sourceAPPf29b, not generatedAP8cf. Independently source-derived EXPECTED8cf equals actual AP only after source composition; all386 prior complete links/order, source rights/holds and canonical883d preserved. Exactly AP+threeCJS+reader change vs68dc;29files including26otherdata byteexact. Five production source changes match sourcepeerc0b803; other src/web and package/lock/build sources unchanged. Current4231regular dependency files/37521775bytes and3containedbinlinks measured; locke238 and148installedversions equal prior approved receipt. Historical sibling dependency copy has been removed, so no fresh historical whole-tree bytecomparison claimed. Currentnode_modules is regular and compiled outputs contain no sibling-worktree path labels. Root observed normal npmrunbuild success in session84191; complete stdout not retained, no reviewer rebuild/compiler formal proof. Retained curator log/session75338 confirms394source/rights/root profiles and0bundledtranslationbodies. Readonlybytes/hash/Gitblobs only; no reviewer app/parser/producer/tests/build/browser/provider/network execution, installed/browser/nativeCI or release approval."
+}
