@@ -133,7 +133,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "67468836435ad2458a37ea91133f67881883479ba60c68a92f8e782b462e40e7"
+      "after_sha256": "c6d7881a3e29f2f9003ebf1539b6a1ed0eacdb648b8f0dfa73c90ce049eef4d4"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -174,6 +174,10 @@
     "tests/held234-current333-chain.test.mjs": {
       "before_sha256": "51655bcfc60b9d3707caf863eab909ff681a2d66d4c65685ecdc7c41eec2418e",
       "after_sha256": "e252a07ac8339ba40ad83dcfca2caa747a1100621987f3d01f0b171d523c7fbd"
+    },
+    "tests/historical104-auxiliary-workflow.test.mjs": {
+      "before_sha256": "a1a73e5af5bbe9a44b87c7db9cd7c6d238ad85e8034a2d649f60d5434cc91aa9",
+      "after_sha256": "9dd6d35201446cc23fe0c0a1743e89340a71ae27b4ac435b893a604821dc9780"
     },
     "tests/intake343-ci.test.mjs": {
       "before_sha256": "284f89789badb1f05877e993dd5e454547f7f27be7b52e67b01f76978dbcec99",
@@ -394,12 +398,14 @@
     "tests/current375-bindings.test.mjs": "ac9b058aa861e4fb4da2e02bb396746a5e38d7d49c57e75a3e60d2a038ddea3c",
     "tests/held234-current375-chain.test.mjs": "62ba5aeec1d83e9281991eacda12528ce183ef99784fbc64a804b609fb8114a7",
     "tests/intake375-current-negatives.test.mjs": "f151769712c2f2ad4c080ec03ba2f3686d8cbc7b3b9485d394f0a5c2bf78ec18",
+    "tests/monthly-refresh-prerequisites.test.mjs": "2b98337cd41c760397a50b56a303651e63f21e5d3d485b0fb5a93b26787455ed",
     "tests/scaled-profile-probe-diagnostics.test.mjs": "514ef07d6c6417fff2ab04c1569706a107b71de163ef6f8e15ae755002685ad0",
     "tests/thera371-378-seven.test.mjs": "c136a188c4a94ecd98c0e8fea3f5a609a666a66d80a507875ece8547889ca964",
     "tests/thera381-386-five.test.mjs": "2d6468786ea0d2bf232b026f7d1c62bb8fadb3c750a445542b32066754a347fe",
     "tests/thera394-407-four.test.mjs": "851f3a5ec02e989dd54924be9fb919ed88a43d537a1c0e65e626a466c35d8835",
     "tests/thera401-402-pair.test.mjs": "79bc747fe0d3ac4e5f169438c69cfbbe032d16ca47b862dd3a1fd2076e61e8fd",
     "tests/thera411-419-eight.test.mjs": "1321f9e75a4404f96346bda3516c6c17fc2e9ece1ee085b9d27a7333e0610c12",
+    "tests/thera421-429-seven.test.mjs": "4c8f8c805444fb210d8c5d30d53a20ab0bc74f0ed2e388f56e9948c8638302bf",
     "tests/verse-scope-python.test.mjs": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"
   },
   "registrations": {
@@ -3554,7 +3560,7 @@
       },
       "tests/ci-test-partitions.test.mjs": {
         "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-        "after_sha256": "67468836435ad2458a37ea91133f67881883479ba60c68a92f8e782b462e40e7",
+        "after_sha256": "c6d7881a3e29f2f9003ebf1539b6a1ed0eacdb648b8f0dfa73c90ce049eef4d4",
         "before": [
           {
             "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
@@ -4253,6 +4259,98 @@
             "name": "actual held234 metadata preflight keeps the full325,333,339,343 and359 bridges into current368 and rejects baseline corruption",
             "name_expression": "'actual held234 metadata preflight keeps the full325,333,339,343 and359 bridges into current368 and rejects baseline corruption'",
             "line": 11,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ]
+      },
+      "tests/historical104-auxiliary-workflow.test.mjs": {
+        "before_sha256": "a1a73e5af5bbe9a44b87c7db9cd7c6d238ad85e8034a2d649f60d5434cc91aa9",
+        "after_sha256": "9dd6d35201446cc23fe0c0a1743e89340a71ae27b4ac435b893a604821dc9780",
+        "before": [
+          {
+            "name": null,
+            "name_expression": "'exact historical104 setup and complete oldworkflow inverse '+row.path",
+            "line": 9,
+            "column": 2,
+            "registration_ancestors": [
+              "ForOfStatement"
+            ],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": null,
+            "name_expression": "'historical104 setup refuses missing duplicate moved or broadened provisioning '+row.path",
+            "line": 17,
+            "column": 2,
+            "registration_ancestors": [
+              "ForOfStatement"
+            ],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": null,
+            "name_expression": "'finite104 setup cannot conceal old fulltest/triggers/permissions/job byte changes '+row.path",
+            "line": 28,
+            "column": 2,
+            "registration_ancestors": [
+              "ForOfStatement"
+            ],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "every configured full npm inventory job provisions exact104 before tests with no new workflow invocation",
+            "name_expression": "'every configured full npm inventory job provisions exact104 before tests with no new workflow invocation'",
+            "line": 36,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 2,
+            "options_source": null
+          }
+        ],
+        "after": [
+          {
+            "name": null,
+            "name_expression": "'exact historical104 setup and complete oldworkflow inverse '+row.path",
+            "line": 29,
+            "column": 2,
+            "registration_ancestors": [
+              "ForOfStatement"
+            ],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": null,
+            "name_expression": "'historical104 setup refuses missing duplicate moved or broadened provisioning '+row.path",
+            "line": 37,
+            "column": 2,
+            "registration_ancestors": [
+              "ForOfStatement"
+            ],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": null,
+            "name_expression": "'finite104 setup cannot conceal old fulltest/triggers/permissions/job byte changes '+row.path",
+            "line": 48,
+            "column": 2,
+            "registration_ancestors": [
+              "ForOfStatement"
+            ],
+            "argument_count": 2,
+            "options_source": null
+          },
+          {
+            "name": "every configured full npm inventory job provisions exact104 before tests with no new workflow invocation",
+            "name_expression": "'every configured full npm inventory job provisions exact104 before tests with no new workflow invocation'",
+            "line": 56,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -10061,6 +10159,20 @@
           }
         ]
       },
+      "tests/monthly-refresh-prerequisites.test.mjs": {
+        "sha256": "2b98337cd41c760397a50b56a303651e63f21e5d3d485b0fb5a93b26787455ed",
+        "after": [
+          {
+            "name": "current monthly exact104 and fixedH setup has strict historical inverse and drift refusals",
+            "name_expression": "'current monthly exact104 and fixedH setup has strict historical inverse and drift refusals'",
+            "line": 28,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "{timeout:5000}"
+          }
+        ]
+      },
       "tests/scaled-profile-probe-diagnostics.test.mjs": {
         "sha256": "514ef07d6c6417fff2ab04c1569706a107b71de163ef6f8e15ae755002685ad0",
         "after": [
@@ -10190,6 +10302,29 @@
           }
         ]
       },
+      "tests/thera421-429-seven.test.mjs": {
+        "sha256": "4c8f8c805444fb210d8c5d30d53a20ab0bc74f0ed2e388f56e9948c8638302bf",
+        "after": [
+          {
+            "name": "publisher421/423-427/429 exact sources retain394 objects,119 paragraphs,101 notes and98 physical quotes",
+            "name_expression": "'publisher421/423-427/429 exact sources retain394 objects,119 paragraphs,101 notes and98 physical quotes'",
+            "line": 82,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "source"
+          },
+          {
+            "name": "publisher421/423-427/429 actual API preserves37 cursors,98 quotes,complete native pages andNEXT10 source pins",
+            "name_expression": "'publisher421/423-427/429 actual API preserves37 cursors,98 quotes,complete native pages andNEXT10 source pins'",
+            "line": 110,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "source"
+          }
+        ]
+      },
       "tests/verse-scope-python.test.mjs": {
         "sha256": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19",
         "after": [
@@ -10227,10 +10362,10 @@
   "counts": {
     "baseline_files": 345,
     "preserved_cases": 2092,
-    "added_files": 12,
-    "added_cases": 28,
-    "total_files": 357,
-    "total_cases": 2120
+    "added_files": 14,
+    "added_cases": 31,
+    "total_files": 359,
+    "total_cases": 2123
   },
   "all_H_scenarios_preserved": true,
   "source_only": true,

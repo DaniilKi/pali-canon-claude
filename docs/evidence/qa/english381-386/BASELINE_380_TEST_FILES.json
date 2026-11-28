@@ -2,7 +2,7 @@
   "schema": "reviewed-ci-test-baseline-v5",
   "commit": "4e9287bd5ebc78aba4b185b017e63eac6547bfd7",
   "legacy_test_count": 2092,
-  "added_test_count": 28,
+  "added_test_count": 31,
   "driver": {
     "path": "scripts/test.mjs",
     "sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad"
@@ -149,7 +149,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "67468836435ad2458a37ea91133f67881883479ba60c68a92f8e782b462e40e7"
+      "after_sha256": "c6d7881a3e29f2f9003ebf1539b6a1ed0eacdb648b8f0dfa73c90ce049eef4d4"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -190,6 +190,10 @@
     "tests/held234-current333-chain.test.mjs": {
       "before_sha256": "51655bcfc60b9d3707caf863eab909ff681a2d66d4c65685ecdc7c41eec2418e",
       "after_sha256": "e252a07ac8339ba40ad83dcfca2caa747a1100621987f3d01f0b171d523c7fbd"
+    },
+    "tests/historical104-auxiliary-workflow.test.mjs": {
+      "before_sha256": "a1a73e5af5bbe9a44b87c7db9cd7c6d238ad85e8034a2d649f60d5434cc91aa9",
+      "after_sha256": "9dd6d35201446cc23fe0c0a1743e89340a71ae27b4ac435b893a604821dc9780"
     },
     "tests/intake343-ci.test.mjs": {
       "before_sha256": "284f89789badb1f05877e993dd5e454547f7f27be7b52e67b01f76978dbcec99",
@@ -410,25 +414,27 @@
     "tests/current375-bindings.test.mjs": "ac9b058aa861e4fb4da2e02bb396746a5e38d7d49c57e75a3e60d2a038ddea3c",
     "tests/held234-current375-chain.test.mjs": "62ba5aeec1d83e9281991eacda12528ce183ef99784fbc64a804b609fb8114a7",
     "tests/intake375-current-negatives.test.mjs": "f151769712c2f2ad4c080ec03ba2f3686d8cbc7b3b9485d394f0a5c2bf78ec18",
+    "tests/monthly-refresh-prerequisites.test.mjs": "2b98337cd41c760397a50b56a303651e63f21e5d3d485b0fb5a93b26787455ed",
     "tests/scaled-profile-probe-diagnostics.test.mjs": "514ef07d6c6417fff2ab04c1569706a107b71de163ef6f8e15ae755002685ad0",
     "tests/thera371-378-seven.test.mjs": "c136a188c4a94ecd98c0e8fea3f5a609a666a66d80a507875ece8547889ca964",
     "tests/thera381-386-five.test.mjs": "2d6468786ea0d2bf232b026f7d1c62bb8fadb3c750a445542b32066754a347fe",
     "tests/thera394-407-four.test.mjs": "851f3a5ec02e989dd54924be9fb919ed88a43d537a1c0e65e626a466c35d8835",
     "tests/thera401-402-pair.test.mjs": "79bc747fe0d3ac4e5f169438c69cfbbe032d16ca47b862dd3a1fd2076e61e8fd",
     "tests/thera411-419-eight.test.mjs": "1321f9e75a4404f96346bda3516c6c17fc2e9ece1ee085b9d27a7333e0610c12",
+    "tests/thera421-429-seven.test.mjs": "4c8f8c805444fb210d8c5d30d53a20ab0bc74f0ed2e388f56e9948c8638302bf",
     "tests/verse-scope-python.test.mjs": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "2a46e7d349cb07a7cd962df602946e6076f125328659d0fb70b8b3fbfd2858fd",
+    "scripts/ci-test-partitions.mjs": "724bb608492e6074f739f50a3bb7ed33e44288471eb0fd7bd93264fa0be52ea9",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
-    "docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json": "f2c20fecbda8a4b94dd48f444813bbf2f6a288bb3a37cb6f7ceadb98ef8ee5ce",
+    "docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json": "bc82bef94c95307e73d9b1a9d4385216d05e6fce2fe58942a6f891af04716cab",
     "docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json": "4c3cf4df171873477757e158736a842903770c35e824df5ab0f820ecc566c425",
     "docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json": "db3e46646b405dc0e18c7c10c4d79fa1ea9515803b2826d01f6fb33512b387d5",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
-    "tests/helpers/current-apadana.mjs": "bf2366a2c889c8e0a44f1ec5e55c19e347d838f340e9d208fc68c3547cecb833",
+    "tests/helpers/current-apadana.mjs": "86abbb586c1bbd8073275e8d37cf12de2bbd9bcbe01894e2b596265917f3589c",
     "tests/helpers/current389390-metadata.mjs": "74e8b7daf92ccb377ae0ad10d8d0378adb07ac54e39bb599f19aed6d95d6c1e6",
     "tests/helpers/historical-h-inputs.mjs": "8318fc4c884610f931486037f47cdf6b2c130cb7185875c3055af0266a7c700b",
     "tests/helpers/intake375-metadata.mjs": "ee77c32767be7713ef383c835b44ce942e510008da2c057bcd42380368edbf3d",
@@ -519,7 +525,7 @@
     "tests/cbeta-khp-assessment.test.mjs": "032baceafe209d89d2da2edc4e07fe42b2d8e9fc99fb2d2b7a14dacc7e42023b",
     "tests/chatgpt-widget.test.mjs": "b8c20ff21c8d10f3ef9e95891298afa923997b3c949098f2b7476b85ddcd3246",
     "tests/check-ci-stages.test.mjs": "216f7e198e5272bb16a2d6b841ca1bc9674033e9a9bfc965d7a6403b3f9f58c0",
-    "tests/ci-test-partitions.test.mjs": "67468836435ad2458a37ea91133f67881883479ba60c68a92f8e782b462e40e7",
+    "tests/ci-test-partitions.test.mjs": "c6d7881a3e29f2f9003ebf1539b6a1ed0eacdb648b8f0dfa73c90ce049eef4d4",
     "tests/citation-id-coverage.test.mjs": "ac30a105e79ae69f8f1cf867ee713929380b153812368333d93dc45886459123",
     "tests/citation-pagination.test.mjs": "bbdbbabf73edd4ffe4aedf592f6e504c476811b652c1559129bae5454b6b4443",
     "tests/citation-range-validation.test.mjs": "65db48e84f79515b8764df6ed063fc849a6b271fecee8ef19e061117750e336d",
@@ -570,7 +576,7 @@
     "tests/held234-current333-chain.test.mjs": "e252a07ac8339ba40ad83dcfca2caa747a1100621987f3d01f0b171d523c7fbd",
     "tests/held234-current375-chain.test.mjs": "62ba5aeec1d83e9281991eacda12528ce183ef99784fbc64a804b609fb8114a7",
     "tests/held42-editorial-gap.test.mjs": "70101b75e2e9df2959de1924fad036ef258f36ee88dd257f48befa97c85931eb",
-    "tests/historical104-auxiliary-workflow.test.mjs": "a1a73e5af5bbe9a44b87c7db9cd7c6d238ad85e8034a2d649f60d5434cc91aa9",
+    "tests/historical104-auxiliary-workflow.test.mjs": "9dd6d35201446cc23fe0c0a1743e89340a71ae27b4ac435b893a604821dc9780",
     "tests/hosted-recovery.test.mjs": "a7ee46667672663293d4c2e144c6553765256837bad2881134b170d3774ec63d",
     "tests/hosting-memory.test.mjs": "c4ef705bcec46ff8e39b886c4db8d882303014bff87c8b8bcece80d51dfb690b",
     "tests/http-client.test.mjs": "aeb0da7baafa20b7e9fd86c25e392572597b29b9ab415840b29c9a0b7b232285",
@@ -597,6 +603,7 @@
     "tests/milinda-medicine-partial.test.mjs": "6ffbbe1b662666460dbf90980480aa720c0d24a33abd068ec894d0d528de3272",
     "tests/milinda-screening.test.mjs": "5377f4a3600e92eecd050c4aea9297ec0bcee6f92fab38ade83ee7ef529ba290",
     "tests/milinda-sections.test.mjs": "ab92d42716b010836b07644c2198ca6ab3d7ac627dfec3afa910ba509ca4e134",
+    "tests/monthly-refresh-prerequisites.test.mjs": "2b98337cd41c760397a50b56a303651e63f21e5d3d485b0fb5a93b26787455ed",
     "tests/nalaka-kondanna-review.test.mjs": "120164206c152b00bcc2021dc3ea8c3b2cb8d832f122cdb6daa64f79750fef7f",
     "tests/name-title-evidence.test.mjs": "aed8909e5c62ee07bf0b18f1fdce1fe0209f4a358418b21e80d09097bf009f57",
     "tests/navigation-commands.test.mjs": "f219923ace72a7be1316d072140cae5e763689aec126e91015881cab2153d25c",
@@ -722,6 +729,7 @@
     "tests/thera394-407-four.test.mjs": "851f3a5ec02e989dd54924be9fb919ed88a43d537a1c0e65e626a466c35d8835",
     "tests/thera401-402-pair.test.mjs": "79bc747fe0d3ac4e5f169438c69cfbbe032d16ca47b862dd3a1fd2076e61e8fd",
     "tests/thera411-419-eight.test.mjs": "1321f9e75a4404f96346bda3516c6c17fc2e9ece1ee085b9d27a7333e0610c12",
+    "tests/thera421-429-seven.test.mjs": "4c8f8c805444fb210d8c5d30d53a20ab0bc74f0ed2e388f56e9948c8638302bf",
     "tests/title-pagination.test.mjs": "0d4781baf210f7b37ff1bb47eb14e2ec2efa43e1e5e27217f9b92584c5e6c34d",
     "tests/tool-titles.test.mjs": "67c78bcf3eed979ab5abf7b8aa842bb06e56dacd82568f0cfe41449a692aa974",
     "tests/topic-script-input.test.mjs": "7903c5a9acc049a015abb21cbceaa9a9c605de66f71d26ea0b3dd6d135a509e0",
@@ -803,6 +811,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/english381-386/CASE_SOURCE_REVIEW.json",
-    "sha256": "c3e780e6729b6a5743b67b75927b099f2ba2e2d677fd92f77718cd22d2e8f57d"
+    "sha256": "17b575690a4360f5ab5f14942e59701e992bb2fd324f69584cc630a31abf098d"
   }
 }
