@@ -133,7 +133,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "c6d7881a3e29f2f9003ebf1539b6a1ed0eacdb648b8f0dfa73c90ce049eef4d4"
+      "after_sha256": "82630c29a63cc4fc006027ef77cfaa45f4f5421599b4a598273f14083764d0b6"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -3560,7 +3560,7 @@
       },
       "tests/ci-test-partitions.test.mjs": {
         "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-        "after_sha256": "c6d7881a3e29f2f9003ebf1539b6a1ed0eacdb648b8f0dfa73c90ce049eef4d4",
+        "after_sha256": "82630c29a63cc4fc006027ef77cfaa45f4f5421599b4a598273f14083764d0b6",
         "before": [
           {
             "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",

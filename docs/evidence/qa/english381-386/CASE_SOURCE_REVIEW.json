@@ -148,7 +148,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "c6d7881a3e29f2f9003ebf1539b6a1ed0eacdb648b8f0dfa73c90ce049eef4d4"
+      "after_sha256": "82630c29a63cc4fc006027ef77cfaa45f4f5421599b4a598273f14083764d0b6"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -424,7 +424,7 @@
     "tests/verse-scope-python.test.mjs": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "724bb608492e6074f739f50a3bb7ed33e44288471eb0fd7bd93264fa0be52ea9",
+    "scripts/ci-test-partitions.mjs": "4ccf28f75604d9a092d422b8de1de98410c9cdbc177fe08143246d107847c673",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
@@ -447,7 +447,7 @@
     "tests/six_boundary_history_acceptance.py": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
     "tests/six_operation_scope_controls.py": "e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570"
   },
-  "inventory_sha256": "645c7432e23e6120f80ff66c467e96bc234a667952bf122a7c08e3b6516e6b51",
+  "inventory_sha256": "378a5d374808fbbd7d50f3e9b5a51efcdba0929f9ca270e7399ce443ca255200",
   "counts": {
     "baseline_files": 345,
     "preserved_cases": 2092,
@@ -3608,7 +3608,7 @@
       },
       "tests/ci-test-partitions.test.mjs": {
         "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-        "after_sha256": "c6d7881a3e29f2f9003ebf1539b6a1ed0eacdb648b8f0dfa73c90ce049eef4d4",
+        "after_sha256": "82630c29a63cc4fc006027ef77cfaa45f4f5421599b4a598273f14083764d0b6",
         "before": [
           {
             "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
@@ -10426,7 +10426,7 @@
   "evidence": [
     {
       "path": "docs/evidence/qa/english381-386/CASE_SOURCE_AUDIT.json",
-      "sha256": "4b12fb4183c5b343c75b86d6671f665f59cef1d11b2c006f64e52d099ffad7a8"
+      "sha256": "3d537cba4757e6e4f919fb67fae657c8e4f91ad665f967dc14afb852a256c357"
     }
   ],
   "partition_suites": [
