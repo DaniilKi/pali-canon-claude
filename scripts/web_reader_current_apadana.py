@@ -427,7 +427,7 @@ def widget_contract():
     return {'version':'v53','uri':'ui://pali-canon/reader-v53.html','skybridge':'ui://pali-canon/reader-v53.skybridge.html'}
 
 
-def capture_current(root):
+def _capture_current_fresh(root):
     root=_physical_root(root)
     for pin in RUNTIME_PINS.values():_pin(pin)
     context=_source(root)
@@ -493,17 +493,22 @@ def capture_current(root):
     _require(_typed(expected)==_typed(context['english']['manifest']) and list(expected['links'])==context['english']['ids'] and
              _typed(json.loads(raw_data['data/apadana.json']))==_typed(expected),
              'Actual current catalogue must equal independent source394 prefix plus exact seven source objects')
+    return context,files
+
+
+
+def capture_current(root):
+    context,files=_capture_current_fresh(root)
     return deepcopy(context),deepcopy(files)
 
 
-
 def approved_catalogue(root):
-    context,_=capture_current(root)
+    context,_=_capture_current_fresh(root)
     return deepcopy({key:context['english'][key]for key in ('ids','profiles','links','source')})
 
 
 def approved_runtime(root):
-    _,files=capture_current(root)
+    _,files=_capture_current_fresh(root)
     return deepcopy(files)
 
 

@@ -520,8 +520,8 @@
       "sha256": "2282bac62b38207769d459d8005cc308fc420b5ae13025eee6f3e1ded9f89957"
     },
     "scripts/web_reader_current_apadana.py": {
-      "bytes": 43001,
-      "sha256": "7922087b7b962b5e074c5851bbd633e36443a52b56b1333f87d582cfddece436"
+      "bytes": 43123,
+      "sha256": "3eee03f94879790fd1d14f6c58becccca13fed76721f9ab457216fc3abb7bf08"
     },
     "scripts/web_reader_intake375.py": {
       "bytes": 18999,
