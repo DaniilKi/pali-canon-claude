@@ -22259,6 +22259,435 @@ __export(canon_exports, {
   translationScope: () => translationScope
 });
 
+// src/apadana-thera401-402-profiles.mjs
+var THERA_401_402_PROFILES = {
+  "tha-ap403": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-401.md",
+    "id": "tha-ap403",
+    "publisher_chapter": "chapter-3",
+    "poem": 401,
+    "verses": [
+      3891,
+      3918
+    ],
+    "root_verses": [
+      1,
+      28
+    ],
+    "note_count": 19,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-401/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-401/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-401.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Tissametteyya",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 401; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "acd65e79f98f11239870504f054002cc440339a375e77033800649d99bf91bc9",
+    "body_sha256": "0a5968b8e6c25e7336cbb67019733e395a156356c1c5be2c5159232f9f2c2277",
+    "notes_sha256": "6063400c75b7a5736bb76cf1cbea605cd02db0f607765b0d760eb7e05416629c",
+    "paratext_sha256": "b1c76c6f71ae64fa62ebf4ffecdfd76cffb7a5935e86d8590cf8761715e8a332",
+    "root_sha256": "f18e3eab3e4ba7fb91e85aa42cc6da9e641ef567c7386b7b5c3ec2928fb278e9",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3891",
+        "suffix": "(1) [3891]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3892",
+        "suffix": "(2) [3892]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3893",
+        "suffix": "(3) [3893]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3894",
+        "suffix": "(4) [3894]",
+        "lines": 5
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3895",
+        "suffix": "(5) [3895]",
+        "lines": 5
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "3896",
+        "suffix": "(6) [3896]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "3897",
+        "suffix": "(7) [3897]",
+        "lines": 5
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "3898",
+        "suffix": "(8) [3898]",
+        "lines": 5
+      },
+      {
+        "local_label": "9",
+        "publisher_label": "3899",
+        "suffix": "(9) [3899]",
+        "lines": 5
+      },
+      {
+        "local_label": "10",
+        "publisher_label": "3900",
+        "suffix": "(10) [3900]",
+        "lines": 5
+      },
+      {
+        "local_label": "11",
+        "publisher_label": "3901",
+        "suffix": "(11) [3901]",
+        "lines": 5
+      },
+      {
+        "local_label": "12",
+        "publisher_label": "3902",
+        "suffix": "(12) [3902]",
+        "lines": 5
+      },
+      {
+        "local_label": "13",
+        "publisher_label": "3903",
+        "suffix": "(13) [3903]",
+        "lines": 4
+      },
+      {
+        "local_label": "14",
+        "publisher_label": "3904",
+        "suffix": "(14) [3904]",
+        "lines": 4
+      },
+      {
+        "local_label": "15",
+        "publisher_label": "3905",
+        "suffix": "(15) [3905]",
+        "lines": 4
+      },
+      {
+        "local_label": "16",
+        "publisher_label": "3906",
+        "suffix": "(16) [3906]",
+        "lines": 4
+      },
+      {
+        "local_label": "17",
+        "publisher_label": "3907",
+        "suffix": "(17) [3907]",
+        "lines": 4
+      },
+      {
+        "local_label": "18",
+        "publisher_label": "3908",
+        "suffix": "(18) [3908]",
+        "lines": 5
+      },
+      {
+        "local_label": "19",
+        "publisher_label": "3909",
+        "suffix": "(19) [3909]",
+        "lines": 4
+      },
+      {
+        "local_label": "20",
+        "publisher_label": "3910",
+        "suffix": "(20) [3910]",
+        "lines": 4
+      },
+      {
+        "local_label": "21",
+        "publisher_label": "3911",
+        "suffix": "(21) [3911]",
+        "lines": 4
+      },
+      {
+        "local_label": "22",
+        "publisher_label": "3912",
+        "suffix": "(22) [3912]",
+        "lines": 4
+      },
+      {
+        "local_label": "23",
+        "publisher_label": "3913",
+        "suffix": "(23) [3913]",
+        "lines": 4
+      },
+      {
+        "local_label": "24",
+        "publisher_label": "3914",
+        "suffix": "(24) [3914]",
+        "lines": 5
+      },
+      {
+        "local_label": "25",
+        "publisher_label": "3915",
+        "suffix": "(25) [3915]",
+        "lines": 4
+      },
+      {
+        "local_label": "26",
+        "publisher_label": "3916",
+        "suffix": "(26) [3916]",
+        "lines": 4
+      },
+      {
+        "local_label": "27",
+        "publisher_label": "3917",
+        "suffix": "(27) [3917]",
+        "lines": 4
+      },
+      {
+        "local_label": "28",
+        "publisher_label": "3918",
+        "suffix": "(28) [3918]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+      "Publisher main PTS heading398, BJTS brace/file401 and canonical tha-ap403 are distinct literal identities. Chapter41, its first poem title, the Sobhita/fire/Padumuttara/fruit narrative and both colophons establish this particular correspondence; no general numbering rule is approved.",
+      "The unnoted Metteyya chapter41 heading remains separate publisher paratext. Notes1\u20132 belong to the poem heading, notes3\u201319 remain poem-owned, and no chapter-summary or note-owning preface is invented.",
+      "Retain all ten bracketed speaker-label lines and their original single-newline separators in local4,5,7,8,9,10,11,12,18,24. Those physical five-line entries contain a speaker label plus four translated verse lines; the labels are not numbering-only or missing-verse text.",
+      "Retain Tissametteyya in the file title and Tissa-metteyya in the colophons and note2. Preserve the attributed SN reference, note4 hehi, note5 PTS/BJTS manuja/manuje and note6 deva te/devate alternatives; the independent VRI hohiti/hehiti variant and its other original note remain separate.",
+      "This publisher poem prints28 stanzas with full final attainment refrains; this VRI unit also has28 numbered stanzas and full refrains. Equal counts do not prove word equivalence. Preserve the translator\u2019s speaker assignments, bracketed supplements, lexical choices and note16 botanical spelling without harmonization."
+    ],
+    "publisher_verse_labels": [
+      "3891",
+      "3892",
+      "3893",
+      "3894",
+      "3895",
+      "3896",
+      "3897",
+      "3898",
+      "3899",
+      "3900",
+      "3901",
+      "3902",
+      "3903",
+      "3904",
+      "3905",
+      "3906",
+      "3907",
+      "3908",
+      "3909",
+      "3910",
+      "3911",
+      "3912",
+      "3913",
+      "3914",
+      "3915",
+      "3916",
+      "3917",
+      "3918"
+    ],
+    "publisher_heading_sha256": "c756b3f49219aba48d7142b176e749712f7c27057e891068f2248032b204a903"
+  },
+  "tha-ap404": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-402.md",
+    "id": "tha-ap404",
+    "publisher_chapter": "chapter-3",
+    "poem": 402,
+    "verses": [
+      3919,
+      3934
+    ],
+    "root_verses": [
+      29,
+      44
+    ],
+    "note_count": 17,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-402/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-402/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-402.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Pu\u1E47\u1E47aka",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 402; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "36ab4b64da98ca50626ff3f9c9d86fc34f53b1405b47ba2e9d60dda6a5d99740",
+    "body_sha256": "5a2f6375fc4b6e8891df8dc119aac5e52be745c49bcb7e9b1fc2e3a6cc9417a7",
+    "notes_sha256": "f99587903f0ce94ec8a0969f820231bd1a3a1f41d34b9055d6ca329e0959743a",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "bf55622e636b7bd3691c2764f1e2b3f399b3335483689ecf292790f6073c8976",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3919",
+        "suffix": "(1) [3919]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3920",
+        "suffix": "(2) [3920]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3921",
+        "suffix": "(3) [3921]",
+        "lines": 4
+      },
+      {
+        "local_label": "4-5",
+        "publisher_label": "3922-3923",
+        "suffix": "(4-5) [3922-3923]",
+        "lines": 8
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "3924",
+        "suffix": "(6) [3924]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "3925",
+        "suffix": "(7) [3925]",
+        "lines": 4
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "3926",
+        "suffix": "(8) [3926]",
+        "lines": 4
+      },
+      {
+        "local_label": "9",
+        "publisher_label": "3927",
+        "suffix": "(9) [3927]",
+        "lines": 4
+      },
+      {
+        "local_label": "10",
+        "publisher_label": "3928",
+        "suffix": "(10) [3928]",
+        "lines": 4
+      },
+      {
+        "local_label": "11",
+        "publisher_label": "3929",
+        "suffix": "(11) [3929]",
+        "lines": 4
+      },
+      {
+        "local_label": "12",
+        "publisher_label": "3930",
+        "suffix": "(12) [3930]",
+        "lines": 4
+      },
+      {
+        "local_label": "13",
+        "publisher_label": "3931",
+        "suffix": "(13) [3931]",
+        "lines": 4
+      },
+      {
+        "local_label": "14",
+        "publisher_label": "3932",
+        "suffix": "(14) [3932]",
+        "lines": 4
+      },
+      {
+        "local_label": "15",
+        "publisher_label": "3933",
+        "suffix": "(15) [3933]",
+        "lines": 4
+      },
+      {
+        "local_label": "16",
+        "publisher_label": "3934",
+        "suffix": "(16) [3934]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+      "Publisher main PTS heading399, BJTS brace/file402 and canonical tha-ap404 are distinct literal identities. Chapter41\u2019s second title, the self-become Buddha\u2019s illness/death, cremation and yakkha naming narrative,91-aeon statement and both colophons establish this particular correspondence; no general numbering rule is approved.",
+      "Keep local4\u20135/global3922\u20133923 as one physical eight-line paragraph with its one original terminal range suffix. Both printed stanzas remain present; do not split, drop or silently renumber the paragraph.",
+      "All17 original notes stay poem-owned: notes1\u20132 are attached to the poem heading and notes3\u201317 to their original stanzas. There is no chapter heading, chapter summary or transferred editorial note in this file.",
+      "Retain source-note6\u2019s BJTS wolf/compound qualification and its mixed quotation punctuation, note7 vyaggha/v\u0101l\u0101 alternatives, note13 ya\u1E43/ta\u014B variants and note15 divyamayo/dibbamayo wording. All six VRI variant-note records remain independent; no edition is silently selected to repair another.",
+      "The publisher prints16 complete stanzas, including three full attainment refrains at local14\u201316, whereas VRI42\u201344 abbreviates those refrains with peyy\u0101la. Do not expand VRI from the publisher, substitute a different refrain, or equate whole publisher coverage with line-complete VRI coverage."
+    ],
+    "publisher_verse_labels": [
+      "3919",
+      "3920",
+      "3921",
+      "3922-3923",
+      "3924",
+      "3925",
+      "3926",
+      "3927",
+      "3928",
+      "3929",
+      "3930",
+      "3931",
+      "3932",
+      "3933",
+      "3934"
+    ],
+    "publisher_heading_sha256": "2dfda0f2f797948c80d2d59d82926ba85a3910064cfc88798fa721b5a6c0ed61"
+  }
+};
+
 // src/apadana-thera381-386-five-profiles.mjs
 var THERA_381_386_FIVE_PROFILES = {
   "tha-ap383": {
@@ -52559,7 +52988,8 @@ var THERA_APADANA_PROFILES = deepFreeze2({
   ...THERA_335_350_PROFILES,
   ...THERA_351_360_NINE_PROFILES,
   ...THERA_371_378_SEVEN_PROFILES,
-  ...THERA_381_386_FIVE_PROFILES
+  ...THERA_381_386_FIVE_PROFILES,
+  ...THERA_401_402_PROFILES
 });
 
 // src/apadana-profiles.mjs
@@ -63089,6 +63519,52 @@ var MIXED_PTS_BJTS_HEADINGS = Object.freeze({
     "note_count": 3,
     "paragraph_pairs": {},
     "note_pairs": {}
+  },
+  "tha-ap403": {
+    "poem": 401,
+    "pts": 398,
+    "raw_sha256": "acd65e79f98f11239870504f054002cc440339a375e77033800649d99bf91bc9",
+    "heading_sha256": "c756b3f49219aba48d7142b176e749712f7c27057e891068f2248032b204a903",
+    "paragraph_count": 32,
+    "note_count": 19,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "7": [
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "tha-ap404": {
+    "poem": 402,
+    "pts": 399,
+    "raw_sha256": "36ab4b64da98ca50626ff3f9c9d86fc34f53b1405b47ba2e9d60dda6a5d99740",
+    "heading_sha256": "2dfda0f2f797948c80d2d59d82926ba85a3910064cfc88798fa721b5a6c0ed61",
+    "paragraph_count": 18,
+    "note_count": 17,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "4": [
+        [
+          0,
+          1
+        ]
+      ],
+      "6": [
+        [
+          0,
+          3
+        ]
+      ],
+      "17": [
+        [
+          0,
+          1
+        ]
+      ]
+    }
   }
 });
 var MIXED_DISPLAY_TOKENS = Object.freeze([
@@ -63328,7 +63804,7 @@ function parseTheraApadana(raw, profile) {
   const headings = [...poem.matchAll(profile.id === "tha-ap103" ? /^## \\\[101\. /gm : /^### /gm)];
   if (headings.length !== 1) fail2();
   const split = headings[0].index;
-  if (["tha-ap13", "tha-ap23", "tha-ap33", "tha-ap43", "tha-ap53", "tha-ap63", "tha-ap73", "tha-ap83", "tha-ap93", "tha-ap103", "tha-ap113", "tha-ap123", "tha-ap133", "tha-ap143", "tha-ap153", "tha-ap163", "tha-ap173", "tha-ap183", "tha-ap193", "tha-ap203", "tha-ap213", "tha-ap243", "tha-ap223", "tha-ap233", "tha-ap253", "tha-ap263", "tha-ap273", "tha-ap283", "tha-ap323", "tha-ap333", "tha-ap343", "tha-ap353", "tha-ap373", "tha-ap383"].includes(profile.id) !== split > 0) fail2();
+  if (["tha-ap13", "tha-ap23", "tha-ap33", "tha-ap43", "tha-ap53", "tha-ap63", "tha-ap73", "tha-ap83", "tha-ap93", "tha-ap103", "tha-ap113", "tha-ap123", "tha-ap133", "tha-ap143", "tha-ap153", "tha-ap163", "tha-ap173", "tha-ap183", "tha-ap193", "tha-ap203", "tha-ap213", "tha-ap243", "tha-ap223", "tha-ap233", "tha-ap253", "tha-ap263", "tha-ap273", "tha-ap283", "tha-ap323", "tha-ap333", "tha-ap343", "tha-ap353", "tha-ap373", "tha-ap383", "tha-ap403"].includes(profile.id) !== split > 0) fail2();
   const preface = poem.slice(0, split), body = poem.slice(split);
   refs(body, profile.note_numbers);
   const publisher_paratext = present(preface), text2 = present(body), translator_notes = notesFor(profile.note_numbers), paragraphs = text2.split(/\n\n+/);
@@ -75804,7 +76280,7 @@ function createServer({ executeTool } = {}) {
 // src/chatgpt-widget.mjs
 var import_node_crypto11 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v49";
+var WIDGET_VERSION = "v50";
 var NAVIGATION_TIMEOUT_MS = 9e4;
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
@@ -75813,7 +76289,7 @@ var SKYBRIDGE_MIME = "text/html+skybridge";
 var WIDGET_HASH_SOURCE = true ? "function contentSha256(text) {\n  if (typeof text !== 'string' || text.length > 100000 || typeof TextEncoder !== 'function') throw Error('Editorial content integrity checking is unavailable.');\n  const input = new TextEncoder().encode(text), length = input.length;\n  const bytes = new Uint8Array(Math.ceil((length + 9) / 64) * 64);\n  bytes.set(input); bytes[length] = 0x80;\n  const view = new DataView(bytes.buffer);\n  view.setUint32(bytes.length - 8, Math.floor(length / 0x20000000));\n  view.setUint32(bytes.length - 4, (length * 8) >>> 0);\n  const constants = [\n    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,\n    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,\n    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,\n    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,\n    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,\n    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,\n    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,\n    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2,\n  ];\n  const state = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];\n  const words = new Uint32Array(64), rotate = (value, n) => (value >>> n) | (value << (32 - n));\n  for (let offset = 0; offset < bytes.length; offset += 64) {\n    for (let i = 0; i < 16; i++) words[i] = view.getUint32(offset + 4 * i);\n    for (let i = 16; i < 64; i++) {\n      const x = words[i - 15], y = words[i - 2];\n      const s0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >>> 3), s1 = rotate(y, 17) ^ rotate(y, 19) ^ (y >>> 10);\n      words[i] = (words[i - 16] + s0 + words[i - 7] + s1) >>> 0;\n    }\n    let [a,b,c,d,e,f,g,h] = state;\n    for (let i = 0; i < 64; i++) {\n      const sum1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25), choice = (e & f) ^ (~e & g);\n      const first = (h + sum1 + choice + constants[i] + words[i]) >>> 0;\n      const sum0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22), majority = (a & b) ^ (a & c) ^ (b & c);\n      h=g; g=f; f=e; e=(d+first)>>>0; d=c; c=b; b=a; a=(first+sum0+majority)>>>0;\n    }\n    for (const [i,value] of [a,b,c,d,e,f,g,h].entries()) state[i] = (state[i] + value) >>> 0;\n  }\n  return state.map(value => value.toString(16).padStart(8, '0')).join('');\n}" : contentSha256.toString();
 var SOURCE_NOTES_POLICY_SOURCE = true ? "function createSourceNotesPolicy(hash, fixedMetadata) {\n  function stable(value) {\n    let count = 0;\n    const seen = new Set();\n    function visit(item, depth) {\n      if (++count > 2048 || depth > 20) throw Error('Unsupported source-note data');\n      if (item === null || typeof item === 'boolean') return JSON.stringify(item);\n      if (typeof item === 'string') { if (item.length > 16384) throw Error('Unsupported source-note data'); return JSON.stringify(item); }\n      if (typeof item === 'number' && Number.isFinite(item)) return JSON.stringify(item);\n      if (!item || typeof item !== 'object' || seen.has(item)) throw Error('Unsupported source-note data');\n      seen.add(item);\n      let result;\n      if (Array.isArray(item)) {\n        if (item.length > 256) throw Error('Unsupported source-note data');\n        result = '[' + item.map(child => visit(child, depth + 1)).join(',') + ']';\n      } else {\n        if (Object.prototype.toString.call(item) !== '[object Object]' || Object.getOwnPropertySymbols(item).length) throw Error('Unsupported source-note data');\n        const keys = Object.keys(item).sort();\n        if (keys.length > 64) throw Error('Unsupported source-note data');\n        result = '{' + keys.map(key => JSON.stringify(key) + ':' + visit(item[key], depth + 1)).join(',') + '}';\n      }\n      seen.delete(item); return result;\n    }\n    return visit(value, 0);\n  }\n  // Snapshot trusted finite metadata; mutations of a consumer's object cannot\n  // change the authority against which subsequent restored events are checked.\n  const profile = JSON.parse(stable(fixedMetadata));\n  const warning = 'The separately indexed original edition note could not be verified. The loaded P\u0101li remains available; this apparatus is unavailable.';\n  const owns = (object, key) => Boolean(object && Object.prototype.hasOwnProperty.call(object, key));\n  const keysEqual = (object, keys) => object && !Array.isArray(object) && stable(Object.keys(object).sort()) === stable(keys.slice().sort());\n  function model(state, affected, opening, anchor, entry) {\n    const view = { state, affected, opening, anchor_ref: anchor ? anchor.segment.ref : null,\n      availability: state === 'available' ? JSON.parse(stable(anchor.availability)) : null,\n      entry: entry || null, warning: state === 'unavailable' ? warning : null };\n    view.signature = stable({ state, affected, opening, anchor_ref: view.anchor_ref, entry: Boolean(entry), record_sha256: state === 'available' ? profile.record_sha256 : null });\n    return view;\n  }\n  function inspect(page) {\n    let anchor = null, affected = false, opening = false;\n    try {\n      if (!page || typeof page !== 'object' || Array.isArray(page)) return model('absent', false, false, null, null);\n      const isBook = page.selection === 'source_book';\n      if (isBook && page.book_id === profile.anchors.book.selector.book) anchor = profile.anchors.book;\n      else if (!isBook && page.text_id === profile.anchors.uid.selector.uid && page.canonical !== false && page.content_type !== 'commentary') anchor = profile.anchors.uid;\n      affected = Boolean(anchor);\n      if (!affected) return model(owns(page, 'source_notes') ? 'unavailable' : 'absent', false, false, null, null);\n      const position = page.pali || page;\n      opening = position.offset === 0;\n      const unavailable = () => model('unavailable', true, opening, anchor, null);\n      if (page.canonical === false || !page.source || page.source.commit !== profile.source_commit ||\n          (owns(page.source, 'locator_revision') && page.source.locator_revision !== profile.source_commit) ||\n          (isBook && owns(page, 'text_id') && page.text_id !== null) || (!isBook && owns(page, 'book_id'))) return unavailable();\n      const envelope = page.source_notes;\n      if (!keysEqual(envelope, ['schema','state','extraction_revision','record_sha256','availability','entries','error_code']) ||\n          envelope.schema !== profile.schema || envelope.extraction_revision !== profile.extraction_revision ||\n          envelope.record_sha256 !== profile.record_sha256 || stable(envelope.availability) !== stable(anchor.availability) ||\n          !Array.isArray(envelope.entries) || envelope.entries.length > 1) return unavailable();\n      if (envelope.state === 'unavailable') {\n        if (envelope.error_code !== 'SOURCE_NOTE_UNAVAILABLE' || envelope.entries.length) return unavailable();\n        return unavailable();\n      }\n      if (envelope.state !== 'available' || envelope.error_code !== null) return unavailable();\n      const segments = position.segments;\n      if (!Array.isArray(segments) || segments.length > 200 || !Number.isSafeInteger(position.offset) || position.offset < 0 ||\n          !Number.isSafeInteger(position.returned) || position.returned !== segments.length) return unavailable();\n      const relative = anchor.offset - position.offset, inPage = relative >= 0 && relative < segments.length;\n      const matches = segments.filter(segment => segment && segment.ref === anchor.segment.ref);\n      if (matches.length !== (inPage ? 1 : 0) || (inPage && stable(segments[relative]) !== stable(anchor.segment)) ||\n          envelope.entries.length !== (inPage ? 1 : 0)) return unavailable();\n      if (!inPage) return model('available', true, opening, anchor, null);\n      const record = envelope.entries[0], serialized = stable(record);\n      if (!keysEqual(record, profile.record_keys) || serialized.length > profile.max_record_characters ||\n          hash(serialized) !== profile.record_sha256 || record.id !== profile.record_id ||\n          record.extraction_revision !== profile.extraction_revision || record.text_sha256 !== profile.text_sha256 ||\n          typeof record.text !== 'string' || hash(record.text) !== profile.text_sha256) return unavailable();\n      return model('available', true, opening, anchor, JSON.parse(serialized));\n    } catch { return model('unavailable', affected, opening, anchor, null); }\n  }\n  return { inspect, stable };\n}" : createSourceNotesPolicy.toString();
 var APADANA_PINS = ["raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256"];
-var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287", "tha-ap289", "tha-ap290", "tha-ap294", "tha-ap295", "tha-ap296", "tha-ap297", "tha-ap298", "tha-ap300", "tha-ap301", "tha-ap303", "tha-ap304", "tha-ap305", "tha-ap306", "tha-ap307", "tha-ap310", "tha-ap311", "tha-ap312", "tha-ap314", "tha-ap315", "tha-ap316", "tha-ap317", "tha-ap318", "tha-ap319", "tha-ap320", "tha-ap321", "tha-ap323", "tha-ap325", "tha-ap326", "tha-ap327", "tha-ap328", "tha-ap331", "tha-ap333", "tha-ap334", "tha-ap335", "tha-ap336", "tha-ap337", "tha-ap338", "tha-ap339", "tha-ap340", "tha-ap341", "tha-ap342", "tha-ap343", "tha-ap344", "tha-ap345", "tha-ap346", "tha-ap347", "tha-ap348", "tha-ap349", "tha-ap350", "tha-ap351", "tha-ap352", "tha-ap353", "tha-ap354", "tha-ap355", "tha-ap356", "tha-ap357", "tha-ap358", "tha-ap359", "tha-ap361", "tha-ap362", "tha-ap373", "tha-ap374", "tha-ap376", "tha-ap377", "tha-ap378", "tha-ap379", "tha-ap380", "tha-ap383", "tha-ap385", "tha-ap386", "tha-ap387", "tha-ap388"];
+var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287", "tha-ap289", "tha-ap290", "tha-ap294", "tha-ap295", "tha-ap296", "tha-ap297", "tha-ap298", "tha-ap300", "tha-ap301", "tha-ap303", "tha-ap304", "tha-ap305", "tha-ap306", "tha-ap307", "tha-ap310", "tha-ap311", "tha-ap312", "tha-ap314", "tha-ap315", "tha-ap316", "tha-ap317", "tha-ap318", "tha-ap319", "tha-ap320", "tha-ap321", "tha-ap323", "tha-ap325", "tha-ap326", "tha-ap327", "tha-ap328", "tha-ap331", "tha-ap333", "tha-ap334", "tha-ap335", "tha-ap336", "tha-ap337", "tha-ap338", "tha-ap339", "tha-ap340", "tha-ap341", "tha-ap342", "tha-ap343", "tha-ap344", "tha-ap345", "tha-ap346", "tha-ap347", "tha-ap348", "tha-ap349", "tha-ap350", "tha-ap351", "tha-ap352", "tha-ap353", "tha-ap354", "tha-ap355", "tha-ap356", "tha-ap357", "tha-ap358", "tha-ap359", "tha-ap361", "tha-ap362", "tha-ap373", "tha-ap374", "tha-ap376", "tha-ap377", "tha-ap378", "tha-ap379", "tha-ap380", "tha-ap383", "tha-ap385", "tha-ap386", "tha-ap387", "tha-ap388", "tha-ap403", "tha-ap404"];
 var WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: translationId(p),
   url: p.url,
@@ -76583,7 +77059,7 @@ var WIDGET_HTML = `<!doctype html>
         Array.isArray(e.translator_notes) && e.translator_notes.length === p.note_count &&
         e.translator_notes.every(function (note, i) { return note && Object.keys(note).sort().join(',') === 'number,text' && note.number === (p.note_numbers ? p.note_numbers[i] : i + 1) && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
         checkedContentHash(JSON.stringify(e.translator_notes), p.notes_sha256) &&
-        (['tha-ap333','tha-ap334','tha-ap335','tha-ap336','tha-ap337','tha-ap338','tha-ap339','tha-ap340','tha-ap341','tha-ap342','tha-ap343','tha-ap344','tha-ap345','tha-ap346','tha-ap347','tha-ap348','tha-ap349','tha-ap350','tha-ap351','tha-ap352','tha-ap353','tha-ap354','tha-ap355','tha-ap356','tha-ap357','tha-ap358','tha-ap359','tha-ap361','tha-ap362','tha-ap373','tha-ap374','tha-ap376','tha-ap377','tha-ap378','tha-ap379','tha-ap380','tha-ap383','tha-ap385','tha-ap386','tha-ap387','tha-ap388'].indexOf(d.text_id) === -1 || e.offset !== 0 || e.next_offset !== null ||
+        (['tha-ap333','tha-ap334','tha-ap335','tha-ap336','tha-ap337','tha-ap338','tha-ap339','tha-ap340','tha-ap341','tha-ap342','tha-ap343','tha-ap344','tha-ap345','tha-ap346','tha-ap347','tha-ap348','tha-ap349','tha-ap350','tha-ap351','tha-ap352','tha-ap353','tha-ap354','tha-ap355','tha-ap356','tha-ap357','tha-ap358','tha-ap359','tha-ap361','tha-ap362','tha-ap373','tha-ap374','tha-ap376','tha-ap377','tha-ap378','tha-ap379','tha-ap380','tha-ap383','tha-ap385','tha-ap386','tha-ap387','tha-ap388','tha-ap403','tha-ap404'].indexOf(d.text_id) === -1 || e.offset !== 0 || e.next_offset !== null ||
           Number.isSafeInteger(e.total_characters) && e.total_characters === e.text.length && checkedContentHash(e.text, p.body_sha256)) &&
         checkedChapterSummary(e, p) && checkedPublisherPreface(e, p, d.text_id) && checkedCollectionSummary(e, p, d.text_id) && checkedPublisherDivisions(e, p, d.text_id) && checkedEditorialGap(e, p, d.text_id) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
     return Object.assign({}, d, { english: null, english_error: 'Apad\u0101na publisher identity, terms, edition notices or source pins changed. No English was displayed.' });
