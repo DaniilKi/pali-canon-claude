@@ -480,6 +480,42 @@ function assertCurrent375WorkflowRefusals(raw,pin){
 }
 
 // Actual live source/V5 validation occurs before any named historical-H materialization.
+// Fixed current V5 policy controls; original eight registered scenarios stay byte-exact.
+function assertCurrentV5PartitionAssignments(checked){
+  const files=checked.inventory.map(row=>row.path),targets={'tests/next-ten-history.test.mjs':1,'tests/approved-current339-authority-negatives.test.mjs':2};
+  assert.equal(checked.baseline.schema,'reviewed-ci-test-baseline-v5');
+  const modulo=partition=>files.filter((_,i)=>i%4===partition);
+  const expected=partition=>files.filter((path,i)=>(Object.hasOwn(targets,path)?targets[path]:i%4)===partition);
+  for(const path of Object.keys(targets)){assert.equal(files.filter(name=>name===path).length,1);assert.equal(files.indexOf(path)%4,3,'Both reviewed moves start in current partition3');}
+  for(const schema of ['reviewed-ci-test-baseline-v1','reviewed-ci-test-baseline-v2','reviewed-ci-test-baseline-v3','reviewed-ci-test-baseline-v4']){
+    const historical={...checked,baseline:{...checked.baseline,schema}};
+    for(let partition=0;partition<4;partition++)assert.deepEqual(makeContext(ROOT,historical,{commit:COMMIT,mode:'partition',partition}).selected_files,modulo(partition),'Legacy selection stays modulo');
+    assert.deepEqual(makeContext(ROOT,historical,{commit:COMMIT,mode:'full'}).selected_files,files);
+  }
+  for(const major of [20,22]){
+    const node='v'+major+'.0.0',full=makeContext(ROOT,checked,{commit:COMMIT,mode:'full',platform:'linux',node}),contexts=[0,1,2,3].map(partition=>makeContext(ROOT,checked,{commit:COMMIT,mode:'partition',partition,platform:'win32',node}));
+    assert.deepEqual(full.selected_files,files,'Full reference keeps complete original order');
+    for(let partition=0;partition<4;partition++)assert.deepEqual(contexts[partition].selected_files,expected(partition),'Only two literal files move; every other path keeps modulo and sorted order');
+    assert.deepEqual(contexts.flatMap(context=>context.selected_files).sort(),files);assert.equal(new Set(contexts.flatMap(context=>context.selected_files)).size,files.length);
+    for(const platform of ['linux','darwin','freebsd'])for(let partition=0;partition<4;partition++)assert.deepEqual(makeContext(ROOT,checked,{commit:COMMIT,mode:'partition',partition,platform,node}).selected_files,expected(partition),'Checked V5 policy cannot be changed by platform');
+    const total=checked.baseline.legacy_test_count+checked.baseline.added_test_count,rows=Array.from({length:total},(_,i)=>({file:files[i%files.length],line:1,column:1,name:'V5 policy synthetic case '+i,type:'test',nesting:0,status:i%13===0?'skip':i%17===0?'todo':'pass'}));
+    const reference=fakeReceipt(full,rows),parts=contexts.map(context=>fakeReceipt(context,rows.filter(row=>context.selected_files.includes(row.file)))),base={reference,parts};
+    const aggregate=aggregateReceipts(reference,parts,checked,COMMIT,null,major);assert.equal(aggregate.disjoint_complete_file_cover,true);assert.equal(aggregate.exact_case_multiset,true);assert.deepEqual(aggregate.summary,reference.events.summary);
+    const refusing=mutate=>{const wrong=clone(base);mutate(wrong);for(const receipt of [wrong.reference,...wrong.parts])receipt.events.context_sha256=digest(JSON.stringify(receipt.events.context));assert.throws(()=>aggregateReceipts(wrong.reference,wrong.parts,checked,COMMIT,null,major));};
+    // Old modulo receipts have valid hashes, complete file/case cover and totals, but wrong current assignments.
+    refusing(wrong=>{wrong.parts=contexts.map((context,partition)=>{const old={...context,selected_files:modulo(partition)};return fakeReceipt(old,rows.filter(row=>old.selected_files.includes(row.file)));});});
+    for(const path of Object.keys(targets))refusing(wrong=>{const selections=contexts.map(context=>context.selected_files.filter(name=>name!==path));selections[3].push(path);selections[3].sort();wrong.parts=contexts.map((context,partition)=>{const changed={...context,selected_files:selections[partition]};return fakeReceipt(changed,rows.filter(row=>changed.selected_files.includes(row.file)));});});
+    for(const mutate of [wrong=>wrong.parts.pop(),wrong=>wrong.parts[1]=clone(wrong.parts[0]),wrong=>wrong.parts[0].events.context.inventory.reverse(),wrong=>wrong.parts[1].events.context.selected_files.reverse(),wrong=>{const row=wrong.parts[0].events.cases[0];row.status=row.status==='pass'?'skip':'pass';},wrong=>wrong.parts[0].events.cases.push(clone(wrong.parts[0].events.cases[0])),wrong=>wrong.parts[0].events.context.node_major=major===20?22:20])refusing(mutate);
+  }
+  for(const path of Object.keys(targets)){
+    const missing={...checked,inventory:checked.inventory.filter(row=>row.path!==path)};
+    assert.throws(()=>makeContext(ROOT,missing,{commit:COMMIT,mode:'partition',partition:0}),'Missing fixed V5 path must refuse');
+    const duplicate={...checked,inventory:[...checked.inventory,checked.inventory.find(row=>row.path===path)]};
+    assert.throws(()=>makeContext(ROOT,duplicate,{commit:COMMIT,mode:'partition',partition:0}),'Duplicate fixed V5 path must refuse');
+  }
+  for(const partition of [-1,4,1.5,'1',null])assert.throws(()=>makeContext(ROOT,checked,{commit:COMMIT,mode:'partition',partition}));
+  assert.throws(()=>makeContext(ROOT,checked,{commit:COMMIT,mode:'full',partition:0}));
+}
 function assertCurrent380CIBaseline(){
   assertCurrentSourceClosure(ROOT);const currentSource=currentContext(ROOT);assert.equal(currentSource.canonical.new_canonical_logical_sha256,'883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a');assert.equal(HISTORICAL382_WIDGET_VERSION,'v50');assert.equal(currentSource.english.historical382.ids.length,382);assert.equal(currentSource.widget.version,CURRENT_WIDGET_VERSION);assert.equal(currentSource.widget.uri,CURRENT_WIDGET_URI);
   const raw=readFileSync(join(ROOT,'.github/workflows/check.yml'),'utf8');assert.equal(rawWorkflowContract(raw),true);
@@ -487,6 +523,7 @@ function assertCurrent380CIBaseline(){
   assert.equal(paths.length,1);assert.equal(paths[0][1],CURRENT380_CI_INDEX);assert.equal(pins.length,1);
   const pin=pins[0][1];assertCurrentSevenWorkflowRefusals(raw,pin);assertCurrentEightSourceBootstrapFixtures();assertCurrentEightSourceBootstrapFixtures('seven');if(process.env.CI_TEST_BASELINE_INDEX!==undefined)assert.equal(process.env.CI_TEST_BASELINE_INDEX,CURRENT380_CI_INDEX);if(process.env.CI_TEST_BASELINE_SHA!==undefined)assert.equal(process.env.CI_TEST_BASELINE_SHA,pin);
   const actual=loadBaseline(ROOT,join(ROOT,CURRENT380_CI_INDEX),pin);assert.equal(actual.baseline.schema,'reviewed-ci-test-baseline-v5');assert.equal(actual.baseline.legacy_test_count,2092);assert.ok(actual.baseline.added_test_count>0);assert.ok(actual.inventory.length>345);
+  assertCurrentV5PartitionAssignments(actual);
   return actual;
 }
 // Additive current V5 refusals inside the existing complete-inventory scenario.
