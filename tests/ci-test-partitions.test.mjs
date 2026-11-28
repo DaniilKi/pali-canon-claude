@@ -6,7 +6,7 @@ import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {digest,inventory,loadBaseline,makeContext,nodeArguments,eventCollector,aggregateReceipts,execute,MAX_CHILD_MS,ciIdentity,historicalWindowsPythonWrappers,historicalNativePythonPartitionFixture,WINDOWS_PYTHON_PARTITION_INDEX,CURRENT380_CI_INDEX} from '../scripts/ci-test-partitions.mjs';
-import {assertCurrent389390SourceClosure,current389390Authority} from './helpers/current389390-metadata.mjs';
+import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure,current382Authority as current389390Authority} from './helpers/intake382-metadata.mjs';
 import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'), COMMIT='0123456789abcdef0123456789abcdef01234567';
 const clone=x=>JSON.parse(JSON.stringify(x));
@@ -300,8 +300,14 @@ function portableSourceWorkflowBefore389390(text){
  const prior=reader.raw.replace(CURRENT389390_SOURCE16_AFTER,CURRENT389390_SOURCE16_BEFORE).replace(CURRENT389390_SOURCE9_AFTER,CURRENT389390_SOURCE9_BEFORE);
  return text.slice(0,reader.start)+prior+text.slice(reader.end);
 }
+const SOURCE_PAIR401402_PARTS=Object.freeze(["      - name: Require both publisher401-402 source API and widget cases\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        shell: bash\n        env:\n          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned\n          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned\n        run: |\n          set -euo pipefail\n          node --test --test-reporter=tap tests/thera401-402-pair.test.mjs | tee reviewed-publisher401-402-pair.tap\n          node --input-type=module -e 'import assert from \"node:assert/strict\"; import {readFileSync} from \"node:fs\"; const tap=readFileSync(\"reviewed-publisher401-402-pair.tap\",\"utf8\"); for(const [key,value] of [[\"tests\",2],[\"pass\",2],[\"fail\",0],[\"cancelled\",0],[\"skipped\",0],[\"todo\",0]]) assert.match(tap,new RegExp(\"^# \"+key+\" \"+value+\"$\",\"m\"));'\n","            src/_poems/chapter-3/poem-401.md\n            src/_poems/chapter-3/poem-402.md\n","      - name: Check both publisher401-402 reader sources\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        run: |\n          python scripts/web-reader-thera401-402-check.py --mode normal --source-root \"$GITHUB_WORKSPACE\" --server-dir server --publisher-root .fixtures/apadana-pinned --browser \"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\" --report standalone-thera401-402.report.json\n","      - name: Audit both publisher401-402 reader sources\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        run: |\n          python scripts/web-reader-thera401-402-check.py --mode a11y --source-root \"$GITHUB_WORKSPACE\" --server-dir server --publisher-root .fixtures/apadana-pinned --browser \"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\" --report standalone-thera401-402-a11y.report.json\n","      - name: Check both publisher401-402 sources in a fresh npm installation\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        run: |\n          mkdir -p \"$RUNNER_TEMP/pair401402-install\"\n          npm install --offline --ignore-scripts --no-audit --no-fund --prefix \"$RUNNER_TEMP/pair401402-install\" \"$RUNNER_TEMP/apadana-package/\"*.tgz\n          python scripts/web-reader-thera401-402-check.py --mode installed --source-root \"$GITHUB_WORKSPACE\" --server-dir \"$RUNNER_TEMP/pair401402-install/node_modules/pali-canon-mcp/server\" --publisher-root .fixtures/apadana-pinned --browser \"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\" --report installed-thera401-402.report.json\n","            reviewed-publisher401-402-pair.tap\n            standalone-thera401-402.report.json\n            standalone-thera401-402-a11y.report.json\n            installed-thera401-402.report.json\n"]);
+function beforeSourcePair401402Workflow(text){
+ for(const part of SOURCE_PAIR401402_PARTS){assert.equal(text.split(part).length-1,1,'Every finite401402 source/browser/sparse/report addition is exact');text=text.replace(part,'');}
+ return text;
+}
 function assertCurrent375Workflow(raw,pin){
  assert.equal(rawWorkflowContract(raw),true);assert.match(pin,/^[a-f0-9]{64}$/);let text=raw;
+ text=beforeSourcePair401402Workflow(text);
  text=portableSourceWorkflowBefore389390(text);
  const fruit=current375JobBlock(text,'reader-browser-group');
  assert.equal(fruit.raw.split(CURRENT389390_INSTALLED_FRUIT_GATE).length-1,1);assert.ok(fruit.raw.includes(CURRENT389390_INSTALLED_FRUIT_GATE+'      - name: Check source-aware Pāli print and PDF privacy\n'));
@@ -318,13 +324,14 @@ function assertCurrent375Workflow(raw,pin){
 }
 function assertCurrent375WorkflowRefusals(raw,pin){
  assert.equal(assertCurrent375Workflow(raw,pin),true);
+ for(const part of SOURCE_PAIR401402_PARTS)for(const replacement of ['',part+'-UNREVIEWED']){const changed=raw.replace(part,replacement);assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin),'Exact new401402 workflow source gate/browser/sparse/report must refuse drift');}
  for(const marker of ['node scripts/ci-check-contract.mjs','timeout-minutes: 30',CURRENT375_SEVEN_GATE,CURRENT380_FIVE_GATE,CURRENT389390_INSTALLED_FRUIT_GATE,CURRENT389390_FRUIT_REPORT]){assert.ok(raw.includes(marker));const changed=raw.replace(marker,(marker===CURRENT375_SEVEN_GATE||marker===CURRENT380_FIVE_GATE)?'':marker+'-MUTATED');assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin));}
  for(const marker of ["          python3 scripts/canon/historical389390_source_fixture.py --canon .fixtures/english16-canon/canon.json.gz --out .fixtures/english16-historical-source\n", "python3 scripts/apadana/thera335-350/portable_source_replay.py --publisher-checkout .fixtures/apadana-pinned --canon .fixtures/english16-historical-source/canon.json.gz", "python3 -X utf8 scripts/apadana/thera351-360-nine/source-nine-replay.py --publisher-root .fixtures/apadana-pinned --canon .fixtures/english16-historical-source/canon.json.gz"]){assert.equal(raw.split(marker).length-1,1);for(const replacement of ['',marker+'-UNREVIEWED']){const changed=raw.replace(marker,replacement);assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin));}}
 }
 
 // Actual current380/source/V5 validation occurs before any named historical-H materialization.
 function assertCurrent380CIBaseline(){
-  assertCurrent389390SourceClosure(ROOT);const currentSource=current389390Authority(ROOT);assert.equal(currentSource.canonical.new_canonical_logical_sha256,'883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a');assert.equal(currentSource.widget.version,'v49');
+  assertCurrent389390SourceClosure(ROOT);const currentSource=current389390Authority(ROOT);assert.equal(currentSource.canonical.new_canonical_logical_sha256,'883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a');assert.equal(currentSource.widget.version,'v50');
   const raw=readFileSync(join(ROOT,'.github/workflows/check.yml'),'utf8');assert.equal(rawWorkflowContract(raw),true);
   const paths=[...raw.matchAll(/^  CI_TEST_BASELINE_INDEX: (.+)$/gm)],pins=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: ([a-f0-9]{64})$/gm)];
   assert.equal(paths.length,1);assert.equal(paths[0][1],CURRENT380_CI_INDEX);assert.equal(pins.length,1);
@@ -345,7 +352,7 @@ function assertCurrent380CIFixtureRefusals(actual){
     const pin=publish();assert.deepEqual(loadBaseline(f.root,index,pin).inventory,actual.inventory);
     const refusal=change=>{const candidate=clone(b),proof=clone(r);change(candidate,proof);assert.throws(()=>loadBaseline(f.root,index,publish(candidate,proof)));publish();};
     for(const change of [b=>b.legacy_test_count--,b=>b.added_test_count++,b=>b.changed_files['tests/unreviewed.test.mjs']={before_sha256:'a'.repeat(64),after_sha256:'b'.repeat(64)},b=>b.changed_files['tests/ci-test-partitions.test.mjs'].before_sha256='0'.repeat(64),(_b,r)=>r.status='PENDING',(_b,r)=>r.behavioral_or_release_approval=true])refusal(change);
-    const added=Object.keys(b.added_files)[0],manifest='docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json';
+    const added=Object.keys(b.added_files)[0],manifest='docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json';
     for(const path of [added,manifest]){
       const file=join(f.root,path),saved=readFileSync(file);assert.deepEqual(loadBaseline(f.root,index,pin).inventory,actual.inventory);
       try{writeFileSync(file,Buffer.concat([saved,Buffer.from('\nSYNTHETIC_CURRENT375_SOURCE_DRIFT')]));assert.throws(()=>loadBaseline(f.root,index,pin),'V5 actual current source drift '+path);}

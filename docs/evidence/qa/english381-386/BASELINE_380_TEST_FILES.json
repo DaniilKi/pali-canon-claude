@@ -2,7 +2,7 @@
   "schema": "reviewed-ci-test-baseline-v5",
   "commit": "4e9287bd5ebc78aba4b185b017e63eac6547bfd7",
   "legacy_test_count": 2092,
-  "added_test_count": 21,
+  "added_test_count": 24,
   "driver": {
     "path": "scripts/test.mjs",
     "sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad"
@@ -37,7 +37,7 @@
     },
     "tests/apadana-disclosures.test.mjs": {
       "before_sha256": "48a974214ac02352d52160d785a855c6b21bf728683d73a3a68190eb9bf23c20",
-      "after_sha256": "93ac88b7c5936797aecc548679c42e571066892e76d05fd230eaff56916f26a2"
+      "after_sha256": "6a0eb24bb4593997a3f364e0a475a63c739538b13dae9b1178fd77fc3eafb56a"
     },
     "tests/apadana-four-boundary-migration.test.mjs": {
       "before_sha256": "d5161aae498371ef77c9001283ceb51690c87c3bc4940424f2341bbd3cafca69",
@@ -49,15 +49,15 @@
     },
     "tests/apadana-fourth-client.test.mjs": {
       "before_sha256": "e892f8ecc37b4f60419475fa7734fb0d53d4a9aabbcf2eb57f9b36d461a0f1d4",
-      "after_sha256": "1fa2573b63adb0194aa3814fb07519e44bd4a10fb4a860708512f1f939ba6ff8"
+      "after_sha256": "b6740c479280ec007250e10e2d318e1da6dd473a588ff08cf48768d90d6b6263"
     },
     "tests/apadana-fourth.test.mjs": {
       "before_sha256": "e0fdac899a5cd6ce6939c78afcdcdc8da61267e8396f00d079a24fbc5b738868",
-      "after_sha256": "5b2f843c285d39e6e9bda960f7e5d2345f0e467fcb71d37452e163ea3b52e89d"
+      "after_sha256": "a872d5ac1c88ee8b499f29f63543fc1bba306799c60d4ba49b8d03c115a31bd9"
     },
     "tests/apadana-held234.test.mjs": {
       "before_sha256": "fbcff0abdc1b1a6a2d318b37528e008967cc61aabd93ae2d8b2774b2038256d4",
-      "after_sha256": "3c124dea2417add473a5654f4837b9fdf77a334cef565212b46c472667a07748"
+      "after_sha256": "973b6420f5ee2017243f9f96a9cefb36f6a93af073cee3940cebcc233b72f316"
     },
     "tests/apadana-next-boundaries.test.mjs": {
       "before_sha256": "15666e23309ca4e65f102a8703e1b4661f64531b23bad623cb00b4b3a40cda40",
@@ -69,7 +69,7 @@
     },
     "tests/apadana-next.test.mjs": {
       "before_sha256": "e2c498dd264b70d1a3ad07d90d71ac90e3b358ed549c1ebaacc963668e80bec3",
-      "after_sha256": "764fbb90dd938ab7e6371e919964aebb56c7f4728ac46a4a7b2ebf9b97ad7a65"
+      "after_sha256": "b30a339231bd65db32dbdb072edb4598634c41c8062e80c8ffa70101e8f43cb2"
     },
     "tests/apadana-pair-boundary.test.mjs": {
       "before_sha256": "716867682e8211badbb51906688dc60b36c967806ec37d09eacc5064924bdcc2",
@@ -93,7 +93,7 @@
     },
     "tests/apadana-thera.test.mjs": {
       "before_sha256": "2e6e0e08268838ab5f5ebcfa438ceaecd552a554e387f8cdae30d9249228072e",
-      "after_sha256": "aa0c1c9396568bdc42ce1f4b54d1b5c1e219d69f399fd24267b2cd39ecf4809d"
+      "after_sha256": "89d95384651ed62429dafce279164d06092d3f46af22c910f3c9cec976c610c5"
     },
     "tests/apadana-thera141-180.test.mjs": {
       "before_sha256": "fee23e3e8dbdc159a3b309394fa66384456d8d9450279fe0a60f64756c5eb87a",
@@ -105,7 +105,7 @@
     },
     "tests/apadana-thera221-230.test.mjs": {
       "before_sha256": "de6d9f1aae7098a1f1119dd5f40fd2a6eee27c63473b05540397cb8798746ac5",
-      "after_sha256": "edf1daa23bb85be45aab5b2a93328dee786db296ff710b7a3569551e99ab7610"
+      "after_sha256": "a4b9b411b2374e1c7084052d2983c01a1496f1e0a0bf133d1ea69919e19f5a61"
     },
     "tests/apadana-thera241-250.test.mjs": {
       "before_sha256": "b15e7861b64840e353ad88c95f82a0c5400d5370b2a920d82099d3e4b982cb50",
@@ -117,7 +117,7 @@
     },
     "tests/apadana-third.test.mjs": {
       "before_sha256": "92e72fe456b1a056b6e4052f4a017853cce4c9d6466b9f99f0ca3f821b9b58a0",
-      "after_sha256": "c136593a510cb8374d34ef9e8b47af524dddd6b3e2b4a14433ea51885c378770"
+      "after_sha256": "fe5947fc8df544ed0dd245291634f1ad6b1586f4d8a7e51c7cdaff09d5a3f43c"
     },
     "tests/approved-acceptance.test.mjs": {
       "before_sha256": "c52b29e6dbf8fe65a5433bb9a37ae932497138e0343506b3a88166fcdb9f6414",
@@ -149,7 +149,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "1613ca0abceca9f81c7ab392bd7361716732dd727e6ad0fe988495e8875cb45b"
+      "after_sha256": "e14a1ba0bcf1a4f0a94d6e5fd870898408b7f90e02b7cc140eaa512717ab37d7"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -161,7 +161,7 @@
     },
     "tests/current339-source-inverses.test.mjs": {
       "before_sha256": "5e4e036b932a1c6e90f028295bdb45626e016f38eb8a14e186fe174d244a14a0",
-      "after_sha256": "8eccdcfdd19ac2d91286532b69f01214add41baa5419a615e5cde1dec38af41e"
+      "after_sha256": "a93397b946580248c507344e835a3cf5cd55fafefd2a53e5b8dc5b9d8b834ed8"
     },
     "tests/current343-bindings.test.mjs": {
       "before_sha256": "30801f1bc203245f8cb3ee9c0bb3ea0ce8267d19a1fe3b568817e2cd37c61b7e",
@@ -185,7 +185,7 @@
     },
     "tests/held234-client.test.mjs": {
       "before_sha256": "0b5969a079d50ce005f35e508f54dcb8ed343f08aa1e99ba826a13f2d8821cef",
-      "after_sha256": "ce7f825b3dd4c788aa5cc3e8bd354c86a794db7c393ce35aa17dcc2832346b50"
+      "after_sha256": "fc3ed50fee8fc71db6052f69199f9b9cd3bcf7f3632750e5acba75c43de429ae"
     },
     "tests/held234-current333-chain.test.mjs": {
       "before_sha256": "51655bcfc60b9d3707caf863eab909ff681a2d66d4c65685ecdc7c41eec2418e",
@@ -277,7 +277,7 @@
     },
     "tests/source-notes-baseline-projection.test.mjs": {
       "before_sha256": "631ec6f793d7ce518e21a5eece52aeac7c50138be50e8d5cfd684a88ccef1afa",
-      "after_sha256": "d11ddc3192b8388f6071940eb618b6a563c5582e49f926810c98b2da4cb3d0c4"
+      "after_sha256": "f9f90ec9f1c39cccb7d729cb04ca07a4c688e9f670cc599613df4b1a8d8da1e2"
     },
     "tests/source-notes-ci.test.mjs": {
       "before_sha256": "c8c3f5dd938c10e8d9e999a7d32e5634ba524ba342b8836c65fdd05460961e98",
@@ -285,91 +285,91 @@
     },
     "tests/source-notes-compatibility.test.mjs": {
       "before_sha256": "b0eab70a46893957a1433181081f3ef5a6fac3fd66ea328ea191d1000b1dfd80",
-      "after_sha256": "9639e286f0f7e4e72c64517f7c3f6ec311d6803591e7a541a6f91ba2cf1cc780"
+      "after_sha256": "b6089922524852b1e6595aee578ea09401361cafcc936209ba3c40bbe2fdc06d"
     },
     "tests/thera-commentary-locators.test.mjs": {
       "before_sha256": "1e5e8607d3131adecb164a4c56e91de71aae057a5a7c439103886048a9c6370b",
-      "after_sha256": "2ba9d366ed54c9c3286184775e061aabad48aebe54f0be5343af326ffbaf56de"
+      "after_sha256": "b969f40edde5aa83ba6ac9a643760a43008b27cc4b15017c532acaebf59d23d9"
     },
     "tests/thera141-180-client.test.mjs": {
       "before_sha256": "a7f41e07febc41acdb240f7b01f5ff0863b5700e4ca852b32d1a10867f89b3d8",
-      "after_sha256": "ba5de46d3c0ad243331c5953d15fd2830c40aa2b406c53e29a3e1a3a9c99b150"
+      "after_sha256": "502169938f36e53028869863ff43b812c56ad320b1b06d3f7f083111f0d5d8fc"
     },
     "tests/thera181-220-client.test.mjs": {
       "before_sha256": "c8695064857fa2b7e404091aa64da167d4ec2eb6b3ad36dc1091feb17b1ba77d",
-      "after_sha256": "aebf404847c40828d1fa112e232f938411a330d784b2aa7cdd563dce3bc56a26"
+      "after_sha256": "08fac9c700c191ed2b2158465a165a01ab43bed1d860f104d270651b21abd040"
     },
     "tests/thera221-230-client.test.mjs": {
       "before_sha256": "f81fb17374a5ebba7c5dedb68ce4a970b9b6d69e331be5133d6d4b60422f4a56",
-      "after_sha256": "e6de16a8edbd6a375d80d9fce5a5da0ad383b39745ac653c607a31c838eab35e"
+      "after_sha256": "0831d89cd779a398629e6fbcbb4ab8c2ca06ff13703d0b21d7c1a1c6244c3653"
     },
     "tests/thera241-250-client.test.mjs": {
       "before_sha256": "8c32c0a6867dc6d543667fbaede0d7941a0f486326b92beeba70a7b0a355a98c",
-      "after_sha256": "85709aa47c2a1925b298169c76ce30e8def3185fb3264b21a46d0d1f035a94d2"
+      "after_sha256": "4d431f3eb7bde2bebf53187ae7107e61ebb0560a2ee5dbecda00c7bd2a6b0c4e"
     },
     "tests/thera261-280-client.test.mjs": {
       "before_sha256": "b721ed69f91cb6144d70613ffc09a4c4c82a5ca2f8aa8d2a895ef07d34b22261",
-      "after_sha256": "3eccd759eb9c7220d505987efa314b6e6c4177212fdaf4a3365998792b84b41c"
+      "after_sha256": "4405a32ec67b3371ace2072cc05dbe8af4ea0af094fe9351af9d2f9c24c41df1"
     },
     "tests/thera261-280-source.test.mjs": {
       "before_sha256": "252dcc58ac2618029a171e74ec46a4b28c05bdc593bf89bd62b3e642d61bd373",
-      "after_sha256": "8a724339766222ed5eeab1768a6e507c003c19aefed016b437c902d0a8f521db"
+      "after_sha256": "0e4b81f24c70819d930dc1fd57e3c4133a46a8c6028630627107a1f54cba78a4"
     },
     "tests/thera281-285-client.test.mjs": {
       "before_sha256": "abe3db29a30e998152736fd9ca9c42598441c153a62ee1e7a524739391d1b3b1",
-      "after_sha256": "3cf039437e4e49ad3373a6fae47154e13210d209e4dfdf790e36baa2f81666ab"
+      "after_sha256": "57bd44be1a11c39481e342fe37c29db6ffb7630336fc58fe3b0ce3221b15d82d"
     },
     "tests/thera281-285-source.test.mjs": {
       "before_sha256": "3fe3081c55681611c396d2a845be497ec2e7611bca0ac2e4e02a706c65d0fcad",
-      "after_sha256": "97089ebd0dfd030b3538abbcd88e739030197a2c19aab6968750a78def0a392c"
+      "after_sha256": "1f8090c55d6904b4c816c4e1d7434047e0e968feb2b4cc30f62dcad124ee9374"
     },
     "tests/thera287-288-client.test.mjs": {
       "before_sha256": "83606202405989c9d0b5a034adffed3b92145e800093b255ae2264261f69e5f9",
-      "after_sha256": "9c718c4ea851e1e9759005225e0cc84ea943502b440b9f0c48c689c1f676c9de"
+      "after_sha256": "9ca222be8dd3d81cac9f1b9bfbd09597eaa8412756ef76452afa218fa7297047"
     },
     "tests/thera287-288-source.test.mjs": {
       "before_sha256": "2928fc8f939fffc6c0cdf07e2b16f755c6851492a61f8e1681fdb25aa7f38d18",
-      "after_sha256": "187ccd6ed51cd50314670148b1080ae72fb95630842b71d50bd37723d23b6351"
+      "after_sha256": "469cfc441329945dd640a3c572b66a7846e9dc3c78319d2169721048832d358a"
     },
     "tests/thera292-299-client.test.mjs": {
       "before_sha256": "37460c107c048d4601619f8c2f6bd86b3bf3d4338df588bffb27c169ac728e24",
-      "after_sha256": "d7e4a75accbb3bf00bafa7f054c0e92077576becda0009ed1f5f93a1f8c82838"
+      "after_sha256": "7a8bd6aa01677348744e7e398ba79d26e9fe61df16b227beac5986c76cac674b"
     },
     "tests/thera292-299-source.test.mjs": {
       "before_sha256": "056416b7144f531ed36eb5d8b8e7eaa4e0b61f6d70f37064a30860117749e8d4",
-      "after_sha256": "171885010073df03e62eebafcb1e3097a5b70e18bd92710e78d27d34dd95bfc3"
+      "after_sha256": "b7afdc94043730ebd720a467021840a2dd0b3513bf73b4b1ebd59c0e1d06be46"
     },
     "tests/thera301-310-client.test.mjs": {
       "before_sha256": "796352f3d8d1d8769979e6b29225281e2a20f138ac86aa313fcfd6f4a7ccb08f",
-      "after_sha256": "302151bb2803cded9f0b00bf96a8014cd391fe7794e9a0e1f68b668c83aa0d5e"
+      "after_sha256": "7fc92a8ff06154a9d2c5435b2a3f26be32bf77822106072bc36f8b2d125c5164"
     },
     "tests/thera301-310-source.test.mjs": {
       "before_sha256": "536d2663253dc71e37e016e1c5b59bebb55016f98e76ea8635b44c92eca6df63",
-      "after_sha256": "53f887f4e6189aa0024c579a4d121accb0f79283fe38331fcb392dc41c8cd817"
+      "after_sha256": "11d19eedccbd79b232d2d3807eed4b7f93ede6aada4f38297b4b24d8417cef55"
     },
     "tests/thera312-319-client.test.mjs": {
       "before_sha256": "f17758d982fe97314105d14553e5ce1ee909e78f94818c5e1cc0bf4bcdc47953",
-      "after_sha256": "8b8c87af8cde81510e0ff10c1ea1e1458af218d48335c3674282422d53a5f489"
+      "after_sha256": "fac5a627fbd044e79c37d2eaffefa9f633938d265ad9011e5223691b30136aa6"
     },
     "tests/thera312-319-source.test.mjs": {
       "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
-      "after_sha256": "b71bf364a717dfa7380468ebebd3deef621d99803fb908e50b359746533091b8"
+      "after_sha256": "e24b2c700b15faf38305f47b2dfc6a87d38e1014634b9fecc98816256d86a8f0"
     },
     "tests/thera321-329-client.test.mjs": {
       "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
-      "after_sha256": "e124d3da73cdfdfd345aadf21dc26c3eb41ca9d99f65847900f9f826ccbfc3ef"
+      "after_sha256": "df5ac8ba4bb0169a9d87d46aeb05da11a24bf9c3e4bbc04cf8ad768bf21e52a6"
     },
     "tests/thera321-329-source.test.mjs": {
       "before_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499",
-      "after_sha256": "69ab3d20e9c87493800bbf23bd4229bb847a8c6b841f43ee740d9ec8eaa0e353"
+      "after_sha256": "03cd08c21da8d5593f4059451333651c7708e04e270b868656222b2645d84be9"
     },
     "tests/thera331-334-preface-client.test.mjs": {
       "before_sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f",
-      "after_sha256": "a0f2538d4c5c481e4bd06636a680ba29bac917afb5983aec29be288939b75852"
+      "after_sha256": "ee0251859b7f1a4f45bd858c5a9b9207b5b7a02fdd214720e73f62b4b324c8c1"
     },
     "tests/thera331-334-source.test.mjs": {
       "before_sha256": "d1ebee4d575f76da14b1b999e62036f460aa4e460bdcc315da86e1e867272fd3",
-      "after_sha256": "7d27a29b6be251f35cf7f09ea6bcf5ad7d4af0586964588e6fad6b0bde9fdd81"
+      "after_sha256": "6979a4daa73b475873c06260f980fac64cc2e5845eb9d74b518c1ce8d21c00fa"
     },
     "tests/thera333-legacy-projection.test.mjs": {
       "before_sha256": "3ae753c1926ad69b4e02ed8b2451a97767cd605e817280e4816f4712abe83fae",
@@ -381,7 +381,7 @@
     },
     "tests/thera335-350-source.test.mjs": {
       "before_sha256": "cbe814127a9e71c9383873e91797311fda65f353577070efc1506be3bd028880",
-      "after_sha256": "344aa29ab41f05d4796cb0a7fced5d1f1ea0bf91d7e47bff55654e647e474901"
+      "after_sha256": "1bdf08a021572357e23bcb628af45a023d313a58d08b8967280fc8e89718645f"
     },
     "tests/thera339-legacy-projection.test.mjs": {
       "before_sha256": "bc0770aae600a3293a3e260ba1b4bdfaf9e731a797600b9a20449aa0ab3dc1a7",
@@ -389,7 +389,7 @@
     },
     "tests/thera351-360-nine-source.test.mjs": {
       "before_sha256": "b386cd017c9979d48151f56265ed0ff2d4c325a960e55ffbbf5ba5b996a1b235",
-      "after_sha256": "c85aff0df3a7d52659b43c05e43aeccafbbe8ff655adaf479ce3cc7366378d53"
+      "after_sha256": "b3c80618159fdb887e810456d149d0c7e77413bfc33ce084f0a2df79e92e6f44"
     },
     "tests/verse-scope-review.test.mjs": {
       "before_sha256": "4821500d404b852c2573b89d96f52cba79ea6706a14de577751cdabe51aa4186",
@@ -401,34 +401,38 @@
     },
     "tests/widget-hosted-selections.test.mjs": {
       "before_sha256": "4ad932ef76cb23c279926ccd2848a8c8007627d17b8eedb513b25e04a92d8264",
-      "after_sha256": "3cb35045bb8da4a4c42f9baa52df9e572777239e4da47119c4e99e65749d0884"
+      "after_sha256": "c4207ce088c9a6df5ad2099665ac1759e6eed2f2c16a1814711252c4929c4a75"
     }
   },
   "added_files": {
     "tests/apadana-thera389390-boundary.test.mjs": "94333529ae751ca4611465c4ce02f6fd54b0b1d852ec676bdb59e1297a89052e",
-    "tests/current375-bindings.test.mjs": "8652b0bd5dc5ada1cc39a220e6e1b954d3528b5ab111d59ff85c1cc55f32c35c",
+    "tests/browser-preflight-utf8.test.mjs": "29bfe44d143cc601823d2edef5ba11072d67fcf4d5cfc42c155bf730335e79c4",
+    "tests/current375-bindings.test.mjs": "15ed189ad4418613a3f378887c1ba8b7147fa1e2bad0594d90bba85d80d3abb4",
     "tests/held234-current375-chain.test.mjs": "62ba5aeec1d83e9281991eacda12528ce183ef99784fbc64a804b609fb8114a7",
     "tests/intake375-current-negatives.test.mjs": "f151769712c2f2ad4c080ec03ba2f3686d8cbc7b3b9485d394f0a5c2bf78ec18",
     "tests/scaled-profile-probe-diagnostics.test.mjs": "514ef07d6c6417fff2ab04c1569706a107b71de163ef6f8e15ae755002685ad0",
-    "tests/thera371-378-seven.test.mjs": "345c458db1f44a5f9c1aee8526e553eabdca7fffe1f932f2f7eedb96b4b231a7",
-    "tests/thera381-386-five.test.mjs": "787e737401175759b2c3424d40eca1d8af752e03cfd2a4db1d24e88e42613fd6",
+    "tests/thera371-378-seven.test.mjs": "48473e89ab48d0889ed383f3c170165cfe8fec6379cc42b7a9a12c7c447524e1",
+    "tests/thera381-386-five.test.mjs": "4f906eed1e86fd5a458bb0c45eef9716f55f04a51cd3a28c2565b6b674a367b5",
+    "tests/thera401-402-pair.test.mjs": "a8fddbeb1f1506c349c343b5c43c7703f71a8af53be341c4d5837f864e0e6878",
     "tests/verse-scope-python.test.mjs": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "e74c3b3d56f05551105b4f9580c7c5f4a9a698dfb3c1e043e3fc9be43df88547",
+    "scripts/ci-test-partitions.mjs": "fa5547def736e4ff5d27f9daf0436d2a0e1d36433e43dd68c2aa82f35c70a0b7",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
+    "docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json": "0de64ade735c657bfc1d92ff5fb2d57eaf9ec05893118a74fe5c8571f271b55b",
     "docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json": "db3e46646b405dc0e18c7c10c4d79fa1ea9515803b2826d01f6fb33512b387d5",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
     "tests/helpers/current389390-metadata.mjs": "74e8b7daf92ccb377ae0ad10d8d0378adb07ac54e39bb599f19aed6d95d6c1e6",
-    "tests/helpers/historical-h-inputs.mjs": "dec8be94435e86094ae6b6a7496d00308b081573f6c9b8800020f8dae40fe6d6",
+    "tests/helpers/historical-h-inputs.mjs": "ff938318f56c931bc7769b208ffb67955dc1b846765c4c286d8aa9cf5789d499",
     "tests/helpers/intake375-metadata.mjs": "ee77c32767be7713ef383c835b44ce942e510008da2c057bcd42380368edbf3d",
     "tests/helpers/intake380-metadata.mjs": "66919b4e77dee5c2aabc44c9d2ed5ce46050a758279348d0063c429e983c5127",
+    "tests/helpers/intake382-metadata.mjs": "5cf49392ede41636b308acccebaef069cec33f723f3668911788f7dcbefedf54",
     "tests/helpers/partitioned-python.mjs": "31b57009d667c0d88dfd73b849f0e9506e39ae9e26ab11b27b01cf0a3f9066f3",
     "tests/helpers/verse-scope-python.mjs": "c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f",
-    "tests/materialize_h_history.py": "103602ae53857b9ceb0d9ddd870efc83e43d1698bcfc408b134138f062f7cf6d"
+    "tests/materialize_h_history.py": "1a9ab71ef11e547ed660afdbadd14245ade64f5d1e20d882be44db34f37c2055"
   },
   "python_sources": {
     "tests/six_boundary_history_acceptance.py": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
@@ -449,21 +453,21 @@
     "tests/analysis-reader-modes.test.mjs": "dba711b25078abc7c03424a78c7f95ee8ae9be9d3de138bbb31a8b498110c8ec",
     "tests/analysis-selection.test.mjs": "d7ee38ed48454672b816916c1d256ea75c1081d137ed3dafa56d360403c6d247",
     "tests/anandajoti.test.mjs": "7b3e76a36c569aed38802ee1fad0d3041f34f0f101f8c1df9c4c9a44d0f6c92f",
-    "tests/apadana-disclosures.test.mjs": "93ac88b7c5936797aecc548679c42e571066892e76d05fd230eaff56916f26a2",
+    "tests/apadana-disclosures.test.mjs": "6a0eb24bb4593997a3f364e0a475a63c739538b13dae9b1178fd77fc3eafb56a",
     "tests/apadana-edition-navigation.test.mjs": "4c6a8b0b808846da062006df24507b6cbc51593f9c7f80adb58b3ed014ee4aa7",
     "tests/apadana-four-boundary-migration.test.mjs": "2336d14c851a67f227fdc4b87fcccbb2322aeb2ea5fabcf5dc555cf3d6be37c3",
     "tests/apadana-four-locator-consumers.test.mjs": "d576f8495fc7a27f1d83f34e843d73daaa25fa06ab1638d7714bdc4940e2e2b2",
     "tests/apadana-fourth-boundaries.test.mjs": "b1746b0e1c7fef0b619ac73509356561fc80cbf0cea17912e43f2fa384fd7e8e",
-    "tests/apadana-fourth-client.test.mjs": "1fa2573b63adb0194aa3814fb07519e44bd4a10fb4a860708512f1f939ba6ff8",
-    "tests/apadana-fourth.test.mjs": "5b2f843c285d39e6e9bda960f7e5d2345f0e467fcb71d37452e163ea3b52e89d",
-    "tests/apadana-held234.test.mjs": "3c124dea2417add473a5654f4837b9fdf77a334cef565212b46c472667a07748",
+    "tests/apadana-fourth-client.test.mjs": "b6740c479280ec007250e10e2d318e1da6dd473a588ff08cf48768d90d6b6263",
+    "tests/apadana-fourth.test.mjs": "a872d5ac1c88ee8b499f29f63543fc1bba306799c60d4ba49b8d03c115a31bd9",
+    "tests/apadana-held234.test.mjs": "973b6420f5ee2017243f9f96a9cefb36f6a93af073cee3940cebcc233b72f316",
     "tests/apadana-integration.test.mjs": "84821a66f93960d0fbd2a7a1cf4f940cc9d3d78c448882d4732ac3a27d00d97e",
     "tests/apadana-next-boundaries.test.mjs": "b1312d53c20da5a432f702b78e4c3a4a8d97d82d1d28022908b3ecaa703ce54b",
     "tests/apadana-next-client.test.mjs": "f8ac1b937e5ce02850954e03ba2a1f79c44102e5a8b67a96fa60960db4e80b34",
     "tests/apadana-next-ten-cached-consumers.test.mjs": "60007d4df36c86ace6823a7db2a39f63ec1b3418981c92f79f62bcd6b5f9cf2b",
     "tests/apadana-next-ten-locator-consumers.test.mjs": "2314164562cadde2bfd22e1f40bdc6192779bb677e953e0583e3135be26b69ed",
     "tests/apadana-next-ten-migration.test.mjs": "7e3a38044290753ab845b8c673dd97800b16d99bbe05ac52b33f84a7d69150ea",
-    "tests/apadana-next.test.mjs": "764fbb90dd938ab7e6371e919964aebb56c7f4728ac46a4a7b2ebf9b97ad7a65",
+    "tests/apadana-next.test.mjs": "b30a339231bd65db32dbdb072edb4598634c41c8062e80c8ffa70101e8f43cb2",
     "tests/apadana-pair-boundary.test.mjs": "eeb5e8b57ef0df367bd716eb50bc136d4d107b96271e01c06996f28cee56256e",
     "tests/apadana-pair-locator-compat.test.mjs": "efce6a7c516a905cef1d394a9885e40a1dfc5b02546d4e702e2fb4342e5c2b6b",
     "tests/apadana-parser.test.mjs": "dba1a333253e9964801bcf04b5d4b4100063e5af2510b10f576d60ec78b723e3",
@@ -477,16 +481,16 @@
     "tests/apadana-thera-pair-intake.test.mjs": "4b95871f6c8e7be22278329cdaa4314375f1b058fdf37bc25319a9b606281d8b",
     "tests/apadana-thera-scaled.test.mjs": "b5a65d5d866a71a89ab4c1556486b4870be0d51b92ecd6e775e6aac20cea1986",
     "tests/apadana-thera-sixth.test.mjs": "702acbb4ba33c2b3d04dfffc77eb67b1426aa2618b9a7cc1c6b927b2beff1953",
-    "tests/apadana-thera.test.mjs": "aa0c1c9396568bdc42ce1f4b54d1b5c1e219d69f399fd24267b2cd39ecf4809d",
+    "tests/apadana-thera.test.mjs": "89d95384651ed62429dafce279164d06092d3f46af22c910f3c9cec976c610c5",
     "tests/apadana-thera141-180.test.mjs": "e1ee3e36ff064fd5fc21d0cfedbdb67a6583f895e9a5410bae62097498a11b43",
     "tests/apadana-thera181-220.test.mjs": "a09d304cebf31ed00512faeabaa5a1af411eb114572cd882f5a8df75fbf79cf2",
-    "tests/apadana-thera221-230.test.mjs": "edf1daa23bb85be45aab5b2a93328dee786db296ff710b7a3569551e99ab7610",
+    "tests/apadana-thera221-230.test.mjs": "a4b9b411b2374e1c7084052d2983c01a1496f1e0a0bf133d1ea69919e19f5a61",
     "tests/apadana-thera231-240.test.mjs": "e4f76536603bf0fdcf0710de7a60074d048f2544df294cd524f2e70b1366aa87",
     "tests/apadana-thera241-250.test.mjs": "7312948b7fec8c4b31d74aaef49bb0185e0d1a527e09682a9f665b9bdd7cf332",
     "tests/apadana-thera251-259.test.mjs": "bf9346c0f64d6fd7bad93a45ea0cee1123ce2c78e250bd850368686b586edbf6",
     "tests/apadana-thera389390-boundary.test.mjs": "94333529ae751ca4611465c4ce02f6fd54b0b1d852ec676bdb59e1297a89052e",
     "tests/apadana-third-boundaries.test.mjs": "79892f90b7a2704e705fd22680dfb8a0121127922e19c02e48b9a410c007eb03",
-    "tests/apadana-third.test.mjs": "c136593a510cb8374d34ef9e8b47af524dddd6b3e2b4a14433ea51885c378770",
+    "tests/apadana-third.test.mjs": "fe5947fc8df544ed0dd245291634f1ad6b1586f4d8a7e51c7cdaff09d5a3f43c",
     "tests/apadana-three.test.mjs": "e8b8576958e1937afe2447eb81ff2afec817c3ce8a87416d7f36896cf52ec96b",
     "tests/approved-acceptance.test.mjs": "8356cce883cacc456ff185aac676aef6bae4011337e019470841e0d4f4b26f9f",
     "tests/approved-current333-authority-negatives.test.mjs": "b120ebfee591b450fec4d27bd201d473fb0178e8b78771b8dd6ba82bada67b13",
@@ -502,6 +506,7 @@
     "tests/browse-scope.test.mjs": "04ceedb5f27d8ee073f22ab285e932b926e3a225c757b5ff5077186bc07ede13",
     "tests/browser-current359-routing.test.mjs": "72a86b423eb9af085fc555dfc5a3d49d8cb5c34c94aeffcda12eee0320eb4838",
     "tests/browser-current368-routing.test.mjs": "0166c40038b76c64d11f5b5378277e9c209165a4629128e07055ab00c70bde18",
+    "tests/browser-preflight-utf8.test.mjs": "29bfe44d143cc601823d2edef5ba11072d67fcf4d5cfc42c155bf730335e79c4",
     "tests/bundled-data.test.mjs": "653cf583c9b3baace38c6573686fee8907d4104ddcdb0f0ed2ce317442c6a116",
     "tests/calendar-evidence.test.mjs": "843a58bf2413b3d9e1d1bd8c4ad2db1fc82b01865399efe376a8d9a76094e34d",
     "tests/calendar.test.mjs": "ed2d4ed32508273a6dabf9542479908d15323d82fb2a88f6757f828e4b501112",
@@ -510,7 +515,7 @@
     "tests/cbeta-khp-assessment.test.mjs": "032baceafe209d89d2da2edc4e07fe42b2d8e9fc99fb2d2b7a14dacc7e42023b",
     "tests/chatgpt-widget.test.mjs": "b8c20ff21c8d10f3ef9e95891298afa923997b3c949098f2b7476b85ddcd3246",
     "tests/check-ci-stages.test.mjs": "216f7e198e5272bb16a2d6b841ca1bc9674033e9a9bfc965d7a6403b3f9f58c0",
-    "tests/ci-test-partitions.test.mjs": "1613ca0abceca9f81c7ab392bd7361716732dd727e6ad0fe988495e8875cb45b",
+    "tests/ci-test-partitions.test.mjs": "e14a1ba0bcf1a4f0a94d6e5fd870898408b7f90e02b7cc140eaa512717ab37d7",
     "tests/citation-id-coverage.test.mjs": "ac30a105e79ae69f8f1cf867ee713929380b153812368333d93dc45886459123",
     "tests/citation-pagination.test.mjs": "bbdbbabf73edd4ffe4aedf592f6e504c476811b652c1559129bae5454b6b4443",
     "tests/citation-range-validation.test.mjs": "65db48e84f79515b8764df6ed063fc849a6b271fecee8ef19e061117750e336d",
@@ -526,9 +531,9 @@
     "tests/corpus-check.test.mjs": "ef5190de6dcdd1cf1766a06435e3319149e148f16213cb7775f26282da5501ca",
     "tests/current333-uri-bindings.test.mjs": "630ee6d57bfc86c2edec3d344c674d271b3ef35f6ffb8aefca9ff0b4b36624d4",
     "tests/current333-version-bindings.test.mjs": "86a38bed1e279b916888d96465df823c5f31f1db0d5883b6939f024ec42c877f",
-    "tests/current339-source-inverses.test.mjs": "8eccdcfdd19ac2d91286532b69f01214add41baa5419a615e5cde1dec38af41e",
+    "tests/current339-source-inverses.test.mjs": "a93397b946580248c507344e835a3cf5cd55fafefd2a53e5b8dc5b9d8b834ed8",
     "tests/current343-bindings.test.mjs": "a1a9ce2e007ecbac308ceb307f5875ba26236e36e7cbee51be4b2e6739cddbe1",
-    "tests/current375-bindings.test.mjs": "8652b0bd5dc5ada1cc39a220e6e1b954d3528b5ab111d59ff85c1cc55f32c35c",
+    "tests/current375-bindings.test.mjs": "15ed189ad4418613a3f378887c1ba8b7147fa1e2bad0594d90bba85d80d3abb4",
     "tests/daily.test.mjs": "6eb550c91e1a2f57d7a8ee73e16dc7de65fde0a7d5653519dbf974493bec6e65",
     "tests/dasabala-commentary.test.mjs": "de5aaf3bfb3a53165b65e5ac82167b85160e77a18f9139c6a9b05352aeccdd8b",
     "tests/dasabala-spans.test.mjs": "c092791f01657c3ff02d9f4bc4c4a2e8edae2905c52e5a7b5e7ab3ffafd11ee8",
@@ -557,7 +562,7 @@
     "tests/four-history-data.test.mjs": "3ed5d934143a44c4050d51c6f55d1cffa764f0cd7f3d73bcff4510fb6935fa63",
     "tests/grouped-scope.test.mjs": "15481867b7f9324751cd98c964ad521b48f2e49543001a7b298d4e2fb3974f99",
     "tests/guide-excerpt-subjects.test.mjs": "757f45317ee0ece21f8da88b037a20719a28518bbd0ba0e4adce368a092d9153",
-    "tests/held234-client.test.mjs": "ce7f825b3dd4c788aa5cc3e8bd354c86a794db7c393ce35aa17dcc2832346b50",
+    "tests/held234-client.test.mjs": "fc3ed50fee8fc71db6052f69199f9b9cd3bcf7f3632750e5acba75c43de429ae",
     "tests/held234-current333-chain.test.mjs": "e252a07ac8339ba40ad83dcfca2caa747a1100621987f3d01f0b171d523c7fbd",
     "tests/held234-current375-chain.test.mjs": "62ba5aeec1d83e9281991eacda12528ce183ef99784fbc64a804b609fb8114a7",
     "tests/held42-editorial-gap.test.mjs": "70101b75e2e9df2959de1924fad036ef258f36ee88dd257f48befa97c85931eb",
@@ -657,10 +662,10 @@
     "tests/source-books.test.mjs": "3809be0f1c860dfa13694e2563d47b325d1db32997482a8f39f46a7347618098",
     "tests/source-diagnostics.test.mjs": "b418825903620da3d6969689dfce13efd1561091dbaaaefb2d8488fa63cb83d4",
     "tests/source-headings.test.mjs": "44e61830867f7f95b3b14db8db3b9c92e52906ea9455cf6f3d53d235316b6c04",
-    "tests/source-notes-baseline-projection.test.mjs": "d11ddc3192b8388f6071940eb618b6a563c5582e49f926810c98b2da4cb3d0c4",
+    "tests/source-notes-baseline-projection.test.mjs": "f9f90ec9f1c39cccb7d729cb04ca07a4c688e9f670cc599613df4b1a8d8da1e2",
     "tests/source-notes-ci.test.mjs": "a6a91a295246af98e9f52b3e1c0c6d92443717b6104444811b78964df89e6f47",
     "tests/source-notes-client.test.mjs": "8f094250a2ddaa5c6ae7f3f1eff21b3cd7f991f5c884b53bf7191173ccf6f3c9",
-    "tests/source-notes-compatibility.test.mjs": "9639e286f0f7e4e72c64517f7c3f6ec311d6803591e7a541a6f91ba2cf1cc780",
+    "tests/source-notes-compatibility.test.mjs": "b6089922524852b1e6595aee578ea09401361cafcc936209ba3c40bbe2fdc06d",
     "tests/source-notes.test.mjs": "edd987a7ea1b269a19bd1e0450183bfaa7f78548833735be7b5add2e1b96a53a",
     "tests/source-passage.test.mjs": "e49847a6c3ef413f94f74e020fe64b40b588607da6fad08404f9326032ae8818",
     "tests/story-boundaries.test.mjs": "cff5cb3bddb67419ff49b1b9f3dcaad992bb303a0e0576235687439bf65650ab",
@@ -677,39 +682,40 @@
     "tests/thag-sixteen-boundaries.test.mjs": "7b96a7cf98a79014d3ce9a55b7618f2c3ed035c2de864348eabaaa40f50fbb47",
     "tests/thag-sixteen-consumers.test.mjs": "1a128d2da64e01e6e02ae4a8a157b16424daeef8c03f8c530cdaa0c7e5f09f4d",
     "tests/thera-cached-poem-notes.test.mjs": "e1653335c3302913125b8e7623b3911676d6fc5d0079b820e45de0ed52ad40cd",
-    "tests/thera-commentary-locators.test.mjs": "2ba9d366ed54c9c3286184775e061aabad48aebe54f0be5343af326ffbaf56de",
+    "tests/thera-commentary-locators.test.mjs": "b969f40edde5aa83ba6ac9a643760a43008b27cc4b15017c532acaebf59d23d9",
     "tests/thera-hundred-client.test.mjs": "4d518f25a3a7cd844fc917dcdc35664777f56f40c6100d54867b964f1eae8ea6",
-    "tests/thera141-180-client.test.mjs": "ba5de46d3c0ad243331c5953d15fd2830c40aa2b406c53e29a3e1a3a9c99b150",
-    "tests/thera181-220-client.test.mjs": "aebf404847c40828d1fa112e232f938411a330d784b2aa7cdd563dce3bc56a26",
-    "tests/thera221-230-client.test.mjs": "e6de16a8edbd6a375d80d9fce5a5da0ad383b39745ac653c607a31c838eab35e",
+    "tests/thera141-180-client.test.mjs": "502169938f36e53028869863ff43b812c56ad320b1b06d3f7f083111f0d5d8fc",
+    "tests/thera181-220-client.test.mjs": "08fac9c700c191ed2b2158465a165a01ab43bed1d860f104d270651b21abd040",
+    "tests/thera221-230-client.test.mjs": "0831d89cd779a398629e6fbcbb4ab8c2ca06ff13703d0b21d7c1a1c6244c3653",
     "tests/thera231-240-client.test.mjs": "54c564b8cb1dfef30424a25b7c3fd536ef3e98be935c3e0c423a569cb2ad7742",
-    "tests/thera241-250-client.test.mjs": "85709aa47c2a1925b298169c76ce30e8def3185fb3264b21a46d0d1f035a94d2",
+    "tests/thera241-250-client.test.mjs": "4d431f3eb7bde2bebf53187ae7107e61ebb0560a2ee5dbecda00c7bd2a6b0c4e",
     "tests/thera251-259-client.test.mjs": "42d318b18d7a6c539d031c8d77969f3bba4cd84050ed9094b3124e96ce0abf4d",
-    "tests/thera261-280-client.test.mjs": "3eccd759eb9c7220d505987efa314b6e6c4177212fdaf4a3365998792b84b41c",
-    "tests/thera261-280-source.test.mjs": "8a724339766222ed5eeab1768a6e507c003c19aefed016b437c902d0a8f521db",
-    "tests/thera281-285-client.test.mjs": "3cf039437e4e49ad3373a6fae47154e13210d209e4dfdf790e36baa2f81666ab",
-    "tests/thera281-285-source.test.mjs": "97089ebd0dfd030b3538abbcd88e739030197a2c19aab6968750a78def0a392c",
-    "tests/thera287-288-client.test.mjs": "9c718c4ea851e1e9759005225e0cc84ea943502b440b9f0c48c689c1f676c9de",
-    "tests/thera287-288-source.test.mjs": "187ccd6ed51cd50314670148b1080ae72fb95630842b71d50bd37723d23b6351",
-    "tests/thera292-299-client.test.mjs": "d7e4a75accbb3bf00bafa7f054c0e92077576becda0009ed1f5f93a1f8c82838",
-    "tests/thera292-299-source.test.mjs": "171885010073df03e62eebafcb1e3097a5b70e18bd92710e78d27d34dd95bfc3",
-    "tests/thera301-310-client.test.mjs": "302151bb2803cded9f0b00bf96a8014cd391fe7794e9a0e1f68b668c83aa0d5e",
-    "tests/thera301-310-source.test.mjs": "53f887f4e6189aa0024c579a4d121accb0f79283fe38331fcb392dc41c8cd817",
-    "tests/thera312-319-client.test.mjs": "8b8c87af8cde81510e0ff10c1ea1e1458af218d48335c3674282422d53a5f489",
-    "tests/thera312-319-source.test.mjs": "b71bf364a717dfa7380468ebebd3deef621d99803fb908e50b359746533091b8",
-    "tests/thera321-329-client.test.mjs": "e124d3da73cdfdfd345aadf21dc26c3eb41ca9d99f65847900f9f826ccbfc3ef",
-    "tests/thera321-329-source.test.mjs": "69ab3d20e9c87493800bbf23bd4229bb847a8c6b841f43ee740d9ec8eaa0e353",
-    "tests/thera331-334-preface-client.test.mjs": "a0f2538d4c5c481e4bd06636a680ba29bac917afb5983aec29be288939b75852",
-    "tests/thera331-334-source.test.mjs": "7d27a29b6be251f35cf7f09ea6bcf5ad7d4af0586964588e6fad6b0bde9fdd81",
+    "tests/thera261-280-client.test.mjs": "4405a32ec67b3371ace2072cc05dbe8af4ea0af094fe9351af9d2f9c24c41df1",
+    "tests/thera261-280-source.test.mjs": "0e4b81f24c70819d930dc1fd57e3c4133a46a8c6028630627107a1f54cba78a4",
+    "tests/thera281-285-client.test.mjs": "57bd44be1a11c39481e342fe37c29db6ffb7630336fc58fe3b0ce3221b15d82d",
+    "tests/thera281-285-source.test.mjs": "1f8090c55d6904b4c816c4e1d7434047e0e968feb2b4cc30f62dcad124ee9374",
+    "tests/thera287-288-client.test.mjs": "9ca222be8dd3d81cac9f1b9bfbd09597eaa8412756ef76452afa218fa7297047",
+    "tests/thera287-288-source.test.mjs": "469cfc441329945dd640a3c572b66a7846e9dc3c78319d2169721048832d358a",
+    "tests/thera292-299-client.test.mjs": "7a8bd6aa01677348744e7e398ba79d26e9fe61df16b227beac5986c76cac674b",
+    "tests/thera292-299-source.test.mjs": "b7afdc94043730ebd720a467021840a2dd0b3513bf73b4b1ebd59c0e1d06be46",
+    "tests/thera301-310-client.test.mjs": "7fc92a8ff06154a9d2c5435b2a3f26be32bf77822106072bc36f8b2d125c5164",
+    "tests/thera301-310-source.test.mjs": "11d19eedccbd79b232d2d3807eed4b7f93ede6aada4f38297b4b24d8417cef55",
+    "tests/thera312-319-client.test.mjs": "fac5a627fbd044e79c37d2eaffefa9f633938d265ad9011e5223691b30136aa6",
+    "tests/thera312-319-source.test.mjs": "e24b2c700b15faf38305f47b2dfc6a87d38e1014634b9fecc98816256d86a8f0",
+    "tests/thera321-329-client.test.mjs": "df5ac8ba4bb0169a9d87d46aeb05da11a24bf9c3e4bbc04cf8ad768bf21e52a6",
+    "tests/thera321-329-source.test.mjs": "03cd08c21da8d5593f4059451333651c7708e04e270b868656222b2645d84be9",
+    "tests/thera331-334-preface-client.test.mjs": "ee0251859b7f1a4f45bd858c5a9b9207b5b7a02fdd214720e73f62b4b324c8c1",
+    "tests/thera331-334-source.test.mjs": "6979a4daa73b475873c06260f980fac64cc2e5845eb9d74b518c1ce8d21c00fa",
     "tests/thera333-legacy-projection.test.mjs": "18b2bc8a88f7c57db2ad6659b7803a7431769db9e964350aa33bc35e3d2764f0",
     "tests/thera333-legacy-source-inverses.test.mjs": "a5e4ae483b9ffc814e3da75b2862ea0667c645e5dc655e25056c59bc30fa1ddd",
     "tests/thera335-350-client.test.mjs": "c17ad1147d3aa766c113db1c7318c4f8863d64ffb7e9d490f0ca27985cc12119",
-    "tests/thera335-350-source.test.mjs": "344aa29ab41f05d4796cb0a7fced5d1f1ea0bf91d7e47bff55654e647e474901",
+    "tests/thera335-350-source.test.mjs": "1bdf08a021572357e23bcb628af45a023d313a58d08b8967280fc8e89718645f",
     "tests/thera339-legacy-projection.test.mjs": "f8f3f72e67e22effa16d97bf32aff3994b87d4cc16004b6644c1208a2af729b7",
     "tests/thera351-360-nine-client.test.mjs": "fb359a0639995f1e6623c82d33f8eda1f1be016ff82cd9fb9da96ebebe17adaf",
-    "tests/thera351-360-nine-source.test.mjs": "c85aff0df3a7d52659b43c05e43aeccafbbe8ff655adaf479ce3cc7366378d53",
-    "tests/thera371-378-seven.test.mjs": "345c458db1f44a5f9c1aee8526e553eabdca7fffe1f932f2f7eedb96b4b231a7",
-    "tests/thera381-386-five.test.mjs": "787e737401175759b2c3424d40eca1d8af752e03cfd2a4db1d24e88e42613fd6",
+    "tests/thera351-360-nine-source.test.mjs": "b3c80618159fdb887e810456d149d0c7e77413bfc33ce084f0a2df79e92e6f44",
+    "tests/thera371-378-seven.test.mjs": "48473e89ab48d0889ed383f3c170165cfe8fec6379cc42b7a9a12c7c447524e1",
+    "tests/thera381-386-five.test.mjs": "4f906eed1e86fd5a458bb0c45eef9716f55f04a51cd3a28c2565b6b674a367b5",
+    "tests/thera401-402-pair.test.mjs": "a8fddbeb1f1506c349c343b5c43c7703f71a8af53be341c4d5837f864e0e6878",
     "tests/title-pagination.test.mjs": "0d4781baf210f7b37ff1bb47eb14e2ec2efa43e1e5e27217f9b92584c5e6c34d",
     "tests/tool-titles.test.mjs": "67c78bcf3eed979ab5abf7b8aa842bb06e56dacd82568f0cfe41449a692aa974",
     "tests/topic-script-input.test.mjs": "7903c5a9acc049a015abb21cbceaa9a9c605de66f71d26ea0b3dd6d135a509e0",
@@ -773,7 +779,7 @@
     "tests/widget-deadline.test.mjs": "1b3ecf8b6d1d6fae0c8c6db9cfacf39cfc934eec6a705aeb6903e41b46e4f608",
     "tests/widget-exact-segments.test.mjs": "d05b40336fa39fe4f3bef2e868509ad64d68bab6e56796639578ff8962fb8fdc",
     "tests/widget-hash-serialization.test.mjs": "58e96389be08a636512b5bbec150e233442e09fc54f359b1e5fc6de96c497446",
-    "tests/widget-hosted-selections.test.mjs": "3cb35045bb8da4a4c42f9baa52df9e572777239e4da47119c4e99e65749d0884",
+    "tests/widget-hosted-selections.test.mjs": "c4207ce088c9a6df5ad2099665ac1759e6eed2f2c16a1814711252c4929c4a75",
     "tests/widget-json-output-cache.test.mjs": "c81d1c25003c508299270645945352b4dc89f47e78e9f2c748f01c942500dbdb",
     "tests/widget-links.test.mjs": "c3287d77bee5fec675cf95250f0569a8eacf4a57cb30d43780930c40392a171d",
     "tests/widget-model-context.test.mjs": "1145363c1a89cd21e6a788b5676313d10466d04f75b2e7674b89fa6aeec953bd",
@@ -791,6 +797,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/english381-386/CASE_SOURCE_REVIEW.json",
-    "sha256": "db58b822e31a9d6006d297f04f6d324eab4ce27dd92867b45599de06d98fd2e5"
+    "sha256": "b5ec46a101cacb6224d7f3e2fada5dd83d5c8c5ce958253877897b951d714eac"
   }
 }

@@ -1,0 +1,71 @@
+{
+  "schema": "reviewed-thera401-402-independent-source-approval-v1",
+  "status": "GO_EXACT_TWO_PUBLISHER_EDITION_SOURCE_SCOPES_ONLY",
+  "base_commit": "f03150ff03f75e20abfb735836093cf3a0bfe5c2",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "approved_pairs": [
+    [
+      401,
+      "tha-ap403"
+    ],
+    [
+      402,
+      "tha-ap404"
+    ]
+  ],
+  "source_documents": {
+    "profiles": {
+      "bytes": 13368,
+      "sha256": "e2bc9b358af5bf952ad3f97f7bdab567e4e057a2e66437e2d88cbb2e370f9133"
+    },
+    "approved_links": {
+      "bytes": 13528,
+      "sha256": "a42e583e2907cf09c7ed3e2fbe9272d856020317baa6860977d2989d52e9d7bb"
+    },
+    "producer_pending_links": {
+      "bytes": 13530,
+      "sha256": "8b57b6d84525a9b251a39aca931425dfbf589537888c92d92ab553662b3adf2b"
+    },
+    "source_bindings": {
+      "bytes": 87191,
+      "sha256": "5a0b036055a1aa8269db1a7db0c3efa6defe89c7d350c737aceadf38d04259e6"
+    },
+    "required_notices": {
+      "bytes": 6223,
+      "sha256": "f6ce9f3073fe8464e7cde6e7d5f34bcc4cbdd6db84bfb576d7d8f7c6567c9aa9"
+    }
+  },
+  "producer_evidence": {
+    "source_packet": {
+      "bytes": 5084,
+      "sha256": "cc62a8ce19598623b6543a7296310149a9532eebd57357856880b5dd21dbd230"
+    },
+    "fresh_normalization": {
+      "bytes": 7629,
+      "sha256": "e0ea63010169b44884cfd32e0af6b204ca003d5f1d65df3561c3f195afe6b437"
+    },
+    "consumer_contract": {
+      "bytes": 15944,
+      "sha256": "187fa54105f2273aee08c58bba139ac7f55d0d58b8ecad7e22eda9e80bea6b47"
+    },
+    "independent_blind_manifest": {
+      "bytes": 1393,
+      "sha256": "77746b64c25becaa37ca78bf9d5a06d69743e8b0fee842dd307e0a019be300a1"
+    },
+    "independent_prior_source_review": {
+      "bytes": 6510,
+      "sha256": "e5688ad867aecf5be12eb6dc7e35c2cd9625ad27ef0d45a18eba229d5e9e19a7"
+    },
+    "independent_fresh_reverification": {
+      "bytes": 5868,
+      "sha256": "2f9e8b5ff1a895f99c45b9af0c08896cea53985e7f892ce343be86a88dccd295"
+    }
+  },
+  "all_nine_holds_unchanged": true,
+  "complete_publisher_editions_only": true,
+  "source_and_normalization_only": true,
+  "runtime_API_activation_or_release_approval": false,
+  "operations": "Independent blind primary raw-first record77746 was sealed before reading authorproposal f2f741. Fresh primary401/402 and all6 specific Walters/Whitman2017 CC BY-NC-SA4.0 artifacts rehashed; bodies/all36 notes/49paragraphs/43physicalentries/44printedlabels/16UTF16pages/6note-ownedc/ch pairs/10speakerlines matched independent normalization. Selected136 XMLtuples and full14645 retained Book36tuples were independently compared against883d; all8 VRI notes/pageanchors retained. Publisher401 unnoted33character chapterheading/titlehyphenation and fullrefrains remain;402 combined8line3922–3923paragraph/note6mixedquotes/fullpublishedrefrains versus VRIpeyyala remain. Allqualification arrays byteexact. PROFILES/bindings/notices unchanged; LINKS changes ONLYtwo pending→individually-reviewed-whole-poem matchmarkers with wholebyteinverse to originalpendinglinks. All380prefixIDs independentlycomposed from oldsource approvals; currentheldlist matches independentlysealed canonicalbinding. All9 sourcepublisherholds391392393403404405408409410 andprior398399scope untouched; canonicaltha-ap403/404 are not heldpublisher403/404. This leaf authenticates source/normalization scope only, not line-complete VRI, wholechapter, parser/API/native/runtime/package/CI/activation/release. No authorproducer/application/test/Git/network execution or checkoutwrite byreviewer. NoAPPROVAL/self/sourceclosure/future/runtime hash is included, preventing a cycle."
+}

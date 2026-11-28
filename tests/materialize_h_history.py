@@ -48,7 +48,8 @@ _prep_phase('bootstrap')
 sys.path.insert(0,str(Path(__file__).absolute().parents[1]/'scripts'))
 from web_reader_intake375 import (DIRECTORY,H_COMMIT,_physical_root,_require,
     _relative,_regular,_row,_sha)
-from web_reader_boundary389390 import source_authority389390,_capture389390_current,CANON
+from web_reader_intake382 import (source_authority382 as source_authority389390,
+    _capture382_current as _capture389390_current,CANON)
 from owned_intake375_proofs import _empty,_exclusive
 
 _prep_phase('qa-imports-ready')
@@ -127,9 +128,9 @@ def _materialize(source_root,destination,kind):
     _require(source_root!=destination and not destination.is_relative_to(source_root) and
              not source_root.is_relative_to(destination),'Separate owned H fixture required')
     if kind=='runtime':
-        _prep_phase('actual380-start')
-        context,_=_capture389390_current(source_root)  # actual883d/current380 positive before H
-        _prep_phase('actual380-complete')
+        _prep_phase('actual382-start')
+        context,_=_capture389390_current(source_root)  # actual883d/current382 positive before H
+        _prep_phase('actual382-complete')
     else:
         context=source_authority389390(source_root)  # source-only new canonical context before H
     _prep_phase('source-authority-start')
@@ -207,8 +208,11 @@ def _materialize(source_root,destination,kind):
         _require(item['path'] in rows and all(item[k]==rows[item['path']][k] for k in ('bytes','sha256')),
                  'H index/workflow descriptor differs from copied object')
     _prep_phase('final-descriptors-complete')
+    # The retained current380_checked field names the immutable SOURCE prefix.
+    # Only runtime-kind preparation claims an actual382 data/runtime positive.
     return {'schema':'owned-H-history-fixture-v3','kind':kind,'commit':H_COMMIT,
             'root':str(destination),'files':sorted(written),'current380_checked':True,
+            'current382_source_checked':True,'current382_runtime_checked':kind=='runtime',
             'current_canonical_logical_sha256':CANON,
             'index':index,'workflow':workflow}
 

@@ -1,10 +1,8 @@
-"""Three fixed380-English/new883d copy domains; no historical runtime capture."""
+"""Actual382 copy domains; immutable380 source proofs, no historical capture."""
 from pathlib import Path
-from web_reader_intake380 import (_physical_root, _regular, _sha, _require,
-    _source, _proof_rows, _source_metadata_pins, _all_metadata_pins,
-    source_authority380)
-from web_reader_boundary389390 import (source_authority389390,_capture389390_current,
-    DIRECTORY as BOUNDARY_DIRECTORY,PINS as BOUNDARY_PINS)
+from web_reader_intake380 import (_physical_root, _regular, _sha, _require, _proof_rows)
+from web_reader_intake382 import (source_authority382 as source_authority389390,
+    _capture382_current as _capture389390_current, _source_metadata_pins, _all_metadata_pins)
 # Reuse the exact old physical guard/write primitives, never its old capture.
 from owned_intake375_proofs import _empty, _exclusive
 
@@ -23,11 +21,6 @@ def _copy(source_root,destination,kind):
         context,runtime=_capture389390_current(root)
         authority=context['english']
     names=_source_metadata_pins() if kind=='source' else _all_metadata_pins()
-    transition=('CURRENT_CANON_BINDING.json',) if kind=='source' else tuple(BOUNDARY_PINS)
-    for leaf in transition:
-        name=BOUNDARY_DIRECTORY+'/'+leaf
-        _require(name not in names,'Overlapping boundary source/runtime metadata')
-        names[name]=BOUNDARY_PINS[leaf]
     for name,row in _proof_rows(authority).items():
         if kind!='source' or row['domain']=='H_source_prerequisite':
             _require(name not in names,'Overlapping source/proof copy domains')
@@ -37,7 +30,7 @@ def _copy(source_root,destination,kind):
             if kind=='runtime' or name.startswith('data/'):
                 _require('server/'+name not in names,'Overlapping runtime/proof copy domains')
                 names['server/'+name]=row['sha256']
-    _require(len(names)==(218 if kind=='source' else 281 if kind=='data' else 288),
+    _require(len(names)==(225 if kind=='source' else 291 if kind=='data' else 298),
              'Exact finite source/data/runtime copy set required')
     written=[]
     try:

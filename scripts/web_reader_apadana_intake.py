@@ -705,8 +705,8 @@ def _reviewed_current375(root):
 def reviewed_intake(root):
     if type(root) not in (str, type(Path("."))):
         raise ValueError("Current380 requires an exact physical path root")
-    from web_reader_intake380 import reviewed_intake380
-    return reviewed_intake380(root)
+    from web_reader_intake382 import reviewed_intake382
+    return reviewed_intake382(root)
 
 
 def curated_303_additions(root,anchor_filename):
@@ -1411,5 +1411,5 @@ def historical368_curated_additions(root, anchor_filename):
 def curated_additions(root, anchor_filename):
     if type(root) not in (str, type(Path("."))):
         raise ValueError("Current380 requires an exact physical path root")
-    from web_reader_intake380 import curated_additions380
-    return curated_additions380(root, anchor_filename)
+    from web_reader_intake382 import curated_additions382
+    return curated_additions382(root, anchor_filename)

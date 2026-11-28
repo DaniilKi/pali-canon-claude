@@ -1,7 +1,9 @@
+import {INTAKE382_IDS} from './helpers/intake382-metadata.mjs';
 import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
-import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
-import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+import {intake380Authority} from './helpers/intake380-metadata.mjs';
+import {requireProfiles382 as requireProfiles380,requireMetadata382 as requireMetadata380} from './helpers/intake382-metadata.mjs';
+import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure} from './helpers/intake382-metadata.mjs';
 assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
@@ -46,7 +48,7 @@ test('held234 curation appends only236 to exact284 objects and preserves separat
   assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,285),e.approval.expected_profile_ids);
   assert.deepEqual(CURRENT_APADANA_IDS.slice(0,285),e.approval.expected_profile_ids);
   assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);
-  assert.equal(current380Source.historical368.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,380);
+  assert.equal(current380Source.historical368.ids.length,368);assert.equal(current380Source.ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),current380Source.ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380),INTAKE382_IDS);assert.equal(CURRENT_APADANA_IDS.length,382);
   for(const id of e.previous.expected_profile_ids){assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id],id+' prior profile exact');assert.deepEqual(manifest.links[id],e.priorLinks[id],id+' prior link exact');}
   assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.profiles['tha-ap236']);assert.deepEqual(manifest.links['tha-ap236'],e.links['tha-ap236']);
   assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixture(data.canon)))),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);

@@ -1,4 +1,4 @@
-import {CURRENT_WIDGET_URI} from './helpers/current389390-metadata.mjs';
+import {CURRENT_WIDGET_URI} from './helpers/intake382-metadata.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';

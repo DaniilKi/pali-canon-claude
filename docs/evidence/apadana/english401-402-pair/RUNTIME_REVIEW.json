@@ -1,0 +1,25 @@
+{
+  "schema": "reviewed-intake382-runtime-approval-v1",
+  "status": "GO_RUNTIME_INVENTORY_ONLY",
+  "inventory_sha256": "d96c2bfcdd6ec0802f6e36dec6a792ee35e1cc05751b2579c57d6ad5871cf8b2",
+  "application_commit": "cc0165ccebdf8639168f05d30af175ffe7d0b529",
+  "curation_sha256": "9d6efabf44deb7b51b65125f62dedf2cca4ec46ce7f1344c79923d42dee5ec2d",
+  "baseline_commit": "f03150ff03f75e20abfb735836093cf3a0bfe5c2",
+  "predecessor_inventory_sha256": "fa46d776a08100d79117bd415f29a16f8fa4d2a37a8ef4918acccea88f30256b",
+  "expected_manifest_sha256": "0bdd61300073bdf55631709f0152707a9fa4039c5de55b31681260d5b74f43ae",
+  "runtime_paths": 34,
+  "actual_data_paths": 27,
+  "changed_paths": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_paths": 29,
+  "independent_manifest_composition": true,
+  "physical_and_Git_blob_inventory_exact": true,
+  "canonical_data26_and_H_held_preserved": true,
+  "behavioral_installed_browser_native_CI_or_release_approval": false,
+  "operations": "Independent standard-library read/hash/JSON composition and read-only Git cat-file blob comparison: all34 current physical server files equal component cc0165ccebdf8639168f05d30af175ffe7d0b529 and the literal inventory; all34 f031 baseline blobs equal the immutable predecessor inventory; exactly AP metadata plus four bundles differ, all26 other data and29 total files remain identical. AP382 was independently composed from sealed368 full source objects plus immutable7 and5 source objects and the independently raw-first reviewed publisher401/402 profiles/approved links; only literal source-policy counts change, all380 prefix objects/order and manifest held remain exact. The two canonical gzip parts reconstruct logical883d. No application, proposed helper, producer, tests, browser, network, native CI or release operation was executed. Detailed comparison is detached outside the runtime hash graph."
+}

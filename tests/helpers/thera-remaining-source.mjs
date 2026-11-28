@@ -4,8 +4,9 @@ import {after as closeRemainingHistoricalInputs} from 'node:test';
 import {lstatSync as remainingInputStat} from 'node:fs';
 import {resolve as remainingResolve,isAbsolute as remainingIsAbsolute} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {intake380Authority,requireProfiles380,requireMetadata380} from './intake380-metadata.mjs';
-import {assertCurrent389390SourceClosure} from './current389390-metadata.mjs';
+import {intake380Authority} from './intake380-metadata.mjs';
+import {requireProfiles382 as requireProfiles380,requireMetadata382 as requireMetadata380} from './intake382-metadata.mjs';
+import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure} from './intake382-metadata.mjs';
 import {prepareHistoricalHRuntimeInputs} from './historical-h-inputs.mjs';
 const actualRemainingRoot=new URL('../../',import.meta.url);
 function readRemainingRegularBytes(root,path){

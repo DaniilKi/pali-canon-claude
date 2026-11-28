@@ -1,4 +1,4 @@
-import {CURRENT_WIDGET_VERSION} from './helpers/current389390-metadata.mjs';
+import {CURRENT_WIDGET_VERSION} from './helpers/intake382-metadata.mjs';
 // Synthetic transport/render fixtures use real finite profile metadata, never source wording.
 import {test} from 'node:test';
 import assert from 'node:assert/strict';

@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/english381-386/BASELINE_380_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: 014ad1abe189cf3ee85766ed3e7a59ded4217beb8d27fb6a68c1122baa7cd516
+  CI_TEST_BASELINE_SHA: a0ce2e234a662b4c2c5d0dfe556242a4d33e17a354b4cf0c893543aba7389b40
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -927,6 +927,8 @@ jobs:
             src/_poems/chapter-3/poem-384.md
             src/_poems/chapter-3/poem-385.md
             src/_poems/chapter-3/poem-386.md
+            src/_poems/chapter-3/poem-401.md
+            src/_poems/chapter-3/poem-402.md
             src/_poems/chapter-3/chapter-3.json
       - name: Fetch exact VRI Book36 for independent English16 source replay
         if: matrix.group == 'apadana'
@@ -991,6 +993,17 @@ jobs:
           set -euo pipefail
           node --test --test-reporter=tap tests/thera381-386-five.test.mjs | tee reviewed-publisher381-386-five.tap
           node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher381-386-five.tap","utf8"); for(const [key,value] of [["tests",2],["pass",2],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
+      - name: Require both publisher401-402 source API and widget cases
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        shell: bash
+        env:
+          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned
+          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap tests/thera401-402-pair.test.mjs | tee reviewed-publisher401-402-pair.tap
+          node --input-type=module -e 'import assert from "node:assert/strict"; import {readFileSync} from "node:fs"; const tap=readFileSync("reviewed-publisher401-402-pair.tap","utf8"); for(const [key,value] of [["tests",2],["pass",2],["fail",0],["cancelled",0],["skipped",0],["todo",0]]) assert.match(tap,new RegExp("^# "+key+" "+value+"$","m"));'
       - name: Validate all Apadāna source and rights pins before browser retrieval
         if: matrix.group == 'apadana'
         run: node scripts/apadana/build.mjs --source .fixtures/apadana-pinned --check
@@ -1087,6 +1100,23 @@ jobs:
       - name: Check repaired Apadāna and summary from isolated npm package
         if: matrix.group == 'apadana'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-apadana-three-check.py --source-root .fixtures/apadana-pinned --server-dir "$RUNNER_TEMP/apadana-package/package/server" --report installed-apadana-three.report.json
+      - name: Check both publisher401-402 reader sources
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        run: |
+          python scripts/web-reader-thera401-402-check.py --mode normal --source-root "$GITHUB_WORKSPACE" --server-dir server --publisher-root .fixtures/apadana-pinned --browser "$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" --report standalone-thera401-402.report.json
+      - name: Audit both publisher401-402 reader sources
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        run: |
+          python scripts/web-reader-thera401-402-check.py --mode a11y --source-root "$GITHUB_WORKSPACE" --server-dir server --publisher-root .fixtures/apadana-pinned --browser "$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" --report standalone-thera401-402-a11y.report.json
+      - name: Check both publisher401-402 sources in a fresh npm installation
+        if: matrix.group == 'apadana'
+        timeout-minutes: 5
+        run: |
+          mkdir -p "$RUNNER_TEMP/pair401402-install"
+          npm install --offline --ignore-scripts --no-audit --no-fund --prefix "$RUNNER_TEMP/pair401402-install" "$RUNNER_TEMP/apadana-package/"*.tgz
+          python scripts/web-reader-thera401-402-check.py --mode installed --source-root "$GITHUB_WORKSPACE" --server-dir "$RUNNER_TEMP/pair401402-install/node_modules/pali-canon-mcp/server" --publisher-root .fixtures/apadana-pinned --browser "$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" --report installed-thera401-402.report.json
       - name: Validate next Apadāna chapter source rights and refusal cases
         if: matrix.group == 'apadananext'
         run: |
@@ -1697,6 +1727,10 @@ jobs:
             reviewed-publisher301-310.tap
             reviewed-publisher312-319.tap
             reviewed-publisher321-329.tap
+            reviewed-publisher401-402-pair.tap
+            standalone-thera401-402.report.json
+            standalone-thera401-402-a11y.report.json
+            installed-thera401-402.report.json
             reviewed-publisher331-334.tap
             reviewed-publisher335-350.tap
             reviewed-current368-source-seal.tap

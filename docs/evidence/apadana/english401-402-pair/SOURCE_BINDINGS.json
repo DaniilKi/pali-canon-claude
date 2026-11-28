@@ -1,0 +1,3299 @@
+{
+  "schema": "publisher401402-source-preparation-bindings-v1",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "publisher_revision_parent_authority": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "VRI_revision_parent_authority": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "literal_pairs": [
+    [
+      401,
+      "tha-ap403"
+    ],
+    [
+      402,
+      "tha-ap404"
+    ]
+  ],
+  "entries": {
+    "tha-ap403": {
+      "publisher_poem": 401,
+      "raw": {
+        "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-401.md",
+        "bytes": 6387,
+        "sha256": "acd65e79f98f11239870504f054002cc440339a375e77033800649d99bf91bc9",
+        "git_blob_sha1": "b90907423af09928dd3c661d1c1b60a08ff46a47"
+      },
+      "root_record": {
+        "id": "tha-ap403",
+        "book": 36,
+        "start": 12892,
+        "end": 12980,
+        "title": "Tissametteyyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 403",
+        "vri": "1–28",
+        "pts": {
+          "volume": 2,
+          "page": 339,
+          "end_page": 340
+        }
+      },
+      "root_wrapper_sha256_JSON_stringify": "f18e3eab3e4ba7fb91e85aa42cc6da9e641ef567c7386b7b5c3ec2928fb278e9",
+      "physical_root_tuple_array_sha256_JSON_stringify": "747ca266f513053e7056936ccdf1a6e577e655da3982eb5d638ff76ff77f6369",
+      "physical_root_tuple_count": 88,
+      "body_presentation_operations": [
+        {
+          "rule": "numbered_note_call",
+          "count": 19,
+          "before_sha256": "70fe3d36e703e3bbd8cd89af8174d75590a633f7bac83b56635b09b3dbcc6abc",
+          "after_sha256": "449e6af7d924a9f55f20dccd288caa8b305512d836b283a6b92882f7ebcedafa",
+          "matched_replacement_pairs_sha256": "b3afb2fd6dce887ccadce07d9f4d07126c24cf2559f9950f763416d01c5f9c6d",
+          "stage_positions": [
+            [
+              17,
+              21
+            ],
+            [
+              35,
+              39
+            ],
+            [
+              604,
+              608
+            ],
+            [
+              643,
+              647
+            ],
+            [
+              726,
+              730
+            ],
+            [
+              762,
+              766
+            ],
+            [
+              782,
+              786
+            ],
+            [
+              953,
+              957
+            ],
+            [
+              1811,
+              1815
+            ],
+            [
+              1991,
+              1996
+            ],
+            [
+              2011,
+              2016
+            ],
+            [
+              2036,
+              2041
+            ],
+            [
+              2067,
+              2072
+            ],
+            [
+              2089,
+              2094
+            ],
+            [
+              2531,
+              2536
+            ],
+            [
+              2573,
+              2578
+            ],
+            [
+              3578,
+              3583
+            ],
+            [
+              3777,
+              3782
+            ],
+            [
+              3847,
+              3852
+            ]
+          ]
+        },
+        {
+          "rule": "Markdown_heading_marker",
+          "count": 1,
+          "before_sha256": "449e6af7d924a9f55f20dccd288caa8b305512d836b283a6b92882f7ebcedafa",
+          "after_sha256": "2e1dbe0dc21355987a52e4de8167fa702b27e4953a01bf334824a08e6a601e43",
+          "matched_replacement_pairs_sha256": "52b7ccc5c452c1471ffdfee4bbf89cb2f22112447e49cc275b2722b85a5d7fa3",
+          "stage_positions": [
+            [
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "rule": "Markdown_punctuation_escape",
+          "count": 174,
+          "before_sha256": "2e1dbe0dc21355987a52e4de8167fa702b27e4953a01bf334824a08e6a601e43",
+          "after_sha256": "699affa42e0a805f6074659af8bf9288469fa255575468f1bd3c94d2726b061f",
+          "matched_replacement_pairs_sha256": "2301ea60cff7e7cf8bf748414ddee8115c697ce72ed2d51cdaf1b59bb8ec2415",
+          "stage_positions": [
+            [
+              0,
+              2
+            ],
+            [
+              43,
+              45
+            ],
+            [
+              153,
+              155
+            ],
+            [
+              159,
+              161
+            ],
+            [
+              174,
+              176
+            ],
+            [
+              184,
+              186
+            ],
+            [
+              192,
+              194
+            ],
+            [
+              198,
+              200
+            ],
+            [
+              217,
+              219
+            ],
+            [
+              223,
+              225
+            ],
+            [
+              231,
+              233
+            ],
+            [
+              236,
+              238
+            ],
+            [
+              345,
+              347
+            ],
+            [
+              351,
+              353
+            ],
+            [
+              466,
+              468
+            ],
+            [
+              472,
+              474
+            ],
+            [
+              480,
+              482
+            ],
+            [
+              486,
+              488
+            ],
+            [
+              490,
+              492
+            ],
+            [
+              510,
+              512
+            ],
+            [
+              572,
+              574
+            ],
+            [
+              577,
+              579
+            ],
+            [
+              626,
+              628
+            ],
+            [
+              631,
+              633
+            ],
+            [
+              680,
+              682
+            ],
+            [
+              686,
+              688
+            ],
+            [
+              690,
+              692
+            ],
+            [
+              703,
+              705
+            ],
+            [
+              820,
+              822
+            ],
+            [
+              828,
+              830
+            ],
+            [
+              856,
+              858
+            ],
+            [
+              861,
+              863
+            ],
+            [
+              879,
+              881
+            ],
+            [
+              885,
+              887
+            ],
+            [
+              1017,
+              1019
+            ],
+            [
+              1026,
+              1028
+            ],
+            [
+              1052,
+              1054
+            ],
+            [
+              1058,
+              1060
+            ],
+            [
+              1062,
+              1064
+            ],
+            [
+              1082,
+              1084
+            ],
+            [
+              1089,
+              1091
+            ],
+            [
+              1095,
+              1097
+            ],
+            [
+              1162,
+              1164
+            ],
+            [
+              1168,
+              1170
+            ],
+            [
+              1221,
+              1223
+            ],
+            [
+              1227,
+              1229
+            ],
+            [
+              1249,
+              1251
+            ],
+            [
+              1255,
+              1257
+            ],
+            [
+              1259,
+              1261
+            ],
+            [
+              1272,
+              1274
+            ],
+            [
+              1412,
+              1414
+            ],
+            [
+              1427,
+              1429
+            ],
+            [
+              1436,
+              1438
+            ],
+            [
+              1442,
+              1444
+            ],
+            [
+              1446,
+              1448
+            ],
+            [
+              1466,
+              1468
+            ],
+            [
+              1615,
+              1617
+            ],
+            [
+              1621,
+              1623
+            ],
+            [
+              1625,
+              1627
+            ],
+            [
+              1638,
+              1640
+            ],
+            [
+              1781,
+              1783
+            ],
+            [
+              1787,
+              1789
+            ],
+            [
+              1791,
+              1793
+            ],
+            [
+              1811,
+              1813
+            ],
+            [
+              1962,
+              1964
+            ],
+            [
+              1968,
+              1970
+            ],
+            [
+              1972,
+              1974
+            ],
+            [
+              1985,
+              1987
+            ],
+            [
+              2088,
+              2090
+            ],
+            [
+              2094,
+              2096
+            ],
+            [
+              2186,
+              2188
+            ],
+            [
+              2192,
+              2194
+            ],
+            [
+              2210,
+              2212
+            ],
+            [
+              2214,
+              2216
+            ],
+            [
+              2230,
+              2232
+            ],
+            [
+              2237,
+              2239
+            ],
+            [
+              2249,
+              2251
+            ],
+            [
+              2258,
+              2260
+            ],
+            [
+              2265,
+              2267
+            ],
+            [
+              2270,
+              2272
+            ],
+            [
+              2322,
+              2324
+            ],
+            [
+              2327,
+              2329
+            ],
+            [
+              2338,
+              2340
+            ],
+            [
+              2344,
+              2346
+            ],
+            [
+              2368,
+              2370
+            ],
+            [
+              2374,
+              2376
+            ],
+            [
+              2419,
+              2421
+            ],
+            [
+              2425,
+              2427
+            ],
+            [
+              2470,
+              2472
+            ],
+            [
+              2475,
+              2477
+            ],
+            [
+              2498,
+              2500
+            ],
+            [
+              2504,
+              2506
+            ],
+            [
+              2512,
+              2514
+            ],
+            [
+              2518,
+              2520
+            ],
+            [
+              2541,
+              2543
+            ],
+            [
+              2547,
+              2549
+            ],
+            [
+              2605,
+              2607
+            ],
+            [
+              2611,
+              2613
+            ],
+            [
+              2661,
+              2663
+            ],
+            [
+              2665,
+              2667
+            ],
+            [
+              2692,
+              2694
+            ],
+            [
+              2698,
+              2700
+            ],
+            [
+              2727,
+              2729
+            ],
+            [
+              2733,
+              2735
+            ],
+            [
+              2755,
+              2757
+            ],
+            [
+              2764,
+              2766
+            ],
+            [
+              2794,
+              2796
+            ],
+            [
+              2806,
+              2808
+            ],
+            [
+              2834,
+              2836
+            ],
+            [
+              2838,
+              2840
+            ],
+            [
+              2847,
+              2849
+            ],
+            [
+              2854,
+              2856
+            ],
+            [
+              2895,
+              2897
+            ],
+            [
+              2901,
+              2903
+            ],
+            [
+              2959,
+              2961
+            ],
+            [
+              2966,
+              2968
+            ],
+            [
+              2996,
+              2998
+            ],
+            [
+              3002,
+              3004
+            ],
+            [
+              3024,
+              3026
+            ],
+            [
+              3034,
+              3036
+            ],
+            [
+              3043,
+              3045
+            ],
+            [
+              3049,
+              3051
+            ],
+            [
+              3053,
+              3055
+            ],
+            [
+              3073,
+              3075
+            ],
+            [
+              3103,
+              3105
+            ],
+            [
+              3115,
+              3117
+            ],
+            [
+              3121,
+              3123
+            ],
+            [
+              3136,
+              3138
+            ],
+            [
+              3199,
+              3201
+            ],
+            [
+              3207,
+              3209
+            ],
+            [
+              3239,
+              3241
+            ],
+            [
+              3245,
+              3247
+            ],
+            [
+              3267,
+              3269
+            ],
+            [
+              3283,
+              3285
+            ],
+            [
+              3383,
+              3385
+            ],
+            [
+              3391,
+              3393
+            ],
+            [
+              3400,
+              3402
+            ],
+            [
+              3406,
+              3408
+            ],
+            [
+              3560,
+              3562
+            ],
+            [
+              3566,
+              3568
+            ],
+            [
+              3619,
+              3621
+            ],
+            [
+              3624,
+              3626
+            ],
+            [
+              3718,
+              3720
+            ],
+            [
+              3724,
+              3726
+            ],
+            [
+              3761,
+              3763
+            ],
+            [
+              3770,
+              3772
+            ],
+            [
+              3873,
+              3875
+            ],
+            [
+              3879,
+              3881
+            ],
+            [
+              3893,
+              3895
+            ],
+            [
+              3898,
+              3900
+            ],
+            [
+              4032,
+              4034
+            ],
+            [
+              4038,
+              4040
+            ],
+            [
+              4042,
+              4044
+            ],
+            [
+              4055,
+              4057
+            ],
+            [
+              4204,
+              4206
+            ],
+            [
+              4210,
+              4212
+            ],
+            [
+              4255,
+              4257
+            ],
+            [
+              4263,
+              4265
+            ],
+            [
+              4358,
+              4360
+            ],
+            [
+              4364,
+              4366
+            ],
+            [
+              4387,
+              4389
+            ],
+            [
+              4392,
+              4394
+            ],
+            [
+              4411,
+              4413
+            ],
+            [
+              4416,
+              4418
+            ],
+            [
+              4519,
+              4521
+            ],
+            [
+              4525,
+              4527
+            ],
+            [
+              4632,
+              4634
+            ],
+            [
+              4640,
+              4642
+            ],
+            [
+              4677,
+              4679
+            ],
+            [
+              4683,
+              4685
+            ],
+            [
+              4783,
+              4785
+            ],
+            [
+              4791,
+              4793
+            ],
+            [
+              4828,
+              4830
+            ],
+            [
+              4834,
+              4836
+            ]
+          ]
+        },
+        {
+          "rule": "Markdown_hardbreak_spaces",
+          "count": 94,
+          "before_sha256": "699affa42e0a805f6074659af8bf9288469fa255575468f1bd3c94d2726b061f",
+          "after_sha256": "0a5968b8e6c25e7336cbb67019733e395a156356c1c5be2c5159232f9f2c2277",
+          "matched_replacement_pairs_sha256": "44ddf3bd475cbf18c23263adebfedf4c07f27ce1044e86ce44c048384690ee35",
+          "stage_positions": [
+            [
+              70,
+              72
+            ],
+            [
+              105,
+              107
+            ],
+            [
+              141,
+              143
+            ],
+            [
+              232,
+              234
+            ],
+            [
+              263,
+              265
+            ],
+            [
+              294,
+              296
+            ],
+            [
+              367,
+              369
+            ],
+            [
+              392,
+              394
+            ],
+            [
+              423,
+              425
+            ],
+            [
+              493,
+              495
+            ],
+            [
+              530,
+              532
+            ],
+            [
+              569,
+              571
+            ],
+            [
+              614,
+              616
+            ],
+            [
+              678,
+              680
+            ],
+            [
+              718,
+              720
+            ],
+            [
+              758,
+              760
+            ],
+            [
+              801,
+              803
+            ],
+            [
+              887,
+              889
+            ],
+            [
+              925,
+              927
+            ],
+            [
+              971,
+              973
+            ],
+            [
+              1045,
+              1047
+            ],
+            [
+              1085,
+              1087
+            ],
+            [
+              1117,
+              1119
+            ],
+            [
+              1155,
+              1157
+            ],
+            [
+              1225,
+              1227
+            ],
+            [
+              1261,
+              1263
+            ],
+            [
+              1297,
+              1299
+            ],
+            [
+              1335,
+              1337
+            ],
+            [
+              1413,
+              1415
+            ],
+            [
+              1449,
+              1451
+            ],
+            [
+              1482,
+              1484
+            ],
+            [
+              1514,
+              1516
+            ],
+            [
+              1581,
+              1583
+            ],
+            [
+              1617,
+              1619
+            ],
+            [
+              1651,
+              1653
+            ],
+            [
+              1683,
+              1685
+            ],
+            [
+              1750,
+              1752
+            ],
+            [
+              1789,
+              1791
+            ],
+            [
+              1821,
+              1823
+            ],
+            [
+              1854,
+              1856
+            ],
+            [
+              1920,
+              1922
+            ],
+            [
+              1964,
+              1966
+            ],
+            [
+              2017,
+              2019
+            ],
+            [
+              2076,
+              2078
+            ],
+            [
+              2163,
+              2165
+            ],
+            [
+              2200,
+              2202
+            ],
+            [
+              2239,
+              2241
+            ],
+            [
+              2327,
+              2329
+            ],
+            [
+              2370,
+              2372
+            ],
+            [
+              2403,
+              2405
+            ],
+            [
+              2496,
+              2498
+            ],
+            [
+              2547,
+              2549
+            ],
+            [
+              2582,
+              2584
+            ],
+            [
+              2660,
+              2662
+            ],
+            [
+              2701,
+              2703
+            ],
+            [
+              2745,
+              2747
+            ],
+            [
+              2817,
+              2819
+            ],
+            [
+              2842,
+              2844
+            ],
+            [
+              2877,
+              2879
+            ],
+            [
+              2952,
+              2954
+            ],
+            [
+              2992,
+              2994
+            ],
+            [
+              3035,
+              3037
+            ],
+            [
+              3068,
+              3070
+            ],
+            [
+              3151,
+              3153
+            ],
+            [
+              3183,
+              3185
+            ],
+            [
+              3219,
+              3221
+            ],
+            [
+              3305,
+              3307
+            ],
+            [
+              3339,
+              3341
+            ],
+            [
+              3382,
+              3384
+            ],
+            [
+              3460,
+              3462
+            ],
+            [
+              3505,
+              3507
+            ],
+            [
+              3537,
+              3539
+            ],
+            [
+              3614,
+              3616
+            ],
+            [
+              3648,
+              3650
+            ],
+            [
+              3678,
+              3680
+            ],
+            [
+              3774,
+              3776
+            ],
+            [
+              3805,
+              3807
+            ],
+            [
+              3840,
+              3842
+            ],
+            [
+              3904,
+              3906
+            ],
+            [
+              3935,
+              3937
+            ],
+            [
+              3970,
+              3972
+            ],
+            [
+              4007,
+              4009
+            ],
+            [
+              4089,
+              4091
+            ],
+            [
+              4124,
+              4126
+            ],
+            [
+              4157,
+              4159
+            ],
+            [
+              4242,
+              4244
+            ],
+            [
+              4278,
+              4280
+            ],
+            [
+              4315,
+              4317
+            ],
+            [
+              4394,
+              4396
+            ],
+            [
+              4426,
+              4428
+            ],
+            [
+              4463,
+              4465
+            ],
+            [
+              4543,
+              4545
+            ],
+            [
+              4575,
+              4577
+            ],
+            [
+              4610,
+              4612
+            ]
+          ]
+        }
+      ],
+      "paratext_presentation_operations": [
+        {
+          "rule": "Markdown_heading_marker",
+          "count": 1,
+          "before_sha256": "5c694c8e80a42548fe8f690b6d1e6140534df1be20217713a6610d7e5ffd277f",
+          "after_sha256": "b1c76c6f71ae64fa62ebf4ffecdfd76cffb7a5935e86d8590cf8761715e8a332",
+          "matched_replacement_pairs_sha256": "748a6dc0e4af567f1ac2c52be7fe5c09f55f2b41f8649f608b3a51b5947851f3",
+          "stage_positions": [
+            [
+              0,
+              3
+            ]
+          ]
+        }
+      ],
+      "all_note_calls_and_definitions_owned_exactly_once": true,
+      "note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading",
+          "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+          "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+          "characters_utf16": 189,
+          "raw_definition_lines_inclusive": [
+            165,
+            165
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+              "after_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  65,
+                  123
+                ],
+                [
+                  184,
+                  226
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "after_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+              "matched_replacement_pairs_sha256": "c579dddbe40ab82984bdec5141dea547af24e2ecf735e019fe925cf1f90a840a",
+              "stage_positions": [
+                [
+                  0,
+                  9
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading",
+          "raw_content_sha256": "1691d800612ba94a8509f1a37a0ee26a1209e7d151c2cec7b004e78b59add321",
+          "text_sha256": "51ac725fcd0ebd26ea74f201961765669f9a59846379eba76b98da3fa997ee05",
+          "characters_utf16": 104,
+          "raw_definition_lines_inclusive": [
+            167,
+            167
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 1,
+              "before_sha256": "1691d800612ba94a8509f1a37a0ee26a1209e7d151c2cec7b004e78b59add321",
+              "after_sha256": "e83f2288967bd3944fa5aebe1ff524426bcb9e87cb8fdaea313c347f98e2f302",
+              "matched_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4",
+              "stage_positions": [
+                [
+                  0,
+                  58
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "e83f2288967bd3944fa5aebe1ff524426bcb9e87cb8fdaea313c347f98e2f302",
+              "after_sha256": "51ac725fcd0ebd26ea74f201961765669f9a59846379eba76b98da3fa997ee05",
+              "matched_replacement_pairs_sha256": "58dfb1e08ad828e72e9870e688ae02041393f31204e43db66119374a30aa66fb",
+              "stage_positions": [
+                [
+                  11,
+                  27
+                ],
+                [
+                  66,
+                  88
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "5fa538f50dc9d570a279f43b963666e8b2fd6de79c588baa9a7a00e5898f0109",
+          "text_sha256": "1eae8ebc24615a97716ca58e876fdebd6fe39fb8b6d4cbac8647ed98b8c63efa",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            169,
+            169
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "5fa538f50dc9d570a279f43b963666e8b2fd6de79c588baa9a7a00e5898f0109",
+              "after_sha256": "1eae8ebc24615a97716ca58e876fdebd6fe39fb8b6d4cbac8647ed98b8c63efa",
+              "matched_replacement_pairs_sha256": "d33014047c24af347615df584e4f7759e2239204afa4d8d1762853a833ba3b08",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "f23d025d95022500db291a71ed59f48b97f2b847405bc44c8edaf87c7c6ebbee",
+          "text_sha256": "d8d1006f40252799bf40b5f4522b8ff63eebdb251e488e86f26634ba184f38c1",
+          "characters_utf16": 35,
+          "raw_definition_lines_inclusive": [
+            171,
+            171
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "f23d025d95022500db291a71ed59f48b97f2b847405bc44c8edaf87c7c6ebbee",
+              "after_sha256": "d8d1006f40252799bf40b5f4522b8ff63eebdb251e488e86f26634ba184f38c1",
+              "matched_replacement_pairs_sha256": "6d9326f1865ff187d1f921209014020c6924794c021088018165b80ed96413b2",
+              "stage_positions": [
+                [
+                  0,
+                  6
+                ],
+                [
+                  29,
+                  38
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "owner": "body:5",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "513969fee3da9028e09c48d06a6029287502b7ca3631c2b80b09c49189bc3f5f",
+          "text_sha256": "9e8521982efe8ddbf2bbe32891a9bfb8195a074526ab9d68c9a1f1def8d16acf",
+          "characters_utf16": 64,
+          "raw_definition_lines_inclusive": [
+            173,
+            173
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 1,
+              "before_sha256": "513969fee3da9028e09c48d06a6029287502b7ca3631c2b80b09c49189bc3f5f",
+              "after_sha256": "e346da5e5af72d28de6b987fa57b55f0fa6cbc9016af0838d6e82ace277ad031",
+              "matched_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4",
+              "stage_positions": [
+                [
+                  18,
+                  76
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "e346da5e5af72d28de6b987fa57b55f0fa6cbc9016af0838d6e82ace277ad031",
+              "after_sha256": "9e8521982efe8ddbf2bbe32891a9bfb8195a074526ab9d68c9a1f1def8d16acf",
+              "matched_replacement_pairs_sha256": "0540bc7b9521d5b51599eac3f0b9ed7aa3ea900a6acce16fd1d155cee96f325d",
+              "stage_positions": [
+                [
+                  0,
+                  8
+                ],
+                [
+                  29,
+                  37
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "owner": "body:5",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "a58f3c7da4e7029a1e88528bb696b55b96725ac9d506bc7cab9ad59e1aade423",
+          "text_sha256": "7f6c3b8fc2092ddd1b91e041739e387f4571f856195e0dbaf58a17fc37fc74ea",
+          "characters_utf16": 40,
+          "raw_definition_lines_inclusive": [
+            175,
+            175
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "a58f3c7da4e7029a1e88528bb696b55b96725ac9d506bc7cab9ad59e1aade423",
+              "after_sha256": "c3b3b7137032934562693995d9b49449c720c2f6c9cfe0205ab1b233ae851111",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  22,
+                  80
+                ],
+                [
+                  85,
+                  127
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "c3b3b7137032934562693995d9b49449c720c2f6c9cfe0205ab1b233ae851111",
+              "after_sha256": "7f6c3b8fc2092ddd1b91e041739e387f4571f856195e0dbaf58a17fc37fc74ea",
+              "matched_replacement_pairs_sha256": "181af71a091c4896299d88f1899793a28bd89043019d8075475e8359a3ebb7f3",
+              "stage_positions": [
+                [
+                  8,
+                  16
+                ],
+                [
+                  35,
+                  44
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "owner": "body:5",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "3f0b7d67ec0086d89f6b0b202c9c1e4266ccbebce973c99dc50e84dbef946c41",
+          "text_sha256": "99f65505406af0d432c5d1315aa75a41f7e14780bdf34dad6023f0a5f6f86b8b",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            177,
+            177
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Pandoc_diacritics_on",
+              "count": 1,
+              "before_sha256": "3f0b7d67ec0086d89f6b0b202c9c1e4266ccbebce973c99dc50e84dbef946c41",
+              "after_sha256": "be757bfa92a2aeee0aab1e4a4895a3a3e0fa033f6cfee225bc4a9878cd860aca",
+              "matched_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af",
+              "stage_positions": [
+                [
+                  5,
+                  70
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "be757bfa92a2aeee0aab1e4a4895a3a3e0fa033f6cfee225bc4a9878cd860aca",
+              "after_sha256": "99f65505406af0d432c5d1315aa75a41f7e14780bdf34dad6023f0a5f6f86b8b",
+              "matched_replacement_pairs_sha256": "d9aa2ee85e52610d646ecf12727ea6cadff2e0bd15ee93f31b0736eb2e497549",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "owner": "body:6",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "e983a4c46ee092a0ab6fc856b444827144f165554a3c69f96d27f28bbe1bd9c9",
+          "text_sha256": "e983a4c46ee092a0ab6fc856b444827144f165554a3c69f96d27f28bbe1bd9c9",
+          "characters_utf16": 23,
+          "raw_definition_lines_inclusive": [
+            179,
+            179
+          ],
+          "presentation_operations": []
+        },
+        {
+          "number": 9,
+          "owner": "body:11",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "bf86d11fedc07f5e815368264ac64179aadd91361b9a5847464e17991cd4156b",
+          "text_sha256": "bf86d11fedc07f5e815368264ac64179aadd91361b9a5847464e17991cd4156b",
+          "characters_utf16": 17,
+          "raw_definition_lines_inclusive": [
+            181,
+            181
+          ],
+          "presentation_operations": []
+        },
+        {
+          "number": 10,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "b9c256bbea0d280c93c7d0ac874d114f58b6d030db6b4fe7b40fae313aa6ee22",
+          "text_sha256": "e4a35ec1c04c70fa3e52b6d7a6f4df1e5b46d8b95442c0cb8aff6addd2c3590b",
+          "characters_utf16": 26,
+          "raw_definition_lines_inclusive": [
+            183,
+            183
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "b9c256bbea0d280c93c7d0ac874d114f58b6d030db6b4fe7b40fae313aa6ee22",
+              "after_sha256": "e4a35ec1c04c70fa3e52b6d7a6f4df1e5b46d8b95442c0cb8aff6addd2c3590b",
+              "matched_replacement_pairs_sha256": "df0d5cc2cf48e3d2070971e546e04d421ad7fa63331638c278703cf3555eb999",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "efa6ab408cb9552d757f89695e995396c69d82aaf2f34c58cfb58e3947a003cd",
+          "text_sha256": "fae6ba3e7cafbecf72f6a5fff08b620e3373a3591140bf07ee6774aca564db92",
+          "characters_utf16": 10,
+          "raw_definition_lines_inclusive": [
+            185,
+            185
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "efa6ab408cb9552d757f89695e995396c69d82aaf2f34c58cfb58e3947a003cd",
+              "after_sha256": "fae6ba3e7cafbecf72f6a5fff08b620e3373a3591140bf07ee6774aca564db92",
+              "matched_replacement_pairs_sha256": "51435489588c879a2053ca3bcae50826aee15f0d8e70efde44f2a592ad9f0017",
+              "stage_positions": [
+                [
+                  0,
+                  12
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "d188fc8a54892f7117b73922bc98e4aa759787ea68d8db01e223123eb1bcbd61",
+          "text_sha256": "029f5f950129342d2acb686e235e6dc1cf555a0cd2f82cff1a72bdcc0cffac2c",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            187,
+            187
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "d188fc8a54892f7117b73922bc98e4aa759787ea68d8db01e223123eb1bcbd61",
+              "after_sha256": "029f5f950129342d2acb686e235e6dc1cf555a0cd2f82cff1a72bdcc0cffac2c",
+              "matched_replacement_pairs_sha256": "1743657c8bb245aafd3edf4746ae8a1786f61e802aae1d6398575c57df52eb38",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "a73af00427b202f699a765b030c31d08befa2eed81286147adbcbf99d99c562a",
+          "text_sha256": "ff7feac60290c1a2b05331c1f88af0715967a0c5737c8e1e646c8264789e443e",
+          "characters_utf16": 12,
+          "raw_definition_lines_inclusive": [
+            189,
+            189
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "a73af00427b202f699a765b030c31d08befa2eed81286147adbcbf99d99c562a",
+              "after_sha256": "ff7feac60290c1a2b05331c1f88af0715967a0c5737c8e1e646c8264789e443e",
+              "matched_replacement_pairs_sha256": "d1f753c4cd39c9cd1e68abee0b9cdbc05fde53fdc0c6ca347a2fbe5c556cf6a7",
+              "stage_positions": [
+                [
+                  0,
+                  14
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "3f928a44994777d39a518f2bfb1588a96186c6b8b90cb3b562de592baa4898fb",
+          "text_sha256": "f33d6075511dab128939d5a587dcea034e80fa764753b3a2d21591ead82e2aff",
+          "characters_utf16": 4,
+          "raw_definition_lines_inclusive": [
+            191,
+            191
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "3f928a44994777d39a518f2bfb1588a96186c6b8b90cb3b562de592baa4898fb",
+              "after_sha256": "f33d6075511dab128939d5a587dcea034e80fa764753b3a2d21591ead82e2aff",
+              "matched_replacement_pairs_sha256": "84d71450b330a4f05a6a315fe6914c2f4dc3ac5363b21d18989d8b56b2757a4d",
+              "stage_positions": [
+                [
+                  0,
+                  6
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "owner": "body:15",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "7f2ddffd46ad9cd6d8cb8063715332a00df82f812de0b1ccc8ac6752aa04d82f",
+          "text_sha256": "423662faf378271201870e8885abdf0ff952f2b8cf4248fe11ea9e0e4d66c978",
+          "characters_utf16": 11,
+          "raw_definition_lines_inclusive": [
+            193,
+            193
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "7f2ddffd46ad9cd6d8cb8063715332a00df82f812de0b1ccc8ac6752aa04d82f",
+              "after_sha256": "423662faf378271201870e8885abdf0ff952f2b8cf4248fe11ea9e0e4d66c978",
+              "matched_replacement_pairs_sha256": "b355e3076e54db3b9419a7d7801300059833510eefca817837f11b421a4d0afd",
+              "stage_positions": [
+                [
+                  0,
+                  13
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "owner": "body:15",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "4b8bc2151e7b1b87075013a4e566c1f2782e9970d71c451e58237168743f6ba9",
+          "text_sha256": "8d5a0596b60f979a79e5df4ec3dceddb4fa9e473ae1f9ca6ac085c774ce7dbdc",
+          "characters_utf16": 91,
+          "raw_definition_lines_inclusive": [
+            195,
+            195
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 3,
+              "before_sha256": "4b8bc2151e7b1b87075013a4e566c1f2782e9970d71c451e58237168743f6ba9",
+              "after_sha256": "8d5a0596b60f979a79e5df4ec3dceddb4fa9e473ae1f9ca6ac085c774ce7dbdc",
+              "matched_replacement_pairs_sha256": "56f2b61e6c9cc18d62ef113823e232ff23a1cf9bfe59b2525f49770b5bda0227",
+              "stage_positions": [
+                [
+                  0,
+                  17
+                ],
+                [
+                  20,
+                  29
+                ],
+                [
+                  31,
+                  55
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 17,
+          "owner": "body:21",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "dfbe6dc4ea2834c0ea289a9335537872013aaa1214b88217056dda7c23f31dd2",
+          "text_sha256": "9d299b145bbfd06ebc409485c30ca37e620341d497db6db598eb4c23ec8db851",
+          "characters_utf16": 59,
+          "raw_definition_lines_inclusive": [
+            197,
+            197
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_punctuation_escape",
+              "count": 2,
+              "before_sha256": "dfbe6dc4ea2834c0ea289a9335537872013aaa1214b88217056dda7c23f31dd2",
+              "after_sha256": "d81ce985f94ba3280351ab9ed85cc451d7c8b7bf5224a652d5ff6ddf5849cd21",
+              "matched_replacement_pairs_sha256": "8c0efb52bdd9f6ae70dddc00e89f5fe89541055a1a54d26ea2529e83b0b2625e",
+              "stage_positions": [
+                [
+                  37,
+                  39
+                ],
+                [
+                  42,
+                  44
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "d81ce985f94ba3280351ab9ed85cc451d7c8b7bf5224a652d5ff6ddf5849cd21",
+              "after_sha256": "9d299b145bbfd06ebc409485c30ca37e620341d497db6db598eb4c23ec8db851",
+              "matched_replacement_pairs_sha256": "05c09fa1121d6afe4df7bbd06aef7f434c49c07ac10c6fe89a297acc20d23181",
+              "stage_positions": [
+                [
+                  0,
+                  23
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 18,
+          "owner": "body:22",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "ad06b7d3a0478fe83a823bf74b2160070c60f715e3ff19f4c2067a3dce6e4975",
+          "text_sha256": "ad06b7d3a0478fe83a823bf74b2160070c60f715e3ff19f4c2067a3dce6e4975",
+          "characters_utf16": 19,
+          "raw_definition_lines_inclusive": [
+            199,
+            199
+          ],
+          "presentation_operations": []
+        },
+        {
+          "number": 19,
+          "owner": "body:23",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "f757578f2015b63ced56c75736a8422d0300dbf2fd2e742a1ca8e7d386e4bf74",
+          "text_sha256": "f757578f2015b63ced56c75736a8422d0300dbf2fd2e742a1ca8e7d386e4bf74",
+          "characters_utf16": 15,
+          "raw_definition_lines_inclusive": [
+            201,
+            201
+          ],
+          "presentation_operations": []
+        }
+      ],
+      "display_pairs": [
+        {
+          "owner": "note:7",
+          "source_stage_start0": 5,
+          "source_stage_end_exclusive": 70,
+          "state_on": "c",
+          "state_off": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        }
+      ],
+      "speaker_labels": [
+        {
+          "body_paragraph_index0": 4,
+          "label_sha256": "09546def2689f65f337ed4cec8bf0d22784fdb4c1472174387a78fdd77de8f67",
+          "label_characters_utf16": 21,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 5,
+          "label_sha256": "3f9bb0b984aaad4a26948fb598142dfc2d5b5fa9cbe78000d0115021f2d31fdf",
+          "label_characters_utf16": 14,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 7,
+          "label_sha256": "09546def2689f65f337ed4cec8bf0d22784fdb4c1472174387a78fdd77de8f67",
+          "label_characters_utf16": 21,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 8,
+          "label_sha256": "3f9bb0b984aaad4a26948fb598142dfc2d5b5fa9cbe78000d0115021f2d31fdf",
+          "label_characters_utf16": 14,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 9,
+          "label_sha256": "09546def2689f65f337ed4cec8bf0d22784fdb4c1472174387a78fdd77de8f67",
+          "label_characters_utf16": 21,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 10,
+          "label_sha256": "3f9bb0b984aaad4a26948fb598142dfc2d5b5fa9cbe78000d0115021f2d31fdf",
+          "label_characters_utf16": 14,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 11,
+          "label_sha256": "09546def2689f65f337ed4cec8bf0d22784fdb4c1472174387a78fdd77de8f67",
+          "label_characters_utf16": 21,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 12,
+          "label_sha256": "3f9bb0b984aaad4a26948fb598142dfc2d5b5fa9cbe78000d0115021f2d31fdf",
+          "label_characters_utf16": 14,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 18,
+          "label_sha256": "09546def2689f65f337ed4cec8bf0d22784fdb4c1472174387a78fdd77de8f67",
+          "label_characters_utf16": 21,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        },
+        {
+          "body_paragraph_index0": 24,
+          "label_sha256": "3f9bb0b984aaad4a26948fb598142dfc2d5b5fa9cbe78000d0115021f2d31fdf",
+          "label_characters_utf16": 14,
+          "following_separator": "single_original_newline",
+          "physical_lines_with_label": 5
+        }
+      ],
+      "separate_summary": null,
+      "private_lossless_fixture": {
+        "file": "poem-401.lossless.json",
+        "bytes": 9930,
+        "sha256": "6f1adf4ea7e04330817ff4a8fdd21505575bbce085aeae7e7f7e26eb37047601"
+      },
+      "private_presentation_fixture": {
+        "file": "poem-401.presentation.json",
+        "bytes": 11034,
+        "sha256": "dec83a636a0347de28d901fe291b606eac42a917112ddbd7df94e91ba611c99a"
+      }
+    },
+    "tha-ap404": {
+      "publisher_poem": 402,
+      "raw": {
+        "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-402.md",
+        "bytes": 5073,
+        "sha256": "36ab4b64da98ca50626ff3f9c9d86fc34f53b1405b47ba2e9d60dda6a5d99740",
+        "git_blob_sha1": "e536bf5a9f1691564458da49bc94023b2d0a6dbd"
+      },
+      "root_record": {
+        "id": "tha-ap404",
+        "book": 36,
+        "start": 12980,
+        "end": 13028,
+        "title": "Puṇṇakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 404",
+        "vri": "29–44",
+        "pts": {
+          "volume": 2,
+          "page": 340,
+          "end_page": 341
+        }
+      },
+      "root_wrapper_sha256_JSON_stringify": "bf55622e636b7bd3691c2764f1e2b3f399b3335483689ecf292790f6073c8976",
+      "physical_root_tuple_array_sha256_JSON_stringify": "6fbdecd3731f79f3a064e2105fb148b9d9d9120484f2af5a6dbb2434fd37418b",
+      "physical_root_tuple_count": 48,
+      "body_presentation_operations": [
+        {
+          "rule": "numbered_note_call",
+          "count": 17,
+          "before_sha256": "fb209b8485bd347f7196f5f5619d606f53c816442e7c845068a96552d7d00c04",
+          "after_sha256": "cf7f8fe2f2a0abebd1e68f8f30db37dbd31f83a53d37904b24142108fd83a8ec",
+          "matched_replacement_pairs_sha256": "d5f931682bdfa8602120cf22c34f01373fa2f8a8755db9bfde7ffde2b7830e2b",
+          "stage_positions": [
+            [
+              17,
+              21
+            ],
+            [
+              29,
+              33
+            ],
+            [
+              256,
+              260
+            ],
+            [
+              404,
+              408
+            ],
+            [
+              420,
+              424
+            ],
+            [
+              443,
+              447
+            ],
+            [
+              460,
+              464
+            ],
+            [
+              565,
+              569
+            ],
+            [
+              582,
+              586
+            ],
+            [
+              659,
+              664
+            ],
+            [
+              820,
+              825
+            ],
+            [
+              1128,
+              1133
+            ],
+            [
+              1209,
+              1214
+            ],
+            [
+              1337,
+              1342
+            ],
+            [
+              1476,
+              1481
+            ],
+            [
+              1602,
+              1607
+            ],
+            [
+              1761,
+              1766
+            ]
+          ]
+        },
+        {
+          "rule": "Markdown_heading_marker",
+          "count": 1,
+          "before_sha256": "cf7f8fe2f2a0abebd1e68f8f30db37dbd31f83a53d37904b24142108fd83a8ec",
+          "after_sha256": "dbe410119bfed835fc2d9205611010a9f5cdad4721dc1ee1e48ac5520adeaa34",
+          "matched_replacement_pairs_sha256": "52b7ccc5c452c1471ffdfee4bbf89cb2f22112447e49cc275b2722b85a5d7fa3",
+          "stage_positions": [
+            [
+              0,
+              4
+            ]
+          ]
+        },
+        {
+          "rule": "Markdown_punctuation_escape",
+          "count": 82,
+          "before_sha256": "dbe410119bfed835fc2d9205611010a9f5cdad4721dc1ee1e48ac5520adeaa34",
+          "after_sha256": "15b6c0bf0f0a9b5b625614ff1c7d8ebef0449162d9634bc75ba2d8f2719a457e",
+          "matched_replacement_pairs_sha256": "46c58f378b2dad8b7d702a2a5b2cd34c450108941e93d73b7032ee724f108355",
+          "stage_positions": [
+            [
+              0,
+              2
+            ],
+            [
+              37,
+              39
+            ],
+            [
+              184,
+              186
+            ],
+            [
+              190,
+              192
+            ],
+            [
+              218,
+              220
+            ],
+            [
+              226,
+              228
+            ],
+            [
+              320,
+              322
+            ],
+            [
+              331,
+              333
+            ],
+            [
+              358,
+              360
+            ],
+            [
+              364,
+              366
+            ],
+            [
+              547,
+              549
+            ],
+            [
+              553,
+              555
+            ],
+            [
+              653,
+              655
+            ],
+            [
+              658,
+              660
+            ],
+            [
+              789,
+              791
+            ],
+            [
+              794,
+              796
+            ],
+            [
+              820,
+              822
+            ],
+            [
+              838,
+              840
+            ],
+            [
+              893,
+              895
+            ],
+            [
+              904,
+              906
+            ],
+            [
+              948,
+              950
+            ],
+            [
+              954,
+              956
+            ],
+            [
+              969,
+              971
+            ],
+            [
+              978,
+              980
+            ],
+            [
+              1002,
+              1004
+            ],
+            [
+              1008,
+              1010
+            ],
+            [
+              1045,
+              1047
+            ],
+            [
+              1059,
+              1061
+            ],
+            [
+              1074,
+              1076
+            ],
+            [
+              1080,
+              1082
+            ],
+            [
+              1103,
+              1105
+            ],
+            [
+              1108,
+              1110
+            ],
+            [
+              1147,
+              1149
+            ],
+            [
+              1154,
+              1156
+            ],
+            [
+              1238,
+              1240
+            ],
+            [
+              1244,
+              1246
+            ],
+            [
+              1395,
+              1397
+            ],
+            [
+              1413,
+              1415
+            ],
+            [
+              1422,
+              1424
+            ],
+            [
+              1428,
+              1430
+            ],
+            [
+              1543,
+              1545
+            ],
+            [
+              1549,
+              1551
+            ],
+            [
+              1575,
+              1577
+            ],
+            [
+              1581,
+              1583
+            ],
+            [
+              1598,
+              1600
+            ],
+            [
+              1613,
+              1615
+            ],
+            [
+              1670,
+              1672
+            ],
+            [
+              1679,
+              1681
+            ],
+            [
+              1716,
+              1718
+            ],
+            [
+              1721,
+              1723
+            ],
+            [
+              1744,
+              1746
+            ],
+            [
+              1750,
+              1752
+            ],
+            [
+              1787,
+              1789
+            ],
+            [
+              1791,
+              1793
+            ],
+            [
+              1891,
+              1893
+            ],
+            [
+              1899,
+              1901
+            ],
+            [
+              1919,
+              1921
+            ],
+            [
+              1925,
+              1927
+            ],
+            [
+              2032,
+              2034
+            ],
+            [
+              2037,
+              2039
+            ],
+            [
+              2064,
+              2066
+            ],
+            [
+              2070,
+              2072
+            ],
+            [
+              2117,
+              2119
+            ],
+            [
+              2123,
+              2125
+            ],
+            [
+              2222,
+              2224
+            ],
+            [
+              2228,
+              2230
+            ],
+            [
+              2251,
+              2253
+            ],
+            [
+              2256,
+              2258
+            ],
+            [
+              2275,
+              2277
+            ],
+            [
+              2280,
+              2282
+            ],
+            [
+              2350,
+              2352
+            ],
+            [
+              2355,
+              2357
+            ],
+            [
+              2382,
+              2384
+            ],
+            [
+              2388,
+              2390
+            ],
+            [
+              2495,
+              2497
+            ],
+            [
+              2503,
+              2505
+            ],
+            [
+              2540,
+              2542
+            ],
+            [
+              2546,
+              2548
+            ],
+            [
+              2646,
+              2648
+            ],
+            [
+              2654,
+              2656
+            ],
+            [
+              2691,
+              2693
+            ],
+            [
+              2697,
+              2699
+            ]
+          ]
+        },
+        {
+          "rule": "Markdown_single_emphasis",
+          "count": 2,
+          "before_sha256": "15b6c0bf0f0a9b5b625614ff1c7d8ebef0449162d9634bc75ba2d8f2719a457e",
+          "after_sha256": "5e2d040495e69b0883d0155e1e46315136f722f8482a1b57cf019cc3c03b2dd9",
+          "matched_replacement_pairs_sha256": "7a38546eb66f2a9c8384195f19ecf65ef6525c1de2eaccde89178f85f57367a7",
+          "stage_positions": [
+            [
+              431,
+              442
+            ],
+            [
+              723,
+              728
+            ]
+          ]
+        },
+        {
+          "rule": "Markdown_hardbreak_spaces",
+          "count": 49,
+          "before_sha256": "5e2d040495e69b0883d0155e1e46315136f722f8482a1b57cf019cc3c03b2dd9",
+          "after_sha256": "5a2f6375fc4b6e8891df8dc119aac5e52be745c49bcb7e9b1fc2e3a6cc9417a7",
+          "matched_replacement_pairs_sha256": "ac94cf1193a037abb264b3d788485abcd1ff8900f9ad0a4dc0938e85233703cf",
+          "stage_positions": [
+            [
+              72,
+              74
+            ],
+            [
+              106,
+              108
+            ],
+            [
+              141,
+              143
+            ],
+            [
+              222,
+              224
+            ],
+            [
+              262,
+              264
+            ],
+            [
+              301,
+              303
+            ],
+            [
+              394,
+              396
+            ],
+            [
+              455,
+              457
+            ],
+            [
+              495,
+              497
+            ],
+            [
+              583,
+              585
+            ],
+            [
+              624,
+              626
+            ],
+            [
+              660,
+              662
+            ],
+            [
+              705,
+              707
+            ],
+            [
+              739,
+              741
+            ],
+            [
+              777,
+              779
+            ],
+            [
+              819,
+              821
+            ],
+            [
+              919,
+              921
+            ],
+            [
+              959,
+              961
+            ],
+            [
+              1001,
+              1003
+            ],
+            [
+              1082,
+              1084
+            ],
+            [
+              1119,
+              1121
+            ],
+            [
+              1159,
+              1161
+            ],
+            [
+              1248,
+              1250
+            ],
+            [
+              1287,
+              1289
+            ],
+            [
+              1322,
+              1324
+            ],
+            [
+              1417,
+              1419
+            ],
+            [
+              1452,
+              1454
+            ],
+            [
+              1493,
+              1495
+            ],
+            [
+              1569,
+              1571
+            ],
+            [
+              1617,
+              1619
+            ],
+            [
+              1651,
+              1653
+            ],
+            [
+              1728,
+              1730
+            ],
+            [
+              1772,
+              1774
+            ],
+            [
+              1809,
+              1811
+            ],
+            [
+              1896,
+              1898
+            ],
+            [
+              1926,
+              1928
+            ],
+            [
+              1962,
+              1964
+            ],
+            [
+              2037,
+              2039
+            ],
+            [
+              2074,
+              2076
+            ],
+            [
+              2110,
+              2112
+            ],
+            [
+              2196,
+              2198
+            ],
+            [
+              2232,
+              2234
+            ],
+            [
+              2268,
+              2270
+            ],
+            [
+              2345,
+              2347
+            ],
+            [
+              2377,
+              2379
+            ],
+            [
+              2414,
+              2416
+            ],
+            [
+              2494,
+              2496
+            ],
+            [
+              2526,
+              2528
+            ],
+            [
+              2561,
+              2563
+            ]
+          ]
+        }
+      ],
+      "paratext_presentation_operations": [],
+      "all_note_calls_and_definitions_owned_exactly_once": true,
+      "note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading",
+          "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+          "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+          "characters_utf16": 189,
+          "raw_definition_lines_inclusive": [
+            92,
+            92
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+              "after_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  65,
+                  123
+                ],
+                [
+                  184,
+                  226
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "after_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+              "matched_replacement_pairs_sha256": "c579dddbe40ab82984bdec5141dea547af24e2ecf735e019fe925cf1f90a840a",
+              "stage_positions": [
+                [
+                  0,
+                  9
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading",
+          "raw_content_sha256": "b6c3a102d8abeefad862d990879256c99ddea6d6ba89148667e15da3a0beccfc",
+          "text_sha256": "662387c753c44fc5a147bd29467dcad8439b71f708a8d7faf26a8fc5516970bc",
+          "characters_utf16": 210,
+          "raw_definition_lines_inclusive": [
+            94,
+            94
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "b6c3a102d8abeefad862d990879256c99ddea6d6ba89148667e15da3a0beccfc",
+              "after_sha256": "662387c753c44fc5a147bd29467dcad8439b71f708a8d7faf26a8fc5516970bc",
+              "matched_replacement_pairs_sha256": "e6e1f567308ea003e097bc5c09fe4543de2c7bb0efc40b4ee9d811d7c94c3ea5",
+              "stage_positions": [
+                [
+                  43,
+                  60
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "owner": "body:2",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "dabfb1469ff352973bb56f8c619a76400de12ebe0988edfe6fa13fa907304b51",
+          "text_sha256": "050de251367934b6a91ee1e3aa98d12fa6b0cdfe783b1ac812937eaa70ea8148",
+          "characters_utf16": 46,
+          "raw_definition_lines_inclusive": [
+            96,
+            96
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "dabfb1469ff352973bb56f8c619a76400de12ebe0988edfe6fa13fa907304b51",
+              "after_sha256": "050de251367934b6a91ee1e3aa98d12fa6b0cdfe783b1ac812937eaa70ea8148",
+              "matched_replacement_pairs_sha256": "607d2d9848e99dbb03f25a52e95a9a4c9ed1f6bf55bccc3ac2bda29f04e4d68c",
+              "stage_positions": [
+                [
+                  0,
+                  23
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "18122e1d7f6c784089521d39c4985e0a96f364e287117ee939063968aeb43e9c",
+          "text_sha256": "2d969246863666248d799e5b94c9ce6cb895444d48a25979c483f42dce9a1ad7",
+          "characters_utf16": 27,
+          "raw_definition_lines_inclusive": [
+            98,
+            98
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Pandoc_diacritics_on",
+              "count": 1,
+              "before_sha256": "18122e1d7f6c784089521d39c4985e0a96f364e287117ee939063968aeb43e9c",
+              "after_sha256": "96b348ae6f6a6ab96d5e2def491aec92ba6b4d8ff5a511e99804a4565b79e90e",
+              "matched_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af",
+              "stage_positions": [
+                [
+                  2,
+                  67
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "96b348ae6f6a6ab96d5e2def491aec92ba6b4d8ff5a511e99804a4565b79e90e",
+              "after_sha256": "2d969246863666248d799e5b94c9ce6cb895444d48a25979c483f42dce9a1ad7",
+              "matched_replacement_pairs_sha256": "afe1d0829acf6cb09cd909c76b017c45f1c1144a6bdad1b4fa9d649ad760bff7",
+              "stage_positions": [
+                [
+                  0,
+                  8
+                ],
+                [
+                  22,
+                  31
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "a50158c096a47082551bb3cb654f0af4a35557fc0f13584d28785ab264b48c68",
+          "text_sha256": "051747a86043e368d37d37cba80ffe3a7d6e9f79e2e74022f415b916e21a0ddf",
+          "characters_utf16": 54,
+          "raw_definition_lines_inclusive": [
+            100,
+            100
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 3,
+              "before_sha256": "a50158c096a47082551bb3cb654f0af4a35557fc0f13584d28785ab264b48c68",
+              "after_sha256": "051747a86043e368d37d37cba80ffe3a7d6e9f79e2e74022f415b916e21a0ddf",
+              "matched_replacement_pairs_sha256": "389905f78e6068c8d17185caa406e36cc548faf87dc33bdeecad98c7b0ab4c44",
+              "stage_positions": [
+                [
+                  0,
+                  6
+                ],
+                [
+                  31,
+                  37
+                ],
+                [
+                  39,
+                  45
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "f28a8724770319fb5000231b22a1db7c03d51116e4caf7bf347b63b551af8d4b",
+          "text_sha256": "51c8da0800088a76cef82e4306c4428993e2ec21e39c8f565233830ee14e7793",
+          "characters_utf16": 265,
+          "raw_definition_lines_inclusive": [
+            102,
+            102
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Pandoc_diacritics_on",
+              "count": 3,
+              "before_sha256": "f28a8724770319fb5000231b22a1db7c03d51116e4caf7bf347b63b551af8d4b",
+              "after_sha256": "a42d47c3c4e185ca649d07ab0323587edb52c5fb7d4e05414a6ca1c3e067eff9",
+              "matched_replacement_pairs_sha256": "7dd79408b800ad057e3c4c30142d225b938e0ebf3e3e424d61f2b09591fe16c9",
+              "stage_positions": [
+                [
+                  5,
+                  70
+                ],
+                [
+                  285,
+                  350
+                ],
+                [
+                  371,
+                  436
+                ]
+              ]
+            },
+            {
+              "rule": "abbreviation_display_label",
+              "count": 1,
+              "before_sha256": "a42d47c3c4e185ca649d07ab0323587edb52c5fb7d4e05414a6ca1c3e067eff9",
+              "after_sha256": "2aa30d0602a200c111d02d5f0d26a3114b606e2c90609238a80bdb764fb6f631",
+              "matched_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4",
+              "stage_positions": [
+                [
+                  79,
+                  137
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 7,
+              "before_sha256": "2aa30d0602a200c111d02d5f0d26a3114b606e2c90609238a80bdb764fb6f631",
+              "after_sha256": "51c8da0800088a76cef82e4306c4428993e2ec21e39c8f565233830ee14e7793",
+              "matched_replacement_pairs_sha256": "293bdc92f3d263b89e3c2a270562211f8707e5c78bc9d1087fbad790978a7577",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ],
+                [
+                  24,
+                  35
+                ],
+                [
+                  63,
+                  72
+                ],
+                [
+                  138,
+                  144
+                ],
+                [
+                  162,
+                  172
+                ],
+                [
+                  180,
+                  194
+                ],
+                [
+                  253,
+                  272
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "5d751ad9eb76b94f1b9126d5cedec904cfdd5fff4de5f30311a47b39ca7dfad0",
+          "text_sha256": "14fe12a0eb72061fae347bd93452c4756b02c135370ccbe24b0505ad96f18a2f",
+          "characters_utf16": 56,
+          "raw_definition_lines_inclusive": [
+            104,
+            104
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "5d751ad9eb76b94f1b9126d5cedec904cfdd5fff4de5f30311a47b39ca7dfad0",
+              "after_sha256": "3265fa9dd66d6aa3fe1ef5bab19755fd32d127b1b8b5f8eaa2f657304c4f2d63",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  23,
+                  81
+                ],
+                [
+                  86,
+                  128
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 3,
+              "before_sha256": "3265fa9dd66d6aa3fe1ef5bab19755fd32d127b1b8b5f8eaa2f657304c4f2d63",
+              "after_sha256": "14fe12a0eb72061fae347bd93452c4756b02c135370ccbe24b0505ad96f18a2f",
+              "matched_replacement_pairs_sha256": "72e18b26e116d2aeaeaa012883e1c0f3d465c2d7b728dd274c9bc05606d3606b",
+              "stage_positions": [
+                [
+                  8,
+                  17
+                ],
+                [
+                  36,
+                  42
+                ],
+                [
+                  46,
+                  52
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "a6d15f4adcc15848dfdac034bd543c3884108530001254a4ae0d8fd645f678bb",
+          "text_sha256": "c09ad5b79102efde186af9f541f02c1d34663100c060c1fca0ae76c63ae41fce",
+          "characters_utf16": 138,
+          "raw_definition_lines_inclusive": [
+            106,
+            106
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "a6d15f4adcc15848dfdac034bd543c3884108530001254a4ae0d8fd645f678bb",
+              "after_sha256": "c09ad5b79102efde186af9f541f02c1d34663100c060c1fca0ae76c63ae41fce",
+              "matched_replacement_pairs_sha256": "dd9eb8e812d05e95579a084a70b5a8cd6c2d43b57c3e3e88456a163754ed190e",
+              "stage_positions": [
+                [
+                  0,
+                  19
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "2beede2adde71aee2c394da52551639a6dfaac859cee0272f42a13188ca23925",
+          "text_sha256": "2beede2adde71aee2c394da52551639a6dfaac859cee0272f42a13188ca23925",
+          "characters_utf16": 12,
+          "raw_definition_lines_inclusive": [
+            108,
+            108
+          ],
+          "presentation_operations": []
+        },
+        {
+          "number": 10,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+          "text_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            110,
+            110
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+              "after_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+              "matched_replacement_pairs_sha256": "5c03393f69e2761baa67b292308b057e83efdc054f2f0a3e23b77cd3568f2759",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+          "text_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            112,
+            112
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+              "after_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+              "matched_replacement_pairs_sha256": "5c03393f69e2761baa67b292308b057e83efdc054f2f0a3e23b77cd3568f2759",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "owner": "body:6",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "8f00961fe5cc66e35160aa26a4de19473822dad94f4d43c27b06c928542434c2",
+          "text_sha256": "3b6a54ddb3ef71d5acb18c51722d61ab55b5612c223e297d4d93958279b55ba2",
+          "characters_utf16": 6,
+          "raw_definition_lines_inclusive": [
+            114,
+            114
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "8f00961fe5cc66e35160aa26a4de19473822dad94f4d43c27b06c928542434c2",
+              "after_sha256": "3b6a54ddb3ef71d5acb18c51722d61ab55b5612c223e297d4d93958279b55ba2",
+              "matched_replacement_pairs_sha256": "659167d6215a64be43e34b40d5be0f6f98ce0b2897d12f972397e3ccfd3af9b0",
+              "stage_positions": [
+                [
+                  0,
+                  8
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "owner": "body:7",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "30e07d02a4340edd93dc9c6ee1fcfa3e9bced298bf5a2bba99d8c9c1909167ac",
+          "text_sha256": "aab4e739368aba0a47a2634a1db1a04433c1f6ea47dfc2c39366ab6fe5d4bb50",
+          "characters_utf16": 52,
+          "raw_definition_lines_inclusive": [
+            116,
+            116
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 3,
+              "before_sha256": "30e07d02a4340edd93dc9c6ee1fcfa3e9bced298bf5a2bba99d8c9c1909167ac",
+              "after_sha256": "af2bc6ed78e5b864ab977230a5dfd933f30bbff962e59c093e367b1a8be6c0e6",
+              "matched_replacement_pairs_sha256": "97802efb81fc249f8dde861b85471f77536bab8585b8e41a90dad7acb1058dc7",
+              "stage_positions": [
+                [
+                  0,
+                  58
+                ],
+                [
+                  85,
+                  127
+                ],
+                [
+                  133,
+                  191
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "af2bc6ed78e5b864ab977230a5dfd933f30bbff962e59c093e367b1a8be6c0e6",
+              "after_sha256": "aab4e739368aba0a47a2634a1db1a04433c1f6ea47dfc2c39366ab6fe5d4bb50",
+              "matched_replacement_pairs_sha256": "c398d8031463ecd6163b254aa17b09eb626c95eb56f097c5db3d235d4a66a648",
+              "stage_positions": [
+                [
+                  11,
+                  16
+                ],
+                [
+                  51,
+                  56
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "owner": "body:7",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+          "text_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+          "characters_utf16": 7,
+          "raw_definition_lines_inclusive": [
+            118,
+            118
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+              "after_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+              "matched_replacement_pairs_sha256": "03c859fa29cbcf9c3c33acd18dc52304ce42200b09be0722a390f05dd4dd44e3",
+              "stage_positions": [
+                [
+                  0,
+                  9
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "owner": "body:8",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "da9f1e8b4d5ae0e863dcafd47f8ecd005d1b97e11c5e73465ddf3e273b57b800",
+          "text_sha256": "e85d1e49e54b10307e04cc103b0175ecf7651b544f3a8fbb9222af11ba965723",
+          "characters_utf16": 51,
+          "raw_definition_lines_inclusive": [
+            120,
+            120
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "da9f1e8b4d5ae0e863dcafd47f8ecd005d1b97e11c5e73465ddf3e273b57b800",
+              "after_sha256": "906bb0efead1c7f5add5457ee4686378e430eac82f41b94b23bc6aa048506f2a",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  13,
+                  71
+                ],
+                [
+                  76,
+                  118
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 3,
+              "before_sha256": "906bb0efead1c7f5add5457ee4686378e430eac82f41b94b23bc6aa048506f2a",
+              "after_sha256": "e85d1e49e54b10307e04cc103b0175ecf7651b544f3a8fbb9222af11ba965723",
+              "matched_replacement_pairs_sha256": "6198e173c6e70b5908fc703d5644dfcc57f518616bbae10f43a914499d61506a",
+              "stage_positions": [
+                [
+                  0,
+                  11
+                ],
+                [
+                  36,
+                  47
+                ],
+                [
+                  49,
+                  57
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "owner": "body:9",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+          "text_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+          "characters_utf16": 7,
+          "raw_definition_lines_inclusive": [
+            122,
+            122
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+              "after_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+              "matched_replacement_pairs_sha256": "03c859fa29cbcf9c3c33acd18dc52304ce42200b09be0722a390f05dd4dd44e3",
+              "stage_positions": [
+                [
+                  0,
+                  9
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 17,
+          "owner": "body:10",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "4c3b64b17f0d7b8f773c3c73cba3475255b2df9bd18bc6af9e813cd73f778876",
+          "text_sha256": "ae700fb1137c6a7f2e7e415519eea1805847fb7d3441e3d5e1946218db0f229f",
+          "characters_utf16": 20,
+          "raw_definition_lines_inclusive": [
+            124,
+            124
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Pandoc_diacritics_on",
+              "count": 1,
+              "before_sha256": "4c3b64b17f0d7b8f773c3c73cba3475255b2df9bd18bc6af9e813cd73f778876",
+              "after_sha256": "8d4b8a7d25e217733161becffcedd556f360fb184ecd79ee8e3c224439b0348c",
+              "matched_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af",
+              "stage_positions": [
+                [
+                  1,
+                  66
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "8d4b8a7d25e217733161becffcedd556f360fb184ecd79ee8e3c224439b0348c",
+              "after_sha256": "ae700fb1137c6a7f2e7e415519eea1805847fb7d3441e3d5e1946218db0f229f",
+              "matched_replacement_pairs_sha256": "cf4e2f2f755aeec54bcb5f4f175015f09338dc5f96947358602c3ba903929aba",
+              "stage_positions": [
+                [
+                  0,
+                  22
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "display_pairs": [
+        {
+          "owner": "note:4",
+          "source_stage_start0": 2,
+          "source_stage_end_exclusive": 67,
+          "state_on": "c",
+          "state_off": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        },
+        {
+          "owner": "note:6",
+          "source_stage_start0": 5,
+          "source_stage_end_exclusive": 70,
+          "state_on": "c",
+          "state_off": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        },
+        {
+          "owner": "note:6",
+          "source_stage_start0": 285,
+          "source_stage_end_exclusive": 350,
+          "state_on": "c",
+          "state_off": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        },
+        {
+          "owner": "note:6",
+          "source_stage_start0": 371,
+          "source_stage_end_exclusive": 436,
+          "state_on": "c",
+          "state_off": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        },
+        {
+          "owner": "note:17",
+          "source_stage_start0": 1,
+          "source_stage_end_exclusive": 66,
+          "state_on": "c",
+          "state_off": "ch",
+          "raw_sha256": "c15e20df821a2670c477605446971e5bba8769bfc99af6025daeb0aff79fbf04"
+        }
+      ],
+      "speaker_labels": [],
+      "separate_summary": null,
+      "private_lossless_fixture": {
+        "file": "poem-402.lossless.json",
+        "bytes": 8073,
+        "sha256": "782973ac3e47c070147ea1af7aa0008f9ef77334de8675c2538e8dbed7680def"
+      },
+      "private_presentation_fixture": {
+        "file": "poem-402.presentation.json",
+        "bytes": 7350,
+        "sha256": "f8f57baba48b2c4cc45c2dbcad4e29ea7e4be905d7ef51702cc70f6adcfecdf8"
+      }
+    }
+  },
+  "totals": {
+    "poems": 2,
+    "physical_stanzas": 43,
+    "numbered_stanzas": 44,
+    "notes": 36,
+    "body_paragraphs": 49,
+    "hard500_pages": 16,
+    "display_pairs": 6,
+    "speaker_labels": 10
+  },
+  "source_preparation_only": true,
+  "runtime_API_activation_or_release_approval": false
+}

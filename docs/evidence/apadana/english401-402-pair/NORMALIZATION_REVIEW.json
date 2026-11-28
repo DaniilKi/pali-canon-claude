@@ -1,0 +1,165 @@
+{
+  "schema": "publisher401402-activation-source-reverification-v1",
+  "status": "GO_EXACT_TWO_COMPLETE_PUBLISHER_EDITION_SOURCE_SCOPES_ONLY",
+  "accepted_dev_commit": "f03150ff03f75e20abfb735836093cf3a0bfe5c2",
+  "published_source_kit_commit": "a690fd8e86c07fef695441b31cab42ca7a2a48fd",
+  "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "VRI_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "source_format": "Pinned official repository Markdown; rendered HTML was not substituted.",
+  "per_poem": {
+    "tha-ap403": {
+      "publisher_poem": 401,
+      "title": "Tissametteyya",
+      "raw_bytes": 6387,
+      "raw_sha256": "acd65e79f98f11239870504f054002cc440339a375e77033800649d99bf91bc9",
+      "raw_git_blob_sha1": "b90907423af09928dd3c661d1c1b60a08ff46a47",
+      "body_sha256": "0a5968b8e6c25e7336cbb67019733e395a156356c1c5be2c5159232f9f2c2277",
+      "notes_sha256_JSON_stringify": "6063400c75b7a5736bb76cf1cbea605cd02db0f607765b0d760eb7e05416629c",
+      "paratext_sha256": "b1c76c6f71ae64fa62ebf4ffecdfd76cffb7a5935e86d8590cf8761715e8a332",
+      "root_sha256_JSON_stringify": "f18e3eab3e4ba7fb91e85aa42cc6da9e641ef567c7386b7b5c3ec2928fb278e9",
+      "poem_heading_sha256": "c756b3f49219aba48d7142b176e749712f7c27057e891068f2248032b204a903",
+      "canonical_range_half_open": [
+        12892,
+        12980
+      ],
+      "body_characters_utf16": 4587,
+      "body_paragraph_count": 31,
+      "physical_stanza_count": 28,
+      "note_count": 19,
+      "hard500_pages": 10,
+      "entire_original_body_and_all_original_notes_present": true,
+      "all_original_note_owners_preserved": true,
+      "source_rights_qualified_for_existing_NC_SA_source_preparation_scope": true,
+      "runtime_API_activation_approval": false
+    },
+    "tha-ap404": {
+      "publisher_poem": 402,
+      "title": "Puṇṇaka",
+      "raw_bytes": 5073,
+      "raw_sha256": "36ab4b64da98ca50626ff3f9c9d86fc34f53b1405b47ba2e9d60dda6a5d99740",
+      "raw_git_blob_sha1": "e536bf5a9f1691564458da49bc94023b2d0a6dbd",
+      "body_sha256": "5a2f6375fc4b6e8891df8dc119aac5e52be745c49bcb7e9b1fc2e3a6cc9417a7",
+      "notes_sha256_JSON_stringify": "f99587903f0ce94ec8a0969f820231bd1a3a1f41d34b9055d6ca329e0959743a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256_JSON_stringify": "bf55622e636b7bd3691c2764f1e2b3f399b3335483689ecf292790f6073c8976",
+      "poem_heading_sha256": "2dfda0f2f797948c80d2d59d82926ba85a3910064cfc88798fa721b5a6c0ed61",
+      "canonical_range_half_open": [
+        12980,
+        13028
+      ],
+      "body_characters_utf16": 2614,
+      "body_paragraph_count": 18,
+      "physical_stanza_count": 15,
+      "note_count": 17,
+      "hard500_pages": 6,
+      "entire_original_body_and_all_original_notes_present": true,
+      "all_original_note_owners_preserved": true,
+      "source_rights_qualified_for_existing_NC_SA_source_preparation_scope": true,
+      "runtime_API_activation_approval": false
+    }
+  },
+  "all_nine_original_publisher_holds_unchanged": [
+    391,
+    392,
+    393,
+    403,
+    404,
+    405,
+    408,
+    409,
+    410
+  ],
+  "original_holds_object_compact_sha256": "a0bf2a67451a0002fbd3ce35f7bb716f054fd970ec5cdf5f053b69922e698fba",
+  "existing398399_source_prep_scope_unchanged": true,
+  "controlling_translation_terms": "CC BY-NC-SA 4.0: Jonathan S. Walters and Whitman College attribution; retain licence URL, provenance and revision, change and warranty notices, noncommercial/sharealike limits. Generic site BY4 does not broaden the specific translation terms.",
+  "all_six_actual_rights_artifacts_freshly_read_and_matched": true,
+  "original_Pali_Book36_all14645_retained_source_tuples_equal": true,
+  "source_app_test_Git_write_network_execution": "Only the exact reviewed published stdlib source producer was run. Git object reads were read-only; no app/parser/tests/build/browser/CI/network or checkout writes.",
+  "independent_source_review_lineage": {
+    "file": "/tmp/pali-next401402-independent-source-nov28/review/INDEPENDENT_REVIEW.json",
+    "sha256": "e5688ad867aecf5be12eb6dc7e35c2cd9625ad27ef0d45a18eba229d5e9e19a7",
+    "role": "Prior independent raw-first source review; labels not used in place of actual reverification."
+  },
+  "new_source_ambiguities_found": [],
+  "required_visible_qualifications_remain_exact": true,
+  "source_only": true,
+  "runtime_API_installed_browser_CI_activation_or_release_approval": false,
+  "public_replay_members": {
+    "public/INPUT_PINS.json": {
+      "bytes": 3769,
+      "sha256": "5b55ca611f278b1e738a66b02e04df8616592989dabf2d3a5b59d4b562d72b12",
+      "byte_exact_published_source_kit": true
+    },
+    "public/ORIGINAL_XML_REPLAY.json": {
+      "bytes": 2585,
+      "sha256": "09fa38ea9bde20ad8147e003b9be19d79a112b10551d76550022fb79d370be6d",
+      "byte_exact_published_source_kit": true
+    },
+    "public/PRIVATE_INPUTS.json": {
+      "bytes": 725,
+      "sha256": "d4565f766ccb12464c90e1b05c5925a09eb1249956206b6e1928c5c6c5d271c1",
+      "byte_exact_published_source_kit": true
+    },
+    "public/PROPOSED_LINKS.json": {
+      "bytes": 13530,
+      "sha256": "8b57b6d84525a9b251a39aca931425dfbf589537888c92d92ab553662b3adf2b",
+      "byte_exact_published_source_kit": true
+    },
+    "public/PROPOSED_PROFILES.json": {
+      "bytes": 13368,
+      "sha256": "e2bc9b358af5bf952ad3f97f7bdab567e4e057a2e66437e2d88cbb2e370f9133",
+      "byte_exact_published_source_kit": true
+    },
+    "public/REPLAY_RESULT.json": {
+      "bytes": 574,
+      "sha256": "a3acb1622a0e16898483fdcf8fd64daa15ef277711b5864feeb8abf7d8e49dd7",
+      "byte_exact_published_source_kit": true
+    },
+    "public/REQUIRED_NOTICES.json": {
+      "bytes": 6223,
+      "sha256": "f6ce9f3073fe8464e7cde6e7d5f34bcc4cbdd6db84bfb576d7d8f7c6567c9aa9",
+      "byte_exact_published_source_kit": true
+    },
+    "public/SOURCE_BINDINGS.json": {
+      "bytes": 87191,
+      "sha256": "5a0b036055a1aa8269db1a7db0c3efa6defe89c7d350c737aceadf38d04259e6",
+      "byte_exact_published_source_kit": true
+    },
+    "public/SOURCE_DERIVED_GOLDENS.json": {
+      "bytes": 100159,
+      "sha256": "6658c027a133048622bc1d3a6ac82a41d699594c3679b6c6effc01a3ccc1b718",
+      "byte_exact_published_source_kit": true
+    }
+  },
+  "private_output_members": [
+    {
+      "file": "/tmp/pali-401402-activation-source-nov28/reproduced/PRIVATE_DO_NOT_COMMIT/poem-401.lossless.json",
+      "bytes": 9930,
+      "sha256": "6f1adf4ea7e04330817ff4a8fdd21505575bbce085aeae7e7f7e26eb37047601",
+      "byte_exact_prior_private_witness": true,
+      "do_not_commit": true
+    },
+    {
+      "file": "/tmp/pali-401402-activation-source-nov28/reproduced/PRIVATE_DO_NOT_COMMIT/poem-401.presentation.json",
+      "bytes": 11034,
+      "sha256": "dec83a636a0347de28d901fe291b606eac42a917112ddbd7df94e91ba611c99a",
+      "byte_exact_prior_private_witness": true,
+      "do_not_commit": true
+    },
+    {
+      "file": "/tmp/pali-401402-activation-source-nov28/reproduced/PRIVATE_DO_NOT_COMMIT/poem-402.lossless.json",
+      "bytes": 8073,
+      "sha256": "782973ac3e47c070147ea1af7aa0008f9ef77334de8675c2538e8dbed7680def",
+      "byte_exact_prior_private_witness": true,
+      "do_not_commit": true
+    },
+    {
+      "file": "/tmp/pali-401402-activation-source-nov28/reproduced/PRIVATE_DO_NOT_COMMIT/poem-402.presentation.json",
+      "bytes": 7350,
+      "sha256": "f8f57baba48b2c4cc45c2dbcad4e29ea7e4be905d7ef51702cc70f6adcfecdf8",
+      "byte_exact_prior_private_witness": true,
+      "do_not_commit": true
+    }
+  ]
+}

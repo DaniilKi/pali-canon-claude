@@ -214,10 +214,10 @@ def _capture389390_current(root):
 
 
 def approved389390_catalogue(root):
-    context,_=_capture389390_current(root)
-    return deepcopy({key:context['english'][key] for key in ('ids','profiles','links','source')})
+    from web_reader_intake382 import approved382_catalogue
+    return approved382_catalogue(root)
 
 
 def approved389390_runtime(root):
-    _,files=_capture389390_current(root)
-    return deepcopy(files)
+    from web_reader_intake382 import approved382_runtime
+    return approved382_runtime(root)

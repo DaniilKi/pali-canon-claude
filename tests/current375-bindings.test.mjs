@@ -12,29 +12,30 @@ import {CURRENT_APADANA_IDS,CURRENT_APADANA_RECORDS,CURRENT_APADANA_URLS,CURRENT
 import {INTAKE375_IDS,INTAKE375_VRI,CURRENT375_SOURCE_FILE as HISTORICAL375_SOURCE_FILE,CURRENT375_SOURCE_SHA as HISTORICAL375_SOURCE_SHA} from './helpers/intake375-metadata.mjs';
 import {intake380Authority,requireProfiles380,requireMetadata380,INTAKE380_IDS,CURRENT380_SOURCE_FILE as HISTORICAL380_SOURCE_FILE,CURRENT380_SOURCE_SHA as HISTORICAL380_SOURCE_SHA,sha} from './helpers/intake380-metadata.mjs';
 
-import {current389390Authority,assertCurrent389390SourceClosure,CURRENT_WIDGET_VERSION,CURRENT_WIDGET_URI,CURRENT389390_SOURCE_FILE,CURRENT_CANONICAL_SHA,CURRENT_LOCATOR_NAMESPACE} from './helpers/current389390-metadata.mjs';
+import {CURRENT_LOCATOR_NAMESPACE,CURRENT389390_SOURCE_FILE as HISTORICAL389390_SOURCE_FILE,CURRENT389390_SOURCE_SHA as HISTORICAL389390_SOURCE_SHA} from './helpers/current389390-metadata.mjs';
+import {current382Authority as current389390Authority,assertCurrent382SourceClosure as assertCurrent389390SourceClosure,CURRENT_WIDGET_VERSION,CURRENT_WIDGET_URI,CURRENT382_SOURCE_FILE as CURRENT389390_SOURCE_FILE,CURRENT_CANONICAL_SHA,requireProfiles382,requireMetadata382,INTAKE382_IDS} from './helpers/intake382-metadata.mjs';
 import * as currentCanon from '../src/canon.mjs';
 
 test('actual380 exports and full ordered profiles bind widget48 while historical375 and H368 objects and canonical citation pins remain exact',()=>{
  const base=new URL('../',import.meta.url);assertCurrent389390SourceClosure(base);
- const context=current389390Authority(base);assert.deepEqual(Object.keys(context),['english','canonical','widget']);const a=context.english;assert.deepEqual(a,intake380Authority(base));requireProfiles380(APADANA_PROFILES,base);
+ const context=current389390Authority(base);assert.deepEqual(Object.keys(context),['english','canonical','widget']);const now=context.english,a=now.historical380;assert.equal(now.ids.length,382);assert.deepEqual(now.ids,[...a.ids,...INTAKE382_IDS]);assert.deepEqual(a,intake380Authority(base));requireProfiles380(a.profiles,base);requireProfiles382(APADANA_PROFILES,base);
  const actual=currentCanon.load();assert.equal(sha(JSON.stringify(actual.canon)),CURRENT_CANONICAL_SHA);assert.equal(context.canonical.new_canonical_logical_sha256,CURRENT_CANONICAL_SHA);assert.equal(context.canonical.namespace,CURRENT_LOCATOR_NAMESPACE);for(const id of context.canonical.targets){assert.deepEqual(actual.byId.get(id),context.canonical.new_units[id]);assert.equal(requiredCanonicalRevision(id),INTAKE375_VRI+'-'+CURRENT_LOCATOR_NAMESPACE);}assert.deepEqual(context.widget,{version:WIDGET_VERSION,uri:WIDGET_URI,skybridge:SKYBRIDGE_URI});
  assert.deepEqual(Object.keys(a),['ids','profiles','links','source','selection','approval','historical368','historical375','documents','manifest']);assert.equal(Object.hasOwn(a,'baseline'),false);assert.equal(a.historical368,a.historical375.baseline);
- const catalogue=JSON.parse(readFileSync(new URL('../server/data/apadana.json',import.meta.url)));requireMetadata380(APADANA_PROFILES,catalogue,base);
+ const catalogue=JSON.parse(readFileSync(new URL('../server/data/apadana.json',import.meta.url)));requireMetadata380(a.profiles,a.manifest,base);requireMetadata382(APADANA_PROFILES,catalogue,base);
  function bindings(value){
   assert.deepEqual(Object.keys(value),['ids','version','uri','skybridge']);
-  assert.deepEqual(value.ids,a.ids);assert.equal(value.ids.length,380);assert.equal(new Set(value.ids).size,380);
-  assert.equal(value.version,CURRENT_WIDGET_VERSION);assert.equal(value.version,'v49');
-  assert.equal(value.uri,CURRENT_WIDGET_URI);assert.equal(value.uri,'ui://pali-canon/reader-v49.html');
-  assert.equal(value.skybridge,'ui://pali-canon/reader-v49.skybridge.html');
+  assert.deepEqual(value.ids,now.ids);assert.equal(value.ids.length,382);assert.equal(new Set(value.ids).size,382);
+  assert.equal(value.version,CURRENT_WIDGET_VERSION);assert.equal(value.version,'v50');
+  assert.equal(value.uri,CURRENT_WIDGET_URI);assert.equal(value.uri,'ui://pali-canon/reader-v50.html');
+  assert.equal(value.skybridge,'ui://pali-canon/reader-v50.skybridge.html');
  }
  const good={ids:CURRENT_APADANA_IDS,version:WIDGET_VERSION,uri:WIDGET_URI,skybridge:SKYBRIDGE_URI};bindings(good);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(0,368),a.historical368.ids);assert.equal(a.historical368.ids.length,368);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(368,375),INTAKE375_IDS);assert.equal(Object.keys(a.historical375.profiles).filter(id=>id.startsWith('tha-ap')).length,335);
- assert.deepEqual(CURRENT_APADANA_IDS.slice(0,375),a.historical375.ids);assert.equal(a.historical375.ids.length,375);assert.deepEqual(CURRENT_APADANA_IDS.slice(375),INTAKE380_IDS);assert.equal(CURRENT_THERA_IDS.length,340);
+ assert.deepEqual(CURRENT_APADANA_IDS.slice(0,375),a.historical375.ids);assert.equal(a.historical375.ids.length,375);assert.deepEqual(CURRENT_APADANA_IDS.slice(375,380),INTAKE380_IDS);assert.equal(CURRENT_THERA_IDS.length,342);
  const expectedRecords=[...a.selection.baseline_records,...a.selection.approved_records];
- assert.deepEqual(CURRENT_APADANA_RECORDS,expectedRecords);assert.equal(CURRENT_APADANA_RECORDS.filter(row=>row.publisher_chapter==='chapter-4').length,40);
- assert.deepEqual(CURRENT_APADANA_URLS,expectedRecords.map(row=>'https://apadanatranslation.com/text/'+row.publisher_chapter+'/poem-'+String(row.poem).padStart(3,'0')+'/'));
+ assert.deepEqual(CURRENT_APADANA_RECORDS.slice(0,380),expectedRecords);assert.deepEqual(CURRENT_APADANA_RECORDS,[...expectedRecords,...now.selection.approved_records]);assert.equal(CURRENT_APADANA_RECORDS.filter(row=>row.publisher_chapter==='chapter-4').length,40);
+ assert.deepEqual(CURRENT_APADANA_URLS,[...expectedRecords,...now.selection.approved_records].map(row=>'https://apadanatranslation.com/text/'+row.publisher_chapter+'/poem-'+String(row.poem).padStart(3,'0')+'/'));
  for(const id of a.historical368.ids){assert.deepEqual(APADANA_PROFILES[id],a.historical368.profiles[id]);assert.deepEqual(catalogue.links[id],a.historical368.links[id]);}
  for(const id of a.historical375.ids){assert.deepEqual(APADANA_PROFILES[id],a.historical375.profiles[id]);assert.deepEqual(catalogue.links[id],a.historical375.links[id]);}
  for(const id of INTAKE375_IDS)assert.equal(requiredCanonicalRevision(id),id==='tha-ap374'?INTAKE375_VRI+'-apadana-thera-next10-v1':null);
@@ -45,13 +46,14 @@ test('actual380 exports and full ordered profiles bind widget48 while historical
  assert.throws(()=>bindings({ids:a.historical375.ids,version:'v47',uri:'ui://pali-canon/reader-v47.html',skybridge:'ui://pali-canon/reader-v47.skybridge.html'}),'Coherent old375 binding stays historical');
  // Each side remains separately strict; a coherent same-count old/new owner substitution cannot become a new binding.
  for(const id of [a.historical368.ids[0],...INTAKE375_IDS,...INTAKE380_IDS]){
-  const changed=structuredClone(APADANA_PROFILES);changed['tha-ap9999']=changed[id];delete changed[id];assert.equal(Object.keys(changed).length,380);assert.throws(()=>requireProfiles380(changed,base));
-  const links=structuredClone(catalogue);links.links[id]={...links.links[id],raw_sha256:'0'.repeat(64)};assert.throws(()=>requireMetadata380(APADANA_PROFILES,links,base));
+  const changed=structuredClone(APADANA_PROFILES);changed['tha-ap9999']=changed[id];delete changed[id];assert.equal(Object.keys(changed).length,382);assert.throws(()=>requireProfiles382(changed,base));
+  const links=structuredClone(catalogue);links.links[id]={...links.links[id],raw_sha256:'0'.repeat(64)};assert.throws(()=>requireMetadata382(APADANA_PROFILES,links,base));
  }
  // The independently sealed current source manifest is the only fixture selector.
  // Copy its exact declared source rows; never copy the repository or runtime tree.
  const closure=assertCurrent389390SourceClosure(base),declared=Object.keys(closure.files);
  assert.ok(declared.includes('src/chatgpt-widget.mjs'));
+ const old178Raw=readFileSync(new URL(HISTORICAL389390_SOURCE_FILE,base));assert.equal(sha(old178Raw),HISTORICAL389390_SOURCE_SHA);const old178=JSON.parse(old178Raw);assert.equal(Object.keys(old178.files).length,178);assert.ok(declared.includes(HISTORICAL389390_SOURCE_FILE));for(const path of Object.keys(old178.files))assert.ok(declared.includes(path),'Every old178 path remains an actual current negative target');
 
  const old380Raw=readFileSync(new URL(HISTORICAL380_SOURCE_FILE,base));assert.equal(sha(old380Raw),HISTORICAL380_SOURCE_SHA);const old380=JSON.parse(old380Raw);assert.equal(Object.keys(old380.files).length,136);for(const path of Object.keys(old380.files))assert.ok(declared.includes(path),'Every old136 path remains an actual current negative target');assert.ok(declared.includes(HISTORICAL380_SOURCE_FILE),'Old136 declaration is an authenticated historical witness');
  const oldSourceRaw=readFileSync(new URL(HISTORICAL375_SOURCE_FILE,base));assert.equal(sha(oldSourceRaw),HISTORICAL375_SOURCE_SHA);
@@ -105,5 +107,5 @@ test('actual380 exports and full ordered profiles bind widget48 while historical
   }
   assert.equal(conversions,0,'Foreign source-root objects are not coerced');assert.deepEqual(positive(),closure);
  }finally{rmSync(owner,{recursive:true,force:true});}
- bindings(good);requireMetadata380(APADANA_PROFILES,catalogue,base);
+ bindings(good);requireMetadata380(a.profiles,a.manifest,base);requireMetadata382(APADANA_PROFILES,catalogue,base);
 });
