@@ -1,0 +1,25 @@
+{
+  "schema": "reviewed-current-apadana-runtime-approval-v1",
+  "status": "GO_RUNTIME_INVENTORY_ONLY",
+  "inventory_sha256": "b483807682583518e6774fd6885d3229a8591d5ec164a4f40e0c0e1c29cee841",
+  "application_commit": "889bdbe6e52f4758014de83ff88feae9c9014e69",
+  "curation_sha256": "d78631de945e2aa234a869c7840e4b2940b7db32dc18dbc199a2fb1eec83929d",
+  "baseline_commit": "f1e5c8114680fabe9083bde41d57c34730fd6bcd",
+  "predecessor_inventory_sha256": "364339616b495e56c1d4973b691e0334334fc44fcfb975a653be0fd3c4cc35c4",
+  "expected_manifest_sha256": "78ef86dd53edf8d6a7434e7165bff94d406a0445524c259d0ebef2dbde42b2bd",
+  "runtime_paths": 34,
+  "actual_data_paths": 27,
+  "changed_paths": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_paths": 29,
+  "independent_manifest_composition": true,
+  "physical_and_Git_blob_inventory_exact": true,
+  "canonical_data26_and_H_held_preserved": true,
+  "behavioral_installed_browser_native_CI_or_release_approval": false,
+  "operations": "Independent read-only verification: all34 regular physical server files equal immutable product889bdbe Git blobs and exact12-key inventory; f1 Gitserver set equals predecessor364. ExactlyAP+threeCJS+reader changed,29same including all26otherdata. Canonical883d/all61books/8544units, other corpus/source-note/server-licence bytes and full held objects unchanged. Independently recomposed EXPECTED78ef from approved3948cf plus corrected7source LINKS2ff9 and only policy394/354→401/361, before actualAP byte comparison; all394 full linkobjects/order and header/rights/checked date retained. Approvedcuration identity APPd786 is distinct from AP78ef. Five actual/Git source files equal reviewedappV3, carrying exactly5existingNEXT10pins and2bareVRI profiles; no other src/web changes. PackageJSON/lock/build sources and LICENSE/PRIVACY exactf1/product/current. Current THIRD_PARTY.md has an additive401scope paragraph, retaining old notices; it and README/finalpackage39 are outside this runtime inventory scope. Currentnode_modules is regular,3bundles lack sibling-worktree labels; no newinstall, olddependency-tree equality or reviewer rebuild claimed. Root-recorded correctedcurator/build exit0 and retainedlogs authenticated, not rerun. Inventory/source-data scope only; API/browser/installed/nativeCI/fullCI/release remain separate."
+}
