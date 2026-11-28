@@ -1,0 +1,25 @@
+{
+  "schema": "reviewed-intake386-runtime-approval-v1",
+  "status": "GO_RUNTIME_INVENTORY_ONLY",
+  "inventory_sha256": "38d90c150b2b70bd0fde1b1cc5e1a40d2ff6cc86deedec91477dad5ae58dde6b",
+  "application_commit": "d71a23ce1b78c5c3028814dc7cc6a1e8cdd9b86c",
+  "curation_sha256": "40552a2b723037f0b63022e747bfa9c20077e4c26404ca6125473c412d722307",
+  "baseline_commit": "81c970094bcb1a539acf4e3856491ea9af9cc57f",
+  "predecessor_inventory_sha256": "d96c2bfcdd6ec0802f6e36dec6a792ee35e1cc05751b2579c57d6ad5871cf8b2",
+  "expected_manifest_sha256": "29d22858a2a2cf541b9c4b81ef6ddc3c28ed84327580da99349c7a601d14c0b7",
+  "runtime_paths": 34,
+  "actual_data_paths": 27,
+  "changed_paths": [
+    "data/apadana.json",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_paths": 29,
+  "independent_manifest_composition": true,
+  "physical_and_Git_blob_inventory_exact": true,
+  "canonical_data26_and_H_held_preserved": true,
+  "behavioral_installed_browser_native_CI_or_release_approval": false,
+  "operations": "Independent standard-library JSON composition from sealed368 plus immutable7/5/2 source objects to full382, then exact four independently source-approved profiles/links and only literal386/346 source-policy operands. Expected manifest bytes independently equal AP386. Every actual physical server34 byte equals build Git d71a23ce1b78c5c3028814dc7cc6a1e8cdd9b86c and literal inventory; all34 accepted81 Git blobs equal immutable382 predecessor. Exactly AP catalogue plus four build bundles change;29 files and26 other data remain exact; canonical parts reconstruct logical883d. All382 previous full profile/link objects/order and unchanged canonical/publication holds were source-compared. Source and build Git deltas are exactly12 and4 paths. Read-only Git cat-file/diff-tree, hash/gzip/JSON/source inspection only; no application, proposed helper, producer, test, browser, installer, network or CI execution was used for this inventory verdict. No installed/native/release approval."
+}
