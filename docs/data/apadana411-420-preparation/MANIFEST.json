@@ -1,0 +1,17 @@
+{
+  "schema": "publisher411-420-public-metadata-handoff-v1",
+  "status": "SOURCE_SCOUT_ONLY_PENDING_FUTURE_REVIEW",
+  "members": {
+    "SCOUT.json": {
+      "bytes": 14274,
+      "sha256": "e0637089ecf4404eff71bafd8ce36b2a631ad33b39fff4ef9796a721a19b997f"
+    },
+    "NEXT_INTAKE_HANDOFF.md": {
+      "bytes": 8810,
+      "sha256": "6e222541560587df1ecff40da25ce27cebe42ed6755e665684953fd96d8b1ded"
+    }
+  },
+  "English_bodies_or_notes_bundled": false,
+  "application_profiles_or_activation": false,
+  "private_witnesses_excluded": true
+}

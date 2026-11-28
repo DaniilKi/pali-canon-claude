@@ -1,0 +1,527 @@
+{
+  "schema": "publisher411-420-source-scout-v1",
+  "status": "AUTHOR_SOURCE_SCOUT_PENDING_INDEPENDENT_PREPARATION_REVIEW",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "last_explicit_accepted_baseline": "81c970094bcb1a539acf4e3856491ea9af9cc57f",
+  "current386_candidate_acceptance_not_inferred": true,
+  "literal_pairs": [
+    [
+      411,
+      "tha-ap413"
+    ],
+    [
+      412,
+      "tha-ap414"
+    ],
+    [
+      413,
+      "tha-ap415"
+    ],
+    [
+      414,
+      "tha-ap416"
+    ],
+    [
+      415,
+      "tha-ap417"
+    ],
+    [
+      416,
+      "tha-ap418"
+    ],
+    [
+      417,
+      "tha-ap419"
+    ],
+    [
+      418,
+      "tha-ap420"
+    ],
+    [
+      419,
+      "tha-ap421"
+    ],
+    [
+      420,
+      "tha-ap422"
+    ]
+  ],
+  "recommended_lower_risk_publishers": [
+    411,
+    412,
+    414,
+    415,
+    416,
+    417,
+    418,
+    419
+  ],
+  "conditional_publishers": [
+    413,
+    420
+  ],
+  "per_poem": [
+    {
+      "publisher_poem": 411,
+      "canonical_id": "tha-ap413",
+      "publisher_title": "Bhaddāli",
+      "source_path": "src/_poems/chapter-3/poem-411.md",
+      "status": "LOWER_RISK_SOURCE_PREPARATION_CANDIDATE",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14043,
+        14142
+      ],
+      "canonical_title": "Bhaddālittheraapadānaṃ",
+      "chapter_ordinal": 1,
+      "VRI_chapter_verse_numbers": [
+        1,
+        31
+      ],
+      "physical_stanza_paragraphs": 30,
+      "expanded_local_stanzas": 31,
+      "poem_paragraphs_including_two_colophons": 32,
+      "translator_notes": 29,
+      "global_BJTS_label_range": [
+        4268,
+        4298
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 28,
+        "6": 1,
+        "10": 1
+      },
+      "separate_chapter_heading": true,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 0,
+      "HTML_display_pairs": 4,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": [
+        {
+          "note": 24,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": 1
+        }
+      ]
+    },
+    {
+      "publisher_poem": 412,
+      "canonical_id": "tha-ap414",
+      "publisher_title": "Ekachattiya",
+      "source_path": "src/_poems/chapter-3/poem-412.md",
+      "status": "LOWER_RISK_SOURCE_PREPARATION_CANDIDATE",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14142,
+        14283
+      ],
+      "canonical_title": "Ekachattiyattheraapadānaṃ",
+      "chapter_ordinal": 2,
+      "VRI_chapter_verse_numbers": [
+        32,
+        78
+      ],
+      "physical_stanza_paragraphs": 47,
+      "expanded_local_stanzas": 47,
+      "poem_paragraphs_including_two_colophons": 49,
+      "translator_notes": 85,
+      "global_BJTS_label_range": [
+        4299,
+        4345
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 47
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 11,
+      "HTML_display_pairs": 0,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": [
+        {
+          "note": 10,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": -1
+        },
+        {
+          "note": 57,
+          "parenthesis_balance": 1,
+          "double_curly_quote_balance": 0
+        },
+        {
+          "note": 75,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": 1
+        }
+      ]
+    },
+    {
+      "publisher_poem": 413,
+      "canonical_id": "tha-ap415",
+      "publisher_title": "Tiṇasūlakachādaniya",
+      "source_path": "src/_poems/chapter-3/poem-413.md",
+      "status": "CONDITIONAL_SOURCE_PREPARATION_ONLY",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14283,
+        14365
+      ],
+      "canonical_title": "Tiṇasūlakachādaniyattheraapadānaṃ",
+      "chapter_ordinal": 3,
+      "VRI_chapter_verse_numbers": [
+        79,
+        105
+      ],
+      "physical_stanza_paragraphs": 27,
+      "expanded_local_stanzas": 27,
+      "poem_paragraphs_including_two_colophons": 29,
+      "translator_notes": 30,
+      "global_BJTS_label_range": [
+        4346,
+        4372
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 26,
+        "5": 1
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 3,
+      "HTML_display_pairs": 0,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": [
+        {
+          "note": 2,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": 2
+        }
+      ]
+    },
+    {
+      "publisher_poem": 414,
+      "canonical_id": "tha-ap416",
+      "publisher_title": "Madhumaŋsadāyaka",
+      "source_path": "src/_poems/chapter-3/poem-414.md",
+      "status": "LOWER_RISK_SOURCE_PREPARATION_CANDIDATE",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14365,
+        14401
+      ],
+      "canonical_title": "Madhumaṃsadāyakattheraapadānaṃ",
+      "chapter_ordinal": 4,
+      "VRI_chapter_verse_numbers": [
+        106,
+        117
+      ],
+      "physical_stanza_paragraphs": 12,
+      "expanded_local_stanzas": 12,
+      "poem_paragraphs_including_two_colophons": 14,
+      "translator_notes": 12,
+      "global_BJTS_label_range": [
+        4373,
+        4384
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 12
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 2,
+      "HTML_display_pairs": 0,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": [
+        {
+          "note": 4,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": -1
+        }
+      ]
+    },
+    {
+      "publisher_poem": 415,
+      "canonical_id": "tha-ap417",
+      "publisher_title": "Nāgapallavaka",
+      "source_path": "src/_poems/chapter-3/poem-415.md",
+      "status": "LOWER_RISK_SOURCE_PREPARATION_CANDIDATE",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14401,
+        14419
+      ],
+      "canonical_title": "Nāgapallavattheraapadānaṃ",
+      "chapter_ordinal": 5,
+      "VRI_chapter_verse_numbers": [
+        118,
+        123
+      ],
+      "physical_stanza_paragraphs": 6,
+      "expanded_local_stanzas": 6,
+      "poem_paragraphs_including_two_colophons": 8,
+      "translator_notes": 3,
+      "global_BJTS_label_range": [
+        4385,
+        4390
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 6
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 0,
+      "HTML_display_pairs": 0,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": []
+    },
+    {
+      "publisher_poem": 416,
+      "canonical_id": "tha-ap418",
+      "publisher_title": "Ekadīpiya",
+      "source_path": "src/_poems/chapter-3/poem-416.md",
+      "status": "LOWER_RISK_SOURCE_PREPARATION_CANDIDATE",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14419,
+        14473
+      ],
+      "canonical_title": "Ekadīpiyattheraapadānaṃ",
+      "chapter_ordinal": 6,
+      "VRI_chapter_verse_numbers": [
+        124,
+        141
+      ],
+      "physical_stanza_paragraphs": 18,
+      "expanded_local_stanzas": 18,
+      "poem_paragraphs_including_two_colophons": 20,
+      "translator_notes": 9,
+      "global_BJTS_label_range": [
+        4391,
+        4408
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 18
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 2,
+      "HTML_display_pairs": 0,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": []
+    },
+    {
+      "publisher_poem": 417,
+      "canonical_id": "tha-ap419",
+      "publisher_title": "Ucchaṅgapupphiya",
+      "source_path": "src/_poems/chapter-3/poem-417.md",
+      "status": "LOWER_RISK_SOURCE_PREPARATION_CANDIDATE",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14473,
+        14494
+      ],
+      "canonical_title": "Ucchaṅgapupphiyattheraapadānaṃ",
+      "chapter_ordinal": 7,
+      "VRI_chapter_verse_numbers": [
+        142,
+        148
+      ],
+      "physical_stanza_paragraphs": 7,
+      "expanded_local_stanzas": 7,
+      "poem_paragraphs_including_two_colophons": 9,
+      "translator_notes": 9,
+      "global_BJTS_label_range": [
+        4409,
+        4415
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 7
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 3,
+      "HTML_display_pairs": 0,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": [
+        {
+          "note": 3,
+          "parenthesis_balance": 0,
+          "double_curly_quote_balance": 1
+        }
+      ]
+    },
+    {
+      "publisher_poem": 418,
+      "canonical_id": "tha-ap420",
+      "publisher_title": "Yāgudāyaka",
+      "source_path": "src/_poems/chapter-3/poem-418.md",
+      "status": "LOWER_RISK_SOURCE_PREPARATION_CANDIDATE",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14494,
+        14557
+      ],
+      "canonical_title": "Yāgudāyakattheraapadānaṃ",
+      "chapter_ordinal": 8,
+      "VRI_chapter_verse_numbers": [
+        149,
+        169
+      ],
+      "physical_stanza_paragraphs": 21,
+      "expanded_local_stanzas": 21,
+      "poem_paragraphs_including_two_colophons": 23,
+      "translator_notes": 30,
+      "global_BJTS_label_range": [
+        4416,
+        4434
+      ],
+      "local_stanzas_without_global_BJTS_label": [
+        16,
+        17
+      ],
+      "physical_stanza_line_histogram": {
+        "4": 21
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 0,
+      "HTML_display_pairs": 5,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": []
+    },
+    {
+      "publisher_poem": 419,
+      "canonical_id": "tha-ap421",
+      "publisher_title": "Patthodanadāyaka",
+      "source_path": "src/_poems/chapter-3/poem-419.md",
+      "status": "LOWER_RISK_SOURCE_PREPARATION_CANDIDATE",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14557,
+        14599
+      ],
+      "canonical_title": "Patthodanadāyakattheraapadānaṃ",
+      "chapter_ordinal": 9,
+      "VRI_chapter_verse_numbers": [
+        170,
+        183
+      ],
+      "physical_stanza_paragraphs": 14,
+      "expanded_local_stanzas": 14,
+      "poem_paragraphs_including_two_colophons": 16,
+      "translator_notes": 6,
+      "global_BJTS_label_range": [
+        4435,
+        4448
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 14
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 0,
+      "MD_display_pairs": 0,
+      "HTML_display_pairs": 0,
+      "orphan_MD_display_on_spans": 0,
+      "note_punctuation_flags": []
+    },
+    {
+      "publisher_poem": 420,
+      "canonical_id": "tha-ap422",
+      "publisher_title": "Mañcadāyaka",
+      "source_path": "src/_poems/chapter-3/poem-420.md",
+      "status": "CONDITIONAL_SOURCE_PREPARATION_ONLY",
+      "canonical_book": 36,
+      "canonical_blocks_half_open": [
+        14599,
+        14645
+      ],
+      "canonical_title": "Mañcadāyakattheraapadānaṃ",
+      "chapter_ordinal": 10,
+      "VRI_chapter_verse_numbers": [
+        184,
+        196
+      ],
+      "physical_stanza_paragraphs": 13,
+      "expanded_local_stanzas": 13,
+      "poem_paragraphs_including_two_colophons": 15,
+      "translator_notes": 6,
+      "global_BJTS_label_range": [
+        4449,
+        4461
+      ],
+      "local_stanzas_without_global_BJTS_label": [],
+      "physical_stanza_line_histogram": {
+        "4": 13
+      },
+      "separate_chapter_heading": false,
+      "separate_summary_paragraphs": 3,
+      "MD_display_pairs": 7,
+      "HTML_display_pairs": 1,
+      "orphan_MD_display_on_spans": 2,
+      "note_punctuation_flags": []
+    }
+  ],
+  "totals": {
+    "poems": 10,
+    "physical_stanza_paragraphs": 195,
+    "expanded_local_stanzas": 196,
+    "translator_notes": 219,
+    "poem_paragraphs_including_two_colophons": 215
+  },
+  "canonical_holds_preserved": [
+    "tha-ap72",
+    "tha-ap142",
+    "tha-ap160",
+    "tha-ap161",
+    "tha-ap262",
+    "tha-ap268",
+    "tha-ap282",
+    "tha-ap308",
+    "tha-ap309",
+    "tha-ap360"
+  ],
+  "publisher_holds_preserved": [
+    391,
+    392,
+    393,
+    403,
+    404,
+    405,
+    408,
+    409,
+    410
+  ],
+  "rights": {
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "edition_year": 2017,
+    "translation_terms": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "generic_site_BY4_does_not_broaden_translation_terms": true,
+    "controlling_local_artifacts": [
+      "LICENSE.md",
+      "src/_pages/about.md",
+      "src/_includes/site/footer.njk",
+      "src/_includes/layouts/epub-metadata.xml",
+      "src/_data/site.json",
+      "src/_poems/_poems.json"
+    ]
+  },
+  "source_boundary_observation": "All ten literal chapter42 ranges begin at their own subhead (411 includes chapter42 heading), close with their own ordinal colophon, and contain no next poem subhead; 420 ends Book36 and separately owns chapter apparatus.",
+  "independent_review": false,
+  "normalized_rendering_approval": false,
+  "profile_or_API_approval": false,
+  "runtime_or_activation_approval": false,
+  "release_or_push_approval": false,
+  "full_chapter_approval": false,
+  "complete_publisher_edition_is_not_line_complete_VRI": true,
+  "source_or_original_Pali_changed": false
+}
