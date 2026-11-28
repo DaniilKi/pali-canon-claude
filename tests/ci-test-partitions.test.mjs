@@ -6,7 +6,8 @@ import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {digest,inventory,loadBaseline,makeContext,nodeArguments,eventCollector,aggregateReceipts,execute,MAX_CHILD_MS,ciIdentity,historicalWindowsPythonWrappers,historicalNativePythonPartitionFixture,WINDOWS_PYTHON_PARTITION_INDEX,CURRENT380_CI_INDEX} from '../scripts/ci-test-partitions.mjs';
-import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure,current382Authority as current389390Authority} from './helpers/intake382-metadata.mjs';
+import {assertCurrentSourceClosure,currentContext,CURRENT_SOURCE_FILE,CURRENT_WIDGET_VERSION,CURRENT_WIDGET_URI} from './helpers/current-apadana.mjs';
+import {CURRENT_WIDGET_VERSION as HISTORICAL382_WIDGET_VERSION} from './helpers/intake382-metadata.mjs';
 import {prepareHistoricalHSourceInputs} from './helpers/historical-h-inputs.mjs';
 const ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..'), COMMIT='0123456789abcdef0123456789abcdef01234567';
 const clone=x=>JSON.parse(JSON.stringify(x));
@@ -305,8 +306,19 @@ function beforeSourcePair401402Workflow(text){
  for(const part of SOURCE_PAIR401402_PARTS){assert.equal(text.split(part).length-1,1,'Every finite401402 source/browser/sparse/report addition is exact');text=text.replace(part,'');}
  return text;
 }
+// Four reviewed current-cohort additions; the normalized whole workflow seals their positions as well as bytes.
+const CURRENT_FOUR394407_WORKFLOW_SHA='39c224a626a235d4bf5bfd0b37fbbd739bfb40ce5b07065e03e296743f1108eb';
+const SOURCE_FOUR394407_PARTS=Object.freeze(["            src/_poems/chapter-3/poem-394.md\n            src/_poems/chapter-3/poem-397.md\n            src/_poems/chapter-3/poem-406.md\n            src/_poems/chapter-3/poem-407.md\n","      - name: Validate the current source-metadata adapter recipe\n        if: matrix.group == 'apadana'\n        shell: bash\n        run: |\n          set -euo pipefail\n          python3 -B scripts/check-current-source-adapters.py --source-root \"$GITHUB_WORKSPACE\"\n      - name: Require both publisher394-407 source API and widget cases\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        shell: bash\n        env:\n          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned\n          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned\n        run: |\n          set -euo pipefail\n          node --test --test-reporter=tap tests/thera394-407-four.test.mjs | tee reviewed-publisher394-407-four.tap\n          node --input-type=module -e 'import assert from \"node:assert/strict\"; import {readFileSync} from \"node:fs\"; const tap=readFileSync(\"reviewed-publisher394-407-four.tap\",\"utf8\"); const names=[...tap.matchAll(/^ok \\d+ - (.+)$/gm)].map(row=>row[1]); assert.deepEqual(names,[\"publisher394/397/406/407 exact sources preserve382 objects,121 paragraphs,141 notes and both label domains\", \"publisher394/397/406/407 actual API and widget guards retain source rights, citations and6000+439 continuation\"]); for(const [key,value] of [[\"tests\",2],[\"pass\",2],[\"fail\",0],[\"cancelled\",0],[\"skipped\",0],[\"todo\",0]]) { const rows=tap.split(/\\r?\\n/).filter(line=>line.startsWith(\"# \"+key+\" \")); assert.deepEqual(rows,[\"# \"+key+\" \"+value]); } assert.doesNotMatch(tap,/^\\s*not ok\\b/m);'\n","      - name: Check all four publisher394-407 reader sources\n        if: matrix.group == 'apadana'\n        timeout-minutes: 7\n        shell: bash\n        run: |\n          set -euo pipefail\n          pali_four_chromium=\"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\"\n          python3 -B \"$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py\" --output-dir \"$GITHUB_WORKSPACE/.ci-four394407/normal\" --name four386-normal -- python3 -B \"$GITHUB_WORKSPACE/scripts/web-reader-thera394-407-four-check.py\" --mode normal --source-root \"$GITHUB_WORKSPACE\" --server-dir \"$GITHUB_WORKSPACE/server\" --publisher-root \"$GITHUB_WORKSPACE/.fixtures/apadana-pinned\" --browser \"$pali_four_chromium\" --report \"$GITHUB_WORKSPACE/.ci-four394407/normal/REPORT.json\"\n      - name: Audit all four publisher394-407 reader sources\n        if: matrix.group == 'apadana'\n        timeout-minutes: 7\n        shell: bash\n        run: |\n          set -euo pipefail\n          pali_four_chromium=\"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\"\n          python3 -B \"$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py\" --output-dir \"$GITHUB_WORKSPACE/.ci-four394407/a11y\" --name four386-a11y -- python3 -B \"$GITHUB_WORKSPACE/scripts/web-reader-thera394-407-four-check.py\" --mode a11y --source-root \"$GITHUB_WORKSPACE\" --server-dir \"$GITHUB_WORKSPACE/server\" --publisher-root \"$GITHUB_WORKSPACE/.fixtures/apadana-pinned\" --browser \"$pali_four_chromium\" --report \"$GITHUB_WORKSPACE/.ci-four394407/a11y/REPORT.json\"\n      - name: Prepare a fresh offline npm installation for publisher394-407\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        shell: bash\n        run: |\n          set -euo pipefail\n          test ! -e \"$RUNNER_TEMP/four394407-install\"\n          pali_four_archives=(\"$RUNNER_TEMP/apadana-package/\"*.tgz)\n          test \"${#pali_four_archives[@]}\" -eq 1\n          test -f \"${pali_four_archives[0]}\"\n          mkdir -p \"$RUNNER_TEMP/four394407-install\"\n          npm install --offline --ignore-scripts --no-audit --no-fund --prefix \"$RUNNER_TEMP/four394407-install\" \"${pali_four_archives[0]}\"\n      - name: Check all four publisher394-407 sources in a fresh npm installation\n        if: matrix.group == 'apadana'\n        timeout-minutes: 7\n        shell: bash\n        run: |\n          set -euo pipefail\n          pali_four_chromium=\"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\"\n          python3 -B \"$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py\" --output-dir \"$GITHUB_WORKSPACE/.ci-four394407/installed\" --name four386-installed -- python3 -B \"$GITHUB_WORKSPACE/scripts/web-reader-thera394-407-four-check.py\" --mode installed --source-root \"$GITHUB_WORKSPACE\" --server-dir \"$RUNNER_TEMP/four394407-install/node_modules/pali-canon-mcp/server\" --publisher-root \"$GITHUB_WORKSPACE/.fixtures/apadana-pinned\" --browser \"$pali_four_chromium\" --report \"$GITHUB_WORKSPACE/.ci-four394407/installed/REPORT.json\"\n","            reviewed-publisher394-407-four.tap\n            .ci-four394407/normal/\n            .ci-four394407/a11y/\n            .ci-four394407/installed/\n"]);
+function beforeSourceFour394407Workflow(text){
+ for(const part of SOURCE_FOUR394407_PARTS){assert.equal(text.split(part).length-1,1,'Every reviewed394407 sparse/source/mode/report addition is exact and unique');text=text.replace(part,'');}
+ return text;
+}
 function assertCurrent375Workflow(raw,pin){
- assert.equal(rawWorkflowContract(raw),true);assert.match(pin,/^[a-f0-9]{64}$/);let text=raw;
+ assert.equal(rawWorkflowContract(raw),true);assert.match(pin,/^[a-f0-9]{64}$/);
+ const livePins=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: (.+)$/gm)];assert.equal(livePins.length,1);assert.equal(livePins[0][1],pin);
+ const normalized=raw.replace(livePins[0][0],'  CI_TEST_BASELINE_SHA: PENDING_ROOT_REVIEWED_BASELINE_SHA');
+ assert.equal(digest(normalized),CURRENT_FOUR394407_WORKFLOW_SHA,'Exact current job/step placement, source recipes, gates, modes, sparse paths and artifacts must remain');
+ let text=beforeSourceFour394407Workflow(raw);
  text=beforeSourcePair401402Workflow(text);
  text=portableSourceWorkflowBefore389390(text);
  const fruit=current375JobBlock(text,'reader-browser-group');
@@ -324,14 +336,31 @@ function assertCurrent375Workflow(raw,pin){
 }
 function assertCurrent375WorkflowRefusals(raw,pin){
  assert.equal(assertCurrent375Workflow(raw,pin),true);
+ // Bounded metadata-only counterfactuals: each exact part must refuse missing, duplicate, edited and relocated forms.
+ for(const part of SOURCE_FOUR394407_PARTS){
+  for(const replacement of ['',part+part,part+'-UNREVIEWED']){const changed=raw.replace(part,replacement);assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin),'New394407 workflow part must refuse omission, duplication and editing');}
+  const removed=raw.replace(part,''),other=current375JobBlock(removed,'hosted-memory'),steps='    steps:\n';assert.equal(other.raw.split(steps).length-1,1);
+  const moved=removed.slice(0,other.start)+other.raw.replace(steps,steps+part)+removed.slice(other.end);assert.notEqual(moved,raw);assert.throws(()=>assertCurrent375Workflow(moved,pin),'An exact new394407 part moved to another job must refuse');
+ }
+ const sourcePart=SOURCE_FOUR394407_PARTS[1],modesPart=SOURCE_FOUR394407_PARTS[2];
+ for(const [part,before,after]of [
+  [sourcePart,"if: matrix.group == 'apadana'","if: matrix.group == 'core'"],
+  [sourcePart,'timeout-minutes: 5','timeout-minutes: 6'],
+  [sourcePart,'scripts/check-current-source-adapters.py --source-root','scripts/check-current-source-adapters.py --reviewed-support-contract'],
+  [sourcePart,'["pass",2]','["pass",1]'],
+  [modesPart,'timeout-minutes: 7','timeout-minutes: 8'],
+  [modesPart,'--mode a11y','--mode normal'],
+  [modesPart,'npm install --offline','npm install']
+ ]){assert.ok(part.includes(before));const changed=raw.replace(part,part.replace(before,after));assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin),'New394407 group, cap, argv, exact2case, mode or offline requirement must refuse drift');}
+ const pinLine='  CI_TEST_BASELINE_SHA: '+pin;assert.equal(raw.split(pinLine).length-1,1);assert.throws(()=>assertCurrent375Workflow(raw.replace(pinLine,pinLine+'\n'+pinLine),pin),'Exactly one actual baseline digest line is required');
  for(const part of SOURCE_PAIR401402_PARTS)for(const replacement of ['',part+'-UNREVIEWED']){const changed=raw.replace(part,replacement);assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin),'Exact new401402 workflow source gate/browser/sparse/report must refuse drift');}
  for(const marker of ['node scripts/ci-check-contract.mjs','timeout-minutes: 30',CURRENT375_SEVEN_GATE,CURRENT380_FIVE_GATE,CURRENT389390_INSTALLED_FRUIT_GATE,CURRENT389390_FRUIT_REPORT]){assert.ok(raw.includes(marker));const changed=raw.replace(marker,(marker===CURRENT375_SEVEN_GATE||marker===CURRENT380_FIVE_GATE)?'':marker+'-MUTATED');assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin));}
  for(const marker of ["          python3 scripts/canon/historical389390_source_fixture.py --canon .fixtures/english16-canon/canon.json.gz --out .fixtures/english16-historical-source\n", "python3 scripts/apadana/thera335-350/portable_source_replay.py --publisher-checkout .fixtures/apadana-pinned --canon .fixtures/english16-historical-source/canon.json.gz", "python3 -X utf8 scripts/apadana/thera351-360-nine/source-nine-replay.py --publisher-root .fixtures/apadana-pinned --canon .fixtures/english16-historical-source/canon.json.gz"]){assert.equal(raw.split(marker).length-1,1);for(const replacement of ['',marker+'-UNREVIEWED']){const changed=raw.replace(marker,replacement);assert.notEqual(changed,raw);assert.throws(()=>assertCurrent375Workflow(changed,pin));}}
 }
 
-// Actual current380/source/V5 validation occurs before any named historical-H materialization.
+// Actual live source/V5 validation occurs before any named historical-H materialization.
 function assertCurrent380CIBaseline(){
-  assertCurrent389390SourceClosure(ROOT);const currentSource=current389390Authority(ROOT);assert.equal(currentSource.canonical.new_canonical_logical_sha256,'883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a');assert.equal(currentSource.widget.version,'v50');
+  assertCurrentSourceClosure(ROOT);const currentSource=currentContext(ROOT);assert.equal(currentSource.canonical.new_canonical_logical_sha256,'883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a');assert.equal(HISTORICAL382_WIDGET_VERSION,'v50');assert.equal(currentSource.english.historical382.ids.length,382);assert.equal(currentSource.widget.version,CURRENT_WIDGET_VERSION);assert.equal(currentSource.widget.uri,CURRENT_WIDGET_URI);
   const raw=readFileSync(join(ROOT,'.github/workflows/check.yml'),'utf8');assert.equal(rawWorkflowContract(raw),true);
   const paths=[...raw.matchAll(/^  CI_TEST_BASELINE_INDEX: (.+)$/gm)],pins=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: ([a-f0-9]{64})$/gm)];
   assert.equal(paths.length,1);assert.equal(paths[0][1],CURRENT380_CI_INDEX);assert.equal(pins.length,1);
@@ -352,8 +381,8 @@ function assertCurrent380CIFixtureRefusals(actual){
     const pin=publish();assert.deepEqual(loadBaseline(f.root,index,pin).inventory,actual.inventory);
     const refusal=change=>{const candidate=clone(b),proof=clone(r);change(candidate,proof);assert.throws(()=>loadBaseline(f.root,index,publish(candidate,proof)));publish();};
     for(const change of [b=>b.legacy_test_count--,b=>b.added_test_count++,b=>b.changed_files['tests/unreviewed.test.mjs']={before_sha256:'a'.repeat(64),after_sha256:'b'.repeat(64)},b=>b.changed_files['tests/ci-test-partitions.test.mjs'].before_sha256='0'.repeat(64),(_b,r)=>r.status='PENDING',(_b,r)=>r.behavioral_or_release_approval=true])refusal(change);
-    const added=Object.keys(b.added_files)[0],manifest='docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json';
-    for(const path of [added,manifest]){
+    const added=Object.keys(b.added_files)[0],historical382Manifest='docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json',manifest=CURRENT_SOURCE_FILE,currentOwner='tests/helpers/current-apadana.mjs';
+    for(const path of [added,historical382Manifest,manifest,currentOwner]){
       const file=join(f.root,path),saved=readFileSync(file);assert.deepEqual(loadBaseline(f.root,index,pin).inventory,actual.inventory);
       try{writeFileSync(file,Buffer.concat([saved,Buffer.from('\nSYNTHETIC_CURRENT375_SOURCE_DRIFT')]));assert.throws(()=>loadBaseline(f.root,index,pin),'V5 actual current source drift '+path);}
       finally{writeFileSync(file,saved);}
