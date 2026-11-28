@@ -20,6 +20,12 @@ Use regular dependencies inside each build worktree. Do not symlink
 `node_modules`: esbuild can embed another worktree's path in generated CJS labels.
 Require clean rebuild parity with the tracked server outputs.
 
+CI's private setup in `tests/ci-test-partitions.test.mjs` must use the same live
+source role. New workflow gates need exact inverse and drift/placement checks
+there, with all eight test callbacks preserved. A current-workflow digest must
+normalize only the global baseline SHA to the reviewed placeholder; embedding
+the final index-dependent workflow hash would create a hash cycle.
+
 Publisher394/397/406/407 map to canonical tha-ap396/399/408/409. Preserve all382
 earlier full objects, all nine publisher holds and ten canonical holds; the two
 numbering systems differ. Complete publisher-edition poems do not imply
