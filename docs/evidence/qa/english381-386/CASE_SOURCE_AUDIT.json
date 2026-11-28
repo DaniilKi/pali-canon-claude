@@ -337,7 +337,7 @@
     },
     "tests/thera312-319-source.test.mjs": {
       "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
-      "after_sha256": "e24b2c700b15faf38305f47b2dfc6a87d38e1014634b9fecc98816256d86a8f0"
+      "after_sha256": "a4c5e66476bd54dc4707c51ea75469f7ab8144bb4138caa9e36ab28400bd1297"
     },
     "tests/thera321-329-client.test.mjs": {
       "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
@@ -345,7 +345,7 @@
     },
     "tests/thera321-329-source.test.mjs": {
       "before_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499",
-      "after_sha256": "03cd08c21da8d5593f4059451333651c7708e04e270b868656222b2645d84be9"
+      "after_sha256": "8f885f1a4d74eca62c28f3b186ddc4bda407c705105c38f9f756b66bf00b5a30"
     },
     "tests/thera331-334-preface-client.test.mjs": {
       "before_sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f",
@@ -390,7 +390,7 @@
   },
   "added_files": {
     "tests/apadana-thera389390-boundary.test.mjs": "94333529ae751ca4611465c4ce02f6fd54b0b1d852ec676bdb59e1297a89052e",
-    "tests/browser-preflight-utf8.test.mjs": "29bfe44d143cc601823d2edef5ba11072d67fcf4d5cfc42c155bf730335e79c4",
+    "tests/browser-preflight-utf8.test.mjs": "4ef04d7aee61f7a42064922ff2bcf3b260df94754f8e8ef047937299e66befcc",
     "tests/current375-bindings.test.mjs": "15ed189ad4418613a3f378887c1ba8b7147fa1e2bad0594d90bba85d80d3abb4",
     "tests/held234-current375-chain.test.mjs": "62ba5aeec1d83e9281991eacda12528ce183ef99784fbc64a804b609fb8114a7",
     "tests/intake375-current-negatives.test.mjs": "f151769712c2f2ad4c080ec03ba2f3686d8cbc7b3b9485d394f0a5c2bf78ec18",
@@ -7946,7 +7946,7 @@
       },
       "tests/thera312-319-source.test.mjs": {
         "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
-        "after_sha256": "e24b2c700b15faf38305f47b2dfc6a87d38e1014634b9fecc98816256d86a8f0",
+        "after_sha256": "a4c5e66476bd54dc4707c51ea75469f7ab8144bb4138caa9e36ab28400bd1297",
         "before": [
           {
             "name": "exact333 identities preserve all325 full ordered profile and link objects, rights policy and all canonical/non-Apadana data",
@@ -8034,7 +8034,7 @@
           {
             "name": "all eight original raw/blob pins and six rights artifacts yield73 paragraphs34 complete notes with independent UTF16/layout hashes",
             "name_expression": "'all eight original raw/blob pins and six rights artifacts yield73 paragraphs34 complete notes with independent UTF16/layout hashes'",
-            "line": 77,
+            "line": 79,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8043,7 +8043,7 @@
           {
             "name": "all49 whole-verse quotation entries match independent pins, including the single319 eight-line4-5 entry and excluded title/colophons/notes",
             "name_expression": "'all49 whole-verse quotation entries match independent pins, including the single319 eight-line4-5 entry and excluded title/colophons/notes'",
-            "line": 91,
+            "line": 93,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8052,7 +8052,7 @@
           {
             "name": "all approved edition caveats and exact publisher titles remain literal beside unchanged independent VRI titles",
             "name_expression": "'all approved edition caveats and exact publisher titles remain literal beside unchanged independent VRI titles'",
-            "line": 109,
+            "line": 111,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8061,7 +8061,7 @@
           {
             "name": "all34 numbered notes keep independently recorded owners;312 two c/ch displays stay solely in note3 and no chapter apparatus is invented",
             "name_expression": "'all34 numbered notes keep independently recorded owners;312 two c/ch displays stay solely in note3 and no chapter apparatus is invented'",
-            "line": 122,
+            "line": 124,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8070,7 +8070,7 @@
           {
             "name": "authentic positives precede raw/title/order/rights/note/layout/HTML corruption and forged-profile refusal controls",
             "name_expression": "'authentic positives precede raw/title/order/rights/note/layout/HTML corruption and forged-profile refusal controls'",
-            "line": 142,
+            "line": 144,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8079,7 +8079,7 @@
           {
             "name": "all existing held publishers plus311/320 and media refuse before transport while genuine canonical Pali remains available",
             "name_expression": "'all existing held publishers plus311/320 and media refuse before transport while genuine canonical Pali remains available'",
-            "line": 164,
+            "line": 166,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -8088,7 +8088,7 @@
           {
             "name": "cold and warm link-rights guards and authentic source-bound continuations reject revision/prefix/owner drift without fallback",
             "name_expression": "'cold and warm link-rights guards and authentic source-bound continuations reject revision/prefix/owner drift without fallback'",
-            "line": 177,
+            "line": 179,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8214,7 +8214,7 @@
       },
       "tests/thera321-329-source.test.mjs": {
         "before_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499",
-        "after_sha256": "03cd08c21da8d5593f4059451333651c7708e04e270b868656222b2645d84be9",
+        "after_sha256": "8f885f1a4d74eca62c28f3b186ddc4bda407c705105c38f9f756b66bf00b5a30",
         "before": [
           {
             "name": "exact339 preserves all333 ordered fullobjects, canonical roots and all26 unrelated data files",
@@ -8284,7 +8284,7 @@
           {
             "name": "all6 original raw and six rights blobs match both independent fullbody56paragraphs28notes and one separately owned heading",
             "name_expression": "'all6 original raw and six rights blobs match both independent fullbody56paragraphs28notes and one separately owned heading'",
-            "line": 50,
+            "line": 52,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8293,7 +8293,7 @@
           {
             "name": "all38 exact wholeverse quotations preserve41printed labels and three combined eightline entries excluding title notes heading and colophons",
             "name_expression": "'all38 exact wholeverse quotations preserve41printed labels and three combined eightline entries excluding title notes heading and colophons'",
-            "line": 56,
+            "line": 58,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8302,7 +8302,7 @@
           {
             "name": "six finite on/off pairs and all28 note owners remain exact including329 literalxxx and terminalellipsis",
             "name_expression": "'six finite on/off pairs and all28 note owners remain exact including329 literalxxx and terminalellipsis'",
-            "line": 61,
+            "line": 63,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8311,7 +8311,7 @@
           {
             "name": "genuine positives precede raw note statepair boundary and forgedprofile corruption refusals",
             "name_expression": "'genuine positives precede raw note statepair boundary and forgedprofile corruption refusals'",
-            "line": 67,
+            "line": 69,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -8320,7 +8320,7 @@
           {
             "name": "held322327328330331 and previousholds media and alteredrights refuse beforetransport while actualsource prefix checks refetch exactsameversion",
             "name_expression": "'held322327328330331 and previousholds media and alteredrights refuse beforetransport while actualsource prefix checks refetch exactsameversion'",
-            "line": 71,
+            "line": 73,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -9968,7 +9968,7 @@
         ]
       },
       "tests/browser-preflight-utf8.test.mjs": {
-        "sha256": "29bfe44d143cc601823d2edef5ba11072d67fcf4d5cfc42c155bf730335e79c4",
+        "sha256": "4ef04d7aee61f7a42064922ff2bcf3b260df94754f8e8ef047937299e66befcc",
         "after": [
           {
             "name": "browser preflight collectors preserve UTF-8 across byte-split stdin chunks",

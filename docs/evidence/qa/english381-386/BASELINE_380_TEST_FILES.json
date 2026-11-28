@@ -353,7 +353,7 @@
     },
     "tests/thera312-319-source.test.mjs": {
       "before_sha256": "cd79c0cfa90ae8ba48b6e5df7b11b1a2b536bc57eb64dac92e74cdbc91e983b6",
-      "after_sha256": "e24b2c700b15faf38305f47b2dfc6a87d38e1014634b9fecc98816256d86a8f0"
+      "after_sha256": "a4c5e66476bd54dc4707c51ea75469f7ab8144bb4138caa9e36ab28400bd1297"
     },
     "tests/thera321-329-client.test.mjs": {
       "before_sha256": "561a2a713d84a043f39bd02d3a535f51dcf8abddc986d7c0d4c729f6376f69ab",
@@ -361,7 +361,7 @@
     },
     "tests/thera321-329-source.test.mjs": {
       "before_sha256": "7a8124104b3c2ee6ef384d6cae851495253ff153ee93983bb34e263c2c0c3499",
-      "after_sha256": "03cd08c21da8d5593f4059451333651c7708e04e270b868656222b2645d84be9"
+      "after_sha256": "8f885f1a4d74eca62c28f3b186ddc4bda407c705105c38f9f756b66bf00b5a30"
     },
     "tests/thera331-334-preface-client.test.mjs": {
       "before_sha256": "a33e335f7ea71456d13e29b2f1b28744ac199541f2b3ba7a3a7dd2aa8b72251f",
@@ -406,7 +406,7 @@
   },
   "added_files": {
     "tests/apadana-thera389390-boundary.test.mjs": "94333529ae751ca4611465c4ce02f6fd54b0b1d852ec676bdb59e1297a89052e",
-    "tests/browser-preflight-utf8.test.mjs": "29bfe44d143cc601823d2edef5ba11072d67fcf4d5cfc42c155bf730335e79c4",
+    "tests/browser-preflight-utf8.test.mjs": "4ef04d7aee61f7a42064922ff2bcf3b260df94754f8e8ef047937299e66befcc",
     "tests/current375-bindings.test.mjs": "15ed189ad4418613a3f378887c1ba8b7147fa1e2bad0594d90bba85d80d3abb4",
     "tests/held234-current375-chain.test.mjs": "62ba5aeec1d83e9281991eacda12528ce183ef99784fbc64a804b609fb8114a7",
     "tests/intake375-current-negatives.test.mjs": "f151769712c2f2ad4c080ec03ba2f3686d8cbc7b3b9485d394f0a5c2bf78ec18",
@@ -421,7 +421,7 @@
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
-    "docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json": "22b1b9e15ef597c86ead21c865c8bc44b5d9a3e8c748d00bddaf9c8fab42d2eb",
+    "docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json": "4c3cf4df171873477757e158736a842903770c35e824df5ab0f820ecc566c425",
     "docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json": "db3e46646b405dc0e18c7c10c4d79fa1ea9515803b2826d01f6fb33512b387d5",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
@@ -429,7 +429,7 @@
     "tests/helpers/historical-h-inputs.mjs": "5b4218b0da291a6307bc07b0b67fd1d50c957b8a1c744114fd16d9bc36f37301",
     "tests/helpers/intake375-metadata.mjs": "ee77c32767be7713ef383c835b44ce942e510008da2c057bcd42380368edbf3d",
     "tests/helpers/intake380-metadata.mjs": "66919b4e77dee5c2aabc44c9d2ed5ce46050a758279348d0063c429e983c5127",
-    "tests/helpers/intake382-metadata.mjs": "ebaccda622cc327c579068ebac261af955a64e6058700f0a2baf68462076efb7",
+    "tests/helpers/intake382-metadata.mjs": "c63a5965ed821ecc6af3a43c5ec34d28be0108b4c3c8a240a65b83ef79e27f5f",
     "tests/helpers/partitioned-python.mjs": "31b57009d667c0d88dfd73b849f0e9506e39ae9e26ab11b27b01cf0a3f9066f3",
     "tests/helpers/verse-scope-python.mjs": "c7faa723fe1938850fabf85dea9665bddae77bd668092ec075592cd172ec3f1f",
     "tests/materialize_h_history.py": "c7f57e96508483d6ce9e967ac371f260a4197706d2564899a05a0821eff728c7"
@@ -506,7 +506,7 @@
     "tests/browse-scope.test.mjs": "04ceedb5f27d8ee073f22ab285e932b926e3a225c757b5ff5077186bc07ede13",
     "tests/browser-current359-routing.test.mjs": "72a86b423eb9af085fc555dfc5a3d49d8cb5c34c94aeffcda12eee0320eb4838",
     "tests/browser-current368-routing.test.mjs": "0166c40038b76c64d11f5b5378277e9c209165a4629128e07055ab00c70bde18",
-    "tests/browser-preflight-utf8.test.mjs": "29bfe44d143cc601823d2edef5ba11072d67fcf4d5cfc42c155bf730335e79c4",
+    "tests/browser-preflight-utf8.test.mjs": "4ef04d7aee61f7a42064922ff2bcf3b260df94754f8e8ef047937299e66befcc",
     "tests/bundled-data.test.mjs": "653cf583c9b3baace38c6573686fee8907d4104ddcdb0f0ed2ce317442c6a116",
     "tests/calendar-evidence.test.mjs": "843a58bf2413b3d9e1d1bd8c4ad2db1fc82b01865399efe376a8d9a76094e34d",
     "tests/calendar.test.mjs": "ed2d4ed32508273a6dabf9542479908d15323d82fb2a88f6757f828e4b501112",
@@ -701,9 +701,9 @@
     "tests/thera301-310-client.test.mjs": "7fc92a8ff06154a9d2c5435b2a3f26be32bf77822106072bc36f8b2d125c5164",
     "tests/thera301-310-source.test.mjs": "11d19eedccbd79b232d2d3807eed4b7f93ede6aada4f38297b4b24d8417cef55",
     "tests/thera312-319-client.test.mjs": "c1be48a60b17a1feae3ccdcfde3b052d07dbbde8fad7ad0c4d75baa19a6c2e4c",
-    "tests/thera312-319-source.test.mjs": "e24b2c700b15faf38305f47b2dfc6a87d38e1014634b9fecc98816256d86a8f0",
+    "tests/thera312-319-source.test.mjs": "a4c5e66476bd54dc4707c51ea75469f7ab8144bb4138caa9e36ab28400bd1297",
     "tests/thera321-329-client.test.mjs": "68c10c4436b5ac037e524dd35e94840005e2712bba25d6e27d85d3218f559caa",
-    "tests/thera321-329-source.test.mjs": "03cd08c21da8d5593f4059451333651c7708e04e270b868656222b2645d84be9",
+    "tests/thera321-329-source.test.mjs": "8f885f1a4d74eca62c28f3b186ddc4bda407c705105c38f9f756b66bf00b5a30",
     "tests/thera331-334-preface-client.test.mjs": "ee0251859b7f1a4f45bd858c5a9b9207b5b7a02fdd214720e73f62b4b324c8c1",
     "tests/thera331-334-source.test.mjs": "6979a4daa73b475873c06260f980fac64cc2e5845eb9d74b518c1ce8d21c00fa",
     "tests/thera333-legacy-projection.test.mjs": "18b2bc8a88f7c57db2ad6659b7803a7431769db9e964350aa33bc35e3d2764f0",
@@ -797,6 +797,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/english381-386/CASE_SOURCE_REVIEW.json",
-    "sha256": "8780aba069cf9f4cfa276bc162b5cfb005693eea099cf2dbf0300e31f29e2bb5"
+    "sha256": "fe9ae057c755542cb55eacf798fd8c3778dc5aeacdec645fcacf8a0d97ee0fd1"
   }
 }

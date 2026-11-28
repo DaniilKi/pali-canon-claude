@@ -9,7 +9,12 @@ test('browser preflight collectors preserve UTF-8 across byte-split stdin chunks
   const canonical=source.match(/    probe = ("(?:\\.|[^"\\])*")\n    run = subprocess.run/);
   const comparison=source.match(/comparison = """([\s\S]*?)"""/);
   assert.ok(profile&&canonical&&comparison,'All three actual browser preflight programs remain covered');
-  const programs=[profile[1],JSON.parse(canonical[1]),comparison[1]];
+  const scaledSource=readFileSync(new URL('../scripts/web-reader-apadana-thera-scaled-check.py',import.meta.url),'utf8');
+  const scaledProfile=scaledSource.match(/profile_probe = """([\s\S]*?)"""/);
+  const scaledCanonical=scaledSource.match(/    probe = """([\s\S]*?)"""/);
+  const scaledComparison=scaledSource.match(/comparison = """([\s\S]*?)"""/);
+  assert.ok(scaledProfile&&scaledCanonical&&scaledComparison,'All three actual scaled preflight collectors remain covered');
+  const programs=[profile[1],JSON.parse(canonical[1]),comparison[1],scaledProfile[1],scaledCanonical[1],scaledComparison[1]];
   const expected={text:'Sumedhā · 漢 · 😀',end:'unchanged'};
   const raw=Buffer.from(JSON.stringify(expected));
   for(const program of programs){

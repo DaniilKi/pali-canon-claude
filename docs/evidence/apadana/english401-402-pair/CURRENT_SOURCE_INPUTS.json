@@ -208,8 +208,8 @@
       "sha256": "f69abcfccbd2d892be8bbba918a528983b03354b0225b96e4e8d8cce32fc17ec"
     },
     "scripts/web-reader-apadana-thera-scaled-check.py": {
-      "bytes": 54710,
-      "sha256": "e1c6c4a39470388dbc805df9984607aab5099a8f4cf904b166d555adbe73c0f6"
+      "bytes": 54812,
+      "sha256": "c236e2b01bef3f362c918055267819a1ed746babccc2bfee54be671dede1c36d"
     },
     "scripts/web-reader-fruit-boundary-check.py": {
       "bytes": 8924,
@@ -440,8 +440,8 @@
       "sha256": "0166c40038b76c64d11f5b5378277e9c209165a4629128e07055ab00c70bde18"
     },
     "tests/browser-preflight-utf8.test.mjs": {
-      "bytes": 2361,
-      "sha256": "29bfe44d143cc601823d2edef5ba11072d67fcf4d5cfc42c155bf730335e79c4"
+      "bytes": 2896,
+      "sha256": "4ef04d7aee61f7a42064922ff2bcf3b260df94754f8e8ef047937299e66befcc"
     },
     "tests/check-ci-stages.test.mjs": {
       "bytes": 7618,
@@ -629,7 +629,7 @@
     },
     "tests/scaled_profile_probe_diagnostic_controls.py": {
       "bytes": 16118,
-      "sha256": "97c415598f9dea11922216116918f5b3ee52ebcc9006b8d797a8266766940788"
+      "sha256": "ed516e6d4f661297b4034072fd1be564b6472249154cb3d57f1578a1cba70ce2"
     },
     "tests/six-boundary-ci.test.mjs": {
       "bytes": 4044,
@@ -724,16 +724,16 @@
       "sha256": "c1be48a60b17a1feae3ccdcfde3b052d07dbbde8fad7ad0c4d75baa19a6c2e4c"
     },
     "tests/thera312-319-source.test.mjs": {
-      "bytes": 16875,
-      "sha256": "e24b2c700b15faf38305f47b2dfc6a87d38e1014634b9fecc98816256d86a8f0"
+      "bytes": 17264,
+      "sha256": "a4c5e66476bd54dc4707c51ea75469f7ab8144bb4138caa9e36ab28400bd1297"
     },
     "tests/thera321-329-client.test.mjs": {
       "bytes": 23036,
       "sha256": "68c10c4436b5ac037e524dd35e94840005e2712bba25d6e27d85d3218f559caa"
     },
     "tests/thera321-329-source.test.mjs": {
-      "bytes": 11589,
-      "sha256": "03cd08c21da8d5593f4059451333651c7708e04e270b868656222b2645d84be9"
+      "bytes": 11978,
+      "sha256": "8f885f1a4d74eca62c28f3b186ddc4bda407c705105c38f9f756b66bf00b5a30"
     },
     "tests/thera331-334-preface-client.test.mjs": {
       "bytes": 16853,

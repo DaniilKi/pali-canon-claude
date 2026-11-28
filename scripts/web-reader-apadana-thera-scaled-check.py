@@ -199,7 +199,7 @@ def main():
     current_intake = reviewed_intake(ROOT)
     assert manifest['source']['policy'] == old['source']['policy'].replace('89 finite',str(len(current_intake['expected_profile_ids']))+' finite').replace('49 explicitly mapped Therā',str(sum(r['publisher_chapter']=='chapter-3' for r in current_intake['baseline_records']+current_intake['approved_records']))+' explicitly mapped Therā')
     profile_probe = """import assert from'node:assert/strict';import{APADANA_PROFILES as current}from'./src/apadana-profiles.mjs';
-      let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),url=x=>'data:text/javascript;base64,'+Buffer.from(x).toString('base64');
+      process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),url=x=>'data:text/javascript;base64,'+Buffer.from(x).toString('base64');
       const old=await import(url(p.root.replace('./apadana-thera-profiles.mjs',url(p.thera))));
       assert.equal(Object.keys(old.APADANA_PROFILES).length,89);for(const[id,row]of Object.entries(old.APADANA_PROFILES))assert.deepEqual(current[id],row,id);
       console.log(JSON.stringify({preserved:89}));"""
@@ -288,7 +288,7 @@ def main():
             artifacts.append({'path': a['path'], 'sha256': a['raw_sha256'], 'git_blob_sha1': blob})
     # Validate every old raw Pāli root against base64a3367, plus every selected new independent root.
     probe = """import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';
-    let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),d=JSON.parse(gunzipSync(readBundled(p)));
+    process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s),d=JSON.parse(gunzipSync(readBundled(p)));
     console.log(JSON.stringify(d));"""
     run = subprocess.run(['node', '--input-type=module', '-e', probe], cwd=ROOT, input=json.dumps(str(server_dir/'data/canon.json.gz')), text=True, capture_output=True)
     assert run.returncode == 0
@@ -438,7 +438,7 @@ def main():
                     result = tool('verify_quote',{'text':stanza[:-len(suffix)].strip(),'language':'english','texts':[uid],'translation_ids':[version(uid)]})
                     assert result['verdict'] == 'found' and result['best_similarity'] == 1
             patches = mutations(whole)
-            comparison = """import assert from'node:assert/strict';import{validateComparisonPage,comparisonChoices}from'./web/translation-comparison.mjs';let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s);for(const[uid,d]of Object.entries(p.first)){const choices=p.metadata[uid].english_available,args={uid,translation:d.translation_id,translation_revision:d.translation_revision,limit:d.limit};assert.equal(comparisonChoices(choices,uid).length,1);validateComparisonPage(d,args,{uid,choices,accepted:null});}for(const[uid,label,patch]of p.patches){const d=p.first[uid],choices=p.metadata[uid].english_available,args={uid,translation:d.translation_id,translation_revision:d.translation_revision,limit:d.limit};assert.throws(()=>validateComparisonPage({...d,...patch},args,{uid,choices,accepted:null}),label)}"""
+            comparison = """import assert from'node:assert/strict';import{validateComparisonPage,comparisonChoices}from'./web/translation-comparison.mjs';process.stdin.setEncoding('utf8');let s='';for await(const c of process.stdin)s+=c;const p=JSON.parse(s);for(const[uid,d]of Object.entries(p.first)){const choices=p.metadata[uid].english_available,args={uid,translation:d.translation_id,translation_revision:d.translation_revision,limit:d.limit};assert.equal(comparisonChoices(choices,uid).length,1);validateComparisonPage(d,args,{uid,choices,accepted:null});}for(const[uid,label,patch]of p.patches){const d=p.first[uid],choices=p.metadata[uid].english_available,args={uid,translation:d.translation_id,translation_revision:d.translation_revision,limit:d.limit};assert.throws(()=>validateComparisonPage({...d,...patch},args,{uid,choices,accepted:null}),label)}"""
             run = subprocess.run(['node','--input-type=module','-e',comparison],cwd=ROOT,input=compact({'first':first,'metadata':metadata,'patches':patches}),text=True,capture_output=True)
             if run.returncode:
                 label = re.search(r'Missing expected exception[^\n]*',run.stderr)
