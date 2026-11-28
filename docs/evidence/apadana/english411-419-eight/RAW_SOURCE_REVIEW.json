@@ -1,0 +1,112 @@
+{
+  "schema": "independent-next411-420-source-preparation-review-v1",
+  "status": "GO_EIGHT_RAW_EDITION_SCOPES_FOR_NEXT_NORMALIZATION_ONLY_KEEP_TWO_CONDITIONAL",
+  "proof": {
+    "path": "/tmp/pali-four386-evidence-nov28/next411-420-independent-review/v1/SOURCE_PROOF.json",
+    "bytes": 21275,
+    "sha256": "0ba48785759229ed85311e68be61903cd8930d0bc2c9c9fb02bd514192a319fc"
+  },
+  "per_poem_results": [
+    {
+      "publisher": 411,
+      "canonical_id": "tha-ap413",
+      "status": "PASS_RAW_EDITION_SCOPE_FOR_FUTURE_NORMALIZATION_ONLY",
+      "next_normalization_requirements": [
+        "Separate unnoted chapter42 heading from note-owning title.",
+        "Preserve six-line local13 and single ten-line physical18/19 paragraph; retain two global markers and metrical notes16/25.",
+        "Keep note24 unfinished quote, note1 numbering typo notice, all29 notes and4 HTML note display pairs."
+      ]
+    },
+    {
+      "publisher": 412,
+      "canonical_id": "tha-ap414",
+      "status": "PASS_RAW_EDITION_SCOPE_FOR_FUTURE_NORMALIZATION_ONLY",
+      "next_normalization_requirements": [
+        "Preserve47 four-line stanzas,85 notes and11 display pairs with case/double-letter forms.",
+        "Keep unfinished/mismatched notes10/57/75 and attributed botanical/fish/PTS/BJTS alternatives without correction."
+      ]
+    },
+    {
+      "publisher": 414,
+      "canonical_id": "tha-ap416",
+      "status": "PASS_RAW_EDITION_SCOPE_FOR_FUTURE_NORMALIZATION_ONLY",
+      "next_normalization_requirements": [
+        "Keep literal publisher ŋ title spelling versus canonical ṃ, note4 anatomical gloss/punctuation and note5 honey-on-meat/PTS honey-ghee alternatives; keep VRI note separate."
+      ]
+    },
+    {
+      "publisher": 415,
+      "canonical_id": "tha-ap417",
+      "status": "PASS_RAW_EDITION_SCOPE_FOR_FUTURE_NORMALIZATION_ONLY",
+      "next_normalization_requirements": [
+        "Keep Nāgapallavaka/Nāgapallava title distinction and all3 notes; no harmonization."
+      ]
+    },
+    {
+      "publisher": 416,
+      "canonical_id": "tha-ap418",
+      "status": "PASS_RAW_EDITION_SCOPE_FOR_FUTURE_NORMALIZATION_ONLY",
+      "next_normalization_requirements": [
+        "Keep all18 stanzas/9 notes/2 display pairs and exact Siddhattha/lamp narrative and printed numbering."
+      ]
+    },
+    {
+      "publisher": 417,
+      "canonical_id": "tha-ap419",
+      "status": "PASS_RAW_EDITION_SCOPE_FOR_FUTURE_NORMALIZATION_ONLY",
+      "next_normalization_requirements": [
+        "Preserve exact c/ch title/body/note pairs, Vipassi/Bandhumati attribution and note3 unmatched quotation."
+      ]
+    },
+    {
+      "publisher": 418,
+      "canonical_id": "tha-ap420",
+      "status": "PASS_RAW_EDITION_SCOPE_FOR_FUTURE_NORMALIZATION_ONLY",
+      "next_normalization_requirements": [
+        "Retain all21 local stanzas. Locals16/17 have no BJTS globals; do not invent global labels or delete passages.",
+        "Keep source notes29/30 explicitly recording BJTS omission, actual VRI164/165 counterparts, all30 notes and5 HTML note pairs."
+      ]
+    },
+    {
+      "publisher": 419,
+      "canonical_id": "tha-ap421",
+      "status": "PASS_RAW_EDITION_SCOPE_FOR_FUTURE_NORMALIZATION_ONLY",
+      "next_normalization_requirements": [
+        "Retain14 stanzas/6 notes and original local10 typo; no silent editorial repair."
+      ]
+    }
+  ],
+  "conditional_holds": [
+    {
+      "publisher": 413,
+      "canonical_id": "tha-ap415",
+      "status": "HOLD_APPARATUS_NORMALIZATION_DECISION",
+      "reason": "Recitation18 heading is first line of5-line local20/global4365 physical paragraph; separate original VRI bodytext14341 lies between97/98. Fix exact heading/metrical/quote ownership and preserve person/quotation edition difference before inclusion."
+    },
+    {
+      "publisher": 420,
+      "canonical_id": "tha-ap422",
+      "status": "HOLD_SUMMARY_DISPLAY_MARKUP_AND_EDITION_ORDER",
+      "reason": "Poem13stanzas/6notes is separate from3paragraph unnoted summary. Preserve actual196 versus publisher/VRI summary201 discrepancy, two unmatched on-spans, roster spellings and different publisher/VRI ordering. No guessed off forms, missing words or whole-chapter activation."
+    }
+  ],
+  "rights": {
+    "translator": "Jonathan S. Walters",
+    "publisher": "Jonathan S. Walters and Whitman College",
+    "terms": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "specific_evidence": "Pinned LICENSE, about-page explicit translation reuse permission, footer and ePub author/publisher/rights agree; generic site JSON BY4 does not broaden translation terms.",
+    "requirements": "Retain attribution, source/revision and licence/notices, noncommercial/share-alike conditions and a truthful record of normalization. No commercial/media/endorsement permission inferred from public availability. Raw English bodies and notes remain external, not packaged."
+  },
+  "findings_blocking_eight_raw_source_preparation": [],
+  "retained_limits": [
+    "All9 publisher holds391/392/393/403/404/405/408/409/410 and10 canonical holds remain unchanged. Publisher and canonical IDs are different domains.",
+    "No new canonical boundary correction. No Book37 extension; conditional420 closes Book36.",
+    "Complete publisher-edition coverage is not line-complete VRI translation or specialist translation-quality acceptance; preserve unexpanded Pali peyyala, all original words/notes/pages and edition differences.",
+    "No normalized presentation/profile/API/page/quote/runtime/current-candidate/activation/release approval. Future lossless normalization and independent source review must precede finite profiles and API goldens, original-prefix/hold checks, installed/browser/private-data and exactcandidateCI.",
+    "Physical-device/human-assistive/signed-host claims are absent. This preparation does not alter or approve current386 release."
+  ],
+  "target_checkout_changed": false,
+  "raw_English_or_note_content_in_review_packet": false,
+  "app_tests_build_browser_or_network_execution": false
+}

@@ -1,0 +1,165 @@
+{
+  "schema": "independent-eight411420-normalization-raw-comparison-proof-v1",
+  "proposal": {
+    "path": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-prep/v1/MANIFEST.json",
+    "bytes": 6315,
+    "sha256": "944fba2a2c25a092426a833559bbc90e0406ad199a18a33c85fd8b45cacc8488"
+  },
+  "raw_source_independent_review": {
+    "path": "/tmp/pali-four386-evidence-nov28/next411-420-independent-review/v1/INDEPENDENT_REVIEW.json",
+    "bytes": 6062,
+    "sha256": "d687e610431baf192b473f8b4f0d23be5ccad982bcd73021b962687762d07644"
+  },
+  "producer": {
+    "path": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-prep/v1/prepare_normalization.py",
+    "bytes": 22977,
+    "sha256": "9ad2d91ec1820bf2e48dd174bd9e279a99cb93545677f10c529aabc1daae156b"
+  },
+  "input_contract": {
+    "path": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-prep/v1/public/INPUT_CONTRACT.json",
+    "bytes": 42423,
+    "sha256": "b80c6b5d5fb6ce829a70d4a934bf5d63159124d5b86273b15b6ad911f15caf3c"
+  },
+  "normalized_expectations": {
+    "path": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-prep/v1/public/NORMALIZED_EXPECTATIONS.json",
+    "bytes": 562237,
+    "sha256": "7496fcd17fb9f4576aee04108ffb32cb63a45ad1e37794822ce3edcc656db149"
+  },
+  "normalization_bindings": {
+    "path": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-prep/v1/public/NORMALIZATION_BINDINGS.json",
+    "bytes": 131536,
+    "sha256": "a3d6648bd39baaf2b047d2ffb6064a8795352692563b2cfc111c465a8c8eb4ff"
+  },
+  "all37_members_exact": true,
+  "prior8RULES_AST_exact": true,
+  "own_finite_normalizer_exact_private_fullbody_notes_paratext_and_public_hashes": true,
+  "all199_owners_285stages_1969changes_reversed_actual_presentation_to_raw": true,
+  "all8_original_sources_reassembled_exact": true,
+  "all179_paragraphs_183notes_155proposed_physicalquotes_54pages_and_start_end_prefixes_independently_equal": true,
+  "decoded_public_scalar_leak_check": {
+    "complete_raw_and_presented_segments_at_least80bytes_checked": 474,
+    "full_segments_found": 0
+  },
+  "private_directory_mode": "0700",
+  "per_poem": [
+    {
+      "publisher": 411,
+      "canonical_id": "tha-ap413",
+      "body_sha256": "8727624662c657e917cf3a0fc86a7c96983810ba7995b8b3c4b16949e8d66bf2",
+      "notes_sha256_JSON_stringify": "b7a17fce4e9d56590df6fdd53beac67f97905425d37f6d4736c10efbfb23c2e6",
+      "paratext_sha256": "d4f8f0ef0fcd18aed3cefdfbe6bb20274cd0627f48a04f36fd0a46298e93f888",
+      "body_paragraphs": 33,
+      "physical_quotes": 30,
+      "notes": 29,
+      "pages500": 10,
+      "all_note_owners_paragraphs_markers_pages_prefixes_exact": true,
+      "raw_whole_source_and_each_owner_inverse_exact": true
+    },
+    {
+      "publisher": 412,
+      "canonical_id": "tha-ap414",
+      "body_sha256": "db95ca2bdc0fadba64773f149a67137bac1405248c7e670ae640d4e3433f6444",
+      "notes_sha256_JSON_stringify": "e2b2e9ebeea7f2d3a5bd4581a458980f7e092d951cab3f0dcc6917e71a726c15",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 50,
+      "physical_quotes": 47,
+      "notes": 85,
+      "pages500": 16,
+      "all_note_owners_paragraphs_markers_pages_prefixes_exact": true,
+      "raw_whole_source_and_each_owner_inverse_exact": true
+    },
+    {
+      "publisher": 414,
+      "canonical_id": "tha-ap416",
+      "body_sha256": "225999bc7837985e2e7b9bc5a671ad5c1589f4b4b82fe84f312165a5a49e1325",
+      "notes_sha256_JSON_stringify": "3910d53fc99ec077080ce845425eb110509d7f13f006189c867a4c5f712e3af2",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 15,
+      "physical_quotes": 12,
+      "notes": 12,
+      "pages500": 4,
+      "all_note_owners_paragraphs_markers_pages_prefixes_exact": true,
+      "raw_whole_source_and_each_owner_inverse_exact": true
+    },
+    {
+      "publisher": 415,
+      "canonical_id": "tha-ap417",
+      "body_sha256": "5d5b284dc93db8b3371be3eeeebc3e2a8f31bb6c03c0dd0d6bc864510785725c",
+      "notes_sha256_JSON_stringify": "b4e45655f3c72c28a8056158e045789c97fce0ea3bbcbf4c38d22d8d631c6894",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 9,
+      "physical_quotes": 6,
+      "notes": 3,
+      "pages500": 3,
+      "all_note_owners_paragraphs_markers_pages_prefixes_exact": true,
+      "raw_whole_source_and_each_owner_inverse_exact": true
+    },
+    {
+      "publisher": 416,
+      "canonical_id": "tha-ap418",
+      "body_sha256": "d5ae9b6282d7d7fd7547cce99dfd8e80b92e3f9641cde96ce25fd3a064aad049",
+      "notes_sha256_JSON_stringify": "ef937c3a6db862ba7818df4e08a0670a87047052e66b8ccccc218b90e4fb955f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 21,
+      "physical_quotes": 18,
+      "notes": 9,
+      "pages500": 6,
+      "all_note_owners_paragraphs_markers_pages_prefixes_exact": true,
+      "raw_whole_source_and_each_owner_inverse_exact": true
+    },
+    {
+      "publisher": 417,
+      "canonical_id": "tha-ap419",
+      "body_sha256": "611f1bb24ccc5b66157537f44539feb453fb50ac65adb56c2d115471a918351d",
+      "notes_sha256_JSON_stringify": "a382a3bd040dcffd7e47416216d3c5ca408e987c1f570f8aeccbbe10395ad4de",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 10,
+      "physical_quotes": 7,
+      "notes": 9,
+      "pages500": 3,
+      "all_note_owners_paragraphs_markers_pages_prefixes_exact": true,
+      "raw_whole_source_and_each_owner_inverse_exact": true
+    },
+    {
+      "publisher": 418,
+      "canonical_id": "tha-ap420",
+      "body_sha256": "acbc37539cc698f62161bf971820ff64589c524d8a88f8cad8c280e040a20a5e",
+      "notes_sha256_JSON_stringify": "a4213cef89c5f6d2c383770cd64416e752693e9a8d5a472a12887c89340b657a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 24,
+      "physical_quotes": 21,
+      "notes": 30,
+      "pages500": 7,
+      "all_note_owners_paragraphs_markers_pages_prefixes_exact": true,
+      "raw_whole_source_and_each_owner_inverse_exact": true
+    },
+    {
+      "publisher": 419,
+      "canonical_id": "tha-ap421",
+      "body_sha256": "1473c68518d2defb1644d3cc031e9d158b745fe639a4e37bd73dceb5684b50ea",
+      "notes_sha256_JSON_stringify": "f91eaa50f3f62a59b32deecbb2e2f2a3bbcc984055a98b6e2257d5dd5be49e0f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_paragraphs": 17,
+      "physical_quotes": 14,
+      "notes": 6,
+      "pages500": 5,
+      "all_note_owners_paragraphs_markers_pages_prefixes_exact": true,
+      "raw_whole_source_and_each_owner_inverse_exact": true
+    }
+  ],
+  "total_counts": {
+    "poems": 8,
+    "raw_paragraphs_excluding_heading": 171,
+    "full_body_paragraphs": 179,
+    "physical_stanza_paragraphs": 155,
+    "expanded_local_stanzas": 156,
+    "printed_global_labels": 154,
+    "notes": 183,
+    "hard500_pages": 54,
+    "paired_display_occurrences": 27,
+    "unnoted_chapter_headings": 1
+  },
+  "holds_413_420_9publisher_10canonical_unchanged": true,
+  "operations": "Own stdlib raw text, finite-rule interpretation, JSON/hash/UTF16 and data-ledger inversion only; no application/proposer/parser/test/browser/build execution, Git/network calls or target writes.",
+  "all27_original_finite_display_pairs_exact_owner_case_and_alternatives": true
+}
