@@ -15,7 +15,7 @@ export const CURRENT389390_DIRECTORY='docs/evidence/apadana/thera389-390/';
 export const CURRENT389390_CANON_BINDING_FILE=CURRENT389390_DIRECTORY+'CURRENT_CANON_BINDING.json';
 export const CURRENT389390_CANON_BINDING_SHA='3b9cf33ff529ec5e950cf07bdf1aec0ed1edcf41123d9c975958c2f66e2d31e9';
 export const CURRENT389390_SOURCE_FILE=CURRENT389390_DIRECTORY+'CURRENT_SOURCE_INPUTS.json';
-export const CURRENT389390_SOURCE_SHA='8408c9e1f00eb921e14667cc1c40f8a1a9335b7f2d86b1f7f2ab729c5e3531fc';
+export const CURRENT389390_SOURCE_SHA='db3e46646b405dc0e18c7c10c4d79fa1ea9515803b2826d01f6fb33512b387d5';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const plain=value=>value!==null&&typeof value==='object'&&!Array.isArray(value)&&Object.getPrototypeOf(value)===Object.prototype;
 function keys(value,names){assert.ok(plain(value));assert.deepEqual(Object.keys(value).sort(),[...names].sort());}

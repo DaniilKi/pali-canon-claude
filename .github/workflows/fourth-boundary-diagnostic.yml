@@ -1,0 +1,62 @@
+name: Bounded fourth-boundary fixture diagnostic
+on:
+  push:
+    branches: ['diagnostic/fourth-boundary-bounds-*']
+permissions:
+  contents: read
+jobs:
+  fixture:
+    name: Fourth boundary / ${{ matrix.os }} / Node 22.23.5
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    defaults:
+      run:
+        shell: bash
+    env:
+      REVIEWED_FIXTURE_SHA256: b1746b0e1c7fef0b619ac73509356561fc80cbf0cea17912e43f2fa384fd7e8e
+    steps:
+      - name: Use LF line endings
+        if: runner.os == 'Windows'
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.eol lf
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.5'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Bind exact checkout, fixture and native runtime
+        timeout-minutes: 1
+        run: |
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python3 --version
+          node --input-type=module -e 'import assert from "node:assert/strict";import{readFileSync,writeFileSync}from"node:fs";import{createHash}from"node:crypto";const p="tests/apadana-fourth-boundaries.test.mjs",sha=createHash("sha256").update(readFileSync(p)).digest("hex");assert.match(process.env.REVIEWED_FIXTURE_SHA256,/^[a-f0-9]{64}$/);assert.equal(sha,process.env.REVIEWED_FIXTURE_SHA256);const r={commit:process.env.GITHUB_SHA,node:process.version,platform:process.platform,arch:process.arch,fixture:p,sha256:sha,not_full_suite_or_release_acceptance:true};writeFileSync("fourth-boundary-runtime.json",JSON.stringify(r,null,2)+"\n");console.log(JSON.stringify(r));'
+      - name: Install pinned development dependencies
+        timeout-minutes: 5
+        run: npm ci --no-audit --no-fund
+      - name: Build and require unchanged committed application runtime
+        timeout-minutes: 2
+        run: |
+          npm run build
+          git diff --exit-code -- server/
+      - name: Exercise all four fixture cases with bounded Python stages
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap tests/apadana-fourth-boundaries.test.mjs 2>&1 | tee fourth-boundary.tap
+          node --input-type=module -e 'import assert from "node:assert/strict";import{readFileSync}from"node:fs";const s=readFileSync("fourth-boundary.tap","utf8");for(const[k,v]of[["tests",4],["pass",4],["fail",0],["cancelled",0],["skipped",0],["todo",0]])assert.match(s,new RegExp("^# "+k+" "+v+"$","m"));'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fourth-boundary-${{ matrix.os }}-${{ github.sha }}
+          path: |
+            fourth-boundary-runtime.json
+            fourth-boundary.tap
+          if-no-files-found: error

@@ -2,15 +2,62 @@ import {historicalF3SourceFixture} from './helpers/historical389390-source-canon
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import { spawnSync as spawnFourthPythonSync } from 'node:child_process';
 import { gunzipSync } from 'node:zlib';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeSync } from 'node:fs';
 import { readBundled } from '../src/bundled-data.mjs';
 import * as canon from '../src/canon.mjs';
 import { readPassage } from '../src/chatgpt-widget.mjs';
 import { assertPositionPin } from '../web/reading-position.mjs';
 
-const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).status === 0);
+// QA-only phase metadata: never log Python source, corpus input or process output.
+const FOURTH_PROBE_MS=10000,FOURTH_FIXTURE_MS=120000,FOURTH_PHASE_BYTES=8192;
+let fourthPhaseBytes=0;
+function fourthStage(phase,event,fields={}){
+  const value={schema:'fourth-boundary-python-stage-v1',phase,event,node_pid:process.pid,platform:process.platform,at_ms:Math.round(performance.now()*1000)/1000,...fields};
+  const row='FOURTH_BOUNDARY_PYTHON:'+JSON.stringify(value)+'\n',size=Buffer.byteLength(row);
+  if(fourthPhaseBytes+size>FOURTH_PHASE_BYTES)return;
+  fourthPhaseBytes+=size;
+  try{writeSync(2,row);}catch{} // Logging must not replace the original fixture failure.
+}
+function fourthDirectAbsence(pid){
+  if(!Number.isSafeInteger(pid)||pid<=0)return {state:'not-spawned',error_code:null};
+  try{process.kill(pid,0);return {state:'present',error_code:null};}
+  catch(error){return {state:error.code==='ESRCH'?'absent':'unknown',error_code:typeof error.code==='string'?error.code.slice(0,64):'UNKNOWN'};}
+}
+function fourthProcessMetadata(result,started,bound){
+  const bytes=value=>Buffer.isBuffer(value)?value.length:typeof value==='string'?Buffer.byteLength(value):0;
+  return {bound_ms:bound,elapsed_ms:Math.round((performance.now()-started)*1000)/1000,pid:Number.isSafeInteger(result.pid)&&result.pid>0?result.pid:null,status:result.status??null,signal:result.signal??null,error_code:result.error?(typeof result.error.code==='string'?result.error.code.slice(0,64):'UNKNOWN_SPAWN_ERROR'):null,stdout_bytes:bytes(result.stdout),stderr_bytes:bytes(result.stderr),spawn_sync_returned:true,close_event_observed:false,direct_pid_absence:fourthDirectAbsence(result.pid),descendants_verified:false};
+}
+function findFourthPython(){
+  const started=performance.now(),deadline=started+FOURTH_PROBE_MS;
+  for(const [index,command]of ['python3','python'].entries()){
+    const remaining=Math.floor(deadline-performance.now());
+    if(remaining<1){fourthStage('probe','budget-exhausted',{bound_ms:FOURTH_PROBE_MS});throw Error('Fourth fixture Python probe exceeded shared10s budget');}
+    fourthStage('probe','start',{alias_index0:index,bound_ms:FOURTH_PROBE_MS,remaining_ms:remaining});
+    const result=spawnFourthPythonSync(command,['--version'],{timeout:remaining,killSignal:'SIGKILL'});
+    const metadata=fourthProcessMetadata(result,started,FOURTH_PROBE_MS);
+    fourthStage('probe','returned',{alias_index0:index,...metadata});
+    const within=performance.now()<=deadline;
+    const missingOnly=result.error?.code==='ENOENT'&&result.status===null&&result.signal===null&&metadata.pid===null&&metadata.stdout_bytes===0&&metadata.stderr_bytes===0&&metadata.direct_pid_absence.state==='not-spawned'&&within;
+    if(missingOnly)continue;
+    if(result.error||result.signal||result.status!==0||!within||metadata.direct_pid_absence.state!=='absent')throw Error('Fourth fixture Python version probe failed; inspect metadata stages');
+    fourthStage('probe','selected',{alias_index0:index});return command;
+  }
+  fourthStage('probe','both-aliases-missing');return undefined;
+}
+function spawnSync(command,args,options){
+  const started=performance.now();fourthStage('fixture','start',{bound_ms:FOURTH_FIXTURE_MS});
+  const result=spawnFourthPythonSync(command,args,{...options,timeout:FOURTH_FIXTURE_MS,killSignal:'SIGKILL'});
+  const metadata=fourthProcessMetadata(result,started,FOURTH_FIXTURE_MS);
+  fourthStage('fixture','returned',metadata);
+  assert.ok(result.error===undefined,'Bounded fourth fixture process failed; inspect metadata stages');
+  assert.equal(result.signal,null,'Fourth fixture process must return without a signal');
+  assert.ok(metadata.elapsed_ms<=FOURTH_FIXTURE_MS,'Fourth fixture exceeded120s subprocess budget');
+  assert.equal(metadata.direct_pid_absence.state,'absent','Owned direct Python child absence must be observed; descendants are not verified');
+  return result;
+}
+const python = findFourthPython(); // Only genuine missing executables retain optional skipping.
 const revision = 'apadana-theri31-40-v1';
 const bounds = {
   'thi-ap33': [10121, 10200, 10121, 10196],
