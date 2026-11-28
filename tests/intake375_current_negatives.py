@@ -56,6 +56,7 @@ class Current375Negatives(unittest.TestCase):
         cls.current_context=successor.source_authority382(ROOT)
         cls.current_source=cls.current_context['english']
         cls.four_source=live_current.source_cohort(cls.current_context,'four394407')
+        cls.eight_source=live_current.source_cohort(cls.current_context,'eight411419')
         assert cls.current_source['historical380']==cls.source
         cls.historical382=cls.current_source['historical382']
         assert cls.historical382['ids']==cls.source['ids']+list(successor.IDS)
@@ -63,6 +64,14 @@ class Current375Negatives(unittest.TestCase):
         cls.four_source_ids=cls.historical382['ids']+cls.four_source['ids']
         assert len(cls.four_source_ids)==386 and cls.four_source['approval']['expected_profile_ids']==cls.four_source_ids
         assert cls.current_source['ids'][:386]==cls.four_source_ids
+        assert cls.eight_source['ids']==list(live_current.EIGHT_IDS)
+        cls.eight_source_ids=cls.four_source_ids+cls.eight_source['ids']
+        assert len(cls.eight_source_ids)==394 and cls.eight_source['approval']['expected_profile_ids']==cls.eight_source_ids
+        assert cls.current_source['ids'][:394]==cls.eight_source_ids
+        assert cls.current_source['ids']==cls.eight_source_ids+list(live_current.IDS)
+        for uid in cls.eight_source['ids']:
+            assert cls.current_source['profiles'][uid]==cls.eight_source['profiles'][uid]
+            assert cls.current_source['links'][uid]==cls.eight_source['links'][uid]
         assert cls.current_source['ids']==cls.current_source['selection']['expected_profile_ids']
         assert cls.current_source['ids']==[record['id']for record in cls.current_source['selection']['baseline_records']+cls.current_source['selection']['approved_records']]
         for uid in cls.four_source['ids']:
@@ -281,7 +290,7 @@ class Current375Negatives(unittest.TestCase):
                         path.unlink();path.symlink_to(target);self.refused(successor.approved382_runtime)
                 self.positive()
         # Additional eight10 preserves the original254/pair10/four10 scope identities.
-        eight=sorted(live_current.DIRECTORY+'/'+leaf for leaf in (*live_current.PINS,*live_current.RUNTIME_PINS))
+        eight=sorted(live_current.EIGHT_DIRECTORY+'/'+leaf for leaf in (*live_current.EIGHT_PINS,*live_current.EIGHT_RUNTIME_PINS))
         self.assertEqual(len(eight),10)
         self.assertFalse(set(eight)&(set(self.proof_rows)|self.current_names|set(added)|set(four)))
         batch=type(self)._proof_batch
@@ -292,6 +301,22 @@ class Current375Negatives(unittest.TestCase):
                 altered=json.loads((self.root/name).read_bytes());altered['independent_negative_witness']=True
                 with self.change(name,raw=json.dumps(altered,ensure_ascii=False).encode()):self.refused(successor.approved382_catalogue)
                 with tempfile.TemporaryDirectory(prefix='pali-current-eight-proof-alias-') as d:
+                    target=Path(d).resolve(strict=True)/'authentic.json';target.write_bytes((self.root/name).read_bytes())
+                    with self.change(name) as path:
+                        path.unlink();path.symlink_to(target);self.refused(successor.approved382_runtime)
+                self.positive()
+        # Newseven10 extend only this scope; original254/pair10/four10/eight10 remain distinct.
+        seven=sorted(live_current.DIRECTORY+'/'+leaf for leaf in (*live_current.PINS,*live_current.RUNTIME_PINS))
+        self.assertEqual(len(seven),10)
+        self.assertFalse(set(seven)&(set(self.proof_rows)|self.current_names|set(added)|set(four)|set(eight)))
+        batch=type(self)._proof_batch
+        for name in seven if batch is None else seven[batch::3]:
+            with self.subTest(current_seven_source_scope_proof=name):
+                self.positive()
+                with self.change(name,missing=True):self.refused(successor.approved382_runtime)
+                altered=json.loads((self.root/name).read_bytes());altered['independent_negative_witness']=True
+                with self.change(name,raw=json.dumps(altered,ensure_ascii=False).encode()):self.refused(successor.approved382_catalogue)
+                with tempfile.TemporaryDirectory(prefix='pali-current-seven-proof-alias-') as d:
                     target=Path(d).resolve(strict=True)/'authentic.json';target.write_bytes((self.root/name).read_bytes())
                     with self.change(name) as path:
                         path.unlink();path.symlink_to(target);self.refused(successor.approved382_runtime)
@@ -440,6 +465,13 @@ class Current375Negatives(unittest.TestCase):
         old386=json.loads(raw386);self.assertEqual(list(old386['links']),self.four_source_ids)
         self.assertEqual(len(old386['links']),386)
         with self.change('server/data/apadana.json',raw=raw386):
+            self.refused(successor.approved382_catalogue);self.refused(successor.approved382_runtime)
+        # Independently source-derived eight catalogue is historical metadata, never an old capture.
+        raw394=(self.root/live_current.EIGHT_DIRECTORY/'EXPECTED_MANIFEST.json').read_bytes()
+        self.assertEqual(hashlib.sha256(raw394).hexdigest(),live_current.EIGHT_RUNTIME_PINS['EXPECTED_MANIFEST.json'])
+        old394=json.loads(raw394);self.assertEqual(list(old394['links']),self.eight_source_ids)
+        self.assertEqual(len(old394['links']),394)
+        with self.change('server/data/apadana.json',raw=raw394):
             self.refused(successor.approved382_catalogue);self.refused(successor.approved382_runtime)
         with self.change(current.DIRECTORY+'/RUNTIME_REVIEW.json',missing=True):
             self.refused(successor.approved382_runtime)

@@ -20,11 +20,11 @@ and compare its target's 34 physical runtime files directly. The public Python
 `web_reader_approved_acceptance.assert_runtime` wrapper also checks those 34 target files.
 
 The current declaration composes the unchanged source authority for 382 choices,
-the four approved publisher editions, and the eight approved publisher editions. Its `historical382` member is source
+the four approved publisher editions, the eight approved publisher editions, and the seven approved publisher editions. Its `historical382` member is source
 metadata, not a projected API response or an old runtime check. Earlier source
 contexts, all full profile/link objects, holds, numbering qualifications, source
 revisions and rights notices remain explicit. `english.source_cohorts` exposes only
-`four394407` and `eight411419`; each view contains the cohort's directory, addition
+`four394407`, `eight411419` and `seven421429`; each view contains the cohort's directory, addition
 IDs/records/profiles/links, seven source documents and approval. The selectors return
 detached copies (also frozen in JavaScript), read no files and never construct an
 older runtime. Earlier journeys select their own source cohort while verifying
@@ -77,9 +77,9 @@ shape, infer missing wording, or treat an inventory review as release approval.
 The H preparation V4 receipt distinguishes the historical 380 source prerequisite
 from current source validation and actual current runtime capture. Its closed
 phase names and original limits remain fixed. The old 254-proof receipt keeps its
-original scope; the pair's 10, four's 10 and eight's 10 metadata controls are
+original scope; the pair's 10, four's 10, eight's 10 and seven's 10 metadata controls are
 additional scopes, not a reinterpretation of that receipt. Canonical source
-authorities comprise 41 documents; source/runtime declarations comprise 58.
+authorities comprise 48 documents; source/runtime declarations comprise 68.
 These are logical authority roles, not all physical reads or live map rows.
 The additional original normalization, provenance and test-oracle leaves are
 separately map-protected and authenticated before test/browser use. Their

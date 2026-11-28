@@ -31,7 +31,7 @@ def _copy(source_root,destination,kind):
             if kind=='runtime' or name.startswith('data/'):
                 _require('server/'+name not in names,'Overlapping runtime/proof copy domains')
                 names['server/'+name]=row['sha256']
-    _require(len(names)==(239 if kind=='source' else 311 if kind=='data' else 318),
+    _require(len(names)==(246 if kind=='source' else 321 if kind=='data' else 328),
              'Exact finite source/data/runtime copy set required')
     written=[]
     try:
