@@ -793,7 +793,7 @@ def main():
         files[row['raw_url']] = str(local)
     root_probe = """import assert from 'node:assert/strict';import {gunzipSync} from 'node:zlib';
       import {createHash} from 'node:crypto';import {readBundled} from './src/bundled-data.mjs';
-      let input='';for await(const chunk of process.stdin)input+=chunk;const p=JSON.parse(input);
+      process.stdin.setEncoding('utf8');let input='';for await(const chunk of process.stdin)input+=chunk;const p=JSON.parse(input);
       const canon=JSON.parse(gunzipSync(readBundled(p.path)));
       for(const [uid,g] of Object.entries(p.roots)){
         const u=canon.units.find(u=>u.id===uid);assert(u);assert.equal(u.book,g.book);assert.equal(u.start,g.start);assert.equal(u.end,g.end);
@@ -931,7 +931,7 @@ def main():
             checks.append({'check': 'Historical89 explicit choices; old70 profiles/links/Pāli exact; current intake exact and held publisher70 absent; all19 exact body paragraphs, printed entries, per-note hashes, apparatus, revisions and bounded continuations; actual widget tool payloads'})
             comparison_probe = """import assert from 'node:assert/strict';
               import {validateComparisonPage,comparisonChoices} from './web/translation-comparison.mjs';
-              let input='';for await(const chunk of process.stdin)input+=chunk;const p=JSON.parse(input);
+              process.stdin.setEncoding('utf8');let input='';for await(const chunk of process.stdin)input+=chunk;const p=JSON.parse(input);
               for(const [uid,data] of Object.entries(p.first)){
                 const choices=p.metadata[uid].english_available,args={uid,translation:data.translation_id,translation_revision:data.translation_revision,limit:data.limit};
                 assert.equal(comparisonChoices(choices,uid).length,1);

@@ -14,22 +14,39 @@ test('browser preflight collectors preserve UTF-8 across byte-split stdin chunks
   const scaledCanonical=scaledSource.match(/    probe = """([\s\S]*?)"""/);
   const scaledComparison=scaledSource.match(/comparison = """([\s\S]*?)"""/);
   assert.ok(scaledProfile&&scaledCanonical&&scaledComparison,'All three actual scaled preflight collectors remain covered');
-  const programs=[profile[1],JSON.parse(canonical[1]),comparison[1],scaledProfile[1],scaledCanonical[1],scaledComparison[1]];
+  const source181=readFileSync(new URL('../scripts/web-reader-thera181-220-check.py',import.meta.url),'utf8');
+  const profile181=source181.match(/profile_probe="""([\s\S]*?)"""/);
+  const canonical181=source181.match(/    probe = ("(?:\\.|[^"\\])*")\n    run = subprocess.run/);
+  const comparison181=source181.match(/comparison = """([\s\S]*?)"""/);
+  assert.ok(profile181&&canonical181&&comparison181,'All three actual181 preflight collectors remain covered');
+  const pairSource=readFileSync(new URL('../scripts/web-reader-thera-pair-intake-check.py',import.meta.url),'utf8');
+  const pairCanonical=pairSource.match(/    probe = ("(?:\\.|[^"\\])*")\n    run = subprocess.run/);
+  const pairComparison=pairSource.match(/comparison = """([\s\S]*?)"""/);
+  assert.ok(pairCanonical&&pairComparison,'Both actual pair-intake collectors remain covered');
+  const expansionSource=readFileSync(new URL('../scripts/web-reader-apadana-thera-expansion-check.py',import.meta.url),'utf8');
+  const expansionRoot=expansionSource.match(/root_probe = """([\s\S]*?)"""/);
+  const expansionComparison=expansionSource.match(/comparison_probe = """([\s\S]*?)"""/);
+  assert.ok(expansionRoot&&expansionComparison,'Both actual expansion collectors remain covered');
+  const programs=[profile[1],JSON.parse(canonical[1]),comparison[1],scaledProfile[1],scaledCanonical[1],scaledComparison[1],profile181[1],JSON.parse(canonical181[1]),comparison181[1],JSON.parse(pairCanonical[1]),pairComparison[1],expansionRoot[1],expansionComparison[1]];
+  assert.equal(programs.length,13);
+  let completedControls=0;
   const expected={text:'Sumedhā · 漢 · 😀',end:'unchanged'};
   const raw=Buffer.from(JSON.stringify(expected));
   for(const program of programs){
-    const collectors=[...program.matchAll(/(?:process\.stdin\.setEncoding\('utf8'\);)?let s='';for await\(const c of process\.stdin\)s\+=c;/g)];
+    const collectors=[...program.matchAll(/(?:process\.stdin\.setEncoding\('utf8'\);)?let (s|input)='';for await\(const (c|chunk) of process\.stdin\)\1\+=\2;/g)];
     assert.equal(collectors.length,1,'Exercise the actual collector, without replacing its algorithm');
-    const collector=collectors[0][0];
+    const collector=collectors[0][0],inputVariable=collectors[0][1];
     for(const character of ['ā','漢','😀']){
       const cut=raw.indexOf(Buffer.from(character))+1;
       assert.ok(cut>0&&(raw[cut]&0xc0)===0x80,'A real multi-byte character crosses the chunk boundary');
       const prefix="import{Readable}from'node:stream';const raw=Buffer.from("+JSON.stringify(raw.toString('base64'))+",'base64');Object.defineProperty(process,'stdin',{value:Readable.from([raw.subarray(0,"+cut+"),raw.subarray("+cut+")])});";
-      const run=body=>spawnSync(process.execPath,['--input-type=module','-e',prefix+body+'process.stdout.write(JSON.stringify(JSON.parse(s)));'],{encoding:'utf8',timeout:3000,maxBuffer:64*1024});
+      const run=body=>spawnSync(process.execPath,['--input-type=module','-e',prefix+body+'process.stdout.write(JSON.stringify(JSON.parse('+inputVariable+')));'],{encoding:'utf8',timeout:3000,maxBuffer:64*1024});
       const valid=run(collector);assert.equal(valid.error,undefined);assert.equal(valid.signal,null);assert.equal(valid.status,0);assert.deepEqual(JSON.parse(valid.stdout),expected);
       const old=run(collector.replace("process.stdin.setEncoding('utf8');",''));
       assert.equal(old.error,undefined);assert.equal(old.signal,null);assert.equal(old.status,0);
       assert.notDeepEqual(JSON.parse(old.stdout),expected,'The negative control must reproduce silent replacement characters');
+      completedControls+=2;
     }
   }
+  assert.equal(completedControls,78);
 });
