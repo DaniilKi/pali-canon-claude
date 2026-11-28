@@ -1,6 +1,45 @@
 # AGENTS.md
 
-## Current development routing: 394-choice intake
+## Current development routing: 401-choice intake
+
+Read the current validation guide and docs/data/thera421-429-seven-intake.md first.
+Historical capsules below describe older snapshots; use actual Git refs and receipts.
+
+Use tests/helpers/current-apadana.mjs and scripts/web_reader_current_apadana.py.
+Current source declarations compose pure382 plus the four, eight and seven
+source-only cohorts: four394407, eight411419 and seven421429. They expose metadata,
+not old runtimes or API projections. Preserve one actual 27-file capture and direct
+34-file target checks; logical 48 source / 68 source-runtime metadata roles are distinct from map rows or reads.
+Keep the original fourteen historical Python method bodies and all nine current
+negative identities; preserve old 254, pair 10, four 10 and eight 10 control scopes.
+
+The seven literal publisher-to-canonical mappings are 421→423,423→425,424→426,
+425→427,426→428,427→429,429→431. Preserve all 394 earlier full objects/order,
+nine publisher holds, ten canonical holds and conditional 413/420/422/428/430.
+New profiles423/426/427/428/429 inherit the already existing canonical NEXT10
+index_revision;425/431 remain unversioned. Compare profile and actual get_text
+locator namespaces before edition navigation. Text-hash equality alone is not
+reader acceptance. No Pāli boundary or private-study format changes follow.
+
+Use regular build-worktree dependencies, never a symlinked node_modules.
+Clean rebuild parity and the sealed source/map/bootstrap contracts are mandatory.
+Source reviews, runtime inventories and actual API/browser/install results have
+separate scopes. New code must not substitute old 394 runtime results for 401.
+
+The monthly prerequisite repair fetches fixed104 and H within the same two-minute
+step. Preserve the pure historical104 validator; the finite current counterpart
+has its own inverse and separate added test. Both indexed callers authenticate
+the exact helper buffer before importing it. This does not expand the fourteen
+AP bootstrap supports or claim all project code is preauthenticated. Do not
+change a live schedule or dispatch the monthly workflow to validate this repair.
+
+All 75 existing required jobs must pass on the exact candidate before dev advances.
+No main merge, deployment or force-push. See docs/qa/english421-429/manual-acceptance.md
+for physical-device, human screen-reader and signed-in-host checks. Browser
+downloads/PWA and account sync remain unsupported. Local Git preparation success
+is not a complete monthly upstream-refresh result.
+
+## Historical 394-choice routing snapshot
 
 Read [the current validation guide](docs/qa/current-apadana-validation.md) and
 [eight-source scope](docs/data/thera411-419-eight-intake.md) before using the

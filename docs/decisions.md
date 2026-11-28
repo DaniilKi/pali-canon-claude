@@ -1896,3 +1896,30 @@ Add only publisher394→`tha-ap396`,397→`tha-ap399`,406→`tha-ap408` and407�
 Use the existing parser grammar and add only four closed mixed-heading/note-display owners. Preserve394’s after-suffix note21/local15–16/global3720, note16’s Sikhi reading,397’s uncertain/corrupt note28 and unfinished note44,406’s name distinctions and407’s four eight-line ranges. Preserve the Pāli-only recitation marker without inventing English. Both reader policies add the four explicit paratext/complete-body hash owners; the embedded catalogue requires widgetv51. No continuation limit is increased:407’s6,439 UTF-16 body uses the existing6,000+439 native pages.
 
 The specific CC BY-NC-SA4.0 textual grant does not imply media, commercial or whole-chapter permission. English bodies and notes remain live-only. Focused parser/API/widget-host/citation checks are separate from installed/browser and exact-candidate CI acceptance. No historical authority, QA helper, public test driver, canonical locator, citation corpus or private-study format is changed by this app lane. [Scope](data/thera394-407-four-intake.md).
+
+### Seven further Apadāna scopes and bounded monthly preparation
+
+Add only publishers 421,423–427,429 with their seven individually reviewed
+canonical IDs. Preserve all 394 earlier source objects and all holds. Compare
+every new profile's locator revision with the existing canonical record before
+edition navigation:five of these sources already require NEXT10 markers.
+Source wording hashes and generated-data equality do not alone prove the UI
+can select an edition. Keep complete publisher-edition scope distinct from
+line-complete VRI translation, and keep English live-only under the specific
+Walters/Whitman CC BY-NC-SA4.0 terms.
+
+Extend the stable source facades with a third small source-only cohort,
+not an old 394 runtime or another history snapshot. Preserve actual 27-file data
+capture, 34-file target verification, the original historical methods and the
+existing75-job release gate. Widget v53 carries the new guards.
+
+Monthly tests need exact 104 and fixed H locally. Add only H's fetch/commit check
+inside the existing two-minute preparation block. Preserve the historical104
+validator and use a strict finite current inverse. Add the new source-control
+case in a separate test file so original historical registrations remain exact.
+Indexed callers authenticate the same helper buffer before importing it.
+An isolated Git rehearsal established missing H under the old preparation and
+exact availability of all 1,014 selected source/runtime paths after the repair.
+This is a Git precondition result; upstream rebuild, new rights/alignment
+review and a live monthly run remain separate. No schedule change, main merge
+or production deployment follows from this work.

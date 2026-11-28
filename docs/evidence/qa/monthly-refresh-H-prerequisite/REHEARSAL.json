@@ -1,0 +1,51 @@
+{
+  "schema": "monthly-refresh-H-prerequisite-local-acceptance-v1",
+  "date": "2026-11-28",
+  "scope": "Exact Git prerequisite and source controls; not an executed monthly refresh",
+  "baseline_commit": "f1e5c8114680fabe9083bde41d57c34730fd6bcd",
+  "historical_H": "4e9287bd5ebc78aba4b185b017e63eac6547bfd7",
+  "historical104": "104b57a6891ddae645c51e39eb3d27b89b64ffdf",
+  "workflow_sha256": "8b8871924f7d560cc00a8af0b565aef1e0afbaa11ae6b3337238d953c34b9259",
+  "source_review_sha256": "f25993f49b39c31d07f5bcc7e267b1917ec3119bf6d69450c760fc51297d610c",
+  "fixture_driver_sha256": "8808bd27a60fb4451e4732da2e9fd4910d5c25eb2d9f04d5bdc54d8d0becf781",
+  "consumer_manifest": "docs/evidence/apadana/english371-378-seven/H_HISTORY_FIXTURE_INPUTS.json",
+  "consumer_manifest_sha256": "0166698d9fa535b693be6b7b5462253952d67a1c105e2324a46b88dd6444be5e",
+  "focused_tests": {
+    "command": [
+      "node",
+      "--test",
+      "--test-reporter=tap",
+      "tests/historical104-auxiliary-workflow.test.mjs",
+      "tests/monthly-refresh-prerequisites.test.mjs"
+    ],
+    "pass": 11,
+    "fail": 0,
+    "skip": 0,
+    "seconds": 0.16654088298673742
+  },
+  "actual_Git_rehearsal": {
+    "old104_only_H_absent": true,
+    "selected_source_paths": 980,
+    "selected_runtime_paths": 34,
+    "selected_paths": 1014,
+    "unique_blobs": 993,
+    "summed_path_bytes": 118649921,
+    "unique_blob_bytes": 101959007,
+    "all_selected_tree_modes_and_blob_bodies_verified": true,
+    "owned_fixture_cleaned": true,
+    "seconds": 11.548802581994096
+  },
+  "original104_only_H_lookup_exit": 128,
+  "repaired_preparation_bound_seconds": 120,
+  "positive_fetch_origin": "Owned local bare origin backed by cached repository objects; used read-only, not mounted read-only",
+  "fresh_client_shallow_and_without_alternates": true,
+  "offline_blob_reads_no_lazy_fetch_or_transports": true,
+  "schedule_or_live_workflow_dispatch_changed": false,
+  "limits": [
+    "Not an actual runner outage reproduction or complete monthly upstream refresh",
+    "No project, application or materializer execution in the Git fixture",
+    "Locked axe dependency remains outside this Git-object proof",
+    "Temporary-directory cleanup is not a general process-tree absence proof",
+    "Not physical-device, human screen-reader, signed-in host or offline/PWA acceptance"
+  ]
+}

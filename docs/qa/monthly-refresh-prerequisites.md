@@ -2,7 +2,7 @@
 
 The monthly test step requires both exact canonical baseline
 `104b57a6891ddae645c51e39eb3d27b89b64ffdf` and fixed historical H
-`4e9287bd5ebc78aba4b185b017e63eac6547bfd7`. The proposed repair fetches each
+`4e9287bd5ebc78aba4b185b017e63eac6547bfd7`. The repair fetches each
 with `--no-tags --depth=1` and checks each exact commit inside the existing
 two-minute prerequisite step. The original104 commands, step name, full-test
 command, schedule, permissions, refresh/report logic and PR/deploy settings
@@ -24,9 +24,9 @@ support class, facade-map assertion or bootstrap scope is implied.
 
 ## Offline prerequisite rehearsal and limits
 
-Root may create an owned local read-only bare origin backed by the accepted
-repository's cached objects and a fresh shallow client containing only the base
-and104 prerequisites. The negative must establish H is absent. Run the exact
+The local rehearsal used an owned bare origin as a read-only source, backed by
+the accepted repository's cached objects, and a fresh shallow client containing
+only the base and 104 prerequisites. The negative must establish H is absent. Run the exact
 reviewed104+H provisioning body against that local origin with file transport
 only, no lazy fetch, bounded children and cleanup evidence. Then disable all
 transport and verify the exact H commit plus every selected H source/runtime
@@ -34,12 +34,17 @@ path's mode, blob ID, byte count, SHA-256 and Git object identity. The immutable
 H history manifest supplies980 source and34 runtime paths; the separately
 locked axe dependency is not a GitH blob and is outside that fetch proof.
 
-The earlier offline tree-only proof established only commit/tree metadata;
-it did not prove selected blob availability. The stronger rehearsal is a
-separate root-owned acceptance step and is not claimed complete by this source
-proposal. No live scheduled workflow, upstream refresh, application, materializer
-or project module is executed by the source author. Missing-source-object
-premises in a constructed fixture do not prove an actual runner outage.
+The focused source checks passed all 11 cases with zero skips. The stronger
+local Git rehearsal passed in 11.55 seconds: the old preparation left H absent
+(exit128); the repaired preparation made all 980 source and 34 runtime paths
+available with exact tree modes and verified byte/Git/SHA-256 identities. Those
+1,014 paths contain 993 unique blobs (101,959,007 unique bytes;118,649,921 summed
+path bytes). The temporary fixture was removed. [Recorded local evidence](../evidence/qa/monthly-refresh-H-prerequisite/REHEARSAL.json).
+
+The earlier tree-only proof did not establish blob availability; the new result
+adds that selected-blob evidence. Neither establishes a complete upstream refresh,
+an actual runner outage, the separately locked axe dependency or general process
+tree cleanup. No live scheduled workflow, application or materializer was run.
 
 Even after provisioning is repaired, changed VRI, numbering, DPD or source
 correspondence may correctly fail current source/runtime pins and produce a
