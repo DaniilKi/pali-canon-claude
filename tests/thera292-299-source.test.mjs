@@ -1,6 +1,8 @@
+import {historicalF3SourceFixtureFromOwnedH} from './helpers/historical389390-source-canon.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
-import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
-assertCurrent380SourceClosure(new URL('../',import.meta.url));
+import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
 const HistoricalH368Profiles=current380Source.historical368.profiles;
@@ -55,7 +57,7 @@ test('seven V2 approved profiles extend every preserved310 object and link to317
  }
 for(const[current,previous]of [['317 finite complete publisher-edition poems','310 finite complete publisher-edition poems'],['277 explicitly mapped Therā','270 explicitly mapped Therā']]){assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved current counter '+current);priorSource.policy=priorSource.policy.replace(current,previous);}
  assert.equal(digest(JSON.stringify(priorSource)),e.compact.manifest_source_sha256,'Only the exact two approved counters may differ');let preserved=0;for(const[path,sha]of Object.entries(e.compact.data_file_sha256))if(path!=='server/data/apadana.json'){assert.equal(digest(readFileSync(path)),sha,'Unchanged prior data artifact '+path);preserved++;}assert.equal(preserved,26);
- assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
+ assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixtureFromOwnedH(data.canon, HistoricalHBase)))),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
  for(const id of e.ids){const p=profile(id),b=e.independent(id),u=data.byId.get(id);assert.deepEqual(p,e.profiles[id]);assert.deepEqual(manifest.links[id],e.links[id]);assert.equal(rootDigest(u,data.canon.books[u.book]),b.root_sha256);assert.deepEqual({start:u.start,end:u.end,book:u.book},{start:b.canonical.start,end:b.canonical.end,book:b.canonical.book});assert.ok(Object.isFrozen(p));}
  for(const id of ['tha-ap262','tha-ap268','tha-ap282','tha-ap293','tha-ap299','tha-ap302'])assert.equal(profile(id),undefined);
  for(const[poem,notice]of Object.entries(e.noticeAdditions.by_publisher)){const p=profile('tha-ap'+(Number(poem)+2));assert.equal(p.mapping_notes.filter(row=>row===notice).length,1);assert.deepEqual(p.mapping_notes,e.profiles[p.id].mapping_notes);}

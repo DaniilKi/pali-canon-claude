@@ -8,7 +8,8 @@ const ownedHistoricalHInputs=prepareHistoricalHSourceInputs(new URL('../',import
 const HistoricalHBase=historicalHFileURL(ownedHistoricalHInputs.root+'/');
 closeOwnedHistoricalHInputs(()=>ownedHistoricalHInputs.close());
 function readCurrentFileSync(path,...options){return readOwnedHPhysicalFile(typeof path==='string'&&!isAbsoluteHistoricalHInput(path)?resolveHistoricalHInput(ownedHistoricalHInputs.root,path):path,...options);}
-import {CURRENT_WIDGET_URI,CURRENT_WIDGET_VERSION,intake380Authority} from './helpers/intake380-metadata.mjs';
+import {intake380Authority} from './helpers/intake380-metadata.mjs';
+import {CURRENT_WIDGET_URI,CURRENT_WIDGET_VERSION} from './helpers/current389390-metadata.mjs';
 const {frozen440FileReader}=await import(new URL('tests/helpers/boundary333-336-source-input.mjs',HistoricalHBase).href);
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync as readOwnedHPhysicalFile} from 'node:fs';import {createHash} from 'node:crypto';
 const {sourceInverses,projectD4Source,d4FileReader}=await import(new URL('tests/helpers/current339-source-inverse.mjs',HistoricalHBase).href);

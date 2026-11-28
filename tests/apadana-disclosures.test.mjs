@@ -1,4 +1,4 @@
-import {CURRENT_WIDGET_VERSION} from './helpers/intake380-metadata.mjs';
+import {CURRENT_WIDGET_VERSION} from './helpers/current389390-metadata.mjs';
 import {CURRENT_APADANA_IDS,BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 // Contract regressions for the reproduced loss of edition caveats in cached responses.
 // Synthetic wording exercises rendering guards; it is not source or rights evidence.

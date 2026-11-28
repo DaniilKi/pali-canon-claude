@@ -307,13 +307,13 @@ def main():
     assert set(manifest['links']) == set(current_intake['expected_profile_ids']), 'Unreviewed current activation'
     rows = manifest['links']
     for uid,row in old['links'].items():assert rows[uid] == row, 'Previous source changed: '+uid
-    probe = "import{exactHistoricalCanonBytes}from'./tests/helpers/canon-before-four.mjs';import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';let s='';for await(const c of process.stdin)s+=c;process.stdout.write(exactHistoricalCanonBytes(gunzipSync(readBundled(JSON.parse(s)))).toString());"
+    probe = "import{historicalF3SourceBytes}from'./tests/helpers/historical389390-source-canon.mjs';import{exactHistoricalCanonBytes}from'./tests/helpers/canon-before-four.mjs';import{gunzipSync}from'node:zlib';import{readBundled}from'./src/bundled-data.mjs';let s='';for await(const c of process.stdin)s+=c;process.stdout.write(exactHistoricalCanonBytes(historicalF3SourceBytes(gunzipSync(readBundled(JSON.parse(s))))).toString());"
     run = subprocess.run(['node','--input-type=module','-e',probe],cwd=ROOT,input=json.dumps(str(server_dir/'data/canon.json.gz')),text=True,capture_output=True)
     assert run.returncode == 0 and digest(run.stdout) == approval['after_canon_sha256'], 'Current logical canonical pin differs'
-    current = json.loads(run.stdout)
+    historical_source_canon = json.loads(run.stdout)
     for row in plan['units']:
-        assert next(u for u in current['units'] if u['id'] == row['id']) == row['after'], 'Current pair metadata differs before inverse'
-    inverse = copy.deepcopy(current)
+        assert next(u for u in historical_source_canon['units'] if u['id'] == row['id']) == row['after'], 'Current pair metadata differs before inverse'
+    inverse = copy.deepcopy(historical_source_canon)
     for row in plan['units']:
         unit = next(u for u in inverse['units'] if u['id'] == row['id'])
         unit.clear();unit.update(row['old_unit'])

@@ -1,6 +1,8 @@
+import {historicalF3SourceFixtureFromOwnedH} from './helpers/historical389390-source-canon.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
-import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
-assertCurrent380SourceClosure(new URL('../',import.meta.url));
+import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
 const HistoricalH368Profiles=current380Source.historical368.profiles;
@@ -46,7 +48,7 @@ test('eight V2 approved profiles extend every preserved317 object and link to325
  for(const id of e.approval.baseline_ids){assert.deepEqual(profile(id),e.baseline.profile_objects[id]);assert.deepEqual(manifest.links[id],e.baseline.translation_objects[id]);assert.equal(digest(JSON.stringify(profile(id))),e.compact.profile_object_sha256[id]);assert.equal(digest(JSON.stringify(manifest.links[id])),e.compact.translation_object_sha256[id]);}
  const priorSource=clone(manifest.source);for(const[current,previous]of [['325 finite complete publisher-edition poems','317 finite complete publisher-edition poems'],['285 explicitly mapped Therā','277 explicitly mapped Therā']]){assert.equal(priorSource.policy.split(current).length-1,1,'Exactly one approved current counter '+current);priorSource.policy=priorSource.policy.replace(current,previous);}
  assert.equal(digest(JSON.stringify(priorSource)),e.compact.manifest_source_sha256,'Only the exact two approved counters may differ');let preserved=0;for(const[path,sha]of Object.entries(e.compact.data_file_sha256))if(path!=='server/data/apadana.json'){assert.equal(digest(readFileSync(path)),sha,'Unchanged prior data artifact '+path);preserved++;}assert.equal(preserved,26);
- assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
+ assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixtureFromOwnedH(data.canon, HistoricalHBase)))),e.baseline.canon_logical_sha256);assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
  for(const id of e.ids){const p=profile(id),b=e.independent(id),u=data.byId.get(id);assert.deepEqual(p,e.profiles[id]);assert.deepEqual(manifest.links[id],e.links[id]);assert.equal(rootDigest(u,data.canon.books[u.book]),b.root_sha256);assert.deepEqual({start:u.start,end:u.end,book:u.book},{start:b.canonical.start,end:b.canonical.end,book:b.canonical.book});assert.ok(Object.isFrozen(p));}
  for(const id of ['tha-ap262','tha-ap268','tha-ap282','tha-ap293','tha-ap299','tha-ap302','tha-ap308','tha-ap309'])assert.equal(profile(id),undefined);
  e.assertClientProjection(HistoricalHBase);assert.equal(profile('tha-ap312').mapping_notes.filter(row=>row===e.notice).length,1);

@@ -1,3 +1,4 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 // Two immutable historical freeze descriptors are exact actual-R H witnesses,
 // not extra H980 output or current380 application/runtime data.
 import {lstatSync as fixedHFreezeStat} from 'node:fs';
@@ -20,8 +21,9 @@ function readFixedHMetadataFreeze(path,...options){
  return options.length?raw.toString('utf8'):raw;
 }
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
-import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
-assertCurrent380SourceClosure(new URL('../',import.meta.url));
+import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
 const HistoricalH368Profiles=current380Source.historical368.profiles;
@@ -112,7 +114,7 @@ test('every private-data/storage helper retains its original bytes outside the e
 });
 
 test('the projection cannot mask canonical or all285 profile/link changes',()=>{
- assert.equal(jsonSha(canonBeforeFour(canon.load().canon)),before.canonical_sha256);
+ assert.equal(jsonSha(canonBeforeFour(historicalF3SourceFixture(canon.load().canon))),before.canonical_sha256);
  const heldBytes=readFileSync(new URL('../docs/evidence/apadana/THERA_HELD234_APPROVAL.json',import.meta.url));
  assert.equal(sha(heldBytes),'14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7');
  const historicalIds=JSON.parse(heldBytes).expected_profile_ids;assert.equal(historicalIds.length,285);assert.equal(new Set(historicalIds).size,285);

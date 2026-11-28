@@ -1,3 +1,4 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 /** Exact source-scope curation, separate from production profile derivation. */
 import test, { afterEach } from 'node:test';
@@ -90,7 +91,7 @@ test('241–250 intake is exactly independently approved10 and preserves all246 
     assert.deepEqual(APADANA_PROFILES[uid], oldProfile, `${uid} previous profile exact`);
     assert.deepEqual(manifest.links[uid], oldLink, `${uid} previous source link exact`);
   }
-  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))), baseline.canon_logical_sha256, 'This intake cannot change canonical words, boundaries or locator revisions');
+  assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixture(data.canon)))), baseline.canon_logical_sha256, 'This intake cannot change canonical words, boundaries or locator revisions');
   for (const uid of approved) {
     const p = APADANA_PROFILES[uid], g = golden(uid), u = data.byId.get(uid), book = data.canon.books[u.book];
     assert.equal(p, THERA_APADANA_PROFILES[uid]);

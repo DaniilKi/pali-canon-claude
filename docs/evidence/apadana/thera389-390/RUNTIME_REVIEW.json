@@ -1,0 +1,36 @@
+{
+  "schema": "reviewed-boundary389390-runtime-approval-v1",
+  "status": "GO_EXACT_NEW_CANON_RUNTIME_INVENTORY_ONLY",
+  "inventory_sha256": "fa46d776a08100d79117bd415f29a16f8fa4d2a37a8ef4918acccea88f30256b",
+  "canonical_binding_sha256": "3b9cf33ff529ec5e950cf07bdf1aec0ed1edcf41123d9c975958c2f66e2d31e9",
+  "application_commit": "fef295916e1421e018b4f3d8f99c5c5a9d3a17aa",
+  "baseline_commit": "40d27f3bc8af2386ee253c32174652a9bbad0153",
+  "predecessor_inventory_sha256": "1e3d92309fbc2aa9aba54516693c5e1908a6b8d5b6c941008c8d05cf5b54374f",
+  "runtime_paths": 34,
+  "actual_data_paths": 27,
+  "changed_paths": [
+    "data/canon.json.gz.part-0002",
+    "data/canon.json.gz.parts.json",
+    "data/parallels.json.gz",
+    "http-worker.cjs",
+    "http.cjs",
+    "index.cjs",
+    "web/reader.js"
+  ],
+  "unchanged_paths": 27,
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "namespace": "apadana-thera389-390-v1",
+  "preservation": {
+    "source_books": 61,
+    "other_units": 8542,
+    "commentary_unchanged": true,
+    "english_profiles": 380,
+    "english_links": 380,
+    "held_unchanged": true,
+    "accepted_citations": 5327,
+    "shared_links": 1518
+  },
+  "physical_and_Git_blob_inventory_exact": true,
+  "behavioral_installed_browser_native_CI_or_release_approval": false,
+  "operations": "Root measured all34 physical and exact Git blob bytes against accepted40d; exact7delta/27unchanged; full8544/parallels root audits and independent source/oracle reviews authenticated. Independent exact proposed-document review required before adoption. No behavioral/browser/native/release approval."
+}

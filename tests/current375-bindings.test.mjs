@@ -10,19 +10,23 @@ import {WIDGET_VERSION,WIDGET_URI,SKYBRIDGE_URI} from '../src/chatgpt-widget.mjs
 import {requiredCanonicalRevision} from '../src/locator-policy.mjs';
 import {CURRENT_APADANA_IDS,CURRENT_APADANA_RECORDS,CURRENT_APADANA_URLS,CURRENT_THERA_IDS} from './helpers/apadana-intake-expectations.mjs';
 import {INTAKE375_IDS,INTAKE375_VRI,CURRENT375_SOURCE_FILE as HISTORICAL375_SOURCE_FILE,CURRENT375_SOURCE_SHA as HISTORICAL375_SOURCE_SHA} from './helpers/intake375-metadata.mjs';
-import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure,INTAKE380_IDS,CURRENT_WIDGET_VERSION,CURRENT_WIDGET_URI,CURRENT380_SOURCE_FILE,sha} from './helpers/intake380-metadata.mjs';
+import {intake380Authority,requireProfiles380,requireMetadata380,INTAKE380_IDS,CURRENT380_SOURCE_FILE as HISTORICAL380_SOURCE_FILE,CURRENT380_SOURCE_SHA as HISTORICAL380_SOURCE_SHA,sha} from './helpers/intake380-metadata.mjs';
+
+import {current389390Authority,assertCurrent389390SourceClosure,CURRENT_WIDGET_VERSION,CURRENT_WIDGET_URI,CURRENT389390_SOURCE_FILE,CURRENT_CANONICAL_SHA,CURRENT_LOCATOR_NAMESPACE} from './helpers/current389390-metadata.mjs';
+import * as currentCanon from '../src/canon.mjs';
 
 test('actual380 exports and full ordered profiles bind widget48 while historical375 and H368 objects and canonical citation pins remain exact',()=>{
- const base=new URL('../',import.meta.url);assertCurrent380SourceClosure(base);
- const a=intake380Authority(base);requireProfiles380(APADANA_PROFILES,base);
+ const base=new URL('../',import.meta.url);assertCurrent389390SourceClosure(base);
+ const context=current389390Authority(base);assert.deepEqual(Object.keys(context),['english','canonical','widget']);const a=context.english;assert.deepEqual(a,intake380Authority(base));requireProfiles380(APADANA_PROFILES,base);
+ const actual=currentCanon.load();assert.equal(sha(JSON.stringify(actual.canon)),CURRENT_CANONICAL_SHA);assert.equal(context.canonical.new_canonical_logical_sha256,CURRENT_CANONICAL_SHA);assert.equal(context.canonical.namespace,CURRENT_LOCATOR_NAMESPACE);for(const id of context.canonical.targets){assert.deepEqual(actual.byId.get(id),context.canonical.new_units[id]);assert.equal(requiredCanonicalRevision(id),INTAKE375_VRI+'-'+CURRENT_LOCATOR_NAMESPACE);}assert.deepEqual(context.widget,{version:WIDGET_VERSION,uri:WIDGET_URI,skybridge:SKYBRIDGE_URI});
  assert.deepEqual(Object.keys(a),['ids','profiles','links','source','selection','approval','historical368','historical375','documents','manifest']);assert.equal(Object.hasOwn(a,'baseline'),false);assert.equal(a.historical368,a.historical375.baseline);
  const catalogue=JSON.parse(readFileSync(new URL('../server/data/apadana.json',import.meta.url)));requireMetadata380(APADANA_PROFILES,catalogue,base);
  function bindings(value){
   assert.deepEqual(Object.keys(value),['ids','version','uri','skybridge']);
   assert.deepEqual(value.ids,a.ids);assert.equal(value.ids.length,380);assert.equal(new Set(value.ids).size,380);
-  assert.equal(value.version,CURRENT_WIDGET_VERSION);assert.equal(value.version,'v48');
-  assert.equal(value.uri,CURRENT_WIDGET_URI);assert.equal(value.uri,'ui://pali-canon/reader-v48.html');
-  assert.equal(value.skybridge,'ui://pali-canon/reader-v48.skybridge.html');
+  assert.equal(value.version,CURRENT_WIDGET_VERSION);assert.equal(value.version,'v49');
+  assert.equal(value.uri,CURRENT_WIDGET_URI);assert.equal(value.uri,'ui://pali-canon/reader-v49.html');
+  assert.equal(value.skybridge,'ui://pali-canon/reader-v49.skybridge.html');
  }
  const good={ids:CURRENT_APADANA_IDS,version:WIDGET_VERSION,uri:WIDGET_URI,skybridge:SKYBRIDGE_URI};bindings(good);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(0,368),a.historical368.ids);assert.equal(a.historical368.ids.length,368);
@@ -37,6 +41,7 @@ test('actual380 exports and full ordered profiles bind widget48 while historical
  for(const id of INTAKE380_IDS)assert.equal(requiredCanonicalRevision(id),null);
  for(const ids of [good.ids.slice(1),good.ids.map((id,i)=>i===374?'tha-ap375':id),[...good.ids.slice(0,-1),good.ids[0]],good.ids.slice().reverse()])assert.throws(()=>bindings({...good,ids}));
  for(const bad of [{...good,version:'v46'},{...good,uri:'ui://pali-canon/reader-v46.html'},{...good,skybridge:'ui://pali-canon/reader-v46.skybridge.html'},{...good,extra:true},{ids:good.ids,version:good.version,uri:good.uri}])assert.throws(()=>bindings(bad));
+ assert.throws(()=>bindings({ids:a.ids,version:'v48',uri:'ui://pali-canon/reader-v48.html',skybridge:'ui://pali-canon/reader-v48.skybridge.html'}),'Coherent old380 widget binding stays historical');
  assert.throws(()=>bindings({ids:a.historical375.ids,version:'v47',uri:'ui://pali-canon/reader-v47.html',skybridge:'ui://pali-canon/reader-v47.skybridge.html'}),'Coherent old375 binding stays historical');
  // Each side remains separately strict; a coherent same-count old/new owner substitution cannot become a new binding.
  for(const id of [a.historical368.ids[0],...INTAKE375_IDS,...INTAKE380_IDS]){
@@ -45,9 +50,10 @@ test('actual380 exports and full ordered profiles bind widget48 while historical
  }
  // The independently sealed current source manifest is the only fixture selector.
  // Copy its exact declared source rows; never copy the repository or runtime tree.
- const closure=assertCurrent380SourceClosure(base),declared=Object.keys(closure.files);
+ const closure=assertCurrent389390SourceClosure(base),declared=Object.keys(closure.files);
  assert.ok(declared.includes('src/chatgpt-widget.mjs'));
 
+ const old380Raw=readFileSync(new URL(HISTORICAL380_SOURCE_FILE,base));assert.equal(sha(old380Raw),HISTORICAL380_SOURCE_SHA);const old380=JSON.parse(old380Raw);assert.equal(Object.keys(old380.files).length,136);for(const path of Object.keys(old380.files))assert.ok(declared.includes(path),'Every old136 path remains an actual current negative target');assert.ok(declared.includes(HISTORICAL380_SOURCE_FILE),'Old136 declaration is an authenticated historical witness');
  const oldSourceRaw=readFileSync(new URL(HISTORICAL375_SOURCE_FILE,base));assert.equal(sha(oldSourceRaw),HISTORICAL375_SOURCE_SHA);
  const oldSource=JSON.parse(oldSourceRaw);assert.equal(oldSource.schema,'reviewed-current375-source-inputs-v1');assert.equal(Object.keys(oldSource.files).length,115);
  for(const oldPath of Object.keys(oldSource.files))assert.ok(declared.includes(oldPath),'All115 historical pathnames remain actual380 negative targets');
@@ -57,9 +63,9 @@ test('actual380 exports and full ordered profiles bind widget48 while historical
  const owner=realpathSync(mkdtempSync(join(tmpdir(),'pali375-source-closure-'))),fixture=join(owner,'fixture');
  mkdirSync(fixture);
  try{
-  const targets=[CURRENT380_SOURCE_FILE,...declared],fixedPositiveTime=new Date('2020-01-01T00:00:00.000Z');
+  const targets=[CURRENT389390_SOURCE_FILE,...declared],fixedPositiveTime=new Date('2020-01-01T00:00:00.000Z');
   for(const path of targets){const target=join(fixture,path);mkdirSync(dirname(target),{recursive:true});writeFileSync(target,readFileSync(new URL(path,base)),{flag:'wx'});utimesSync(target,fixedPositiveTime,fixedPositiveTime);}
-  const fixtureURL=pathToFileURL(fixture+sep),positive=()=>assertCurrent380SourceClosure(fixtureURL);
+  const fixtureURL=pathToFileURL(fixture+sep),positive=()=>assertCurrent389390SourceClosure(fixtureURL);
   assert.deepEqual(positive(),closure);
   for(const path of targets)for(const missing of [false,true]){
    assert.deepEqual(positive(),closure);const target=join(fixture,path),raw=readFileSync(target),stamp=statSync(target);
@@ -71,14 +77,14 @@ test('actual380 exports and full ordered profiles bind widget48 while historical
    assert.deepEqual(positive(),closure);
   }
   // Direct regular-file type controls apply to both the manifest and actual widget source.
-  for(const path of [CURRENT380_SOURCE_FILE,'src/chatgpt-widget.mjs']){
+  for(const path of [CURRENT389390_SOURCE_FILE,'src/chatgpt-widget.mjs']){
    assert.deepEqual(positive(),closure);const target=join(fixture,path),raw=readFileSync(target);
    unlinkSync(target);mkdirSync(target);try{assert.throws(positive,path+' directory substitution');}finally{rmSync(target,{recursive:true});writeFileSync(target,raw,{flag:'wx'});}
    assert.deepEqual(positive(),closure);
    // Native Windows file-symlink privileges are not assumed. Its mandatory
    // parent/root junction controls below still exercise genuine alias refusal.
    if(process.platform!=='win32'){
-    const authentic=join(owner,'authentic-'+(path===CURRENT380_SOURCE_FILE?'manifest':'widget'));writeFileSync(authentic,raw,{flag:'wx'});
+    const authentic=join(owner,'authentic-'+(path===CURRENT389390_SOURCE_FILE?'manifest':'widget'));writeFileSync(authentic,raw,{flag:'wx'});
     unlinkSync(target);symlinkSync(authentic,target,'file');try{assert.throws(positive,path+' authentic file alias');}finally{unlinkSync(target);writeFileSync(target,raw,{flag:'wx'});}
     assert.deepEqual(positive(),closure);
    }
@@ -89,13 +95,13 @@ test('actual380 exports and full ordered profiles bind widget48 while historical
   try{assert.throws(positive,'authentic source-parent alias');}finally{unlinkSync(parent);renameSync(savedParent,parent);}
   assert.deepEqual(positive(),closure);
   const alias=join(owner,'root-alias');symlinkSync(fixture,alias,process.platform==='win32'?'junction':'dir');
-  try{assert.throws(()=>assertCurrent380SourceClosure(alias));assert.throws(()=>assertCurrent380SourceClosure(pathToFileURL(alias+sep)));}finally{unlinkSync(alias);}
+  try{assert.throws(()=>assertCurrent389390SourceClosure(alias));assert.throws(()=>assertCurrent389390SourceClosure(pathToFileURL(alias+sep)));}finally{unlinkSync(alias);}
   assert.deepEqual(positive(),closure);
   const rootFile=join(owner,'not-a-directory');writeFileSync(rootFile,'SYNTHETIC_SOURCE_ROOT_FILE',{flag:'wx'});
-  assert.throws(()=>assertCurrent380SourceClosure(rootFile));assert.throws(()=>assertCurrent380SourceClosure(join(owner,'missing-root')));
+  assert.throws(()=>assertCurrent389390SourceClosure(rootFile));assert.throws(()=>assertCurrent389390SourceClosure(join(owner,'missing-root')));
   let conversions=0;const foreign={toString(){conversions++;return fixture;},valueOf(){conversions++;return fixture;},[Symbol.toPrimitive](){conversions++;return fixture;}};
   for(const root of [null,{},foreign,new String(fixture),new URL('https://example.invalid/source')]){
-   assert.throws(()=>assertCurrent380SourceClosure(root));
+   assert.throws(()=>assertCurrent389390SourceClosure(root));
   }
   assert.equal(conversions,0,'Foreign source-root objects are not coerced');assert.deepEqual(positive(),closure);
  }finally{rmSync(owner,{recursive:true,force:true});}

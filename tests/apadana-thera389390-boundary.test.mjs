@@ -1,3 +1,4 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 // QUOTED UNEXECUTED SOURCE. Root must independently bind namespace/future oracle.
 import {test,before,after} from 'node:test';
 import assert from 'node:assert/strict';
@@ -194,6 +195,18 @@ function data(r){assert.ok(!r.isError,JSON.stringify(r.content));return r.struct
 function refused(r){assert.equal(r.isError,true);assert.equal(r.structuredContent?.segments,undefined);assert.match(JSON.stringify(r.content),/revision|ambiguous|unversioned|mapping/i);}
 
 test('reserved pair uses eighteen independently source-pinned fresh positions and no English activation',()=>{
+  // Historical source-only helper: actual canon stays883d and all original SUT assertions below remain.
+  const actualSourceCanon=canon.load().canon,historicalSourceCanon=historicalF3SourceFixture(actualSourceCanon);
+  assert.equal(hash(JSON.stringify(actualSourceCanon)),'883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a');
+  assert.equal(hash(JSON.stringify(historicalSourceCanon)),'f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de');
+  assert.notEqual(actualSourceCanon,historicalSourceCanon);assert.notEqual(actualSourceCanon.units,historicalSourceCanon.units);
+  assert.throws(()=>historicalF3SourceFixture(historicalSourceCanon),'A coherent old F3 input is never current');
+  const badHistoricalSourceInput=structuredClone(actualSourceCanon),badPair=badHistoricalSourceInput.units.find(unit=>unit.id==='tha-ap389');
+  const properStart=badPair.start;badPair.start=String(properStart);assert.throws(()=>historicalF3SourceFixture(badHistoricalSourceInput));badPair.start=properStart;
+  const properNamespace=badPair.index_revision;badPair.index_revision='wrong';assert.throws(()=>historicalF3SourceFixture(badHistoricalSourceInput));badPair.index_revision=properNamespace;
+  badHistoricalSourceInput.units[0].title+='!';assert.throws(()=>historicalF3SourceFixture(badHistoricalSourceInput),'An unrelated source mutation cannot be hidden');
+  historicalSourceCanon.units[0].title+='detached';
+  assert.equal(hash(JSON.stringify(actualSourceCanon)),'883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a');
  assert.equal(canon.source().commit,original);
  for(const [id,start,end,vri] of [['tha-ap389',11045,11063,'37–42'],['tha-ap390',11063,11081,'43–48']]){
   const u=canon.resolve(id).unit;assert.deepEqual([u.start,u.end,u.vri],[start,end,vri]);

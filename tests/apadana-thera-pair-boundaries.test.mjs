@@ -1,3 +1,4 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -21,7 +22,7 @@ boundaryProbeStage('start');
 const python = await findPython(); // One10s total; only genuine missing commands allow the old local optional skip.
 boundaryProbeStage('end');
 const sourceRoot = process.env.VRI_SOURCE_CHECKOUT;
-const loaded = () => canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))));
+const loaded = () => canonBeforeFour(historicalF3SourceFixture(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')))));
 const sha = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const corrected = c => {
   const out = structuredClone(c);

@@ -14,6 +14,7 @@ from unittest.mock import patch
 ROOT=Path(__file__).absolute().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 import web_reader_intake380 as current
+import web_reader_boundary389390 as boundary
 from owned_intake380_proofs import (copy_current380_source_inputs,
     copy_current380_data_inputs,copy_current380_runtime_inputs)
 from materialize_h_history import materialize_h_runtime_fixture
@@ -39,20 +40,26 @@ class Current375Negatives(unittest.TestCase):
     def setUpClass(cls):
         # Genuine current source + actual current-data/runtime gates BEFORE
         # any mutation or owned historical fixture. No generated expected data.
-        cls.source=current.source_authority380(ROOT)
-        cls.approved=current.approved380_catalogue(ROOT)
-        cls.inventory=current.approved380_runtime(ROOT)
+        cls.context=boundary.source_authority389390(ROOT)
+        cls.source=cls.context['english']
+        assert cls.source==current.source_authority380(ROOT)
+        assert cls.context['canonical']['new_canonical_logical_sha256']==boundary.CANON
+        cls.approved=boundary.approved389390_catalogue(ROOT)
+        cls.inventory=boundary.approved389390_runtime(ROOT)
         assert_runtime(ROOT,ROOT/'server')
         cls.temp=tempfile.TemporaryDirectory(prefix='pali-current375-owned-')
         cls.addClassCleanup(cls.temp.cleanup)
         cls.root=Path(cls.temp.name).resolve(strict=True)
         copy_current380_runtime_inputs(ROOT,cls.root)
-        assert current.approved380_catalogue(cls.root)==cls.approved
-        assert current.approved380_runtime(cls.root)==cls.inventory
+        assert boundary.approved389390_catalogue(cls.root)==cls.approved
+        assert boundary.approved389390_runtime(cls.root)==cls.inventory
         cls.proof_rows=json.loads((cls.root/current.BASELINE_DIRECTORY/'H_CURRENT_PROOF_INPUTS.json').read_bytes())['files']
         cls.legacy_names={current.BASELINE_DIRECTORY+'/'+n for n in (*current.BASELINE_PINS,*current.BASELINE_RUNTIME_PINS)}
         cls.extension_names={current.DIRECTORY+'/'+n for n in (*current.PINS,*current.RUNTIME_PINS)}
-        cls.current_names=cls.legacy_names|cls.extension_names
+        cls.transition_names={boundary.DIRECTORY+'/'+name for name in boundary.PINS}
+        assert len(cls.transition_names)==3
+        assert not cls.transition_names&(set(cls.proof_rows)|cls.legacy_names|cls.extension_names)
+        cls.current_names=cls.legacy_names|cls.extension_names|cls.transition_names
         cls.data_names=['server/'+n for n in cls.inventory if n.startswith('data/')]
         assert len(cls.data_names)==27 and len(cls.proof_rows)==226
 
@@ -69,8 +76,8 @@ class Current375Negatives(unittest.TestCase):
             path.write_bytes(before);os.utime(path,ns=(stamp.st_atime_ns,stamp.st_mtime_ns))
 
     def positive(self):
-        self.assertEqual(current.approved380_catalogue(self.root),self.approved)
-        self.assertEqual(current.approved380_runtime(self.root),self.inventory)
+        self.assertEqual(boundary.approved389390_catalogue(self.root),self.approved)
+        self.assertEqual(boundary.approved389390_runtime(self.root),self.inventory)
 
     def refused(self,function,root=None):
         with self.assertRaises((ValueError,FileNotFoundError,NotADirectoryError,AssertionError)):
@@ -98,21 +105,25 @@ class Current375Negatives(unittest.TestCase):
                 self.assertEqual(family,expected);self.assertEqual(len(family),count)
         self.assertEqual(approved_catalogue(self.root),self.approved)
         self.assertEqual(approved_runtime(self.root),self.inventory)
-        original=current._regular;seen=[]
+        original=boundary._regular;seen=[]
         def delegated(root,name):
             seen.append(name);return original(root,name)
-        for function in (current.approved380_catalogue,current.approved380_runtime):
+        for function in (boundary.approved389390_catalogue,boundary.approved389390_runtime):
             seen.clear()
-            with patch.object(current,'_regular',side_effect=delegated):function(self.root)
+            with patch.object(boundary,'_regular',side_effect=delegated):function(self.root)
             self.assertEqual(sorted(n for n in seen if n.startswith('server/')),sorted(self.data_names))
         # Registry/source path must work without any CURRENT runtime leaf or
         # server data access; historical baseline-runtime metadata is distinct.
         with self.change(current.DIRECTORY+'/RUNTIME_REVIEW.json',missing=True):
             with self.change('server/data/apadana.json',missing=True):
                 seen.clear()
-                with patch.object(current,'_regular',side_effect=delegated):
+                with patch.object(boundary,'_regular',side_effect=delegated):
                     self.assertEqual(current.source_authority380(self.root),self.source)
+                    self.assertEqual(boundary.source_authority389390(self.root),self.context)
                 self.assertFalse(any(n.startswith('server/') or n==current.DIRECTORY+'/RUNTIME_REVIEW.json' for n in seen))
+        with self.change(boundary.DIRECTORY+'/RUNTIME_REVIEW.json',missing=True):
+            self.assertEqual(boundary.source_authority389390(self.root),self.context)
+            self.refused(boundary.approved389390_runtime)
         self.positive()
         for anchor,size in current.ANCHORS.items():
             extra=current.curated_additions380(self.root,anchor)
@@ -126,8 +137,8 @@ class Current375Negatives(unittest.TestCase):
         for name in self.data_names:
             with self.subTest(path=name):
                 self.positive()
-                with self.change(name):self.refused(current.approved380_catalogue)
-                with self.change(name,missing=True):self.refused(current.approved380_runtime)
+                with self.change(name):self.refused(boundary.approved389390_catalogue)
+                with self.change(name,missing=True):self.refused(boundary.approved389390_runtime)
                 self.positive()
 
     def test_03_same_size_mtime_does_not_reuse_a_success(self):
@@ -137,33 +148,38 @@ class Current375Negatives(unittest.TestCase):
                 with self.change(name,preserve_mtime=True):
                     after=(self.root/name).stat()
                     self.assertEqual((before.st_size,before.st_mtime_ns),(after.st_size,after.st_mtime_ns))
-                    self.refused(current.approved380_catalogue);self.refused(current.approved380_runtime)
+                    self.refused(boundary.approved389390_catalogue);self.refused(boundary.approved389390_runtime)
                 self.positive()
 
     def _closed_proof_names(self,names):
         legacy=sorted(set(self.proof_rows)|self.legacy_names)
         extension=sorted(self.extension_names)
-        expected=sorted(legacy+extension)
-        if (type(names) is not list or names!=expected or len(names)!=251 or
+        transition=sorted(self.transition_names)
+        expected=sorted(legacy+extension+transition)
+        if (type(names) is not list or names!=expected or len(names)!=254 or
                 len(self.proof_rows)!=226 or len(self.legacy_names)!=15 or
                 len(self.extension_names)!=10 or set(legacy)&set(extension) or
-                len(legacy)!=241 or len(extension)!=10):
-            raise ValueError('Exact legacy241 plus new10 disjoint proof paths required')
+                len(legacy)!=241 or len(extension)!=10 or len(transition)!=3 or
+                set(transition)&(set(legacy)|set(extension))):
+            raise ValueError('Exact legacy241 plus extension10 plus boundary3 disjoint proof paths required')
         batch=type(self)._proof_batch
         if batch is not None and (type(batch) is not int or batch not in (0,1,2)):
             raise ValueError('Unknown closed proof batch')
         selected_legacy=legacy if batch is None else legacy[batch::3]
         selected_extension=extension if batch is None else extension[batch::3]
-        selected=sorted(selected_legacy+selected_extension)
+        selected_transition=transition if batch is None else transition[batch::3]
+        selected=sorted(selected_legacy+selected_extension+selected_transition)
         if (len(selected_legacy)!=(241 if batch is None else (81,80,80)[batch]) or
                 len(selected_extension)!=(10 if batch is None else (4,3,3)[batch]) or
-                len(selected)!=(251 if batch is None else (85,83,83)[batch])):
+                len(selected_transition)!=(3 if batch is None else 1) or
+                len(selected)!=(254 if batch is None else (86,84,84)[batch])):
             raise ValueError('Incomplete fixed proof batch')
         protocol={'batch':batch,'all_paths':list(names),'selected_paths':list(selected),
                   'completed_paths':[],'controls_per_path':['positive','missing','valid-json-tamper',
                                                            'authentic-symlink','restored-positive'],
                   'legacy':{'all_paths':legacy,'selected_paths':selected_legacy,'completed_paths':[]},
-                  'extension':{'all_paths':extension,'selected_paths':selected_extension,'completed_paths':[]}}
+                  'extension':{'all_paths':extension,'selected_paths':selected_extension,'completed_paths':[]},
+                  'transition':{'all_paths':transition,'selected_paths':selected_transition,'completed_paths':[]}}
         type(self)._proof_protocol=protocol
         def completed_iterations():
             for name in selected:
@@ -172,16 +188,18 @@ class Current375Negatives(unittest.TestCase):
                 # Any subtest failure still makes the genuine result fail below.
                 protocol['completed_paths'].append(name)
                 protocol['legacy' if name in self.legacy_names or name in self.proof_rows
-                         else 'extension']['completed_paths'].append(name)
+                         else 'transition' if name in self.transition_names else 'extension']['completed_paths'].append(name)
         return completed_iterations()
 
     def test_04_all_closed_proofs_missing_tamper_and_authentic_symlink_refuse(self):
         names=self._closed_proof_names(sorted(set(self.proof_rows)|self.current_names))
         for name in names:
             source_domain=(name in self.proof_rows and self.proof_rows[name]['domain']=='H_source_prerequisite') or name in current._source_metadata_pins()
-            function=current.source_authority380 if source_domain else current.approved380_runtime
+            canonical_source=name==boundary.DIRECTORY+'/CURRENT_CANON_BINDING.json'
+            function=boundary.source_authority389390 if canonical_source else current.source_authority380 if source_domain else boundary.approved389390_runtime
+            expected=self.context if canonical_source else self.source if source_domain else self.inventory
             with self.subTest(proof=name):
-                self.assertEqual(function(self.root),self.source if source_domain else self.inventory)
+                self.assertEqual(function(self.root),expected)
                 with self.change(name,missing=True):self.refused(function)
                 # JSON stays syntactically valid, rather than relying on parse failure.
                 before=(self.root/name).read_bytes()
@@ -191,12 +209,12 @@ class Current375Negatives(unittest.TestCase):
                     target=Path(d).resolve(strict=True)/'authentic.json';target.write_bytes(before)
                     with self.change(name) as path:
                         path.unlink();path.symlink_to(target);self.refused(function)
-                self.assertEqual(function(self.root),self.source if source_domain else self.inventory)
+                self.assertEqual(function(self.root),expected)
         self.positive()
 
     def test_05_exact_roots_and_genuine_H_tokens_reject_before_any_path_IO(self):
-        for function in (current.source_authority380,current.reviewed_intake380,
-                         current.approved380_catalogue,current.approved380_runtime):
+        for function in (boundary.source_authority389390,current.source_authority380,current.reviewed_intake380,
+                         boundary.approved389390_catalogue,boundary.approved389390_runtime):
             self.assertEqual(function(str(self.root)),function(self.root))
         class PathProtocol:
             def __fspath__(self):raise AssertionError('Custom path protocol was called')
@@ -210,6 +228,25 @@ class Current375Negatives(unittest.TestCase):
         self._assert_before_IO([traversal,str(traversal)])
         with tempfile.TemporaryDirectory(prefix='pali-H375-token-fixture-') as temporary:
             hroot=Path(temporary).resolve(strict=True);materialize_h_runtime_fixture(ROOT,hroot)
+            # Genuine F3 packed bytes are only mutation witnesses: actual SUT
+            # remains the new runtime fixture. Never return/project an inverse.
+            old_inventory=json.loads((self.root/current.DIRECTORY/'RUNTIME_INVENTORY.json').read_bytes())['files']
+            witnesses={}
+            for relative in ('data/canon.json.gz.part-0001','data/canon.json.gz.part-0002','data/canon.json.gz.parts.json','data/parallels.json.gz'):
+                raw=(hroot/'server'/relative).read_bytes()
+                self.assertEqual((len(raw),hashlib.sha256(raw).hexdigest()),
+                                 (old_inventory[relative]['bytes'],old_inventory[relative]['sha256']))
+                witnesses['server/'+relative]=raw
+            from contextlib import ExitStack
+            for paths in (('server/data/canon.json.gz.part-0002',),
+                          ('server/data/canon.json.gz.parts.json',),
+                          ('server/data/canon.json.gz.part-0001','server/data/canon.json.gz.part-0002','server/data/canon.json.gz.parts.json'),
+                          ('server/data/parallels.json.gz',)):
+                with ExitStack() as stack:
+                    for name in paths:stack.enter_context(self.change(name,raw=witnesses[name]))
+                    self.refused(boundary.approved389390_catalogue)
+                    self.refused(boundary.approved389390_runtime)
+                self.positive()
             # Exact H module bodies are unchanged; explicit H root never375.
             import web_reader_six_boundary_history as historical
             with historical._c1_operation_scope(hroot) as scope:
@@ -247,8 +284,8 @@ class Current375Negatives(unittest.TestCase):
         def delegated_read(path,*args,**kwargs):count.append('read');return original_read(path,*args,**kwargs)
         with patch.object(Path,'stat',delegated_stat),patch.object(Path,'read_bytes',delegated_read):
             for root in roots:
-                for function in (current.source_authority380,current.reviewed_intake380,
-                                 current.approved380_catalogue,current.approved380_runtime):
+                for function in (boundary.source_authority389390,current.source_authority380,current.reviewed_intake380,
+                                 boundary.approved389390_catalogue,boundary.approved389390_runtime):
                     with self.assertRaises(ValueError):function(root)
         self.assertEqual(count,[])
 
@@ -260,11 +297,15 @@ class Current375Negatives(unittest.TestCase):
         first['selection']['approved_records'][0]['poem']=-1
         self.assertEqual(second,self.source)
         self.assertEqual(current.source_authority380(self.root),self.source)
-        runtime=current.approved380_runtime(self.root)
+        context=boundary.source_authority389390(self.root)
+        context['canonical']['namespace']='unreviewed'
+        context['canonical']['new_units']['tha-ap390']['start']=-1
+        self.assertEqual(boundary.source_authority389390(self.root),self.context)
+        runtime=boundary.approved389390_runtime(self.root)
         runtime[next(iter(runtime))]['sha256']='0'*64
-        self.assertEqual(current.approved380_runtime(self.root),self.inventory)
+        self.assertEqual(boundary.approved389390_runtime(self.root),self.inventory)
         with self.change(current.DIRECTORY+'/APPROVAL.json',missing=True):
-            self.refused(current.source_authority380);self.refused(current.approved380_catalogue)
+            self.refused(current.source_authority380);self.refused(boundary.approved389390_catalogue)
         self.positive()
 
     def test_07_full_old368_plus_literal7_and_no_history_fallback(self):
@@ -285,22 +326,22 @@ class Current375Negatives(unittest.TestCase):
                 changed=deepcopy(original);value=changed['links'][uid][field]
                 changed['links'][uid][field]=('0' if value[0]!='0' else '1')+value[1:]
                 with self.change('server/data/apadana.json',raw=json.dumps(changed,ensure_ascii=False).encode()):
-                    self.refused(current.approved380_catalogue)
+                    self.refused(boundary.approved389390_catalogue)
         for bad_uid in ('tha-ap360','tha-ap999999'):
             changed=deepcopy(original);uid=current.IDS[-1]
             changed['links'][bad_uid]=changed['links'].pop(uid)
             self.assertEqual(len(changed['links']),380)
             with self.change('server/data/apadana.json',raw=json.dumps(changed,ensure_ascii=False).encode()):
-                self.refused(current.approved380_catalogue)
+                self.refused(boundary.approved389390_catalogue)
         old=deepcopy(original);old['source']=baseline['manifest_source'];old['held']=baseline['manifest_held'];old['links']=baseline['links']
         with self.change('server/data/apadana.json',raw=json.dumps(old,ensure_ascii=False).encode()):
-            self.refused(current.approved380_catalogue);self.refused(current.approved380_runtime)
+            self.refused(boundary.approved389390_catalogue);self.refused(boundary.approved389390_runtime)
         old375=deepcopy(prefix['manifest'])
         self.assertEqual(len(old375['links']),375)
         with self.change('server/data/apadana.json',raw=json.dumps(old375,ensure_ascii=False).encode()):
-            self.refused(current.approved380_catalogue);self.refused(current.approved380_runtime)
+            self.refused(boundary.approved389390_catalogue);self.refused(boundary.approved389390_runtime)
         with self.change(current.DIRECTORY+'/RUNTIME_REVIEW.json',missing=True):
-            self.refused(current.approved380_runtime)
+            self.refused(boundary.approved389390_runtime)
         self.positive()
 
     def test_08_actual34_runtime_guards_keep_nondata_extras_and_path_identity(self):
@@ -347,6 +388,11 @@ class Current375Negatives(unittest.TestCase):
                             function(self.root,traversal)
                     self.assertEqual(reads,[])
                     self.assertEqual(list(child.iterdir()),[])
+            with tempfile.TemporaryDirectory(prefix='pali-boundary-copy-proof-loss-') as d:
+                destination=Path(d).resolve(strict=True)
+                with self.change(boundary.DIRECTORY+'/CURRENT_CANON_BINDING.json',missing=True):
+                    with self.assertRaises((ValueError,FileNotFoundError)):function(self.root,destination)
+                self.assertEqual(list(destination.iterdir()),[])
         with tempfile.TemporaryDirectory(prefix='pali375-copy-mutant-') as d:
             with self.change(current.DIRECTORY+'/PROFILES.json'):
                 with self.assertRaises(ValueError):copy_current380_source_inputs(self.root,Path(d).resolve(strict=True))
@@ -392,12 +438,13 @@ def _run_closed_group():
     success=(result.wasSuccessful() and result.testsRun==len(selected) and
              not result.failures and not result.errors and not result.skipped and
              not result.expectedFailures and not result.unexpectedSuccesses)
-    receipt={'schema':'current380-closed-negative-group-v1','group':group,
+    receipt={'schema':'current389390-closed-negative-group-v1','group':group,
              'full_methods':list(complete),'selected_methods':list(selected),
              'tests_run':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),
              'skipped':len(result.skipped),'expected_failures':len(result.expectedFailures),
              'unexpected_successes':len(result.unexpectedSuccesses),'successful':success,
-             'proof':Current375Negatives._proof_protocol}
+             'proof':Current375Negatives._proof_protocol,
+             'current_canonical_logical_sha256':boundary.CANON}
     sys.stdout.write(json.dumps(receipt,ensure_ascii=False,separators=(',',':'))+'\n')
     raise SystemExit(0 if success else 1)
 

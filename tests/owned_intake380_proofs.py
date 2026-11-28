@@ -1,8 +1,10 @@
-"""Three fixed CURRENT380 copy domains; no375 runtime capture or caller readers."""
+"""Three fixed380-English/new883d copy domains; no historical runtime capture."""
 from pathlib import Path
 from web_reader_intake380 import (_physical_root, _regular, _sha, _require,
     _source, _proof_rows, _source_metadata_pins, _all_metadata_pins,
-    _capture380_current, source_authority380)
+    source_authority380)
+from web_reader_boundary389390 import (source_authority389390,_capture389390_current,
+    DIRECTORY as BOUNDARY_DIRECTORY,PINS as BOUNDARY_PINS)
 # Reuse the exact old physical guard/write primitives, never its old capture.
 from owned_intake375_proofs import _empty, _exclusive
 
@@ -14,11 +16,18 @@ def _copy(source_root,destination,kind):
     _require(root!=destination and not destination.is_relative_to(root) and
              not root.is_relative_to(destination),'Separate external owned fixture required')
     if kind=='source':
-        authority,_,_=_source(root)
+        context=source_authority389390(root)
+        authority=context['english']
         runtime=None
     else:
-        authority,runtime=_capture380_current(root)
+        context,runtime=_capture389390_current(root)
+        authority=context['english']
     names=_source_metadata_pins() if kind=='source' else _all_metadata_pins()
+    transition=('CURRENT_CANON_BINDING.json',) if kind=='source' else tuple(BOUNDARY_PINS)
+    for leaf in transition:
+        name=BOUNDARY_DIRECTORY+'/'+leaf
+        _require(name not in names,'Overlapping boundary source/runtime metadata')
+        names[name]=BOUNDARY_PINS[leaf]
     for name,row in _proof_rows(authority).items():
         if kind!='source' or row['domain']=='H_source_prerequisite':
             _require(name not in names,'Overlapping source/proof copy domains')
@@ -28,7 +37,7 @@ def _copy(source_root,destination,kind):
             if kind=='runtime' or name.startswith('data/'):
                 _require('server/'+name not in names,'Overlapping runtime/proof copy domains')
                 names['server/'+name]=row['sha256']
-    _require(len(names)==(217 if kind=='source' else 278 if kind=='data' else 285),
+    _require(len(names)==(218 if kind=='source' else 281 if kind=='data' else 288),
              'Exact finite source/data/runtime copy set required')
     written=[]
     try:
@@ -44,8 +53,8 @@ def _copy(source_root,destination,kind):
             leaf=destination/name
             if leaf.is_file() and not leaf.is_symlink():leaf.unlink()
         raise
-    if kind=='source':source_authority380(destination)
-    else:_capture380_current(destination)
+    if kind=='source':source_authority389390(destination)
+    else:_capture389390_current(destination)
     return frozenset(written)
 
 

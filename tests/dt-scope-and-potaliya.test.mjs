@@ -1,3 +1,4 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { canonBeforeTheraPair } from './helpers/canon-before-thera-pair.mjs';
 import {CURRENT_APADANA_IDS, BASELINE_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
@@ -25,7 +26,7 @@ function fixture(){return `${begin}<div class="chapter">${Array.from({length:24}
 function install(){const d=canon.load();saved||=d.translations;const link={...structuredClone(d.translations.mn54[0]),path:'/tipitaka/mn/synthetic-dream-fixture',url:'https://accesstoinsight.org/tipitaka/mn/synthetic-dream-fixture.html'};link.partial_scope.text_sha256=scopeHash(selected);link.partial_scope.notice_sha256=scopeHash(english.atiNotice(fixture()));d.translations={...d.translations,mn54:[link]};return {unit:canon.resolve('mn54').unit,link,id:canon.translationId(link)};}
 
 test('three primary DT and one ATI whole bindings are held globally while complete Pali remains unchanged',async()=>{
- assert.equal(scopeHash(canonBeforeTheraPair(canonBeforeFour(canon.load().canon))),'49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1');
+ assert.equal(scopeHash(canonBeforeTheraPair(canonBeforeFour(historicalF3SourceFixture(canon.load().canon)))),'49701605d61352898b3970143192e12b3509dbda966cfb42511e2af0e5f790a1');
  assert.equal(report.rows.length,4);assert.equal(report.rows.filter(r=>r.source==='dhammatalks').length,3);
  let calls=0;globalThis.fetch=async()=>{calls++;throw Error('No held fetch');};
  const key=x=>{const u=new URL(x);return u.hostname.replace(/^www\./,'')+u.pathname;};

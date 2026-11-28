@@ -1,3 +1,4 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -28,7 +29,7 @@ const bounds = {
 
 test('both Therā boundary pairs and false commentary ownership change atomically with exact original source parity', { skip: !python, timeout: 125000 }, async () => {
   const input = {
-    canon: canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')))),
+    canon: canonBeforeFour(historicalF3SourceFixture(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))))),
     commentary: JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz'))),
   };
   const bi = input.canon.units.find(u => u.id === 'tha-ap19').book;

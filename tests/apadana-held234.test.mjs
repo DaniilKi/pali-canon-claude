@@ -1,6 +1,8 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
-import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
-assertCurrent380SourceClosure(new URL('../',import.meta.url));
+import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
 const HistoricalH368Profiles=current380Source.historical368.profiles;
@@ -47,7 +49,7 @@ test('held234 curation appends only236 to exact284 objects and preserves separat
   assert.equal(current380Source.historical368.ids.length,368);assert.equal(CURRENT_APADANA_IDS.length,380);
   for(const id of e.previous.expected_profile_ids){assert.deepEqual(APADANA_PROFILES[id],e.priorProfiles[id],id+' prior profile exact');assert.deepEqual(manifest.links[id],e.priorLinks[id],id+' prior link exact');}
   assert.deepEqual(APADANA_PROFILES['tha-ap236'],e.profiles['tha-ap236']);assert.deepEqual(manifest.links['tha-ap236'],e.links['tha-ap236']);
-  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);
+  assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixture(data.canon)))),e.approval.before_canon_sha256);assert.equal(e.approval.after_canon_sha256,e.approval.before_canon_sha256);
   assert.deepEqual(data.byId.get('tha-ap236'),e.peer.canonical_unit);assert.equal(data.byId.get('tha-ap236').index_revision,undefined);
   assert.equal(rootDigest(data.byId.get('tha-ap236'),data.canon.books[36]),e.peerGolden.root_sha256);
   assert.equal(digest(JSON.stringify(data.canon.books[36].blocks.slice(8015,8032))),e.peerGolden.raw_unit_blocks_sha256,'Raw-block and registered-root hash domains remain distinct');

@@ -8,7 +8,7 @@ permissions:
   contents: read
 env:
   CI_TEST_BASELINE_INDEX: docs/evidence/qa/english381-386/BASELINE_380_TEST_FILES.json
-  CI_TEST_BASELINE_SHA: d6d38f95b43c4f2cb67687e23e664ce2a1b09d24ff786dd834e9b303500e6c55
+  CI_TEST_BASELINE_SHA: 30b580d377faf0f3cee450b806b26fce45d6f0f4c02e22452cd1cd826cfc443a
 jobs:
   hosted-memory:
     name: Hosted memory budget
@@ -186,6 +186,14 @@ jobs:
       - name: Audit versioned bookmark refusals and legacy review
         if: matrix.group == 'provenance'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-bookmark-pin-check.py --a11y --report standalone-bookmark-pin-a11y.report.json
+      - name: Check repaired 389-390 saved positions and exports in a fresh installed reader
+        if: matrix.group == 'provenance'
+        timeout-minutes: 4
+        run: |
+          mkdir -p "$RUNNER_TEMP/fruit-pair-package" "$RUNNER_TEMP/fruit-pair-install"
+          npm pack --pack-destination "$RUNNER_TEMP/fruit-pair-package"
+          npm install --offline --ignore-scripts --no-audit --no-fund --prefix "$RUNNER_TEMP/fruit-pair-install" "$RUNNER_TEMP/fruit-pair-package/"*.tgz
+          PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-fruit-boundary-check.py --source-root "$GITHUB_WORKSPACE" --installed-root "$RUNNER_TEMP/fruit-pair-install/node_modules/pali-canon-mcp" --report installed-fruit-boundary.report.json
       - name: Check source-aware Pāli print and PDF privacy
         if: matrix.group == 'core'
         run: PALI_BROWSER="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" python scripts/web-reader-print-check.py --report standalone-print.report.json
@@ -1705,6 +1713,7 @@ jobs:
             standalone-saved-a11y.report.json
             standalone-bookmark-pin.report.json
             standalone-bookmark-pin-a11y.report.json
+            installed-fruit-boundary.report.json
             standalone-a11y.report.json
             standalone-scope.report.json
             standalone-scope-a11y.report.json

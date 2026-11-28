@@ -16,7 +16,7 @@ import time
 
 # Closed CLI-only preparation diagnostics. Imported helper behavior is unchanged.
 # Stderr carries metadata only; stdout remains the original success receipt.
-_PREP_PHASES=frozenset(('bootstrap', 'qa-imports-ready', 'materialize-start', 'actual380-start', 'actual380-complete', 'source-authority-start', 'source-authority-complete', 'git-mode-start', 'git-mode-returned', 'git-mode-verified', 'git-blobs-start', 'git-blobs-returned', 'git-objects-verified', 'dependency-start', 'dependency-complete', 'write-start', 'write-complete', 'final-descriptors-start', 'final-descriptors-complete', 'terminal-receipt-ready'))
+_PREP_PHASES=frozenset(('bootstrap', 'qa-imports-ready', 'materialize-start', 'actual380-start', 'actual380-complete', 'source-authority-start', 'source-authority-complete', 'git-mode-start', 'git-mode-returned', 'git-mode-verified', 'git-blobs-start', 'git-blobs-returned', 'git-objects-verified', 'dependency-start', 'dependency-complete', 'write-start', 'write-progress', 'write-complete', 'final-descriptors-start', 'final-descriptors-complete', 'terminal-receipt-ready'))
 _PREP_DIAGNOSTICS=(__name__=='__main__')
 _PREP_STARTED=time.monotonic()
 _PREP_SEQUENCE=0
@@ -48,7 +48,7 @@ _prep_phase('bootstrap')
 sys.path.insert(0,str(Path(__file__).absolute().parents[1]/'scripts'))
 from web_reader_intake375 import (DIRECTORY,H_COMMIT,_physical_root,_require,
     _relative,_regular,_row,_sha)
-from web_reader_intake380 import source_authority380,_capture380_current
+from web_reader_boundary389390 import source_authority389390,_capture389390_current,CANON
 from owned_intake375_proofs import _empty,_exclusive
 
 _prep_phase('qa-imports-ready')
@@ -128,12 +128,12 @@ def _materialize(source_root,destination,kind):
              not source_root.is_relative_to(destination),'Separate owned H fixture required')
     if kind=='runtime':
         _prep_phase('actual380-start')
-        authority,_=_capture380_current(source_root)  # actual CURRENT380 positive before H
+        context,_=_capture389390_current(source_root)  # actual883d/current380 positive before H
         _prep_phase('actual380-complete')
     else:
-        authority=source_authority380(source_root)  # source-only380 positive before H
+        context=source_authority389390(source_root)  # source-only new canonical context before H
     _prep_phase('source-authority-start')
-    documents=authority['historical375']['documents']
+    documents=context['english']['historical375']['documents']
     _prep_phase('source-authority-complete')
     manifest=documents['H_HISTORY_FIXTURE_INPUTS.json']
     _require(manifest.get('schema')=='H-history-fixture-inputs-v1' and
@@ -191,6 +191,8 @@ def _materialize(source_root,destination,kind):
                      (os.name=='nt' or bool(status.st_mode&0o111)==(rows[name]['mode']=='100755')) and
                      _regular(destination,name)==raw[name],'H copy/mode/readback mismatch')
             written.append(name)
+            if len(written) in (250,500,750,980):
+                _prep_phase('write-progress',len(written))
         name='node_modules/axe-core/axe.min.js'
         _exclusive(destination,name,dependency_raw);written.append(name)
     except BaseException:
@@ -205,8 +207,9 @@ def _materialize(source_root,destination,kind):
         _require(item['path'] in rows and all(item[k]==rows[item['path']][k] for k in ('bytes','sha256')),
                  'H index/workflow descriptor differs from copied object')
     _prep_phase('final-descriptors-complete')
-    return {'schema':'owned-H-history-fixture-v2','kind':kind,'commit':H_COMMIT,
+    return {'schema':'owned-H-history-fixture-v3','kind':kind,'commit':H_COMMIT,
             'root':str(destination),'files':sorted(written),'current380_checked':True,
+            'current_canonical_logical_sha256':CANON,
             'index':index,'workflow':workflow}
 
 

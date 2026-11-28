@@ -1,9 +1,11 @@
+import {historicalF3SourceFixtureFromOwnedH} from './helpers/historical389390-source-canon.mjs';
 /** Current380 app/API stays actual R; historical baseline inputs are explicit owned H. */
 import {after as closeThera221HistoricalInputs} from 'node:test';
 import {lstatSync as thera221InputStat} from 'node:fs';
 import {resolve as thera221Resolve,isAbsolute as thera221IsAbsolute} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {assertCurrent380SourceClosure,intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
 import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
 const actualThera221Root=new URL('../',import.meta.url);
 function readThera221RegularBytes(root,path){
@@ -12,7 +14,7 @@ function readThera221RegularBytes(root,path){
  return readActualFileSync(target);
 }
 function thera221ReadMode(raw,options){assert.ok(options.length===0||options.length===1&&options[0]==='utf8','Existing explicit Buffer or utf8 mode only');return options.length?raw.toString('utf8'):raw;}
-assertCurrent380SourceClosure(actualThera221Root);
+assertCurrent389390SourceClosure(actualThera221Root);
 requireProfiles380(APADANA_PROFILES,actualThera221Root);
 requireMetadata380(APADANA_PROFILES,JSON.parse(readThera221RegularBytes(actualThera221Root,'server/data/apadana.json')),actualThera221Root);
 const thera221Source=intake380Authority(actualThera221Root),thera221Manifest=thera221Source.historical375.documents['H_HISTORY_FIXTURE_INPUTS.json'];
@@ -229,7 +231,7 @@ test('221–230 intake is exactly independently approved10 and preserves all256 
     assert.deepEqual(APADANA_PROFILES[uid], oldProfile, `${uid} previous profile exact`);
     assert.deepEqual(manifest.links[uid], oldLink, `${uid} previous source link exact`);
   }
-  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))), baseline.canon_logical_sha256, 'This intake cannot change canonical words, boundaries or locator revisions');
+  assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixtureFromOwnedH(data.canon, thera221HRoot)))), baseline.canon_logical_sha256, 'This intake cannot change canonical words, boundaries or locator revisions');
   for (const uid of approved) {
     const p = APADANA_PROFILES[uid], g = golden(uid), u = data.byId.get(uid), book = data.canon.books[u.book];
     assert.equal(p, THERA_APADANA_PROFILES[uid]);

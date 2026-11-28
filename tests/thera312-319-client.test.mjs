@@ -1,12 +1,13 @@
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
-import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
-assertCurrent380SourceClosure(new URL('../',import.meta.url));
+import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
 const HistoricalH368Profiles=current380Source.historical368.profiles;
 const HistoricalH368Catalogue={version:1,source:current380Source.historical368.manifest_source,vri_commit:current380Source.manifest.vri_commit,held:current380Source.historical368.manifest_held,links:current380Source.historical368.links};
 requireProfiles380(APADANA_PROFILES);
-import {CURRENT_WIDGET_VERSION} from './helpers/intake380-metadata.mjs';
+import {CURRENT_WIDGET_VERSION} from './helpers/current389390-metadata.mjs';
 /** Source-positive comparisons use presealed metadata, not implementation output as expected data. */
 import test,{afterEach} from 'node:test';
 import assert from 'node:assert/strict';

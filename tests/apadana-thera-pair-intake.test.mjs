@@ -1,3 +1,4 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { CURRENT_APADANA_IDS } from './helpers/apadana-intake-expectations.mjs';
 /** Exact source-scope curation, separate from production profile derivation. */
@@ -100,7 +101,7 @@ test('paired intake is exactly independently approved39 and preserves all129 pri
     assert.deepEqual(APADANA_PROFILES[uid], oldProfile, `${uid} previous profile exact`);
     assert.deepEqual(manifest.links[uid], oldLink, `${uid} previous source link exact`);
   }
-  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))), independent.required_current_canon_logical_sha256);
+  assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixture(data.canon)))), independent.required_current_canon_logical_sha256);
   for (const uid of approved) {
     const p = APADANA_PROFILES[uid], g = golden(uid), u = data.byId.get(uid), book = data.canon.books[u.book];
     assert.equal(p, THERA_APADANA_PROFILES[uid]);

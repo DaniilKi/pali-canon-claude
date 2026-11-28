@@ -1,9 +1,11 @@
+import {historicalF3SourceFixtureFromOwnedH} from './historical389390-source-canon.mjs';
 /** Current380 app/API inputs and explicit immutable historical read domains. */
 import {after as closeRemainingHistoricalInputs} from 'node:test';
 import {lstatSync as remainingInputStat} from 'node:fs';
 import {resolve as remainingResolve,isAbsolute as remainingIsAbsolute} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {assertCurrent380SourceClosure,intake380Authority,requireProfiles380,requireMetadata380} from './intake380-metadata.mjs';
+import {intake380Authority,requireProfiles380,requireMetadata380} from './intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './current389390-metadata.mjs';
 import {prepareHistoricalHRuntimeInputs} from './historical-h-inputs.mjs';
 const actualRemainingRoot=new URL('../../',import.meta.url);
 function readRemainingRegularBytes(root,path){
@@ -13,7 +15,7 @@ function readRemainingRegularBytes(root,path){
 }
 function remainingReadMode(raw,options){assert.ok(options.length===0||options.length===1&&options[0]==='utf8','Existing explicit Buffer or utf8 mode only');return options.length?raw.toString('utf8'):raw;}
 // Current source/profile/complete AP380 positives precede ALL historical setup.
-assertCurrent380SourceClosure(actualRemainingRoot);
+assertCurrent389390SourceClosure(actualRemainingRoot);
 requireProfiles380(APADANA_PROFILES,actualRemainingRoot);
 requireMetadata380(APADANA_PROFILES,JSON.parse(readRemainingRegularBytes(actualRemainingRoot,'server/data/apadana.json')),actualRemainingRoot);
 const remaining380Source=intake380Authority(actualRemainingRoot),remainingHManifest=remaining380Source.historical375.documents['H_HISTORY_FIXTURE_INPUTS.json'];
@@ -146,7 +148,7 @@ test('group '+batch+' intake is exactly independently approved9 and preserves al
     assert.deepEqual(APADANA_PROFILES[uid], oldProfile, `${uid} previous profile exact`);
     assert.deepEqual(manifest.links[uid], oldLink, `${uid} previous source link exact`);
   }
-  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))), baseline.canon_logical_sha256, 'This intake cannot change canonical words, boundaries or locator revisions');
+  assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixtureFromOwnedH(data.canon, remainingHRoot)))), baseline.canon_logical_sha256, 'This intake cannot change canonical words, boundaries or locator revisions');
   for (const uid of approved) {
     const p = APADANA_PROFILES[uid], g = golden(uid), u = data.byId.get(uid), book = data.canon.books[u.book];
     assert.equal(p, THERA_APADANA_PROFILES[uid]);

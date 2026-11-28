@@ -25,6 +25,7 @@ from web_reader_test_helpers import read_tool
 from web_reader_apadana_intake import reviewed_intake
 from canon.apadana_thera_pair_spans import canon_before_thera_pair
 from web_reader_four_boundary_history import canon_before_four
+from canon.apadana_thera389390_spans import canon_before_389390, POST_PAIR_SHA256
 
 ROOT = Path(__file__).resolve().parents[1]
 HARNESS_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
@@ -292,7 +293,9 @@ def main():
     run = subprocess.run(['node', '--input-type=module', '-e', probe], cwd=ROOT, input=json.dumps(str(server_dir/'data/canon.json.gz')), text=True, capture_output=True)
     assert run.returncode == 0
     current = json.loads(run.stdout)
-    assert canon_before_thera_pair(canon_before_four(current)) == canon, 'Only independently verified atomic107/108 and333–336 metadata may differ from historical canonical snapshot'
+    assert digest(compact(current)) == POST_PAIR_SHA256, 'Actual installed current canonical JSON must be exactly883d'
+    historical_current_source_canon = canon_before_389390(copy.deepcopy(current))
+    assert canon_before_thera_pair(canon_before_four(historical_current_source_canon)) == canon, 'Only independently verified atomic107/108 and333–336 metadata may differ from historical canonical snapshot'
     for uid in old['links']:
         a = next(u for u in canon['units'] if u['id'] == uid)
         b = next(u for u in current['units'] if u['id'] == uid)

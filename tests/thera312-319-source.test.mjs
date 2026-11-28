@@ -1,6 +1,8 @@
+import {historicalF3SourceFixtureFromOwnedH} from './helpers/historical389390-source-canon.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
-import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
-assertCurrent380SourceClosure(new URL('../',import.meta.url));
+import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
 const HistoricalH368Profiles=current380Source.historical368.profiles;
@@ -59,7 +61,7 @@ test('exact333 identities preserve all325 full ordered profile and link objects,
   assert.equal(APADANA_COMMIT,REV);
   assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('thi-ap')).length,40);
   assert.equal(Object.keys(current380Source.historical375.profiles).filter(id=>id.startsWith('tha-ap')).length,335);assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,340);
-  assert.equal(digest(JSON.stringify(canonBeforeFour(data.canon))),e.compact.canonical_logical_sha256);
+  assert.equal(digest(JSON.stringify(canonBeforeFour(historicalF3SourceFixtureFromOwnedH(data.canon, HistoricalHBase)))),e.compact.canonical_logical_sha256);
   assert.equal(data.canon.units.length,8544);assert.equal(data.canon.books.length,61);
   for(const [path,sha] of Object.entries(e.compact.data_file_sha256)) assert.equal(digest(readFileSync(path)),sha,'Preserved original325 data '+path);
   for(const id of e.ids) {

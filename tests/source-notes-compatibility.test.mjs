@@ -1,6 +1,8 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
-import {intake380Authority,requireProfiles380,requireMetadata380,assertCurrent380SourceClosure} from './helpers/intake380-metadata.mjs';
-assertCurrent380SourceClosure(new URL('../',import.meta.url));
+import {intake380Authority,requireProfiles380,requireMetadata380} from './helpers/intake380-metadata.mjs';
+import {assertCurrent389390SourceClosure} from './helpers/current389390-metadata.mjs';
+assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
 const HistoricalH368Profiles=current380Source.historical368.profiles;
@@ -26,7 +28,7 @@ const baseline = JSON.parse(readFileSync(new URL('./fixtures/source-notes-baseli
 const sha = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
 test('separately indexed note preserves all old unit and book identities, source objects and 420 downstream spans', () => {
-  const data = canonBeforeFour(canon.load().canon);
+  const data = canonBeforeFour(historicalF3SourceFixture(canon.load().canon));
   assert.equal(sha(data), baseline.canonical_sha256);
   const units = data.units;
   const books = data.books.map((book, i) => ({
@@ -58,7 +60,7 @@ test('separately indexed note preserves all old unit and book identities, source
 });
 
 test('complete old segment objects remain unchanged in all 8544 units and 61 books under every existing variant mode', () => {
-  const data = canonBeforeFour(canon.load().canon);
+  const data = canonBeforeFour(historicalF3SourceFixture(canon.load().canon));
   const books = data.books.map((book, i) => ({
     id: `vri-book:${book.file.replace(/\.mul\.xml$/, '')}`, book: i,
     start: 0, end: book.blocks.length,

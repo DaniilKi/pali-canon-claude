@@ -1,0 +1,116 @@
+{
+  "schema": "reviewed-boundary389390-current-canon-binding-v1",
+  "status": "APPROVED_SOURCE_BOUNDARY_AND_PARALLELS_BINDING_ONLY",
+  "base_commit": "40d27f3bc8af2386ee253c32174652a9bbad0153",
+  "source_commit": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "old_canonical_logical_sha256": "f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de",
+  "new_canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "namespace": "apadana-thera389-390-v1",
+  "targets": [
+    "tha-ap389",
+    "tha-ap390"
+  ],
+  "old_units": {
+    "tha-ap389": {
+      "id": "tha-ap389",
+      "book": 36,
+      "start": 11045,
+      "end": 11067,
+      "title": "Kadaliphaladāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 389",
+      "vri": "37–43",
+      "pts": {
+        "volume": 1,
+        "page": 297,
+        "end_page": 297
+      }
+    },
+    "tha-ap390": {
+      "id": "tha-ap390",
+      "book": 36,
+      "start": 11067,
+      "end": 11081,
+      "title": "Panasaphaladāyakattheraapadāna",
+      "collection": "ap",
+      "acronym": "Tha Ap 390",
+      "vri": "44–48",
+      "pts": {
+        "volume": 1,
+        "page": 297,
+        "end_page": 297
+      }
+    }
+  },
+  "new_units": {
+    "tha-ap389": {
+      "id": "tha-ap389",
+      "book": 36,
+      "start": 11045,
+      "end": 11063,
+      "title": "Kadaliphaladāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 389",
+      "vri": "37–42",
+      "pts": {
+        "volume": 1,
+        "page": 297,
+        "end_page": 297
+      },
+      "index_revision": "apadana-thera389-390-v1"
+    },
+    "tha-ap390": {
+      "id": "tha-ap390",
+      "book": 36,
+      "start": 11063,
+      "end": 11081,
+      "title": "Panasaphaladāyakattheraapadānaṃ",
+      "collection": "ap",
+      "acronym": "Tha Ap 390",
+      "vri": "43–48",
+      "pts": {
+        "volume": 1,
+        "page": 297,
+        "end_page": 297
+      },
+      "index_revision": "apadana-thera389-390-v1"
+    }
+  },
+  "preservation": {
+    "source_books": 61,
+    "other_units": 8542,
+    "commentary_unchanged": true,
+    "english_profiles": 380,
+    "english_links": 380,
+    "held_unchanged": true,
+    "accepted_citations": 5327,
+    "shared_links": 1518
+  },
+  "english_profiles_sha256_JSON_stringify": "e813f4786e2ed80b2e172d3a9795d36c968e40070a1375326f1c9eb1a5df3b56",
+  "english_links_sha256_JSON_stringify": "9ae1d604d035757fe200ac2ade4ef4a2027ed370b30bd061c69d2aa3bc80c898",
+  "held_sha256_JSON_stringify": "641c6abeccada54ff6e33139504bef3ca7ce2a8342b68ea25e9099f7ee53328f",
+  "evidence": {
+    "source_review": {
+      "artifact": "boundary389390/implementation-independent-review/v3/INDEPENDENT_REVIEW.json",
+      "bytes": 4605,
+      "sha256": "af81a110c7f555898f5513a51a23e6f88270c03f0112aeca73db4b0b54f10eed"
+    },
+    "namespace_oracle_review": {
+      "artifact": "boundary389390/namespace-oracle-independent-review/v1/INDEPENDENT_REVIEW.json",
+      "bytes": 3004,
+      "sha256": "db2d9a49f1587d548801343c0e5bc4f35da5746ea654c7fc4d4881f1e79162ef"
+    },
+    "full_canon_audit": {
+      "artifact": "boundary389390/root-execution/ACTUAL_FULL_AUDIT_AFTER_PARALLELS_RESULT.json",
+      "bytes": 177,
+      "sha256": "1f4399812a3e572383988e5c064538185411584d156541441e8c5558c686febc"
+    },
+    "parallels_diff_review": {
+      "artifact": "boundary389390/root-execution/PARALLELS_DIFF_REVIEW_ROOT.json",
+      "bytes": 567,
+      "sha256": "c94dbf0622922647a48f9a670ab272847d67f7d9a458d0be32bdc6d83efa297b"
+    }
+  },
+  "source_only": true,
+  "behavioral_or_release_approval": false
+}

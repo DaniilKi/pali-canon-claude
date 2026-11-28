@@ -5,7 +5,7 @@ Source fixtures are exact pinned originals, never forwarded upstream. Reports co
 import argparse,copy,gzip,hashlib,json,math,os,re,signal,socket,stat,subprocess,sys,tempfile,time,traceback,unicodedata,urllib.parse,urllib.request
 from contextlib import contextmanager
 from pathlib import Path
-VRI='2d134ff9ef60f70a1eb03c9370580228811a3070';REV='fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4';F3='f3b3a608bac8d7e9f56323eb06fcc6fccdf2640561b7c2382d5c8cc34cc535de'
+VRI='2d134ff9ef60f70a1eb03c9370580228811a3070';REV='fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4';CURRENT_CANON='883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a';BASE='40d27f3bc8af2386ee253c32174652a9bbad0153'
 KEY='pali-library-v1';DRAFT='pali-library-note-drafts-v1';CANARY='SYNTHETIC_PRIVATE_ENGLISH16';PRIVATE=CANARY+'_a\u0304😀'
 phase='arguments';report={'status':'running','checks':[],'counts':{},'limitations':'Fresh installed HTTP/MCP and actual Chromium DOM using5pinned external publisher fixtures. No live provider/signedhost/physicaldevice/humanAT/freshbrowseroffline or originalVRI-note acceptance claim.'}
 PAIRS=[(381,'tha-ap383'),(383,'tha-ap385'),(384,'tha-ap386'),(385,'tha-ap387'),(386,'tha-ap388')]
@@ -415,9 +415,9 @@ def whole_source(data,row,p,version):
 
 def source_metadata(c,stage):
  root=Path(c['source_root']);require(root.is_absolute()and root.is_dir()and not any(z.is_symlink()for z in[root,*root.parents]),'PHYSICAL_CURRENT_SOURCE_ROOT')
- require(set(c['qa_source_closure'])=={'tests/helpers/intake380-metadata.mjs'},'ONE_FIXED_CURRENT_SOURCE_HELPER')
+ require(set(c['qa_source_closure'])=={'tests/helpers/intake380-metadata.mjs','tests/helpers/current389390-metadata.mjs'},'FIXED_CURRENT_AND_UNCHANGED_ENGLISH_SOURCE_HELPERS')
  for path,pin in c['qa_source_closure'].items():sealed({'path':str(root/path),'sha256':pin},False)
- program="""import{pathToFileURL}from'node:url';const root=pathToFileURL(process.argv[1]+'/'),m=await import(new URL('tests/helpers/intake380-metadata.mjs',root));m.assertCurrent380SourceClosure(root);const a=m.intake380Authority(root);console.log(JSON.stringify({ids:a.ids,profiles:a.profiles,links:a.links,historical375:a.historical375,historical368:a.historical368,manifest:a.manifest,approval:a.approval,documents:a.documents,source_pins:m.INTAKE380_PINS,widget_version:m.CURRENT_WIDGET_VERSION,widget_uri:m.CURRENT_WIDGET_URI}));"""
+ program="""import{readFileSync}from'node:fs';import{createHash}from'node:crypto';import{pathToFileURL}from'node:url';const root=pathToFileURL(process.argv[1]+'/'),m=await import(new URL('tests/helpers/intake380-metadata.mjs',root));const current=await import(new URL('tests/helpers/current389390-metadata.mjs',root));current.assertCurrent389390SourceClosure(root);const predecessorRaw=readFileSync(new URL('docs/evidence/apadana/english381-386-five/RUNTIME_INVENTORY.json',root)),context=current.current389390Authority(root),a=context.english;console.log(JSON.stringify({ids:a.ids,profiles:a.profiles,links:a.links,historical375:a.historical375,historical368:a.historical368,manifest:a.manifest,approval:a.approval,documents:a.documents,source_pins:m.INTAKE380_PINS,canonical_binding:context.canonical,canonical_binding_sha256:current.CURRENT389390_CANON_BINDING_SHA,predecessor_inventory:JSON.parse(predecessorRaw),predecessor_inventory_sha256:createHash('sha256').update(predecessorRaw).digest('hex'),widget_version:context.widget.version,widget_uri:context.widget.uri}));"""
  env={k:v for k,v in os.environ.items()if k not in('NODE_OPTIONS','NODE_PATH')}
  result=subprocess.run(['node','--input-type=module','-e',program,str(root)],cwd=stage,env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=30)
  require(result.returncode==0 and len(result.stdout)<=16777216,'GENUINE_CURRENT380_SOURCE_HOOK_REFUSED_OR_BOUND');return json.loads(result.stdout)
@@ -427,7 +427,7 @@ def preflight(c,server,stage):
  require(c['schema']=='english5-installed-reader-contract-v1'and c['execution_status']=='READY_EXACT_FIVE_SOURCE_AND_INSTALLED_BINDINGS','UNREVIEWED_OR_PENDING_CONTRACT')
  require(re.fullmatch('[a-f0-9]{40}',c['application_commit'])is not None and re.fullmatch('[a-f0-9]{40}',c['package_snapshot_commit'])is not None,'ACTUAL_COMMIT_PINS_REQUIRED')
  require(sha(Path(__file__).read_bytes())==c['harness_sha256'],'EXACT_REVIEWED_FIVE_DRIVER')
- require(c['canonical_logical_sha256']==F3 and c['publisher_revision']==REV and c['approved_pairs']==[{'publisher':p,'id':u}for p,u in PAIRS],'EXACT_SOURCE_SCOPE')
+ require(c['canonical_logical_sha256']==CURRENT_CANON and c['publisher_revision']==REV and c['approved_pairs']==[{'publisher':p,'id':u}for p,u in PAIRS],'EXACT_SOURCE_SCOPE')
  require(c['pending_roles']==[],'PENDING_BINDINGS')
  meta=source_metadata(c,stage);ids=[uid for _,uid in PAIRS]
  require(len(meta['ids'])==380 and meta['ids']==meta['historical375']['ids']+ids and list(meta['documents']['PROFILES.json'])==ids,'SOURCE_DERIVED_FULL380_AND_EXACT_FIVE');c['approved_ids']=ids
@@ -444,17 +444,22 @@ def preflight(c,server,stage):
  require(install['offline_npm_install']is True and install['npm_scripts_executed']is False and install['registry_downloads']==install['observed_http_fetches']==0,'GENUINE_OFFLINE_PACKAGE_INSTALL_PROCESS')
  require(install['all39_archive_checkout_install_bytes_exact']is True and binding['all39_commit_archive_installed_exact']is True and len(install['members'])==39 and inventory(package)==install['members']==binding['members'],'ALL39_ACTUAL_INSTALLED_BYTES')
  require(install['installed']==str(package)and inventory(server.resolve())==runtime['files']and len(runtime['files'])==34,'ALL34_CURRENT_INSTALLED_RUNTIME_BYTES')
- require(runtime['schema']=='independent-reviewed-intake380-runtime-inventory-v1'and runtime['candidate_commit']==c['application_commit']and runtime['canonical_logical_sha256']==F3 and runtime['runtime_files']==34 and runtime['inventory_only']is True and runtime['behavioral_or_release_approval']is False,'ACTUAL_TYPED_CURRENT_RUNTIME_INVENTORY')
- require(review['schema']=='reviewed-intake380-runtime-approval-v1'and review['status']=='GO_RUNTIME_INVENTORY_ONLY'and review['application_commit']==c['application_commit']and review['inventory_sha256']==c['runtime_inventory']['sha256'],'EXACT_CURRENT_RUNTIME_REVIEW_APP_AND_INVENTORY_BINDING')
- require(runtime['curation_sha256']==review['curation_sha256']==meta['source_pins']['APPROVAL.json']and runtime['baseline_commit']==review['baseline_commit']=='9bacd4d7b98c53ed4ae53785b5213a35c2a93096','SAME_EXACT_SOURCE_CURATION_AND_BASELINE')
- require(review['runtime_paths']==34 and review['actual_data_paths']==27 and review['physical_and_Git_blob_inventory_exact']is True and review['canonical_data26_and_H_held_preserved']is True and review['behavioral_installed_browser_native_CI_or_release_approval']is False,'EXACT_REVIEWED34_PHYSICAL_GIT_AND_DATA_SCOPE')
- require(review['changed_paths']==runtime['allowed_changed_paths']and review['unchanged_paths']==len(runtime['unchanged_paths'])==29,'FINITE_REVIEWED_RUNTIME_DELTA')
- require(review['expected_manifest_sha256']==runtime['files']['data/apadana.json']['sha256']==sha((server/'data/apadana.json').read_bytes()),'INDEPENDENT_EXPECTED_MANIFEST_BYTE_BINDING')
+ require(runtime['schema']=='independent-reviewed-boundary389390-runtime-inventory-v1'and runtime['candidate_commit']==c['application_commit']and runtime['canonical_logical_sha256']==CURRENT_CANON and runtime['runtime_files']==34 and runtime['inventory_only']is True and runtime['behavioral_or_release_approval']is False,'ACTUAL_TYPED_CURRENT_RUNTIME_INVENTORY')
+ require(review['schema']=='reviewed-boundary389390-runtime-approval-v1'and review['status']=='GO_EXACT_NEW_CANON_RUNTIME_INVENTORY_ONLY'and review['application_commit']==c['application_commit']and review['inventory_sha256']==c['runtime_inventory']['sha256'],'EXACT_CURRENT_RUNTIME_REVIEW_APP_AND_INVENTORY_BINDING')
+ require(runtime['canonical_binding_sha256']==review['canonical_binding_sha256']==meta['canonical_binding_sha256'] and runtime['predecessor_inventory_sha256']==review['predecessor_inventory_sha256']==meta['predecessor_inventory_sha256'] and runtime['baseline_commit']==review['baseline_commit']==BASE,'SAME_EXACT_NEW_CANON_BINDING_AND_PREDECESSOR')
+ require(meta['canonical_binding']['new_canonical_logical_sha256']==CURRENT_CANON and review['canonical_logical_sha256']==CURRENT_CANON and review['namespace']==meta['canonical_binding']['namespace']=='apadana-thera389-390-v1' and review['preservation']==meta['canonical_binding']['preservation'],'EXACT_NEW_CANONICAL_CONTEXT')
+ require(review['runtime_paths']==34 and review['actual_data_paths']==27 and review['physical_and_Git_blob_inventory_exact']is True and review['preservation']['held_unchanged']is True and review['behavioral_installed_browser_native_CI_or_release_approval']is False,'EXACT_REVIEWED34_PHYSICAL_GIT_AND_DATA_SCOPE')
+ require(review['changed_paths']==runtime['allowed_changed_paths']and review['unchanged_paths']==len(runtime['unchanged_paths'])==27,'FINITE_REVIEWED_RUNTIME_DELTA')
+ require(meta['predecessor_inventory']['files']['data/apadana.json']['sha256']==runtime['files']['data/apadana.json']['sha256']==sha((server/'data/apadana.json').read_bytes()),'INDEPENDENT_UNCHANGED_ENGLISH_MANIFEST_BYTE_BINDING')
+ changed=['data/canon.json.gz.part-0002','data/canon.json.gz.parts.json','data/parallels.json.gz','http-worker.cjs','http.cjs','index.cjs','web/reader.js'];require(runtime['allowed_changed_paths']==changed and sorted(runtime['files'])==sorted(meta['predecessor_inventory']['files']) and runtime['unchanged_paths']==sorted(set(runtime['files'])-set(changed)),'EXACT_SEVEN_RUNTIME_CHANGES_AND27_UNCHANGED')
+ for name in runtime['unchanged_paths']:require(runtime['files'][name]==meta['predecessor_inventory']['files'][name],'EXACT_PREDECESSOR_RUNTIME_UNCHANGED_BYTES')
+ for name in changed:require(runtime['files'][name]!=meta['predecessor_inventory']['files'][name],'EXACT_REVIEWED_CHANGED_RUNTIME_BYTE_DOMAIN')
  require(sha(sealed(c['archive'],False))==install['archive_sha256']==binding['archive_sha256'],'EXACT_SAME_ARCHIVE');require(json.loads((server/'data/apadana.json').read_bytes())==meta['manifest'],'ACTUAL_INSTALLED_MANIFEST_EQUALS_SOURCE380')
  parts=json.loads((server/'data/canon.json.gz.parts.json').read_bytes());chunks=[]
  for part in parts['parts']:
   raw=(server/'data'/part['file']).read_bytes();require(sha(raw)==part['sha256']and len(raw)==part['size'],'CANON_PART_PIN');chunks.append(raw)
- logical=gzip.decompress(b''.join(chunks));require(sha(logical)==F3,'UNCHANGED_F3');canon=json.loads(logical);require(len(canon['units'])==8544 and len(canon['books'])==61,'UNCHANGED_CORPUS_EXTENT');units={u['id']:u for u in canon['units']}
+ logical=gzip.decompress(b''.join(chunks));require(sha(logical)==CURRENT_CANON,'ACTUAL_REVIEWED_NEW_CANONICAL_SHA');canon=json.loads(logical);require(len(canon['units'])==8544 and len(canon['books'])==61,'UNCHANGED_CORPUS_EXTENT');units={u['id']:u for u in canon['units']}
+ for uid in meta['canonical_binding']['targets']:require(units[uid]==meta['canonical_binding']['new_units'][uid],'ACTUAL_TYPED_REVIEWED_BOUNDARY_PAIR')
  c['_pins']={uid:VRI+'-'+u['index_revision']if'index_revision'in u else VRI for uid,u in units.items()};roots={uid:render(canon,units[uid])for uid in[*ids,*RETAINED_SEVEN_IDS,'tha-ap107','tha-ap333','tha-ap340','tha-ap348','tha-ap349','tha-ap360']}
  golden=meta['documents']['SOURCE_BINDINGS.json']['source_derived_API_expected_metadata'];require(set(golden)=={'entries'}and list(golden['entries'])==ids,'SOURCE_GOLDEN_IDS');c['_rows']=[];c['_quotes']={};c['_queries']={};c['_verified_mutation_baselines']={};c['_historical375']=meta['historical375'];c['_all_profiles']=meta['profiles'];c['_manifest']=meta['manifest']
  old_capsule=meta['historical375']['documents']['SOURCE_BINDINGS.json']['source_derived_API_expected_metadata']['entries']['tha-ap373']['translation_source_metadata']

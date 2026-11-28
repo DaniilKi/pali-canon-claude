@@ -7,6 +7,8 @@ or human assistive acceptance. Full English is never written to reports.
 import argparse,gzip,hashlib,importlib.util,json,os,re,signal,socket,subprocess,sys,tempfile,time,traceback,urllib.request
 from datetime import datetime,timezone
 from web_reader_four_boundary_history import historical_canon_bytes
+import copy
+from canon.apadana_thera389390_spans import canon_before_389390, POST_PAIR_SHA256
 from pathlib import Path
 from web_reader_apadana_intake import reviewed_held234_intake,read_261_280,read_281_285,read_287_288,read_292_299,read_301_310,read_312_319,read_321_329,read_331_334,read_335_350,_reviewed_current368 as read_historical368,_reviewed_current375 as read_historical375,curated_additions
 from web_reader_approved_acceptance import assert_runtime
@@ -133,7 +135,10 @@ def main():
     assert rows[UID]['raw_sha256']!=rows[NEIGHBOR]['raw_sha256'] and rows[UID]['body_sha256']!=rows[NEIGHBOR]['body_sha256']
     parts=json.loads((server_dir/'data/canon.json.gz.parts.json').read_text())['parts']
     canon_raw=gzip.decompress(b''.join((server_dir/'data'/(part if isinstance(part,str) else part['file'])).read_bytes() for part in parts))
-    canon_raw=historical_canon_bytes(canon_raw)
+    current_canon_source=json.loads(canon_raw)
+    assert digest(compact(current_canon_source))==POST_PAIR_SHA256, 'Actual installed current canonical JSON must be exactly883d'
+    historical_canon_source=canon_before_389390(copy.deepcopy(current_canon_source))
+    canon_raw=historical_canon_bytes(compact(historical_canon_source).encode('utf-8'))
     assert digest(canon_raw)==approval['after_canon_sha256'];canon=json.loads(canon_raw)
     normalized=normalized_segments(g,canon);assert normalized==norm['poems'][0]['pali_segments']
     for k in engine.PINS:assert rows[UID][k]==normalization_poems[UID][k]

@@ -1,4 +1,4 @@
-import {CURRENT_WIDGET_VERSION} from './helpers/intake380-metadata.mjs';
+import {CURRENT_WIDGET_VERSION} from './helpers/current389390-metadata.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';

@@ -1,3 +1,4 @@
+import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 import {canonBeforeFour} from './helpers/canon-before-four.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -12,7 +13,7 @@ const python = ['python3', 'python'].find(cmd => spawnSync(cmd, ['--version']).s
 
 test('finite third-vagga pair repair preserves earlier repairs, future holds and commentary atomically', { skip: !python }, () => {
   const input = {
-    canon: canonBeforeFour(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz')))),
+    canon: canonBeforeFour(historicalF3SourceFixture(JSON.parse(gunzipSync(readBundled('server/data/canon.json.gz'))))),
     commentary: JSON.parse(gunzipSync(readBundled('server/data/commentary.json.gz'))),
   };
   const bi = input.canon.units.find(u => u.id === 'thi-ap23').book;
