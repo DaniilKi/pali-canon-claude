@@ -1,16 +1,19 @@
 # AGENTS.md
 
-## Current development routing: 386-choice intake
+## Current development routing: 394-choice intake
 
 Read [the current validation guide](docs/qa/current-apadana-validation.md) and
-[four-source scope](docs/data/thera394-407-four-intake.md) before using the
+[eight-source scope](docs/data/thera411-419-eight-intake.md) before using the
 historical capsules below. Their pending statuses, counts and version-specific
 entrypoints describe earlier snapshots; check the actual Git ref and its CI.
 
 Use `tests/helpers/current-apadana.mjs` and
 `scripts/web_reader_current_apadana.py` for the live source role. Pure historical
 382 declarations and the old198 map remain immutable source witnesses, not a
-runtime fallback. Keep source validation distinct from actual27-data capture
+runtime fallback. Current declarations compose that pure382 prefix with the
+approved four and eight source cohorts. The two closed `source_cohorts` views
+contain source metadata only; they are not old386 runtimes or API projections.
+Keep source validation distinct from actual27-data capture
 and target34-runtime verification. Retain all fourteen original historical
 Python method bodies. Current-negative scenarios keep their identities and
 refusals; current cardinality predicates use independently reviewed declarations.
@@ -26,14 +29,24 @@ there, with all eight test callbacks preserved. A current-workflow digest must
 normalize only the global baseline SHA to the reviewed placeholder; embedding
 the final index-dependent workflow hash would create a hash cycle.
 
-Publisher394/397/406/407 map to canonical tha-ap396/399/408/409. Preserve all382
+Before the source recipe and new browser driver, the builtin-only preflight
+authenticates the sealed CI index, support/map ownership and fixed source leaves.
+This is a scoped preexecution check, not a claim that all project execution is
+preauthenticated. Additional provenance/test-oracle files have their own fixed
+hash checks; do not expand the seven-file cohort API to pretend it reads them.
+
+Publisher411/412/414–419 map to canonical tha-ap413/414/416–421. Preserve all386
 earlier full objects, all nine publisher holds and ten canonical holds; the two
-numbering systems differ. Complete publisher-edition poems do not imply
-line-complete VRI translations. The candidate inventory is356 files/2118 cases
-with14 direct supports; all75 existing required jobs must pass on the exact
+numbering systems differ. Publisher413/420 remain conditional even though the
+different canonical IDs tha-ap413/tha-ap420 have approved sources. Complete
+publisher-edition poems do not imply line-complete VRI translations. The final
+sealed index supplies exact file/case/support counts; all75 existing required
+jobs must pass on the exact
 candidate before a dev-only fast-forward. Do not merge main or deploy. Real
 device, human screen-reader and signed-in-host acceptance remain separate;
-use [the hands-on checklist](docs/qa/english394-407/manual-acceptance.md).
+use [the hands-on checklist](docs/qa/english411-419/manual-acceptance.md).
+Offline browser downloads/PWA remain unsupported. The monthly-refresh prerequisite
+repair is [a separate deferred scope](docs/qa/monthly-refresh-prerequisites.md).
 
 **Pending CI-only Linux full-file scheduling (source proposal only):** exactF `7c55503` finished72/75 required CI jobs. Linux22's original SIX heavy method02 hit its unchanged60-second child bound despite1+6; the other six completed53.2s, scope passed56.7s and approved33 passed18.9s. Linux20 full SIX passed46.4s; both full macOS runs, all eight actual Windows partitions and all browser jobs passed. The two dependent Windows aggregate guards correctly refused the failed Linux22 reference. This is neither a source/API defect finding nor proof of a CPU cause.
 
