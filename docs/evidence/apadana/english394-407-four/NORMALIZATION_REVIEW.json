@@ -1,0 +1,77 @@
+{
+  "schema": "author-four-source-activation-reverification81-v1",
+  "status": "GO_UNCHANGED_FOUR_PUBLISHER_EDITION_SOURCE_SCOPES_AGAINST_ACCEPTED81_ONLY",
+  "review_role": "Original source-preparation author reverification, not a new independent peer review.",
+  "accepted_dev_base_parent_supplied": "81c970094bcb1a539acf4e3856491ea9af9cc57f",
+  "old_packet_unchanged": {
+    "file": "/tmp/pali-next-four394407-sourceprep-nov28/MANIFEST.json",
+    "bytes": 3797,
+    "sha256": "6e43b0c39d8fdd2e4cce918d54828aa62b3ca85436f56cc7e75e445d20467246"
+  },
+  "old_independent_review_unchanged": {
+    "file": "/tmp/pali-next-four394407-independent-nov28/INDEPENDENT_SOURCE_REVIEW.json",
+    "bytes": 9581,
+    "sha256": "50dba77c1735c496661f34450447911a49044921ff1ad4453db14ef69922b96b"
+  },
+  "old_context_preserved": "Original f031 accepted/c702 unaccepted-context fields remain correct historical packet records; no frozen field was rewritten. This additive receipt supplies current accepted81 context.",
+  "literal_pairs": [
+    [
+      394,
+      "tha-ap396"
+    ],
+    [
+      397,
+      "tha-ap399"
+    ],
+    [
+      406,
+      "tha-ap408"
+    ],
+    [
+      407,
+      "tha-ap409"
+    ]
+  ],
+  "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "VRI_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "current382_prefix_source_evidence": {
+    "file": "/tmp/pali-four386-evidence-nov28/source-reverification/CURRENT382_PREFIX_EVIDENCE.json",
+    "bytes": 10953,
+    "sha256": "e040f7b8d7a9eeb300f362d10fe857783dcd5585b327f4b9ac9395b6d3174166"
+  },
+  "primary_and_private_word_evidence": {
+    "file": "/tmp/pali-four386-evidence-nov28/source-reverification/PRIMARY_SOURCE_AND_PRIVATE_WITNESS_RECHECK.json",
+    "bytes": 35273,
+    "sha256": "b0c6074f5b29896af7efa0613a6b56ec28d6d9e336bf15d252422b01fbdf8002"
+  },
+  "input_closure": {
+    "file": "/tmp/pali-four386-evidence-nov28/source-reverification/INPUTS.json",
+    "bytes": 15831,
+    "sha256": "6fbb3abad75672fb6410cb645581727fe27c6b6fcbb91c49dea7aa60f1644b2c"
+  },
+  "profiles382_full_objects_sha256_JSON_stringify": "3a424f4c8f11e77ae35f5c2cf3fcc5d233b54b6987ad242effb38b919fdfeeeb",
+  "links382_full_objects_sha256_JSON_stringify": "a6a2f7fd636c007221e8ee2cac397a935f9a45feff66c4d22f5727e10bf0e48c",
+  "all382_options_and_order_exact_approved_source_vs_actual_manifest_and_literal_registry": true,
+  "old382_manifest_source_and_held_exact": true,
+  "all_nine_publisher_hold_objects_unchanged": true,
+  "all_ten_historical_selection_held_ids_unchanged": true,
+  "all_new_four_ids_disjoint_from_current382": true,
+  "all_primary4_raw6_rights_XML_and_canon_hashes_exact": true,
+  "all_existing8_private_witnesses_raw_word_note_hashes_exact": true,
+  "no_source_generation_or_private_word_output": true,
+  "new_source_blocker": null,
+  "qualifications_still_mandatory": [
+    "394 original local15–16/global3720 grouping, note21 after suffix, note8 unfinished quote, note16 Sikhi versus mainSumedha.",
+    "397 note28 explicit corrupt offering readings, note44 unfinished quote and note33 mixed punctuation.",
+    "406 source Nanda versus BJTS/canonical Nandaka and original Anuraddha/Anuruddha/metre discussion.",
+    "407 original four eight-line range paragraphs; independent Pāli recitation marker remains unexpanded and without invented English.",
+    "113 expanded global labels differ from114 expanded local labels because of394; preserve original domains without inventing a missing stanza.",
+    "Whole publisher-edition scope does not imply line-complete VRI coverage or intended-note completion."
+  ],
+  "rights_scope": "Specific translation CC BY-NC-SA4.0; preserve Walters/Whitman attribution, licence URL, provenance/revision and change/warranty notices. Generic siteBY4 does not broaden the terms. No new commercial/media or publisher endorsement approval.",
+  "source_reverification_only": true,
+  "new_independent_review_claim": false,
+  "runtime_API_browser_CI_activation_release_or_push_approval": false,
+  "operations": "Read/hash/stdlib data and quoted literal source inspection only; no producer/app/test/build/Git/browser/CI/network execution or checkout writes."
+}

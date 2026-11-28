@@ -1,0 +1,91 @@
+{
+  "schema": "reviewed-thera394-407-four-independent-source-approval-v1",
+  "status": "GO_EXACT_FOUR_PUBLISHER_EDITION_SOURCE_SCOPES_ONLY",
+  "base_commit": "81c970094bcb1a539acf4e3856491ea9af9cc57f",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "approved_pairs": [
+    [
+      394,
+      "tha-ap396"
+    ],
+    [
+      397,
+      "tha-ap399"
+    ],
+    [
+      406,
+      "tha-ap408"
+    ],
+    [
+      407,
+      "tha-ap409"
+    ]
+  ],
+  "source_documents": {
+    "profiles": {
+      "file": "PROFILES.json",
+      "bytes": 29416,
+      "sha256": "fef6e9e9af3c70dd5efdbec3e98a9d882165cde92337df022b1e49e4077415b1"
+    },
+    "approved_links": {
+      "file": "LINKS.json",
+      "bytes": 29723,
+      "sha256": "116e8fbe5437a47c8226496a7f2bd4c7657ed2dbd47a0cf78094417edd2fa251"
+    },
+    "producer_pending_links": {
+      "file": "PROPOSED_LINKS.json",
+      "bytes": 29727,
+      "sha256": "d0c8cb4a974ea95ad1dd8da269a4addf56ace4bd52a3417f7e43d74316b837f3"
+    },
+    "source_bindings": {
+      "file": "SOURCE_BINDINGS.json",
+      "bytes": 626928,
+      "sha256": "54119b17caeb16f4bec416b4698a67bbb8c3b5cb7e4cf07e5e7983028c524e89"
+    },
+    "normalization_review": {
+      "file": "NORMALIZATION_REVIEW.json",
+      "bytes": 4267,
+      "sha256": "2fb7a5df73246f98646540b7b40cb3f7a750f518bfd76402f3573dadb7f3a9c1"
+    },
+    "required_notices": {
+      "file": "REQUIRED_NOTICES.json",
+      "bytes": 8304,
+      "sha256": "acff79613ecac0907c2d748f7c192088c174b51564edefb07f415e2322f41bed"
+    }
+  },
+  "producer_evidence": {
+    "original_source_packet": {
+      "file": "/tmp/pali-next-four394407-sourceprep-nov28/MANIFEST.json",
+      "bytes": 3797,
+      "sha256": "6e43b0c39d8fdd2e4cce918d54828aa62b3ca85436f56cc7e75e445d20467246"
+    },
+    "original_independent_source_review": {
+      "file": "/tmp/pali-next-four394407-independent-nov28/INDEPENDENT_SOURCE_REVIEW.json",
+      "bytes": 9581,
+      "sha256": "50dba77c1735c496661f34450447911a49044921ff1ad4453db14ef69922b96b"
+    },
+    "additive_author81_reverification": {
+      "file": "/tmp/pali-four386-evidence-nov28/source-reverification/SOURCE_REVERIFICATION.json",
+      "bytes": 4267,
+      "sha256": "2fb7a5df73246f98646540b7b40cb3f7a750f518bfd76402f3573dadb7f3a9c1"
+    },
+    "current382_prefix_evidence": {
+      "file": "/tmp/pali-four386-evidence-nov28/source-reverification/CURRENT382_PREFIX_EVIDENCE.json",
+      "bytes": 10953,
+      "sha256": "e040f7b8d7a9eeb300f362d10fe857783dcd5585b327f4b9ac9395b6d3174166"
+    },
+    "source_goldens": {
+      "file": "/tmp/pali-next-four394407-sourceprep-nov28/derived-v1/public/SOURCE_DERIVED_GOLDENS.json",
+      "bytes": 329344,
+      "sha256": "ad4c85afb9d3408804acc63d3962e1a8009b3b5c409734198b0d5406d51c4a21"
+    }
+  },
+  "all_nine_publisher_holds_unchanged": true,
+  "all_ten_historical_canonical_held_ids_unchanged": true,
+  "complete_publisher_editions_only": true,
+  "source_and_normalization_only": true,
+  "runtime_API_activation_or_release_approval": false,
+  "operations": "Independent accepted81 source-only review: fresh read/hash/Git-blob calculation for the four original publisher files, six specific translation-rights/routing artifacts, original VRI XML and unchanged883d canonical shards; all14 source inputs exact. Reused authenticated prior raw-first50d source interpretation after fresh physical pins, and independently compared all8 original private fixtures plus four independent prior normalized fixtures; all121 body paragraphs,141 complete notes,109 physical quotation entries,37 hard500 pages/start-prefix/end-continuation hashes match source-derived domains. Current382 full profile/link objects and original order were independently source-composed from approved368+7+5+2, with actual compiled links compared only as observed metadata. All10 historical canonical holds and all9 full publisher hold objects/statuses remain unchanged; publisher406/407 are distinct from held publisher408/409. Literal394→396,397→399,406→408,407→409 source identities preserve titles, narratives, exact colophons, root wrappers and independent VRI notes/peyyala/apparatus. Keep394 local15–16 as one physical paragraph and distinguish109 physical/113 expanded global/114 expanded local numbering; original unfinished quotation punctuation and Sikhi/Sumedha, corrupt397 offering interpretation, Nanda/Nandaka and Anuraddha/Anuruddha alternatives, four407 eight-line paragraphs and unrendered VRI recitation marker remain mandatory attributed qualifications. Specific Walters/Whitman CC BY-NC-SA4.0 controls translation reuse; preserve attribution, revision, licence URL, change/warranty and edition notices; generic siteBY4/public availability grants no broader commercial/media/endorsement permission. PROFILES/notices exact original bytes; approvedLINKS changes only four pending match markers, with whole inverse; BINDINGS adds only exact original source-derived API expected metadata entries and otherwise restores original whole bytes. No APP/self/current-source-closure/future-runtime digest is referenced: five primitives→this independent leaf→separate APPROVAL is acyclic. This GO is source/normalization scope only, not line-complete VRI, parser/API/runtime/package/browser/CI/activation/release. Only stdlib reading/hashing/JSON composition/decompression; no author producer/application/parser/test/Git/network/CI execution or target writes. Private body/note wording remains external and must not be bundled or committed."
+}

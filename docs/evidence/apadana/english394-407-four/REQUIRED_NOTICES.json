@@ -1,0 +1,77 @@
+{
+  "schema": "publisher394397406407-required-notices-proposal-v1",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "translator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "specific_rights_artifacts": {
+    "LICENSE.md": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    "src/_pages/about.md": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    "src/_includes/site/footer.njk": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    "src/_includes/layouts/epub-metadata.xml": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    "src/_data/site.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    "src/_poems/_poems.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  },
+  "per_poem": {
+    "tha-ap396": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading391, BJTS brace/file394 and canonical tha-ap396 are separate literal identities. The Indus hermitage, Sumedha honey/mat offering, honey-rain rebirth narrative and named colophons establish this pair; no general number offset is approved.",
+      "Retain local15–16/global3720 as one four-line source paragraph. Note21 distinguishes PTS two six-syllable-foot verses from BJTS one twelve-syllable-foot verse; local21 final numbering and20 printed global labels are both original, not missing text to reconstruct.",
+      "Note8 ends in original unfinished quotation punctuation at the published definition boundary; preserve every word as printed and do not invent a closing quote or intended continuation. Note16 refers to Sikhi while the main poem names Sumedha; preserve the attributed discrepancy without harmonization.",
+      "All23 notes remain poem-owned (1–2 heading,3–23 stanza); no chapter heading or summary is assigned. Preserve notes17–23 edition/metre choices and all four independent VRI variant notes. Publisher full refrains do not expand the two VRI peyyāla stanzas."
+    ],
+    "tha-ap399": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading394, BJTS brace/file397 and canonical tha-ap399 remain separate literal identities. The family-death/grief narrative, Sumedha teaching, offerings/praise and named colophons establish this particular pair; no general numbering rule is approved.",
+      "Source note28 explicitly calls the offering wording corrupt and records competing readings. Keep its complete published note and chosen flower-stalk translation as attributed editorial judgment, not as a resolution or repair of Pāli.",
+      "Source note44 ends in an unclosed original gloss quotation; preserve its exact published words and punctuation and do not invent a closing mark or continuation. Mixed quotation punctuation in note33 also remains unchanged.",
+      "All49 notes stay poem-owned (1–2 heading,3–49 stanza); all30 four-line source paragraphs and their two closing colophons are retained. No chapter heading or summary is assigned. Preserve every PTS/BJTS alternative and all seven independent VRI notes; publisher full refrains do not expand the two VRI peyyāla stanzas."
+    ],
+    "tha-ap408": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading403, BJTS brace/file406 and canonical tha-ap408 are separately verified identities. Source note2 names BJTS Nandaka while the source title/colophons say Nanda; retain both without renaming. The deer-hunter, lotus pavilion, illness/death and subsequent attainment narrative supports this correspondence.",
+      "Keep source Anuraddha and note4’s explicit Anuruddha/metre discussion exactly as published, with canonical wording separate. Do not regularize names, metre or lexical alternatives to force edition agreement.",
+      "All22 four-line source paragraphs, both colophons and19 notes (1–2 heading,3–19 stanza) remain complete publisher-edition scope. No chapter heading or summary is assigned. All five VRI variants and three peyyāla stanzas remain independent and unexpanded."
+    ],
+    "tha-ap409": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading404, BJTS brace/file407 and canonical tha-ap409 are separately verified literal identities. The Anoma ascetic, Piyadassi encounter, gem-seat/rose-apple offering, promised retinues and named colophons establish this particular pair, without a general number-offset rule.",
+      "Retain four physical eight-line paragraphs with single terminal ranges: local25–26/global4096–4097,27–28/4098–4099,29–30/4100–4101 and32–33/4103–4104. All41 printed stanzas occupy37 physical source paragraphs; do not split or reflow the originals.",
+      "All50 notes remain poem-owned (1–2 heading,3–50 stanza); all interpretations, animal/trainer alternatives and metre choices remain attributed. No publisher chapter heading, summary or recitation-marker wording is invented.",
+      "The canonical tha-ap409 unit contains an independent recitation marker after its Hemaka colophon, absent from this publisher file. Preserve that original Pāli apparatus separately; whole publisher coverage does not supply an English rendering. All three VRI variant notes and three peyyāla stanzas remain independent and unexpanded."
+    ]
+  },
+  "rights_scope": "Retain attribution, source edition/revision, specific BY-NC-SA4 licence, change and warranty notices. Generic site BY4 metadata and public availability do not broaden translation reuse. No new commercial/media/publication approval.",
+  "presentation_changes": "Only explicitly reverse-checked formatting conversions; words, punctuation, spelling, original note labels/ownership, line/stanza breaks, speaker assignments and colophons retained. No Unicode normalization or invented completion."
+}
