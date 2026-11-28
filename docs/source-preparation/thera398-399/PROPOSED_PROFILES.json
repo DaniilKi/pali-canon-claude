@@ -1,0 +1,383 @@
+{
+  "tha-ap400": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-398.md",
+    "id": "tha-ap400",
+    "publisher_chapter": "chapter-3",
+    "poem": 398,
+    "verses": [
+      3821,
+      3827
+    ],
+    "root_verses": [
+      449,
+      455
+    ],
+    "note_count": 10,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-398/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-398/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-398.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Salaḷamaṇḍapiya",
+    "reference": "Therā Apadāna publisher poem 398; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "f3e4820a2b9f9d6d2b8c5e3203cfa999fd50c675ee0dc38c452bc13c7a53ba05",
+    "body_sha256": "52f5b47839662611759e62fa6cf65c14c55826a1b7512096eb49b552341e79a4",
+    "notes_sha256": "3238dc0826bddfab8dcd94b79c2b91442a286fa35ba22312bfca6dd4133ad0bd",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "15bb2bba4ed1a5564e21c6c70d293a731d9a44d59aa0d87db7a757414f5ddeea",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3821",
+        "suffix": "(1) [3821]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3822",
+        "suffix": "(2) [3822]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3823",
+        "suffix": "(3) [3823]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3824",
+        "suffix": "(4) [3824]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3825",
+        "suffix": "(5) [3825]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "3826",
+        "suffix": "(6) [3826]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "3827",
+        "suffix": "(7) [3827]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, peyyāla, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading395, BJTS brace/file398, and canonical tha-ap400 are distinct literal identities; no general numbering rule is approved.",
+      "Retain publisher Salaḷamaṇḍapiya, source-note2 BJTS salala, and VRI Saḷalamaṇḍapiya spellings without harmonization. Source-note5 botanical spelling rezin remains unchanged.",
+      "Source-note2 identifies a near-verbatim later554 poem ascribed to Kimbila, whose concluding refrain differs. Do not substitute that poem or its Like elephants wording.",
+      "The publisher prints all seven stanzas and three complete attainment refrains; VRI449–455 abbreviates the final three with peyyāla. No words or ordering are reconstructed from VRI. Notes1–2 are heading-owned,3–10 stanza-owned; there is no chapter heading or summary."
+    ],
+    "publisher_verse_labels": [
+      "3821",
+      "3822",
+      "3823",
+      "3824",
+      "3825",
+      "3826",
+      "3827"
+    ],
+    "publisher_heading_sha256": "38cf0112c729b6004ab00ce528717bb5ec47c01b5c84dda2440cf912241926a8"
+  },
+  "tha-ap401": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-399.md",
+    "id": "tha-ap401",
+    "publisher_chapter": "chapter-3",
+    "poem": 399,
+    "verses": [
+      3828,
+      3855
+    ],
+    "root_verses": [
+      456,
+      483
+    ],
+    "note_count": 40,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-399/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-399/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-399.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Sabbadāyaka",
+    "reference": "Therā Apadāna publisher poem 399; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "62c49921b15fd769734cff44bb70b06d4b446268cd9a895e83c31c96a21af20f",
+    "body_sha256": "f100649fd46357639de1de99765382393020b13a4b162a50daef447a22355640",
+    "notes_sha256": "563cb998f1e42e631bee10f8e99cc5b491900bf23933c196d9d794d3c20b2e28",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "181508a7e083f17d3a1adcfa9710bd1e648a98775b5f7908d1b743f3a52f1d55",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3828",
+        "suffix": "(1) [3828]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3829",
+        "suffix": "(2) [3829]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3830",
+        "suffix": "(3) [3830]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3831",
+        "suffix": "(4) [3831]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3832",
+        "suffix": "(5) [3832]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "3833",
+        "suffix": "(6) [3833]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "3834",
+        "suffix": "(7) [3834]",
+        "lines": 4
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "3835",
+        "suffix": "(8) [3835]",
+        "lines": 4
+      },
+      {
+        "local_label": "9",
+        "publisher_label": "3836",
+        "suffix": "(9) [3836]",
+        "lines": 4
+      },
+      {
+        "local_label": "10",
+        "publisher_label": "3837",
+        "suffix": "(10) [3837]",
+        "lines": 4
+      },
+      {
+        "local_label": "11",
+        "publisher_label": "3838",
+        "suffix": "(11) [3838]",
+        "lines": 4
+      },
+      {
+        "local_label": "12",
+        "publisher_label": "3839",
+        "suffix": "(12) [3839]",
+        "lines": 4
+      },
+      {
+        "local_label": "13",
+        "publisher_label": "3840",
+        "suffix": "(13) [3840]",
+        "lines": 4
+      },
+      {
+        "local_label": "14",
+        "publisher_label": "3841",
+        "suffix": "(14) [3841]",
+        "lines": 4
+      },
+      {
+        "local_label": "15",
+        "publisher_label": "3842",
+        "suffix": "(15) [3842]",
+        "lines": 4
+      },
+      {
+        "local_label": "16",
+        "publisher_label": "3843",
+        "suffix": "(16) [3843]",
+        "lines": 4
+      },
+      {
+        "local_label": "17",
+        "publisher_label": "3844",
+        "suffix": "(17) [3844]",
+        "lines": 4
+      },
+      {
+        "local_label": "18",
+        "publisher_label": "3845",
+        "suffix": "(18) [3845]",
+        "lines": 4
+      },
+      {
+        "local_label": "19",
+        "publisher_label": "3846",
+        "suffix": "(19) [3846]",
+        "lines": 4
+      },
+      {
+        "local_label": "20",
+        "publisher_label": "3847",
+        "suffix": "(20) [3847]",
+        "lines": 4
+      },
+      {
+        "local_label": "21",
+        "publisher_label": "3848",
+        "suffix": "(21) [3848]",
+        "lines": 4
+      },
+      {
+        "local_label": "22",
+        "publisher_label": "3849",
+        "suffix": "(22) [3849]",
+        "lines": 4
+      },
+      {
+        "local_label": "23",
+        "publisher_label": "3850",
+        "suffix": "(23) [3850]",
+        "lines": 4
+      },
+      {
+        "local_label": "24",
+        "publisher_label": "3851",
+        "suffix": "(24) [3851]",
+        "lines": 4
+      },
+      {
+        "local_label": "25",
+        "publisher_label": "3852",
+        "suffix": "(25) [3852]",
+        "lines": 4
+      },
+      {
+        "local_label": "26",
+        "publisher_label": "3853",
+        "suffix": "(26) [3853]",
+        "lines": 4
+      },
+      {
+        "local_label": "27",
+        "publisher_label": "3854",
+        "suffix": "(27) [3854]",
+        "lines": 4
+      },
+      {
+        "local_label": "28",
+        "publisher_label": "3855",
+        "suffix": "(28) [3855]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, peyyāla, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading396, BJTS brace/file399, and canonical tha-ap401 are distinct literal identities; no general numbering rule is approved.",
+      "Source-note2 identifies later551 as a BJTS-only repetition ascribed to Yasa, with a different first concluding-refrain verse. Retain this exact Sabbadāyaka source and its current refrain.",
+      "Keep all source bird-name/gloss and metrical alternatives, including note26 repeated-poem reading, notes29/31/32 meter-breaking alternatives and note36 PTS/BJTS wording. Do not silently select a different edition.",
+      "The publisher prints all28 stanzas and three complete attainment refrains; VRI456–483 abbreviates the final three with peyyāla. Retain VRI original variant notes separately. Notes1–2 are heading-owned,3–40 stanza-owned; there is no chapter heading or summary."
+    ],
+    "publisher_verse_labels": [
+      "3828",
+      "3829",
+      "3830",
+      "3831",
+      "3832",
+      "3833",
+      "3834",
+      "3835",
+      "3836",
+      "3837",
+      "3838",
+      "3839",
+      "3840",
+      "3841",
+      "3842",
+      "3843",
+      "3844",
+      "3845",
+      "3846",
+      "3847",
+      "3848",
+      "3849",
+      "3850",
+      "3851",
+      "3852",
+      "3853",
+      "3854",
+      "3855"
+    ],
+    "publisher_heading_sha256": "ee7d0a929734d57d7fb926fd8819485d4e1ba99c0847aa0c3c2d44c9b35f511d"
+  }
+}

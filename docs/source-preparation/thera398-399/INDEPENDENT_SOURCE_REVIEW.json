@@ -1,0 +1,202 @@
+{
+  "schema": "independent-publisher398-399-raw-first-source-preparation-review-v1",
+  "status": "GO_SOURCE_PREPARATION_ONLY_TWO_LITERAL_UNITS_WITH_EDITION_AND_RIGHTS_QUALIFICATIONS",
+  "effective_proposal": {
+    "base_manifest": {
+      "path": "/tmp/pali-next391-410-nov28/v1/MANIFEST.json",
+      "bytes": 4237,
+      "sha256": "f3be69e23296821912530f0359e2a36b2645f46691dcb894cb7a1d00f5563dc4"
+    },
+    "metadata_only_overlay_manifest": {
+      "path": "/tmp/pali-next391-410-nov28/v2-metadata-overlay/MANIFEST.json",
+      "bytes": 1892,
+      "sha256": "5d7b8103d58507f86a90e479272f7c6d549472618b8c1a9b43e08c32c4c2b792"
+    },
+    "overridden_files": [
+      "SCOPE_AND_HOLDS.json",
+      "SECOND_REVIEW_REQUIREMENTS.json",
+      "README.md"
+    ],
+    "all_other_base_members_unchanged": true
+  },
+  "approved_for_future_source_preparation_literal_pairs": [
+    [
+      398,
+      "tha-ap400"
+    ],
+    [
+      399,
+      "tha-ap401"
+    ]
+  ],
+  "raw_first_preseal": {
+    "path": "/tmp/pali-next391-410-nov28/independent-review/BLIND_RAW_FIRST_SOURCE_MODEL.json",
+    "bytes": 51036,
+    "sha256": "eed3e2985058ac0e632d331d5a7f868eb822b8598d7874e2ef8f23d3ea8ee5b2"
+  },
+  "independent_raw_first_producer": {
+    "path": "/tmp/pali-next391-410-nov28/independent-review/raw_first_review.py",
+    "bytes": 9220,
+    "sha256": "2a56a369a03d6837cd147c8362b4f8a4f2d1903ca5823ce363d318ed76f47b16"
+  },
+  "normalization_comparison": {
+    "path": "/tmp/pali-next391-410-nov28/independent-review/NORMALIZATION_COMPARISON.json",
+    "bytes": 1513,
+    "sha256": "84ba99503a86df0513f534b48cf46d637acb3bfdb70f277df0816454c7858b47"
+  },
+  "rights_correspondence_review": {
+    "path": "/tmp/pali-next391-410-nov28/independent-review/RIGHTS_AND_CORRESPONDENCE_REVIEW_v2.json",
+    "bytes": 10618,
+    "sha256": "c7208aa554b3cc1b177ae044f14c742aafee6ff0dc6cd9eb0978cce071c1ab0d"
+  },
+  "metadata_count_overlay_review": {
+    "path": "/tmp/pali-next391-410-nov28/independent-review/METADATA_OVERLAY_REVIEW.json",
+    "bytes": 1345,
+    "sha256": "be5d48d690e5ca4e3bfcb58159bc0549ac2bba53eca5fd237c6a74fa34b6ea39"
+  },
+  "verified_expected_metadata": {
+    "PROPOSED_PROFILES.json": {
+      "path": "/tmp/pali-next391-410-nov28/v1/PROPOSED_PROFILES.json",
+      "bytes": 11197,
+      "sha256": "39880089d38350b134e697bee0a1e8e2f2f14ed716dc44a777712fae2e28b6d7"
+    },
+    "PROPOSED_LINKS.json": {
+      "path": "/tmp/pali-next391-410-nov28/v1/PROPOSED_LINKS.json",
+      "bytes": 11368,
+      "sha256": "cf5d11944c3eba5b1cc5de4a89753060176e7e8648da282d335b05a9e17a420f"
+    },
+    "SOURCE_BINDINGS.json": {
+      "path": "/tmp/pali-next391-410-nov28/v1/SOURCE_BINDINGS.json",
+      "bytes": 109622,
+      "sha256": "6dfc0a939e0506cbc08df646a4b19be0e6396079b8840fb1a59fcd8cbd7b7cd0"
+    },
+    "QUOTE_METADATA.json": {
+      "path": "/tmp/pali-next391-410-nov28/v1/QUOTE_METADATA.json",
+      "bytes": 7659,
+      "sha256": "ac65611bd23b8a730de3d3289cb7d11b5471962b089eabf44aec48f400f6ee33"
+    },
+    "REQUIRED_NOTICES.json": {
+      "path": "/tmp/pali-next391-410-nov28/v1/REQUIRED_NOTICES.json",
+      "bytes": 5241,
+      "sha256": "bfbbac2f5af07cc294708198d221614cd48d53417bbe520958fb267e4f47d565"
+    },
+    "ORIGINAL_XML_REPLAY.json": {
+      "path": "/tmp/pali-next391-410-nov28/v1/ORIGINAL_XML_REPLAY.json",
+      "bytes": 1343,
+      "sha256": "f9649063f32bb5af620e0db7d4dc7e69dd32e1c82ad1ff5c68797843e326ea34"
+    }
+  },
+  "full_profile_hashes_JSON_stringify": {
+    "tha-ap400": "0d2d8f6f32ef8918e846a5061db9135f505a80742e8dc688ba1e021a4db2648e",
+    "tha-ap401": "105c7eaa63b7a79a2db1a16c93a1982cf4038edae78fecc274c8eb91b74306de"
+  },
+  "full_proposed_link_hashes_JSON_stringify": {
+    "tha-ap400": "598d40b42713f22c22651129ddf8aa166e842a946a50ce412f0359b074c48d48",
+    "tha-ap401": "a9ab8f489c0744e0f68b98f8a30ba9d86cb5b9c223ee0cd51c7aa866ab13d6b8"
+  },
+  "per_unit_scope": {
+    "tha-ap400": {
+      "publisher": 398,
+      "raw": {
+        "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-398.md",
+        "bytes": 3230,
+        "sha256": "f3e4820a2b9f9d6d2b8c5e3203cfa999fd50c675ee0dc38c452bc13c7a53ba05"
+      },
+      "root_record": {
+        "id": "tha-ap400",
+        "book": 36,
+        "start": 12665,
+        "end": 12686,
+        "title": "Saḷalamaṇḍapiyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 400",
+        "vri": "449–455",
+        "pts": {
+          "volume": 1,
+          "page": 332,
+          "end_page": 333
+        }
+      },
+      "root_wrapper_sha256": "15bb2bba4ed1a5564e21c6c70d293a731d9a44d59aa0d87db7a757414f5ddeea",
+      "raw_original_tuple_sha256": "6ce36bb61631c75b167d469575029e3ec00253979e247b6848d9d15206eb8093",
+      "body_sha256": "52f5b47839662611759e62fa6cf65c14c55826a1b7512096eb49b552341e79a4",
+      "notes_sha256": "3238dc0826bddfab8dcd94b79c2b91442a286fa35ba22312bfca6dd4133ad0bd",
+      "heading_sha256": "38cf0112c729b6004ab00ce528717bb5ec47c01b5c84dda2440cf912241926a8",
+      "body_characters_UTF16": 1216,
+      "body_paragraphs": 10,
+      "physical_stanzas": 7,
+      "notes": 10,
+      "hard500_pages": 3,
+      "separate_paratext": false,
+      "chapter_or_collection_summaries": false
+    },
+    "tha-ap401": {
+      "publisher": 399,
+      "raw": {
+        "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-399.md",
+        "bytes": 11804,
+        "sha256": "62c49921b15fd769734cff44bb70b06d4b446268cd9a895e83c31c96a21af20f"
+      },
+      "root_record": {
+        "id": "tha-ap401",
+        "book": 36,
+        "start": 12686,
+        "end": 12770,
+        "title": "Sabbadāyakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 401",
+        "vri": "456–483",
+        "pts": {
+          "volume": 1,
+          "page": 333,
+          "end_page": 335
+        }
+      },
+      "root_wrapper_sha256": "181508a7e083f17d3a1adcfa9710bd1e648a98775b5f7908d1b743f3a52f1d55",
+      "raw_original_tuple_sha256": "b4150c4ffbfdc80531c21a740fb0f19446c7bef0ca2bc63c11142fe43eb2182b",
+      "body_sha256": "f100649fd46357639de1de99765382393020b13a4b162a50daef447a22355640",
+      "notes_sha256": "563cb998f1e42e631bee10f8e99cc5b491900bf23933c196d9d794d3c20b2e28",
+      "heading_sha256": "ee7d0a929734d57d7fb926fd8819485d4e1ba99c0847aa0c3c2d44c9b35f511d",
+      "body_characters_UTF16": 4520,
+      "body_paragraphs": 31,
+      "physical_stanzas": 28,
+      "notes": 40,
+      "hard500_pages": 10,
+      "separate_paratext": false,
+      "chapter_or_collection_summaries": false
+    }
+  },
+  "totals": {
+    "selected_poems": 2,
+    "complete_publisher_stanzas": 35,
+    "stanza_lines": 140,
+    "notes": 50,
+    "body_paragraphs": 41,
+    "hard500_UTF16_pages": 13,
+    "body_UTF16": 5736,
+    "original_VRI_tuples": 105,
+    "VRI_variant_notes": 4,
+    "presentation_operation_records": 92,
+    "presentation_edits": 506
+  },
+  "scope_qualifications": [
+    "The complete publisher-edition398/399 poems are source-verified. No complete VRI line/word alignment or full-canonical translation equivalence is approved; preserve all six VRI peyyāla abbreviations and independent publisher full attainment stanzas.",
+    "Retain publisher Salaḷamaṇḍapiya, VRI Saḷalamaṇḍapiya, BJTS salala and botanical rezin unchanged; retain repeated554/Kimbila and551/Yasa different-refrain notices and all source lexical/metrical alternatives. No harmonization, source transfer, generated words or specialist botanical/metrical correctness claim.",
+    "Specific Jonathan S.Walters/Whitman2017 BY-NC-SA4.0 evidence controls. Preserve attribution/provenance/licence/modification/warranty notices and NC/SA conditions. Generic siteBY and public availability confer no broader permission or new commercial/media clearance.",
+    "Exactly15Pandoc display pairs and HTML abbreviation display labels occur in selected originals; no pairedHTML span occurs here. All actual replacements were independently replayed. No Unicode/transliteration/editorial changes.",
+    "All9scout holds and9otherdeferred candidates remain unchanged. Held publisher387/388 and active boundary389/390 are separate. No general+2numbering rule or new namespace authorized.",
+    "Current proposed link match values remain PENDING_INDEPENDENT_SOURCE_REVIEW. Any future status/curation/app integration delta requires explicit review; this approval does not rewrite frozen profiles or activate them."
+  ],
+  "private_verbatim_policy": "Both author and independent normalized body/note/quote witnesses remain only external PRIVATE_DO_NOT_COMMIT directories0700/files0600. Do not bundle verbatim witnesses in app metadata or repository evidence.",
+  "blocking_source_findings": [],
+  "all_count_label_findings_resolved_by_exact_overlay": true,
+  "source_preparation_only": true,
+  "runtime_catalogue_API_parser_package_CI_activation_or_release_approval": false,
+  "physical_signedin_or_human_AT_approval": false,
+  "reviewer_operations": "Own stdlib primary raw and rights reads, input hashes, originalXML105tuple replay, gzip/JSON metadata parity, raw-first normalization, and quoted source AST inspection only. No author prepare/scout/parser/app/test/browser/Git/network code imported or executed; no checkout changes. Revision membership inherits parent-pinned provenance; computed blobSHA1 is not a Git query.",
+  "remaining": [
+    "Root may separately choose a future baseline/curation for these two literal units; existing coverage and holds are not changed by preparation.",
+    "Root must compare actual parser/API body/orderednotes/quotes/paragraphs/13hard500pages against independent witnesses and preserve existing fullprofile/link prefixes and fail-closed source/rights/owner validation before activation.",
+    "Actual native/widget/mobile/assistive behavior, package and exact-commit CI/release are separate gates."
+  ]
+}

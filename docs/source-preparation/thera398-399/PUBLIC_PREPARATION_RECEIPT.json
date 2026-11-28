@@ -1,0 +1,56 @@
+{
+  "schema": "public-two-poem-source-preparation-v1",
+  "status": "SOURCE_PREPARATION_ONLY_NOT_ACTIVATED",
+  "pairs": [
+    [
+      398,
+      "tha-ap400"
+    ],
+    [
+      399,
+      "tha-ap401"
+    ]
+  ],
+  "accepted_base": "40d27f3bc8af2386ee253c32174652a9bbad0153",
+  "frozen_author_packet_sha256": "f3be69e23296821912530f0359e2a36b2645f46691dcb894cb7a1d00f5563dc4",
+  "metadata_overlay_sha256": "5d7b8103d58507f86a90e479272f7c6d549472618b8c1a9b43e08c32c4c2b792",
+  "independent_source_review_sha256": "6b59f0727d7529a64673c368c646faa2a94957e71ef93cb6fa212cb8cafaeb44",
+  "selected": 2,
+  "other_candidates_deferred": 9,
+  "scout_holds_preserved": 9,
+  "all_existing_runtime_choices_and_holds_unchanged": true,
+  "private_verbatim_source_published": false,
+  "source_binding_operations_and_private_body_not_copied": true,
+  "profile_pending_markers_intentionally_preserved": true,
+  "runtime_browser_installed_CI_release_approval": false,
+  "copied_members": {
+    "INDEPENDENT_SOURCE_REVIEW.json": {
+      "bytes": 9899,
+      "sha256": "6b59f0727d7529a64673c368c646faa2a94957e71ef93cb6fa212cb8cafaeb44"
+    },
+    "INPUT_PINS.json": {
+      "bytes": 4324,
+      "sha256": "3d0d801028a5712cda2ef1cfb6520bdfcd5a6e788e475061b41e8a0307c6aed4"
+    },
+    "ORIGINAL_XML_REPLAY.json": {
+      "bytes": 1343,
+      "sha256": "f9649063f32bb5af620e0db7d4dc7e69dd32e1c82ad1ff5c68797843e326ea34"
+    },
+    "PROPOSED_LINKS.json": {
+      "bytes": 11368,
+      "sha256": "cf5d11944c3eba5b1cc5de4a89753060176e7e8648da282d335b05a9e17a420f"
+    },
+    "PROPOSED_PROFILES.json": {
+      "bytes": 11197,
+      "sha256": "39880089d38350b134e697bee0a1e8e2f2f14ed716dc44a777712fae2e28b6d7"
+    },
+    "REPLAY_RESULT.json": {
+      "bytes": 577,
+      "sha256": "267c275403ca1cb0cadf1791fe6a1652cc8bc6814c82703ac0d57253f993b62c"
+    },
+    "REQUIRED_NOTICES.json": {
+      "bytes": 5241,
+      "sha256": "bfbbac2f5af07cc294708198d221614cd48d53417bbe520958fb267e4f47d565"
+    }
+  }
+}

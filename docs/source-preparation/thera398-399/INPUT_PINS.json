@@ -1,0 +1,102 @@
+{
+  "schema": "bounded-two-source-input-pins-v1",
+  "files": [
+    {
+      "path": "/tmp/pali-five381-386-evidence-nov27/next391-410-source-scout/MANIFEST.json",
+      "bytes": 1679,
+      "sha256": "982c27b31ef088442627a113aaccad45a6abfe5a77bff2a60a966b5b32ebf23a"
+    },
+    {
+      "path": "/tmp/pali-five381-386-evidence-nov27/next391-410-source-scout/scout.py",
+      "bytes": 16782,
+      "sha256": "c2911a664669bce1f20f7ab5fea827bad2cf85e33b45b090df2843d493bb2d9b"
+    },
+    {
+      "path": "/tmp/pali-five381-386-evidence-nov27/next391-410-source-scout/rank_dossier.py",
+      "bytes": 12347,
+      "sha256": "c1cb5b8916757a48439227e9cfd783207403495cd3959d2b86138fd449339205"
+    },
+    {
+      "path": "/tmp/pali-five381-386-evidence-nov27/next391-410-source-scout/STRUCTURE_AND_ROOTS.json",
+      "bytes": 2044560,
+      "sha256": "b03463618cf5945200e9db680d9f01684cf51bf00829e5ce7189424b459cb2b2"
+    },
+    {
+      "path": "/tmp/pali-five381-386-evidence-nov27/next391-410-source-scout/LITERAL_ROOT_ROWS.json",
+      "bytes": 12673,
+      "sha256": "b29f3cf4be716246e32a84a9e1540dd76f0fcf8969332b56f796efee8ba9d36b"
+    },
+    {
+      "path": "/tmp/pali-five381-386-evidence-nov27/next391-410-source-scout/DOSSIER.json",
+      "bytes": 36876,
+      "sha256": "bdb03ad6290b7d17015dab8016a07ca4ed5d5e0b28523adfb78a78ace03091c4"
+    },
+    {
+      "path": "/tmp/pali-five381-386-evidence-nov27/next391-410-source-scout/README.md",
+      "bytes": 2649,
+      "sha256": "e2484ab64ca188e7170b0bf7ffc61bd7110f6675eaa1944cf48b5dd466ba0e02"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22"
+    },
+    {
+      "path": "/tmp/pali-boundary389390-next380-nov27/server/data/canon.json.gz.parts.json",
+      "bytes": 455,
+      "sha256": "3635c4e7e4082e6816e4fa8670d478004a76aa8a2613f6c6e1fe51f0c6a7ed23"
+    },
+    {
+      "path": "/tmp/pali-boundary389390-next380-nov27/server/data/canon.json.gz.part-0001",
+      "bytes": 4194304,
+      "sha256": "526ba969d0fc3ce62fde7d11764313de43b91a2f71375d602cd647a43b601632"
+    },
+    {
+      "path": "/tmp/pali-boundary389390-next380-nov27/server/data/canon.json.gz.part-0002",
+      "bytes": 1367702,
+      "sha256": "7b84f3d0e9d22582da1a06c838566bc6654f75ec260039c7aaf05a35176d325a"
+    },
+    {
+      "path": "/tmp/pali-next-ten-evidence-nov26/vri-fixture/romn/s0510m1.mul.xml",
+      "bytes": 2464074,
+      "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-398.md",
+      "bytes": 3230,
+      "sha256": "f3e4820a2b9f9d6d2b8c5e3203cfa999fd50c675ee0dc38c452bc13c7a53ba05"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-399.md",
+      "bytes": 11804,
+      "sha256": "62c49921b15fd769734cff44bb70b06d4b446268cd9a895e83c31c96a21af20f"
+    }
+  ],
+  "Git_revision_membership_not_queried": true,
+  "provenance": "Checkout/revision relationship inherited from parent frozen source pins; physical bytes and selected originalXML tuples independently checked."
+}

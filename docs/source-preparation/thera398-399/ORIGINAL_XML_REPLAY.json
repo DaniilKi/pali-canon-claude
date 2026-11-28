@@ -1,0 +1,38 @@
+{
+  "schema": "selected-two-XML-tuple-replay-v1",
+  "XML": {
+    "path": "/tmp/pali-next-ten-evidence-nov26/vri-fixture/romn/s0510m1.mul.xml",
+    "bytes": 2464074,
+    "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1"
+  },
+  "scope": "Only selected two fixed originalXML slices; not an entire XML reconstruction.",
+  "rows": [
+    {
+      "id": "tha-ap400",
+      "XML_paragraph_range_index0_half_open": [
+        12586,
+        12607
+      ],
+      "all_five_tuple_fields_equal": true,
+      "tuples": 21,
+      "tuple_array_sha256": "6ce36bb61631c75b167d469575029e3ec00253979e247b6848d9d15206eb8093",
+      "wrapper_sha256": "15bb2bba4ed1a5564e21c6c70d293a731d9a44d59aa0d87db7a757414f5ddeea",
+      "original_VRI_note_count": 0,
+      "three_abbreviated_attainment_refrains_preserved": true
+    },
+    {
+      "id": "tha-ap401",
+      "XML_paragraph_range_index0_half_open": [
+        12607,
+        12691
+      ],
+      "all_five_tuple_fields_equal": true,
+      "tuples": 84,
+      "tuple_array_sha256": "b4150c4ffbfdc80531c21a740fb0f19446c7bef0ca2bc63c11142fe43eb2182b",
+      "wrapper_sha256": "181508a7e083f17d3a1adcfa9710bd1e648a98775b5f7908d1b743f3a52f1d55",
+      "original_VRI_note_count": 4,
+      "three_abbreviated_attainment_refrains_preserved": true
+    }
+  ],
+  "all_selected_tuples_equal": true
+}

@@ -1,0 +1,17 @@
+{
+  "status": "AUTHOR_STDLIB_SOURCE_REPLAY_PASS_PENDING_SECOND_REVIEW",
+  "totals": {
+    "poems": 2,
+    "physical_stanzas": 35,
+    "stanza_lines": 140,
+    "notes": 50,
+    "body_paragraphs": 41,
+    "hard500_pages": 13
+  },
+  "physical_inputs_unchanged_at_end": true,
+  "selected_XML_full_tuples_equal": true,
+  "all_words_punctuation_notes_and_labels_preserved_under_declared_rules": true,
+  "quoted_source_only_no_project_app_test_or_proposed_module_import": true,
+  "no_target_checkout_or_runtime_writes": true,
+  "no_independent_peer_or_runtime_approval_claim": true
+}

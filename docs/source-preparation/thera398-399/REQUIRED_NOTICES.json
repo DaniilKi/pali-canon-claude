@@ -1,0 +1,64 @@
+{
+  "schema": "publisher398-399-required-source-notices-proposal-v1",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "translator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "specific_rights_artifacts": {
+    "LICENSE.md": {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    "src/_pages/about.md": {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    "src/_includes/site/footer.njk": {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    "src/_includes/layouts/epub-metadata.xml": {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    "src/_data/site.json": {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    "src/_poems/_poems.json": {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  },
+  "rights_notice": "Retain creator, publisher, provenance, source revision, specific translation CC BY-NC-SA 4.0 licence/URL, attribution, modification and warranty notices. Generic site CC-BY does not relax the translation-specific licence. Public availability grants no additional reuse approval; commercial/media/publication scope is not newly cleared.",
+  "presentation_notice": "Only finite documented presentation syntax was changed; original words, punctuation, spelling, note numbers/ownership, line/stanza breaks, printed labels and colophons remain. No Unicode normalization, translation, harmonization, editorial completion or silent repair.",
+  "per_poem": {
+    "tha-ap400": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, peyyāla, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading395, BJTS brace/file398, and canonical tha-ap400 are distinct literal identities; no general numbering rule is approved.",
+      "Retain publisher Salaḷamaṇḍapiya, source-note2 BJTS salala, and VRI Saḷalamaṇḍapiya spellings without harmonization. Source-note5 botanical spelling rezin remains unchanged.",
+      "Source-note2 identifies a near-verbatim later554 poem ascribed to Kimbila, whose concluding refrain differs. Do not substitute that poem or its Like elephants wording.",
+      "The publisher prints all seven stanzas and three complete attainment refrains; VRI449–455 abbreviates the final three with peyyāla. No words or ordering are reconstructed from VRI. Notes1–2 are heading-owned,3–10 stanza-owned; there is no chapter heading or summary."
+    ],
+    "tha-ap401": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, peyyāla, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading396, BJTS brace/file399, and canonical tha-ap401 are distinct literal identities; no general numbering rule is approved.",
+      "Source-note2 identifies later551 as a BJTS-only repetition ascribed to Yasa, with a different first concluding-refrain verse. Retain this exact Sabbadāyaka source and its current refrain.",
+      "Keep all source bird-name/gloss and metrical alternatives, including note26 repeated-poem reading, notes29/31/32 meter-breaking alternatives and note36 PTS/BJTS wording. Do not silently select a different edition.",
+      "The publisher prints all28 stanzas and three complete attainment refrains; VRI456–483 abbreviates the final three with peyyāla. Retain VRI original variant notes separately. Notes1–2 are heading-owned,3–40 stanza-owned; there is no chapter heading or summary."
+    ]
+  }
+}
