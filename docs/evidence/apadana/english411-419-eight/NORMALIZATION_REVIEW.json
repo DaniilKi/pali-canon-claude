@@ -1,0 +1,26 @@
+{
+  "schema": "independent-eight411420-lossless-normalization-source-review-v1",
+  "status": "GO_EXACT_EIGHT_SOURCE_NORMALIZATION_DOMAINS_ONLY",
+  "proof": {
+    "path": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-independent-review/v1/COMPARISON_PROOF.json",
+    "bytes": 7519,
+    "sha256": "1b02c9d8e12614e86d7a91cccb2a9e9f0a0a71134e9e3e0b797143b088701089"
+  },
+  "findings": [],
+  "conclusions": [
+    "The179 full-body paragraphs intentionally retain8 note-owning title headings in addition to171 raw poem paragraphs;411unnoted34UTF16 chapterheading is separate. All text/notes reflect only the prior8 finite presentation rules, preserving source punctuation and spelling.",
+    "All199 owner domains including7 emptyparatext domains invert from actual presented output to raw; all8 complete rawfiles reassemble byteexact. Independent finite normalization and per-note/source ownership match exact output hashes.",
+    "411local13 six-line and18/19 ten-line entry preserve two markers at lines6/10;418locals16/17 remain global-null. All155 proposed physicalquotation strings remove only Note calls and each verified line-end suffix, retaining other words/linebreaks.",
+    "54 exacthard500 UTF16 slices, page hashes and start-prefix/end-continuation domains independently match; allsource outputsBMP. No target runtime output used as oracle.",
+    "SpecificWalters/WhitmanNC-SA4 rights/source edition limitations and all9publisher/10canonical holds carry from raw-scope review.413/420 stay conditional; no widerchapter clearance."
+  ],
+  "scope_limits": [
+    "GO applies only to this immutable normalized-source packet and its explicit proposed quotation/page domains. It does not approve future parser/API quotation behavior, profiles, source activation, current386 release, runtime, installed/browser/nativeCI or push.",
+    "Future411mixedheading/paratext,411multi-suffix10line and418global-null handling require finite source-owned implementation and independent API/quote/cursor acceptance; preserve all existing profiles/holds/citations/sourcepins/private data.",
+    "No invented punctuation/wording, VRI line-completeness claim or peyyala expansion; no commercial/media/endorsement rights inferred.",
+    "Raw/normalized English and reversible tokens remain in external0700 PRIVATE_DO_NOT_COMMIT; public review contains hashes/metadata only."
+  ],
+  "target_checkout_changed": false,
+  "app_proposer_module_or_test_execution": false,
+  "runtime_or_activation_or_release_approval": false
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "reviewed-thera411-419-eight-independent-source-approval-v1",
+  "status": "GO_EXACT_EIGHT_PUBLISHER_EDITION_SOURCE_SCOPES_AND_NORMALIZATION_ONLY",
+  "base_commit": "68dc2aafdfe8194dd40c78c00c62616ff0b18aea",
+  "canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "publisher_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "vri_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "approved_pairs": [
+    [
+      411,
+      "tha-ap413"
+    ],
+    [
+      412,
+      "tha-ap414"
+    ],
+    [
+      414,
+      "tha-ap416"
+    ],
+    [
+      415,
+      "tha-ap417"
+    ],
+    [
+      416,
+      "tha-ap418"
+    ],
+    [
+      417,
+      "tha-ap419"
+    ],
+    [
+      418,
+      "tha-ap420"
+    ],
+    [
+      419,
+      "tha-ap421"
+    ]
+  ],
+  "source_documents": {
+    "profiles": {
+      "file": "PROFILES.json",
+      "bytes": 45538,
+      "sha256": "332c658097eec4b05cca3ab5bee1e5cb1b341923559a9ab198cecb0f6cf5b67c"
+    },
+    "approved_links": {
+      "file": "LINKS.json",
+      "bytes": 46191,
+      "sha256": "828fca68e112e4cb31816de084569f5e55517314a548085698f83a17505ca33e"
+    },
+    "source_bindings": {
+      "file": "SOURCE_BINDINGS.json",
+      "bytes": 647576,
+      "sha256": "c2fd278d28188f159124d77d10cc58cccd2ffd921d12d412dcc96a79576344ef"
+    },
+    "normalization_review": {
+      "file": "NORMALIZATION_REVIEW.json",
+      "bytes": 2519,
+      "sha256": "9d555fbfa38c2f80bab6101a5c2e952a4b37471ad206f22c5df733a503a38992"
+    },
+    "required_notices": {
+      "file": "REQUIRED_NOTICES.json",
+      "bytes": 10949,
+      "sha256": "54df7eded75336ae018bf2056b0eb3d105cac1b0ce0c55a320e353bc8cb1bf93"
+    }
+  },
+  "producer_evidence": {
+    "original_raw_scope_review": {
+      "file": "/tmp/pali-four386-evidence-nov28/next411-420-independent-review/v1/INDEPENDENT_REVIEW.json",
+      "bytes": 6062,
+      "sha256": "d687e610431baf192b473f8b4f0d23be5ccad982bcd73021b962687762d07644"
+    },
+    "original_lossless_normalization_packet": {
+      "file": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-prep/v1/MANIFEST.json",
+      "bytes": 6315,
+      "sha256": "944fba2a2c25a092426a833559bbc90e0406ad199a18a33c85fd8b45cacc8488"
+    },
+    "normalization_source_peer": {
+      "file": "/tmp/pali-four386-evidence-nov28/next411-420-normalization-independent-review/v1/INDEPENDENT_REVIEW.json",
+      "bytes": 2519,
+      "sha256": "9d555fbfa38c2f80bab6101a5c2e952a4b37471ad206f22c5df733a503a38992"
+    },
+    "profile_field_and_decoder_comparison": {
+      "file": "/tmp/pali-eight394-evidence-nov28/decoder-independent-review/v1/SOURCE_PROOF.json",
+      "bytes": 4831,
+      "sha256": "ec008eea449f652b7ddde704c9cc0b0067a92a876cd199856d41bbe474da5f8f"
+    },
+    "five_app_source_review": {
+      "file": "/tmp/pali-eight394-evidence-nov28/app-independent-review/v1/INDEPENDENT_REVIEW.json",
+      "bytes": 3292,
+      "sha256": "c0b803e0a77d595416a4c518709f8a5d154f9482ad7165fde092e3cc77acf007"
+    },
+    "immutable_source_domain_manifest": {
+      "file": "SOURCE_DOMAIN_MANIFEST.json",
+      "bytes": 2363,
+      "sha256": "af9d688c68ce8b9c92a2bbfbb77fe46dfeb91aafd0db4974037882f37f716513"
+    },
+    "accepted386_source_approval": {
+      "file": "docs/evidence/apadana/english394-407-four/APPROVAL.json",
+      "bytes": 20968,
+      "sha256": "40552a2b723037f0b63022e747bfa9c20077e4c26404ca6125473c412d722307"
+    }
+  },
+  "all_nine_publisher_holds_unchanged": true,
+  "all_ten_historical_canonical_held_ids_unchanged": true,
+  "complete_publisher_editions_only": true,
+  "source_and_normalization_only": true,
+  "runtime_API_activation_or_release_approval": false,
+  "operations": "Independent cachedoriginal byte/SHA/Gitblob-formula14input recheck, prior raw/XML883d and lossless normalization approvals reused; all8 profilefields and27displayowner/155quote domains compared to source7496/b80, not application output. Full prior386source declarations/order/holds preserved. Only source/metadata/hash and quoted syntax inspection; no application/parser/producer/tests/build/browser/network/Git execution or checkout writes. Eight source profiles/links/notices qualify;413/420 remain conditional. The pinned sourceBindings adapter is authored by this reviewer from exact previously approved source domains; the external source-authority/test packet still requires its separately designated peer, and this leaf is not a runtime verdict."
+}
