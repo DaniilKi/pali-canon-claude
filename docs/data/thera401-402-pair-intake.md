@@ -7,7 +7,7 @@ original order. The measured local index has2,965 whole-unit English links,
 with1,861 texts directly covered and2,284 including inherited links. These CLI
 counts are not a new public MCP coverage measurement.
 
-The published [source-preparation kit](../../source-preparation/thera401-402/README.md)
+The published [source-preparation kit](../source-preparation/thera401-402/README.md)
 is source evidence, not an activation or release receipt. Its producer was
 rerun against both original raw files, six rights/routing files and the original
 VRI XML before this implementation. Source revision remains
