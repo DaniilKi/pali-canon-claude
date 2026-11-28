@@ -1,19 +1,19 @@
 {
   "schema": "reviewed-current-apadana-source-inputs-v1",
   "status": "APPROVED_EXACT_CURRENT_APADANA_SOURCE_INPUTS_ONLY",
-  "baseline_commit": "68dc2aafdfe8194dd40c78c00c62616ff0b18aea",
+  "baseline_commit": "f1e5c8114680fabe9083bde41d57c34730fd6bcd",
   "files": {
     "README.md": {
-      "bytes": 56378,
-      "sha256": "7744485c7a9626aa6ba899ac35bec327f7515a8c419f6f8157e248edf6351f6a"
+      "bytes": 57113,
+      "sha256": "4ffd920a623206808212a045f84db9151a1a59a4a0b492e8d7d60c6f9c5288e4"
     },
     "THIRD_PARTY.md": {
-      "bytes": 46515,
-      "sha256": "7f85edf3be1bbfa80db4a0175d0df50fdf343db98dca1a72edcbbc627577aef6"
+      "bytes": 46996,
+      "sha256": "7409eceb5bc57c336beceb900392fc34dd17ff6ec91058cc085ba623836ad093"
     },
     "docs/coverage.md": {
-      "bytes": 46161,
-      "sha256": "c96393b83b0a43011ab0ae40fa2a7b5bc8b3bf4a488f65ee481157ddf5a26d4e"
+      "bytes": 46859,
+      "sha256": "7bd922bf33de57a0b8e912f9a19e6f17c141590316ada117003b5fdd6a519f54"
     },
     "docs/data/thera389390-boundary-work-in-progress.md": {
       "bytes": 4001,
@@ -27,9 +27,13 @@
       "bytes": 4090,
       "sha256": "6636f8c332f04f2d49b8d463d902e20b31f968e2e3b9f644b14d19edf20cfcb6"
     },
+    "docs/data/thera421-429-seven-intake.md": {
+      "bytes": 4004,
+      "sha256": "2c5f35c440142655e885773c07a0751b1b0355fac0c87b345587b3defef17989"
+    },
     "docs/decisions.md": {
-      "bytes": 366213,
-      "sha256": "d3be6ee84d5db7dfdf2cb85b5f23fdb8e2bd52b0b591873a3780dfa5df2d0da4"
+      "bytes": 367900,
+      "sha256": "e6ac50cfde1423a487c2b071714f7079adab12c9456be60749cf050eee6e76b9"
     },
     "docs/evidence/apadana/english371-378-seven/APPROVAL.json": {
       "bytes": 15604,
@@ -291,6 +295,70 @@
       "bytes": 4448,
       "sha256": "e93ae65a9cf27031d989c40f1dd89f9fd16f36b8e0da92b1cba5ae01f4f15aee"
     },
+    "docs/evidence/apadana/english421-429-seven/APPROVAL.json": {
+      "bytes": 24264,
+      "sha256": "d78631de945e2aa234a869c7840e4b2940b7db32dc18dbc199a2fb1eec83929d"
+    },
+    "docs/evidence/apadana/english421-429-seven/EXPECTED_MANIFEST.json": {
+      "bytes": 1666222,
+      "sha256": "78ef86dd53edf8d6a7434e7165bff94d406a0445524c259d0ebef2dbde42b2bd"
+    },
+    "docs/evidence/apadana/english421-429-seven/INPUT_CONTRACT.json": {
+      "bytes": 29279,
+      "sha256": "e61951950fb80a8916e4099f8f411eeac296587d3fcac9d82754ee69ae40cd87"
+    },
+    "docs/evidence/apadana/english421-429-seven/LINKS.json": {
+      "bytes": 33863,
+      "sha256": "2ff9b96c33e2c7b8fe72ae4a2958390a2974b1ff4d438cc79ee73c9eb0393c46"
+    },
+    "docs/evidence/apadana/english421-429-seven/NORMALIZATION_BINDINGS.json": {
+      "bytes": 88325,
+      "sha256": "0b0f923c8b03488677829944a1da8dd76619800a2accdebf8a01b39a57c21b9f"
+    },
+    "docs/evidence/apadana/english421-429-seven/NORMALIZATION_REVIEW.json": {
+      "bytes": 7184,
+      "sha256": "fdfeb35e1f7c60735dc517a4edb26f8d10a4a3564ff544ffb9306f4756c20ff2"
+    },
+    "docs/evidence/apadana/english421-429-seven/NORMALIZED_EXPECTATIONS.json": {
+      "bytes": 349035,
+      "sha256": "8ff6eddf60a1fc58788755ff3f97a405f55f9d7b46db872cd90eadde0f115d3b"
+    },
+    "docs/evidence/apadana/english421-429-seven/ORIGINAL_XML_REPLAY.json": {
+      "bytes": 531,
+      "sha256": "e4ff130e3284ff738eba1ae05d67a728f6071485244f8584044aff46720ea714"
+    },
+    "docs/evidence/apadana/english421-429-seven/PROFILES.json": {
+      "bytes": 33255,
+      "sha256": "693b9f2824c5f155c9e3196c3b454fa757dc62d596f420a37334d20abefdb89d"
+    },
+    "docs/evidence/apadana/english421-429-seven/RAW_SOURCE_REVIEW.json": {
+      "bytes": 25762,
+      "sha256": "d63391f3feaa135810da593b5eba0a752ec61014179cce50912d6e03c3d30a0d"
+    },
+    "docs/evidence/apadana/english421-429-seven/REQUIRED_NOTICES.json": {
+      "bytes": 10698,
+      "sha256": "2a8170f413b1447cfa8e91322ae783577beede358cd164f2958a3528197c8496"
+    },
+    "docs/evidence/apadana/english421-429-seven/RUNTIME_INVENTORY.json": {
+      "bytes": 6766,
+      "sha256": "b483807682583518e6774fd6885d3229a8591d5ec164a4f40e0c0e1c29cee841"
+    },
+    "docs/evidence/apadana/english421-429-seven/RUNTIME_REVIEW.json": {
+      "bytes": 2386,
+      "sha256": "da4387a571d89a22d7ac153a7545b11a2d8f13e9cab31208305f9347c2e75819"
+    },
+    "docs/evidence/apadana/english421-429-seven/SOURCE_BINDINGS.json": {
+      "bytes": 407660,
+      "sha256": "6eab76faf013ef5af45329ad88431119a69f451bb87dee0950f0444b4883aa5f"
+    },
+    "docs/evidence/apadana/english421-429-seven/SOURCE_DOMAIN_MANIFEST.json": {
+      "bytes": 1438,
+      "sha256": "70346ff97d6fd41385dbbfeb9b6fc5a449d874fdd54b12a4437f9cc223fd1c2f"
+    },
+    "docs/evidence/apadana/english421-429-seven/SOURCE_REVIEW.json": {
+      "bytes": 4931,
+      "sha256": "0656b7607ca661c328ae3cebf5f8830791944efa88d6e54113a8ab35759034ac"
+    },
     "docs/evidence/apadana/thera389-390/CURRENT_CANON_BINDING.json": {
       "bytes": 3624,
       "sha256": "3b9cf33ff529ec5e950cf07bdf1aec0ed1edcf41123d9c975958c2f66e2d31e9"
@@ -308,8 +376,8 @@
       "sha256": "6601b6252c7734f5cc755c8b0c0de013dbbd26aaf0e9df070962317fd1de9f80"
     },
     "docs/qa/current-apadana-validation.md": {
-      "bytes": 5693,
-      "sha256": "b41916be5ea51f18af0725dc325aa626b48e20deddc34b80ffdb1f6d02f9b01c"
+      "bytes": 5759,
+      "sha256": "61c0cf720b2d22bc81d6296bb22f60e087df5917530f718a14263b4ef49ba227"
     },
     "docs/qa/english394-407/manual-acceptance.md": {
       "bytes": 2763,
@@ -318,6 +386,10 @@
     "docs/qa/english411-419/manual-acceptance.md": {
       "bytes": 2826,
       "sha256": "a0028247908bf17788a4824476e98f6789751eee746c25bc2201b059f4e54fb2"
+    },
+    "docs/qa/english421-429/manual-acceptance.md": {
+      "bytes": 2329,
+      "sha256": "5cbd08ea5d6e0383e1f03aff3bfd786fed1e16c10eb1c29f099bdc93b1b7f17a"
     },
     "docs/source-preparation/thera401-402/proposal/derived-v1/public/INPUT_PINS.json": {
       "bytes": 3769,
@@ -332,16 +404,20 @@
       "sha256": "6658c027a133048622bc1d3a6ac82a41d699594c3679b6c6effc01a3ccc1b718"
     },
     "docs/sources.md": {
-      "bytes": 74621,
-      "sha256": "628a278a5b03c8c2145d0cb005de3b3652d85ecf9174aa8738d36e4f9a86b11d"
+      "bytes": 75278,
+      "sha256": "eca945dba3134f4ad4f730d15dc76aa6499abdd798b408551b3de2bcc9c62d23"
     },
     "scripts/apadana/thera394-407-four/browser-inputs.py": {
       "bytes": 12916,
       "sha256": "2aa77d98e0e54fcd0cb16339dcf65223f6e485cae90b8c4d7956b7b940912e72"
     },
     "scripts/apadana/thera411-419-eight/browser-inputs.py": {
-      "bytes": 16434,
-      "sha256": "72c8bc12b60b93e9e8aeb6a9f8bf6217aebff9d89ddd727f09907d77bfeff2ef"
+      "bytes": 16791,
+      "sha256": "4529324109eabcfbd585017844a40f5602b9514d14ff2628833ee6bde79a36d2"
+    },
+    "scripts/apadana/thera421-429-seven/browser-inputs.py": {
+      "bytes": 17539,
+      "sha256": "ee7426be0e6bdf3e053e6637f6415bdaabaf9f7bfd0ba57d3b34f68253095c6a"
     },
     "scripts/canon/apadana_thera389390_spans.py": {
       "bytes": 14082,
@@ -425,7 +501,11 @@
     },
     "scripts/web-reader-thera411-419-eight-check.py": {
       "bytes": 44064,
-      "sha256": "adb632a6aa37034e9757935bfe5c63d1d3d72fb05edfc45d2761090912c31673"
+      "sha256": "999d5a32d64bad51aad033bb63d6d452cb57af54e8849e19c63651e880ce8352"
+    },
+    "scripts/web-reader-thera421-429-seven-check.py": {
+      "bytes": 40107,
+      "sha256": "c06df36ace1eab929c5e983d20cd84eb899812893a85704f3538c5c881469d87"
     },
     "scripts/web_reader_apadana_intake.py": {
       "bytes": 103252,
@@ -440,8 +520,8 @@
       "sha256": "2282bac62b38207769d459d8005cc308fc420b5ae13025eee6f3e1ded9f89957"
     },
     "scripts/web_reader_current_apadana.py": {
-      "bytes": 31391,
-      "sha256": "108c1dafe6f81ec9de6a8a4e7bd87bfe89759a47b6ac42f9c12501feb84a9f93"
+      "bytes": 43001,
+      "sha256": "7922087b7b962b5e074c5851bbd633e36443a52b56b1333f87d582cfddece436"
     },
     "scripts/web_reader_intake375.py": {
       "bytes": 18999,
@@ -456,12 +536,12 @@
       "sha256": "47b7eacb39dbf060ff0dc797f239281f0d22d2884ebaa0edde76defc60afcb13"
     },
     "src/apadana-thera-profiles.mjs": {
-      "bytes": 834752,
-      "sha256": "4729da79291fd57dad1c31d894741ef4664e3ce6807f1313f7f49ae6fb0bab32"
+      "bytes": 834877,
+      "sha256": "912b2b656f3254b2e6366dc4bdca221bbb2423595df8ae41a93839dbc717242d"
     },
     "src/apadana-thera.mjs": {
-      "bytes": 47949,
-      "sha256": "4c27191f7a23093d1a25aa70b88f7332ed00120c8c2eea67fed3fb41e2b03709"
+      "bytes": 50745,
+      "sha256": "52513b7bde910a804a1d03292faaf846230dcac5964b7b13d633acb3fec87839"
     },
     "src/apadana-thera371-378-profiles.mjs": {
       "bytes": 23753,
@@ -483,9 +563,13 @@
       "bytes": 45679,
       "sha256": "63674995f151ccfb47a7fcc26f6ada80d383eb9798d82ea810e56bae9dee135a"
     },
+    "src/apadana-thera421-429-seven-profiles.mjs": {
+      "bytes": 33396,
+      "sha256": "752ae25cb1bbde179147da707066011f600b3f564e1eb903098f752eca7ed51a"
+    },
     "src/chatgpt-widget.mjs": {
-      "bytes": 100402,
-      "sha256": "fdf8daadac543aa00406f7c37b18dbf2849c0a4d031860919a6ebeb82607478a"
+      "bytes": 100570,
+      "sha256": "d3f839e8402c8a360137f2fdf78555118518cc37d88a31ccfe71a968cc77f6ba"
     },
     "src/locator-policy.mjs": {
       "bytes": 5493,
@@ -760,8 +844,8 @@
       "sha256": "f151769712c2f2ad4c080ec03ba2f3686d8cbc7b3b9485d394f0a5c2bf78ec18"
     },
     "tests/intake375_current_negatives.py": {
-      "bytes": 39093,
-      "sha256": "94c97422654c298990ce4dbd1b95dd3690ebf0aa26be55838bfa82c40f638605"
+      "bytes": 41786,
+      "sha256": "9537932ef1c97502368da2efaecdd01c0c9e7274b31dc9f817b0355792e2a18e"
     },
     "tests/materialize_h_history.py": {
       "bytes": 13605,
@@ -789,7 +873,7 @@
     },
     "tests/owned_intake380_proofs.py": {
       "bytes": 3043,
-      "sha256": "1a66c8765cdf186c7ae790d9dcd9e85da96ef18f5844df217fbfbf2f669e6474"
+      "sha256": "f42464d9ef43c776edf65c3a7d3fd813468e58aa37b40a6f57169427c60029ae"
     },
     "tests/priority-prose-review.test.mjs": {
       "bytes": 7763,
@@ -971,6 +1055,10 @@
       "bytes": 23899,
       "sha256": "1321f9e75a4404f96346bda3516c6c17fc2e9ece1ee085b9d27a7333e0610c12"
     },
+    "tests/thera421-429-seven.test.mjs": {
+      "bytes": 20265,
+      "sha256": "4c8f8c805444fb210d8c5d30d53a20ab0bc74f0ed2e388f56e9948c8638302bf"
+    },
     "tests/verse-scope-python.test.mjs": {
       "bytes": 3536,
       "sha256": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"
@@ -988,8 +1076,8 @@
       "sha256": "fda5fa373016b530106804d116d1efbecd8b0de810c46d96979218f996ae5972"
     },
     "web/translation-policy.mjs": {
-      "bytes": 27467,
-      "sha256": "9984339bd229ef32d93d16cd92bfaa689a83f52fcc07e63d9082f03fb14757f2"
+      "bytes": 27635,
+      "sha256": "4d32c39ce348fba94d4af8057912c2f9c11915ace0f96f84d32b039ad460ec4f"
     }
   }
 }
