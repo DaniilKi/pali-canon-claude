@@ -11,6 +11,7 @@ import copy
 from canon.apadana_thera389390_spans import canon_before_389390, POST_PAIR_SHA256
 from pathlib import Path
 from web_reader_apadana_intake import reviewed_held234_intake,read_261_280,read_281_285,read_287_288,read_292_299,read_301_310,read_312_319,read_321_329,read_331_334,read_335_350,_reviewed_current368 as read_historical368,_reviewed_current375 as read_historical375,curated_additions
+from web_reader_intake380 import reviewed_intake380 as read_historical380
 from web_reader_approved_acceptance import assert_runtime
 ROOT=Path(__file__).resolve().parents[1]
 BASE='7d5ac90845402b322dabf2c5120d1485b15c0bda'
@@ -83,8 +84,11 @@ def main():
     historical359=read_335_350(ROOT)
     historical368=read_historical368(ROOT)
     historical375=read_historical375(ROOT)
+    historical380=read_historical380(ROOT)
     assert len(historical375['expected_profile_ids'])==375 and len(historical375['expected_profile_ids'][285:])==90
-    assert len(current_ids)==380 and len(current_additions['ids'])==95
+    assert len(historical380['expected_profile_ids'])==380 and len(historical380['expected_profile_ids'][285:])==95
+    assert len(current_ids)==382 and len(current_additions['ids'])==97
+    assert current_ids[-2:]==['tha-ap403','tha-ap404']
     assert len(historical368['expected_profile_ids'])==368
     assert approval['base_commit']==BASE and approval['approved_ids']==[UID] and len(approval['baseline_ids'])==284
     assert approval['expected_profile_ids']==approval['baseline_ids']+[UID] and len(set(approval['expected_profile_ids']))==285
@@ -119,7 +123,8 @@ def main():
     assert historical359['baseline_ids']==historical343['expected_profile_ids']
     assert historical368['baseline_ids']==historical359['expected_profile_ids']
     assert historical375['baseline_ids']==historical368['expected_profile_ids']
-    assert current_curation['baseline_ids']==historical375['expected_profile_ids']
+    assert historical380['baseline_ids']==historical375['expected_profile_ids']
+    assert current_curation['baseline_ids']==historical380['expected_profile_ids']
     assert current_ids==approval['expected_profile_ids']+current_additions['ids']
     assert set(rows)==set(current_ids) and rows[UID]==links[UID]
     prior=sealed(evidence_dir,historical303['baseline_freeze'])
@@ -129,7 +134,7 @@ def main():
     for new_id,new_row in current_additions['links'].items():assert rows[new_id]==new_row, 'Current addition differs from independent pins: '+new_id
     old_source=prior['manifest_source']
     assert {key:value for key,value in manifest['source'].items() if key!='policy'}=={key:value for key,value in old_source.items() if key!='policy'}
-    assert manifest['source']['policy']==old_source['policy'].replace('285 finite','380 finite').replace('245 explicitly mapped Therā','340 explicitly mapped Therā')
+    assert manifest['source']['policy']==old_source['policy'].replace('285 finite','382 finite').replace('245 explicitly mapped Therā','342 explicitly mapped Therā')
     assert rows[NEIGHBOR]['poem']==235 and rows[NEIGHBOR]['path']=='/text/chapter-3/poem-235/' and rows[NEIGHBOR]['title']=='Vediyadāyaka'
     assert rows[UID]['poem']==234 and rows[UID]['path']=='/text/chapter-3/poem-234/' and rows[UID]['title']=='Kilañjadāyaka'
     assert rows[UID]['raw_sha256']!=rows[NEIGHBOR]['raw_sha256'] and rows[UID]['body_sha256']!=rows[NEIGHBOR]['body_sha256']
