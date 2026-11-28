@@ -148,7 +148,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "c2a71087e2681dafcfd5b28c4117e979b66cdc11c4e34ae9b45bdcd1a513c207"
+      "after_sha256": "67468836435ad2458a37ea91133f67881883479ba60c68a92f8e782b462e40e7"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -414,19 +414,20 @@
     "tests/thera381-386-five.test.mjs": "2d6468786ea0d2bf232b026f7d1c62bb8fadb3c750a445542b32066754a347fe",
     "tests/thera394-407-four.test.mjs": "851f3a5ec02e989dd54924be9fb919ed88a43d537a1c0e65e626a466c35d8835",
     "tests/thera401-402-pair.test.mjs": "79bc747fe0d3ac4e5f169438c69cfbbe032d16ca47b862dd3a1fd2076e61e8fd",
+    "tests/thera411-419-eight.test.mjs": "1321f9e75a4404f96346bda3516c6c17fc2e9ece1ee085b9d27a7333e0610c12",
     "tests/verse-scope-python.test.mjs": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "8183a936c11b5fa8a373f7c0c8556d4817a79ce0b635657f076e3b2a37079991",
+    "scripts/ci-test-partitions.mjs": "2a46e7d349cb07a7cd962df602946e6076f125328659d0fb70b8b3fbfd2858fd",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
-    "docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json": "bedbfde291efcdb3a60c11066c9a8aea39a7e27a7be0d5b40912047394992627",
+    "docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json": "f2c20fecbda8a4b94dd48f444813bbf2f6a288bb3a37cb6f7ceadb98ef8ee5ce",
     "docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json": "4c3cf4df171873477757e158736a842903770c35e824df5ab0f820ecc566c425",
     "docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json": "db3e46646b405dc0e18c7c10c4d79fa1ea9515803b2826d01f6fb33512b387d5",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
-    "tests/helpers/current-apadana.mjs": "81ae88f3b3eefa55d88a1fa61580e73d864d95440c2c07692e936da37181df29",
+    "tests/helpers/current-apadana.mjs": "bf2366a2c889c8e0a44f1ec5e55c19e347d838f340e9d208fc68c3547cecb833",
     "tests/helpers/current389390-metadata.mjs": "74e8b7daf92ccb377ae0ad10d8d0378adb07ac54e39bb599f19aed6d95d6c1e6",
     "tests/helpers/historical-h-inputs.mjs": "8318fc4c884610f931486037f47cdf6b2c130cb7185875c3055af0266a7c700b",
     "tests/helpers/intake375-metadata.mjs": "ee77c32767be7713ef383c835b44ce942e510008da2c057bcd42380368edbf3d",
@@ -440,14 +441,14 @@
     "tests/six_boundary_history_acceptance.py": "1d360d565fc9f534fe27bca1dee6388f8faad516ff0ae57803aee6a23162aa55",
     "tests/six_operation_scope_controls.py": "e4bc5488f629b6637a0adec4daf719134abe97ca123897f906da0ac8176ab570"
   },
-  "inventory_sha256": "cdd205991744d22d64687639f857bd547c69ba922bc68b29f39a4937dc15f886",
+  "inventory_sha256": "b883bfbe2c2c6042ef03eaed17c42e9f65f8a78cccb56cbc646a4a308ec88a25",
   "counts": {
     "baseline_files": 345,
     "preserved_cases": 2092,
-    "added_files": 11,
-    "added_cases": 26,
-    "total_files": 356,
-    "total_cases": 2118
+    "added_files": 12,
+    "added_cases": 28,
+    "total_files": 357,
+    "total_cases": 2120
   },
   "registrations": {
     "changed": {
@@ -3601,7 +3602,7 @@
       },
       "tests/ci-test-partitions.test.mjs": {
         "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-        "after_sha256": "c2a71087e2681dafcfd5b28c4117e979b66cdc11c4e34ae9b45bdcd1a513c207",
+        "after_sha256": "67468836435ad2458a37ea91133f67881883479ba60c68a92f8e782b462e40e7",
         "before": [
           {
             "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
@@ -3680,7 +3681,7 @@
           {
             "name": "complete sorted discovery and finite additions reject omissions substitution and nonregular files",
             "name_expression": "'complete sorted discovery and finite additions reject omissions substitution and nonregular files'",
-            "line": 24,
+            "line": 26,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3689,7 +3690,7 @@
           {
             "name": "real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases",
             "name_expression": "'real full and four partition children preserve the same nested Unicode duplicate skip and TODO cases'",
-            "line": 26,
+            "line": 28,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3698,7 +3699,7 @@
           {
             "name": "terminal event accounting rejects missing summaries cancellations failures and duplicate summary events",
             "name_expression": "'terminal event accounting rejects missing summaries cancellations failures and duplicate summary events'",
-            "line": 28,
+            "line": 30,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3707,7 +3708,7 @@
           {
             "name": "aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases",
             "name_expression": "'aggregate refuses corrupt identity cover source hashes statuses counts and duplicated terminal cases'",
-            "line": 30,
+            "line": 32,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -3716,7 +3717,7 @@
           {
             "name": "a real failing child cannot seal an approving execution receipt",
             "name_expression": "'a real failing child cannot seal an approving execution receipt'",
-            "line": 32,
+            "line": 34,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3725,7 +3726,7 @@
           {
             "name": "a bounded hung child fails closed without an approving complete receipt",
             "name_expression": "'a bounded hung child fails closed without an approving complete receipt'",
-            "line": 34,
+            "line": 36,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3734,7 +3735,7 @@
           {
             "name": "the real CLI activates its reporter before unchanged complete-file argv",
             "name_expression": "'the real CLI activates its reporter before unchanged complete-file argv'",
-            "line": 36,
+            "line": 38,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 3,
@@ -3743,7 +3744,7 @@
           {
             "name": "raw CI workflow keeps the full reference and four bounded Windows partitions",
             "name_expression": "'raw CI workflow keeps the full reference and four bounded Windows partitions'",
-            "line": 119,
+            "line": 121,
             "column": 1,
             "registration_ancestors": [],
             "argument_count": 2,
@@ -10214,6 +10215,29 @@
           }
         ]
       },
+      "tests/thera411-419-eight.test.mjs": {
+        "sha256": "1321f9e75a4404f96346bda3516c6c17fc2e9ece1ee085b9d27a7333e0610c12",
+        "after": [
+          {
+            "name": "publisher411/412/414-419 exact sources retain386 objects,179 paragraphs,183 notes and156 local labels",
+            "name_expression": "'publisher411/412/414-419 exact sources retain386 objects,179 paragraphs,183 notes and156 local labels'",
+            "line": 103,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "source"
+          },
+          {
+            "name": "publisher411/412/414-419 actual API and embedded guards preserve54 cursors,155 quotes and6000+1546 continuation",
+            "name_expression": "'publisher411/412/414-419 actual API and embedded guards preserve54 cursors,155 quotes and6000+1546 continuation'",
+            "line": 140,
+            "column": 1,
+            "registration_ancestors": [],
+            "argument_count": 3,
+            "options_source": "source"
+          }
+        ]
+      },
       "tests/verse-scope-python.test.mjs": {
         "sha256": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19",
         "after": [
@@ -10259,12 +10283,13 @@
     "tests/thera381-386-five.test.mjs": 2,
     "tests/thera394-407-four.test.mjs": 2,
     "tests/thera401-402-pair.test.mjs": 2,
+    "tests/thera411-419-eight.test.mjs": 2,
     "tests/verse-scope-python.test.mjs": 3
   },
   "evidence": [
     {
       "path": "docs/evidence/qa/english381-386/CASE_SOURCE_AUDIT.json",
-      "sha256": "d94e8ab707dd268b8bf294917e94856df7950ab36e333cbdbe81b8db0d3de70e"
+      "sha256": "0d70bb24f85d6bc52ed9eb9b94f7dff15c83b4f92923edd228005434c9411f26"
     }
   ],
   "partition_suites": [

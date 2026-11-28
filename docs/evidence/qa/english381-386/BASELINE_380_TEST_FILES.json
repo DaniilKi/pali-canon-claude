@@ -2,7 +2,7 @@
   "schema": "reviewed-ci-test-baseline-v5",
   "commit": "4e9287bd5ebc78aba4b185b017e63eac6547bfd7",
   "legacy_test_count": 2092,
-  "added_test_count": 26,
+  "added_test_count": 28,
   "driver": {
     "path": "scripts/test.mjs",
     "sha256": "0693509f63143b63d4e2619884c4c12dd6333effc46124add4e2644c2d5287ad"
@@ -149,7 +149,7 @@
     },
     "tests/ci-test-partitions.test.mjs": {
       "before_sha256": "394ce3381df59d5de0b4964e3b67e85cbfbfcfa0015fc9b7193c26b563c87b56",
-      "after_sha256": "c2a71087e2681dafcfd5b28c4117e979b66cdc11c4e34ae9b45bdcd1a513c207"
+      "after_sha256": "67468836435ad2458a37ea91133f67881883479ba60c68a92f8e782b462e40e7"
     },
     "tests/current333-uri-bindings.test.mjs": {
       "before_sha256": "9c63b6bed7aa68d7407fb089f91488b31a670619ae38faaf91667c8f59e2cac1",
@@ -415,19 +415,20 @@
     "tests/thera381-386-five.test.mjs": "2d6468786ea0d2bf232b026f7d1c62bb8fadb3c750a445542b32066754a347fe",
     "tests/thera394-407-four.test.mjs": "851f3a5ec02e989dd54924be9fb919ed88a43d537a1c0e65e626a466c35d8835",
     "tests/thera401-402-pair.test.mjs": "79bc747fe0d3ac4e5f169438c69cfbbe032d16ca47b862dd3a1fd2076e61e8fd",
+    "tests/thera411-419-eight.test.mjs": "1321f9e75a4404f96346bda3516c6c17fc2e9ece1ee085b9d27a7333e0610c12",
     "tests/verse-scope-python.test.mjs": "98e3fa0fee077e7e885a4ffd66b2c9baf0582823d69213927d73317bc2b37d19"
   },
   "additions": {
-    "scripts/ci-test-partitions.mjs": "8183a936c11b5fa8a373f7c0c8556d4817a79ce0b635657f076e3b2a37079991",
+    "scripts/ci-test-partitions.mjs": "2a46e7d349cb07a7cd962df602946e6076f125328659d0fb70b8b3fbfd2858fd",
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
-    "docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json": "bedbfde291efcdb3a60c11066c9a8aea39a7e27a7be0d5b40912047394992627",
+    "docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json": "f2c20fecbda8a4b94dd48f444813bbf2f6a288bb3a37cb6f7ceadb98ef8ee5ce",
     "docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json": "4c3cf4df171873477757e158736a842903770c35e824df5ab0f820ecc566c425",
     "docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json": "db3e46646b405dc0e18c7c10c4d79fa1ea9515803b2826d01f6fb33512b387d5",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
-    "tests/helpers/current-apadana.mjs": "81ae88f3b3eefa55d88a1fa61580e73d864d95440c2c07692e936da37181df29",
+    "tests/helpers/current-apadana.mjs": "bf2366a2c889c8e0a44f1ec5e55c19e347d838f340e9d208fc68c3547cecb833",
     "tests/helpers/current389390-metadata.mjs": "74e8b7daf92ccb377ae0ad10d8d0378adb07ac54e39bb599f19aed6d95d6c1e6",
     "tests/helpers/historical-h-inputs.mjs": "8318fc4c884610f931486037f47cdf6b2c130cb7185875c3055af0266a7c700b",
     "tests/helpers/intake375-metadata.mjs": "ee77c32767be7713ef383c835b44ce942e510008da2c057bcd42380368edbf3d",
@@ -518,7 +519,7 @@
     "tests/cbeta-khp-assessment.test.mjs": "032baceafe209d89d2da2edc4e07fe42b2d8e9fc99fb2d2b7a14dacc7e42023b",
     "tests/chatgpt-widget.test.mjs": "b8c20ff21c8d10f3ef9e95891298afa923997b3c949098f2b7476b85ddcd3246",
     "tests/check-ci-stages.test.mjs": "216f7e198e5272bb16a2d6b841ca1bc9674033e9a9bfc965d7a6403b3f9f58c0",
-    "tests/ci-test-partitions.test.mjs": "c2a71087e2681dafcfd5b28c4117e979b66cdc11c4e34ae9b45bdcd1a513c207",
+    "tests/ci-test-partitions.test.mjs": "67468836435ad2458a37ea91133f67881883479ba60c68a92f8e782b462e40e7",
     "tests/citation-id-coverage.test.mjs": "ac30a105e79ae69f8f1cf867ee713929380b153812368333d93dc45886459123",
     "tests/citation-pagination.test.mjs": "bbdbbabf73edd4ffe4aedf592f6e504c476811b652c1559129bae5454b6b4443",
     "tests/citation-range-validation.test.mjs": "65db48e84f79515b8764df6ed063fc849a6b271fecee8ef19e061117750e336d",
@@ -720,6 +721,7 @@
     "tests/thera381-386-five.test.mjs": "2d6468786ea0d2bf232b026f7d1c62bb8fadb3c750a445542b32066754a347fe",
     "tests/thera394-407-four.test.mjs": "851f3a5ec02e989dd54924be9fb919ed88a43d537a1c0e65e626a466c35d8835",
     "tests/thera401-402-pair.test.mjs": "79bc747fe0d3ac4e5f169438c69cfbbe032d16ca47b862dd3a1fd2076e61e8fd",
+    "tests/thera411-419-eight.test.mjs": "1321f9e75a4404f96346bda3516c6c17fc2e9ece1ee085b9d27a7333e0610c12",
     "tests/title-pagination.test.mjs": "0d4781baf210f7b37ff1bb47eb14e2ec2efa43e1e5e27217f9b92584c5e6c34d",
     "tests/tool-titles.test.mjs": "67c78bcf3eed979ab5abf7b8aa842bb06e56dacd82568f0cfe41449a692aa974",
     "tests/topic-script-input.test.mjs": "7903c5a9acc049a015abb21cbceaa9a9c605de66f71d26ea0b3dd6d135a509e0",
@@ -801,6 +803,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/english381-386/CASE_SOURCE_REVIEW.json",
-    "sha256": "f06001b01ede7ea33c99262c0dae938f8d00b3dc5548eeb771940510a364c9f2"
+    "sha256": "c3e780e6729b6a5743b67b75927b099f2ba2e2d677fd92f77718cd22d2e8f57d"
   }
 }
