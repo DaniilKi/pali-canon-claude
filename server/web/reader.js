@@ -385,6 +385,1085 @@
     return data;
   }
 
+  // src/apadana-thera394-407-four-profiles.mjs
+  var THERA_394_397_406_407_PROFILES = {
+    "tha-ap396": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-394.md",
+      "id": "tha-ap396",
+      "publisher_chapter": "chapter-3",
+      "poem": 394,
+      "verses": [
+        3706,
+        3725
+      ],
+      "root_verses": [
+        333,
+        352
+      ],
+      "note_count": 23,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-394/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-394/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-394.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Madhud\u0101yaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 394; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "b166f27176245ae233b53ca3980e0b972e5b9f9173e72a5e9584004b001a5ba5",
+      "body_sha256": "e91e128bb9bfa513a35644285b7193b65d676823c2c0965e6402858b7387243f",
+      "notes_sha256": "0ea2c919336e97584a0dd0eb6212e8ab11c45d368993d1a7ec56a4575641c45a",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "a9d3687a220614a965d495cbe80026f022e6b314c0bf29f94e5b860f9791612d",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3706",
+          "suffix": "(1) [3706]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3707",
+          "suffix": "(2) [3707]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3708",
+          "suffix": "(3) [3708]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "3709",
+          "suffix": "(4) [3709]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "3710",
+          "suffix": "(5) [3710]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "3711",
+          "suffix": "(6) [3711]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "3712",
+          "suffix": "(7) [3712]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "3713",
+          "suffix": "(8) [3713]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "3714",
+          "suffix": "(9) [3714]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "3715",
+          "suffix": "(10) [3715]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "3716",
+          "suffix": "(11) [3716]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "3717",
+          "suffix": "(12) [3717]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "3718",
+          "suffix": "(13) [3718]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "3719",
+          "suffix": "(14) [3719]",
+          "lines": 4
+        },
+        {
+          "local_label": "15-16",
+          "publisher_label": "3720",
+          "suffix": "(15-16) [3720]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "3721",
+          "suffix": "(17) [3721]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "3722",
+          "suffix": "(18) [3722]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "3723",
+          "suffix": "(19) [3723]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "3724",
+          "suffix": "(20) [3724]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "3725",
+          "suffix": "(21) [3725]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+        "Publisher main PTS heading391, BJTS brace/file394 and canonical tha-ap396 are separate literal identities. The Indus hermitage, Sumedha honey/mat offering, honey-rain rebirth narrative and named colophons establish this pair; no general number offset is approved.",
+        "Retain local15\u201316/global3720 as one four-line source paragraph. Note21 distinguishes PTS two six-syllable-foot verses from BJTS one twelve-syllable-foot verse; local21 final numbering and20 printed global labels are both original, not missing text to reconstruct.",
+        "Note8 ends in original unfinished quotation punctuation at the published definition boundary; preserve every word as printed and do not invent a closing quote or intended continuation. Note16 refers to Sikhi while the main poem names Sumedha; preserve the attributed discrepancy without harmonization.",
+        "All23 notes remain poem-owned (1\u20132 heading,3\u201323 stanza); no chapter heading or summary is assigned. Preserve notes17\u201323 edition/metre choices and all four independent VRI variant notes. Publisher full refrains do not expand the two VRI peyy\u0101la stanzas."
+      ],
+      "publisher_verse_labels": [
+        "3706",
+        "3707",
+        "3708",
+        "3709",
+        "3710",
+        "3711",
+        "3712",
+        "3713",
+        "3714",
+        "3715",
+        "3716",
+        "3717",
+        "3718",
+        "3719",
+        "3720",
+        "3721",
+        "3722",
+        "3723",
+        "3724",
+        "3725"
+      ],
+      "publisher_heading_sha256": "6a5b0345115d31ccbf94f79fa885178b6910c8171df1da9c7a9cad57cec17484"
+    },
+    "tha-ap399": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-397.md",
+      "id": "tha-ap399",
+      "publisher_chapter": "chapter-3",
+      "poem": 397,
+      "verses": [
+        3791,
+        3820
+      ],
+      "root_verses": [
+        419,
+        448
+      ],
+      "note_count": 49,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-397/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-397/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-397.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Girim\u0101nanda",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 397; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "80c5ad0c659676406f48e2ae3c3eb2adda3fe4e5b34541a776af7e338a14fd2e",
+      "body_sha256": "ce44b1b5775e3e134b44ceab2a086526a3bcb0430151191948880a43df99379d",
+      "notes_sha256": "eb8887dc6d5a0cf27e0611e05e0cbf4e67fa7b95a0a103d55702793c53c7f370",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d5ee5dc3169b4ade0dbdba1af50cb41f84825237e585ea17d16e0c5f1904df12",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3791",
+          "suffix": "(1) [3791]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3792",
+          "suffix": "(2) [3792]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3793",
+          "suffix": "(3) [3793]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "3794",
+          "suffix": "(4) [3794]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "3795",
+          "suffix": "(5) [3795]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "3796",
+          "suffix": "(6) [3796]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "3797",
+          "suffix": "(7) [3797]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "3798",
+          "suffix": "(8) [3798]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "3799",
+          "suffix": "(9) [3799]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "3800",
+          "suffix": "(10) [3800]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "3801",
+          "suffix": "(11) [3801]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "3802",
+          "suffix": "(12) [3802]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "3803",
+          "suffix": "(13) [3803]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "3804",
+          "suffix": "(14) [3804]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "3805",
+          "suffix": "(15) [3805]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "3806",
+          "suffix": "(16) [3806]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "3807",
+          "suffix": "(17) [3807]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "3808",
+          "suffix": "(18) [3808]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "3809",
+          "suffix": "(19) [3809]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "3810",
+          "suffix": "(20) [3810]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "3811",
+          "suffix": "(21) [3811]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "3812",
+          "suffix": "(22) [3812]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "3813",
+          "suffix": "(23) [3813]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "3814",
+          "suffix": "(24) [3814]",
+          "lines": 4
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "3815",
+          "suffix": "(25) [3815]",
+          "lines": 4
+        },
+        {
+          "local_label": "26",
+          "publisher_label": "3816",
+          "suffix": "(26) [3816]",
+          "lines": 4
+        },
+        {
+          "local_label": "27",
+          "publisher_label": "3817",
+          "suffix": "(27) [3817]",
+          "lines": 4
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "3818",
+          "suffix": "(28) [3818]",
+          "lines": 4
+        },
+        {
+          "local_label": "29",
+          "publisher_label": "3819",
+          "suffix": "(29) [3819]",
+          "lines": 4
+        },
+        {
+          "local_label": "30",
+          "publisher_label": "3820",
+          "suffix": "(30) [3820]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+        "Publisher main PTS heading394, BJTS brace/file397 and canonical tha-ap399 remain separate literal identities. The family-death/grief narrative, Sumedha teaching, offerings/praise and named colophons establish this particular pair; no general numbering rule is approved.",
+        "Source note28 explicitly calls the offering wording corrupt and records competing readings. Keep its complete published note and chosen flower-stalk translation as attributed editorial judgment, not as a resolution or repair of P\u0101li.",
+        "Source note44 ends in an unclosed original gloss quotation; preserve its exact published words and punctuation and do not invent a closing mark or continuation. Mixed quotation punctuation in note33 also remains unchanged.",
+        "All49 notes stay poem-owned (1\u20132 heading,3\u201349 stanza); all30 four-line source paragraphs and their two closing colophons are retained. No chapter heading or summary is assigned. Preserve every PTS/BJTS alternative and all seven independent VRI notes; publisher full refrains do not expand the two VRI peyy\u0101la stanzas."
+      ],
+      "publisher_verse_labels": [
+        "3791",
+        "3792",
+        "3793",
+        "3794",
+        "3795",
+        "3796",
+        "3797",
+        "3798",
+        "3799",
+        "3800",
+        "3801",
+        "3802",
+        "3803",
+        "3804",
+        "3805",
+        "3806",
+        "3807",
+        "3808",
+        "3809",
+        "3810",
+        "3811",
+        "3812",
+        "3813",
+        "3814",
+        "3815",
+        "3816",
+        "3817",
+        "3818",
+        "3819",
+        "3820"
+      ],
+      "publisher_heading_sha256": "186355f05376400d8718c4f404dcd8b05492fb09f22b2b3230e3f10e31c8943a"
+    },
+    "tha-ap408": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-406.md",
+      "id": "tha-ap408",
+      "publisher_chapter": "chapter-3",
+      "poem": 406,
+      "verses": [
+        4050,
+        4071
+      ],
+      "root_verses": [
+        161,
+        182
+      ],
+      "note_count": 19,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-406/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-406/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-406.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Nanda",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 406; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "ec7687df026a9a498e3147a0b8d25c10866a9a439c1e38bde01dcbaddca28ee2",
+      "body_sha256": "c15d526b9d48f70eb53fbea97d849b90588253d79e2be1654b4813d5ddf5c48a",
+      "notes_sha256": "cf84713378328cc3a6d4e1c399e40b0d36f70306b407ae4777a87042ad90533f",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "e2bc16ef9a4d481084a675f3110b49e785f26a8fbd351d72e8b8081903bdaa0b",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "4050",
+          "suffix": "(1) [4050]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "4051",
+          "suffix": "(2) [4051]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "4052",
+          "suffix": "(3) [4052]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "4053",
+          "suffix": "(4) [4053]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "4054",
+          "suffix": "(5) [4054]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "4055",
+          "suffix": "(6) [4055]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "4056",
+          "suffix": "(7) [4056]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "4057",
+          "suffix": "(8) [4057]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "4058",
+          "suffix": "(9) [4058]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "4059",
+          "suffix": "(10) [4059]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "4060",
+          "suffix": "(11) [4060]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "4061",
+          "suffix": "(12) [4061]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "4062",
+          "suffix": "(13) [4062]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "4063",
+          "suffix": "(14) [4063]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "4064",
+          "suffix": "(15) [4064]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "4065",
+          "suffix": "(16) [4065]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "4066",
+          "suffix": "(17) [4066]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "4067",
+          "suffix": "(18) [4067]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "4068",
+          "suffix": "(19) [4068]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "4069",
+          "suffix": "(20) [4069]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "4070",
+          "suffix": "(21) [4070]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "4071",
+          "suffix": "(22) [4071]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+        "Publisher main PTS heading403, BJTS brace/file406 and canonical tha-ap408 are separately verified identities. Source note2 names BJTS Nandaka while the source title/colophons say Nanda; retain both without renaming. The deer-hunter, lotus pavilion, illness/death and subsequent attainment narrative supports this correspondence.",
+        "Keep source Anuraddha and note4\u2019s explicit Anuruddha/metre discussion exactly as published, with canonical wording separate. Do not regularize names, metre or lexical alternatives to force edition agreement.",
+        "All22 four-line source paragraphs, both colophons and19 notes (1\u20132 heading,3\u201319 stanza) remain complete publisher-edition scope. No chapter heading or summary is assigned. All five VRI variants and three peyy\u0101la stanzas remain independent and unexpanded."
+      ],
+      "publisher_verse_labels": [
+        "4050",
+        "4051",
+        "4052",
+        "4053",
+        "4054",
+        "4055",
+        "4056",
+        "4057",
+        "4058",
+        "4059",
+        "4060",
+        "4061",
+        "4062",
+        "4063",
+        "4064",
+        "4065",
+        "4066",
+        "4067",
+        "4068",
+        "4069",
+        "4070",
+        "4071"
+      ],
+      "publisher_heading_sha256": "f7cc58f471cbf3fc8acc2b68c484f53d04f0179424261bb859ee6bead2faf450"
+    },
+    "tha-ap409": {
+      "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-407.md",
+      "id": "tha-ap409",
+      "publisher_chapter": "chapter-3",
+      "poem": 407,
+      "verses": [
+        4072,
+        4112
+      ],
+      "root_verses": [
+        183,
+        223
+      ],
+      "note_count": 50,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "source": "apadana",
+      "path": "/text/chapter-3/poem-407/",
+      "url": "https://apadanatranslation.com/text/chapter-3/poem-407/",
+      "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-407.md",
+      "translator": "Jonathan S. Walters",
+      "license": "CC BY-NC-SA 4.0",
+      "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+      "title": "Hemaka",
+      "reference": "Ther\u0101 Apad\u0101na publisher poem 407; complete publisher-edition poem; original numbering retained",
+      "raw_sha256": "115dbc759544c0cfdabb3d32aeb06cb401c9a6d0aee45b05285f50cba74c8b17",
+      "body_sha256": "5faf5801cf416b24d1a0baee18cd42c049a6e5a8e0ec54fb3bd96b179604115c",
+      "notes_sha256": "719ef784fc32960dcf14f32f2c57a6eeb9448a7b478fc5f680d17bf05b38a939",
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "root_sha256": "d0089a5a084962dbc15919aeef4ac94bf10dbb9f9fb7acef135969e85dde8b24",
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "4072",
+          "suffix": "(1) [4072]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "4073",
+          "suffix": "(2) [4073]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "4074",
+          "suffix": "(3) [4074]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "4075",
+          "suffix": "(4) [4075]",
+          "lines": 4
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "4076",
+          "suffix": "(5) [4076]",
+          "lines": 4
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "4077",
+          "suffix": "(6) [4077]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "4078",
+          "suffix": "(7) [4078]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "4079",
+          "suffix": "(8) [4079]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "4080",
+          "suffix": "(9) [4080]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "4081",
+          "suffix": "(10) [4081]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "4082",
+          "suffix": "(11) [4082]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "4083",
+          "suffix": "(12) [4083]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "4084",
+          "suffix": "(13) [4084]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "4085",
+          "suffix": "(14) [4085]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "4086",
+          "suffix": "(15) [4086]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "4087",
+          "suffix": "(16) [4087]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "4088",
+          "suffix": "(17) [4088]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "4089",
+          "suffix": "(18) [4089]",
+          "lines": 4
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "4090",
+          "suffix": "(19) [4090]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "4091",
+          "suffix": "(20) [4091]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "4092",
+          "suffix": "(21) [4092]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "4093",
+          "suffix": "(22) [4093]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "4094",
+          "suffix": "(23) [4094]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "4095",
+          "suffix": "(24) [4095]",
+          "lines": 4
+        },
+        {
+          "local_label": "25-26",
+          "publisher_label": "4096-4097",
+          "suffix": "(25-26) [4096-4097]",
+          "lines": 8
+        },
+        {
+          "local_label": "27-28",
+          "publisher_label": "4098-4099",
+          "suffix": "(27-28) [4098-4099]",
+          "lines": 8
+        },
+        {
+          "local_label": "29-30",
+          "publisher_label": "4100-4101",
+          "suffix": "(29-30) [4100-4101]",
+          "lines": 8
+        },
+        {
+          "local_label": "31",
+          "publisher_label": "4102",
+          "suffix": "(31) [4102]",
+          "lines": 4
+        },
+        {
+          "local_label": "32-33",
+          "publisher_label": "4103-4104",
+          "suffix": "(32-33) [4103-4104]",
+          "lines": 8
+        },
+        {
+          "local_label": "34",
+          "publisher_label": "4105",
+          "suffix": "(34) [4105]",
+          "lines": 4
+        },
+        {
+          "local_label": "35",
+          "publisher_label": "4106",
+          "suffix": "(35) [4106]",
+          "lines": 4
+        },
+        {
+          "local_label": "36",
+          "publisher_label": "4107",
+          "suffix": "(36) [4107]",
+          "lines": 4
+        },
+        {
+          "local_label": "37",
+          "publisher_label": "4108",
+          "suffix": "(37) [4108]",
+          "lines": 4
+        },
+        {
+          "local_label": "38",
+          "publisher_label": "4109",
+          "suffix": "(38) [4109]",
+          "lines": 4
+        },
+        {
+          "local_label": "39",
+          "publisher_label": "4110",
+          "suffix": "(39) [4110]",
+          "lines": 4
+        },
+        {
+          "local_label": "40",
+          "publisher_label": "4111",
+          "suffix": "(40) [4111]",
+          "lines": 4
+        },
+        {
+          "local_label": "41",
+          "publisher_label": "4112",
+          "suffix": "(41) [4112]",
+          "lines": 4
+        }
+      ],
+      "mapping_notes": [
+        "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+        "Publisher main PTS heading404, BJTS brace/file407 and canonical tha-ap409 are separately verified literal identities. The Anoma ascetic, Piyadassi encounter, gem-seat/rose-apple offering, promised retinues and named colophons establish this particular pair, without a general number-offset rule.",
+        "Retain four physical eight-line paragraphs with single terminal ranges: local25\u201326/global4096\u20134097,27\u201328/4098\u20134099,29\u201330/4100\u20134101 and32\u201333/4103\u20134104. All41 printed stanzas occupy37 physical source paragraphs; do not split or reflow the originals.",
+        "All50 notes remain poem-owned (1\u20132 heading,3\u201350 stanza); all interpretations, animal/trainer alternatives and metre choices remain attributed. No publisher chapter heading, summary or recitation-marker wording is invented.",
+        "The canonical tha-ap409 unit contains an independent recitation marker after its Hemaka colophon, absent from this publisher file. Preserve that original P\u0101li apparatus separately; whole publisher coverage does not supply an English rendering. All three VRI variant notes and three peyy\u0101la stanzas remain independent and unexpanded."
+      ],
+      "publisher_verse_labels": [
+        "4072",
+        "4073",
+        "4074",
+        "4075",
+        "4076",
+        "4077",
+        "4078",
+        "4079",
+        "4080",
+        "4081",
+        "4082",
+        "4083",
+        "4084",
+        "4085",
+        "4086",
+        "4087",
+        "4088",
+        "4089",
+        "4090",
+        "4091",
+        "4092",
+        "4093",
+        "4094",
+        "4095",
+        "4096-4097",
+        "4098-4099",
+        "4100-4101",
+        "4102",
+        "4103-4104",
+        "4105",
+        "4106",
+        "4107",
+        "4108",
+        "4109",
+        "4110",
+        "4111",
+        "4112"
+      ],
+      "publisher_heading_sha256": "8c7b705a1bae8059778b2f75d050113389aa681a40bdf2796c269162feeb82ce"
+    }
+  };
+
   // src/apadana-thera401-402-profiles.mjs
   var THERA_401_402_PROFILES = {
     "tha-ap403": {
@@ -31115,7 +32194,8 @@
     ...THERA_351_360_NINE_PROFILES,
     ...THERA_371_378_SEVEN_PROFILES,
     ...THERA_381_386_FIVE_PROFILES,
-    ...THERA_401_402_PROFILES
+    ...THERA_401_402_PROFILES,
+    ...THERA_394_397_406_407_PROFILES
   });
 
   // src/apadana-profiles.mjs
@@ -41028,7 +42108,7 @@
   }
 
   // web/translation-policy.mjs
-  var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287", "tha-ap289", "tha-ap290", "tha-ap294", "tha-ap295", "tha-ap296", "tha-ap297", "tha-ap298", "tha-ap300", "tha-ap301", "tha-ap303", "tha-ap304", "tha-ap305", "tha-ap306", "tha-ap307", "tha-ap310", "tha-ap311", "tha-ap312", "tha-ap314", "tha-ap315", "tha-ap316", "tha-ap317", "tha-ap318", "tha-ap319", "tha-ap320", "tha-ap321", "tha-ap323", "tha-ap325", "tha-ap326", "tha-ap327", "tha-ap328", "tha-ap331", "tha-ap333", "tha-ap334", "tha-ap335", "tha-ap336", "tha-ap337", "tha-ap338", "tha-ap339", "tha-ap340", "tha-ap341", "tha-ap342", "tha-ap343", "tha-ap344", "tha-ap345", "tha-ap346", "tha-ap347", "tha-ap348", "tha-ap349", "tha-ap350", "tha-ap351", "tha-ap352", "tha-ap353", "tha-ap354", "tha-ap355", "tha-ap356", "tha-ap357", "tha-ap358", "tha-ap359", "tha-ap361", "tha-ap362", "tha-ap373", "tha-ap374", "tha-ap376", "tha-ap377", "tha-ap378", "tha-ap379", "tha-ap380", "tha-ap383", "tha-ap385", "tha-ap386", "tha-ap387", "tha-ap388", "tha-ap403", "tha-ap404"]);
+  var PINNED_NEW_PARATEXT_IDS = /* @__PURE__ */ new Set(["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287", "tha-ap289", "tha-ap290", "tha-ap294", "tha-ap295", "tha-ap296", "tha-ap297", "tha-ap298", "tha-ap300", "tha-ap301", "tha-ap303", "tha-ap304", "tha-ap305", "tha-ap306", "tha-ap307", "tha-ap310", "tha-ap311", "tha-ap312", "tha-ap314", "tha-ap315", "tha-ap316", "tha-ap317", "tha-ap318", "tha-ap319", "tha-ap320", "tha-ap321", "tha-ap323", "tha-ap325", "tha-ap326", "tha-ap327", "tha-ap328", "tha-ap331", "tha-ap333", "tha-ap334", "tha-ap335", "tha-ap336", "tha-ap337", "tha-ap338", "tha-ap339", "tha-ap340", "tha-ap341", "tha-ap342", "tha-ap343", "tha-ap344", "tha-ap345", "tha-ap346", "tha-ap347", "tha-ap348", "tha-ap349", "tha-ap350", "tha-ap351", "tha-ap352", "tha-ap353", "tha-ap354", "tha-ap355", "tha-ap356", "tha-ap357", "tha-ap358", "tha-ap359", "tha-ap361", "tha-ap362", "tha-ap373", "tha-ap374", "tha-ap376", "tha-ap377", "tha-ap378", "tha-ap379", "tha-ap380", "tha-ap383", "tha-ap385", "tha-ap386", "tha-ap387", "tha-ap388", "tha-ap403", "tha-ap404", "tha-ap396", "tha-ap399", "tha-ap408", "tha-ap409"]);
   var apadanaId = (uid2) => APADANA_PROFILES[uid2]?.path ? "ap:" + APADANA_PROFILES[uid2].path.replace(/^\/text\/|\/$/g, "") : void 0;
   var apadanaFamily = (id5) => typeof id5 === "string" && /^ap:/i.test(id5.trim());
   var isApadana = (value) => apadanaFamily(value?.translation_id) || value?.source === "apadana" || value?.source === "Legends of the Buddhist Saints (Apad\u0101na)" || own(value, "translation_revision") || own(value, "publisher_paratext") || own(value, "chapter_summary") || own(value, "publisher_divisions") || own(value, "publisher_preface") || own(value, "collection_summary") || own(value, "editorial_gap");
@@ -41140,7 +42220,7 @@
       }
       if (!valid) throw Error("The pinned Apad\u0101na publisher-preface content changed. No English was displayed.");
     }
-    if (content && ["tha-ap333", "tha-ap334", "tha-ap335", "tha-ap336", "tha-ap337", "tha-ap338", "tha-ap339", "tha-ap340", "tha-ap341", "tha-ap342", "tha-ap343", "tha-ap344", "tha-ap345", "tha-ap346", "tha-ap347", "tha-ap348", "tha-ap349", "tha-ap350", "tha-ap351", "tha-ap352", "tha-ap353", "tha-ap354", "tha-ap355", "tha-ap356", "tha-ap357", "tha-ap358", "tha-ap359", "tha-ap361", "tha-ap362", "tha-ap373", "tha-ap374", "tha-ap376", "tha-ap377", "tha-ap378", "tha-ap379", "tha-ap380", "tha-ap383", "tha-ap385", "tha-ap386", "tha-ap387", "tha-ap388", "tha-ap403", "tha-ap404"].includes(uid2) && value.offset === 0 && value.next_offset === null) {
+    if (content && ["tha-ap333", "tha-ap334", "tha-ap335", "tha-ap336", "tha-ap337", "tha-ap338", "tha-ap339", "tha-ap340", "tha-ap341", "tha-ap342", "tha-ap343", "tha-ap344", "tha-ap345", "tha-ap346", "tha-ap347", "tha-ap348", "tha-ap349", "tha-ap350", "tha-ap351", "tha-ap352", "tha-ap353", "tha-ap354", "tha-ap355", "tha-ap356", "tha-ap357", "tha-ap358", "tha-ap359", "tha-ap361", "tha-ap362", "tha-ap373", "tha-ap374", "tha-ap376", "tha-ap377", "tha-ap378", "tha-ap379", "tha-ap380", "tha-ap383", "tha-ap385", "tha-ap386", "tha-ap387", "tha-ap388", "tha-ap403", "tha-ap404", "tha-ap396", "tha-ap399", "tha-ap408", "tha-ap409"].includes(uid2) && value.offset === 0 && value.next_offset === null) {
       if (!Number.isSafeInteger(value.total_characters) || typeof value.text !== "string" || value.total_characters !== value.text.length || contentSha256(value.text) !== profile2.body_sha256) {
         throw Error("The complete pinned Apad\u0101na poem body changed. No English was displayed.");
       }

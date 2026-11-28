@@ -33,9 +33,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// node_modules/ajv/dist/compile/codegen/code.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/codegen/code.js
 var require_code = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.regexpCode = exports2.getEsmExportName = exports2.getProperty = exports2.safeStringify = exports2.stringify = exports2.strConcat = exports2.addCodeArg = exports2.str = exports2._ = exports2.nil = exports2._Code = exports2.Name = exports2.IDENTIFIER = exports2._CodeOrName = void 0;
@@ -187,9 +187,9 @@ var require_code = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/codegen/scope.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/codegen/scope.js
 var require_scope = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ValueScope = exports2.ValueScopeName = exports2.Scope = exports2.varKinds = exports2.UsedValueState = void 0;
@@ -332,9 +332,9 @@ var require_scope = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/codegen/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/codegen/index.js
 var require_codegen = __commonJS({
-  "node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.or = exports2.and = exports2.not = exports2.CodeGen = exports2.operators = exports2.varKinds = exports2.ValueScopeName = exports2.ValueScope = exports2.Scope = exports2.Name = exports2.regexpCode = exports2.stringify = exports2.getProperty = exports2.nil = exports2.strConcat = exports2.str = exports2._ = void 0;
@@ -1052,9 +1052,9 @@ var require_codegen = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/util.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/util.js
 var require_util = __commonJS({
-  "node_modules/ajv/dist/compile/util.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/util.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.checkStrictMode = exports2.getErrorPath = exports2.Type = exports2.useFunc = exports2.setEvaluated = exports2.evaluatedPropsToName = exports2.mergeEvaluated = exports2.eachItem = exports2.unescapeJsonPointer = exports2.escapeJsonPointer = exports2.escapeFragment = exports2.unescapeFragment = exports2.schemaRefOrVal = exports2.schemaHasRulesButRef = exports2.schemaHasRules = exports2.checkUnknownRules = exports2.alwaysValidSchema = exports2.toHash = void 0;
@@ -1219,9 +1219,9 @@ var require_util = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/names.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/names.js
 var require_names = __commonJS({
-  "node_modules/ajv/dist/compile/names.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/names.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -1258,9 +1258,9 @@ var require_names = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/errors.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/errors.js
 var require_errors = __commonJS({
-  "node_modules/ajv/dist/compile/errors.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/errors.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendErrors = exports2.resetErrorsCount = exports2.reportExtraError = exports2.reportError = exports2.keyword$DataError = exports2.keywordError = void 0;
@@ -1380,9 +1380,9 @@ var require_errors = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/boolSchema.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/boolSchema.js
 var require_boolSchema = __commonJS({
-  "node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.boolOrEmptySchema = exports2.topBoolOrEmptySchema = void 0;
@@ -1431,9 +1431,9 @@ var require_boolSchema = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/rules.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/rules.js
 var require_rules = __commonJS({
-  "node_modules/ajv/dist/compile/rules.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/rules.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getRules = exports2.isJSONType = void 0;
@@ -1462,9 +1462,9 @@ var require_rules = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/applicability.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/applicability.js
 var require_applicability = __commonJS({
-  "node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.shouldUseRule = exports2.shouldUseGroup = exports2.schemaHasRulesForType = void 0;
@@ -1485,9 +1485,9 @@ var require_applicability = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/dataType.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/dataType.js
 var require_dataType = __commonJS({
-  "node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.reportTypeError = exports2.checkDataTypes = exports2.checkDataType = exports2.coerceAndCheckDataType = exports2.getJSONTypes = exports2.getSchemaTypes = exports2.DataType = void 0;
@@ -1669,9 +1669,9 @@ var require_dataType = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/defaults.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/defaults.js
 var require_defaults = __commonJS({
-  "node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.assignDefaults = void 0;
@@ -1706,9 +1706,9 @@ var require_defaults = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/code.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/code.js
 var require_code2 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/code.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateUnion = exports2.validateArray = exports2.usePattern = exports2.callValidateCode = exports2.schemaProperties = exports2.allSchemaProperties = exports2.noPropertyInData = exports2.propertyInData = exports2.isOwnProperty = exports2.hasPropFunc = exports2.reportMissingProp = exports2.checkMissingProp = exports2.checkReportMissingProp = void 0;
@@ -1839,9 +1839,9 @@ var require_code2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/keyword.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/keyword.js
 var require_keyword = __commonJS({
-  "node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateKeywordUsage = exports2.validSchemaType = exports2.funcKeywordCode = exports2.macroKeywordCode = void 0;
@@ -1957,9 +1957,9 @@ var require_keyword = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/subschema.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/subschema.js
 var require_subschema = __commonJS({
-  "node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendSubschemaMode = exports2.extendSubschemaData = exports2.getSubschema = void 0;
@@ -2040,9 +2040,9 @@ var require_subschema = __commonJS({
   }
 });
 
-// node_modules/fast-deep-equal/index.js
+// ../pali-401402-integration-nov28/node_modules/fast-deep-equal/index.js
 var require_fast_deep_equal = __commonJS({
-  "node_modules/fast-deep-equal/index.js"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/fast-deep-equal/index.js"(exports2, module2) {
     "use strict";
     module2.exports = function equal(a, b) {
       if (a === b) return true;
@@ -2075,9 +2075,9 @@ var require_fast_deep_equal = __commonJS({
   }
 });
 
-// node_modules/json-schema-traverse/index.js
+// ../pali-401402-integration-nov28/node_modules/json-schema-traverse/index.js
 var require_json_schema_traverse = __commonJS({
-  "node_modules/json-schema-traverse/index.js"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/json-schema-traverse/index.js"(exports2, module2) {
     "use strict";
     var traverse = module2.exports = function(schema, opts, cb) {
       if (typeof opts == "function") {
@@ -2163,9 +2163,9 @@ var require_json_schema_traverse = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/resolve.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/resolve.js
 var require_resolve = __commonJS({
-  "node_modules/ajv/dist/compile/resolve.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/resolve.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getSchemaRefs = exports2.resolveUrl = exports2.normalizeId = exports2._getFullPath = exports2.getFullPath = exports2.inlineRef = void 0;
@@ -2319,9 +2319,9 @@ var require_resolve = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/validate/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/index.js
 var require_validate = __commonJS({
-  "node_modules/ajv/dist/compile/validate/index.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/validate/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getData = exports2.KeywordCxt = exports2.validateFunctionCode = void 0;
@@ -2827,9 +2827,9 @@ var require_validate = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/validation_error.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/runtime/validation_error.js
 var require_validation_error = __commonJS({
-  "node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var ValidationError = class extends Error {
@@ -2843,9 +2843,9 @@ var require_validation_error = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/ref_error.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/ref_error.js
 var require_ref_error = __commonJS({
-  "node_modules/ajv/dist/compile/ref_error.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/ref_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var resolve_1 = require_resolve();
@@ -2860,9 +2860,9 @@ var require_ref_error = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/compile/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/compile/index.js
 var require_compile = __commonJS({
-  "node_modules/ajv/dist/compile/index.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/compile/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.resolveSchema = exports2.getCompilingSchema = exports2.resolveRef = exports2.compileSchema = exports2.SchemaEnv = void 0;
@@ -3084,9 +3084,9 @@ var require_compile = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/refs/data.json
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/refs/data.json
 var require_data = __commonJS({
-  "node_modules/ajv/dist/refs/data.json"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/refs/data.json"(exports2, module2) {
     module2.exports = {
       $id: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#",
       description: "Meta-schema for $data reference (JSON AnySchema extension proposal)",
@@ -3103,9 +3103,9 @@ var require_data = __commonJS({
   }
 });
 
-// node_modules/fast-uri/lib/utils.js
+// ../pali-401402-integration-nov28/node_modules/fast-uri/lib/utils.js
 var require_utils = __commonJS({
-  "node_modules/fast-uri/lib/utils.js"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
     "use strict";
     var isUUID = RegExp.prototype.test.bind(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu);
     var isIPv4 = RegExp.prototype.test.bind(/^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u);
@@ -3637,9 +3637,9 @@ var require_utils = __commonJS({
   }
 });
 
-// node_modules/fast-uri/lib/schemes.js
+// ../pali-401402-integration-nov28/node_modules/fast-uri/lib/schemes.js
 var require_schemes = __commonJS({
-  "node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
     "use strict";
     var { isUUID } = require_utils();
     var URN_REG = /^([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-./:;=@]|%[\da-f]{2})+)$/iu;
@@ -3848,9 +3848,9 @@ var require_schemes = __commonJS({
   }
 });
 
-// node_modules/fast-uri/index.js
+// ../pali-401402-integration-nov28/node_modules/fast-uri/index.js
 var require_fast_uri = __commonJS({
-  "node_modules/fast-uri/index.js"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/fast-uri/index.js"(exports2, module2) {
     "use strict";
     var { normalizeIPv6, removeDotSegments, removeDotSegmentsRelative, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, serializePathEncoding, normalizeQueryFragmentEncoding, encodeQuery, encodeFragment, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = require_utils();
     var { SCHEMES, getSchemeHandler } = require_schemes();
@@ -4278,9 +4278,9 @@ var require_fast_uri = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/uri.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/runtime/uri.js
 var require_uri = __commonJS({
-  "node_modules/ajv/dist/runtime/uri.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/runtime/uri.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var uri = require_fast_uri();
@@ -4289,9 +4289,9 @@ var require_uri = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/core.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/core.js
 var require_core = __commonJS({
-  "node_modules/ajv/dist/core.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/core.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = void 0;
@@ -4900,9 +4900,9 @@ var require_core = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/id.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/core/id.js
 var require_id = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var def = {
@@ -4915,9 +4915,9 @@ var require_id = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/ref.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/core/ref.js
 var require_ref = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.callRef = exports2.getValidate = void 0;
@@ -5037,9 +5037,9 @@ var require_ref = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/core/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/core/index.js
 var require_core2 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var id_1 = require_id();
@@ -5058,9 +5058,9 @@ var require_core2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitNumber.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/limitNumber.js
 var require_limitNumber = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5090,9 +5090,9 @@ var require_limitNumber = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/multipleOf.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/multipleOf.js
 var require_multipleOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5118,9 +5118,9 @@ var require_multipleOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/ucs2length.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/runtime/ucs2length.js
 var require_ucs2length = __commonJS({
-  "node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     function ucs2length(str) {
@@ -5144,9 +5144,9 @@ var require_ucs2length = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitLength.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/limitLength.js
 var require_limitLength = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5176,9 +5176,9 @@ var require_limitLength = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/pattern.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/pattern.js
 var require_pattern = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5213,9 +5213,9 @@ var require_pattern = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitProperties.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/limitProperties.js
 var require_limitProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5242,9 +5242,9 @@ var require_limitProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/required.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/required.js
 var require_required = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5324,9 +5324,9 @@ var require_required = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/limitItems.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/limitItems.js
 var require_limitItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5353,9 +5353,9 @@ var require_limitItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/runtime/equal.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/runtime/equal.js
 var require_equal = __commonJS({
-  "node_modules/ajv/dist/runtime/equal.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/runtime/equal.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var equal = require_fast_deep_equal();
@@ -5364,9 +5364,9 @@ var require_equal = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
 var require_uniqueItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var dataType_1 = require_dataType();
@@ -5431,9 +5431,9 @@ var require_uniqueItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/const.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/const.js
 var require_const = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5460,9 +5460,9 @@ var require_const = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/enum.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/enum.js
 var require_enum = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5509,9 +5509,9 @@ var require_enum = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/validation/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/index.js
 var require_validation = __commonJS({
-  "node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var limitNumber_1 = require_limitNumber();
@@ -5547,9 +5547,9 @@ var require_validation = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
 var require_additionalItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateAdditionalItems = void 0;
@@ -5600,9 +5600,9 @@ var require_additionalItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/items.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/items.js
 var require_items = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateTuple = void 0;
@@ -5657,9 +5657,9 @@ var require_items = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
 var require_prefixItems = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var items_1 = require_items();
@@ -5674,9 +5674,9 @@ var require_prefixItems = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/items2020.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/items2020.js
 var require_items2020 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5709,9 +5709,9 @@ var require_items2020 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/contains.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/contains.js
 var require_contains = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5803,9 +5803,9 @@ var require_contains = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/dependencies.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/dependencies.js
 var require_dependencies = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateSchemaDeps = exports2.validatePropertyDeps = exports2.error = void 0;
@@ -5897,9 +5897,9 @@ var require_dependencies = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
 var require_propertyNames = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5940,9 +5940,9 @@ var require_propertyNames = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
 var require_additionalProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6046,9 +6046,9 @@ var require_additionalProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/properties.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/properties.js
 var require_properties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var validate_1 = require_validate();
@@ -6104,9 +6104,9 @@ var require_properties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
 var require_patternProperties = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6178,9 +6178,9 @@ var require_patternProperties = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/not.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/not.js
 var require_not = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6209,9 +6209,9 @@ var require_not = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/anyOf.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/anyOf.js
 var require_anyOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -6226,9 +6226,9 @@ var require_anyOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/oneOf.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/oneOf.js
 var require_oneOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6284,9 +6284,9 @@ var require_oneOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/allOf.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/allOf.js
 var require_allOf = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6311,9 +6311,9 @@ var require_allOf = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/if.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/if.js
 var require_if = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6380,9 +6380,9 @@ var require_if = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/thenElse.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/thenElse.js
 var require_thenElse = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -6398,9 +6398,9 @@ var require_thenElse = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/applicator/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/index.js
 var require_applicator = __commonJS({
-  "node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var additionalItems_1 = require_additionalItems();
@@ -6446,9 +6446,9 @@ var require_applicator = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/format/format.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/format/format.js
 var require_format = __commonJS({
-  "node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6536,9 +6536,9 @@ var require_format = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/format/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/format/index.js
 var require_format2 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var format_1 = require_format();
@@ -6547,9 +6547,9 @@ var require_format2 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/metadata.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/metadata.js
 var require_metadata = __commonJS({
-  "node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.contentVocabulary = exports2.metadataVocabulary = void 0;
@@ -6570,9 +6570,9 @@ var require_metadata = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/draft7.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/draft7.js
 var require_draft7 = __commonJS({
-  "node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var core_1 = require_core2();
@@ -6592,9 +6592,9 @@ var require_draft7 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/discriminator/types.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/discriminator/types.js
 var require_types = __commonJS({
-  "node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.DiscrError = void 0;
@@ -6606,9 +6606,9 @@ var require_types = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/vocabularies/discriminator/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/discriminator/index.js
 var require_discriminator = __commonJS({
-  "node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6711,9 +6711,9 @@ var require_discriminator = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/refs/json-schema-draft-07.json
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/refs/json-schema-draft-07.json
 var require_json_schema_draft_07 = __commonJS({
-  "node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
     module2.exports = {
       $schema: "http://json-schema.org/draft-07/schema#",
       $id: "http://json-schema.org/draft-07/schema#",
@@ -6868,9 +6868,9 @@ var require_json_schema_draft_07 = __commonJS({
   }
 });
 
-// node_modules/ajv/dist/ajv.js
+// ../pali-401402-integration-nov28/node_modules/ajv/dist/ajv.js
 var require_ajv = __commonJS({
-  "node_modules/ajv/dist/ajv.js"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/ajv/dist/ajv.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.MissingRefError = exports2.ValidationError = exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = exports2.Ajv = void 0;
@@ -6938,9 +6938,9 @@ var require_ajv = __commonJS({
   }
 });
 
-// node_modules/ajv-formats/dist/formats.js
+// ../pali-401402-integration-nov28/node_modules/ajv-formats/dist/formats.js
 var require_formats = __commonJS({
-  "node_modules/ajv-formats/dist/formats.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv-formats/dist/formats.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatNames = exports2.fastFormats = exports2.fullFormats = void 0;
@@ -7141,9 +7141,9 @@ var require_formats = __commonJS({
   }
 });
 
-// node_modules/ajv-formats/dist/limit.js
+// ../pali-401402-integration-nov28/node_modules/ajv-formats/dist/limit.js
 var require_limit = __commonJS({
-  "node_modules/ajv-formats/dist/limit.js"(exports2) {
+  "../pali-401402-integration-nov28/node_modules/ajv-formats/dist/limit.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatLimitDefinition = void 0;
@@ -7213,9 +7213,9 @@ var require_limit = __commonJS({
   }
 });
 
-// node_modules/ajv-formats/dist/index.js
+// ../pali-401402-integration-nov28/node_modules/ajv-formats/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/ajv-formats/dist/index.js"(exports2, module2) {
+  "../pali-401402-integration-nov28/node_modules/ajv-formats/dist/index.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var formats_1 = require_formats();
@@ -7258,7 +7258,7 @@ var require_dist = __commonJS({
 // src/http-worker.mjs
 var import_node_worker_threads = require("node:worker_threads");
 
-// node_modules/zod/v3/external.js
+// ../pali-401402-integration-nov28/node_modules/zod/v3/external.js
 var external_exports = {};
 __export(external_exports, {
   BRAND: () => BRAND,
@@ -7370,7 +7370,7 @@ __export(external_exports, {
   void: () => voidType
 });
 
-// node_modules/zod/v3/helpers/util.js
+// ../pali-401402-integration-nov28/node_modules/zod/v3/helpers/util.js
 var util;
 (function(util2) {
   util2.assertEqual = (_) => {
@@ -7504,7 +7504,7 @@ var getParsedType = (data5) => {
   }
 };
 
-// node_modules/zod/v3/ZodError.js
+// ../pali-401402-integration-nov28/node_modules/zod/v3/ZodError.js
 var ZodIssueCode = util.arrayToEnum([
   "invalid_type",
   "invalid_literal",
@@ -7622,7 +7622,7 @@ ZodError.create = (issues) => {
   return error2;
 };
 
-// node_modules/zod/v3/locales/en.js
+// ../pali-401402-integration-nov28/node_modules/zod/v3/locales/en.js
 var errorMap = (issue2, _ctx) => {
   let message;
   switch (issue2.code) {
@@ -7725,7 +7725,7 @@ var errorMap = (issue2, _ctx) => {
 };
 var en_default = errorMap;
 
-// node_modules/zod/v3/errors.js
+// ../pali-401402-integration-nov28/node_modules/zod/v3/errors.js
 var overrideErrorMap = en_default;
 function setErrorMap(map) {
   overrideErrorMap = map;
@@ -7734,7 +7734,7 @@ function getErrorMap() {
   return overrideErrorMap;
 }
 
-// node_modules/zod/v3/helpers/parseUtil.js
+// ../pali-401402-integration-nov28/node_modules/zod/v3/helpers/parseUtil.js
 var makeIssue = (params) => {
   const { data: data5, path, errorMaps, issueData } = params;
   const fullPath = [...path, ...issueData.path || []];
@@ -7844,14 +7844,14 @@ var isDirty = (x) => x.status === "dirty";
 var isValid = (x) => x.status === "valid";
 var isAsync = (x) => typeof Promise !== "undefined" && x instanceof Promise;
 
-// node_modules/zod/v3/helpers/errorUtil.js
+// ../pali-401402-integration-nov28/node_modules/zod/v3/helpers/errorUtil.js
 var errorUtil;
 (function(errorUtil2) {
   errorUtil2.errToObj = (message) => typeof message === "string" ? { message } : message || {};
   errorUtil2.toString = (message) => typeof message === "string" ? message : message?.message;
 })(errorUtil || (errorUtil = {}));
 
-// node_modules/zod/v3/types.js
+// ../pali-401402-integration-nov28/node_modules/zod/v3/types.js
 var ParseInputLazyPath = class {
   constructor(parent, value, path, key3) {
     this._cachedPath = [];
@@ -11299,7 +11299,7 @@ var coerce = {
 };
 var NEVER = INVALID;
 
-// node_modules/zod/v4/core/core.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/core.js
 var NEVER2 = Object.freeze({
   status: "aborted"
 });
@@ -11358,7 +11358,7 @@ function config(newConfig) {
   return globalConfig;
 }
 
-// node_modules/zod/v4/core/util.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/util.js
 var util_exports = {};
 __export(util_exports, {
   BIGINT_FORMAT_RANGES: () => BIGINT_FORMAT_RANGES,
@@ -11879,7 +11879,7 @@ var Class = class {
   }
 };
 
-// node_modules/zod/v4/core/errors.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/errors.js
 var initializer = (inst, def) => {
   inst.name = "$ZodError";
   Object.defineProperty(inst, "_zod", {
@@ -11954,7 +11954,7 @@ function formatError(error2, _mapper) {
   return fieldErrors;
 }
 
-// node_modules/zod/v4/core/parse.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/parse.js
 var _parse = (_Err) => (schema, value, _ctx, _params) => {
   const ctx = _ctx ? Object.assign(_ctx, { async: false }) : { async: false };
   const result = schema._zod.run({ value, issues: [] }, ctx);
@@ -12006,7 +12006,7 @@ var _safeParseAsync = (_Err) => async (schema, value, _ctx) => {
 };
 var safeParseAsync = /* @__PURE__ */ _safeParseAsync($ZodRealError);
 
-// node_modules/zod/v4/core/regexes.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/regexes.js
 var cuid = /^[cC][^\s-]{8,}$/;
 var cuid2 = /^[0-9a-z]+$/;
 var ulid = /^[0-9A-HJKMNP-TV-Za-hjkmnp-tv-z]{26}$/;
@@ -12064,7 +12064,7 @@ var _null = /null/i;
 var lowercase = /^[^A-Z]*$/;
 var uppercase = /^[^a-z]*$/;
 
-// node_modules/zod/v4/core/checks.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/checks.js
 var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
   var _a;
   inst._zod ?? (inst._zod = {});
@@ -12449,7 +12449,7 @@ var $ZodCheckOverwrite = /* @__PURE__ */ $constructor("$ZodCheckOverwrite", (ins
   };
 });
 
-// node_modules/zod/v4/core/doc.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/doc.js
 var Doc = class {
   constructor(args = []) {
     this.content = [];
@@ -12485,14 +12485,14 @@ var Doc = class {
   }
 };
 
-// node_modules/zod/v4/core/versions.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/versions.js
 var version = {
   major: 4,
   minor: 0,
   patch: 0
 };
 
-// node_modules/zod/v4/core/schemas.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/schemas.js
 var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   var _a;
   inst ?? (inst = {});
@@ -13730,7 +13730,7 @@ function handleRefineResult(result, payload, input, inst) {
   }
 }
 
-// node_modules/zod/v4/locales/en.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/locales/en.js
 var parsedType = (data5) => {
   const t = typeof data5;
   switch (t) {
@@ -13848,7 +13848,7 @@ function en_default2() {
   };
 }
 
-// node_modules/zod/v4/core/registries.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/registries.js
 var $ZodRegistry = class {
   constructor() {
     this._map = /* @__PURE__ */ new Map();
@@ -13896,7 +13896,7 @@ function registry() {
 }
 var globalRegistry = /* @__PURE__ */ registry();
 
-// node_modules/zod/v4/core/api.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/api.js
 function _string(Class2, params) {
   return new Class2({
     type: "string",
@@ -14335,7 +14335,7 @@ function _refine(Class2, fn, _params) {
   return schema;
 }
 
-// node_modules/zod/v4/core/to-json-schema.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/core/to-json-schema.js
 var JSONSchemaGenerator = class {
   constructor(params) {
     this.counter = 0;
@@ -15102,7 +15102,7 @@ function isTransforming(_schema, _ctx) {
   throw new Error(`Unknown schema type: ${def.type}`);
 }
 
-// node_modules/zod/v4/mini/schemas.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/mini/schemas.js
 var ZodMiniType = /* @__PURE__ */ $constructor("ZodMiniType", (inst, def) => {
   if (!inst._zod)
     throw new Error("Uninitialized schema in ZodMiniType.");
@@ -15148,7 +15148,7 @@ function object(shape, params) {
   return new ZodMiniObject(def);
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
 function isZ4Schema(s) {
   const schema = s;
   return !!schema._zod;
@@ -15308,7 +15308,7 @@ function getLiteralValue(schema) {
   return void 0;
 }
 
-// node_modules/zod/v4/classic/iso.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/classic/iso.js
 var iso_exports2 = {};
 __export(iso_exports2, {
   ZodISODate: () => ZodISODate,
@@ -15349,7 +15349,7 @@ function duration2(params) {
   return _isoDuration(ZodISODuration, params);
 }
 
-// node_modules/zod/v4/classic/errors.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/classic/errors.js
 var initializer2 = (inst, issues) => {
   $ZodError.init(inst, issues);
   inst.name = "ZodError";
@@ -15383,13 +15383,13 @@ var ZodRealError = $constructor("ZodError", initializer2, {
   Parent: Error
 });
 
-// node_modules/zod/v4/classic/parse.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/classic/parse.js
 var parse2 = /* @__PURE__ */ _parse(ZodRealError);
 var parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
 var safeParse3 = /* @__PURE__ */ _safeParse(ZodRealError);
 var safeParseAsync3 = /* @__PURE__ */ _safeParseAsync(ZodRealError);
 
-// node_modules/zod/v4/classic/schemas.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/classic/schemas.js
 var ZodType2 = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
   $ZodType.init(inst, def);
   inst.def = def;
@@ -16000,10 +16000,10 @@ function preprocess(fn, schema) {
   return pipe(transform(fn), schema);
 }
 
-// node_modules/zod/v4/classic/external.js
+// ../pali-401402-integration-nov28/node_modules/zod/v4/classic/external.js
 config(en_default2());
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
 var LATEST_PROTOCOL_VERSION = "2025-11-25";
 var SUPPORTED_PROTOCOL_VERSIONS = [LATEST_PROTOCOL_VERSION, "2025-06-18", "2025-03-26", "2024-11-05", "2024-10-07"];
 var RELATED_TASK_META_KEY = "io.modelcontextprotocol/related-task";
@@ -17534,12 +17534,12 @@ var UrlElicitationRequiredError = class extends McpError {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
 function isTerminal(status) {
   return status === "completed" || status === "failed" || status === "cancelled";
 }
 
-// node_modules/zod-to-json-schema/dist/esm/Options.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/Options.js
 var ignoreOverride = /* @__PURE__ */ Symbol("Let zodToJsonSchema decide on which parser to use");
 var defaultOptions = {
   name: void 0,
@@ -17573,7 +17573,7 @@ var getDefaultOptions = (options) => typeof options === "string" ? {
   ...options
 };
 
-// node_modules/zod-to-json-schema/dist/esm/Refs.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/Refs.js
 var getRefs = (options) => {
   const _options = getDefaultOptions(options);
   const currentPath = _options.name !== void 0 ? [..._options.basePath, _options.definitionPath, _options.name] : _options.basePath;
@@ -17594,7 +17594,7 @@ var getRefs = (options) => {
   };
 };
 
-// node_modules/zod-to-json-schema/dist/esm/errorMessages.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/errorMessages.js
 function addErrorMessage(res, key3, errorMessage, refs) {
   if (!refs?.errorMessages)
     return;
@@ -17610,7 +17610,7 @@ function setResponseValueAndErrors(res, key3, value, errorMessage, refs) {
   addErrorMessage(res, key3, errorMessage, refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
 var getRelativePath = (pathA, pathB) => {
   let i = 0;
   for (; i < pathA.length && i < pathB.length; i++) {
@@ -17620,7 +17620,7 @@ var getRelativePath = (pathA, pathB) => {
   return [(pathA.length - i).toString(), ...pathB.slice(i)].join("/");
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/any.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/any.js
 function parseAnyDef(refs) {
   if (refs.target !== "openAi") {
     return {};
@@ -17636,7 +17636,7 @@ function parseAnyDef(refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/array.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/array.js
 function parseArrayDef(def, refs) {
   const res = {
     type: "array"
@@ -17660,7 +17660,7 @@ function parseArrayDef(def, refs) {
   return res;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js
 function parseBigintDef(def, refs) {
   const res = {
     type: "integer",
@@ -17706,24 +17706,24 @@ function parseBigintDef(def, refs) {
   return res;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js
 function parseBooleanDef() {
   return {
     type: "boolean"
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/branded.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/branded.js
 function parseBrandedDef(_def, refs) {
   return parseDef(_def.type._def, refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/catch.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/catch.js
 var parseCatchDef = (def, refs) => {
   return parseDef(def.innerType._def, refs);
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/date.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/date.js
 function parseDateDef(def, refs, overrideDateStrategy) {
   const strategy = overrideDateStrategy ?? refs.dateStrategy;
   if (Array.isArray(strategy)) {
@@ -17782,7 +17782,7 @@ var integerDateParser = (def, refs) => {
   return res;
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/default.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/default.js
 function parseDefaultDef(_def, refs) {
   return {
     ...parseDef(_def.innerType._def, refs),
@@ -17790,12 +17790,12 @@ function parseDefaultDef(_def, refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/effects.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/effects.js
 function parseEffectsDef(_def, refs) {
   return refs.effectStrategy === "input" ? parseDef(_def.schema._def, refs) : parseAnyDef(refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/enum.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/enum.js
 function parseEnumDef(def) {
   return {
     type: "string",
@@ -17803,7 +17803,7 @@ function parseEnumDef(def) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js
 var isJsonSchema7AllOfType = (type) => {
   if ("type" in type && type.type === "string")
     return false;
@@ -17845,7 +17845,7 @@ function parseIntersectionDef(def, refs) {
   } : void 0;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/literal.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/literal.js
 function parseLiteralDef(def, refs) {
   const parsedType2 = typeof def.value;
   if (parsedType2 !== "bigint" && parsedType2 !== "number" && parsedType2 !== "boolean" && parsedType2 !== "string") {
@@ -17865,7 +17865,7 @@ function parseLiteralDef(def, refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/string.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/string.js
 var emojiRegex2 = void 0;
 var zodPatterns = {
   /**
@@ -18190,7 +18190,7 @@ function stringifyRegExpWithFlags(regex, refs) {
   return pattern;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/record.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/record.js
 function parseRecordDef(def, refs) {
   if (refs.target === "openAi") {
     console.warn("Warning: OpenAI may not support records in schemas! Try an array of key-value pairs instead.");
@@ -18242,7 +18242,7 @@ function parseRecordDef(def, refs) {
   return schema;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/map.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/map.js
 function parseMapDef(def, refs) {
   if (refs.mapStrategy === "record") {
     return parseRecordDef(def, refs);
@@ -18267,7 +18267,7 @@ function parseMapDef(def, refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
 function parseNativeEnumDef(def) {
   const object3 = def.values;
   const actualKeys = Object.keys(def.values).filter((key3) => {
@@ -18281,7 +18281,7 @@ function parseNativeEnumDef(def) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/never.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/never.js
 function parseNeverDef(refs) {
   return refs.target === "openAi" ? void 0 : {
     not: parseAnyDef({
@@ -18291,7 +18291,7 @@ function parseNeverDef(refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/null.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/null.js
 function parseNullDef(refs) {
   return refs.target === "openApi3" ? {
     enum: ["null"],
@@ -18301,7 +18301,7 @@ function parseNullDef(refs) {
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/union.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/union.js
 var primitiveMappings = {
   ZodString: "string",
   ZodNumber: "number",
@@ -18369,7 +18369,7 @@ var asAnyOf = (def, refs) => {
   return anyOf.length ? { anyOf } : void 0;
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js
 function parseNullableDef(def, refs) {
   if (["ZodString", "ZodNumber", "ZodBigInt", "ZodBoolean", "ZodNull"].includes(def.innerType._def.typeName) && (!def.innerType._def.checks || !def.innerType._def.checks.length)) {
     if (refs.target === "openApi3") {
@@ -18401,7 +18401,7 @@ function parseNullableDef(def, refs) {
   return base && { anyOf: [base, { type: "null" }] };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/number.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/number.js
 function parseNumberDef(def, refs) {
   const res = {
     type: "number"
@@ -18450,7 +18450,7 @@ function parseNumberDef(def, refs) {
   return res;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/object.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/object.js
 function parseObjectDef(def, refs) {
   const forceOptionalIntoNullable = refs.target === "openAi";
   const result = {
@@ -18520,7 +18520,7 @@ function safeIsOptional(schema) {
   }
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/optional.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/optional.js
 var parseOptionalDef = (def, refs) => {
   if (refs.currentPath.toString() === refs.propertyPath?.toString()) {
     return parseDef(def.innerType._def, refs);
@@ -18539,7 +18539,7 @@ var parseOptionalDef = (def, refs) => {
   } : parseAnyDef(refs);
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js
 var parsePipelineDef = (def, refs) => {
   if (refs.pipeStrategy === "input") {
     return parseDef(def.in._def, refs);
@@ -18559,12 +18559,12 @@ var parsePipelineDef = (def, refs) => {
   };
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/promise.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/promise.js
 function parsePromiseDef(def, refs) {
   return parseDef(def.type._def, refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/set.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/set.js
 function parseSetDef(def, refs) {
   const items = parseDef(def.valueType._def, {
     ...refs,
@@ -18584,7 +18584,7 @@ function parseSetDef(def, refs) {
   return schema;
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js
 function parseTupleDef(def, refs) {
   if (def.rest) {
     return {
@@ -18612,24 +18612,24 @@ function parseTupleDef(def, refs) {
   }
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js
 function parseUndefinedDef(refs) {
   return {
     not: parseAnyDef(refs)
   };
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js
 function parseUnknownDef(refs) {
   return parseAnyDef(refs);
 }
 
-// node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js
 var parseReadonlyDef = (def, refs) => {
   return parseDef(def.innerType._def, refs);
 };
 
-// node_modules/zod-to-json-schema/dist/esm/selectParser.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/selectParser.js
 var selectParser = (def, typeName, refs) => {
   switch (typeName) {
     case ZodFirstPartyTypeKind.ZodString:
@@ -18705,7 +18705,7 @@ var selectParser = (def, typeName, refs) => {
   }
 };
 
-// node_modules/zod-to-json-schema/dist/esm/parseDef.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/parseDef.js
 function parseDef(def, refs, forceResolution = false) {
   const seenItem = refs.seen.get(def);
   if (refs.override) {
@@ -18761,7 +18761,7 @@ var addMeta = (def, refs, jsonSchema) => {
   return jsonSchema;
 };
 
-// node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js
+// ../pali-401402-integration-nov28/node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js
 var zodToJsonSchema = (schema, options) => {
   const refs = getRefs(options);
   let definitions = typeof options === "object" && options.definitions ? Object.entries(options.definitions).reduce((acc, [name2, schema2]) => ({
@@ -18823,7 +18823,7 @@ var zodToJsonSchema = (schema, options) => {
   return combined;
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-json-schema-compat.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-json-schema-compat.js
 function mapMiniTarget(t) {
   if (!t)
     return "draft-7";
@@ -18865,7 +18865,7 @@ function parseWithCompat(schema, data5) {
   return result.data;
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js
 var DEFAULT_REQUEST_TIMEOUT_MSEC = 6e4;
 var Protocol = class {
   constructor(_options) {
@@ -19842,7 +19842,7 @@ function mergeCapabilities(base, additional) {
   return result;
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/validation/ajv-provider.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/validation/ajv-provider.js
 var import_ajv = __toESM(require_ajv(), 1);
 var import_ajv_formats = __toESM(require_dist(), 1);
 function createDefaultAjvInstance() {
@@ -19910,7 +19910,7 @@ var AjvJsonSchemaValidator = class {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/client.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/client.js
 var ExperimentalClientTasks = class {
   constructor(_client) {
     this._client = _client;
@@ -20064,7 +20064,7 @@ var ExperimentalClientTasks = class {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/helpers.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/helpers.js
 function assertToolsCallTaskCapability(requests, method, entityName) {
   if (!requests) {
     throw new Error(`${entityName} does not support task creation (required for ${method})`);
@@ -20099,7 +20099,7 @@ function assertClientRequestTaskCapability(requests, method, entityName) {
   }
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/client/index.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/client/index.js
 function applyElicitationDefaults(schema, data5) {
   if (!schema || data5 === null || typeof data5 !== "object")
     return;
@@ -20610,7 +20610,7 @@ var Client = class extends Protocol {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/inMemory.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/inMemory.js
 var InMemoryTransport = class _InMemoryTransport {
   constructor() {
     this._messageQueue = [];
@@ -20722,7 +20722,7 @@ function assertCanonicalLocator(id, revision, { expected, positional = false } =
   }
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
 var ExperimentalServerTasks = class {
   constructor(_server) {
     this._server = _server;
@@ -20935,7 +20935,7 @@ var ExperimentalServerTasks = class {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
 var Server = class extends Protocol {
   /**
    * Initializes this server with the given name and version information.
@@ -21306,7 +21306,7 @@ var Server = class extends Protocol {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/completable.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/server/completable.js
 var COMPLETABLE_SYMBOL = /* @__PURE__ */ Symbol.for("mcp.completable");
 function isCompletable(schema) {
   return !!schema && typeof schema === "object" && COMPLETABLE_SYMBOL in schema;
@@ -21320,7 +21320,7 @@ var McpZodTypeKind;
   McpZodTypeKind2["Completable"] = "McpCompletable";
 })(McpZodTypeKind || (McpZodTypeKind = {}));
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/toolNameValidation.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/toolNameValidation.js
 var TOOL_NAME_REGEX = /^[A-Za-z0-9._-]{1,128}$/;
 function validateToolName(name) {
   const warnings = [];
@@ -21378,7 +21378,7 @@ function validateAndWarnToolName(name) {
   return result.isValid;
 }
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/mcp-server.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/mcp-server.js
 var ExperimentalMcpServerTasks = class {
   constructor(_mcpServer) {
     this._mcpServer = _mcpServer;
@@ -21393,7 +21393,7 @@ var ExperimentalMcpServerTasks = class {
   }
 };
 
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js
+// ../pali-401402-integration-nov28/node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js
 function toolInputElementCount(value, max) {
   let count = 0;
   const stack = [value];
@@ -22258,6 +22258,1085 @@ __export(canon_exports, {
   translationId: () => translationId,
   translationScope: () => translationScope
 });
+
+// src/apadana-thera394-407-four-profiles.mjs
+var THERA_394_397_406_407_PROFILES = {
+  "tha-ap396": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-394.md",
+    "id": "tha-ap396",
+    "publisher_chapter": "chapter-3",
+    "poem": 394,
+    "verses": [
+      3706,
+      3725
+    ],
+    "root_verses": [
+      333,
+      352
+    ],
+    "note_count": 23,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-394/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-394/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-394.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Madhud\u0101yaka",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 394; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "b166f27176245ae233b53ca3980e0b972e5b9f9173e72a5e9584004b001a5ba5",
+    "body_sha256": "e91e128bb9bfa513a35644285b7193b65d676823c2c0965e6402858b7387243f",
+    "notes_sha256": "0ea2c919336e97584a0dd0eb6212e8ab11c45d368993d1a7ec56a4575641c45a",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "a9d3687a220614a965d495cbe80026f022e6b314c0bf29f94e5b860f9791612d",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3706",
+        "suffix": "(1) [3706]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3707",
+        "suffix": "(2) [3707]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3708",
+        "suffix": "(3) [3708]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3709",
+        "suffix": "(4) [3709]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3710",
+        "suffix": "(5) [3710]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "3711",
+        "suffix": "(6) [3711]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "3712",
+        "suffix": "(7) [3712]",
+        "lines": 4
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "3713",
+        "suffix": "(8) [3713]",
+        "lines": 4
+      },
+      {
+        "local_label": "9",
+        "publisher_label": "3714",
+        "suffix": "(9) [3714]",
+        "lines": 4
+      },
+      {
+        "local_label": "10",
+        "publisher_label": "3715",
+        "suffix": "(10) [3715]",
+        "lines": 4
+      },
+      {
+        "local_label": "11",
+        "publisher_label": "3716",
+        "suffix": "(11) [3716]",
+        "lines": 4
+      },
+      {
+        "local_label": "12",
+        "publisher_label": "3717",
+        "suffix": "(12) [3717]",
+        "lines": 4
+      },
+      {
+        "local_label": "13",
+        "publisher_label": "3718",
+        "suffix": "(13) [3718]",
+        "lines": 4
+      },
+      {
+        "local_label": "14",
+        "publisher_label": "3719",
+        "suffix": "(14) [3719]",
+        "lines": 4
+      },
+      {
+        "local_label": "15-16",
+        "publisher_label": "3720",
+        "suffix": "(15-16) [3720]",
+        "lines": 4
+      },
+      {
+        "local_label": "17",
+        "publisher_label": "3721",
+        "suffix": "(17) [3721]",
+        "lines": 4
+      },
+      {
+        "local_label": "18",
+        "publisher_label": "3722",
+        "suffix": "(18) [3722]",
+        "lines": 4
+      },
+      {
+        "local_label": "19",
+        "publisher_label": "3723",
+        "suffix": "(19) [3723]",
+        "lines": 4
+      },
+      {
+        "local_label": "20",
+        "publisher_label": "3724",
+        "suffix": "(20) [3724]",
+        "lines": 4
+      },
+      {
+        "local_label": "21",
+        "publisher_label": "3725",
+        "suffix": "(21) [3725]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+      "Publisher main PTS heading391, BJTS brace/file394 and canonical tha-ap396 are separate literal identities. The Indus hermitage, Sumedha honey/mat offering, honey-rain rebirth narrative and named colophons establish this pair; no general number offset is approved.",
+      "Retain local15\u201316/global3720 as one four-line source paragraph. Note21 distinguishes PTS two six-syllable-foot verses from BJTS one twelve-syllable-foot verse; local21 final numbering and20 printed global labels are both original, not missing text to reconstruct.",
+      "Note8 ends in original unfinished quotation punctuation at the published definition boundary; preserve every word as printed and do not invent a closing quote or intended continuation. Note16 refers to Sikhi while the main poem names Sumedha; preserve the attributed discrepancy without harmonization.",
+      "All23 notes remain poem-owned (1\u20132 heading,3\u201323 stanza); no chapter heading or summary is assigned. Preserve notes17\u201323 edition/metre choices and all four independent VRI variant notes. Publisher full refrains do not expand the two VRI peyy\u0101la stanzas."
+    ],
+    "publisher_verse_labels": [
+      "3706",
+      "3707",
+      "3708",
+      "3709",
+      "3710",
+      "3711",
+      "3712",
+      "3713",
+      "3714",
+      "3715",
+      "3716",
+      "3717",
+      "3718",
+      "3719",
+      "3720",
+      "3721",
+      "3722",
+      "3723",
+      "3724",
+      "3725"
+    ],
+    "publisher_heading_sha256": "6a5b0345115d31ccbf94f79fa885178b6910c8171df1da9c7a9cad57cec17484"
+  },
+  "tha-ap399": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-397.md",
+    "id": "tha-ap399",
+    "publisher_chapter": "chapter-3",
+    "poem": 397,
+    "verses": [
+      3791,
+      3820
+    ],
+    "root_verses": [
+      419,
+      448
+    ],
+    "note_count": 49,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-397/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-397/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-397.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Girim\u0101nanda",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 397; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "80c5ad0c659676406f48e2ae3c3eb2adda3fe4e5b34541a776af7e338a14fd2e",
+    "body_sha256": "ce44b1b5775e3e134b44ceab2a086526a3bcb0430151191948880a43df99379d",
+    "notes_sha256": "eb8887dc6d5a0cf27e0611e05e0cbf4e67fa7b95a0a103d55702793c53c7f370",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "d5ee5dc3169b4ade0dbdba1af50cb41f84825237e585ea17d16e0c5f1904df12",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "3791",
+        "suffix": "(1) [3791]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "3792",
+        "suffix": "(2) [3792]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "3793",
+        "suffix": "(3) [3793]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "3794",
+        "suffix": "(4) [3794]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "3795",
+        "suffix": "(5) [3795]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "3796",
+        "suffix": "(6) [3796]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "3797",
+        "suffix": "(7) [3797]",
+        "lines": 4
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "3798",
+        "suffix": "(8) [3798]",
+        "lines": 4
+      },
+      {
+        "local_label": "9",
+        "publisher_label": "3799",
+        "suffix": "(9) [3799]",
+        "lines": 4
+      },
+      {
+        "local_label": "10",
+        "publisher_label": "3800",
+        "suffix": "(10) [3800]",
+        "lines": 4
+      },
+      {
+        "local_label": "11",
+        "publisher_label": "3801",
+        "suffix": "(11) [3801]",
+        "lines": 4
+      },
+      {
+        "local_label": "12",
+        "publisher_label": "3802",
+        "suffix": "(12) [3802]",
+        "lines": 4
+      },
+      {
+        "local_label": "13",
+        "publisher_label": "3803",
+        "suffix": "(13) [3803]",
+        "lines": 4
+      },
+      {
+        "local_label": "14",
+        "publisher_label": "3804",
+        "suffix": "(14) [3804]",
+        "lines": 4
+      },
+      {
+        "local_label": "15",
+        "publisher_label": "3805",
+        "suffix": "(15) [3805]",
+        "lines": 4
+      },
+      {
+        "local_label": "16",
+        "publisher_label": "3806",
+        "suffix": "(16) [3806]",
+        "lines": 4
+      },
+      {
+        "local_label": "17",
+        "publisher_label": "3807",
+        "suffix": "(17) [3807]",
+        "lines": 4
+      },
+      {
+        "local_label": "18",
+        "publisher_label": "3808",
+        "suffix": "(18) [3808]",
+        "lines": 4
+      },
+      {
+        "local_label": "19",
+        "publisher_label": "3809",
+        "suffix": "(19) [3809]",
+        "lines": 4
+      },
+      {
+        "local_label": "20",
+        "publisher_label": "3810",
+        "suffix": "(20) [3810]",
+        "lines": 4
+      },
+      {
+        "local_label": "21",
+        "publisher_label": "3811",
+        "suffix": "(21) [3811]",
+        "lines": 4
+      },
+      {
+        "local_label": "22",
+        "publisher_label": "3812",
+        "suffix": "(22) [3812]",
+        "lines": 4
+      },
+      {
+        "local_label": "23",
+        "publisher_label": "3813",
+        "suffix": "(23) [3813]",
+        "lines": 4
+      },
+      {
+        "local_label": "24",
+        "publisher_label": "3814",
+        "suffix": "(24) [3814]",
+        "lines": 4
+      },
+      {
+        "local_label": "25",
+        "publisher_label": "3815",
+        "suffix": "(25) [3815]",
+        "lines": 4
+      },
+      {
+        "local_label": "26",
+        "publisher_label": "3816",
+        "suffix": "(26) [3816]",
+        "lines": 4
+      },
+      {
+        "local_label": "27",
+        "publisher_label": "3817",
+        "suffix": "(27) [3817]",
+        "lines": 4
+      },
+      {
+        "local_label": "28",
+        "publisher_label": "3818",
+        "suffix": "(28) [3818]",
+        "lines": 4
+      },
+      {
+        "local_label": "29",
+        "publisher_label": "3819",
+        "suffix": "(29) [3819]",
+        "lines": 4
+      },
+      {
+        "local_label": "30",
+        "publisher_label": "3820",
+        "suffix": "(30) [3820]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+      "Publisher main PTS heading394, BJTS brace/file397 and canonical tha-ap399 remain separate literal identities. The family-death/grief narrative, Sumedha teaching, offerings/praise and named colophons establish this particular pair; no general numbering rule is approved.",
+      "Source note28 explicitly calls the offering wording corrupt and records competing readings. Keep its complete published note and chosen flower-stalk translation as attributed editorial judgment, not as a resolution or repair of P\u0101li.",
+      "Source note44 ends in an unclosed original gloss quotation; preserve its exact published words and punctuation and do not invent a closing mark or continuation. Mixed quotation punctuation in note33 also remains unchanged.",
+      "All49 notes stay poem-owned (1\u20132 heading,3\u201349 stanza); all30 four-line source paragraphs and their two closing colophons are retained. No chapter heading or summary is assigned. Preserve every PTS/BJTS alternative and all seven independent VRI notes; publisher full refrains do not expand the two VRI peyy\u0101la stanzas."
+    ],
+    "publisher_verse_labels": [
+      "3791",
+      "3792",
+      "3793",
+      "3794",
+      "3795",
+      "3796",
+      "3797",
+      "3798",
+      "3799",
+      "3800",
+      "3801",
+      "3802",
+      "3803",
+      "3804",
+      "3805",
+      "3806",
+      "3807",
+      "3808",
+      "3809",
+      "3810",
+      "3811",
+      "3812",
+      "3813",
+      "3814",
+      "3815",
+      "3816",
+      "3817",
+      "3818",
+      "3819",
+      "3820"
+    ],
+    "publisher_heading_sha256": "186355f05376400d8718c4f404dcd8b05492fb09f22b2b3230e3f10e31c8943a"
+  },
+  "tha-ap408": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-406.md",
+    "id": "tha-ap408",
+    "publisher_chapter": "chapter-3",
+    "poem": 406,
+    "verses": [
+      4050,
+      4071
+    ],
+    "root_verses": [
+      161,
+      182
+    ],
+    "note_count": 19,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-406/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-406/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-406.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Nanda",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 406; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "ec7687df026a9a498e3147a0b8d25c10866a9a439c1e38bde01dcbaddca28ee2",
+    "body_sha256": "c15d526b9d48f70eb53fbea97d849b90588253d79e2be1654b4813d5ddf5c48a",
+    "notes_sha256": "cf84713378328cc3a6d4e1c399e40b0d36f70306b407ae4777a87042ad90533f",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "e2bc16ef9a4d481084a675f3110b49e785f26a8fbd351d72e8b8081903bdaa0b",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "4050",
+        "suffix": "(1) [4050]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "4051",
+        "suffix": "(2) [4051]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "4052",
+        "suffix": "(3) [4052]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "4053",
+        "suffix": "(4) [4053]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "4054",
+        "suffix": "(5) [4054]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "4055",
+        "suffix": "(6) [4055]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "4056",
+        "suffix": "(7) [4056]",
+        "lines": 4
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "4057",
+        "suffix": "(8) [4057]",
+        "lines": 4
+      },
+      {
+        "local_label": "9",
+        "publisher_label": "4058",
+        "suffix": "(9) [4058]",
+        "lines": 4
+      },
+      {
+        "local_label": "10",
+        "publisher_label": "4059",
+        "suffix": "(10) [4059]",
+        "lines": 4
+      },
+      {
+        "local_label": "11",
+        "publisher_label": "4060",
+        "suffix": "(11) [4060]",
+        "lines": 4
+      },
+      {
+        "local_label": "12",
+        "publisher_label": "4061",
+        "suffix": "(12) [4061]",
+        "lines": 4
+      },
+      {
+        "local_label": "13",
+        "publisher_label": "4062",
+        "suffix": "(13) [4062]",
+        "lines": 4
+      },
+      {
+        "local_label": "14",
+        "publisher_label": "4063",
+        "suffix": "(14) [4063]",
+        "lines": 4
+      },
+      {
+        "local_label": "15",
+        "publisher_label": "4064",
+        "suffix": "(15) [4064]",
+        "lines": 4
+      },
+      {
+        "local_label": "16",
+        "publisher_label": "4065",
+        "suffix": "(16) [4065]",
+        "lines": 4
+      },
+      {
+        "local_label": "17",
+        "publisher_label": "4066",
+        "suffix": "(17) [4066]",
+        "lines": 4
+      },
+      {
+        "local_label": "18",
+        "publisher_label": "4067",
+        "suffix": "(18) [4067]",
+        "lines": 4
+      },
+      {
+        "local_label": "19",
+        "publisher_label": "4068",
+        "suffix": "(19) [4068]",
+        "lines": 4
+      },
+      {
+        "local_label": "20",
+        "publisher_label": "4069",
+        "suffix": "(20) [4069]",
+        "lines": 4
+      },
+      {
+        "local_label": "21",
+        "publisher_label": "4070",
+        "suffix": "(21) [4070]",
+        "lines": 4
+      },
+      {
+        "local_label": "22",
+        "publisher_label": "4071",
+        "suffix": "(22) [4071]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+      "Publisher main PTS heading403, BJTS brace/file406 and canonical tha-ap408 are separately verified identities. Source note2 names BJTS Nandaka while the source title/colophons say Nanda; retain both without renaming. The deer-hunter, lotus pavilion, illness/death and subsequent attainment narrative supports this correspondence.",
+      "Keep source Anuraddha and note4\u2019s explicit Anuruddha/metre discussion exactly as published, with canonical wording separate. Do not regularize names, metre or lexical alternatives to force edition agreement.",
+      "All22 four-line source paragraphs, both colophons and19 notes (1\u20132 heading,3\u201319 stanza) remain complete publisher-edition scope. No chapter heading or summary is assigned. All five VRI variants and three peyy\u0101la stanzas remain independent and unexpanded."
+    ],
+    "publisher_verse_labels": [
+      "4050",
+      "4051",
+      "4052",
+      "4053",
+      "4054",
+      "4055",
+      "4056",
+      "4057",
+      "4058",
+      "4059",
+      "4060",
+      "4061",
+      "4062",
+      "4063",
+      "4064",
+      "4065",
+      "4066",
+      "4067",
+      "4068",
+      "4069",
+      "4070",
+      "4071"
+    ],
+    "publisher_heading_sha256": "f7cc58f471cbf3fc8acc2b68c484f53d04f0179424261bb859ee6bead2faf450"
+  },
+  "tha-ap409": {
+    "exact_ref_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-407.md",
+    "id": "tha-ap409",
+    "publisher_chapter": "chapter-3",
+    "poem": 407,
+    "verses": [
+      4072,
+      4112
+    ],
+    "root_verses": [
+      183,
+      223
+    ],
+    "note_count": 50,
+    "note_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ],
+    "source": "apadana",
+    "path": "/text/chapter-3/poem-407/",
+    "url": "https://apadanatranslation.com/text/chapter-3/poem-407/",
+    "raw_url": "https://raw.githubusercontent.com/apadana-translation/apadana-site/fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4/src/_poems/chapter-3/poem-407.md",
+    "translator": "Jonathan S. Walters",
+    "license": "CC BY-NC-SA 4.0",
+    "translation_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "title": "Hemaka",
+    "reference": "Ther\u0101 Apad\u0101na publisher poem 407; complete publisher-edition poem; original numbering retained",
+    "raw_sha256": "115dbc759544c0cfdabb3d32aeb06cb401c9a6d0aee45b05285f50cba74c8b17",
+    "body_sha256": "5faf5801cf416b24d1a0baee18cd42c049a6e5a8e0ec54fb3bd96b179604115c",
+    "notes_sha256": "719ef784fc32960dcf14f32f2c57a6eeb9448a7b478fc5f680d17bf05b38a939",
+    "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root_sha256": "d0089a5a084962dbc15919aeef4ac94bf10dbb9f9fb7acef135969e85dde8b24",
+    "stanza_layout": [
+      {
+        "local_label": "1",
+        "publisher_label": "4072",
+        "suffix": "(1) [4072]",
+        "lines": 4
+      },
+      {
+        "local_label": "2",
+        "publisher_label": "4073",
+        "suffix": "(2) [4073]",
+        "lines": 4
+      },
+      {
+        "local_label": "3",
+        "publisher_label": "4074",
+        "suffix": "(3) [4074]",
+        "lines": 4
+      },
+      {
+        "local_label": "4",
+        "publisher_label": "4075",
+        "suffix": "(4) [4075]",
+        "lines": 4
+      },
+      {
+        "local_label": "5",
+        "publisher_label": "4076",
+        "suffix": "(5) [4076]",
+        "lines": 4
+      },
+      {
+        "local_label": "6",
+        "publisher_label": "4077",
+        "suffix": "(6) [4077]",
+        "lines": 4
+      },
+      {
+        "local_label": "7",
+        "publisher_label": "4078",
+        "suffix": "(7) [4078]",
+        "lines": 4
+      },
+      {
+        "local_label": "8",
+        "publisher_label": "4079",
+        "suffix": "(8) [4079]",
+        "lines": 4
+      },
+      {
+        "local_label": "9",
+        "publisher_label": "4080",
+        "suffix": "(9) [4080]",
+        "lines": 4
+      },
+      {
+        "local_label": "10",
+        "publisher_label": "4081",
+        "suffix": "(10) [4081]",
+        "lines": 4
+      },
+      {
+        "local_label": "11",
+        "publisher_label": "4082",
+        "suffix": "(11) [4082]",
+        "lines": 4
+      },
+      {
+        "local_label": "12",
+        "publisher_label": "4083",
+        "suffix": "(12) [4083]",
+        "lines": 4
+      },
+      {
+        "local_label": "13",
+        "publisher_label": "4084",
+        "suffix": "(13) [4084]",
+        "lines": 4
+      },
+      {
+        "local_label": "14",
+        "publisher_label": "4085",
+        "suffix": "(14) [4085]",
+        "lines": 4
+      },
+      {
+        "local_label": "15",
+        "publisher_label": "4086",
+        "suffix": "(15) [4086]",
+        "lines": 4
+      },
+      {
+        "local_label": "16",
+        "publisher_label": "4087",
+        "suffix": "(16) [4087]",
+        "lines": 4
+      },
+      {
+        "local_label": "17",
+        "publisher_label": "4088",
+        "suffix": "(17) [4088]",
+        "lines": 4
+      },
+      {
+        "local_label": "18",
+        "publisher_label": "4089",
+        "suffix": "(18) [4089]",
+        "lines": 4
+      },
+      {
+        "local_label": "19",
+        "publisher_label": "4090",
+        "suffix": "(19) [4090]",
+        "lines": 4
+      },
+      {
+        "local_label": "20",
+        "publisher_label": "4091",
+        "suffix": "(20) [4091]",
+        "lines": 4
+      },
+      {
+        "local_label": "21",
+        "publisher_label": "4092",
+        "suffix": "(21) [4092]",
+        "lines": 4
+      },
+      {
+        "local_label": "22",
+        "publisher_label": "4093",
+        "suffix": "(22) [4093]",
+        "lines": 4
+      },
+      {
+        "local_label": "23",
+        "publisher_label": "4094",
+        "suffix": "(23) [4094]",
+        "lines": 4
+      },
+      {
+        "local_label": "24",
+        "publisher_label": "4095",
+        "suffix": "(24) [4095]",
+        "lines": 4
+      },
+      {
+        "local_label": "25-26",
+        "publisher_label": "4096-4097",
+        "suffix": "(25-26) [4096-4097]",
+        "lines": 8
+      },
+      {
+        "local_label": "27-28",
+        "publisher_label": "4098-4099",
+        "suffix": "(27-28) [4098-4099]",
+        "lines": 8
+      },
+      {
+        "local_label": "29-30",
+        "publisher_label": "4100-4101",
+        "suffix": "(29-30) [4100-4101]",
+        "lines": 8
+      },
+      {
+        "local_label": "31",
+        "publisher_label": "4102",
+        "suffix": "(31) [4102]",
+        "lines": 4
+      },
+      {
+        "local_label": "32-33",
+        "publisher_label": "4103-4104",
+        "suffix": "(32-33) [4103-4104]",
+        "lines": 8
+      },
+      {
+        "local_label": "34",
+        "publisher_label": "4105",
+        "suffix": "(34) [4105]",
+        "lines": 4
+      },
+      {
+        "local_label": "35",
+        "publisher_label": "4106",
+        "suffix": "(35) [4106]",
+        "lines": 4
+      },
+      {
+        "local_label": "36",
+        "publisher_label": "4107",
+        "suffix": "(36) [4107]",
+        "lines": 4
+      },
+      {
+        "local_label": "37",
+        "publisher_label": "4108",
+        "suffix": "(37) [4108]",
+        "lines": 4
+      },
+      {
+        "local_label": "38",
+        "publisher_label": "4109",
+        "suffix": "(38) [4109]",
+        "lines": 4
+      },
+      {
+        "local_label": "39",
+        "publisher_label": "4110",
+        "suffix": "(39) [4110]",
+        "lines": 4
+      },
+      {
+        "local_label": "40",
+        "publisher_label": "4111",
+        "suffix": "(40) [4111]",
+        "lines": 4
+      },
+      {
+        "local_label": "41",
+        "publisher_label": "4112",
+        "suffix": "(41) [4112]",
+        "lines": 4
+      }
+    ],
+    "mapping_notes": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem\u2019s refrain.",
+      "Publisher main PTS heading404, BJTS brace/file407 and canonical tha-ap409 are separately verified literal identities. The Anoma ascetic, Piyadassi encounter, gem-seat/rose-apple offering, promised retinues and named colophons establish this particular pair, without a general number-offset rule.",
+      "Retain four physical eight-line paragraphs with single terminal ranges: local25\u201326/global4096\u20134097,27\u201328/4098\u20134099,29\u201330/4100\u20134101 and32\u201333/4103\u20134104. All41 printed stanzas occupy37 physical source paragraphs; do not split or reflow the originals.",
+      "All50 notes remain poem-owned (1\u20132 heading,3\u201350 stanza); all interpretations, animal/trainer alternatives and metre choices remain attributed. No publisher chapter heading, summary or recitation-marker wording is invented.",
+      "The canonical tha-ap409 unit contains an independent recitation marker after its Hemaka colophon, absent from this publisher file. Preserve that original P\u0101li apparatus separately; whole publisher coverage does not supply an English rendering. All three VRI variant notes and three peyy\u0101la stanzas remain independent and unexpanded."
+    ],
+    "publisher_verse_labels": [
+      "4072",
+      "4073",
+      "4074",
+      "4075",
+      "4076",
+      "4077",
+      "4078",
+      "4079",
+      "4080",
+      "4081",
+      "4082",
+      "4083",
+      "4084",
+      "4085",
+      "4086",
+      "4087",
+      "4088",
+      "4089",
+      "4090",
+      "4091",
+      "4092",
+      "4093",
+      "4094",
+      "4095",
+      "4096-4097",
+      "4098-4099",
+      "4100-4101",
+      "4102",
+      "4103-4104",
+      "4105",
+      "4106",
+      "4107",
+      "4108",
+      "4109",
+      "4110",
+      "4111",
+      "4112"
+    ],
+    "publisher_heading_sha256": "8c7b705a1bae8059778b2f75d050113389aa681a40bdf2796c269162feeb82ce"
+  }
+};
 
 // src/apadana-thera401-402-profiles.mjs
 var THERA_401_402_PROFILES = {
@@ -52989,7 +54068,8 @@ var THERA_APADANA_PROFILES = deepFreeze2({
   ...THERA_351_360_NINE_PROFILES,
   ...THERA_371_378_SEVEN_PROFILES,
   ...THERA_381_386_FIVE_PROFILES,
-  ...THERA_401_402_PROFILES
+  ...THERA_401_402_PROFILES,
+  ...THERA_394_397_406_407_PROFILES
 });
 
 // src/apadana-profiles.mjs
@@ -63559,6 +64639,133 @@ var MIXED_PTS_BJTS_HEADINGS = Object.freeze({
         ]
       ],
       "17": [
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  "tha-ap396": {
+    "poem": 394,
+    "pts": 391,
+    "raw_sha256": "b166f27176245ae233b53ca3980e0b972e5b9f9173e72a5e9584004b001a5ba5",
+    "heading_sha256": "6a5b0345115d31ccbf94f79fa885178b6910c8171df1da9c7a9cad57cec17484",
+    "paragraph_count": 23,
+    "note_count": 23,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "6": [
+        [
+          0,
+          1
+        ]
+      ],
+      "14": [
+        [
+          0,
+          1
+        ]
+      ],
+      "17": [
+        [
+          0,
+          1
+        ]
+      ],
+      "18": [
+        [
+          0,
+          2
+        ]
+      ]
+    }
+  },
+  "tha-ap399": {
+    "poem": 397,
+    "pts": 394,
+    "raw_sha256": "80c5ad0c659676406f48e2ae3c3eb2adda3fe4e5b34541a776af7e338a14fd2e",
+    "heading_sha256": "186355f05376400d8718c4f404dcd8b05492fb09f22b2b3230e3f10e31c8943a",
+    "paragraph_count": 33,
+    "note_count": 49,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "3": [
+        [
+          3,
+          2
+        ]
+      ],
+      "4": [
+        [
+          3,
+          1
+        ]
+      ],
+      "17": [
+        [
+          3,
+          1
+        ]
+      ],
+      "22": [
+        [
+          3,
+          1
+        ]
+      ],
+      "23": [
+        [
+          3,
+          1
+        ]
+      ],
+      "28": [
+        [
+          3,
+          1
+        ]
+      ],
+      "45": [
+        [
+          3,
+          1
+        ]
+      ]
+    }
+  },
+  "tha-ap408": {
+    "poem": 406,
+    "pts": 403,
+    "raw_sha256": "ec7687df026a9a498e3147a0b8d25c10866a9a439c1e38bde01dcbaddca28ee2",
+    "heading_sha256": "f7cc58f471cbf3fc8acc2b68c484f53d04f0179424261bb859ee6bead2faf450",
+    "paragraph_count": 25,
+    "note_count": 19,
+    "paragraph_pairs": {},
+    "note_pairs": {}
+  },
+  "tha-ap409": {
+    "poem": 407,
+    "pts": 404,
+    "raw_sha256": "115dbc759544c0cfdabb3d32aeb06cb401c9a6d0aee45b05285f50cba74c8b17",
+    "heading_sha256": "8c7b705a1bae8059778b2f75d050113389aa681a40bdf2796c269162feeb82ce",
+    "paragraph_count": 40,
+    "note_count": 50,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "20": [
+        [
+          0,
+          1
+        ]
+      ],
+      "41": [
+        [
+          0,
+          1
+        ]
+      ],
+      "50": [
         [
           0,
           1
@@ -76280,7 +77487,7 @@ function createServer({ executeTool } = {}) {
 // src/chatgpt-widget.mjs
 var import_node_crypto11 = require("node:crypto");
 var WIDGET_TOOL = "read_passage_widget";
-var WIDGET_VERSION = "v50";
+var WIDGET_VERSION = "v51";
 var NAVIGATION_TIMEOUT_MS = 9e4;
 var WIDGET_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.html`;
 var SKYBRIDGE_URI = `ui://pali-canon/reader-${WIDGET_VERSION}.skybridge.html`;
@@ -76289,7 +77496,7 @@ var SKYBRIDGE_MIME = "text/html+skybridge";
 var WIDGET_HASH_SOURCE = true ? "function contentSha256(text) {\n  if (typeof text !== 'string' || text.length > 100000 || typeof TextEncoder !== 'function') throw Error('Editorial content integrity checking is unavailable.');\n  const input = new TextEncoder().encode(text), length = input.length;\n  const bytes = new Uint8Array(Math.ceil((length + 9) / 64) * 64);\n  bytes.set(input); bytes[length] = 0x80;\n  const view = new DataView(bytes.buffer);\n  view.setUint32(bytes.length - 8, Math.floor(length / 0x20000000));\n  view.setUint32(bytes.length - 4, (length * 8) >>> 0);\n  const constants = [\n    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,\n    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,\n    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,\n    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,\n    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,\n    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,\n    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,\n    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2,\n  ];\n  const state = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];\n  const words = new Uint32Array(64), rotate = (value, n) => (value >>> n) | (value << (32 - n));\n  for (let offset = 0; offset < bytes.length; offset += 64) {\n    for (let i = 0; i < 16; i++) words[i] = view.getUint32(offset + 4 * i);\n    for (let i = 16; i < 64; i++) {\n      const x = words[i - 15], y = words[i - 2];\n      const s0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >>> 3), s1 = rotate(y, 17) ^ rotate(y, 19) ^ (y >>> 10);\n      words[i] = (words[i - 16] + s0 + words[i - 7] + s1) >>> 0;\n    }\n    let [a,b,c,d,e,f,g,h] = state;\n    for (let i = 0; i < 64; i++) {\n      const sum1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25), choice = (e & f) ^ (~e & g);\n      const first = (h + sum1 + choice + constants[i] + words[i]) >>> 0;\n      const sum0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22), majority = (a & b) ^ (a & c) ^ (b & c);\n      h=g; g=f; f=e; e=(d+first)>>>0; d=c; c=b; b=a; a=(first+sum0+majority)>>>0;\n    }\n    for (const [i,value] of [a,b,c,d,e,f,g,h].entries()) state[i] = (state[i] + value) >>> 0;\n  }\n  return state.map(value => value.toString(16).padStart(8, '0')).join('');\n}" : contentSha256.toString();
 var SOURCE_NOTES_POLICY_SOURCE = true ? "function createSourceNotesPolicy(hash, fixedMetadata) {\n  function stable(value) {\n    let count = 0;\n    const seen = new Set();\n    function visit(item, depth) {\n      if (++count > 2048 || depth > 20) throw Error('Unsupported source-note data');\n      if (item === null || typeof item === 'boolean') return JSON.stringify(item);\n      if (typeof item === 'string') { if (item.length > 16384) throw Error('Unsupported source-note data'); return JSON.stringify(item); }\n      if (typeof item === 'number' && Number.isFinite(item)) return JSON.stringify(item);\n      if (!item || typeof item !== 'object' || seen.has(item)) throw Error('Unsupported source-note data');\n      seen.add(item);\n      let result;\n      if (Array.isArray(item)) {\n        if (item.length > 256) throw Error('Unsupported source-note data');\n        result = '[' + item.map(child => visit(child, depth + 1)).join(',') + ']';\n      } else {\n        if (Object.prototype.toString.call(item) !== '[object Object]' || Object.getOwnPropertySymbols(item).length) throw Error('Unsupported source-note data');\n        const keys = Object.keys(item).sort();\n        if (keys.length > 64) throw Error('Unsupported source-note data');\n        result = '{' + keys.map(key => JSON.stringify(key) + ':' + visit(item[key], depth + 1)).join(',') + '}';\n      }\n      seen.delete(item); return result;\n    }\n    return visit(value, 0);\n  }\n  // Snapshot trusted finite metadata; mutations of a consumer's object cannot\n  // change the authority against which subsequent restored events are checked.\n  const profile = JSON.parse(stable(fixedMetadata));\n  const warning = 'The separately indexed original edition note could not be verified. The loaded P\u0101li remains available; this apparatus is unavailable.';\n  const owns = (object, key) => Boolean(object && Object.prototype.hasOwnProperty.call(object, key));\n  const keysEqual = (object, keys) => object && !Array.isArray(object) && stable(Object.keys(object).sort()) === stable(keys.slice().sort());\n  function model(state, affected, opening, anchor, entry) {\n    const view = { state, affected, opening, anchor_ref: anchor ? anchor.segment.ref : null,\n      availability: state === 'available' ? JSON.parse(stable(anchor.availability)) : null,\n      entry: entry || null, warning: state === 'unavailable' ? warning : null };\n    view.signature = stable({ state, affected, opening, anchor_ref: view.anchor_ref, entry: Boolean(entry), record_sha256: state === 'available' ? profile.record_sha256 : null });\n    return view;\n  }\n  function inspect(page) {\n    let anchor = null, affected = false, opening = false;\n    try {\n      if (!page || typeof page !== 'object' || Array.isArray(page)) return model('absent', false, false, null, null);\n      const isBook = page.selection === 'source_book';\n      if (isBook && page.book_id === profile.anchors.book.selector.book) anchor = profile.anchors.book;\n      else if (!isBook && page.text_id === profile.anchors.uid.selector.uid && page.canonical !== false && page.content_type !== 'commentary') anchor = profile.anchors.uid;\n      affected = Boolean(anchor);\n      if (!affected) return model(owns(page, 'source_notes') ? 'unavailable' : 'absent', false, false, null, null);\n      const position = page.pali || page;\n      opening = position.offset === 0;\n      const unavailable = () => model('unavailable', true, opening, anchor, null);\n      if (page.canonical === false || !page.source || page.source.commit !== profile.source_commit ||\n          (owns(page.source, 'locator_revision') && page.source.locator_revision !== profile.source_commit) ||\n          (isBook && owns(page, 'text_id') && page.text_id !== null) || (!isBook && owns(page, 'book_id'))) return unavailable();\n      const envelope = page.source_notes;\n      if (!keysEqual(envelope, ['schema','state','extraction_revision','record_sha256','availability','entries','error_code']) ||\n          envelope.schema !== profile.schema || envelope.extraction_revision !== profile.extraction_revision ||\n          envelope.record_sha256 !== profile.record_sha256 || stable(envelope.availability) !== stable(anchor.availability) ||\n          !Array.isArray(envelope.entries) || envelope.entries.length > 1) return unavailable();\n      if (envelope.state === 'unavailable') {\n        if (envelope.error_code !== 'SOURCE_NOTE_UNAVAILABLE' || envelope.entries.length) return unavailable();\n        return unavailable();\n      }\n      if (envelope.state !== 'available' || envelope.error_code !== null) return unavailable();\n      const segments = position.segments;\n      if (!Array.isArray(segments) || segments.length > 200 || !Number.isSafeInteger(position.offset) || position.offset < 0 ||\n          !Number.isSafeInteger(position.returned) || position.returned !== segments.length) return unavailable();\n      const relative = anchor.offset - position.offset, inPage = relative >= 0 && relative < segments.length;\n      const matches = segments.filter(segment => segment && segment.ref === anchor.segment.ref);\n      if (matches.length !== (inPage ? 1 : 0) || (inPage && stable(segments[relative]) !== stable(anchor.segment)) ||\n          envelope.entries.length !== (inPage ? 1 : 0)) return unavailable();\n      if (!inPage) return model('available', true, opening, anchor, null);\n      const record = envelope.entries[0], serialized = stable(record);\n      if (!keysEqual(record, profile.record_keys) || serialized.length > profile.max_record_characters ||\n          hash(serialized) !== profile.record_sha256 || record.id !== profile.record_id ||\n          record.extraction_revision !== profile.extraction_revision || record.text_sha256 !== profile.text_sha256 ||\n          typeof record.text !== 'string' || hash(record.text) !== profile.text_sha256) return unavailable();\n      return model('available', true, opening, anchor, JSON.parse(serialized));\n    } catch { return model('unavailable', affected, opening, anchor, null); }\n  }\n  return { inspect, stable };\n}" : createSourceNotesPolicy.toString();
 var APADANA_PINS = ["raw_sha256", "body_sha256", "notes_sha256", "paratext_sha256", "root_sha256"];
-var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287", "tha-ap289", "tha-ap290", "tha-ap294", "tha-ap295", "tha-ap296", "tha-ap297", "tha-ap298", "tha-ap300", "tha-ap301", "tha-ap303", "tha-ap304", "tha-ap305", "tha-ap306", "tha-ap307", "tha-ap310", "tha-ap311", "tha-ap312", "tha-ap314", "tha-ap315", "tha-ap316", "tha-ap317", "tha-ap318", "tha-ap319", "tha-ap320", "tha-ap321", "tha-ap323", "tha-ap325", "tha-ap326", "tha-ap327", "tha-ap328", "tha-ap331", "tha-ap333", "tha-ap334", "tha-ap335", "tha-ap336", "tha-ap337", "tha-ap338", "tha-ap339", "tha-ap340", "tha-ap341", "tha-ap342", "tha-ap343", "tha-ap344", "tha-ap345", "tha-ap346", "tha-ap347", "tha-ap348", "tha-ap349", "tha-ap350", "tha-ap351", "tha-ap352", "tha-ap353", "tha-ap354", "tha-ap355", "tha-ap356", "tha-ap357", "tha-ap358", "tha-ap359", "tha-ap361", "tha-ap362", "tha-ap373", "tha-ap374", "tha-ap376", "tha-ap377", "tha-ap378", "tha-ap379", "tha-ap380", "tha-ap383", "tha-ap385", "tha-ap386", "tha-ap387", "tha-ap388", "tha-ap403", "tha-ap404"];
+var PINNED_NEW_PARATEXT_IDS = ["tha-ap44", "tha-ap63", "tha-ap64", "tha-ap65", "tha-ap66", "tha-ap67", "tha-ap68", "tha-ap69", "tha-ap70", "tha-ap71", "tha-ap73", "tha-ap74", "tha-ap75", "tha-ap76", "tha-ap77", "tha-ap78", "tha-ap79", "tha-ap80", "tha-ap81", "tha-ap82", "tha-ap83", "tha-ap84", "tha-ap85", "tha-ap86", "tha-ap87", "tha-ap88", "tha-ap89", "tha-ap90", "tha-ap91", "tha-ap92", "tha-ap93", "tha-ap94", "tha-ap95", "tha-ap96", "tha-ap97", "tha-ap98", "tha-ap99", "tha-ap100", "tha-ap101", "tha-ap102", "tha-ap103", "tha-ap104", "tha-ap105", "tha-ap106", "tha-ap107", "tha-ap108", "tha-ap109", "tha-ap110", "tha-ap111", "tha-ap112", "tha-ap113", "tha-ap114", "tha-ap115", "tha-ap116", "tha-ap117", "tha-ap118", "tha-ap119", "tha-ap120", "tha-ap121", "tha-ap122", "tha-ap123", "tha-ap124", "tha-ap125", "tha-ap126", "tha-ap127", "tha-ap128", "tha-ap129", "tha-ap130", "tha-ap131", "tha-ap132", "tha-ap133", "tha-ap134", "tha-ap135", "tha-ap136", "tha-ap137", "tha-ap138", "tha-ap139", "tha-ap140", "tha-ap141", "tha-ap143", "tha-ap144", "tha-ap145", "tha-ap146", "tha-ap147", "tha-ap148", "tha-ap149", "tha-ap150", "tha-ap151", "tha-ap152", "tha-ap153", "tha-ap154", "tha-ap155", "tha-ap156", "tha-ap157", "tha-ap158", "tha-ap159", "tha-ap162", "tha-ap163", "tha-ap164", "tha-ap165", "tha-ap166", "tha-ap167", "tha-ap168", "tha-ap169", "tha-ap170", "tha-ap171", "tha-ap172", "tha-ap173", "tha-ap174", "tha-ap175", "tha-ap176", "tha-ap177", "tha-ap178", "tha-ap179", "tha-ap180", "tha-ap181", "tha-ap182", "tha-ap183", "tha-ap184", "tha-ap185", "tha-ap186", "tha-ap187", "tha-ap188", "tha-ap189", "tha-ap190", "tha-ap191", "tha-ap192", "tha-ap193", "tha-ap194", "tha-ap195", "tha-ap196", "tha-ap197", "tha-ap198", "tha-ap199", "tha-ap200", "tha-ap201", "tha-ap202", "tha-ap203", "tha-ap204", "tha-ap205", "tha-ap206", "tha-ap207", "tha-ap208", "tha-ap209", "tha-ap210", "tha-ap211", "tha-ap212", "tha-ap213", "tha-ap214", "tha-ap215", "tha-ap216", "tha-ap217", "tha-ap218", "tha-ap219", "tha-ap220", "tha-ap221", "tha-ap222", "tha-ap243", "tha-ap244", "tha-ap245", "tha-ap246", "tha-ap247", "tha-ap248", "tha-ap249", "tha-ap250", "tha-ap251", "tha-ap252", "tha-ap223", "tha-ap224", "tha-ap225", "tha-ap226", "tha-ap227", "tha-ap228", "tha-ap229", "tha-ap230", "tha-ap231", "tha-ap232", "tha-ap233", "tha-ap234", "tha-ap235", "tha-ap237", "tha-ap238", "tha-ap239", "tha-ap240", "tha-ap241", "tha-ap242", "tha-ap253", "tha-ap254", "tha-ap255", "tha-ap256", "tha-ap257", "tha-ap258", "tha-ap259", "tha-ap260", "tha-ap261", "tha-ap236", "tha-ap263", "tha-ap264", "tha-ap265", "tha-ap266", "tha-ap267", "tha-ap269", "tha-ap270", "tha-ap271", "tha-ap272", "tha-ap273", "tha-ap274", "tha-ap275", "tha-ap276", "tha-ap277", "tha-ap278", "tha-ap279", "tha-ap280", "tha-ap281", "tha-ap283", "tha-ap284", "tha-ap285", "tha-ap286", "tha-ap287", "tha-ap289", "tha-ap290", "tha-ap294", "tha-ap295", "tha-ap296", "tha-ap297", "tha-ap298", "tha-ap300", "tha-ap301", "tha-ap303", "tha-ap304", "tha-ap305", "tha-ap306", "tha-ap307", "tha-ap310", "tha-ap311", "tha-ap312", "tha-ap314", "tha-ap315", "tha-ap316", "tha-ap317", "tha-ap318", "tha-ap319", "tha-ap320", "tha-ap321", "tha-ap323", "tha-ap325", "tha-ap326", "tha-ap327", "tha-ap328", "tha-ap331", "tha-ap333", "tha-ap334", "tha-ap335", "tha-ap336", "tha-ap337", "tha-ap338", "tha-ap339", "tha-ap340", "tha-ap341", "tha-ap342", "tha-ap343", "tha-ap344", "tha-ap345", "tha-ap346", "tha-ap347", "tha-ap348", "tha-ap349", "tha-ap350", "tha-ap351", "tha-ap352", "tha-ap353", "tha-ap354", "tha-ap355", "tha-ap356", "tha-ap357", "tha-ap358", "tha-ap359", "tha-ap361", "tha-ap362", "tha-ap373", "tha-ap374", "tha-ap376", "tha-ap377", "tha-ap378", "tha-ap379", "tha-ap380", "tha-ap383", "tha-ap385", "tha-ap386", "tha-ap387", "tha-ap388", "tha-ap403", "tha-ap404", "tha-ap396", "tha-ap399", "tha-ap408", "tha-ap409"];
 var WIDGET_APADANA = Object.fromEntries(Object.entries(APADANA_PROFILES).map(([id, p]) => [id, {
   translation_id: translationId(p),
   url: p.url,
@@ -77059,7 +78266,7 @@ var WIDGET_HTML = `<!doctype html>
         Array.isArray(e.translator_notes) && e.translator_notes.length === p.note_count &&
         e.translator_notes.every(function (note, i) { return note && Object.keys(note).sort().join(',') === 'number,text' && note.number === (p.note_numbers ? p.note_numbers[i] : i + 1) && typeof note.text === 'string' && note.text.length <= 50000 && note.text.trim(); }) &&
         checkedContentHash(JSON.stringify(e.translator_notes), p.notes_sha256) &&
-        (['tha-ap333','tha-ap334','tha-ap335','tha-ap336','tha-ap337','tha-ap338','tha-ap339','tha-ap340','tha-ap341','tha-ap342','tha-ap343','tha-ap344','tha-ap345','tha-ap346','tha-ap347','tha-ap348','tha-ap349','tha-ap350','tha-ap351','tha-ap352','tha-ap353','tha-ap354','tha-ap355','tha-ap356','tha-ap357','tha-ap358','tha-ap359','tha-ap361','tha-ap362','tha-ap373','tha-ap374','tha-ap376','tha-ap377','tha-ap378','tha-ap379','tha-ap380','tha-ap383','tha-ap385','tha-ap386','tha-ap387','tha-ap388','tha-ap403','tha-ap404'].indexOf(d.text_id) === -1 || e.offset !== 0 || e.next_offset !== null ||
+        (['tha-ap333','tha-ap334','tha-ap335','tha-ap336','tha-ap337','tha-ap338','tha-ap339','tha-ap340','tha-ap341','tha-ap342','tha-ap343','tha-ap344','tha-ap345','tha-ap346','tha-ap347','tha-ap348','tha-ap349','tha-ap350','tha-ap351','tha-ap352','tha-ap353','tha-ap354','tha-ap355','tha-ap356','tha-ap357','tha-ap358','tha-ap359','tha-ap361','tha-ap362','tha-ap373','tha-ap374','tha-ap376','tha-ap377','tha-ap378','tha-ap379','tha-ap380','tha-ap383','tha-ap385','tha-ap386','tha-ap387','tha-ap388','tha-ap403','tha-ap404','tha-ap396','tha-ap399','tha-ap408','tha-ap409'].indexOf(d.text_id) === -1 || e.offset !== 0 || e.next_offset !== null ||
           Number.isSafeInteger(e.total_characters) && e.total_characters === e.text.length && checkedContentHash(e.text, p.body_sha256)) &&
         checkedChapterSummary(e, p) && checkedPublisherPreface(e, p, d.text_id) && checkedCollectionSummary(e, p, d.text_id) && checkedPublisherDivisions(e, p, d.text_id) && checkedEditorialGap(e, p, d.text_id) && ${JSON.stringify(APADANA_PINS)}.every(function (key) { return e[key] === p[key]; })) return d;
     return Object.assign({}, d, { english: null, english_error: 'Apad\u0101na publisher identity, terms, edition notices or source pins changed. No English was displayed.' });
