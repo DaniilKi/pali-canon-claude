@@ -1,5 +1,30 @@
 # AGENTS.md
 
+## Current development routing: 386-choice intake
+
+Read [the current validation guide](docs/qa/current-apadana-validation.md) and
+[four-source scope](docs/data/thera394-407-four-intake.md) before using the
+historical capsules below. Their pending statuses, counts and version-specific
+entrypoints describe earlier snapshots; check the actual Git ref and its CI.
+
+Use `tests/helpers/current-apadana.mjs` and
+`scripts/web_reader_current_apadana.py` for the live source role. Pure historical
+382 declarations and the old198 map remain immutable source witnesses, not a
+runtime fallback. Keep source validation distinct from actual27-data capture
+and target34-runtime verification. Retain all fourteen original historical
+Python method bodies. Current-negative scenarios keep their identities and
+refusals; current cardinality predicates use independently reviewed declarations.
+The owned-H V4 receipt and its current-role phase names keep the original bounds.
+
+Publisher394/397/406/407 map to canonical tha-ap396/399/408/409. Preserve all382
+earlier full objects, all nine publisher holds and ten canonical holds; the two
+numbering systems differ. Complete publisher-edition poems do not imply
+line-complete VRI translations. The candidate inventory is356 files/2118 cases
+with14 direct supports; all75 existing required jobs must pass on the exact
+candidate before a dev-only fast-forward. Do not merge main or deploy. Real
+device, human screen-reader and signed-in-host acceptance remain separate;
+use [the hands-on checklist](docs/qa/english394-407/manual-acceptance.md).
+
 **Pending CI-only Linux full-file scheduling (source proposal only):** exactF `7c55503` finished72/75 required CI jobs. Linux22's original SIX heavy method02 hit its unchanged60-second child bound despite1+6; the other six completed53.2s, scope passed56.7s and approved33 passed18.9s. Linux20 full SIX passed46.4s; both full macOS runs, all eight actual Windows partitions and all browser jobs passed. The two dependent Windows aggregate guards correctly refused the failed Linux22 reference. This is neither a source/API defect finding nor proof of a CPU cause.
 
 The proposed finite response is `--test-concurrency=2` only in CI `nodeArguments` for `platform==='linux' && mode==='full'`. Windows keeps flag1; Linux partitions, macOS and other platforms keep their existing scheduling. It limits concurrent Node test files, not total processes: each1+6 wrapper can still spawn two Python children. Public `scripts/test.mjs`, all345 files/2092 cases, original fourteen Python methods/assertions/default scripts, every child/Node deadline and the full30-minute budget remain unchanged. QA7 keeps every existing assertion and real-CLI/reporter-before-files/public-driver check, with one deliberate expected-argv scheduling amendment and additive pure platform/mode vectors; the seven other callback bodies stay byte-exact. Retain current V4/K2 schemas and historical authorities; no V5 or new history frame is introduced. Code-source hashes remain pending review. One external full-F Node22 diagnostic must bind its actual commit/argv and genuine baseline/reporter/source inventory; it is an explicit diagnostic override, not ordinary Fpolicy or release acceptance. Fresh source/metadata closure and all75 exact successor CI jobs remain required before dev. Nine-source/API/corpus/rights/private-data identities and publisher358's hold stay unchanged; no new source activation, physical-device/human-assistive acceptance, main change or deployment follows. All older policy/status capsules below are historical snapshots. [Scope and evidence](docs/qa/english351-360-nine-installed.md).
