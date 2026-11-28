@@ -600,6 +600,133 @@ const MIXED_PTS_BJTS_HEADINGS = Object.freeze({
         ]
       ]
     }
+  },
+  "tha-ap396": {
+    "poem": 394,
+    "pts": 391,
+    "raw_sha256": "b166f27176245ae233b53ca3980e0b972e5b9f9173e72a5e9584004b001a5ba5",
+    "heading_sha256": "6a5b0345115d31ccbf94f79fa885178b6910c8171df1da9c7a9cad57cec17484",
+    "paragraph_count": 23,
+    "note_count": 23,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "6": [
+        [
+          0,
+          1
+        ]
+      ],
+      "14": [
+        [
+          0,
+          1
+        ]
+      ],
+      "17": [
+        [
+          0,
+          1
+        ]
+      ],
+      "18": [
+        [
+          0,
+          2
+        ]
+      ]
+    }
+  },
+  "tha-ap399": {
+    "poem": 397,
+    "pts": 394,
+    "raw_sha256": "80c5ad0c659676406f48e2ae3c3eb2adda3fe4e5b34541a776af7e338a14fd2e",
+    "heading_sha256": "186355f05376400d8718c4f404dcd8b05492fb09f22b2b3230e3f10e31c8943a",
+    "paragraph_count": 33,
+    "note_count": 49,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "3": [
+        [
+          3,
+          2
+        ]
+      ],
+      "4": [
+        [
+          3,
+          1
+        ]
+      ],
+      "17": [
+        [
+          3,
+          1
+        ]
+      ],
+      "22": [
+        [
+          3,
+          1
+        ]
+      ],
+      "23": [
+        [
+          3,
+          1
+        ]
+      ],
+      "28": [
+        [
+          3,
+          1
+        ]
+      ],
+      "45": [
+        [
+          3,
+          1
+        ]
+      ]
+    }
+  },
+  "tha-ap408": {
+    "poem": 406,
+    "pts": 403,
+    "raw_sha256": "ec7687df026a9a498e3147a0b8d25c10866a9a439c1e38bde01dcbaddca28ee2",
+    "heading_sha256": "f7cc58f471cbf3fc8acc2b68c484f53d04f0179424261bb859ee6bead2faf450",
+    "paragraph_count": 25,
+    "note_count": 19,
+    "paragraph_pairs": {},
+    "note_pairs": {}
+  },
+  "tha-ap409": {
+    "poem": 407,
+    "pts": 404,
+    "raw_sha256": "115dbc759544c0cfdabb3d32aeb06cb401c9a6d0aee45b05285f50cba74c8b17",
+    "heading_sha256": "8c7b705a1bae8059778b2f75d050113389aa681a40bdf2796c269162feeb82ce",
+    "paragraph_count": 40,
+    "note_count": 50,
+    "paragraph_pairs": {},
+    "note_pairs": {
+      "20": [
+        [
+          0,
+          1
+        ]
+      ],
+      "41": [
+        [
+          0,
+          1
+        ]
+      ],
+      "50": [
+        [
+          0,
+          1
+        ]
+      ]
+    }
   }
 });
 const MIXED_DISPLAY_TOKENS = Object.freeze([
