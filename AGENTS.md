@@ -36,7 +36,7 @@ change a live schedule or dispatch the monthly workflow to validate this repair.
 Current V5 partition contexts route next-ten-history to partition1 and
 approved-current339-authority-negatives to partition2; every other file keeps
 its sorted modulo-four assignment. Full runs, the public legacy selector and
-V1-V4 routing stay unchanged. Keep the four Windows jobs serial, retain all
+V1-V4 routing stay unchanged. Keep file execution serial within each Windows partition job, retain all
 existing bounds, and compare their complete case/status multiset with the same
 Node-major Linux reference. Review partition load when adding test files.
 
