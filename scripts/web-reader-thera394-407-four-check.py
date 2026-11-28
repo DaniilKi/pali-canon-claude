@@ -432,11 +432,16 @@ def run_cell(utilities, inputs, client, browser, root, stage, prepared, roots, u
                 links = siblings.get_by_role('link').filter(has_text=prefix)
                 require(links.count() == int(other is not None), 'EXACT_PREVIOUS_NEXT_REVIEWED_MEMBERSHIP')
                 if other:
-                    require(links.text_content() == prefix + str(other['poem']) and
-                            utilities.fields(links.get_attribute('href')) == {'uid': other['id'], 'offset': '0',
-                            'page_source': roots[other['id']][0]['expected_source_pin']}, 'EXACT_ADJACENT_SOURCE_PIN_ROUTE')
+                    label_matches = links.text_content() == prefix + str(other['poem']) + (' →' if prefix == 'Next reviewed poem · ' else '')
+                    route_matches = utilities.fields(links.get_attribute('href')) == {'uid': other['id'], 'offset': '0',
+                            'page_source': roots[other['id']][0]['expected_source_pin']}
+                    if not (label_matches and route_matches) and 'adjacent_source_diagnostic' not in report:
+                        report['adjacent_source_diagnostic'] = {'ownerUID': uid,
+                            'direction': 'next' if prefix == 'Next reviewed poem · ' else 'previous',
+                            'label_matches': label_matches, 'route_matches': route_matches}
+                    require(label_matches and route_matches, 'EXACT_ADJACENT_SOURCE_PIN_ROUTE')
             adjacent = following or previous; target = adjacent['id']
-            go(target, lambda: activate(siblings.get_by_role('link', name=('Next reviewed poem · ' if following else '← Previous reviewed poem · ') + str(adjacent['poem']), exact=True)))
+            go(target, lambda: activate(siblings.get_by_role('link', name=('Next reviewed poem · ' if following else '← Previous reviewed poem · ') + str(adjacent['poem']) + (' →' if following else ''), exact=True)))
             count('edition_switches'); nav, picker = navigation(); picker.select_option(uid)
             go(uid, lambda: activate(nav.get_by_role('button', name='Open reviewed poem', exact=True))); count('edition_switches')
             require(sum(c.get('name') == 'get_translation' for c in state['calls']) == before, 'BROWSE_SEARCH_EDITION_NO_AUTO_ENGLISH')
