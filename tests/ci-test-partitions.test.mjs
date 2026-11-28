@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,copyFileSync,rmSync,existsSync,symlinkSync,realpathSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,copyFileSync,rmSync,existsSync,symlinkSync,realpathSync,lstatSync} from 'node:fs';
 import {tmpdir} from 'node:os';
-import {resolve,join,dirname} from 'node:path';
+import {createHash} from 'node:crypto';
+import {runInNewContext} from 'node:vm';
+import {resolve,join,dirname,isAbsolute} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {digest,inventory,loadBaseline,makeContext,nodeArguments,eventCollector,aggregateReceipts,execute,MAX_CHILD_MS,ciIdentity,historicalWindowsPythonWrappers,historicalNativePythonPartitionFixture,WINDOWS_PYTHON_PARTITION_INDEX,CURRENT380_CI_INDEX} from '../scripts/ci-test-partitions.mjs';
@@ -313,6 +315,88 @@ function beforeSourceFour394407Workflow(text){
  for(const part of SOURCE_FOUR394407_PARTS){assert.equal(text.split(part).length-1,1,'Every reviewed394407 sparse/source/mode/report addition is exact and unique');text=text.replace(part,'');}
  return text;
 }
+// Finite eight-source layer; deliberately invalid until exact parts/source contracts freeze.
+const CURRENT_EIGHT411419_WORKFLOW_SHA='b8fa313ea29f77b064b5e80b823100f0589a1aafba0a384b14c789ec4800a3d3';
+const CURRENT_EIGHT_BOOTSTRAP_CODE="import {createHash} from 'node:crypto';\nimport {lstatSync,readFileSync} from 'node:fs';\nimport {dirname,isAbsolute,join,resolve} from 'node:path';\nconst INDEX='docs/evidence/qa/english381-386/BASELINE_380_TEST_FILES.json';\nconst MAP='docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json';\nconst OWNER='tests/helpers/current-apadana.mjs';\nconst SUPPORTS=[\"docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json\",\"docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json\",\"docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json\",\"scripts/check-python-partitions.mjs\",\"scripts/ci-python-partition-driver.py\",\"tests/helpers/current-apadana.mjs\",\"tests/helpers/current389390-metadata.mjs\",\"tests/helpers/historical-h-inputs.mjs\",\"tests/helpers/intake375-metadata.mjs\",\"tests/helpers/intake380-metadata.mjs\",\"tests/helpers/intake382-metadata.mjs\",\"tests/helpers/partitioned-python.mjs\",\"tests/helpers/verse-scope-python.mjs\",\"tests/materialize_h_history.py\"];\nconst LEAVES=['scripts/check-current-source-adapters.py','scripts/web-reader-thera411-419-eight-check.py','scripts/apadana/thera411-419-eight/browser-inputs.py'];\nconst digest=raw=>createHash('sha256').update(raw).digest('hex');\nconst plain=value=>value!==null&&typeof value==='object'&&!Array.isArray(value)&&Object.getPrototypeOf(value)===Object.prototype;\nfunction need(value,code){if(!value)throw new Error('PREFLIGHT_'+code);}\nfunction pin(value){need(typeof value==='string'&&/^[a-f0-9]{64}$/.test(value),'SHA_TYPE');}\nfunction relative(name){need(typeof name==='string'&&/^[a-zA-Z0-9_./-]+$/.test(name)&&!name.startsWith('/')&&name.split('/').every(x=>x&&x!=='.'&&x!=='..'),'RELATIVE_PATH');return name;}\nfunction rootPath(value){\n need(typeof value==='string'&&isAbsolute(value)&&!value.split(/[\\\\/]/).includes('..')&&resolve(value)===value,'ROOT');\n const parents=[];for(let p=value;;p=dirname(p)){parents.push(p);if(dirname(p)===p)break;}\n for(const p of parents.reverse()){const s=lstatSync(p);need(s.isDirectory()&&!s.isSymbolicLink(),'ROOT_COMPONENT');}\n return value;\n}\nfunction regular(root,name){\n let p=root;const parts=relative(name).split('/');\n for(const[i,part]of parts.entries()){p=join(p,part);const s=lstatSync(p);need(!s.isSymbolicLink()&&(i===parts.length-1?s.isFile():s.isDirectory()),'REGULAR_COMPONENT');if(i===parts.length-1)need(Number.isSafeInteger(s.size)&&s.size>=0&&s.size<=4*1024*1024,'SOURCE_BYTE_BOUND');}\n const raw=readFileSync(p);need(raw.length<=4*1024*1024,'SOURCE_BYTE_BOUND');return raw;\n}\nfunction main(){\n const root=rootPath(process.env.GITHUB_WORKSPACE),workflow=regular(root,'.github/workflows/check.yml').toString('utf8');\n const paths=[...workflow.matchAll(/^  CI_TEST_BASELINE_INDEX: (.+)$/gm)],pins=[...workflow.matchAll(/^  CI_TEST_BASELINE_SHA: (.+)$/gm)];\n need(paths.length===1&&paths[0][1]===INDEX&&pins.length===1,'WORKFLOW_INDEX');pin(pins[0][1]);\n need(process.env.CI_TEST_BASELINE_INDEX===INDEX&&process.env.CI_TEST_BASELINE_SHA===pins[0][1],'INDEX_ENV');\n const indexRaw=regular(root,INDEX);need(digest(indexRaw)===pins[0][1],'INDEX_RAW');\n const index=JSON.parse(indexRaw);need(plain(index)&&index.schema==='reviewed-ci-test-baseline-v5'&&plain(index.supporting_sources),'INDEX_SCHEMA');\n need(JSON.stringify(Object.keys(index.supporting_sources).sort())===JSON.stringify(SUPPORTS),'SUPPORT_MEMBERSHIP');\n const bytes=new Map();\n for(const name of SUPPORTS){const expected=index.supporting_sources[name];pin(expected);const raw=regular(root,name);need(digest(raw)===expected,'SUPPORT_RAW');bytes.set(name,raw);}\n const mapRaw=bytes.get(MAP),ownerRaw=bytes.get(OWNER);need(mapRaw&&ownerRaw,'OWNER_MAP_MEMBERSHIP');\n const ownerPins=[...ownerRaw.toString('utf8').matchAll(/^export const CURRENT_SOURCE_SHA='([a-f0-9]{64})';$/gm)];\n need(ownerPins.length===1&&ownerPins[0][1]===digest(mapRaw),'OWNER_MAP_BINDING');\n const map=JSON.parse(mapRaw);need(plain(map)&&map.schema==='reviewed-current-apadana-source-inputs-v1'&&map.status==='APPROVED_EXACT_CURRENT_APADANA_SOURCE_INPUTS_ONLY'&&plain(map.files),'MAP_SCHEMA');\n for(const name of LEAVES){\n  need(Object.hasOwn(map.files,name),'LEAF_MEMBERSHIP');const row=map.files[name];\n  need(plain(row)&&JSON.stringify(Object.keys(row).sort())===JSON.stringify(['bytes','sha256'])&&Number.isSafeInteger(row.bytes)&&row.bytes>=0,'LEAF_ROW');pin(row.sha256);\n  const raw=regular(root,name);need(raw.length===row.bytes,'LEAF_BYTES');need(digest(raw)===row.sha256,'LEAF_RAW');\n }\n process.stdout.write('CURRENT_SOURCE_PREFLIGHT:'+JSON.stringify({schema:'reviewed-current-source-preexecution-v1',status:'PASS',support_files:SUPPORTS.length,mandatory_leaf_files:LEAVES.length,index_sha256:digest(indexRaw),map_sha256:digest(mapRaw)})+'\\n');\n}\ntry{main();}catch(error){\n const code=typeof error?.message==='string'&&/^PREFLIGHT_[A-Z0-9_]+$/.test(error.message)?error.message:'PREFLIGHT_IO_OR_JSON_FAILURE';\n process.stderr.write('CURRENT_SOURCE_PREFLIGHT:'+JSON.stringify({schema:'reviewed-current-source-preexecution-v1',status:'FAIL',code})+'\\n');process.exitCode=1;\n}\n";
+const EIGHT_BOOTSTRAP_SUPPORTS=Object.freeze(["docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json","docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json","docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json","scripts/check-python-partitions.mjs","scripts/ci-python-partition-driver.py","tests/helpers/current-apadana.mjs","tests/helpers/current389390-metadata.mjs","tests/helpers/historical-h-inputs.mjs","tests/helpers/intake375-metadata.mjs","tests/helpers/intake380-metadata.mjs","tests/helpers/intake382-metadata.mjs","tests/helpers/partitioned-python.mjs","tests/helpers/verse-scope-python.mjs","tests/materialize_h_history.py"]);
+const CURRENT_EIGHT_BOOTSTRAP_PART="          node --input-type=module <<'CURRENT_SOURCE_PREFLIGHT'\n"+CURRENT_EIGHT_BOOTSTRAP_CODE.split('\n').filter((line,i,all)=>i<all.length-1||line).map(line=>'          '+line+'\n').join('')+'          CURRENT_SOURCE_PREFLIGHT\n';
+const SOURCE_EIGHT411419_PARTS=Object.freeze([CURRENT_EIGHT_BOOTSTRAP_PART,"            src/_poems/chapter-3/poem-411.md\n            src/_poems/chapter-3/poem-412.md\n            src/_poems/chapter-3/poem-414.md\n            src/_poems/chapter-3/poem-415.md\n            src/_poems/chapter-3/poem-416.md\n            src/_poems/chapter-3/poem-417.md\n            src/_poems/chapter-3/poem-418.md\n            src/_poems/chapter-3/poem-419.md\n","      - name: Require both publisher411-419 source API and widget cases\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        shell: bash\n        env:\n          APADANA_SOURCE_CHECKOUT: .fixtures/apadana-pinned\n          APADANA_OFFICIAL_CHECKOUT: .fixtures/apadana-pinned\n        run: |\n          set -euo pipefail\n          node --test --test-reporter=tap tests/thera411-419-eight.test.mjs | tee reviewed-publisher411-419-eight.tap\n          node --input-type=module -e 'import assert from \"node:assert/strict\"; import {readFileSync} from \"node:fs\"; const tap=readFileSync(\"reviewed-publisher411-419-eight.tap\",\"utf8\"); const names=[...tap.matchAll(/^ok \\d+ - (.+)$/gm)].map(row=>row[1]); assert.deepEqual(names,[\"publisher411/412/414-419 exact sources retain386 objects,179 paragraphs,183 notes and156 local labels\", \"publisher411/412/414-419 actual API and embedded guards preserve54 cursors,155 quotes and6000+1546 continuation\"]); for(const [key,value] of [[\"tests\",2],[\"pass\",2],[\"fail\",0],[\"cancelled\",0],[\"skipped\",0],[\"todo\",0]]) { const rows=tap.split(/\\r?\\n/).filter(line=>line.startsWith(\"# \"+key+\" \")); assert.deepEqual(rows,[\"# \"+key+\" \"+value]); } assert.doesNotMatch(tap,/^\\s*not ok\\b/m);'\n","      - name: Check all eight publisher411-419 reader sources\n        if: matrix.group == 'apadana'\n        timeout-minutes: 7\n        shell: bash\n        run: |\n          set -euo pipefail\n          pali_eight_chromium=\"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\"\n          python3 -B \"$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py\" --output-dir \"$GITHUB_WORKSPACE/.ci-eight411419/normal\" --name eight394-normal -- python3 -B \"$GITHUB_WORKSPACE/scripts/web-reader-thera411-419-eight-check.py\" --mode normal --source-root \"$GITHUB_WORKSPACE\" --server-dir \"$GITHUB_WORKSPACE/server\" --publisher-root \"$GITHUB_WORKSPACE/.fixtures/apadana-pinned\" --browser \"$pali_eight_chromium\" --report \"$GITHUB_WORKSPACE/.ci-eight411419/normal/REPORT.json\"\n      - name: Audit all eight publisher411-419 reader sources\n        if: matrix.group == 'apadana'\n        timeout-minutes: 7\n        shell: bash\n        run: |\n          set -euo pipefail\n          pali_eight_chromium=\"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\"\n          python3 -B \"$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py\" --output-dir \"$GITHUB_WORKSPACE/.ci-eight411419/a11y\" --name eight394-a11y -- python3 -B \"$GITHUB_WORKSPACE/scripts/web-reader-thera411-419-eight-check.py\" --mode a11y --source-root \"$GITHUB_WORKSPACE\" --server-dir \"$GITHUB_WORKSPACE/server\" --publisher-root \"$GITHUB_WORKSPACE/.fixtures/apadana-pinned\" --browser \"$pali_eight_chromium\" --report \"$GITHUB_WORKSPACE/.ci-eight411419/a11y/REPORT.json\"\n      - name: Prepare a fresh offline npm installation for publisher411-419\n        if: matrix.group == 'apadana'\n        timeout-minutes: 5\n        shell: bash\n        run: |\n          set -euo pipefail\n          test ! -e \"$RUNNER_TEMP/eight411419-install\"\n          pali_eight_archives=(\"$RUNNER_TEMP/apadana-package/\"*.tgz)\n          test \"${#pali_eight_archives[@]}\" -eq 1\n          test -f \"${pali_eight_archives[0]}\"\n          mkdir -p \"$RUNNER_TEMP/eight411419-install\"\n          npm install --offline --ignore-scripts --no-audit --no-fund --prefix \"$RUNNER_TEMP/eight411419-install\" \"${pali_eight_archives[0]}\"\n      - name: Check all eight publisher411-419 sources in a fresh npm installation\n        if: matrix.group == 'apadana'\n        timeout-minutes: 7\n        shell: bash\n        run: |\n          set -euo pipefail\n          pali_eight_chromium=\"$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')\"\n          python3 -B \"$GITHUB_WORKSPACE/scripts/apadana/thera351-360-nine/run-installed-bounded.py\" --output-dir \"$GITHUB_WORKSPACE/.ci-eight411419/installed\" --name eight394-installed -- python3 -B \"$GITHUB_WORKSPACE/scripts/web-reader-thera411-419-eight-check.py\" --mode installed --source-root \"$GITHUB_WORKSPACE\" --server-dir \"$RUNNER_TEMP/eight411419-install/node_modules/pali-canon-mcp/server\" --publisher-root \"$GITHUB_WORKSPACE/.fixtures/apadana-pinned\" --browser \"$pali_eight_chromium\" --report \"$GITHUB_WORKSPACE/.ci-eight411419/installed/REPORT.json\"\n","            reviewed-publisher411-419-eight.tap\n            .ci-eight411419/normal/\n            .ci-eight411419/a11y/\n            .ci-eight411419/installed/\n"]);
+function beforeSourceEight411419Workflow(text){
+ for(const part of SOURCE_EIGHT411419_PARTS){assert.equal(text.split(part).length-1,1,'Every eight-source bootstrap/sparse/gate/mode/report part is exact and unique');text=text.replace(part,'');}
+ return text;
+}
+function assertCurrentEightSourceBootstrapFixtures(){
+ const owner=realpathSync(mkdtempSync(join(tmpdir(),'ci-eight-source-preflight-'))),INDEX='docs/evidence/qa/english381-386/BASELINE_380_TEST_FILES.json',MAP='docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json',OWNER='tests/helpers/current-apadana.mjs';
+ const supports=EIGHT_BOOTSTRAP_SUPPORTS,leaves=['scripts/check-current-source-adapters.py','scripts/web-reader-thera411-419-eight-check.py','scripts/apadana/thera411-419-eight/browser-inputs.py'];
+ const imports=["import {createHash} from 'node:crypto';","import {lstatSync,readFileSync} from 'node:fs';","import {dirname,isAbsolute,join,resolve} from 'node:path';"];
+ const lines=CURRENT_EIGHT_BOOTSTRAP_CODE.split('\n');assert.deepEqual(lines.slice(0,3),imports);const code=lines.slice(3).join('\n');
+ const leafBytes=Object.fromEntries(leaves.map(name=>[name,Buffer.from('# public synthetic source-preflight fixture '+name+'\n')]));let environment,index,seeded=false;
+ const write=(name,raw)=>{const p=join(owner,name);mkdirSync(dirname(p),{recursive:true});writeFileSync(p,raw);};
+ const sealIndex=()=>{const raw=JSON.stringify(index),pin=digest(raw);write(INDEX,raw);write('.github/workflows/check.yml','env:\n  CI_TEST_BASELINE_INDEX: '+INDEX+'\n  CI_TEST_BASELINE_SHA: '+pin+'\n');environment={GITHUB_WORKSPACE:owner,CI_TEST_BASELINE_INDEX:INDEX,CI_TEST_BASELINE_SHA:pin};};
+ const publish=manifest=>{write(MAP,JSON.stringify(manifest));write(OWNER,"export const CURRENT_SOURCE_SHA='"+digest(readFileSync(join(owner,MAP)))+"';\n");index={schema:'reviewed-ci-test-baseline-v5',supporting_sources:Object.fromEntries(supports.map(name=>[name,digest(readFileSync(join(owner,name)))]))};sealIndex();};
+ const reset=()=>{
+  if(!seeded){for(const name of supports)write(name,'// public synthetic support fixture '+name+'\n');seeded=true;}
+  for(const name of leaves){rmSync(join(owner,name),{recursive:true,force:true});write(name,leafBytes[name]);}
+  const manifest={schema:'reviewed-current-apadana-source-inputs-v1',status:'APPROVED_EXACT_CURRENT_APADANA_SOURCE_INPUTS_ONLY',baseline_commit:'0'.repeat(40),files:Object.fromEntries(leaves.map(name=>[name,{bytes:leafBytes[name].length,sha256:digest(leafBytes[name])}]))};publish(manifest);return manifest;
+ };
+ const run=expected=>{
+  const output=[],errors=[],processSurface={env:{...environment},stdout:{write:value=>output.push(String(value))},stderr:{write:value=>errors.push(String(value))},exitCode:0};
+  runInNewContext(code,{createHash,lstatSync,readFileSync,dirname,isAbsolute,join,resolve,process:processSurface},{timeout:1000});
+  const text=[...output,...errors].join('');assert.ok(Buffer.byteLength(text,'utf8')<=2048);const records=text.trim().split('\n');assert.equal(records.length,1);assert.ok(records[0].startsWith('CURRENT_SOURCE_PREFLIGHT:'));const result=JSON.parse(records[0].slice('CURRENT_SOURCE_PREFLIGHT:'.length));
+  assert.equal(result.status,expected?'PASS':'FAIL');assert.equal(processSurface.exitCode,expected?0:1);if(expected){assert.equal(result.support_files,14);assert.equal(result.mandatory_leaf_files,3);}
+ };
+ let completed=0,pristine;
+ const refuse=change=>{run(true);change(clone(pristine));run(false);pristine=reset();run(true);completed++;};
+ try{
+  pristine=reset();run(true);
+  refuse(()=>{delete environment.CI_TEST_BASELINE_SHA;});
+  refuse(()=>{environment.CI_TEST_BASELINE_INDEX='docs/evidence/qa/foreign.json';});
+  refuse(()=>write(INDEX,readFileSync(join(owner,INDEX),'utf8')+' '));
+  refuse(()=>{index.supporting_sources['tests/helpers/unreviewed.mjs']='0'.repeat(64);sealIndex();});
+  refuse(()=>write(OWNER,readFileSync(join(owner,OWNER),'utf8')+'// changed\n'));
+  refuse(manifest=>{manifest.status='PENDING';publish(manifest);});
+  refuse(()=>{write(OWNER,"export const CURRENT_SOURCE_SHA='"+'0'.repeat(64)+"';\n");index.supporting_sources[OWNER]=digest(readFileSync(join(owner,OWNER)));sealIndex();});
+  refuse(()=>{delete index.supporting_sources[MAP];sealIndex();});
+  for(const name of leaves){
+   refuse(()=>rmSync(join(owner,name)));
+   refuse(()=>{const raw=Buffer.from(leafBytes[name]);raw[0]^=1;write(name,raw);});
+   refuse(()=>{rmSync(join(owner,name));mkdirSync(join(owner,name));});
+   refuse(manifest=>{delete manifest.files[name];publish(manifest);});
+   refuse(manifest=>{manifest.files[name].bytes=true;publish(manifest);});
+   refuse(manifest=>{manifest.files[name].bytes++;publish(manifest);});
+   refuse(manifest=>{manifest.files[name].sha256='0'.repeat(64);publish(manifest);});
+  }
+  assert.equal(completed,29);run(true);
+ }finally{rmSync(owner,{recursive:true,force:true});}
+}
+
+function assertCurrentEightWorkflow(raw,pin){
+ assert.equal(rawWorkflowContract(raw),true);assert.match(pin,/^[a-f0-9]{64}$/);
+ const livePins=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: (.+)$/gm)];assert.equal(livePins.length,1);assert.equal(livePins[0][1],pin);
+ const normalized=raw.replace(livePins[0][0],'  CI_TEST_BASELINE_SHA: PENDING_ROOT_REVIEWED_BASELINE_SHA');
+ assert.equal(digest(normalized),CURRENT_EIGHT411419_WORKFLOW_SHA,'Exact eight-source placement, bootstrap, source gate, modes, sparse and report parts must remain');
+ return assertCurrent375Workflow(beforeSourceEight411419Workflow(raw),pin);
+}
+function assertCurrentEightWorkflowRefusals(raw,pin){
+ assert.equal(assertCurrentEightWorkflow(raw,pin),true);
+ // Finite eight-source counterfactuals preserve all current-four and earlier refusals below.
+ for(const part of SOURCE_EIGHT411419_PARTS){
+  for(const replacement of ['',part+part,part+'-UNREVIEWED']){const changed=raw.replace(part,replacement);assert.notEqual(changed,raw);assert.throws(()=>assertCurrentEightWorkflow(changed,pin),'Eight-source parts must reject loss, duplication and edit');}
+  const removed=raw.replace(part,''),other=current375JobBlock(removed,'hosted-memory'),steps='    steps:\n';assert.equal(other.raw.split(steps).length-1,1);const moved=removed.slice(0,other.start)+other.raw.replace(steps,steps+part)+removed.slice(other.end);assert.notEqual(moved,raw);assert.throws(()=>assertCurrentEightWorkflow(moved,pin),'Exact eight-source parts moved to another job must refuse');
+ }
+ for(const [part,before,after]of [
+  [SOURCE_EIGHT411419_PARTS[0],'SUPPORT_MEMBERSHIP','REMOVED_SUPPORT_CHECK'],
+  [SOURCE_EIGHT411419_PARTS[0],'scripts/check-current-source-adapters.py','scripts/unreviewed-recipe.py'],
+  [SOURCE_EIGHT411419_PARTS[2],"if: matrix.group == 'apadana'","if: matrix.group == 'core'"],
+  [SOURCE_EIGHT411419_PARTS[2],'timeout-minutes: 5','timeout-minutes: 6'],
+  [SOURCE_EIGHT411419_PARTS[2],'["pass",2]','["pass",1]'],
+  [SOURCE_EIGHT411419_PARTS[3],'timeout-minutes: 7','timeout-minutes: 8'],
+  [SOURCE_EIGHT411419_PARTS[3],'--mode a11y','--mode normal'],
+  [SOURCE_EIGHT411419_PARTS[3],'npm install --offline','npm install']
+ ]){assert.ok(part.includes(before));const changed=raw.replace(part,part.replace(before,after));assert.notEqual(changed,raw);assert.throws(()=>assertCurrentEightWorkflow(changed,pin),'Eight-source bootstrap, group, cap, count, mode and offline drift must refuse');}
+ // Keep the entire old-four positive and all48 refusals meaningful on their exact source layer.
+ assertCurrent375WorkflowRefusals(beforeSourceEight411419Workflow(raw),pin);
+}
 function assertCurrent375Workflow(raw,pin){
  assert.equal(rawWorkflowContract(raw),true);assert.match(pin,/^[a-f0-9]{64}$/);
  const livePins=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: (.+)$/gm)];assert.equal(livePins.length,1);assert.equal(livePins[0][1],pin);
@@ -364,7 +448,7 @@ function assertCurrent380CIBaseline(){
   const raw=readFileSync(join(ROOT,'.github/workflows/check.yml'),'utf8');assert.equal(rawWorkflowContract(raw),true);
   const paths=[...raw.matchAll(/^  CI_TEST_BASELINE_INDEX: (.+)$/gm)],pins=[...raw.matchAll(/^  CI_TEST_BASELINE_SHA: ([a-f0-9]{64})$/gm)];
   assert.equal(paths.length,1);assert.equal(paths[0][1],CURRENT380_CI_INDEX);assert.equal(pins.length,1);
-  const pin=pins[0][1];assertCurrent375WorkflowRefusals(raw,pin);if(process.env.CI_TEST_BASELINE_INDEX!==undefined)assert.equal(process.env.CI_TEST_BASELINE_INDEX,CURRENT380_CI_INDEX);if(process.env.CI_TEST_BASELINE_SHA!==undefined)assert.equal(process.env.CI_TEST_BASELINE_SHA,pin);
+  const pin=pins[0][1];assertCurrentEightWorkflowRefusals(raw,pin);assertCurrentEightSourceBootstrapFixtures();if(process.env.CI_TEST_BASELINE_INDEX!==undefined)assert.equal(process.env.CI_TEST_BASELINE_INDEX,CURRENT380_CI_INDEX);if(process.env.CI_TEST_BASELINE_SHA!==undefined)assert.equal(process.env.CI_TEST_BASELINE_SHA,pin);
   const actual=loadBaseline(ROOT,join(ROOT,CURRENT380_CI_INDEX),pin);assert.equal(actual.baseline.schema,'reviewed-ci-test-baseline-v5');assert.equal(actual.baseline.legacy_test_count,2092);assert.ok(actual.baseline.added_test_count>0);assert.ok(actual.inventory.length>345);
   return actual;
 }
