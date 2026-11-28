@@ -68,7 +68,7 @@ def load_fixed(root, relative, expected, name):
     require(sha(raw) == expected, 'EXACT_REUSED_SOURCE_BYTES')
     spec = importlib.util.spec_from_file_location(name, root / relative)
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    exec(compile(raw, str(root / relative), 'exec'), module.__dict__)
     return module
 
 
