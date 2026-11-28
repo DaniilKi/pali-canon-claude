@@ -429,12 +429,12 @@
     "scripts/ci-test-reporter.mjs": "eeb87f9b07015eb9cf3cd220efb5aafb9a5e8cdb4cd62282ff89c45985f59515"
   },
   "supporting_sources": {
-    "docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json": "bc82bef94c95307e73d9b1a9d4385216d05e6fce2fe58942a6f891af04716cab",
+    "docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json": "87d282357ba831fcbdce0e72d6c944b5d1a6232df9edacaea3fada7b34f3ba73",
     "docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json": "4c3cf4df171873477757e158736a842903770c35e824df5ab0f820ecc566c425",
     "docs/evidence/apadana/thera389-390/CURRENT_SOURCE_INPUTS.json": "db3e46646b405dc0e18c7c10c4d79fa1ea9515803b2826d01f6fb33512b387d5",
     "scripts/check-python-partitions.mjs": "4ef5df2648ef909b4270413b9162a802db20d71d8f6e2b34d90f9d336980e2a0",
     "scripts/ci-python-partition-driver.py": "e8b89a5aed517be5c1303ca135f9a4964ee58d451444e2e83090a4f363b128f3",
-    "tests/helpers/current-apadana.mjs": "86abbb586c1bbd8073275e8d37cf12de2bbd9bcbe01894e2b596265917f3589c",
+    "tests/helpers/current-apadana.mjs": "6b28573ced049164c406734b8f40c6f2e6cffe8ab015812cd6db6754f6d2357b",
     "tests/helpers/current389390-metadata.mjs": "74e8b7daf92ccb377ae0ad10d8d0378adb07ac54e39bb599f19aed6d95d6c1e6",
     "tests/helpers/historical-h-inputs.mjs": "8318fc4c884610f931486037f47cdf6b2c130cb7185875c3055af0266a7c700b",
     "tests/helpers/intake375-metadata.mjs": "ee77c32767be7713ef383c835b44ce942e510008da2c057bcd42380368edbf3d",
@@ -811,6 +811,6 @@
   },
   "case_inventory": {
     "path": "docs/evidence/qa/english381-386/CASE_SOURCE_REVIEW.json",
-    "sha256": "17b575690a4360f5ab5f14942e59701e992bb2fd324f69584cc630a31abf098d"
+    "sha256": "d6126ee15ba55b833307c485578dad83efdb415619e4c245ba9f459c64a88642"
   }
 }
