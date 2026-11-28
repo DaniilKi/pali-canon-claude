@@ -64,10 +64,15 @@ def validate_context(context):
     """Pure field validation; no file, server or runtime access on this route."""
     require(type(context) is dict and set(context) == {'english', 'canonical', 'widget'}, 'CLOSED_CURRENT_CONTEXT')
     english, canonical = context['english'], context['canonical']
+    from web_reader_current_apadana import source_cohort, widget_contract
+    cohort = source_cohort(context, 'four394407')
     old = english['historical382']
     ids = [uid for _, uid in PAIRS]
-    require(len(old['ids']) == 382 and english['ids'] == old['ids'] + ids and len(english['ids']) == 386,
-            'EXACT_CURRENT386_OLD382_PREFIX_AND_FOUR')
+    cohort_ids = old['ids'] + ids
+    require(len(old['ids']) == 382 and cohort['ids'] == ids and len(cohort_ids) == 386 and
+            cohort['approval']['expected_profile_ids'] == cohort_ids and english['ids'][:386] == cohort_ids,
+            'EXACT_HISTORICAL386_SOURCE_PREFIX_AND_FOUR')
+    require(english['ids'] == english['selection']['expected_profile_ids'], 'FULL_CURRENT_SOURCE_DECLARATION')
     require(list(english['profiles']) == list(english['links']) == english['ids'], 'ORDERED_FULL_SOURCE_OBJECTS')
     for uid in old['ids']:
         require(english['profiles'][uid] == old['profiles'][uid] and english['links'][uid] == old['links'][uid],
@@ -76,13 +81,16 @@ def validate_context(context):
             english['selection']['held_ids'] == old['selection']['held_ids'], 'UNCHANGED_HISTORICAL_HELD_OBJECTS')
     require(canonical['new_canonical_logical_sha256'] == CANON and
             canonical['namespace'] == 'apadana-thera389-390-v1', 'UNCHANGED_CANONICAL_CONTEXT')
-    require(context['widget'] == {'version': 'v51', 'uri': 'ui://pali-canon/reader-v51.html',
-                                  'skybridge': 'ui://pali-canon/reader-v51.skybridge.html'}, 'EXACT_REVIEWED_WIDGET_BINDING')
-    bindings = english['documents']['SOURCE_BINDINGS.json']
+    require(context['widget'] == widget_contract(), 'EXACT_REVIEWED_CURRENT_WIDGET_BINDING')
+    bindings = cohort['documents']['SOURCE_BINDINGS.json']
     require(set(bindings['source_derived_API_expected_metadata']) == {'entries'}, 'CLOSED_GOLDEN_ENVELOPE')
     goldens = bindings['source_derived_API_expected_metadata']['entries']
     require(list(goldens) == ids and sha(packed(goldens)) == GOLDEN_ENTRIES_SHA, 'INDEPENDENT_SOURCE_GOLDENS')
-    profiles = {uid: english['profiles'][uid] for uid in ids}
+    profiles = cohort['profiles']
+    require(list(profiles) == list(cohort['links']) == ids, 'EXACT_FOUR_SOURCE_OBJECT_DOMAINS')
+    for uid in ids:
+        require(english['profiles'][uid] == profiles[uid] and english['links'][uid] == cohort['links'][uid],
+                'CURRENT_RETAINS_FOUR_COMPLETE_SOURCE_OBJECTS')
     for publisher, uid in PAIRS:
         p, g = profiles[uid], goldens[uid]
         require(p['id'] == uid and p['poem'] == g['publisher_poem'] == publisher and
@@ -98,7 +106,11 @@ def validate_context(context):
     source_records = english['selection']['baseline_records'] + english['selection']['approved_records']
     require([r['id'] for r in source_records] == english['ids'], 'SOURCE_REGISTRY_RECORDS_ORDER')
     navigation = sorted([r for r in source_records if r.get('publisher_chapter') == 'chapter-3'], key=lambda r: r['poem'])
-    require(len(navigation) == 346 and len({r['poem'] for r in navigation}) == 346, 'INDEPENDENT_PUBLISHER_ORDER')
+    historical_records = old['selection']['baseline_records'] + old['selection']['approved_records'] + cohort['records']
+    historical_navigation = sorted([r for r in historical_records if r['publisher_chapter'] == 'chapter-3'], key=lambda r: r['poem'])
+    require(len(historical_navigation) == 346, 'HISTORICAL_FOUR_SOURCE_PUBLISHER_ORDER')
+    require([r for r in navigation if r['id'] in cohort_ids] == historical_navigation and
+            len(navigation) == len({r['poem'] for r in navigation}), 'FULL_CURRENT_PUBLISHER_ORDER_AND_OLD_SUBSEQUENCE')
     require(not any(r['poem'] in PUBLISHER_HOLDS for r in navigation), 'ALL_NINE_PUBLISHER_HOLDS_UNCHANGED')
     require(sum(len(g['body_paragraphs']) for g in goldens.values()) == 121 and
             sum(len(g['note_owners']) for g in goldens.values()) == 141 and
@@ -107,7 +119,7 @@ def validate_context(context):
     require(len(pairs) == 16 and all(pair['owner'].startswith('note:') and pair['state_on'] == 'c' and
                                    pair['state_off'] == 'ch' for pair in pairs), 'SIXTEEN_NOTE_OWNED_STATE_PAIRS')
     return {'context': context, 'english': english, 'profiles': profiles, 'goldens': goldens,
-            'navigation': navigation, 'rights': english['documents']['REQUIRED_NOTICES.json']['specific_rights_artifacts']}
+            'navigation': navigation, 'rights': cohort['documents']['REQUIRED_NOTICES.json']['specific_rights_artifacts']}
 
 
 def capture_inputs(root, server, publisher, mode):

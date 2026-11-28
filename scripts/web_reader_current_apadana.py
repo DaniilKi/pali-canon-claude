@@ -28,7 +28,7 @@ def _sealed(root,name,pin):
     return value,raw
 
 
-def _source(root):
+def _source_four(root):
     root=_physical_root(root)
     prior=historical382._source382(root)  # PURE fixed382 source exactly ONCE
     old=prior['english']
@@ -127,7 +127,28 @@ def _source(root):
     manifest={'version':1,'source':source,'vri_commit':boundary.SOURCE_COMMIT,'held':deepcopy(old['manifest']['held']),'links':links}
     return {'english':{'ids':ids,'profiles':profiles,'links':links,'source':source,'selection':selection,'approval':approval,
         'historical368':old['historical368'],'historical375':old['historical375'],'historical380':old['historical380'],
-        'historical382':old,'documents':documents,'manifest':manifest},'canonical':prior['canonical'],'widget':widget_contract()}
+        'historical382':old,'source_cohorts':{'four394407':{'directory':DIRECTORY+'/',
+            'ids':list(IDS),'records':deepcopy(records),'profiles':added,'links':links_added,
+            'documents':documents,'approval':approval}},'documents':documents,'manifest':manifest},'canonical':prior['canonical'],'widget':widget_contract()}
+
+
+def _source(root):
+    # One pure historical382 decode inside the fixed four source declaration.
+    return _source_four(root)
+
+
+def source_cohort(context,key):
+    """Select one closed source-only addition cohort; never capture or read IO."""
+    _require(type(key)is str and key in ('four394407','eight411419'),
+        'Closed named source cohort required')
+    _require(type(context)is dict and set(context)=={'english','canonical','widget'},
+        'Closed validated current source context required')
+    cohorts=context['english']['source_cohorts']
+    _require(type(cohorts)is dict and key in cohorts,'Named source cohort is not declared')
+    cohort=cohorts[key]
+    _keys(cohort,('directory','ids','records','profiles','links','documents','approval'),
+        'Closed source-only addition cohort required')
+    return deepcopy(cohort)
 
 
 def source_authority(root):

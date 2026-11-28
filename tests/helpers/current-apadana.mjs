@@ -12,7 +12,7 @@ export const CURRENT_WIDGET_VERSION='v51';
 export const CURRENT_WIDGET_URI='ui://pali-canon/reader-v51.html';
 const DEFAULT_ROOT=fileURLToPath(new URL('../../',import.meta.url));
 export const CURRENT_SOURCE_FILE='docs/evidence/apadana/current/CURRENT_SOURCE_INPUTS.json';
-export const CURRENT_SOURCE_SHA='bedbfde291efcdb3a60c11066c9a8aea39a7e27a7be0d5b40912047394992627';
+export const CURRENT_SOURCE_SHA='PENDING';
 export const CURRENT_SOURCE_BASE='81c970094bcb1a539acf4e3856491ea9af9cc57f';
 const OLD_SOURCE_FILE='docs/evidence/apadana/english401-402-pair/CURRENT_SOURCE_INPUTS.json';
 const OLD_SOURCE_SHA='4c3cf4df171873477757e158736a842903770c35e824df5ab0f820ecc566c425';
@@ -33,7 +33,7 @@ const IDS=freeze(PAIRS.map(([,id])=>id));
 const REFS={profiles:'PROFILES.json',links:'LINKS.json',source_bindings:'SOURCE_BINDINGS.json',independent_source_review:'SOURCE_REVIEW.json',normalization_review:'NORMALIZATION_REVIEW.json',required_notices:'REQUIRED_NOTICES.json'};
 const APPROVAL_KEYS=['schema','status','base_commit','canonical_logical_sha256','publisher_revision','vri_revision','baseline_source','baseline_ids','approved_ids','approved_records','expected_profile_ids','held_ids','source_refs','required_visible_qualifications','source_and_normalization_only','runtime_approval','release_approval'];
 const PEER_KEYS=['schema','status','base_commit','canonical_logical_sha256','publisher_revision','vri_revision','approved_pairs','source_documents','producer_evidence','all_nine_publisher_holds_unchanged','all_ten_historical_canonical_held_ids_unchanged','complete_publisher_editions_only','source_and_normalization_only','runtime_API_activation_or_release_approval','operations'];
-export function currentContext(base=DEFAULT_ROOT){
+function fourSourceContext(base=DEFAULT_ROOT){
  base=physical(base);
  const prior=current382Authority(base),old=prior.english; // PURE historical source once, no old runtime
  const captured=Object.fromEntries(Object.entries(PINS).map(([leaf,digest])=>{pin(digest);const raw=regular(base,DIRECTORY+leaf);assert.equal(sha(raw),digest);return[leaf,{raw,value:JSON.parse(raw)}];}));
@@ -54,8 +54,10 @@ export function currentContext(base=DEFAULT_ROOT){
  const baselineRecords=[...old.selection.baseline_records,...old.selection.approved_records];assert.deepEqual(baselineRecords.map(row=>row.id),old.ids);
  const selection={...structuredClone(approval),baseline_records:baselineRecords,current_source_approval:{file:DIRECTORY+'APPROVAL.json',sha256:PINS['APPROVAL.json']},historical382_source_approval:structuredClone(old.selection.current_source_approval),...Object.fromEntries(['historical380_source_approval','historical375_source_approval','historical368_source_approval','historical359_source_approval','historical343_source_approval'].map(key=>[key,structuredClone(old.selection[key])]))};
  const manifest={version:1,source,vri_commit:INTAKE380_VRI,held:structuredClone(old.manifest.held),links};
- return freeze({english:{ids,profiles,links,source,selection,approval,historical368:old.historical368,historical375:old.historical375,historical380:old.historical380,historical382:old,documents,manifest},canonical:prior.canonical,widget:{version:CURRENT_WIDGET_VERSION,uri:CURRENT_WIDGET_URI,skybridge:'ui://pali-canon/reader-v51.skybridge.html'}});
+ return freeze({english:{ids,profiles,links,source,selection,approval,historical368:old.historical368,historical375:old.historical375,historical380:old.historical380,historical382:old,source_cohorts:{four394407:{directory:DIRECTORY,ids:IDS,records,profiles:added,links:addedLinks,documents,approval}},documents,manifest},canonical:prior.canonical,widget:{version:CURRENT_WIDGET_VERSION,uri:CURRENT_WIDGET_URI,skybridge:'ui://pali-canon/reader-v51.skybridge.html'}});
 }
+export function currentContext(base=DEFAULT_ROOT){return fourSourceContext(base);}
+export function sourceCohort(context,key){assert.equal(typeof key,'string');assert.ok(['four394407','eight411419'].includes(key));keys(context,['english','canonical','widget']);assert.ok(plain(context.english.source_cohorts)&&Object.hasOwn(context.english.source_cohorts,key));const cohort=context.english.source_cohorts[key];keys(cohort,['directory','ids','records','profiles','links','documents','approval']);return freeze(structuredClone(cohort));}
 export function currentAuthority(base=DEFAULT_ROOT){return currentContext(base).english;}
 export function currentSourceViews(base=DEFAULT_ROOT){const current=currentContext(base);return freeze({current,historical382:{english:current.english.historical382,canonical:current.canonical,widget:{version:'v50',uri:'ui://pali-canon/reader-v50.html',skybridge:'ui://pali-canon/reader-v50.skybridge.html'}}});}
 export function currentSourcePins(){return PINS;}
