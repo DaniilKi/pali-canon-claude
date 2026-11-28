@@ -183,6 +183,8 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin 104b57a6891ddae645c51e39eb3d27b89b64ffdf
           git cat-file -e '104b57a6891ddae645c51e39eb3d27b89b64ffdf^{commit}'
+          git fetch --no-tags --depth=1 origin 4e9287bd5ebc78aba4b185b017e63eac6547bfd7
+          git cat-file -e '4e9287bd5ebc78aba4b185b017e63eac6547bfd7^{commit}'
       - name: Tests (npm test)
         id: tests
         continue-on-error: true
