@@ -1,3 +1,5 @@
+import {requireCurrentMetadata,CURRENT_WIDGET_VERSION} from './helpers/current-apadana.mjs';
+import {intake382Authority as historical382Authority,CURRENT_WIDGET_VERSION as HISTORICAL382_WIDGET_VERSION} from './helpers/intake382-metadata.mjs';
 /** Actual pinned publisher inputs; expectations derive from independently reverified source kit cc62a8ce. */
 import test, {afterEach} from 'node:test';
 import assert from 'node:assert/strict';
@@ -75,8 +77,8 @@ function exactContent(id, value) {
 test('publisher401/402 exact sources retain382 choices, all speaker lines,36 notes and combined4–5 stanza', source, () => {
   const baseline = intake380Authority(ROOT), manifest = JSON.parse(readFileSync(resolve(ROOT, 'server/data/apadana.json')));
   assert.equal(baseline.ids.length, 380);
-  assert.deepEqual(Object.keys(APADANA_PROFILES), baseline.ids.concat(IDS));
-  assert.deepEqual(Object.keys(manifest.links), baseline.ids.concat(IDS));
+  const historical382=historical382Authority(ROOT);assert.deepEqual(historical382.ids,baseline.ids.concat(IDS));assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,382),historical382.ids);requireCurrentMetadata(APADANA_PROFILES,manifest,ROOT);
+  assert.deepEqual(Object.keys(manifest.links).slice(0,382), baseline.ids.concat(IDS));
   for (const id of baseline.ids) { assert.deepEqual(APADANA_PROFILES[id], baseline.profiles[id]); assert.deepEqual(manifest.links[id], baseline.links[id]); }
   assert.deepEqual(manifest.held, baseline.manifest.held);
   for (const publisher of [391,392,393,403,404,405,408,409,410]) assert.equal(Object.values(APADANA_PROFILES).some(p => p.publisher_chapter === 'chapter-3' && p.poem === publisher), false);
@@ -114,7 +116,7 @@ test('publisher401/402 exact sources retain382 choices, all speaker lines,36 not
 test('publisher401/402 actual API, citations and both widget hosts preserve source and edition guards', source, async () => {
   const raw = artifacts(), calls = [];
   globalThis.fetch = async input => { const url = typeof input === 'string' ? input : input.href; assert.ok(raw.has(url), 'Only the two pinned publisher artifacts'); calls.push(url); return new Response(raw.get(url), {headers:{'content-type':'text/plain; charset=utf-8'}}); };
-  let pages = 0; assert.equal(WIDGET_VERSION, 'v50');
+  let pages = 0; assert.equal(HISTORICAL382_WIDGET_VERSION, 'v50');assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);
   for (const id of IDS) {
     const p = APADANA_PROFILES[id], g = EXPECTED.poems[id], unit = canon.resolve(id).unit, translation = tid(id);
     const choices = english.available(unit); assert.ok(choices.some(c => c.translation_id === translation));

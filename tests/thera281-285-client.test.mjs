@@ -1,8 +1,11 @@
+import {currentAuthority} from './helpers/current-apadana.mjs';
+import {intake382Authority as historical382Authority} from './helpers/intake382-metadata.mjs';
+const liveCurrentSource=currentAuthority(),historical382Source=historical382Authority();
 import {INTAKE382_IDS} from './helpers/intake382-metadata.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
 import {intake380Authority} from './helpers/intake380-metadata.mjs';
-import {requireProfiles382 as requireProfiles380,requireMetadata382 as requireMetadata380} from './helpers/intake382-metadata.mjs';
-import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure} from './helpers/intake382-metadata.mjs';
+import {requireCurrentProfiles as requireProfiles380,requireCurrentMetadata as requireMetadata380} from './helpers/current-apadana.mjs';
+import {assertCurrentSourceClosure as assertCurrent389390SourceClosure} from './helpers/current-apadana.mjs';
 assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
@@ -38,7 +41,7 @@ function shown(host,value,pali,id){
 function refuse(host,widget,bad,first,pali,id){host.output({...clone(widget),english:bad});assert.match(host.elements.english.textContent,/No English|No translation/);assert.ok(!host.elements.english.textContent.includes(first.text),id+' corrupt English not retained');assert.ok(host.elements.pali.textContent.includes(pali));}
 
 test('all five capabilities retain exact308 identity and every original303 profile without mistaking API choices for private pins',()=>{
- assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current380Source.historical368.ids.length,368);assert.equal(current380Source.ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),current380Source.ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380),INTAKE382_IDS);assert.equal(CURRENT_APADANA_IDS.length,382);
+ assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current380Source.historical368.ids.length,368);assert.equal(current380Source.ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),current380Source.ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380,382),INTAKE382_IDS);assert.equal(historical382Source.ids.length,382);assert.deepEqual(CURRENT_APADANA_IDS,liveCurrentSource.ids);
  assert.equal(e.approval.expected_profile_ids.length,308);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,308),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,308),e.approval.expected_profile_ids);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(308,310),['tha-ap289','tha-ap290']);

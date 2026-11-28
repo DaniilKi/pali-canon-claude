@@ -5,8 +5,8 @@ import {lstatSync as thera221InputStat} from 'node:fs';
 import {resolve as thera221Resolve,isAbsolute as thera221IsAbsolute} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {intake380Authority} from './helpers/intake380-metadata.mjs';
-import {requireProfiles382 as requireProfiles380,requireMetadata382 as requireMetadata380} from './helpers/intake382-metadata.mjs';
-import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure} from './helpers/intake382-metadata.mjs';
+import {requireCurrentProfiles as requireProfiles380,requireCurrentMetadata as requireMetadata380} from './helpers/current-apadana.mjs';
+import {assertCurrentSourceClosure as assertCurrent389390SourceClosure} from './helpers/current-apadana.mjs';
 import {prepareHistoricalHRuntimeInputs} from './helpers/historical-h-inputs.mjs';
 const actualThera221Root=new URL('../',import.meta.url);
 function readThera221RegularBytes(root,path){

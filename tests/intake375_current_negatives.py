@@ -15,7 +15,17 @@ ROOT=Path(__file__).absolute().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 import web_reader_intake380 as current
 import web_reader_boundary389390 as boundary
-import web_reader_intake382 as successor
+# Preserve the nine original method bodies while their existing live call sites
+# exercise the stable current facade. Metadata constants below remain explicit382.
+import web_reader_intake382 as historical382
+import web_reader_current_apadana as live_current
+from types import SimpleNamespace
+successor=SimpleNamespace(source_authority382=live_current.source_authority,
+    curated_additions382=live_current.curated_additions,
+    approved382_catalogue=live_current.approved_catalogue,
+    approved382_runtime=live_current.approved_runtime,
+    DIRECTORY=historical382.DIRECTORY,PINS=historical382.PINS,
+    RUNTIME_PINS=historical382.RUNTIME_PINS,IDS=historical382.IDS)
 from owned_intake380_proofs import (copy_current380_source_inputs,
     copy_current380_data_inputs,copy_current380_runtime_inputs)
 from materialize_h_history import materialize_h_runtime_fixture

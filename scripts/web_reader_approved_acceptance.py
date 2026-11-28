@@ -719,14 +719,14 @@ def approved_six_runtime(root):
 def approved_catalogue(root):
     if type(root) not in (str, type(Path("."))):
         raise ValueError("Current380 requires an exact physical path root")
-    from web_reader_boundary389390 import approved389390_catalogue
-    return approved389390_catalogue(root)
+    from web_reader_current_apadana import approved_catalogue as current_catalogue
+    return current_catalogue(root)
 
 def approved_runtime(root):
     if type(root) not in (str, type(Path("."))):
         raise ValueError("Current380 requires an exact physical path root")
-    from web_reader_boundary389390 import approved389390_runtime
-    return approved389390_runtime(root)
+    from web_reader_current_apadana import approved_runtime as current_runtime
+    return current_runtime(root)
 
 
 def historical_c1_approved_catalogue(root):

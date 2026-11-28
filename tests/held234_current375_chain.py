@@ -11,12 +11,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import web_reader_apadana_intake as intake
 from web_reader_intake380 import reviewed_intake380
+from web_reader_intake382 import reviewed_intake382
 
 CLI = ROOT / 'scripts/web-reader-thera-held234-check.py'
 READERS = ('reviewed_held234_intake', 'curated_additions', 'read_261_280',
-    'read_281_285', 'read_287_288', 'read_292_299', 'read_301_310', 'read_312_319', 'read_321_329', 'read_331_334', 'read_335_350', 'read_historical368', 'read_historical375', 'read_historical380')
-HISTORICAL = ('historical303', 'historical308', 'historical310', 'historical317', 'historical325', 'historical333', 'historical339', 'historical343', 'historical359', 'historical368', 'historical375', 'historical380')
-METADATA = {'approval', 'current_additions', 'current_curation', 'current_ids', *HISTORICAL}
+    'read_281_285', 'read_287_288', 'read_292_299', 'read_301_310', 'read_312_319', 'read_321_329', 'read_331_334', 'read_335_350', 'read_historical368', 'read_historical375', 'read_historical380', 'read_historical382', 'reviewed_intake')
+HISTORICAL = ('historical303', 'historical308', 'historical310', 'historical317', 'historical325', 'historical333', 'historical339', 'historical343', 'historical359', 'historical368', 'historical375', 'historical380', 'historical382')
+METADATA = {'approval', 'current_additions', 'current_curation', 'current_ids', 'expected_current', *HISTORICAL}
 ASSIGNMENTS = METADATA | {'evidence_dir'}
 BRIDGES = (
     "historical303['baseline_ids'] == approval['expected_profile_ids']",
@@ -31,7 +32,8 @@ BRIDGES = (
     "historical368['baseline_ids'] == historical359['expected_profile_ids']",
     "historical375['baseline_ids'] == historical368['expected_profile_ids']",
     "historical380['baseline_ids'] == historical375['expected_profile_ids']",
-    "current_curation['baseline_ids'] == historical380['expected_profile_ids']",
+    "historical382['baseline_ids'] == historical380['expected_profile_ids']",
+    "current_curation['baseline_ids'] == expected_current['baseline_ids']",
 )
 
 
@@ -71,7 +73,7 @@ def run_actual_preflight(overrides=None):
     env = {'__builtins__': {'len': len, 'set': set}, 'ROOT': ROOT,
         'BASE': '7d5ac90845402b322dabf2c5120d1485b15c0bda', 'UID': 'tha-ap236',
         'json': json, 'args': SimpleNamespace(approval=ROOT / 'docs/evidence/apadana/THERA_HELD234_APPROVAL.json')}
-    env.update({name: reviewed_intake380 if name=='read_historical380' else getattr(intake, {'read_historical368':'_reviewed_current368', 'read_historical375':'_reviewed_current375'}.get(name,name)) for name in READERS})
+    env.update({name: reviewed_intake382 if name=='read_historical382' else reviewed_intake380 if name=='read_historical380' else getattr(intake, {'read_historical368':'_reviewed_current368', 'read_historical375':'_reviewed_current375'}.get(name,name)) for name in READERS})
     env.update(overrides or {})
     exec(compile(ast.Module(body=selected, type_ignores=[]), str(CLI), 'exec'), env)
     return tree, selected, env
@@ -85,12 +87,14 @@ class Held234Current375Chain(unittest.TestCase):
         self.assertEqual(len(set(env['historical375']['expected_profile_ids'])), 375)
         self.assertEqual(len(env['historical375']['expected_profile_ids'][285:]), 90)
         self.assertEqual(len(env['historical380']['expected_profile_ids']), 380)
-        self.assertEqual(len(env['current_ids']), 382)
+        self.assertEqual(len(env['historical382']['expected_profile_ids']), 382)
+        self.assertEqual(env['current_ids'],env['expected_current']['expected_profile_ids'])
         self.assertEqual(len(set(env['historical380']['expected_profile_ids'])), 380)
-        self.assertEqual(len(set(env['current_ids'])), 382)
+        self.assertEqual(len(set(env['current_ids'])),len(env['current_ids']))
         self.assertEqual(len(env['historical380']['expected_profile_ids'][285:]), 95)
-        self.assertEqual(len(env['current_additions']['ids']), 97)
-        for name, count in zip(HISTORICAL, (303,308,310,317,325,333,339,343,359,368,375,380), strict=True):
+        self.assertEqual(len(env['historical382']['expected_profile_ids'][285:]), 97)
+        self.assertEqual(env['current_additions']['ids'],env['expected_current']['expected_profile_ids'][285:])
+        for name, count in zip(HISTORICAL, (303,308,310,317,325,333,339,343,359,368,375,380,382), strict=True):
             self.assertEqual(len(env[name]['expected_profile_ids']), count)
         assertions = [ast.unparse(node.test) for node in selected if isinstance(node, ast.Assert)]
         for bridge in BRIDGES:
@@ -101,12 +105,14 @@ class Held234Current375Chain(unittest.TestCase):
         self.assertIn(('_reviewed_current375', 'read_historical375'), aliases)
         direct380=[(alias.name,alias.asname)for node in tree.body if isinstance(node,ast.ImportFrom)and node.module=='web_reader_intake380'for alias in node.names]
         self.assertIn(('reviewed_intake380','read_historical380'),direct380)
+        direct382=[(alias.name,alias.asname)for node in tree.body if isinstance(node,ast.ImportFrom)and node.module=='web_reader_intake382'for alias in node.names]
+        self.assertIn(('reviewed_intake382','read_historical382'),direct382)
         self.assertNotIn("current_curation['baseline_ids'] == historical359['expected_profile_ids']", assertions)
         self.assertEqual(env['historical375']['expected_profile_ids'][-7:], ['tha-ap373','tha-ap374','tha-ap376','tha-ap377','tha-ap378','tha-ap379','tha-ap380'])
         self.assertEqual(env['current_ids'][:375], env['historical375']['expected_profile_ids'])
         self.assertEqual(env['current_ids'][375:380], ['tha-ap383','tha-ap385','tha-ap386','tha-ap387','tha-ap388'])
         self.assertEqual(env['current_ids'][:380],env['historical380']['expected_profile_ids'])
-        self.assertEqual(env['current_ids'][380:],['tha-ap403','tha-ap404'])
+        self.assertEqual(env['current_ids'][380:382],['tha-ap403','tha-ap404'])
         self.assertNotIn('tha-ap375', env['current_ids'])
         return env
 

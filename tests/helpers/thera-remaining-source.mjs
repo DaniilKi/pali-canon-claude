@@ -5,8 +5,8 @@ import {lstatSync as remainingInputStat} from 'node:fs';
 import {resolve as remainingResolve,isAbsolute as remainingIsAbsolute} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {intake380Authority} from './intake380-metadata.mjs';
-import {requireProfiles382 as requireProfiles380,requireMetadata382 as requireMetadata380} from './intake382-metadata.mjs';
-import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure} from './intake382-metadata.mjs';
+import {requireCurrentProfiles as requireProfiles380,requireCurrentMetadata as requireMetadata380} from './current-apadana.mjs';
+import {assertCurrentSourceClosure as assertCurrent389390SourceClosure} from './current-apadana.mjs';
 import {prepareHistoricalHRuntimeInputs} from './historical-h-inputs.mjs';
 const actualRemainingRoot=new URL('../../',import.meta.url);
 function readRemainingRegularBytes(root,path){

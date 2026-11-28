@@ -1,9 +1,12 @@
+import {currentAuthority} from './helpers/current-apadana.mjs';
+import {intake382Authority as historical382Authority} from './helpers/intake382-metadata.mjs';
+const liveCurrentSource=currentAuthority(),historical382Source=historical382Authority();
 import {INTAKE382_IDS} from './helpers/intake382-metadata.mjs';
 import {historicalF3SourceFixtureFromOwnedH} from './helpers/historical389390-source-canon.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
 import {intake380Authority} from './helpers/intake380-metadata.mjs';
-import {requireProfiles382 as requireProfiles380,requireMetadata382 as requireMetadata380} from './helpers/intake382-metadata.mjs';
-import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure} from './helpers/intake382-metadata.mjs';
+import {requireCurrentProfiles as requireProfiles380,requireCurrentMetadata as requireMetadata380} from './helpers/current-apadana.mjs';
+import {assertCurrentSourceClosure as assertCurrent389390SourceClosure} from './helpers/current-apadana.mjs';
 assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
@@ -46,7 +49,7 @@ function transport(calls){globalThis.fetch=async url=>{const id=e.ids.find(id=>e
 
 test('seven V2 approved profiles extend every preserved310 object and link to317 with finite counter projection and unchanged canonical/data identities',()=>{
  const data=canon.load(),manifest=JSON.parse(readFileSync('server/data/apadana.json'));
- assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current380Source.historical368.ids.length,368);assert.equal(current380Source.ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),current380Source.ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380),INTAKE382_IDS);assert.equal(CURRENT_APADANA_IDS.length,382);
+ assert.equal(APADANA_COMMIT,e.approval.publisher_revision);assert.deepEqual(Object.keys(APADANA_PROFILES),CURRENT_APADANA_IDS);assert.equal(current380Source.historical368.ids.length,368);assert.equal(current380Source.ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),current380Source.ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380,382),INTAKE382_IDS);assert.equal(historical382Source.ids.length,382);assert.deepEqual(CURRENT_APADANA_IDS,liveCurrentSource.ids);
  assert.equal(e.approval.expected_profile_ids.length,317);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,317),e.approval.expected_profile_ids);
  assert.deepEqual(Object.keys(APADANA_PROFILES).slice(0,317),e.approval.expected_profile_ids);
  assert.deepEqual(CURRENT_APADANA_IDS.slice(317,325),['tha-ap303','tha-ap304','tha-ap305','tha-ap306','tha-ap307','tha-ap310','tha-ap311','tha-ap312']);assert.deepEqual(Object.keys(manifest.links),CURRENT_APADANA_IDS);

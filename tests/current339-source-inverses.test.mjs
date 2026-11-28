@@ -1,4 +1,8 @@
-import {INTAKE382_IDS,CURRENT_WIDGET_URI,CURRENT_WIDGET_VERSION} from './helpers/intake382-metadata.mjs';
+import {currentAuthority} from './helpers/current-apadana.mjs';
+import {intake382Authority as historical382Authority} from './helpers/intake382-metadata.mjs';
+const liveCurrentSource=currentAuthority(),historical382Source=historical382Authority();
+import {INTAKE382_IDS,CURRENT_WIDGET_VERSION as HISTORICAL382_WIDGET_VERSION,CURRENT_WIDGET_URI as HISTORICAL382_WIDGET_URI} from './helpers/intake382-metadata.mjs';
+import {CURRENT_WIDGET_URI,CURRENT_WIDGET_VERSION} from './helpers/current-apadana.mjs';
 // Historical H source/metadata inputs only. The owned provider validates CURRENT380 first.
 // Registration stays at this actual-R file; no H .test.mjs is imported or executed.
 import {after as closeOwnedHistoricalHInputs} from 'node:test';
@@ -19,8 +23,8 @@ import {CURRENT_APADANA_IDS} from './helpers/apadana-intake-expectations.mjs';
 const readFileSync=frozen440FileReader(readCurrentFileSync);
 const sha=x=>createHash('sha256').update(x).digest('hex');
 test('actual current359 and v45 bindings retain every exact D4 assertion through finite source inputs',()=>{
- assert.equal(intake380Authority().historical368.ids.length,368);assert.equal(intake380Authority().ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),intake380Authority().ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380),INTAKE382_IDS);assert.equal(CURRENT_APADANA_IDS.length,382);assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);assert.equal(WIDGET_URI,CURRENT_WIDGET_URI);
- const historicalWidget=current389390Authority().widget;assert.deepEqual(historicalWidget,{version:'v49',uri:'ui://pali-canon/reader-v49.html',skybridge:'ui://pali-canon/reader-v49.skybridge.html'});assert.equal(WIDGET_VERSION,'v50');assert.equal(WIDGET_URI,'ui://pali-canon/reader-v50.html');
+ assert.equal(intake380Authority().historical368.ids.length,368);assert.equal(intake380Authority().ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),intake380Authority().ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380,382),INTAKE382_IDS);assert.equal(historical382Source.ids.length,382);assert.deepEqual(CURRENT_APADANA_IDS,liveCurrentSource.ids);assert.equal(WIDGET_VERSION,CURRENT_WIDGET_VERSION);assert.equal(WIDGET_URI,CURRENT_WIDGET_URI);
+ const historicalWidget=current389390Authority().widget;assert.deepEqual(historicalWidget,{version:'v49',uri:'ui://pali-canon/reader-v49.html',skybridge:'ui://pali-canon/reader-v49.skybridge.html'});assert.equal(HISTORICAL382_WIDGET_VERSION,'v50');assert.equal(HISTORICAL382_WIDGET_URI,'ui://pali-canon/reader-v50.html');
  assert.ok(Object.keys(sourceInverses.files).length>=20);
  const reader=d4FileReader(readCurrentFileSync);
  for(const [path,row]of Object.entries(sourceInverses.files)){

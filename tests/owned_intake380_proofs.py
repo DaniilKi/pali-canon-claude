@@ -1,8 +1,9 @@
 """Actual382 copy domains; immutable380 source proofs, no historical capture."""
 from pathlib import Path
 from web_reader_intake380 import (_physical_root, _regular, _sha, _require, _proof_rows)
-from web_reader_intake382 import (source_authority382 as source_authority389390,
-    _capture382_current as _capture389390_current, _source_metadata_pins, _all_metadata_pins)
+from web_reader_current_apadana import (source_authority as source_authority389390,
+    capture_current as _capture389390_current, source_metadata_pins as _source_metadata_pins,
+    all_metadata_pins as _all_metadata_pins)
 # Reuse the exact old physical guard/write primitives, never its old capture.
 from owned_intake375_proofs import _empty, _exclusive
 

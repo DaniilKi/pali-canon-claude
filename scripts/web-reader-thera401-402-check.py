@@ -15,7 +15,7 @@ REV = 'fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4'
 VRI = '2d134ff9ef60f70a1eb03c9370580228811a3070'
 CANON = '883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a'
 UTILITY = 'scripts/web-reader-thera381-386-five-check.py'
-UTILITY_SHA = 'c2fc19380376b65ce4f5478093442306a9bf8f2a85cf6bc5c74b2cb6500677af'
+UTILITY_SHA = '66044879d1cc3387ebc47b33fb92242eb56131e7889b69d38404a751451d3473'
 GOLDENS_FILE = 'docs/source-preparation/thera401-402/proposal/derived-v1/public/SOURCE_DERIVED_GOLDENS.json'
 GOLDENS_SHA = '6658c027a133048622bc1d3a6ac82a41d699594c3679b6c6effc01a3ccc1b718'
 AXE_SHA = '20c09fe157a8a34a30e241aaa1fcdade657734f08ab379ecfbeb7d45cc46e878'
@@ -221,17 +221,17 @@ def main():
     spec = importlib.util.spec_from_file_location('reviewed_five_browser_utilities', root / UTILITY)
     utilities = importlib.util.module_from_spec(spec); spec.loader.exec_module(utilities)
     sys.path.insert(0, str(root / 'scripts'))
-    from web_reader_intake382 import source_authority382
+    from web_reader_current_apadana import source_authority, source_views, widget_contract
     from web_reader_approved_acceptance import assert_runtime
-    context = source_authority382(root); english = context['english']
-    require(set(context) == {'english', 'canonical', 'widget'} and len(english['ids']) == 382 and
+    context = source_authority(root); english = context['english']
+    historical_context = source_views(context)['historical382']; historical382 = historical_context['english']
+    require(set(context) == {'english', 'canonical', 'widget'} and len(historical382['ids']) == 382 and english['ids'][:382] == historical382['ids'] and
             english['ids'][:380] == english['historical380']['ids'] and
-            english['ids'][380:] == ['tha-ap403', 'tha-ap404'], 'ACTUAL382_AND_UNCHANGED380_PREFIX')
-    require(context['canonical']['new_canonical_logical_sha256'] == CANON and
-            context['widget'] == {'version': 'v50', 'uri': 'ui://pali-canon/reader-v50.html',
-                                 'skybridge': 'ui://pali-canon/reader-v50.skybridge.html'}, 'EXACT_CURRENT_CANON_AND_WIDGET')
+            historical382['ids'][380:] == ['tha-ap403', 'tha-ap404'], 'ACTUAL382_AND_UNCHANGED380_PREFIX')
+    require(context['canonical']['new_canonical_logical_sha256'] == CANON and context['widget'] == widget_contract() and
+            historical_context['widget'] == {'version': 'v50', 'uri': 'ui://pali-canon/reader-v50.html','skybridge': 'ui://pali-canon/reader-v50.skybridge.html'}, 'EXACT_CURRENT_CANON_AND_WIDGET')
     actual_runtime = assert_runtime(root, server)
-    rights = english['documents']['REQUIRED_NOTICES.json']['specific_rights_artifacts']
+    rights = historical382['documents']['REQUIRED_NOTICES.json']['specific_rights_artifacts']
     require(len(rights) == 6, 'EXACT_SIX_SOURCE_RIGHTS_ARTIFACTS')
     for relative, descriptor in rights.items():
         require(relative and not relative.startswith('/') and all(p not in ('', '.', '..') for p in relative.split('/')),
@@ -294,7 +294,7 @@ def main():
                 browser = pw.chromium.launch(executable_path=args.browser, headless=True)
                 try:
                     for width, theme, touch, keyboard in CELLS:
-                        run_cell(utilities, client, browser, root, stage, context, roots, units,
+                        run_cell(utilities, client, browser, root, stage, context, historical382, roots, units,
                                  profiles, golden['entries'], baseline, args.mode,
                                  width, theme, touch, keyboard, expect)
                 finally:
@@ -308,7 +308,7 @@ def main():
     signal.alarm(0); report['status'] = 'passed'
 
 
-def run_cell(utilities, client, browser, root, stage, context, roots, units, profiles,
+def run_cell(utilities, client, browser, root, stage, context, historical382, roots, units, profiles,
              goldens, baseline, mode, width, theme, touch, keyboard, expect):
     global phase
     old = [{'uid': uid, 'ref': ref, 'offset': offset, 'source_commit': VRI,
@@ -391,7 +391,9 @@ def run_cell(utilities, client, browser, root, stage, context, roots, units, pro
             picker = nav.get_by_role('combobox'); expect(picker).to_have_count(1)
             expected_ids = [k for k, p in sorted(context['english']['profiles'].items(), key=lambda item: item[1]['poem'])
                             if p.get('publisher_chapter') == 'chapter-3']
-            require(len(expected_ids) == 342 and picker.locator('option').evaluate_all('xs=>xs.map(x=>x.value)') == expected_ids,
+            historical_ids = [k for k, p in sorted(historical382['profiles'].items(), key=lambda item: item[1]['poem']) if p.get('publisher_chapter') == 'chapter-3']
+            observed_ids = picker.locator('option').evaluate_all('xs=>xs.map(x=>x.value)')
+            require(len(historical_ids) == 342 and [k for k in observed_ids if k in historical382['profiles']] == historical_ids and observed_ids == expected_ids,
                     'FULL_ACTUAL382_EDITION_SELECTOR')
             other = 'tha-ap404' if uid == 'tha-ap403' else 'tha-ap403'
             for target in (other, uid):

@@ -1,14 +1,18 @@
+import {currentAuthority} from './helpers/current-apadana.mjs';
+import {intake382Authority as historical382Authority} from './helpers/intake382-metadata.mjs';
+const liveCurrentSource=currentAuthority(),historical382Source=historical382Authority();
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
 import {intake380Authority} from './helpers/intake380-metadata.mjs';
-import {requireProfiles382 as requireProfiles380,requireMetadata382 as requireMetadata380,INTAKE382_IDS} from './helpers/intake382-metadata.mjs';
-import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure} from './helpers/intake382-metadata.mjs';
+import {INTAKE382_IDS} from './helpers/intake382-metadata.mjs';
+import {requireCurrentProfiles as requireProfiles380,requireCurrentMetadata as requireMetadata380} from './helpers/current-apadana.mjs';
+import {assertCurrentSourceClosure as assertCurrent389390SourceClosure} from './helpers/current-apadana.mjs';
 assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
 const HistoricalH368Profiles=current380Source.historical368.profiles;
 const HistoricalH368Catalogue={version:1,source:current380Source.historical368.manifest_source,vri_commit:current380Source.manifest.vri_commit,held:current380Source.historical368.manifest_held,links:current380Source.historical368.links};
 requireProfiles380(APADANA_PROFILES);
-import {CURRENT_WIDGET_VERSION} from './helpers/intake382-metadata.mjs';
+import {CURRENT_WIDGET_VERSION} from './helpers/current-apadana.mjs';
 import {currentHeldPublishers} from './helpers/intake343-metadata.mjs';
 /** Source-positive comparisons use presealed metadata, not implementation output as expected data. */
 import test,{afterEach} from 'node:test';
@@ -78,19 +82,19 @@ test('current359 clients retain the reviewed339 cohort and40+319 identities with
   assert.equal(Object.keys(HistoricalH368Profiles).filter(id=>id.startsWith('tha-ap')).length,328);
   const currentTheraCount=Object.keys(current380Source.profiles).filter(id=>id.startsWith('tha-ap')).length;
   assert.equal(Object.keys(current380Source.historical375.profiles).filter(id=>id.startsWith('tha-ap')).length,335);assert.equal(currentTheraCount,340);
-  const declaredCurrentTheraCount=currentTheraCount+INTAKE382_IDS.length;assert.equal(declaredCurrentTheraCount,342);
+  const historical382TheraCount=currentTheraCount+INTAKE382_IDS.length;assert.equal(historical382TheraCount,342);
   const historicalTheraIds=Object.keys(current380Source.profiles).filter(id=>id.startsWith('tha-ap')),actualTheraIds=Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap'));
-  assert.deepEqual(actualTheraIds.slice(0,340),historicalTheraIds);assert.deepEqual(actualTheraIds.slice(340),INTAKE382_IDS);assert.deepEqual(actualTheraIds,[...historicalTheraIds,...INTAKE382_IDS]);
-  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,declaredCurrentTheraCount);assert.equal(actualTheraIds.length,342);
+  assert.deepEqual(actualTheraIds.slice(0,340),historicalTheraIds);assert.deepEqual(actualTheraIds.slice(340,342),INTAKE382_IDS);assert.deepEqual(actualTheraIds.slice(0,342),[...historicalTheraIds,...INTAKE382_IDS]);assert.deepEqual(actualTheraIds,liveCurrentSource.ids.filter(id=>id.startsWith('tha-ap')));
+  assert.equal(Object.keys(APADANA_PROFILES).filter(id=>id.startsWith('tha-ap')).length,liveCurrentSource.ids.filter(id=>id.startsWith('tha-ap')).length);assert.equal(historical382Source.ids.filter(id=>id.startsWith('tha-ap')).length,342);assert.equal(actualTheraIds.length,liveCurrentSource.ids.filter(id=>id.startsWith('tha-ap')).length);
   let calls=0;globalThis.fetch=async()=>{calls++;throw Error('Metadata or held request attempted provider transport');};
   await withMCP(async call=>{
     for(const id of e.ids) {
       const p=APADANA_PROFILES[id],data=await call('get_text',{uid:id,limit:2}),choice=data.english_available.find(row=>row.translation_id===tid(p));
       assert.ok(choice);validateApadanaChoice(choice,id);assert.deepEqual(p,e.profiles[id]);
       const navigation=apadanaEditionNavigation(data),observed=navigation.groups.flatMap(group=>group.poems);
-      const ordered=Object.values(APADANA_PROFILES).filter(p=>p.id.startsWith('tha-ap')).sort((a,b)=>a.poem-b.poem);
+      const ordered=Object.values(liveCurrentSource.profiles).filter(p=>p.id.startsWith('tha-ap')).sort((a,b)=>a.poem-b.poem);
       assert.deepEqual(observed.map(row=>({uid:row.uid,label:row.label})),ordered.map(p=>({uid:p.id,label:'Publisher poem '+p.poem+' · '+p.title+' · '+p.id})));
-      assert.equal(observed.length,declaredCurrentTheraCount);assert.equal(navigation.revision,REV);assert.equal(navigation.summary,null); // No new chapter32 summary.
+      assert.equal(observed.length,liveCurrentSource.ids.filter(id=>id.startsWith('tha-ap')).length);const oldNavigation=Object.values(historical382Source.profiles).filter(p=>p.id.startsWith('tha-ap')).sort((a,b)=>a.poem-b.poem);assert.deepEqual(observed.filter(row=>Object.hasOwn(historical382Source.profiles,row.uid)).map(row=>row.uid),oldNavigation.map(p=>p.id));assert.equal(navigation.revision,REV);assert.equal(navigation.summary,null); // No new chapter32 summary.
       assert.equal(choice.translation_id,tid(p));assert.equal(choice.translation_revision,REV);assert.equal(choice.url,p.url);assert.equal(choice.note_count,p.note_count);assert.deepEqual(choice.note_numbers,p.note_numbers);
       for(const field of ['audio','media','reciter']) assert.equal(Object.hasOwn(choice,field),false);
       const widget=await call(WIDGET_TOOL,{uid:id,english:false,limit:2});assert.equal(widget.english,null);assert.ok(widget.pali.segments.length);assert.equal(widget.source.commit,VRI);

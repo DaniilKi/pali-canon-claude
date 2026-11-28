@@ -1,9 +1,12 @@
+import {currentAuthority} from './helpers/current-apadana.mjs';
+import {intake382Authority as historical382Authority} from './helpers/intake382-metadata.mjs';
+const liveCurrentSource=currentAuthority(),historical382Source=historical382Authority();
 import {INTAKE382_IDS} from './helpers/intake382-metadata.mjs';
 import {historicalF3SourceFixture} from './helpers/historical389390-source-canon.mjs';
 // Current380 app/API inputs remain actual R; historical375 and H368 remain separately named. Named H metadata below is source-derived, never an API projection.
 import {intake380Authority} from './helpers/intake380-metadata.mjs';
-import {requireProfiles382 as requireProfiles380,requireMetadata382 as requireMetadata380} from './helpers/intake382-metadata.mjs';
-import {assertCurrent382SourceClosure as assertCurrent389390SourceClosure} from './helpers/intake382-metadata.mjs';
+import {requireCurrentProfiles as requireProfiles380,requireCurrentMetadata as requireMetadata380} from './helpers/current-apadana.mjs';
+import {assertCurrentSourceClosure as assertCurrent389390SourceClosure} from './helpers/current-apadana.mjs';
 assertCurrent389390SourceClosure(new URL('../',import.meta.url));
 const current380Source=intake380Authority();
 assert.equal(current380Source.historical375.ids.length,375);assert.deepEqual(current380Source.ids.slice(0,375),current380Source.historical375.ids);
@@ -51,7 +54,7 @@ test('separately indexed note preserves all old unit and book identities, source
   assert.equal(createHash('sha256').update(heldBytes).digest('hex'), '14b739ffe5f3e6f01718ccd1c247dd35454d71abb6cf4d0de672295cef8f4aa7');
   const historicalIds = JSON.parse(heldBytes).expected_profile_ids;
   assert.equal(historicalIds.length, 285);assert.equal(historicalIds.length, baseline.profile_count);assert.equal(new Set(historicalIds).size, 285);
-  assert.equal(current380Source.historical368.ids.length,368);assert.equal(current380Source.ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),current380Source.ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380),INTAKE382_IDS);assert.equal(CURRENT_APADANA_IDS.length,382);assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
+  assert.equal(current380Source.historical368.ids.length,368);assert.equal(current380Source.ids.length,380);assert.deepEqual(CURRENT_APADANA_IDS.slice(0,380),current380Source.ids);assert.deepEqual(CURRENT_APADANA_IDS.slice(380,382),INTAKE382_IDS);assert.equal(historical382Source.ids.length,382);assert.deepEqual(CURRENT_APADANA_IDS,liveCurrentSource.ids);assert.deepEqual(Object.keys(APADANA_PROFILES), CURRENT_APADANA_IDS);
   assert.deepEqual(CURRENT_APADANA_IDS.slice(0, 285), historicalIds);
   const historicalProfiles = Object.fromEntries(historicalIds.map(id => { assert.ok(Object.hasOwn(APADANA_PROFILES, id), id + ' prior profile retained');return [id, APADANA_PROFILES[id]]; }));
   assert.equal(sha(historicalProfiles), baseline.profiles_sha256);

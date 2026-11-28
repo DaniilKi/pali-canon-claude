@@ -16,7 +16,7 @@ import time
 
 # Closed CLI-only preparation diagnostics. Imported helper behavior is unchanged.
 # Stderr carries metadata only; stdout remains the original success receipt.
-_PREP_PHASES=frozenset(('bootstrap', 'qa-imports-ready', 'materialize-start', 'actual382-start', 'actual382-complete', 'source-authority-start', 'source-authority-complete', 'git-mode-start', 'git-mode-returned', 'git-mode-verified', 'git-blobs-start', 'git-blobs-returned', 'git-objects-verified', 'dependency-start', 'dependency-complete', 'write-start', 'write-progress', 'write-complete', 'final-descriptors-start', 'final-descriptors-complete', 'terminal-receipt-ready'))
+_PREP_PHASES=frozenset(('bootstrap', 'qa-imports-ready', 'materialize-start', 'current-capture-start', 'current-capture-complete', 'source-authority-start', 'source-authority-complete', 'git-mode-start', 'git-mode-returned', 'git-mode-verified', 'git-blobs-start', 'git-blobs-returned', 'git-objects-verified', 'dependency-start', 'dependency-complete', 'write-start', 'write-progress', 'write-complete', 'final-descriptors-start', 'final-descriptors-complete', 'terminal-receipt-ready'))
 _PREP_DIAGNOSTICS=(__name__=='__main__')
 _PREP_STARTED=time.monotonic()
 _PREP_SEQUENCE=0
@@ -48,8 +48,7 @@ _prep_phase('bootstrap')
 sys.path.insert(0,str(Path(__file__).absolute().parents[1]/'scripts'))
 from web_reader_intake375 import (DIRECTORY,H_COMMIT,_physical_root,_require,
     _relative,_regular,_row,_sha)
-from web_reader_intake382 import (source_authority382 as source_authority389390,
-    _capture382_current as _capture389390_current,CANON)
+from web_reader_current_apadana import source_authority, capture_current, CANON
 from owned_intake375_proofs import _empty,_exclusive
 
 _prep_phase('qa-imports-ready')
@@ -122,17 +121,25 @@ def _git_objects(root,rows):
 
 def _materialize(source_root,destination,kind):
     _prep_phase('materialize-start')
+    _require(type(kind) is str and kind in ('source','runtime'),
+             'Exact closed source/runtime fixture kind required before IO')
     _require(type(source_root) in (str,type(Path('.'))) and type(destination) in (str,type(Path('.'))),
              'Exact physical source/destination roots required before IO')
     source_root=_physical_root(source_root);destination=_empty(destination)
     _require(source_root!=destination and not destination.is_relative_to(source_root) and
              not source_root.is_relative_to(destination),'Separate owned H fixture required')
     if kind=='runtime':
-        _prep_phase('actual382-start')
-        context,_=_capture389390_current(source_root)  # actual883d/current382 positive before H
-        _prep_phase('actual382-complete')
+        _prep_phase('current-capture-start')
+        context,_=capture_current(source_root)  # actual883d/current382 positive before H
+        _prep_phase('current-capture-complete')
     else:
-        context=source_authority389390(source_root)  # source-only new canonical context before H
+        context=source_authority(source_root)  # source-only new canonical context before H
+    source_approval=context['english']['selection']['current_source_approval']
+    _require(type(source_approval) is dict and set(source_approval)=={'file','sha256'},
+             'Closed independent current source approval required')
+    _relative(source_approval['file']);_require(type(source_approval['sha256']) is str and
+        re.fullmatch('[a-f0-9]{64}',source_approval['sha256']) is not None,
+        'Exact current source approval descriptor required')
     _prep_phase('source-authority-start')
     documents=context['english']['historical375']['documents']
     _prep_phase('source-authority-complete')
@@ -208,11 +215,12 @@ def _materialize(source_root,destination,kind):
         _require(item['path'] in rows and all(item[k]==rows[item['path']][k] for k in ('bytes','sha256')),
                  'H index/workflow descriptor differs from copied object')
     _prep_phase('final-descriptors-complete')
-    # The retained current380_checked field names the immutable SOURCE prefix.
+    # Historical380 is an immutable SOURCE prerequisite, never an old runtime.
     # Only runtime-kind preparation claims an actual382 data/runtime positive.
-    return {'schema':'owned-H-history-fixture-v3','kind':kind,'commit':H_COMMIT,
-            'root':str(destination),'files':sorted(written),'current380_checked':True,
-            'current382_source_checked':True,'current382_runtime_checked':kind=='runtime',
+    return {'schema':'owned-H-history-fixture-v4','kind':kind,'commit':H_COMMIT,
+            'root':str(destination),'files':sorted(written),'historical380_source_checked':True,
+            'current_source_checked':True,'current_runtime_checked':kind=='runtime',
+            'current_source_approval':{'file':source_approval['file'],'sha256':source_approval['sha256']},
             'current_canonical_logical_sha256':CANON,
             'index':index,'workflow':workflow}
 
