@@ -1,0 +1,24 @@
+{
+  "schema": "publisher401402-stdlib-source-reproduction-v1",
+  "producer": {
+    "file": "/tmp/pali-next401402-sourceprep-nov28/prepare_pair.py",
+    "bytes": 29173,
+    "sha256": "7f36916977b8c805debc0faf325eccbd38fb8221a71fae242103f901541a4ae4"
+  },
+  "command": [
+    "python3",
+    "prepare_pair.py",
+    "--publisher-root",
+    "<exact-fb76-publisher-checkout>",
+    "--canon-data",
+    "<exact883d-server/data>",
+    "--vri-xml",
+    "<exact-ad566-Book36.xml>",
+    "--out",
+    "<fresh-external-output-directory>"
+  ],
+  "actual_author_derivation": "Own stdlib source transformation executed once to derive external fixtures and metadata. It does not import or execute app/parser/tests/proposed project modules, Git, CI, browser or network.",
+  "input_revision_membership": "Parent-frozen revision relationships inherited; physical SHA256/Git-blob hashes freshly checked. No Git membership command performed.",
+  "private_policy": "PRIVATE_DO_NOT_COMMIT contains original source segments and normalized bodies, notes and quotations. Only public metadata/hash artifacts and producer are eligible for later parent-selected metadata publication.",
+  "output_provenance": "Expected hashes derive from exact raw publisher source and originalXML/current canonical metadata, not from a runtime/parser/API output. The author derivation is not its own independent approval."
+}

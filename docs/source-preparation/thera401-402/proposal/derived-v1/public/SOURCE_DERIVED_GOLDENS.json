@@ -1,0 +1,2453 @@
+{
+  "schema": "source-derived401402-presentation-expectations-v1",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "hash_domain": "UTF8 SHA256; *_JSON_stringify uses compact insertion-order JSON, literal Unicode; no normalization.",
+  "body_domain": "Poem heading, original marked body and colophons; unnoted chapter heading is separate.",
+  "quote_domain": "Physical entry with Note markers and terminal numeric suffix removed; speaker labels remain.",
+  "page_domain": "Hard500 UTF16 body slices; no hidden trim or word boundary adjustment.",
+  "entries": {
+    "tha-ap403": {
+      "publisher_poem": 401,
+      "title": "Tissametteyya",
+      "body_sha256": "0a5968b8e6c25e7336cbb67019733e395a156356c1c5be2c5159232f9f2c2277",
+      "body_characters_utf16": 4587,
+      "notes_sha256_JSON_stringify": "6063400c75b7a5736bb76cf1cbea605cd02db0f607765b0d760eb7e05416629c",
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading",
+          "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+          "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+          "characters_utf16": 189,
+          "raw_definition_lines_inclusive": [
+            165,
+            165
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+              "after_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  65,
+                  123
+                ],
+                [
+                  184,
+                  226
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "after_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+              "matched_replacement_pairs_sha256": "c579dddbe40ab82984bdec5141dea547af24e2ecf735e019fe925cf1f90a840a",
+              "stage_positions": [
+                [
+                  0,
+                  9
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading",
+          "raw_content_sha256": "1691d800612ba94a8509f1a37a0ee26a1209e7d151c2cec7b004e78b59add321",
+          "text_sha256": "51ac725fcd0ebd26ea74f201961765669f9a59846379eba76b98da3fa997ee05",
+          "characters_utf16": 104,
+          "raw_definition_lines_inclusive": [
+            167,
+            167
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 1,
+              "before_sha256": "1691d800612ba94a8509f1a37a0ee26a1209e7d151c2cec7b004e78b59add321",
+              "after_sha256": "e83f2288967bd3944fa5aebe1ff524426bcb9e87cb8fdaea313c347f98e2f302",
+              "matched_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4",
+              "stage_positions": [
+                [
+                  0,
+                  58
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "e83f2288967bd3944fa5aebe1ff524426bcb9e87cb8fdaea313c347f98e2f302",
+              "after_sha256": "51ac725fcd0ebd26ea74f201961765669f9a59846379eba76b98da3fa997ee05",
+              "matched_replacement_pairs_sha256": "58dfb1e08ad828e72e9870e688ae02041393f31204e43db66119374a30aa66fb",
+              "stage_positions": [
+                [
+                  11,
+                  27
+                ],
+                [
+                  66,
+                  88
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "5fa538f50dc9d570a279f43b963666e8b2fd6de79c588baa9a7a00e5898f0109",
+          "text_sha256": "1eae8ebc24615a97716ca58e876fdebd6fe39fb8b6d4cbac8647ed98b8c63efa",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            169,
+            169
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "5fa538f50dc9d570a279f43b963666e8b2fd6de79c588baa9a7a00e5898f0109",
+              "after_sha256": "1eae8ebc24615a97716ca58e876fdebd6fe39fb8b6d4cbac8647ed98b8c63efa",
+              "matched_replacement_pairs_sha256": "d33014047c24af347615df584e4f7759e2239204afa4d8d1762853a833ba3b08",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "f23d025d95022500db291a71ed59f48b97f2b847405bc44c8edaf87c7c6ebbee",
+          "text_sha256": "d8d1006f40252799bf40b5f4522b8ff63eebdb251e488e86f26634ba184f38c1",
+          "characters_utf16": 35,
+          "raw_definition_lines_inclusive": [
+            171,
+            171
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "f23d025d95022500db291a71ed59f48b97f2b847405bc44c8edaf87c7c6ebbee",
+              "after_sha256": "d8d1006f40252799bf40b5f4522b8ff63eebdb251e488e86f26634ba184f38c1",
+              "matched_replacement_pairs_sha256": "6d9326f1865ff187d1f921209014020c6924794c021088018165b80ed96413b2",
+              "stage_positions": [
+                [
+                  0,
+                  6
+                ],
+                [
+                  29,
+                  38
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "owner": "body:5",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "513969fee3da9028e09c48d06a6029287502b7ca3631c2b80b09c49189bc3f5f",
+          "text_sha256": "9e8521982efe8ddbf2bbe32891a9bfb8195a074526ab9d68c9a1f1def8d16acf",
+          "characters_utf16": 64,
+          "raw_definition_lines_inclusive": [
+            173,
+            173
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 1,
+              "before_sha256": "513969fee3da9028e09c48d06a6029287502b7ca3631c2b80b09c49189bc3f5f",
+              "after_sha256": "e346da5e5af72d28de6b987fa57b55f0fa6cbc9016af0838d6e82ace277ad031",
+              "matched_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4",
+              "stage_positions": [
+                [
+                  18,
+                  76
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "e346da5e5af72d28de6b987fa57b55f0fa6cbc9016af0838d6e82ace277ad031",
+              "after_sha256": "9e8521982efe8ddbf2bbe32891a9bfb8195a074526ab9d68c9a1f1def8d16acf",
+              "matched_replacement_pairs_sha256": "0540bc7b9521d5b51599eac3f0b9ed7aa3ea900a6acce16fd1d155cee96f325d",
+              "stage_positions": [
+                [
+                  0,
+                  8
+                ],
+                [
+                  29,
+                  37
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "owner": "body:5",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "a58f3c7da4e7029a1e88528bb696b55b96725ac9d506bc7cab9ad59e1aade423",
+          "text_sha256": "7f6c3b8fc2092ddd1b91e041739e387f4571f856195e0dbaf58a17fc37fc74ea",
+          "characters_utf16": 40,
+          "raw_definition_lines_inclusive": [
+            175,
+            175
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "a58f3c7da4e7029a1e88528bb696b55b96725ac9d506bc7cab9ad59e1aade423",
+              "after_sha256": "c3b3b7137032934562693995d9b49449c720c2f6c9cfe0205ab1b233ae851111",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  22,
+                  80
+                ],
+                [
+                  85,
+                  127
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "c3b3b7137032934562693995d9b49449c720c2f6c9cfe0205ab1b233ae851111",
+              "after_sha256": "7f6c3b8fc2092ddd1b91e041739e387f4571f856195e0dbaf58a17fc37fc74ea",
+              "matched_replacement_pairs_sha256": "181af71a091c4896299d88f1899793a28bd89043019d8075475e8359a3ebb7f3",
+              "stage_positions": [
+                [
+                  8,
+                  16
+                ],
+                [
+                  35,
+                  44
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "owner": "body:5",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "3f0b7d67ec0086d89f6b0b202c9c1e4266ccbebce973c99dc50e84dbef946c41",
+          "text_sha256": "99f65505406af0d432c5d1315aa75a41f7e14780bdf34dad6023f0a5f6f86b8b",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            177,
+            177
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Pandoc_diacritics_on",
+              "count": 1,
+              "before_sha256": "3f0b7d67ec0086d89f6b0b202c9c1e4266ccbebce973c99dc50e84dbef946c41",
+              "after_sha256": "be757bfa92a2aeee0aab1e4a4895a3a3e0fa033f6cfee225bc4a9878cd860aca",
+              "matched_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af",
+              "stage_positions": [
+                [
+                  5,
+                  70
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "be757bfa92a2aeee0aab1e4a4895a3a3e0fa033f6cfee225bc4a9878cd860aca",
+              "after_sha256": "99f65505406af0d432c5d1315aa75a41f7e14780bdf34dad6023f0a5f6f86b8b",
+              "matched_replacement_pairs_sha256": "d9aa2ee85e52610d646ecf12727ea6cadff2e0bd15ee93f31b0736eb2e497549",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "owner": "body:6",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "e983a4c46ee092a0ab6fc856b444827144f165554a3c69f96d27f28bbe1bd9c9",
+          "text_sha256": "e983a4c46ee092a0ab6fc856b444827144f165554a3c69f96d27f28bbe1bd9c9",
+          "characters_utf16": 23,
+          "raw_definition_lines_inclusive": [
+            179,
+            179
+          ],
+          "presentation_operations": []
+        },
+        {
+          "number": 9,
+          "owner": "body:11",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "bf86d11fedc07f5e815368264ac64179aadd91361b9a5847464e17991cd4156b",
+          "text_sha256": "bf86d11fedc07f5e815368264ac64179aadd91361b9a5847464e17991cd4156b",
+          "characters_utf16": 17,
+          "raw_definition_lines_inclusive": [
+            181,
+            181
+          ],
+          "presentation_operations": []
+        },
+        {
+          "number": 10,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "b9c256bbea0d280c93c7d0ac874d114f58b6d030db6b4fe7b40fae313aa6ee22",
+          "text_sha256": "e4a35ec1c04c70fa3e52b6d7a6f4df1e5b46d8b95442c0cb8aff6addd2c3590b",
+          "characters_utf16": 26,
+          "raw_definition_lines_inclusive": [
+            183,
+            183
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "b9c256bbea0d280c93c7d0ac874d114f58b6d030db6b4fe7b40fae313aa6ee22",
+              "after_sha256": "e4a35ec1c04c70fa3e52b6d7a6f4df1e5b46d8b95442c0cb8aff6addd2c3590b",
+              "matched_replacement_pairs_sha256": "df0d5cc2cf48e3d2070971e546e04d421ad7fa63331638c278703cf3555eb999",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "efa6ab408cb9552d757f89695e995396c69d82aaf2f34c58cfb58e3947a003cd",
+          "text_sha256": "fae6ba3e7cafbecf72f6a5fff08b620e3373a3591140bf07ee6774aca564db92",
+          "characters_utf16": 10,
+          "raw_definition_lines_inclusive": [
+            185,
+            185
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "efa6ab408cb9552d757f89695e995396c69d82aaf2f34c58cfb58e3947a003cd",
+              "after_sha256": "fae6ba3e7cafbecf72f6a5fff08b620e3373a3591140bf07ee6774aca564db92",
+              "matched_replacement_pairs_sha256": "51435489588c879a2053ca3bcae50826aee15f0d8e70efde44f2a592ad9f0017",
+              "stage_positions": [
+                [
+                  0,
+                  12
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "d188fc8a54892f7117b73922bc98e4aa759787ea68d8db01e223123eb1bcbd61",
+          "text_sha256": "029f5f950129342d2acb686e235e6dc1cf555a0cd2f82cff1a72bdcc0cffac2c",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            187,
+            187
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "d188fc8a54892f7117b73922bc98e4aa759787ea68d8db01e223123eb1bcbd61",
+              "after_sha256": "029f5f950129342d2acb686e235e6dc1cf555a0cd2f82cff1a72bdcc0cffac2c",
+              "matched_replacement_pairs_sha256": "1743657c8bb245aafd3edf4746ae8a1786f61e802aae1d6398575c57df52eb38",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "a73af00427b202f699a765b030c31d08befa2eed81286147adbcbf99d99c562a",
+          "text_sha256": "ff7feac60290c1a2b05331c1f88af0715967a0c5737c8e1e646c8264789e443e",
+          "characters_utf16": 12,
+          "raw_definition_lines_inclusive": [
+            189,
+            189
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "a73af00427b202f699a765b030c31d08befa2eed81286147adbcbf99d99c562a",
+              "after_sha256": "ff7feac60290c1a2b05331c1f88af0715967a0c5737c8e1e646c8264789e443e",
+              "matched_replacement_pairs_sha256": "d1f753c4cd39c9cd1e68abee0b9cdbc05fde53fdc0c6ca347a2fbe5c556cf6a7",
+              "stage_positions": [
+                [
+                  0,
+                  14
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "owner": "body:12",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "3f928a44994777d39a518f2bfb1588a96186c6b8b90cb3b562de592baa4898fb",
+          "text_sha256": "f33d6075511dab128939d5a587dcea034e80fa764753b3a2d21591ead82e2aff",
+          "characters_utf16": 4,
+          "raw_definition_lines_inclusive": [
+            191,
+            191
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "3f928a44994777d39a518f2bfb1588a96186c6b8b90cb3b562de592baa4898fb",
+              "after_sha256": "f33d6075511dab128939d5a587dcea034e80fa764753b3a2d21591ead82e2aff",
+              "matched_replacement_pairs_sha256": "84d71450b330a4f05a6a315fe6914c2f4dc3ac5363b21d18989d8b56b2757a4d",
+              "stage_positions": [
+                [
+                  0,
+                  6
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "owner": "body:15",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "7f2ddffd46ad9cd6d8cb8063715332a00df82f812de0b1ccc8ac6752aa04d82f",
+          "text_sha256": "423662faf378271201870e8885abdf0ff952f2b8cf4248fe11ea9e0e4d66c978",
+          "characters_utf16": 11,
+          "raw_definition_lines_inclusive": [
+            193,
+            193
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "7f2ddffd46ad9cd6d8cb8063715332a00df82f812de0b1ccc8ac6752aa04d82f",
+              "after_sha256": "423662faf378271201870e8885abdf0ff952f2b8cf4248fe11ea9e0e4d66c978",
+              "matched_replacement_pairs_sha256": "b355e3076e54db3b9419a7d7801300059833510eefca817837f11b421a4d0afd",
+              "stage_positions": [
+                [
+                  0,
+                  13
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "owner": "body:15",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "4b8bc2151e7b1b87075013a4e566c1f2782e9970d71c451e58237168743f6ba9",
+          "text_sha256": "8d5a0596b60f979a79e5df4ec3dceddb4fa9e473ae1f9ca6ac085c774ce7dbdc",
+          "characters_utf16": 91,
+          "raw_definition_lines_inclusive": [
+            195,
+            195
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 3,
+              "before_sha256": "4b8bc2151e7b1b87075013a4e566c1f2782e9970d71c451e58237168743f6ba9",
+              "after_sha256": "8d5a0596b60f979a79e5df4ec3dceddb4fa9e473ae1f9ca6ac085c774ce7dbdc",
+              "matched_replacement_pairs_sha256": "56f2b61e6c9cc18d62ef113823e232ff23a1cf9bfe59b2525f49770b5bda0227",
+              "stage_positions": [
+                [
+                  0,
+                  17
+                ],
+                [
+                  20,
+                  29
+                ],
+                [
+                  31,
+                  55
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 17,
+          "owner": "body:21",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "dfbe6dc4ea2834c0ea289a9335537872013aaa1214b88217056dda7c23f31dd2",
+          "text_sha256": "9d299b145bbfd06ebc409485c30ca37e620341d497db6db598eb4c23ec8db851",
+          "characters_utf16": 59,
+          "raw_definition_lines_inclusive": [
+            197,
+            197
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_punctuation_escape",
+              "count": 2,
+              "before_sha256": "dfbe6dc4ea2834c0ea289a9335537872013aaa1214b88217056dda7c23f31dd2",
+              "after_sha256": "d81ce985f94ba3280351ab9ed85cc451d7c8b7bf5224a652d5ff6ddf5849cd21",
+              "matched_replacement_pairs_sha256": "8c0efb52bdd9f6ae70dddc00e89f5fe89541055a1a54d26ea2529e83b0b2625e",
+              "stage_positions": [
+                [
+                  37,
+                  39
+                ],
+                [
+                  42,
+                  44
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "d81ce985f94ba3280351ab9ed85cc451d7c8b7bf5224a652d5ff6ddf5849cd21",
+              "after_sha256": "9d299b145bbfd06ebc409485c30ca37e620341d497db6db598eb4c23ec8db851",
+              "matched_replacement_pairs_sha256": "05c09fa1121d6afe4df7bbd06aef7f434c49c07ac10c6fe89a297acc20d23181",
+              "stage_positions": [
+                [
+                  0,
+                  23
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 18,
+          "owner": "body:22",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "ad06b7d3a0478fe83a823bf74b2160070c60f715e3ff19f4c2067a3dce6e4975",
+          "text_sha256": "ad06b7d3a0478fe83a823bf74b2160070c60f715e3ff19f4c2067a3dce6e4975",
+          "characters_utf16": 19,
+          "raw_definition_lines_inclusive": [
+            199,
+            199
+          ],
+          "presentation_operations": []
+        },
+        {
+          "number": 19,
+          "owner": "body:23",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "f757578f2015b63ced56c75736a8422d0300dbf2fd2e742a1ca8e7d386e4bf74",
+          "text_sha256": "f757578f2015b63ced56c75736a8422d0300dbf2fd2e742a1ca8e7d386e4bf74",
+          "characters_utf16": 15,
+          "raw_definition_lines_inclusive": [
+            201,
+            201
+          ],
+          "presentation_operations": []
+        }
+      ],
+      "paratext_sha256": "b1c76c6f71ae64fa62ebf4ffecdfd76cffb7a5935e86d8590cf8761715e8a332",
+      "paratext_characters_utf16": 33,
+      "paratext_note_numbers": [],
+      "body_paragraphs": [
+        {
+          "paragraph_index0": 0,
+          "raw_sha256": "f31f682b0b991bfbf8d602b8af95021ec7ecc462e77f17703d2d134b283d0371",
+          "text_sha256": "c756b3f49219aba48d7142b176e749712f7c27057e891068f2248032b204a903",
+          "characters_utf16": 43,
+          "lines": 1,
+          "body_start_utf16": 0,
+          "body_end_utf16": 43,
+          "original_note_numbers": [
+            1,
+            2
+          ]
+        },
+        {
+          "paragraph_index0": 1,
+          "raw_sha256": "cb8e9d1fc87ae1540a196ae4bcc92bae181ff1cb93c22d28eba6764eebde79fd",
+          "text_sha256": "985a6804ff87fd2f7553fb78e1bb6ed81e5cdac5c5cb630bc602f40142c4bbac",
+          "characters_utf16": 141,
+          "lines": 4,
+          "body_start_utf16": 45,
+          "body_end_utf16": 186,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 2,
+          "raw_sha256": "de2bb4e87609ebcf9d2db6031269531efb9eb865d201fee093be93280670b518",
+          "text_sha256": "817f63868f9ff891c1dd8fc218f17acdcac09ed67ec300d4a74c6cc92706f2a7",
+          "characters_utf16": 139,
+          "lines": 4,
+          "body_start_utf16": 188,
+          "body_end_utf16": 327,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 3,
+          "raw_sha256": "6961f0c9588f3584933660731ccdd66192d0a84b209c0eacef5e448b4fcedb41",
+          "text_sha256": "cbd978a2a56f0620212c8951fffeb483c583bf83dbdfe4bca503378895c30db9",
+          "characters_utf16": 123,
+          "lines": 4,
+          "body_start_utf16": 329,
+          "body_end_utf16": 452,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 4,
+          "raw_sha256": "e4762893edf0eea42a60d9ac301f0bf88f2080d00956d2e613e1c0a61a6b1edb",
+          "text_sha256": "c339098f9564f69aee62144ad247149a6debda3fef2bb99984c6c1334f187e3d",
+          "characters_utf16": 182,
+          "lines": 5,
+          "body_start_utf16": 454,
+          "body_end_utf16": 636,
+          "original_note_numbers": [
+            3,
+            4
+          ]
+        },
+        {
+          "paragraph_index0": 5,
+          "raw_sha256": "a39647627317ce6f7b2d4bba7b2ccef7e7a8074267a72990b7ff485cc6af831d",
+          "text_sha256": "01e41e3b0440ab7bbf0c61f7a324016ae8a921038a840f38165460ea88f63938",
+          "characters_utf16": 181,
+          "lines": 5,
+          "body_start_utf16": 638,
+          "body_end_utf16": 819,
+          "original_note_numbers": [
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "paragraph_index0": 6,
+          "raw_sha256": "86e399fdf0245bbbe7d08fd359cb29a6fe4566b29f7a81dd4998030d3d1b43c2",
+          "text_sha256": "a1a21dfa1f8fcc3db4ffb9972fed0d0f6c7a0f30df371af03b622fb79b228261",
+          "characters_utf16": 161,
+          "lines": 4,
+          "body_start_utf16": 821,
+          "body_end_utf16": 982,
+          "original_note_numbers": [
+            8
+          ]
+        },
+        {
+          "paragraph_index0": 7,
+          "raw_sha256": "4501f54deec09741511478bb710a331a2bb6735d4122fbf061d8250a2f9b4960",
+          "text_sha256": "3f9da54c16e0bfe59748262d4afa19eca04ca56096fa5ae06e32e488057ba214",
+          "characters_utf16": 177,
+          "lines": 5,
+          "body_start_utf16": 984,
+          "body_end_utf16": 1161,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 8,
+          "raw_sha256": "7cade52526afd4e4dd17fba45fad653f402e71bfea6b72de2656e72021c13b45",
+          "text_sha256": "fdb20152e2f7620b7825f8bbeae118c11bcd5ddd0578879018b3a3b0de786f04",
+          "characters_utf16": 171,
+          "lines": 5,
+          "body_start_utf16": 1163,
+          "body_end_utf16": 1334,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 9,
+          "raw_sha256": "1f990c1973b89924f2430db59c59148ed7cc1385e0861f1d6e638f861a4d574c",
+          "text_sha256": "6c037286981b244247adf6d6c6b29528f1887c334e4c95ee62746ece1254c94c",
+          "characters_utf16": 165,
+          "lines": 5,
+          "body_start_utf16": 1336,
+          "body_end_utf16": 1501,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 10,
+          "raw_sha256": "1237bc7de64e1214fd5b01657029bba8f56f87c4905556dcaaded474cb349926",
+          "text_sha256": "c5092ab954a7f28b004a30058b277acd3abd3d2f987410acd86814e5bf7a46e2",
+          "characters_utf16": 152,
+          "lines": 5,
+          "body_start_utf16": 1503,
+          "body_end_utf16": 1655,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 11,
+          "raw_sha256": "38fd188b12cc0ac6cd784d81fef05ec70be2ddd56c484ef3c177a48dd1d443a1",
+          "text_sha256": "e71f92178222cd6cac010c0931c94d3f9238b715727df0a917d4e5649a3d11b4",
+          "characters_utf16": 167,
+          "lines": 5,
+          "body_start_utf16": 1657,
+          "body_end_utf16": 1824,
+          "original_note_numbers": [
+            9
+          ]
+        },
+        {
+          "paragraph_index0": 12,
+          "raw_sha256": "452977e50d51b8d591d19af30b799889049f21225b963048daf4eeb5c3ddb7cc",
+          "text_sha256": "24a7cbf1491982930585466864f08aeec3d2d67cceaaf4a1cc65aafde518486b",
+          "characters_utf16": 208,
+          "lines": 5,
+          "body_start_utf16": 1826,
+          "body_end_utf16": 2034,
+          "original_note_numbers": [
+            10,
+            11,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "paragraph_index0": 13,
+          "raw_sha256": "946a0ede9f88e9fada94bf95009d3cd2b9374250371d694318c1e02f70f9d631",
+          "text_sha256": "77e8da4ccca370bb4226b4202ee0c40db60aef8f90d10b5e733e1b558b4b6ea1",
+          "characters_utf16": 160,
+          "lines": 4,
+          "body_start_utf16": 2036,
+          "body_end_utf16": 2196,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 14,
+          "raw_sha256": "63c7e35e2ec7888d9e2afd74f9143e58ceb3be4ee3e3ec20a0ac80a1b47f187f",
+          "text_sha256": "1270dc27f517dc2404da899d22bddc596612808835c99a5acddcf6b8cb8971d9",
+          "characters_utf16": 155,
+          "lines": 4,
+          "body_start_utf16": 2198,
+          "body_end_utf16": 2353,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 15,
+          "raw_sha256": "88dedc5bb8a844d1c6d28ef9ff9558d1897aa6f87eb7460ab3dec6e20632a22d",
+          "text_sha256": "5b2293bf4521171613e9b34b4e31bf3d019d86cb9df49a8b4e49b0756e9472e1",
+          "characters_utf16": 170,
+          "lines": 4,
+          "body_start_utf16": 2355,
+          "body_end_utf16": 2525,
+          "original_note_numbers": [
+            15,
+            16
+          ]
+        },
+        {
+          "paragraph_index0": 16,
+          "raw_sha256": "c247c60110ece44792ed746fbde67291fb809aa8549d1a34b9952c341dfe7a6d",
+          "text_sha256": "15e33aa1faed86d3d0071fef95631685a244fc9aaa5f5cd410c8b9eb10895009",
+          "characters_utf16": 150,
+          "lines": 4,
+          "body_start_utf16": 2527,
+          "body_end_utf16": 2677,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 17,
+          "raw_sha256": "95c2741d580b28130f055beb754a8bfefb45d37ce119675aa9ec4640980834aa",
+          "text_sha256": "eeabbbaa1aa7ace1466fc9294240671bf3c66d249b58b3028261a15abea87eb3",
+          "characters_utf16": 132,
+          "lines": 4,
+          "body_start_utf16": 2679,
+          "body_end_utf16": 2811,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 18,
+          "raw_sha256": "5e818efbc1ad962c8628a12d1c494c57eb2549072f30957eb119d90d2226e3c5",
+          "text_sha256": "e721dcbced02d6307fbda1241d89fd33982024cf1cccfc429828d0cf3d990969",
+          "characters_utf16": 176,
+          "lines": 5,
+          "body_start_utf16": 2813,
+          "body_end_utf16": 2989,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 19,
+          "raw_sha256": "c7f9d8c39d8c34de9579a45e9aa1f9c0e1326d88201b20b4b7ade9d9886511e7",
+          "text_sha256": "b3052a9540ff2ed0fa64f68739531ca70a915c1667405ff15709ce5a3bbcd40e",
+          "characters_utf16": 147,
+          "lines": 4,
+          "body_start_utf16": 2991,
+          "body_end_utf16": 3138,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 20,
+          "raw_sha256": "4b9e3fdeda91d100146cf7a57c15b2446224602d0e8104eeb548d0febfd7b214",
+          "text_sha256": "74ef8643fcb137b32fb2c897705036f3032c58316aefc65735cf0ec251ebb1be",
+          "characters_utf16": 150,
+          "lines": 4,
+          "body_start_utf16": 3140,
+          "body_end_utf16": 3290,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 21,
+          "raw_sha256": "87013ac34efb38ea6284c0a1347ef0ca8d8fdc146f138655ec826ec95bba3e6c",
+          "text_sha256": "a518b931d14f232cbf1cffaa37ca8319086685320e55940e278f89c0d8a86337",
+          "characters_utf16": 146,
+          "lines": 4,
+          "body_start_utf16": 3292,
+          "body_end_utf16": 3438,
+          "original_note_numbers": [
+            17
+          ]
+        },
+        {
+          "paragraph_index0": 22,
+          "raw_sha256": "5cb4073590f9b36ff169edcf5c38a4fc0efa5dfdb98cb1897cdf787f5c565ed2",
+          "text_sha256": "7d0a8ab482e80fff065214686a15719240a8d33da9ecbc666742097359eeb7f2",
+          "characters_utf16": 143,
+          "lines": 4,
+          "body_start_utf16": 3440,
+          "body_end_utf16": 3583,
+          "original_note_numbers": [
+            18
+          ]
+        },
+        {
+          "paragraph_index0": 23,
+          "raw_sha256": "1e337c4228afb116400f40d3e9fbfc5b5c945d0bb20af3f92563528b4680a740",
+          "text_sha256": "1b1e491bfc44602fea3f630b17bf5d1b771c1340cf4c16988d9ca40c5cba4669",
+          "characters_utf16": 147,
+          "lines": 4,
+          "body_start_utf16": 3585,
+          "body_end_utf16": 3732,
+          "original_note_numbers": [
+            19
+          ]
+        },
+        {
+          "paragraph_index0": 24,
+          "raw_sha256": "8c83a120ba3e40ca606fff649179c025cd60240156af63e40cbd143297249651",
+          "text_sha256": "5f91e6cdc565296489932c405fb273931abbc967fbc4bfb351865d18438fed84",
+          "characters_utf16": 158,
+          "lines": 5,
+          "body_start_utf16": 3734,
+          "body_end_utf16": 3892,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 25,
+          "raw_sha256": "f7fb6596a17e10b8f2191c4a449619db45dae804042f46a930c3987affaf89ce",
+          "text_sha256": "a26b0593d01b96941d96b42a8e4b3f5d34d2d495319c4e39121ccbf3d56d8588",
+          "characters_utf16": 142,
+          "lines": 4,
+          "body_start_utf16": 3894,
+          "body_end_utf16": 4036,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 26,
+          "raw_sha256": "ddbf55775cf3055fc1e74743b34c1f436f5b0a3ae396f515435a8d934daba41c",
+          "text_sha256": "110e356132f3b598deeadc76136fb68eb630ff166fa0f87b889c582a3335092e",
+          "characters_utf16": 147,
+          "lines": 4,
+          "body_start_utf16": 4038,
+          "body_end_utf16": 4185,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 27,
+          "raw_sha256": "f0f32fccf094860398f3efcd80646fa0e40f8f3ee75b25dd9ec1e4c2411b9555",
+          "text_sha256": "fd0c73db636e356ebbf2a3d81c974cd5251ef0dea06398992663a468d87de6c7",
+          "characters_utf16": 146,
+          "lines": 4,
+          "body_start_utf16": 4187,
+          "body_end_utf16": 4333,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 28,
+          "raw_sha256": "1ab351f003c719c483d2608fd48c990f5da2692fb0121fc0858d590e4101786d",
+          "text_sha256": "3157e47205b5765cc8bb6281ba1e8ee89aa4be136c451bbc9caf9c2a4c334bb4",
+          "characters_utf16": 139,
+          "lines": 4,
+          "body_start_utf16": 4335,
+          "body_end_utf16": 4474,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 29,
+          "raw_sha256": "4a3ce8c380ef1e4e06cba53ffd639063c1c89a401fc02a4d7a90b471ddcd5aac",
+          "text_sha256": "4a3ce8c380ef1e4e06cba53ffd639063c1c89a401fc02a4d7a90b471ddcd5aac",
+          "characters_utf16": 62,
+          "lines": 1,
+          "body_start_utf16": 4476,
+          "body_end_utf16": 4538,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 30,
+          "raw_sha256": "76bf10a94dc67e5a1e60cb428ff1fc2b3ce7b3d660cb8785a0ea36b256aed540",
+          "text_sha256": "76bf10a94dc67e5a1e60cb428ff1fc2b3ce7b3d660cb8785a0ea36b256aed540",
+          "characters_utf16": 47,
+          "lines": 1,
+          "body_start_utf16": 4540,
+          "body_end_utf16": 4587,
+          "original_note_numbers": []
+        }
+      ],
+      "quotation_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "local_label": "1",
+          "publisher_label": "3891",
+          "text_sha256": "d075cfebce015c489db5d3bffe2f55770490216b3c6688d89e86754db2798677",
+          "characters_utf16": 130,
+          "lines": 4,
+          "suffix_sha256": "4434c6449a299443986733675021ffcc9ca9b336b4cd5a84aec5ed0e5d9b0905",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "local_label": "2",
+          "publisher_label": "3892",
+          "text_sha256": "4d239d563358be1c93f3170abfa1772204edf2f5635f4a466da248bd8662d091",
+          "characters_utf16": 128,
+          "lines": 4,
+          "suffix_sha256": "cce3414a871b8c15a215e938f1432ee014859055f7d8c15801e5d855e016bc14",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "local_label": "3",
+          "publisher_label": "3893",
+          "text_sha256": "1ee8c005dcdd45447f94c949bf122746a426a1f1ff43e39c705ac74a17513da9",
+          "characters_utf16": 112,
+          "lines": 4,
+          "suffix_sha256": "b56b68c55231ed6c786fd16a154966df82ebb12bdc912b50126d413589a27d17",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "local_label": "4",
+          "publisher_label": "3894",
+          "text_sha256": "26bc62cc43d0d9ed742acc0bfae618cad89a1c2bce0429795e09bed73fd70475",
+          "characters_utf16": 155,
+          "lines": 5,
+          "suffix_sha256": "1a80caa261892daeb8399131f75f09a8987678ade5ff3729b8492be218841dce",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 5,
+          "body_paragraph_index0": 5,
+          "local_label": "5",
+          "publisher_label": "3895",
+          "text_sha256": "d8ccbac41df0ac450a06a6568edb32fb2b9b2b7662e662181b6b884f6da5e733",
+          "characters_utf16": 146,
+          "lines": 5,
+          "suffix_sha256": "7869bf33109fdc6b3279cd1cca1e03176ae8a9f44b4c63f0655e00594859a0d4",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 6,
+          "body_paragraph_index0": 6,
+          "local_label": "6",
+          "publisher_label": "3896",
+          "text_sha256": "597d1f4e33e615b99f9a2a0fff4721931d3061644f34cc4c8a5819d4bce17e60",
+          "characters_utf16": 142,
+          "lines": 4,
+          "suffix_sha256": "f42b7e96c98b1a960efa08fc8f9c3fb6aeb109994ecff99914a5d63ad836e1f9",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 7,
+          "body_paragraph_index0": 7,
+          "local_label": "7",
+          "publisher_label": "3897",
+          "text_sha256": "bec71f79f5f69f0269ff94f1e77bb5004ec61debcfac33f5a3347d6c45267cea",
+          "characters_utf16": 166,
+          "lines": 5,
+          "suffix_sha256": "649613013e825594258115d9d5fbfda5e0ad81bb51883e752e324339630f3a73",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 8,
+          "body_paragraph_index0": 8,
+          "local_label": "8",
+          "publisher_label": "3898",
+          "text_sha256": "4a57a90b70ce78045bff932cffada866fc342c323b16abaa088f3169f792ccb1",
+          "characters_utf16": 160,
+          "lines": 5,
+          "suffix_sha256": "6fccbac737933038b2033c9e9ca3d0dd1b3190832e8f986578826298579e3bdf",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 9,
+          "body_paragraph_index0": 9,
+          "local_label": "9",
+          "publisher_label": "3899",
+          "text_sha256": "72a51a8e41d10088022717d1704b025830a5d7e026a28c8a3ccf302d886456a4",
+          "characters_utf16": 154,
+          "lines": 5,
+          "suffix_sha256": "f94a206c71197fba8c9092fc9d7bdc6872982ae04ae481c63048ff399a5af251",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 10,
+          "body_paragraph_index0": 10,
+          "local_label": "10",
+          "publisher_label": "3900",
+          "text_sha256": "3539f896048e16e087838d717c4110c9851ff9ab225477cfb2fd160c47a43413",
+          "characters_utf16": 140,
+          "lines": 5,
+          "suffix_sha256": "477d93489548bb5158ed1c1e987e2a0e247d1622e5b8c025eecb19275655a00b",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 11,
+          "body_paragraph_index0": 11,
+          "local_label": "11",
+          "publisher_label": "3901",
+          "text_sha256": "f18dcd447122047f363913103454fd5f24fb65a4e2cc17706fb7344182e33836",
+          "characters_utf16": 147,
+          "lines": 5,
+          "suffix_sha256": "52aa6781d572670bed80b672a29d7bc59851fe99e761f6f5d8c125e5e0c37bc7",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 12,
+          "body_paragraph_index0": 12,
+          "local_label": "12",
+          "publisher_label": "3902",
+          "text_sha256": "dc9af1ec15c16499cd5655421e80741fab28b2c79194ac93dca9315d0e3ca37e",
+          "characters_utf16": 151,
+          "lines": 5,
+          "suffix_sha256": "d665a770fcd142c5ca8ec23895190997162979b87f70503ca22879c02732fb68",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 13,
+          "body_paragraph_index0": 13,
+          "local_label": "13",
+          "publisher_label": "3903",
+          "text_sha256": "501fb8aa754c7543108fac05871f6cf1911548566cb915bdeabe4c533368c06a",
+          "characters_utf16": 148,
+          "lines": 4,
+          "suffix_sha256": "c781dc747a098024c6eebc7945d5fb4e888c75a58a2dd6fcfa4a721685d8bab7",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 14,
+          "body_paragraph_index0": 14,
+          "local_label": "14",
+          "publisher_label": "3904",
+          "text_sha256": "3e809a5458965cc26626c1401ebdf599a0b41415968117d24881aa7c2a1ecc13",
+          "characters_utf16": 143,
+          "lines": 4,
+          "suffix_sha256": "888298dd0357922e68e91f7f25f8c4689fc995b028b8acbb9f02ff96883c8452",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 15,
+          "body_paragraph_index0": 15,
+          "local_label": "15",
+          "publisher_label": "3905",
+          "text_sha256": "a41424b8da5b5cb37690f26527c6e03863602c592170cae32948188351f5cf01",
+          "characters_utf16": 140,
+          "lines": 4,
+          "suffix_sha256": "911ea9c49585aeff9c446a6347e5b01eb4e2a989976a2bb986425fa5e61b284e",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 16,
+          "body_paragraph_index0": 16,
+          "local_label": "16",
+          "publisher_label": "3906",
+          "text_sha256": "035f29dfb79588e8563dae626e688625b4ff9729ccabaddbba2c3d935234f943",
+          "characters_utf16": 138,
+          "lines": 4,
+          "suffix_sha256": "c9e7873239c5271795a43918154df4436d28f48c2222db4f2b41321c5723aa6b",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 17,
+          "body_paragraph_index0": 17,
+          "local_label": "17",
+          "publisher_label": "3907",
+          "text_sha256": "e95f1ba464dffb12998a0eec5097238e45ab02c8c76f07250b895a0284835fea",
+          "characters_utf16": 120,
+          "lines": 4,
+          "suffix_sha256": "9d9bbb2c2c720f6081403072c4b042f8a2abdacc57449099f848706fe0524d70",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 18,
+          "body_paragraph_index0": 18,
+          "local_label": "18",
+          "publisher_label": "3908",
+          "text_sha256": "9e2feb5d5d32d009f46412c35b2dc3a06a0f8aefc175ea29f7797bc7c171c36c",
+          "characters_utf16": 164,
+          "lines": 5,
+          "suffix_sha256": "530c01ff2a6f6f6e671e2fc725bfc04e330fb50704293107f31c6cce3ce8065a",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 19,
+          "body_paragraph_index0": 19,
+          "local_label": "19",
+          "publisher_label": "3909",
+          "text_sha256": "e2357d3b835197a74d7889995d14d78c4853e3143ccb844c2c7046db953e4118",
+          "characters_utf16": 135,
+          "lines": 4,
+          "suffix_sha256": "180ed7433252d204c1878d6c99baf600e6c57074414c69d40fc16cfe9572a375",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 20,
+          "body_paragraph_index0": 20,
+          "local_label": "20",
+          "publisher_label": "3910",
+          "text_sha256": "dd6d72a76ff054be115dbc5fcbe93b49389d37b0df6627d2c028fefe330c0a0b",
+          "characters_utf16": 138,
+          "lines": 4,
+          "suffix_sha256": "e2186c276e1c2d1cd51e0647ae64e19b8fc3ec971baeaa48ce8df5c07e75d837",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 21,
+          "body_paragraph_index0": 21,
+          "local_label": "21",
+          "publisher_label": "3911",
+          "text_sha256": "44ebb25265365013d6121bc2eaa9649224947385ac9d4dfaf2841d4da1e4f90d",
+          "characters_utf16": 125,
+          "lines": 4,
+          "suffix_sha256": "dc4a1944540a0d42783881968a16e1e5f2b4ccccf5b9124bc128c3a23ff0bfba",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 22,
+          "body_paragraph_index0": 22,
+          "local_label": "22",
+          "publisher_label": "3912",
+          "text_sha256": "76f243bcacbf675355d853670b648036cf625859ad711903c1b4db4ee8d5d615",
+          "characters_utf16": 122,
+          "lines": 4,
+          "suffix_sha256": "d5cf21d4490445834cdbbe17df0174ad819fca71f94a568eac7c4e4a1cb09742",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 23,
+          "body_paragraph_index0": 23,
+          "local_label": "23",
+          "publisher_label": "3913",
+          "text_sha256": "230a6d1671fa8251bf8803a3d7bb4e0c1587e8eaab4af4e653174a86d582261b",
+          "characters_utf16": 126,
+          "lines": 4,
+          "suffix_sha256": "cf4e78ecb885d06584fb60276d751334bad0258e4f168b909b72383885277237",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 24,
+          "body_paragraph_index0": 24,
+          "local_label": "24",
+          "publisher_label": "3914",
+          "text_sha256": "7b2e24716ca6623dca22ba414c3cfc0a7c08de60f4c81f992b59966fdcb8851c",
+          "characters_utf16": 146,
+          "lines": 5,
+          "suffix_sha256": "2dbce9e39002a5f42972c6ae6e85fad839e30e7ba625b947481f1a711c4a629f",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 25,
+          "body_paragraph_index0": 25,
+          "local_label": "25",
+          "publisher_label": "3915",
+          "text_sha256": "d111bd86e92b1f8ef2a7f4ffd96e9c1e609aaa525ccd8c62c5d70cc7943a1a5d",
+          "characters_utf16": 130,
+          "lines": 4,
+          "suffix_sha256": "3fc4992cbdb34316162d1a30c3c9697305583938f11b32e195d882842eaf0b4c",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 26,
+          "body_paragraph_index0": 26,
+          "local_label": "26",
+          "publisher_label": "3916",
+          "text_sha256": "88e5d8584f3af044882ad423991665f79b753fef6a79bdc12cdfc3a906e77bc6",
+          "characters_utf16": 135,
+          "lines": 4,
+          "suffix_sha256": "834a32d82667423bf7a1bd5c233b4ee0250ca4be603571f515bed4a5db706dc3",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 27,
+          "body_paragraph_index0": 27,
+          "local_label": "27",
+          "publisher_label": "3917",
+          "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+          "characters_utf16": 134,
+          "lines": 4,
+          "suffix_sha256": "3ab62b7e6ad80e94ae510f7e771b0189d771b6ad42ab78590519496bcb89cc49",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 28,
+          "body_paragraph_index0": 28,
+          "local_label": "28",
+          "publisher_label": "3918",
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "1d62813446006ae996ebfb1dffd4a3dae0b9b0a14df63494e2e4d5d0689b6904",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        }
+      ],
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "e0d201309d0816323e549b6db76bf7cf772c6a1cec4debbfb04d60abb4146eec",
+          "start_prefix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "continuation_prefix_sha256": "e0d201309d0816323e549b6db76bf7cf772c6a1cec4debbfb04d60abb4146eec",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 500,
+          "text_sha256": "a6c35ce9ef2baa4363fb866f89cbfbc14bbb66307891b3fb3aa0b8f51ff40b9d",
+          "start_prefix_sha256": "e0d201309d0816323e549b6db76bf7cf772c6a1cec4debbfb04d60abb4146eec",
+          "continuation_prefix_sha256": "fa3e3ed5c715efd2cd5e77e43cbeee37239dbc80f5a1299b598bc08d9b7030b9",
+          "next_offset": 1000
+        },
+        {
+          "offset": 1000,
+          "characters_utf16": 500,
+          "text_sha256": "edacdbe414bea7d546148784c021601d696d5f7bb461fdbe8f0cf4d0fe599c74",
+          "start_prefix_sha256": "fa3e3ed5c715efd2cd5e77e43cbeee37239dbc80f5a1299b598bc08d9b7030b9",
+          "continuation_prefix_sha256": "9d5f8f58b5534fdd991e0777c5a31c00f4ea3f784174022f11dcf41162ad69e1",
+          "next_offset": 1500
+        },
+        {
+          "offset": 1500,
+          "characters_utf16": 500,
+          "text_sha256": "1f6e4cfbebcb78f3d76b5c0c97d632af0146c2c316c7bdfb61281dab575f7c01",
+          "start_prefix_sha256": "9d5f8f58b5534fdd991e0777c5a31c00f4ea3f784174022f11dcf41162ad69e1",
+          "continuation_prefix_sha256": "1d9b374d53ca029d99e7cbbf29ad96fa3c757b4f423a8d552dee46cb7e7bdadc",
+          "next_offset": 2000
+        },
+        {
+          "offset": 2000,
+          "characters_utf16": 500,
+          "text_sha256": "5ff5469c2188bfb11addde63105acc2d7e954ff18bb2d9e348e6f11ff225d7fc",
+          "start_prefix_sha256": "1d9b374d53ca029d99e7cbbf29ad96fa3c757b4f423a8d552dee46cb7e7bdadc",
+          "continuation_prefix_sha256": "41d41f6cd2600d1784e1fb2edd2cbbb21e032b22662cc199128d600376a4f30a",
+          "next_offset": 2500
+        },
+        {
+          "offset": 2500,
+          "characters_utf16": 500,
+          "text_sha256": "15ea08c974feb948f5cac83e90e21409376761e5c7c7bcf522d43826a3618f70",
+          "start_prefix_sha256": "41d41f6cd2600d1784e1fb2edd2cbbb21e032b22662cc199128d600376a4f30a",
+          "continuation_prefix_sha256": "0047483bb7106ea5e7a32b99e0caf15afee9460250a213eb6ca7f040f82deef1",
+          "next_offset": 3000
+        },
+        {
+          "offset": 3000,
+          "characters_utf16": 500,
+          "text_sha256": "cf8b1467066127367195f90e4185ec248815a9d30955148476ce9e87858aba47",
+          "start_prefix_sha256": "0047483bb7106ea5e7a32b99e0caf15afee9460250a213eb6ca7f040f82deef1",
+          "continuation_prefix_sha256": "90acdb8ebdc38ac0d109958dde5fb582eee8d9e3927a7dd943fdcdf95113ec91",
+          "next_offset": 3500
+        },
+        {
+          "offset": 3500,
+          "characters_utf16": 500,
+          "text_sha256": "19d9fe7dbda2b45b8055f030a50b130856d1e8c4f916ca725fb457258e722c87",
+          "start_prefix_sha256": "90acdb8ebdc38ac0d109958dde5fb582eee8d9e3927a7dd943fdcdf95113ec91",
+          "continuation_prefix_sha256": "fe6f9fef4c873c7a64faa57cdfb978608be1bed78234f90f9816d40a10c085d7",
+          "next_offset": 4000
+        },
+        {
+          "offset": 4000,
+          "characters_utf16": 500,
+          "text_sha256": "9ab59e703e7853997dcd6fdfe44a0f4d9d3ab1cc99818d7554ea97032bc75428",
+          "start_prefix_sha256": "fe6f9fef4c873c7a64faa57cdfb978608be1bed78234f90f9816d40a10c085d7",
+          "continuation_prefix_sha256": "04f41a250d9034e858e67e05baebcd52a4f819a6baeb8afa3a4d66c746ec37ce",
+          "next_offset": 4500
+        },
+        {
+          "offset": 4500,
+          "characters_utf16": 87,
+          "text_sha256": "04a0d84cedf0b7a86cfab0c5ca87233bca0b0ac13b5760a1640a821fb3048784",
+          "start_prefix_sha256": "04f41a250d9034e858e67e05baebcd52a4f819a6baeb8afa3a4d66c746ec37ce",
+          "continuation_prefix_sha256": "0a5968b8e6c25e7336cbb67019733e395a156356c1c5be2c5159232f9f2c2277",
+          "next_offset": null
+        }
+      ],
+      "root_wrapper_sha256_JSON_stringify": "f18e3eab3e4ba7fb91e85aa42cc6da9e641ef567c7386b7b5c3ec2928fb278e9",
+      "full_proposed_profile_sha256_JSON_stringify": "b253909795d7543a717bbed66e1c29de3724ed6cbf86bf833850f10bfa36c26f",
+      "full_pending_link_sha256_JSON_stringify": "e00fb75ce67e3805a2167a9959e378f0b19fe61807e5e50f891eee8a4109a949"
+    },
+    "tha-ap404": {
+      "publisher_poem": 402,
+      "title": "Puṇṇaka",
+      "body_sha256": "5a2f6375fc4b6e8891df8dc119aac5e52be745c49bcb7e9b1fc2e3a6cc9417a7",
+      "body_characters_utf16": 2614,
+      "notes_sha256_JSON_stringify": "f99587903f0ce94ec8a0969f820231bd1a3a1f41d34b9055d6ca329e0959743a",
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "note_owners": [
+        {
+          "number": 1,
+          "owner": "body:0",
+          "owner_kind": "poem_heading",
+          "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+          "text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+          "characters_utf16": 189,
+          "raw_definition_lines_inclusive": [
+            92,
+            92
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+              "after_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  65,
+                  123
+                ],
+                [
+                  184,
+                  226
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "after_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+              "matched_replacement_pairs_sha256": "c579dddbe40ab82984bdec5141dea547af24e2ecf735e019fe925cf1f90a840a",
+              "stage_positions": [
+                [
+                  0,
+                  9
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "owner": "body:0",
+          "owner_kind": "poem_heading",
+          "raw_content_sha256": "b6c3a102d8abeefad862d990879256c99ddea6d6ba89148667e15da3a0beccfc",
+          "text_sha256": "662387c753c44fc5a147bd29467dcad8439b71f708a8d7faf26a8fc5516970bc",
+          "characters_utf16": 210,
+          "raw_definition_lines_inclusive": [
+            94,
+            94
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "b6c3a102d8abeefad862d990879256c99ddea6d6ba89148667e15da3a0beccfc",
+              "after_sha256": "662387c753c44fc5a147bd29467dcad8439b71f708a8d7faf26a8fc5516970bc",
+              "matched_replacement_pairs_sha256": "e6e1f567308ea003e097bc5c09fe4543de2c7bb0efc40b4ee9d811d7c94c3ea5",
+              "stage_positions": [
+                [
+                  43,
+                  60
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "owner": "body:2",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "dabfb1469ff352973bb56f8c619a76400de12ebe0988edfe6fa13fa907304b51",
+          "text_sha256": "050de251367934b6a91ee1e3aa98d12fa6b0cdfe783b1ac812937eaa70ea8148",
+          "characters_utf16": 46,
+          "raw_definition_lines_inclusive": [
+            96,
+            96
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "dabfb1469ff352973bb56f8c619a76400de12ebe0988edfe6fa13fa907304b51",
+              "after_sha256": "050de251367934b6a91ee1e3aa98d12fa6b0cdfe783b1ac812937eaa70ea8148",
+              "matched_replacement_pairs_sha256": "607d2d9848e99dbb03f25a52e95a9a4c9ed1f6bf55bccc3ac2bda29f04e4d68c",
+              "stage_positions": [
+                [
+                  0,
+                  23
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "18122e1d7f6c784089521d39c4985e0a96f364e287117ee939063968aeb43e9c",
+          "text_sha256": "2d969246863666248d799e5b94c9ce6cb895444d48a25979c483f42dce9a1ad7",
+          "characters_utf16": 27,
+          "raw_definition_lines_inclusive": [
+            98,
+            98
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Pandoc_diacritics_on",
+              "count": 1,
+              "before_sha256": "18122e1d7f6c784089521d39c4985e0a96f364e287117ee939063968aeb43e9c",
+              "after_sha256": "96b348ae6f6a6ab96d5e2def491aec92ba6b4d8ff5a511e99804a4565b79e90e",
+              "matched_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af",
+              "stage_positions": [
+                [
+                  2,
+                  67
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "96b348ae6f6a6ab96d5e2def491aec92ba6b4d8ff5a511e99804a4565b79e90e",
+              "after_sha256": "2d969246863666248d799e5b94c9ce6cb895444d48a25979c483f42dce9a1ad7",
+              "matched_replacement_pairs_sha256": "afe1d0829acf6cb09cd909c76b017c45f1c1144a6bdad1b4fa9d649ad760bff7",
+              "stage_positions": [
+                [
+                  0,
+                  8
+                ],
+                [
+                  22,
+                  31
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "a50158c096a47082551bb3cb654f0af4a35557fc0f13584d28785ab264b48c68",
+          "text_sha256": "051747a86043e368d37d37cba80ffe3a7d6e9f79e2e74022f415b916e21a0ddf",
+          "characters_utf16": 54,
+          "raw_definition_lines_inclusive": [
+            100,
+            100
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 3,
+              "before_sha256": "a50158c096a47082551bb3cb654f0af4a35557fc0f13584d28785ab264b48c68",
+              "after_sha256": "051747a86043e368d37d37cba80ffe3a7d6e9f79e2e74022f415b916e21a0ddf",
+              "matched_replacement_pairs_sha256": "389905f78e6068c8d17185caa406e36cc548faf87dc33bdeecad98c7b0ab4c44",
+              "stage_positions": [
+                [
+                  0,
+                  6
+                ],
+                [
+                  31,
+                  37
+                ],
+                [
+                  39,
+                  45
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "f28a8724770319fb5000231b22a1db7c03d51116e4caf7bf347b63b551af8d4b",
+          "text_sha256": "51c8da0800088a76cef82e4306c4428993e2ec21e39c8f565233830ee14e7793",
+          "characters_utf16": 265,
+          "raw_definition_lines_inclusive": [
+            102,
+            102
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Pandoc_diacritics_on",
+              "count": 3,
+              "before_sha256": "f28a8724770319fb5000231b22a1db7c03d51116e4caf7bf347b63b551af8d4b",
+              "after_sha256": "a42d47c3c4e185ca649d07ab0323587edb52c5fb7d4e05414a6ca1c3e067eff9",
+              "matched_replacement_pairs_sha256": "7dd79408b800ad057e3c4c30142d225b938e0ebf3e3e424d61f2b09591fe16c9",
+              "stage_positions": [
+                [
+                  5,
+                  70
+                ],
+                [
+                  285,
+                  350
+                ],
+                [
+                  371,
+                  436
+                ]
+              ]
+            },
+            {
+              "rule": "abbreviation_display_label",
+              "count": 1,
+              "before_sha256": "a42d47c3c4e185ca649d07ab0323587edb52c5fb7d4e05414a6ca1c3e067eff9",
+              "after_sha256": "2aa30d0602a200c111d02d5f0d26a3114b606e2c90609238a80bdb764fb6f631",
+              "matched_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4",
+              "stage_positions": [
+                [
+                  79,
+                  137
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 7,
+              "before_sha256": "2aa30d0602a200c111d02d5f0d26a3114b606e2c90609238a80bdb764fb6f631",
+              "after_sha256": "51c8da0800088a76cef82e4306c4428993e2ec21e39c8f565233830ee14e7793",
+              "matched_replacement_pairs_sha256": "293bdc92f3d263b89e3c2a270562211f8707e5c78bc9d1087fbad790978a7577",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ],
+                [
+                  24,
+                  35
+                ],
+                [
+                  63,
+                  72
+                ],
+                [
+                  138,
+                  144
+                ],
+                [
+                  162,
+                  172
+                ],
+                [
+                  180,
+                  194
+                ],
+                [
+                  253,
+                  272
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "owner": "body:3",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "5d751ad9eb76b94f1b9126d5cedec904cfdd5fff4de5f30311a47b39ca7dfad0",
+          "text_sha256": "14fe12a0eb72061fae347bd93452c4756b02c135370ccbe24b0505ad96f18a2f",
+          "characters_utf16": 56,
+          "raw_definition_lines_inclusive": [
+            104,
+            104
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "5d751ad9eb76b94f1b9126d5cedec904cfdd5fff4de5f30311a47b39ca7dfad0",
+              "after_sha256": "3265fa9dd66d6aa3fe1ef5bab19755fd32d127b1b8b5f8eaa2f657304c4f2d63",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  23,
+                  81
+                ],
+                [
+                  86,
+                  128
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 3,
+              "before_sha256": "3265fa9dd66d6aa3fe1ef5bab19755fd32d127b1b8b5f8eaa2f657304c4f2d63",
+              "after_sha256": "14fe12a0eb72061fae347bd93452c4756b02c135370ccbe24b0505ad96f18a2f",
+              "matched_replacement_pairs_sha256": "72e18b26e116d2aeaeaa012883e1c0f3d465c2d7b728dd274c9bc05606d3606b",
+              "stage_positions": [
+                [
+                  8,
+                  17
+                ],
+                [
+                  36,
+                  42
+                ],
+                [
+                  46,
+                  52
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "a6d15f4adcc15848dfdac034bd543c3884108530001254a4ae0d8fd645f678bb",
+          "text_sha256": "c09ad5b79102efde186af9f541f02c1d34663100c060c1fca0ae76c63ae41fce",
+          "characters_utf16": 138,
+          "raw_definition_lines_inclusive": [
+            106,
+            106
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "a6d15f4adcc15848dfdac034bd543c3884108530001254a4ae0d8fd645f678bb",
+              "after_sha256": "c09ad5b79102efde186af9f541f02c1d34663100c060c1fca0ae76c63ae41fce",
+              "matched_replacement_pairs_sha256": "dd9eb8e812d05e95579a084a70b5a8cd6c2d43b57c3e3e88456a163754ed190e",
+              "stage_positions": [
+                [
+                  0,
+                  19
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "2beede2adde71aee2c394da52551639a6dfaac859cee0272f42a13188ca23925",
+          "text_sha256": "2beede2adde71aee2c394da52551639a6dfaac859cee0272f42a13188ca23925",
+          "characters_utf16": 12,
+          "raw_definition_lines_inclusive": [
+            108,
+            108
+          ],
+          "presentation_operations": []
+        },
+        {
+          "number": 10,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+          "text_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            110,
+            110
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+              "after_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+              "matched_replacement_pairs_sha256": "5c03393f69e2761baa67b292308b057e83efdc054f2f0a3e23b77cd3568f2759",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "owner": "body:4",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+          "text_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+          "characters_utf16": 8,
+          "raw_definition_lines_inclusive": [
+            112,
+            112
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+              "after_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+              "matched_replacement_pairs_sha256": "5c03393f69e2761baa67b292308b057e83efdc054f2f0a3e23b77cd3568f2759",
+              "stage_positions": [
+                [
+                  0,
+                  10
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "owner": "body:6",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "8f00961fe5cc66e35160aa26a4de19473822dad94f4d43c27b06c928542434c2",
+          "text_sha256": "3b6a54ddb3ef71d5acb18c51722d61ab55b5612c223e297d4d93958279b55ba2",
+          "characters_utf16": 6,
+          "raw_definition_lines_inclusive": [
+            114,
+            114
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "8f00961fe5cc66e35160aa26a4de19473822dad94f4d43c27b06c928542434c2",
+              "after_sha256": "3b6a54ddb3ef71d5acb18c51722d61ab55b5612c223e297d4d93958279b55ba2",
+              "matched_replacement_pairs_sha256": "659167d6215a64be43e34b40d5be0f6f98ce0b2897d12f972397e3ccfd3af9b0",
+              "stage_positions": [
+                [
+                  0,
+                  8
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "owner": "body:7",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "30e07d02a4340edd93dc9c6ee1fcfa3e9bced298bf5a2bba99d8c9c1909167ac",
+          "text_sha256": "aab4e739368aba0a47a2634a1db1a04433c1f6ea47dfc2c39366ab6fe5d4bb50",
+          "characters_utf16": 52,
+          "raw_definition_lines_inclusive": [
+            116,
+            116
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 3,
+              "before_sha256": "30e07d02a4340edd93dc9c6ee1fcfa3e9bced298bf5a2bba99d8c9c1909167ac",
+              "after_sha256": "af2bc6ed78e5b864ab977230a5dfd933f30bbff962e59c093e367b1a8be6c0e6",
+              "matched_replacement_pairs_sha256": "97802efb81fc249f8dde861b85471f77536bab8585b8e41a90dad7acb1058dc7",
+              "stage_positions": [
+                [
+                  0,
+                  58
+                ],
+                [
+                  85,
+                  127
+                ],
+                [
+                  133,
+                  191
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 2,
+              "before_sha256": "af2bc6ed78e5b864ab977230a5dfd933f30bbff962e59c093e367b1a8be6c0e6",
+              "after_sha256": "aab4e739368aba0a47a2634a1db1a04433c1f6ea47dfc2c39366ab6fe5d4bb50",
+              "matched_replacement_pairs_sha256": "c398d8031463ecd6163b254aa17b09eb626c95eb56f097c5db3d235d4a66a648",
+              "stage_positions": [
+                [
+                  11,
+                  16
+                ],
+                [
+                  51,
+                  56
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "owner": "body:7",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+          "text_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+          "characters_utf16": 7,
+          "raw_definition_lines_inclusive": [
+            118,
+            118
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+              "after_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+              "matched_replacement_pairs_sha256": "03c859fa29cbcf9c3c33acd18dc52304ce42200b09be0722a390f05dd4dd44e3",
+              "stage_positions": [
+                [
+                  0,
+                  9
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "owner": "body:8",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "da9f1e8b4d5ae0e863dcafd47f8ecd005d1b97e11c5e73465ddf3e273b57b800",
+          "text_sha256": "e85d1e49e54b10307e04cc103b0175ecf7651b544f3a8fbb9222af11ba965723",
+          "characters_utf16": 51,
+          "raw_definition_lines_inclusive": [
+            120,
+            120
+          ],
+          "presentation_operations": [
+            {
+              "rule": "abbreviation_display_label",
+              "count": 2,
+              "before_sha256": "da9f1e8b4d5ae0e863dcafd47f8ecd005d1b97e11c5e73465ddf3e273b57b800",
+              "after_sha256": "906bb0efead1c7f5add5457ee4686378e430eac82f41b94b23bc6aa048506f2a",
+              "matched_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b",
+              "stage_positions": [
+                [
+                  13,
+                  71
+                ],
+                [
+                  76,
+                  118
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 3,
+              "before_sha256": "906bb0efead1c7f5add5457ee4686378e430eac82f41b94b23bc6aa048506f2a",
+              "after_sha256": "e85d1e49e54b10307e04cc103b0175ecf7651b544f3a8fbb9222af11ba965723",
+              "matched_replacement_pairs_sha256": "6198e173c6e70b5908fc703d5644dfcc57f518616bbae10f43a914499d61506a",
+              "stage_positions": [
+                [
+                  0,
+                  11
+                ],
+                [
+                  36,
+                  47
+                ],
+                [
+                  49,
+                  57
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "owner": "body:9",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+          "text_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+          "characters_utf16": 7,
+          "raw_definition_lines_inclusive": [
+            122,
+            122
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+              "after_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+              "matched_replacement_pairs_sha256": "03c859fa29cbcf9c3c33acd18dc52304ce42200b09be0722a390f05dd4dd44e3",
+              "stage_positions": [
+                [
+                  0,
+                  9
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "number": 17,
+          "owner": "body:10",
+          "owner_kind": "poem_stanza",
+          "raw_content_sha256": "4c3b64b17f0d7b8f773c3c73cba3475255b2df9bd18bc6af9e813cd73f778876",
+          "text_sha256": "ae700fb1137c6a7f2e7e415519eea1805847fb7d3441e3d5e1946218db0f229f",
+          "characters_utf16": 20,
+          "raw_definition_lines_inclusive": [
+            124,
+            124
+          ],
+          "presentation_operations": [
+            {
+              "rule": "Pandoc_diacritics_on",
+              "count": 1,
+              "before_sha256": "4c3b64b17f0d7b8f773c3c73cba3475255b2df9bd18bc6af9e813cd73f778876",
+              "after_sha256": "8d4b8a7d25e217733161becffcedd556f360fb184ecd79ee8e3c224439b0348c",
+              "matched_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af",
+              "stage_positions": [
+                [
+                  1,
+                  66
+                ]
+              ]
+            },
+            {
+              "rule": "Markdown_single_emphasis",
+              "count": 1,
+              "before_sha256": "8d4b8a7d25e217733161becffcedd556f360fb184ecd79ee8e3c224439b0348c",
+              "after_sha256": "ae700fb1137c6a7f2e7e415519eea1805847fb7d3441e3d5e1946218db0f229f",
+              "matched_replacement_pairs_sha256": "cf4e2f2f755aeec54bcb5f4f175015f09338dc5f96947358602c3ba903929aba",
+              "stage_positions": [
+                [
+                  0,
+                  22
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "paratext_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "paratext_characters_utf16": 0,
+      "paratext_note_numbers": [],
+      "body_paragraphs": [
+        {
+          "paragraph_index0": 0,
+          "raw_sha256": "c2349b3784e510e93b248f7815fcafb5d335e7b6c394b7f6446223c892f06400",
+          "text_sha256": "2dfda0f2f797948c80d2d59d82926ba85a3910064cfc88798fa721b5a6c0ed61",
+          "characters_utf16": 37,
+          "lines": 1,
+          "body_start_utf16": 0,
+          "body_end_utf16": 37,
+          "original_note_numbers": [
+            1,
+            2
+          ]
+        },
+        {
+          "paragraph_index0": 1,
+          "raw_sha256": "507dee9d9f3ccbfc760e131ad1f58eaa8559f9bbde1e08846d1ee08f2d905126",
+          "text_sha256": "b92552b6ff028e193114c6e32646695cebda47a11c752a55d8d3b2d33158964a",
+          "characters_utf16": 143,
+          "lines": 4,
+          "body_start_utf16": 39,
+          "body_end_utf16": 182,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 2,
+          "raw_sha256": "7bea24304cd791167c8d63635951dd5a26fdc81a0b8c8175b98ea9681c7441fb",
+          "text_sha256": "64ef6079986cca2c5922504271bf41bd9bcdd4288ebd0da00fbbcbf3a7ec9ae0",
+          "characters_utf16": 160,
+          "lines": 4,
+          "body_start_utf16": 184,
+          "body_end_utf16": 344,
+          "original_note_numbers": [
+            3
+          ]
+        },
+        {
+          "paragraph_index0": 3,
+          "raw_sha256": "8ba0e18c5471d9ff7f349c8a5d502a901cb0a1c85faee7df13745793759981d1",
+          "text_sha256": "eca43ba52a33bce41f9d951740e688bb4757dbb2fca3f6b1446cb3f3213b817a",
+          "characters_utf16": 177,
+          "lines": 4,
+          "body_start_utf16": 346,
+          "body_end_utf16": 523,
+          "original_note_numbers": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "paragraph_index0": 4,
+          "raw_sha256": "53a4157988f47ff53c9819a2ff0909705e57e50ab3c99082fbfa71d64a4d4ccf",
+          "text_sha256": "8f53bdc3d0bb4bd1f94f2c3231b22f6c368a418efe93bad4a90553bc547a9e58",
+          "characters_utf16": 325,
+          "lines": 8,
+          "body_start_utf16": 525,
+          "body_end_utf16": 850,
+          "original_note_numbers": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "paragraph_index0": 5,
+          "raw_sha256": "98047b97aa89a5100480a83651d30318a21d165f0af8fe62fa223539e3133f4e",
+          "text_sha256": "c0b1ff0b162a433f20722fdd7d7869199c4ccafe93c35c9775dce8714f8589c8",
+          "characters_utf16": 158,
+          "lines": 4,
+          "body_start_utf16": 852,
+          "body_end_utf16": 1010,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 6,
+          "raw_sha256": "6926de35f055551d82cea08d70886116473616551c04788e9278e0f80f4db9cc",
+          "text_sha256": "187bcf31a6ac9e213bfda5471e0ee800cc10d4ad9800f90a2dd023b0b6adf096",
+          "characters_utf16": 150,
+          "lines": 4,
+          "body_start_utf16": 1012,
+          "body_end_utf16": 1162,
+          "original_note_numbers": [
+            12
+          ]
+        },
+        {
+          "paragraph_index0": 7,
+          "raw_sha256": "e384784b7d822b9ed6e2dbbe58b4644a038c36a0f80ffdfe385f4a78b33a4875",
+          "text_sha256": "fa088a8f2bfc77f7975d5fddc8f76835b24a2a0901448eadf423b110561350e1",
+          "characters_utf16": 172,
+          "lines": 4,
+          "body_start_utf16": 1164,
+          "body_end_utf16": 1336,
+          "original_note_numbers": [
+            13,
+            14
+          ]
+        },
+        {
+          "paragraph_index0": 8,
+          "raw_sha256": "0b906f835406802fb3c5fb8bf96dbbee6a4a6c451d574f2bece4bd9c18fdc0a5",
+          "text_sha256": "0ef5f4556931ca66e7a3821921b0a1dc8d4f563748e54c33e4f5a9e2ae6c6397",
+          "characters_utf16": 141,
+          "lines": 4,
+          "body_start_utf16": 1338,
+          "body_end_utf16": 1479,
+          "original_note_numbers": [
+            15
+          ]
+        },
+        {
+          "paragraph_index0": 9,
+          "raw_sha256": "ec0e6f3d9a2b2e339dd5b7c75b747ca0fb98238dd3f6fdecf0cee5cccd50a4bc",
+          "text_sha256": "d9bcbcab9cea4de1a61003a8470360a7ddf8a0913f4e30e6eccb4a29a58e6084",
+          "characters_utf16": 153,
+          "lines": 4,
+          "body_start_utf16": 1481,
+          "body_end_utf16": 1634,
+          "original_note_numbers": [
+            16
+          ]
+        },
+        {
+          "paragraph_index0": 10,
+          "raw_sha256": "1848dddeddc79775876d4244475f569026e6f2123ad3a96852f0eaa2b91f6ff2",
+          "text_sha256": "b94a5a8f48c1e1bdbb919fb38a3df16d5e5584561be6f23c4a8165e38b99a8a5",
+          "characters_utf16": 161,
+          "lines": 4,
+          "body_start_utf16": 1636,
+          "body_end_utf16": 1797,
+          "original_note_numbers": [
+            17
+          ]
+        },
+        {
+          "paragraph_index0": 11,
+          "raw_sha256": "f795ea80458ac0cb1910c00d3c060cda4dcfc2205195c9c644c3242e50fbf6b7",
+          "text_sha256": "d79aaab70306aaab08f108ad410d955f414ea6508ef840a0b7a14c9ecacd9f25",
+          "characters_utf16": 133,
+          "lines": 4,
+          "body_start_utf16": 1799,
+          "body_end_utf16": 1932,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 12,
+          "raw_sha256": "0162ad7a0d416bfed172796b954cb6d37d24a124e69c7471770104ac1eeb686f",
+          "text_sha256": "b24dfa961dc62651b0731235cfd22c11e59b30cfbd7c289d5f45cb8f7c41829e",
+          "characters_utf16": 146,
+          "lines": 4,
+          "body_start_utf16": 1934,
+          "body_end_utf16": 2080,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 13,
+          "raw_sha256": "3d776fb9ba5ba599716e8726f84333a34a5a65d882f93a561a630c00514bb64a",
+          "text_sha256": "3cca87062537d03d656f3608e0679aca070371d3d02480d54f747c6043bc7f3b",
+          "characters_utf16": 144,
+          "lines": 4,
+          "body_start_utf16": 2082,
+          "body_end_utf16": 2226,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 14,
+          "raw_sha256": "c03d30df983a632dc9f0b5accfc7bfcdfe8d26d485c315e1d6410f6596112b9f",
+          "text_sha256": "d6fcaaf93083c2d44d5fc2afdc00feb3e2fd9185e1955be6759d4f141822349e",
+          "characters_utf16": 146,
+          "lines": 4,
+          "body_start_utf16": 2228,
+          "body_end_utf16": 2374,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 15,
+          "raw_sha256": "5cf20dc1effc8c9b2106c2f34f3cbc2ff1876783236c5cb3fdbaa5cfe2a84492",
+          "text_sha256": "10182c735b4899b74cb775d048591e9434f76f47bd70208872a8a03223f71416",
+          "characters_utf16": 139,
+          "lines": 4,
+          "body_start_utf16": 2376,
+          "body_end_utf16": 2515,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 16,
+          "raw_sha256": "f3d6e075825803f1d4c7942495d2ad9c8fea1893b15e31d2c343827c5c23b9f1",
+          "text_sha256": "f3d6e075825803f1d4c7942495d2ad9c8fea1893b15e31d2c343827c5c23b9f1",
+          "characters_utf16": 55,
+          "lines": 1,
+          "body_start_utf16": 2517,
+          "body_end_utf16": 2572,
+          "original_note_numbers": []
+        },
+        {
+          "paragraph_index0": 17,
+          "raw_sha256": "2b9adbe90385519cf1c4f8c575f06c9a5d001724d4616c8f7cd678abe9268933",
+          "text_sha256": "2b9adbe90385519cf1c4f8c575f06c9a5d001724d4616c8f7cd678abe9268933",
+          "characters_utf16": 40,
+          "lines": 1,
+          "body_start_utf16": 2574,
+          "body_end_utf16": 2614,
+          "original_note_numbers": []
+        }
+      ],
+      "quotation_proofs": [
+        {
+          "physical_entry1": 1,
+          "body_paragraph_index0": 1,
+          "local_label": "1",
+          "publisher_label": "3919",
+          "text_sha256": "a7fe27ae6f222348fc7a441365ccafcfc37c7e58cad174394b97f42d2c7d4998",
+          "characters_utf16": 132,
+          "lines": 4,
+          "suffix_sha256": "196dc7579b249477967e509f1c4e01b080f7a30d75a22624e4a575685cc61757",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 2,
+          "body_paragraph_index0": 2,
+          "local_label": "2",
+          "publisher_label": "3920",
+          "text_sha256": "d9a1056deb7467fad6551f06adbdaa35782ac4de085511a1fe942b94889a5888",
+          "characters_utf16": 141,
+          "lines": 4,
+          "suffix_sha256": "ffca17d0e7410fb1747a8cafd20472a63c05b0b47bd5b2b1af05d237ad5a9584",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 3,
+          "body_paragraph_index0": 3,
+          "local_label": "3",
+          "publisher_label": "3921",
+          "text_sha256": "09ce6eacbe5d6db24a4dc9da22b23fa4cca425387a6e4c0642d95441f48fca43",
+          "characters_utf16": 134,
+          "lines": 4,
+          "suffix_sha256": "01a198fa242f25d3a0b44d1a0e29365ba39887addf82032ac12a1ee2ddae9135",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 4,
+          "body_paragraph_index0": 4,
+          "local_label": "4-5",
+          "publisher_label": "3922-3923",
+          "text_sha256": "e4d226e83567ab530633142bce8f81bd3f38ea842dd074889d94005c02006f34",
+          "characters_utf16": 273,
+          "lines": 8,
+          "suffix_sha256": "d7e6c8478bceef50b68f5d143c435edf27e2bbe20be2886ad6bff9771998edc1",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 5,
+          "body_paragraph_index0": 5,
+          "local_label": "6",
+          "publisher_label": "3924",
+          "text_sha256": "e371f954f789682e150868bd4b2211c28799810b355ffc409c4e7b29807d4d42",
+          "characters_utf16": 147,
+          "lines": 4,
+          "suffix_sha256": "061062b6d705c919dcf633a593c3d80660f28f3aa5794f82537cc1b11c4af943",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 6,
+          "body_paragraph_index0": 6,
+          "local_label": "7",
+          "publisher_label": "3925",
+          "text_sha256": "895245ff2d2d5f8bfca6d9a00af7647d4844cd234529d211607f7db9bb788495",
+          "characters_utf16": 130,
+          "lines": 4,
+          "suffix_sha256": "2cf3b4f1aab066bd1f2bd563038db724420763b9ecfcf1b323a8810c8f374780",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 7,
+          "body_paragraph_index0": 7,
+          "local_label": "8",
+          "publisher_label": "3926",
+          "text_sha256": "0143a5b81d92f5a7bbce16b5d2f90f3ebc5aa7aba8888cd9f16579eda07e9c88",
+          "characters_utf16": 143,
+          "lines": 4,
+          "suffix_sha256": "4c40a6afc2b56f645d06958b7837b5776ee9d0f8a73680ca0ccf5d4366e16e31",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 8,
+          "body_paragraph_index0": 8,
+          "local_label": "9",
+          "publisher_label": "3927",
+          "text_sha256": "f0d99c106dbe0081409ffa5723735c6a0ad1afcea8fb1f975c0ae343745e5cd9",
+          "characters_utf16": 121,
+          "lines": 4,
+          "suffix_sha256": "9de9c9f6d500d7b9bcc6e35c071f938afa014e82b365b6cbcff907dccbceef31",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 9,
+          "body_paragraph_index0": 9,
+          "local_label": "10",
+          "publisher_label": "3928",
+          "text_sha256": "4216c8205dd56b55d062251c39ef2ddc8db95720d8c69f3f49dadc49ceadf9f4",
+          "characters_utf16": 132,
+          "lines": 4,
+          "suffix_sha256": "008ba55a34f8119cb00373f44148d0d94f28ca4a87cb0740a786b10c23d2711a",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 10,
+          "body_paragraph_index0": 10,
+          "local_label": "11",
+          "publisher_label": "3929",
+          "text_sha256": "6e59773f1241d81611f88ec29b67a6d230d0099a7f9d7a6af7da3360bf97d8a1",
+          "characters_utf16": 140,
+          "lines": 4,
+          "suffix_sha256": "49157408217055f5be823871c6c11c8130c05f215dcd19185f591d0ec5ffe7f8",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 11,
+          "body_paragraph_index0": 11,
+          "local_label": "12",
+          "publisher_label": "3930",
+          "text_sha256": "b497f7220a7f0421b46c014d5e90488ac5075eb166815556628d4dc6f1205d59",
+          "characters_utf16": 121,
+          "lines": 4,
+          "suffix_sha256": "199ca2209241c72a599f9af8ffd3cb991d1a885b4b2865d95ddb0c928be6cd3b",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 12,
+          "body_paragraph_index0": 12,
+          "local_label": "13",
+          "publisher_label": "3931",
+          "text_sha256": "9b8fae17472861e66412e836b64c5cbec48dd162519994329d09ce0964f3f5ae",
+          "characters_utf16": 134,
+          "lines": 4,
+          "suffix_sha256": "258c910c7267aa6da22d577f5cf718afab05e5db7e2ee567ac96f852c3455daa",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 13,
+          "body_paragraph_index0": 13,
+          "local_label": "14",
+          "publisher_label": "3932",
+          "text_sha256": "ef549437bb3d8f758018b79fcb55aa75932fac533c54e673859fde4189f03cad",
+          "characters_utf16": 132,
+          "lines": 4,
+          "suffix_sha256": "1cd2d5578ba095ee7fb4d023b0a62b534030413bed2e04d1e2618750f934beb4",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 14,
+          "body_paragraph_index0": 14,
+          "local_label": "15",
+          "publisher_label": "3933",
+          "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+          "characters_utf16": 134,
+          "lines": 4,
+          "suffix_sha256": "f1e027375ab4da4d46fe8a491011ae81578adb75e51c0fd75f82901d477d1c0e",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        },
+        {
+          "physical_entry1": 15,
+          "body_paragraph_index0": 15,
+          "local_label": "16",
+          "publisher_label": "3934",
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_utf16": 127,
+          "lines": 4,
+          "suffix_sha256": "df4253c5e80c391d2a846cd0b06a79eb68f83f62c057c2749d520a174d221152",
+          "domain": "Original physical paragraph, note-call markers and one terminal numeric suffix excluded; speaker labels, all other bracketed words and internal newlines retained."
+        }
+      ],
+      "pages500": [
+        {
+          "offset": 0,
+          "characters_utf16": 500,
+          "text_sha256": "663f717c4c436b65002650ba68252461632077760d7f99119c342105ebaf93d0",
+          "start_prefix_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "continuation_prefix_sha256": "663f717c4c436b65002650ba68252461632077760d7f99119c342105ebaf93d0",
+          "next_offset": 500
+        },
+        {
+          "offset": 500,
+          "characters_utf16": 500,
+          "text_sha256": "5150b331adfd8f0003f19cba0301a67f4408c82816002bd8a86efdf831dc781e",
+          "start_prefix_sha256": "663f717c4c436b65002650ba68252461632077760d7f99119c342105ebaf93d0",
+          "continuation_prefix_sha256": "065eb378ebf386f2413ecbe5d4b369b6566c7d7055fc21a7dd049f5d3e5ce4a2",
+          "next_offset": 1000
+        },
+        {
+          "offset": 1000,
+          "characters_utf16": 500,
+          "text_sha256": "cc96dca00d37f8cf5c413e8ea8fe6757e579eae14305945185ec7cef8329dc77",
+          "start_prefix_sha256": "065eb378ebf386f2413ecbe5d4b369b6566c7d7055fc21a7dd049f5d3e5ce4a2",
+          "continuation_prefix_sha256": "42a6829fb9468ede81de100772c045e0e5688dd388c06ebb387c81fffc9e2615",
+          "next_offset": 1500
+        },
+        {
+          "offset": 1500,
+          "characters_utf16": 500,
+          "text_sha256": "0ef3e6f2d9626c3b0832e3e37111824e15b8369325fe370003ccfc58fb110b08",
+          "start_prefix_sha256": "42a6829fb9468ede81de100772c045e0e5688dd388c06ebb387c81fffc9e2615",
+          "continuation_prefix_sha256": "1a93ee7c345fcb33a5c81042ea5258565c67aa600c97f9994041c17c0fd57cd6",
+          "next_offset": 2000
+        },
+        {
+          "offset": 2000,
+          "characters_utf16": 500,
+          "text_sha256": "8a84da6f276a7d9fff8ef729a5f7b2ee9d1ec030c06d8f3c72965804e8081306",
+          "start_prefix_sha256": "1a93ee7c345fcb33a5c81042ea5258565c67aa600c97f9994041c17c0fd57cd6",
+          "continuation_prefix_sha256": "65f0bc1a877ae7fc30f01ee347eb04d4d3490ae06759b78a576a96e2fff43536",
+          "next_offset": 2500
+        },
+        {
+          "offset": 2500,
+          "characters_utf16": 114,
+          "text_sha256": "f65117572a58744bcea1040aa1435d1ebfa4c3c88b45114e887fed1be807d47e",
+          "start_prefix_sha256": "65f0bc1a877ae7fc30f01ee347eb04d4d3490ae06759b78a576a96e2fff43536",
+          "continuation_prefix_sha256": "5a2f6375fc4b6e8891df8dc119aac5e52be745c49bcb7e9b1fc2e3a6cc9417a7",
+          "next_offset": null
+        }
+      ],
+      "root_wrapper_sha256_JSON_stringify": "bf55622e636b7bd3691c2764f1e2b3f399b3335483689ecf292790f6073c8976",
+      "full_proposed_profile_sha256_JSON_stringify": "34fb38c6ed221edcd9768d02e95df2c143b2f37b5e847f575fbde695850cea2e",
+      "full_pending_link_sha256_JSON_stringify": "3627a99c1aef5fe8ab4553f86d6e8b18dd48f7c352a83b4e3afe1fd41c0450d2"
+    }
+  },
+  "totals": {
+    "poems": 2,
+    "physical_stanzas": 43,
+    "numbered_stanzas": 44,
+    "notes": 36,
+    "body_paragraphs": 49,
+    "hard500_pages": 16,
+    "display_pairs": 6,
+    "speaker_labels": 10
+  },
+  "proposed_API_hashes_not_API_approval": true
+}

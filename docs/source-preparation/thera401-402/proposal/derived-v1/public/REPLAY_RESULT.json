@@ -1,0 +1,19 @@
+{
+  "status": "AUTHOR_STDLIB_SOURCE_DERIVATION_PASS_PENDING_INDEPENDENT_REVIEW",
+  "totals": {
+    "poems": 2,
+    "physical_stanzas": 43,
+    "numbered_stanzas": 44,
+    "notes": 36,
+    "body_paragraphs": 49,
+    "hard500_pages": 16,
+    "display_pairs": 6,
+    "speaker_labels": 10
+  },
+  "physical_inputs_unchanged_at_end": true,
+  "all14645_XML_tuples_equal": true,
+  "reverse_checked_finite_presentation_only": true,
+  "app_parser_test_Git_network_or_proposed_module_execution": false,
+  "no_checkout_or_runtime_writes": true,
+  "runtime_or_release_approval": false
+}

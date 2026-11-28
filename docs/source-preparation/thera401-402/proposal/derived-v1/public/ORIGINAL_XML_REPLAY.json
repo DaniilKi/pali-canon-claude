@@ -1,0 +1,76 @@
+{
+  "schema": "original-Book36-plus-selected-pair-replay-v1",
+  "XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+  "all14645_retained_tuples_match_current_Book36": true,
+  "note_only_source_event1130_excluded_exactly": true,
+  "book_block_sha256_JSON_stringify": "bce212d970603cb0ef7fbebbc4b78de5538377f8fbf7e451b1a4487c97753d44",
+  "rows": [
+    {
+      "id": "tha-ap403",
+      "canonical_block_range_half_open": [
+        12892,
+        12980
+      ],
+      "selected_XML_tuples_equal_all_five_fields": true,
+      "tuples": 88,
+      "wrapper_sha256_JSON_stringify": "f18e3eab3e4ba7fb91e85aa42cc6da9e641ef567c7386b7b5c3ec2928fb278e9",
+      "original_note_rows": [
+        {
+          "relative_block": 13,
+          "count": 1,
+          "sha256_JSON_stringify": "d540cff1eaf7cd5b2657d3126c23f9b7571dc78efa6c2490c05f010488c357f2"
+        },
+        {
+          "relative_block": 24,
+          "count": 1,
+          "sha256_JSON_stringify": "0565e208ae09b70308f4d840fde802bff50704f88511f2199b4c8eb54f876895"
+        }
+      ],
+      "peyyala_stanza_count": 0
+    },
+    {
+      "id": "tha-ap404",
+      "canonical_block_range_half_open": [
+        12980,
+        13028
+      ],
+      "selected_XML_tuples_equal_all_five_fields": true,
+      "tuples": 48,
+      "wrapper_sha256_JSON_stringify": "bf55622e636b7bd3691c2764f1e2b3f399b3335483689ecf292790f6073c8976",
+      "original_note_rows": [
+        {
+          "relative_block": 3,
+          "count": 1,
+          "sha256_JSON_stringify": "0854cbb506be7f6ddfb23789aeedd37a940289524ef7be878e9cf4acc59546c4"
+        },
+        {
+          "relative_block": 6,
+          "count": 1,
+          "sha256_JSON_stringify": "5235590d6fc8e4c35273dff275932adb94e860769906822a1450bcbe01ed4bc3"
+        },
+        {
+          "relative_block": 9,
+          "count": 1,
+          "sha256_JSON_stringify": "056bb51857432028bbaa05da200f91b5b0c8a9506f33321ba3aa580e966e5c82"
+        },
+        {
+          "relative_block": 23,
+          "count": 1,
+          "sha256_JSON_stringify": "5fd860a764ef7c9b155e970db518d1d1a6eaa84d841bc2cc410c2c90848f7cbe"
+        },
+        {
+          "relative_block": 24,
+          "count": 1,
+          "sha256_JSON_stringify": "33a97f1ac25d331fdbc6b7c6795bf68cf64453687ca16f74f6022351f0512eca"
+        },
+        {
+          "relative_block": 27,
+          "count": 1,
+          "sha256_JSON_stringify": "8ccb33cc7aada771657f01e2a99aaab5a6d4a3c3bd608d0bd88bb32c0fca5e8b"
+        }
+      ],
+      "peyyala_stanza_count": 3
+    }
+  ],
+  "no_Pali_word_note_or_page_changes": true
+}

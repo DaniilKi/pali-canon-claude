@@ -1,0 +1,161 @@
+{
+  "schema": "publisher401402-source-preparation-scope-v1",
+  "status": "AUTHOR_QUALIFIED_SOURCE_PREPARATION_PROPOSAL_PENDING_INDEPENDENT_REVIEW",
+  "selected_literal_pairs": [
+    [
+      401,
+      "tha-ap403"
+    ],
+    [
+      402,
+      "tha-ap404"
+    ]
+  ],
+  "selection_basis": "Two literal adjacent chapter41 source poems, independently matched by printed and canonical titles, ordered narrative and distinct closing colophons, with all source words/notes present. No poem-ID arithmetic is used.",
+  "per_poem": {
+    "tha-ap403": {
+      "publisher_poem": 401,
+      "proposed_scope": "Complete publisher-edition poem and all19 original poem-owned notes, with separate unnoted chapter41 paratext. Not line-complete VRI approval.",
+      "canonical_range_half_open": [
+        12892,
+        12980
+      ],
+      "VRI_labels": [
+        1,
+        28
+      ],
+      "printed_labels": [
+        3891,
+        3918
+      ],
+      "narrative_evidence": [
+        "Sobhita ascetic on mountain slope, fire ritual and Padumuttara arrival",
+        "Alternating fire/oblations dialogue, deer skin and tinduka-fruit/honey offering",
+        "25 divine reigns and1000 wheel-turning reigns",
+        "Tissametteyya/Tissa-metteyya title and named two-part colophon"
+      ],
+      "required_preservation": {
+        "chapter_heading_unnoted_separate": true,
+        "speaker_prefix_paragraphs1": [
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          18,
+          24
+        ],
+        "speaker_separator": "single original newline",
+        "five_line_physical_entries": 10,
+        "four_line_physical_entries": 18,
+        "notes_heading": [
+          1,
+          2
+        ],
+        "notes_stanza": [
+          3,
+          19
+        ],
+        "no_chapter_summary": true
+      },
+      "edition_and_attribution_caveats": [
+        "Main heading398 versus brace/order401 versus canonical403 stay distinct.",
+        "Title Tissametteyya and source-note2/colophon Tissa-metteyya remain exact. Source-note2 historical/SN identification is attributed translator commentary, not independently verified history.",
+        "Keep note4 hehi, note5 manuja/manuje, note6 deva te/devate and the two independent VRI variant-note records. Do not reconcile their different spellings.",
+        "Source stanza9 lexical rendering and speaker assignments are preserved as published; equality of28 printed/VRI stanza counts is not a word-equivalence claim.",
+        "Botanical/transliteration and bracketed supplied wording remain exact; no punctuation or source language is silently corrected."
+      ],
+      "concrete_scout_refinement": "The ten extra lines described as printed-number-only in the parent rank summary are actual original speaker labels. Raw-source evidence proves their exact positions. Nothing is added to or dropped from the poem."
+    },
+    "tha-ap404": {
+      "publisher_poem": 402,
+      "proposed_scope": "Complete publisher-edition poem and all17 original poem-owned notes. No paratext or summary; not line-complete VRI approval.",
+      "canonical_range_half_open": [
+        12980,
+        13028
+      ],
+      "VRI_labels": [
+        29,
+        44
+      ],
+      "printed_labels": [
+        3919,
+        3934
+      ],
+      "narrative_evidence": [
+        "Unnamed self-become Buddha on mountain slope, illness/death and omens",
+        "Cremation and scented water, yakkha bestowing Puṇṇaka/full-one name",
+        "Repeated naming across births, Gotama attainment,91-aeon karmic statement",
+        "Puṇṇaka title, complete numbered16 publisher scope and both named colophons"
+      ],
+      "required_preservation": {
+        "combined_physical_paragraph": {
+          "entry1": 4,
+          "local_label": "4-5",
+          "publisher_label": "3922-3923",
+          "lines": 8,
+          "one_original_terminal_range_suffix": true
+        },
+        "notes_heading": [
+          1,
+          2
+        ],
+        "notes_stanza": [
+          3,
+          17
+        ],
+        "no_chapter_heading_or_summary": true
+      },
+      "edition_and_attribution_caveats": [
+        "Main heading399 versus brace/order402 versus canonical404 stay distinct.",
+        "Publisher16 numbered stanzas occupy15 physical stanza paragraphs because local4–5 is one eight-line unit; all16 labels are present.",
+        "Publisher local14–16 are full attainment refrains; VRI42–44 contain peyyāla. Retain both editions independently and do not transfer or reconstruct wording.",
+        "Source-note6 mixed opening/closing quotation marks and its uncertain bear/wolf/compound interpretation are original attributed wording, not incomplete text to be repaired.",
+        "Preserve note7 vyaggha/vālā alternatives, note13 yaṃ/taŋ and note15 divyamayo/dibbamayo, plus all six VRI variant-note records. The original source spelling and metrical interpretation are not harmonized.",
+        "Source-note2 historical monk/commentary claim remains attributed; this source-preparation packet does not independently validate that historical claim."
+      ]
+    }
+  },
+  "original_nine_hold_publishers_unchanged": [
+    391,
+    392,
+    393,
+    403,
+    404,
+    405,
+    408,
+    409,
+    410
+  ],
+  "original_nine_hold_objects_compact_sha256": "a0bf2a67451a0002fbd3ce35f7bb716f054fd970ec5cdf5f053b69922e698fba",
+  "original_hold_authority": {
+    "file": "/tmp/pali-next391-410-nov28/v2-metadata-overlay/files/SCOPE_AND_HOLDS.json",
+    "bytes": 23699,
+    "sha256": "4bfaa5e62b229b07389f63d0073685438c79677473cf71b59962d8fef1a5510d"
+  },
+  "previous398399_packet_unchanged": {
+    "file": "/tmp/pali-next391-410-nov28/v1/MANIFEST.json",
+    "bytes": 4237,
+    "sha256": "f3be69e23296821912530f0359e2a36b2645f46691dcb894cb7a1d00f5563dc4"
+  },
+  "previous398399_independent_source_review": {
+    "file": "/tmp/pali-next391-410-nov28/independent-review/RIGHTS_AND_CORRESPONDENCE_REVIEW_v2.json",
+    "bytes": 10618,
+    "sha256": "c7208aa554b3cc1b177ae044f14c742aafee6ff0dc6cd9eb0978cce071c1ab0d"
+  },
+  "other_seven_original_candidate_publishers_deferred": [
+    394,
+    395,
+    396,
+    397,
+    400,
+    406,
+    407
+  ],
+  "all_other_existing_hold_and_runtime_decisions_untouched": true,
+  "source_only_no_activation": true,
+  "runtime_or_release_approval": false
+}

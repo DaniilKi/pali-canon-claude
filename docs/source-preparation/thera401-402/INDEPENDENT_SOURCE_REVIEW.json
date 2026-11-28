@@ -1,0 +1,125 @@
+{
+  "schema": "independent-publisher401402-public-source-preparation-review-v1",
+  "status": "GO_EXACT_PUBLIC_METADATA_SOURCE_PREP",
+  "reviewer": "ci_recovery_review independent of author next_ten_history_review",
+  "author_packet": {
+    "manifest": "/tmp/pali-next401402-sourceprep-nov28/MANIFEST.json",
+    "sha256": "f2f741e2e3c0379ce906eabf1b1a0b19f15dd46c513c3a896b6ca2905fb0badb",
+    "public_members": 14,
+    "all_members_rehashed": true,
+    "profiles_sha256": "e2bc9b358af5bf952ad3f97f7bdab567e4e057a2e66437e2d88cbb2e370f9133",
+    "links_sha256": "8b57b6d84525a9b251a39aca931425dfbf589537888c92d92ab553662b3adf2b"
+  },
+  "blind_first": {
+    "manifest": "/tmp/pali-next401402-independent-source-nov28/blind/MANIFEST.json",
+    "sha256": "77746b64c25becaa37ca78bf9d5a06d69743e8b0fee842dd307e0a019be300a1",
+    "public_record_sha256": "07d7f3dfae2d9e0c1636a86585e3facdd5cf9edb47af316c81193d908e01c11f",
+    "sealed_and_parent_notified_before_author_packet_read": true,
+    "primary_only_no_author_output_used_as_oracle": true
+  },
+  "literal_source_selection": [
+    {
+      "publisher_poem": 401,
+      "canonical_id": "tha-ap403",
+      "publisher_title": "Tissametteyya",
+      "canonical_chapter41_ordinal": 1
+    },
+    {
+      "publisher_poem": 402,
+      "canonical_id": "tha-ap404",
+      "publisher_title": "Puṇṇaka",
+      "canonical_chapter41_ordinal": 2
+    }
+  ],
+  "verified_source_domains": {
+    "primary_publisher_revision_parent_pinned": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+    "original_XML_sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+    "VRI_revision_parent_pinned": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+    "actual_canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+    "counts": {
+      "poem_paragraphs": 49,
+      "physical_stanza_paragraphs": 43,
+      "printed_numbered_stanzas": 44,
+      "notes": 36,
+      "hard500_UTF16_pages": 16,
+      "speaker_lines": 10,
+      "note_owned_c_ch_display_pairs": 6
+    },
+    "body_notes_quotes_paratext_equal_independent_private_primary_model": true,
+    "all_profile_fields_and_link_profile_plus_english_pendingmatch_exact": true,
+    "all_note_owners_definition_line_ranges_and_rawhashes_exact": true,
+    "all_quote_layout_numeric_suffix_rawparagraph_and_UTF16_prefix_page_hashes_exact": true,
+    "selected136_originalXML_tuples_all5fields_match": true,
+    "whole_Book36_original14645_retained_tuples_independently_replayed_after_blindseal": true,
+    "one_exact_emptytext_noteonly_source_event1130_excluded_as_existing_block_convention": true,
+    "all8_VRI_variant_note_rows_and_page_maps_retained": true,
+    "presentation_ledger_records_independently_replayed": 55,
+    "exact_formatting_edits_checked": 515,
+    "all_source_fields_rehashed_after_review": true
+  },
+  "qualified_scope": {
+    "publisher401": "Separate33-character unnoted chapter41 heading,31poemparagraphs,28physical/printedstanzas,19notes. All10 speakerlines remain in body andquote before4verselines, labels/sourceinterpolations not promoted toVRI. Tissametteyya/Tissa-metteyya spellings and translator historical/SN attribution remain exact. Both publisher andVRI finalrefrains are full, notpeyyala.",
+    "publisher402": "18poemparagraphs,15physicalentries/16printedstanzas/17notes. Local4–5/global3922–3923 stays one8lineparagraph. No summary/preface. Mixed original note6 quotation typography and bearer/wolf/compound ambiguity preserved. Publisher fullfinal3refrains remain separate fromVRI42–44peyyala. No unnamedBuddha identity orwording is invented.",
+    "whole_publisher_edition_only": true,
+    "no_linecomplete_canonical_or_wholechapter_translation_claim": true,
+    "no_lexical_punctuation_Unicode_or_refrain_harmonization": true,
+    "alloriginal_notes_and_edition_alternatives_retained": true
+  },
+  "rights": {
+    "six_primary_artifacts_freshly_hashed_and_reviewed": true,
+    "specific_translation": "Jonathan S. Walters/Whitman2017 CC BY-NC-SA4.0",
+    "actual_specific_terms_in_About_LICENSE_footer_epub": true,
+    "generic_site_BY_metadata_does_not_relax_translation_terms": true,
+    "required": "Retain attribution,creator/publisher,exactsource/revision,licenceURL,NonCommercial/ShareAlike,change andwarranty notices. Availability implies no additionalpermission.",
+    "new_commercial_media_runtime_release_permission": false
+  },
+  "holds": {
+    "all_nine_held_publisher_numbers_unchanged": [
+      391,
+      392,
+      393,
+      403,
+      404,
+      405,
+      408,
+      409,
+      410
+    ],
+    "canonical403_404_are_not_held_publisher403_404": true,
+    "existing398399_scope_and_sourcepeers_unchanged": true,
+    "other_seven_candidates_deferred": [
+      394,
+      395,
+      396,
+      397,
+      400,
+      406,
+      407
+    ],
+    "all_other_existing_decisions_untouched": true
+  },
+  "publication_boundary": {
+    "eligible": "Exact14 publicmetadata/stdlibproducer members of author manifest for root-selected separate future source-preparation WIP only.",
+    "private_verbatim_files": "Not public manifest members; independent and author PRIVATE_DO_NOT_COMMIT normalized/raw/lossless bodies/notes/quotes remain external and must not be committed/bundled.",
+    "no_full_private_body_note_or_quote_present_in_public_members": true,
+    "proposed_links_pending_status_retained": true,
+    "no_APPROVAL_or_activation_document_created": true
+  },
+  "supporting_review_files": [
+    {
+      "path": "COMPARISON.json",
+      "sha256": "61b3f7d51f74d65eabf4f98f21e1b352d29121a002653f84873b4f910a69fe17"
+    },
+    {
+      "path": "LEDGER_AND_PRODUCER_REVIEW.json",
+      "sha256": "5436c03597a8a0d75f6ca15b8a8f273830d468f16e84367d96a12f488a0acd92"
+    }
+  ],
+  "limits": [
+    "Own stdlib source/hash/JSON/gzip/XML/text comparison and staticPythonAST only. No authorproducer/application/parser/test/Git/network/browser/CI execution, no checkout orapp edits.",
+    "Publisher/VRI checkout-revision relationship is parentpinned provenance; computed Gitblob hashes are not Gitmembership queries.",
+    "This GO approves exactpublicmetadata source-preparation scope only. It does not authorize parser/API/currentcatalogue/runtime/package/native/CI/release activation or fullcanonicaltranslation.",
+    "Any future integration still needs root-owned exactparser/body/notes/quote/pages/sourceproofnegative and prefix-preservation checks; all independent currentcandidate gates remain separate."
+  ],
+  "blockers": []
+}

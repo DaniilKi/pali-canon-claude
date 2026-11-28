@@ -1,0 +1,48 @@
+{
+  "schema": "publisher401402-future-integration-requirements-v1",
+  "status": "NO_PRODUCTION_CHANGE_OR_API_ACCEPTANCE",
+  "profile_schema": "Same existing hash-only profile/link fields; no new descriptor or parser grammar is proposed by this packet.",
+  "finite_future_parser_binding_requirements": [
+    {
+      "id": "tha-ap403",
+      "publisher_poem": 401,
+      "raw_sha256": "acd65e79f98f11239870504f054002cc440339a375e77033800649d99bf91bc9",
+      "poem_heading_sha256": "c756b3f49219aba48d7142b176e749712f7c27057e891068f2248032b204a903",
+      "note_count": 19,
+      "body_paragraph_count": 31,
+      "display_pair_owners": {
+        "note:7": 1
+      }
+    },
+    {
+      "id": "tha-ap404",
+      "publisher_poem": 402,
+      "raw_sha256": "36ab4b64da98ca50626ff3f9c9d86fc34f53b1405b47ba2e9d60dda6a5d99740",
+      "poem_heading_sha256": "2dfda0f2f797948c80d2d59d82926ba85a3910064cfc88798fa721b5a6c0ed61",
+      "note_count": 17,
+      "body_paragraph_count": 18,
+      "display_pair_owners": {
+        "note:4": 1,
+        "note:6": 3,
+        "note:17": 1
+      }
+    }
+  ],
+  "unnoted_chapter_heading_owner_only": "tha-ap403",
+  "existing_layout_inference_not_runtime_acceptance": "The existing source parser compares each literal stanza_layout.lines rather than forcing four-line multiples; current quotation handling retains other lines after removing note calls and final suffix. Five-line speaker entries and the ordinary eight-line single-range paragraph appear representable without a new grammar. Actual parser/API verification remains required.",
+  "minimum_independent_source_peer": [
+    "Fresh read both raw publisher files and six controlling rights artifacts; verify all notes and no borrowed text.",
+    "Independently normalize all49 body paragraphs/36 notes and chapter heading; compare each hash, quote, page and note owner.",
+    "Check actual originalXML tuples, literal titles/boundaries and all edition differences; preserve all9 original holds and existing398399 scope."
+  ],
+  "minimum_future_execution_if_selected": [
+    "Exact source-to-parser parity for both whole bodies, all36 notes, separate unnoted heading, ten speaker lines, combined8-line entry and all6 display pairs.",
+    "Full source profile/link preservation of every previous current object/order and held-source exclusions.",
+    "Actual current English/readPassage/quote/search plus hard500 continuations with all16 source pages and root/source pins; no source text bundled.",
+    "Both actual widget-host paths and fresh installed/browser reader render mandatory notices, source identity, all notes and paratext.",
+    "Negative same-length body/paratext/note/label mutations; cached/offline citation stability; no private study-data migration.",
+    "Exact candidate tests and required CI before any separately authorized integration; no physical-device or human accessibility claim from emulation."
+  ],
+  "new_rights_or_external_outreach_needed_for_this_qualified_source_prep": false,
+  "scope_limits": "Commercial/media publication, specialist interpretation, actual parser/API/browser behavior, physical devices and human assistive acceptance are not approved here."
+}

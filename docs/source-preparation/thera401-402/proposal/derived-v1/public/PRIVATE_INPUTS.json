@@ -1,0 +1,26 @@
+{
+  "DO_NOT_COMMIT": true,
+  "directory": "../PRIVATE_DO_NOT_COMMIT",
+  "files": [
+    {
+      "file": "poem-401.lossless.json",
+      "bytes": 9930,
+      "sha256": "6f1adf4ea7e04330817ff4a8fdd21505575bbce085aeae7e7f7e26eb37047601"
+    },
+    {
+      "file": "poem-401.presentation.json",
+      "bytes": 11034,
+      "sha256": "dec83a636a0347de28d901fe291b606eac42a917112ddbd7df94e91ba611c99a"
+    },
+    {
+      "file": "poem-402.lossless.json",
+      "bytes": 8073,
+      "sha256": "782973ac3e47c070147ea1af7aa0008f9ef77334de8675c2538e8dbed7680def"
+    },
+    {
+      "file": "poem-402.presentation.json",
+      "bytes": 7350,
+      "sha256": "f8f57baba48b2c4cc45c2dbcad4e29ea7e4be905d7ef51702cc70f6adcfecdf8"
+    }
+  ]
+}

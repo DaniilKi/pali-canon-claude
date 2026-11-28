@@ -1,0 +1,66 @@
+{
+  "schema": "publisher401402-required-notices-proposal-v1",
+  "status": "PENDING_INDEPENDENT_REVIEW",
+  "translator": "Jonathan S. Walters",
+  "publisher": "Jonathan S. Walters and Whitman College",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "specific_rights_artifacts": {
+    "LICENSE.md": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    "src/_pages/about.md": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    "src/_includes/site/footer.njk": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    "src/_includes/layouts/epub-metadata.xml": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    "src/_data/site.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    "src/_poems/_poems.json": {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    }
+  },
+  "per_poem": {
+    "tha-ap403": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading398, BJTS brace/file401 and canonical tha-ap403 are distinct literal identities. Chapter41, its first poem title, the Sobhita/fire/Padumuttara/fruit narrative and both colophons establish this particular correspondence; no general numbering rule is approved.",
+      "The unnoted Metteyya chapter41 heading remains separate publisher paratext. Notes1–2 belong to the poem heading, notes3–19 remain poem-owned, and no chapter-summary or note-owning preface is invented.",
+      "Retain all ten bracketed speaker-label lines and their original single-newline separators in local4,5,7,8,9,10,11,12,18,24. Those physical five-line entries contain a speaker label plus four translated verse lines; the labels are not numbering-only or missing-verse text.",
+      "Retain Tissametteyya in the file title and Tissa-metteyya in the colophons and note2. Preserve the attributed SN reference, note4 hehi, note5 PTS/BJTS manuja/manuje and note6 deva te/devate alternatives; the independent VRI hohiti/hehiti variant and its other original note remain separate.",
+      "This publisher poem prints28 stanzas with full final attainment refrains; this VRI unit also has28 numbered stanzas and full refrains. Equal counts do not prove word equivalence. Preserve the translator’s speaker assignments, bracketed supplements, lexical choices and note16 botanical spelling without harmonization."
+    ],
+    "tha-ap404": [
+      "Complete publisher-edition poem (PTS/BJTS), not a line-complete translation of every VRI stanza. Whole-poem correspondence does not imply segment, line or word equivalence. Preserve independent VRI wording, variant notes and edition differences; do not invent missing words or transfer another poem’s refrain.",
+      "Publisher main PTS heading399, BJTS brace/file402 and canonical tha-ap404 are distinct literal identities. Chapter41’s second title, the self-become Buddha’s illness/death, cremation and yakkha naming narrative,91-aeon statement and both colophons establish this particular correspondence; no general numbering rule is approved.",
+      "Keep local4–5/global3922–3923 as one physical eight-line paragraph with its one original terminal range suffix. Both printed stanzas remain present; do not split, drop or silently renumber the paragraph.",
+      "All17 original notes stay poem-owned: notes1–2 are attached to the poem heading and notes3–17 to their original stanzas. There is no chapter heading, chapter summary or transferred editorial note in this file.",
+      "Retain source-note6’s BJTS wolf/compound qualification and its mixed quotation punctuation, note7 vyaggha/vālā alternatives, note13 yaṃ/taŋ variants and note15 divyamayo/dibbamayo wording. All six VRI variant-note records remain independent; no edition is silently selected to repair another.",
+      "The publisher prints16 complete stanzas, including three full attainment refrains at local14–16, whereas VRI42–44 abbreviates those refrains with peyyāla. Do not expand VRI from the publisher, substitute a different refrain, or equate whole publisher coverage with line-complete VRI coverage."
+    ]
+  },
+  "rights_scope": "Retain attribution, source edition/revision, specific BY-NC-SA4 licence, change and warranty notices. Generic site BY4 metadata and public availability do not broaden translation reuse. No new commercial/media/publication approval.",
+  "presentation_changes": "Only explicitly reverse-checked formatting conversions; words, punctuation, spelling, original note labels/ownership, line/stanza breaks, speaker assignments and colophons retained. No Unicode normalization or invented completion."
+}

@@ -1,0 +1,2806 @@
+{
+  "schema": "blind-primary-publisher401402-source-model-v1",
+  "status": "PRESEALED_BEFORE_AUTHOR_PROPOSAL_READ_NO_APPROVAL",
+  "publisher_revision_parent_pinned": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "VRI_revision_parent_pinned": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "current_canonical_logical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "canonical_counts": {
+    "books": 61,
+    "units": 8544
+  },
+  "physical_input_pins": [
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1_computed_not_queried": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1_computed_not_queried": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1_computed_not_queried": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1_computed_not_queried": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1_computed_not_queried": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1_computed_not_queried": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    },
+    {
+      "path": "/tmp/pali-boundary-integration-nov28/recovery-execution/current17/canon.json.gz",
+      "bytes": 5562006,
+      "sha256": "d7016ec31d89583c55fe7b502622cb9cbcda1ba4b4fddf754372bc4c3b987aa0",
+      "git_blob_sha1_computed_not_queried": "f6e5527c6a3febb29f62b4838889978c71c96fba"
+    },
+    {
+      "path": "/tmp/pali-next-ten-evidence-nov26/vri-fixture/romn/s0510m1.mul.xml",
+      "bytes": 2464074,
+      "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+      "git_blob_sha1_computed_not_queried": "f37368072aece065d2668f93a74c24b423939f1f"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-401.md",
+      "bytes": 6387,
+      "sha256": "acd65e79f98f11239870504f054002cc440339a375e77033800649d99bf91bc9",
+      "git_blob_sha1_computed_not_queried": "b90907423af09928dd3c661d1c1b60a08ff46a47"
+    },
+    {
+      "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-402.md",
+      "bytes": 5073,
+      "sha256": "36ab4b64da98ca50626ff3f9c9d86fc34f53b1405b47ba2e9d60dda6a5d99740",
+      "git_blob_sha1_computed_not_queried": "e536bf5a9f1691564458da49bc94023b2d0a6dbd"
+    }
+  ],
+  "rows": {
+    "tha-ap403": {
+      "publisher_poem": 401,
+      "title": "Tissametteyya",
+      "publisher_heading_PTS_BJTS": [
+        398,
+        401
+      ],
+      "primary_raw": {
+        "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-401.md",
+        "bytes": 6387,
+        "sha256": "acd65e79f98f11239870504f054002cc440339a375e77033800649d99bf91bc9",
+        "git_blob_sha1_computed_not_queried": "b90907423af09928dd3c661d1c1b60a08ff46a47"
+      },
+      "body_sha256": "0a5968b8e6c25e7336cbb67019733e395a156356c1c5be2c5159232f9f2c2277",
+      "body_characters_UTF16": 4587,
+      "body_paragraphs": 31,
+      "normalized_heading_sha256": "c756b3f49219aba48d7142b176e749712f7c27057e891068f2248032b204a903",
+      "notes_sha256_JSON_stringify": "6063400c75b7a5736bb76cf1cbea605cd02db0f607765b0d760eb7e05416629c",
+      "note_count": 19,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "paragraph_index0": 0,
+          "scope": "poem_heading",
+          "definition_start_line1": 165,
+          "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+          "normalized_text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+          "characters_UTF16": 189,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "abbreviation_label",
+              "count": 2,
+              "input_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+              "output_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "matched_and_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "output_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+              "matched_and_replacement_pairs_sha256": "c579dddbe40ab82984bdec5141dea547af24e2ecf735e019fe925cf1f90a840a"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "paragraph_index0": 0,
+          "scope": "poem_heading",
+          "definition_start_line1": 167,
+          "raw_content_sha256": "1691d800612ba94a8509f1a37a0ee26a1209e7d151c2cec7b004e78b59add321",
+          "normalized_text_sha256": "51ac725fcd0ebd26ea74f201961765669f9a59846379eba76b98da3fa997ee05",
+          "characters_UTF16": 104,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "abbreviation_label",
+              "count": 1,
+              "input_sha256": "1691d800612ba94a8509f1a37a0ee26a1209e7d151c2cec7b004e78b59add321",
+              "output_sha256": "e83f2288967bd3944fa5aebe1ff524426bcb9e87cb8fdaea313c347f98e2f302",
+              "matched_and_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 2,
+              "input_sha256": "e83f2288967bd3944fa5aebe1ff524426bcb9e87cb8fdaea313c347f98e2f302",
+              "output_sha256": "51ac725fcd0ebd26ea74f201961765669f9a59846379eba76b98da3fa997ee05",
+              "matched_and_replacement_pairs_sha256": "58dfb1e08ad828e72e9870e688ae02041393f31204e43db66119374a30aa66fb"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "paragraph_index0": 4,
+          "scope": "poem_stanza",
+          "definition_start_line1": 169,
+          "raw_content_sha256": "5fa538f50dc9d570a279f43b963666e8b2fd6de79c588baa9a7a00e5898f0109",
+          "normalized_text_sha256": "1eae8ebc24615a97716ca58e876fdebd6fe39fb8b6d4cbac8647ed98b8c63efa",
+          "characters_UTF16": 8,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "5fa538f50dc9d570a279f43b963666e8b2fd6de79c588baa9a7a00e5898f0109",
+              "output_sha256": "1eae8ebc24615a97716ca58e876fdebd6fe39fb8b6d4cbac8647ed98b8c63efa",
+              "matched_and_replacement_pairs_sha256": "d33014047c24af347615df584e4f7759e2239204afa4d8d1762853a833ba3b08"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "paragraph_index0": 4,
+          "scope": "poem_stanza",
+          "definition_start_line1": 171,
+          "raw_content_sha256": "f23d025d95022500db291a71ed59f48b97f2b847405bc44c8edaf87c7c6ebbee",
+          "normalized_text_sha256": "d8d1006f40252799bf40b5f4522b8ff63eebdb251e488e86f26634ba184f38c1",
+          "characters_UTF16": 35,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 2,
+              "input_sha256": "f23d025d95022500db291a71ed59f48b97f2b847405bc44c8edaf87c7c6ebbee",
+              "output_sha256": "d8d1006f40252799bf40b5f4522b8ff63eebdb251e488e86f26634ba184f38c1",
+              "matched_and_replacement_pairs_sha256": "6d9326f1865ff187d1f921209014020c6924794c021088018165b80ed96413b2"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "paragraph_index0": 5,
+          "scope": "poem_stanza",
+          "definition_start_line1": 173,
+          "raw_content_sha256": "513969fee3da9028e09c48d06a6029287502b7ca3631c2b80b09c49189bc3f5f",
+          "normalized_text_sha256": "9e8521982efe8ddbf2bbe32891a9bfb8195a074526ab9d68c9a1f1def8d16acf",
+          "characters_UTF16": 64,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "abbreviation_label",
+              "count": 1,
+              "input_sha256": "513969fee3da9028e09c48d06a6029287502b7ca3631c2b80b09c49189bc3f5f",
+              "output_sha256": "e346da5e5af72d28de6b987fa57b55f0fa6cbc9016af0838d6e82ace277ad031",
+              "matched_and_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 2,
+              "input_sha256": "e346da5e5af72d28de6b987fa57b55f0fa6cbc9016af0838d6e82ace277ad031",
+              "output_sha256": "9e8521982efe8ddbf2bbe32891a9bfb8195a074526ab9d68c9a1f1def8d16acf",
+              "matched_and_replacement_pairs_sha256": "0540bc7b9521d5b51599eac3f0b9ed7aa3ea900a6acce16fd1d155cee96f325d"
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "paragraph_index0": 5,
+          "scope": "poem_stanza",
+          "definition_start_line1": 175,
+          "raw_content_sha256": "a58f3c7da4e7029a1e88528bb696b55b96725ac9d506bc7cab9ad59e1aade423",
+          "normalized_text_sha256": "7f6c3b8fc2092ddd1b91e041739e387f4571f856195e0dbaf58a17fc37fc74ea",
+          "characters_UTF16": 40,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "abbreviation_label",
+              "count": 2,
+              "input_sha256": "a58f3c7da4e7029a1e88528bb696b55b96725ac9d506bc7cab9ad59e1aade423",
+              "output_sha256": "c3b3b7137032934562693995d9b49449c720c2f6c9cfe0205ab1b233ae851111",
+              "matched_and_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 2,
+              "input_sha256": "c3b3b7137032934562693995d9b49449c720c2f6c9cfe0205ab1b233ae851111",
+              "output_sha256": "7f6c3b8fc2092ddd1b91e041739e387f4571f856195e0dbaf58a17fc37fc74ea",
+              "matched_and_replacement_pairs_sha256": "181af71a091c4896299d88f1899793a28bd89043019d8075475e8359a3ebb7f3"
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "paragraph_index0": 5,
+          "scope": "poem_stanza",
+          "definition_start_line1": 177,
+          "raw_content_sha256": "3f0b7d67ec0086d89f6b0b202c9c1e4266ccbebce973c99dc50e84dbef946c41",
+          "normalized_text_sha256": "99f65505406af0d432c5d1315aa75a41f7e14780bdf34dad6023f0a5f6f86b8b",
+          "characters_UTF16": 8,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Pandoc_diacritics_on",
+              "count": 1,
+              "input_sha256": "3f0b7d67ec0086d89f6b0b202c9c1e4266ccbebce973c99dc50e84dbef946c41",
+              "output_sha256": "be757bfa92a2aeee0aab1e4a4895a3a3e0fa033f6cfee225bc4a9878cd860aca",
+              "matched_and_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "be757bfa92a2aeee0aab1e4a4895a3a3e0fa033f6cfee225bc4a9878cd860aca",
+              "output_sha256": "99f65505406af0d432c5d1315aa75a41f7e14780bdf34dad6023f0a5f6f86b8b",
+              "matched_and_replacement_pairs_sha256": "d9aa2ee85e52610d646ecf12727ea6cadff2e0bd15ee93f31b0736eb2e497549"
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "paragraph_index0": 6,
+          "scope": "poem_stanza",
+          "definition_start_line1": 179,
+          "raw_content_sha256": "e983a4c46ee092a0ab6fc856b444827144f165554a3c69f96d27f28bbe1bd9c9",
+          "normalized_text_sha256": "e983a4c46ee092a0ab6fc856b444827144f165554a3c69f96d27f28bbe1bd9c9",
+          "characters_UTF16": 23,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": []
+        },
+        {
+          "number": 9,
+          "paragraph_index0": 11,
+          "scope": "poem_stanza",
+          "definition_start_line1": 181,
+          "raw_content_sha256": "bf86d11fedc07f5e815368264ac64179aadd91361b9a5847464e17991cd4156b",
+          "normalized_text_sha256": "bf86d11fedc07f5e815368264ac64179aadd91361b9a5847464e17991cd4156b",
+          "characters_UTF16": 17,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": []
+        },
+        {
+          "number": 10,
+          "paragraph_index0": 12,
+          "scope": "poem_stanza",
+          "definition_start_line1": 183,
+          "raw_content_sha256": "b9c256bbea0d280c93c7d0ac874d114f58b6d030db6b4fe7b40fae313aa6ee22",
+          "normalized_text_sha256": "e4a35ec1c04c70fa3e52b6d7a6f4df1e5b46d8b95442c0cb8aff6addd2c3590b",
+          "characters_UTF16": 26,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "b9c256bbea0d280c93c7d0ac874d114f58b6d030db6b4fe7b40fae313aa6ee22",
+              "output_sha256": "e4a35ec1c04c70fa3e52b6d7a6f4df1e5b46d8b95442c0cb8aff6addd2c3590b",
+              "matched_and_replacement_pairs_sha256": "df0d5cc2cf48e3d2070971e546e04d421ad7fa63331638c278703cf3555eb999"
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "paragraph_index0": 12,
+          "scope": "poem_stanza",
+          "definition_start_line1": 185,
+          "raw_content_sha256": "efa6ab408cb9552d757f89695e995396c69d82aaf2f34c58cfb58e3947a003cd",
+          "normalized_text_sha256": "fae6ba3e7cafbecf72f6a5fff08b620e3373a3591140bf07ee6774aca564db92",
+          "characters_UTF16": 10,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "efa6ab408cb9552d757f89695e995396c69d82aaf2f34c58cfb58e3947a003cd",
+              "output_sha256": "fae6ba3e7cafbecf72f6a5fff08b620e3373a3591140bf07ee6774aca564db92",
+              "matched_and_replacement_pairs_sha256": "51435489588c879a2053ca3bcae50826aee15f0d8e70efde44f2a592ad9f0017"
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "paragraph_index0": 12,
+          "scope": "poem_stanza",
+          "definition_start_line1": 187,
+          "raw_content_sha256": "d188fc8a54892f7117b73922bc98e4aa759787ea68d8db01e223123eb1bcbd61",
+          "normalized_text_sha256": "029f5f950129342d2acb686e235e6dc1cf555a0cd2f82cff1a72bdcc0cffac2c",
+          "characters_UTF16": 8,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "d188fc8a54892f7117b73922bc98e4aa759787ea68d8db01e223123eb1bcbd61",
+              "output_sha256": "029f5f950129342d2acb686e235e6dc1cf555a0cd2f82cff1a72bdcc0cffac2c",
+              "matched_and_replacement_pairs_sha256": "1743657c8bb245aafd3edf4746ae8a1786f61e802aae1d6398575c57df52eb38"
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "paragraph_index0": 12,
+          "scope": "poem_stanza",
+          "definition_start_line1": 189,
+          "raw_content_sha256": "a73af00427b202f699a765b030c31d08befa2eed81286147adbcbf99d99c562a",
+          "normalized_text_sha256": "ff7feac60290c1a2b05331c1f88af0715967a0c5737c8e1e646c8264789e443e",
+          "characters_UTF16": 12,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "a73af00427b202f699a765b030c31d08befa2eed81286147adbcbf99d99c562a",
+              "output_sha256": "ff7feac60290c1a2b05331c1f88af0715967a0c5737c8e1e646c8264789e443e",
+              "matched_and_replacement_pairs_sha256": "d1f753c4cd39c9cd1e68abee0b9cdbc05fde53fdc0c6ca347a2fbe5c556cf6a7"
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "paragraph_index0": 12,
+          "scope": "poem_stanza",
+          "definition_start_line1": 191,
+          "raw_content_sha256": "3f928a44994777d39a518f2bfb1588a96186c6b8b90cb3b562de592baa4898fb",
+          "normalized_text_sha256": "f33d6075511dab128939d5a587dcea034e80fa764753b3a2d21591ead82e2aff",
+          "characters_UTF16": 4,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "3f928a44994777d39a518f2bfb1588a96186c6b8b90cb3b562de592baa4898fb",
+              "output_sha256": "f33d6075511dab128939d5a587dcea034e80fa764753b3a2d21591ead82e2aff",
+              "matched_and_replacement_pairs_sha256": "84d71450b330a4f05a6a315fe6914c2f4dc3ac5363b21d18989d8b56b2757a4d"
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "paragraph_index0": 15,
+          "scope": "poem_stanza",
+          "definition_start_line1": 193,
+          "raw_content_sha256": "7f2ddffd46ad9cd6d8cb8063715332a00df82f812de0b1ccc8ac6752aa04d82f",
+          "normalized_text_sha256": "423662faf378271201870e8885abdf0ff952f2b8cf4248fe11ea9e0e4d66c978",
+          "characters_UTF16": 11,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "7f2ddffd46ad9cd6d8cb8063715332a00df82f812de0b1ccc8ac6752aa04d82f",
+              "output_sha256": "423662faf378271201870e8885abdf0ff952f2b8cf4248fe11ea9e0e4d66c978",
+              "matched_and_replacement_pairs_sha256": "b355e3076e54db3b9419a7d7801300059833510eefca817837f11b421a4d0afd"
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "paragraph_index0": 15,
+          "scope": "poem_stanza",
+          "definition_start_line1": 195,
+          "raw_content_sha256": "4b8bc2151e7b1b87075013a4e566c1f2782e9970d71c451e58237168743f6ba9",
+          "normalized_text_sha256": "8d5a0596b60f979a79e5df4ec3dceddb4fa9e473ae1f9ca6ac085c774ce7dbdc",
+          "characters_UTF16": 91,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 3,
+              "input_sha256": "4b8bc2151e7b1b87075013a4e566c1f2782e9970d71c451e58237168743f6ba9",
+              "output_sha256": "8d5a0596b60f979a79e5df4ec3dceddb4fa9e473ae1f9ca6ac085c774ce7dbdc",
+              "matched_and_replacement_pairs_sha256": "56f2b61e6c9cc18d62ef113823e232ff23a1cf9bfe59b2525f49770b5bda0227"
+            }
+          ]
+        },
+        {
+          "number": 17,
+          "paragraph_index0": 21,
+          "scope": "poem_stanza",
+          "definition_start_line1": 197,
+          "raw_content_sha256": "dfbe6dc4ea2834c0ea289a9335537872013aaa1214b88217056dda7c23f31dd2",
+          "normalized_text_sha256": "9d299b145bbfd06ebc409485c30ca37e620341d497db6db598eb4c23ec8db851",
+          "characters_UTF16": 59,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 2,
+              "input_sha256": "dfbe6dc4ea2834c0ea289a9335537872013aaa1214b88217056dda7c23f31dd2",
+              "output_sha256": "d81ce985f94ba3280351ab9ed85cc451d7c8b7bf5224a652d5ff6ddf5849cd21",
+              "matched_and_replacement_pairs_sha256": "8c0efb52bdd9f6ae70dddc00e89f5fe89541055a1a54d26ea2529e83b0b2625e"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "d81ce985f94ba3280351ab9ed85cc451d7c8b7bf5224a652d5ff6ddf5849cd21",
+              "output_sha256": "9d299b145bbfd06ebc409485c30ca37e620341d497db6db598eb4c23ec8db851",
+              "matched_and_replacement_pairs_sha256": "05c09fa1121d6afe4df7bbd06aef7f434c49c07ac10c6fe89a297acc20d23181"
+            }
+          ]
+        },
+        {
+          "number": 18,
+          "paragraph_index0": 22,
+          "scope": "poem_stanza",
+          "definition_start_line1": 199,
+          "raw_content_sha256": "ad06b7d3a0478fe83a823bf74b2160070c60f715e3ff19f4c2067a3dce6e4975",
+          "normalized_text_sha256": "ad06b7d3a0478fe83a823bf74b2160070c60f715e3ff19f4c2067a3dce6e4975",
+          "characters_UTF16": 19,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": []
+        },
+        {
+          "number": 19,
+          "paragraph_index0": 23,
+          "scope": "poem_stanza",
+          "definition_start_line1": 201,
+          "raw_content_sha256": "f757578f2015b63ced56c75736a8422d0300dbf2fd2e742a1ca8e7d386e4bf74",
+          "normalized_text_sha256": "f757578f2015b63ced56c75736a8422d0300dbf2fd2e742a1ca8e7d386e4bf74",
+          "characters_UTF16": 15,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": []
+        }
+      ],
+      "body_operations": [
+        {
+          "kind": "note_marker",
+          "count": 19,
+          "input_sha256": "70fe3d36e703e3bbd8cd89af8174d75590a633f7bac83b56635b09b3dbcc6abc",
+          "output_sha256": "449e6af7d924a9f55f20dccd288caa8b305512d836b283a6b92882f7ebcedafa",
+          "matched_and_replacement_pairs_sha256": "b3afb2fd6dce887ccadce07d9f4d07126c24cf2559f9950f763416d01c5f9c6d"
+        },
+        {
+          "kind": "Markdown_heading_marker",
+          "count": 1,
+          "input_sha256": "449e6af7d924a9f55f20dccd288caa8b305512d836b283a6b92882f7ebcedafa",
+          "output_sha256": "2e1dbe0dc21355987a52e4de8167fa702b27e4953a01bf334824a08e6a601e43",
+          "matched_and_replacement_pairs_sha256": "52b7ccc5c452c1471ffdfee4bbf89cb2f22112447e49cc275b2722b85a5d7fa3"
+        },
+        {
+          "kind": "Markdown_escape",
+          "count": 174,
+          "input_sha256": "2e1dbe0dc21355987a52e4de8167fa702b27e4953a01bf334824a08e6a601e43",
+          "output_sha256": "699affa42e0a805f6074659af8bf9288469fa255575468f1bd3c94d2726b061f",
+          "matched_and_replacement_pairs_sha256": "2301ea60cff7e7cf8bf748414ddee8115c697ce72ed2d51cdaf1b59bb8ec2415"
+        },
+        {
+          "kind": "trailing_hardbreak_spaces",
+          "count": 94,
+          "input_sha256": "699affa42e0a805f6074659af8bf9288469fa255575468f1bd3c94d2726b061f",
+          "output_sha256": "0a5968b8e6c25e7336cbb67019733e395a156356c1c5be2c5159232f9f2c2277",
+          "matched_and_replacement_pairs_sha256": "44ddf3bd475cbf18c23263adebfedf4c07f27ce1044e86ce44c048384690ee35"
+        }
+      ],
+      "paratext": {
+        "scope": "separate_unnoted_chapter_heading",
+        "sha256": "b1c76c6f71ae64fa62ebf4ffecdfd76cffb7a5935e86d8590cf8761715e8a332",
+        "characters_UTF16": 33,
+        "paragraphs": 1,
+        "note_numbers": [],
+        "presentation_operations": [
+          {
+            "kind": "Markdown_heading_marker",
+            "count": 1,
+            "input_sha256": "5c694c8e80a42548fe8f690b6d1e6140534df1be20217713a6610d7e5ffd277f",
+            "output_sha256": "b1c76c6f71ae64fa62ebf4ffecdfd76cffb7a5935e86d8590cf8761715e8a332",
+            "matched_and_replacement_pairs_sha256": "748a6dc0e4af567f1ac2c52be7fe5c09f55f2b41f8649f608b3a51b5947851f3"
+          }
+        ]
+      },
+      "summary_scopes": [],
+      "physical_stanza_paragraphs": 28,
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3891",
+          "suffix": "(1) [3891]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3892",
+          "suffix": "(2) [3892]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3893",
+          "suffix": "(3) [3893]",
+          "lines": 4
+        },
+        {
+          "local_label": "4",
+          "publisher_label": "3894",
+          "suffix": "(4) [3894]",
+          "lines": 5
+        },
+        {
+          "local_label": "5",
+          "publisher_label": "3895",
+          "suffix": "(5) [3895]",
+          "lines": 5
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "3896",
+          "suffix": "(6) [3896]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "3897",
+          "suffix": "(7) [3897]",
+          "lines": 5
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "3898",
+          "suffix": "(8) [3898]",
+          "lines": 5
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "3899",
+          "suffix": "(9) [3899]",
+          "lines": 5
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "3900",
+          "suffix": "(10) [3900]",
+          "lines": 5
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "3901",
+          "suffix": "(11) [3901]",
+          "lines": 5
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "3902",
+          "suffix": "(12) [3902]",
+          "lines": 5
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "3903",
+          "suffix": "(13) [3903]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "3904",
+          "suffix": "(14) [3904]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "3905",
+          "suffix": "(15) [3905]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "3906",
+          "suffix": "(16) [3906]",
+          "lines": 4
+        },
+        {
+          "local_label": "17",
+          "publisher_label": "3907",
+          "suffix": "(17) [3907]",
+          "lines": 4
+        },
+        {
+          "local_label": "18",
+          "publisher_label": "3908",
+          "suffix": "(18) [3908]",
+          "lines": 5
+        },
+        {
+          "local_label": "19",
+          "publisher_label": "3909",
+          "suffix": "(19) [3909]",
+          "lines": 4
+        },
+        {
+          "local_label": "20",
+          "publisher_label": "3910",
+          "suffix": "(20) [3910]",
+          "lines": 4
+        },
+        {
+          "local_label": "21",
+          "publisher_label": "3911",
+          "suffix": "(21) [3911]",
+          "lines": 4
+        },
+        {
+          "local_label": "22",
+          "publisher_label": "3912",
+          "suffix": "(22) [3912]",
+          "lines": 4
+        },
+        {
+          "local_label": "23",
+          "publisher_label": "3913",
+          "suffix": "(23) [3913]",
+          "lines": 4
+        },
+        {
+          "local_label": "24",
+          "publisher_label": "3914",
+          "suffix": "(24) [3914]",
+          "lines": 5
+        },
+        {
+          "local_label": "25",
+          "publisher_label": "3915",
+          "suffix": "(25) [3915]",
+          "lines": 4
+        },
+        {
+          "local_label": "26",
+          "publisher_label": "3916",
+          "suffix": "(26) [3916]",
+          "lines": 4
+        },
+        {
+          "local_label": "27",
+          "publisher_label": "3917",
+          "suffix": "(27) [3917]",
+          "lines": 4
+        },
+        {
+          "local_label": "28",
+          "publisher_label": "3918",
+          "suffix": "(28) [3918]",
+          "lines": 4
+        }
+      ],
+      "local_labels_expanded": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "publisher_labels_expanded": [
+        3891,
+        3892,
+        3893,
+        3894,
+        3895,
+        3896,
+        3897,
+        3898,
+        3899,
+        3900,
+        3901,
+        3902,
+        3903,
+        3904,
+        3905,
+        3906,
+        3907,
+        3908,
+        3909,
+        3910,
+        3911,
+        3912,
+        3913,
+        3914,
+        3915,
+        3916,
+        3917,
+        3918
+      ],
+      "quotes": [
+        {
+          "paragraph_index0": 1,
+          "text_sha256": "d075cfebce015c489db5d3bffe2f55770490216b3c6688d89e86754db2798677",
+          "characters_UTF16": 130,
+          "lines": 4,
+          "raw_paragraph_sha256": "cb8e9d1fc87ae1540a196ae4bcc92bae181ff1cb93c22d28eba6764eebde79fd",
+          "presented_paragraph_sha256": "985a6804ff87fd2f7553fb78e1bb6ed81e5cdac5c5cb630bc602f40142c4bbac",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "cb8e9d1fc87ae1540a196ae4bcc92bae181ff1cb93c22d28eba6764eebde79fd",
+              "output_sha256": "dd17a316611ac6c9526a6e6bee819b0392facd6baf3c22a88008405d9d844989",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "dd17a316611ac6c9526a6e6bee819b0392facd6baf3c22a88008405d9d844989",
+              "output_sha256": "985a6804ff87fd2f7553fb78e1bb6ed81e5cdac5c5cb630bc602f40142c4bbac",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 2,
+          "text_sha256": "4d239d563358be1c93f3170abfa1772204edf2f5635f4a466da248bd8662d091",
+          "characters_UTF16": 128,
+          "lines": 4,
+          "raw_paragraph_sha256": "de2bb4e87609ebcf9d2db6031269531efb9eb865d201fee093be93280670b518",
+          "presented_paragraph_sha256": "817f63868f9ff891c1dd8fc218f17acdcac09ed67ec300d4a74c6cc92706f2a7",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "de2bb4e87609ebcf9d2db6031269531efb9eb865d201fee093be93280670b518",
+              "output_sha256": "69c027a0c660cdf043fbaacfc8859a7206469aba9ded51a325a24e827ba8a1fb",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "69c027a0c660cdf043fbaacfc8859a7206469aba9ded51a325a24e827ba8a1fb",
+              "output_sha256": "817f63868f9ff891c1dd8fc218f17acdcac09ed67ec300d4a74c6cc92706f2a7",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 3,
+          "text_sha256": "1ee8c005dcdd45447f94c949bf122746a426a1f1ff43e39c705ac74a17513da9",
+          "characters_UTF16": 112,
+          "lines": 4,
+          "raw_paragraph_sha256": "6961f0c9588f3584933660731ccdd66192d0a84b209c0eacef5e448b4fcedb41",
+          "presented_paragraph_sha256": "cbd978a2a56f0620212c8951fffeb483c583bf83dbdfe4bca503378895c30db9",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "6961f0c9588f3584933660731ccdd66192d0a84b209c0eacef5e448b4fcedb41",
+              "output_sha256": "56bf82ddae3114c9455890dcbf40318d8e775f4712fda07b38a7af03f13e1904",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "56bf82ddae3114c9455890dcbf40318d8e775f4712fda07b38a7af03f13e1904",
+              "output_sha256": "cbd978a2a56f0620212c8951fffeb483c583bf83dbdfe4bca503378895c30db9",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 4,
+          "text_sha256": "26bc62cc43d0d9ed742acc0bfae618cad89a1c2bce0429795e09bed73fd70475",
+          "characters_UTF16": 155,
+          "lines": 5,
+          "raw_paragraph_sha256": "e4762893edf0eea42a60d9ac301f0bf88f2080d00956d2e613e1c0a61a6b1edb",
+          "presented_paragraph_sha256": "c339098f9564f69aee62144ad247149a6debda3fef2bb99984c6c1334f187e3d",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 2,
+              "input_sha256": "e4762893edf0eea42a60d9ac301f0bf88f2080d00956d2e613e1c0a61a6b1edb",
+              "output_sha256": "faa8c46cecec69c967ca0955c306040fbff5ab48d93461d7360fa3006db03374",
+              "matched_and_replacement_pairs_sha256": "d0aa44131938c2990c75deb8d0cac4ae728c3ea741aeb4fa00e11c1d08f06bdb"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 8,
+              "input_sha256": "faa8c46cecec69c967ca0955c306040fbff5ab48d93461d7360fa3006db03374",
+              "output_sha256": "8cb7f95b7509cc93cd8e6e1f3d5512424f1958131cb504df6779e6360fad99aa",
+              "matched_and_replacement_pairs_sha256": "0a62c0e54a07a89b1755c5e9f2dded6649ed157595e02069418ccf95c0728d72"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "8cb7f95b7509cc93cd8e6e1f3d5512424f1958131cb504df6779e6360fad99aa",
+              "output_sha256": "c339098f9564f69aee62144ad247149a6debda3fef2bb99984c6c1334f187e3d",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 5,
+          "text_sha256": "d8ccbac41df0ac450a06a6568edb32fb2b9b2b7662e662181b6b884f6da5e733",
+          "characters_UTF16": 146,
+          "lines": 5,
+          "raw_paragraph_sha256": "a39647627317ce6f7b2d4bba7b2ccef7e7a8074267a72990b7ff485cc6af831d",
+          "presented_paragraph_sha256": "01e41e3b0440ab7bbf0c61f7a324016ae8a921038a840f38165460ea88f63938",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 3,
+              "input_sha256": "a39647627317ce6f7b2d4bba7b2ccef7e7a8074267a72990b7ff485cc6af831d",
+              "output_sha256": "3e3884e4a85553acae8f0d44de284f3b5826e30ece62d28b8e09e765b3993ddd",
+              "matched_and_replacement_pairs_sha256": "140ef15102d87efd0a7e8995884cfb5d6f0b556cbed8e605ed5a544047a602da"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 8,
+              "input_sha256": "3e3884e4a85553acae8f0d44de284f3b5826e30ece62d28b8e09e765b3993ddd",
+              "output_sha256": "6c32f4f2acb29d7f347dd38c899bd05889867d95171163be819065db41a79333",
+              "matched_and_replacement_pairs_sha256": "0a62c0e54a07a89b1755c5e9f2dded6649ed157595e02069418ccf95c0728d72"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "6c32f4f2acb29d7f347dd38c899bd05889867d95171163be819065db41a79333",
+              "output_sha256": "01e41e3b0440ab7bbf0c61f7a324016ae8a921038a840f38165460ea88f63938",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 6,
+          "text_sha256": "597d1f4e33e615b99f9a2a0fff4721931d3061644f34cc4c8a5819d4bce17e60",
+          "characters_UTF16": 142,
+          "lines": 4,
+          "raw_paragraph_sha256": "86e399fdf0245bbbe7d08fd359cb29a6fe4566b29f7a81dd4998030d3d1b43c2",
+          "presented_paragraph_sha256": "a1a21dfa1f8fcc3db4ffb9972fed0d0f6c7a0f30df371af03b622fb79b228261",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "86e399fdf0245bbbe7d08fd359cb29a6fe4566b29f7a81dd4998030d3d1b43c2",
+              "output_sha256": "2ac7346e55b068be462a59ba509fa83167ed72d34cebe020975124ecc1711818",
+              "matched_and_replacement_pairs_sha256": "1ddd4884f53076d72a2aa1151a9df582bee89d3baf7abb9a5ccffccb84e45168"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "2ac7346e55b068be462a59ba509fa83167ed72d34cebe020975124ecc1711818",
+              "output_sha256": "bec17021ff34835d4c444aa45e7fba63dae2e06b2d8c960978be2676ff9b54f0",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "bec17021ff34835d4c444aa45e7fba63dae2e06b2d8c960978be2676ff9b54f0",
+              "output_sha256": "a1a21dfa1f8fcc3db4ffb9972fed0d0f6c7a0f30df371af03b622fb79b228261",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 7,
+          "text_sha256": "bec71f79f5f69f0269ff94f1e77bb5004ec61debcfac33f5a3347d6c45267cea",
+          "characters_UTF16": 166,
+          "lines": 5,
+          "raw_paragraph_sha256": "4501f54deec09741511478bb710a331a2bb6735d4122fbf061d8250a2f9b4960",
+          "presented_paragraph_sha256": "3f9da54c16e0bfe59748262d4afa19eca04ca56096fa5ae06e32e488057ba214",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 10,
+              "input_sha256": "4501f54deec09741511478bb710a331a2bb6735d4122fbf061d8250a2f9b4960",
+              "output_sha256": "210a45f9aa747580f1b58e34716e0339ce95225db895a9d0d5a08227368735c8",
+              "matched_and_replacement_pairs_sha256": "2a97c406a89bd8e446a96231a3a74a707b856b29df7803b690500304c3ac33a6"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "210a45f9aa747580f1b58e34716e0339ce95225db895a9d0d5a08227368735c8",
+              "output_sha256": "3f9da54c16e0bfe59748262d4afa19eca04ca56096fa5ae06e32e488057ba214",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 8,
+          "text_sha256": "4a57a90b70ce78045bff932cffada866fc342c323b16abaa088f3169f792ccb1",
+          "characters_UTF16": 160,
+          "lines": 5,
+          "raw_paragraph_sha256": "7cade52526afd4e4dd17fba45fad653f402e71bfea6b72de2656e72021c13b45",
+          "presented_paragraph_sha256": "fdb20152e2f7620b7825f8bbeae118c11bcd5ddd0578879018b3a3b0de786f04",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "7cade52526afd4e4dd17fba45fad653f402e71bfea6b72de2656e72021c13b45",
+              "output_sha256": "b395ff51a445b4eeed1bfab97e705af0ed5fa03a4b35c86ab39b619bcf9b6ccc",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "b395ff51a445b4eeed1bfab97e705af0ed5fa03a4b35c86ab39b619bcf9b6ccc",
+              "output_sha256": "fdb20152e2f7620b7825f8bbeae118c11bcd5ddd0578879018b3a3b0de786f04",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 9,
+          "text_sha256": "72a51a8e41d10088022717d1704b025830a5d7e026a28c8a3ccf302d886456a4",
+          "characters_UTF16": 154,
+          "lines": 5,
+          "raw_paragraph_sha256": "1f990c1973b89924f2430db59c59148ed7cc1385e0861f1d6e638f861a4d574c",
+          "presented_paragraph_sha256": "6c037286981b244247adf6d6c6b29528f1887c334e4c95ee62746ece1254c94c",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "1f990c1973b89924f2430db59c59148ed7cc1385e0861f1d6e638f861a4d574c",
+              "output_sha256": "1bd1b271f205b67f7d59e2d47df3c888fe4739c9816f7811594a8bad042611a5",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "1bd1b271f205b67f7d59e2d47df3c888fe4739c9816f7811594a8bad042611a5",
+              "output_sha256": "6c037286981b244247adf6d6c6b29528f1887c334e4c95ee62746ece1254c94c",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 10,
+          "text_sha256": "3539f896048e16e087838d717c4110c9851ff9ab225477cfb2fd160c47a43413",
+          "characters_UTF16": 140,
+          "lines": 5,
+          "raw_paragraph_sha256": "1237bc7de64e1214fd5b01657029bba8f56f87c4905556dcaaded474cb349926",
+          "presented_paragraph_sha256": "c5092ab954a7f28b004a30058b277acd3abd3d2f987410acd86814e5bf7a46e2",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "1237bc7de64e1214fd5b01657029bba8f56f87c4905556dcaaded474cb349926",
+              "output_sha256": "98e32df77231f9968d3958a5d725318e0a71bedbcc3f0b5ca92de809f3b0be26",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "98e32df77231f9968d3958a5d725318e0a71bedbcc3f0b5ca92de809f3b0be26",
+              "output_sha256": "c5092ab954a7f28b004a30058b277acd3abd3d2f987410acd86814e5bf7a46e2",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 11,
+          "text_sha256": "f18dcd447122047f363913103454fd5f24fb65a4e2cc17706fb7344182e33836",
+          "characters_UTF16": 147,
+          "lines": 5,
+          "raw_paragraph_sha256": "38fd188b12cc0ac6cd784d81fef05ec70be2ddd56c484ef3c177a48dd1d443a1",
+          "presented_paragraph_sha256": "e71f92178222cd6cac010c0931c94d3f9238b715727df0a917d4e5649a3d11b4",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "38fd188b12cc0ac6cd784d81fef05ec70be2ddd56c484ef3c177a48dd1d443a1",
+              "output_sha256": "0cb639539c4a538c536d893409fd63d1a11138fe8446d72be47b0dd8d1ab0c20",
+              "matched_and_replacement_pairs_sha256": "10f1e583af9e9b93257d31715b6e569bcfa86507bbf04298fc04506da6c95a11"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "0cb639539c4a538c536d893409fd63d1a11138fe8446d72be47b0dd8d1ab0c20",
+              "output_sha256": "3e7ef89fbe197eab8af2e45af8203d53e807b3bb2d5019d20b6c5e149aa0e9fc",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "3e7ef89fbe197eab8af2e45af8203d53e807b3bb2d5019d20b6c5e149aa0e9fc",
+              "output_sha256": "e71f92178222cd6cac010c0931c94d3f9238b715727df0a917d4e5649a3d11b4",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 12,
+          "text_sha256": "dc9af1ec15c16499cd5655421e80741fab28b2c79194ac93dca9315d0e3ca37e",
+          "characters_UTF16": 151,
+          "lines": 5,
+          "raw_paragraph_sha256": "452977e50d51b8d591d19af30b799889049f21225b963048daf4eeb5c3ddb7cc",
+          "presented_paragraph_sha256": "24a7cbf1491982930585466864f08aeec3d2d67cceaaf4a1cc65aafde518486b",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 5,
+              "input_sha256": "452977e50d51b8d591d19af30b799889049f21225b963048daf4eeb5c3ddb7cc",
+              "output_sha256": "84848f46f58c44c6fa37b821492d426f2d8a1d2b8a65c9e0e63b14f0017cbd29",
+              "matched_and_replacement_pairs_sha256": "dda6b017a18d9343d98b6cb3b8c49ec0a14cfdaa47559176a23d89a479dbb2e1"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "84848f46f58c44c6fa37b821492d426f2d8a1d2b8a65c9e0e63b14f0017cbd29",
+              "output_sha256": "a630d58433c8e169bb782adeb8dc3fc333879b36640001ea06f953ccf01d9528",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "a630d58433c8e169bb782adeb8dc3fc333879b36640001ea06f953ccf01d9528",
+              "output_sha256": "24a7cbf1491982930585466864f08aeec3d2d67cceaaf4a1cc65aafde518486b",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 13,
+          "text_sha256": "501fb8aa754c7543108fac05871f6cf1911548566cb915bdeabe4c533368c06a",
+          "characters_UTF16": 148,
+          "lines": 4,
+          "raw_paragraph_sha256": "946a0ede9f88e9fada94bf95009d3cd2b9374250371d694318c1e02f70f9d631",
+          "presented_paragraph_sha256": "77e8da4ccca370bb4226b4202ee0c40db60aef8f90d10b5e733e1b558b4b6ea1",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 14,
+              "input_sha256": "946a0ede9f88e9fada94bf95009d3cd2b9374250371d694318c1e02f70f9d631",
+              "output_sha256": "54c9aa4b619e04af684cce42afbf74d261ba356ea22c197ea44cc83dd19ec837",
+              "matched_and_replacement_pairs_sha256": "6915190d9785c808d63cfd3f55fb5e8ae12a2d10baebbe9ec19f2743d7144839"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "54c9aa4b619e04af684cce42afbf74d261ba356ea22c197ea44cc83dd19ec837",
+              "output_sha256": "77e8da4ccca370bb4226b4202ee0c40db60aef8f90d10b5e733e1b558b4b6ea1",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 14,
+          "text_sha256": "3e809a5458965cc26626c1401ebdf599a0b41415968117d24881aa7c2a1ecc13",
+          "characters_UTF16": 143,
+          "lines": 4,
+          "raw_paragraph_sha256": "63c7e35e2ec7888d9e2afd74f9143e58ceb3be4ee3e3ec20a0ac80a1b47f187f",
+          "presented_paragraph_sha256": "1270dc27f517dc2404da899d22bddc596612808835c99a5acddcf6b8cb8971d9",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 10,
+              "input_sha256": "63c7e35e2ec7888d9e2afd74f9143e58ceb3be4ee3e3ec20a0ac80a1b47f187f",
+              "output_sha256": "7ed461f74d5d9762946245265620fcae87e912ce6d7b3c01c4b6bcd099d5f4bb",
+              "matched_and_replacement_pairs_sha256": "2a97c406a89bd8e446a96231a3a74a707b856b29df7803b690500304c3ac33a6"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "7ed461f74d5d9762946245265620fcae87e912ce6d7b3c01c4b6bcd099d5f4bb",
+              "output_sha256": "1270dc27f517dc2404da899d22bddc596612808835c99a5acddcf6b8cb8971d9",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 15,
+          "text_sha256": "a41424b8da5b5cb37690f26527c6e03863602c592170cae32948188351f5cf01",
+          "characters_UTF16": 140,
+          "lines": 4,
+          "raw_paragraph_sha256": "88dedc5bb8a844d1c6d28ef9ff9558d1897aa6f87eb7460ab3dec6e20632a22d",
+          "presented_paragraph_sha256": "5b2293bf4521171613e9b34b4e31bf3d019d86cb9df49a8b4e49b0756e9472e1",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 2,
+              "input_sha256": "88dedc5bb8a844d1c6d28ef9ff9558d1897aa6f87eb7460ab3dec6e20632a22d",
+              "output_sha256": "dfcd21b916edfdce7461e479c916a0ec014165fcf2d6cc42c2f80cdf054f66ab",
+              "matched_and_replacement_pairs_sha256": "243e5a515fe4757d5aa9091e85071504d7b852bfc397e93fa6872b3a86e3ddc9"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 8,
+              "input_sha256": "dfcd21b916edfdce7461e479c916a0ec014165fcf2d6cc42c2f80cdf054f66ab",
+              "output_sha256": "d8ebb81b03f05c363750fcbe9dd91e7620a9fd6c47b4e4273eb97bc183536bc6",
+              "matched_and_replacement_pairs_sha256": "0a62c0e54a07a89b1755c5e9f2dded6649ed157595e02069418ccf95c0728d72"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "d8ebb81b03f05c363750fcbe9dd91e7620a9fd6c47b4e4273eb97bc183536bc6",
+              "output_sha256": "5b2293bf4521171613e9b34b4e31bf3d019d86cb9df49a8b4e49b0756e9472e1",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 16,
+          "text_sha256": "035f29dfb79588e8563dae626e688625b4ff9729ccabaddbba2c3d935234f943",
+          "characters_UTF16": 138,
+          "lines": 4,
+          "raw_paragraph_sha256": "c247c60110ece44792ed746fbde67291fb809aa8549d1a34b9952c341dfe7a6d",
+          "presented_paragraph_sha256": "15e33aa1faed86d3d0071fef95631685a244fc9aaa5f5cd410c8b9eb10895009",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 10,
+              "input_sha256": "c247c60110ece44792ed746fbde67291fb809aa8549d1a34b9952c341dfe7a6d",
+              "output_sha256": "cacc9f986ef4c2cbb829753139537ee4a46feabfa2a5e52d222afbcc0404cb20",
+              "matched_and_replacement_pairs_sha256": "2a97c406a89bd8e446a96231a3a74a707b856b29df7803b690500304c3ac33a6"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "cacc9f986ef4c2cbb829753139537ee4a46feabfa2a5e52d222afbcc0404cb20",
+              "output_sha256": "15e33aa1faed86d3d0071fef95631685a244fc9aaa5f5cd410c8b9eb10895009",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 17,
+          "text_sha256": "e95f1ba464dffb12998a0eec5097238e45ab02c8c76f07250b895a0284835fea",
+          "characters_UTF16": 120,
+          "lines": 4,
+          "raw_paragraph_sha256": "95c2741d580b28130f055beb754a8bfefb45d37ce119675aa9ec4640980834aa",
+          "presented_paragraph_sha256": "eeabbbaa1aa7ace1466fc9294240671bf3c66d249b58b3028261a15abea87eb3",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 8,
+              "input_sha256": "95c2741d580b28130f055beb754a8bfefb45d37ce119675aa9ec4640980834aa",
+              "output_sha256": "8e06ddb38cc07631028b5575c37a4004e52f58c0694278b9823156a17ef26589",
+              "matched_and_replacement_pairs_sha256": "0a62c0e54a07a89b1755c5e9f2dded6649ed157595e02069418ccf95c0728d72"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "8e06ddb38cc07631028b5575c37a4004e52f58c0694278b9823156a17ef26589",
+              "output_sha256": "eeabbbaa1aa7ace1466fc9294240671bf3c66d249b58b3028261a15abea87eb3",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 18,
+          "text_sha256": "9e2feb5d5d32d009f46412c35b2dc3a06a0f8aefc175ea29f7797bc7c171c36c",
+          "characters_UTF16": 164,
+          "lines": 5,
+          "raw_paragraph_sha256": "5e818efbc1ad962c8628a12d1c494c57eb2549072f30957eb119d90d2226e3c5",
+          "presented_paragraph_sha256": "e721dcbced02d6307fbda1241d89fd33982024cf1cccfc429828d0cf3d990969",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 10,
+              "input_sha256": "5e818efbc1ad962c8628a12d1c494c57eb2549072f30957eb119d90d2226e3c5",
+              "output_sha256": "64f77db06b1f1170697b969a0e1386e2537522aee3cbcb9302cad70ee44b050f",
+              "matched_and_replacement_pairs_sha256": "2a97c406a89bd8e446a96231a3a74a707b856b29df7803b690500304c3ac33a6"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "64f77db06b1f1170697b969a0e1386e2537522aee3cbcb9302cad70ee44b050f",
+              "output_sha256": "e721dcbced02d6307fbda1241d89fd33982024cf1cccfc429828d0cf3d990969",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 19,
+          "text_sha256": "e2357d3b835197a74d7889995d14d78c4853e3143ccb844c2c7046db953e4118",
+          "characters_UTF16": 135,
+          "lines": 4,
+          "raw_paragraph_sha256": "c7f9d8c39d8c34de9579a45e9aa1f9c0e1326d88201b20b4b7ade9d9886511e7",
+          "presented_paragraph_sha256": "b3052a9540ff2ed0fa64f68739531ca70a915c1667405ff15709ce5a3bbcd40e",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "c7f9d8c39d8c34de9579a45e9aa1f9c0e1326d88201b20b4b7ade9d9886511e7",
+              "output_sha256": "3bc5472957e0734c806061e6c6d4a38c01297496818ea53f2708cb65586c1aa5",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "3bc5472957e0734c806061e6c6d4a38c01297496818ea53f2708cb65586c1aa5",
+              "output_sha256": "b3052a9540ff2ed0fa64f68739531ca70a915c1667405ff15709ce5a3bbcd40e",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 20,
+          "text_sha256": "dd6d72a76ff054be115dbc5fcbe93b49389d37b0df6627d2c028fefe330c0a0b",
+          "characters_UTF16": 138,
+          "lines": 4,
+          "raw_paragraph_sha256": "4b9e3fdeda91d100146cf7a57c15b2446224602d0e8104eeb548d0febfd7b214",
+          "presented_paragraph_sha256": "74ef8643fcb137b32fb2c897705036f3032c58316aefc65735cf0ec251ebb1be",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 2,
+              "input_sha256": "4b9e3fdeda91d100146cf7a57c15b2446224602d0e8104eeb548d0febfd7b214",
+              "output_sha256": "985499743cc390e6f4254fedabbf990983190f84af70f407074ed3068e436d46",
+              "matched_and_replacement_pairs_sha256": "8c0efb52bdd9f6ae70dddc00e89f5fe89541055a1a54d26ea2529e83b0b2625e"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "985499743cc390e6f4254fedabbf990983190f84af70f407074ed3068e436d46",
+              "output_sha256": "74ef8643fcb137b32fb2c897705036f3032c58316aefc65735cf0ec251ebb1be",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 21,
+          "text_sha256": "44ebb25265365013d6121bc2eaa9649224947385ac9d4dfaf2841d4da1e4f90d",
+          "characters_UTF16": 125,
+          "lines": 4,
+          "raw_paragraph_sha256": "87013ac34efb38ea6284c0a1347ef0ca8d8fdc146f138655ec826ec95bba3e6c",
+          "presented_paragraph_sha256": "a518b931d14f232cbf1cffaa37ca8319086685320e55940e278f89c0d8a86337",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "87013ac34efb38ea6284c0a1347ef0ca8d8fdc146f138655ec826ec95bba3e6c",
+              "output_sha256": "2348c5324f1468c2e33eeb86e9870afbe1e4e55bdc86b410915f8e7b4dcadb51",
+              "matched_and_replacement_pairs_sha256": "b87e1774298288d3b635efb3432931423cc3f4293113f40be8fad8c23af3c873"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "2348c5324f1468c2e33eeb86e9870afbe1e4e55bdc86b410915f8e7b4dcadb51",
+              "output_sha256": "15a28bac0ca748aba2161a753abf09a4e49a58b24981c7a8fe8736964d9bd802",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "15a28bac0ca748aba2161a753abf09a4e49a58b24981c7a8fe8736964d9bd802",
+              "output_sha256": "a518b931d14f232cbf1cffaa37ca8319086685320e55940e278f89c0d8a86337",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 22,
+          "text_sha256": "76f243bcacbf675355d853670b648036cf625859ad711903c1b4db4ee8d5d615",
+          "characters_UTF16": 122,
+          "lines": 4,
+          "raw_paragraph_sha256": "5cb4073590f9b36ff169edcf5c38a4fc0efa5dfdb98cb1897cdf787f5c565ed2",
+          "presented_paragraph_sha256": "7d0a8ab482e80fff065214686a15719240a8d33da9ecbc666742097359eeb7f2",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "5cb4073590f9b36ff169edcf5c38a4fc0efa5dfdb98cb1897cdf787f5c565ed2",
+              "output_sha256": "d786f0753a29d874410e14c096b0a4f47df9c5b2e0c98f3c14a6e5fda3dafac1",
+              "matched_and_replacement_pairs_sha256": "82f3f1adecac938f60b31e1c95e45d7e07c37cfa5459b3c777b2695657c586c1"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "d786f0753a29d874410e14c096b0a4f47df9c5b2e0c98f3c14a6e5fda3dafac1",
+              "output_sha256": "332864b4734a659e8ca106ba0bdc81b900c97a3a162edd324dcc8f8816469ad5",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "332864b4734a659e8ca106ba0bdc81b900c97a3a162edd324dcc8f8816469ad5",
+              "output_sha256": "7d0a8ab482e80fff065214686a15719240a8d33da9ecbc666742097359eeb7f2",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 23,
+          "text_sha256": "230a6d1671fa8251bf8803a3d7bb4e0c1587e8eaab4af4e653174a86d582261b",
+          "characters_UTF16": 126,
+          "lines": 4,
+          "raw_paragraph_sha256": "1e337c4228afb116400f40d3e9fbfc5b5c945d0bb20af3f92563528b4680a740",
+          "presented_paragraph_sha256": "1b1e491bfc44602fea3f630b17bf5d1b771c1340cf4c16988d9ca40c5cba4669",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "1e337c4228afb116400f40d3e9fbfc5b5c945d0bb20af3f92563528b4680a740",
+              "output_sha256": "f2065c67cd3c3c6cd98fdce1400372166ff1e044768d62940dcee5e239dda1da",
+              "matched_and_replacement_pairs_sha256": "c9b994365822be58e9c9da6b55deeff34a511415d250ec37ae7183f8158bbdbb"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "f2065c67cd3c3c6cd98fdce1400372166ff1e044768d62940dcee5e239dda1da",
+              "output_sha256": "4fe6a14e47fc4519b95426468adfd710bd6270b0b5d4de80f43f45ff3c1aec54",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "4fe6a14e47fc4519b95426468adfd710bd6270b0b5d4de80f43f45ff3c1aec54",
+              "output_sha256": "1b1e491bfc44602fea3f630b17bf5d1b771c1340cf4c16988d9ca40c5cba4669",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 24,
+          "text_sha256": "7b2e24716ca6623dca22ba414c3cfc0a7c08de60f4c81f992b59966fdcb8851c",
+          "characters_UTF16": 146,
+          "lines": 5,
+          "raw_paragraph_sha256": "8c83a120ba3e40ca606fff649179c025cd60240156af63e40cbd143297249651",
+          "presented_paragraph_sha256": "5f91e6cdc565296489932c405fb273931abbc967fbc4bfb351865d18438fed84",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "8c83a120ba3e40ca606fff649179c025cd60240156af63e40cbd143297249651",
+              "output_sha256": "909d5a687325811c61188dae5bb515e43d3852abd52ee6c61edc335b228a9058",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 4,
+              "input_sha256": "909d5a687325811c61188dae5bb515e43d3852abd52ee6c61edc335b228a9058",
+              "output_sha256": "5f91e6cdc565296489932c405fb273931abbc967fbc4bfb351865d18438fed84",
+              "matched_and_replacement_pairs_sha256": "8a43c0c57dbe761e799b49baa79c33bae666b6fa4c8b263dc62c2e0db9499a1d"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 25,
+          "text_sha256": "d111bd86e92b1f8ef2a7f4ffd96e9c1e609aaa525ccd8c62c5d70cc7943a1a5d",
+          "characters_UTF16": 130,
+          "lines": 4,
+          "raw_paragraph_sha256": "f7fb6596a17e10b8f2191c4a449619db45dae804042f46a930c3987affaf89ce",
+          "presented_paragraph_sha256": "a26b0593d01b96941d96b42a8e4b3f5d34d2d495319c4e39121ccbf3d56d8588",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "f7fb6596a17e10b8f2191c4a449619db45dae804042f46a930c3987affaf89ce",
+              "output_sha256": "e19c01f100f11fd64dc735f9bd9bc067de050ab0df2d8ec25ae2ce46acfeea34",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "e19c01f100f11fd64dc735f9bd9bc067de050ab0df2d8ec25ae2ce46acfeea34",
+              "output_sha256": "a26b0593d01b96941d96b42a8e4b3f5d34d2d495319c4e39121ccbf3d56d8588",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 26,
+          "text_sha256": "88e5d8584f3af044882ad423991665f79b753fef6a79bdc12cdfc3a906e77bc6",
+          "characters_UTF16": 135,
+          "lines": 4,
+          "raw_paragraph_sha256": "ddbf55775cf3055fc1e74743b34c1f436f5b0a3ae396f515435a8d934daba41c",
+          "presented_paragraph_sha256": "110e356132f3b598deeadc76136fb68eb630ff166fa0f87b889c582a3335092e",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "ddbf55775cf3055fc1e74743b34c1f436f5b0a3ae396f515435a8d934daba41c",
+              "output_sha256": "4af6484c34f8210f2edca724ce910120bab89d1c899cb64f5ee253069ce1a2fb",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "4af6484c34f8210f2edca724ce910120bab89d1c899cb64f5ee253069ce1a2fb",
+              "output_sha256": "110e356132f3b598deeadc76136fb68eb630ff166fa0f87b889c582a3335092e",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 27,
+          "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+          "characters_UTF16": 134,
+          "lines": 4,
+          "raw_paragraph_sha256": "f0f32fccf094860398f3efcd80646fa0e40f8f3ee75b25dd9ec1e4c2411b9555",
+          "presented_paragraph_sha256": "fd0c73db636e356ebbf2a3d81c974cd5251ef0dea06398992663a468d87de6c7",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "f0f32fccf094860398f3efcd80646fa0e40f8f3ee75b25dd9ec1e4c2411b9555",
+              "output_sha256": "ff9632963f8a2c538d48deaae784247e57f6d271a6ed783ce1c4be90e3b91bb6",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "ff9632963f8a2c538d48deaae784247e57f6d271a6ed783ce1c4be90e3b91bb6",
+              "output_sha256": "fd0c73db636e356ebbf2a3d81c974cd5251ef0dea06398992663a468d87de6c7",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 28,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_UTF16": 127,
+          "lines": 4,
+          "raw_paragraph_sha256": "1ab351f003c719c483d2608fd48c990f5da2692fb0121fc0858d590e4101786d",
+          "presented_paragraph_sha256": "3157e47205b5765cc8bb6281ba1e8ee89aa4be136c451bbc9caf9c2a4c334bb4",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "1ab351f003c719c483d2608fd48c990f5da2692fb0121fc0858d590e4101786d",
+              "output_sha256": "a706d0dada852813250e41c161da4ae7793a9c7efa90c1acc029ce717da12ccd",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "a706d0dada852813250e41c161da4ae7793a9c7efa90c1acc029ce717da12ccd",
+              "output_sha256": "3157e47205b5765cc8bb6281ba1e8ee89aa4be136c451bbc9caf9c2a4c334bb4",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        }
+      ],
+      "speaker_lines": [
+        {
+          "poem_stanza_paragraph1": 4,
+          "local_label": "4",
+          "publisher_label": "3894",
+          "source_label": "[Padumuttara Buddha]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 5,
+          "local_label": "5",
+          "publisher_label": "3895",
+          "source_label": "[Protagonist]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 7,
+          "local_label": "7",
+          "publisher_label": "3897",
+          "source_label": "[Padumuttara Buddha]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 8,
+          "local_label": "8",
+          "publisher_label": "3898",
+          "source_label": "[Protagonist]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 9,
+          "local_label": "9",
+          "publisher_label": "3899",
+          "source_label": "[Padumuttara Buddha]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 10,
+          "local_label": "10",
+          "publisher_label": "3900",
+          "source_label": "[Protagonist]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 11,
+          "local_label": "11",
+          "publisher_label": "3901",
+          "source_label": "[Padumuttara Buddha]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 12,
+          "local_label": "12",
+          "publisher_label": "3902",
+          "source_label": "[Protagonist]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 18,
+          "local_label": "18",
+          "publisher_label": "3908",
+          "source_label": "[Padumuttara Buddha]:",
+          "label_preserved_in_body_and_quote": true
+        },
+        {
+          "poem_stanza_paragraph1": 24,
+          "local_label": "24",
+          "publisher_label": "3914",
+          "source_label": "[Protagonist]:",
+          "label_preserved_in_body_and_quote": true
+        }
+      ],
+      "hard500_pages": [
+        {
+          "offset": 0,
+          "characters_UTF16": 500,
+          "sha256": "e0d201309d0816323e549b6db76bf7cf772c6a1cec4debbfb04d60abb4146eec"
+        },
+        {
+          "offset": 500,
+          "characters_UTF16": 500,
+          "sha256": "a6c35ce9ef2baa4363fb866f89cbfbc14bbb66307891b3fb3aa0b8f51ff40b9d"
+        },
+        {
+          "offset": 1000,
+          "characters_UTF16": 500,
+          "sha256": "edacdbe414bea7d546148784c021601d696d5f7bb461fdbe8f0cf4d0fe599c74"
+        },
+        {
+          "offset": 1500,
+          "characters_UTF16": 500,
+          "sha256": "1f6e4cfbebcb78f3d76b5c0c97d632af0146c2c316c7bdfb61281dab575f7c01"
+        },
+        {
+          "offset": 2000,
+          "characters_UTF16": 500,
+          "sha256": "5ff5469c2188bfb11addde63105acc2d7e954ff18bb2d9e348e6f11ff225d7fc"
+        },
+        {
+          "offset": 2500,
+          "characters_UTF16": 500,
+          "sha256": "15ea08c974feb948f5cac83e90e21409376761e5c7c7bcf522d43826a3618f70"
+        },
+        {
+          "offset": 3000,
+          "characters_UTF16": 500,
+          "sha256": "cf8b1467066127367195f90e4185ec248815a9d30955148476ce9e87858aba47"
+        },
+        {
+          "offset": 3500,
+          "characters_UTF16": 500,
+          "sha256": "19d9fe7dbda2b45b8055f030a50b130856d1e8c4f916ca725fb457258e722c87"
+        },
+        {
+          "offset": 4000,
+          "characters_UTF16": 500,
+          "sha256": "9ab59e703e7853997dcd6fdfe44a0f4d9d3ab1cc99818d7554ea97032bc75428"
+        },
+        {
+          "offset": 4500,
+          "characters_UTF16": 87,
+          "sha256": "04a0d84cedf0b7a86cfab0c5ca87233bca0b0ac13b5760a1640a821fb3048784"
+        }
+      ],
+      "canonical_record": {
+        "id": "tha-ap403",
+        "book": 36,
+        "start": 12892,
+        "end": 12980,
+        "title": "Tissametteyyattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 403",
+        "vri": "1–28",
+        "pts": {
+          "volume": 2,
+          "page": 339,
+          "end_page": 340
+        }
+      },
+      "canonical_subheading": "1. Tissametteyyattheraapadānaṃ",
+      "canonical_chapter": "41. Metteyyavaggo",
+      "root_wrapper_sha256": "f18e3eab3e4ba7fb91e85aa42cc6da9e641ef567c7386b7b5c3ec2928fb278e9",
+      "canonical_hangnum_labels": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28"
+      ],
+      "original_XML": {
+        "range_paragraph_index0_halfopen": [
+          12893,
+          12981
+        ],
+        "all_five_tuple_fields_equal": true,
+        "tuples": 88,
+        "tuples_sha256_JSON_stringify": "747ca266f513053e7056936ccdf1a6e577e655da3982eb5d638ff76ff77f6369",
+        "variant_note_count": 2,
+        "peyyala_blocks": []
+      }
+    },
+    "tha-ap404": {
+      "publisher_poem": 402,
+      "title": "Puṇṇaka",
+      "publisher_heading_PTS_BJTS": [
+        399,
+        402
+      ],
+      "primary_raw": {
+        "path": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-402.md",
+        "bytes": 5073,
+        "sha256": "36ab4b64da98ca50626ff3f9c9d86fc34f53b1405b47ba2e9d60dda6a5d99740",
+        "git_blob_sha1_computed_not_queried": "e536bf5a9f1691564458da49bc94023b2d0a6dbd"
+      },
+      "body_sha256": "5a2f6375fc4b6e8891df8dc119aac5e52be745c49bcb7e9b1fc2e3a6cc9417a7",
+      "body_characters_UTF16": 2614,
+      "body_paragraphs": 18,
+      "normalized_heading_sha256": "2dfda0f2f797948c80d2d59d82926ba85a3910064cfc88798fa721b5a6c0ed61",
+      "notes_sha256_JSON_stringify": "f99587903f0ce94ec8a0969f820231bd1a3a1f41d34b9055d6ca329e0959743a",
+      "note_count": 17,
+      "note_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "notes": [
+        {
+          "number": 1,
+          "paragraph_index0": 0,
+          "scope": "poem_heading",
+          "definition_start_line1": 92,
+          "raw_content_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+          "normalized_text_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+          "characters_UTF16": 189,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "abbreviation_label",
+              "count": 2,
+              "input_sha256": "b32366ba4600564fd7c85967191792ecbc385623c6d9fd7c09e1debef3a43127",
+              "output_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "matched_and_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "901a9028402ffcaca0d8f41d2807724a346aa30cbd78c453c8034f9ddffe3943",
+              "output_sha256": "2d4732820dafa40c1a02f84fa838c7bab31cdbad1e05065c7211874ba9cdcbf6",
+              "matched_and_replacement_pairs_sha256": "c579dddbe40ab82984bdec5141dea547af24e2ecf735e019fe925cf1f90a840a"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "paragraph_index0": 0,
+          "scope": "poem_heading",
+          "definition_start_line1": 94,
+          "raw_content_sha256": "b6c3a102d8abeefad862d990879256c99ddea6d6ba89148667e15da3a0beccfc",
+          "normalized_text_sha256": "662387c753c44fc5a147bd29467dcad8439b71f708a8d7faf26a8fc5516970bc",
+          "characters_UTF16": 210,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "b6c3a102d8abeefad862d990879256c99ddea6d6ba89148667e15da3a0beccfc",
+              "output_sha256": "662387c753c44fc5a147bd29467dcad8439b71f708a8d7faf26a8fc5516970bc",
+              "matched_and_replacement_pairs_sha256": "e6e1f567308ea003e097bc5c09fe4543de2c7bb0efc40b4ee9d811d7c94c3ea5"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "paragraph_index0": 2,
+          "scope": "poem_stanza",
+          "definition_start_line1": 96,
+          "raw_content_sha256": "dabfb1469ff352973bb56f8c619a76400de12ebe0988edfe6fa13fa907304b51",
+          "normalized_text_sha256": "050de251367934b6a91ee1e3aa98d12fa6b0cdfe783b1ac812937eaa70ea8148",
+          "characters_UTF16": 46,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "dabfb1469ff352973bb56f8c619a76400de12ebe0988edfe6fa13fa907304b51",
+              "output_sha256": "050de251367934b6a91ee1e3aa98d12fa6b0cdfe783b1ac812937eaa70ea8148",
+              "matched_and_replacement_pairs_sha256": "607d2d9848e99dbb03f25a52e95a9a4c9ed1f6bf55bccc3ac2bda29f04e4d68c"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "paragraph_index0": 3,
+          "scope": "poem_stanza",
+          "definition_start_line1": 98,
+          "raw_content_sha256": "18122e1d7f6c784089521d39c4985e0a96f364e287117ee939063968aeb43e9c",
+          "normalized_text_sha256": "2d969246863666248d799e5b94c9ce6cb895444d48a25979c483f42dce9a1ad7",
+          "characters_UTF16": 27,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Pandoc_diacritics_on",
+              "count": 1,
+              "input_sha256": "18122e1d7f6c784089521d39c4985e0a96f364e287117ee939063968aeb43e9c",
+              "output_sha256": "96b348ae6f6a6ab96d5e2def491aec92ba6b4d8ff5a511e99804a4565b79e90e",
+              "matched_and_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 2,
+              "input_sha256": "96b348ae6f6a6ab96d5e2def491aec92ba6b4d8ff5a511e99804a4565b79e90e",
+              "output_sha256": "2d969246863666248d799e5b94c9ce6cb895444d48a25979c483f42dce9a1ad7",
+              "matched_and_replacement_pairs_sha256": "afe1d0829acf6cb09cd909c76b017c45f1c1144a6bdad1b4fa9d649ad760bff7"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "paragraph_index0": 3,
+          "scope": "poem_stanza",
+          "definition_start_line1": 100,
+          "raw_content_sha256": "a50158c096a47082551bb3cb654f0af4a35557fc0f13584d28785ab264b48c68",
+          "normalized_text_sha256": "051747a86043e368d37d37cba80ffe3a7d6e9f79e2e74022f415b916e21a0ddf",
+          "characters_UTF16": 54,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 3,
+              "input_sha256": "a50158c096a47082551bb3cb654f0af4a35557fc0f13584d28785ab264b48c68",
+              "output_sha256": "051747a86043e368d37d37cba80ffe3a7d6e9f79e2e74022f415b916e21a0ddf",
+              "matched_and_replacement_pairs_sha256": "389905f78e6068c8d17185caa406e36cc548faf87dc33bdeecad98c7b0ab4c44"
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "paragraph_index0": 3,
+          "scope": "poem_stanza",
+          "definition_start_line1": 102,
+          "raw_content_sha256": "f28a8724770319fb5000231b22a1db7c03d51116e4caf7bf347b63b551af8d4b",
+          "normalized_text_sha256": "51c8da0800088a76cef82e4306c4428993e2ec21e39c8f565233830ee14e7793",
+          "characters_UTF16": 265,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Pandoc_diacritics_on",
+              "count": 3,
+              "input_sha256": "f28a8724770319fb5000231b22a1db7c03d51116e4caf7bf347b63b551af8d4b",
+              "output_sha256": "a42d47c3c4e185ca649d07ab0323587edb52c5fb7d4e05414a6ca1c3e067eff9",
+              "matched_and_replacement_pairs_sha256": "7dd79408b800ad057e3c4c30142d225b938e0ebf3e3e424d61f2b09591fe16c9"
+            },
+            {
+              "kind": "abbreviation_label",
+              "count": 1,
+              "input_sha256": "a42d47c3c4e185ca649d07ab0323587edb52c5fb7d4e05414a6ca1c3e067eff9",
+              "output_sha256": "2aa30d0602a200c111d02d5f0d26a3114b606e2c90609238a80bdb764fb6f631",
+              "matched_and_replacement_pairs_sha256": "57460283a919cb8eada0cc7a067236c40438cbd87bc3e92a8d1053f829e389e4"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 7,
+              "input_sha256": "2aa30d0602a200c111d02d5f0d26a3114b606e2c90609238a80bdb764fb6f631",
+              "output_sha256": "51c8da0800088a76cef82e4306c4428993e2ec21e39c8f565233830ee14e7793",
+              "matched_and_replacement_pairs_sha256": "293bdc92f3d263b89e3c2a270562211f8707e5c78bc9d1087fbad790978a7577"
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "paragraph_index0": 3,
+          "scope": "poem_stanza",
+          "definition_start_line1": 104,
+          "raw_content_sha256": "5d751ad9eb76b94f1b9126d5cedec904cfdd5fff4de5f30311a47b39ca7dfad0",
+          "normalized_text_sha256": "14fe12a0eb72061fae347bd93452c4756b02c135370ccbe24b0505ad96f18a2f",
+          "characters_UTF16": 56,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "abbreviation_label",
+              "count": 2,
+              "input_sha256": "5d751ad9eb76b94f1b9126d5cedec904cfdd5fff4de5f30311a47b39ca7dfad0",
+              "output_sha256": "3265fa9dd66d6aa3fe1ef5bab19755fd32d127b1b8b5f8eaa2f657304c4f2d63",
+              "matched_and_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 3,
+              "input_sha256": "3265fa9dd66d6aa3fe1ef5bab19755fd32d127b1b8b5f8eaa2f657304c4f2d63",
+              "output_sha256": "14fe12a0eb72061fae347bd93452c4756b02c135370ccbe24b0505ad96f18a2f",
+              "matched_and_replacement_pairs_sha256": "72e18b26e116d2aeaeaa012883e1c0f3d465c2d7b728dd274c9bc05606d3606b"
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "paragraph_index0": 4,
+          "scope": "poem_stanza",
+          "definition_start_line1": 106,
+          "raw_content_sha256": "a6d15f4adcc15848dfdac034bd543c3884108530001254a4ae0d8fd645f678bb",
+          "normalized_text_sha256": "c09ad5b79102efde186af9f541f02c1d34663100c060c1fca0ae76c63ae41fce",
+          "characters_UTF16": 138,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "a6d15f4adcc15848dfdac034bd543c3884108530001254a4ae0d8fd645f678bb",
+              "output_sha256": "c09ad5b79102efde186af9f541f02c1d34663100c060c1fca0ae76c63ae41fce",
+              "matched_and_replacement_pairs_sha256": "dd9eb8e812d05e95579a084a70b5a8cd6c2d43b57c3e3e88456a163754ed190e"
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "paragraph_index0": 4,
+          "scope": "poem_stanza",
+          "definition_start_line1": 108,
+          "raw_content_sha256": "2beede2adde71aee2c394da52551639a6dfaac859cee0272f42a13188ca23925",
+          "normalized_text_sha256": "2beede2adde71aee2c394da52551639a6dfaac859cee0272f42a13188ca23925",
+          "characters_UTF16": 12,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": []
+        },
+        {
+          "number": 10,
+          "paragraph_index0": 4,
+          "scope": "poem_stanza",
+          "definition_start_line1": 110,
+          "raw_content_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+          "normalized_text_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+          "characters_UTF16": 8,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+              "output_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+              "matched_and_replacement_pairs_sha256": "5c03393f69e2761baa67b292308b057e83efdc054f2f0a3e23b77cd3568f2759"
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "paragraph_index0": 4,
+          "scope": "poem_stanza",
+          "definition_start_line1": 112,
+          "raw_content_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+          "normalized_text_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+          "characters_UTF16": 8,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "8c6f1b6a4d391b8c321addfaf3733d8a8608eff6194ecc96c9a605b23d69c3fd",
+              "output_sha256": "0d07e8bc977bec5b8ac85c087363c77e56f85604651b2d37f5ffcba13e433d80",
+              "matched_and_replacement_pairs_sha256": "5c03393f69e2761baa67b292308b057e83efdc054f2f0a3e23b77cd3568f2759"
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "paragraph_index0": 6,
+          "scope": "poem_stanza",
+          "definition_start_line1": 114,
+          "raw_content_sha256": "8f00961fe5cc66e35160aa26a4de19473822dad94f4d43c27b06c928542434c2",
+          "normalized_text_sha256": "3b6a54ddb3ef71d5acb18c51722d61ab55b5612c223e297d4d93958279b55ba2",
+          "characters_UTF16": 6,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "8f00961fe5cc66e35160aa26a4de19473822dad94f4d43c27b06c928542434c2",
+              "output_sha256": "3b6a54ddb3ef71d5acb18c51722d61ab55b5612c223e297d4d93958279b55ba2",
+              "matched_and_replacement_pairs_sha256": "659167d6215a64be43e34b40d5be0f6f98ce0b2897d12f972397e3ccfd3af9b0"
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "paragraph_index0": 7,
+          "scope": "poem_stanza",
+          "definition_start_line1": 116,
+          "raw_content_sha256": "30e07d02a4340edd93dc9c6ee1fcfa3e9bced298bf5a2bba99d8c9c1909167ac",
+          "normalized_text_sha256": "aab4e739368aba0a47a2634a1db1a04433c1f6ea47dfc2c39366ab6fe5d4bb50",
+          "characters_UTF16": 52,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "abbreviation_label",
+              "count": 3,
+              "input_sha256": "30e07d02a4340edd93dc9c6ee1fcfa3e9bced298bf5a2bba99d8c9c1909167ac",
+              "output_sha256": "af2bc6ed78e5b864ab977230a5dfd933f30bbff962e59c093e367b1a8be6c0e6",
+              "matched_and_replacement_pairs_sha256": "97802efb81fc249f8dde861b85471f77536bab8585b8e41a90dad7acb1058dc7"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 2,
+              "input_sha256": "af2bc6ed78e5b864ab977230a5dfd933f30bbff962e59c093e367b1a8be6c0e6",
+              "output_sha256": "aab4e739368aba0a47a2634a1db1a04433c1f6ea47dfc2c39366ab6fe5d4bb50",
+              "matched_and_replacement_pairs_sha256": "c398d8031463ecd6163b254aa17b09eb626c95eb56f097c5db3d235d4a66a648"
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "paragraph_index0": 7,
+          "scope": "poem_stanza",
+          "definition_start_line1": 118,
+          "raw_content_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+          "normalized_text_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+          "characters_UTF16": 7,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+              "output_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+              "matched_and_replacement_pairs_sha256": "03c859fa29cbcf9c3c33acd18dc52304ce42200b09be0722a390f05dd4dd44e3"
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "paragraph_index0": 8,
+          "scope": "poem_stanza",
+          "definition_start_line1": 120,
+          "raw_content_sha256": "da9f1e8b4d5ae0e863dcafd47f8ecd005d1b97e11c5e73465ddf3e273b57b800",
+          "normalized_text_sha256": "e85d1e49e54b10307e04cc103b0175ecf7651b544f3a8fbb9222af11ba965723",
+          "characters_UTF16": 51,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "abbreviation_label",
+              "count": 2,
+              "input_sha256": "da9f1e8b4d5ae0e863dcafd47f8ecd005d1b97e11c5e73465ddf3e273b57b800",
+              "output_sha256": "906bb0efead1c7f5add5457ee4686378e430eac82f41b94b23bc6aa048506f2a",
+              "matched_and_replacement_pairs_sha256": "97db8d75c5e85140abd65c91e87b2b65a2cb43ca69f88092e8b9c624ddb6035b"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 3,
+              "input_sha256": "906bb0efead1c7f5add5457ee4686378e430eac82f41b94b23bc6aa048506f2a",
+              "output_sha256": "e85d1e49e54b10307e04cc103b0175ecf7651b544f3a8fbb9222af11ba965723",
+              "matched_and_replacement_pairs_sha256": "6198e173c6e70b5908fc703d5644dfcc57f518616bbae10f43a914499d61506a"
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "paragraph_index0": 9,
+          "scope": "poem_stanza",
+          "definition_start_line1": 122,
+          "raw_content_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+          "normalized_text_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+          "characters_UTF16": 7,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "be193df84fa858bf0055df9897bcabf613c2f02c52efce82fd752a89b00e3d56",
+              "output_sha256": "a4d15d97eeaeffdc69d8e7f8dd63697ca7cbe7a33f5495137beb49ce0e8e020d",
+              "matched_and_replacement_pairs_sha256": "03c859fa29cbcf9c3c33acd18dc52304ce42200b09be0722a390f05dd4dd44e3"
+            }
+          ]
+        },
+        {
+          "number": 17,
+          "paragraph_index0": 10,
+          "scope": "poem_stanza",
+          "definition_start_line1": 124,
+          "raw_content_sha256": "4c3b64b17f0d7b8f773c3c73cba3475255b2df9bd18bc6af9e813cd73f778876",
+          "normalized_text_sha256": "ae700fb1137c6a7f2e7e415519eea1805847fb7d3441e3d5e1946218db0f229f",
+          "characters_UTF16": 20,
+          "parentheses_open_minus_close": 0,
+          "presentation_operations": [
+            {
+              "kind": "Pandoc_diacritics_on",
+              "count": 1,
+              "input_sha256": "4c3b64b17f0d7b8f773c3c73cba3475255b2df9bd18bc6af9e813cd73f778876",
+              "output_sha256": "8d4b8a7d25e217733161becffcedd556f360fb184ecd79ee8e3c224439b0348c",
+              "matched_and_replacement_pairs_sha256": "26e4fe40652ef297fc66ac14388932e4acd6a8c4f2ae1eeeedae1c82cdc151af"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "8d4b8a7d25e217733161becffcedd556f360fb184ecd79ee8e3c224439b0348c",
+              "output_sha256": "ae700fb1137c6a7f2e7e415519eea1805847fb7d3441e3d5e1946218db0f229f",
+              "matched_and_replacement_pairs_sha256": "cf4e2f2f755aeec54bcb5f4f175015f09338dc5f96947358602c3ba903929aba"
+            }
+          ]
+        }
+      ],
+      "body_operations": [
+        {
+          "kind": "note_marker",
+          "count": 17,
+          "input_sha256": "fb209b8485bd347f7196f5f5619d606f53c816442e7c845068a96552d7d00c04",
+          "output_sha256": "cf7f8fe2f2a0abebd1e68f8f30db37dbd31f83a53d37904b24142108fd83a8ec",
+          "matched_and_replacement_pairs_sha256": "d5f931682bdfa8602120cf22c34f01373fa2f8a8755db9bfde7ffde2b7830e2b"
+        },
+        {
+          "kind": "Markdown_heading_marker",
+          "count": 1,
+          "input_sha256": "cf7f8fe2f2a0abebd1e68f8f30db37dbd31f83a53d37904b24142108fd83a8ec",
+          "output_sha256": "dbe410119bfed835fc2d9205611010a9f5cdad4721dc1ee1e48ac5520adeaa34",
+          "matched_and_replacement_pairs_sha256": "52b7ccc5c452c1471ffdfee4bbf89cb2f22112447e49cc275b2722b85a5d7fa3"
+        },
+        {
+          "kind": "Markdown_escape",
+          "count": 82,
+          "input_sha256": "dbe410119bfed835fc2d9205611010a9f5cdad4721dc1ee1e48ac5520adeaa34",
+          "output_sha256": "15b6c0bf0f0a9b5b625614ff1c7d8ebef0449162d9634bc75ba2d8f2719a457e",
+          "matched_and_replacement_pairs_sha256": "46c58f378b2dad8b7d702a2a5b2cd34c450108941e93d73b7032ee724f108355"
+        },
+        {
+          "kind": "Markdown_emphasis",
+          "count": 2,
+          "input_sha256": "15b6c0bf0f0a9b5b625614ff1c7d8ebef0449162d9634bc75ba2d8f2719a457e",
+          "output_sha256": "5e2d040495e69b0883d0155e1e46315136f722f8482a1b57cf019cc3c03b2dd9",
+          "matched_and_replacement_pairs_sha256": "7a38546eb66f2a9c8384195f19ecf65ef6525c1de2eaccde89178f85f57367a7"
+        },
+        {
+          "kind": "trailing_hardbreak_spaces",
+          "count": 49,
+          "input_sha256": "5e2d040495e69b0883d0155e1e46315136f722f8482a1b57cf019cc3c03b2dd9",
+          "output_sha256": "5a2f6375fc4b6e8891df8dc119aac5e52be745c49bcb7e9b1fc2e3a6cc9417a7",
+          "matched_and_replacement_pairs_sha256": "ac94cf1193a037abb264b3d788485abcd1ff8900f9ad0a4dc0938e85233703cf"
+        }
+      ],
+      "paratext": {
+        "scope": "none",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "characters_UTF16": 0,
+        "paragraphs": 0,
+        "note_numbers": [],
+        "presentation_operations": []
+      },
+      "summary_scopes": [],
+      "physical_stanza_paragraphs": 15,
+      "stanza_layout": [
+        {
+          "local_label": "1",
+          "publisher_label": "3919",
+          "suffix": "(1) [3919]",
+          "lines": 4
+        },
+        {
+          "local_label": "2",
+          "publisher_label": "3920",
+          "suffix": "(2) [3920]",
+          "lines": 4
+        },
+        {
+          "local_label": "3",
+          "publisher_label": "3921",
+          "suffix": "(3) [3921]",
+          "lines": 4
+        },
+        {
+          "local_label": "4-5",
+          "publisher_label": "3922-3923",
+          "suffix": "(4-5) [3922-3923]",
+          "lines": 8
+        },
+        {
+          "local_label": "6",
+          "publisher_label": "3924",
+          "suffix": "(6) [3924]",
+          "lines": 4
+        },
+        {
+          "local_label": "7",
+          "publisher_label": "3925",
+          "suffix": "(7) [3925]",
+          "lines": 4
+        },
+        {
+          "local_label": "8",
+          "publisher_label": "3926",
+          "suffix": "(8) [3926]",
+          "lines": 4
+        },
+        {
+          "local_label": "9",
+          "publisher_label": "3927",
+          "suffix": "(9) [3927]",
+          "lines": 4
+        },
+        {
+          "local_label": "10",
+          "publisher_label": "3928",
+          "suffix": "(10) [3928]",
+          "lines": 4
+        },
+        {
+          "local_label": "11",
+          "publisher_label": "3929",
+          "suffix": "(11) [3929]",
+          "lines": 4
+        },
+        {
+          "local_label": "12",
+          "publisher_label": "3930",
+          "suffix": "(12) [3930]",
+          "lines": 4
+        },
+        {
+          "local_label": "13",
+          "publisher_label": "3931",
+          "suffix": "(13) [3931]",
+          "lines": 4
+        },
+        {
+          "local_label": "14",
+          "publisher_label": "3932",
+          "suffix": "(14) [3932]",
+          "lines": 4
+        },
+        {
+          "local_label": "15",
+          "publisher_label": "3933",
+          "suffix": "(15) [3933]",
+          "lines": 4
+        },
+        {
+          "local_label": "16",
+          "publisher_label": "3934",
+          "suffix": "(16) [3934]",
+          "lines": 4
+        }
+      ],
+      "local_labels_expanded": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "publisher_labels_expanded": [
+        3919,
+        3920,
+        3921,
+        3922,
+        3923,
+        3924,
+        3925,
+        3926,
+        3927,
+        3928,
+        3929,
+        3930,
+        3931,
+        3932,
+        3933,
+        3934
+      ],
+      "quotes": [
+        {
+          "paragraph_index0": 1,
+          "text_sha256": "a7fe27ae6f222348fc7a441365ccafcfc37c7e58cad174394b97f42d2c7d4998",
+          "characters_UTF16": 132,
+          "lines": 4,
+          "raw_paragraph_sha256": "507dee9d9f3ccbfc760e131ad1f58eaa8559f9bbde1e08846d1ee08f2d905126",
+          "presented_paragraph_sha256": "b92552b6ff028e193114c6e32646695cebda47a11c752a55d8d3b2d33158964a",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 2,
+              "input_sha256": "507dee9d9f3ccbfc760e131ad1f58eaa8559f9bbde1e08846d1ee08f2d905126",
+              "output_sha256": "c4c64b4fe9dbde92d932a1050e005b1c6bcf28fe640b7a60031d7cb68f8c71e2",
+              "matched_and_replacement_pairs_sha256": "8c0efb52bdd9f6ae70dddc00e89f5fe89541055a1a54d26ea2529e83b0b2625e"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "c4c64b4fe9dbde92d932a1050e005b1c6bcf28fe640b7a60031d7cb68f8c71e2",
+              "output_sha256": "b92552b6ff028e193114c6e32646695cebda47a11c752a55d8d3b2d33158964a",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 2,
+          "text_sha256": "d9a1056deb7467fad6551f06adbdaa35782ac4de085511a1fe942b94889a5888",
+          "characters_UTF16": 141,
+          "lines": 4,
+          "raw_paragraph_sha256": "7bea24304cd791167c8d63635951dd5a26fdc81a0b8c8175b98ea9681c7441fb",
+          "presented_paragraph_sha256": "64ef6079986cca2c5922504271bf41bd9bcdd4288ebd0da00fbbcbf3a7ec9ae0",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "7bea24304cd791167c8d63635951dd5a26fdc81a0b8c8175b98ea9681c7441fb",
+              "output_sha256": "c51ad1d0b6d101a5e449855e6d82ed4d93ba21bfe5206d42ed95d26ea25a6a8a",
+              "matched_and_replacement_pairs_sha256": "5ba69cb67128506ec04a493c42a96131408f167a7387283b19ea6ff1d92d2142"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "c51ad1d0b6d101a5e449855e6d82ed4d93ba21bfe5206d42ed95d26ea25a6a8a",
+              "output_sha256": "4e755fc06413ce4b32e12fccbb717e56d27bba525f3ed8a65c6df39a3c5fb167",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "4e755fc06413ce4b32e12fccbb717e56d27bba525f3ed8a65c6df39a3c5fb167",
+              "output_sha256": "64ef6079986cca2c5922504271bf41bd9bcdd4288ebd0da00fbbcbf3a7ec9ae0",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 3,
+          "text_sha256": "09ce6eacbe5d6db24a4dc9da22b23fa4cca425387a6e4c0642d95441f48fca43",
+          "characters_UTF16": 134,
+          "lines": 4,
+          "raw_paragraph_sha256": "8ba0e18c5471d9ff7f349c8a5d502a901cb0a1c85faee7df13745793759981d1",
+          "presented_paragraph_sha256": "eca43ba52a33bce41f9d951740e688bb4757dbb2fca3f6b1446cb3f3213b817a",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 4,
+              "input_sha256": "8ba0e18c5471d9ff7f349c8a5d502a901cb0a1c85faee7df13745793759981d1",
+              "output_sha256": "8f3216037f9c2526c95aeeacd05524cb5a0313859a30fa244da8f8131f139388",
+              "matched_and_replacement_pairs_sha256": "2c376a987bb7f9c217d72e3198e8b98f5fc3aae91059d8966c323bc719ae1723"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 2,
+              "input_sha256": "8f3216037f9c2526c95aeeacd05524cb5a0313859a30fa244da8f8131f139388",
+              "output_sha256": "ed590d72d437240cfc318d48e3a62b6360b221c7e280d1a7c52fc8093b0c18d2",
+              "matched_and_replacement_pairs_sha256": "8c0efb52bdd9f6ae70dddc00e89f5fe89541055a1a54d26ea2529e83b0b2625e"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "ed590d72d437240cfc318d48e3a62b6360b221c7e280d1a7c52fc8093b0c18d2",
+              "output_sha256": "23d0ec31674cff00a67325fc5c52976361967e5fc0ab4a72e47d9bb52f14f570",
+              "matched_and_replacement_pairs_sha256": "35c451af7d42e948ca08271e4be4d5a14c054add5ce04133a386caa2f0399e9c"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "23d0ec31674cff00a67325fc5c52976361967e5fc0ab4a72e47d9bb52f14f570",
+              "output_sha256": "eca43ba52a33bce41f9d951740e688bb4757dbb2fca3f6b1446cb3f3213b817a",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 4,
+          "text_sha256": "e4d226e83567ab530633142bce8f81bd3f38ea842dd074889d94005c02006f34",
+          "characters_UTF16": 273,
+          "lines": 8,
+          "raw_paragraph_sha256": "53a4157988f47ff53c9819a2ff0909705e57e50ab3c99082fbfa71d64a4d4ccf",
+          "presented_paragraph_sha256": "8f53bdc3d0bb4bd1f94f2c3231b22f6c368a418efe93bad4a90553bc547a9e58",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 4,
+              "input_sha256": "53a4157988f47ff53c9819a2ff0909705e57e50ab3c99082fbfa71d64a4d4ccf",
+              "output_sha256": "b860ceb5ad8442636bcefda2b7ec5294572cb98154c71fe62bfc23d2eace5e52",
+              "matched_and_replacement_pairs_sha256": "9ea42d4503b666f977ae043d394a521b351a13a0f397a41dbfabee080455b586"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 8,
+              "input_sha256": "b860ceb5ad8442636bcefda2b7ec5294572cb98154c71fe62bfc23d2eace5e52",
+              "output_sha256": "5382e14370b1c4a3af1ac3e577a0a3ff66da05d445e6b4ce97287a344f36cbe3",
+              "matched_and_replacement_pairs_sha256": "0a62c0e54a07a89b1755c5e9f2dded6649ed157595e02069418ccf95c0728d72"
+            },
+            {
+              "kind": "Markdown_emphasis",
+              "count": 1,
+              "input_sha256": "5382e14370b1c4a3af1ac3e577a0a3ff66da05d445e6b4ce97287a344f36cbe3",
+              "output_sha256": "28737cfc2042715affadb7be17301783b95b713dc748357279c197a5a08ddb00",
+              "matched_and_replacement_pairs_sha256": "88e187fb4efea60824fb9314a1205f6e066e1b938157bf968bfdb0ad4b709df4"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 7,
+              "input_sha256": "28737cfc2042715affadb7be17301783b95b713dc748357279c197a5a08ddb00",
+              "output_sha256": "8f53bdc3d0bb4bd1f94f2c3231b22f6c368a418efe93bad4a90553bc547a9e58",
+              "matched_and_replacement_pairs_sha256": "9d60b1f0cc9233087210fb1e9f1258f5000ab3d7103517422dd8e685cce4e9ea"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 5,
+          "text_sha256": "e371f954f789682e150868bd4b2211c28799810b355ffc409c4e7b29807d4d42",
+          "characters_UTF16": 147,
+          "lines": 4,
+          "raw_paragraph_sha256": "98047b97aa89a5100480a83651d30318a21d165f0af8fe62fa223539e3133f4e",
+          "presented_paragraph_sha256": "c0b1ff0b162a433f20722fdd7d7869199c4ccafe93c35c9775dce8714f8589c8",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 10,
+              "input_sha256": "98047b97aa89a5100480a83651d30318a21d165f0af8fe62fa223539e3133f4e",
+              "output_sha256": "26670f00544b801f94d0c5d22c44acdf01f9280ba2fa4f2095f51a256ab1090b",
+              "matched_and_replacement_pairs_sha256": "2a97c406a89bd8e446a96231a3a74a707b856b29df7803b690500304c3ac33a6"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "26670f00544b801f94d0c5d22c44acdf01f9280ba2fa4f2095f51a256ab1090b",
+              "output_sha256": "c0b1ff0b162a433f20722fdd7d7869199c4ccafe93c35c9775dce8714f8589c8",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 6,
+          "text_sha256": "895245ff2d2d5f8bfca6d9a00af7647d4844cd234529d211607f7db9bb788495",
+          "characters_UTF16": 130,
+          "lines": 4,
+          "raw_paragraph_sha256": "6926de35f055551d82cea08d70886116473616551c04788e9278e0f80f4db9cc",
+          "presented_paragraph_sha256": "187bcf31a6ac9e213bfda5471e0ee800cc10d4ad9800f90a2dd023b0b6adf096",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "6926de35f055551d82cea08d70886116473616551c04788e9278e0f80f4db9cc",
+              "output_sha256": "068701067529f3a95f6b47f062ca8fcbc45166f9126b041f8e8336e1c0fdc9f7",
+              "matched_and_replacement_pairs_sha256": "8ece45c00baefeed38ee88d15a10581cab484c6b353d6a8ea676c05b4939bcff"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "068701067529f3a95f6b47f062ca8fcbc45166f9126b041f8e8336e1c0fdc9f7",
+              "output_sha256": "5f1d44226529eed9caa03651dbcc063fafcadc44a0aef3f61dc22df12e43da83",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "5f1d44226529eed9caa03651dbcc063fafcadc44a0aef3f61dc22df12e43da83",
+              "output_sha256": "187bcf31a6ac9e213bfda5471e0ee800cc10d4ad9800f90a2dd023b0b6adf096",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 7,
+          "text_sha256": "0143a5b81d92f5a7bbce16b5d2f90f3ebc5aa7aba8888cd9f16579eda07e9c88",
+          "characters_UTF16": 143,
+          "lines": 4,
+          "raw_paragraph_sha256": "e384784b7d822b9ed6e2dbbe58b4644a038c36a0f80ffdfe385f4a78b33a4875",
+          "presented_paragraph_sha256": "fa088a8f2bfc77f7975d5fddc8f76835b24a2a0901448eadf423b110561350e1",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 2,
+              "input_sha256": "e384784b7d822b9ed6e2dbbe58b4644a038c36a0f80ffdfe385f4a78b33a4875",
+              "output_sha256": "cb627617a9201c43fa3f1b7573a14906af345244b1bd095088ec5b4761f1d481",
+              "matched_and_replacement_pairs_sha256": "db534bb1a9a1cd97663ebe5417524780c7a84e20bee02fec7211390cd386bc5d"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "cb627617a9201c43fa3f1b7573a14906af345244b1bd095088ec5b4761f1d481",
+              "output_sha256": "b9dfa60adca640356c3086514ae2462d63174b995266675b753ddae264fab77f",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "b9dfa60adca640356c3086514ae2462d63174b995266675b753ddae264fab77f",
+              "output_sha256": "fa088a8f2bfc77f7975d5fddc8f76835b24a2a0901448eadf423b110561350e1",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 8,
+          "text_sha256": "f0d99c106dbe0081409ffa5723735c6a0ad1afcea8fb1f975c0ae343745e5cd9",
+          "characters_UTF16": 121,
+          "lines": 4,
+          "raw_paragraph_sha256": "0b906f835406802fb3c5fb8bf96dbbee6a4a6c451d574f2bece4bd9c18fdc0a5",
+          "presented_paragraph_sha256": "0ef5f4556931ca66e7a3821921b0a1dc8d4f563748e54c33e4f5a9e2ae6c6397",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "0b906f835406802fb3c5fb8bf96dbbee6a4a6c451d574f2bece4bd9c18fdc0a5",
+              "output_sha256": "afb476f90c22b2c4287ad1e56136663f338cdac0cfb04845db25a93e9ab7f026",
+              "matched_and_replacement_pairs_sha256": "ad1595dbc71a09a35aa42566db2daf822de732a41b248a64d1be5fc15725b1f5"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "afb476f90c22b2c4287ad1e56136663f338cdac0cfb04845db25a93e9ab7f026",
+              "output_sha256": "2b57406b55254a8ee92d3a8fe10a2f5466abd66fae16ddbd064b7a1d95f68ac2",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "2b57406b55254a8ee92d3a8fe10a2f5466abd66fae16ddbd064b7a1d95f68ac2",
+              "output_sha256": "0ef5f4556931ca66e7a3821921b0a1dc8d4f563748e54c33e4f5a9e2ae6c6397",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 9,
+          "text_sha256": "4216c8205dd56b55d062251c39ef2ddc8db95720d8c69f3f49dadc49ceadf9f4",
+          "characters_UTF16": 132,
+          "lines": 4,
+          "raw_paragraph_sha256": "ec0e6f3d9a2b2e339dd5b7c75b747ca0fb98238dd3f6fdecf0cee5cccd50a4bc",
+          "presented_paragraph_sha256": "d9bcbcab9cea4de1a61003a8470360a7ddf8a0913f4e30e6eccb4a29a58e6084",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "ec0e6f3d9a2b2e339dd5b7c75b747ca0fb98238dd3f6fdecf0cee5cccd50a4bc",
+              "output_sha256": "94d7e18685e9de7b7c3b54989bb54a19eff02c9a0f680fb2436d65a0acf17dbe",
+              "matched_and_replacement_pairs_sha256": "ded2810c870baff2c8d6d02e7fcac86a72dc3e234f11c211e292e4cf9d971e6a"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 8,
+              "input_sha256": "94d7e18685e9de7b7c3b54989bb54a19eff02c9a0f680fb2436d65a0acf17dbe",
+              "output_sha256": "95e8d351627b1aff5cbc12dc0e935730a5dea7093e68642ca4f28cff75bbcc25",
+              "matched_and_replacement_pairs_sha256": "0a62c0e54a07a89b1755c5e9f2dded6649ed157595e02069418ccf95c0728d72"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "95e8d351627b1aff5cbc12dc0e935730a5dea7093e68642ca4f28cff75bbcc25",
+              "output_sha256": "d9bcbcab9cea4de1a61003a8470360a7ddf8a0913f4e30e6eccb4a29a58e6084",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 10,
+          "text_sha256": "6e59773f1241d81611f88ec29b67a6d230d0099a7f9d7a6af7da3360bf97d8a1",
+          "characters_UTF16": 140,
+          "lines": 4,
+          "raw_paragraph_sha256": "1848dddeddc79775876d4244475f569026e6f2123ad3a96852f0eaa2b91f6ff2",
+          "presented_paragraph_sha256": "b94a5a8f48c1e1bdbb919fb38a3df16d5e5584561be6f23c4a8165e38b99a8a5",
+          "presentation_operations": [
+            {
+              "kind": "note_marker",
+              "count": 1,
+              "input_sha256": "1848dddeddc79775876d4244475f569026e6f2123ad3a96852f0eaa2b91f6ff2",
+              "output_sha256": "fa5e20a70efa47f4e2619e246f487492fb79a1c206836bb9d31ccd2edc19f1cb",
+              "matched_and_replacement_pairs_sha256": "b87e1774298288d3b635efb3432931423cc3f4293113f40be8fad8c23af3c873"
+            },
+            {
+              "kind": "Markdown_escape",
+              "count": 6,
+              "input_sha256": "fa5e20a70efa47f4e2619e246f487492fb79a1c206836bb9d31ccd2edc19f1cb",
+              "output_sha256": "59cd715967dd55a6770fc4ce4a67e154fbbb44e8a98af23238aa8100aa834318",
+              "matched_and_replacement_pairs_sha256": "f4d3616ad810868bab32fc3cdd283a415dde451f88a74477ee0cfb2764c434dc"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "59cd715967dd55a6770fc4ce4a67e154fbbb44e8a98af23238aa8100aa834318",
+              "output_sha256": "b94a5a8f48c1e1bdbb919fb38a3df16d5e5584561be6f23c4a8165e38b99a8a5",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 11,
+          "text_sha256": "b497f7220a7f0421b46c014d5e90488ac5075eb166815556628d4dc6f1205d59",
+          "characters_UTF16": 121,
+          "lines": 4,
+          "raw_paragraph_sha256": "f795ea80458ac0cb1910c00d3c060cda4dcfc2205195c9c644c3242e50fbf6b7",
+          "presented_paragraph_sha256": "d79aaab70306aaab08f108ad410d955f414ea6508ef840a0b7a14c9ecacd9f25",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "f795ea80458ac0cb1910c00d3c060cda4dcfc2205195c9c644c3242e50fbf6b7",
+              "output_sha256": "416a9b499ac5fc3d16e6ef1e122bbe80dcc1ca676ec5160bdded05dac53a7b67",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "416a9b499ac5fc3d16e6ef1e122bbe80dcc1ca676ec5160bdded05dac53a7b67",
+              "output_sha256": "d79aaab70306aaab08f108ad410d955f414ea6508ef840a0b7a14c9ecacd9f25",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 12,
+          "text_sha256": "9b8fae17472861e66412e836b64c5cbec48dd162519994329d09ce0964f3f5ae",
+          "characters_UTF16": 134,
+          "lines": 4,
+          "raw_paragraph_sha256": "0162ad7a0d416bfed172796b954cb6d37d24a124e69c7471770104ac1eeb686f",
+          "presented_paragraph_sha256": "b24dfa961dc62651b0731235cfd22c11e59b30cfbd7c289d5f45cb8f7c41829e",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "0162ad7a0d416bfed172796b954cb6d37d24a124e69c7471770104ac1eeb686f",
+              "output_sha256": "70846a2b6e6e4292999ffaad73985fa7823a194482a48643a4496a9f2fd6623b",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "70846a2b6e6e4292999ffaad73985fa7823a194482a48643a4496a9f2fd6623b",
+              "output_sha256": "b24dfa961dc62651b0731235cfd22c11e59b30cfbd7c289d5f45cb8f7c41829e",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 13,
+          "text_sha256": "ef549437bb3d8f758018b79fcb55aa75932fac533c54e673859fde4189f03cad",
+          "characters_UTF16": 132,
+          "lines": 4,
+          "raw_paragraph_sha256": "3d776fb9ba5ba599716e8726f84333a34a5a65d882f93a561a630c00514bb64a",
+          "presented_paragraph_sha256": "3cca87062537d03d656f3608e0679aca070371d3d02480d54f747c6043bc7f3b",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 8,
+              "input_sha256": "3d776fb9ba5ba599716e8726f84333a34a5a65d882f93a561a630c00514bb64a",
+              "output_sha256": "35a63f2d9fa4b2a5c4b595530d419d21b7d3b70346e000b9a1f88aa7e0aa59d8",
+              "matched_and_replacement_pairs_sha256": "0a62c0e54a07a89b1755c5e9f2dded6649ed157595e02069418ccf95c0728d72"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "35a63f2d9fa4b2a5c4b595530d419d21b7d3b70346e000b9a1f88aa7e0aa59d8",
+              "output_sha256": "3cca87062537d03d656f3608e0679aca070371d3d02480d54f747c6043bc7f3b",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 14,
+          "text_sha256": "b54f08466c0bf57532d8b9250d29b47c3b7ba7c46ad08b1cca77f04f39355386",
+          "characters_UTF16": 134,
+          "lines": 4,
+          "raw_paragraph_sha256": "c03d30df983a632dc9f0b5accfc7bfcdfe8d26d485c315e1d6410f6596112b9f",
+          "presented_paragraph_sha256": "d6fcaaf93083c2d44d5fc2afdc00feb3e2fd9185e1955be6759d4f141822349e",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "c03d30df983a632dc9f0b5accfc7bfcdfe8d26d485c315e1d6410f6596112b9f",
+              "output_sha256": "a43d13485e61b1a1f230a96f4f7c80a02d2654ec04ad4892d3ba7dbe830134af",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "a43d13485e61b1a1f230a96f4f7c80a02d2654ec04ad4892d3ba7dbe830134af",
+              "output_sha256": "d6fcaaf93083c2d44d5fc2afdc00feb3e2fd9185e1955be6759d4f141822349e",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        },
+        {
+          "paragraph_index0": 15,
+          "text_sha256": "ea1dfe1417ce9f041527949cfb081198413e284f2761469a6e2864d6ba1e5385",
+          "characters_UTF16": 127,
+          "lines": 4,
+          "raw_paragraph_sha256": "5cf20dc1effc8c9b2106c2f34f3cbc2ff1876783236c5cb3fdbaa5cfe2a84492",
+          "presented_paragraph_sha256": "10182c735b4899b74cb775d048591e9434f76f47bd70208872a8a03223f71416",
+          "presentation_operations": [
+            {
+              "kind": "Markdown_escape",
+              "count": 4,
+              "input_sha256": "5cf20dc1effc8c9b2106c2f34f3cbc2ff1876783236c5cb3fdbaa5cfe2a84492",
+              "output_sha256": "3b74f8b7b2ffc67479586476f2d0d04d4ec09809bafb745519197796d5872702",
+              "matched_and_replacement_pairs_sha256": "741b7032d4332002caa2eac68d9ffb8ce4ec4caf586a485cb8ec3eefcccfecff"
+            },
+            {
+              "kind": "trailing_hardbreak_spaces",
+              "count": 3,
+              "input_sha256": "3b74f8b7b2ffc67479586476f2d0d04d4ec09809bafb745519197796d5872702",
+              "output_sha256": "10182c735b4899b74cb775d048591e9434f76f47bd70208872a8a03223f71416",
+              "matched_and_replacement_pairs_sha256": "08182b62d032143d6de58f3c0f030c0d9fd2c91aa5c3b5fe347483b5bd911b71"
+            }
+          ]
+        }
+      ],
+      "speaker_lines": [],
+      "hard500_pages": [
+        {
+          "offset": 0,
+          "characters_UTF16": 500,
+          "sha256": "663f717c4c436b65002650ba68252461632077760d7f99119c342105ebaf93d0"
+        },
+        {
+          "offset": 500,
+          "characters_UTF16": 500,
+          "sha256": "5150b331adfd8f0003f19cba0301a67f4408c82816002bd8a86efdf831dc781e"
+        },
+        {
+          "offset": 1000,
+          "characters_UTF16": 500,
+          "sha256": "cc96dca00d37f8cf5c413e8ea8fe6757e579eae14305945185ec7cef8329dc77"
+        },
+        {
+          "offset": 1500,
+          "characters_UTF16": 500,
+          "sha256": "0ef3e6f2d9626c3b0832e3e37111824e15b8369325fe370003ccfc58fb110b08"
+        },
+        {
+          "offset": 2000,
+          "characters_UTF16": 500,
+          "sha256": "8a84da6f276a7d9fff8ef729a5f7b2ee9d1ec030c06d8f3c72965804e8081306"
+        },
+        {
+          "offset": 2500,
+          "characters_UTF16": 114,
+          "sha256": "f65117572a58744bcea1040aa1435d1ebfa4c3c88b45114e887fed1be807d47e"
+        }
+      ],
+      "canonical_record": {
+        "id": "tha-ap404",
+        "book": 36,
+        "start": 12980,
+        "end": 13028,
+        "title": "Puṇṇakattheraapadānaṃ",
+        "collection": "ap",
+        "acronym": "Tha Ap 404",
+        "vri": "29–44",
+        "pts": {
+          "volume": 2,
+          "page": 340,
+          "end_page": 341
+        }
+      },
+      "canonical_subheading": "2. Puṇṇakattheraapadānaṃ",
+      "canonical_chapter": "41. Metteyyavaggo",
+      "root_wrapper_sha256": "bf55622e636b7bd3691c2764f1e2b3f399b3335483689ecf292790f6073c8976",
+      "canonical_hangnum_labels": [
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
+      "original_XML": {
+        "range_paragraph_index0_halfopen": [
+          12981,
+          13029
+        ],
+        "all_five_tuple_fields_equal": true,
+        "tuples": 48,
+        "tuples_sha256_JSON_stringify": "6fbdecd3731f79f3a064e2105fb148b9d9d9120484f2af5a6dbb2434fd37418b",
+        "variant_note_count": 6,
+        "peyyala_blocks": [
+          41,
+          43,
+          45
+        ]
+      }
+    }
+  },
+  "rights": {
+    "translation_specific": "Jonathan S. Walters / Whitman2017 CC BY-NC-SA4.0",
+    "all6_primary_artifacts_freshly_hashed": true,
+    "specific_BY_NC_SA_in_About_footer_epub": true,
+    "generic_site_BY_is_not_relaxation": true,
+    "all_attribution_provenance_license_modification_warranty_notices_required": true,
+    "new_commercial_media_runtime_or_release_permission": false
+  },
+  "limits": [
+    "No author proposal/profiles/normalizer read before blind seal.",
+    "No application/parser/test/Git/network/proposed producer execution or checkout writes.",
+    "Primary XML selected136tuple replay is not entire corpus reconstruction.",
+    "Exact source identities derived from AP title/chapter/subheading/colophon, never publisher+2 arithmetic.",
+    "All9 existing publisherholds391392393403404405408409410 remain unchanged; publisher numbers differ from canonical UIDs.",
+    "Existing398399scope and allpreviousholds unchanged. No source approval/activation/native/runtime/release claim."
+  ]
+}

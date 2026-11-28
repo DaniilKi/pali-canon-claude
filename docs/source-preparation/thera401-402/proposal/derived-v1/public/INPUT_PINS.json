@@ -1,0 +1,82 @@
+{
+  "schema": "publisher401402-physical-input-pins-v1",
+  "files": [
+    {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/LICENSE.md",
+      "bytes": 19093,
+      "sha256": "66eea18fe8cb99e0d178d838a4932be0d3af8a6f844e933a8bbb0054e22f2592",
+      "git_blob_sha1": "4fd532b173b207f8bb96c861f58eaec49fd105b7"
+    },
+    {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_pages/about.md",
+      "bytes": 12404,
+      "sha256": "17d8029419cd7b4c7f9e7f88d0127141d2425b3fe30516888b389ce7521f1352",
+      "git_blob_sha1": "70ae05d036d0440a69c0fb8d6d79cf478468ad54"
+    },
+    {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/site/footer.njk",
+      "bytes": 555,
+      "sha256": "08a7d4a0c3a9841afa38a8d98aa563e0ddedc6228f66e86b9a49d564aba26fd4",
+      "git_blob_sha1": "8fbd7bb5ccd73fb28dc789ad437b857891f3432c"
+    },
+    {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_includes/layouts/epub-metadata.xml",
+      "bytes": 603,
+      "sha256": "1a6320b1580b76112c63bd557e419d5816b410197da666444e9d412327430b2f",
+      "git_blob_sha1": "3d3605879c096daea5cda3c3399ca93e771e6ec5"
+    },
+    {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_data/site.json",
+      "bytes": 659,
+      "sha256": "6b4b5b5661b1bfb35cee0f207066fd6941aa042d6377993b02c77db677319efa",
+      "git_blob_sha1": "83f16121b162cff069e526cfc475edde1695f2cd"
+    },
+    {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/_poems.json",
+      "bytes": 135,
+      "sha256": "7c0d9a568ff9c495c89fb3ae13397ff71e8e1d678c221cca5966c9adc886cf22",
+      "git_blob_sha1": "da2e2f144856a7244b5c204464a596bd49af85c5"
+    },
+    {
+      "file": "/tmp/pali-boundary389390-integration-nov28/server/data/canon.json.gz.parts.json",
+      "bytes": 455,
+      "sha256": "3635c4e7e4082e6816e4fa8670d478004a76aa8a2613f6c6e1fe51f0c6a7ed23",
+      "git_blob_sha1": "e1f7dc8e4a202bfa668f5f61176c0379866e4379"
+    },
+    {
+      "file": "/tmp/pali-boundary389390-integration-nov28/server/data/canon.json.gz.part-0001",
+      "bytes": 4194304,
+      "sha256": "526ba969d0fc3ce62fde7d11764313de43b91a2f71375d602cd647a43b601632",
+      "git_blob_sha1": "40a2779daf3f812e406ae96bb5d3fd70976185f1"
+    },
+    {
+      "file": "/tmp/pali-boundary389390-integration-nov28/server/data/canon.json.gz.part-0002",
+      "bytes": 1367702,
+      "sha256": "7b84f3d0e9d22582da1a06c838566bc6654f75ec260039c7aaf05a35176d325a",
+      "git_blob_sha1": "03e1d9659f216afc7a39421b0c81558ed34d9cfa"
+    },
+    {
+      "file": "/tmp/pali-next-ten-evidence-nov26/vri-fixture/romn/s0510m1.mul.xml",
+      "bytes": 2464074,
+      "sha256": "ad566fefab842ddcf02a84b1bda9b9dafcadba2cbb4e81fad1be58c98cc2bed1",
+      "git_blob_sha1": "f37368072aece065d2668f93a74c24b423939f1f"
+    },
+    {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-401.md",
+      "bytes": 6387,
+      "sha256": "acd65e79f98f11239870504f054002cc440339a375e77033800649d99bf91bc9",
+      "git_blob_sha1": "b90907423af09928dd3c661d1c1b60a08ff46a47"
+    },
+    {
+      "file": "/tmp/pali-seven371-378-evidence-nov27/publisher-source/src/_poems/chapter-3/poem-402.md",
+      "bytes": 5073,
+      "sha256": "36ab4b64da98ca50626ff3f9c9d86fc34f53b1405b47ba2e9d60dda6a5d99740",
+      "git_blob_sha1": "e536bf5a9f1691564458da49bc94023b2d0a6dbd"
+    }
+  ],
+  "parent_pinned_revision_membership_inherited_not_queried": true,
+  "source_revision": "fb76b8b4556c559aeaaba852f9bf7ed74ea11fd4",
+  "VRI_revision": "2d134ff9ef60f70a1eb03c9370580228811a3070",
+  "actual_current_canonical_sha256": "883d62fbf6cbb7333f9968ee1a906a34ae337024ee1e0cab47e7fc69beb8350a",
+  "source_only": true
+}
